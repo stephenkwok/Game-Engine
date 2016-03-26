@@ -1,5 +1,5 @@
 package authoringenvironment.model;
 
-public interface AvailableLevel {
+public interface CreatedLevel {
 
 }
