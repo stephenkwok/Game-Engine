@@ -2,9 +2,13 @@ package authoringenvironment.model;
 
 import javafx.scene.image.Image;
 
-// The ImageLibrary will contain all images loaded by the user. It will use the singleton design pattern and whenever
-// the user adds a new image, the ImageLibrary will store a map of filename --> Image, and whenever an actor or
-// level's image is changed, it can access it from the ImageLibrary rather than reloading the files repeatedly.
+/**
+ *  The ImageLibrary will contain all images loaded by the user. It will use the singleton design pattern and whenever the user
+ *  adds a new image, the ImageLibrary will store a map of filename --> Image, and whenever an actor or level's image is changed,
+ *  it can access it from the ImageLibrary rather than reloading the files repeatedly.
+ * @author amyzhao
+ *
+ */
 
 public interface ImageLibrary {
 

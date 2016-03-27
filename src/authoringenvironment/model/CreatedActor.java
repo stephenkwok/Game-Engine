@@ -1,8 +1,14 @@
 package authoringenvironment.model;
 
-// This class represents the actors that the user will create. It holds the relevant data that must be saved in the XML
-// and will implement the IActor interface, and it will also extend the GestureSource class so that the user can interact
-// with it from the GUI
+import java.util.Map;
+
+/**
+ * This class represents the actors that the user will create. It holds the relevant data that must be saved in the XML 
+ * and will implement the IActor interface, and it will also extend the GestureSource class so that the user can interact
+ * with it from the GUI
+ * @author amyzhao
+ *
+ */
 
 public interface CreatedActor {
 
@@ -39,8 +45,8 @@ public interface CreatedActor {
 	public void addRule(String trigger, String action);
 	
 	/**
-	 * Returns the info necessary to create the actor in the game engine in a specified order and format.
-	 * @return: actor's info in a specified order and format.
+	 * Returns the info necessary to create the actor in the game engine.
+	 * @return: actor's info.
 	 */
-	public String getInfo();
+	public Map<String, String> getInfo();
 }
