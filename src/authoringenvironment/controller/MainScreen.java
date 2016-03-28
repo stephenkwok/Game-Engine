@@ -6,9 +6,9 @@ import authoringenvironment.model.IActor;
 import authoringenvironment.model.ILevel;
 
 /**
+ * This class serves as the interface that all authoring environment main screens must implement
  * 
  * @author Stephen
- *
  */
 
 public interface MainScreen {
