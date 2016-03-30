@@ -21,7 +21,7 @@ public interface CreatedLevel {
 	 * Adds an actor to the level from the list of existing CreatedActors.
 	 * @param actor: actor to add.
 	 */
-	public void addActor(IActor actor);
+	public void addActor(ICreatedActor actor);
 	
 	/**
 	 * Sets the level name.
@@ -63,6 +63,6 @@ public interface CreatedLevel {
 	 * Returns a list of the actors in this level.
 	 * @return list of actors.
 	 */
-	public List<IActor> getLevelActors();
+	public List<ICreatedActor> getLevelActors();
 	
 }
