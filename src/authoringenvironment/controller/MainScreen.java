@@ -25,7 +25,7 @@ public interface MainScreen {
 	 * @param level - level to be edited 
 	 * @param createdActors - list of created Actors that can be placed into the level 
 	 */
-	public void goToSceneEditing(ILevel level, List<IActor> createdActors);
+	public void goToLevelEditing(ILevel level, List<IActor> createdActors);
 	
 	/**
 	 * Switches screen to Actor Editing Environment
