@@ -50,9 +50,9 @@ public class CreatedActorInstance extends ImageView {
 	private void setDragResponse() {
 		setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent event) {
-                setX(event.getX());
-                setY(event.getY());
-                System.out.println("(" + event.getX() + ", " + event.getY() + ")");
+                setX(event.getSceneX());
+                setY(event.getSceneY());
+                System.out.println("(" + event.getSceneX() + ", " + event.getSceneY() + ")");
                 event.consume();
             }
         }); 
