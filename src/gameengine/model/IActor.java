@@ -4,7 +4,11 @@ package gameengine.model;
 import javafx.scene.Node;
 
 /**
- * Created by blakekaplan on 3/30/16.
+ * This interface defines the the public methods for Actor objects. Each Actor will have a position, a number of points, a designated
+ * amount of health, and sets of rules. For Rules, each Trigger will have corresponding Action objects associated with it
+ * that define the procedure to be performed when the Trigger is set off.
+ *
+ * @author blakekaplan
  */
 public interface IActor {
 
