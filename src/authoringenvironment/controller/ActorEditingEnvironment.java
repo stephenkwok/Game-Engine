@@ -1,6 +1,7 @@
 package authoringenvironment.controller;
 
 import authoringenvironment.model.IActor;
+import javafx.scene.Scene;
 
 /**
  * This class serves as the interface that all actor editing environments must implement
@@ -21,5 +22,11 @@ public interface ActorEditingEnvironment {
 	 * @param actor to be edited 
 	 */
 	public void setActor(IActor actor);
+	
+	/**
+	 * 
+	 * @return Editing Environment's Scene
+	 */
+	public Scene getScene();
 	
 }
