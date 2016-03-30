@@ -5,6 +5,11 @@ package gameengine.model;
  */
 public interface ITrigger {
 
+    /**
+     * Provides the name of the Trigger
+     * @return
+     * The Trigger's name
+     */
     public String getTriggerName();
 
 }
