@@ -1,7 +1,10 @@
 package gameengine.model;
 
 /**
- * Created by blakekaplan on 3/30/16.
+ * This interface defines the public methods for Trigger objects. Trigger correspond with the different events that can
+ * cause an Action response.
+ *
+ * @author blakekaplan
  */
 public interface ITrigger {
 

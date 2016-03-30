@@ -6,7 +6,11 @@ import gameengine.model.ITrigger;
 import java.util.List;
 
 /**
- * Created by blakekaplan on 3/30/16.
+ * This interface defines the API for the Game class.
+ * The Game will be the main point of interaction between the Game Player and the Game Engine.
+ * It will allow player to switch Levels and to get all of Actors to display on the screen.
+ *
+ * @author blakekaplan
  */
 public interface IGame {
 

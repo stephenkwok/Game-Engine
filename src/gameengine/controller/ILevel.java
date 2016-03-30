@@ -1,9 +1,16 @@
 package gameengine.controller;
 
+import gameengine.model.IActor;
 import gameengine.model.ITrigger;
 
+import java.util.List;
+
 /**
- * Created by blakekaplan on 3/30/16.
+ * This interface describes the API for a Level object
+ * Levels will contain sets of Actor objects. When the game calls for a change in Levels, it will be able to swap
+ * out scenes to get a different set of Actors to display.
+ *
+ * @author blakekaplan
  */
 public interface ILevel {
 
@@ -28,4 +35,10 @@ public interface ILevel {
      */
     public String getName();
 
+    /**
+     * Provides all of the Actors to be visualized by the player
+     *
+     * @return A List of all the Actors on in the Level
+     */
+    public List<IActor> getActors();
 }
