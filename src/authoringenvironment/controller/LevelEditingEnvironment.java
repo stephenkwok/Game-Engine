@@ -2,8 +2,8 @@ package authoringenvironment.controller;
 
 import java.util.List;
 
-import authoringenvironment.model.IActor;
-import authoringenvironment.model.ILevel;
+import authoringenvironment.model.ICreatedActor;
+import authoringenvironment.model.ICreatedLevel;
 import javafx.scene.Scene;
 
 /**
@@ -25,7 +25,7 @@ public interface LevelEditingEnvironment {
 	 * 
 	 * @param level to be edited 
 	 */
-	public void setLevel(ILevel level, List<IActor> actors);
+	public void setLevel(ICreatedLevel level, List<ICreatedActor> actors);
 	
 	/**
 	 * 

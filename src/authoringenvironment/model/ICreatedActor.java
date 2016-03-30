@@ -8,7 +8,7 @@ import java.util.Map;
  *
  */
 
-public interface IActor {
+public interface ICreatedActor {
 
 	/**
 	 * Gets all relevant information for each actor in a specific format to save into an XML file.

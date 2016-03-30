@@ -9,7 +9,7 @@ import java.util.Map;
  *
  */
 
-public interface ILevel {
+public interface ICreatedLevel {
 
 	/**
 	 * Gets all relevant information for each actor in a specific format to save into an XML file.
@@ -21,6 +21,6 @@ public interface ILevel {
 	 * Gets all actors contained in the level.
 	 * @return list of actors contained in the level.
 	 */
-	public List<IActor> getLevelActors();
+	public List<ICreatedActor> getLevelActors();
 	
 }

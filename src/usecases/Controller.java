@@ -5,8 +5,8 @@ import java.util.List;
 import authoringenvironment.controller.ActorEditingEnvironment;
 import authoringenvironment.controller.LevelEditingEnvironment;
 import authoringenvironment.controller.MainScreen;
-import authoringenvironment.model.IActor;
-import authoringenvironment.model.ILevel;
+import authoringenvironment.model.ICreatedActor;
+import authoringenvironment.model.ICreatedLevel;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -25,10 +25,10 @@ public class Controller extends Application implements MainScreen {
     private static final String TITLE = "Main Screen";
     private LevelEditingEnvironment levelEditor;
     private ActorEditingEnvironment actorEditor;
-    private ILevel currentLevel;
-    private IActor currentActor;
+    private ICreatedLevel currentLevel;
+    private ICreatedActor currentActor;
     private BorderPane borderPane;
-    private List<IActor> availableActors;
+    private List<ICreatedActor> availableActors;
 
 	public static void main(String[] args) {
 		launch();
@@ -78,7 +78,7 @@ public class Controller extends Application implements MainScreen {
 	 * @param createdActors that can be added to that level
 	 */
 	@Override
-	public void goToLevelEditing(ILevel level, List<IActor> createdActors) {
+	public void goToLevelEditing(ICreatedLevel level, List<ICreatedActor> createdActors) {
 		levelEditor.setLevel(level, createdActors);	
 		stage.setScene(levelEditor.getScene());
 	}
@@ -91,7 +91,7 @@ public class Controller extends Application implements MainScreen {
 	 * @param actor to be edited
 	 */
 	@Override
-	public void goToActorEditing(IActor actor) {
+	public void goToActorEditing(ICreatedActor actor) {
 		actorEditor.setActor(actor);
 		stage.setScene(actorEditor.getScene());
 	}
