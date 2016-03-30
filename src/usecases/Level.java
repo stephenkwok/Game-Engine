@@ -2,12 +2,12 @@ package usecases;
 import java.util.List;
 import java.util.Map;
 
-import authoringenvironment.model.IActor;
-import authoringenvironment.model.ILevel;
+import authoringenvironment.model.ICreatedActor;
+import authoringenvironment.model.ICreatedLevel;
 
-public class Level implements ILevel {
+public class Level implements ICreatedLevel {
 
-	public Level(ILevel level, List<IActor> createdActors) {
+	public Level(ICreatedLevel level, List<ICreatedActor> createdActors) {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -18,7 +18,7 @@ public class Level implements ILevel {
 	}
 
 	@Override
-	public List<IActor> getLevelActors() {
+	public List<ICreatedActor> getLevelActors() {
 		// TODO Auto-generated method stub
 		return null;
 	}

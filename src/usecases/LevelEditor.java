@@ -3,15 +3,15 @@ package usecases;
 import java.util.List;
 
 import authoringenvironment.controller.LevelEditingEnvironment;
-import authoringenvironment.model.IActor;
-import authoringenvironment.model.ILevel;
+import authoringenvironment.model.ICreatedActor;
+import authoringenvironment.model.ICreatedLevel;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 
 public class LevelEditor implements LevelEditingEnvironment {
 
-	private ILevel level;
-	private List<IActor> actors;
+	private ICreatedLevel level;
+	private List<ICreatedActor> actors;
 	private Group root;
 	private Scene scene;
 	
@@ -26,7 +26,7 @@ public class LevelEditor implements LevelEditingEnvironment {
 	}
 
 	@Override
-	public void setLevel(ILevel level, List<IActor> actors) {
+	public void setLevel(ICreatedLevel level, List<ICreatedActor> actors) {
 		this.level = level;
 		this.actors = actors;
 	}

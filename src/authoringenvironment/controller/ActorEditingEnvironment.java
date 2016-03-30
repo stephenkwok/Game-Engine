@@ -1,6 +1,6 @@
 package authoringenvironment.controller;
 
-import authoringenvironment.model.IActor;
+import authoringenvironment.model.ICreatedActor;
 import javafx.scene.Scene;
 
 /**
@@ -21,7 +21,7 @@ public interface ActorEditingEnvironment {
 	 * 
 	 * @param actor to be edited 
 	 */
-	public void setActor(IActor actor);
+	public void setActor(ICreatedActor actor);
 	
 	/**
 	 * 

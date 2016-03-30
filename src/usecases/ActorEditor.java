@@ -1,13 +1,13 @@
 package usecases;
 
 import authoringenvironment.controller.ActorEditingEnvironment;
-import authoringenvironment.model.IActor;
+import authoringenvironment.model.ICreatedActor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 
 public class ActorEditor implements ActorEditingEnvironment {
 
-	private IActor actor;
+	private ICreatedActor actor;
 	private Scene scene;
 	private Group root;
 	
@@ -22,7 +22,7 @@ public class ActorEditor implements ActorEditingEnvironment {
 	}
 
 	@Override
-	public void setActor(IActor actor) {
+	public void setActor(ICreatedActor actor) {
 		this.actor = actor;
 	}
 
