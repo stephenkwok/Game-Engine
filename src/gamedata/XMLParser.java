@@ -13,10 +13,26 @@ import authoringenvironment.model.ICreatedLevel;
 
 public interface XMLParser {
 	
+	/**
+	 * Gets from an XML file all the information pertinent to a level's settings.
+	 * @param infoTags a list of strings referring to tags in the XML storing level settings
+	 * @return map associating information tag to information value (for all pieces of information contained in a level)
+	 */
 	public Map<String, String> getLevelInfo (List<String> infoTags);
 	
-	public List<ICreatedActor> getLevelActors (List<String> actorTags);
+	/**
+	 * Gets from an XML file all the information pertinent to an actor's settings.
+	 * @param actorTags a string of actors' information
+	 * @return map associating information tag to information value (for all pieces of information contained in a level)
+	 */
+	public List<ICreatedActor> getLevelActors (String actorInfo);
 	
+	
+	/**
+	 * Gets from an XML file all the information pertinent to an actor's settings.
+	 * @param levelInfo a list of actors 
+	 * @return an instance of an editable level for the authoring environment
+	 */
 	public ICreatedLevel createLevel (Map<String, String> levelInfo, List<ICreatedActor> levelActors);
 	
 	

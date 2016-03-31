@@ -15,6 +15,8 @@ public interface ICreator {
 
 	/**
 	 * Saves all relevant information for each level in a specific format reflected at a basic level in initialGame.XML.
+	 * @param levelInfo a map of tags referring to level settings matched to their values
+	 * @param levelActors a list of actors belonging to a level's editing environment
 	 */
 	public void saveLevel (Map<String, String> levelInfo, List<ICreatedActor> levelActors);
 
