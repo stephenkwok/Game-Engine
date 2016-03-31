@@ -2,7 +2,7 @@ package authoringenvironment.view;
 
 import java.util.List;
 import java.util.ResourceBundle;
-
+import authoringenvironment.controller.MainScreen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -27,13 +27,16 @@ public abstract class GUIComboBox implements IGUIElement {
 	protected String promptText;
 	protected ResourceBundle myResources;
 	protected ObservableList<String> options;
+	protected List<String> optionsList;
 	protected ComboBox<String> comboBox;
 	protected Button comboButton;
 	protected String paletteSource;
+	protected MainScreen mainScreen;
 	
-	public GUIComboBox(ResourceBundle myResources, String promptText) {
+	public GUIComboBox(ResourceBundle myResources, String promptText, MainScreen mainScreen) {
 		this.myResources = myResources;
 		this.promptText = promptText;
+		this.mainScreen = mainScreen;
 	}
 	
 	/**
@@ -43,7 +46,7 @@ public abstract class GUIComboBox implements IGUIElement {
 	public Node createNode(){
 		HBox hbox = new HBox(HBOX_SPACING);
 		options = FXCollections.observableArrayList(
-			        optionsList()
+			        getOptionsList()
 			    );
 		comboBox = new ComboBox<>(options);
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
@@ -94,27 +97,14 @@ public abstract class GUIComboBox implements IGUIElement {
 	@Override
 	public void updateNode() {
 		ObservableList<String> newOptions = FXCollections.observableArrayList(
-		        optionsList()
+		        getOptionsList()
 		    );
 		comboBox.setItems(newOptions);
 	}
 	
 	/**
-	 * List that contains Data for each ComboBox.
-	 * @return
-	 */
-	protected abstract List<String> optionsList();
-	
-	public void changePalette(String RGB, int index) {
-		List<String> currentPalette = comboBox.getItems();
-		currentPalette.set(index, RGB);
-		updateNode();
-	}
-	/**
 	 * Returns list of items in the ComboBox.
 	 * @return
 	 */
-	public List<String> getOptionsList(){
-		return optionsList();
-	}
+	abstract List<String> getOptionsList();
 }

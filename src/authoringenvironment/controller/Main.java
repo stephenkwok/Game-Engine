@@ -1,6 +1,6 @@
 package authoringenvironment.controller;
 
-import authoringenvironment.view.MainScreenGUI;
+import authoringenvironment.view.ToolBarGUI;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -12,11 +12,11 @@ public class Main extends Application{
 	private static final int SCREEN_HEIGHT = 800;
 	
 	private Stage s;
-	MainScreenGUI myGui;
+	ToolBarGUI myGui;
     @Override
     public void start(Stage myStage) throws Exception {
     	s = new Stage();
-    	myGui = new MainScreenGUI(SCREEN_HEIGHT, SCREEN_WIDTH, s);
+    	myGui = new ToolBarGUI(SCREEN_HEIGHT, SCREEN_WIDTH, s);
     	s.setScene(myGui.getScene());
     	s.show();
     }

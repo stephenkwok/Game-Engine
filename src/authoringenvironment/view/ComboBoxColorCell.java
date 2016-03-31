@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import authoringenvironment.controller.MainScreen;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -15,13 +16,13 @@ import javafx.scene.shape.Rectangle;
  * @author AnnieTang
  *
  */
-abstract class ComboBoxColor extends GUIComboBox{
+abstract class ComboBoxColorCell extends GUIComboBox{
 	private static final int RECTANGLE_SIDE_SIZE = 20;
 	private static final String DEFAULT_COLORS_KEY = "DefaultColors";
 	protected List<String> palette;
 	
-	public ComboBoxColor(ResourceBundle myResources, String promptText) {
-		super(myResources, promptText);
+	public ComboBoxColorCell(ResourceBundle myResources, String promptText, MainScreen mainScreen) {
+		super(myResources, promptText, mainScreen);
 		fillDefaultPalette();
 	}
 	/**
@@ -54,7 +55,7 @@ abstract class ComboBoxColor extends GUIComboBox{
 	 *Returns current palette of colors. 
 	 */
 	@Override
-	protected List<String> optionsList() {
+	protected List<String> getOptionsList() {
 		return palette;
 	}
 }

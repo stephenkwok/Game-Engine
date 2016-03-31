@@ -1,10 +1,12 @@
 package authoringenvironment.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import authoringenvironment.model.ICreatedActor;
 import authoringenvironment.model.ICreatedLevel;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -15,9 +17,15 @@ import javafx.stage.Stage;
 
 public class MainScreen {
 	Stage myStage;
+	Scene myScene;
 	
-	public MainScreen(Stage myStage){
-		this.myStage = myStage; 
+	List<ICreatedLevel> levels;
+	
+	
+	public MainScreen(Stage myStage, Scene myScene){
+		this.myStage = myStage;
+		this.myScene = myScene; 
+		levels = new ArrayList<>();
 	}
 	/**
 	 * Displays the Main Screen giving user option to create/edit actors and levels or save 
@@ -60,6 +68,22 @@ public class MainScreen {
      */
     public Stage getStage() {
         return myStage;
+    }
+    
+    /**
+     * Returns list of created levels.
+     * @return
+     */
+    public List<ICreatedLevel> getLevels(){
+    	return levels;
+    }
+    
+    /**
+     * For each level that is created, adds it to the running list in this class. 
+     * @param newLevel
+     */
+    public void addLevel(ICreatedLevel newLevel){
+    	levels.add(newLevel);
     }
 	
 }

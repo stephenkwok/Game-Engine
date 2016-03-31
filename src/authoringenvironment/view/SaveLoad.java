@@ -7,9 +7,9 @@ import authoringenvironment.controller.MainScreen;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
+//import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
+//import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 /**
  * Pair of save/load buttons so the user can load an XML to define the workspace, or save the current workspace. 
@@ -75,19 +75,19 @@ public class SaveLoad implements IGUIElement {
      * @param imageString
      * @return
      */
-    private Image stringToImage(String imageString){
-    	return new Image(getClass().getClassLoader().getResourceAsStream(imageString));
-    }
-    /**
-     * Converts color String to a JavaFX Color. 
-     * @param colorString
-     * @return
-     */
-    private Color stringToColor(String colorString) {
-		String[] rgb = colorString.split(" ");
-		return Color.rgb((int) Double.parseDouble(rgb[0]),
-				(int) Double.parseDouble(rgb[1]), (int) Double.parseDouble(rgb[2]));
-	}
+//    private Image stringToImage(String imageString){
+//    	return new Image(getClass().getClassLoader().getResourceAsStream(imageString));
+//    }
+//    /**
+//     * Converts color String to a JavaFX Color. 
+//     * @param colorString
+//     * @return
+//     */
+//    private Color stringToColor(String colorString) {
+//		String[] rgb = colorString.split(" ");
+//		return Color.rgb((int) Double.parseDouble(rgb[0]),
+//				(int) Double.parseDouble(rgb[1]), (int) Double.parseDouble(rgb[2]));
+//	}
 
 	@Override
 	public void updateNode() {
