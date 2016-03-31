@@ -80,7 +80,7 @@ Finally, the third image shows the Actor editing environment. On the left pane, 
 
 **authoringenvironment.controller**
 
-The MainScreen module serves as the controller for the authoring environment and allows the user to add or edit actors and levels as well as return to the overall program’s main screen. The ActorEditingEnvironment module allows the user to either edit a currently existing actor or create a new one. The LevelEditingEnviroment module allows the user to either edit a currently existing actor or create a new one. We decided to create these three separate modules for the controller component of the authoring environment so as to ensure each class only fulfills a single responsibility.
+The MainScreen module serves as the controller for the authoring environment and allows the user to add or edit actors and levels as well as return to the overall program’s main screen. The ActorEditingEnvironment module allows the user to either edit a currently existing actor or create a new one. The LevelEditingEnvironment module allows the user to either edit a currently existing actor or create a new one. We decided to create these three separate modules for the controller component of the authoring environment so as to ensure each class only fulfills a single responsibility.
 
 ## Example Games
 
