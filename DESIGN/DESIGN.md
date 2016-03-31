@@ -69,6 +69,15 @@ Finally, the third image shows the Actor editing environment. On the left pane, 
 
 ![Authoring environment actor editing screen.](design_images/authoringenvironment_UI_3.png)
 
+#### Game Engine/Player
+
+The User Interface will include a splash screen as the starting location for the user input. From here, the user will have the option to choose between two buttons, one to create a new game or play a game. The ‘creating a new game’ button will transition to the Game Authoring Environment, which is described above. From there, the user can save the game specifics to a new file and then return to the splash screen. The ‘play a game’ button will prompt the user to choose a file to play and then launch the game screen. In the game screen, there will be a couple of ways for the user to interact with the environment. First, there will be buttons or icons to click on which will accomplish high-level operations like switching games without quitting, replaying a game, or saving progress. In addition, a menu bar or other similar feature will incorporate a drop down box to display the other available games, along with the relevant information (like images and descriptions). The user’s score will be displayed somewhere on the game screen as well and will update to reflect its current status. There will be a heads up display that will keep track of time-sensitive data like the user’s position and proximity to the finish line or destination (in bounded scrolling games, like SuperMario but not Flappy Bird). The HUD will also keep track of health status and other player variables.
+
+Erroneous situations that are reported to the user: invalid file formats (for images, sound files, and XMLs), invalid values entered for attributes of the Level or the Actor (e.g. for an Actor’s x-position, it cannot be a boolean). In terms of erroneous situations, the user interface will handle the cases where the user inputs an improperly formatted file name or the name of a preexisting file (in which case it will ask the user for permission to overwrite this file).
+
+![Splash screen](design_images/gameplayer_splashscreen.png)
+
+![In-game screen.](design_images/gameplayer_screen.png)
 
 ## Design Details
 
