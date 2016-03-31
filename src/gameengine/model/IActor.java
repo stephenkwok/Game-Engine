@@ -29,7 +29,7 @@ public interface IActor {
     /**
      * Moves the Actor's current position
      *
-     * @param distance  The distance to move the Actor's
+     * @param distance  The distance to move the Actor
      * @param direction The direction that the Actor should move in
      */
     public void move(double distance, double direction);
