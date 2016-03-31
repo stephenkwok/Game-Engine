@@ -7,6 +7,15 @@ import javafx.scene.image.ImageView;
 
 import java.util.*;
 
+/**
+ * This class defines the logic for an Actor object.
+ * Each interactive element in the Game is an Actor. Actors contains a set of rules that are contained
+ * within the myRules map. When provided with a Trigger object, all actions associated with a particular Trigger
+ * are executed. The Actor also extends the ImageView class so they will also be visual elements.
+ *
+ * @author blakekaplan
+ */
+
 public class Actor extends ImageView implements IActor {
 
     private int health;
@@ -18,9 +27,9 @@ public class Actor extends ImageView implements IActor {
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
      *
-     * @param rules A list of Rule objects to define the Actor's behavior
+     * @param id The Actor's ID number
      */
-    public Actor(int id, List<IRule> rules) {
+    public Actor(int id) {
         myRules = new HashMap<>();
         myID = id;
     }
