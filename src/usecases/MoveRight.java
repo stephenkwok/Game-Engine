@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class MoveRight extends Action {
 
+    private static final int RIGHT_ANGLE = 90;
     private double distance;
 
     public MoveRight(Actor assignedActor, List<Object> args){
@@ -16,6 +17,6 @@ public class MoveRight extends Action {
 
     @Override
     public void perform() {
-        getActor().move(distance, 90);
+        getActor().move(distance, RIGHT_ANGLE);
     }
 }
