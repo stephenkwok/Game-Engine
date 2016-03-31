@@ -17,7 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class Controller extends Application implements MainScreen {
+public class Controller extends Application {
 
 	private Stage stage;
 	private Scene mainScreenScene;
@@ -70,7 +70,6 @@ public class Controller extends Application implements MainScreen {
 		mainScreenScene = new Scene(root);
 	}
 
-	@Override
 	public void show() {
 		stage.show();
 	}
@@ -105,7 +104,7 @@ public class Controller extends Application implements MainScreen {
 	 * @param createdActors
 	 *            that can be added to that level
 	 */
-	@Override
+
 	public void goToLevelEditing(ILevel level, List<IActor> createdActors) {
 		levelEditor.setLevel(level, createdActors);
 		stage.setScene(levelEditor.getScene());
@@ -120,13 +119,12 @@ public class Controller extends Application implements MainScreen {
 	 * @param actor
 	 *            to be edited
 	 */
-	@Override
+
 	public void goToActorEditing(IActor actor) {
 		actorEditor.setActor(actor);
 		stage.setScene(actorEditor.getScene());
 	}
 
-	@Override
 	public void saveGame() {
 
 	}
