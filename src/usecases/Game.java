@@ -17,7 +17,7 @@ public class Game implements IGame {
 	private ILevel currentLevel;
 	private List<ILevel> levels;
 	private List<IActor> allActors = new ArrayList<IActor>();
-	private Map<Integer,Actor> actorIDMap = new HashMap<Integer,Actor>();
+	private Map<Integer,IActor> actorIDMap = new HashMap<Integer,IActor>();
 	private Map<String,List<Integer>> levelActorsMap = new HashMap<String,List<Integer>>();
 
 	/**
