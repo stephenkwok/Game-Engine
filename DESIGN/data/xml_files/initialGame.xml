@@ -1,0 +1,68 @@
+<game>
+	<level>
+		<information>
+			<number>1</number>
+			<name>Level One</name>
+			<background-image>hills_background.jpg</background-image>
+			<health>3</health>
+			<sound>happysound.mp3</sound>
+			<direction>horizontal</direction>
+			<termination>infinite</termination>
+		</information>
+		<actors>
+			<actor>
+				<image>hellokity.gif </image>
+				<name>main</name>
+				<x>10</x>
+				<y>100</y>
+				<type>player</type>
+				<rules>playerActions.properties</rules>
+			</actor>
+			<actor>
+				<image>dog.png</image>
+				<name>enemy1</name>
+				<x>30</x>
+				<y>100</y>
+				<type>obstacle</type>
+				<rules>obstacleActions.properties</rules>
+			</actor>
+		</actors>
+	</level>
+	<level>
+		<information>
+			<number>2</number>
+			<name>Level Two</name>
+			<background-image>hills_background.jpg</background-image>
+			<health>3</health>
+			<sound>happysound.mp3</sound>
+			<direction>horizontal</direction>
+			<termination>infinite</termination>
+		</information>
+		<actors>
+			<actor>
+				<image>hellokity.gif </image>
+				<name>main</name>
+				<x>10</x>
+				<y>100</y>
+				<type>player</type>
+				<rules>playerActions.properties</rules>
+			</actor>
+			<actor>
+				<image>dog.png</image>
+				<name>enemy1</name>
+				<x>30</x>
+				<y>100</y>
+				<type>obstacle</type>
+				<rules>obstacleActions.properties</rules>
+			</actor>
+			<actor>
+				<image>dog.png</image>
+				<name>enemy2</name>
+				<x>60</x>
+				<y>100</y>
+				<type>obstacle</type>
+				<rules>obstacleActions.properties</rules>
+			</actor>
+		</actors>
+	</level>
+</game>
