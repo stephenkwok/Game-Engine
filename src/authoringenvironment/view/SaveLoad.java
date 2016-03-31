@@ -3,7 +3,7 @@ package authoringenvironment.view;
 import java.io.File;
 import java.util.ResourceBundle;
 
-import authoringenvironment.controller.MainScreen;
+import authoringenvironment.controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -18,11 +18,11 @@ import javafx.stage.FileChooser;
  */
 public class SaveLoad implements IGUIElement {
 	private ResourceBundle myResources;
-	private MainScreen mainScreen;
+	private Controller mainScreen;
 	
 	private static final int PADDING = 10;
 
-	public SaveLoad(ResourceBundle myResources, MainScreen mainScreen) {
+	public SaveLoad(ResourceBundle myResources, Controller mainScreen) {
 		this.myResources = myResources;
 		this.mainScreen = mainScreen;
 	}

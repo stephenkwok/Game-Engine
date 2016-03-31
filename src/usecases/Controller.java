@@ -4,7 +4,7 @@ import java.util.List;
 
 import authoringenvironment.controller.ActorEditingEnvironment;
 import authoringenvironment.controller.LevelEditingEnvironment;
-import authoringenvironment.controller.MainScreen;
+import authoringenvironment.controller.Controller;
 import authoringenvironment.model.ICreatedActor;
 import authoringenvironment.model.ICreatedLevel;
 import javafx.application.Application;
@@ -15,7 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class Controller extends Application implements MainScreen {
+public class Controller extends Application implements Controller {
 	
 	private Stage stage;
 	private Scene mainScreenScene;

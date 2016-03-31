@@ -2,7 +2,7 @@ package authoringenvironment.view;
 
 import java.util.ResourceBundle;
 
-import authoringenvironment.controller.MainScreen;
+import authoringenvironment.controller.Controller;
 
 /**
  * Instantiates IGUIElements based on a ResourceBundle String key passed into createNewGUIObject(String nodeTypeKey).
@@ -12,11 +12,11 @@ import authoringenvironment.controller.MainScreen;
 
 public class GUIFactory {
 	private ResourceBundle myResources;
-	private MainScreen mainScreen;
+	private Controller mainScreen;
 	
-	public GUIFactory(ResourceBundle myResources, MainScreen mainScreen){
+	public GUIFactory(ResourceBundle myResources, Controller myController){
 		this.myResources = myResources;
-		this.mainScreen = mainScreen;
+		this.mainScreen = myController;
 	}
 	
 	/**

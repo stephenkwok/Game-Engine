@@ -1,8 +1,8 @@
 package authoringenvironment.view;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.Controller;
 import javafx.scene.Scene;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -13,18 +13,28 @@ import javafx.stage.Stage;
  * @author AnnieTang
  *
  */
-public class ToolBarGUI implements IGUI {
+public class GUIMain implements IGUI {
     private static final String GUI_RESOURCE = "GUI";
     private Scene myScene;
 	private BorderPane myRoot;
 	private ResourceBundle myResources;
 	private int windowHeight;
 	private int windowWidth;
-
-	public ToolBarGUI(int windowWidth, int windowHeight, Stage stage) {
+	private Stage myStage;
+	private Controller myController;
+	private GUIFactory factory;
+	
+	public GUIMain(int windowWidth, int windowHeight, Stage s) {
 		this.windowWidth = windowWidth;
 		this.windowHeight = windowHeight;
+		this.myStage = s;
+		init();
+	}
+	
+	private void init(){
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
+		myController = new Controller(myStage);
+		factory = new GUIFactory(myResources, myController);
 	}
 	
 	/**

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import authoringenvironment.controller.MainScreen;
+import authoringenvironment.controller.Controller;
 import authoringenvironment.model.ICreatedLevel;
 
 public class ComboBoxLevel extends ComboBoxTextCell{
@@ -13,7 +13,7 @@ public class ComboBoxLevel extends ComboBoxTextCell{
 	private List<String> levelNames;
 	List<ICreatedLevel> levels;
 	
-	public ComboBoxLevel(ResourceBundle myResources, String promptText, MainScreen mainScreen) {
+	public ComboBoxLevel(ResourceBundle myResources, String promptText, Controller mainScreen) {
 		super(myResources,promptText, mainScreen);
 		levels = mainScreen.getLevels();
 		levelMap = new HashMap<>();

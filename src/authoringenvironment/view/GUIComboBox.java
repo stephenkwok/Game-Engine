@@ -2,7 +2,7 @@ package authoringenvironment.view;
 
 import java.util.List;
 import java.util.ResourceBundle;
-import authoringenvironment.controller.MainScreen;
+import authoringenvironment.controller.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -31,9 +31,9 @@ public abstract class GUIComboBox implements IGUIElement {
 	protected ComboBox<String> comboBox;
 	protected Button comboButton;
 	protected String paletteSource;
-	protected MainScreen mainScreen;
+	protected Controller mainScreen;
 	
-	public GUIComboBox(ResourceBundle myResources, String promptText, MainScreen mainScreen) {
+	public GUIComboBox(ResourceBundle myResources, String promptText, Controller mainScreen) {
 		this.myResources = myResources;
 		this.promptText = promptText;
 		this.mainScreen = mainScreen;

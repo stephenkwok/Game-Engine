@@ -2,7 +2,7 @@ package authoringenvironment.view;
 
 import java.util.List;
 import java.util.ResourceBundle;
-import authoringenvironment.controller.MainScreen;
+import authoringenvironment.controller.Controller;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 /**
@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
  *
  */
 abstract class ComboBoxTextCell extends GUIComboBox {
-	public ComboBoxTextCell(ResourceBundle myResources, String promptText, MainScreen mainScreen) {
+	public ComboBoxTextCell(ResourceBundle myResources, String promptText, Controller mainScreen) {
 		super(myResources,promptText, mainScreen);
 	}
 

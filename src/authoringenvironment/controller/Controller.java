@@ -12,19 +12,16 @@ import javafx.stage.Stage;
 /**
  * This class serves as the interface that all authoring environment main screens must implement
  * 
- * @author Stephen
+ * @author Stephen, AnnieTang
  */
 
-public class MainScreen {
-	Stage myStage;
-	Scene myScene;
-	
+public class Controller {
+	Stage myStage;	
 	List<ICreatedLevel> levels;
 	
 	
-	public MainScreen(Stage myStage, Scene myScene){
+	public Controller(Stage myStage){
 		this.myStage = myStage;
-		this.myScene = myScene; 
 		levels = new ArrayList<>();
 	}
 	/**
@@ -32,7 +29,7 @@ public class MainScreen {
 	 * data from created game into XML file 
 	 */
 	public void show(){
-		
+		myStage.setScene(null);
 	}
 	
 	/**
