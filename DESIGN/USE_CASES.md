@@ -85,7 +85,23 @@ On the GameScreen implementing IButtons, user clicks on ‘Restart’ —> onAct
 ##### 21. Saving a player’s progress
 On the GameScreen implementing IButtons, user clicks on ‘Save Progress’ —> onAction it will pauseGame(), create an instance of GameXMLCreator then writeLevelInfo(level) for the current level, writeActorInfo(actor) for all actors in that current level, and writeInitialFile() for the game.  
 
-#### ADD BOBBY'S
+##### 22. Enter level editing mode from main splash screen
+
+On an implemented ISplashScreen, the user will hover over ‘High Scores’ -> onAction openEditor() is called which instantiates and switches the scene to the game authoring environment.
+
+##### 23. View high scores
+
+On an implemented ISplashScreen, the user will hover over ‘High Scores’. OnHover, openHighScores() is called, opening a menu of options of games which have saved high scores. Each game will show its highest score next to it. Each game is its own button -> onHover openIndividualHighScore() is called, which opens up an entire list of high scores.
+
+##### 24. Clear high scores
+
+Similarly to the view high scores use case, each game will show its highest score next to it, and onHover for each game, openIndividualHighScore() is called, opening up the entire list of high scores. The last entry of the list of high scores is a clickable button. OnClick of this button, clearHighScore() is called, which clears the high score list of that particular game.
+
+##### 25. Muting/enabling music/sfx
+
+On the main gameplay screen, there will be two buttons in the top right corner - one which looks like a loudspeaker (for sfx) and one that looks like a music quarter note (for music). OnClick of the loudspeaker, toggleSFX() is called, which tells the game engine to mute/unmute sound effects. OnClick of the music note, toggleMusic() is called, which tells the game engine to mute/unmute music.
+Return to main menu
+On the main gameplay screen, the leftmost button in the top of the screen will be labeled “menu.” OnClick of this button, pauseGame() and returnToMain() will be called. The second function sets the scene back to the main implemented ISplashScreen.
 
 ##### 26. Game character passes through pipe in Flappy Bird game
 
