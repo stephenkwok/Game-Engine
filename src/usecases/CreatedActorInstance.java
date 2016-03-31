@@ -37,6 +37,7 @@ public class CreatedActorInstance extends ImageView {
 		setDragResponse();
 	}
 	
+	// initialize the default variables for a new actor; can be extended by adding new values to be initialized.
 	private void initializeDefaultVariables() {
 		setImage(new Image("default_icon.png"));
 		setName("Untitled");
@@ -47,6 +48,7 @@ public class CreatedActorInstance extends ImageView {
 		myRules = new HashMap<>();
 	}
 	
+	// sets the drag response of the imageview so that the actor is dragged to a new position.
 	private void setDragResponse() {
 		setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent event) {
@@ -58,6 +60,7 @@ public class CreatedActorInstance extends ImageView {
         }); 
 	}
 	
+	// renders the imageview at its current location
 	public void render() {
 		setX(myX);
 		setY(myY);
