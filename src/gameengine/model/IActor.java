@@ -1,7 +1,7 @@
 package gameengine.model;
 
 
-import javafx.scene.Node;
+import java.util.Set;
 
 /**
  * This interface defines the the public methods for Actor objects. Each Actor will have a position, a number of points, a designated
@@ -13,38 +13,23 @@ import javafx.scene.Node;
 public interface IActor {
 
     /**
-     * Gets the Actor's X location
-     *
-     * @return The Actor's X coordinate
-     */
-    public double getX();
-
-
-    /**
-     * Gets the Actor's Y location
-     *
-     * @return The Actor's Y coordinate
-     */
-    public double getY();
-
-    /**
      * Gets the Actor's amount of health
      *
      * @return The Actor's amount of health
      */
-    public double getHealth();
+    public int getHealth();
 
     /**
      * Gets the Actor's number of points
      *
      * @return The Actor's number of points
      */
-    public double getPoints();
+    public int getPoints();
 
     /**
      * Moves the Actor's current position
      *
-     * @param distance  The distance to move the Actor's
+     * @param distance  The distance to move the Actor
      * @param direction The direction that the Actor should move in
      */
     public void move(double distance, double direction);
@@ -54,7 +39,7 @@ public interface IActor {
      *
      * @param change The desired change in the Actor's number of points
      */
-    public void changePoints(double change);
+    public void changePoints(int change);
 
 
     /**
@@ -62,20 +47,34 @@ public interface IActor {
      *
      * @param change The desired change in the Actor's amount of health
      */
-    public void changeHealth(double change);
+    public void changeHealth(int change);
 
     /**
      * Performs the action for a particular provided trigger
      *
      * @param myTrigger A Trigger object that calls for an appropriate response
      */
-    public void performActionFor(ITrigger myTrigger);
+    public void performActionsFor(ITrigger myTrigger);
 
     /**
-     * Provides the a visual element reflecting the Actor's current characteristics
+     * Provides the list of Triggers that the Actor responds to
      *
-     * @return A JavaFX Node that can be displayed in the UI
+     * @return The list of Triggers
      */
-    public Node getUINode();
+    public Set<ITrigger> getTriggers();
+
+    /**
+     * Adds a new Rule to the Actor
+     *
+     * @param newRule The Rule to be added to the Actor
+     */
+    public void addRule(IRule newRule);
+
+    /**
+     * Provides the Actor's ID
+     *
+     * @return The Actor's ID
+     */
+    public int getID();
 
 }

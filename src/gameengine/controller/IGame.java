@@ -36,9 +36,10 @@ public interface IGame {
     public void handleTrigger(ITrigger myTrigger);
 
     /**
-     * Provides a list of the actors in the current level, each of which may contain a visual Node to be displayed
+     * Provides a list of all actors used across all levels
      *
      * @return A List of Actor objects
      */
     public List<IActor> getActors();
+
 }

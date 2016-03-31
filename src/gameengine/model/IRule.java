@@ -1,5 +1,7 @@
 package gameengine.model;
 
+import usecases.Action;
+
 /**
  * This interface defines the public methods for Rule objects. For our purposes, Rules will be ways of packaging
  * Triggers with their appropriate Action response.
@@ -20,5 +22,5 @@ public interface IRule {
      *
      * @return The specific Action from the Rule
      */
-    public IAction getAction();
+    public Action getAction();
 }
