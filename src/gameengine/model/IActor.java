@@ -1,7 +1,7 @@
 package gameengine.model;
 
 
-import javafx.scene.Node;
+import java.util.Set;
 
 /**
  * This interface defines the the public methods for Actor objects. Each Actor will have a position, a number of points, a designated
@@ -55,5 +55,26 @@ public interface IActor {
      * @param myTrigger A Trigger object that calls for an appropriate response
      */
     public void performActionsFor(ITrigger myTrigger);
+
+    /**
+     * Provides the list of Triggers that the Actor responds to
+     *
+     * @return The list of Triggers
+     */
+    public Set<ITrigger> getTriggers();
+
+    /**
+     * Adds a new Rule to the Actor
+     *
+     * @param newRule The Rule to be added to the Actor
+     */
+    public void addRule(IRule newRule);
+
+    /**
+     * Provides the Actor's ID
+     *
+     * @return The Actor's ID
+     */
+    public int getID();
 
 }
