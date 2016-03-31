@@ -7,6 +7,8 @@ import gameengine.model.ITrigger;
 import java.util.*;
 
 /**
+ * A Level is essentially a package of Actor objects. It is able to relay a Trigger to Actors when it receives one.
+ *
  * @author blakekaplan
  */
 public class Level implements ILevel {
@@ -16,36 +18,11 @@ public class Level implements ILevel {
     String myName;
 
     /**
-     * Instantiates the triggerMap and populates it based on provided information
-     *
-     * @param actors The provided List of Actors to be accounted for
+     * Instantiates the triggerMap and Actor list
      */
-    public Level(List<IActor> actors) {
-        myActors = actors;
+    public Level() {
+        myActors = new ArrayList<>();
         triggerMap = new HashMap<>();
-        populateMap(actors);
-    }
-
-    /**
-     * Populates triggerMap based on the provided list of Actors
-     *
-     * @param actors The list of Actors to be accounted for
-     */
-    private void populateMap(List<IActor> actors) {
-        for (IActor myActor : actors) {
-            Set<ITrigger> actorTriggers = myActor.getTriggers();
-            for (ITrigger myTrigger : actorTriggers) {
-                if (triggerMap.containsKey(myTrigger)) {
-                    List<IActor> levelActors = triggerMap.get(myTrigger);
-                    levelActors.add(myActor);
-                    triggerMap.put(myTrigger, levelActors);
-                } else {
-                    List<IActor> levelActors = new ArrayList<>();
-                    levelActors.add(myActor);
-                    triggerMap.put(myTrigger, levelActors);
-                }
-            }
-        }
     }
 
     /**
@@ -69,6 +46,28 @@ public class Level implements ILevel {
     @Override
     public void setName(String name) {
         myName = name;
+    }
+
+    /**
+     * Adds a new Actor to the Level and updates the triggerMap accordingly
+     *
+     * @param newActor The Actor to be added to the Level
+     */
+    @Override
+    public void addActor(IActor newActor) {
+        myActors.add(newActor);
+        Set<ITrigger> actorTriggers = newActor.getTriggers();
+        for (ITrigger myTrigger : actorTriggers) {
+            if (triggerMap.containsKey(myTrigger)) {
+                List<IActor> levelActors = triggerMap.get(myTrigger);
+                levelActors.add(newActor);
+                triggerMap.put(myTrigger, levelActors);
+            } else {
+                List<IActor> levelActors = new ArrayList<>();
+                levelActors.add(newActor);
+                triggerMap.put(myTrigger, levelActors);
+            }
+        }
     }
 
     /**
