@@ -117,7 +117,7 @@ public class Controller extends Application {
 	 * ActorEditor
 	 * 
 	 * @param actor
-	 *            to be edited
+	 *            IActor to be edited
 	 */
 
 	public void goToActorEditing(IActor actor) {
