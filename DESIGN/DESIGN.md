@@ -1,6 +1,6 @@
 # VOOGASalad Design - The Loop's Goat Cheese Salad
 
-Justin Bergkamp, Michelle Chen, Michael Figueiras, Blake Kaplan, Stephen Kwok, Annie Tang, Carine Torres, Colette Torres, Bobby Wang, Amy Zhao
+*Justin Bergkamp, Michelle Chen, Michael Figueiras, Blake Kaplan, Stephen Kwok, Annie Tang, Carine Torres, Colette Torres, Bobby Wang, Amy Zhao*
 
 ## Introduction
 
@@ -118,3 +118,9 @@ We also discussed at length how we would store the information within each level
 For returning information such as name, image, size, etc., we considered returning them as Lists of Strings or as Maps of property to setting (String to String) and ultimately decided that storing info as Maps would minimize dependencies between the authoring environment and game data since there is no need to agree upon a particular order as there would be if we returned a single String. We also decided that for Rules, we would set strings corresponding to Triggers and Actions via properties files that would match an option with the class name that the Game Engine decides on so that they can use reflection to create the Trigger and Action pairings.
 
 In this preparation process, we had several conversations about the interpretation of XML data and how to pass this information to the GameAuthoringEnvironment. We initially felt the need to be able to parse the data by information category and then format it to the GameAuthoringEnvironment’s specifications of a map of information attributes and a list of actors. However, this limits the extension potential of this component. After Professor Duvall introduced us to xstream, we opted to try this feature since it allows us to save and read data in as objects that have their own attributes. This way, extension is made simple with the capability of adding new information to the object class. In addition, we will continue to interact with the GameAuthoringEnvironment through a map and list.
+
+#### Game Engine
+
+As explained above, our Game Engine design centers around a collection of Actors, each possessing a link from a Trigger to an Action. Much of our team decision focussed on what would constitute a Trigger and the method through which our game engine could evaluate whether the Triggers had been prompted.
+
+The initial idea was to cycle through every Trigger for each Actor in the level, evaluating each. After discussion, we decided that this method would be excessive and that only checking the relevant Actors would be best. To this end, we decided on creating a map linking each Triggers to all of the Actors that possess an action for that Trigger. Map <Trigger, List<Actors>>. This cuts down on the amount of processing that the Game Engine must do, as each Trigger can directly call the actions for each affected Actor. This layout necessitates a separate collision detection process, however, since the Game Player has no collision detection capabilities. This system also means that the game loop must be contained within the Game Player in order for the map to receive the animation step ‘tick’ as a Trigger.  
