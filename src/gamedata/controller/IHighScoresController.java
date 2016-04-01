@@ -25,6 +25,10 @@ public interface IHighScoresController {
 	 */
 	public void viewHighScores(Map<String,Integer> highScores);
 	
+	
+	/**
+	 * Will clear the high scores from a highScores.xml
+	 */
 	public void clearHighScores() throws SAXException, IOException;
 	
 

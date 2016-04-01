@@ -52,6 +52,10 @@ Furthermore, our Actor class will extend the ImageView class. This will allow us
 
 ![Game engine overview.](design_images/gameengine_overview.png)
 
+#### Game Player / Data
+
+![Game player / data overview.](design_images/gameplayer_overview.jpg)
+
 
 ## User Interface
 
