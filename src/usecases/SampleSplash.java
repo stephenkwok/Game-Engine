@@ -1,20 +1,31 @@
 package usecases;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.util.Optional;
 
-import gamedata.HighScoreParser;
-import gameplayer.screens.IScreen;
-import gameplayer.screens.ISplashScreen;
+import org.xml.sax.SAXException;
+import gameplayer.view.IScreen;
+import gameplayer.view.ISplashScreen;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
+import javafx.scene.control.ButtonType;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+/**
+ * This class is an example implementation of the use case where the user wishes to clear the list of 
+ * high scores. It relies on the interfaces of the gameplayer.view class to set up the scene and contain
+ * the necessary methods of user interaction to handle these mouse events. In addition, it utilizes the 
+ * interfaces of the gamedata.controller to make changes in the xml data files. Together, these APIs
+ * collaborate to carry out the user's commands of the front end to the back end's data components by relying
+ * on private methods to implement the public calls of this work. 
+ * @author michaelfigueiras
+ *
+ */
 public class SampleSplash implements ISplashScreen, IScreen {
 
 	Stage myStage;
@@ -32,29 +43,22 @@ public class SampleSplash implements ISplashScreen, IScreen {
 
 	@Override
 	public void play() {
-		// TODO Auto-generated method stub
+		// TO BE IMPLEMENTED LATER
 		
 	}
 
 	@Override
 	public void edit() {
-		// TODO Auto-generated method stub
+		// TO BE IMPLEMENTED LATER
 		
 	}
 	
 	public void openHighScores(){
-		SampleParser myParser = new SampleParser();
-		List<String> myList = new ArrayList<String>();
-		Map<String, List<String>> myInfo = myParser.getHighScoreInfo(myList);
-		VBox myBox = new VBox();
-		for(String key : myInfo.keySet()){
-			HBox hb = new HBox();
-			for(String info : myInfo.get(key)){
-				hb.getChildren().add(new Text(info));
-			}
-			myBox.getChildren().add(hb);
-		}
-		myRoot.getChildren().add(myBox);
+		FileChooser fChooser = new FileChooser();
+		File f = fChooser.showSaveDialog(new Stage());
+		String fileName = f.getName();
+		
+		openIndividualHighScores(fileName);
 	}
 
 	@Override
@@ -63,6 +67,26 @@ public class SampleSplash implements ISplashScreen, IScreen {
 		myScene = new Scene(myRoot);
 		myRoot = new Group();
 		myStage.show();
+	}
+
+	@Override
+	public void openIndividualHighScores(String gameName) {
+		HighScoresController myHSC = new HighScoresController(gameName);
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("HIGH SCORES");
+		alert.setHeaderText("Press OK to view scores or Cancel to clear scores");
+		Optional<ButtonType> result = alert.showAndWait();
+		if(result.get() == ButtonType.CANCEL){
+			try {
+				myHSC.clearHighScores();
+			} catch (SAXException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else if (result.get() == ButtonType.OK){
+			myHSC.viewHighScores(myHSC.getHighScores());
+		}
+
 	}
 
 }

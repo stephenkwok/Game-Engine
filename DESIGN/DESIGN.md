@@ -129,7 +129,11 @@ We wanted to create a class that provided a common point of access to all the le
 We also discussed at length how we would store the information within each level and within each actor.
 For returning information such as name, image, size, etc., we considered returning them as Lists of Strings or as Maps of property to setting (String to String) and ultimately decided that storing info as Maps would minimize dependencies between the authoring environment and game data since there is no need to agree upon a particular order as there would be if we returned a single String. We also decided that for Rules, we would set strings corresponding to Triggers and Actions via properties files that would match an option with the class name that the Game Engine decides on so that they can use reflection to create the Trigger and Action pairings.
 
+#### Game Data/Game Player
+
 In this preparation process, we had several conversations about the interpretation of XML data and how to pass this information to the GameAuthoringEnvironment. We initially felt the need to be able to parse the data by information category and then format it to the GameAuthoringEnvironment’s specifications of a map of information attributes and a list of actors. However, this limits the extension potential of this component. After Professor Duvall introduced us to xstream, we opted to try this feature since it allows us to save and read data in as objects that have their own attributes. This way, extension is made simple with the capability of adding new information to the object class. In addition, we will continue to interact with the GameAuthoringEnvironment through a map and list.
+
+In discussing the location of the Game Player work in relation to the GameAuthoringEnvironment and Game Engine, we realized it was necessary to clearly delineate the responsibilities of the controller as the primary mediator between the authoring environment and data files rather than have the view pass this information along. Incorporating a controller package allowed the game player's view components to better distinguish their work encompassing game visualizations while moving the GameLoop and other update relationships with the Game Engine to a better position in the hierarchy of sharing information. 
 
 #### Game Engine
 
