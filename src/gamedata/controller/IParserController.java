@@ -2,6 +2,7 @@ package gamedata.controller;
 
 import java.util.List;
 import authoringenvironment.model.ICreatedLevel;
+import gameengine.controller.ILevel;
 
 /**
  * The purpose of this interface is to provide the loading capabilities from the authoring environment and game engine to play or edit a game from an XML file.
@@ -22,6 +23,6 @@ public interface IParserController {
 	 * @return a list of playable levels
 	 * @param the name of the file to parse through
 	 */
-	public void loadforPlaying (String filepath);
+	public List<ILevel> loadforPlaying (String filepath);
 
 }

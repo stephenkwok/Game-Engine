@@ -17,14 +17,4 @@ public interface IButtons {
 	 */
 	public void replayLevel ();
 	
-	/**
-	 * Will prompt the saving of a game at current status.
-	 */
-	public void saveProgress ();
-	
-	/**
-	 * Will stop current game to switch to a different game.
-	 */
-	public void switchGame ();
-
 }
