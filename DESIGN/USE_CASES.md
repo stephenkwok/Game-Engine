@@ -60,42 +60,42 @@ In the HUDScreen, the update() method will change the x position of the icon’s
 
 ##### 15. User clicks to replay their current level
 
-User clicks the “circular arrow icon” to restart the level -> onAction invokes game.playAt(currentLevel) -> GameLoop is reinitialized along with level actors
+User clicks the “circular arrow icon” to restart the level -> onAction invokes the GameController's initialize(level) (where level is the number representing the current level taken from IGame) and then begin() so that the timeline plays from the initial settings.   
 
 ##### 16. User clicks to pause the game
 
-User clicks the “||” button on the game screen -> the GameLoop stop() method is invoked which halts the animation timeline.
+User clicks the “||” button on the game screen -> the endGame() method is invoked by GameController which halts the animation timeline.
 
 ##### 17. User switches game without quitting
 
-User selects an item from “New Game” combobox, calling the switchGame() method -> onAction will endGame() through the GameLoop and create a new Game based on their choice, then initialize(0) on what they selected.
+User selects an item from “New Game” combobox, calling the switchGame() method -> onAction will endGame() through the GameController and create a new instance of IGame based on their choice.  IGame is instantiated with information passed from an instantiated IParserController that's given the chosen game file.  Then, initialize(level) is invoked based on the current level setting found in the saved game file.
 
 ##### 18. User saves high score after the game ends
 
-When endGame() is called, GameScreen will then saveHighScore() which creates and prompts an alert to save the current score only if the player has reached a high score.  If the alert is prompted, the user will click ‘OK’ —> onAction will overwrites information in HighScores.xml only if the player has reached a high score.
+When endGame() is called, GameScreen will then saveHighScore() which creates and prompts an alert to save the current score only if the player has reached a high score.  If the alert is prompted, the user will click ‘OK’ —> onAction will overwrite information in HighScores.xml only if the player has reached a high score.
 
 ##### 19. Starting the game from main menu screen
 
-On an implemented ISplashScreen, the user will hover over ‘Play’ —> onAction play() is called which instantiates a Menu of options of available games for playing. The games will be represented by an image preview of the game.  When one of the game options is clicked —> onAction a new instance of GameXMLParser is instantiated to read through the XML file and that information gets passed to instantiate a new IGame from the Game Engine.  That IGame will be instantiated with a list of levels taken from IGameParser’s getLevels() and then the current level to be played is set with setLevel(myLevel).
+On an implemented ISplashScreen, the user will hover over ‘Play’ —> onAction play() is called which instantiates a Menu of options of available games for playing. The games will be represented by an image preview of the game.  When one of the game options is clicked —> onAction a new instance of IParserController is instantiated and its loadforPlaying() method is invoked which creates an instance of a GameXMLParser.  The information parsed through gets passed to instantiate a new IGame.  That IGame will be instantiated with a list of levels taken from GameXMLParser's getLevels() and then the current level to be played is set with setLevel(myLevel).
 
 ##### 20. Pressing restart mid-game to reset game to level 0 (the start)
 
-On the GameScreen implementing IButtons, user clicks on ‘Restart’ —> onAction it will pauseGame(), and start the game loop over by calling the game’s implemented GameLoop function initialize(0).  initialize(0) clears the scene on the stage and uses the GameScreen’s addActor(actor) to add every visualization of an IActor passed from getActors() on the game’s level 0 (an instance of ILevel).
+On the GameScreen implementing IButtons, user clicks on ‘Restart’ —> onAction it will endGame(), and start the game loop over through the GameController's initialize(0).  initialize(0) clears the scene on the stage and uses the GameScreen’s addActor(actor) to add every visualization of an IActor passed from getActors() on the game’s level 0 (an instance of ILevel).
 
 ##### 21. Saving a player’s progress
-On the GameScreen implementing IButtons, user clicks on ‘Save Progress’ —> onAction it will pauseGame(), create an instance of GameXMLCreator then writeLevelInfo(level) for the current level, writeActorInfo(actor) for all actors in that current level, and writeInitialFile() for the game.  
+On the GameScreen implementing IButtons, user clicks on ‘Save Progress’ —> onAction GameController will endGame(), create an instance of ICreatorController and call its saveforPlaying(filepath) method which creates an GameXMLCreator.  filepath is taken from a prompted File Chooser. Then, writeLevelInfo(level) for the current level, writeActorInfo(actor) for all actors in that current level, and writeInitialFile() are all invoked from GameXMLCreator and saveLevel(levelInfo, levelActors) is called to save current level progress.
 
 ##### 22. Enter level editing mode from main splash screen
 
-On an implemented ISplashScreen, the user will hover over ‘High Scores’ -> onAction openEditor() is called which instantiates and switches the scene to the game authoring environment.
+On an implemented ISplashScreen, the user will hover over ‘Edit’ -> onAction openEditor() is called which instantiates and switches the scene to the game authoring environment.
 
 ##### 23. View high scores
 
-On an implemented ISplashScreen, the user will hover over ‘High Scores’. OnHover, openHighScores() is called, opening a menu of options of games which have saved high scores. Each game will show its highest score next to it. Each game is its own button -> onHover openIndividualHighScore() is called, which opens up an entire list of high scores.
+On an implemented ISplashScreen, the user will hover over ‘High Scores’. OnHover, openHighScores() is called, opening a menu of options of games which have saved high scores. Clicking on one of the game options --> invokes openIndividualHighScore(gameName) which prompts an alert to view or clear that game's high scores.  Click 'OK' --> invokes IHighScoresController's viewHighScores(highScores).  highScores comes from getHighScores() which returns the highScores map from creating an instance of HighScoresParser.  viewHighScores(highScores) also creates an instance of a HighScoresScreen will to display the map information for that game.
 
 ##### 24. Clear high scores
 
-Similarly to the view high scores use case, each game will show its highest score next to it, and onHover for each game, openIndividualHighScore() is called, opening up the entire list of high scores. The last entry of the list of high scores is a clickable button. OnClick of this button, clearHighScore() is called, which clears the high score list of that particular game.
+On an implemented ISplashScreen, the user will hover over ‘High Scores’. OnHover, openHighScores() is called, opening a menu of options of games which have saved high scores. Clicking on one of the game options --> invokes openIndividualHighScore(gameName) which prompts an alert to view or clear that game's high scores.  Click 'Cancel' --> invokes IHighScoresController's clearHighScores(highScores). 
 
 ##### 25. Muting/enabling music/sfx
 

@@ -14,15 +14,29 @@ import gameplayer.view.BaseScreen;
 public interface GameController {
 	
 	/**
-	 * Will initialize the backend (game engine) with the current level's information and actor information to set up the game for playing.  Will visualize that backend too. 
-	 * @param level an int representing the level to be played
+	 * Creates an instance of IGame populated with ILevels
+	 * @param list of playable levels
+	 * @return an instance of IGame
 	 */
 	public IGame createGame (List<ILevel> myLevels);
 	
+	/**
+	 * Creates the basic game view which holds the other front end view components
+	 * @param IGame
+	 * @return BaseScreen
+	 */
 	public BaseScreen createGameView (IGame myGame);
 	
+	/**
+	 * Sets the current game to the given IGame
+	 * @param IGame
+	 */
 	public void setGame (IGame myGame);
 	
+	/**
+	 * Sets the basic game view to the given BaseScreen
+	 * @param BaseScreen
+	 */
 	public void setGameView (BaseScreen myGameView);
 	
 	/**
@@ -54,7 +68,7 @@ public interface GameController {
 	/**
 	 * Will stop the animation timeline.
 	 */
-	public void stop ();
+	public void endGame ();
 	
 	
 	
