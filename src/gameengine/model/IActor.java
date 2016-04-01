@@ -13,6 +13,59 @@ import java.util.Set;
 public interface IActor {
 
     /**
+     * Gets the Actor's X location
+     *
+     * @return The Actor's X coordinate
+     */
+    public double getX();
+
+
+    /**
+     * Gets the Actor's Y location
+     *
+     * @return The Actor's Y coordinate
+     */
+    public double getY();
+    
+    /**
+     * Gets the Actor's velocity along the horizontal vector
+     * 
+     * @return the Actor's X velocity
+     */
+    public double getXVelo();
+
+    /**
+     * Gets the Actor's velocity along the vertical vector
+     * 
+     * @return the Actor's Y velocity
+     */
+    public double getYVelo();
+    
+    /**
+     * Sets an Actor's X position
+     * @param updateXPosition
+     */
+	public void setXPos(double updateXPosition); 
+	
+	/**
+     * Sets an Actor's Y position
+     * @param updateYPosition
+     */
+	public void setYPos(double updateYPosition); 
+	
+	/**
+     * Sets an Actor's X velocity
+     * @param updateXVelo
+     */
+	public void setXVelo(double updateXVelo); 
+	
+	/**
+     * Sets an Actor's Y velocity
+     * @param updateYVelo
+     */
+	public void setYVelo(double updateYVelo);
+    
+    /**
      * Gets the Actor's amount of health
      *
      * @return The Actor's amount of health

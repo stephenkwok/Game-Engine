@@ -135,4 +135,40 @@ public class Actor extends ImageView implements IActor {
     public int getID() {
         return myID;
     }
+
+	@Override
+	public double getXVelo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getYVelo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setXPos(double updateXPosition) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setYPos(double updateYPosition) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setXVelo(double updateXVelo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setYVelo(double updateYVelo) {
+		// TODO Auto-generated method stub
+		
+	}
 }
