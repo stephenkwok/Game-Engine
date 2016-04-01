@@ -1,0 +1,36 @@
+<game>
+	<settings>
+		<initial-file> initialGame.xml </initial-file>
+		<score>700</score>
+		<health>2</health>
+	</settings>
+	<level>
+		<information>
+			<number>1</number>
+			<name>Level One</name>
+			<background-image>hills_background.jpg</background-image>
+			<health>3</health>
+			<sound>happysound.mp3</sound>
+			<direction>horizontal</direction>
+			<termination>infinite</termination>
+		</information>
+		<actors>
+			<actor>
+				<image>hellokity.gif </image>
+				<name>main</name>
+				<x>200</x>
+				<y>100</y>
+				<type>player</type>
+				<rules>playerActions.properties</rules>
+			</actor>
+			<actor>
+				<image>dog.png</image>
+				<name>enemy1</name>
+				<x>30</x>
+				<y>100</y>
+				<type>obstacle</type>
+				<rules>obstacleActions.properties</rules>
+			</actor>
+		</actors>
+	</level>
+</game>
