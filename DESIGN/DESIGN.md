@@ -54,6 +54,23 @@ Furthermore, our Actor class will extend the ImageView class. This will allow us
 
 #### Game Player / Data
 
+There are several high-level modules to the game player, which are each implemented by individual classes:
+
+**High-Level Controller**: This module is responsible for controlling most of the logic of the rest of the program. It consists of two classes: `GameController` and `ISplashScreen`.
+
+`GameController` is the main controller class for the game player. It has various methods for starting and ending games, and it performs all of the setup/teardown of the games themselves. In particular, the `createGame()`, `createGameView()`, `setGame()`, `setGameView()`, `initialize()`, `begin()`, `update()`, `checkInteractions()`, `cleanUp()`, and `endGame()` methods are all within this class. Overall, this class has control over almost every other class within the Game Player.
+
+The `ISplashScreen` is an interface, and a classes which implements this interface will serve as the main splash screen for our application. It has four main functions: `play()`, `edit()`, `openHighScores()`, and `openIndividualHighScores()`. `play()` opens up a menu of types of games to play, and once the user selects an individual game type, the game engine is instantiated and the scene is switched over to the `BaseScreen`. `edit()` opens up the game authoring environment and switches over the display. `openHighScores()` results in a menu opening where each game type is shown with its high score next to it. Clicking on an individual game inside that menu reuslts in `openIndividualHighScores()` being called, which opens up a list of all the high scores.
+
+**Information Parsing**: This module is responsible for loading the save games from disk files to the program. It consists of three main classes:  `IParserController`, `GameXMLParser`, and `EditXMLParser`. `IParserController` serves as the controller for this class, and it determines whether the information loaded is for gameplay or for editing. The  classes for loading the XML for gameplay and editing are the `GameXMLParser` and `EditXMLParser`, respectively.
+
+**Information Storing** On the flip side of the parsing module, this module is responsible for saving games to the disk. There is a lot of parity between the parsing and storing modules. The storing module consists of three main classes:  `ICreatorController`, `GameXMLCreator`, and `EditXMLCreator`. `ICreatorController` serves as the controller for this class, and it determines whether the information saved is for gameplay or for editing. The  classes for saving the XML for gameplay and editing are the `GameXMLCreator` and `EditXMLCreator`, respectively.
+
+**HighScores**: This is implemented by several classes. A `HighScoresController` class has two methods: `getHighScores()` and `viewHighScores()`. The former is mediated by a `HighScoresParser` class, which de-serializes an XML file into a map Java object, and the latter is displayed on a `HighScoreScreen` class.
+
+**Display**: This module is responsible for displaying all of the actors and background objects on the gameplay area screen. It consists of the `BaseScreen`, `HUDScreen`, `GameScreen` and `MenuScreen` classes. `BaseScreen` is the base upon which other objects can be added with `addComponents()`. `HUDScreen` is a dynamically updating (with the `update()` function) overlay on top of the `BaseScreen` which shows relevant information such as the number of lives remaining and the current score to the player. `GameScreen` has two main functions: `addActor()` and `handleScreenEvent()`. The former function deals with adding various actors to the current displayed area, and the latter deals with handling what happens if an on-screen event happens. This information may get sent back to the game engine for further processing. `MenuScreen` is responsible for saving the current game, switching games, and returning to the main menu, through the `saveProgress()`, `switchGame()`, and `returnToSplash()` functions respectively. As more extensions get added to this project, the `MenuScreen` may have further increased responsibilities.
+
+
 ![Game player / data overview.](design_images/gameplayer_overview.jpg)
 
 
@@ -95,11 +112,31 @@ Erroneous situations that are reported to the user: invalid file formats (for im
 
 The MainScreen module serves as the controller for the authoring environment and allows the user to add or edit actors and levels as well as return to the overall program’s main screen. The ActorEditingEnvironment module allows the user to either edit a currently existing actor or create a new one. The LevelEditingEnvironment module allows the user to either edit a currently existing actor or create a new one. We decided to create these three separate modules for the controller component of the authoring environment so as to ensure each class only fulfills a single responsibility.
 
+#### Game Player / Data
+
+Describe how each module handles specific features given in the assignment specification, what resources it might use, how it collaborates with other modules, and how each could be extended to include additional requirements (from the assignment specification or discussed by your team). Note, each sub-team should have its own API for others in the overall team or for new team members to write extensions. Finally, justify the decision to create each module with respect to the design's key goals, principles, and abstractions.
+
+**High-Level Controller**: This high-level controller is responsible for prompting the behavior of all other modules in the Game Player / Data sector. It would use relatively few external resources in the form of XML configuration files. Its performance is not dependent on the correct performance of any other class, in that other classes having errors will not cause this class to have an error. However, it is likely that incorrect performance of other classes would negatively impact the overall application. This application launches either the game editing environment, game play environment, or the high score environment, depending on the user selection.
+
+
+**Information Parsing**:
+
+**Information Storing**:
+
+**HighScores**:
+
+**Display**:
+
 ## Example Games
 
 **Flappy Bird**
 
 In the game Flappy Bird, the user attempts to dodge obstacles by moving an actor up and down as the screen scrolls horizontally until a collision occurs between the actor and an obstacle. The game authoring environment allows for this type of game by giving the author the option to generate an infinitely-scrolling scene within the level editing environment. The author then has the option of dragging and dropping actors created in the actor editing environment into that scene or level. The author may also decide how frequently each actor appears on that level (as it would be impossible for the author to place obstacles indefinitely). Each of the actors will come with a set of defined rules for responding to given triggering events (this will be implemented as a Rules class with a TriggerEvent that results in the invoking of an Action). In the case of Flappy Bird, the actors to be created will include the user-controlled player and obstacles such as pipes. Each obstacle will likely have a single Rule, stating that whenever the TriggerEvent Collision occurs between the user and the obstacle, the GameEnd Action is invoked. For the user-controlled player, a Rule specific to that actor may be that whenever the trigger event KeyPressUp occurs, the MoveUp Action is invoked. Any other responses to events such as mouse clicks, key presses, or collisions, can be added to an Actor’s list of rules in this way. Then, when the game runs, each game loop will involve iterating through each actor’s list of Rules to check for TriggerEvents and making any responses happen as needed.
+
+Flappy bird is unique from many platform scrolling games because it has infinite scrolling (until the player loses). Every keyframe, the game player simulates scrolling by updating the x positions of each obstacle on the screen and the y position of the bird on the screen. This creates the illusion of scrolling, even though the bird is moving on a stationary stage (not the other way around).
+
+Since the game is infinitely scrolling, the game player would save the current score, the y position of the bird, the total distance it traveled, and the bird’s relative distance from the start of the current “level” in a save state. These four pieces of data, along with preferences like whether music is on/off, are all the information that is necessary to recreate a game from an XML.
+
 
 **Super Mario**
 
@@ -137,7 +174,7 @@ For returning information such as name, image, size, etc., we considered returni
 
 In this preparation process, we had several conversations about the interpretation of XML data and how to pass this information to the GameAuthoringEnvironment. We initially felt the need to be able to parse the data by information category and then format it to the GameAuthoringEnvironment’s specifications of a map of information attributes and a list of actors. However, this limits the extension potential of this component. After Professor Duvall introduced us to xstream, we opted to try this feature since it allows us to save and read data in as objects that have their own attributes. This way, extension is made simple with the capability of adding new information to the object class. In addition, we will continue to interact with the GameAuthoringEnvironment through a map and list.
 
-In discussing the location of the Game Player work in relation to the GameAuthoringEnvironment and Game Engine, we realized it was necessary to clearly delineate the responsibilities of the controller as the primary mediator between the authoring environment and data files rather than have the view pass this information along. Incorporating a controller package allowed the game player's view components to better distinguish their work encompassing game visualizations while moving the GameLoop and other update relationships with the Game Engine to a better position in the hierarchy of sharing information. 
+In discussing the location of the Game Player work in relation to the GameAuthoringEnvironment and Game Engine, we realized it was necessary to clearly delineate the responsibilities of the controller as the primary mediator between the authoring environment and data files rather than have the view pass this information along. Incorporating a controller package allowed the game player's view components to better distinguish their work encompassing game visualizations while moving the GameLoop and other update relationships with the Game Engine to a better position in the hierarchy of sharing information.
 
 #### Game Engine
 
