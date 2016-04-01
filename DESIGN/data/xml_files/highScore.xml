@@ -1,11 +1,8 @@
 <game>
-	<players>
-		<michael>99</michael>
-		<carine>98</carine>
-		<robert>97</robert>
-		<broadhead>96</broadhead>
-		<trump>2</trump>
-		<spongebob>50</spongebob>
+	<mario>
 		<rihanna>100</rihanna>
-	</players>
+	</mario>
+	<flappybird>
+		<bobby>100000</bobby>
+	</flappybird>
 </game>

@@ -13,5 +13,5 @@ import java.util.Map;
 
 public interface HighScoreParser {
 
-	public Map<String, Integer> getHighScoreInfo(List<String> playerTags);
+	public Map<String, Map<String, Integer>> getHighScoreInfo(String fileName);
 }
