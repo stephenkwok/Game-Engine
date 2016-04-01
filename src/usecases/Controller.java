@@ -79,7 +79,7 @@ public class Controller extends Application {
 	 */
 	private void addActor() {
 		int actorID = createdActors.size() + 1;
-		IActor newActor = new Actor(actorID, null); // take out null later
+		IActor newActor = new Actor(actorID); // take out null later
 		createdActors.add(newActor);
 		goToActorEditing(newActor);
 	}
@@ -88,7 +88,7 @@ public class Controller extends Application {
 	 * Instantiates new level to be edited and switches scene to LevelEditingEnvironment
 	 */
 	private void addLevel() {
-		ILevel newLevel = new Level(null); // take out null later
+		ILevel newLevel = new Level(); // take out null later
 		createdLevels.add(newLevel);
 		goToLevelEditing(newLevel, createdActors);
 	}
