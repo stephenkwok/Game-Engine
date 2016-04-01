@@ -3,7 +3,7 @@ package gamedata;
 import java.util.Map;
 
 /**
- * 
+ * The purpose of this class is to serve as the public interface for the HighScoresController, which will take information from an XML file to display high scores.
  * @author cmt57
  *
  */

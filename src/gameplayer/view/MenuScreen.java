@@ -2,7 +2,7 @@ package gameplayer.view;
 
 /**
  * This class provides for a private interface to add specific Menu-related functionality, such as saving progress and exiting the game, to the BaseScreen view.
- * @author Carine
+ * @author cmt57
  *
  */
 public interface MenuScreen {
