@@ -1,4 +1,4 @@
-package gameplayer.screens;
+package gameplayer.view;
 
 /** 
  * This class serves as the private interface that an HUDScreen must implement to display certain game values stored in the backend (game engine) such as health, scores, etc.

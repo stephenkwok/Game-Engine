@@ -1,4 +1,4 @@
-package gameplayer.screens;
+package gameplayer.view;
 
 /** 
  * This class serves as the private interface that sets up the framework for what a screen in our project will consist of (i.e. a stage, a group, etc.).

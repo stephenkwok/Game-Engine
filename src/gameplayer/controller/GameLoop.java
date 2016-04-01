@@ -1,7 +1,7 @@
-package gameplayer.game;
+package gameplayer.controller;
 
 /** 
- * This class serves as the private interface that a Game must implement in order to be able to animate the changes determined by the game engine.
+ * This class serves as the private interface that a game loop must implement in order to be able to animate the changes determined by the game engine.
  * @author cmt57
  */
 
