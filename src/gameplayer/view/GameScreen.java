@@ -1,6 +1,7 @@
-package gameplayer.screens;
+package gameplayer.view;
 
 import gameengine.model.IActor;
+import javafx.event.Event;
 
 /** 
  * This class serves as the private interface that a Game screen must implement in order to be able to add visual elements of the game to the screen.
@@ -15,5 +16,11 @@ public interface GameScreen {
 	 * @param actor an instance of IActor
 	 */
 	public void addActor (IActor actor);
+	
+	/**
+	 * Will receive events on screen and then pass to the game engine's handler to determine what action to take
+	 * @param e event 
+	 */
+	public void handleScreenEvent (Event e);
 
 }

@@ -3,6 +3,8 @@ package usecases;
 import java.util.List;
 
 /**
+ * An example of an Action to move an Actor right by a given distance.
+ *
  * @author blakekaplan
  */
 public class MoveRight extends Action {

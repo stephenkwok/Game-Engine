@@ -1,7 +1,7 @@
 package gameengine.model;
 
 
-import javafx.scene.Node;
+import java.util.Set;
 
 /**
  * This interface defines the the public methods for Actor objects. Each Actor will have a position, a number of points, a designated
@@ -12,6 +12,59 @@ import javafx.scene.Node;
  */
 public interface IActor {
 
+    /**
+     * Gets the Actor's X location
+     *
+     * @return The Actor's X coordinate
+     */
+    public double getX();
+
+
+    /**
+     * Gets the Actor's Y location
+     *
+     * @return The Actor's Y coordinate
+     */
+    public double getY();
+    
+    /**
+     * Gets the Actor's velocity along the horizontal vector
+     * 
+     * @return the Actor's X velocity
+     */
+    public double getXVelo();
+
+    /**
+     * Gets the Actor's velocity along the vertical vector
+     * 
+     * @return the Actor's Y velocity
+     */
+    public double getYVelo();
+    
+    /**
+     * Sets an Actor's X position
+     * @param updateXPosition
+     */
+	public void setXPos(double updateXPosition); 
+	
+	/**
+     * Sets an Actor's Y position
+     * @param updateYPosition
+     */
+	public void setYPos(double updateYPosition); 
+	
+	/**
+     * Sets an Actor's X velocity
+     * @param updateXVelo
+     */
+	public void setXVelo(double updateXVelo); 
+	
+	/**
+     * Sets an Actor's Y velocity
+     * @param updateYVelo
+     */
+	public void setYVelo(double updateYVelo);
+    
     /**
      * Gets the Actor's amount of health
      *
@@ -55,5 +108,26 @@ public interface IActor {
      * @param myTrigger A Trigger object that calls for an appropriate response
      */
     public void performActionsFor(ITrigger myTrigger);
+
+    /**
+     * Provides the list of Triggers that the Actor responds to
+     *
+     * @return The list of Triggers
+     */
+    public Set<ITrigger> getTriggers();
+
+    /**
+     * Adds a new Rule to the Actor
+     *
+     * @param newRule The Rule to be added to the Actor
+     */
+    public void addRule(IRule newRule);
+
+    /**
+     * Provides the Actor's ID
+     *
+     * @return The Actor's ID
+     */
+    public int getID();
 
 }

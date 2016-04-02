@@ -2,12 +2,13 @@ package usecases;
 
 import authoringenvironment.model.ActorEditingEnvironment;
 import authoringenvironment.model.ICreatedActor;
+import gameengine.model.IActor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 
 public class ActorEditor implements ActorEditingEnvironment {
 
-	private ICreatedActor actor;
+	private IActor actor;
 	private Scene scene;
 	private Group root;
 	
@@ -22,13 +23,13 @@ public class ActorEditor implements ActorEditingEnvironment {
 	}
 
 	@Override
-	public void setActor(ICreatedActor actor) {
-		this.actor = actor;
+	public Scene getScene() {
+		return scene;
 	}
 
 	@Override
-	public Scene getScene() {
-		return scene;
+	public void setActor(IActor actor) {
+		this.actor = actor;
 	}
 
 }

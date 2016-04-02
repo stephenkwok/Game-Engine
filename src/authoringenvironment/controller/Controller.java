@@ -6,7 +6,6 @@ import java.util.List;
 
 import authoringenvironment.model.ICreatedActor;
 import authoringenvironment.model.ICreatedLevel;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**

@@ -1,5 +1,6 @@
 package authoringenvironment.model;
 
+import gameengine.model.IActor;
 import javafx.scene.Scene;
 
 /**
@@ -20,7 +21,7 @@ public interface ActorEditingEnvironment {
 	 * 
 	 * @param actor to be edited 
 	 */
-	public void setActor(ICreatedActor actor);
+	public void setActor(IActor actor);
 	
 	/**
 	 * 
