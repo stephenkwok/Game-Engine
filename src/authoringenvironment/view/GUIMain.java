@@ -34,6 +34,7 @@ public class GUIMain implements IGUI {
 	private IGUIElement levels;
 	private IGUIElement save;
 	private IGUIElement load;
+	private GUIMainScreen mainScreen;
 	
 	public GUIMain(int windowWidth, int windowHeight, Stage s) {
 		this.windowWidth = windowWidth;
@@ -81,7 +82,6 @@ public class GUIMain implements IGUI {
 	}
 	
 	public void setCenterPane(){
-//		myController.goToMainScreen();
 		TabPane tp = new TabPane();
 		TabImages test = new TabImages(myResources, "Images"); 
 		TabSounds test2 = new TabSounds(myResources, "Sounds");

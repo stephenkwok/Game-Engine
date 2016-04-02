@@ -3,6 +3,8 @@ package authoringenvironment.view;
 import java.io.File;
 
 import authoringenvironment.controller.Controller;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -14,18 +16,20 @@ import javafx.stage.FileChooser;
  * @author AnnieTang
  *
  */
-abstract class ButtonParent implements IGUIElement {
+public class ButtonParent implements IGUIElement {
 	private static final int ICON_SIZE = 30;
 	private static final int PADDING = 10;
 	protected Controller myController;
 	private String buttonText;
 	protected Button button;
 	private String imageName;
+	private EventHandler<ActionEvent> handler;
 	
-	public ButtonParent(Controller myController, String buttonText, String imageName) {
+	public ButtonParent(Controller myController, String buttonText, String imageName, EventHandler<ActionEvent> handler) {
 		this.myController = myController;
 		this.buttonText = buttonText;
 		this.imageName = imageName;
+		this.handler = handler;
 	}
 	/**
 	 * Creates and returns button
@@ -42,7 +46,9 @@ abstract class ButtonParent implements IGUIElement {
 	/**
 	 * Sets action when button is pressed.
 	 */
-	abstract void setButtonAction();
+	protected void setButtonAction(){
+		button.setOnAction(handler);
+	}
 	
 	/**
 	 * Optional, sets image for button.
