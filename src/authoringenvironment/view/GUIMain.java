@@ -71,6 +71,10 @@ public class GUIMain implements IGUI {
 		//combobox of scenes
 		//save button
 	}
+	
+	private void setCenterPane(){
+		//set to main screen 
+	}
 
 	@Override
 	public void updateAllNodes() {

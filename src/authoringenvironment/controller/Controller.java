@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import authoringenvironment.model.ActorEditingEnvironment;
+import authoringenvironment.model.LevelEditingEnvironment;
+import authoringenvironment.model.MainScreen;
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import javafx.stage.Stage;
@@ -17,6 +20,9 @@ import javafx.stage.Stage;
 public class Controller {
 	Stage myStage;	
 	List<ILevel> levels;
+	LevelEditingEnvironment levelEnvironment;
+	ActorEditingEnvironment actorEnvironment;
+	MainScreen mainScreen; 
 	
 	
 	public Controller(Stage myStage){
@@ -38,7 +44,8 @@ public class Controller {
 	 * @param createdActors - list of created Actors that can be placed into the level 
 	 */
 	public void goToLevelEditing(ILevel level, List<IActor> createdActors){
-		
+		levelEnvironment.setLevel(level, createdActors);
+		myStage.setScene(levelEnvironment.getScene()); 
 	}
 	
 	/**
@@ -47,7 +54,15 @@ public class Controller {
 	 * @param actor - Actor to edit
 	 */
 	public void goToActorEditing(IActor actor){
-		
+		actorEnvironment.setActor(actor);
+		myStage.setScene(actorEnvironment.getScene());
+	}
+	
+	/**
+	 * Switches screen to main screen
+	 */
+	public void goToMainScreen(){
+		myStage.setScene(mainScreen.getScene());
 	}
 	
 	/**
