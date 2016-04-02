@@ -6,14 +6,14 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class GUIActor implements IGUI {
+public class GUIActorEditingEnvironment implements IGUI {
 	Stage myStage;
 	StackPane myRoot;
 	Scene myScene;
 	int windowHeight;
 	int windowWidth;
 	
-	public GUIActor(int height, int width, Stage myStage) {
+	public GUIActorEditingEnvironment(int height, int width, Stage myStage) {
 		this.myStage = myStage; 
 		this.windowHeight = height;
 		this.windowWidth = width;

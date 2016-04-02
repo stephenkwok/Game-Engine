@@ -17,7 +17,7 @@ import javafx.scene.layout.HBox;
  * @author AnnieTang
  *
  */
-public abstract class ComboBoxImageCell extends GUIComboBox {
+public abstract class ComboBoxImageCell extends ComboBoxParent {
 	private Map<String, ImageView> imageMap;
 	private List<String> imageNames;
 	private static final int STANDARD_IMAGE_HEIGHT = 20;

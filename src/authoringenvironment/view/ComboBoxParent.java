@@ -18,7 +18,7 @@ import javafx.scene.layout.HBox;
  * @author AnnieTang
  */
 
-public abstract class GUIComboBox implements IGUIElement {
+public abstract class ComboBoxParent implements IGUIElement {
 	private static final int COMBOBOX_WIDTH = 190;
 	private static final int VISIBLE_ROW_COUNT = 5;
 	private static final int PADDING = 10;
@@ -33,7 +33,7 @@ public abstract class GUIComboBox implements IGUIElement {
 	protected String paletteSource;
 	protected Controller myController;
 	
-	public GUIComboBox(ResourceBundle myResources, String promptText, Controller myController) {
+	public ComboBoxParent(ResourceBundle myResources, String promptText, Controller myController) {
 		this.myResources = myResources;
 		this.promptText = promptText;
 		this.myController = myController;

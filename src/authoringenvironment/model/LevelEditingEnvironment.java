@@ -4,7 +4,7 @@ import java.util.List;
 
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
-import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 
 /**
  * This class serves as the interface that all level editing environments must implement
@@ -29,8 +29,8 @@ public interface LevelEditingEnvironment {
 	
 	/**
 	 * 
-	 * @return Editing Environment's Scene
+	 * @return Editing Environment's Layout
 	 */
-	public Scene getScene();
+	public Pane getPane();
 
 }
