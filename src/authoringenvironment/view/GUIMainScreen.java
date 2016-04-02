@@ -99,10 +99,4 @@ public class GUIMainScreen implements IGUI {
 		updateLabels(levelLabels);
 		updateLabels(actorLabels);
 	}
-
-	@Override
-	public Scene getScene() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
