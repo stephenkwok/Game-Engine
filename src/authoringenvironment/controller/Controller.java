@@ -46,8 +46,8 @@ public class Controller {
 	 * @param level - level to be edited 
 	 * @param createdActors - list of created Actors that can be placed into the level 
 	 */
-	public void goToLevelEditing(ILevel level, List<IActor> createdActors){
-		levelEnvironment.setLevel(level, createdActors);
+	public void goToLevelEditing(ILevel level){
+		levelEnvironment.setLevel(level);
 		clearPanes();
 		guiMain.setCenterPane(levelEnvironment.getPane());
 		

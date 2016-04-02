@@ -1,12 +1,14 @@
 package usecases;
 
 import authoringenvironment.model.ActorEditingEnvironment;
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingEnvironment;
 import gameengine.model.IActor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
-public class ActorEditor implements ActorEditingEnvironment {
+public class ActorEditor implements IEditingEnvironment {
 
 	private IActor actor;
 	private Scene scene;
@@ -22,14 +24,13 @@ public class ActorEditor implements ActorEditingEnvironment {
 	}
 
 	@Override
-	public void setActor(IActor actor) {
-		this.actor = actor;
-	}
-
-	@Override
 	public Pane getPane() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void setEditable(IEditableGameElement editable) {
+		
 	}
 
 }
