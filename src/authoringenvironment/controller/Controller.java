@@ -29,16 +29,16 @@ public class Controller {
 	
 	public Controller(Stage myStage, GUIMain guiMain){
 		this.myStage = myStage;
-		levels = new ArrayList<>();
 		this.guiMain = guiMain;
+		init();
 	}
-//	/**
-//	 * Displays the Main Screen giving user option to create/edit actors and levels or save 
-//	 * data from created game into XML file 
-//	 */
-//	public void show(){
-//		myStage.setScene(null);
-//	}
+	
+	private void init(){
+		levels = new ArrayList<>();
+		levelEnvironment = new LevelEditingEnvironment();
+		actorEnvironment = new ActorEditingEnvironment();
+		mainScreen = new MainScreen();
+	}
 	
 	/**
 	 * Switches screen to Level Editing Environment
@@ -69,7 +69,7 @@ public class Controller {
 	 */
 	public void goToMainScreen(){
 		clearPanes();
-		myStage.setScene(mainScreen.getScene());
+		guiMain.setCenterPane(mainScreen.getPane());
 	}
 	
 	/**

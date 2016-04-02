@@ -4,20 +4,24 @@ import java.util.ResourceBundle;
 import authoringenvironment.controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
- * Main GUI class. Creates main JavaFX components for game authoring environment.
+ * Main GUI class. Fixed tool-bar as top pane. 
  * @author AnnieTang
  *
  */
 public class GUIMain implements IGUI {
     private static final String GUI_RESOURCE = "authoringGUI";
-    private static final int PADDING = 20;
+    private static final int PADDING = 10;
     private Scene myScene;
 	private BorderPane myRoot;
 	private ResourceBundle myResources;
@@ -26,8 +30,6 @@ public class GUIMain implements IGUI {
 	private Stage myStage;
 	private Controller myController;
 	private GUIFactory factory;
-//	private GUIMainScreen mainScreen;
-	
 	private IGUIElement home;
 	private IGUIElement levels;
 	private IGUIElement save;
@@ -57,7 +59,7 @@ public class GUIMain implements IGUI {
 	public Scene getScene() {
 		myRoot = new BorderPane();
 		setTopPane();
-//		setCenterPane();
+		setCenterPane();
 		myScene = new Scene(myRoot, windowHeight, windowWidth, Color.WHITE);
 		return myScene;
 	}
@@ -78,6 +80,14 @@ public class GUIMain implements IGUI {
 		myRoot.setBottom(pane);
 	}
 	
+	public void setCenterPane(){
+//		myController.goToMainScreen();
+		TabPane tp = new TabPane();
+		TabImages test = new TabImages(myResources, "images"); 
+		tp.getTabs().add(test.createTab());
+		myRoot.setCenter(tp);
+	}
+	
 	private void setTopPane(){
 		HBox hbox = new HBox(PADDING);
 		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
@@ -86,6 +96,7 @@ public class GUIMain implements IGUI {
 		save = factory.createNewGUIObject("Save");
 		load = factory.createNewGUIObject("Load");
 		hbox.getChildren().addAll(home.createNode(),levels.createNode(),save.createNode(),load.createNode());
+		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		myRoot.setTop(hbox);
 	}
 

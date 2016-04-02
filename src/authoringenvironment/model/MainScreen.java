@@ -1,15 +1,15 @@
 package authoringenvironment.model;
 
-import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 
 public class MainScreen {
-	Scene myScene;
+	Pane myPane;
 	
 	public void initializeEnvironment(){
-		//create instance of GUI class that represents main screen 
+		
 	}
 	
-	public Scene getScene(){
-		return myScene;
+	public Pane getPane(){
+		return myPane;
 	}
 }
