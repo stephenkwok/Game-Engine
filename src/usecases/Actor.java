@@ -179,7 +179,7 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
 	}
 	
 	public void setID(int ID) {
-		this.myID = ID;
+		myID = ID;
 	}
 
 	@Override
@@ -189,7 +189,7 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
 
 	@Override
 	public void setName(String name) {
-		this.myName = name;
+		myName = name;
 	}
 
 }

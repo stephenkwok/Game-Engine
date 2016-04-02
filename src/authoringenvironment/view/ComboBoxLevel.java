@@ -33,7 +33,7 @@ public class ComboBoxLevel extends ComboBoxTextCell{
 		comboButton.setOnAction(event -> {
 			String levelName = comboBox.getValue();
 			ILevel level = levelMap.get(levelName);
-			myController.goToLevelEditing(level, level.getActors());
+			myController.goToLevelEditing(level);
 		});
 	}
 

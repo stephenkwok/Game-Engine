@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
  * @author AnnieTang
  *
  */
-abstract class ComboBoxTextCell extends GUIComboBox {
+abstract class ComboBoxTextCell extends ComboBoxParent {
 	public ComboBoxTextCell(ResourceBundle myResources, String promptText, Controller mainScreen) {
 		super(myResources,promptText, mainScreen);
 	}

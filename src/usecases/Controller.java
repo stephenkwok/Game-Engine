@@ -104,8 +104,6 @@ public class Controller extends Application {
 		label.setOnMouseClicked(e -> goToEditingEnviroment(environment, element));
 		return label;
 	}
-	
-	// createLabel for other
 
 	private void goToEditingEnviroment(IEditingEnvironment environment, IEditableGameElement editable) {
 		environment.setEditable(editable);
@@ -124,8 +122,6 @@ public class Controller extends Application {
 			container.getChildren().add(label);
 		}
 	}
-	
-	// updateScrollPane for other
 
 	public void show() {
 		stage.show();

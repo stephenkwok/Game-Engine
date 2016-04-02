@@ -6,7 +6,8 @@ import java.util.List;
 
 import authoringenvironment.model.ActorEditingEnvironment;
 import authoringenvironment.model.LevelEditingEnvironment;
-import authoringenvironment.view.GUIMainScreen;
+import authoringenvironment.model.MainScreen;
+import authoringenvironment.view.GUIMain;
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import javafx.stage.Stage;
@@ -18,24 +19,26 @@ import javafx.stage.Stage;
  */
 
 public class Controller {
-	Stage myStage;	
-	List<ILevel> levels;
-	LevelEditingEnvironment levelEnvironment;
-	ActorEditingEnvironment actorEnvironment;
-	GUIMainScreen mainScreen; 
+	private Stage myStage;	
+	private List<ILevel> levels;
+	private LevelEditingEnvironment levelEnvironment;
+	private ActorEditingEnvironment actorEnvironment;
+	private MainScreen mainScreen; 
+	private GUIMain guiMain;
 	
 	
-	public Controller(Stage myStage){
+	public Controller(Stage myStage, GUIMain guiMain){
 		this.myStage = myStage;
 		levels = new ArrayList<>();
+		this.guiMain = guiMain;
 	}
-	/**
-	 * Displays the Main Screen giving user option to create/edit actors and levels or save 
-	 * data from created game into XML file 
-	 */
-	public void show(){
-		myStage.setScene(null);
-	}
+//	/**
+//	 * Displays the Main Screen giving user option to create/edit actors and levels or save 
+//	 * data from created game into XML file 
+//	 */
+//	public void show(){
+//		myStage.setScene(null);
+//	}
 	
 	/**
 	 * Switches screen to Level Editing Environment
@@ -43,9 +46,11 @@ public class Controller {
 	 * @param level - level to be edited 
 	 * @param createdActors - list of created Actors that can be placed into the level 
 	 */
-	public void goToLevelEditing(ILevel level, List<IActor> createdActors){
-		levelEnvironment.setLevel(level, createdActors);
-		myStage.setScene(levelEnvironment.getScene()); 
+	public void goToLevelEditing(ILevel level){
+		levelEnvironment.setLevel(level);
+		clearPanes();
+		guiMain.setCenterPane(levelEnvironment.getPane());
+		
 	}
 	
 	/**
@@ -55,14 +60,16 @@ public class Controller {
 	 */
 	public void goToActorEditing(IActor actor){
 		actorEnvironment.setActor(actor);
-		myStage.setScene(actorEnvironment.getScene());
+		clearPanes();
+		guiMain.setCenterPane(actorEnvironment.getPane());
 	}
 	
 	/**
 	 * Switches screen to main screen
 	 */
 	public void goToMainScreen(){
-		myStage.setScene(mainScreen.getPane());
+		clearPanes();
+		guiMain.setCenterPane(mainScreen.getPane());
 	}
 	
 	/**
@@ -70,6 +77,10 @@ public class Controller {
      * @param file: file to write to.
      */
 	public void saveGame(File file){
+		
+	}
+	
+	public void loadGame(File file){
 		
 	}
 	
@@ -95,6 +106,13 @@ public class Controller {
      */
     public void addLevel(ILevel newLevel){
     	levels.add(newLevel);
+    }
+    
+    private void clearPanes(){
+    	guiMain.setBottomPane(null);
+    	guiMain.setCenterPane(null);
+    	guiMain.setLeftPane(null);
+    	guiMain.setRightPane(null);
     }
 	
 }

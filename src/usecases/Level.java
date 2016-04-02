@@ -101,7 +101,7 @@ public class Level implements ILevel, IEditableGameElement {
 
 	@Override
 	public void setImage(Image image) {
-		this.myBackground = image;
+		myBackground = image;
 	}
 
 
