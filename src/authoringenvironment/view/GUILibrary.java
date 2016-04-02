@@ -7,7 +7,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 public class GUILibrary implements IGUI{
-	ResourceBundle myResources;
+	private ResourceBundle myResources;
+	private static final String TAB_NAME = "Library";
 	
 	public GUILibrary(ResourceBundle myResources) {
 		this.myResources = myResources;
