@@ -3,7 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="images"/>
 	<classpathentry kind="src" path="authoringresources"/>
-	<classpathentry kind="src" path="actorimages"/>
+	<classpathentry kind="src" path="authoringimages"/>
+	<classpathentry kind="src" path="authoringsounds"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
