@@ -66,6 +66,7 @@ public class GUIMain implements IGUI {
 	}
 	
 	private void setTopPane(){
+		
 		//TODO
 		//home button
 		//combobox of scenes
