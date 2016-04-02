@@ -1,7 +1,6 @@
 package gamedata.controller;
 
 import java.util.List;
-import authoringenvironment.model.ICreatedLevel;
 import gameengine.controller.ILevel;
 
 /**
@@ -16,7 +15,7 @@ public interface IParserController {
 	 * @return a list of editable levels
 	 * @param the name of the file to parse through
 	 */
-	public List<ICreatedLevel> loadForEditing (String filepath);
+	public List<ILevel> loadForEditing (String filepath);
 	
 	/**
 	 * Uses the GameXMLParser to parse through an game file to produce levels for playing

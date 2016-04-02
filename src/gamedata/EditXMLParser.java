@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import authoringenvironment.model.ICreatedActor;
-import authoringenvironment.model.ICreatedLevel;
+import gameengine.controller.ILevel;
 
 /** 
  * This class serves as the private interface that any Game Data xml parser reading game editing files must implement in order to read data from an initial XML file and process it so that it can then be passed over in the right format to the authoring environment (which is looking for a list of levels populated with info).
@@ -34,12 +34,12 @@ public interface EditXMLParser {
 	 * @return an instance of an editable level for the authoring environment
 	 */
 	
-	public ICreatedLevel createLevel (Map<String, String> levelInfo, List<ICreatedActor> levelActors);
+	public ILevel createLevel (Map<String, String> levelInfo, List<ICreatedActor> levelActors);
 	
 	/**
 	 * Gets all levels enumerated in a saved XML file for editing purposes in the Authoring Environment.
 	 * @return list of all levels associated to one game for editing
 	 */
-	public List<ICreatedLevel> getLevels();
+	public List<ILevel> getLevels();
 	
 }
