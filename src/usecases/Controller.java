@@ -98,7 +98,7 @@ public class Controller extends Application {
 		return scrollPane;
 	}
 	
-	private void createLabel(String text, Image image, ) {
+	private void createLabel(String text, Image image) {
 		// need text, image, and onClick event 
 	}
 	
