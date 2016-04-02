@@ -1,7 +1,7 @@
 package authoringenvironment.model;
 
 import gameengine.model.IActor;
-import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 
 /**
  * This class serves as the interface that all actor editing environments must implement
@@ -25,8 +25,8 @@ public interface ActorEditingEnvironment {
 	
 	/**
 	 * 
-	 * @return Editing Environment's Scene
+	 * @return Editing Environment's Layout
 	 */
-	public Scene getScene();
+	public Pane getPane();
 	
 }

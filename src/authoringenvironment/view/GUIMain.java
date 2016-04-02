@@ -26,6 +26,12 @@ public class GUIMain implements IGUI {
 	private Stage myStage;
 	private Controller myController;
 	private GUIFactory factory;
+//	private GUIMainScreen mainScreen;
+	
+	private IGUIElement home;
+	private IGUIElement levels;
+	private IGUIElement save;
+	private IGUIElement load;
 	
 	public GUIMain(int windowWidth, int windowHeight, Stage s) {
 		this.windowWidth = windowWidth;
@@ -34,9 +40,12 @@ public class GUIMain implements IGUI {
 		init();
 	}
 	
+	/**
+	 * Initializes resource bundle, controller, and factory class.
+	 */
 	private void init(){
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		myController = new Controller(myStage);
+		myController = new Controller(myStage, this);
 		factory = new GUIFactory(myResources, myController);
 	}
 	
@@ -48,6 +57,7 @@ public class GUIMain implements IGUI {
 	public Scene getScene() {
 		myRoot = new BorderPane();
 		setTopPane();
+//		setCenterPane();
 		myScene = new Scene(myRoot, windowHeight, windowWidth, Color.WHITE);
 		return myScene;
 	}
@@ -71,17 +81,17 @@ public class GUIMain implements IGUI {
 	private void setTopPane(){
 		HBox hbox = new HBox(PADDING);
 		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
-		IGUIElement home = factory.createNewGUIObject("Home");
-		IGUIElement levels = factory.createNewGUIObject("Levels");
-		IGUIElement save = factory.createNewGUIObject("Save");
-		IGUIElement load = factory.createNewGUIObject("Load");
+		home = factory.createNewGUIObject("Home");
+		levels = factory.createNewGUIObject("Levels");
+		save = factory.createNewGUIObject("Save");
+		load = factory.createNewGUIObject("Load");
 		hbox.getChildren().addAll(home.createNode(),levels.createNode(),save.createNode(),load.createNode());
 		myRoot.setTop(hbox);
 	}
 
 	@Override
 	public void updateAllNodes() {
-		
+		levels.updateNode();
 	}
 
 }
