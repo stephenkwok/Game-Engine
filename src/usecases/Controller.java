@@ -6,7 +6,6 @@ import java.util.List;
 import authoringenvironment.model.ActorEditingEnvironment;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.model.IGoToEditingEnvironment;
 import authoringenvironment.model.LevelEditingEnvironment;
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
@@ -105,6 +104,8 @@ public class Controller extends Application {
 		label.setOnMouseClicked(e -> goToEditingEnviroment(environment, element));
 		return label;
 	}
+	
+	// createLabel for other
 
 	private void goToEditingEnviroment(IEditingEnvironment environment, IEditableGameElement editable) {
 		environment.setEditable(editable);
@@ -123,6 +124,8 @@ public class Controller extends Application {
 			container.getChildren().add(label);
 		}
 	}
+	
+	// updateScrollPane for other
 
 	public void show() {
 		stage.show();
@@ -147,39 +150,6 @@ public class Controller extends Application {
 		createdLevels.add(newLevel);
 		goToEditingEnviroment(levelEditor, newLevel);
 	}
-
-	// /**
-	// *
-	// * When the user presses a button to add a new level, the LevelEditor is
-	// * passed the level to be edited and a list of Actors that can be added to
-	// * that level. The stage is then set to the scene of the Level Editor
-	// *
-	// * @param level
-	// * to be edited
-	// * @param createdActors
-	// * that can be added to that level
-	// */
-	//
-	// public void goToLevelEditing(ILevel level, List<IActor> createdActors) {
-	// levelEditor.setLevel(level, createdActors);
-	// stage.setScene(levelEditor.getScene());
-	// }
-	//
-	// /**
-	// *
-	// * When the user presses a button to add a new actor, the ActorEditor is
-	// * passed the actor to be edited. The stage is then set to the scene of
-	// the
-	// * ActorEditor
-	// *
-	// * @param actor
-	// * IActor to be edited
-	// */
-	//
-	// public void goToActorEditing(IActor actor) {
-	// actorEditor.setActor(actor);
-	// stage.setScene(actorEditor.getScene());
-	// }
 
 	public void saveGame() {
 

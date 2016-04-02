@@ -6,7 +6,7 @@ import java.util.List;
 
 import authoringenvironment.model.ActorEditingEnvironment;
 import authoringenvironment.model.LevelEditingEnvironment;
-import authoringenvironment.model.MainScreen;
+import authoringenvironment.view.GUIMainScreen;
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import javafx.stage.Stage;
@@ -22,7 +22,7 @@ public class Controller {
 	List<ILevel> levels;
 	LevelEditingEnvironment levelEnvironment;
 	ActorEditingEnvironment actorEnvironment;
-	MainScreen mainScreen; 
+	GUIMainScreen mainScreen; 
 	
 	
 	public Controller(Stage myStage){
@@ -62,7 +62,7 @@ public class Controller {
 	 * Switches screen to main screen
 	 */
 	public void goToMainScreen(){
-		myStage.setScene(mainScreen.getScene());
+		myStage.setScene(mainScreen.getPane());
 	}
 	
 	/**
