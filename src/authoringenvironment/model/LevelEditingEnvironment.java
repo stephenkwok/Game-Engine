@@ -27,7 +27,7 @@ public class LevelEditingEnvironment {
 	 * 
 	 * @param level to be edited 
 	 */
-	public void setLevel(ILevel level, List<IActor> actors){
+	public void setLevel(ILevel level){
 		
 	}
 	
