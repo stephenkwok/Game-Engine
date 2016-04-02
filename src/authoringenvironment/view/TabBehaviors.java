@@ -10,12 +10,6 @@ public class TabBehaviors extends TabParent {
 	}
 
 	@Override
-	void updateNode() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	void setContent() {
 		// TODO Auto-generated method stub
 
