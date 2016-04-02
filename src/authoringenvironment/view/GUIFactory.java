@@ -26,7 +26,7 @@ public class GUIFactory {
 	 */
 	public IGUIElement createNewGUIObject(String nodeTypeKey){
 		String nodeType = myResources.getString(nodeTypeKey);
-		switch(nodeType){
+		switch(nodeType) {
 		case("HomeButton"): return new ButtonHome(myController, myResources.getString("HomeButtonText"), 
 				myResources.getString("HomeButtonIcon"));
 		case("SaveButton"): return new ButtonSave(myController, myResources.getString("SaveButtonText"),

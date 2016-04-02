@@ -1,4 +1,5 @@
 package authoringenvironment.view;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
@@ -21,6 +22,7 @@ import javafx.stage.Stage;
  */
 public class GUIMain implements IGUI {
     private static final String GUI_RESOURCE = "authoringGUI";
+    private static final String TOP_PANE_ELEMENTS = "TopPaneElements";
     private static final int PADDING = 10;
     private Scene myScene;
 	private BorderPane myRoot;
@@ -94,13 +96,20 @@ public class GUIMain implements IGUI {
 	private void setTopPane(){
 		HBox hbox = new HBox(PADDING);
 		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
-		home = factory.createNewGUIObject("Home");
+		/* home = factory.createNewGUIObject("Home");
 		save = factory.createNewGUIObject("Save");
 		load = factory.createNewGUIObject("Load");
 		newActor = factory.createNewGUIObject("NewActor");
 		newLevel = factory.createNewGUIObject("NewLevel");
 		levels = factory.createNewGUIObject("Levels");
 		hbox.getChildren().addAll(home.createNode(), save.createNode(),load.createNode(), newActor.createNode(), newLevel.createNode(), levels.createNode());
+		*/
+		String[] topPaneElements = myResources.getString("TOP_PANE_ELEMENTS").split(",");
+		for (int i = 0; i < topPaneElements.length; i++) {
+			IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
+			hbox.getChildren().add(elementToCreate.createNode());
+		}
+		
 		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		myRoot.setTop(hbox);
 	}
