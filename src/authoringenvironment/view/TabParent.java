@@ -20,7 +20,9 @@ abstract class TabParent{
 		return tab;
 	}
 
-	abstract void updateNode();
+	private void updateNode(){
+		setContent();
+	}
 	
 	abstract void setContent();
 

@@ -33,11 +33,6 @@ public class TabImages extends TabParent {
 	}
 
 	@Override
-	void updateNode() {
-		setContent();
-	}
-
-	@Override
 	void setContent() {
 		imageLabels = FXCollections.observableArrayList();
 		for(String imageName: imageNames){
