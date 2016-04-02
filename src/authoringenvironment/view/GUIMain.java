@@ -56,7 +56,6 @@ public class GUIMain implements IGUI {
 	 * Creates the fixed tool-bar and sets up over-arching BorderPane. 
 	 * @return Scene
 	 */
-	@Override
 	public Scene getScene() {
 		myRoot = new BorderPane();
 		setTopPane();
@@ -83,12 +82,14 @@ public class GUIMain implements IGUI {
 	
 	public void setCenterPane(){
 //		myController.goToMainScreen();
-//		TabPane tp = new TabPane();
-//		TabImages test = new TabImages(myResources, "images"); 
-//		tp.getTabs().add(test.createTab());
-//		myRoot.setCenter(tp);
-		GUIMainScreen test = new GUIMainScreen(myController);
-		myRoot.setCenter(test.getPane());
+		TabPane tp = new TabPane();
+		TabImages test = new TabImages(myResources, "Images");
+		TabSounds test2 = new TabSounds(myResources, "Sounds");
+		TabBehaviors test3 = new TabBehaviors(myResources, "Behaviors");
+		tp.getTabs().addAll(test.createTab(), test2.createTab(), test3.createTab());
+		myRoot.setCenter(tp);
+//		GUIMainScreen test = new GUIMainScreen(myController);
+//		myRoot.setCenter(test.getPane());
 	}
 	
 	private void setTopPane(){
@@ -106,6 +107,11 @@ public class GUIMain implements IGUI {
 	@Override
 	public void updateAllNodes() {
 		levels.updateNode();
+	}
+
+	@Override
+	public Pane getPane() {
+		return myRoot;
 	}
 
 }

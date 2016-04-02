@@ -1,6 +1,7 @@
 package authoringenvironment.view;
 
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 
 /**
  * This interface contains the information that the frontend (of the authoring environment)
@@ -12,10 +13,10 @@ import javafx.scene.Scene;
  */
 public interface IGUI {
 	/**
-	 * Creates the JavaFX Scene, which will be put on a Stage in the controller.
+	 * Creates the JavaFX Pane, which will be put within a BorderPane through the controller.
 	 * @return Scene
 	 */
-	Scene getScene();
+	Pane getPane();
     
 	/**
      * This method updates each of the GUI elements' visual representations, based on the

@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.Tab;
 abstract class TabParent{
 	protected Tab tab;
-	private String tabText;
+	protected String tabText;
 	protected ResourceBundle myResources;
 	protected List<String> fileNames;
 	
