@@ -1,6 +1,5 @@
-package usecases;
+package gameengine.controller;
 
-import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import gameengine.model.ITrigger;
 import javafx.scene.image.Image;
@@ -16,6 +15,7 @@ import authoringenvironment.model.IEditableGameElement;
  */
 public class Level implements ILevel, IEditableGameElement {
 
+	private static final String DEFAULT_NAME = "Untitled";
     List<IActor> myActors;
     Map<ITrigger, List<IActor>> triggerMap;
     String myName;
@@ -27,6 +27,7 @@ public class Level implements ILevel, IEditableGameElement {
     public Level() {
         myActors = new ArrayList<>();
         triggerMap = new HashMap<>();
+        myName = DEFAULT_NAME;
     }
 
     /**

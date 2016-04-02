@@ -34,6 +34,10 @@ public class GUIFactory {
 		case("LoadButton"): return new ButtonLoad(myController, myResources.getString("LoadButtonText"),
 				myResources.getString("LoadButtonIcon"));
 		case("LevelComboBox"): return new ComboBoxLevel(myResources, myResources.getString("LevelComboBoxPrompt"), myController);
+		case("NewLevelButton"): return new ButtonNewLevel(myController, myResources.getString("NewLevelButtonText"),
+				myResources.getString("NewLevelButtonIcon"));
+		case("NewActorButton"): return new ButtonNewActor(myController, myResources.getString("NewActorButtonText"),
+				myResources.getString("NewActorButtonIcon"));
 		}
 		return null;
 	}

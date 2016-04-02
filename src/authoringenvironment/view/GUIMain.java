@@ -34,6 +34,8 @@ public class GUIMain implements IGUI {
 	private IGUIElement levels;
 	private IGUIElement save;
 	private IGUIElement load;
+	private IGUIElement newLevel;
+	private IGUIElement newActor;
 	
 	public GUIMain(int windowWidth, int windowHeight, Stage s) {
 		this.windowWidth = windowWidth;
@@ -93,10 +95,12 @@ public class GUIMain implements IGUI {
 		HBox hbox = new HBox(PADDING);
 		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
 		home = factory.createNewGUIObject("Home");
-		levels = factory.createNewGUIObject("Levels");
 		save = factory.createNewGUIObject("Save");
 		load = factory.createNewGUIObject("Load");
-		hbox.getChildren().addAll(home.createNode(),levels.createNode(),save.createNode(),load.createNode());
+		newActor = factory.createNewGUIObject("NewActor");
+		newLevel = factory.createNewGUIObject("NewLevel");
+		levels = factory.createNewGUIObject("Levels");
+		hbox.getChildren().addAll(home.createNode(), save.createNode(),load.createNode(), newActor.createNode(), newLevel.createNode(), levels.createNode());
 		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		myRoot.setTop(hbox);
 	}

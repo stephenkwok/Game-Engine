@@ -11,6 +11,7 @@ import authoringenvironment.view.GUIMain;
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import javafx.stage.Stage;
+import usecases.Actor;
 
 /**
  * This class serves as the interface that all authoring environment main screens must implement
@@ -21,6 +22,7 @@ import javafx.stage.Stage;
 public class Controller {
 	private Stage myStage;	
 	private List<ILevel> levels;
+	private List<IActor> actors;
 	private LevelEditingEnvironment levelEnvironment;
 	private ActorEditingEnvironment actorEnvironment;
 	private MainScreen mainScreen; 
@@ -35,6 +37,7 @@ public class Controller {
 	
 	private void init(){
 		levels = new ArrayList<>();
+		actors = new ArrayList<>();
 		levelEnvironment = new LevelEditingEnvironment();
 		actorEnvironment = new ActorEditingEnvironment();
 		mainScreen = new MainScreen();
@@ -114,5 +117,11 @@ public class Controller {
     	guiMain.setLeftPane(null);
     	guiMain.setRightPane(null);
     }
+
+	public void addActor(IActor newActor) {
+		if (newActor != null) {
+			actors.add(newActor);
+		}
+	}
 	
 }
