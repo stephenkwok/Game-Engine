@@ -12,25 +12,31 @@ import javafx.scene.layout.Pane;
  * @author Stephen
  */
 
-public interface LevelEditingEnvironment {
-	
+public class LevelEditingEnvironment {
+	Pane myPane;
 
 	/**
 	 * Initializes the Level Editing Environment
 	 */
-	public void initializeEnvironment();
+	public void initializeEnvironment(){
+		
+	}
 	
 	/**
 	 * Sets the environment's level to be edited
 	 * 
 	 * @param level to be edited 
 	 */
-	public void setLevel(ILevel level, List<IActor> actors);
+	public void setLevel(ILevel level, List<IActor> actors){
+		
+	}
 	
 	/**
 	 * 
 	 * @return Editing Environment's Layout
 	 */
-	public Pane getPane();
+	public Pane getPane(){
+		return myPane;
+	}
 
 }

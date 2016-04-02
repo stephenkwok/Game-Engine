@@ -9,7 +9,11 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-
+/**
+ * Abstract class to implement JavaFX Buttons
+ * @author AnnieTang
+ *
+ */
 abstract class ButtonParent implements IGUIElement {
 	private static final int ICON_SIZE = 30;
 	private static final int PADDING = 10;

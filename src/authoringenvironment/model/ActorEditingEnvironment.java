@@ -9,24 +9,31 @@ import javafx.scene.layout.Pane;
  * @author Stephen
  */
 
-public interface ActorEditingEnvironment {
+public class ActorEditingEnvironment {
+	Pane myPane;
 	
 	/**
 	 * Initializes the Actor Editing Environment
 	 */
-	public void initializeEnvironment();
+	public void initializeEnvironment(){
+		
+	}
 	
 	/**
 	 * Sets the environment's actor to be edited
 	 * 
 	 * @param actor to be edited 
 	 */
-	public void setActor(IActor actor);
+	public void setActor(IActor actor){
+		
+	}
 	
 	/**
 	 * 
 	 * @return Editing Environment's Layout
 	 */
-	public Pane getPane();
+	public Pane getPane(){
+		return myPane;
+	}
 	
 }

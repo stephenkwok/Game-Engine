@@ -7,6 +7,7 @@ import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 
 public class LevelEditor implements LevelEditingEnvironment {
 
@@ -33,6 +34,12 @@ public class LevelEditor implements LevelEditingEnvironment {
 	
 	public Scene getScene() {
 		return scene;
+	}
+
+	@Override
+	public Pane getPane() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

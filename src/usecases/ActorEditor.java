@@ -4,6 +4,7 @@ import authoringenvironment.model.ActorEditingEnvironment;
 import gameengine.model.IActor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 
 public class ActorEditor implements ActorEditingEnvironment {
 
@@ -21,13 +22,14 @@ public class ActorEditor implements ActorEditingEnvironment {
 	}
 
 	@Override
-	public Scene getScene() {
-		return scene;
+	public void setActor(IActor actor) {
+		this.actor = actor;
 	}
 
 	@Override
-	public void setActor(IActor actor) {
-		this.actor = actor;
+	public Pane getPane() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
