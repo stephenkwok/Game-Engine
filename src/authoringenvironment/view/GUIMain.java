@@ -66,10 +66,15 @@ public class GUIMain implements IGUI {
 	}
 	
 	private void setTopPane(){
+		
 		//TODO
 		//home button
 		//combobox of scenes
 		//save button
+	}
+	
+	private void setCenterPane(){
+		//set to main screen 
 	}
 
 	@Override

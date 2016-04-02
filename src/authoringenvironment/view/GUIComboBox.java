@@ -31,12 +31,12 @@ public abstract class GUIComboBox implements IGUIElement {
 	protected ComboBox<String> comboBox;
 	protected Button comboButton;
 	protected String paletteSource;
-	protected Controller mainScreen;
+	protected Controller myController;
 	
-	public GUIComboBox(ResourceBundle myResources, String promptText, Controller mainScreen) {
+	public GUIComboBox(ResourceBundle myResources, String promptText, Controller myController) {
 		this.myResources = myResources;
 		this.promptText = promptText;
-		this.mainScreen = mainScreen;
+		this.myController = myController;
 	}
 	
 	/**
