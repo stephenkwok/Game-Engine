@@ -15,7 +15,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import usecases.Actor;
 import usecases.Level;
 
@@ -37,9 +39,14 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	public void initializeEnvironment() {
+		Stage stage = controller.getStage();
 		borderPane = new BorderPane();
+		borderPane.setStyle("-fx-border-color: red;");
+		borderPane.prefHeightProperty().bind(stage.heightProperty());
+		borderPane.prefWidthProperty().bind(stage.widthProperty());
 		scrollPaneContainer = new HBox();
-		scrollPaneContainer.setPrefSize(1300, 600);
+		scrollPaneContainer.setStyle("-fx-border-color: blue;");
+		HBox.setHgrow(scrollPaneContainer, Priority.ALWAYS);
 		scrollPaneContainer.prefHeightProperty().bind(borderPane.heightProperty());
 		scrollPaneContainer.prefWidthProperty().bind(borderPane.widthProperty());
 		initLabelContainers();
@@ -52,9 +59,10 @@ public class GUIMainScreen implements IGUI {
 	private void initLabelContainers() {
 		actorLabelContainer = new VBox();
 		levelLabelContainer = new VBox();
-//		actorLabelContainer.setPrefSize(650, 300);
-//		actorLabelContainer.setMinSize(650, 300);
-//		levelLabelContainer.setMinSize(650, 300);
+		actorLabelContainer.prefWidthProperty().bind(scrollPaneContainer.widthProperty());
+		actorLabelContainer.prefHeightProperty().bind(scrollPaneContainer.heightProperty());
+		levelLabelContainer.prefWidthProperty().bind(scrollPaneContainer.widthProperty());
+		levelLabelContainer.prefHeightProperty().bind(scrollPaneContainer.heightProperty());
 		actorLabelContainer.getChildren().add(createButton("Add New Actor", e -> addActor()));
 		levelLabelContainer.getChildren().add(createButton("Add New Level", e -> addLevel()));
 	}
@@ -67,7 +75,6 @@ public class GUIMainScreen implements IGUI {
 	
 	private ScrollPane initScrollPane(ReadOnlyDoubleProperty bindingProperty, VBox container) {
 		ScrollPane scrollPane = new ScrollPane();
-		scrollPane.prefWidthProperty().bind(bindingProperty);
 		scrollPane.setContent(container);
 		return scrollPane;
 	}
