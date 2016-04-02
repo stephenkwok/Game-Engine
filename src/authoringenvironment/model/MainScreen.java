@@ -1,15 +1,21 @@
 package authoringenvironment.model;
 
+import authoringenvironment.controller.Controller;
+import authoringenvironment.view.GUIMainScreen;
 import javafx.scene.layout.Pane;
 
 public class MainScreen {
-	Pane myPane;
+	GUIMainScreen guiMainScreen;
 	
-	public void initializeEnvironment(){
-		
+	public void initializeEnvironment(Controller controller){
+		guiMainScreen = new GUIMainScreen(controller);
 	}
 	
 	public Pane getPane(){
-		return myPane;
+		return guiMainScreen.getPane();
+	}
+	
+	public void update() {
+		guiMainScreen.updateAllNodes();
 	}
 }
