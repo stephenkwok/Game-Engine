@@ -1,7 +1,6 @@
 package usecases;
 
 import authoringenvironment.model.ActorEditingEnvironment;
-import authoringenvironment.model.ICreatedActor;
 import gameengine.model.IActor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -13,7 +12,6 @@ public class ActorEditor implements ActorEditingEnvironment {
 	private Group root;
 	
 	public ActorEditor() {
-
 	}
 
 	@Override
