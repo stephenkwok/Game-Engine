@@ -3,8 +3,11 @@ package usecases;
 import java.util.ArrayList;
 import java.util.List;
 
-import authoringenvironment.controller.ActorEditingEnvironment;
-import authoringenvironment.controller.LevelEditingEnvironment;
+import authoringenvironment.model.ActorEditingEnvironment;
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.model.IGoToEditingEnvironment;
+import authoringenvironment.model.LevelEditingEnvironment;
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import javafx.application.Application;
@@ -30,17 +33,17 @@ public class Controller extends Application {
 	private static final int SCREEN_WIDTH = 1300;
 	private static final int SCREEN_HEIGHT = 750;
 	private static final String TITLE = "Main Screen";
-	private LevelEditingEnvironment levelEditor;
-	private ActorEditingEnvironment actorEditor;
+	private IEditingEnvironment levelEditor;
+	private IEditingEnvironment actorEditor;
 	private BorderPane borderPane;
 	private HBox container;
-	private List<IActor> createdActors;
-	private List<ILevel> createdLevels;
+	private List<IEditableGameElement> createdActors;
+	private List<IEditableGameElement> createdLevels;
 	private VBox actorLabelContainer;
 	private VBox levelLabelContainer;
 	private ScrollPane actorScrollPane;
 	private ScrollPane levelScrollPane;
-	
+
 	public static void main(String[] args) {
 		launch();
 	}
@@ -54,8 +57,8 @@ public class Controller extends Application {
 		initMainScreen();
 		initLevelEditingEnvironment();
 		initActorEditingEnvironment();
-		createdActors = new ArrayList<IActor>();
-		createdLevels = new ArrayList<ILevel>();
+		createdActors = new ArrayList<IEditableGameElement>();
+		createdLevels = new ArrayList<IEditableGameElement>();
 		stage.setScene(mainScreenScene);
 		show();
 	}
@@ -77,10 +80,9 @@ public class Controller extends Application {
 		borderPane.prefWidthProperty().bind(stage.widthProperty());
 		root.getChildren().add(borderPane);
 		mainScreenScene = new Scene(root);
-		
-		
+
 	}
-	
+
 	private void initCenter() {
 		container = new HBox();
 		container.prefHeightProperty().bind(borderPane.heightProperty());
@@ -90,111 +92,105 @@ public class Controller extends Application {
 		container.getChildren().addAll(levelScrollPane, actorScrollPane);
 		borderPane.setCenter(container);
 	}
-	
+
 	private ScrollPane initScrollPane(ReadOnlyDoubleProperty bindingProperty, VBox container) {
 		ScrollPane scrollPane = new ScrollPane();
 		scrollPane.prefWidthProperty().bind(bindingProperty);
 		scrollPane.setContent(container);
 		return scrollPane;
 	}
-	
-	private void createLabel(String text, Image image) {
-		// need text, image, and onClick event 
+
+	private Label createLabel(IEditableGameElement element, IEditingEnvironment environment) {
+		Label label = new Label(element.getName(), new ImageView(element.getImage()));
+		label.setOnMouseClicked(e -> goToEditingEnviroment(environment, element));
+		return label;
+	}
+
+	private void goToEditingEnviroment(IEditingEnvironment environment, IEditableGameElement editable) {
+		environment.setEditable(editable);
+		stage.setScene(environment.getScene());
 	}
 	
-	// Could use marker interface pattern to remove duplicated code
-	private void updateScrollPanes() {
-		// would like getName() method in Actor
-		actorLabelContainer.getChildren().clear();
-		for (IActor actor : createdActors) {
-			Actor myActor = (Actor) actor; // how to avoid casting here?
-			int ID = actor.getID();
-			Image image = myActor.getImage();
-			Label label = new Label(String.valueOf(ID), new ImageView(image));
-			label.setOnMouseClicked(e -> goToActorEditing(actor));
-			actorLabelContainer.getChildren().add(label);
-		}
-		// need getImage() method in Level
-		levelLabelContainer.getChildren().clear();
-		for (ILevel level : createdLevels) {
-			Level myLevel = (Level) level; // how to avoid casting here?
-			String name = level.getName();
-//			Image image = level.getImage();
-//			Label label = new Label(name, new ImageView(image));
-//			label.setOnMouseClicked(e -> goToLevelEditing(level, createdLevels));
-//			levelLabelContainer.getChildren().add(label);
+	public void updateScrollPanes() {
+		updateScrollPane(actorLabelContainer, createdActors, actorEditor);
+		updateScrollPane(levelLabelContainer, createdLevels, levelEditor);
+	}
+
+	private void updateScrollPane(VBox container, List<IEditableGameElement> elements, IEditingEnvironment environment) {
+		container.getChildren().clear();
+		for (IEditableGameElement element : elements) {
+			Label label = createLabel(element, environment);
+			container.getChildren().add(label);
 		}
 	}
-	
-//	private void updateScrollPane(VBox container, List<EditableGameElement> elements) {
-//		container.getChildren().clear();
-//	}
 
 	public void show() {
 		stage.show();
 	}
-	
+
 	/**
-	 * Instantiates new actor to be edited and switches scene to ActorEditingEnvironment
+	 * Instantiates new actor to be edited and switches scene to
+	 * ActorEditingEnvironment
 	 */
 	private void addActor() {
-		int actorID = createdActors.size() + 1; // 
-		IActor newActor = new Actor(actorID);
+		IEditableGameElement newActor = new Actor();
 		createdActors.add(newActor);
-		goToActorEditing(newActor);
+		goToEditingEnviroment(actorEditor, newActor);
 	}
-	
+
 	/**
-	 * Instantiates new level to be edited and switches scene to LevelEditingEnvironment
+	 * Instantiates new level to be edited and switches scene to
+	 * LevelEditingEnvironment
 	 */
 	private void addLevel() {
-		ILevel newLevel = new Level(); 
+		IEditableGameElement newLevel = new Level();
 		createdLevels.add(newLevel);
-		goToLevelEditing(newLevel, createdActors);
+		goToEditingEnviroment(levelEditor, newLevel);
 	}
 
-	/**
-	 * 
-	 * When the user presses a button to add a new level, the LevelEditor is
-	 * passed the level to be edited and a list of Actors that can be added to
-	 * that level. The stage is then set to the scene of the Level Editor
-	 * 
-	 * @param level
-	 *            to be edited
-	 * @param createdActors
-	 *            that can be added to that level
-	 */
-
-	public void goToLevelEditing(ILevel level, List<IActor> createdActors) {
-		levelEditor.setLevel(level, createdActors);
-		stage.setScene(levelEditor.getScene());
-	}
-
-	/**
-	 * 
-	 * When the user presses a button to add a new actor, the ActorEditor is
-	 * passed the actor to be edited. The stage is then set to the scene of the
-	 * ActorEditor
-	 * 
-	 * @param actor
-	 *            IActor to be edited
-	 */
-
-	public void goToActorEditing(IActor actor) {
-		actorEditor.setActor(actor);
-		stage.setScene(actorEditor.getScene());
-	}
+	// /**
+	// *
+	// * When the user presses a button to add a new level, the LevelEditor is
+	// * passed the level to be edited and a list of Actors that can be added to
+	// * that level. The stage is then set to the scene of the Level Editor
+	// *
+	// * @param level
+	// * to be edited
+	// * @param createdActors
+	// * that can be added to that level
+	// */
+	//
+	// public void goToLevelEditing(ILevel level, List<IActor> createdActors) {
+	// levelEditor.setLevel(level, createdActors);
+	// stage.setScene(levelEditor.getScene());
+	// }
+	//
+	// /**
+	// *
+	// * When the user presses a button to add a new actor, the ActorEditor is
+	// * passed the actor to be edited. The stage is then set to the scene of
+	// the
+	// * ActorEditor
+	// *
+	// * @param actor
+	// * IActor to be edited
+	// */
+	//
+	// public void goToActorEditing(IActor actor) {
+	// actorEditor.setActor(actor);
+	// stage.setScene(actorEditor.getScene());
+	// }
 
 	public void saveGame() {
 
 	}
 
 	public void initLevelEditingEnvironment() {
-		levelEditor = new LevelEditor();
+		// levelEditor = new LevelEditor();
 	}
 
 	public void initActorEditingEnvironment() {
-		actorEditor = new ActorEditor();
+		// actorEditor = new ActorEditor();
 	}
 
 }

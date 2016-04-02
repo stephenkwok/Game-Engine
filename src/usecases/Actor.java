@@ -1,11 +1,17 @@
 package usecases;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.ITrigger;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import java.util.*;
 
 /**
  * This class defines the logic for an Actor object.
@@ -16,11 +22,12 @@ import java.util.*;
  * @author blakekaplan
  */
 
-public class Actor extends ImageView implements IActor {
+public class Actor extends ImageView implements IActor, IEditableGameElement {
 
     private int health;
     private int points;
     private int myID;
+    private String myName;
 
     private Map<ITrigger, List<Action>> myRules;
 
@@ -29,9 +36,8 @@ public class Actor extends ImageView implements IActor {
      *
      * @param id The Actor's ID number
      */
-    public Actor(int id) {
+    public Actor() {
         myRules = new HashMap<>();
-        myID = id;
     }
 
     /**
@@ -171,4 +177,19 @@ public class Actor extends ImageView implements IActor {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void setID(int ID) {
+		this.myID = ID;
+	}
+
+	@Override
+	public String getName() {
+		return myName;
+	}
+
+	@Override
+	public void setName(String name) {
+		this.myName = name;
+	}
+
 }

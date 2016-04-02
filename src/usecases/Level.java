@@ -3,19 +3,23 @@ package usecases;
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import gameengine.model.ITrigger;
+import javafx.scene.image.Image;
 
 import java.util.*;
+
+import authoringenvironment.model.IEditableGameElement;
 
 /**
  * A Level is essentially a package of Actor objects. It is able to relay a Trigger to Actors when it receives one.
  *
  * @author blakekaplan
  */
-public class Level implements ILevel {
+public class Level implements ILevel, IEditableGameElement {
 
     List<IActor> myActors;
     Map<ITrigger, List<IActor>> triggerMap;
     String myName;
+    Image myBackground;
 
     /**
      * Instantiates the triggerMap and Actor list
@@ -89,4 +93,16 @@ public class Level implements ILevel {
     public List<IActor> getActors() {
         return myActors;
     }
+
+	@Override
+	public Image getImage() {
+		return myBackground;
+	}
+
+	@Override
+	public void setImage(Image image) {
+		this.myBackground = image;
+	}
+
+
 }
