@@ -38,6 +38,7 @@ public class Controller {
 		levelEnvironment = new LevelEditingEnvironment();
 		actorEnvironment = new ActorEditingEnvironment();
 		mainScreen = new MainScreen();
+		mainScreen.initializeEnvironment(this);
 	}
 	
 	/**
@@ -68,6 +69,7 @@ public class Controller {
 	 * Switches screen to main screen
 	 */
 	public void goToMainScreen(){
+		mainScreen.update();
 		clearPanes();
 		guiMain.setCenterPane(mainScreen.getPane());
 	}

@@ -82,10 +82,12 @@ public class GUIMain implements IGUI {
 	
 	public void setCenterPane(){
 //		myController.goToMainScreen();
-		TabPane tp = new TabPane();
-		TabImages test = new TabImages(myResources, "images"); 
-		tp.getTabs().add(test.createTab());
-		myRoot.setCenter(tp);
+//		TabPane tp = new TabPane();
+//		TabImages test = new TabImages(myResources, "images"); 
+//		tp.getTabs().add(test.createTab());
+//		myRoot.setCenter(tp);
+		GUIMainScreen test = new GUIMainScreen(myController);
+		myRoot.setCenter(test.getPane());
 	}
 	
 	private void setTopPane(){

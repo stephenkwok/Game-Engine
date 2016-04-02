@@ -10,6 +10,7 @@ public abstract class ClickableLabel extends Label {
 	
 	public ClickableLabel(IEditableGameElement editable) {
 		myEditable = editable;
+		this.setOnMouseClicked(e -> reactToMouseClicked());
 	}
 	
 	protected abstract void reactToMouseClicked();
