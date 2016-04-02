@@ -3,12 +3,20 @@ package usecases;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
+import authoringenvironment.controller.Controller;
+import authoringenvironment.model.ActorEditingEnvironment;
+import authoringenvironment.model.ICreatedActor;
+import authoringenvironment.model.ICreatedLevel;
+import authoringenvironment.model.LevelEditingEnvironment;
+=======
 import authoringenvironment.controller.ActorEditingEnvironment;
 import authoringenvironment.controller.LevelEditingEnvironment;
 import authoringenvironment.controller.MainScreen;
 import authoringenvironment.model.ICreatedLevel;
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
+>>>>>>> 58516e45cf7574599a0e867464007961c79fcb10
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -17,8 +25,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+<<<<<<< HEAD
+public class Controller extends Application implements Controller {
+	
+=======
 public class Controller extends Application {
 
+>>>>>>> 58516e45cf7574599a0e867464007961c79fcb10
 	private Stage stage;
 	private Scene mainScreenScene;
 	private Group root;

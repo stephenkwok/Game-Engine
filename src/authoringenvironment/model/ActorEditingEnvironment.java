@@ -1,4 +1,4 @@
-package authoringenvironment.controller;
+package authoringenvironment.model;
 
 import gameengine.model.IActor;
 import javafx.scene.Scene;

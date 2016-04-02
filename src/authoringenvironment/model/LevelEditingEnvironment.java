@@ -1,4 +1,4 @@
-package authoringenvironment.controller;
+package authoringenvironment.model;
 
 import java.util.List;
 
