@@ -1,6 +1,5 @@
-package authoringenvironment.controller;
+package authoringenvironment.model;
 
-import authoringenvironment.model.ICreatedActor;
 import javafx.scene.Scene;
 
 /**

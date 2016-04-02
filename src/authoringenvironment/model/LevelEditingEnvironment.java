@@ -1,9 +1,7 @@
-package authoringenvironment.controller;
+package authoringenvironment.model;
 
 import java.util.List;
 
-import authoringenvironment.model.ICreatedActor;
-import authoringenvironment.model.ICreatedLevel;
 import javafx.scene.Scene;
 
 /**

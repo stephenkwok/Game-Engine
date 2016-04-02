@@ -2,9 +2,9 @@ package usecases;
 
 import java.util.List;
 
-import authoringenvironment.controller.LevelEditingEnvironment;
 import authoringenvironment.model.ICreatedActor;
 import authoringenvironment.model.ICreatedLevel;
+import authoringenvironment.model.LevelEditingEnvironment;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 

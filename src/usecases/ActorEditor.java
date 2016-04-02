@@ -1,6 +1,6 @@
 package usecases;
 
-import authoringenvironment.controller.ActorEditingEnvironment;
+import authoringenvironment.model.ActorEditingEnvironment;
 import authoringenvironment.model.ICreatedActor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
