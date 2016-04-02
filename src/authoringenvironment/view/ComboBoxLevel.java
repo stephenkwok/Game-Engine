@@ -23,8 +23,8 @@ public class ComboBoxLevel extends ComboBoxTextCell{
 
 	private void fillLevelNamesAndMap(){
 		for(ILevel level: levels){
-//			levelNames.add(level.getLevelInfo().get("Name"));
-//			levelMap.put(level.getLevelInfo().get("Name"), level);
+			levelNames.add(level.getName());
+			levelMap.put(level.getName(), level);
 		}
 	}
 	
@@ -33,7 +33,7 @@ public class ComboBoxLevel extends ComboBoxTextCell{
 		comboButton.setOnAction(event -> {
 			String levelName = comboBox.getValue();
 			ILevel level = levelMap.get(levelName);
-//			mainScreen.goToLevelEditing(level, level.getLevelActors());
+			myController.goToLevelEditing(level, level.getActors());
 		});
 	}
 

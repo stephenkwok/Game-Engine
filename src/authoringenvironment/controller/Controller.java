@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import authoringenvironment.model.ICreatedActor;
 import gameengine.controller.ILevel;
+import gameengine.model.IActor;
 import javafx.stage.Stage;
 
 /**
@@ -37,7 +37,7 @@ public class Controller {
 	 * @param level - level to be edited 
 	 * @param createdActors - list of created Actors that can be placed into the level 
 	 */
-	public void goToLevelEditing(ILevel level, List<ICreatedActor> createdActors){
+	public void goToLevelEditing(ILevel level, List<IActor> createdActors){
 		
 	}
 	
@@ -46,7 +46,7 @@ public class Controller {
 	 * 
 	 * @param actor - Actor to edit
 	 */
-	public void goToActorEditing(ICreatedActor actor){
+	public void goToActorEditing(IActor actor){
 		
 	}
 	
