@@ -16,7 +16,7 @@ import javafx.scene.shape.Rectangle;
  * @author AnnieTang
  *
  */
-abstract class ComboBoxColorCell extends GUIComboBox{
+abstract class ComboBoxColorCell extends ComboBoxParent{
 	private static final int RECTANGLE_SIDE_SIZE = 20;
 	private static final String DEFAULT_COLORS_KEY = "DefaultColors";
 	protected List<String> palette;

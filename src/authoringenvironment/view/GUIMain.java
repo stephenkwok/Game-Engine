@@ -2,8 +2,10 @@ package authoringenvironment.view;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -14,7 +16,8 @@ import javafx.stage.Stage;
  *
  */
 public class GUIMain implements IGUI {
-    private static final String GUI_RESOURCE = "GUI";
+    private static final String GUI_RESOURCE = "authoringGUI";
+    private static final int PADDING = 20;
     private Scene myScene;
 	private BorderPane myRoot;
 	private ResourceBundle myResources;
@@ -66,15 +69,14 @@ public class GUIMain implements IGUI {
 	}
 	
 	private void setTopPane(){
-		
-		//TODO
-		//home button
-		//combobox of scenes
-		//save button
-	}
-	
-	private void setCenterPane(){
-		//set to main screen 
+		HBox hbox = new HBox(PADDING);
+		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
+		IGUIElement home = factory.createNewGUIObject("Home");
+		IGUIElement levels = factory.createNewGUIObject("Levels");
+		IGUIElement save = factory.createNewGUIObject("Save");
+		IGUIElement load = factory.createNewGUIObject("Load");
+		hbox.getChildren().addAll(home.createNode(),levels.createNode(),save.createNode(),load.createNode());
+		myRoot.setTop(hbox);
 	}
 
 	@Override

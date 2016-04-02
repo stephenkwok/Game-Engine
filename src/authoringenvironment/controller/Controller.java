@@ -73,6 +73,10 @@ public class Controller {
 		
 	}
 	
+	public void loadGame(File file){
+		
+	}
+	
 	/**
      * Gets the current workspace's stage.
      * @return current workspace's stage.

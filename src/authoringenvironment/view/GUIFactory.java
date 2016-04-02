@@ -12,11 +12,11 @@ import authoringenvironment.controller.Controller;
 
 public class GUIFactory {
 	private ResourceBundle myResources;
-	private Controller mainScreen;
+	private Controller myController;
 	
 	public GUIFactory(ResourceBundle myResources, Controller myController){
 		this.myResources = myResources;
-		this.mainScreen = myController;
+		this.myController = myController;
 	}
 	
 	/**
@@ -27,7 +27,13 @@ public class GUIFactory {
 	public IGUIElement createNewGUIObject(String nodeTypeKey){
 		String nodeType = myResources.getString(nodeTypeKey);
 		switch(nodeType){
-		case("SaveLoadButtons"): return new SaveLoad(myResources, mainScreen);
+		case("HomeButton"): return new ButtonHome(myController, myResources.getString("HomeButtonText"), 
+				myResources.getString("HomeButtonIcon"));
+		case("SaveButton"): return new ButtonSave(myController, myResources.getString("SaveButtonText"),
+				myResources.getString("SaveButtonIcon"));
+		case("LoadButton"): return new ButtonLoad(myController, myResources.getString("LoadButtonText"),
+				myResources.getString("LoadButtonIcon"));
+		case("LevelComboBox"): return new ComboBoxLevel(myResources, myResources.getString("LevelComboBoxPrompt"), myController);
 		}
 		return null;
 	}
