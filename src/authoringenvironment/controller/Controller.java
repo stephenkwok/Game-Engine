@@ -3,11 +3,12 @@ package authoringenvironment.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-import authoringenvironment.model.ActorEditingEnvironment;
-import authoringenvironment.model.LevelEditingEnvironment;
-import authoringenvironment.model.MainScreen;
+import authoringenvironment.view.GUIActorEditingEnvironment;
+import authoringenvironment.view.GUILevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
+import authoringenvironment.view.GUIMainScreen;
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import javafx.stage.Stage;
@@ -19,26 +20,28 @@ import javafx.stage.Stage;
  */
 
 public class Controller {
-	private Stage myStage;	
+	private Stage myStage;
 	private List<ILevel> levels;
-	private LevelEditingEnvironment levelEnvironment;
-	private ActorEditingEnvironment actorEnvironment;
-	private MainScreen mainScreen; 
+	private List<IActor> actors;
+	private GUILevelEditingEnvironment levelEnvironment;
+	private GUIActorEditingEnvironment actorEnvironment; 
+	private GUIMainScreen mainScreen;
 	private GUIMain guiMain;
+	private ResourceBundle myResources;
 	
-	
-	public Controller(Stage myStage, GUIMain guiMain){
+	public Controller(Stage myStage, GUIMain guiMain, ResourceBundle myResources){
 		this.myStage = myStage;
 		this.guiMain = guiMain;
+		this.myResources = myResources; 
 		init();
 	}
 	
 	private void init(){
 		levels = new ArrayList<>();
-		levelEnvironment = new LevelEditingEnvironment();
-		actorEnvironment = new ActorEditingEnvironment();
-		mainScreen = new MainScreen();
-		mainScreen.initializeEnvironment(this);
+		actors = new ArrayList<>();
+		levelEnvironment = new GUILevelEditingEnvironment();
+		actorEnvironment = new GUIActorEditingEnvironment(myResources);
+		mainScreen = new GUIMainScreen(this);
 	}
 	
 	/**
@@ -69,7 +72,7 @@ public class Controller {
 	 * Switches screen to main screen
 	 */
 	public void goToMainScreen(){
-		mainScreen.update();
+		mainScreen.updateAllNodes();
 		clearPanes();
 		guiMain.setCenterPane(mainScreen.getPane());
 	}
@@ -116,5 +119,11 @@ public class Controller {
     	guiMain.setLeftPane(null);
     	guiMain.setRightPane(null);
     }
+
+	public void addActor(IActor newActor) {
+		if (newActor != null) {
+			actors.add(newActor);
+		}
+	}
 	
 }

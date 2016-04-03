@@ -1,38 +1,39 @@
 package authoringenvironment.view;
 
-import javafx.scene.Scene;
+import java.util.ResourceBundle;
+
+import gameengine.model.IActor;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
 /**
  * Returns BorderPane to represent Actor Editing Environment. 
  * @author AnnieTang
  *
  */
 public class GUIActorEditingEnvironment implements IGUI {
-	Stage myStage;
-	BorderPane myRoot;
-	Scene myScene;
-	int windowHeight;
-	int windowWidth;
+	private BorderPane myRoot;
+	private GUILibrary library;
+	private ResourceBundle myResources;
 	
-	public GUIActorEditingEnvironment(int height, int width, Stage myStage) {
-		this.myStage = myStage; 
-		this.windowHeight = height;
-		this.windowWidth = width;
+	public GUIActorEditingEnvironment(ResourceBundle myResources) {
+		this.myResources = myResources;
 	}
 
 	@Override
-	public Scene getScene() {
+	public void updateAllNodes() { 
+	}
+
+	@Override
+	public Pane getPane() {
 		myRoot = new BorderPane();
-		myScene = new Scene(myRoot, windowHeight, windowWidth, Color.WHITE);
-		return myScene;
+		library = new GUILibrary(myResources);
+		myRoot.setLeft(library.getPane());
+		//left will be hbox of attributes and library
+		//right will be draggable area thingiemabob
+		return myRoot;
 	}
-
-	@Override
-	public void updateAllNodes() {
-		// TODO 
+	
+	public void setActor(IActor actor){
+		
 	}
-
 }
