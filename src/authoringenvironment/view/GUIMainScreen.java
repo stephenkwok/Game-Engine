@@ -1,10 +1,13 @@
 package authoringenvironment.view;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.ILevel;
+import gameengine.controller.Level;
 import gameengine.model.IActor;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.event.ActionEvent;
@@ -19,7 +22,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import usecases.Actor;
-import usecases.Level;
 
 public class GUIMainScreen implements IGUI {
 	
@@ -35,6 +37,8 @@ public class GUIMainScreen implements IGUI {
 
 	public GUIMainScreen(Controller controller) {
 		this.controller = controller;
+		levelLabels = new ArrayList<>();
+		actorLabels = new ArrayList<>();
 		initializeEnvironment();
 	}
 
@@ -105,5 +109,12 @@ public class GUIMainScreen implements IGUI {
 	public void updateAllNodes() {
 		updateLabels(levelLabels);
 		updateLabels(actorLabels);
+	}
+
+	@Override
+	public Scene getScene()
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

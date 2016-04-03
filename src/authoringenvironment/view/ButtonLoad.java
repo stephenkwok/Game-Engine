@@ -9,11 +9,9 @@ import javafx.event.EventHandler;
  *
  */
 public class ButtonLoad extends ButtonParent {
-	EventHandler<ActionEvent> handler;
 	
-	public ButtonLoad(Controller myController, String buttonText, String imageName, EventHandler<ActionEvent> handler) {
-		super(myController, buttonText, imageName, handler);
-		this.handler = handler;
+	public ButtonLoad(Controller myController, String buttonText, String imageName) {
+		super(myController, buttonText, imageName);
 	}
 
 	@Override

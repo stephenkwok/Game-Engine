@@ -2,6 +2,8 @@ package authoringenvironment.model;
 
 import java.util.List;
 
+import authoringenvironment.controller.Controller;
+import authoringenvironment.view.GUILevelEditingEnvironment;
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import javafx.scene.layout.Pane;
@@ -10,11 +12,16 @@ import javafx.scene.layout.Pane;
  * This class serves as the interface that all level editing environments must implement
  * 
  * @author Stephen
+ * @author amyzhao
  */
 
 public class LevelEditingEnvironment {
-	Pane myPane;
-
+	private GUILevelEditingEnvironment myLevelEditingGUI;
+  
+	public LevelEditingEnvironment() {
+		myLevelEditingGUI = new GUILevelEditingEnvironment();	
+	}
+	
 	/**
 	 * Initializes the Level Editing Environment
 	 */
@@ -36,7 +43,7 @@ public class LevelEditingEnvironment {
 	 * @return Editing Environment's Layout
 	 */
 	public Pane getPane(){
-		return myPane;
+		return myLevelEditingGUI.getPane();
 	}
 
 }

@@ -16,20 +16,18 @@ import javafx.stage.FileChooser;
  * @author AnnieTang
  *
  */
-public class ButtonParent implements IGUIElement {
+public abstract class ButtonParent implements IGUIElement {
 	private static final int ICON_SIZE = 30;
 	private static final int PADDING = 10;
 	protected Controller myController;
 	private String buttonText;
 	protected Button button;
 	private String imageName;
-	private EventHandler<ActionEvent> handler;
 	
-	public ButtonParent(Controller myController, String buttonText, String imageName, EventHandler<ActionEvent> handler) {
+	public ButtonParent(Controller myController, String buttonText, String imageName) {
 		this.myController = myController;
 		this.buttonText = buttonText;
 		this.imageName = imageName;
-		this.handler = handler;
 	}
 	/**
 	 * Creates and returns button
@@ -46,9 +44,7 @@ public class ButtonParent implements IGUIElement {
 	/**
 	 * Sets action when button is pressed.
 	 */
-	protected void setButtonAction(){
-		button.setOnAction(handler);
-	}
+	protected abstract void setButtonAction();
 	
 	/**
 	 * Optional, sets image for button.
