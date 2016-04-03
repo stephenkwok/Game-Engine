@@ -19,14 +19,14 @@ public class LevelEditingEnvironment {
 	private GUILevelEditingEnvironment myLevelEditingGUI;
   
 	public LevelEditingEnvironment() {
-		myLevelEditingGUI = new GUILevelEditingEnvironment();	
+		initializeEnvironment();
 	}
 	
 	/**
 	 * Initializes the Level Editing Environment
 	 */
-	public void initializeEnvironment(){
-		
+	private void initializeEnvironment(){
+		myLevelEditingGUI = new GUILevelEditingEnvironment();
 	}
 	
 	/**

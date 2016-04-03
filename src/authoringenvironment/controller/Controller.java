@@ -3,6 +3,7 @@ package authoringenvironment.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import authoringenvironment.model.ActorEditingEnvironment;
 import authoringenvironment.model.LevelEditingEnvironment;
@@ -27,10 +28,12 @@ public class Controller {
 	private ActorEditingEnvironment actorEnvironment;
 	private MainScreen mainScreen; 
 	private GUIMain guiMain;
+	private ResourceBundle myResources;
 	
-	public Controller(Stage myStage, GUIMain guiMain){
+	public Controller(Stage myStage, GUIMain guiMain, ResourceBundle myResources){
 		this.myStage = myStage;
 		this.guiMain = guiMain;
+		this.myResources = myResources; 
 		init();
 	}
 	
@@ -38,9 +41,8 @@ public class Controller {
 		levels = new ArrayList<>();
 		actors = new ArrayList<>();
 		levelEnvironment = new LevelEditingEnvironment();
-		actorEnvironment = new ActorEditingEnvironment();
-		mainScreen = new MainScreen();
-		mainScreen.initializeEnvironment(this);
+		actorEnvironment = new ActorEditingEnvironment(myResources);
+		mainScreen = new MainScreen(this);
 	}
 	
 	/**

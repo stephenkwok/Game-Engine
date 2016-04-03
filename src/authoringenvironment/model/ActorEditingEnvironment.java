@@ -1,5 +1,8 @@
 package authoringenvironment.model;
 
+import java.util.ResourceBundle;
+
+import authoringenvironment.view.GUIActorEditingEnvironment;
 import gameengine.model.IActor;
 import javafx.scene.layout.Pane;
 
@@ -10,13 +13,19 @@ import javafx.scene.layout.Pane;
  */
 
 public class ActorEditingEnvironment {
-	Pane myPane;
+	private GUIActorEditingEnvironment myActorEditingGUI;
+	private Pane myPane;
+	private ResourceBundle myResources;
 	
+	public ActorEditingEnvironment(ResourceBundle myResources){
+		this.myResources = myResources;
+		initializeEnvironment();
+	}
 	/**
 	 * Initializes the Actor Editing Environment
 	 */
-	public void initializeEnvironment(){
-		
+	private void initializeEnvironment(){
+		myActorEditingGUI = new GUIActorEditingEnvironment(myResources);
 	}
 	
 	/**

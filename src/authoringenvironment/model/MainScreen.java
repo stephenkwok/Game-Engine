@@ -5,10 +5,16 @@ import authoringenvironment.view.GUIMainScreen;
 import javafx.scene.layout.Pane;
 
 public class MainScreen {
-	GUIMainScreen guiMainScreen;
+	private GUIMainScreen guiMainScreen;
+	private Controller myController;
 	
-	public void initializeEnvironment(Controller controller){
-		guiMainScreen = new GUIMainScreen(controller);
+	public MainScreen(Controller controller){
+		this.myController = controller;
+		initializeEnvironment();
+	}
+	
+	private void initializeEnvironment(){
+		guiMainScreen = new GUIMainScreen(myController);
 	}
 	
 	public Pane getPane(){

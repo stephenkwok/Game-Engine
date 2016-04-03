@@ -32,11 +32,13 @@ public class GUIMain implements IGUI {
 	private Controller myController;
 	private GUIFactory factory;
 	private IGUIElement levels;
+	private Scene splashScene;
 	
-	public GUIMain(int windowWidth, int windowHeight, Stage s) {
+	public GUIMain(int windowWidth, int windowHeight, Stage s, Scene splashScene) {
 		this.windowWidth = windowWidth;
 		this.windowHeight = windowHeight;
 		this.myStage = s;
+		this.splashScene = splashScene;
 		init();
 	}
 	
@@ -45,7 +47,7 @@ public class GUIMain implements IGUI {
 	 */
 	private void init(){
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		myController = new Controller(myStage, this);
+		myController = new Controller(myStage, this, this.myResources);
 		factory = new GUIFactory(myResources, myController);
 	}
 	
