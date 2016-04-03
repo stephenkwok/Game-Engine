@@ -11,9 +11,7 @@ public class ButtonNewActor extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		Actor actor = new Actor();
-		myController.addActor(actor);
-		button.setOnAction(e -> myController.goToActorEditing(actor));
+		button.setOnAction(e -> myController.addActor());
 	}
 
 }

@@ -96,14 +96,14 @@ public class GUIMainScreen implements IGUI {
 		labels.stream().forEach(label -> label.update());
 	}
 	
-	private void addActor() {
+	public void addActor() {
 		IEditableGameElement newActor = new Actor();
 		LabelActor label = new LabelActor(newActor, controller);
 		processLabel(actorLabelContainer, label);
 		controller.goToActorEditing((IActor) newActor);
 	}
 	
-	private void addLevel() {
+	public void addLevel() {
 		IEditableGameElement newLevel = new Level();
 		LabelLevel label = new LabelLevel(newLevel, controller);
 		processLabel(levelLabelContainer, label);
