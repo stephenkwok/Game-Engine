@@ -25,6 +25,7 @@ import javafx.scene.image.ImageView;
 
 public class Actor extends ImageView implements IActor, IEditableGameElement {
 
+    private static final double DEGREES_TO_RADIANS = Math.PI / 180;
     private int health;
     private int points;
     private int myID;
@@ -69,8 +70,8 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
      */
     @Override
     public void move(double distance, double direction) {
-        setX(distance * Math.cos(direction * (Math.PI/180)));
-        setY(distance * Math.sin(direction * (Math.PI/180)));
+        setX(distance * Math.cos(direction * DEGREES_TO_RADIANS));
+        setY(distance * Math.sin(direction * DEGREES_TO_RADIANS));
     }
 
     /**
