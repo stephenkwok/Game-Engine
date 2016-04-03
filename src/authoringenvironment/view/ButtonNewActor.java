@@ -1,7 +1,7 @@
 package authoringenvironment.view;
 
 import authoringenvironment.controller.Controller;
-import usecases.Actor;
+import gameengine.controller.Actor;
 
 public class ButtonNewActor extends ButtonParent {
 

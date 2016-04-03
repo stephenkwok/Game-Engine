@@ -1,6 +1,5 @@
 package usecases;
 
-import authoringenvironment.model.ActorEditingEnvironment;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.model.IActor;
