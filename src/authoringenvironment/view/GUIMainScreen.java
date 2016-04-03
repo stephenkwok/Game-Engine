@@ -32,8 +32,8 @@ public class GUIMainScreen implements IGUI {
 	private ScrollPane levelScrollPane;
 	private HBox scrollPaneContainer;
 	private BorderPane borderPane;
-	private List<ClickableLabel> levelLabels;
-	private List<ClickableLabel> actorLabels;
+	private List<LabelClickable> levelLabels;
+	private List<LabelClickable> actorLabels;
 
 	public GUIMainScreen(Controller controller) {
 		this.controller = controller;
@@ -87,20 +87,20 @@ public class GUIMainScreen implements IGUI {
 		return borderPane;
 	}
 
-	private void updateLabels(List<ClickableLabel> labels) {
+	private void updateLabels(List<LabelClickable> labels) {
 		labels.stream().forEach(label -> label.update());
 	}
 	
 	private void addActor() {
 		IEditableGameElement newActor = new Actor();
-		ActorLabel label = new ActorLabel(newActor, controller);
+		LabelActor label = new LabelActor(newActor, controller);
 		actorLabelContainer.getChildren().add(label);
 		controller.goToActorEditing((IActor) newActor);
 	}
 	
 	private void addLevel() {
 		IEditableGameElement newLevel = new Level();
-		LevelLabel label = new LevelLabel(newLevel, controller);
+		LabelLevel label = new LabelLevel(newLevel, controller);
 		levelLabelContainer.getChildren().add(label);
 		controller.goToLevelEditing((ILevel) newLevel);
 	}
