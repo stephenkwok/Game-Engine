@@ -1,18 +1,20 @@
 package usecases;
 
-import authoringenvironment.controller.ActorEditingEnvironment;
-import authoringenvironment.model.ICreatedActor;
+import authoringenvironment.model.ActorEditingEnvironment;
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingEnvironment;
+import gameengine.model.IActor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 
-public class ActorEditor implements ActorEditingEnvironment {
+public class ActorEditor implements IEditingEnvironment {
 
-	private ICreatedActor actor;
+	private IActor actor;
 	private Scene scene;
 	private Group root;
 	
 	public ActorEditor() {
-
 	}
 
 	@Override
@@ -22,13 +24,13 @@ public class ActorEditor implements ActorEditingEnvironment {
 	}
 
 	@Override
-	public void setActor(ICreatedActor actor) {
-		this.actor = actor;
+	public Pane getPane() {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	@Override
-	public Scene getScene() {
-		return scene;
+	
+	public void setEditable(IEditableGameElement editable) {
+		
 	}
 
 }

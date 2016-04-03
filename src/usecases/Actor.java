@@ -1,28 +1,43 @@
 package usecases;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.ITrigger;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.util.*;
+/**
+ * This class defines the logic for an Actor object.
+ * Each interactive element in the Game is an Actor. Actors contains a set of rules that are contained
+ * within the myRules map. When provided with a Trigger object, all actions associated with a particular Trigger
+ * are executed. The Actor also extends the ImageView class so they will also be visual elements.
+ *
+ * @author blakekaplan
+ */
 
-public class Actor extends ImageView implements IActor {
+public class Actor extends ImageView implements IActor, IEditableGameElement {
 
     private int health;
     private int points;
     private int myID;
+    private String myName;
 
     private Map<ITrigger, List<Action>> myRules;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
      *
-     * @param rules A list of Rule objects to define the Actor's behavior
+     * @param id The Actor's ID number
      */
-    public Actor(int id, List<IRule> rules) {
+    public Actor() {
         myRules = new HashMap<>();
-        myID = id;
     }
 
     /**
@@ -126,4 +141,55 @@ public class Actor extends ImageView implements IActor {
     public int getID() {
         return myID;
     }
+
+	@Override
+	public double getXVelo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getYVelo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setXPos(double updateXPosition) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setYPos(double updateYPosition) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setXVelo(double updateXVelo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setYVelo(double updateYVelo) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void setID(int ID) {
+		myID = ID;
+	}
+
+	@Override
+	public String getName() {
+		return myName;
+	}
+
+	@Override
+	public void setName(String name) {
+		myName = name;
+	}
+
 }

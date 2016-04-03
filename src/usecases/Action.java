@@ -3,6 +3,10 @@ package usecases;
 import gameengine.model.IAction;
 
 /**
+ * This class defines the generalized behavior of an Action object.
+ * Since the Action class is abstract, the perform function will have to be implemented in a manner specific to the
+ * type of action.
+ *
  * @author blakekaplan
  */
 public abstract class Action implements IAction {
