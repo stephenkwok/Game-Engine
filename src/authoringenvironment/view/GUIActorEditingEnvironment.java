@@ -1,6 +1,8 @@
 package authoringenvironment.view;
 
 import java.util.ResourceBundle;
+
+import gameengine.model.IActor;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 /**
@@ -29,5 +31,9 @@ public class GUIActorEditingEnvironment implements IGUI {
 		//left will be hbox of attributes and library
 		//right will be draggable area thingiemabob
 		return myRoot;
+	}
+	
+	public void setActor(IActor actor){
+		
 	}
 }

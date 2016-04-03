@@ -2,6 +2,7 @@ package authoringenvironment.view;
 
 import java.util.ResourceBundle;
 
+import gameengine.controller.ILevel;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -52,6 +53,10 @@ public class GUILevelEditingEnvironment implements IGUI {
 	@Override
 	public void updateAllNodes() {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public void setLevel(ILevel level){
 		
 	}
 

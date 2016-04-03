@@ -5,14 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import authoringenvironment.model.ActorEditingEnvironment;
-import authoringenvironment.model.LevelEditingEnvironment;
-import authoringenvironment.model.MainScreen;
+import authoringenvironment.view.GUIActorEditingEnvironment;
+import authoringenvironment.view.GUILevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
+import authoringenvironment.view.GUIMainScreen;
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import javafx.stage.Stage;
-import usecases.Actor;
 
 /**
  * This class serves as the interface that all authoring environment main screens must implement
@@ -24,9 +23,9 @@ public class Controller {
 	private Stage myStage;
 	private List<ILevel> levels;
 	private List<IActor> actors;
-	private LevelEditingEnvironment levelEnvironment;
-	private ActorEditingEnvironment actorEnvironment;
-	private MainScreen mainScreen; 
+	private GUILevelEditingEnvironment levelEnvironment;
+	private GUIActorEditingEnvironment actorEnvironment; 
+	private GUIMainScreen mainScreen;
 	private GUIMain guiMain;
 	private ResourceBundle myResources;
 	
@@ -40,9 +39,9 @@ public class Controller {
 	private void init(){
 		levels = new ArrayList<>();
 		actors = new ArrayList<>();
-		levelEnvironment = new LevelEditingEnvironment();
-		actorEnvironment = new ActorEditingEnvironment(myResources);
-		mainScreen = new MainScreen(this);
+		levelEnvironment = new GUILevelEditingEnvironment();
+		actorEnvironment = new GUIActorEditingEnvironment(myResources);
+		mainScreen = new GUIMainScreen(this);
 	}
 	
 	/**
@@ -73,7 +72,7 @@ public class Controller {
 	 * Switches screen to main screen
 	 */
 	public void goToMainScreen(){
-		mainScreen.update();
+		mainScreen.updateAllNodes();
 		clearPanes();
 		guiMain.setCenterPane(mainScreen.getPane());
 	}
