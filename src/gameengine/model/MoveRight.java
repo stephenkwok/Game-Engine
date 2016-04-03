@@ -1,4 +1,7 @@
-package usecases;
+package gameengine.model;
+
+import gameengine.controller.Action;
+import gameengine.controller.Actor;
 
 import java.util.List;
 
@@ -20,7 +23,7 @@ public class MoveRight extends Action {
      */
     public MoveRight(Actor assignedActor, List<Object> args) {
         super(assignedActor);
-        distance = (Double) args.get(0);
+        distance = (double) args.get(0);
     }
 
     /**

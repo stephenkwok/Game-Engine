@@ -1,4 +1,4 @@
-package usecases;
+package gameengine.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +10,6 @@ import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.ITrigger;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -24,17 +23,17 @@ import javafx.scene.image.ImageView;
 
 public class Actor extends ImageView implements IActor, IEditableGameElement {
 
+    private static final double DEGREES_TO_RADIANS = Math.PI / 180;
     private int health;
     private int points;
     private int myID;
     private String myName;
 
-    private Map<ITrigger, List<Action>> myRules;
+    private Map<String, List<Action>> myRules;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
      *
-     * @param id The Actor's ID number
      */
     public Actor() {
         myRules = new HashMap<>();
@@ -68,8 +67,8 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
      */
     @Override
     public void move(double distance, double direction) {
-        setX(distance * Math.cos(direction));
-        setY(distance * Math.sin(direction));
+        setX(distance * Math.cos(direction * DEGREES_TO_RADIANS));
+        setY(distance * Math.sin(direction * DEGREES_TO_RADIANS));
     }
 
     /**
@@ -99,7 +98,7 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
      */
     @Override
     public void performActionsFor(ITrigger myTrigger) {
-        List<Action> myActions = myRules.get(myTrigger);
+        List<Action> myActions = myRules.get(myTrigger.getTriggerName());
         for (Action myAction : myActions) {
             myAction.perform();
         }
@@ -112,14 +111,14 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
      */
     @Override
     public void addRule(IRule newRule) {
-        if (myRules.containsKey(newRule.getTrigger())) {
-            List<Action> myActions = myRules.get(newRule.getTrigger());
+        if (myRules.containsKey(newRule.getTrigger().getTriggerName())) {
+            List<Action> myActions = myRules.get(newRule.getTrigger().getTriggerName());
             myActions.add(newRule.getAction());
-            myRules.put(newRule.getTrigger(), myActions);
+            myRules.put(newRule.getTrigger().getTriggerName(), myActions);
         } else {
             List<Action> myActions = new ArrayList<>();
             myActions.add(newRule.getAction());
-            myRules.put(newRule.getTrigger(), myActions);
+            myRules.put(newRule.getTrigger().getTriggerName(), myActions);
         }
     }
 
@@ -128,7 +127,7 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
      *
      * @return The list of Triggers that the Actor responds to
      */
-    public Set<ITrigger> getTriggers() {
+    public Set<String> getTriggers() {
         return myRules.keySet();
     }
 
