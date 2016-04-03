@@ -18,7 +18,7 @@ public class ButtonNewLevel extends ButtonParent {
 	 * On click, creates a new level, adds it to the list of levels, and transitions to the level editing environment.
 	 */
 	@Override
-	void setButtonAction() {
+	protected void setButtonAction() {
 		Level level = new Level();
 		myController.addLevel(level);
 		button.setOnAction(e -> myController.goToLevelEditing(level));

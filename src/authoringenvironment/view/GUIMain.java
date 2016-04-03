@@ -39,6 +39,7 @@ public class GUIMain implements IGUI {
 	private IGUIElement load;
 	private IGUIElement newLevel;
 	private IGUIElement newActor;
+	private GUIMainScreen mainScreen;
 	
 	public GUIMain(int windowWidth, int windowHeight, Stage s) {
 		this.windowWidth = windowWidth;
@@ -64,7 +65,6 @@ public class GUIMain implements IGUI {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	@Override
 	public Scene getScene() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		myRoot = new BorderPane();
 		setTopPane();
@@ -91,11 +91,10 @@ public class GUIMain implements IGUI {
 	
 	public void setCenterPane(){
 //		myController.goToMainScreen();
-		TabPane tp = new TabPane();
-		TabImages test = new TabImages(myResources, "Images"); 
-		TabSounds test2 = new TabSounds(myResources, "Sounds");
-		tp.getTabs().addAll(test.createTab(), test2.createTab());
-		myRoot.setCenter(tp);
+		IGUI actorEditing = new GUIActorEditingEnvironment(myResources);
+		myRoot.setCenter(actorEditing.getPane());
+//		GUIMainScreen test = new GUIMainScreen(myController);
+//		myRoot.setCenter(test.getPane());
 	}
 	
 	private void setTopPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
@@ -117,6 +116,11 @@ public class GUIMain implements IGUI {
 	@Override
 	public void updateAllNodes() {
 		levels.updateNode();
+	}
+
+	@Override
+	public Pane getPane() {
+		return myRoot;
 	}
 
 }

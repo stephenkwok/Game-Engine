@@ -12,7 +12,7 @@ public class ButtonHome extends ButtonParent{
 	}
 
 	@Override
-	void setButtonAction() {
+	protected void setButtonAction() {
 		button.setOnAction(event -> {
 			myController.goToMainScreen();
 		});

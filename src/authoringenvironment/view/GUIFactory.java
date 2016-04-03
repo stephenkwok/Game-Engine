@@ -22,12 +22,12 @@ public class GUIFactory {
 	private static final String VIEW = "view.";
 	private ResourceBundle myResources;
 	private Controller myController;
-	
+
 	public GUIFactory(ResourceBundle myResources, Controller myController){
 		this.myResources = myResources;
 		this.myController = myController;
 	}
-	
+
 	/**
 	 * Creates new IGUIElement based on nodeTypeKey passed in. 
 	 * @param nodeTypeKey
@@ -46,15 +46,15 @@ public class GUIFactory {
 		}
 		return null;
 	}
-	
+
 	private boolean isButton(String nodeType) {
 		return Arrays.asList(myResources.getString("Buttons").split(",")).contains(nodeType);
 	}
-	
+
 	private boolean isComboBox(String nodeType) {
 		return Arrays.asList(myResources.getString("ComboBoxes").split(",")).contains(nodeType);
 	}
-	
+
 	private IGUIElement createButton(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String text = myResources.getString(nodeType + TEXT);
 		String icon = myResources.getString(nodeType + ICON);
@@ -70,7 +70,7 @@ public class GUIFactory {
 		}
 		return null;
 	}
-	
+
 	private IGUIElement createComboBox(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String prompt = myResources.getString(nodeType + PROMPT);
 		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
