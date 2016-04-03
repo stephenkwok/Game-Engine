@@ -114,7 +114,7 @@ public interface IActor {
      *
      * @return The list of Triggers
      */
-    public Set<ITrigger> getTriggers();
+    public Set<String> getTriggers();
 
     /**
      * Adds a new Rule to the Actor

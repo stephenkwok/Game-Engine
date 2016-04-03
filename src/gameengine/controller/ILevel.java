@@ -2,7 +2,6 @@ package gameengine.controller;
 
 import gameengine.model.IActor;
 import gameengine.model.ITrigger;
-import usecases.Actor;
 
 import java.util.List;
 
