@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import authoringenvironment.model.IEditableGameElement;
+import gameengine.model.IAction;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.ITrigger;
@@ -68,8 +69,8 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
      */
     @Override
     public void move(double distance, double direction) {
-        setX(distance * Math.cos(direction));
-        setY(distance * Math.sin(direction));
+        setX(distance * Math.cos(direction * (Math.PI/180)));
+        setY(distance * Math.sin(direction * (Math.PI/180)));
     }
 
     /**
