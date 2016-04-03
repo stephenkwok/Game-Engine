@@ -10,20 +10,21 @@ public class GUILevelInspector implements IGUI {
 //	private static final String TAB_NAME = "Inspector";
 	private static final String ACTORS = "Actors";
 	private static final String LEVEL_ATTRIBUTES = "Level Attributes";
+	private Pane myPane;
 	
 	public GUILevelInspector(ResourceBundle myResources) {
 		this.myResources = myResources;
-	}
-
-	@Override
-	public Pane getPane() {
-		StackPane wrapper = new StackPane();
+		myPane = new StackPane();
 		TabPane tabPane = new TabPane();
 		TabActors actors = new TabActors(myResources, ACTORS);
 		TabLevelAttributes attr = new TabLevelAttributes(myResources, LEVEL_ATTRIBUTES);
 		tabPane.getTabs().addAll(actors.createTab(), attr.createTab());
-		wrapper.getChildren().add(tabPane);
-		return wrapper;
+		myPane.getChildren().add(tabPane);
+	}
+
+	@Override
+	public Pane getPane() {
+		return myPane;
 	}
 
 	@Override
