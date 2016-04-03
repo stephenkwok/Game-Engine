@@ -1,14 +1,10 @@
 package authoringenvironment.view;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
-import javafx.scene.Scene;
+import gameengine.model.IActor;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 /**
  * Returns BorderPane to represent Actor Editing Environment. 
  * @author AnnieTang
@@ -36,12 +32,8 @@ public class GUIActorEditingEnvironment implements IGUI {
 		//right will be draggable area thingiemabob
 		return myRoot;
 	}
-
-	@Override
-	public Scene getScene()
-			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public void setActor(IActor actor){
+		
 	}
-
 }

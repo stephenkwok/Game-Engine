@@ -19,7 +19,7 @@ public class Main extends Application{
     @Override
     public void start(Stage myStage) throws Exception {
     	s = new Stage();
-    	myGUI = new GUIMain(SCREEN_HEIGHT, SCREEN_WIDTH, s);
+    	myGUI = new GUIMain(SCREEN_HEIGHT, SCREEN_WIDTH, s, null);
     	s.setScene(myGUI.getScene());
     	s.show();
     }

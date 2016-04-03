@@ -4,11 +4,11 @@ import authoringenvironment.model.IEditableGameElement;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-public abstract class ClickableLabel extends Label {
+public abstract class LabelClickable extends Label {
 	
 	IEditableGameElement myEditable;
 	
-	public ClickableLabel(IEditableGameElement editable) {
+	public LabelClickable(IEditableGameElement editable) {
 		myEditable = editable;
 		this.setOnMouseClicked(e -> reactToMouseClicked());
 	}
