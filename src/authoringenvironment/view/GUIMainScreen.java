@@ -5,6 +5,7 @@ import java.util.List;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
+import gameengine.controller.Actor;
 import gameengine.controller.ILevel;
 import gameengine.controller.Level;
 import gameengine.model.IActor;
@@ -19,7 +20,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import usecases.Actor;
 
 public class GUIMainScreen implements IGUI {
 	
@@ -89,14 +89,14 @@ public class GUIMainScreen implements IGUI {
 		labels.stream().forEach(label -> label.update());
 	}
 	
-	private void addActor() {
+	public void addActor() {
 		IEditableGameElement newActor = new Actor();
 		LabelActor label = new LabelActor(newActor, controller);
 		actorLabelContainer.getChildren().add(label);
 		controller.goToActorEditing((IActor) newActor);
 	}
 	
-	private void addLevel() {
+	public void addLevel() {
 		IEditableGameElement newLevel = new Level();
 		LabelLevel label = new LabelLevel(newLevel, controller);
 		levelLabelContainer.getChildren().add(label);
