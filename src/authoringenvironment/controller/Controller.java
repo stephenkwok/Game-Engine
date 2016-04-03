@@ -109,8 +109,8 @@ public class Controller {
      * For each level that is created, adds it to the running list in this class. 
      * @param newLevel
      */
-    public void addLevel(ILevel newLevel){
-    	levels.add(newLevel);
+    public void addLevel(){
+    	mainScreen.addLevel();
     }
     
     private void clearPanes(){
@@ -120,10 +120,8 @@ public class Controller {
     	guiMain.setRightPane(null);
     }
 
-	public void addActor(IActor newActor) {
-		if (newActor != null) {
-			actors.add(newActor);
-		}
+	public void addActor() {
+		mainScreen.addActor();
 	}
 	
 }
