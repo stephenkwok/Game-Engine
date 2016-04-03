@@ -1,8 +1,5 @@
 package authoringenvironment.view;
 
-import java.lang.reflect.InvocationTargetException;
-
-import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
 /**
@@ -14,15 +11,6 @@ import javafx.scene.layout.Pane;
  * @author Annie
  */
 public interface IGUI {
-	/**
-	 * Creates the JavaFX Pane, which will be put within a BorderPane through the controller.
-	 * @return Scene
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 */
-	Scene getScene() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
 
 	Pane getPane();
 

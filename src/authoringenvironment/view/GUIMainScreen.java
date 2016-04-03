@@ -1,6 +1,5 @@
 package authoringenvironment.view;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import gameengine.model.IActor;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
@@ -109,12 +107,5 @@ public class GUIMainScreen implements IGUI {
 	public void updateAllNodes() {
 		updateLabels(levelLabels);
 		updateLabels(actorLabels);
-	}
-
-	@Override
-	public Scene getScene()
-			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

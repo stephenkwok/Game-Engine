@@ -1,7 +1,5 @@
 package authoringenvironment.view;
 import authoringenvironment.controller.Controller;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 /**
  * Button to save game
  * @author AnnieTang

@@ -1,12 +1,10 @@
 package authoringenvironment.view;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -33,13 +31,7 @@ public class GUIMain implements IGUI {
 	private Stage myStage;
 	private Controller myController;
 	private GUIFactory factory;
-	private IGUIElement home;
 	private IGUIElement levels;
-	private IGUIElement save;
-	private IGUIElement load;
-	private IGUIElement newLevel;
-	private IGUIElement newActor;
-	private GUIMainScreen mainScreen;
 	
 	public GUIMain(int windowWidth, int windowHeight, Stage s) {
 		this.windowWidth = windowWidth;
