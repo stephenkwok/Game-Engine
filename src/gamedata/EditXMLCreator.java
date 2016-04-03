@@ -3,7 +3,8 @@ package gamedata;
 import java.util.List;
 import java.util.Map;
 
-import authoringenvironment.model.ICreatedActor;
+import gameengine.model.IActor;
+
 
 /** 
  * This class serves as the private interface that any Game Data xml creator writing editable game files must implement in order to write data to an initial XML file from objects belonging to the authoring environment.
@@ -24,13 +25,13 @@ public interface EditXMLCreator {
 	 * Writes to an XML file all the information pertinent to an actor's settings.
 	 * @param actor an instance of a level's actor
 	 */
-	public void writeActorInfo (ICreatedActor actor);
+	public void writeActorInfo (IActor actor);
 	
 	/**
 	 * Saves all relevant information for each level in a specific format reflected at a basic level in initialGame.XML.
 	 * @param levelInfo a map of tags referring to level settings matched to their values
 	 * @param levelActors a list of actors belonging to a level's editing environment
 	 */
-	public void saveLevel (Map<String, String> levelInfo, List<ICreatedActor> levelActors);
+	public void saveLevel (Map<String, String> levelInfo, List<IActor> levelActors);
 
 }
