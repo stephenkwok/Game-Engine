@@ -1,5 +1,7 @@
 package authoringenvironment.view;
 
+import java.lang.reflect.InvocationTargetException;
+
 import javafx.scene.Scene;
 
 /**
@@ -14,8 +16,12 @@ public interface IGUI {
 	/**
 	 * Creates the JavaFX Scene, which will be put on a Stage in the controller.
 	 * @return Scene
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	Scene getScene();
+	Scene getScene() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
     
 	/**
      * This method updates each of the GUI elements' visual representations, based on the

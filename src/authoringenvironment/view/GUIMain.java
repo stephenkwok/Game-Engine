@@ -1,4 +1,5 @@
 package authoringenvironment.view;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -58,9 +59,13 @@ public class GUIMain implements IGUI {
 	/**
 	 * Creates the fixed tool-bar and sets up over-arching BorderPane. 
 	 * @return Scene
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
 	@Override
-	public Scene getScene() {
+	public Scene getScene() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		myRoot = new BorderPane();
 		setTopPane();
 		setCenterPane();
@@ -93,25 +98,20 @@ public class GUIMain implements IGUI {
 		myRoot.setCenter(tp);
 	}
 	
-	private void setTopPane(){
+	private void setTopPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		HBox hbox = new HBox(PADDING);
-		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
-		/* home = factory.createNewGUIObject("Home");
-		save = factory.createNewGUIObject("Save");
-		load = factory.createNewGUIObject("Load");
-		newActor = factory.createNewGUIObject("NewActor");
-		newLevel = factory.createNewGUIObject("NewLevel");
-		levels = factory.createNewGUIObject("Levels");
-		hbox.getChildren().addAll(home.createNode(), save.createNode(),load.createNode(), newActor.createNode(), newLevel.createNode(), levels.createNode());
-		*/
-		String[] topPaneElements = myResources.getString("TOP_PANE_ELEMENTS").split(",");
+		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));		
+		initializeTopPaneElements(hbox);
+		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		myRoot.setTop(hbox);
+	}
+
+	private void initializeTopPaneElements(HBox hbox) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
 		for (int i = 0; i < topPaneElements.length; i++) {
 			IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
 			hbox.getChildren().add(elementToCreate.createNode());
 		}
-		
-		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-		myRoot.setTop(hbox);
 	}
 
 	@Override
