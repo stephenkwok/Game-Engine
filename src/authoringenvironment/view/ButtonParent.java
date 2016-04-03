@@ -3,8 +3,6 @@ package authoringenvironment.view;
 import java.io.File;
 
 import authoringenvironment.controller.Controller;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
