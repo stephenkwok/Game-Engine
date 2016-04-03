@@ -1,5 +1,6 @@
-package usecases;
+package gameengine.controller;
 
+import gameengine.controller.Actor;
 import gameengine.model.IAction;
 
 /**

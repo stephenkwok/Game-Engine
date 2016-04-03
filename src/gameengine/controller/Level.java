@@ -1,4 +1,4 @@
-package usecases;
+package gameengine.controller;
 
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
@@ -17,7 +17,7 @@ import authoringenvironment.model.IEditableGameElement;
 public class Level implements ILevel, IEditableGameElement {
 
     List<IActor> myActors;
-    Map<ITrigger, List<IActor>> triggerMap;
+    Map<String, List<IActor>> triggerMap;
     String myName;
     Image myBackground;
 
@@ -36,7 +36,7 @@ public class Level implements ILevel, IEditableGameElement {
      */
     @Override
     public void handleTrigger(ITrigger myTrigger) {
-        List<IActor> relevantActors = triggerMap.get(myTrigger);
+        List<IActor> relevantActors = triggerMap.get(myTrigger.getTriggerName());
         for (IActor myActor : relevantActors) {
             myActor.performActionsFor(myTrigger);
         }
@@ -60,8 +60,8 @@ public class Level implements ILevel, IEditableGameElement {
     @Override
     public void addActor(IActor newActor) {
         myActors.add(newActor);
-        Set<ITrigger> actorTriggers = newActor.getTriggers();
-        for (ITrigger myTrigger : actorTriggers) {
+        Set<String> actorTriggers = newActor.getTriggers();
+        for (String myTrigger : actorTriggers) {
             if (triggerMap.containsKey(myTrigger)) {
                 List<IActor> levelActors = triggerMap.get(myTrigger);
                 levelActors.add(newActor);
