@@ -20,14 +20,13 @@ import usecases.Actor;
  */
 
 public class Controller {
-	private Stage myStage;	
+	private Stage myStage;
 	private List<ILevel> levels;
 	private List<IActor> actors;
 	private LevelEditingEnvironment levelEnvironment;
 	private ActorEditingEnvironment actorEnvironment;
 	private MainScreen mainScreen; 
 	private GUIMain guiMain;
-	
 	
 	public Controller(Stage myStage, GUIMain guiMain){
 		this.myStage = myStage;

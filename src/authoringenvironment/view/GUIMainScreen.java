@@ -1,6 +1,7 @@
 package authoringenvironment.view;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import authoringenvironment.controller.Controller;
@@ -36,6 +37,8 @@ public class GUIMainScreen implements IGUI {
 
 	public GUIMainScreen(Controller controller) {
 		this.controller = controller;
+		levelLabels = new ArrayList<>();
+		actorLabels = new ArrayList<>();
 		initializeEnvironment();
 	}
 
