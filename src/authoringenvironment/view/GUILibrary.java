@@ -1,7 +1,9 @@
 package authoringenvironment.view;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
+import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -29,6 +31,13 @@ public class GUILibrary implements IGUI{
 		tp.getTabs().addAll(behaviorLib.createTab(), imageLib.createTab(), soundLib.createTab());
 		wrapper.getChildren().add(tp);
 		return wrapper;
+	}
+
+	@Override
+	public Scene getScene()
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

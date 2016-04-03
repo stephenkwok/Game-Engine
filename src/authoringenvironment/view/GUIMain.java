@@ -1,4 +1,6 @@
 package authoringenvironment.view;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
@@ -21,6 +23,7 @@ import javafx.stage.Stage;
  */
 public class GUIMain implements IGUI {
     private static final String GUI_RESOURCE = "authoringGUI";
+    private static final String TOP_PANE_ELEMENTS = "TopPaneElements";
     private static final int PADDING = 10;
     private Scene myScene;
 	private BorderPane myRoot;
@@ -34,6 +37,8 @@ public class GUIMain implements IGUI {
 	private IGUIElement levels;
 	private IGUIElement save;
 	private IGUIElement load;
+	private IGUIElement newLevel;
+	private IGUIElement newActor;
 	private GUIMainScreen mainScreen;
 	
 	public GUIMain(int windowWidth, int windowHeight, Stage s) {
@@ -55,8 +60,12 @@ public class GUIMain implements IGUI {
 	/**
 	 * Creates the fixed tool-bar and sets up over-arching BorderPane. 
 	 * @return Scene
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	public Scene getScene() {
+	public Scene getScene() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		myRoot = new BorderPane();
 		setTopPane();
 		setCenterPane();
@@ -88,16 +97,20 @@ public class GUIMain implements IGUI {
 //		myRoot.setCenter(test.getPane());
 	}
 	
-	private void setTopPane(){
+	private void setTopPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		HBox hbox = new HBox(PADDING);
-		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
-		home = factory.createNewGUIObject("Home");
-		levels = factory.createNewGUIObject("Levels");
-		save = factory.createNewGUIObject("Save");
-		load = factory.createNewGUIObject("Load");
-		hbox.getChildren().addAll(home.createNode(),levels.createNode(),save.createNode(),load.createNode());
+		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));		
+		initializeTopPaneElements(hbox);
 		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		myRoot.setTop(hbox);
+	}
+
+	private void initializeTopPaneElements(HBox hbox) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
+		for (int i = 0; i < topPaneElements.length; i++) {
+			IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
+			hbox.getChildren().add(elementToCreate.createNode());
+		}
 	}
 
 	@Override

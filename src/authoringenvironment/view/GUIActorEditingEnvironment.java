@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
 import javafx.scene.Scene;
@@ -34,6 +35,13 @@ public class GUIActorEditingEnvironment implements IGUI {
 		//left will be hbox of attributes and library
 		//right will be draggable area thingiemabob
 		return myRoot;
+	}
+
+	@Override
+	public Scene getScene()
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
