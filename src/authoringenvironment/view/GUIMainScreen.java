@@ -9,10 +9,7 @@ import gameengine.controller.Actor;
 import gameengine.controller.ILevel;
 import gameengine.controller.Level;
 import gameengine.model.IActor;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -31,9 +28,13 @@ public class GUIMainScreen implements IGUI {
 	private HBox scrollPaneContainer;
 	private BorderPane borderPane;
 	private List<LabelClickable> clickableLabels;
+	private List<IActor> createdActors;
+	private List<ILevel> createdLevels;
 
-	public GUIMainScreen(Controller controller) {
+	public GUIMainScreen(Controller controller, List<IActor> createdActors, List<ILevel> createdLevels) {
 		this.controller = controller;
+		this.createdActors = createdActors;
+		this.createdLevels = createdLevels;
 		clickableLabels = new ArrayList<LabelClickable>();
 		initializeEnvironment();
 	}
@@ -51,24 +52,22 @@ public class GUIMainScreen implements IGUI {
 	private void initBorderPane() {
 		Stage stage = controller.getStage();
 		borderPane = new BorderPane();
-//		borderPane.setStyle("-fx-border-color: red;");
 		borderPane.prefHeightProperty().bind(stage.heightProperty());
 		borderPane.prefWidthProperty().bind(stage.widthProperty());
 	}
 	
 	private void initScrollPaneContainer() {
 		scrollPaneContainer = new HBox();
-//		scrollPaneContainer.setStyle("-fx-border-color: blue;");
 //		HBox.setHgrow(scrollPaneContainer, Priority.ALWAYS);
 		bindNodeSizeToParentSize(scrollPaneContainer, borderPane);
 	}
 	
 	private void initLabelContainers() {
-		actorLabelContainer = createLabelContainer("Add New Actor", e -> addActor());
-		levelLabelContainer = createLabelContainer("Add New Level", e -> addLevel());
+		actorLabelContainer = createLabelContainer();
+		levelLabelContainer = createLabelContainer();
 	}
 	
-	private VBox createLabelContainer(String buttonText, EventHandler<ActionEvent> buttonEvent) {
+	private VBox createLabelContainer() {
 		VBox container = new VBox();
 		bindNodeSizeToParentSize(container, scrollPaneContainer);
 		// HARD-CODED VALUE
@@ -77,37 +76,37 @@ public class GUIMainScreen implements IGUI {
 		return container;
 	}
 	
-	private void bindNodeSizeToParentSize(Region child, Region parent) {
-		child.prefWidthProperty().bind(parent.widthProperty());
-		child.prefHeightProperty().bind(parent.heightProperty());
-	}
-	
 	private ScrollPane initScrollPane(VBox labelContainer) {
 		ScrollPane scrollPane = new ScrollPane();
 		scrollPane.setContent(labelContainer);
 		return scrollPane;
 	}
+	
+	private void bindNodeSizeToParentSize(Region child, Region parent) {
+		child.prefWidthProperty().bind(parent.widthProperty());
+		child.prefHeightProperty().bind(parent.heightProperty());
+	}
 
 	public Pane getPane() {
 		return borderPane;
-	}
-
-	private void updateLabels(List<LabelClickable> labels) {
-		labels.stream().forEach(label -> label.update());
 	}
 	
 	public void addActor() {
 		IEditableGameElement newActor = new Actor();
 		LabelActor label = new LabelActor(newActor, controller);
 		processLabel(actorLabelContainer, label);
-		controller.goToActorEditing((IActor) newActor);
+		IActor actorAdded = (IActor) newActor;
+		createdActors.add(actorAdded);
+		controller.goToActorEditing(actorAdded);
 	}
 	
 	public void addLevel() {
 		IEditableGameElement newLevel = new Level();
 		LabelLevel label = new LabelLevel(newLevel, controller);
 		processLabel(levelLabelContainer, label);
-		controller.goToLevelEditing((ILevel) newLevel);
+		ILevel levelAdded = (ILevel) newLevel;
+		createdLevels.add(levelAdded);
+		controller.goToLevelEditing(levelAdded);
 	}
 	
 	private void processLabel(VBox container, LabelClickable label) {

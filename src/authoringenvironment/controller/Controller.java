@@ -41,7 +41,7 @@ public class Controller {
 		actors = new ArrayList<>();
 		levelEnvironment = new GUILevelEditingEnvironment();
 		actorEnvironment = new GUIActorEditingEnvironment(myResources);
-		mainScreen = new GUIMainScreen(this);
+		mainScreen = new GUIMainScreen(this, actors, levels);
 	}
 	
 	/**
@@ -73,6 +73,7 @@ public class Controller {
 	 */
 	public void goToMainScreen(){
 		mainScreen.updateAllNodes();
+		System.out.println("Update executed");
 		clearPanes();
 		guiMain.setCenterPane(mainScreen.getPane());
 	}
