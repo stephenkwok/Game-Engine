@@ -13,6 +13,7 @@ import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
 import gameengine.controller.Actor;
 import gameengine.controller.ILevel;
+import gameengine.controller.Level;
 import gameengine.model.IActor;
 import javafx.stage.Stage;
 
@@ -25,9 +26,8 @@ import javafx.stage.Stage;
 
 public class Controller {
 	private Stage myStage;
-	private List<ILevel> levels;
-	//private List<IActor> actors;
-	private List<Actor> actors;	//need actor to get imageviews..
+	private List<Level> levels;
+	private List<Actor> actors;	
 	private GUILevelEditingEnvironment levelEnvironment;
 	private GUIActorEditingEnvironment actorEnvironment;
 	private GUIMainScreen mainScreen;
@@ -46,8 +46,7 @@ public class Controller {
 		actors = new ArrayList<>();
 		levelEnvironment = new GUILevelEditingEnvironment(this, actors);
 		actorEnvironment = new GUIActorEditingEnvironment(myResources);
-		mainScreen = new GUIMainScreen(this, actors, levels, (IEditingEnvironment) actorEnvironment,
-				(IEditingEnvironment) levelEnvironment);
+		mainScreen = new GUIMainScreen(this, actors, levels, actorEnvironment, levelEnvironment);
 	}
 
 	/**
@@ -126,7 +125,7 @@ public class Controller {
 	 * 
 	 * @return
 	 */
-	public List<ILevel> getLevels() {
+	public List<Level> getLevels() {
 		return levels;
 	}
 
