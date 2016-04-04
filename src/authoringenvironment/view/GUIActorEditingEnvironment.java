@@ -4,8 +4,10 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
+import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 /**
  * Returns BorderPane to represent Actor Editing Environment. 
@@ -16,9 +18,11 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	private BorderPane myRoot;
 	private GUILibrary library;
 	private ResourceBundle myResources;
+	private IActor myActor;
 	
 	public GUIActorEditingEnvironment(ResourceBundle myResources) {
 		this.myResources = myResources;
+		initializeEnvironment();
 	}
 
 	@Override
@@ -27,27 +31,35 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 
 	@Override
 	public Pane getPane() {
-		myRoot = new BorderPane();
-		library = new GUILibrary(myResources);
-		myRoot.setLeft(library.getPane());
-		//left will be hbox of attributes and library
-		//right will be draggable area thingiemabob
 		return myRoot;
 	}
 	
-	public void setActor(IActor actor){
-		
-	}
+	private void initializeEnvironment() {
+		myRoot = new BorderPane();
+		setLeftPane();
+		setRightPane();
 
-	@Override
-	public void initializeEnvironment() {
-		// TODO Auto-generated method stub
-		
 	}
-
+	
+	private void setLeftPane(){
+		//left will be hbox of attributes and library
+		HBox hbox = new HBox();
+		//attributes
+		library = new GUILibrary(myResources);
+		hbox.getChildren().addAll(library.getPane());
+		myRoot.setLeft(hbox);
+	}
+	
+	private void setRightPane(){
+		//right will be draggable area thingiemabob
+	}
+	
 	@Override
 	public void setEditable(IEditableGameElement editable) {
-		// TODO Auto-generated method stub
-		
+		myActor = (IActor) editable;
+	}
+	
+	public void setActor(IActor actor){
+		myActor = actor;
 	}
 }

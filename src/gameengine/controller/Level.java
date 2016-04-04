@@ -109,5 +109,17 @@ public class Level implements ILevel, IEditableGameElement {
 		myBackground = image;
 	}
 
+	@Override
+	public void setID(int ID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 }
