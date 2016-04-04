@@ -21,8 +21,8 @@ abstract class ComboBoxColorCell extends ComboBoxParent{
 	private static final String DEFAULT_COLORS_KEY = "DefaultColors";
 	protected List<String> palette;
 	
-	public ComboBoxColorCell(ResourceBundle myResources, String promptText, Controller mainScreen) {
-		super(myResources, promptText, mainScreen);
+	public ComboBoxColorCell(ResourceBundle myResources, String promptText) {
+		super(myResources, promptText);
 		fillDefaultPalette();
 	}
 	/**

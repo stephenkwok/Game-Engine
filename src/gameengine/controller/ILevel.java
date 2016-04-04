@@ -47,5 +47,5 @@ public interface ILevel {
      *
      * @param newActor The Actor to be added to the Level
      */
-    public void addActor(IActor newActor);
+    public void addActor(Actor newActor);
 }
