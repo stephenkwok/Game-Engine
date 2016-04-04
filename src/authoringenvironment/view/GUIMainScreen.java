@@ -78,6 +78,7 @@ public class GUIMainScreen implements IGUI {
 	}
 	
 	private void initScrollPane(ScrollPane scrollPane, VBox container) {
+		// magic value?
 		bindNodeSizeToGivenSize(scrollPane, scrollPaneContainer.widthProperty().divide(2.0), null);
 		scrollPane.setContent(container);
 	}
