@@ -4,13 +4,20 @@ import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+
+/**
+ * 
+ * @author Stephen
+ *
+ */
 
 public class LabelClickable extends Label {
 	
 	private static final String IMAGE_TEXT_PADDING = "        ";
+	private static final Double FIT_SIZE = 50.0;
+	
 	IEditableGameElement myEditable;
 	IEditingEnvironment myEnvironment;
 	Controller controller;
@@ -31,11 +38,11 @@ public class LabelClickable extends Label {
 	}
 	
 	protected void update() {
-		this.setText(myEditable.getName());
+		this.setText(myEditable.getName() + IMAGE_TEXT_PADDING);
 		ImageView imageView = new ImageView(myEditable.getImage());
+		imageView.setFitHeight(FIT_SIZE);
+		imageView.setFitWidth(FIT_SIZE);
 		// HARD-CODED VALUES
-		imageView.setFitHeight(50.0);
-		imageView.setFitWidth(50);
 		Insets insets = new Insets(0.0, 10.0, 10.0, 5.0);
 		this.setPadding(insets);
 		this.setGraphic(imageView);

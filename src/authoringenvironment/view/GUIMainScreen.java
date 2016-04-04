@@ -10,7 +10,9 @@ import gameengine.controller.Actor;
 import gameengine.controller.ILevel;
 import gameengine.controller.Level;
 import gameengine.model.IActor;
-import javafx.geometry.Pos;
+import javafx.beans.binding.DoubleExpression;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -48,6 +50,8 @@ public class GUIMainScreen implements IGUI {
 		this.actorEditor = actorEditor;
 		this.levelEditor = levelEditor;
 		clickableLabels = new ArrayList<LabelClickable>();
+		levelScrollPane = new ScrollPane();
+		actorScrollPane = new ScrollPane();
 		initializeEnvironment();
 	}
 
@@ -55,8 +59,7 @@ public class GUIMainScreen implements IGUI {
 		initBorderPane();
 		initScrollPaneContainer();
 		initLabelContainers();
-		actorScrollPane = initScrollPane(actorLabelContainer);
-		levelScrollPane = initScrollPane(levelLabelContainer);
+		initScrollPanes();
 		scrollPaneContainer.getChildren().addAll(levelScrollPane, actorScrollPane);
 		borderPane.setCenter(scrollPaneContainer);
 	}
@@ -64,38 +67,40 @@ public class GUIMainScreen implements IGUI {
 	private void initBorderPane() {
 		Stage stage = controller.getStage();
 		borderPane = new BorderPane();
-		borderPane.prefHeightProperty().bind(stage.heightProperty());
-		borderPane.prefWidthProperty().bind(stage.widthProperty());
+		bindNodeSizeToGivenSize(borderPane, stage.widthProperty(), stage.heightProperty());
 	}
 
 	private void initScrollPaneContainer() {
 		scrollPaneContainer = new HBox();
-		// HBox.setHgrow(scrollPaneContainer, Priority.ALWAYS);
-		bindNodeSizeToParentSize(scrollPaneContainer, borderPane);
+		bindNodeSizeToGivenSize(scrollPaneContainer, borderPane.widthProperty(), borderPane.heightProperty());
 	}
 
+	private void initScrollPanes() {
+		initScrollPane(actorScrollPane, actorLabelContainer);
+		initScrollPane(levelScrollPane, levelLabelContainer);
+	}
+	
+	private void initScrollPane(ScrollPane scrollPane, VBox container) {
+		bindNodeSizeToGivenSize(scrollPane, scrollPaneContainer.widthProperty().divide(2.0), null);
+		scrollPane.setContent(container);
+	}
+	
 	private void initLabelContainers() {
-		actorLabelContainer = createLabelContainer();
-		levelLabelContainer = createLabelContainer();
+		actorLabelContainer = createLabelContainer(actorScrollPane);
+		levelLabelContainer = createLabelContainer(levelScrollPane);
 	}
 
-	private VBox createLabelContainer() {
+	private VBox createLabelContainer(ScrollPane parentScrollPane) {
 		VBox container = new VBox();
-		bindNodeSizeToParentSize(container, scrollPaneContainer);
-		// HARD-CODED VALUE
-		container.setMaxWidth(630);
+		bindNodeSizeToGivenSize(container, parentScrollPane.widthProperty(), parentScrollPane.heightProperty());
 		return container;
 	}
 
-	private ScrollPane initScrollPane(VBox labelContainer) {
-		ScrollPane scrollPane = new ScrollPane();
-		scrollPane.setContent(labelContainer);
-		return scrollPane;
-	}
-
-	private void bindNodeSizeToParentSize(Region child, Region parent) {
-		child.prefWidthProperty().bind(parent.widthProperty());
-		child.prefHeightProperty().bind(parent.heightProperty());
+	private void bindNodeSizeToGivenSize(Region child, DoubleExpression width, DoubleExpression height) {
+		if (width != null)
+			child.prefWidthProperty().bind(width);
+		if (height != null)
+			child.prefHeightProperty().bind(height);
 	}
 
 	public Pane getPane() {
@@ -126,10 +131,7 @@ public class GUIMainScreen implements IGUI {
 
 	@Override
 	public void updateAllNodes() {
-		updateLabels();
-	}
-
-	private void updateLabels() {
 		clickableLabels.stream().forEach(label -> label.update());
 	}
+
 }
