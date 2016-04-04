@@ -23,14 +23,15 @@ public class ComboBoxLevel extends ComboBoxTextCell{
 	private Controller myController;
 	
 	public ComboBoxLevel(ResourceBundle myResources, String promptText, Controller myController) {
-		super(myResources,promptText, myController);
-		levels = myController.getLevels();
-		levelMap = new HashMap<>();
-		levelNames = new ArrayList<>();
+		super(myResources,promptText);
+		this.myController = myController;
 		fillLevelNamesAndMap();
 	}
 
 	private void fillLevelNamesAndMap(){
+		levels = myController.getLevels();
+		levelMap = new HashMap<>();
+		levelNames = new ArrayList<>();
 		for(ILevel level: levels){
 			levelNames.add(level.getName());
 			levelMap.put(level.getName(), level);
