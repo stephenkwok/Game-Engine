@@ -10,7 +10,6 @@ public class TextFieldTest extends TextFieldParent{
 	@Override
 	void setButtonAction() {
 		// TODO Auto-generated method stub
-		
 	}
 
 }
