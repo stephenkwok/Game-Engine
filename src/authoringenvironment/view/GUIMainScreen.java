@@ -106,7 +106,7 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	public void addActor() {
-		IEditableGameElement newActor = new Actor();
+		Actor newActor = new Actor();
 		Actor actorAdded = (Actor) newActor;
 //		IActor actorAdded = (IActor) newActor;
 //		createdActors.add(actorAdded);
@@ -125,6 +125,7 @@ public class GUIMainScreen implements IGUI {
 
 	public void createLabel(IEditableGameElement editable, IEditingEnvironment environment, VBox container) {
 		LabelClickable label = new LabelClickable(editable, environment, controller);
+		bindNodeSizeToGivenSize(label, container.widthProperty(), null);
 		container.getChildren().add(label);
 		clickableLabels.add(label);
 	}

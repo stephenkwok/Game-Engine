@@ -15,8 +15,8 @@ import javafx.scene.image.ImageView;
 
 public class LabelClickable extends Label {
 	
-	private static final String IMAGE_TEXT_PADDING = "        ";
-	private static final Double FIT_SIZE = 50.0;
+	private static final String IMAGE_TEXT_PADDING = "    ";
+	private static final Double FIT_SIZE = 75.0;
 	
 	IEditableGameElement myEditable;
 	IEditingEnvironment myEnvironment;
@@ -27,6 +27,7 @@ public class LabelClickable extends Label {
 		this.controller = controller;
 		this.myEnvironment = environment;
 		this.setOnMouseClicked(e -> reactToMouseClicked());
+		this.setStyle("-fx-border-color: black;");
 	}
 	
 	private void reactToMouseClicked() {
@@ -38,12 +39,12 @@ public class LabelClickable extends Label {
 	}
 	
 	protected void update() {
-		this.setText(myEditable.getName() + IMAGE_TEXT_PADDING);
+		this.setText(IMAGE_TEXT_PADDING + myEditable.getName());
 		ImageView imageView = new ImageView(myEditable.getImage());
 		imageView.setFitHeight(FIT_SIZE);
 		imageView.setFitWidth(FIT_SIZE);
 		// HARD-CODED VALUES
-		Insets insets = new Insets(0.0, 10.0, 10.0, 5.0);
+		Insets insets = new Insets(10.0, 10.0, 10.0, 10.0);
 		this.setPadding(insets);
 		this.setGraphic(imageView);
 	}
