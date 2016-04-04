@@ -2,6 +2,8 @@ package authoringenvironment.view;
 
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingEnvironment;
 import gameengine.model.IActor;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -10,7 +12,7 @@ import javafx.scene.layout.Pane;
  * @author AnnieTang
  *
  */
-public class GUIActorEditingEnvironment implements IGUI {
+public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	private BorderPane myRoot;
 	private GUILibrary library;
 	private ResourceBundle myResources;
@@ -34,6 +36,18 @@ public class GUIActorEditingEnvironment implements IGUI {
 	}
 	
 	public void setActor(IActor actor){
+		
+	}
+
+	@Override
+	public void initializeEnvironment() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setEditable(IEditableGameElement editable) {
+		// TODO Auto-generated method stub
 		
 	}
 }

@@ -4,20 +4,27 @@ import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IActor;
 
-public class LabelActor extends LabelClickable {
+/**
+ * DEPRECATED
+ * 
+ * @author Stephen
+ *
+ */
 
-	Controller controller;
-	
-	public LabelActor(IEditableGameElement editable, Controller controller) {
-		super(editable);
-		this.controller = controller;
-	}
+//public class LabelActor extends LabelClickable {
 
-	@Override
-	protected void reactToMouseClicked() {
-		IActor myActor = (IActor) getEditable();
-		controller.goToActorEditing(myActor);
+//	Controller controller;
+//	
+//	public LabelActor(IEditableGameElement editable, Controller controller) {
+//		super(editable);
+//		this.controller = controller;
+//	}
+//
+//	@Override
+//	protected void reactToMouseClicked() {
+//		IActor myActor = (IActor) getEditable();
+//		controller.goToActorEditing(myActor);
+//
+//	}
 
-	}
-
-}
+//}
