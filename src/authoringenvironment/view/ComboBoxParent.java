@@ -50,7 +50,7 @@ public abstract class ComboBoxParent implements IGUIElement {
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
 		comboBox.setPrefWidth(COMBOBOX_WIDTH);
 		comboBox.setPromptText(promptText);
-		//comboBox.setCellFactory(factory -> new MyCustomCell());
+		comboBox.setCellFactory(factory -> new MyCustomCell());
 		comboButton = new Button("Go");
 		setButtonAction();
 		hbox.getChildren().addAll(comboBox, comboButton);

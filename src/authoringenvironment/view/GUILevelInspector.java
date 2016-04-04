@@ -11,7 +11,7 @@ public class GUILevelInspector implements IGUI {
 	private static final String LEVEL_ATTRIBUTES = "Level Attributes";
 	private Pane myPane;
 	
-	public GUILevelInspector(ResourceBundle myResources) {
+	public GUILevelInspector(ResourceBundle myResources, GUIFactory factory) {
 		this.myResources = myResources;
 		myPane = new StackPane();
 		TabPane tabPane = new TabPane();

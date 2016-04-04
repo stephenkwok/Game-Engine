@@ -2,6 +2,7 @@ package authoringenvironment.view;
 
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.Controller;
 import gameengine.controller.ILevel;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
@@ -21,18 +22,20 @@ public class GUILevelEditingEnvironment implements IGUI {
 	private ResourceBundle myResources;
 	private VBox myLeftPane;
 	private Canvas myCanvas;
+	private GUIFactory myFactory;
     	
-	public GUILevelEditingEnvironment() {
+	public GUILevelEditingEnvironment(Controller controller) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myRoot = new BorderPane();
 		initializeLeftPane();
 		initializeCenterCanvas();
+		myFactory = new GUIFactory(myResources, controller);
 	}
 	
 	private void initializeLeftPane() {
 		myLeftPane = new VBox();
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
-		myInspector = new GUILevelInspector(myResources);
+		myInspector = new GUILevelInspector(myResources, myFactory);
 		myLibrary = new GUILibrary(myResources);
 		myLeftPane.getChildren().addAll(myInspector.getPane(), myLibrary.getPane());
 		myRoot.setLeft(myLeftPane);

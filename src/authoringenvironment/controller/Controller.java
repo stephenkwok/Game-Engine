@@ -39,7 +39,7 @@ public class Controller {
 	private void init(){
 		levels = new ArrayList<>();
 		actors = new ArrayList<>();
-		levelEnvironment = new GUILevelEditingEnvironment();
+		levelEnvironment = new GUILevelEditingEnvironment(this);
 		actorEnvironment = new GUIActorEditingEnvironment(myResources);
 		mainScreen = new GUIMainScreen(this);
 	}

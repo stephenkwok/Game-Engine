@@ -1,17 +1,15 @@
 package authoringenvironment.view;
 
-
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 
-public class ComboBoxScrollingDirection extends ComboBoxParent {
+public class ComboBoxLosingConditions extends ComboBoxParent {
 	private List<String> myOptions;
 	
-	public ComboBoxScrollingDirection(ResourceBundle myResources, String promptText, List<String> options) {
+	public ComboBoxLosingConditions(ResourceBundle myResources, String promptText, List<String> options) {
 		super(myResources, promptText);
 		myOptions = options;
 	}
@@ -30,4 +28,5 @@ public class ComboBoxScrollingDirection extends ComboBoxParent {
 	List<String> getOptionsList() {
 		return myOptions;
 	}
+
 }
