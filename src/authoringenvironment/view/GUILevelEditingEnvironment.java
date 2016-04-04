@@ -1,10 +1,8 @@
 package authoringenvironment.view;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
+import gameengine.controller.ILevel;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -46,13 +44,6 @@ public class GUILevelEditingEnvironment implements IGUI {
 		myCanvas = new Canvas();
 		myRoot.setCenter(myCanvas);
 	}
-	
-	@Override
-	public Scene getScene()
-			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Pane getPane() {
@@ -62,6 +53,10 @@ public class GUILevelEditingEnvironment implements IGUI {
 	@Override
 	public void updateAllNodes() {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public void setLevel(ILevel level){
 		
 	}
 
