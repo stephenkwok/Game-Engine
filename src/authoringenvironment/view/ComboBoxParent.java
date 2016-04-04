@@ -31,12 +31,10 @@ public abstract class ComboBoxParent implements IGUIElement {
 	protected ComboBox<String> comboBox;
 	protected Button comboButton;
 	protected String paletteSource;
-	protected Controller myController;
 	
-	public ComboBoxParent(ResourceBundle myResources, String promptText, Controller myController) {
+	public ComboBoxParent(ResourceBundle myResources, String promptText) {
 		this.myResources = myResources;
 		this.promptText = promptText;
-		this.myController = myController;
 	}
 	
 	/**

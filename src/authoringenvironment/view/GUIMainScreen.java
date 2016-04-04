@@ -9,10 +9,7 @@ import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Actor;
 import gameengine.controller.ILevel;
 import gameengine.controller.Level;
-import gameengine.model.IActor;
 import javafx.beans.binding.DoubleExpression;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -37,12 +34,12 @@ public class GUIMainScreen implements IGUI {
 	private HBox scrollPaneContainer;
 	private BorderPane borderPane;
 	private List<LabelClickable> clickableLabels;
-	private List<IActor> createdActors;
+	private List<Actor> createdActors;
 	private List<ILevel> createdLevels;
 	private IEditingEnvironment actorEditor;
 	private IEditingEnvironment levelEditor;
 
-	public GUIMainScreen(Controller controller, List<IActor> createdActors, List<ILevel> createdLevels,
+	public GUIMainScreen(Controller controller, List<Actor> createdActors, List<ILevel> createdLevels,
 			IEditingEnvironment actorEditor, IEditingEnvironment levelEditor) {
 		this.controller = controller;
 		this.createdActors = createdActors;
@@ -109,7 +106,9 @@ public class GUIMainScreen implements IGUI {
 
 	public void addActor() {
 		IEditableGameElement newActor = new Actor();
-		IActor actorAdded = (IActor) newActor;
+		Actor actorAdded = (Actor) newActor;
+//		IActor actorAdded = (IActor) newActor;
+//		createdActors.add(actorAdded);
 		createdActors.add(actorAdded);
 		createLabel(newActor, actorEditor, actorLabelContainer);
 		controller.goToEditingEnvironment(newActor, actorEditor);

@@ -7,9 +7,17 @@ import javafx.scene.layout.StackPane;
 
 public class GUILibrary implements IGUI{
 	private ResourceBundle myResources;
+	private Pane myPane;
 	
-	public GUILibrary(ResourceBundle myResources) {
-		this.myResources = myResources;
+	public GUILibrary(ResourceBundle resources) {
+		myResources = resources;
+		myPane = new StackPane();
+		TabPane tp = new TabPane();
+		TabImages imageLib = new TabImages(myResources, "Images");
+		TabSounds soundLib = new TabSounds(myResources, "Sounds");
+		TabBehaviors behaviorLib = new TabBehaviors(myResources, "Behaviors");
+		tp.getTabs().addAll(behaviorLib.createTab(), imageLib.createTab(), soundLib.createTab());
+		myPane.getChildren().add(tp);
 	}
 
 	@Override
@@ -19,13 +27,6 @@ public class GUILibrary implements IGUI{
 
 	@Override
 	public Pane getPane() {
-		StackPane wrapper = new StackPane();
-		TabPane tp = new TabPane();
-		TabImages imageLib = new TabImages(myResources, "Images");
-		TabSounds soundLib = new TabSounds(myResources, "Sounds");
-		TabBehaviors behaviorLib = new TabBehaviors(myResources, "Behaviors");
-		tp.getTabs().addAll(behaviorLib.createTab(), imageLib.createTab(), soundLib.createTab());
-		wrapper.getChildren().add(tp);
-		return wrapper;
+		return myPane;
 	}
 }

@@ -11,8 +11,11 @@ import javafx.scene.control.Label;
  *
  */
 abstract class ComboBoxTextCell extends ComboBoxParent {
-	public ComboBoxTextCell(ResourceBundle myResources, String promptText, Controller mainScreen) {
-		super(myResources,promptText, mainScreen);
+	private Controller myController;
+	
+	public ComboBoxTextCell(ResourceBundle myResources, String promptText, Controller controller) {
+		super(myResources,promptText);
+		myController = controller;
 	}
 
 	@Override

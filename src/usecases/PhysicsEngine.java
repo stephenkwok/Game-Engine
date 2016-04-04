@@ -1,6 +1,6 @@
 package usecases;
 
-
+import gameengine.controller.Actor;
 
 public class PhysicsEngine{
 	
