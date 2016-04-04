@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import authoringenvironment.controller.Controller;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -24,11 +23,12 @@ public class TabLevelAttributes extends TabParent {
 	private static final String DELIMITER = ",";
 	private static final String LABEL = "Label";
 	private static final String OPTIONS = "Options";
-	private static final String TEXTVIEW = "Textviews";
+	private static final String TEXTFIELD = "Textfields";
 	private static final String COMBOBOXES = "Comboboxes";
 	private static final String AUTHORING_ENV = "authoringenvironment.";
 	private static final String VIEW = "view.";
 	private static final String CLASS = "Class";
+	private static final String TEST = "TEST";
 	private ResourceBundle myResources;
 	
 	public TabLevelAttributes(ResourceBundle myResources, String tabText) {
@@ -43,54 +43,44 @@ public class TabLevelAttributes extends TabParent {
 		String[] elements = myResources.getString(LEVEL_EDITOR_ELEMENTS).split(DELIMITER);
 		for (int i = 0; i < elements.length; i++) {
 			HBox hbox = new HBox();
-			hbox.setAlignment(Pos.CENTER);
+			hbox.setAlignment(Pos.CENTER_LEFT);
 			Label label = new Label(myResources.getString(elements[i] + LABEL));
+			
 			IGUIElement elementToCreate = null;
 			try {
 				elementToCreate = createNewGUIObject(elements[i]);
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			hbox.getChildren().addAll(label, elementToCreate.createNode());
 			vbox.getChildren().add(hbox);
 		}
+		
 		tab.setContent(vbox);
 	}
 
 	private IGUIElement createNewGUIObject(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		if (isTextView(nodeType)) {
-		//	return createTextView(nodeType);
+		if (isTextField(nodeType)) {
+			return createTextField(nodeType);
 		} else if (isComboBox(nodeType)) {
 			return createComboBox(nodeType);
 		}
 		return null;
 	}
 	
-	private boolean isTextView(String nodeType) {
-		return Arrays.asList(myResources.getString(TEXTVIEW).split(",")).contains(nodeType);
+	private boolean isTextField(String nodeType) {
+		return Arrays.asList(myResources.getString(TEXTFIELD).split(",")).contains(nodeType);
 	}
 
 	private boolean isComboBox(String nodeType) {
 		return Arrays.asList(myResources.getString(COMBOBOXES).split(",")).contains(nodeType);
 	}
-/*
-	private IGUIElement createTextView(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		String text = myResources.getString(nodeType + TEXT);
-		String icon = myResources.getString(nodeType + ICON);
-		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
-		try {
-			Class<?> button = Class.forName(className);
-			Constructor<?> constructor = button.getConstructor(Controller.class, String.class, String.class);
-			return (IGUIElement) constructor.newInstance(myController, text, icon);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}*/
+
+	private IGUIElement createTextField(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		IGUIElement textField = new TextFieldTest(TEST);
+		return textField;
+	}
 
 	private IGUIElement createComboBox(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
