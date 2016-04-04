@@ -85,10 +85,10 @@ public class GUIMain implements IGUI {
 	
 	public void setCenterPane(){
 //		myController.goToMainScreen();
-//		IGUI actorEditing = new GUIActorEditingEnvironment(myResources);
-//		myRoot.setCenter(actorEditing.getPane());
-		GUIMainScreen test = new GUIMainScreen(myController);
-		myRoot.setCenter(test.getPane());
+		IGUI actorEditing = new GUIActorEditingEnvironment(myResources);
+		myRoot.setCenter(actorEditing.getPane());
+//		GUIMainScreen test = new GUIMainScreen(myController);
+//		myRoot.setCenter(test.getPane());
 	}
 	
 	private void setTopPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{

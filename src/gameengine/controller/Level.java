@@ -16,6 +16,7 @@ import authoringenvironment.model.IEditableGameElement;
 public class Level implements ILevel, IEditableGameElement {
 
 	private static final String DEFAULT_NAME = "Untitled";
+	private static final String DEFAULT_IMAGE_NAME = "default_background.png";
     List<IActor> myActors;
     Map<String, List<Actor>> triggerMap;
     String myName;
@@ -28,6 +29,7 @@ public class Level implements ILevel, IEditableGameElement {
         myActors = new ArrayList<>();
         triggerMap = new HashMap<>();
         myName = DEFAULT_NAME;
+        setImage(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME)));
     }
 
     /**

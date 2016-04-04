@@ -3,6 +3,8 @@ package authoringenvironment.view;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.controller.Controller;
 import gameengine.controller.Actor;
 import gameengine.controller.ILevel;
@@ -20,7 +22,7 @@ import javafx.scene.paint.Color;
  * @author amyzhao
  *
  */
-public class GUILevelEditingEnvironment implements IGUI {
+public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private static final String GUI_RESOURCE = "authoringGUI";
 	private BorderPane myRoot;
 	private GUILibrary myLibrary;
@@ -28,12 +30,18 @@ public class GUILevelEditingEnvironment implements IGUI {
 	private ResourceBundle myResources;
 	private VBox myLeftPane;
 	private Canvas myCanvas;
+	private ILevel myLevel;
 	private List<Actor> availableActors;
     	
 	public GUILevelEditingEnvironment(Controller controller, List<Actor> actors) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
+		initializeEnvironment();
+	}
+	
+	@Override
+	public void initializeEnvironment() {
 		initializeLeftPane();
 		initializeCenterCanvas();
 	}
@@ -64,7 +72,12 @@ public class GUILevelEditingEnvironment implements IGUI {
 	}
 	
 	public void setLevel(ILevel level){
-		
+		// setEditable() would replace this - Stephen
+	}
+
+	@Override
+	public void setEditable(IEditableGameElement editable) {
+		myLevel = (ILevel) editable;
 	}
 
 }
