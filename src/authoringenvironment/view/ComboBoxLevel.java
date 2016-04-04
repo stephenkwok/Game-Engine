@@ -12,6 +12,7 @@ public class ComboBoxLevel extends ComboBoxTextCell{
 	private Map<String, ILevel> levelMap;
 	private List<String> levelNames;
 	List<ILevel> levels;
+	private Controller myController;
 	
 	public ComboBoxLevel(ResourceBundle myResources, String promptText, Controller myController) {
 		super(myResources,promptText, myController);
@@ -39,6 +40,7 @@ public class ComboBoxLevel extends ComboBoxTextCell{
 
 	@Override
 	List<String> getOptionsList() {
+		levelNames.add("default");
 		return levelNames;
 	}
 }
