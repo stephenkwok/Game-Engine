@@ -18,7 +18,7 @@ public class Level implements ILevel, IEditableGameElement {
 	private static final String DEFAULT_NAME = "Untitled";
 	private static final String DEFAULT_IMAGE_NAME = "default_background.png";
     List<IActor> myActors;
-    Map<String, List<IActor>> triggerMap;
+    Map<String, List<Actor>> triggerMap;
     String myName;
     Image myBackground;
 
@@ -39,9 +39,11 @@ public class Level implements ILevel, IEditableGameElement {
      */
     @Override
     public void handleTrigger(ITrigger myTrigger) {
-        List<IActor> relevantActors = triggerMap.get(myTrigger.getTriggerName());
-        for (IActor myActor : relevantActors) {
-            myActor.performActionsFor(myTrigger);
+        List<Actor> relevantActors = triggerMap.get(myTrigger.getTriggerName());
+        for (Actor myActor : relevantActors) {
+            if (myTrigger.evaluate(myActor)){
+                myActor.performActionsFor(myTrigger);
+            }
         }
     }
 
@@ -61,16 +63,16 @@ public class Level implements ILevel, IEditableGameElement {
      * @param newActor The Actor to be added to the Level
      */
     @Override
-    public void addActor(IActor newActor) {
+    public void addActor(Actor newActor) {
         myActors.add(newActor);
         Set<String> actorTriggers = newActor.getTriggers();
         for (String myTrigger : actorTriggers) {
             if (triggerMap.containsKey(myTrigger)) {
-                List<IActor> levelActors = triggerMap.get(myTrigger);
+                List<Actor> levelActors = triggerMap.get(myTrigger);
                 levelActors.add(newActor);
                 triggerMap.put(myTrigger, levelActors);
             } else {
-                List<IActor> levelActors = new ArrayList<>();
+                List<Actor> levelActors = new ArrayList<>();
                 levelActors.add(newActor);
                 triggerMap.put(myTrigger, levelActors);
             }
