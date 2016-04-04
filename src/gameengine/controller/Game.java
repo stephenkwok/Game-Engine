@@ -1,9 +1,7 @@
-package usecases;
+package gameengine.controller;
 
 import java.util.*;
 
-import gameengine.controller.IGame;
-import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import gameengine.model.ITrigger;
 
@@ -15,7 +13,7 @@ import gameengine.model.ITrigger;
 public class Game implements IGame {
 	private String initialGameFile;
 	private ILevel currentLevel;
-	private List<ILevel> levels;
+	private List<Level> levels;
 	private List<IActor> allActors = new ArrayList<IActor>();
 	private Map<Integer,IActor> actorIDMap = new HashMap<Integer,IActor>();
 	private Map<String,List<Integer>> levelActorsMap = new HashMap<String,List<Integer>>();
@@ -27,7 +25,7 @@ public class Game implements IGame {
 	 * @param levelNum the first level to play in the game
 	 * @param gameLevels all the levels in the game 
 	 */
-	public Game(int levelNum, List<ILevel> gameLevels, String gameFilePath) {
+	public Game(int levelNum, List<Level> gameLevels, String gameFilePath) {
 		initialGameFile = gameFilePath;
 		levels = gameLevels;
 		currentLevel = gameLevels.get(levelNum);
@@ -58,7 +56,7 @@ public class Game implements IGame {
 	 * @return a list of all levels in the game 
 	 */
 	@Override
-	public List<ILevel> getLevels() {
+	public List<Level> getLevels() {
 		return levels;
 	}
 	
