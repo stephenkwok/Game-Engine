@@ -27,6 +27,7 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
     private int health;
     private int points;
     private int myID;
+    private int myStrength;
     private String myName;
 
     private Map<String, List<Action>> myRules;

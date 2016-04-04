@@ -7,6 +7,7 @@ import authoringenvironment.model.ActorEditingEnvironment;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.model.LevelEditingEnvironment;
+import gameengine.controller.Actor;
 import gameengine.controller.ILevel;
 import gameengine.controller.Level;
 import gameengine.model.IActor;

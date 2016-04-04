@@ -1,6 +1,9 @@
-package usecases;
+package gameengine.model;
 
 import java.util.List;
+
+import gameengine.controller.Action;
+import gameengine.controller.Actor;
 
 /**
  * Created by Michelle on 3/31/16.
