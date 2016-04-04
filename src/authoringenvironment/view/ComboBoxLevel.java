@@ -5,13 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+
 import authoringenvironment.controller.Controller;
 import gameengine.controller.ILevel;
+import gameengine.controller.Level;
 
 public class ComboBoxLevel extends ComboBoxTextCell{
 	private Map<String, ILevel> levelMap;
 	private List<String> levelNames;
-	List<ILevel> levels;
+	List<Level> levels;
 	private Controller myController;
 	
 	public ComboBoxLevel(ResourceBundle myResources, String promptText, Controller myController) {
