@@ -7,7 +7,6 @@ import javafx.scene.layout.StackPane;
 
 public class GUILevelInspector implements IGUI {
 	private ResourceBundle myResources;
-//	private static final String TAB_NAME = "Inspector";
 	private static final String ACTORS = "Actors";
 	private static final String LEVEL_ATTRIBUTES = "Level Attributes";
 	private Pane myPane;
