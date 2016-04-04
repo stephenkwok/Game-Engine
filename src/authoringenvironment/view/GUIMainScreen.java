@@ -5,6 +5,7 @@ import java.util.List;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Actor;
 import gameengine.controller.ILevel;
 import gameengine.controller.Level;
@@ -18,8 +19,14 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author Stephen
+ *
+ */
+
 public class GUIMainScreen implements IGUI {
-	
+
 	private Controller controller;
 	private VBox actorLabelContainer;
 	private VBox levelLabelContainer;
@@ -30,17 +37,22 @@ public class GUIMainScreen implements IGUI {
 	private List<LabelClickable> clickableLabels;
 	private List<IActor> createdActors;
 	private List<ILevel> createdLevels;
+	private IEditingEnvironment actorEditor;
+	private IEditingEnvironment levelEditor;
 
-	public GUIMainScreen(Controller controller, List<IActor> createdActors, List<ILevel> createdLevels) {
+	public GUIMainScreen(Controller controller, List<IActor> createdActors, List<ILevel> createdLevels,
+			IEditingEnvironment actorEditor, IEditingEnvironment levelEditor) {
 		this.controller = controller;
 		this.createdActors = createdActors;
 		this.createdLevels = createdLevels;
+		this.actorEditor = actorEditor;
+		this.levelEditor = levelEditor;
 		clickableLabels = new ArrayList<LabelClickable>();
 		initializeEnvironment();
 	}
 
 	public void initializeEnvironment() {
-		initBorderPane();	
+		initBorderPane();
 		initScrollPaneContainer();
 		initLabelContainers();
 		actorScrollPane = initScrollPane(actorLabelContainer);
@@ -48,40 +60,39 @@ public class GUIMainScreen implements IGUI {
 		scrollPaneContainer.getChildren().addAll(levelScrollPane, actorScrollPane);
 		borderPane.setCenter(scrollPaneContainer);
 	}
-	
+
 	private void initBorderPane() {
 		Stage stage = controller.getStage();
 		borderPane = new BorderPane();
 		borderPane.prefHeightProperty().bind(stage.heightProperty());
 		borderPane.prefWidthProperty().bind(stage.widthProperty());
 	}
-	
+
 	private void initScrollPaneContainer() {
 		scrollPaneContainer = new HBox();
-//		HBox.setHgrow(scrollPaneContainer, Priority.ALWAYS);
+		// HBox.setHgrow(scrollPaneContainer, Priority.ALWAYS);
 		bindNodeSizeToParentSize(scrollPaneContainer, borderPane);
 	}
-	
+
 	private void initLabelContainers() {
 		actorLabelContainer = createLabelContainer();
 		levelLabelContainer = createLabelContainer();
 	}
-	
+
 	private VBox createLabelContainer() {
 		VBox container = new VBox();
 		bindNodeSizeToParentSize(container, scrollPaneContainer);
 		// HARD-CODED VALUE
 		container.setMaxWidth(630);
-		container.setAlignment(Pos.TOP_CENTER);
 		return container;
 	}
-	
+
 	private ScrollPane initScrollPane(VBox labelContainer) {
 		ScrollPane scrollPane = new ScrollPane();
 		scrollPane.setContent(labelContainer);
 		return scrollPane;
 	}
-	
+
 	private void bindNodeSizeToParentSize(Region child, Region parent) {
 		child.prefWidthProperty().bind(parent.widthProperty());
 		child.prefHeightProperty().bind(parent.heightProperty());
@@ -90,35 +101,34 @@ public class GUIMainScreen implements IGUI {
 	public Pane getPane() {
 		return borderPane;
 	}
-	
+
 	public void addActor() {
 		IEditableGameElement newActor = new Actor();
-		LabelActor label = new LabelActor(newActor, controller);
-		processLabel(actorLabelContainer, label);
 		IActor actorAdded = (IActor) newActor;
 		createdActors.add(actorAdded);
-		controller.goToActorEditing(actorAdded);
+		createLabel(newActor, actorEditor, actorLabelContainer);
+		controller.goToEditingEnvironment(newActor, actorEditor);
 	}
-	
+
 	public void addLevel() {
 		IEditableGameElement newLevel = new Level();
-		LabelLevel label = new LabelLevel(newLevel, controller);
-		processLabel(levelLabelContainer, label);
 		ILevel levelAdded = (ILevel) newLevel;
 		createdLevels.add(levelAdded);
-		controller.goToLevelEditing(levelAdded);
+		createLabel(newLevel, levelEditor, levelLabelContainer);
+		controller.goToEditingEnvironment(newLevel, levelEditor);
 	}
-	
-	private void processLabel(VBox container, LabelClickable label) {
+
+	public void createLabel(IEditableGameElement editable, IEditingEnvironment environment, VBox container) {
+		LabelClickable label = new LabelClickable(editable, environment, controller);
 		container.getChildren().add(label);
 		clickableLabels.add(label);
 	}
-	
+
 	@Override
 	public void updateAllNodes() {
 		updateLabels();
 	}
-	
+
 	private void updateLabels() {
 		clickableLabels.stream().forEach(label -> label.update());
 	}
