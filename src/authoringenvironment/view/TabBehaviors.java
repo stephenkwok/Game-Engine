@@ -5,7 +5,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+/**
+ * Tab contains ListView of behaviors
+ * @author AnnieTang
+ *
+ */
 public class TabBehaviors extends TabParent {
 	private ObservableList<Label> behaviorLabels; 
 	public TabBehaviors(ResourceBundle myResources, String tabText) {

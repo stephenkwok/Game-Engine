@@ -11,7 +11,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
-
+/**
+ * Tab contains ListView of sounds
+ * @author AnnieTang
+ *
+ */
 public class TabSounds extends TabParent{
 	private static final String SOUND_IMAGE_NAME = "sound.png";
 	private static final int STANDARD_IMAGE_HEIGHT = 20;

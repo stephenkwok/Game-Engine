@@ -4,7 +4,11 @@ import java.util.ResourceBundle;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-
+/**
+ * Returns library of available game behaviors, images, and sounds  
+ * @author AnnieTang
+ *
+ */
 public class GUILibrary implements IGUI{
 	private ResourceBundle myResources;
 	private Pane myPane;

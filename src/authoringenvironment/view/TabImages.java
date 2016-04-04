@@ -6,7 +6,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
+/**
+ * Tab contains ListView of images
+ * @author AnnieTang
+ *
+ */
 public class TabImages extends TabParent {
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
 	private ObservableList<Label> imageLabels; 

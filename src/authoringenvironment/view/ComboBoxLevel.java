@@ -7,7 +7,11 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import authoringenvironment.controller.Controller;
 import gameengine.controller.ILevel;
-
+/**
+ * ComboBox that holds existing Levels and allows user to go to LevelEditingEnvironment to edit selected level
+ * @author AnnieTang
+ *
+ */
 public class ComboBoxLevel extends ComboBoxTextCell{
 	private Map<String, ILevel> levelMap;
 	private List<String> levelNames;

@@ -1,10 +1,15 @@
 package authoringenvironment.view;
 import java.io.File;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
+/**
+ * Parent tab class that holds variable content.
+ * @author AnnieTang
+ *
+ */
 import javafx.scene.control.Tab;
 abstract class TabParent{
 	protected Tab tab;
@@ -22,9 +27,9 @@ abstract class TabParent{
 	 */
 	protected void fillFileNames(){
 		fileNames = new ArrayList<>();
-		File imageDir = new File(myResources.getString(tabText));
-		for(File imageFile: imageDir.listFiles()){
-			fileNames.add(imageFile.getName());
+		File directory = new File(myResources.getString(tabText));
+		for(File file: directory.listFiles()){
+			fileNames.add(file.getName());
 		}
 	}
 	
