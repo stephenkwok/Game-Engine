@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -29,14 +30,26 @@ abstract class TabParent{
 	
 	public Tab createTab() {
 		tab = new Tab(tabText);
-		setContent();
+		try {
+			setContent();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return tab;
 	}
 	
 	public void updateNode(){
-		setContent();
+		try {
+			setContent();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	abstract void setContent();
+	abstract void setContent() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
 
 }
