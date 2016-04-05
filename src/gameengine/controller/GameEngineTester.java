@@ -3,6 +3,12 @@ package gameengine.controller;
 import gameengine.actors.Actor;
 import gameengine.actors.PowerUpActor;
 import gameengine.model.*;
+import gameengine.model.Actions.MoveDown;
+import gameengine.model.Actions.MoveLeft;
+import gameengine.model.Actions.MoveRight;
+import gameengine.model.Actions.MoveUp;
+import gameengine.model.Triggers.ClickTrigger;
+import gameengine.model.Triggers.TickTrigger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +38,7 @@ public class GameEngineTester {
         ITrigger trigger3 = new TickTrigger();
         List<Object> args3 = new ArrayList<>();
         args3.add(70.0);
-        Action action3 = new MoveRight(actor1, args3);
+        Action action3 = new MoveUp(actor1, args3);
         actor1.addRule(new Rule(trigger1, action1));
         actor1.addRule(new Rule(trigger3, action3));
 

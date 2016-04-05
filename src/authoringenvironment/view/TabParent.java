@@ -41,6 +41,8 @@ abstract class TabParent{
 		tab = new Tab(tabText);
 		try {
 			sp = new ScrollPane();
+			sp.setFitToHeight(true);
+			sp.setFitToWidth(true);
 			sp.setContent(getContent());
 			tab.setContent(sp);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
