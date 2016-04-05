@@ -26,6 +26,7 @@ public class TabActors extends TabParent {
 	private static final int TILE_WIDTH = 75;
 	private static final int NUM_COLS = 4;
 	private static final int NUM_ROWS = 2;
+	private static final int ACTOR_IMAGE_HEIGHT = 75;
 	private List<Actor> availableActors;
 	private TilePane myPane;
 	
@@ -50,6 +51,10 @@ public class TabActors extends TabParent {
 		availableActors.add(newActor3);
 		availableActors.add(newActor4);
 		
+		for (int i = 0; i < availableActors.size(); i++) {
+			availableActors.get(i).setFitHeight(ACTOR_IMAGE_HEIGHT);
+			availableActors.get(i).setPreserveRatio(true);
+		}
 		myPane = new TilePane(HGAP, VGAP);
 		myPane.setPrefTileHeight(TILE_HEIGHT);
 		myPane.setPrefTileWidth(TILE_WIDTH);

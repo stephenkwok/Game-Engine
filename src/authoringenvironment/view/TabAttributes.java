@@ -49,6 +49,7 @@ public class TabAttributes extends TabParent {
 			hbox.setAlignment(Pos.CENTER_LEFT);
 			Label label = new Label(myAttributesResources.getString(elements[i] + LABEL));
 			label.setPadding(new Insets(NO_PADDING, PADDING, NO_PADDING, PADDING));
+			label.setWrapText(true);
 			IGUIElement elementToCreate = null;
 			try {
 				elementToCreate = createNewGUIObject(elements[i]);
