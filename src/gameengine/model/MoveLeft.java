@@ -1,18 +1,17 @@
 package gameengine.model;
 
+import java.util.List;
+
 import gameengine.controller.Action;
 import gameengine.controller.Actor;
 
-import java.util.List;
-
 /**
- * An example of an Action to move an Actor right by a given distance.
- *
- * @author blakekaplan
+ * Created by Michelle on 3/31/16.
  */
-public class MoveRight extends Action {
 
-    private static final int RIGHT_ANGLE = 0;
+public class MoveLeft extends Action {
+
+    private static final int LEFT_ANGLE = 90;
     private double distance;
 
     /**
@@ -21,17 +20,16 @@ public class MoveRight extends Action {
      * @param assignedActor The Actor that will be changed
      * @param args          The arguments required to perform the change
      */
-    public MoveRight(Actor assignedActor, List<Object> args) {
+    public MoveLeft(Actor assignedActor, List<Object> args) {
         super(assignedActor);
-        distance = (double) args.get(0);
+        distance = (Double) args.get(0);
     }
 
     /**
-     * Moves the Actor to the right by the distance provided in the arguments
+     * Moves the Actor to the left by the distance provided in the arguments
      */
     @Override
     public void perform() {
-    	//myPhysicsEngine.moveRight(myActor);
-        getActor().move(distance, RIGHT_ANGLE);
+        getActor().move(distance, LEFT_ANGLE);
     }
 }
