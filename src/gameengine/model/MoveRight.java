@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class MoveRight extends Action {
 
-    private static final int RIGHT_ANGLE = 90;
+    private static final int RIGHT_ANGLE = 0;
     private double distance;
 
     /**
@@ -31,6 +31,7 @@ public class MoveRight extends Action {
      */
     @Override
     public void perform() {
+    	//myPhysicsEngine.moveRight(myActor);
         getActor().move(distance, RIGHT_ANGLE);
     }
 }

@@ -45,6 +45,8 @@ public class Level implements ILevel, IEditableGameElement {
                 myActor.performActionsFor(myTrigger);
             }
         }
+        
+        //method to check collisions
     }
 
     /**
