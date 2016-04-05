@@ -1,6 +1,7 @@
-package gameengine.model;
+package gameengine.model.Triggers;
 
 import gameengine.controller.Actor;
+import gameengine.model.ITrigger;
 
 /**
  * @author blakekaplan
