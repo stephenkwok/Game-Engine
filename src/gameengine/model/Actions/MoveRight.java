@@ -1,4 +1,4 @@
-package gameengine.model;
+package gameengine.model.Actions;
 
 import gameengine.controller.Action;
 import gameengine.controller.Actor;
@@ -10,10 +10,9 @@ import java.util.List;
  *
  * @author blakekaplan
  */
-public class MoveRight extends Action {
+public class MoveRight extends MovingAction {
 
     private static final int RIGHT_ANGLE = 0;
-    private double distance;
 
     /**
      * Takes in reference to the Actor it will change along with the argument it will require to do so
@@ -22,8 +21,7 @@ public class MoveRight extends Action {
      * @param args          The arguments required to perform the change
      */
     public MoveRight(Actor assignedActor, List<Object> args) {
-        super(assignedActor);
-        distance = (double) args.get(0);
+        super(assignedActor, args);
     }
 
     /**
@@ -31,7 +29,6 @@ public class MoveRight extends Action {
      */
     @Override
     public void perform() {
-    	//myPhysicsEngine.moveRight(myActor);
-        getActor().move(distance, RIGHT_ANGLE);
+        moveActor(RIGHT_ANGLE);
     }
 }

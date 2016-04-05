@@ -1,7 +1,7 @@
 package authoringenvironment.controller;
 
 import authoringenvironment.view.GUIMain;
-import gameengine.model.Test;
+//import gameengine.model.Test;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -29,6 +29,6 @@ public class Main extends Application{
 
     public static void main(String[] args){
         //launch(args);
-    	Test myTest = new Test();
+//    	Test myTest = new Test();
     }
 }
