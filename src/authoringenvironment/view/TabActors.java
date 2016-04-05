@@ -34,17 +34,21 @@ public class TabActors extends TabParent {
 		
 		Actor newActor1 = new Actor();
 		newActor1.setImage(new Image("default_icon.png"));
+		newActor1.setID(1);
 		Actor newActor2 = new Actor();
 		newActor2.setImage(new Image("default_icon.png"));
+		newActor2.setID(2);;
 		Actor newActor3 = new Actor();
 		newActor3.setImage(new Image("default_icon.png"));
+		newActor3.setID(3);
 		Actor newActor4 = new Actor();
 		newActor4.setImage(new Image("default_icon.png"));
+		newActor4.setID(4);
 		availableActors.add(newActor1); // PLACEHOLDER RN, STEPHEN SHOULD'VE ADDED A DEFAULT ONE ALREADY
 		availableActors.add(newActor2);
 		availableActors.add(newActor3);
 		availableActors.add(newActor4);
-		
+		/*
 		//TODO: this isn't working...
 		for (Actor actor: availableActors) {
 			actor.setOnMouseDragged(new EventHandler<MouseEvent>() {
@@ -58,7 +62,7 @@ public class TabActors extends TabParent {
 	            }
 	        }); 
 		}
-		
+		*/
 		myPane = new TilePane(HGAP, VGAP);
 		myPane.setPrefTileHeight(TILE_HEIGHT);
 		myPane.setPrefTileWidth(TILE_WIDTH);
@@ -67,6 +71,10 @@ public class TabActors extends TabParent {
 		myPane.setOrientation(Orientation.HORIZONTAL);
 		myPane.getChildren().addAll(availableActors);	
 		
+	}
+	
+	public List<Actor> getActors() {
+		return availableActors;
 	}
 	
 	@Override
