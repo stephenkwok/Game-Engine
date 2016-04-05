@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 
 public class ComboBoxScrollingDirection extends ComboBoxParent {
 	private List<String> myOptions;

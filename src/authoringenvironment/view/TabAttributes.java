@@ -7,18 +7,18 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
- * Tab for setting level attributes to go in the Inspector Pane in the Level Editing Environment GUI.
- * @author amyzhao
+ * Abstract Tab for setting attributes to go in the Inspector Pane in either the Level or Actor Editing Environment GUI.
+ * @author amyzhao, AnnieTang
  *
  */
-public class TabLevelAttributes extends TabParent {
-	private static final String LEVEL_OPTIONS_RESOURCE = "levelEditorOptions";
-	private static final String LEVEL_EDITOR_ELEMENTS = "LevelEditorElements";
+public class TabAttributes extends TabParent {
+	private static final String EDITOR_ELEMENTS = "EditorElements";
 	private static final String PROMPT = "Select";
 	private static final String DELIMITER = ",";
 	private static final String LABEL = "Label";
@@ -29,22 +29,22 @@ public class TabLevelAttributes extends TabParent {
 	private static final String VIEW = "view.";
 	private static final String CLASS = "Class";
 	private static final String TEST = "TEST";
-	private ResourceBundle myResources;
+	private ResourceBundle myAttributesResources;
 	
-	public TabLevelAttributes(ResourceBundle myResources, String tabText) {
+	public TabAttributes(ResourceBundle myResources, String tabText, String levelOptionsResource) {
 		super(myResources, tabText);
-		this.myResources = ResourceBundle.getBundle(LEVEL_OPTIONS_RESOURCE);
+		this.myAttributesResources = ResourceBundle.getBundle(levelOptionsResource); //LEVEL_OPTIONS_RESOURCE
 	}
 
 	@Override
-	void setContent() {
+	Node getContent() {
 		VBox vbox = new VBox();
 		
-		String[] elements = myResources.getString(LEVEL_EDITOR_ELEMENTS).split(DELIMITER);
+		String[] elements = myAttributesResources.getString(EDITOR_ELEMENTS).split(DELIMITER);
 		for (int i = 0; i < elements.length; i++) {
 			HBox hbox = new HBox();
 			hbox.setAlignment(Pos.CENTER_LEFT);
-			Label label = new Label(myResources.getString(elements[i] + LABEL));
+			Label label = new Label(myAttributesResources.getString(elements[i] + LABEL));
 			
 			IGUIElement elementToCreate = null;
 			try {
@@ -56,8 +56,7 @@ public class TabLevelAttributes extends TabParent {
 			hbox.getChildren().addAll(label, elementToCreate.createNode());
 			vbox.getChildren().add(hbox);
 		}
-		
-		tab.setContent(vbox);
+		return vbox;
 	}
 
 	private IGUIElement createNewGUIObject(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
@@ -70,11 +69,11 @@ public class TabLevelAttributes extends TabParent {
 	}
 	
 	private boolean isTextField(String nodeType) {
-		return Arrays.asList(myResources.getString(TEXTFIELD).split(",")).contains(nodeType);
+		return Arrays.asList(myAttributesResources.getString(TEXTFIELD).split(",")).contains(nodeType);
 	}
 
 	private boolean isComboBox(String nodeType) {
-		return Arrays.asList(myResources.getString(COMBOBOXES).split(",")).contains(nodeType);
+		return Arrays.asList(myAttributesResources.getString(COMBOBOXES).split(",")).contains(nodeType);
 	}
 
 	private IGUIElement createTextField(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -83,13 +82,13 @@ public class TabLevelAttributes extends TabParent {
 	}
 
 	private IGUIElement createComboBox(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
-		String options = myResources.getString(nodeType + OPTIONS);
+		String className = AUTHORING_ENV + VIEW + myAttributesResources.getString(nodeType + CLASS);
+		String options = myAttributesResources.getString(nodeType + OPTIONS);
 		List<String> optionsList = Arrays.asList(options.split(DELIMITER));
 		try {
 			Class<?> comboBox = Class.forName(className);
 			Constructor<?> constructor = comboBox.getConstructor(ResourceBundle.class, String.class, List.class);
-			return (IGUIElement) constructor.newInstance(myResources, PROMPT, optionsList);
+			return (IGUIElement) constructor.newInstance(myAttributesResources, PROMPT, optionsList);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (NoSuchMethodException e) {

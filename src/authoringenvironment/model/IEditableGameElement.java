@@ -19,5 +19,9 @@ public interface IEditableGameElement {
 	public Image getImage();
 
 	public void setImage(Image image);
+	
+	public void setID(int ID);
+	
+	public int getID();
 }
 
