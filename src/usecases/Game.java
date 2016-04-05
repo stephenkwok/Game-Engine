@@ -72,7 +72,7 @@ public class Game implements IGame {
 	}
 	
 	/**
-	 * Gets a list of all actors used in the game 
+	 * Gets a list of all actors  used in the game 
 	 * @return a list of all actors in the game 
 	 */
 	@Override

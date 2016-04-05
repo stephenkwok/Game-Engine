@@ -22,5 +22,5 @@ public interface GameScreen {
 	 * @param e event 
 	 */
 	public void handleScreenEvent (Event e);
-
+	
 }
