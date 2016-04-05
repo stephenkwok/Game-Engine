@@ -10,6 +10,7 @@ import gameengine.actors.Actor;
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -67,102 +68,101 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private void initializeDrag() {
 		List<Actor> actors = myInspector.getActorsTab().getActors();
 
+		setCenterPaneDragOver();
+		setCenterPaneDragEntered();
+		setCenterPaneDragExited();
+		setCenterPaneDragDropped();
+		
 		for (int i = 0; i < actors.size(); i++) {
 			Actor source = actors.get(i);
-			source.setOnDragDetected(new EventHandler <MouseEvent>() {
-				public void handle(MouseEvent event) {
-					System.out.println("drag detected");
-					Dragboard db = source.startDragAndDrop(TransferMode.ANY);
-					ClipboardContent content = new ClipboardContent();
-					content.putString(Integer.toString(source.getID()));
-					db.setContent(content);
-					event.consume();
-				}
-			});
-
-			myCenterPane.setOnDragOver(new EventHandler <DragEvent>() {
-				public void handle(DragEvent event) {
-					System.out.println("onDragOver");
-
-					/* accept it only if it is  not dragged from the same node 
-					 * and if it has a string data */
-					if (event.getGestureSource() != myCenterPane &&
-							event.getDragboard().hasString()) {
-						/* allow for both copying and moving, whatever user chooses */
-						event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-					}
-
-					event.consume();
-				}
-			});
-			
-			myCenterPane.setOnDragEntered(new EventHandler <DragEvent>() {
-	            public void handle(DragEvent event) {
-	                /* the drag-and-drop gesture entered the target */
-	                System.out.println("onDragEntered");
-	                /* show to the user that it is an actual gesture target */
-	                if (event.getGestureSource() != myCenterPane &&
-	                        event.getDragboard().hasString()) {
-	                   // myCanvas.setFill(Color.GREEN);
-	                }
-	                
-	                event.consume();
-	            }
-	        });
-
-			myCenterPane.setOnDragExited(new EventHandler <DragEvent>() {
-	            public void handle(DragEvent event) {
-	            	System.out.println("dragExited");
-	                /* mouse moved away, remove the graphical cues */
-	                //myCanvas.setFill(Color.BLACK);
-	                
-	                event.consume();
-	            }
-	        });
-	        
-	        
-	        myCenterPane.setOnDragDropped(new EventHandler <DragEvent>() {
-	            public void handle(DragEvent event) {
-	                System.out.println("onDragDropped");
-	                Dragboard db = event.getDragboard();
-	                boolean success = false;
-	                if (db.hasString()) {
-	                	Actor actor = getActorById(Integer.parseInt(db.getString()));
-	                	actor.setOnDragDetected(null);
-	                	actor.setOnDragDone(null);
-	                	actor.setOnMouseDragged(new EventHandler<MouseEvent>() {
-	                        @Override public void handle(MouseEvent event) {
-	                            actor.setX(event.getX());
-	                            actor.setY(event.getY());
-	                            System.out.println("(" + actor.getX() + ", " + actor.getY() + ")");
-	                            event.consume();
-	                        }
-	                    }); 
-	                    myCenterPane.getChildren().add(actor);
-	                    success = true;
-	                }
-	                /* let the source know whether the string was successfully 
-	                 * transferred and used */
-	                event.setDropCompleted(success);
-	                
-	                event.consume();
-	            }
-	        });
-
-	        source.setOnDragDone(new EventHandler <DragEvent>() {
-	            public void handle(DragEvent event) {
-	                /* the drag-and-drop gesture ended */
-	                System.out.println("onDragDone");
-	                /* if the data was successfully moved, clear it */
-	                if (event.getTransferMode() == TransferMode.MOVE) {
-//	                    source.setText("");
-	                }
-	                
-	                event.consume();
-	            }
-	        });
-
+			setDragDetected(source);
+			setDragDone(source);
 		}
+	}
+
+	private void setDragDetected(Actor source) {
+		source.setOnDragDetected(new EventHandler <MouseEvent>() {
+			public void handle(MouseEvent event) {
+				System.out.println("drag detected");
+				Dragboard db = source.startDragAndDrop(TransferMode.ANY);
+				ClipboardContent content = new ClipboardContent();
+				content.putString(Integer.toString(source.getID()));
+				db.setContent(content);
+				event.consume();
+			}
+		});
+	}
+
+	private void setDragDone(Actor source) {
+		source.setOnDragDone(new EventHandler <DragEvent>() {
+			public void handle(DragEvent event) {
+				if (event.getTransferMode() == TransferMode.MOVE) {
+					//                    source.setText("");
+				}
+
+				event.consume();
+			}
+		});
+	}
+
+	private void setCenterPaneDragOver() {
+		myCenterPane.setOnDragOver(new EventHandler <DragEvent>() {
+			public void handle(DragEvent event) {
+			if (event.getGestureSource() != myCenterPane &&
+						event.getDragboard().hasString()) {
+					event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+				}
+				event.consume();
+			}
+		});
+	}
+
+	private void setCenterPaneDragEntered() {
+		myCenterPane.setOnDragEntered(new EventHandler <DragEvent>() {
+			public void handle(DragEvent event) {
+				if (event.getGestureSource() != myCenterPane &&
+					event.getDragboard().hasString()) {
+				}
+				event.consume();
+			}
+		});
+	}
+	
+	private void setCenterPaneDragExited() {
+		myCenterPane.setOnDragExited(new EventHandler <DragEvent>() {
+			public void handle(DragEvent event) {
+				event.consume();
+			}
+		});
+	}
+
+	private void setCenterPaneDragDropped() {
+		myCenterPane.setOnDragDropped(new EventHandler <DragEvent>() {
+			public void handle(DragEvent event) {
+				Dragboard db = event.getDragboard();
+				boolean success = false;
+				if (db.hasString()) {
+					Actor actor = getActorById(Integer.parseInt(db.getString()));
+					actor.setOnDragDetected(null);
+					actor.setOnDragDone(null);
+					actor.setOnMouseDragged(new EventHandler<MouseEvent>() {
+						@Override public void handle(MouseEvent event) {
+							moveActor(actor, event);
+							event.consume();
+						}
+					}); 
+					myCenterPane.getChildren().add(actor);
+					success = true;
+				}
+				event.setDropCompleted(success);
+				event.consume();
+			}
+		});
+	}
+	
+	private void moveActor(Actor actor, MouseEvent event) {
+		actor.setX(event.getX());
+		actor.setY(event.getY());
 	}
 	
 	private Actor getActorById(int id) {
@@ -178,7 +178,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private void initializeCenter() {
 		myCenterPane = new Pane();
 		myCanvas = new Canvas();
-        myCenterPane.setStyle("-fx-background-color: white");
+		myCenterPane.setStyle("-fx-background-color: white");
 		myCenterPane.getChildren().add(myCanvas);
 		myRoot.setCenter(myCenterPane);
 	}
