@@ -30,7 +30,9 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
     private int health;
     private int points;
     private int myID;
+    private int myStrength;
     private String myName;
+    private String myActorType;
 
     private Map<String, List<Action>> myRules;
 
@@ -136,6 +138,15 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
         return myRules.keySet();
     }
 
+
+	public void setActorType(String newActorType){
+		myActorType = newActorType;
+	}
+    
+	public String getActorType() {
+		return myActorType;
+	}
+	
     /**
      * Provides the Actor's ID number
      *
