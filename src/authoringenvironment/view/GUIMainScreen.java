@@ -9,8 +9,8 @@ import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Actor;
 import gameengine.controller.Level;
 import javafx.beans.binding.DoubleExpression;
-import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -59,8 +59,25 @@ public class GUIMainScreen implements IGUI {
 		initScrollPanes();
 		scrollPaneContainer.getChildren().addAll(levelScrollPane, actorScrollPane);
 		borderPane.setCenter(scrollPaneContainer);
+		VBox test = new VBox();
+		test.setPrefSize(350.0, 1000.0);
+		test.setStyle("-fx-border-color: black;");
+//		HBox description = new HBox();
+//		TextArea text = new TextArea();
+//		text.setWrapText(true);
+//		text.setPrefRowCount(5);
+//		description.getChildren().add(text);
+//		test.getChildren().add(description);
+		TextAreaWithButton descriptionEditor = new TextAreaWithButton("promptForGameDescription", "Go!", e -> setDescription());
+		bindNodeSizeToGivenSize(descriptionEditor, test.widthProperty(), null);
+		test.getChildren().add(descriptionEditor);
+		borderPane.setLeft(test);
 	}
 
+	private void setDescription() {
+		
+	}
+	
 	private void initBorderPane() {
 		Stage stage = controller.getStage();
 		borderPane = new BorderPane();
