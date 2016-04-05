@@ -3,24 +3,24 @@ package gameengine.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import gameengine.actors.Actor;
+import gameengine.actors.PowerUpActor;
 import gameengine.controller.Action;
-import gameengine.controller.Actor;
 import gameengine.controller.Game;
 import gameengine.controller.Level;
-import gameengine.controller.PowerUpActor;
 
 public class Test {
 
 	public Test() {
 		ClickTrigger myClickTrigger = new ClickTrigger();
-		Actor myActor = new Actor();
+		Actor myActor = new PowerUpActor();
 		System.out.println(myActor.getX());
 		System.out.println("****");
 		List myDistance = new ArrayList<>();
-		myDistance.add(50.0);
+		myDistance.add(55.0);
 
-		Action moveRight = new MoveRight(myActor, myDistance);
-		Rule myRule = new Rule(myClickTrigger, moveRight);		
+		Action moveLeft = new MoveLeft(myActor, myDistance);
+		Rule myRule = new Rule(myClickTrigger, moveLeft);		
 		myActor.addRule(myRule);
 		myActor.performActionsFor(myClickTrigger);
 		

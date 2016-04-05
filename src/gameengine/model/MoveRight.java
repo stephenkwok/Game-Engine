@@ -1,7 +1,7 @@
 package gameengine.model;
 
+import gameengine.actors.Actor;
 import gameengine.controller.Action;
-import gameengine.controller.Actor;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package gameengine.model;
 
-import gameengine.controller.Actor;
+import gameengine.actors.Actor;
 
 /**
  * @author blakekaplan

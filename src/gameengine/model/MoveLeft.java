@@ -2,8 +2,8 @@ package gameengine.model;
 
 import java.util.List;
 
+import gameengine.actors.Actor;
 import gameengine.controller.Action;
-import gameengine.controller.Actor;
 
 /**
  * Created by Michelle on 3/31/16.
@@ -11,7 +11,7 @@ import gameengine.controller.Actor;
 
 public class MoveLeft extends Action {
 
-    private static final int LEFT_ANGLE = 90;
+    private static final int LEFT_ANGLE = 0;
     private double distance;
 
     /**

@@ -4,7 +4,8 @@ import java.util.List;
 
 import java.util.ResourceBundle;
 
-import gameengine.controller.Actor;
+import gameengine.actors.Actor;
+import gameengine.actors.PowerUpActor;
 import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
@@ -32,13 +33,13 @@ public class TabActors extends TabParent {
 		super(myResources, tabText);
 		availableActors = availActors;
 		
-		Actor newActor1 = new Actor();
+		Actor newActor1 = new PowerUpActor();
 		newActor1.setImage(new Image("default_icon.png"));
-		Actor newActor2 = new Actor();
+		Actor newActor2 = new PowerUpActor();
 		newActor2.setImage(new Image("default_icon.png"));
-		Actor newActor3 = new Actor();
+		Actor newActor3 = new PowerUpActor();
 		newActor3.setImage(new Image("default_icon.png"));
-		Actor newActor4 = new Actor();
+		Actor newActor4 = new PowerUpActor();
 		newActor4.setImage(new Image("default_icon.png"));
 		availableActors.add(newActor1); // PLACEHOLDER RN, STEPHEN SHOULD'VE ADDED A DEFAULT ONE ALREADY
 		availableActors.add(newActor2);

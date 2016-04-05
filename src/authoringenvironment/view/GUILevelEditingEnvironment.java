@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.controller.Controller;
-import gameengine.controller.Actor;
+import gameengine.actors.Actor;
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import javafx.scene.canvas.Canvas;
