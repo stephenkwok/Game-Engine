@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 
 /**
  * 
+ * This class sets up all the GUI elements on the Game Authoring Environment's Main Screen
+ * 
  * @author Stephen
  *
  */

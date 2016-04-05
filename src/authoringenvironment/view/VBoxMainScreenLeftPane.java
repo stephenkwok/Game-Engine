@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 
 public class VBoxMainScreenLeftPane extends VBox {
 
+	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
 	private static final double VBOX_PADDING = 20;
 	private static final double VBOX_PREFERRED_WIDTH = 350.0;
 	private static final int TEXT_AREA_ROWS = 5;
@@ -31,7 +32,7 @@ public class VBoxMainScreenLeftPane extends VBox {
 
 	public VBoxMainScreenLeftPane(EventHandler<ActionEvent> saveName, EventHandler<ActionEvent> saveDescription) {
 		super(VBOX_PADDING);
-		this.myResources = ResourceBundle.getBundle("mainScreenGUI");
+		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
 		this.saveNameButtonAction = saveName;
 		this.saveDescriptionButtonAction = saveDescription;
 		setPrefWidth(VBOX_PREFERRED_WIDTH);
