@@ -8,6 +8,7 @@ import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.controller.Controller;
 import gameengine.controller.Actor;
 import gameengine.controller.ILevel;
+import gameengine.model.IActor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -40,8 +41,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		initializeEnvironment();
 	}
 	
-	@Override
-	public void initializeEnvironment() {
+	private void initializeEnvironment() {
 		initializeLeftPane();
 		initializeCenterCanvas();
 	}
@@ -72,9 +72,9 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	}
 	
 	public void setLevel(ILevel level){
-		// setEditable() would replace this - Stephen
+		myLevel = level;
 	}
-
+	
 	@Override
 	public void setEditable(IEditableGameElement editable) {
 		myLevel = (ILevel) editable;

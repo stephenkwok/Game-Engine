@@ -7,9 +7,9 @@ import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Actor;
-import gameengine.controller.ILevel;
 import gameengine.controller.Level;
 import javafx.beans.binding.DoubleExpression;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -35,11 +35,11 @@ public class GUIMainScreen implements IGUI {
 	private BorderPane borderPane;
 	private List<LabelClickable> clickableLabels;
 	private List<Actor> createdActors;
-	private List<ILevel> createdLevels;
+	private List<Level> createdLevels;
 	private IEditingEnvironment actorEditor;
 	private IEditingEnvironment levelEditor;
 
-	public GUIMainScreen(Controller controller, List<Actor> createdActors, List<ILevel> createdLevels,
+	public GUIMainScreen(Controller controller, List<Actor> createdActors, List<Level> createdLevels,
 			IEditingEnvironment actorEditor, IEditingEnvironment levelEditor) {
 		this.controller = controller;
 		this.createdActors = createdActors;
@@ -107,18 +107,14 @@ public class GUIMainScreen implements IGUI {
 
 	public void addActor() {
 		Actor newActor = new Actor();
-		Actor actorAdded = (Actor) newActor;
-//		IActor actorAdded = (IActor) newActor;
-//		createdActors.add(actorAdded);
-		createdActors.add(actorAdded);
+		createdActors.add(newActor);
 		createLabel(newActor, actorEditor, actorLabelContainer);
 		controller.goToEditingEnvironment(newActor, actorEditor);
 	}
 
 	public void addLevel() {
-		IEditableGameElement newLevel = new Level();
-		ILevel levelAdded = (ILevel) newLevel;
-		createdLevels.add(levelAdded);
+		Level newLevel = new Level();
+		createdLevels.add(newLevel);
 		createLabel(newLevel, levelEditor, levelLabelContainer);
 		controller.goToEditingEnvironment(newLevel, levelEditor);
 	}

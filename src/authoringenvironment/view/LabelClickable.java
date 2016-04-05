@@ -17,6 +17,7 @@ public class LabelClickable extends Label {
 	
 	private static final String IMAGE_TEXT_PADDING = "    ";
 	private static final Double FIT_SIZE = 75.0;
+	private static final Double LABEL_PADDING = 10.0;
 	
 	IEditableGameElement myEditable;
 	IEditingEnvironment myEnvironment;
@@ -43,8 +44,7 @@ public class LabelClickable extends Label {
 		ImageView imageView = new ImageView(myEditable.getImage());
 		imageView.setFitHeight(FIT_SIZE);
 		imageView.setFitWidth(FIT_SIZE);
-		// HARD-CODED VALUES
-		Insets insets = new Insets(10.0, 10.0, 10.0, 10.0);
+		Insets insets = new Insets(LABEL_PADDING);
 		this.setPadding(insets);
 		this.setGraphic(imageView);
 	}
