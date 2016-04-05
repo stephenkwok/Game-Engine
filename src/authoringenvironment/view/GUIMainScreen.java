@@ -2,6 +2,7 @@ package authoringenvironment.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
@@ -11,12 +12,14 @@ import gameengine.actors.PowerUpActor;
 import gameengine.controller.Level;
 import javafx.beans.binding.DoubleExpression;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -60,26 +63,24 @@ public class GUIMainScreen implements IGUI {
 		initScrollPaneContainer();
 		initLabelContainers();
 		initScrollPanes();
+		initLeftPane();
 		scrollPaneContainer.getChildren().addAll(levelScrollPane, actorScrollPane);
 		borderPane.setCenter(scrollPaneContainer);
-		VBox test = new VBox(20);
-		test.setPrefSize(350.0, 1000.0);
-		test.setStyle("-fx-border-color: black;");
-		HBox nameEditor = new HBox(10.0);
-		nameEditor.setPadding(new Insets(10.0));
-		Label nameEditorPrompt = new Label("Game Name:");
-		TextField nameEditorInputField = new TextField();
-		nameEditor.getChildren().addAll(nameEditorPrompt, nameEditorInputField);
-		TextAreaWithButton descriptionEditor = new TextAreaWithButton("promptForGameDescription", "Go!", 5, e -> setDescription());
-		bindNodeSizeToGivenSize(descriptionEditor, test.widthProperty(), null);
-		test.getChildren().addAll(nameEditor, descriptionEditor);
-		borderPane.setLeft(test);
 	}
 
-	private void setDescription() {
-		
+	private void initLeftPane() {
+		VBoxMainScreenLeftPane leftPane = new VBoxMainScreenLeftPane(e -> setGameName(), e -> setGameDescription());
+		borderPane.setLeft(leftPane);
 	}
 	
+	private void setGameDescription() {
+
+	}
+	
+	private void setGameName() {
+		
+	}
+
 	private void initBorderPane() {
 		Stage stage = controller.getStage();
 		borderPane = new BorderPane();
@@ -95,13 +96,13 @@ public class GUIMainScreen implements IGUI {
 		initScrollPane(actorScrollPane, actorLabelContainer);
 		initScrollPane(levelScrollPane, levelLabelContainer);
 	}
-	
+
 	private void initScrollPane(ScrollPane scrollPane, VBox container) {
 		// magic value
 		bindNodeSizeToGivenSize(scrollPane, scrollPaneContainer.widthProperty().divide(2.0), null);
 		scrollPane.setContent(container);
 	}
-	
+
 	private void initLabelContainers() {
 		actorLabelContainer = createLabelContainer(actorScrollPane);
 		levelLabelContainer = createLabelContainer(levelScrollPane);
