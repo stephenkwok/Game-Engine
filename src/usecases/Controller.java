@@ -5,7 +5,8 @@ import java.util.List;
 
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import gameengine.controller.Actor;
+import gameengine.actors.Actor;
+import gameengine.actors.PowerUpActor;
 import gameengine.controller.ILevel;
 import gameengine.controller.Level;
 import gameengine.model.IActor;
@@ -132,7 +133,7 @@ public class Controller extends Application {
 	 * ActorEditingEnvironment
 	 */
 	private void addActor() {
-		IEditableGameElement newActor = new Actor();
+		IEditableGameElement newActor = new PowerUpActor();
 		createdActors.add(newActor);
 		goToEditingEnviroment(actorEditor, newActor);
 	}

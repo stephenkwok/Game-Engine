@@ -6,7 +6,8 @@ import java.util.List;
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import gameengine.controller.Actor;
+import gameengine.actors.Actor;
+import gameengine.actors.PowerUpActor;
 import gameengine.controller.Level;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.control.ScrollPane;
@@ -117,7 +118,7 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	public void addActor() {
-		Actor newActor = new Actor();
+		Actor newActor = new PowerUpActor();
 		createdActors.add(newActor);
 		createLabel(newActor, actorEditor, actorLabelContainer);
 		controller.goToEditingEnvironment(newActor, actorEditor);

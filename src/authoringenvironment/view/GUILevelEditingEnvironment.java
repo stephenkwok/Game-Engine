@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.controller.Controller;
-import gameengine.controller.Actor;
+import gameengine.actors.Actor;
 import gameengine.controller.ILevel;
 import gameengine.model.IActor;
 import javafx.scene.canvas.Canvas;
@@ -50,7 +50,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		myLeftPane = new VBox();
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
 		myInspector = new GUILevelInspector(myResources, availableActors);
-		myLibrary = new GUILibrary(myResources);
+		myLibrary = new GUILibrary();
 		myLeftPane.getChildren().addAll(myInspector.getPane(), myLibrary.getPane());
 		myRoot.setLeft(myLeftPane);
 	}

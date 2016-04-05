@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
-import gameengine.controller.ILevel;
 import gameengine.controller.Level;
 
 /**
@@ -17,7 +16,7 @@ import gameengine.controller.Level;
  */
 
 public class ComboBoxLevel extends ComboBoxTextCell{
-	private Map<String, ILevel> levelMap;
+	private Map<String, Level> levelMap;
 	private List<String> levelNames;
 	List<Level> levels;
 	private Controller myController;
@@ -32,7 +31,7 @@ public class ComboBoxLevel extends ComboBoxTextCell{
 		levels = myController.getLevels();
 		levelMap = new HashMap<>();
 		levelNames = new ArrayList<>();
-		for(ILevel level: levels){
+		for(Level level: levels){
 			levelNames.add(level.getName());
 			levelMap.put(level.getName(), level);
 		}
@@ -42,7 +41,7 @@ public class ComboBoxLevel extends ComboBoxTextCell{
 	void setButtonAction() {
 		comboButton.setOnAction(event -> {
 			String levelName = comboBox.getValue();
-			ILevel level = levelMap.get(levelName);
+			Level level = levelMap.get(levelName);
 			myController.goToLevelEditing(level);
 		});
 	}

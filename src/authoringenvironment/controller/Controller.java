@@ -11,10 +11,8 @@ import authoringenvironment.view.GUIActorEditingEnvironment;
 import authoringenvironment.view.GUILevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
-import gameengine.controller.Actor;
-import gameengine.controller.ILevel;
+import gameengine.actors.Actor;
 import gameengine.controller.Level;
-import gameengine.model.IActor;
 import javafx.stage.Stage;
 
 /**
@@ -57,8 +55,8 @@ public class Controller {
 	 * @param createdActors
 	 *            - list of created Actors that can be placed into the level
 	 */
-	public void goToLevelEditing(ILevel level) {
-		levelEnvironment.setLevel(level);
+	public void goToLevelEditing(Level level) {
+		levelEnvironment.setEditable(level);
 		clearPanes();
 		guiMain.setCenterPane(levelEnvironment.getPane());
 
@@ -70,8 +68,8 @@ public class Controller {
 	 * @param actor
 	 *            - Actor to edit
 	 */
-	public void goToActorEditing(IActor actor) {
-		actorEnvironment.setActor(actor);
+	public void goToActorEditing(Actor actor) {
+		actorEnvironment.setEditable(actor);
 		clearPanes();
 		guiMain.setCenterPane(actorEnvironment.getPane());
 	}
