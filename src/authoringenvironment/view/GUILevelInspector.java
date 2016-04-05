@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 public class GUILevelInspector implements IGUI {
+	private static final String LEVEL_OPTIONS_RESOURCE = "levelEditorOptions";
 	private ResourceBundle myResources;
 	private static final String ACTORS = "Actors";
 	private static final String LEVEL_ATTRIBUTES = "Level Attributes";
@@ -19,8 +20,8 @@ public class GUILevelInspector implements IGUI {
 		myPane = new StackPane();
 		TabPane tabPane = new TabPane();
 		TabActors actors = new TabActors(myResources, ACTORS, availActors);
-		TabLevelAttributes attr = new TabLevelAttributes(myResources, LEVEL_ATTRIBUTES);
-		tabPane.getTabs().addAll(actors.createTab(), attr.createTab());
+		TabAttributes attr = new TabAttributes(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE);
+		tabPane.getTabs().addAll(actors.getTab(), attr.getTab());
 		myPane.getChildren().add(tabPane);
 	}
 

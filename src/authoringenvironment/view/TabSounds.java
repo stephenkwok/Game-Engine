@@ -5,13 +5,18 @@ import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
-
+/**
+ * Tab contains ListView of sounds
+ * @author AnnieTang
+ *
+ */
 public class TabSounds extends TabParent{
 	private static final String SOUND_IMAGE_NAME = "sound.png";
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
@@ -22,14 +27,14 @@ public class TabSounds extends TabParent{
 	}
 	
 	@Override
-	void setContent() {
+	Node getContent() {
 		fillFileNames();
 		soundLabels = FXCollections.observableArrayList();
 		for(String soundName: fileNames){
 			soundLabels.add(new Label(soundName, createPlaySoundButton(soundName)));
 		}
 		ListView<Label> listView = new ListView<>(soundLabels);
-		tab.setContent(listView);
+		return listView;
 	}
 	
 	private Button createPlaySoundButton(String soundName){

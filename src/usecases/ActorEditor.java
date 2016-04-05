@@ -17,12 +17,6 @@ public class ActorEditor implements IEditingEnvironment {
 	}
 
 	@Override
-	public void initializeEnvironment() {
-		root = new Group();
-		scene = new Scene(root);
-	}
-
-	@Override
 	public Pane getPane() {
 		// TODO Auto-generated method stub
 		return null;
