@@ -59,18 +59,12 @@ public class GUIMainScreen implements IGUI {
 		initScrollPanes();
 		scrollPaneContainer.getChildren().addAll(levelScrollPane, actorScrollPane);
 		borderPane.setCenter(scrollPaneContainer);
-		VBox test = new VBox();
+		VBox test = new VBox(50);
 		test.setPrefSize(350.0, 1000.0);
 		test.setStyle("-fx-border-color: black;");
-//		HBox description = new HBox();
-//		TextArea text = new TextArea();
-//		text.setWrapText(true);
-//		text.setPrefRowCount(5);
-//		description.getChildren().add(text);
-//		test.getChildren().add(description);
-		TextAreaWithButton descriptionEditor = new TextAreaWithButton("promptForGameDescription", "Go!", e -> setDescription());
+		TextAreaWithButton descriptionEditor = new TextAreaWithButton("promptForGameDescription", "Go!", 5, e -> setDescription());
 		bindNodeSizeToGivenSize(descriptionEditor, test.widthProperty(), null);
-		test.getChildren().add(descriptionEditor);
+		test.getChildren().addAll(descriptionEditor);
 		borderPane.setLeft(test);
 	}
 
@@ -95,7 +89,7 @@ public class GUIMainScreen implements IGUI {
 	}
 	
 	private void initScrollPane(ScrollPane scrollPane, VBox container) {
-		// magic value?
+		// magic value
 		bindNodeSizeToGivenSize(scrollPane, scrollPaneContainer.widthProperty().divide(2.0), null);
 		scrollPane.setContent(container);
 	}
