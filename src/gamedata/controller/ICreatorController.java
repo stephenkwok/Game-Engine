@@ -1,7 +1,6 @@
 package gamedata.controller;
 
 import java.util.List;
-import authoringenvironment.model.ICreatedLevel;
 
 /**
  * The purpose of this interface is to provide the saving capabilities for the authoring environment and game engine to save a game being played or edit to an XML file.
