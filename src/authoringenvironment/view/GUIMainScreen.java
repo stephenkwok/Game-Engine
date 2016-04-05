@@ -9,7 +9,6 @@ import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Actor;
 import gameengine.controller.Level;
 import javafx.beans.binding.DoubleExpression;
-import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;

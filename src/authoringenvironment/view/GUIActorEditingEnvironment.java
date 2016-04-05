@@ -4,18 +4,17 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
+import gameengine.controller.Actor;
 import gameengine.model.IActor;
 import javafx.geometry.Insets;
 import javafx.scene.control.TabPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 /**
  * Returns BorderPane to represent Actor Editing Environment. 
@@ -31,6 +30,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	private TabAttributes attributes;
 	private ResourceBundle myResources;
 	private IActor myActor;
+	private GUIActorRuleMaker ruleMaker;
 	
 	public GUIActorEditingEnvironment(ResourceBundle myResources) {
 		this.myResources = myResources;
@@ -48,7 +48,13 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	
 	private void initializeEnvironment() {
 		myRoot = new BorderPane();
-		setRightPane();
+		//Test Actor ImageView usage
+		Actor testActor = new Actor();
+		testActor.setFitHeight(ACTOR_IMAGE_HEIGHT);
+		testActor.setPreserveRatio(true);
+		this.myActor = testActor;
+	
+		setCenterPane(); // will fill up right side 
 		setLeftPane();
 	}
 	
@@ -57,32 +63,26 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		attributes = new TabAttributes(myResources,ACTOR_ATTRIBUTES,ACTOR_OPTIONS_RESOURCE);
 		TabPane attributeTP = new TabPane();
 		attributeTP.getTabs().add(attributes.getTab());
-		library = new GUILibrary();
+		library = new GUILibrary(ruleMaker);
 		vbox.getChildren().addAll(getActorImageViewer(), attributeTP, library.getPane());
 		myRoot.setLeft(vbox);
 	}
 	
 	private StackPane getActorImageViewer(){
-		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream("marshmallow.png")));
-		imageView.setFitHeight(ACTOR_IMAGE_HEIGHT);
-		imageView.setPreserveRatio(true);
-		
+		Actor myCurrentActor = (Actor) myActor;
 		StackPane sp = new StackPane();
-		sp.getChildren().add(imageView);
+		sp.getChildren().add(myCurrentActor);
 		sp.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		return sp;
 	}
 	
-	private void setRightPane(){
-		//right will be draggable area thingiemabob
+	private void setCenterPane(){
+		ruleMaker = new GUIActorRuleMaker();
+		myRoot.setCenter(ruleMaker.getPane());
 	}
 	
 	@Override
 	public void setEditable(IEditableGameElement editable) {
 		myActor = (IActor) editable;
-	}
-	
-	public void setActor(IActor actor){
-		myActor = actor;
 	}
 }

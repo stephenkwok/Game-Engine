@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -18,6 +19,8 @@ import javafx.scene.layout.VBox;
  *
  */
 public class TabAttributes extends TabParent {
+	private static final int NO_PADDING = 0;
+	private static final int PADDING = 10;
 	private static final String EDITOR_ELEMENTS = "EditorElements";
 	private static final String PROMPT = "Select";
 	private static final String DELIMITER = ",";
@@ -45,7 +48,7 @@ public class TabAttributes extends TabParent {
 			HBox hbox = new HBox();
 			hbox.setAlignment(Pos.CENTER_LEFT);
 			Label label = new Label(myAttributesResources.getString(elements[i] + LABEL));
-			
+			label.setPadding(new Insets(NO_PADDING, PADDING, NO_PADDING, PADDING));
 			IGUIElement elementToCreate = null;
 			try {
 				elementToCreate = createNewGUIObject(elements[i]);
