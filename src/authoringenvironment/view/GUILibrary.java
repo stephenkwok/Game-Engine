@@ -10,11 +10,16 @@ import javafx.scene.layout.StackPane;
  *
  */
 public class GUILibrary implements IGUI{
+	private static final String LIBRARY_RESOURCE = "library";
 	private ResourceBundle myResources;
 	private Pane myPane;
 	
-	public GUILibrary(ResourceBundle resources) {
-		myResources = resources;
+	public GUILibrary() {
+		initializeEnvironment();
+	}
+	
+	private void initializeEnvironment(){
+		myResources = ResourceBundle.getBundle(LIBRARY_RESOURCE);
 		myPane = new StackPane();
 		TabPane tp = new TabPane();
 		TabImages imageLib = new TabImages(myResources, "Images");
