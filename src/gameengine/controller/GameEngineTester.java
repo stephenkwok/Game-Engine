@@ -1,17 +1,17 @@
 package gameengine.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gameengine.actors.Actor;
 import gameengine.actors.PowerUpActor;
-import gameengine.model.*;
-import gameengine.model.Actions.MoveDown;
-import gameengine.model.Actions.MoveLeft;
+import gameengine.model.IActor;
+import gameengine.model.ITrigger;
+import gameengine.model.Rule;
 import gameengine.model.Actions.MoveRight;
 import gameengine.model.Actions.MoveUp;
 import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.TickTrigger;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author blakekaplan
