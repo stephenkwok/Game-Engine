@@ -4,7 +4,8 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import gameengine.controller.Actor;
+import gameengine.actors.Actor;
+import gameengine.actors.PowerUpActor;
 import gameengine.model.IActor;
 import javafx.geometry.Insets;
 import javafx.scene.control.TabPane;
@@ -13,9 +14,9 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.layout.StackPane;
 /**
  * Returns BorderPane to represent Actor Editing Environment. 
  * @author AnnieTang
@@ -49,7 +50,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	private void initializeEnvironment() {
 		myRoot = new BorderPane();
 		//Test Actor ImageView usage
-		Actor testActor = new Actor();
+		Actor testActor = new PowerUpActor();
 		testActor.setFitHeight(ACTOR_IMAGE_HEIGHT);
 		testActor.setPreserveRatio(true);
 		this.myActor = testActor;
