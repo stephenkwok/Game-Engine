@@ -1,15 +1,25 @@
 package authoringenvironment.view;
 import java.io.File;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
+/**
+ * Parent tab class that holds variable content.
+ * @author AnnieTang
+ *
+ */
 import javafx.scene.control.Tab;
 abstract class TabParent{
 	protected Tab tab;
 	protected String tabText;
 	protected ResourceBundle myResources;
 	protected List<String> fileNames;
+	private ScrollPane sp;
 	
 	public TabParent(ResourceBundle myResources, String tabText) {
 		this.tabText = tabText;
@@ -21,22 +31,39 @@ abstract class TabParent{
 	 */
 	protected void fillFileNames(){
 		fileNames = new ArrayList<>();
-		File imageDir = new File(myResources.getString(tabText));
-		for(File imageFile: imageDir.listFiles()){
-			fileNames.add(imageFile.getName());
+		File directory = new File(myResources.getString(tabText));
+		for(File file: directory.listFiles()){
+			fileNames.add(file.getName());
 		}
 	}
 	
-	public Tab createTab() {
+	public Tab getTab() {
 		tab = new Tab(tabText);
-		setContent();
+		try {
+			sp = new ScrollPane();
+			sp.setFitToHeight(true);
+			sp.setFitToWidth(true);
+			sp.setContent(getContent());
+			tab.setContent(sp);
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return tab;
 	}
 	
 	public void updateNode(){
-		setContent();
+		try {
+			sp.setContent(getContent());
+			tab.setContent(sp);
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	abstract void setContent();
+	abstract Node getContent() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
 
 }

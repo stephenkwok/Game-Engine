@@ -1,6 +1,7 @@
 package authoringenvironment.controller;
 
 import authoringenvironment.view.GUIMain;
+//import gameengine.model.Test;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -10,6 +11,8 @@ import javafx.stage.Stage;
 public class Main extends Application{
 	private static final int SCREEN_WIDTH = 1300;
 	private static final int SCREEN_HEIGHT = 800;
+	
+	
 	
 	private Stage s;
 	GUIMain myGUI;
@@ -26,5 +29,6 @@ public class Main extends Application{
 
     public static void main(String[] args){
         launch(args);
+    	//Test myTest = new Test();
     }
 }

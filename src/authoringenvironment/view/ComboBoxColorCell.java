@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import authoringenvironment.controller.Controller;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -21,8 +20,8 @@ abstract class ComboBoxColorCell extends ComboBoxParent{
 	private static final String DEFAULT_COLORS_KEY = "DefaultColors";
 	protected List<String> palette;
 	
-	public ComboBoxColorCell(ResourceBundle myResources, String promptText, Controller mainScreen) {
-		super(myResources, promptText, mainScreen);
+	public ComboBoxColorCell(ResourceBundle myResources, String promptText) {
+		super(myResources, promptText);
 		fillDefaultPalette();
 	}
 	/**

@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import authoringenvironment.controller.Controller;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -23,8 +22,8 @@ public abstract class ComboBoxImageCell extends ComboBoxParent {
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
 	private static final String IMAGE_RESOURCE = "Images";
 	
-	public ComboBoxImageCell(ResourceBundle myResources, String promptText, Controller mainScreen) {
-		super(myResources, promptText, mainScreen);
+	public ComboBoxImageCell(ResourceBundle myResources, String promptText) {
+		super(myResources, promptText);
 		imageMap = new HashMap<>();
 		imageNames = new ArrayList<>();
 		fillImageNames();

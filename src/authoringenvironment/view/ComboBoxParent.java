@@ -2,7 +2,6 @@ package authoringenvironment.view;
 
 import java.util.List;
 import java.util.ResourceBundle;
-import authoringenvironment.controller.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -31,12 +30,10 @@ public abstract class ComboBoxParent implements IGUIElement {
 	protected ComboBox<String> comboBox;
 	protected Button comboButton;
 	protected String paletteSource;
-	protected Controller myController;
 	
-	public ComboBoxParent(ResourceBundle myResources, String promptText, Controller myController) {
+	public ComboBoxParent(ResourceBundle myResources, String promptText) {
 		this.myResources = myResources;
 		this.promptText = promptText;
-		this.myController = myController;
 	}
 	
 	/**

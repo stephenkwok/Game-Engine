@@ -1,7 +1,6 @@
 package authoringenvironment.view;
 
 import authoringenvironment.controller.Controller;
-import gameengine.controller.Level;
 
 /**
  * Button to create a new level and transition to level editing environment.

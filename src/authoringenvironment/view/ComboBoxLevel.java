@@ -5,24 +5,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+
 import authoringenvironment.controller.Controller;
-import gameengine.controller.ILevel;
+import gameengine.controller.Level;
+
+/**
+ * ComboBox that holds existing Levels and allows user to go to LevelEditingEnvironment to edit selected level
+ * @author AnnieTang
+ *
+ */
 
 public class ComboBoxLevel extends ComboBoxTextCell{
-	private Map<String, ILevel> levelMap;
+	private Map<String, Level> levelMap;
 	private List<String> levelNames;
-	List<ILevel> levels;
+	List<Level> levels;
+	private Controller myController;
 	
 	public ComboBoxLevel(ResourceBundle myResources, String promptText, Controller myController) {
-		super(myResources,promptText, myController);
-		levels = myController.getLevels();
-		levelMap = new HashMap<>();
-		levelNames = new ArrayList<>();
+		super(myResources,promptText);
+		this.myController = myController;
 		fillLevelNamesAndMap();
 	}
 
 	private void fillLevelNamesAndMap(){
-		for(ILevel level: levels){
+		levels = myController.getLevels();
+		levelMap = new HashMap<>();
+		levelNames = new ArrayList<>();
+		for(Level level: levels){
 			levelNames.add(level.getName());
 			levelMap.put(level.getName(), level);
 		}
@@ -32,13 +41,14 @@ public class ComboBoxLevel extends ComboBoxTextCell{
 	void setButtonAction() {
 		comboButton.setOnAction(event -> {
 			String levelName = comboBox.getValue();
-			ILevel level = levelMap.get(levelName);
+			Level level = levelMap.get(levelName);
 			myController.goToLevelEditing(level);
 		});
 	}
 
 	@Override
 	List<String> getOptionsList() {
+		levelNames.add("default");
 		return levelNames;
 	}
 }

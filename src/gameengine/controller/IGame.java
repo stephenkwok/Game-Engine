@@ -26,7 +26,7 @@ public interface IGame {
      *
      * @return A list of Level objects that can be played
      */
-    public List<ILevel> getLevels();
+    public List<Level> getLevels();
 
     /**
      * Provided with a Trigger object from the player, sets off the appropriate response
