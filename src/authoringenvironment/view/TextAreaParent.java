@@ -41,6 +41,10 @@ public abstract class TextAreaParent {
 		myContainer.setPadding(insets);
 	}
 	
+	protected void setTextAreaPromptText(String prompt) {
+		myTextArea.setPromptText(prompt);
+	}
+	
 	public VBox getCoupledNodes() {
 		return myContainer;
 	}

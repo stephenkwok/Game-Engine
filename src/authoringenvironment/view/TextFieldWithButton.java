@@ -42,6 +42,10 @@ public abstract class TextFieldWithButton {
 		myContainer.setSpacing(spacing);
 	}
 	
+	protected void setTextFieldPromptText(String promptText) {
+		myTextField.setPromptText(promptText);
+	}
+	
 	public HBox getCoupledNodes() {
 		return myContainer;
 	}
