@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -26,14 +27,14 @@ public class TabSounds extends TabParent{
 	}
 	
 	@Override
-	void setContent() {
+	Node getContent() {
 		fillFileNames();
 		soundLabels = FXCollections.observableArrayList();
 		for(String soundName: fileNames){
 			soundLabels.add(new Label(soundName, createPlaySoundButton(soundName)));
 		}
 		ListView<Label> listView = new ListView<>(soundLabels);
-		tab.setContent(listView);
+		return listView;
 	}
 	
 	private Button createPlaySoundButton(String soundName){

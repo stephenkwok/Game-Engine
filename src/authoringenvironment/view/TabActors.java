@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import gameengine.controller.Actor;
 import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
@@ -68,8 +69,8 @@ public class TabActors extends TabParent {
 	}
 	
 	@Override
-	void setContent() {
-		tab.setContent(myPane);
+	Node getContent() {
+		return myPane;
 	}
 
 }

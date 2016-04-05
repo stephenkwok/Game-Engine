@@ -20,7 +20,7 @@ public class GUILibrary implements IGUI{
 		TabImages imageLib = new TabImages(myResources, "Images");
 		TabSounds soundLib = new TabSounds(myResources, "Sounds");
 		TabBehaviors behaviorLib = new TabBehaviors(myResources, "Behaviors");
-		tp.getTabs().addAll(behaviorLib.createTab(), imageLib.createTab(), soundLib.createTab());
+		tp.getTabs().addAll(behaviorLib.getTab(), imageLib.getTab(), soundLib.getTab());
 		myPane.getChildren().add(tp);
 	}
 

@@ -5,6 +5,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 /**
  * Parent tab class that holds variable content.
  * @author AnnieTang
@@ -16,6 +19,7 @@ abstract class TabParent{
 	protected String tabText;
 	protected ResourceBundle myResources;
 	protected List<String> fileNames;
+	private ScrollPane sp;
 	
 	public TabParent(ResourceBundle myResources, String tabText) {
 		this.tabText = tabText;
@@ -33,10 +37,12 @@ abstract class TabParent{
 		}
 	}
 	
-	public Tab createTab() {
+	public Tab getTab() {
 		tab = new Tab(tabText);
 		try {
-			setContent();
+			sp = new ScrollPane();
+			sp.setContent(getContent());
+			tab.setContent(sp);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
 			// TODO Auto-generated catch block
@@ -47,7 +53,8 @@ abstract class TabParent{
 	
 	public void updateNode(){
 		try {
-			setContent();
+			sp.setContent(getContent());
+			tab.setContent(sp);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
 			// TODO Auto-generated catch block
@@ -55,6 +62,6 @@ abstract class TabParent{
 		}
 	}
 	
-	abstract void setContent() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
+	abstract Node getContent() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
 
 }

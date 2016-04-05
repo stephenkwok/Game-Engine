@@ -7,13 +7,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
  * Abstract Tab for setting attributes to go in the Inspector Pane in either the Level or Actor Editing Environment GUI.
- * @author amyzhao
+ * @author amyzhao, AnnieTang
  *
  */
 public class TabAttributes extends TabParent {
@@ -36,7 +37,7 @@ public class TabAttributes extends TabParent {
 	}
 
 	@Override
-	void setContent() {
+	Node getContent() {
 		VBox vbox = new VBox();
 		
 		String[] elements = myAttributesResources.getString(EDITOR_ELEMENTS).split(DELIMITER);
@@ -55,8 +56,7 @@ public class TabAttributes extends TabParent {
 			hbox.getChildren().addAll(label, elementToCreate.createNode());
 			vbox.getChildren().add(hbox);
 		}
-		
-		tab.setContent(vbox);
+		return vbox;
 	}
 
 	private IGUIElement createNewGUIObject(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{

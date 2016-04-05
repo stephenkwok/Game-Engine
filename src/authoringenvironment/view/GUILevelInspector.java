@@ -21,7 +21,7 @@ public class GUILevelInspector implements IGUI {
 		TabPane tabPane = new TabPane();
 		TabActors actors = new TabActors(myResources, ACTORS, availActors);
 		TabAttributes attr = new TabAttributes(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE);
-		tabPane.getTabs().addAll(actors.createTab(), attr.createTab());
+		tabPane.getTabs().addAll(actors.getTab(), attr.getTab());
 		myPane.getChildren().add(tabPane);
 	}
 

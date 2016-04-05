@@ -4,10 +4,10 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import gameengine.controller.ILevel;
 import gameengine.model.IActor;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.layout.Pane;
 /**
  * Returns BorderPane to represent Actor Editing Environment. 
@@ -15,8 +15,11 @@ import javafx.scene.layout.Pane;
  *
  */
 public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
+	private static final String ACTOR_OPTIONS_RESOURCE = "actorEditorOptions";
+	private static final String ACTOR_ATTRIBUTES = "Actor Attributes";
 	private BorderPane myRoot;
 	private GUILibrary library;
+	private TabAttributes attributes;
 	private ResourceBundle myResources;
 	private IActor myActor;
 	
@@ -43,11 +46,14 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	
 	private void setLeftPane(){
 		//left will be hbox of attributes and library
-		HBox hbox = new HBox();
+		VBox vbox = new VBox();
 		//attributes
 		library = new GUILibrary(myResources);
-		hbox.getChildren().addAll(library.getPane());
-		myRoot.setLeft(hbox);
+		attributes = new TabAttributes(myResources,ACTOR_ATTRIBUTES,ACTOR_OPTIONS_RESOURCE);
+		TabPane attributeTP = new TabPane();
+		attributeTP.getTabs().add(attributes.getTab());
+		vbox.getChildren().addAll(attributeTP, library.getPane());
+		myRoot.setLeft(vbox);
 	}
 	
 	private void setRightPane(){

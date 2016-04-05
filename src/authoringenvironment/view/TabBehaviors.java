@@ -1,6 +1,8 @@
 package authoringenvironment.view;
 
 import java.util.ResourceBundle;
+
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.collections.FXCollections;
@@ -17,13 +19,13 @@ public class TabBehaviors extends TabParent {
 	}
 
 	@Override
-	void setContent() {
+	Node getContent() {
 		behaviorLabels = FXCollections.observableArrayList();
 		for(String behavior: myResources.getString(tabText).split(" ")){
 			behaviorLabels.add(new Label(behavior));
 		}
 		ListView<Label> listView = new ListView<>(behaviorLabels);
-		tab.setContent(listView);
+		return listView;
 	}
 
 }
