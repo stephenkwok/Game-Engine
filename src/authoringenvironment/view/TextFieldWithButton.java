@@ -9,6 +9,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
+/**
+ * This class serves as the base class for all horizontal couplings of a label, text field, and button
+ * 
+ * @author Stephen
+ *
+ */
+
 public abstract class TextFieldWithButton {
 
 	HBox myContainer;

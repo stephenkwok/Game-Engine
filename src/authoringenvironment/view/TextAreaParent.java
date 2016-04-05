@@ -18,25 +18,31 @@ import javafx.scene.layout.VBox;
  *
  */
 
-public abstract class TextAreaParent extends VBox {
+public abstract class TextAreaParent {
 	
+	private VBox myContainer;
 	private Label myPrompt;
 	private TextArea myTextArea;
 	private Button myButton;
 	
 	public TextAreaParent(String promptText, String buttonText, int prefRows, EventHandler<ActionEvent> handler) {
+		myContainer = new VBox();
 		myPrompt = new Label(promptText);
 		myPrompt.setWrapText(true);
 		myTextArea = new TextArea();
 		myTextArea.setPrefRowCount(prefRows);
 		myButton = new Button(buttonText);
 		myButton.setOnAction(handler);
-		myButton.prefWidthProperty().bind(this.widthProperty());
-		this.getChildren().addAll(myPrompt, myTextArea, myButton);
+		myButton.prefWidthProperty().bind(myContainer.widthProperty());
+		myContainer.getChildren().addAll(myPrompt, myTextArea, myButton);
 	}
 	
-	protected void setVBoxPadding(Insets insets) {
-		this.setPadding(insets);
+	protected void setContainerPadding(Insets insets) {
+		myContainer.setPadding(insets);
+	}
+	
+	public VBox getCoupledNodes() {
+		return myContainer;
 	}
 
 }

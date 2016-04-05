@@ -3,6 +3,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 
+/**
+ * This class extends the TextFieldWithButton class and allows the author to set the game's name
+ * 
+ * @author Stephen
+ *
+ */
+
 public class TextFieldGameNameEditor extends TextFieldWithButton{
 
 	private static final double CONTAINER_SPACING = 10.0;

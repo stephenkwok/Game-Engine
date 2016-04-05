@@ -2,8 +2,6 @@ package authoringenvironment.view;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
-
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
@@ -11,15 +9,10 @@ import gameengine.actors.Actor;
 import gameengine.actors.PowerUpActor;
 import gameengine.controller.Level;
 import javafx.beans.binding.DoubleExpression;
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -32,6 +25,7 @@ import javafx.stage.Stage;
 
 public class GUIMainScreen implements IGUI {
 
+	private static final int NUM_SCROLLPANES = 2;
 	private Controller controller;
 	private VBox actorLabelContainer;
 	private VBox levelLabelContainer;
@@ -98,8 +92,7 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	private void initScrollPane(ScrollPane scrollPane, VBox container) {
-		// magic value
-		bindNodeSizeToGivenSize(scrollPane, scrollPaneContainer.widthProperty().divide(2.0), null);
+		bindNodeSizeToGivenSize(scrollPane, scrollPaneContainer.widthProperty().divide(NUM_SCROLLPANES), null);
 		scrollPane.setContent(container);
 	}
 

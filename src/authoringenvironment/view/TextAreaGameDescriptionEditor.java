@@ -19,7 +19,7 @@ public class TextAreaGameDescriptionEditor extends TextAreaParent {
 	
 	public TextAreaGameDescriptionEditor(String promptText, String buttonText, int prefRows, EventHandler<ActionEvent> handler) {
 		super(promptText, buttonText, prefRows, handler);
-		setVBoxPadding(new Insets(VBOX_PADDING));
+		setContainerPadding(new Insets(VBOX_PADDING));
 	}
 
 }

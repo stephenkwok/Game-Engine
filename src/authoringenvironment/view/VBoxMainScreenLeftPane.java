@@ -7,6 +7,15 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+/**
+ * This class functions as a container for all GUI elements in the Main Screen's left pane. It includes
+ * a welcome message, a text field where the author can edit the name of the game, and a text area where
+ * the author can edit the game's description
+ * 
+ * @author Stephen
+ *
+ */
+
 public class VBoxMainScreenLeftPane extends VBox {
 
 	private static final double VBOX_PADDING = 20;
@@ -30,7 +39,7 @@ public class VBoxMainScreenLeftPane extends VBox {
 		initWelcomeMessage();
 		initGameNameEditor();
 		initGameDescriptionEditor();
-		this.getChildren().addAll(welcomeMessage, nameEditor.getCoupledNodes(), gameDescriptionEditor);
+		this.getChildren().addAll(welcomeMessage, nameEditor.getCoupledNodes(), gameDescriptionEditor.getCoupledNodes());
 	}
 
 	private void initWelcomeMessage() {
