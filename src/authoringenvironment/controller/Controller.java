@@ -11,7 +11,7 @@ import authoringenvironment.view.GUIActorEditingEnvironment;
 import authoringenvironment.view.GUILevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
-import gameengine.controller.Actor;
+import gameengine.actors.Actor;
 import gameengine.controller.Level;
 import javafx.stage.Stage;
 

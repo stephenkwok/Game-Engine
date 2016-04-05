@@ -3,7 +3,7 @@ package authoringenvironment.view;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import gameengine.controller.Actor;
+import gameengine.actors.Actor;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;

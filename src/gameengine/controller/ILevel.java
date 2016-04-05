@@ -1,5 +1,6 @@
 package gameengine.controller;
 
+import gameengine.actors.Actor;
 import gameengine.model.IActor;
 import gameengine.model.ITrigger;
 

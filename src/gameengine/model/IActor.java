@@ -19,7 +19,6 @@ public interface IActor {
      */
     public double getX();
 
-
     /**
      * Gets the Actor's Y location
      *
@@ -129,5 +128,11 @@ public interface IActor {
      * @return The Actor's ID
      */
     public int getID();
+    
+    /**
+     * Provides Actor type to distinguish between enemy/neutral etc
+     * @return The Actor's type
+     */
+    public String getActorType();
 
 }
