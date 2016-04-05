@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -28,6 +29,7 @@ public class TextAreaWithButton extends VBox {
 		myButton.setOnAction(handler);
 		myButton.prefWidthProperty().bind(this.widthProperty());
 		this.getChildren().addAll(myPrompt, myTextArea, myButton);
+		this.setPadding(new Insets(10.0));
 	}
 
 }
