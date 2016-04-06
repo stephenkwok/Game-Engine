@@ -1,5 +1,7 @@
 package authoringenvironment.view;
 
+import java.util.ResourceBundle;
+
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
@@ -18,17 +20,20 @@ public class LabelClickable extends Label {
 	private static final String IMAGE_TEXT_PADDING = "    ";
 	private static final Double FIT_SIZE = 75.0;
 	private static final Double LABEL_PADDING = 10.0;
-	
-	IEditableGameElement myEditable;
-	IEditingEnvironment myEnvironment;
-	Controller controller;
+
+	private ResourceBundle myResources;
+	private IEditableGameElement myEditable;
+	private IEditingEnvironment myEnvironment;
+	private Controller controller;
+
 	
 	public LabelClickable(IEditableGameElement editable, IEditingEnvironment environment, Controller controller) {
 		this.myEditable = editable;
 		this.controller = controller;
 		this.myEnvironment = environment;
+		this.myResources = ResourceBundle.getBundle("mainScreenGUI");
 		this.setOnMouseClicked(e -> reactToMouseClicked());
-		this.setStyle("-fx-border-color: black;");
+		this.setStyle(myResources.getString("defaultBorderColor"));
 	}
 	
 	private void reactToMouseClicked() {
@@ -44,8 +49,7 @@ public class LabelClickable extends Label {
 		ImageView imageView = new ImageView(myEditable.getImage());
 		imageView.setFitHeight(FIT_SIZE);
 		imageView.setFitWidth(FIT_SIZE);
-		Insets insets = new Insets(LABEL_PADDING);
-		this.setPadding(insets);
+		this.setPadding(new Insets(LABEL_PADDING));
 		this.setGraphic(imageView);
 	}
 

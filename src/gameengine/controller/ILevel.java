@@ -1,7 +1,6 @@
 package gameengine.controller;
 
-import gameengine.actors.Actor;
-import gameengine.model.IActor;
+import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public interface ILevel {
      *
      * @return A List of all the Actors on in the Level
      */
-    public List<IActor> getActors();
+    public List<Actor> getActors();
 
     /**
      * Adds a new Actor to a Level
