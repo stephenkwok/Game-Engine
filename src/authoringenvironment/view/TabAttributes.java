@@ -21,7 +21,7 @@ import javafx.scene.layout.VBox;
 public class TabAttributes extends TabParent {
 	private static final int NO_PADDING = 0;
 	private static final int PADDING = 10;
-	private static final double TEXTFIELD_WIDTH = 190;
+	private static final double TEXTFIELD_WIDTH = 250;
 	private static final String EDITOR_ELEMENTS = "EditorElements";
 	private static final String PROMPT = "Select";
 	private static final String DELIMITER = ",";
@@ -44,13 +44,15 @@ public class TabAttributes extends TabParent {
 	@Override
 	Node getContent() {
 		VBox vbox = new VBox(PADDING);
+		vbox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
+
 		
 		String[] elements = myAttributesResources.getString(EDITOR_ELEMENTS).split(DELIMITER);
 		for (int i = 0; i < elements.length; i++) {
 			HBox hbox = new HBox(PADDING);
 			hbox.setAlignment(Pos.CENTER_LEFT);
 			Label label = new Label(myAttributesResources.getString(elements[i] + LABEL));
-			label.setPadding(new Insets(NO_PADDING, PADDING, NO_PADDING, PADDING));
+			//label.setPadding(new Insets(NO_PADDING, PADDING, NO_PADDING, PADDING));
 			label.setWrapText(true);
 			IGUIElement elementToCreate = null;
 			try {

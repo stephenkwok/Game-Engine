@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import gameengine.actors.Actor;
 import gameengine.actors.PowerUpActor;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -28,7 +29,7 @@ public class TabActors extends TabParent {
 	private static final int TILE_WIDTH = 75;
 	private static final int NUM_COLS = 4;
 	private static final int NUM_ROWS = 2;
-	private static final int ACTOR_IMAGE_HEIGHT = 75;
+	private static final int PADDING = 10;
 	private List<ImageviewActorIcon> actorIcons;
 	private TilePane myPane;
 	
@@ -56,7 +57,8 @@ public class TabActors extends TabParent {
 		myPane.setPrefRows(NUM_ROWS);
 		myPane.setOrientation(Orientation.HORIZONTAL);
 		myPane.setAlignment(Pos.TOP_CENTER);
-		
+		myPane.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
+
 		myPane.getChildren().addAll(actorIcons);	
 	}
 	
