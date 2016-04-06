@@ -26,7 +26,6 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
     private int health;
-    private int wealth;
     private int points;
     private int myID;
     private String myName;
@@ -62,24 +61,7 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
     	health = newHealth;
     }
     
-    
-	/**
-	 * Provides the Actor's wealth
-	 * 
-	 * @return the wealth
-	 */
-	public int getWealth() {
-		return wealth;
-	}
 
-	/**
-	 * Updates the Actor's health
-	 * @param wealth the wealth to set
-	 */
-	public void setWealth(int wealth) {
-		this.wealth = wealth;
-	}
-	
     /**
      * Provides the Actor's number of points
      *
@@ -89,6 +71,15 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
     public int getPoints() {
         return points;
     }
+    
+	/**
+	 * Updates the Actor's number of points
+	 * @param points the points to set
+	 */
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	
 
     /**
      * Moves the Actor based on a provided distance and direction
