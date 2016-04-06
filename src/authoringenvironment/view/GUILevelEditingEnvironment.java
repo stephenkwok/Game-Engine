@@ -69,21 +69,21 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	}
 
 	private void initializeDrag() {
-		List<Actor> actors = myInspector.getActorsTab().getActors();
+		List<ImageviewActorIcon> icons = myInspector.getActorsTab().getIcons();
 
 		setCenterPaneDragOver();
 		setCenterPaneDragEntered();
 		setCenterPaneDragExited();
 		setCenterPaneDragDropped();
 		
-		for (int i = 0; i < actors.size(); i++) {
-			Actor source = actors.get(i);
+		for (int i = 0; i < icons.size(); i++) {
+			ImageviewActorIcon source = icons.get(i);
 			setDragDetected(source);
 			setDragDone(source);
 		}
 	}
 
-	private void setDragDetected(Actor source) {
+	private void setDragDetected(ImageviewActorIcon source) {
 		source.setOnDragDetected(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
 				System.out.println("drag detected");
@@ -96,7 +96,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		});
 	}
 
-	private void setDragDone(Actor source) {
+	private void setDragDone(ImageviewActorIcon source) {
 		source.setOnDragDone(new EventHandler <DragEvent>() {
 			public void handle(DragEvent event) {
 				if (event.getTransferMode() == TransferMode.MOVE) {
@@ -199,9 +199,6 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 
 	}
 
-	public void setLevel(Level level){
-		myLevel = level;
-	}
 
 	@Override
 	public void setEditable(IEditableGameElement editable) {
