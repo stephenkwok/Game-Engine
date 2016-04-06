@@ -8,6 +8,7 @@ import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.controller.Controller;
 import gameengine.actors.Actor;
 import gameengine.controller.ILevel;
+import gameengine.controller.Level;
 import gameengine.model.IActor;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -39,9 +40,11 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private ResourceBundle myResources;
 	private VBox myLeftPane;
 	private Canvas myCanvas;
-	private ILevel myLevel;
+	private Level myLevel;
 	private List<Actor> availableActors;
 	private Pane myCenterPane;
+	private GraphicsContext myGC;
+	private ImageView myLevelBackground;
 
 	public GUILevelEditingEnvironment(Controller controller, List<Actor> actors) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
@@ -66,21 +69,21 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	}
 
 	private void initializeDrag() {
-		List<Actor> actors = myInspector.getActorsTab().getActors();
+		List<ImageviewActorIcon> icons = myInspector.getActorsTab().getIcons();
 
 		setCenterPaneDragOver();
 		setCenterPaneDragEntered();
 		setCenterPaneDragExited();
 		setCenterPaneDragDropped();
 		
-		for (int i = 0; i < actors.size(); i++) {
-			Actor source = actors.get(i);
+		for (int i = 0; i < icons.size(); i++) {
+			ImageviewActorIcon source = icons.get(i);
 			setDragDetected(source);
 			setDragDone(source);
 		}
 	}
 
-	private void setDragDetected(Actor source) {
+	private void setDragDetected(ImageviewActorIcon source) {
 		source.setOnDragDetected(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
 				System.out.println("drag detected");
@@ -93,7 +96,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		});
 	}
 
-	private void setDragDone(Actor source) {
+	private void setDragDone(ImageviewActorIcon source) {
 		source.setOnDragDone(new EventHandler <DragEvent>() {
 			public void handle(DragEvent event) {
 				if (event.getTransferMode() == TransferMode.MOVE) {
@@ -151,6 +154,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 							event.consume();
 						}
 					}); 
+					myLevel.addActor(actor);
 					myCenterPane.getChildren().add(actor);
 					success = true;
 				}
@@ -178,6 +182,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private void initializeCenter() {
 		myCenterPane = new Pane();
 		myCanvas = new Canvas();
+		myGC = myCanvas.getGraphicsContext2D();
 		myCenterPane.setStyle("-fx-background-color: white");
 		myCenterPane.getChildren().add(myCanvas);
 		myRoot.setCenter(myCenterPane);
@@ -194,13 +199,18 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 
 	}
 
-	public void setLevel(ILevel level){
-		myLevel = level;
-	}
 
 	@Override
 	public void setEditable(IEditableGameElement editable) {
-		myLevel = (ILevel) editable;
+		myCenterPane.getChildren().clear();
+		myLevel = (Level) editable;
+		myLevelBackground = new ImageView(myLevel.getImage());
+		//TODO: SHOULD THIS FIT THE PANE OR PRESERVE RATIO?
+		//myLevelBackground.setPreserveRatio(true);
+		myLevelBackground.fitHeightProperty().bind(myCenterPane.heightProperty());
+		myLevelBackground.fitWidthProperty().bind(myCenterPane.widthProperty());
+		myCenterPane.getChildren().add(myLevelBackground);
+		myCenterPane.getChildren().addAll(myLevel.getActors());
 	}
 
 

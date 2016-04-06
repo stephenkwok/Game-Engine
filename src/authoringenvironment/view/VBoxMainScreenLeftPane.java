@@ -50,7 +50,7 @@ public class VBoxMainScreenLeftPane extends VBox {
 	private void initGameNameEditor() {
 		String prompt = myResources.getString("gameName");
 		String buttonText = myResources.getString("go");
-		nameEditor = new TextFieldGameNameEditor(prompt, TEXT_FIELD_WIDTH, buttonText, saveNameButtonAction);
+		nameEditor = new TextFieldGameNameEditor(prompt, "", TEXT_FIELD_WIDTH, buttonText, saveNameButtonAction);
 	}
 	
 	private void initGameDescriptionEditor() {
