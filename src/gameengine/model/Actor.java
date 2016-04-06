@@ -233,9 +233,9 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
 	//public void typeOfCollision;
 	
 	public void collidesWith(Actor a) {
-		ClickTrigger collision = typeOfCollision(this, a);
-		Action action = myRules.get(collision.getTriggerName()).get(0);
-		action.performOn(a);
+//		ClickTrigger collision = typeOfCollision(this, a);
+//		Action action = myRules.get(collision.getTriggerName()).get(0);
+//		action.performOn(a);
 	}
 
 

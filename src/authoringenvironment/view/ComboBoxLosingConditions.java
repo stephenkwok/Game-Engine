@@ -3,10 +3,7 @@ package authoringenvironment.view;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-
-public class ComboBoxLosingConditions extends ComboBoxParent {
+public class ComboBoxLosingConditions extends ComboBoxTextCell {
 	private List<String> myOptions;
 	
 	public ComboBoxLosingConditions(ResourceBundle myResources, String promptText, List<String> options) {
@@ -17,11 +14,6 @@ public class ComboBoxLosingConditions extends ComboBoxParent {
 	@Override
 	void setButtonAction() {
 		// TODO Auto-generated method stub
-	}
-
-	@Override
-	protected Node getNodeForBox(String item) {
-		return new Label(NO_NODE_FOR_BOX);
 	}
 
 	@Override
