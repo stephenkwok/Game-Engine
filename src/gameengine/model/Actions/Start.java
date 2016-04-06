@@ -16,4 +16,10 @@ public class Start extends ControllerAction {
     public void perform() {
         start();
     }
+
+	@Override
+	public void performOn(Actor a) {
+		// TODO Auto-generated method stub
+		
+	}
 }
