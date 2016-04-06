@@ -15,10 +15,5 @@ public class VerticalStaticCollision extends Action{
 		getActor().setYVelo(0);
 	}
 
-	@Override
-	public void performOn(Actor a) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

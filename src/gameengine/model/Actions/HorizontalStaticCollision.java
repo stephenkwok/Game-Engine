@@ -10,15 +10,10 @@ public class HorizontalStaticCollision extends Action{
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	@Override
 	public void perform() {
 		getActor().setXVelo(0);
-	}
-
-	@Override
-	public void performOn(Actor a) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

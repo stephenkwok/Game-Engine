@@ -21,9 +21,4 @@ public class MoveLeft extends MovingAction {
         moveActor(LEFT_DIRECTION);
     }
 
-	@Override
-	public void performOn(Actor a) {
-		// TODO Auto-generated method stub
-		
-	}
 }
