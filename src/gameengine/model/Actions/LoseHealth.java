@@ -17,12 +17,5 @@ public class LoseHealth extends Action{
 	public void perform() {
 		getActor().setHealth( getActor().getHealth()-numLivesLost );
 	}
-
-	@Override
-	public void performOn(Actor a) {
-		a.setHealth(a.getHealth()-numLivesLost);
-	}
-
-
 	
 }

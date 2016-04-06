@@ -17,10 +17,4 @@ public class GainPoints extends Action{
 		getActor().setPoints(getActor().getPoints()+numPointsGained);
 	}
 
-	@Override
-	public void performOn(Actor a) {
-		a.setPoints(a.getPoints()+numPointsGained);
-		getActor().setPoints(getActor().getPoints()-myPointsLost);
-	}
-
 }

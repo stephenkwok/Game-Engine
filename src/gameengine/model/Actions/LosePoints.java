@@ -16,11 +16,4 @@ public class LosePoints extends Action{
 		getActor().setPoints(getActor().getPoints()-numPointsLost);
 	}
 
-	//this is enemy, a is character
-	@Override
-	public void performOn(Actor a) {
-		a.setPoints(a.getPoints()-numPointsLost);
-		
-	}
-
 }
