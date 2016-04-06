@@ -5,7 +5,6 @@ import java.util.List;
 
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import gameengine.actors.PowerUpActor;
 import gameengine.controller.ILevel;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
