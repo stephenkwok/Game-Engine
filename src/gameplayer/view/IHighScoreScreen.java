@@ -5,7 +5,7 @@ package gameplayer.view;
  * @author Carine
  *
  */
-public interface HighScoreScreen {
+public interface IHighScoreScreen {
 
 	/**
 	 * Creates the scene with with current scores saved in the game score xml data

@@ -5,7 +5,7 @@ package gameplayer.view;
  * @author Carine
  *
  */
-public interface BaseScreen {
+public interface IBaseScreen {
 	/**
 	 * Adds the auxiliary views, like the HUD display, MenuBar, and GameScreen, to the BaseScreen
 	 */

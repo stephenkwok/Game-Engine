@@ -9,7 +9,7 @@ import javafx.event.Event;
  * @author cmt57
  */
 
-public interface GameScreen {
+public interface IGameScreen {
 	
 	/**
 	 * Will add a node to the screen's scene representing the given actor's view.

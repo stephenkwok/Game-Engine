@@ -5,7 +5,7 @@ package gameplayer.view;
  * @author cmt57
  */
 
-public interface HUDScreen {
+public interface IHUDScreen {
 	
 	/** 
 	 * Will reflect observed changes from the observable backend version of a display info screen.

@@ -4,7 +4,7 @@ import java.util.List;
 
 import gameengine.controller.IGame;
 import gameengine.controller.ILevel;
-import gameplayer.view.BaseScreen;
+import gameplayer.view.IBaseScreen;
 
 /** 
  * This class serves as the private interface that any game controller must implement in order to set up the IGame with the appropriate levels and actors for the game engine to interact with
@@ -25,7 +25,7 @@ public interface GameController {
 	 * @param IGame
 	 * @return BaseScreen
 	 */
-	public BaseScreen createGameView (IGame myGame);
+	public IBaseScreen createGameView (IGame myGame);
 	
 	/**
 	 * Sets the current game to the given IGame
@@ -35,9 +35,9 @@ public interface GameController {
 	
 	/**
 	 * Sets the basic game view to the given BaseScreen
-	 * @param BaseScreen
+	 * @param IBaseScreen
 	 */
-	public void setGameView (BaseScreen myGameView);
+	public void setGameView (IBaseScreen myGameView);
 	
 	/**
 	 * Will initialize the backend (game engine) with the current level's information and actor information to set up the game for playing.  Will visualize that backend too. 
