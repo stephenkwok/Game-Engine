@@ -31,7 +31,6 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
     private int myID;
     private String myName;
     private String myActorType;
-
     private Map<String, List<Action>> myRules;
 
     /**
@@ -42,6 +41,7 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
         myRules = new HashMap<>();
         myName = DEFAULT_NAME;
         setImage(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME)));
+    
     }
 
     /**
@@ -236,6 +236,11 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
 		ClickTrigger collision = typeOfCollision(this, a);
 		Action action = myRules.get(collision.getTriggerName()).get(0);
 		action.performOn(a);
+	}
+
+	private ClickTrigger typeOfCollision(Actor actor, Actor a) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
