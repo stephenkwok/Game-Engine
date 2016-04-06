@@ -1,18 +1,33 @@
 package gameengine.model;
 
+/**
+ * Physics Engine Class
+ * Handles calculating/assigning new positions based on positional attributes and movement vectors
+ * Needs to be refactored
+ * @author justinbergkamp
+ */
+
+
 public class PhysicsEngine {
 	
-	private int timeStep = 1;
-	private double friction = .05;
-	private double gravity = .1 ;
-	private double maxXVelo = 50;
-	private double maxYVelo =  -50;
+	private int timeStep    = 1;    //Arbitrary timeStep, will be set to the time provided by step()
+	private double friction = .05;  //Horizontal acceleration dampening (friction) coefficient
+	private double gravity  = .1 ;  //Falling acceleration coefficient
+	private double maxXVelo = 50;   //maximum horizontal velocity
+	private double maxYVelo =  -50; //maximum vertical velocity
 	
 	PhysicsEngine(){
 		
 	}
 	
-	private double applyForce(double velo, double force){
+	
+	/**
+	 * This method updates a given velocity by applying a given force
+	 * @param velo
+	 * @param force
+	 * @return updated
+	 */
+	private double applyForce(double velo, double force){  //Applies a force(acceleration because mass =1) to a velocity
 		double new_velo = velo + force*timeStep;
 		return new_velo;
 	}

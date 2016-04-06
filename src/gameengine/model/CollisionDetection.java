@@ -2,13 +2,21 @@ package gameengine.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import gameengine.model.Actor;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.CollisionTrigger;
 import gameengine.model.Triggers.NeutralCollision;
 import gameengine.model.Triggers.SideCollision;
 import gameengine.model.Triggers.TopCollision;;
+
+/**
+ * Collision Detection class handles checking for collisions among a list of Actors
+ * It also handles resolving said collision should one be found
+ * Needs Refactoring
+ * 
+ * @author justinbergkamp
+ *
+ */
 public class CollisionDetection {
 
 	public void detection(List<Actor> actors){

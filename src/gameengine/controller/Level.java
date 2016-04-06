@@ -1,6 +1,7 @@
 package gameengine.controller;
 
 import gameengine.model.Actor;
+import gameengine.model.CollisionDetection;
 import gameengine.model.ITrigger;
 import javafx.scene.image.Image;
 
@@ -21,6 +22,7 @@ public class Level implements ILevel, IEditableGameElement {
     Map<String, List<Actor>> triggerMap;
     String myName;
     Image myBackground;
+    CollisionDetection myCollisionDetector ;
 
     /**
      * Instantiates the triggerMap and Actor list
@@ -45,8 +47,7 @@ public class Level implements ILevel, IEditableGameElement {
                 myActor.performActionsFor(myTrigger);
             }
         }
-        
-        //method to check collisions
+        myCollisionDetector.detection(myActors); //Collision Detection/Resolution for each Actor
     }
 
     /**
