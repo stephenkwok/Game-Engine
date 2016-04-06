@@ -8,6 +8,8 @@ import java.util.Set;
 
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.Action;
+import gameengine.model.Triggers.ClickTrigger;
+import gameengine.model.Triggers.CollisionTrigger;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -30,6 +32,7 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
     private int myID;
     private String myName;
     private String myActorType;
+    private int myStrength;
 
     private Map<String, List<Action>> myRules;
 
@@ -228,6 +231,15 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
 		myName = name;
 	}
 
+	
+	public void collidesWith(Actor a, CollisionTrigger collisionTrigger) {
+		Action action = myRules.get(collisionTrigger.getTriggerName()).get(0);
+		action.performOn(a);
+	}
+
+	public int getStrength() {
+		return myStrength;
+	}
 
 
 }
