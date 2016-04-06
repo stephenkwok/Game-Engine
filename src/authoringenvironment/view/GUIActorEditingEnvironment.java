@@ -2,9 +2,9 @@ package authoringenvironment.view;
 
 import java.util.ResourceBundle;
 
+
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import gameengine.actors.PowerUpActor;
 import gameengine.model.Actor;
 import gameengine.model.IActor;
 import javafx.geometry.Insets;
@@ -50,7 +50,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	private void initializeEnvironment() {
 		myRoot = new BorderPane();
 		//Test Actor ImageView usage
-		Actor testActor = new PowerUpActor();
+		Actor testActor = new Actor();
 		testActor.setFitHeight(ACTOR_IMAGE_HEIGHT);
 		testActor.setPreserveRatio(true);
 		this.myActor = testActor;

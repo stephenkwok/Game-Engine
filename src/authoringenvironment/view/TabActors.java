@@ -5,7 +5,6 @@ import java.util.List;
 
 import java.util.ResourceBundle;
 
-import gameengine.actors.PowerUpActor;
 import gameengine.model.Actor;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -35,13 +34,13 @@ public class TabActors extends TabParent {
 	
 	public TabActors(ResourceBundle myResources, String tabText, List<Actor> availActors) {
 		super(myResources, tabText);		
-		Actor newActor1 = new PowerUpActor();
+		Actor newActor1 = new Actor();
 		newActor1.setID(1);
-		Actor newActor2 = new PowerUpActor();
+		Actor newActor2 = new Actor();
 		newActor2.setID(2);;
-		Actor newActor3 = new PowerUpActor();
+		Actor newActor3 = new Actor();
 		newActor3.setID(3);
-		Actor newActor4 = new PowerUpActor();
+		Actor newActor4 = new Actor();
 		newActor4.setID(4);
 		availActors.add(newActor1); // PLACEHOLDER RN, STEPHEN SHOULD'VE ADDED A DEFAULT ONE ALREADY
 		availActors.add(newActor2);
