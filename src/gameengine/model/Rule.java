@@ -1,6 +1,5 @@
 package gameengine.model;
 
-import gameengine.controller.Action;
 import gameengine.model.IRule;
 import gameengine.model.ITrigger;
 

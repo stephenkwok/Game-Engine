@@ -18,7 +18,7 @@ public class Level implements ILevel, IEditableGameElement {
 
 	private static final String DEFAULT_NAME = "Untitled";
 	private static final String DEFAULT_IMAGE_NAME = "default_background.png";
-    List<IActor> myActors;
+    List<Actor> myActors;
     Map<String, List<Actor>> triggerMap;
     String myName;
     Image myBackground;
@@ -98,7 +98,7 @@ public class Level implements ILevel, IEditableGameElement {
      * @return The List of Actors in the Level
      */
     @Override
-    public List<IActor> getActors() {
+    public List<Actor> getActors() {
         return myActors;
     }
 

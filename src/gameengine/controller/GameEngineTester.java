@@ -5,6 +5,7 @@ import java.util.List;
 
 import gameengine.actors.Actor;
 import gameengine.actors.PowerUpActor;
+import gameengine.model.Action;
 import gameengine.model.IActor;
 import gameengine.model.ITrigger;
 import gameengine.model.Rule;

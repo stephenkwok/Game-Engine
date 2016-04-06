@@ -1,7 +1,6 @@
-package gameengine.controller;
+package gameengine.model;
 
 import gameengine.actors.Actor;
-import gameengine.model.IAction;
 
 /**
  * This class defines the generalized behavior of an Action object.

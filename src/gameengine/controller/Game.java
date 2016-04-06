@@ -2,7 +2,7 @@ package gameengine.controller;
 
 import java.util.*;
 
-import gameengine.model.IActor;
+import gameengine.actors.Actor;
 import gameengine.model.ITrigger;
 
 /**
@@ -10,14 +10,12 @@ import gameengine.model.ITrigger;
  * @author colettetorres
  *
  */
-public class Game implements IGame {
-	private String initialGameFile;
-	private ILevel currentLevel;
-	private List<Level> levels;
-	private List<IActor> allActors = new ArrayList<IActor>();
-	private Map<Integer,IActor> actorIDMap = new HashMap<Integer,IActor>();
-	private Map<String,List<Integer>> levelActorsMap = new HashMap<String,List<Integer>>();
+public class Game extends Observable implements Observer {
 
+	private String initialGameFile;
+	private List<Level> levels;
+	private GameInfo info;
+	
 	/**
 	 * A game is instantiated with a list of all levels in the game and a level to start on.
 	 * Upon instantiation, the actors from all levels are collected into a list and added to a map containing references from ID to actor.
@@ -25,57 +23,65 @@ public class Game implements IGame {
 	 * @param levelNum the first level to play in the game
 	 * @param gameLevels all the levels in the game 
 	 */
-	public Game(int levelNum, List<Level> gameLevels, String gameFilePath) {
+	public Game(String gameFilePath, GameInfo gameInfo, List<Level> gameLevels) {
 		initialGameFile = gameFilePath;
 		levels = gameLevels;
-		currentLevel = gameLevels.get(levelNum);
-		for(ILevel level: gameLevels){
-			levelActorsMap.put(level.getName(), new ArrayList<Integer>());
-			for(IActor actor: level.getActors()){
-				allActors.add(actor);
-				actorIDMap.put(actor.getID(), actor);
-				List<Integer> levelActorIDs = levelActorsMap.get(level.getName());
-				levelActorIDs.add(actor.getID());
-				levelActorsMap.put(level.getName(),levelActorIDs);
+		info = gameInfo;
+		observeActors();
+	}
+	
+	private void observeActors(){
+		for(Level level: levels){
+			for(Actor actor: level.getActors()){
+				actor.addObserver(this);
 			}
 		}
 	}
+	public String getInitialGameFile() {
+		return initialGameFile;
+	}
 
-	/**
-	 * Sets the current level in the game 
-	 * @param mylevel the level to be set 
-	 */
-	@Override
-	public void setLevel(ILevel mylevel) {
-		currentLevel = mylevel;
+	public void setInitialGameFile(String initialGameFile) {
+		this.initialGameFile = initialGameFile;
+	}
 
+	public GameInfo getInfo() {
+		return info;
+	}
+
+	public void setInfo(GameInfo info) {
+		this.info = info;
+	}
+
+	public void setLevels(List<Level> levels) {
+		this.levels = levels;
 	}
 	
 	/**
 	 * Gets a list of all levels in the game 
 	 * @return a list of all levels in the game 
 	 */
-	@Override
 	public List<Level> getLevels() {
 		return levels;
+	}
+	
+	public void nextLevel(){
+		info.setCurrentLevelNum(info.getCurrentLevelNum()+1);
 	}
 	
 	/**
 	 * Lets current level handle a trigger 
 	 * @param myTrigger the trigger received from the game player 
 	 */
-	@Override
 	public void handleTrigger(ITrigger myTrigger) {
-		currentLevel.handleTrigger(myTrigger);
+		levels.get(info.getCurrentLevelNum()).handleTrigger(myTrigger);
 	}
-	
-	/**
-	 * Gets a list of all actors  used in the game 
-	 * @return a list of all actors in the game 
-	 */
+
 	@Override
-	public List<IActor> getActors() {
-		return allActors;
+	public void update(Observable o, Object arg) {
+		notifyObservers(arg);
+		
 	}
+
 
 }

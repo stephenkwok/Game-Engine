@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Set;
 
 import authoringenvironment.model.IEditableGameElement;
-import gameengine.controller.Action;
+import gameengine.model.Action;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.ITrigger;
@@ -23,11 +24,13 @@ import javafx.scene.image.ImageView;
  * @author blakekaplan
  */
 
-public abstract class Actor extends ImageView implements IActor, IEditableGameElement {
+public abstract class Actor extends Observable implements IActor, IEditableGameElement {
 
     private static final double DEGREES_TO_RADIANS = Math.PI / 180;
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
+    private double x;
+    private double y;
     private int health;
     private int wealth;
     private int points;
@@ -101,8 +104,8 @@ public abstract class Actor extends ImageView implements IActor, IEditableGameEl
      */
     @Override
     public void move(double distance, double direction) {
-        setX(distance * Math.cos(direction * DEGREES_TO_RADIANS));
-        setY(distance * Math.sin(direction * DEGREES_TO_RADIANS));
+        x = distance * Math.cos(direction * DEGREES_TO_RADIANS);
+        y = distance * Math.sin(direction * DEGREES_TO_RADIANS);
     }
 
     /**
