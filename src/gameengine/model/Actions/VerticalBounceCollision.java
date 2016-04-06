@@ -1,6 +1,6 @@
 package gameengine.model.Actions;
 
-import gameengine.actors.Actor;
+import gameengine.model.Actor;
 import gameengine.controller.Action;
 
 public class VerticalBounceCollision extends Action{
@@ -13,6 +13,12 @@ public class VerticalBounceCollision extends Action{
 	@Override
 	public void perform() {
 		getActor().setYVelo(getActor().getYVelo()*-1);
+	}
+
+	@Override
+	public void performOn(Actor a) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,6 +1,6 @@
 package gameengine.model.Actions;
 
-import gameengine.actors.Actor;
+import gameengine.model.Actor;
 import gameengine.controller.Action;
 
 public class HorizontalStaticCollision extends Action{
@@ -13,6 +13,12 @@ public class HorizontalStaticCollision extends Action{
 	@Override
 	public void perform() {
 		getActor().setXVelo(0);
+	}
+
+	@Override
+	public void performOn(Actor a) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

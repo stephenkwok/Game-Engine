@@ -1,6 +1,6 @@
 package gameengine.model.Actions;
 
-import gameengine.actors.Actor;
+import gameengine.model.Actor;
 import gameengine.controller.Action;
 
 public class GainHealth extends Action{
@@ -14,6 +14,12 @@ public class GainHealth extends Action{
 	@Override
 	public void perform() {
 		getActor().setHealth( getActor().getHealth()+numLivesGained );
+	}
+
+	@Override
+	public void performOn(Actor a) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
