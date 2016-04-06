@@ -6,15 +6,10 @@ import java.util.ResourceBundle;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.controller.Controller;
-import gameengine.actors.Actor;
-import gameengine.controller.ILevel;
 import gameengine.controller.Level;
-import gameengine.model.IActor;
+import gameengine.model.Actor;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -23,9 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 /**
  * Front-end of the Level Editing Environment
@@ -43,7 +36,6 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private Level myLevel;
 	private List<Actor> availableActors;
 	private Pane myCenterPane;
-	private GraphicsContext myGC;
 	private ImageView myLevelBackground;
 
 	public GUILevelEditingEnvironment(Controller controller, List<Actor> actors) {
@@ -182,7 +174,6 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private void initializeCenter() {
 		myCenterPane = new Pane();
 		myCanvas = new Canvas();
-		myGC = myCanvas.getGraphicsContext2D();
 		myCenterPane.setStyle("-fx-background-color: white");
 		myCenterPane.getChildren().add(myCanvas);
 		myRoot.setCenter(myCenterPane);

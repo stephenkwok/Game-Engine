@@ -3,8 +3,7 @@ package gameengine.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import gameengine.actors.Actor;
-import gameengine.actors.PowerUpActor;
+import gameengine.model.Actor;
 import gameengine.model.IActor;
 import gameengine.model.ITrigger;
 import gameengine.model.Rule;
@@ -29,7 +28,7 @@ public class GameEngineTester {
         //Rules:
         //  Moves Right 50 on Click
         //  Move Right 70 on Tick
-        Actor actor1 = new PowerUpActor();
+        Actor actor1 = new Actor();
         actor1.setID(1);
         ITrigger trigger1 = new ClickTrigger();
         List<Object> args1 = new ArrayList<>();
@@ -45,7 +44,7 @@ public class GameEngineTester {
         //Create Actor 2
         //Rules:
         //  Moves Right 50 on Tick
-        Actor actor2 = new PowerUpActor();
+        Actor actor2 = new Actor();
         actor2.setID(2);
         ITrigger trigger2 = new TickTrigger();
         List<Object> args2 = new ArrayList<>();

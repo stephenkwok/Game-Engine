@@ -22,7 +22,7 @@ public class TextFieldGameNameEditor extends TextFieldWithButton{
 	public TextFieldGameNameEditor(String labelText, String prompt, Double textFieldWidth, String buttonText, EventHandler<ActionEvent> buttonAction) {
 		super(labelText, prompt, textFieldWidth, buttonText, buttonAction);
 		this.myResources = ResourceBundle.getBundle("mainScreenGui");
-		setTextFieldPromptText(myResources.getString("enterGameName"));
+//		setTextFieldPromptText(myResources.getString("enterGameName"));
 		setContainerSpacing(CONTAINER_SPACING);
 		setContainerPadding(new Insets(CONTAINER_PADDING));
 	}

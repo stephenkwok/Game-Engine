@@ -1,7 +1,5 @@
 package gameengine.model;
 
-import gameengine.actors.Actor;
-
 /**
  * This interface defines the public methods for Trigger objects. Trigger correspond with the different events that can
  * cause an Action response.
