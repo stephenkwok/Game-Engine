@@ -1,5 +1,7 @@
 package authoringenvironment.view;
 
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -16,10 +18,14 @@ import javafx.geometry.Insets;
 public class TextAreaGameDescriptionEditor extends TextAreaParent {
 	
 	private static final double VBOX_PADDING = 10.0;
+	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGui";
+	private ResourceBundle myResources;
 	
 	public TextAreaGameDescriptionEditor(String promptText, String buttonText, int prefRows, EventHandler<ActionEvent> handler) {
 		super(promptText, buttonText, prefRows, handler);
-		setVBoxPadding(new Insets(VBOX_PADDING));
+		myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
+		setContainerPadding(new Insets(VBOX_PADDING));
+		setTextAreaPromptText(myResources.getString("enterGameDescription"));
 	}
 
 }

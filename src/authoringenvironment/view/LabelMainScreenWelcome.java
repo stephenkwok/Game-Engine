@@ -1,7 +1,5 @@
 package authoringenvironment.view;
 
-import java.util.ResourceBundle;
-
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 
