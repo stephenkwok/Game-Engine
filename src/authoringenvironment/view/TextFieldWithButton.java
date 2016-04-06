@@ -19,15 +19,15 @@ import javafx.scene.layout.Priority;
 
 public class TextFieldWithButton implements IGUIElement {
 
-	HBox myContainer;
-	Label myTextFieldPrompt;
-	TextField myTextField;
-	Button myButton;
-	String labelText;
-	String promptText;
-	Double textFieldWidth;
-	String buttonText;
-	EventHandler<ActionEvent> buttonAction;
+	private HBox myContainer;
+	private Label myTextFieldPrompt;
+	private TextField myTextField;
+	private Button myButton;
+	private String labelText;
+	private String promptText;
+	private Double textFieldWidth;
+	private String buttonText;
+	private EventHandler<ActionEvent> buttonAction;
 	
 
 	public TextFieldWithButton(String labelText, String promptText, Double textFieldWidth, String buttonText,
