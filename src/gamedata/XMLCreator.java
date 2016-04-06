@@ -54,7 +54,11 @@ public class XMLCreator {
 	public void writeLevel (Level level) {
 		XStream xstream = new XStream();
 		xstream.alias("level", Level.class);
+		xstream.autodetectAnnotations(true);
 		String xml = xstream.toXML(level);
+		Level leveltest = (Level) xstream.fromXML(xml);
+		System.out.println(leveltest);
+		
 		Document levelDocument;
 		try {
 			levelDocument = myDocumentBuilder.parse(new InputSource(new StringReader(xml)));

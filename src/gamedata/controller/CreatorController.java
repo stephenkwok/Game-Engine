@@ -45,7 +45,7 @@ public class CreatorController implements ICreatorController {
 		//setUpFileChooser();
 		
 		try {
-			saveForEditing(new File ("src/resources/test1.xml"));
+			saveForEditing(new File ("src/resources/test2.xml"));
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
