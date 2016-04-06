@@ -2,6 +2,7 @@ package gameengine.model.Actions;
 
 import gameengine.controller.Action;
 import gameengine.model.Actor;
+import gameengine.model.PhysicsEngine;
 
 public class GainPoints extends Action{
 
@@ -13,7 +14,7 @@ public class GainPoints extends Action{
 	}
 
 	@Override
-	public void perform() {
+	public void perform(PhysicsEngine myPhysicsEngine) {
 		getActor().setPoints(getActor().getPoints()+numPointsGained);
 	}
 
@@ -22,5 +23,6 @@ public class GainPoints extends Action{
 		a.setPoints(a.getPoints()+numPointsGained);
 		getActor().setPoints(getActor().getPoints()-myPointsLost);
 	}
+
 
 }

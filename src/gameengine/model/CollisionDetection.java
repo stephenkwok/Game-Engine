@@ -19,6 +19,12 @@ import gameengine.model.Triggers.TopCollision;;
  */
 public class CollisionDetection {
 
+	PhysicsEngine myPhysicsEngine;
+	
+	CollisionDetection( PhysicsEngine physicsEngine){
+		myPhysicsEngine = physicsEngine;
+	}
+	
 	public void detection(List<Actor> actors){
 		for (Actor a1 : actors){
 			for(Actor a2 : actors){
@@ -54,8 +60,8 @@ public class CollisionDetection {
 			a1.collidesWith(a2,getCollisionType( a1, a2));
 		}else{
 			NeutralCollision nc = new NeutralCollision();
-			a1.performActionsFor(nc);
-			a2.performActionsFor(nc);
+			a1.performActionsFor(nc, myPhysicsEngine);
+			a2.performActionsFor(nc, myPhysicsEngine);
 		}
 	}
 	

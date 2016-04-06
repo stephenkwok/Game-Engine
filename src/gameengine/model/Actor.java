@@ -120,12 +120,13 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
      * Calls the appropriate sequence of Actions based on a provided Trigger
      *
      * @param myTrigger A Trigger object that calls for an appropriate response
+     * @param myPhysicsEngine 
      */
     @Override
-    public void performActionsFor(ITrigger myTrigger) {
+    public void performActionsFor(ITrigger myTrigger, PhysicsEngine myPhysicsEngine) {
         List<Action> myActions = myRules.get(myTrigger.getTriggerName());
         for (Action myAction : myActions) {
-            myAction.perform();
+            myAction.perform(myPhysicsEngine);
         }
     }
 

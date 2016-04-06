@@ -16,7 +16,7 @@ public class PhysicsEngine {
 	private double maxXVelo = 50;   //maximum horizontal velocity
 	private double maxYVelo =  -50; //maximum vertical velocity
 	
-	PhysicsEngine(){
+	public PhysicsEngine(){
 		
 	}
 	

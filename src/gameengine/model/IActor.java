@@ -106,7 +106,6 @@ public interface IActor {
      *
      * @param myTrigger A Trigger object that calls for an appropriate response
      */
-    public void performActionsFor(ITrigger myTrigger);
 
     /**
      * Provides the list of Triggers that the Actor responds to
@@ -134,5 +133,7 @@ public interface IActor {
      * @return The Actor's type
      */
     public String getActorType();
+
+	void performActionsFor(ITrigger myTrigger, PhysicsEngine myPhysicsEngine);
 
 }
