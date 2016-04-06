@@ -2,12 +2,12 @@ package usecases;
 
 import gameengine.model.Actor;
 
-public class PhysicsEngine{
+public class PhysicsEngineUseCase{
 	
 	double fallingAcceleration; //Rate at which actor loses Y velocity when falling
 	double jumpStrength;        //Initial y velocity upon a jump action
 	
-	PhysicsEngine(double gravity, double jumpHeight){
+	PhysicsEngineUseCase(double gravity, double jumpHeight){
 		fallingAcceleration = gravity;
 		jumpStrength = jumpHeight;
 	}
