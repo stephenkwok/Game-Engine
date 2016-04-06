@@ -1,7 +1,7 @@
 package gameengine.model.Actions;
 
-import gameengine.actors.Actor;
-import gameengine.model.Action;
+import gameengine.model.Actions.Action;
+import gameengine.model.Actor;
 
 public class LoseGame extends Action {
 	private Actor assignedActor;

@@ -1,4 +1,4 @@
-package gameengine.actors;
+package gameengine.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,12 +8,12 @@ import java.util.Observable;
 import java.util.Set;
 
 import authoringenvironment.model.IEditableGameElement;
-import gameengine.model.Action;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.ITrigger;
+import gameengine.model.Actions.Action;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 
 /**
  * This class defines the logic for an Actor object.
@@ -24,7 +24,7 @@ import javafx.scene.image.ImageView;
  * @author blakekaplan
  */
 
-public abstract class Actor extends Observable implements IActor, IEditableGameElement {
+public class Actor extends Observable implements IActor, IEditableGameElement {
 
     private static final double DEGREES_TO_RADIANS = Math.PI / 180;
     private static final String DEFAULT_NAME = "Default Name";
@@ -32,7 +32,6 @@ public abstract class Actor extends Observable implements IActor, IEditableGameE
     private double x;
     private double y;
     private int health;
-    private int wealth;
     private int points;
     private int myID;
     private String myName;
@@ -68,24 +67,7 @@ public abstract class Actor extends Observable implements IActor, IEditableGameE
     	health = newHealth;
     }
     
-    
-	/**
-	 * Provides the Actor's wealth
-	 * 
-	 * @return the wealth
-	 */
-	public int getWealth() {
-		return wealth;
-	}
 
-	/**
-	 * Updates the Actor's health
-	 * @param wealth the wealth to set
-	 */
-	public void setWealth(int wealth) {
-		this.wealth = wealth;
-	}
-	
     /**
      * Provides the Actor's number of points
      *
@@ -95,6 +77,15 @@ public abstract class Actor extends Observable implements IActor, IEditableGameE
     public int getPoints() {
         return points;
     }
+    
+	/**
+	 * Updates the Actor's number of points
+	 * @param points the points to set
+	 */
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	
 
     /**
      * Moves the Actor based on a provided distance and direction

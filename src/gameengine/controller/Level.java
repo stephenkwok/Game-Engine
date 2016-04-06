@@ -1,7 +1,6 @@
 package gameengine.controller;
 
-import gameengine.actors.Actor;
-import gameengine.model.IActor;
+import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 import javafx.scene.image.Image;
 

@@ -2,6 +2,7 @@ package gameengine.model;
 
 import gameengine.model.IRule;
 import gameengine.model.ITrigger;
+import gameengine.model.Actions.Action;
 
 /**
  * @author blakekaplan

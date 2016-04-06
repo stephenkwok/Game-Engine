@@ -1,6 +1,6 @@
 package gameengine.model.Triggers;
 
-import gameengine.actors.Actor;
+import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 
 /**
@@ -13,7 +13,7 @@ public class ClickTrigger implements ITrigger {
 
     @Override
     public boolean evaluate(Actor myActor) {
-        return false;
+        return myActor.contains(myX, myY);
     }
 
     @Override

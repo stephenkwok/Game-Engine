@@ -2,11 +2,10 @@ package gameplayer.view;
 
 import java.util.Observable;
 
-import gameengine.actors.Actor;
+import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.KeyTrigger;
-import gameengine.model.Triggers.KeyTriggerFactory;
 import javafx.event.Event;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -50,8 +49,7 @@ public class GameScreen extends Observable {
 	}
 	
 	private KeyTrigger handleKeyPress(KeyCode key){
-		KeyTriggerFactory factory = new KeyTriggerFactory();
-		return factory.createTrigger(key);
+		return new KeyTrigger(key);
 	}
 	
 }

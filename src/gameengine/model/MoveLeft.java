@@ -2,7 +2,7 @@ package gameengine.model;
 
 import java.util.List;
 
-import gameengine.actors.Actor;
+import gameengine.model.Actions.Action;
 
 /**
  * Created by Michelle on 3/31/16.

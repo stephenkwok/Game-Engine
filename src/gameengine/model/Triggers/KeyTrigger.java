@@ -1,12 +1,19 @@
 package gameengine.model.Triggers;
 
-import gameengine.actors.Actor;
+import gameengine.model.Actor;
 import gameengine.model.ITrigger;
+import javafx.scene.input.KeyCode;
 
-public abstract class KeyTrigger implements ITrigger {
-
-	@Override
-	public abstract String getTriggerName();
+public class KeyTrigger implements ITrigger {
+	String myKey;
+	
+	public KeyTrigger(KeyCode key){
+		myKey = key.getName();
+	}
+	
+	public String getTriggerName(){
+		return myKey;
+	}
 
 	@Override
 	public boolean evaluate(Actor myActor) {

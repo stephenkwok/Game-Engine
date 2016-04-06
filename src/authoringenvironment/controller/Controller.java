@@ -11,8 +11,8 @@ import authoringenvironment.view.GUIActorEditingEnvironment;
 import authoringenvironment.view.GUILevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
-import gameengine.actors.Actor;
 import gameengine.controller.Level;
+import gameengine.model.Actor;
 import javafx.stage.Stage;
 
 /**
@@ -44,7 +44,7 @@ public class Controller {
 		actors = new ArrayList<>();
 		levelEnvironment = new GUILevelEditingEnvironment(this, actors);
 		actorEnvironment = new GUIActorEditingEnvironment(myResources);
-		mainScreen = new GUIMainScreen(this, actors, levels, actorEnvironment, levelEnvironment);
+		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment);
 	}
 
 	/**
@@ -134,7 +134,17 @@ public class Controller {
 	 * @param newLevel
 	 */
 	public void addLevel() {
-		mainScreen.addLevel();
+		Level newLevel = new Level();
+		levels.add(newLevel);
+		mainScreen.createLevelLabel(newLevel);
+		goToEditingEnvironment(newLevel, levelEnvironment);
+	}
+	
+	public void addActor() {
+		Actor newActor = new Actor();
+		actors.add(newActor);
+		mainScreen.createActorLabel(newActor);
+		goToEditingEnvironment(newActor, actorEnvironment);
 	}
 
 	private void clearPanes() {
@@ -142,10 +152,6 @@ public class Controller {
 		guiMain.setCenterPane(null);
 		guiMain.setLeftPane(null);
 		guiMain.setRightPane(null);
-	}
-
-	public void addActor() {
-		mainScreen.addActor();
 	}
 
 }
