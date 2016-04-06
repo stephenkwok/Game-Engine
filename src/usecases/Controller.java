@@ -133,7 +133,7 @@ public class Controller extends Application {
 	 * ActorEditingEnvironment
 	 */
 	private void addActor() {
-		IEditableGameElement newActor = new PowerUpActor();
+		IEditableGameElement newActor = new Actor();
 		createdActors.add(newActor);
 		goToEditingEnviroment(actorEditor, newActor);
 	}
