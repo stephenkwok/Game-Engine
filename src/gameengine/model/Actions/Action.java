@@ -39,4 +39,6 @@ public abstract class Action implements IAction {
     public Actor getActor() {
         return myActor;
     }
+    
+    public abstract void performOn(Actor a);
 }

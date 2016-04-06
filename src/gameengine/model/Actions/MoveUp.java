@@ -20,4 +20,10 @@ public class MoveUp extends MovingAction {
     public void perform() {
         moveActor(UP_ANGLE);
     }
+
+	@Override
+	public void performOn(Actor a) {
+		// TODO Auto-generated method stub
+		
+	}
 }

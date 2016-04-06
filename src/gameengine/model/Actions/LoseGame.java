@@ -16,4 +16,10 @@ public class LoseGame extends Action {
 
 	}
 
+	@Override
+	public void performOn(Actor a) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
