@@ -17,7 +17,8 @@ public class Level implements ILevel, IEditableGameElement {
 
 	private static final String DEFAULT_NAME = "Untitled";
 	private static final String DEFAULT_IMAGE_NAME = "default_background.png";
-    List<IActor> myActors;
+   
+	List<IActor> myActors;
     Map<String, List<Actor>> triggerMap;
     String myName;
     Image myBackground;

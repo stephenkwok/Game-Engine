@@ -31,6 +31,7 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
     private int points;
     private int myID;
     private String myName;
+    
 
     private Map<String, List<Action>> myRules;
 
@@ -42,6 +43,7 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
         myRules = new HashMap<>();
         myName = DEFAULT_NAME;
         setImage(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME)));
+    
     }
 
     /**

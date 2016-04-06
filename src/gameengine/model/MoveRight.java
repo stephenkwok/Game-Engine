@@ -3,6 +3,7 @@ package gameengine.model;
 import gameengine.controller.Action;
 import gameengine.controller.Actor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ public class MoveRight extends Action {
         distance = (double) args.get(0);
     }
 
-    /**
+	/**
      * Moves the Actor to the right by the distance provided in the arguments
      */
     @Override
