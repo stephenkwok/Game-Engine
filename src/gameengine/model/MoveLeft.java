@@ -31,4 +31,10 @@ public class MoveLeft extends Action {
     public void perform() {
         getActor().move(distance, LEFT_ANGLE);
     }
+
+	@Override
+	public void performOn(Actor a) {
+		// TODO Auto-generated method stub
+		
+	}
 }

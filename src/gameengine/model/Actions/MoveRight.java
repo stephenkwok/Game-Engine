@@ -31,4 +31,10 @@ public class MoveRight extends MovingAction {
     public void perform() {
         moveActor(RIGHT_ANGLE);
     }
+
+	@Override
+	public void performOn(Actor a) {
+		// TODO Auto-generated method stub
+		
+	}
 }

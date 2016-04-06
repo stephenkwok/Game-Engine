@@ -16,4 +16,10 @@ public class Stop extends ControllerAction {
     public void perform() {
         stop();
     }
+
+	@Override
+	public void performOn(Actor a) {
+		// TODO Auto-generated method stub
+		
+	}
 }
