@@ -21,7 +21,7 @@ public class CollisionDetection {
 
 	PhysicsEngine myPhysicsEngine;
 	
-	CollisionDetection( PhysicsEngine physicsEngine){
+	public CollisionDetection( PhysicsEngine physicsEngine){
 		myPhysicsEngine = physicsEngine;
 	}
 	

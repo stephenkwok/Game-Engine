@@ -35,7 +35,7 @@ public class Level implements ILevel, IEditableGameElement {
         myName = DEFAULT_NAME;
         setImage(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME)));
         myPhysicsEngine = new PhysicsEngine();
-        myCollisionDetector = new CollisionDetection();
+        myCollisionDetector = new CollisionDetection(myPhysicsEngine);
     }
 
     /**
