@@ -12,6 +12,7 @@ import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.ITrigger;
 import gameengine.model.Actions.Action;
+import gameengine.model.Triggers.ClickTrigger;
 import javafx.scene.image.Image;
 
 
@@ -258,6 +259,14 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 		return 0;
 	}
 
+	//TODO JUSTIN ::::::::)
+	//public void typeOfCollision;
+	
+	public void collidesWith(Actor a) {
+		ClickTrigger collision = typeOfCollision(this, a);
+		Action action = myRules.get(collision.getTriggerName()).get(0);
+		action.performOn(a);
+	}
 
 
 }
