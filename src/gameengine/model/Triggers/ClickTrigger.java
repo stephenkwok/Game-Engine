@@ -13,7 +13,7 @@ public class ClickTrigger implements ITrigger {
 
     @Override
     public boolean evaluate(Actor myActor) {
-        return false;
+        return myActor.contains(myX, myY);
     }
 
     @Override
