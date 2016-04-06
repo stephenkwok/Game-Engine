@@ -1,4 +1,4 @@
-package gameengine.actors;
+package gameengine.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,9 +8,7 @@ import java.util.Set;
 
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.Action;
-import gameengine.model.IActor;
-import gameengine.model.IRule;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ClickTrigger;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -23,13 +21,12 @@ import javafx.scene.image.ImageView;
  * @author blakekaplan
  */
 
-public abstract class Actor extends ImageView implements IActor, IEditableGameElement {
+public class Actor extends ImageView implements IActor, IEditableGameElement {
 
     private static final double DEGREES_TO_RADIANS = Math.PI / 180;
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
     private int health;
-    private int wealth;
     private int points;
     private int myID;
     private String myName;
@@ -65,24 +62,7 @@ public abstract class Actor extends ImageView implements IActor, IEditableGameEl
     	health = newHealth;
     }
     
-    
-	/**
-	 * Provides the Actor's wealth
-	 * 
-	 * @return the wealth
-	 */
-	public int getWealth() {
-		return wealth;
-	}
 
-	/**
-	 * Updates the Actor's health
-	 * @param wealth the wealth to set
-	 */
-	public void setWealth(int wealth) {
-		this.wealth = wealth;
-	}
-	
     /**
      * Provides the Actor's number of points
      *
@@ -92,6 +72,15 @@ public abstract class Actor extends ImageView implements IActor, IEditableGameEl
     public int getPoints() {
         return points;
     }
+    
+	/**
+	 * Updates the Actor's number of points
+	 * @param points the points to set
+	 */
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	
 
     /**
      * Moves the Actor based on a provided distance and direction
@@ -240,6 +229,14 @@ public abstract class Actor extends ImageView implements IActor, IEditableGameEl
 		myName = name;
 	}
 
+	//TODO JUSTIN ::::::::)
+	//public void typeOfCollision;
+	
+	public void collidesWith(Actor a) {
+		ClickTrigger collision = typeOfCollision(this, a);
+		Action action = myRules.get(collision.getTriggerName()).get(0);
+		action.performOn(a);
+	}
 
 
 }

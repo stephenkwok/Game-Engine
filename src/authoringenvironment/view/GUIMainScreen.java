@@ -2,29 +2,23 @@ package authoringenvironment.view;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import gameengine.actors.Actor;
-import gameengine.actors.PowerUpActor;
-import gameengine.controller.Level;
 import javafx.beans.binding.DoubleExpression;
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
+ * 
+ * This class sets up all the GUI elements on the Game Authoring Environment's
+ * Main Screen
  * 
  * @author Stephen
  *
@@ -32,6 +26,7 @@ import javafx.stage.Stage;
 
 public class GUIMainScreen implements IGUI {
 
+	private static final int NUM_SCROLLPANES = 2;
 	private Controller controller;
 	private VBox actorLabelContainer;
 	private VBox levelLabelContainer;
@@ -40,16 +35,11 @@ public class GUIMainScreen implements IGUI {
 	private HBox scrollPaneContainer;
 	private BorderPane borderPane;
 	private List<LabelClickable> clickableLabels;
-	private List<Actor> createdActors;
-	private List<Level> createdLevels;
 	private IEditingEnvironment actorEditor;
 	private IEditingEnvironment levelEditor;
 
-	public GUIMainScreen(Controller controller, List<Actor> createdActors, List<Level> createdLevels,
-			IEditingEnvironment actorEditor, IEditingEnvironment levelEditor) {
+	public GUIMainScreen(Controller controller, IEditingEnvironment actorEditor, IEditingEnvironment levelEditor) {
 		this.controller = controller;
-		this.createdActors = createdActors;
-		this.createdLevels = createdLevels;
 		this.actorEditor = actorEditor;
 		this.levelEditor = levelEditor;
 		clickableLabels = new ArrayList<LabelClickable>();
@@ -72,13 +62,13 @@ public class GUIMainScreen implements IGUI {
 		VBoxMainScreenLeftPane leftPane = new VBoxMainScreenLeftPane(e -> setGameName(), e -> setGameDescription());
 		borderPane.setLeft(leftPane);
 	}
-	
+
 	private void setGameDescription() {
 
 	}
-	
+
 	private void setGameName() {
-		
+
 	}
 
 	private void initBorderPane() {
@@ -98,8 +88,7 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	private void initScrollPane(ScrollPane scrollPane, VBox container) {
-		// magic value
-		bindNodeSizeToGivenSize(scrollPane, scrollPaneContainer.widthProperty().divide(2.0), null);
+		bindNodeSizeToGivenSize(scrollPane, scrollPaneContainer.widthProperty().divide(NUM_SCROLLPANES), null);
 		scrollPane.setContent(container);
 	}
 
@@ -125,21 +114,15 @@ public class GUIMainScreen implements IGUI {
 		return borderPane;
 	}
 
-	public void addActor() {
-		Actor newActor = new PowerUpActor();
-		createdActors.add(newActor);
-		createLabel(newActor, actorEditor, actorLabelContainer);
-		controller.goToEditingEnvironment(newActor, actorEditor);
+	public void createActorLabel(IEditableGameElement actor) {
+		createLabel(actor, actorEditor, actorLabelContainer);
 	}
 
-	public void addLevel() {
-		Level newLevel = new Level();
-		createdLevels.add(newLevel);
-		createLabel(newLevel, levelEditor, levelLabelContainer);
-		controller.goToEditingEnvironment(newLevel, levelEditor);
+	public void createLevelLabel(IEditableGameElement level) {
+		createLabel(level, levelEditor, levelLabelContainer);
 	}
 
-	public void createLabel(IEditableGameElement editable, IEditingEnvironment environment, VBox container) {
+	private void createLabel(IEditableGameElement editable, IEditingEnvironment environment, VBox container) {
 		LabelClickable label = new LabelClickable(editable, environment, controller);
 		bindNodeSizeToGivenSize(label, container.widthProperty(), null);
 		container.getChildren().add(label);

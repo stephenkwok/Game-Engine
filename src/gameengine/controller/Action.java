@@ -1,6 +1,6 @@
 package gameengine.controller;
 
-import gameengine.actors.Actor;
+import gameengine.model.Actor;
 import gameengine.model.IAction;
 
 /**
@@ -37,4 +37,6 @@ public abstract class Action implements IAction {
     public Actor getActor() {
         return myActor;
     }
+    
+    public abstract void performOn(Actor a);
 }
