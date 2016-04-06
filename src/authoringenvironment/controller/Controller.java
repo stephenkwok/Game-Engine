@@ -11,9 +11,8 @@ import authoringenvironment.view.GUIActorEditingEnvironment;
 import authoringenvironment.view.GUILevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
-import gameengine.actors.Actor;
-import gameengine.actors.PowerUpActor;
 import gameengine.controller.Level;
+import gameengine.model.Actor;
 import javafx.stage.Stage;
 
 /**
@@ -142,7 +141,7 @@ public class Controller {
 	}
 	
 	public void addActor() {
-		Actor newActor = new PowerUpActor();
+		Actor newActor = new Actor();
 		actors.add(newActor);
 		mainScreen.createActorLabel(newActor);
 		goToEditingEnvironment(newActor, actorEnvironment);

@@ -1,4 +1,4 @@
-package gameengine.actors;
+package gameengine.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,9 +8,6 @@ import java.util.Set;
 
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.Action;
-import gameengine.model.IActor;
-import gameengine.model.IRule;
-import gameengine.model.ITrigger;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -23,7 +20,7 @@ import javafx.scene.image.ImageView;
  * @author blakekaplan
  */
 
-public abstract class Actor extends ImageView implements IActor, IEditableGameElement {
+public class Actor extends ImageView implements IActor, IEditableGameElement {
 
     private static final double DEGREES_TO_RADIANS = Math.PI / 180;
     private static final String DEFAULT_NAME = "Default Name";

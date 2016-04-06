@@ -5,8 +5,8 @@ import java.util.List;
 
 import java.util.ResourceBundle;
 
-import gameengine.actors.Actor;
 import gameengine.actors.PowerUpActor;
+import gameengine.model.Actor;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;

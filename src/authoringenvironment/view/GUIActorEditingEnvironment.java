@@ -4,8 +4,8 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import gameengine.actors.Actor;
 import gameengine.actors.PowerUpActor;
+import gameengine.model.Actor;
 import gameengine.model.IActor;
 import javafx.geometry.Insets;
 import javafx.scene.control.TabPane;

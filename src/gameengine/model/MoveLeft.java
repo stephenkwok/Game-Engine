@@ -2,7 +2,6 @@ package gameengine.model;
 
 import java.util.List;
 
-import gameengine.actors.Actor;
 import gameengine.controller.Action;
 
 /**

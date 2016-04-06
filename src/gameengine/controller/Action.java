@@ -1,6 +1,6 @@
 package gameengine.controller;
 
-import gameengine.actors.Actor;
+import gameengine.model.Actor;
 import gameengine.model.IAction;
 
 /**
