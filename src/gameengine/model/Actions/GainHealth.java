@@ -3,6 +3,7 @@ package gameengine.model.Actions;
 import gameengine.model.Actor;
 import gameengine.model.PhysicsEngine;
 import gameengine.model.Actions.Action;
+import gameengine.model.Triggers.AttributeType;
 
 public class GainHealth extends Action{
 
@@ -14,7 +15,7 @@ public class GainHealth extends Action{
 
 	@Override
 	public void perform() {
-		getActor().changeAttribute("health",numLivesGained);
+		getActor().changeAttribute(AttributeType.HEALTH,numLivesGained);
 	}
 
 

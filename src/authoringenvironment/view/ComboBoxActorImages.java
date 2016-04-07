@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import gui.view.ComboBoxImageCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -12,7 +13,7 @@ public class ComboBoxActorImages extends ComboBoxImageCell{
 	}
 
 	@Override
-	void setButtonAction() {
+	public void setButtonAction() {
 		comboButton.setOnAction(event->{
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(comboBox.getValue()));
 			aEE.setActorImage(new ImageView(image));

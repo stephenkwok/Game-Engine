@@ -15,14 +15,14 @@ import gui.controller.IScreenController;
  */
 
 public class GUIFactory {
-	private static final String TEXT = "Text";
-	private static final String ICON = "Icon";
-	private static final String CLASS = "Class";
-	private static final String PROMPT = "Prompt";
-	private static final String AUTHORING_ENV = "authoringenvironment.";
-	private static final String VIEW = "view.";
-	private ResourceBundle myResources;
-	private IScreenController myController;
+	protected static final String TEXT = "Text";
+	protected static final String ICON = "Icon";
+	protected static final String CLASS = "Class";
+	protected static final String PROMPT = "Prompt";
+	protected static final String AUTHORING_ENV = "authoringenvironment.";
+	protected static final String VIEW = "view.";
+	protected ResourceBundle myResources;
+	protected IScreenController myController;
 
 	public GUIFactory(ResourceBundle myResources, IScreenController myController2){
 		this.myResources = myResources;
@@ -47,6 +47,21 @@ public class GUIFactory {
 		}
 		return null;
 	}
+	
+	private IGUIElement createComboBox(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		String prompt = myResources.getString(nodeType + PROMPT);
+		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
+		try {
+			Class<?> comboBox = Class.forName(className);
+			Constructor<?> constructor = comboBox.getConstructor(ResourceBundle.class, String.class, Controller.class);
+			return (IGUIElement) constructor.newInstance(myResources, prompt, myController);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	private boolean isButton(String nodeType) {
 		return Arrays.asList(myResources.getString("Buttons").split(",")).contains(nodeType);
@@ -62,7 +77,7 @@ public class GUIFactory {
 		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
 		try {
 			Class<?> button = Class.forName(className);
-			Constructor<?> constructor = button.getConstructor(Controller.class, String.class, String.class);
+			Constructor<?> constructor = button.getConstructor(IScreenController.class, String.class, String.class);
 			return (IGUIElement) constructor.newInstance(myController, text, icon);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -72,18 +87,4 @@ public class GUIFactory {
 		return null;
 	}
 
-	private IGUIElement createComboBox(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		String prompt = myResources.getString(nodeType + PROMPT);
-		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
-		try {
-			Class<?> comboBox = Class.forName(className);
-			Constructor<?> constructor = comboBox.getConstructor(ResourceBundle.class, String.class, Controller.class);
-			return (IGUIElement) constructor.newInstance(myResources, prompt, myController);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 }

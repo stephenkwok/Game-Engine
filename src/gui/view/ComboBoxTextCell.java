@@ -1,4 +1,4 @@
-package authoringenvironment.view;
+package gui.view;
 
 import java.util.List;
 import java.util.ResourceBundle;
@@ -10,14 +10,14 @@ import javafx.scene.control.Label;
  * @author AnnieTang
  *
  */
-abstract class ComboBoxTextCell extends ComboBoxParent {
+public abstract class ComboBoxTextCell extends ComboBoxParent {
 	
 	public ComboBoxTextCell(ResourceBundle myResources, String promptText) {
 		super(promptText);
 	}
 
 	@Override
-	abstract void setButtonAction();
+	public abstract void setButtonAction();
 
 	@Override
 	protected Node getNodeForBox(String item) {
@@ -25,6 +25,6 @@ abstract class ComboBoxTextCell extends ComboBoxParent {
 	}
 
 	@Override
-	abstract List<String> getOptionsList();
+	public abstract List<String> getOptionsList();
 
 }

@@ -42,6 +42,7 @@ public class GUIMain extends Screen implements IGUI {
 	public GUIMain(Stage s, Scene splash) {
 		super(s);
 		this.splashScene = splash;
+		this.myStage = s;
 		init();
 	}
 	

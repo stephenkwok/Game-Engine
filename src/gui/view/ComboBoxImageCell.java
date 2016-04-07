@@ -1,4 +1,4 @@
-package authoringenvironment.view;
+package gui.view;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public abstract class ComboBoxImageCell extends ComboBoxParent {
 	 * On comboButton click, turtle ImageViews will be updated with new Image. 
 	 */
 	@Override
-	abstract void setButtonAction();
+	public abstract void setButtonAction();
 	/**
 	 * Return current list of image names. 
 	 */

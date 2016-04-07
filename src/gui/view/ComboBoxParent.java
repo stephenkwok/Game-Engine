@@ -1,9 +1,8 @@
-package authoringenvironment.view;
+package gui.view;
 
 import java.util.List;
 import java.util.ResourceBundle;
 
-import gui.view.IGUIElement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -60,7 +59,7 @@ public abstract class ComboBoxParent implements IGUIElement {
 	/**
 	 * Sets action when button is pressed.
 	 */
-	abstract void setButtonAction();
+	public abstract void setButtonAction();
 	
 	/**
 	 * Creates custom cell factory for ComboBox
@@ -103,5 +102,5 @@ public abstract class ComboBoxParent implements IGUIElement {
 	 * Returns list of items in the ComboBox.
 	 * @return
 	 */
-	abstract List<String> getOptionsList();
+	public abstract List<String> getOptionsList();
 }
