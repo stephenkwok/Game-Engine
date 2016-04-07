@@ -50,6 +50,34 @@ public class Controller implements Observer {
 	}
 
 	/**
+	 * Switches screen to Level Editing Environment
+	 * 
+	 * @param level
+	 *            - level to be edited
+	 * @param createdActors
+	 *            - list of created Actors that can be placed into the level
+	 */
+	public void goToLevelEditing(Level level) {
+		levelEnvironment.setEditable(level);
+		clearPanes();
+		guiMain.setCenterPane(levelEnvironment.getPane());
+
+	}
+
+	/**
+	 * Switches screen to Actor Editing Environment
+	 * 
+	 * @param actor
+	 *            - Actor to edit
+	 */
+	public void goToActorEditing(Actor actor) {
+		actorEnvironment.setEditable(actor);
+		clearPanes();
+		guiMain.setCenterPane(actorEnvironment.getPane());
+	}
+	
+	
+	/**
 	 * Switches screen to appropriate editing environment
 	 * 
 	 * @param editable - Level or Actor to edit
