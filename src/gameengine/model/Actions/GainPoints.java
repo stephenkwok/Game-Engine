@@ -1,6 +1,7 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actions.Action;
+import gameengine.model.Triggers.AttributeType;
 import gameengine.model.Actor;
 import gameengine.model.PhysicsEngine;
 
@@ -13,8 +14,8 @@ public class GainPoints extends Action{
 	}
 
 	@Override
-	public void perform(PhysicsEngine myPhysicsEngine) {
-		getActor().changeAttribute("health",numPointsGained);
+	public void perform() {
+		getActor().changeAttribute(AttributeType.POINTS,numPointsGained);
 	}
 
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
+  <changed>false</changed>
+  <obs/>
+  <levels>
+    <gameengine.controller.Level>
+      <myActors>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Game reference="../../../../../.."/>
+          </obs>
+          <myID>1</myID>
+          <myName>Default Name</myName>
+          <myImageViewName>default_actor.jpg</myImageViewName>
+          <myRules>
+            <entry>
+              <string>Click</string>
+              <list>
+                <gameengine.model.Actions.LoseGame>
+                  <myActor reference="../../../../.."/>
+                  <assignedActor reference="../../../../.."/>
+                </gameengine.model.Actions.LoseGame>
+              </list>
+            </entry>
+          </myRules>
+          <attributeMap/>
+          <myPhysicsEngine>
+            <timeStep>1</timeStep>
+            <friction>-0.05</friction>
+            <gravity>0.1</gravity>
+            <maxHorizVelocity>50.0</maxHorizVelocity>
+            <maxVertVelocity>-50.0</maxVertVelocity>
+            <horizontalForce>5.0</horizontalForce>
+            <jumpForce>-5.0</jumpForce>
+          </myPhysicsEngine>
+        </gameengine.model.Actor>
+      </myActors>
+      <myTriggerMap>
+        <entry>
+          <string>Click</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+      </myTriggerMap>
+      <myName>Untitled</myName>
+      <myBackgroundImgName>default_background.png</myBackgroundImgName>
+      <myCollisionDetector>
+        <myPhysicsEngine reference="../../myActors/gameengine.model.Actor/myPhysicsEngine"/>
+        <LEFT>left</LEFT>
+        <RIGHT>right</RIGHT>
+        <TOP>top</TOP>
+        <BOTTOM>bottom</BOTTOM>
+      </myCollisionDetector>
+      <myPhysicsEngine reference="../myActors/gameengine.model.Actor/myPhysicsEngine"/>
+    </gameengine.controller.Level>
+  </levels>
+  <info>
+    <myName>My Game</myName>
+    <myImageName>default_game.jpg</myImageName>
+    <myDescription>This is a scrolling game.</myDescription>
+    <myCurrentLevelNum>0</myCurrentLevelNum>
+  </info>
+</gameengine.controller.Game>

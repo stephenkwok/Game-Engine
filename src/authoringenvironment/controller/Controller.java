@@ -13,6 +13,7 @@ import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gui.controller.IScreenController;
 import javafx.stage.Stage;
 
 /**
@@ -22,7 +23,7 @@ import javafx.stage.Stage;
  * @author Stephen, AnnieTang
  */
 
-public class Controller {
+public class Controller implements IScreenController {
 	private Stage myStage;
 	private List<Level> levels;
 	private List<Actor> actors;	
@@ -39,7 +40,7 @@ public class Controller {
 		init();
 	}
 
-	private void init() {
+	public void init() {
 		levels = new ArrayList<>();
 		actors = new ArrayList<>();
 		levelEnvironment = new GUILevelEditingEnvironment(this, actors);

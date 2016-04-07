@@ -5,6 +5,7 @@ import gameengine.model.Actor;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Actions.MoveLeft;
+import gameengine.model.Actions.MoveRight;
 import gameengine.model.Triggers.KeyTrigger;
 import gameplayer.controller.GameController;
 import javafx.application.Application;
@@ -38,7 +39,7 @@ public class Main extends Application {
 		actor1.setImageView(new ImageView(actor1img));
 		KeyTrigger trigger = new KeyTrigger(KeyCode.SPACE);
 		List<Object> args = new ArrayList<Object>();
-		args.add(5.0);
+		args.add(50.0);
 		Action action = new MoveLeft(actor1,args);
 		Rule rule = new Rule(trigger,action);
 		actor1.addRule(rule);

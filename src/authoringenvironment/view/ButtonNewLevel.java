@@ -1,6 +1,8 @@
 package authoringenvironment.view;
 
 import authoringenvironment.controller.Controller;
+import gui.controller.IScreenController;
+import gui.view.ButtonParent;
 
 /**
  * Button to create a new level and transition to level editing environment.
@@ -9,7 +11,7 @@ import authoringenvironment.controller.Controller;
  */
 public class ButtonNewLevel extends ButtonParent {
 
-	public ButtonNewLevel(Controller myController, String buttonText, String imageName) {
+	public ButtonNewLevel(IScreenController myController, String buttonText, String imageName) {
 		super(myController, buttonText, imageName);
 	}
 	
@@ -18,7 +20,7 @@ public class ButtonNewLevel extends ButtonParent {
 	 */
 	@Override
 	protected void setButtonAction() {
-		button.setOnAction(e -> myController.addLevel());
+		button.setOnAction(e -> ((Controller) myController).addLevel());
 	}
 
 }

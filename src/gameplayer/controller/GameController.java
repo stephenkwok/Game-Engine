@@ -86,7 +86,33 @@ public interface GameController {
 	/**
 	 * Will stop the animation timeline.
 	 */
+<<<<<<< HEAD
 	public void endGame ();
+=======
+	public void endGame (){
+		
+	}
+	
+	public void nextLevel (){
+		model.nextLevel();
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if(o.equals(view)){
+			model.handleTrigger((ITrigger)arg);
+		}
+		if(o.equals(model)){
+			
+			try{
+				this.getClass().getDeclaredMethod(((String)arg)).invoke(this);
+			}
+			catch (Exception e){
+				//something with exception
+			}
+		}
+	}
+>>>>>>> master
 	
 	
 	

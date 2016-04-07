@@ -2,6 +2,7 @@ package authoringenvironment.view;
 
 import java.util.ResourceBundle;
 
+import gui.view.TextAreaParent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -45,7 +46,7 @@ public class VBoxMainScreenLeftPane extends VBox {
 		initWelcomeMessage();
 		initGameNameEditor();
 		initGameDescriptionEditor();
-		System.out.println(nameEditorContainer);
+		//System.out.println(nameEditorContainer);
 		this.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor.getCoupledNodes());
 	}
 

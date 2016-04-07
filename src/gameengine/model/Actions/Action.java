@@ -28,10 +28,9 @@ public abstract class Action implements IAction {
 
     /**
      * The perform command that will implement the functionality unique to each Action type
-     * @param myPhysicsEngine 
      */
     @Override
-    public abstract void perform(PhysicsEngine myPhysicsEngine);
+    public abstract void perform();
 
     /**
      * Provides the Actor linked to the Action

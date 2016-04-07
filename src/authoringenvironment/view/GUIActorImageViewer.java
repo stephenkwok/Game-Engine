@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import authoringenvironment.controller.Controller;
+import gui.view.IGUI;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;

@@ -1,6 +1,8 @@
 package authoringenvironment.view;
 
 import authoringenvironment.controller.Controller;
+import gui.controller.IScreenController;
+import gui.view.ButtonParent;
 /**
  * Button to load game.
  * @author AnnieTang
@@ -8,7 +10,7 @@ import authoringenvironment.controller.Controller;
  */
 public class ButtonLoad extends ButtonParent {
 	
-	public ButtonLoad(Controller myController, String buttonText, String imageName) {
+	public ButtonLoad(IScreenController myController, String buttonText, String imageName) {
 		super(myController, buttonText, imageName);
 	}
 
@@ -21,6 +23,6 @@ public class ButtonLoad extends ButtonParent {
      * Sets workspace preferences to those specified by the given XML. 
      */
     private void loadProperties() {
-    	myController.loadGame(promptForFileName(false));
+    	((Controller) myController).loadGame(promptForFileName(false));
     }
 }
