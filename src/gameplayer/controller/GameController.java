@@ -112,6 +112,7 @@ public class GameController implements Observer {
 			model.handleTrigger((ITrigger)arg);
 		}
 		if(o.equals(model)){
+			
 			try{
 				this.getClass().getDeclaredMethod(((String)arg)).invoke(this);
 			}

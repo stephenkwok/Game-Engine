@@ -11,6 +11,10 @@ import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.Actions.Action;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -30,8 +34,6 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private static final double DEGREES_TO_RADIANS = Math.PI / 180;
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
-    private double x;
-    private double y;
     private int myID;
     private String myName;
     private ImageView myImageView;
@@ -56,9 +58,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      */
     @Override
     public void move(double distance, double direction) {
-        x = distance * Math.cos(direction * DEGREES_TO_RADIANS);
-        y = distance * Math.sin(direction * DEGREES_TO_RADIANS);
-    	System.out.println(x);//
+        myImageView.setX(distance * Math.cos(direction * DEGREES_TO_RADIANS));
+        myImageView.setY(distance * Math.sin(direction * DEGREES_TO_RADIANS));
     }
 
     /**
