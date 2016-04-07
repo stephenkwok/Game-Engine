@@ -3,7 +3,7 @@ package gameengine.model.Triggers;
 import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 
-public class TopCollision implements ITrigger{
+public class TopCollision extends CollisionTrigger implements ITrigger{
 
 	public TopCollision() {
 		// TODO Auto-generated constructor stub

@@ -2,8 +2,11 @@ package gameengine.model.Actions;
 
 import gameengine.model.Actions.Action;
 import gameengine.model.Actor;
+import gameengine.model.PhysicsEngine;
 
-public class LoseHealth extends Action {
+public class LoseHealth extends Action{
+
+
 
 	private int numLivesLost = 1;
 	
@@ -12,13 +15,8 @@ public class LoseHealth extends Action {
 	}
 
 	@Override
-	public void perform() {
-		getActor().setHealth(getActor().getHealth()-numLivesLost);
-	}
-
-	@Override
-	public void performOn(Actor a) {
-		a.setHealth(a.getHealth()-numLivesLost);
+	public void perform(PhysicsEngine myPhysicsEngine) {
+		getActor().setHealth( getActor().getHealth()-numLivesLost );
 	}
 	
 }

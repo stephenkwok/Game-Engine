@@ -3,19 +3,17 @@ package gameengine.model.Triggers;
 import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 
-public class SideCollision extends CollisionTrigger implements ITrigger {
-
-	public SideCollision() {
-		// TODO Auto-generated constructor stub
-	}
+public abstract class CollisionTrigger implements ITrigger {
 
 	@Override
 	public String getTriggerName() {
-		return "SideCollision";
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public boolean evaluate(Actor myActor) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

@@ -3,6 +3,7 @@ package gameengine.model.Actions;
 
 import gameengine.model.Actions.MovingAction;
 import gameengine.model.Actor;
+import gameengine.model.PhysicsEngine;
 
 import java.util.List;
 
@@ -18,13 +19,8 @@ public class MoveLeft extends MovingAction {
     }
 
     @Override
-    public void perform() {
+    public void perform(PhysicsEngine myPhysicsEngine) {
         moveActor(LEFT_DIRECTION);
     }
 
-	@Override
-	public void performOn(Actor a) {
-		// TODO Auto-generated method stub
-		
-	}
 }

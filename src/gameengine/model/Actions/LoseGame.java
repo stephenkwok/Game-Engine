@@ -2,6 +2,7 @@ package gameengine.model.Actions;
 
 import gameengine.model.Actions.Action;
 import gameengine.model.Actor;
+import gameengine.model.PhysicsEngine;
 
 public class LoseGame extends Action {
 	private Actor assignedActor;
@@ -11,13 +12,7 @@ public class LoseGame extends Action {
 	}
 
 	@Override
-	public void perform() {
-		assignedActor.notifyObservers("endGame");
-
-	}
-
-	@Override
-	public void performOn(Actor a) {
+	public void perform(PhysicsEngine myPhysicsEngine) {
 		// TODO Auto-generated method stub
 		
 	}

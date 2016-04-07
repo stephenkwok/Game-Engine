@@ -27,7 +27,6 @@ public class Attribute {
 	}
 
 	private void initAttribute() {
-		//BooleanBinding triggerAction = myInitialValue.isEqualTo(myTriggerValue);
 		isActionTriggered.addListener(new ChangeListener(){
 	        @Override public void changed(ObservableValue o,Object oldVal, 
 	                 Object newVal){

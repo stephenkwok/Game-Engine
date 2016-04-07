@@ -2,7 +2,7 @@ package gameengine.model.Actions;
 
 import gameengine.model.Actor;
 import gameengine.model.Actions.Action;
-
+import gameengine.model.PhysicsEngine;
 
 import java.util.List;
 
@@ -23,5 +23,5 @@ public abstract class MovingAction extends Action {
     }
 
     @Override
-    public abstract void perform();
+    public abstract void perform(PhysicsEngine myPhysicsEngine);
 }
