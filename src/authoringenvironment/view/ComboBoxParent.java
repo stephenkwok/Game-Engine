@@ -24,15 +24,13 @@ public abstract class ComboBoxParent implements IGUIElement {
 	private static final int HBOX_SPACING = 5;
 	protected static final String NO_NODE_FOR_BOX = "";
 	protected String promptText;
-	protected ResourceBundle myResources;
 	protected ObservableList<String> options;
 	protected List<String> optionsList;
 	protected ComboBox<String> comboBox;
 	protected Button comboButton;
 	protected String paletteSource;
 	
-	public ComboBoxParent(ResourceBundle myResources, String promptText) {
-		this.myResources = myResources;
+	public ComboBoxParent(String promptText) {
 		this.promptText = promptText;
 	}
 	
