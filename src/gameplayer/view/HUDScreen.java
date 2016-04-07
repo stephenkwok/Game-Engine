@@ -21,7 +21,7 @@ import javafx.scene.text.Text;
 
 public class HUDScreen extends Window implements IHUDScreen{
 	
-	private ObservableMap<String, Object> status = FXCollections.observableHashMap();
+	private ObservableMap<String, Object> status;
 	Map<String, Integer> valueToRowMap;
 	Map<Integer, String> rowToValueMap;
 	
@@ -39,12 +39,11 @@ public class HUDScreen extends Window implements IHUDScreen{
 		this(width, height, status, new HashMap<Integer, String>());
 		int i = 0;
 		for (String value : status.keySet()) {
-			rowToValueMap.put(i++, value);
+			rowToValueMap.put(i, value);
+			valueToRowMap.put(value, i);
+			i++;
 		}
 	}
-	
-	
-	
 	
 	@Override
 	public void update() {
