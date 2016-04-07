@@ -92,7 +92,8 @@ abstract class TabLibrary extends TabParent {
 		        boolean success = false;
 		        if (db.hasString()) {
 		           GridPane gp = (GridPane) myTarget;
-		           Node toAdd = getRuleContainer(event.getDragboard().getString());
+		           Label toAdd = getRuleContainer(event.getDragboard().getString());
+		           setDragEvent(toAdd);
 		           gp.add(toAdd, 0, 0);
 		           success = true;
 		        }
@@ -102,7 +103,7 @@ abstract class TabLibrary extends TabParent {
 		});
 	}
 	
-	private Node getRuleContainer(String behaviorType){
+	private Label getRuleContainer(String behaviorType){
 		return new Label(behaviorType);
 	}
 

@@ -29,6 +29,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	private Actor myActor;
 	private ImageView myActorIV;
 	private GUIActorRuleMaker ruleMaker;
+	private GUIActorImageViewer actorImageViewer;
 	
 	public GUIActorEditingEnvironment(Controller myController, ResourceBundle myResources) {
 		this.myController = myController;
@@ -67,9 +68,9 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		myRoot.setLeft(vbox);
 	}
 	
-	private StackPane getActorImageViewer(){
-		GUIActorImageViewer actorImageViewer= new GUIActorImageViewer(this, myController, myActorIV);
-		return (StackPane) actorImageViewer.getPane();
+	private Pane getActorImageViewer(){
+		actorImageViewer= new GUIActorImageViewer(this, myController, myActorIV);
+		return actorImageViewer.getPane();
 	}
 	
 	private void setCenterPane(){
@@ -84,6 +85,9 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	}
 	
 	public void setActorImage(ImageView newImageView){
+		myActorIV = newImageView;
+		myActor.setImageView(newImageView);
+		setLeftPane();
 		
 	}
 }
