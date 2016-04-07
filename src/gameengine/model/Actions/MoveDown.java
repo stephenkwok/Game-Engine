@@ -17,7 +17,7 @@ public class MoveDown extends MovingAction {
     }
 
     @Override
-    public void perform(PhysicsEngine myPhysicsEngine) {
+    public void perform() {
         moveActor(DOWN_ANGLE);
     }
 

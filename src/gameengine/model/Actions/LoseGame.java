@@ -12,7 +12,7 @@ public class LoseGame extends Action {
 	}
 
 	@Override
-	public void perform(PhysicsEngine myPhysicsEngine) {
+	public void perform() {
 		// TODO Auto-generated method stub
 		
 	}

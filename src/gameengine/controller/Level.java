@@ -75,6 +75,7 @@ public class Level implements ILevel, IEditableGameElement {
      */
     @Override
     public void addActor(Actor newActor) {
+    	newActor.setEngine(myPhysicsEngine);
         myActors.add(newActor);
         Set<String> actorTriggers = newActor.getTriggers();
         for (String myTrigger : actorTriggers) {
@@ -88,6 +89,7 @@ public class Level implements ILevel, IEditableGameElement {
                 triggerMap.put(myTrigger, levelActors);
             }
         }
+        
     }
 
     /**

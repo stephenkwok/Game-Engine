@@ -30,8 +30,8 @@ public class MoveRight extends MovingAction {
      * Moves the Actor to the right by the distance provided in the arguments
      */
     @Override
-    public void perform(PhysicsEngine myPhysicsEngine) {
-        moveActor(RIGHT_ANGLE);
+    public void perform() {
+    	getActor().getPhysicsEngine().moveRight(getActor());
     }
 
     
