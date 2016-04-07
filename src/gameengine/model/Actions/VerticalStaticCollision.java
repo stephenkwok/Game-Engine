@@ -19,7 +19,7 @@ public class VerticalStaticCollision extends Action{
 	}
 
 	@Override
-	public void perform(PhysicsEngine myPhysicsEngine) {
+	public void perform() {
 		//myPhysicsEngine.vertStaticCollision(getActor());
 		getActor().setYVelo(0);
 	}
