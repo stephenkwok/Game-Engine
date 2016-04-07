@@ -44,7 +44,7 @@ public class LabelClickable extends Label {
 	
 	public void update() {
 		this.setText(IMAGE_TEXT_PADDING + myEditable.getName());
-		ImageView imageView = new ImageView(myEditable.getImage());
+		ImageView imageView = myEditable.getImageView();
 		imageView.setFitHeight(FIT_SIZE);
 		imageView.setFitWidth(FIT_SIZE);
 		this.setPadding(new Insets(LABEL_PADDING));
