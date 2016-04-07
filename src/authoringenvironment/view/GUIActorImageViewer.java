@@ -14,7 +14,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
@@ -38,9 +38,9 @@ public class GUIActorImageViewer implements IGUI {
 	
 	private void initializeEnvironment(){
 		myPane = new StackPane();
-		VBox vbox = new VBox(PADDING);
-		vbox.getChildren().addAll(myActorIV,getImageSetter());
-		myPane.getChildren().add(vbox);
+		HBox hbox = new HBox(PADDING);
+		hbox.getChildren().addAll(myActorIV,getImageSetter());
+		myPane.getChildren().add(hbox);
 		myPane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 	}
 	
