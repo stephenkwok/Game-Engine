@@ -10,12 +10,10 @@ import java.util.Set;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
-import gameengine.model.ITrigger;
 import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.ClickTrigger;
-import gameengine.model.Triggers.CollisionTrigger;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 
 
 /**
@@ -36,7 +34,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private double y;
     private int myID;
     private String myName;
-
+    private ImageView myImageView;
     private Map<String, List<Action>> myRules;
     private Map<String, Attribute> attributeMap;
 
@@ -60,6 +58,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     public void move(double distance, double direction) {
         x = distance * Math.cos(direction * DEGREES_TO_RADIANS);
         y = distance * Math.sin(direction * DEGREES_TO_RADIANS);
+    	System.out.println(x);//
     }
 
     /**
@@ -89,12 +88,11 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      *
      * @param attributeName The name of the Attribute to be changed
      * @param change        The amount to change the Attribute by
-     */
+     */   
     public void changeAttribute(String attributeName, int change) {
 
         Attribute myAttribute = attributeMap.get(attributeName);
         myAttribute.changeAttribute(change);
-
     }
 
     /**
@@ -134,66 +132,75 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         return myID;
     }
 
-    @Override
-    public double getXVelo() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+	@Override
+	public double getXVelo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-    @Override
-    public double getYVelo() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+	@Override
+	public double getYVelo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-    @Override
-    public void setXPos(double updateXPosition) {
-        // TODO Auto-generated method stub
+	@Override
+	public void setXPos(double updateXPosition) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    }
+	@Override
+	public void setYPos(double updateYPosition) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    @Override
-    public void setYPos(double updateYPosition) {
-        // TODO Auto-generated method stub
+	@Override
+	public void setXVelo(double updateXVelo) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    }
+	@Override
+	public void setYVelo(double updateYVelo) {
+		// TODO Auto-generated method stub
+	}
+	
+	public void setID(int ID) {
+		myID = ID;
+	}
 
-    @Override
-    public void setXVelo(double updateXVelo) {
-        // TODO Auto-generated method stub
+	@Override
+	public String getName() {
+		return myName;
+	}
 
-    }
+	@Override
+	public void setName(String name) {
+		myName = name;
+	}
 
-    @Override
-    public void setYVelo(double updateYVelo) {
-        // TODO Auto-generated method stub
-    }
+	@Override
 
-    public void setID(int ID) {
-        myID = ID;
-    }
+	public ImageView getImageView() {
+		return myImageView;
+	}
 
-    @Override
-    public String getName() {
-        return myName;
-    }
+	@Override
+	public void setImageView(ImageView imageView) {
+		myImageView = imageView;
+	}
 
-    @Override
-    public void setName(String name) {
-        myName = name;
-    }
-
-    @Override
-    public Image getImage() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setImage(Image image) {
-        // TODO Auto-generated method stub
-
-    }
+	
+	//TODO JUSTIN ::::::::)
+	//public void typeOfCollision;
+	
+	public void collidesWith(Actor a) {
+//		ClickTrigger collision = typeOfCollision(this, a);
+//		Action action = myRules.get(collision.getTriggerName()).get(0);
+//		action.performOn(a);
+	}
 
     @Override
     public double getX() {

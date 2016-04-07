@@ -14,7 +14,7 @@ public class LosePoints extends Action{
 
 	@Override
 	public void perform(PhysicsEngine myPhysicsEngine) {
-		getActor().setPoints(getActor().getPoints()-numPointsLost);
+		getActor().changeAttribute("health",-numPointsLost);
 	}
 
 }
