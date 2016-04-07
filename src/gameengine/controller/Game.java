@@ -3,6 +3,7 @@ package gameengine.controller;
 import java.util.*;
 
 import gameengine.model.Actor;
+import gameengine.model.IActor;
 import gameengine.model.ITrigger;
 
 /**
@@ -11,6 +12,7 @@ import gameengine.model.ITrigger;
  *
  */
 public class Game extends Observable implements Observer {
+
 
 	private String initialGameFile;
 	private List<Level> levels;
@@ -28,6 +30,14 @@ public class Game extends Observable implements Observer {
 		levels = gameLevels;
 		info = gameInfo;
 		observeActors();
+	}
+	
+	public Game(GameInfo gameInfo, List<Level> gameLevels) {
+		this(null, gameInfo, gameLevels);
+	}
+	
+	public Game(List<Level> gameLevels) {
+		this(new GameInfo(), gameLevels);
 	}
 	
 	private void observeActors(){
@@ -81,6 +91,10 @@ public class Game extends Observable implements Observer {
 	public void update(Observable o, Object arg) {
 		notifyObservers(arg);
 		
+	}
+
+	public List<? extends IActor> getActors() {
+		return getLevels().get(getInfo().getCurrentLevelNum()).getActors();
 	}
 
 }

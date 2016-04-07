@@ -1,4 +1,4 @@
-package authoringenvironment.view;
+package gui.view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

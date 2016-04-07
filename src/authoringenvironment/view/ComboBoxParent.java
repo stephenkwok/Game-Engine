@@ -2,6 +2,8 @@ package authoringenvironment.view;
 
 import java.util.List;
 import java.util.ResourceBundle;
+
+import gui.view.IGUIElement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;

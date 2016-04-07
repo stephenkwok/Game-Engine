@@ -1,5 +1,7 @@
 package authoringenvironment.view;
 import authoringenvironment.controller.Controller;
+import gui.controller.IScreenController;
+import gui.view.ButtonParent;
 /**
  * Button to save game
  * @author AnnieTang
@@ -7,12 +9,12 @@ import authoringenvironment.controller.Controller;
  */
 public class ButtonSave extends ButtonParent {
 
-	public ButtonSave(Controller myController, String buttonText, String imageName) {
+	public ButtonSave(IScreenController myController, String buttonText, String imageName) {
 		super(myController, buttonText, imageName);
 	}
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnAction(e -> myController.saveGame(promptForFileName(true)));
+		button.setOnAction(e -> ((Controller) myController).saveGame(promptForFileName(true)));
 	}	
 }

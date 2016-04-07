@@ -2,6 +2,7 @@ package authoringenvironment.view;
 
 import java.util.ResourceBundle;
 
+import gui.view.TextAreaParent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

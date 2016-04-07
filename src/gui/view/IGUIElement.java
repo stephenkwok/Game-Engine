@@ -1,4 +1,4 @@
-package authoringenvironment.view;
+package gui.view;
 
 import javafx.scene.Node;
 

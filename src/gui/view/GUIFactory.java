@@ -1,4 +1,4 @@
-package authoringenvironment.view;
+package gui.view;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import gui.controller.IScreenController;
 
 /**
  * Instantiates IGUIElements based on a ResourceBundle String key passed into createNewGUIObject(String nodeTypeKey).
@@ -21,11 +22,11 @@ public class GUIFactory {
 	private static final String AUTHORING_ENV = "authoringenvironment.";
 	private static final String VIEW = "view.";
 	private ResourceBundle myResources;
-	private Controller myController;
+	private IScreenController myController;
 
-	public GUIFactory(ResourceBundle myResources, Controller myController){
+	public GUIFactory(ResourceBundle myResources, IScreenController myController2){
 		this.myResources = myResources;
-		this.myController = myController;
+		this.myController = myController2;
 	}
 
 	/**

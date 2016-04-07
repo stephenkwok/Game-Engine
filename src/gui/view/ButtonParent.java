@@ -1,8 +1,9 @@
-package authoringenvironment.view;
+package gui.view;
 
 import java.io.File;
 
 import authoringenvironment.controller.Controller;
+import gui.controller.IScreenController;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -17,12 +18,12 @@ import javafx.stage.FileChooser;
 public abstract class ButtonParent implements IGUIElement {
 	private static final int ICON_SIZE = 30;
 	private static final int PADDING = 10;
-	protected Controller myController;
+	protected IScreenController myController;
 	private String buttonText;
 	protected Button button;
 	private String imageName;
 	
-	public ButtonParent(Controller myController, String buttonText, String imageName) {
+	public ButtonParent(IScreenController myController, String buttonText, String imageName) {
 		this.myController = myController;
 		this.buttonText = buttonText;
 		this.imageName = imageName;

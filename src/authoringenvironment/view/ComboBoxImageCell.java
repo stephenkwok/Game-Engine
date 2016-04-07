@@ -70,7 +70,7 @@ public abstract class ComboBoxImageCell extends ComboBoxParent {
 	 * Return current list of image names. 
 	 */
 	@Override
-	protected List<String> getOptionsList() {
+	public List<String> getOptionsList() {
 		return imageNames;
 	}
 }

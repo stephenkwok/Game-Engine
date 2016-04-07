@@ -9,16 +9,16 @@ import org.xml.sax.SAXException;
 
 import gamedata.XMLCreator;
 import gameengine.controller.Game;
-import gameplayer.view.IScreen;
+import gui.view.Screen;
 
 
 public class CreatorController implements ICreatorController {
 	
 	private Game myGame;
 	private XMLCreator myXMLCreator;
-	private IScreen myScreen;
+	private Screen myScreen;
 	
-	public CreatorController(Game game, IScreen screen) throws ParserConfigurationException { //, BaseScreen screen) {
+	public CreatorController(Game game, Screen screen) throws ParserConfigurationException { //, BaseScreen screen) {
 		this.myGame = game;
 		this.myScreen = screen;
 		this.myXMLCreator = new XMLCreator();
