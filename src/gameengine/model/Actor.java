@@ -14,7 +14,9 @@ import gameengine.model.ITrigger;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.CollisionTrigger;
+import gameengine.model.Triggers.KeyTrigger;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 
 
 /**
@@ -39,6 +41,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private String myName;
     private String myActorType;
     private int myStrength;
+    Image myImage; //
 
     private Map<String, List<Action>> myRules;
 
@@ -47,7 +50,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      *
      */
     public Actor() {
-        myRules = new HashMap<>();
+        myRules = new HashMap<>(); 
         myName = DEFAULT_NAME;
         setImage(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME)));
     }
@@ -100,6 +103,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     public void move(double distance, double direction) {
         x = distance * Math.cos(direction * DEGREES_TO_RADIANS);
         y = distance * Math.sin(direction * DEGREES_TO_RADIANS);
+    	System.out.println(x);//
     }
 
     /**
@@ -128,7 +132,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      */
     @Override
     public void performActionsFor(PhysicsEngine myPhysicsEngine, String triggerString) {
-        List<Action> myActions = myRules.get(triggerString);
+    	List<Action> myActions = myRules.get(triggerString);
         for (Action myAction : myActions) {
             myAction.perform(myPhysicsEngine);
         }
@@ -238,13 +242,12 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 
 	@Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
-		return null;
+		return myImage;
 	}
 
 	@Override
 	public void setImage(Image image) {
-		// TODO Auto-generated method stub
+		myImage = image;
 		
 	}
 

@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import gameengine.controller.Game;
 import gameengine.controller.Level;
+import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.GameScreen;
@@ -67,7 +68,10 @@ public class GameController implements Observer {
 	 * Will play the animation timeline. 
 	 */
 	public void begin (){
-		
+		Level current = model.getLevels().get(model.getInfo().getCurrentLevelNum());
+		for(Actor actor: current.getActors()){
+			view.addActor(actor);
+		}
 	}
 	
 	/**
