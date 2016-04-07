@@ -17,6 +17,11 @@ public class ParserController implements IParserController {
 	private XMLParser myXMLParser;
 	private Screen myScreen;
 	
+	
+	public ParserController () {
+		this.myXMLParser = new XMLParser();
+		
+	}
 	public ParserController (Screen screen) {
 		this.myXMLParser = new XMLParser();
 		this.myScreen = screen;
@@ -47,18 +52,14 @@ public class ParserController implements IParserController {
 		return game;
 	}
 	
-	/*
+	
 	public static void main (String [] args) {
 		ParserController p = new ParserController ();
-		try {
-			Game g = p.loadforPlaying(new File ("src/resources/test2.xml"));
-			System.out.println(g.toString());
-		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Game g = p.loadforPlaying(new File ("src/resources/test.xml"));
+		System.out.println(g.toString());
+
 		
-	} */
+	}
 	
 
 }

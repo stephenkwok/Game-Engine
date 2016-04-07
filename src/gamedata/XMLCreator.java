@@ -38,7 +38,7 @@ public class XMLCreator {
 		
 		String xml = this.myXStream.toXML(game);
 		Document document = documentBuilder.parse(new InputSource(new StringReader(xml)));
-		document.getDocumentElement().normalize();
+		//document.getDocumentElement().normalize();
 		convertDocumentToFile(document, file);
 	}
 

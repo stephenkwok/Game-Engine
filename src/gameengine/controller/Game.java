@@ -96,5 +96,20 @@ public class Game extends Observable implements Observer {
 	public List<? extends IActor> getActors() {
 		return getLevels().get(getInfo().getCurrentLevelNum()).getActors();
 	}
+	
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+	      
+	      stringBuilder.append("Game [ ");
+	      stringBuilder.append("\ninitialFile: ");
+	      stringBuilder.append(initialGameFile);
+	      stringBuilder.append("\ngameLevels: ");
+	      stringBuilder.append(levels.toString());
+	      stringBuilder.append("\nmyInfo: ");
+	      stringBuilder.append(info.toString());
+	      stringBuilder.append(" ]");
+	      
+	      return stringBuilder.toString();
+	}
 
 }

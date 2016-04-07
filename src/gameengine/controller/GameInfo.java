@@ -66,5 +66,21 @@ public class GameInfo {
 		this.myCurrentLevelNum = myCurrentLevelNum;
 	}
 
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+	      
+	      stringBuilder.append("GameInfo [ ");
+	      stringBuilder.append("\nname: ");
+	      stringBuilder.append(myName);
+	      stringBuilder.append("\nimgName: ");
+	      stringBuilder.append(myImageName);
+	      stringBuilder.append("\nmyDescription: ");
+	      stringBuilder.append(myDescription);
+	      stringBuilder.append("\ncurrentLevelNum: ");
+	      stringBuilder.append(myCurrentLevelNum);
+	      stringBuilder.append(" ]");
+	      
+	      return stringBuilder.toString();
+	}
 
 }
