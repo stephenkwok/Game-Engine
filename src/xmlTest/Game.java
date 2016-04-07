@@ -1,10 +1,6 @@
-package gameengine.controller;
+package xmlTest;
 
 import java.util.*;
-
-import gameengine.model.Actor;
-import gameengine.model.ITrigger;
-
 /**
  * This class is intended to represent a game containing levels with actors.
  * @author colettetorres
@@ -23,20 +19,18 @@ public class Game extends Observable implements Observer {
 	 * @param levelNum the first level to play in the game
 	 * @param gameLevels all the levels in the game 
 	 */
+	
+	public Game (GameInfo gameInfo, List<Level> gameLevels) {
+		this(null, gameInfo, gameLevels);
+	}
+	
 	public Game(String gameFilePath, GameInfo gameInfo, List<Level> gameLevels) {
 		initialGameFile = gameFilePath;
 		levels = gameLevels;
 		info = gameInfo;
-		observeActors();
 	}
 	
-	private void observeActors(){
-		for(Level level: levels){
-			for(Actor actor: level.getActors()){
-				actor.addObserver(this);
-			}
-		}
-	}
+
 	public String getInitialGameFile() {
 		return initialGameFile;
 	}
@@ -73,14 +67,27 @@ public class Game extends Observable implements Observer {
 	 * Lets current level handle a trigger 
 	 * @param myTrigger the trigger received from the game player 
 	 */
-	public void handleTrigger(ITrigger myTrigger) {
-		levels.get(info.getCurrentLevelNum()).handleTrigger(myTrigger);
-	}
+
 
 	@Override
 	public void update(Observable o, Object arg) {
 		notifyObservers(arg);
 		
 	}
-
+	
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+	      
+	      stringBuilder.append("Game [ ");
+	      stringBuilder.append("\ninitialFile: ");
+	      stringBuilder.append(initialGameFile);
+	      stringBuilder.append("\ngameLevels: ");
+	      stringBuilder.append(levels.toString());
+	      stringBuilder.append("\nmyInfo: ");
+	      stringBuilder.append(info.toString());
+	      stringBuilder.append(" ]");
+	      
+	      return stringBuilder.toString();
+	}
 }
+

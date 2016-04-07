@@ -13,6 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+
 /** 
  * This class serves as the private interface that a Game screen must implement in order to be able to add visual elements of the game to the screen.
  * It is the container for all the game contents that will be displayed on the screen.

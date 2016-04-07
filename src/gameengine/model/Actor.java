@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
@@ -34,6 +36,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private double y;
     private int myID;
     private String myName;
+    @XStreamOmitField
     private ImageView myImageView;
     private Map<String, List<Action>> myRules;
     private Map<AttributeType, Attribute> attributeMap;
@@ -49,6 +52,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME))));
     }
 
+  
     /**
      * Moves the Actor based on a provided distance and direction
      *
