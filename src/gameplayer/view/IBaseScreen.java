@@ -7,7 +7,11 @@ import javafx.scene.control.Alert;
  * @author cmt57
  *
  */
+<<<<<<< HEAD:src/gameplayer/view/IBaseScreen.java
+public interface IBaseScreen {
+=======
 public class BaseScreen {
+>>>>>>> master:src/gameplayer/view/BaseScreen.java
 	/**
 	 * Adds the auxiliary views, like the HUD display, MenuBar, and GameScreen, to the BaseScreen
 	 */
