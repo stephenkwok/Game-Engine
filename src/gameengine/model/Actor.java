@@ -33,62 +33,19 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
     private double x;
     private double y;
-    private int health;
-    private int points;
     private int myID;
     private String myName;
-    private String myActorType;
-    private int myStrength;
 
     private Map<String, List<Action>> myRules;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
-     *
      */
     public Actor() {
         myRules = new HashMap<>();
         myName = DEFAULT_NAME;
         setImage(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME)));
     }
-
-    /**
-     * Provides the Actor's health
-     *
-     * @return The Actor's health
-     */
-    @Override
-    public int getHealth() {
-        return health;
-    }
-
-    /**
-     * Updates the Actor's health
-     *
-     */
-    public void setHealth(int newHealth){
-    	health = newHealth;
-    }
-    
-
-    /**
-     * Provides the Actor's number of points
-     *
-     * @return The Actor's number of points
-     */
-    @Override
-    public int getPoints() {
-        return points;
-    }
-    
-	/**
-	 * Updates the Actor's number of points
-	 * @param points the points to set
-	 */
-	public void setPoints(int points) {
-		this.points = points;
-	}
-	
 
     /**
      * Moves the Actor based on a provided distance and direction
@@ -103,28 +60,9 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     }
 
     /**
-     * Changes the Actor's number of points
-     *
-     * @param change The desired change in the Actor's number of points
-     */
-    @Override
-    public void changePoints(int change) {
-        points += change;
-    }
-
-    /**
-     * Changes the Actor's health
-     *
-     * @param change The desired change in the Actor's amount of health
-     */
-    @Override
-    public void changeHealth(int change) {
-        health += change;
-    }
-
-    /**
      * Calls the appropriate sequence of Actions based on a provided Trigger
-     * @param myPhysicsEngine 
+     *
+     * @param myPhysicsEngine
      */
     @Override
     public void performActionsFor(PhysicsEngine myPhysicsEngine, String triggerString) {
@@ -161,22 +99,6 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         return myRules.keySet();
     }
 
-
-    /**
-     * Sets the Actor type to distinguish between enemy/neutral etc
-     * @param newActorType
-     */
-	public void setActorType(String newActorType){
-		myActorType = newActorType;
-	}
-
-    /**
-     * @return The Actor's type
-     */
-	public String getActorType() {
-		return myActorType;
-	}
-	
     /**
      * Provides the Actor's ID number
      *
@@ -187,90 +109,76 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         return myID;
     }
 
-	@Override
-	public double getXVelo() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public double getXVelo() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	@Override
-	public double getYVelo() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public double getYVelo() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	@Override
-	public void setXPos(double updateXPosition) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setXPos(double updateXPosition) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void setYPos(double updateYPosition) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	public void setXVelo(double updateXVelo) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setYPos(double updateYPosition) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void setYVelo(double updateYVelo) {
-		// TODO Auto-generated method stub
-	}
-	
-	public void setID(int ID) {
-		myID = ID;
-	}
+    }
 
-	@Override
-	public String getName() {
-		return myName;
-	}
+    @Override
+    public void setXVelo(double updateXVelo) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void setName(String name) {
-		myName = name;
-	}
+    }
 
-	@Override
-	public Image getImage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public void setYVelo(double updateYVelo) {
+        // TODO Auto-generated method stub
+    }
 
-	@Override
-	public void setImage(Image image) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void setID(int ID) {
+        myID = ID;
+    }
 
-	@Override
-	public double getX() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public String getName() {
+        return myName;
+    }
 
-	@Override
-	public double getY() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public void setName(String name) {
+        myName = name;
+    }
 
-	public int getStrength() {
-		return myStrength;
-	}
+    @Override
+    public Image getImage() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	//TODO JUSTIN ::::::::)
-	//public void typeOfCollision;
-	
-	public void collidesWith(Actor a) {
-//		ClickTrigger collision = typeOfCollision(this, a);
-//		Action action = myRules.get(collision.getTriggerName()).get(0);
-//		action.performOn(a);
-	}
+    @Override
+    public void setImage(Image image) {
+        // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public double getX() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public double getY() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 }
