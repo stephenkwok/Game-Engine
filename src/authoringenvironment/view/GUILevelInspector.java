@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import gameengine.model.Actor;
+import gui.view.IGUI;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;

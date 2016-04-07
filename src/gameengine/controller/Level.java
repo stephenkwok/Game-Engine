@@ -9,6 +9,8 @@ import javafx.scene.image.ImageView;
 
 import java.util.*;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import authoringenvironment.model.IEditableGameElement;
 
 /**
@@ -22,10 +24,12 @@ public class Level implements ILevel, IEditableGameElement {
 	private static final String DEFAULT_IMAGE_NAME = "default_background.png";
 
     private List<Actor> myActors;
-    private Map<String, List<Actor>> triggerMap;
+    private Map<String, List<Actor>> myTriggerMap;
     private String myName;
+    private String myBackgroundImgName;
+	@XStreamOmitField
     private ImageView myBackground;
-    private CollisionDetection myCollisionDetector ;
+    private CollisionDetection myCollisionDetector;
     private PhysicsEngine myPhysicsEngine;
 
 
@@ -34,9 +38,10 @@ public class Level implements ILevel, IEditableGameElement {
      */
     public Level() {
         myActors = new ArrayList<>();
-        triggerMap = new HashMap<>();
+        myTriggerMap = new HashMap<>();
         myName = DEFAULT_NAME;
-        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME))));
+        myBackgroundImgName = DEFAULT_IMAGE_NAME;
+        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
         myPhysicsEngine = new PhysicsEngine();
         myCollisionDetector = new CollisionDetection(myPhysicsEngine);
     }
@@ -48,8 +53,8 @@ public class Level implements ILevel, IEditableGameElement {
      */
     @Override
     public void handleTrigger(ITrigger myTrigger) {
-        if (!triggerMap.containsKey(myTrigger.getTriggerName())) return;
-        List<Actor> relevantActors = triggerMap.get(myTrigger.getTriggerName());
+        if (!myTriggerMap.containsKey(myTrigger.getTriggerName())) return;
+        List<Actor> relevantActors = myTriggerMap.get(myTrigger.getTriggerName());
         for (Actor myActor : relevantActors) {
             if (myTrigger.evaluate(myActor)){
                 myActor.performActionsFor(myPhysicsEngine, myTrigger.getTriggerName());
@@ -79,14 +84,14 @@ public class Level implements ILevel, IEditableGameElement {
         myActors.add(newActor);
         Set<String> actorTriggers = newActor.getTriggers();
         for (String myTrigger : actorTriggers) {
-            if (triggerMap.containsKey(myTrigger)) {
-                List<Actor> levelActors = triggerMap.get(myTrigger);
+            if (myTriggerMap.containsKey(myTrigger)) {
+                List<Actor> levelActors = myTriggerMap.get(myTrigger);
                 levelActors.add(newActor);
-                triggerMap.put(myTrigger, levelActors);
+                myTriggerMap.put(myTrigger, levelActors);
             } else {
                 List<Actor> levelActors = new ArrayList<>();
                 levelActors.add(newActor);
-                triggerMap.put(myTrigger, levelActors);
+                myTriggerMap.put(myTrigger, levelActors);
             }
         }
         
@@ -133,6 +138,35 @@ public class Level implements ILevel, IEditableGameElement {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+    public String getMyBackgroundImgName() {
+		return myBackgroundImgName;
+	}
+
+	public void setMyBackgroundImgName(String myBackgroundImgName) {
+		this.myBackgroundImgName = myBackgroundImgName;
+	}
+	
+	public String toString() {
+
+	      StringBuilder stringBuilder = new StringBuilder();
+	      
+	      stringBuilder.append("\nLevel [ ");
+	      stringBuilder.append("\nmyName: ");
+	      stringBuilder.append(myName);
+	      stringBuilder.append("\nbckImg: ");
+	      stringBuilder.append(myBackgroundImgName);
+	      stringBuilder.append("\nmyActors: ");
+	      stringBuilder.append(myActors.toString());
+	      stringBuilder.append("\nTriggerMap: ");
+	      stringBuilder.append(myTriggerMap.toString());
+	      stringBuilder.append("\nimg: ");
+	      stringBuilder.append(myBackground);
+	      stringBuilder.append(" ]");
+	      
+	      return stringBuilder.toString();
+	}
+	
 
 
 }

@@ -13,14 +13,7 @@ import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.Actions.Action;
-<<<<<<< HEAD
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-=======
 import gameengine.model.Triggers.AttributeType;
->>>>>>> 936c8fff30b6a4439e7f0bd77d0c9aaca8331127
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -39,8 +32,13 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private static final double DEGREES_TO_RADIANS = Math.PI / 180;
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
+    private double x;
+    private double y;
+    private double veloX;
+    private double veloY;
     private int myID;
     private String myName;
+    private String myImageViewName;
     @XStreamOmitField
     private ImageView myImageView;
     private Map<String, List<Action>> myRules;
@@ -54,7 +52,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         myRules = new HashMap<>();
         attributeMap = new HashMap<>();
         myName = DEFAULT_NAME;
-        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME))));
+        myImageViewName = DEFAULT_IMAGE_NAME;
+        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
     }
 
   
@@ -66,14 +65,13 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      */
     @Override
     public void move(double distance, double direction) {
-<<<<<<< HEAD
         myImageView.setX(distance * Math.cos(direction * DEGREES_TO_RADIANS));
         myImageView.setY(distance * Math.sin(direction * DEGREES_TO_RADIANS));
-=======
+        System.out.println(myImageView.getX());
+
         x = distance * Math.cos(direction * DEGREES_TO_RADIANS);
         y = distance * Math.sin(direction * DEGREES_TO_RADIANS);
-        System.out.println(x);//
->>>>>>> 936c8fff30b6a4439e7f0bd77d0c9aaca8331127
+
     }
 
     /**
@@ -149,37 +147,35 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 
     @Override
     public double getXVelo() {
-        // TODO Auto-generated method stub
-        return 0;
+        return veloX;
     }
 
     @Override
     public double getYVelo() {
-        // TODO Auto-generated method stub
-        return 0;
+        return veloY;
     }
 
     @Override
     public void setXPos(double updateXPosition) {
-        // TODO Auto-generated method stub
+        x = updateXPosition;
 
     }
 
     @Override
     public void setYPos(double updateYPosition) {
-        // TODO Auto-generated method stub
+        y = updateYPosition;
 
     }
 
     @Override
     public void setXVelo(double updateXVelo) {
-        // TODO Auto-generated method stub
+        veloX = updateXVelo;
 
     }
 
     @Override
     public void setYVelo(double updateYVelo) {
-        // TODO Auto-generated method stub
+        veloY = updateYVelo;
     }
 
     public void setID(int ID) {
@@ -219,14 +215,12 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 
     @Override
     public double getX() {
-        // TODO Auto-generated method stub
-        return 0;
+        return x;
     }
 
     @Override
     public double getY() {
-        // TODO Auto-generated method stub
-        return 0;
+        return y;
     }
 
 	public void setEngine(PhysicsEngine physicsEngine) {
@@ -235,6 +229,35 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	
 	public PhysicsEngine getPhysicsEngine(){
 		return myPhysicsEngine;
+	}
+	
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+	      
+	      stringBuilder.append("Actor[ ");
+	      stringBuilder.append("\nid: ");
+	      stringBuilder.append(myID);
+	      stringBuilder.append("\nname: ");
+	      stringBuilder.append(myName);
+	      stringBuilder.append("\nmyImgName: ");
+	      stringBuilder.append(myImageViewName);
+	      stringBuilder.append("\nmyImg: ");
+	      stringBuilder.append(myImageView);
+	      stringBuilder.append("\nmyRules: ");
+	      stringBuilder.append(myRules.toString());
+	      stringBuilder.append(" ]");
+	      
+	      return stringBuilder.toString();
+	}
+
+
+	public String getMyImageViewName() {
+		return myImageViewName;
+	}
+
+
+	public void setMyImageViewName(String myImageViewName) {
+		this.myImageViewName = myImageViewName;
 	}
 
 }
