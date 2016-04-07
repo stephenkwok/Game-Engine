@@ -15,6 +15,7 @@ import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.CollisionTrigger;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 
 /**
@@ -46,7 +47,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         myRules = new HashMap<>();
         attributeMap = new HashMap<>();
         myName = DEFAULT_NAME;
-        setImage(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME)));
+        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME))));
     }
 
     /**

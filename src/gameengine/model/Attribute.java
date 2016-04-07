@@ -10,35 +10,36 @@ import javafx.beans.value.ObservableValue;
 public abstract class Attribute {
 
     private String myName;
-	private IntegerProperty myInitialValue;
-	private IntegerProperty myTriggerValue;
-	private Action myAction;
-	private BooleanBinding isActionTriggered;
+    private IntegerProperty myInitialValue;
+    private IntegerProperty myTriggerValue;
+    private Action myAction;
+    private BooleanBinding isActionTriggered;
 
-	public Attribute(String name, int initialValue, int triggerValue, Action action) {
+    public Attribute(String name, int initialValue, int triggerValue, Action action) {
         myName = name;
-		myInitialValue = new SimpleIntegerProperty(initialValue);
-		myTriggerValue = new SimpleIntegerProperty(triggerValue);
-		myAction = action;
-		isActionTriggered = myInitialValue.isEqualTo(myTriggerValue);
+        myInitialValue = new SimpleIntegerProperty(initialValue);
+        myTriggerValue = new SimpleIntegerProperty(triggerValue);
+        myAction = action;
+        isActionTriggered = myInitialValue.isEqualTo(myTriggerValue);
 
-		initAttribute();
-	}
+        initAttribute();
+    }
 
-	public void changeAttribute(int change){
-		myInitialValue.setValue(myInitialValue.getValue() + change);
-	}
+    public void changeAttribute(int change) {
+        myInitialValue.setValue(myInitialValue.getValue() + change);
+    }
 
-	private void initAttribute() {
-		isActionTriggered.addListener(new ChangeListener(){
-	        @Override public void changed(ObservableValue o,Object oldVal,
-	                 Object newVal){
-	             myAction.perform();
-	        }
+    private void initAttribute() {
+        isActionTriggered.addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue o, Object oldVal,
+                                Object newVal) {
+                myAction.perform();
+            }
         });
-	}
+    }
 
-    public String getName(){
+    public String getName() {
         return myName;
     }
 
