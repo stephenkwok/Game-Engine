@@ -1,7 +1,9 @@
 package gameengine.controller;
 
 import gameengine.model.Actor;
+import gameengine.model.CollisionDetection;
 import gameengine.model.ITrigger;
+import gameengine.model.PhysicsEngine;
 import javafx.scene.image.Image;
 
 import java.util.*;
@@ -22,6 +24,8 @@ public class Level implements ILevel, IEditableGameElement {
     Map<String, List<Actor>> triggerMap;
     String myName;
     Image myBackground;
+    CollisionDetection myCollisionDetector ;
+    PhysicsEngine myPhysicsEngine;
 
     /**
      * Instantiates the triggerMap and Actor list
@@ -31,6 +35,8 @@ public class Level implements ILevel, IEditableGameElement {
         triggerMap = new HashMap<>();
         myName = DEFAULT_NAME;
         setImage(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME)));
+        myPhysicsEngine = new PhysicsEngine();
+        myCollisionDetector = new CollisionDetection(myPhysicsEngine);
     }
 
     /**
@@ -43,11 +49,10 @@ public class Level implements ILevel, IEditableGameElement {
         List<Actor> relevantActors = triggerMap.get(myTrigger.getTriggerName());
         for (Actor myActor : relevantActors) {
             if (myTrigger.evaluate(myActor)){
-                myActor.performActionsFor(myTrigger);
+                myActor.performActionsFor(myPhysicsEngine, null);
             }
         }
-        
-        //method to check collisions
+        myCollisionDetector.detection(myActors); //Collision Detection/Resolution for each Actor
     }
 
     /**

@@ -185,13 +185,6 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	}
 
 	@Override
-	public void updateAllNodes() {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	@Override
 	public void setEditable(IEditableGameElement editable) {
 		myCenterPane.getChildren().clear();
 		myLevel = (Level) editable;

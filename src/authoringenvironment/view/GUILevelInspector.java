@@ -40,10 +40,4 @@ public class GUILevelInspector implements IGUI {
 		return myAttributesTab;
 	}
 
-	@Override
-	public void updateAllNodes() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

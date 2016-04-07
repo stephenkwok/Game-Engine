@@ -84,9 +84,9 @@ public class GUIMain implements IGUI {
 	}
 	
 	public void setCenterPane(){
-//		myController.goToMainScreen();
-		IGUI actorEditing = new GUIActorEditingEnvironment(myResources);
-		myRoot.setCenter(actorEditing.getPane());
+		myController.goToMainScreen();
+//		IGUI actorEditing = new GUIActorEditingEnvironment(myResources);
+//		myRoot.setCenter(actorEditing.getPane());
 //		GUIMainScreen test = new GUIMainScreen(myController);
 //		myRoot.setCenter(test.getPane());
 	}
@@ -106,12 +106,7 @@ public class GUIMain implements IGUI {
 			hbox.getChildren().add(elementToCreate.createNode());
 		}
 	}
-
-	@Override
-	public void updateAllNodes() {
-		levels.updateNode();
-	}
-
+	
 	@Override
 	public Pane getPane() {
 		return myRoot;

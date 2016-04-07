@@ -4,13 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Set;
 
 import authoringenvironment.model.IEditableGameElement;
-import gameengine.controller.Action;
+import gameengine.model.IActor;
+import gameengine.model.IRule;
+import gameengine.model.ITrigger;
+import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.ClickTrigger;
+import gameengine.model.Triggers.CollisionTrigger;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 
 /**
  * This class defines the logic for an Actor object.
@@ -21,16 +26,19 @@ import javafx.scene.image.ImageView;
  * @author blakekaplan
  */
 
-public class Actor extends ImageView implements IActor, IEditableGameElement {
+public class Actor extends Observable implements IActor, IEditableGameElement {
 
     private static final double DEGREES_TO_RADIANS = Math.PI / 180;
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
+    private double x;
+    private double y;
     private int health;
     private int points;
     private int myID;
     private String myName;
     private String myActorType;
+    private int myStrength;
     private Map<String, List<Action>> myRules;
 
     /**
@@ -90,8 +98,8 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
      */
     @Override
     public void move(double distance, double direction) {
-        setX(distance * Math.cos(direction * DEGREES_TO_RADIANS));
-        setY(distance * Math.sin(direction * DEGREES_TO_RADIANS));
+        x = distance * Math.cos(direction * DEGREES_TO_RADIANS);
+        y = distance * Math.sin(direction * DEGREES_TO_RADIANS);
     }
 
     /**
@@ -116,14 +124,13 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
 
     /**
      * Calls the appropriate sequence of Actions based on a provided Trigger
-     *
-     * @param myTrigger A Trigger object that calls for an appropriate response
+     * @param myPhysicsEngine 
      */
     @Override
-    public void performActionsFor(ITrigger myTrigger) {
-        List<Action> myActions = myRules.get(myTrigger.getTriggerName());
+    public void performActionsFor(PhysicsEngine myPhysicsEngine, String triggerString) {
+        List<Action> myActions = myRules.get(triggerString);
         for (Action myAction : myActions) {
-            myAction.perform();
+            myAction.perform(myPhysicsEngine);
         }
     }
 
@@ -229,19 +236,41 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
 		myName = name;
 	}
 
-	//TODO JUSTIN ::::::::)
-	//public void typeOfCollision;
-	
-	public void collidesWith(Actor a) {
-		ClickTrigger collision = typeOfCollision(this, a);
-		Action action = myRules.get(collision.getTriggerName()).get(0);
-		action.performOn(a);
-	}
-
-	private ClickTrigger typeOfCollision(Actor actor, Actor a) {
+	@Override
+	public Image getImage() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public void setImage(Image image) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double getX() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getY() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getStrength() {
+		return myStrength;
+	}
+
+	//TODO JUSTIN ::::::::)
+	//public void typeOfCollision;
+	
+	public void collidesWith(Actor a) {
+//		ClickTrigger collision = typeOfCollision(this, a);
+//		Action action = myRules.get(collision.getTriggerName()).get(0);
+//		action.performOn(a);
+	}
 
 }

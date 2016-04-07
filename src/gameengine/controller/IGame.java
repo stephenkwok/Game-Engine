@@ -19,7 +19,7 @@ public interface IGame {
      *
      * @param mylevel The level to be played
      */
-    public void setLevel(ILevel mylevel);
+//    public void setLevel(Level mylevel);
 
     /**
      * Provides a list of all the possible levels to be played
@@ -35,11 +35,11 @@ public interface IGame {
      */
     public void handleTrigger(ITrigger myTrigger);
 
-    /**
-     * Provides a list of all actors used across all levels
-     *
-     * @return A List of Actor objects
-     */
-    public List<IActor> getActors();
+//    /**
+//     * Provides a list of all actors used across all levels
+//     *
+//     * @return A List of Actor objects
+//     */
+//    public List<IActor> getActors();
 
 }

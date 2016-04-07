@@ -36,11 +36,6 @@ public class GUILibrary implements IGUI{
 	}
 
 	@Override
-	public void updateAllNodes() {
-		
-	}
-
-	@Override
 	public Pane getPane() {
 		return myPane;
 	}

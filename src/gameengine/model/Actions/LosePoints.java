@@ -1,7 +1,8 @@
 package gameengine.model.Actions;
 
-import gameengine.controller.Action;
+import gameengine.model.Actions.Action;
 import gameengine.model.Actor;
+import gameengine.model.PhysicsEngine;
 
 public class LosePoints extends Action{
 
@@ -12,15 +13,8 @@ public class LosePoints extends Action{
 	}
 
 	@Override
-	public void perform() {
+	public void perform(PhysicsEngine myPhysicsEngine) {
 		getActor().setPoints(getActor().getPoints()-numPointsLost);
-	}
-
-	//this is enemy, a is character
-	@Override
-	public void performOn(Actor a) {
-		a.setPoints(a.getPoints()-numPointsLost);
-		
 	}
 
 }

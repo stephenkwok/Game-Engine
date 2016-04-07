@@ -1,7 +1,8 @@
 package gameengine.model.Actions;
 
-import gameengine.controller.Action;
+import gameengine.model.Actions.Action;
 import gameengine.model.Actor;
+import gameengine.model.PhysicsEngine;
 
 public class HarmEnemy extends Action {
 
@@ -12,13 +13,9 @@ public class HarmEnemy extends Action {
 	}
 
 	@Override
-	public void perform() {
-		getActor().setHealth(getActor().getHealth()-damage);
-	}
-
-	@Override
-	public void performOn(Actor a) {
-		//nothing happens to character
+	public void perform(PhysicsEngine myPhysicsEngine) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
