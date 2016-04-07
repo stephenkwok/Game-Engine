@@ -1,6 +1,5 @@
 package gameengine.model.Actions;
 
-import gameengine.controller.Action;
 import gameengine.model.Actor;
 import gameengine.model.PhysicsEngine;
 

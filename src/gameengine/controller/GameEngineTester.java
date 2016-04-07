@@ -9,6 +9,7 @@ import gameengine.model.ITrigger;
 import gameengine.model.Rule;
 import gameengine.model.Actions.MoveRight;
 import gameengine.model.Actions.MoveUp;
+import gameengine.model.Actions.Actions.Action;
 import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.TickTrigger;
 
@@ -33,7 +34,7 @@ public class GameEngineTester {
         ITrigger trigger1 = new ClickTrigger();
         List<Object> args1 = new ArrayList<>();
         args1.add(50.0);
-        Action action1 = new MoveRight(actor1, args1);
+        MoveRight action1 = new MoveRight(actor1, args1);
         ITrigger trigger3 = new TickTrigger();
         List<Object> args3 = new ArrayList<>();
         args3.add(70.0);

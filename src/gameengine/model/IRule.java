@@ -1,6 +1,6 @@
 package gameengine.model;
 
-import gameengine.controller.Action;
+import gameengine.model.Actions.Action;
 
 /**
  * This interface defines the public methods for Rule objects. For our purposes, Rules will be ways of packaging
