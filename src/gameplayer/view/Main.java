@@ -38,7 +38,7 @@ public class Main extends Application {
 		actor1.setImageView(new ImageView(actor1img));
 		KeyTrigger trigger = new KeyTrigger(KeyCode.SPACE);
 		List<Object> args = new ArrayList<Object>();
-		args.add(5.0);
+		args.add(50.0);
 		Action action = new MoveLeft(actor1,args);
 		Rule rule = new Rule(trigger,action);
 		actor1.addRule(rule);

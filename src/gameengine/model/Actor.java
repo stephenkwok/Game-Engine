@@ -13,7 +13,14 @@ import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.Actions.Action;
+<<<<<<< HEAD
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+=======
 import gameengine.model.Triggers.AttributeType;
+>>>>>>> 936c8fff30b6a4439e7f0bd77d0c9aaca8331127
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -32,8 +39,6 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private static final double DEGREES_TO_RADIANS = Math.PI / 180;
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
-    private double x;
-    private double y;
     private int myID;
     private String myName;
     @XStreamOmitField
@@ -61,9 +66,14 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      */
     @Override
     public void move(double distance, double direction) {
+<<<<<<< HEAD
+        myImageView.setX(distance * Math.cos(direction * DEGREES_TO_RADIANS));
+        myImageView.setY(distance * Math.sin(direction * DEGREES_TO_RADIANS));
+=======
         x = distance * Math.cos(direction * DEGREES_TO_RADIANS);
         y = distance * Math.sin(direction * DEGREES_TO_RADIANS);
         System.out.println(x);//
+>>>>>>> 936c8fff30b6a4439e7f0bd77d0c9aaca8331127
     }
 
     /**

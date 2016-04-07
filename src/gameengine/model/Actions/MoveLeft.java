@@ -19,6 +19,7 @@ public class MoveLeft extends MovingAction {
     }
 
     @Override
+
     public void perform() {
         getActor().getPhysicsEngine().moveLeft(getActor());
     }
