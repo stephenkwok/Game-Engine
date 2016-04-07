@@ -1,7 +1,15 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
+import gameengine.model.PhysicsEngine;
 import gameengine.controller.Action;
+
+/**
+ * This Action represents an elastic sideways collision between Actors
+ * 
+ * @author justinbergkamp
+ *
+ */
 
 public class HorizontalBounceCollision extends Action{
 
@@ -11,7 +19,8 @@ public class HorizontalBounceCollision extends Action{
 	}
 
 	@Override
-	public void perform() {
+	public void perform(PhysicsEngine myPhysicsEngine) {
+		//myPhysicsEngine.horzBounceCollision(getActor());
 		getActor().setXVelo(getActor().getXVelo()*-1);
 	}
 
