@@ -3,6 +3,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import gui.controller.IScreenController;
+import gui.view.GUIFactory;
+import gui.view.IGUI;
+import gui.view.IGUIElement;
+import gui.view.Screen;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
@@ -19,7 +24,7 @@ import javafx.stage.Stage;
  * @author AnnieTang
  *
  */
-public class GUIMain implements IGUI {
+public class GUIMain extends Screen implements IGUI {
     private static final String GUI_RESOURCE = "authoringGUI";
     private static final String TOP_PANE_ELEMENTS = "TopPaneElements";
     private static final int PADDING = 10;
@@ -34,18 +39,17 @@ public class GUIMain implements IGUI {
 	private IGUIElement levels;
 	private Scene splashScene;
 	
-	public GUIMain(int windowWidth, int windowHeight, Stage s, Scene splashScene) {
-		this.windowWidth = windowWidth;
-		this.windowHeight = windowHeight;
+	public GUIMain(Stage s, Scene splash) {
+		super(s);
+		this.splashScene = splash;
 		this.myStage = s;
-		this.splashScene = splashScene;
 		init();
 	}
 	
 	/**
 	 * Initializes resource bundle, controller, and factory class.
 	 */
-	private void init(){
+	public void init(){
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myController = new Controller(myStage, this, this.myResources);
 		factory = new GUIFactory(myResources, myController);
@@ -110,6 +114,12 @@ public class GUIMain implements IGUI {
 	@Override
 	public Pane getPane() {
 		return myRoot;
+	}
+
+	@Override
+	public IScreenController setController() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

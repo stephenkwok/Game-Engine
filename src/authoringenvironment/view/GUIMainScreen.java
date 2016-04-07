@@ -6,6 +6,7 @@ import java.util.List;
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
+import gui.view.IGUI;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;

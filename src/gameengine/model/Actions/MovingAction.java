@@ -23,5 +23,5 @@ public abstract class MovingAction extends Action {
     }
 
     @Override
-    public abstract void perform(PhysicsEngine myPhysicsEngine);
+    public abstract void perform();
 }

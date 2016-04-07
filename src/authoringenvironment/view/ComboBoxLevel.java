@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import gameengine.controller.Level;
+import gui.view.ComboBoxTextCell;
 
 /**
  * ComboBox that holds existing Levels and allows user to go to LevelEditingEnvironment to edit selected level
@@ -38,7 +39,7 @@ public class ComboBoxLevel extends ComboBoxTextCell{
 	}
 	
 	@Override
-	void setButtonAction() {
+	public void setButtonAction() {
 		comboButton.setOnAction(event -> {
 			String levelName = comboBox.getValue();
 			Level level = levelMap.get(levelName);
@@ -47,7 +48,7 @@ public class ComboBoxLevel extends ComboBoxTextCell{
 	}
 
 	@Override
-	List<String> getOptionsList() {
+	public List<String> getOptionsList() {
 		levelNames.add("default");
 		return levelNames;
 	}

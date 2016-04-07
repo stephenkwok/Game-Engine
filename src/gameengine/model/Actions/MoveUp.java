@@ -18,8 +18,8 @@ public class MoveUp extends MovingAction {
     }
 
     @Override
-    public void perform(PhysicsEngine myPhysicsEngine) {
-        moveActor(UP_ANGLE);
+    public void perform() {
+    	getActor().getPhysicsEngine().jump(getActor());
     }
 
     

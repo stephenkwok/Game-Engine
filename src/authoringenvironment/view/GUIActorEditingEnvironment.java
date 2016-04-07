@@ -6,11 +6,12 @@ import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.model.Actor;
+import gui.view.GUILibrary;
+import gui.view.IGUI;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 /**
  * Returns BorderPane to represent Actor Editing Environment. 
@@ -86,7 +87,9 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	
 	public void setActorImage(ImageView newImageView){
 		myActorIV = newImageView;
-		myActor.setImageView(newImageView);
+		myActorIV.setFitHeight(ACTOR_IMAGE_HEIGHT);
+		myActorIV.setPreserveRatio(true);
+		myActor.setImageView(myActorIV);
 		setLeftPane();
 		
 	}

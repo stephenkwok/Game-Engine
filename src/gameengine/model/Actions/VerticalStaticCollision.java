@@ -1,7 +1,6 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
-import gameengine.model.PhysicsEngine;
 import gameengine.model.Actions.Action;
 
 /**
@@ -19,7 +18,7 @@ public class VerticalStaticCollision extends Action{
 	}
 
 	@Override
-	public void perform(PhysicsEngine myPhysicsEngine) {
+	public void perform() {
 		//myPhysicsEngine.vertStaticCollision(getActor());
 		getActor().setYVelo(0);
 	}

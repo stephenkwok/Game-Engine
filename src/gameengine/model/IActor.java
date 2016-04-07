@@ -63,20 +63,6 @@ public interface IActor {
      * @param updateYVelo
      */
 	public void setYVelo(double updateYVelo);
-    
-    /**
-     * Gets the Actor's amount of health
-     *
-     * @return The Actor's amount of health
-     */
-    public int getHealth();
-
-    /**
-     * Gets the Actor's number of points
-     *
-     * @return The Actor's number of points
-     */
-    public int getPoints();
 
     /**
      * Moves the Actor's current position
@@ -85,27 +71,6 @@ public interface IActor {
      * @param direction The direction that the Actor should move in
      */
     public void move(double distance, double direction);
-
-    /**
-     * Changes the Actor's number of points
-     *
-     * @param change The desired change in the Actor's number of points
-     */
-    public void changePoints(int change);
-
-
-    /**
-     * Changes the Actor's amount of health
-     *
-     * @param change The desired change in the Actor's amount of health
-     */
-    public void changeHealth(int change);
-
-    /**
-     * Performs the action for a particular provided trigger
-     *
-     * @param myTrigger A Trigger object that calls for an appropriate response
-     */
 
     /**
      * Provides the list of Triggers that the Actor responds to
@@ -127,12 +92,6 @@ public interface IActor {
      * @return The Actor's ID
      */
     public int getID();
-    
-    /**
-     * Provides Actor type to distinguish between enemy/neutral etc
-     * @return The Actor's type
-     */
-    public String getActorType();
 
 	void performActionsFor(PhysicsEngine myPhysicsEngine, String triggerString);
 

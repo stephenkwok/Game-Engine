@@ -7,13 +7,13 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
-import gameengine.model.ITrigger;
 import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.ClickTrigger;
-import gameengine.model.Triggers.CollisionTrigger;
+import gameengine.model.Triggers.AttributeType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -34,64 +34,29 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
     private double x;
     private double y;
-    private int health;
-    private int points;
+    private double veloX;
+    private double veloY;
     private int myID;
     private String myName;
-    private String myActorType;
-    private int myStrength;
+    private String myImageViewName;
+    @XStreamOmitField
     private ImageView myImageView;
-
     private Map<String, List<Action>> myRules;
+    private Map<AttributeType, Attribute> attributeMap;
+    private PhysicsEngine myPhysicsEngine;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
-     *
      */
     public Actor() {
         myRules = new HashMap<>();
+        attributeMap = new HashMap<>();
         myName = DEFAULT_NAME;
-        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME))));
+        myImageViewName = DEFAULT_IMAGE_NAME;
+        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
     }
 
-    /**
-     * Provides the Actor's health
-     *
-     * @return The Actor's health
-     */
-    @Override
-    public int getHealth() {
-        return health;
-    }
-
-    /**
-     * Updates the Actor's health
-     *
-     */
-    public void setHealth(int newHealth){
-    	health = newHealth;
-    }
-    
-
-    /**
-     * Provides the Actor's number of points
-     *
-     * @return The Actor's number of points
-     */
-    @Override
-    public int getPoints() {
-        return points;
-    }
-    
-	/**
-	 * Updates the Actor's number of points
-	 * @param points the points to set
-	 */
-	public void setPoints(int points) {
-		this.points = points;
-	}
-	
-
+  
     /**
      * Moves the Actor based on a provided distance and direction
      *
@@ -100,40 +65,48 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      */
     @Override
     public void move(double distance, double direction) {
+//        myImageView.setX(distance * Math.cos(direction * DEGREES_TO_RADIANS));
+//        myImageView.setY(distance * Math.sin(direction * DEGREES_TO_RADIANS));
+//
+//        System.out.println(myImageView.getX());
+
         x = distance * Math.cos(direction * DEGREES_TO_RADIANS);
         y = distance * Math.sin(direction * DEGREES_TO_RADIANS);
-    }
 
-    /**
-     * Changes the Actor's number of points
-     *
-     * @param change The desired change in the Actor's number of points
-     */
-    @Override
-    public void changePoints(int change) {
-        points += change;
-    }
-
-    /**
-     * Changes the Actor's health
-     *
-     * @param change The desired change in the Actor's amount of health
-     */
-    @Override
-    public void changeHealth(int change) {
-        health += change;
     }
 
     /**
      * Calls the appropriate sequence of Actions based on a provided Trigger
-     * @param myPhysicsEngine 
+     *
+     * @param myPhysicsEngine
      */
     @Override
     public void performActionsFor(PhysicsEngine myPhysicsEngine, String triggerString) {
         List<Action> myActions = myRules.get(triggerString);
         for (Action myAction : myActions) {
-            myAction.perform(myPhysicsEngine);
+            myAction.perform();
         }
+    }
+
+    /**
+     * Adds a new Attribute to an Actors
+     *
+     * @param newAttribute The new Actor Attribute
+     */
+    public void addAttribute(Attribute newAttribute) {
+        attributeMap.put(newAttribute.getType(), newAttribute);
+    }
+
+    /**
+     * Modifies the current value of an Attribute
+     *
+     * @param type   The type of the Attribute to be changed
+     * @param change The amount to change the Attribute by
+     */
+    public void changeAttribute(AttributeType type, int change) {
+
+        Attribute myAttribute = attributeMap.get(type);
+        myAttribute.changeAttribute(change);
     }
 
     /**
@@ -163,22 +136,6 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         return myRules.keySet();
     }
 
-
-    /**
-     * Sets the Actor type to distinguish between enemy/neutral etc
-     * @param newActorType
-     */
-	public void setActorType(String newActorType){
-		myActorType = newActorType;
-	}
-
-    /**
-     * @return The Actor's type
-     */
-	public String getActorType() {
-		return myActorType;
-	}
-	
     /**
      * Provides the Actor's ID number
      *
@@ -189,88 +146,119 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         return myID;
     }
 
-	@Override
-	public double getXVelo() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public double getXVelo() {
+        return veloX;
+    }
 
-	@Override
-	public double getYVelo() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public double getYVelo() {
+        return veloY;
+    }
 
-	@Override
-	public void setXPos(double updateXPosition) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setXPos(double updateXPosition) {
+        x = updateXPosition;
 
-	@Override
-	public void setYPos(double updateYPosition) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	public void setXVelo(double updateXVelo) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setYPos(double updateYPosition) {
+        y = updateYPosition;
 
-	@Override
-	public void setYVelo(double updateYVelo) {
-		// TODO Auto-generated method stub
-	}
-	
-	public void setID(int ID) {
-		myID = ID;
-	}
+    }
 
-	@Override
-	public String getName() {
-		return myName;
-	}
+    @Override
+    public void setXVelo(double updateXVelo) {
+        veloX = updateXVelo;
 
-	@Override
-	public void setName(String name) {
-		myName = name;
-	}
+    }
 
-	@Override
-	public ImageView getImageView() {
-		return myImageView;
-	}
+    @Override
+    public void setYVelo(double updateYVelo) {
+        veloY = updateYVelo;
+    }
 
-	@Override
-	public void setImageView(ImageView imageView) {
-		myImageView = imageView;
-	}
+    public void setID(int ID) {
+        myID = ID;
+    }
 
-	@Override
-	public double getX() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public String getName() {
+        return myName;
+    }
 
-	@Override
-	public double getY() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public void setName(String name) {
+        myName = name;
+    }
 
-	public int getStrength() {
-		return myStrength;
-	}
+    @Override
 
-	//TODO JUSTIN ::::::::)
-	//public void typeOfCollision;
-	
-	public void collidesWith(Actor a) {
+    public ImageView getImageView() {
+        return myImageView;
+    }
+
+    @Override
+    public void setImageView(ImageView imageView) {
+        myImageView = imageView;
+    }
+
+
+    //TODO JUSTIN ::::::::)
+    //public void typeOfCollision;
+
+    public void collidesWith(Actor a) {
 //		ClickTrigger collision = typeOfCollision(this, a);
 //		Action action = myRules.get(collision.getTriggerName()).get(0);
 //		action.performOn(a);
+    }
+
+    @Override
+    public double getX() {
+        return x;
+    }
+
+    @Override
+    public double getY() {
+        return y;
+    }
+
+	public void setEngine(PhysicsEngine physicsEngine) {
+		myPhysicsEngine = physicsEngine;
+	}
+	
+	public PhysicsEngine getPhysicsEngine(){
+		return myPhysicsEngine;
+	}
+	
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+	      
+	      stringBuilder.append("Actor[ ");
+	      stringBuilder.append("\nid: ");
+	      stringBuilder.append(myID);
+	      stringBuilder.append("\nname: ");
+	      stringBuilder.append(myName);
+	      stringBuilder.append("\nmyImgName: ");
+	      stringBuilder.append(myImageViewName);
+	      stringBuilder.append("\nmyImg: ");
+	      stringBuilder.append(myImageView);
+	      stringBuilder.append("\nmyRules: ");
+	      stringBuilder.append(myRules.toString());
+	      stringBuilder.append(" ]");
+	      
+	      return stringBuilder.toString();
+	}
+
+
+	public String getMyImageViewName() {
+		return myImageViewName;
+	}
+
+
+	public void setMyImageViewName(String myImageViewName) {
+		this.myImageViewName = myImageViewName;
 	}
 
 }
