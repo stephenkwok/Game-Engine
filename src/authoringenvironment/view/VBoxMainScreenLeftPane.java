@@ -46,7 +46,6 @@ public class VBoxMainScreenLeftPane extends VBox {
 		initWelcomeMessage();
 		initGameNameEditor();
 		initGameDescriptionEditor();
-		//System.out.println(nameEditorContainer);
 		this.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor.getCoupledNodes());
 	}
 
