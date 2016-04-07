@@ -57,7 +57,8 @@ public class GUIActorImageViewer implements IGUI {
 		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(imageFile.getName())));
 		imageView.setPreserveRatio(true);
         imageView.setFitHeight(STANDARD_IMAGE_HEIGHT);
-        myActorIV = imageView;
+        aEE.setActorImage(imageView);
+//        myActorIV = imageView;
 	}
 	
 	/**

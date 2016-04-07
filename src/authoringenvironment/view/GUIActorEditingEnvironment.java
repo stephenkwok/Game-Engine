@@ -6,7 +6,6 @@ import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.model.Actor;
-import gameengine.model.IActor;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -27,7 +26,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	private TabAttributes attributes;
 	private Controller myController;
 	private ResourceBundle myResources;
-	private IActor myActor;
+	private Actor myActor;
 	private ImageView myActorIV;
 	private GUIActorRuleMaker ruleMaker;
 	
@@ -51,10 +50,11 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	
 	private void setDefaultActor(){
 		Actor defaultActor = new Actor();
-		defaultActor.setFitHeight(ACTOR_IMAGE_HEIGHT);
-		defaultActor.setPreserveRatio(true);
+		ImageView defaultIV = defaultActor.getImageView();
+		defaultIV.setFitHeight(ACTOR_IMAGE_HEIGHT);
+		defaultIV.setPreserveRatio(true);
 		this.myActor = defaultActor;
-		this.myActorIV = defaultActor;
+		this.myActorIV = defaultIV;
 	}
 	
 	private void setLeftPane(){
@@ -79,8 +79,8 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	
 	@Override
 	public void setEditable(IEditableGameElement editable) {
-		myActor = (IActor) editable;
-		myActorIV = (Actor) myActor;
+		myActor = (Actor) editable;
+		myActorIV = myActor.getImageView();
 	}
 	
 	public void setActorImage(ImageView newImageView){
