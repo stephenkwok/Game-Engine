@@ -13,7 +13,7 @@ public class ClickTrigger implements ITrigger {
 
     @Override
     public boolean evaluate(Actor myActor) {
-        return false;
+        return myActor.contains(myX, myY);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class ClickTrigger implements ITrigger {
         return "Click";
     }
 
-    public void setLocation(double x, double y) {
+    public void setClickedAt(double x, double y) {
         myX = x;
         myY = y;
     }

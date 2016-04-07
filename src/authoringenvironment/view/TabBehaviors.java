@@ -112,8 +112,8 @@ public class TabBehaviors extends TabParent {
 		        boolean success = false;
 		        if (db.hasString()) {
 		           GridPane gp = (GridPane) myTarget;
-		           Node toAdd = getRuleContainer();
-		           gp.add(new Label(event.getDragboard().getString()), 0, 0);
+		           Node toAdd = getRuleContainer(event.getDragboard().getString());
+		           gp.add(toAdd, 0, 0);
 		           success = true;
 		        }
 		        event.setDropCompleted(success);
@@ -122,7 +122,7 @@ public class TabBehaviors extends TabParent {
 		});
 	}
 	
-	private Node getRuleContainer(){
-		return null;
+	private Node getRuleContainer(String behaviorType){
+		return new Label(behaviorType);
 	}
 }

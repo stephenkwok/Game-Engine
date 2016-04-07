@@ -18,7 +18,7 @@ import javafx.scene.layout.Priority;
  */
 
 public class TextFieldWithButton implements IGUIElement {
-
+	private static final int PADDING = 10;
 	private HBox myContainer;
 	private Label myTextFieldPrompt;
 	private TextField myTextField;
@@ -45,7 +45,7 @@ public class TextFieldWithButton implements IGUIElement {
 
 	@Override
 	public Node createNode() {
-		myContainer = new HBox();
+		myContainer = new HBox(PADDING);
 		myTextFieldPrompt = new Label(labelText);
 		myTextField = new TextField();
 		myTextField.setPrefWidth(textFieldWidth);
@@ -59,7 +59,6 @@ public class TextFieldWithButton implements IGUIElement {
 
 	@Override
 	public void updateNode() {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -1,7 +1,8 @@
 package gameengine.model.Actions;
 
-import gameengine.controller.Action;
 import gameengine.model.Actor;
+import gameengine.model.PhysicsEngine;
+
 
 import java.util.List;
 
@@ -17,7 +18,9 @@ public class MoveUp extends MovingAction {
     }
 
     @Override
-    public void perform() {
+    public void perform(PhysicsEngine myPhysicsEngine) {
         moveActor(UP_ANGLE);
     }
+
+    
 }

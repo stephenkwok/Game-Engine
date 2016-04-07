@@ -2,7 +2,7 @@ package gameengine.model;
 
 import java.util.List;
 
-import gameengine.controller.Action;
+import gameengine.model.Actions.Action;
 
 /**
  * Created by Michelle on 3/31/16.
@@ -27,8 +27,14 @@ public class MoveLeft extends Action {
     /**
      * Moves the Actor to the left by the distance provided in the arguments
      */
-    @Override
     public void perform() {
         getActor().move(distance, LEFT_ANGLE);
     }
+
+	@Override
+	public void perform(PhysicsEngine myPhysicsEngine) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

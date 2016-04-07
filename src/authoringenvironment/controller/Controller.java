@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.view.ButtonParent;
 import authoringenvironment.view.GUIActorEditingEnvironment;
 import authoringenvironment.view.GUILevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
@@ -46,35 +45,8 @@ public class Controller implements Observer {
 		levels = new ArrayList<>();
 		actors = new ArrayList<>();
 		levelEnvironment = new GUILevelEditingEnvironment(this, actors);
-		actorEnvironment = new GUIActorEditingEnvironment(myResources);
+		actorEnvironment = new GUIActorEditingEnvironment(this, myResources);
 		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment);
-	}
-
-	/**
-	 * Switches screen to Level Editing Environment
-	 * 
-	 * @param level
-	 *            - level to be edited
-	 * @param createdActors
-	 *            - list of created Actors that can be placed into the level
-	 */
-	public void goToLevelEditing(Level level) {
-		levelEnvironment.setEditable(level);
-		clearPanes();
-		guiMain.setCenterPane(levelEnvironment.getPane());
-
-	}
-
-	/**
-	 * Switches screen to Actor Editing Environment
-	 * 
-	 * @param actor
-	 *            - Actor to edit
-	 */
-	public void goToActorEditing(Actor actor) {
-		actorEnvironment.setEditable(actor);
-		clearPanes();
-		guiMain.setCenterPane(actorEnvironment.getPane());
 	}
 
 	/**
