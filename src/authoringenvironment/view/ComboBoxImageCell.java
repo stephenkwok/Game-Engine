@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
+
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -20,10 +20,11 @@ public abstract class ComboBoxImageCell extends ComboBoxParent {
 	private Map<String, ImageView> imageMap;
 	private List<String> imageNames;
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
-	private static final String IMAGE_RESOURCE = "Images";
+	protected String imageResource;
 	
-	public ComboBoxImageCell(ResourceBundle myResources, String promptText) {
-		super(myResources, promptText);
+	public ComboBoxImageCell(String promptText, String imageResource) {
+		super(promptText);
+		this.imageResource = imageResource;
 		imageMap = new HashMap<>();
 		imageNames = new ArrayList<>();
 		fillImageNames();
@@ -33,7 +34,7 @@ public abstract class ComboBoxImageCell extends ComboBoxParent {
 	 * Sets default image palette based on which images are in /Images file directory.
 	 */
 	private void fillImageNames(){
-		File imageDir = new File(IMAGE_RESOURCE);
+		File imageDir = new File(imageResource);
 		for(File imageFile: imageDir.listFiles()){
 			imageNames.add(imageFile.getName());
 		}
