@@ -37,12 +37,14 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private String myName;
 
     private Map<String, List<Action>> myRules;
+    private Map<String, Attribute> attributeMap;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
      */
     public Actor() {
         myRules = new HashMap<>();
+        attributeMap = new HashMap<>();
         myName = DEFAULT_NAME;
         setImage(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME)));
     }
@@ -70,6 +72,28 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         for (Action myAction : myActions) {
             myAction.perform(myPhysicsEngine);
         }
+    }
+
+    /**
+     * Adds a new Attribute to an Actors
+     *
+     * @param newAttribute The new Actor Attribute
+     */
+    public void addAttribute(Attribute newAttribute) {
+        attributeMap.put(newAttribute.getName(), newAttribute);
+    }
+
+    /**
+     * Modifies the current value of an Attribute
+     *
+     * @param attributeName The name of the Attribute to be changed
+     * @param change        The amount to change the Attribute by
+     */
+    public void changeAttribute(String attributeName, int change) {
+
+        Attribute myAttribute = attributeMap.get(attributeName);
+        myAttribute.changeAttribute(change);
+
     }
 
     /**
