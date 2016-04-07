@@ -2,7 +2,7 @@ package gameengine.model.Actions;
 
 import gameengine.model.Actor;
 import gameengine.model.PhysicsEngine;
-import gameengine.controller.Action;
+import gameengine.model.Actions.Action;
 
 /**
  * This Action represents an elastic vertical collision between Actors

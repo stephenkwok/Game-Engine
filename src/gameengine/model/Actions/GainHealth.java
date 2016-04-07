@@ -2,7 +2,7 @@ package gameengine.model.Actions;
 
 import gameengine.model.Actor;
 import gameengine.model.PhysicsEngine;
-import gameengine.controller.Action;
+import gameengine.model.Actions.Action;
 
 public class GainHealth extends Action{
 
