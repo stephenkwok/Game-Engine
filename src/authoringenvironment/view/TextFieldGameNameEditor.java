@@ -23,8 +23,8 @@ public class TextFieldGameNameEditor extends TextFieldWithButton{
 		super(labelText, prompt, textFieldWidth, buttonText, buttonAction);
 		this.myResources = ResourceBundle.getBundle("mainScreenGui");
 //		setTextFieldPromptText(myResources.getString("enterGameName"));
-		setContainerSpacing(CONTAINER_SPACING);
-		setContainerPadding(new Insets(CONTAINER_PADDING));
+//		setContainerSpacing(CONTAINER_SPACING);
+//		setContainerPadding(new Insets(CONTAINER_PADDING));
 	}
 
 	@Override
