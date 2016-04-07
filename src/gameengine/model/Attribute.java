@@ -1,6 +1,7 @@
 package gameengine.model;
 
 import gameengine.model.Actions.Action;
+import gameengine.model.Triggers.AttributeType;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -9,14 +10,14 @@ import javafx.beans.value.ObservableValue;
 
 public abstract class Attribute {
 
-    private String myName;
+    private AttributeType myType;
     private IntegerProperty myInitialValue;
     private IntegerProperty myTriggerValue;
     private Action myAction;
     private BooleanBinding isActionTriggered;
 
-    public Attribute(String name, int initialValue, int triggerValue, Action action) {
-        myName = name;
+    public Attribute(AttributeType type, int initialValue, int triggerValue, Action action) {
+        myType = type;
         myInitialValue = new SimpleIntegerProperty(initialValue);
         myTriggerValue = new SimpleIntegerProperty(triggerValue);
         myAction = action;
@@ -39,8 +40,8 @@ public abstract class Attribute {
         });
     }
 
-    public String getName() {
-        return myName;
+    public AttributeType getType(){
+        return myType;
     }
 
 }
