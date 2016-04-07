@@ -27,14 +27,14 @@ public class MoveLeft extends Action {
     /**
      * Moves the Actor to the left by the distance provided in the arguments
      */
-    @Override
     public void perform() {
         getActor().move(distance, LEFT_ANGLE);
     }
 
 	@Override
-	public void performOn(Actor a) {
+	public void perform(PhysicsEngine myPhysicsEngine) {
 		// TODO Auto-generated method stub
 		
 	}
+
 }

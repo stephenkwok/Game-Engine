@@ -118,14 +118,13 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
 
     /**
      * Calls the appropriate sequence of Actions based on a provided Trigger
-     *
-     * @param myTrigger A Trigger object that calls for an appropriate response
+     * @param myPhysicsEngine 
      */
     @Override
-    public void performActionsFor(ITrigger myTrigger) {
-        List<Action> myActions = myRules.get(myTrigger.getTriggerName());
+    public void performActionsFor(PhysicsEngine myPhysicsEngine, String triggerString) {
+        List<Action> myActions = myRules.get(triggerString);
         for (Action myAction : myActions) {
-            myAction.perform();
+            myAction.perform(myPhysicsEngine);
         }
     }
 
@@ -231,15 +230,16 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
 		myName = name;
 	}
 
-	
-	public void collidesWith(Actor a, CollisionTrigger collisionTrigger) {
-		Action action = myRules.get(collisionTrigger.getTriggerName()).get(0);
-		action.performOn(a);
-	}
-
 	public int getStrength() {
 		return myStrength;
 	}
-
+	//TODO JUSTIN ::::::::)
+	//public void typeOfCollision;
+	
+	public void collidesWith(Actor a) {
+//		ClickTrigger collision = typeOfCollision(this, a);
+//		Action action = myRules.get(collision.getTriggerName()).get(0);
+//		action.performOn(a);
+	}
 
 }

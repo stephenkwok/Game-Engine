@@ -1,6 +1,7 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
+import gameengine.model.PhysicsEngine;
 import gameplayer.controller.GameController;
 
 /**
@@ -13,13 +14,8 @@ public class Start extends ControllerAction {
     }
 
     @Override
-    public void perform() {
+    public void perform(PhysicsEngine myPhysicsEngine) {
         start();
     }
 
-	@Override
-	public void performOn(Actor a) {
-		// TODO Auto-generated method stub
-		
-	}
 }

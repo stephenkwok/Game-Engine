@@ -3,6 +3,7 @@ package gameengine.model.Actions;
 import gameengine.controller.Action;
 import gameengine.controller.Game;
 import gameengine.model.Actor;
+import gameengine.model.PhysicsEngine;
 import gameplayer.controller.GameController;
 
 /**
@@ -26,5 +27,5 @@ public abstract class ControllerAction extends Action {
     }
 
     @Override
-    public abstract void perform();
+    public abstract void perform(PhysicsEngine myPhysicsEngine);
 }

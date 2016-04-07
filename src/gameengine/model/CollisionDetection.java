@@ -1,25 +1,37 @@
 package gameengine.model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import gameengine.model.Actor;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.CollisionTrigger;
-import gameengine.model.Triggers.NeutralCollision;
 import gameengine.model.Triggers.SideCollision;
 import gameengine.model.Triggers.TopCollision;;
 
 /**
  * Collision Detection class handles checking for collisions among a list of Actors
  * It also handles resolving said collision should one be found
- * Needs Refactoring
  * 
  * @author justinbergkamp
  *
  */
 public class CollisionDetection {
 
-	public void detection(List<Actor> actors){
+	PhysicsEngine myPhysicsEngine;
+	Map<String,Double> actorCorners;
+	private String LEFT   =  "left";
+	private String RIGHT  =  "right";
+	private String TOP    =  "top";
+	private String BOTTOM =  "bottom";
+	
+	
+	
+	public CollisionDetection( PhysicsEngine physicsEngine){
+		myPhysicsEngine = physicsEngine;
+	}
+	
+	public List<Actor> detection(List<Actor> actors){
 		for (Actor a1 : actors){
 			for(Actor a2 : actors){
 				if(checkBoundingBoxes(a1,a2)){
@@ -27,72 +39,57 @@ public class CollisionDetection {
 				}
 			}
 		}
+		return actors;
 	}
 	
 	private boolean checkBoundingBoxes(Actor a1, Actor a2) {
-		return isCollision(getCorners(a1), getCorners(a2));
+		Map<String,Double> a1Corners = getCorners(a1);
+		Map<String,Double> a2Corners = getCorners(a2);
+		return isCollision(a1Corners,a2Corners);
 		}
+	
+	private Map<String, Double> getCorners(Actor a){ //This may have to change if Actor is no longer an ImageView object
+		Map<String,Double> actorMap = new HashMap<String,Double>();
+		actorMap.put(LEFT  , a.getX());
+		actorMap.put(RIGHT , a.getX()+a.getImage().getWidth());
+		actorMap.put(TOP   , a.getY());
+		actorMap.put(BOTTOM, a.getY()+a.getImage().getHeight());
+		return actorMap;
+	}
+	
+	private boolean isCollision(Map<String,Double> actorMap1, Map<String,Double> actorMap2){
+		if(  
+				edgeCollision(actorMap1,actorMap2,LEFT, RIGHT, LEFT) ||
+				edgeCollision(actorMap1,actorMap2,LEFT, RIGHT, RIGHT) ||
+				edgeCollision(actorMap1,actorMap2,BOTTOM, TOP, BOTTOM) ||
+				edgeCollision(actorMap1,actorMap2,BOTTOM, TOP, TOP) 
+		){
+			return true;
+		}
+		return false;
+	}
 
-	private CollisionTrigger getCollisionType(Actor a1, Actor a2){
-		CollisionTrigger trigger ;
-		if(checkEdges(getCorners(a1), getCorners(a2),2,2)){
-			trigger = new TopCollision();
+	private CollisionTrigger getCollisionType(Map<String,Double> a1Map, Map<String,Double> a2Map){
+		CollisionTrigger ct = null;
+		if( edgeCollision(a1Map,a2Map,LEFT, RIGHT, LEFT) ||
+			edgeCollision(a1Map,a2Map,LEFT, RIGHT, RIGHT) ){
+			ct = new SideCollision();
 		}
-		if(checkEdges(getCorners(a1), getCorners(a2),2,3)){
-			trigger = new BottomCollision();
+		else if(edgeCollision(a1Map,a2Map,BOTTOM, TOP, BOTTOM)){
+			ct = new TopCollision();
 		}
-		else{
-			trigger = new SideCollision();
+		else if(edgeCollision(a1Map,a2Map,BOTTOM, TOP, TOP)){
+			ct = new BottomCollision();
 		}
-		return trigger;
+		return ct;
 	}
+	private boolean edgeCollision(Map<String,Double> a1Map, Map<String,Double> a2Map,String edge1, String edge2, String a2Edge ) {
+		return ( (a1Map.get(edge1)   <= a2Map.get(a2Edge))   &&  (a2Map.get(a2Edge)   <= a1Map.get(edge2)) );
+	}
+
 	private void resolveCollision(Actor a1, Actor a2){
-		if(a1.getStrength() < a2.getStrength()){
-			a2.collidesWith(a1,getCollisionType( a1,  a2));
-			
-		}else if(a1.getStrength() > a2.getStrength()){
-			a1.collidesWith(a2,getCollisionType( a1, a2));
-		}else{
-			NeutralCollision nc = new NeutralCollision();
-			a1.performActionsFor(nc);
-			a2.performActionsFor(nc);
-		}
-	}
-	
-	private List<Double> getCorners(Actor a){
-		List<Double> positions = new ArrayList<Double>();
-		//left,right,top, bottom
-		positions.add(a.getX());
-		positions.add(a.getX()+a.getImage().getWidth());
-		positions.add(a.getY());
-		positions.add(a.getY()+a.getImage().getHeight());
-		return positions;
-	}
-	
-	private boolean isCollision(List<Double> actor1 ,List<Double> actor2){
-		boolean horizontal = false;
-		boolean vertical   = false; 
-		//left
-		if( checkEdges(actor1, actor2,0,0) ){
-			horizontal = true;
-		}
-		//right
-		if (checkEdges(actor1, actor2,0,1)){
-			horizontal = true;
-		}
-		//top
-		if (checkEdges(actor1, actor2,2,2)){
-			vertical = true;
-		}
-		//bottom
-		if (checkEdges(actor1, actor2,2,3)){
-			vertical = true;
-		}	
-		return (vertical & horizontal);
-	}
-	
-	private boolean checkEdges(List<Double> actor1 ,List<Double> actor2, int e, int d){
-		return (actor1.get(e) <= actor2.get(d) & actor2.get(d) <= actor1.get(e+1));
-	}
-	
+		String collisionType = getCollisionType(getCorners(a1),getCorners(a2)).getTriggerName();
+		String triggerString = a1.getName() + collisionType + a2.getName();
+		a1.performActionsFor(myPhysicsEngine,triggerString);   //Needs to be changed to take a string parameter
+	}	
 }

@@ -2,6 +2,7 @@ package gameengine.controller;
 
 import gameengine.model.Actor;
 import gameengine.model.IAction;
+import gameengine.model.PhysicsEngine;
 
 /**
  * This class defines the generalized behavior of an Action object.
@@ -25,9 +26,10 @@ public abstract class Action implements IAction {
 
     /**
      * The perform command that will implement the functionality unique to each Action type
+     * @param myPhysicsEngine 
      */
     @Override
-    public abstract void perform();
+    public abstract void perform(PhysicsEngine myPhysicsEngine);
 
     /**
      * Provides the Actor linked to the Action
@@ -38,5 +40,4 @@ public abstract class Action implements IAction {
         return myActor;
     }
     
-    public abstract void performOn(Actor a);
 }
