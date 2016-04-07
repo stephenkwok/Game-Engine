@@ -134,6 +134,6 @@ public interface IActor {
      */
     public String getActorType();
 
-	void performActionsFor(ITrigger myTrigger, PhysicsEngine myPhysicsEngine);
+	void performActionsFor(PhysicsEngine myPhysicsEngine, String triggerString);
 
 }

@@ -118,13 +118,11 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
 
     /**
      * Calls the appropriate sequence of Actions based on a provided Trigger
-     *
-     * @param myTrigger A Trigger object that calls for an appropriate response
      * @param myPhysicsEngine 
      */
     @Override
-    public void performActionsFor(ITrigger myTrigger, PhysicsEngine myPhysicsEngine) {
-        List<Action> myActions = myRules.get(myTrigger.getTriggerName());
+    public void performActionsFor(PhysicsEngine myPhysicsEngine, String triggerString) {
+        List<Action> myActions = myRules.get(triggerString);
         for (Action myAction : myActions) {
             myAction.perform(myPhysicsEngine);
         }
@@ -241,6 +239,5 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
 	public int getStrength() {
 		return myStrength;
 	}
-
 
 }
