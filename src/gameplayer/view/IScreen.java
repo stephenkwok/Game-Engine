@@ -12,4 +12,6 @@ public interface IScreen {
 	 */
 	public void setUp ();
 	
+	public void showError(String e);
+	
 }

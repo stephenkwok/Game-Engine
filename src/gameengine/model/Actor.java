@@ -7,17 +7,22 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.Actions.Action;
+<<<<<<< HEAD
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+=======
+import gameengine.model.Triggers.AttributeType;
+>>>>>>> 936c8fff30b6a4439e7f0bd77d0c9aaca8331127
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 
 
 /**
@@ -36,9 +41,11 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
     private int myID;
     private String myName;
+    @XStreamOmitField
     private ImageView myImageView;
     private Map<String, List<Action>> myRules;
-    private Map<String, Attribute> attributeMap;
+    private Map<AttributeType, Attribute> attributeMap;
+    private PhysicsEngine myPhysicsEngine;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -50,6 +57,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME))));
     }
 
+  
     /**
      * Moves the Actor based on a provided distance and direction
      *
@@ -58,8 +66,14 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      */
     @Override
     public void move(double distance, double direction) {
+<<<<<<< HEAD
         myImageView.setX(distance * Math.cos(direction * DEGREES_TO_RADIANS));
         myImageView.setY(distance * Math.sin(direction * DEGREES_TO_RADIANS));
+=======
+        x = distance * Math.cos(direction * DEGREES_TO_RADIANS);
+        y = distance * Math.sin(direction * DEGREES_TO_RADIANS);
+        System.out.println(x);//
+>>>>>>> 936c8fff30b6a4439e7f0bd77d0c9aaca8331127
     }
 
     /**
@@ -71,7 +85,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     public void performActionsFor(PhysicsEngine myPhysicsEngine, String triggerString) {
         List<Action> myActions = myRules.get(triggerString);
         for (Action myAction : myActions) {
-            myAction.perform(myPhysicsEngine);
+            myAction.perform();
         }
     }
 
@@ -81,18 +95,18 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * @param newAttribute The new Actor Attribute
      */
     public void addAttribute(Attribute newAttribute) {
-        attributeMap.put(newAttribute.getName(), newAttribute);
+        attributeMap.put(newAttribute.getType(), newAttribute);
     }
 
     /**
      * Modifies the current value of an Attribute
      *
-     * @param attributeName The name of the Attribute to be changed
-     * @param change        The amount to change the Attribute by
-     */   
-    public void changeAttribute(String attributeName, int change) {
+     * @param type   The type of the Attribute to be changed
+     * @param change The amount to change the Attribute by
+     */
+    public void changeAttribute(AttributeType type, int change) {
 
-        Attribute myAttribute = attributeMap.get(attributeName);
+        Attribute myAttribute = attributeMap.get(type);
         myAttribute.changeAttribute(change);
     }
 
@@ -133,75 +147,75 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         return myID;
     }
 
-	@Override
-	public double getXVelo() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public double getXVelo() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	@Override
-	public double getYVelo() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public double getYVelo() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	@Override
-	public void setXPos(double updateXPosition) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setXPos(double updateXPosition) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void setYPos(double updateYPosition) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	public void setXVelo(double updateXVelo) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setYPos(double updateYPosition) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void setYVelo(double updateYVelo) {
-		// TODO Auto-generated method stub
-	}
-	
-	public void setID(int ID) {
-		myID = ID;
-	}
+    }
 
-	@Override
-	public String getName() {
-		return myName;
-	}
+    @Override
+    public void setXVelo(double updateXVelo) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void setName(String name) {
-		myName = name;
-	}
+    }
 
-	@Override
+    @Override
+    public void setYVelo(double updateYVelo) {
+        // TODO Auto-generated method stub
+    }
 
-	public ImageView getImageView() {
-		return myImageView;
-	}
+    public void setID(int ID) {
+        myID = ID;
+    }
 
-	@Override
-	public void setImageView(ImageView imageView) {
-		myImageView = imageView;
-	}
+    @Override
+    public String getName() {
+        return myName;
+    }
 
-	
-	//TODO JUSTIN ::::::::)
-	//public void typeOfCollision;
-	
-	public void collidesWith(Actor a) {
+    @Override
+    public void setName(String name) {
+        myName = name;
+    }
+
+    @Override
+
+    public ImageView getImageView() {
+        return myImageView;
+    }
+
+    @Override
+    public void setImageView(ImageView imageView) {
+        myImageView = imageView;
+    }
+
+
+    //TODO JUSTIN ::::::::)
+    //public void typeOfCollision;
+
+    public void collidesWith(Actor a) {
 //		ClickTrigger collision = typeOfCollision(this, a);
 //		Action action = myRules.get(collision.getTriggerName()).get(0);
 //		action.performOn(a);
-	}
+    }
 
     @Override
     public double getX() {
@@ -214,4 +228,13 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         // TODO Auto-generated method stub
         return 0;
     }
+
+	public void setEngine(PhysicsEngine physicsEngine) {
+		myPhysicsEngine = physicsEngine;
+	}
+	
+	public PhysicsEngine getPhysicsEngine(){
+		return myPhysicsEngine;
+	}
+
 }
