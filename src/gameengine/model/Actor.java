@@ -65,9 +65,10 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      */
     @Override
     public void move(double distance, double direction) {
-        myImageView.setX(distance * Math.cos(direction * DEGREES_TO_RADIANS));
-        myImageView.setY(distance * Math.sin(direction * DEGREES_TO_RADIANS));
-        System.out.println(myImageView.getX());
+//        myImageView.setX(distance * Math.cos(direction * DEGREES_TO_RADIANS));
+//        myImageView.setY(distance * Math.sin(direction * DEGREES_TO_RADIANS));
+//
+//        System.out.println(myImageView.getX());
 
         x = distance * Math.cos(direction * DEGREES_TO_RADIANS);
         y = distance * Math.sin(direction * DEGREES_TO_RADIANS);
