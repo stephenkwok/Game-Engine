@@ -14,9 +14,4 @@ public interface IGUI {
 
 	Pane getPane();
 
-	/**
-	 * This method updates each of the GUI elements' visual representations, based on the
-	 * data each refers to. 
-	 */
-	void updateAllNodes();
 }

@@ -2,21 +2,15 @@ package authoringenvironment.view;
 
 import java.util.ResourceBundle;
 
-
+import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.model.Actor;
-import gameengine.model.IActor;
-import javafx.geometry.Insets;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 /**
  * Returns BorderPane to represent Actor Editing Environment. 
  * @author AnnieTang
@@ -29,17 +23,17 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	private BorderPane myRoot;
 	private GUILibrary library;
 	private TabAttributes attributes;
+	private Controller myController;
 	private ResourceBundle myResources;
-	private IActor myActor;
+	private Actor myActor;
+	private ImageView myActorIV;
 	private GUIActorRuleMaker ruleMaker;
+	private GUIActorImageViewer actorImageViewer;
 	
-	public GUIActorEditingEnvironment(ResourceBundle myResources) {
+	public GUIActorEditingEnvironment(Controller myController, ResourceBundle myResources) {
+		this.myController = myController;
 		this.myResources = myResources;
 		initializeEnvironment();
-	}
-
-	@Override
-	public void updateAllNodes() { 
 	}
 
 	@Override
@@ -49,14 +43,18 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	
 	private void initializeEnvironment() {
 		myRoot = new BorderPane();
-		//Test Actor ImageView usage
-		Actor testActor = new Actor();
-		testActor.setFitHeight(ACTOR_IMAGE_HEIGHT);
-		testActor.setPreserveRatio(true);
-		this.myActor = testActor;
-	
-		setCenterPane(); // will fill up right side 
+		setDefaultActor();	
+		setCenterPane(); 
 		setLeftPane();
+	}
+	
+	private void setDefaultActor(){
+		Actor defaultActor = new Actor();
+		ImageView defaultIV = defaultActor.getImageView();
+		defaultIV.setFitHeight(ACTOR_IMAGE_HEIGHT);
+		defaultIV.setPreserveRatio(true);
+		this.myActor = defaultActor;
+		this.myActorIV = defaultIV;
 	}
 	
 	private void setLeftPane(){
@@ -69,12 +67,9 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		myRoot.setLeft(vbox);
 	}
 	
-	private StackPane getActorImageViewer(){
-		Actor myCurrentActor = (Actor) myActor;
-		StackPane sp = new StackPane();
-		sp.getChildren().add(myCurrentActor);
-		sp.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-		return sp;
+	private Pane getActorImageViewer(){
+		actorImageViewer= new GUIActorImageViewer(this, myController, myActorIV);
+		return actorImageViewer.getPane();
 	}
 	
 	private void setCenterPane(){
@@ -84,6 +79,16 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	
 	@Override
 	public void setEditable(IEditableGameElement editable) {
-		myActor = (IActor) editable;
+		myActor = (Actor) editable;
+		myActorIV = myActor.getImageView();
+	}
+	
+	public void setActorImage(ImageView newImageView){
+		myActorIV = newImageView;
+		myActorIV.setFitHeight(ACTOR_IMAGE_HEIGHT);
+		myActorIV.setPreserveRatio(true);
+		myActor.setImageView(myActorIV);
+		setLeftPane();
+		
 	}
 }

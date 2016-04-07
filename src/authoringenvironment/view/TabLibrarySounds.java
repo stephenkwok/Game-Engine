@@ -17,13 +17,13 @@ import javafx.scene.media.AudioClip;
  * @author AnnieTang
  *
  */
-public class TabSounds extends TabParent{
+public class TabLibrarySounds extends TabLibrary{
 	private static final String SOUND_IMAGE_NAME = "sound.png";
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
 	private ObservableList<Label> soundLabels; 
 	
-	public TabSounds(ResourceBundle myResources, String tabText) {
-		super(myResources, tabText);
+	public TabLibrarySounds(ResourceBundle myResources, String tabText, GUIActorRuleMaker myRuleMaker) {
+		super(myResources, tabText, myRuleMaker);
 	}
 	
 	@Override
@@ -31,7 +31,11 @@ public class TabSounds extends TabParent{
 		fillFileNames();
 		soundLabels = FXCollections.observableArrayList();
 		for(String soundName: fileNames){
-			soundLabels.add(new Label(soundName, createPlaySoundButton(soundName)));
+			Label soundLabel = new Label(soundName, createPlaySoundButton(soundName));
+			if(myRuleMaker!=null){
+				setDragEvent(soundLabel);
+			}
+			soundLabels.add(soundLabel);
 		}
 		ListView<Label> listView = new ListView<>(soundLabels);
 		return listView;

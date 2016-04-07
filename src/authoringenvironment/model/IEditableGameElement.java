@@ -1,6 +1,6 @@
 package authoringenvironment.model;
 
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * 
@@ -16,9 +16,9 @@ public interface IEditableGameElement {
 
 	public String getName();
 	
-	public Image getImage();
+	public ImageView getImageView();
 
-	public void setImage(Image image);
+	public void setImageView(ImageView imageView);
 	
 	public void setID(int ID);
 	

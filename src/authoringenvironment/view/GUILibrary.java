@@ -3,6 +3,7 @@ package authoringenvironment.view;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 /**
@@ -28,16 +29,12 @@ public class GUILibrary implements IGUI{
 		myResources = ResourceBundle.getBundle(LIBRARY_RESOURCE);
 		myPane = new StackPane();
 		TabPane tp = new TabPane();
-		TabImages imageLib = new TabImages(myResources, "Images");
-		TabSounds soundLib = new TabSounds(myResources, "Sounds");
-		TabBehaviors behaviorLib = new TabBehaviors(myResources, "Behaviors", myRuleMaker);
+		TabLibraryImages imageLib = new TabLibraryImages(myResources, "Images", myRuleMaker);
+		TabLibrarySounds soundLib = new TabLibrarySounds(myResources, "Sounds", myRuleMaker);
+		TabLibraryBehaviors behaviorLib = new TabLibraryBehaviors(myResources, "Behaviors", myRuleMaker);
 		tp.getTabs().addAll(behaviorLib.getTab(), imageLib.getTab(), soundLib.getTab());
+		tp.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		myPane.getChildren().add(tp);
-	}
-
-	@Override
-	public void updateAllNodes() {
-		
 	}
 
 	@Override
