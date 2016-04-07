@@ -129,7 +129,6 @@ public class GUIMainScreen implements IGUI {
 		clickableLabels.add(label);
 	}
 
-	@Override
 	public void updateAllNodes() {
 		clickableLabels.stream().forEach(label -> label.update());
 	}

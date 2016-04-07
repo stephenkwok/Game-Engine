@@ -32,11 +32,6 @@ public class GUIActorRuleMaker implements IGUI {
 		return myContent;
 	}
 
-	@Override
-	public void updateAllNodes() {
-		
-	}
-	
 	public void addNode(Node node){
 		myContent.add(node, 0, 0);
 	}
