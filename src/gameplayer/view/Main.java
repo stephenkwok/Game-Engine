@@ -9,6 +9,7 @@ import gameengine.model.Triggers.KeyTrigger;
 import gameplayer.controller.GameController;
 import javafx.application.Application;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
@@ -34,7 +35,7 @@ public class Main extends Application {
 		
 		Actor actor1 = new Actor();
 		Image actor1img = new Image(getClass().getClassLoader().getResourceAsStream("newactor.png"));
-		actor1.setImage(actor1img);
+		actor1.setImageView(new ImageView(actor1img));
 		KeyTrigger trigger = new KeyTrigger(KeyCode.SPACE);
 		List<Object> args = new ArrayList<Object>();
 		args.add(5.0);

@@ -5,6 +5,7 @@ import gameengine.model.CollisionDetection;
 import gameengine.model.ITrigger;
 import gameengine.model.PhysicsEngine;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.*;
 
@@ -19,12 +20,12 @@ public class Level implements ILevel, IEditableGameElement {
 
 	private static final String DEFAULT_NAME = "Untitled";
 	private static final String DEFAULT_IMAGE_NAME = "default_background.png";
-    List<Actor> myActors;
-    Map<String, List<Actor>> triggerMap;
-    String myName;
-    Image myBackground;
-    CollisionDetection myCollisionDetector ;
-    PhysicsEngine myPhysicsEngine;
+    private List<Actor> myActors;
+    private Map<String, List<Actor>> triggerMap;
+    private String myName;
+    private ImageView myBackground;
+    private CollisionDetection myCollisionDetector ;
+    private PhysicsEngine myPhysicsEngine;
 
     /**
      * Instantiates the triggerMap and Actor list
@@ -33,7 +34,7 @@ public class Level implements ILevel, IEditableGameElement {
         myActors = new ArrayList<>();
         triggerMap = new HashMap<>();
         myName = DEFAULT_NAME;
-        setImage(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME)));
+        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME))));
         myPhysicsEngine = new PhysicsEngine();
         myCollisionDetector = new CollisionDetection(myPhysicsEngine);
     }
@@ -107,13 +108,13 @@ public class Level implements ILevel, IEditableGameElement {
     }
 
 	@Override
-	public Image getImage() {
+	public ImageView getImageView() {
 		return myBackground;
 	}
 
 	@Override
-	public void setImage(Image image) {
-		myBackground = image;
+	public void setImageView(ImageView imageView) {
+		myBackground = imageView;
 	}
 
 	@Override

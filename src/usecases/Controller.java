@@ -100,7 +100,7 @@ public class Controller extends Application {
 	}
 
 	private Label createLabel(IEditableGameElement element, IEditingEnvironment environment) {
-		Label label = new Label(element.getName(), new ImageView(element.getImage()));
+		Label label = new Label(element.getName(), new ImageView(element.getImageView()));
 		label.setOnMouseClicked(e -> goToEditingEnviroment(environment, element));
 		return label;
 	}

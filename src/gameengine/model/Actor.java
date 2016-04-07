@@ -10,13 +10,10 @@ import java.util.Set;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
-import gameengine.model.ITrigger;
 import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.ClickTrigger;
-import gameengine.model.Triggers.CollisionTrigger;
-import gameengine.model.Triggers.KeyTrigger;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
+import javafx.scene.image.ImageView;
+
 
 
 /**
@@ -41,7 +38,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private String myName;
     private String myActorType;
     private int myStrength;
-    Image myImage; //
+    private ImageView myImageView;
 
     private Map<String, List<Action>> myRules;
 
@@ -52,7 +49,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     public Actor() {
         myRules = new HashMap<>(); 
         myName = DEFAULT_NAME;
-        setImage(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME)));
+        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE_NAME))));
     }
 
     /**
@@ -241,14 +238,14 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	}
 
 	@Override
-	public Image getImage() {
-		return myImage;
+
+	public ImageView getImageView() {
+		return myImageView;
 	}
 
 	@Override
-	public void setImage(Image image) {
-		myImage = image;
-		
+	public void setImageView(ImageView imageView) {
+		myImageView = imageView;
 	}
 
 	@Override

@@ -2,9 +2,10 @@ package authoringenvironment.view;
 
 import java.util.ResourceBundle;
 
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -16,42 +17,21 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-/**
- * Tab contains ListView of behaviors and drag/drop behavior for behaviors.
- * Drag/Drop event handling code mostly acquired from Oracle. 
- * @author AnnieTang
- *
- */
-public class TabBehaviors extends TabParent {
-	private ObservableList<Label> behaviorLabels;
-	private GUIActorRuleMaker myRuleMaker;
-	private Pane myTarget;
+
+abstract class TabLibrary extends TabParent {
+	protected GUIActorRuleMaker myRuleMaker;
+	protected Pane myTarget;
 	
-	public TabBehaviors(ResourceBundle myResources, String tabText, GUIActorRuleMaker myRuleMaker) {
+	public TabLibrary(ResourceBundle myResources, String tabText, GUIActorRuleMaker myRuleMaker) {
 		super(myResources, tabText);
 		this.myRuleMaker = myRuleMaker;
 		if(myRuleMaker!=null) myTarget = this.myRuleMaker.getPane();
 	}
 
 	@Override
-	Node getContent() {
-		behaviorLabels = FXCollections.observableArrayList();
-		for(String behavior: myResources.getString(tabText).split(" ")){
-			Label mySource = new Label(behavior);
-			if(myRuleMaker!=null){
-				setDragEvent(mySource);
-			}
-			behaviorLabels.add(mySource);
-		}
-		ListView<Label> listView = new ListView<>(behaviorLabels);
-		return listView;
-	}
-
-	private void setDragEvent(Label source) {
+	abstract Node getContent();
+	
+	protected void setDragEvent(Label source) {
 		setDragDetected(source);
 		setDragOver(source);
 		setDragEntered(source);
@@ -112,7 +92,8 @@ public class TabBehaviors extends TabParent {
 		        boolean success = false;
 		        if (db.hasString()) {
 		           GridPane gp = (GridPane) myTarget;
-		           Node toAdd = getRuleContainer(event.getDragboard().getString());
+		           Label toAdd = getRuleContainer(event.getDragboard().getString());
+		           setDragEvent(toAdd);
 		           gp.add(toAdd, 0, 0);
 		           success = true;
 		        }
@@ -122,7 +103,8 @@ public class TabBehaviors extends TabParent {
 		});
 	}
 	
-	private Node getRuleContainer(String behaviorType){
+	private Label getRuleContainer(String behaviorType){
 		return new Label(behaviorType);
 	}
+
 }

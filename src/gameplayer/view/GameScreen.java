@@ -9,7 +9,6 @@ import gameengine.model.Triggers.KeyTrigger;
 import javafx.event.Event;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -27,7 +26,7 @@ public class GameScreen extends Observable {
 	public GameScreen(){
 		myGroup = new Group();
 		myScene = new Scene(myGroup);
-		myScene.setOnKeyPressed(e->handleScreenEvent(e));
+		myScene.setOnKeyPressed(e->handleScreenEvent(e));//
 	}
 	
 	public Scene getScene(){
@@ -39,7 +38,7 @@ public class GameScreen extends Observable {
 	 * @param actor an instance of IActor
 	 */
 	public void addActor (Actor actor){
-		myGroup.getChildren().add(new ImageView(actor.getImage()));
+		myGroup.getChildren().add(actor.getImageView());//
 	}
 	
 	/**
