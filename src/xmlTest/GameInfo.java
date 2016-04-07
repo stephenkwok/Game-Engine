@@ -6,8 +6,8 @@ public class GameInfo {
 	private String myDescription;
 	private int myCurrentLevelNum;
 	
-	public GameInfo() {
-		// TODO Auto-generated constructor stub
+	public GameInfo(String name, String imName, String d) {
+		this(name, imName, d, 0);
 	}
 	
 	public GameInfo (String name, String imName, String d, int num) {

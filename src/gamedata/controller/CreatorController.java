@@ -1,108 +1,58 @@
 package gamedata.controller;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
+import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
 
 import gamedata.XMLCreator;
-import gameplayer.view.BaseScreen;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import xmlTest.Actor;
-import xmlTest.GameInfo;
-import xmlTest.Level;
-import xmlTest.MoveRight;
-import xmlTest.Rule;
-import xmlTest.Trigger;
+import gameengine.controller.Game;
+import gameplayer.view.IScreen;
+
 
 public class CreatorController implements ICreatorController {
 	
-	List<Level> myGameLevels;
-	BaseScreen myScreen;
-	GameInfo myGameInfo;
+	private Game myGame;
+	private XMLCreator myXMLCreator;
+	private IScreen myScreen;
 	
-	public CreatorController(GameInfo gameInfo, List<Level> gameLevels) { //, BaseScreen screen) {
-		this.myGameLevels = gameLevels;
-		//this.myScreen = screen;
-		this.myGameInfo = gameInfo;
-		
-		//setUpFileChooser();
-		
-		try {
-			saveForEditing(new File ("src/resources/test2.xml"));
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public CreatorController(Game game, IScreen screen) throws ParserConfigurationException { //, BaseScreen screen) {
+		this.myGame = game;
+		this.myScreen = screen;
+		this.myXMLCreator = new XMLCreator();
 	}
 
 	@Override
-	public void saveForEditing(File file) throws ParserConfigurationException {
-		
+	public void saveForEditing(File file) {
 		File loaderFile = createLoaderFileFromFile(file);
-		XMLCreator xmlCreator = new XMLCreator(loaderFile);
+		try {
+			this.myXMLCreator.saveGame(myGame, loaderFile);
+			myGame.setInitialGameFile(loaderFile.getPath());
+			saveForPlaying(file);
+		} catch (SAXException | IOException | TransformerException | ParserConfigurationException e) {
+			myScreen.showError(e.getMessage());
+		} 
 		
-		for (Level level: this.myGameLevels) {
-			xmlCreator.writeLevel(level);
-		}
 		
-		xmlCreator.documentToFile();
-		
-		saveForPlaying(file,loaderFile);
+
 	}
 
 	@Override
-	public void saveForPlaying(File file, File loaderFile) throws ParserConfigurationException {
-		XMLCreator xmlCreator = new XMLCreator(file);
-		Level currentLevel = myGameLevels.get(myGameInfo.getCurrentLevelNum());
-		xmlCreator.writeGameInfo(myGameInfo);
-		xmlCreator.writeLevel(currentLevel);
-		xmlCreator.writeInitialFile(loaderFile);
-		xmlCreator.documentToFile();
-	}
-
-	private void setUpFileChooser () {
-		FileChooser fileChooser = new FileChooser();
-		File file  = fileChooser.showSaveDialog(new Stage());
-		if (file != null){
-			try {
-				saveForEditing(file);
-			} catch (ParserConfigurationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	public void saveForPlaying(File file) throws ParserConfigurationException {
+		try {
+			this.myXMLCreator.saveGame(myGame, file);
+		} catch (SAXException | IOException | TransformerException e) {
+			myScreen.showError(e.getMessage());
 		}
 	}
-	
+
 	private File createLoaderFileFromFile (File f) {
 		String loaderFileName = f.getName().replace(".xml", "_loader.xml");
 		File loaderFile = new File(f.getParent() + "/" + loaderFileName);
 		return loaderFile;
 	}
 	
-	
-	public static void main (String [] args) {
 
-		List<Level> levels = new ArrayList<>();
-		Level levelOne = new Level ();
-		Actor actorOne = new Actor();
-		actorOne.setMyId(1);
-		ArrayList<Object> bleh = new ArrayList<>();
-		bleh.add((double) 90);
-		actorOne.addRule(new Rule(new Trigger(), new MoveRight(actorOne, bleh)));
-		levelOne.addActor(actorOne);
-		HashMap<String, List<Actor>> map = new HashMap<>();
-		List<Actor> actors = new ArrayList<>();
-		actors.add(actorOne);
-		map.put("Click", actors);
-		levels.add(levelOne);
-		GameInfo gameInfo = new GameInfo("My Game", "default.jpg", "This is a test.", 0);
-		CreatorController c = new CreatorController (gameInfo , levels);
-		
-		
-		
-	}
 }

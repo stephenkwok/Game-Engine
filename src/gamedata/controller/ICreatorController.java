@@ -2,7 +2,6 @@ package gamedata.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -33,6 +32,6 @@ public interface ICreatorController {
 	 * @throws IOException 
 	 * @throws SAXException 
 	 */
-	public void saveForPlaying (File file, File loaderFile) throws ParserConfigurationException, SAXException, IOException;
+	public void saveForPlaying (File file) throws ParserConfigurationException, SAXException, IOException;
 
 }
