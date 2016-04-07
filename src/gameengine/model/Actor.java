@@ -11,9 +11,9 @@ import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.Actions.Action;
+import gameengine.model.Triggers.AttributeType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 
 
 /**
@@ -36,7 +36,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private String myName;
     private ImageView myImageView;
     private Map<String, List<Action>> myRules;
-    private Map<String, Attribute> attributeMap;
+    private Map<AttributeType, Attribute> attributeMap;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -58,7 +58,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     public void move(double distance, double direction) {
         x = distance * Math.cos(direction * DEGREES_TO_RADIANS);
         y = distance * Math.sin(direction * DEGREES_TO_RADIANS);
-    	System.out.println(x);//
+        System.out.println(x);//
     }
 
     /**
@@ -80,18 +80,18 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * @param newAttribute The new Actor Attribute
      */
     public void addAttribute(Attribute newAttribute) {
-        attributeMap.put(newAttribute.getName(), newAttribute);
+        attributeMap.put(newAttribute.getType(), newAttribute);
     }
 
     /**
      * Modifies the current value of an Attribute
      *
-     * @param attributeName The name of the Attribute to be changed
-     * @param change        The amount to change the Attribute by
-     */   
-    public void changeAttribute(String attributeName, int change) {
+     * @param type   The type of the Attribute to be changed
+     * @param change The amount to change the Attribute by
+     */
+    public void changeAttribute(AttributeType type, int change) {
 
-        Attribute myAttribute = attributeMap.get(attributeName);
+        Attribute myAttribute = attributeMap.get(type);
         myAttribute.changeAttribute(change);
     }
 
@@ -132,75 +132,75 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         return myID;
     }
 
-	@Override
-	public double getXVelo() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public double getXVelo() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	@Override
-	public double getYVelo() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public double getYVelo() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	@Override
-	public void setXPos(double updateXPosition) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setXPos(double updateXPosition) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void setYPos(double updateYPosition) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	public void setXVelo(double updateXVelo) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setYPos(double updateYPosition) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void setYVelo(double updateYVelo) {
-		// TODO Auto-generated method stub
-	}
-	
-	public void setID(int ID) {
-		myID = ID;
-	}
+    }
 
-	@Override
-	public String getName() {
-		return myName;
-	}
+    @Override
+    public void setXVelo(double updateXVelo) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void setName(String name) {
-		myName = name;
-	}
+    }
 
-	@Override
+    @Override
+    public void setYVelo(double updateYVelo) {
+        // TODO Auto-generated method stub
+    }
 
-	public ImageView getImageView() {
-		return myImageView;
-	}
+    public void setID(int ID) {
+        myID = ID;
+    }
 
-	@Override
-	public void setImageView(ImageView imageView) {
-		myImageView = imageView;
-	}
+    @Override
+    public String getName() {
+        return myName;
+    }
 
-	
-	//TODO JUSTIN ::::::::)
-	//public void typeOfCollision;
-	
-	public void collidesWith(Actor a) {
+    @Override
+    public void setName(String name) {
+        myName = name;
+    }
+
+    @Override
+
+    public ImageView getImageView() {
+        return myImageView;
+    }
+
+    @Override
+    public void setImageView(ImageView imageView) {
+        myImageView = imageView;
+    }
+
+
+    //TODO JUSTIN ::::::::)
+    //public void typeOfCollision;
+
+    public void collidesWith(Actor a) {
 //		ClickTrigger collision = typeOfCollision(this, a);
 //		Action action = myRules.get(collision.getTriggerName()).get(0);
 //		action.performOn(a);
-	}
+    }
 
     @Override
     public double getX() {
@@ -213,4 +213,5 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         // TODO Auto-generated method stub
         return 0;
     }
+
 }
