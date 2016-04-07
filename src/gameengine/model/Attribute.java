@@ -9,7 +9,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
 public abstract class Attribute {
-
+	
     private AttributeType myType;
     private IntegerProperty myInitialValue;
     private IntegerProperty myTriggerValue;
@@ -17,7 +17,7 @@ public abstract class Attribute {
     private BooleanBinding isActionTriggered;
 
     public Attribute(AttributeType type, int initialValue, int triggerValue, Action action) {
-        myType = type;
+    	myType = type;
         myInitialValue = new SimpleIntegerProperty(initialValue);
         myTriggerValue = new SimpleIntegerProperty(triggerValue);
         myAction = action;

@@ -5,8 +5,9 @@ import java.io.IOException;
 import java.util.Optional;
 
 import org.xml.sax.SAXException;
-import gameplayer.view.IScreen;
+
 import gameplayer.view.ISplashScreen;
+import gui.view.IScreen;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;

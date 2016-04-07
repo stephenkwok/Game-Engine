@@ -3,6 +3,8 @@ package authoringenvironment.view;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import gui.view.ComboBoxTextCell;
+
 public class ComboBoxOptions extends ComboBoxTextCell {
 	private List<String> myOptions;
 	
@@ -12,13 +14,13 @@ public class ComboBoxOptions extends ComboBoxTextCell {
 	}
 
 	@Override
-	void setButtonAction() {
+	public void setButtonAction() {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	List<String> getOptionsList() {
+	public List<String> getOptionsList() {
 		return myOptions;
 	}
 

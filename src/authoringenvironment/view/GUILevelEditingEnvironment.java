@@ -9,6 +9,8 @@ import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.controller.Controller;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gui.view.GUILibrary;
+import gui.view.IGUI;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.ImageView;

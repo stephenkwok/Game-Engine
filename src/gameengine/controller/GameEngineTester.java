@@ -7,6 +7,7 @@ import gameengine.model.Actor;
 import gameengine.model.IActor;
 import gameengine.model.ITrigger;
 import gameengine.model.Rule;
+import gameengine.model.Actions.Action;
 import gameengine.model.Actions.MoveRight;
 import gameengine.model.Actions.MoveUp;
 import gameengine.model.Triggers.ClickTrigger;
@@ -57,10 +58,10 @@ public class GameEngineTester {
         myLevel.addActor(actor2);
 
         //Initialize Game
-        Game myGame = new Game(0, myLevels, "");
+        Game myGame = new Game(new GameInfo(), myLevels);
 
         //Prints Initial State
-        List<IActor> actors = myGame.getActors();
+        List<IActor> actors = (List<IActor>) myGame.getActors();
         for (IActor actor : actors){
             System.out.printf(actor.getID() + ", " + actor.getX() + ", " + actor.getY() + "\t\t");
         }
@@ -70,7 +71,7 @@ public class GameEngineTester {
         myGame.handleTrigger(new TickTrigger());
 
         //Prints Final State
-        actors = myGame.getActors();
+        actors = (List<IActor>) myGame.getActors();
         for (IActor actor : actors){
             System.out.printf(actor.getID() + ", " + actor.getX() + ", " + actor.getY() + "\t\t");
         }
