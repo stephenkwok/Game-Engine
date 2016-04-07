@@ -9,7 +9,6 @@ import gameengine.model.ITrigger;
 import gameengine.model.Rule;
 import gameengine.model.Actions.MoveRight;
 import gameengine.model.Actions.MoveUp;
-import gameengine.model.Actions.Actions.Action;
 import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.TickTrigger;
 

@@ -14,7 +14,7 @@ public class GainHealth extends Action{
 
 	@Override
 	public void perform(PhysicsEngine myPhysicsEngine) {
-		getActor().setHealth( getActor().getHealth()+numLivesGained );
+		getActor().changeAttribute("health",numLivesGained);
 	}
 
 

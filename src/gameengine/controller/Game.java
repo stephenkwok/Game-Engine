@@ -83,26 +83,4 @@ public class Game extends Observable implements Observer {
 		
 	}
 
-<<<<<<< HEAD
-	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-	      
-	      stringBuilder.append("Game [ ");
-	      stringBuilder.append("\ninitialFile: ");
-	      stringBuilder.append(initialGameFile);
-	      stringBuilder.append("\nbckImg: ");
-	      stringBuilder.append(myBackgroundImgName);
-	      stringBuilder.append("\nmyActors: ");
-	      stringBuilder.append(myActors.toString());
-	      stringBuilder.append("\nTriggerMap: ");
-	      stringBuilder.append(myTriggerMap.toString());
-	      stringBuilder.append("\nimg: ");
-	      stringBuilder.append(myImage);
-	      stringBuilder.append(" ]");
-	      
-	      return stringBuilder.toString();
-	}
-=======
-
->>>>>>> cfe83f6bf05e26a516562018795cf31511f6668d
 }

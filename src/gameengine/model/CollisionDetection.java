@@ -51,9 +51,9 @@ public class CollisionDetection {
 	private Map<String, Double> getCorners(Actor a){ //This may have to change if Actor is no longer an ImageView object
 		Map<String,Double> actorMap = new HashMap<String,Double>();
 		actorMap.put(LEFT  , a.getX());
-		actorMap.put(RIGHT , a.getX()+a.getImage().getWidth());
+		actorMap.put(RIGHT , a.getX()+a.getImageView().getBoundsInLocal().getWidth());
 		actorMap.put(TOP   , a.getY());
-		actorMap.put(BOTTOM, a.getY()+a.getImage().getHeight());
+		actorMap.put(BOTTOM, a.getY()+a.getImageView().getBoundsInLocal().getHeight());
 		return actorMap;
 	}
 	
