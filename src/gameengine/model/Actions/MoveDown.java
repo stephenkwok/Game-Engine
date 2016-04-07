@@ -22,9 +22,4 @@ public class MoveDown extends MovingAction {
         moveActor(DOWN_ANGLE);
     }
 
-	@Override
-	public void performOn(Actor a) {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -230,12 +230,6 @@ public class Actor extends ImageView implements IActor, IEditableGameElement {
 		myName = name;
 	}
 
-	
-	public void collidesWith(Actor a, CollisionTrigger collisionTrigger) {
-		Action action = myRules.get(collisionTrigger.getTriggerName()).get(0);
-		action.performOn(a);
-	}
-
 	public int getStrength() {
 		return myStrength;
 	}

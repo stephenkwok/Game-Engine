@@ -17,10 +17,5 @@ public class GainHealth extends Action{
 		getActor().setHealth( getActor().getHealth()+numLivesGained );
 	}
 
-	@Override
-	public void performOn(Actor a) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

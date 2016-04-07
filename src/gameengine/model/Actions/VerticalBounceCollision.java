@@ -23,11 +23,5 @@ public class VerticalBounceCollision extends Action{
 		getActor().setYVelo(getActor().getYVelo()*-1);
 	}
 
-	@Override
-	public void performOn(Actor a) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
 

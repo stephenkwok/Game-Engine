@@ -24,10 +24,4 @@ public class HorizontalBounceCollision extends Action{
 		getActor().setXVelo(getActor().getXVelo()*-1);
 	}
 
-	@Override
-	public void performOn(Actor a) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

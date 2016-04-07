@@ -1,13 +1,11 @@
 package gameengine.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import gameengine.model.Actor;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.CollisionTrigger;
-import gameengine.model.Triggers.NeutralCollision;
 import gameengine.model.Triggers.SideCollision;
 import gameengine.model.Triggers.TopCollision;;
 

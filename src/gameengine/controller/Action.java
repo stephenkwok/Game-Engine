@@ -40,5 +40,4 @@ public abstract class Action implements IAction {
         return myActor;
     }
     
-    public abstract void performOn(Actor a);
 }
