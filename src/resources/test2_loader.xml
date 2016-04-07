@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><game><level>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><game><xmlTest.Level>
   <myName>Untitled</myName>
   <myBackgroundImgName>default_background.png</myBackgroundImgName>
   <myActors>
@@ -19,4 +19,4 @@
     </xmlTest.Actor>
   </myActors>
   <myTriggerMap/>
-</level></game>
+</xmlTest.Level></game>

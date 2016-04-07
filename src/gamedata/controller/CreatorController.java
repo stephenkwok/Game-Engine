@@ -1,31 +1,18 @@
 package gamedata.controller;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.sax.SAXSource;
-import javax.xml.transform.sax.SAXTransformerFactory;
-import javax.xml.transform.stream.StreamResult;
 
-import org.xml.sax.InputSource;
-
-import gamedata.EditXMLCreator;
-import gamedata.GameXMLCreator;
 import gamedata.XMLCreator;
 import gameplayer.view.BaseScreen;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import xmlTest.Actor;
+import xmlTest.GameInfo;
 import xmlTest.Level;
 import xmlTest.MoveRight;
 import xmlTest.Rule;
@@ -35,12 +22,12 @@ public class CreatorController implements ICreatorController {
 	
 	List<Level> myGameLevels;
 	BaseScreen myScreen;
-	int myCurrentLevelNum;
+	GameInfo myGameInfo;
 	
-	public CreatorController(int currentLevelNum, List<Level> gameLevels) { //, BaseScreen screen) {
+	public CreatorController(GameInfo gameInfo, List<Level> gameLevels) { //, BaseScreen screen) {
 		this.myGameLevels = gameLevels;
 		//this.myScreen = screen;
-		this.myCurrentLevelNum = currentLevelNum;
+		this.myGameInfo = gameInfo;
 		
 		//setUpFileChooser();
 		
@@ -70,8 +57,8 @@ public class CreatorController implements ICreatorController {
 	@Override
 	public void saveForPlaying(File file, File loaderFile) throws ParserConfigurationException {
 		XMLCreator xmlCreator = new XMLCreator(file);
-		
-		Level currentLevel = myGameLevels.get(myCurrentLevelNum);
+		Level currentLevel = myGameLevels.get(myGameInfo.getCurrentLevelNum());
+		xmlCreator.writeGameInfo(myGameInfo);
 		xmlCreator.writeLevel(currentLevel);
 		xmlCreator.writeInitialFile(loaderFile);
 		xmlCreator.documentToFile();
@@ -112,7 +99,8 @@ public class CreatorController implements ICreatorController {
 		actors.add(actorOne);
 		map.put("Click", actors);
 		levels.add(levelOne);
-		CreatorController c = new CreatorController (0 , levels);
+		GameInfo gameInfo = new GameInfo("My Game", "default.jpg", "This is a test.", 0);
+		CreatorController c = new CreatorController (gameInfo , levels);
 		
 		
 		

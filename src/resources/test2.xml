@@ -1,4 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><game><level>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><game><xmlTest.GameInfo>
+  <myName>My Game</myName>
+  <myImageName>default.jpg</myImageName>
+  <myDescription>This is a test.</myDescription>
+  <myCurrentLevelNum>0</myCurrentLevelNum>
+</xmlTest.GameInfo><xmlTest.Level>
   <myName>Untitled</myName>
   <myBackgroundImgName>default_background.png</myBackgroundImgName>
   <myActors>
@@ -19,4 +24,4 @@
     </xmlTest.Actor>
   </myActors>
   <myTriggerMap/>
-</level><loader>test2_loader.xml</loader></game>
+</xmlTest.Level><loader>src/resources/test2_loader.xml</loader></game>

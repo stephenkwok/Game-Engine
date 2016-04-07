@@ -78,4 +78,22 @@ public class Game implements IGame {
 		return allActors;
 	}
 
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+	      
+	      stringBuilder.append("Game [ ");
+	      stringBuilder.append("\ninitialFile: ");
+	      stringBuilder.append(initialGameFile);
+	      stringBuilder.append("\nbckImg: ");
+	      stringBuilder.append(myBackgroundImgName);
+	      stringBuilder.append("\nmyActors: ");
+	      stringBuilder.append(myActors.toString());
+	      stringBuilder.append("\nTriggerMap: ");
+	      stringBuilder.append(myTriggerMap.toString());
+	      stringBuilder.append("\nimg: ");
+	      stringBuilder.append(myImage);
+	      stringBuilder.append(" ]");
+	      
+	      return stringBuilder.toString();
+	}
 }

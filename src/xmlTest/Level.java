@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+//@XStreamAlias("level")
 public class Level {
 	
 	private static final String DEFAULT_NAME = "Untitled";

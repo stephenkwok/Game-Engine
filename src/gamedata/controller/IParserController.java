@@ -1,7 +1,16 @@
 package gamedata.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
-import gameengine.controller.ILevel;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
+
+import xmlTest.Game;
+import xmlTest.Level;
 
 /**
  * The purpose of this interface is to provide the loading capabilities from the authoring environment and game engine to play or edit a game from an XML file.
@@ -14,14 +23,22 @@ public interface IParserController {
 	 * Uses the EditXMLParser to parse through an initial file to produce levels for editing
 	 * @return a list of editable levels
 	 * @param the name of the file to parse through
+	 * @throws IOException 
+	 * @throws SAXException 
+	 * @throws ParserConfigurationException 
+	 * @throws TransformerException 
 	 */
-	public List<ILevel> loadForEditing (String filepath);
+	public List<Level> loadForEditing (File file) throws ParserConfigurationException, SAXException, IOException, TransformerException;
 	
 	/**
 	 * Uses the GameXMLParser to parse through an game file to produce levels for playing
 	 * @return a list of playable levels
 	 * @param the name of the file to parse through
+	 * @throws ParserConfigurationException 
+	 * @throws SAXException 
+	 * @throws IOException 
+	 * @throws TransformerException 
 	 */
-	public List<ILevel> loadforPlaying (String filepath);
+	public Game loadforPlaying (File file) throws ParserConfigurationException, SAXException, IOException, TransformerException;
 
 }

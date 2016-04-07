@@ -67,4 +67,21 @@ public class Actor {
         }
     }
 	
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+	      
+	      stringBuilder.append("Actor[ ");
+	      stringBuilder.append("\nid: ");
+	      stringBuilder.append(myId);
+	      stringBuilder.append("\nname: ");
+	      stringBuilder.append(myName);
+	      stringBuilder.append("\nmyImgName: ");
+	      stringBuilder.append(myImgName);
+	      stringBuilder.append("\nmyRules: ");
+	      stringBuilder.append(myRules.toString());
+	      stringBuilder.append(" ]");
+	      
+	      return stringBuilder.toString();
+	}
+	
 }

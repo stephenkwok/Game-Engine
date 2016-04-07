@@ -20,6 +20,7 @@ import org.xml.sax.SAXException;
 
 import com.thoughtworks.xstream.XStream;
 
+import xmlTest.GameInfo;
 import xmlTest.Level;
 
 
@@ -53,7 +54,6 @@ public class XMLCreator {
 	
 	public void writeLevel (Level level) {
 		XStream xstream = new XStream();
-		xstream.alias("level", Level.class);
 		xstream.autodetectAnnotations(true);
 		String xml = xstream.toXML(level);
 		Level leveltest = (Level) xstream.fromXML(xml);
@@ -73,7 +73,7 @@ public class XMLCreator {
 	
 	public void writeInitialFile (File file) {
 		Element loader = myDocument.createElement("loader");
-		Text loaderText = myDocument.createTextNode(file.getName());
+		Text loaderText = myDocument.createTextNode(file.getPath());
 		myDocument.getFirstChild().appendChild(loader).appendChild(loaderText);
 	}
 	
@@ -93,6 +93,21 @@ public class XMLCreator {
 	        	// TODO FIX ERROR CATCHING
 	            e.printStackTrace();
 	        }
+	}
+
+	public void writeGameInfo(GameInfo myGameInfo) {
+		XStream xstream = new XStream();
+		String xml = xstream.toXML(myGameInfo);
+		
+		Document gameInfoDocument;
+		try {
+			gameInfoDocument = myDocumentBuilder.parse(new InputSource(new StringReader(xml)));
+			myDocument.getFirstChild().appendChild(myDocument.importNode(gameInfoDocument.getFirstChild(),true));
+		} catch (SAXException | IOException e) {
+			// TODO FIX ERROR CATCHING
+			e.printStackTrace();
+		}
+		
 	}
 
 	
