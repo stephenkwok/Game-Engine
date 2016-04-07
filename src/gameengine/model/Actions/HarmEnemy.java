@@ -4,18 +4,18 @@ import gameengine.model.Actions.Action;
 import gameengine.model.Actor;
 import gameengine.model.PhysicsEngine;
 
-public class GainPoints extends Action{
+public class HarmEnemy extends Action {
 
-	private int numPointsGained = 1;
-	private int myPointsLost = 1;
+	private int damage = 1;
 	
-	public GainPoints(Actor assignedActor) {
+	public HarmEnemy(Actor assignedActor) {
 		super(assignedActor);
 	}
 
 	@Override
 	public void perform(PhysicsEngine myPhysicsEngine) {
-		getActor().setPoints(getActor().getPoints()+numPointsGained);
+		// TODO Auto-generated method stub
+		
 	}
 
 }
