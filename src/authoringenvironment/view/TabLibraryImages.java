@@ -12,11 +12,12 @@ import javafx.scene.image.ImageView;
  * @author AnnieTang
  *
  */
-public class TabImages extends TabParent {
+public class TabLibraryImages extends TabLibrary{
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
 	private ObservableList<Label> imageLabels; 
-	public TabImages(ResourceBundle myResources, String tabText) {
-		super(myResources,tabText);
+	
+	public TabLibraryImages(ResourceBundle myResources, String tabText, GUIActorRuleMaker myRuleMaker) {
+		super(myResources,tabText,myRuleMaker);
 	}
 
 	@Override
@@ -27,7 +28,11 @@ public class TabImages extends TabParent {
 			ImageView iv = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(imageName)));
 			iv.setFitHeight(STANDARD_IMAGE_HEIGHT);
 			iv.setPreserveRatio(true);
-			imageLabels.add(new Label(imageName, iv));
+			Label imageLabel = new Label(imageName, iv); 
+			if(myRuleMaker!=null){
+				setDragEvent(imageLabel);
+			}
+			imageLabels.add(imageLabel);
 		}
 		ListView<Label> listView = new ListView<>(imageLabels);
 		return listView;

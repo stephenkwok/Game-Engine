@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -138,16 +139,17 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 				boolean success = false;
 				if (db.hasString()) {
 					Actor actor = getActorById(Integer.parseInt(db.getString()));
-					actor.setOnDragDetected(null);
-					actor.setOnDragDone(null);
-					actor.setOnMouseDragged(new EventHandler<MouseEvent>() {
+					ImageView actorIV = actor.getImageView();
+					actorIV.setOnDragDetected(null);
+					actorIV.setOnDragDone(null);
+					actorIV.setOnMouseDragged(new EventHandler<MouseEvent>() {
 						@Override public void handle(MouseEvent event) {
-							moveActor(actor, event);
+							moveActor(actorIV, event);
 							event.consume();
 						}
 					}); 
 					myLevel.addActor(actor);
-					myCenterPane.getChildren().add(actor);
+					myCenterPane.getChildren().add(actorIV);
 					success = true;
 				}
 				event.setDropCompleted(success);
@@ -156,9 +158,9 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		});
 	}
 	
-	private void moveActor(Actor actor, MouseEvent event) {
-		actor.setX(event.getX());
-		actor.setY(event.getY());
+	private void moveActor(ImageView actorIV, MouseEvent event) {
+		actorIV.setX(event.getX());
+		actorIV.setY(event.getY());
 	}
 	
 	private Actor getActorById(int id) {
@@ -188,13 +190,15 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	public void setEditable(IEditableGameElement editable) {
 		myCenterPane.getChildren().clear();
 		myLevel = (Level) editable;
-		myLevelBackground = new ImageView(myLevel.getImage());
+		myLevelBackground = myLevel.getImageView();
 		//TODO: SHOULD THIS FIT THE PANE OR PRESERVE RATIO?
 		//myLevelBackground.setPreserveRatio(true);
 		myLevelBackground.fitHeightProperty().bind(myCenterPane.heightProperty());
 		myLevelBackground.fitWidthProperty().bind(myCenterPane.widthProperty());
 		myCenterPane.getChildren().add(myLevelBackground);
-		myCenterPane.getChildren().addAll(myLevel.getActors());
+		List<ImageView> actorIVs = new ArrayList<>();
+		for(Actor actor: myLevel.getActors()) actorIVs.add(actor.getImageView());
+		myCenterPane.getChildren().addAll(actorIVs);
 	}
 
 
