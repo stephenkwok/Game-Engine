@@ -2,9 +2,18 @@ package gameplayer.controller;
 
 import java.util.List;
 
+<<<<<<< HEAD
 import gameengine.controller.IGame;
 import gameengine.controller.ILevel;
 import gameplayer.view.IBaseScreen;
+=======
+import gameengine.controller.Game;
+import gameengine.controller.Level;
+import gameengine.model.Actor;
+import gameengine.model.ITrigger;
+import gameplayer.view.BaseScreen;
+import gameplayer.view.GameScreen;
+>>>>>>> master
 
 /** 
  * This class serves as the private interface that any game controller must implement in order to set up the IGame with the appropriate levels and actors for the game engine to interact with
@@ -48,7 +57,16 @@ public interface GameController {
 	/**
 	 * Will play the animation timeline. 
 	 */
+<<<<<<< HEAD
 	public void begin ();
+=======
+	public void begin (){
+		Level current = model.getLevels().get(model.getInfo().getCurrentLevelNum());
+		for(Actor actor: current.getActors()){
+			view.addActor(actor);
+		}
+	}
+>>>>>>> master
 	
 	/**
 	 * Will reflect changes in actors' positions or values in a new "step" to simulate one round of animation.

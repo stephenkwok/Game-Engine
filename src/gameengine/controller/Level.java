@@ -46,13 +46,14 @@ public class Level implements ILevel, IEditableGameElement {
      */
     @Override
     public void handleTrigger(ITrigger myTrigger) {
+        if (!triggerMap.containsKey(myTrigger.getTriggerName())) return;
         List<Actor> relevantActors = triggerMap.get(myTrigger.getTriggerName());
         for (Actor myActor : relevantActors) {
             if (myTrigger.evaluate(myActor)){
-                myActor.performActionsFor(myPhysicsEngine, null);
+                myActor.performActionsFor(myPhysicsEngine, myTrigger.getTriggerName());
             }
         }
-        myCollisionDetector.detection(myActors); //Collision Detection/Resolution for each Actor
+        //myCollisionDetector.detection(myActors); //Collision Detection/Resolution for each Actor
     }
 
     /**
