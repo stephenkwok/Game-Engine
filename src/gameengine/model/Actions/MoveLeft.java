@@ -19,9 +19,7 @@ public class MoveLeft extends MovingAction {
     }
 
     @Override
-    public void perform(PhysicsEngine myPhysicsEngine) {
-    	System.out.println("here3");
-        moveActor(LEFT_DIRECTION);
+    public void perform() {
+        getActor().getPhysicsEngine().moveLeft(getActor());
     }
-
 }

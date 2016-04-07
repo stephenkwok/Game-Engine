@@ -37,6 +37,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private ImageView myImageView;
     private Map<String, List<Action>> myRules;
     private Map<AttributeType, Attribute> attributeMap;
+    private PhysicsEngine myPhysicsEngine;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -70,7 +71,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     public void performActionsFor(PhysicsEngine myPhysicsEngine, String triggerString) {
         List<Action> myActions = myRules.get(triggerString);
         for (Action myAction : myActions) {
-            myAction.perform(myPhysicsEngine);
+            myAction.perform();
         }
     }
 
@@ -213,5 +214,13 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         // TODO Auto-generated method stub
         return 0;
     }
+
+	public void setEngine(PhysicsEngine physicsEngine) {
+		myPhysicsEngine = physicsEngine;
+	}
+	
+	public PhysicsEngine getPhysicsEngine(){
+		return myPhysicsEngine;
+	}
 
 }
