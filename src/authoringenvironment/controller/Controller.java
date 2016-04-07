@@ -3,10 +3,13 @@ package authoringenvironment.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.view.ButtonParent;
 import authoringenvironment.view.GUIActorEditingEnvironment;
 import authoringenvironment.view.GUILevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
@@ -22,7 +25,7 @@ import javafx.stage.Stage;
  * @author Stephen, AnnieTang
  */
 
-public class Controller {
+public class Controller implements Observer {
 	private Stage myStage;
 	private List<Level> levels;
 	private List<Actor> actors;	
@@ -152,6 +155,11 @@ public class Controller {
 		guiMain.setCenterPane(null);
 		guiMain.setLeftPane(null);
 		guiMain.setRightPane(null);
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		
 	}
 
 }
