@@ -2,7 +2,7 @@ package gui.view;
 
 import java.util.ResourceBundle;
 
-import authoringenvironment.view.GUIActorRuleMaker;
+import authoringenvironment.view.ActorRuleCreator;
 import authoringenvironment.view.TabLibraryBehaviors;
 import authoringenvironment.view.TabLibraryImages;
 import authoringenvironment.view.TabLibrarySounds;
@@ -19,12 +19,12 @@ public class GUILibrary implements IGUI{
 	private static final String LIBRARY_RESOURCE = "library";
 	private ResourceBundle myResources;
 	private Pane myPane;
-	private GUIActorRuleMaker myRuleMaker;
+	private ActorRuleCreator myRuleMaker;
 	
 	public GUILibrary(){
 		initializeEnvironment();
 	}
-	public GUILibrary(GUIActorRuleMaker myRuleMaker) {
+	public GUILibrary(ActorRuleCreator myRuleMaker) {
 		this.myRuleMaker = myRuleMaker;
 		initializeEnvironment();
 	}

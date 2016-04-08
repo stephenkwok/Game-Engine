@@ -57,10 +57,4 @@ public class TextFieldWithButton implements IGUIElement {
 		myContainer.getChildren().addAll(myTextFieldPrompt, myTextField, myButton);
 		return myContainer;
 	}
-
-	@Override
-	public void updateNode() {
-
-	}
-
 }

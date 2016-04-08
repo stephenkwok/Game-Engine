@@ -22,7 +22,7 @@ public class TabLibrarySounds extends TabLibrary{
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
 	private ObservableList<Label> soundLabels; 
 	
-	public TabLibrarySounds(ResourceBundle myResources, String tabText, GUIActorRuleMaker myRuleMaker) {
+	public TabLibrarySounds(ResourceBundle myResources, String tabText, ActorRuleCreator myRuleMaker) {
 		super(myResources, tabText, myRuleMaker);
 	}
 	
@@ -32,7 +32,7 @@ public class TabLibrarySounds extends TabLibrary{
 		soundLabels = FXCollections.observableArrayList();
 		for(String soundName: fileNames){
 			Label soundLabel = new Label(soundName, createPlaySoundButton(soundName));
-			if(myRuleMaker!=null){
+			if(myActorRuleCreator!=null){
 				setDragEvent(soundLabel);
 			}
 			soundLabels.add(soundLabel);

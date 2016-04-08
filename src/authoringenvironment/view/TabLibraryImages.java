@@ -16,7 +16,7 @@ public class TabLibraryImages extends TabLibrary{
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
 	private ObservableList<Label> imageLabels; 
 	
-	public TabLibraryImages(ResourceBundle myResources, String tabText, GUIActorRuleMaker myRuleMaker) {
+	public TabLibraryImages(ResourceBundle myResources, String tabText, ActorRuleCreator myRuleMaker) {
 		super(myResources,tabText,myRuleMaker);
 	}
 
@@ -29,7 +29,7 @@ public class TabLibraryImages extends TabLibrary{
 			iv.setFitHeight(STANDARD_IMAGE_HEIGHT);
 			iv.setPreserveRatio(true);
 			Label imageLabel = new Label(imageName, iv); 
-			if(myRuleMaker!=null){
+			if(myActorRuleCreator!=null){
 				setDragEvent(imageLabel);
 			}
 			imageLabels.add(imageLabel);

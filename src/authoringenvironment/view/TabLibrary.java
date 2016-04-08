@@ -19,13 +19,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 abstract class TabLibrary extends TabParent {
-	protected GUIActorRuleMaker myRuleMaker;
-	protected Pane myTarget;
+	protected ActorRuleCreator myActorRuleCreator;
+	protected GridPane myTarget;
 	
-	public TabLibrary(ResourceBundle myResources, String tabText, GUIActorRuleMaker myRuleMaker) {
+	public TabLibrary(ResourceBundle myResources, String tabText, ActorRuleCreator myRuleMaker) {
 		super(myResources, tabText);
-		this.myRuleMaker = myRuleMaker;
-		if(myRuleMaker!=null) myTarget = this.myRuleMaker.getPane();
+		this.myActorRuleCreator = myRuleMaker;
+		if(myRuleMaker!=null) myTarget = this.myActorRuleCreator.getGridPane();
 	}
 
 	@Override
@@ -91,10 +91,9 @@ abstract class TabLibrary extends TabParent {
 		        Dragboard db = event.getDragboard();
 		        boolean success = false;
 		        if (db.hasString()) {
-		           GridPane gp = (GridPane) myTarget;
 		           Label toAdd = getRuleContainer(event.getDragboard().getString());
 		           setDragEvent(toAdd);
-		           gp.add(toAdd, 0, 0);
+		           myTarget.add(toAdd, 0, 0);
 		           success = true;
 		        }
 		        event.setDropCompleted(success);

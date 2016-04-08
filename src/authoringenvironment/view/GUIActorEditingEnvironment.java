@@ -8,10 +8,14 @@ import authoringenvironment.model.IEditingEnvironment;
 import gameengine.model.Actor;
 import gui.view.GUILibrary;
 import gui.view.IGUI;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 /**
  * Returns BorderPane to represent Actor Editing Environment. 
@@ -19,6 +23,7 @@ import javafx.scene.layout.VBox;
  *
  */
 public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
+	private static final String NEW_RULE_LABEL = "New Rule";
 	private static final int ACTOR_IMAGE_HEIGHT = 100; 
 	private static final String ACTOR_OPTIONS_RESOURCE = "actorEditorOptions";
 	private static final String ACTOR_ATTRIBUTES = "Actor Attributes";
@@ -29,7 +34,8 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	private ResourceBundle myResources;
 	private Actor myActor;
 	private ImageView myActorIV;
-	private GUIActorRuleMaker ruleMaker;
+	private ActorRuleCreator myActorRuleCreator;
+	private GridPane myRuleCreator;
 	private GUIActorImageViewer actorImageViewer;
 	
 	public GUIActorEditingEnvironment(Controller myController, ResourceBundle myResources) {
@@ -45,9 +51,12 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	
 	private void initializeEnvironment() {
 		myRoot = new BorderPane();
+		myActorRuleCreator = new ActorRuleCreator();
+		attributes = new TabAttributes(myResources,ACTOR_ATTRIBUTES,ACTOR_OPTIONS_RESOURCE);
 		setDefaultActor();	
 		setCenterPane(); 
 		setLeftPane();
+		setBottomPane();
 	}
 	
 	private void setDefaultActor(){
@@ -61,10 +70,9 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	
 	private void setLeftPane(){
 		VBox vbox = new VBox();
-		attributes = new TabAttributes(myResources,ACTOR_ATTRIBUTES,ACTOR_OPTIONS_RESOURCE);
 		TabPane attributeTP = new TabPane();
 		attributeTP.getTabs().add(attributes.getTab());
-		library = new GUILibrary(ruleMaker);
+		library = new GUILibrary(myActorRuleCreator);
 		vbox.getChildren().addAll(getActorImageViewer(), attributeTP, library.getPane());
 		myRoot.setLeft(vbox);
 	}
@@ -75,8 +83,22 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	}
 	
 	private void setCenterPane(){
-		ruleMaker = new GUIActorRuleMaker();
-		myRoot.setCenter(ruleMaker.getPane());
+		myRuleCreator = myActorRuleCreator.getGridPane();
+		ScrollPane myScrollPane = new ScrollPane();
+		myScrollPane.setContent(myRuleCreator);
+		myRoot.setCenter(myScrollPane);
+	}
+	
+	private void setBottomPane(){
+		myRoot.setBottom(getNewRuleButton());
+	}
+	
+	private Button getNewRuleButton(){
+		Button toReturn = new Button(NEW_RULE_LABEL);
+		toReturn.setOnAction(event -> {
+			myActorRuleCreator.addNewRule();
+		});
+		return toReturn;
 	}
 	
 	@Override
@@ -91,6 +113,5 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		myActorIV.setPreserveRatio(true);
 		myActor.setImageView(myActorIV);
 		setLeftPane();
-		
 	}
 }
