@@ -1,7 +1,6 @@
 package authoringenvironment.view;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -14,8 +13,6 @@ import javafx.scene.image.ImageView;
  */
 public class TabLibraryImages extends TabLibrary{
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
-	private ObservableList<Label> imageLabels; 
-	private ListView<Label> listView;
 	
 	public TabLibraryImages(ResourceBundle myResources, String tabText, ActorRuleCreator myRuleMaker) {
 		super(myResources,tabText,myRuleMaker);
@@ -23,9 +20,9 @@ public class TabLibraryImages extends TabLibrary{
 	}
 	
 	@Override
-	public void setContent() {
+	void setContent() {
 		fillFileNames();
-		imageLabels = FXCollections.observableArrayList();
+		labels = FXCollections.observableArrayList();
 		for(String imageName: fileNames){
 			ImageView iv = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(imageName)));
 			iv.setFitHeight(STANDARD_IMAGE_HEIGHT);
@@ -34,13 +31,12 @@ public class TabLibraryImages extends TabLibrary{
 			if(myActorRuleCreator!=null){
 				setDragEvent(imageLabel);
 			}
-			imageLabels.add(imageLabel);
+			labels.add(imageLabel);
 		}
-		listView = new ListView<>(imageLabels);
+		listView = new ListView<>(labels);
 	}
 	@Override
 	Node getContent() {
 		return listView;
 	}
-
 }

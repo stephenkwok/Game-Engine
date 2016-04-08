@@ -77,12 +77,7 @@ public class SplashScreen extends Screen {
 	 */
 	public void edit() {
 		GUIMain myGUI = new GUIMain(getStage(), getMyScene());
-		try {
-			getStage().setScene(myGUI.getScene());
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			e.printStackTrace();
-		}
+		getStage().setScene(myGUI.getScene());
 	}
 
 	/**

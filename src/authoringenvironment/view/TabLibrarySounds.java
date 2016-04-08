@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,8 +19,6 @@ import javafx.scene.media.AudioClip;
 public class TabLibrarySounds extends TabLibrary{
 	private static final String SOUND_IMAGE_NAME = "sound.png";
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
-	private ObservableList<Label> soundLabels; 
-	private ListView<Label> listView;
 	
 	public TabLibrarySounds(ResourceBundle myResources, String tabText, ActorRuleCreator myRuleMaker) {
 		super(myResources, tabText, myRuleMaker);
@@ -29,17 +26,17 @@ public class TabLibrarySounds extends TabLibrary{
 	}
 	
 	@Override
-	public void setContent() {
+	void setContent() {
 		fillFileNames();
-		soundLabels = FXCollections.observableArrayList();
+		labels = FXCollections.observableArrayList();
 		for(String soundName: fileNames){
 			Label soundLabel = new Label(soundName, createPlaySoundButton(soundName));
 			if(myActorRuleCreator!=null){
 				setDragEvent(soundLabel);
 			}
-			soundLabels.add(soundLabel);
+			labels.add(soundLabel);
 		}
-		listView = new ListView<>(soundLabels);
+		listView = new ListView<>(labels);
 	}
 	
 	@Override
@@ -62,5 +59,4 @@ public class TabLibrarySounds extends TabLibrary{
 	    });
 		return button;
 	}
-
 }

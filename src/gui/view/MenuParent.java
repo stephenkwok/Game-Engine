@@ -21,11 +21,4 @@ public class MenuParent implements IGUIElement{
 		myItem.setText(menuText);
 		return null;
 	}
-
-	@Override
-	public void updateNode() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
