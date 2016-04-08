@@ -27,12 +27,12 @@ import javafx.stage.Stage;
 public class GUIMain extends Screen implements IGUI {
     private static final String GUI_RESOURCE = "authoringGUI";
     private static final String TOP_PANE_ELEMENTS = "TopPaneElements";
+    private static final int WINDOW_HEIGHT = 800;
+	private static final int WINDOW_WIDTH = 1300;
     private static final int PADDING = 10;
     private Scene myScene;
 	private BorderPane myRoot;
 	private ResourceBundle myResources;
-	private int windowHeight;
-	private int windowWidth;
 	private Stage myStage;
 	private Controller myController;
 	private GUIFactory factory;
@@ -67,7 +67,7 @@ public class GUIMain extends Screen implements IGUI {
 		myRoot = new BorderPane();
 		setTopPane();
 		setCenterPane();
-		myScene = new Scene(myRoot, windowHeight, windowWidth, Color.WHITE);
+		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
 		return myScene;
 	}
 	
@@ -89,10 +89,6 @@ public class GUIMain extends Screen implements IGUI {
 	
 	public void setCenterPane(){
 		myController.goToMainScreen();
-//		IGUI actorEditing = new GUIActorEditingEnvironment(myResources);
-//		myRoot.setCenter(actorEditing.getPane());
-//		GUIMainScreen test = new GUIMainScreen(myController);
-//		myRoot.setCenter(test.getPane());
 	}
 	
 	private void setTopPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
