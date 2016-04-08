@@ -1,4 +1,4 @@
-package authoringenvironment.view;
+package gui.view;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import gameengine.controller.Level;
-import gui.view.ComboBoxTextCell;
 
 /**
  * ComboBox that holds existing Levels and allows user to go to LevelEditingEnvironment to edit selected level

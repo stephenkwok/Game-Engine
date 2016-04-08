@@ -20,13 +20,11 @@ public class LabelClickable extends Label {
 	private static final String IMAGE_TEXT_PADDING = "    ";
 	private static final Double FIT_SIZE = 75.0;
 	private static final Double LABEL_PADDING = 10.0;
-
 	private ResourceBundle myResources;
 	private IEditableGameElement myEditable;
 	private IEditingEnvironment myEnvironment;
 	private Controller controller;
 
-	
 	public LabelClickable(IEditableGameElement editable, IEditingEnvironment environment, Controller controller) {
 		this.myEditable = editable;
 		this.controller = controller;
@@ -40,15 +38,15 @@ public class LabelClickable extends Label {
 		controller.goToEditingEnvironment(myEditable, myEnvironment);
 	}
 	
-	protected IEditableGameElement getEditable() {
+	public IEditableGameElement getEditable() {
 		return myEditable;
 	}
 	
-	protected void update() {
+	public void update() {
 		this.setText(IMAGE_TEXT_PADDING + myEditable.getName());
-		ImageView imageView = myEditable.getImageView();
+		ImageView imageView = new ImageView(myEditable.getImageView().getImage());
 		imageView.setFitHeight(FIT_SIZE);
-		imageView.setFitWidth(FIT_SIZE);
+		imageView.setPreserveRatio(true);
 		this.setPadding(new Insets(LABEL_PADDING));
 		this.setGraphic(imageView);
 	}

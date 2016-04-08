@@ -19,7 +19,7 @@ public class GUIFactory {
 	protected static final String ICON = "Icon";
 	protected static final String CLASS = "Class";
 	protected static final String PROMPT = "Prompt";
-	protected static final String AUTHORING_ENV = "authoringenvironment.";
+	protected static final String AUTHORING_ENV = "gui.";
 	protected static final String VIEW = "view.";
 	protected ResourceBundle myResources;
 	protected IScreenController myController;
@@ -44,10 +44,15 @@ public class GUIFactory {
 			return createButton(nodeType);
 		} else if (isComboBox(nodeType)) {
 			return createComboBox(nodeType);
+		} else if(isMenuBar(nodeType)){
+			return createMenuBar(nodeType);
+		} else if (isMenu(nodeType)){
+			return createMenu(nodeType);
+		} else if(isPane(nodeType)){
+			return createPane(nodeType);
 		}
 		return null;
 	}
-	
 	private IGUIElement createComboBox(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String prompt = myResources.getString(nodeType + PROMPT);
 		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
@@ -70,6 +75,18 @@ public class GUIFactory {
 	private boolean isComboBox(String nodeType) {
 		return Arrays.asList(myResources.getString("ComboBoxes").split(",")).contains(nodeType);
 	}
+	
+	private boolean isMenuBar(String nodeType){
+		return Arrays.asList(myResources.getString("Menu")).contains(nodeType);
+	}
+	
+	private boolean isPane(String nodeType){
+		return Arrays.asList(myResources.getString("Panes").split(",")).contains(nodeType);
+	}
+	
+	private boolean isMenu(String nodeType){
+		return Arrays.asList(myResources.getString("Menus").split(",")).contains(nodeType);
+	}
 
 	private IGUIElement createButton(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String text = myResources.getString(nodeType + TEXT);
@@ -86,5 +103,48 @@ public class GUIFactory {
 		}
 		return null;
 	}
+	
+	private IGUIElement createPane(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
+		try{
+			Class<?> pane = Class.forName(className);
+			Constructor<?> constructor = pane.getConstructor(IScreenController.class);
+			return (IGUIElement) constructor.newInstance(myController);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private IGUIElement createMenu(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		String text = myResources.getString(nodeType + TEXT);
+		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
+		try{
+			Class<?> menu = Class.forName(className);
+			Constructor<?> constructor = menu.getConstructor(IScreenController.class, String.class);
+			return (IGUIElement) constructor.newInstance(myController, text);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	private IGUIElement createMenuBar(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
+		try{
+			Class<?> menu = Class.forName(className);
+			Constructor<?> constructor = menu.getConstructor(IScreenController.class);
+			return (IGUIElement) constructor.newInstance(myController);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 
 }

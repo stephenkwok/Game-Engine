@@ -1,9 +1,7 @@
-package authoringenvironment.view;
+package gui.view;
 
 import java.util.List;
 import java.util.ResourceBundle;
-
-import gui.view.ComboBoxTextCell;
 
 public class ComboBoxWinningConditions extends ComboBoxTextCell {
 	private List<String> myOptions;

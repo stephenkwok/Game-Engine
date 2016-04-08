@@ -5,7 +5,6 @@ import gameengine.model.Actor;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Actions.MoveLeft;
-import gameengine.model.Actions.MoveRight;
 import gameengine.model.Triggers.KeyTrigger;
 import gameplayer.controller.GameController;
 import javafx.application.Application;
