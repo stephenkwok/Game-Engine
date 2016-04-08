@@ -30,4 +30,22 @@ public class BaseScreenController implements IScreenController{
 		return null;
 	}
 
+	public void toggleSound() {
+		// TODO Auto-generated method stub
+		System.out.println("toggle sound");
+	}
+	
+	public void toggleMusic(){
+		System.out.print("toggle music");
+	}
+
+	public void togglePause() {
+		System.out.println("pause the game");
+	}
+
+	public void toggleUnPause() {
+		// TODO Auto-generated method stub
+		System.out.println("un pause game");
+	}
+
 }
