@@ -31,12 +31,11 @@ public class BaseScreenController implements IScreenController{
 	}
 
 	public void toggleSound() {
-		// TODO Auto-generated method stub
 		System.out.println("toggle sound");
 	}
 	
 	public void toggleMusic(){
-		System.out.print("toggle music");
+		System.out.println("toggle music");
 	}
 
 	public void togglePause() {
@@ -44,7 +43,6 @@ public class BaseScreenController implements IScreenController{
 	}
 
 	public void toggleUnPause() {
-		// TODO Auto-generated method stub
 		System.out.println("un pause game");
 	}
 

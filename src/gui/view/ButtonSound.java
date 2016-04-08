@@ -10,7 +10,7 @@ public class ButtonSound extends ButtonParent{
 
 	public ButtonSound(IScreenController myController, String buttonText, String imageName) {
 		super(myController, buttonText, imageName);
-		this.myControl = (BaseScreenController) myControl;
+		this.myControl = (BaseScreenController) myController;
 	}
 
 	@Override
