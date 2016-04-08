@@ -15,6 +15,7 @@ public class ButtonEdit extends ButtonParent{
 	@Override
 	protected void setButtonAction() {
 		button.setOnAction(e -> myControl.edit());
+		System.out.println("testing");
 		
 	}
 
