@@ -44,10 +44,10 @@ public class GUIFactory {
 			return createButton(nodeType);
 		} else if (isComboBox(nodeType)) {
 			return createComboBox(nodeType);
-		} else if(isMenu(nodeType)){
+		} else if(isMenuBar(nodeType)){
+			return createMenuBar(nodeType);
+		} else if (isMenu(nodeType)){
 			return createMenu(nodeType);
-		} else if (isMenuItem(nodeType)){
-			return createMenuItem(nodeType);
 		} else if(isPane(nodeType)){
 			return createPane(nodeType);
 		}
@@ -76,7 +76,7 @@ public class GUIFactory {
 		return Arrays.asList(myResources.getString("ComboBoxes").split(",")).contains(nodeType);
 	}
 	
-	private boolean isMenu(String nodeType){
+	private boolean isMenuBar(String nodeType){
 		return Arrays.asList(myResources.getString("Menu")).contains(nodeType);
 	}
 	
@@ -84,7 +84,7 @@ public class GUIFactory {
 		return Arrays.asList(myResources.getString("Panes").split(",")).contains(nodeType);
 	}
 	
-	private boolean isMenuItem(String nodeType){
+	private boolean isMenu(String nodeType){
 		return Arrays.asList(myResources.getString("Menus").split(",")).contains(nodeType);
 	}
 
@@ -118,7 +118,7 @@ public class GUIFactory {
 		return null;
 	}
 
-	private IGUIElement createMenuItem(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	private IGUIElement createMenu(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		String text = myResources.getString(nodeType + TEXT);
 		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
 		try{
@@ -132,7 +132,7 @@ public class GUIFactory {
 		}
 		return null;
 	}
-	private IGUIElement createMenu(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	private IGUIElement createMenuBar(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
 		try{
 			Class<?> menu = Class.forName(className);
