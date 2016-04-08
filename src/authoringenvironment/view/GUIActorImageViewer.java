@@ -34,6 +34,12 @@ public class GUIActorImageViewer implements IGUI {
 	private Controller myController;
 	private GUIActorEditingEnvironment aEE;
 	
+	/**
+	 * Module that contains actor image display and options for loading an image from available images or from computer directory.
+	 * @param aEE
+	 * @param myController
+	 * @param myActorIV
+	 */
 	public GUIActorImageViewer(GUIActorEditingEnvironment aEE, Controller myController, ImageView myActorIV) {
 		this.aEE = aEE;
 		this.myController = myController;

@@ -71,22 +71,10 @@ public class GUIMain extends Screen implements IGUI {
 		return myScene;
 	}
 	
-	public void setLeftPane(Pane pane){
-		myRoot.setLeft(pane);
-	}
-	
-	public void setRightPane(Pane pane){
-		myRoot.setRight(pane);
-	}
-	
 	public void setCenterPane(Pane pane){
 		myRoot.setCenter(pane);
 	}
-	
-	public void setBottomPane(Pane pane){
-		myRoot.setBottom(pane);
-	}
-	
+
 	public void setCenterPane(){
 		myController.goToMainScreen();
 	}
@@ -117,5 +105,4 @@ public class GUIMain extends Screen implements IGUI {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
