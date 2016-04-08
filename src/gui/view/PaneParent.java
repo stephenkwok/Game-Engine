@@ -19,10 +19,4 @@ public class PaneParent implements IGUIElement{
 		return myPane;
 	}
 
-	@Override
-	public void updateNode() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

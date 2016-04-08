@@ -14,9 +14,4 @@ public interface IGUIElement {
      * @return 
      */
     Node createNode();
-
-    /**
-     * This method updates the Node based on new information.
-     */
-    void updateNode();
 }

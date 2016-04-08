@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 /**
- * ComboBox with text options. 
+ * ComboBox with only text representation of options. 
  * @author AnnieTang
  *
  */
