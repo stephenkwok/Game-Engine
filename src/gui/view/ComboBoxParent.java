@@ -90,7 +90,6 @@ public abstract class ComboBoxParent implements IGUIElement {
 	/**
 	 * Updates Node whenever new information or data is available.
 	 */
-	@Override
 	public void updateNode() {
 		ObservableList<String> newOptions = FXCollections.observableArrayList(
 		        getOptionsList()

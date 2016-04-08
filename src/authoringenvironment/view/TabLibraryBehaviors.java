@@ -15,22 +15,38 @@ import javafx.collections.ObservableList;
  */
 public class TabLibraryBehaviors extends TabLibrary {
 	private ObservableList<Label> behaviorLabels;
+	private ListView<Label> listView;
 	
-	public TabLibraryBehaviors(ResourceBundle myResources, String tabText, GUIActorRuleMaker myRuleMaker) {
+	public TabLibraryBehaviors(ResourceBundle myResources, String tabText, ActorRuleCreator myRuleMaker) {
 		super(myResources, tabText, myRuleMaker);
+		setContent();
 	}
-
+	
 	@Override
-	Node getContent() {
+	void setContent() {
 		behaviorLabels = FXCollections.observableArrayList();
 		for(String behavior: myResources.getString(tabText).split(" ")){
 			Label mySource = new Label(behavior);
-			if(myRuleMaker!=null){
+			if(myActorRuleCreator!=null){
 				setDragEvent(mySource);
 			}
 			behaviorLabels.add(mySource);
 		}
-		ListView<Label> listView = new ListView<>(behaviorLabels);
+		listView = new ListView<>(behaviorLabels);
+	}
+
+	@Override
+	Node getContent() {
 		return listView;
+	}
+
+	public void updateDragEvents(ActorRuleCreator myActorRuleCreator) {
+		this.myActorRuleCreator = myActorRuleCreator;
+		for(Label behaviorLabel: behaviorLabels){
+			if(myActorRuleCreator!=null){
+				setDragEvent(behaviorLabel);
+			}
+		}
+		
 	}
 }
