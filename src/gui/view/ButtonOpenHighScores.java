@@ -1,8 +1,7 @@
-package gameplayer.view;
+package gui.view;
 
 import gameplayer.controller.SplashScreenController;
 import gui.controller.IScreenController;
-import gui.view.ButtonParent;
 
 public class ButtonOpenHighScores extends ButtonParent{
 	

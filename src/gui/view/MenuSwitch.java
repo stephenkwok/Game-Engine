@@ -1,15 +1,14 @@
-package gameplayer.view;
+package gui.view;
 
 import gameplayer.controller.BaseScreenController;
 import gui.controller.IScreenController;
-import gui.view.PaneParent;
 
-public class PaneHUD extends PaneParent{
+public class MenuSwitch extends MenuParent{
 	
 	private BaseScreenController myRealController;
 
-	public PaneHUD(IScreenController myController) {
-		super(myController);
+	public MenuSwitch(IScreenController myController, String text) {
+		super(myController, text);
 		myRealController = (BaseScreenController) myRealController;
 	}
 

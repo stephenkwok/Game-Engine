@@ -19,7 +19,7 @@ public class GUIFactory {
 	protected static final String ICON = "Icon";
 	protected static final String CLASS = "Class";
 	protected static final String PROMPT = "Prompt";
-	protected static final String AUTHORING_ENV = "gameplayer.";
+	protected static final String AUTHORING_ENV = "gui.";
 	protected static final String VIEW = "view.";
 	protected ResourceBundle myResources;
 	protected IScreenController myController;
