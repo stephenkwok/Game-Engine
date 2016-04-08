@@ -261,4 +261,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 		this.myImageViewName = myImageViewName;
 	}
 
+    public void changed(){
+        setChanged();
+    }
+
 }
