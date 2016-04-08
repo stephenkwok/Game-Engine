@@ -1,6 +1,6 @@
-package authoringenvironment.view;
+package gui.view;
 
-import gui.view.ComboBoxImageCell;
+import authoringenvironment.view.GUIActorEditingEnvironment;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
