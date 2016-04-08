@@ -3,8 +3,6 @@ package authoringenvironment.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IEditableGameElement;
@@ -147,5 +145,11 @@ public class Controller implements IScreenController {
 		actors.add(newActor);
 		mainScreen.createActorLabel(newActor);
 		goToEditingEnvironment(newActor, actorEnvironment);
+	}
+	/**
+	 * Saves game and returns to splash screen of game player.
+	 */
+	public void goBackToGamePlayer() {
+		guiMain.goBackToGamePlayer();
 	}
 }
