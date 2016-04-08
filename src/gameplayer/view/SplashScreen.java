@@ -83,7 +83,6 @@ public class SplashScreen extends Screen {
 				| InvocationTargetException e) {
 			e.printStackTrace();
 		}
-		System.out.println("dafuq");
 	}
 
 	/**
