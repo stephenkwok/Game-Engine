@@ -1,7 +1,7 @@
 package gameplayer.view;
 
 import java.lang.reflect.InvocationTargetException;
-
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import gameplayer.controller.BaseScreenController;
@@ -9,7 +9,10 @@ import gui.controller.IScreenController;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import gui.view.Screen;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableMap;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.Border;
@@ -17,6 +20,7 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -85,23 +89,39 @@ public class BaseScreen extends Screen {
 	public void addHUD(VBox myV) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		IGUIElement hudPane = factory.createNewGUIObject("hudPane");
 		Pane myP = (Pane) hudPane.createNode();
-		Rectangle myRect = new Rectangle(myP.getMaxWidth(), myP.getMaxHeight());
-		myP.setBorder(new Border(new BorderStroke(Color.BLACK, 
-				            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		myP.getChildren().add(myRect);
+		myP.setMinWidth(SCREEN_WIDTH);
+		ObservableMap<String, Object> status = FXCollections.observableHashMap();
+		status.put("health", 20);
+		status.put("level", 2);
+		HUDScreen myHud = new HUDScreen(SCREEN_WIDTH,SCREEN_WIDTH,status);
+		myHud.init();
+		myP.getChildren().add(myHud.getRoot());
 		myV.getChildren().add(myP);
 	}
 
 	public void addGame(VBox myV) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		HBox myH = new HBox();
+		addButtonPane(myH);
+		addGamePane(myH);
+		myV.getChildren().add(myH);
+	}
+
+	public void addButtonPane(HBox myH) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		String[] sideButtons = myResources.getString(SIDE_BUTTONS).split(",");
 		VBox smallV = new VBox();
 		for(int i = 0; i < sideButtons.length; i++){
 			IGUIElement newElement = factory.createNewGUIObject(sideButtons[i]);
-			smallV.getChildren().add(newElement.createNode());
+			Button myB = (Button) newElement.createNode();
+			myB.setMaxSize(12, 12);
+			smallV.getChildren().add(myB);
 		}
-		myV.getChildren().add(smallV);
+		myH.getChildren().add(smallV);
 	}
-
+	
+	public void addGamePane(HBox myH){
+		
+	}
+	
 	@Override
 	public Scene getScene()
 			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {

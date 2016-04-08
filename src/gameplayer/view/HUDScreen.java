@@ -21,6 +21,7 @@ public class HUDScreen extends Window implements IHUDScreen{
 		super(width, height);
 		this.status = status;
 		this.rowToValueMap = rowToValueMap;
+		this.valueToRowMap = new HashMap<String, Integer>();
 		for (int i = 0; i<rowToValueMap.size(); i++) {
 			valueToRowMap.put(rowToValueMap.get(i), i);
 		}
