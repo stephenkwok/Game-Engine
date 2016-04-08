@@ -1,8 +1,7 @@
-package gameplayer.view;
+package gui.view;
 
 import gameplayer.controller.BaseScreenController;
 import gui.controller.IScreenController;
-import gui.view.MenuBarParent;
 
 
 public class MBar extends MenuBarParent{

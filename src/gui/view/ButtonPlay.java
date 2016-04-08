@@ -1,6 +1,5 @@
-package gameplayer.view;
+package gui.view;
 
-import gui.view.ButtonParent;
 import gui.controller.IScreenController;
 import gameplayer.controller.SplashScreenController;
 

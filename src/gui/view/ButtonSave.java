@@ -1,7 +1,6 @@
-package authoringenvironment.view;
+package gui.view;
 import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
-import gui.view.ButtonParent;
 /**
  * Button to save game
  * @author AnnieTang
