@@ -50,11 +50,10 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	
 	private void initializeEnvironment() {
 		myRoot = new BorderPane();
-		myActorRuleCreator = new ActorRuleCreator();
-		attributes = new TabAttributes(myResources,ACTOR_ATTRIBUTES,ACTOR_OPTIONS_RESOURCE);
+		myActorRuleCreator = new ActorRuleCreator(this);
 		setDefaultActor();	
-		setCenterPane(); 
 		setLeftPane();
+		setCenterPane(); 
 		setBottomPane();
 	}
 	
@@ -68,6 +67,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	}
 	
 	private void setLeftPane(){
+		attributes = new TabAttributes(myResources,ACTOR_ATTRIBUTES,ACTOR_OPTIONS_RESOURCE);
 		VBox vbox = new VBox();
 		TabPane attributeTP = new TabPane();
 		attributeTP.getTabs().add(attributes.getTab());
@@ -112,5 +112,9 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		myActorIV.setPreserveRatio(true);
 		myActor.setImageView(myActorIV);
 		setLeftPane();
+	}
+	
+	public void updateDragEventsForLibrary(){
+		library.updateDragEvents();
 	}
 }

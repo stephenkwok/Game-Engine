@@ -15,13 +15,15 @@ import javafx.scene.image.ImageView;
 public class TabLibraryImages extends TabLibrary{
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
 	private ObservableList<Label> imageLabels; 
+	private ListView<Label> listView;
 	
 	public TabLibraryImages(ResourceBundle myResources, String tabText, ActorRuleCreator myRuleMaker) {
 		super(myResources,tabText,myRuleMaker);
+		setContent();
 	}
-
+	
 	@Override
-	Node getContent() {
+	public void setContent() {
 		fillFileNames();
 		imageLabels = FXCollections.observableArrayList();
 		for(String imageName: fileNames){
@@ -34,7 +36,10 @@ public class TabLibraryImages extends TabLibrary{
 			}
 			imageLabels.add(imageLabel);
 		}
-		ListView<Label> listView = new ListView<>(imageLabels);
+		listView = new ListView<>(imageLabels);
+	}
+	@Override
+	Node getContent() {
 		return listView;
 	}
 

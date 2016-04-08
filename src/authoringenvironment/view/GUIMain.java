@@ -36,12 +36,11 @@ public class GUIMain extends Screen implements IGUI {
 	private Stage myStage;
 	private Controller myController;
 	private GUIFactory factory;
-	private IGUIElement levels;
-	private Scene splashScene;
+//	private Scene splashScene;
 	
 	public GUIMain(Stage s, Scene splash) {
 		super(s);
-		this.splashScene = splash;
+//		this.splashScene = splash;
 		this.myStage = s;
 		init();
 	}

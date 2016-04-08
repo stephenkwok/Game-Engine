@@ -21,13 +21,15 @@ public class TabLibrarySounds extends TabLibrary{
 	private static final String SOUND_IMAGE_NAME = "sound.png";
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
 	private ObservableList<Label> soundLabels; 
+	private ListView<Label> listView;
 	
 	public TabLibrarySounds(ResourceBundle myResources, String tabText, ActorRuleCreator myRuleMaker) {
 		super(myResources, tabText, myRuleMaker);
+		setContent();
 	}
 	
 	@Override
-	Node getContent() {
+	public void setContent() {
 		fillFileNames();
 		soundLabels = FXCollections.observableArrayList();
 		for(String soundName: fileNames){
@@ -37,7 +39,11 @@ public class TabLibrarySounds extends TabLibrary{
 			}
 			soundLabels.add(soundLabel);
 		}
-		ListView<Label> listView = new ListView<>(soundLabels);
+		listView = new ListView<>(soundLabels);
+	}
+	
+	@Override
+	Node getContent() {
 		return listView;
 	}
 	

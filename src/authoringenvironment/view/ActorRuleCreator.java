@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.geometry.Insets;
@@ -21,13 +22,17 @@ public class ActorRuleCreator {
 	private static final int VGAP = 10;
 	private int rule_row;
 	private GridPane myRuleCreator;
+	private List<ActorRule> myRules;
+	private GUIActorEditingEnvironment aEE; 
 	
-	public ActorRuleCreator() {
+	public ActorRuleCreator(GUIActorEditingEnvironment aEE) {
+		this.aEE = aEE;
 		initializeEnvironment();
 	}
 	
 	private void initializeEnvironment(){
 		rule_row = RULE_ROW_START;
+		myRules = new ArrayList<>();
 		myRuleCreator = new GridPane();
 		myRuleCreator.setVgap(VGAP);
 		myRuleCreator.setBackground(new Background(new BackgroundFill(Color.BISQUE, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -53,10 +58,12 @@ public class ActorRuleCreator {
 		ActorRule newRule = new ActorRule();
 		myRuleCreator.add(newRule.getGridPane(), RULE_COL,rule_row);
 		rule_row++;
+		myRules.add(newRule);
+		aEE.updateDragEventsForLibrary();
 	}
 	
-	public List<Node> getRules(){
-		return myRuleCreator.getChildren();
+	public List<ActorRule> getRules(){
+		return myRules;
 	}
 
 }
