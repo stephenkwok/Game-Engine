@@ -134,7 +134,6 @@ public class GUIFactory {
 	}
 	private IGUIElement createMenu(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
-		System.out.println(className);
 		try{
 			Class<?> menu = Class.forName(className);
 			Constructor<?> constructor = menu.getConstructor(IScreenController.class);

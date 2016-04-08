@@ -102,6 +102,7 @@ public class GUIMain extends Screen implements IGUI {
 	private void initializeTopPaneElements(HBox hbox) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
 		for (int i = 0; i < topPaneElements.length; i++) {
+			System.out.println(topPaneElements[i]);
 			IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
 			hbox.getChildren().add(elementToCreate.createNode());
 		}

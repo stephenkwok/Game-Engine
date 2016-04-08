@@ -41,7 +41,6 @@ public class BaseScreen extends Screen {
 		super(stage);
 		init();
 		addComponents();
-		getRoot().getStylesheets().add("application/default.css");
 	}
 
 	public void init() {
