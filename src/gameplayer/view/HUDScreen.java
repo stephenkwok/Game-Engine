@@ -1,27 +1,19 @@
 package gameplayer.view;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
-import javafx.collections.MapChangeListener.Change;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
 
 public class HUDScreen extends Window implements IHUDScreen{
 	
-	private ObservableMap<String, Object> status = FXCollections.observableHashMap();
+	private ObservableMap<String, Object> status;
 	Map<String, Integer> valueToRowMap;
 	Map<Integer, String> rowToValueMap;
 	
@@ -39,12 +31,11 @@ public class HUDScreen extends Window implements IHUDScreen{
 		this(width, height, status, new HashMap<Integer, String>());
 		int i = 0;
 		for (String value : status.keySet()) {
-			rowToValueMap.put(i++, value);
+			rowToValueMap.put(i, value);
+			valueToRowMap.put(value, i);
+			i++;
 		}
 	}
-	
-	
-	
 	
 	@Override
 	public void update() {
