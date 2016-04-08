@@ -112,7 +112,7 @@ public class BaseScreen extends Screen {
 		for(int i = 0; i < sideButtons.length; i++){
 			IGUIElement newElement = factory.createNewGUIObject(sideButtons[i]);
 			Button myB = (Button) newElement.createNode();
-			myB.setMaxSize(12, 12);
+			myB.setMaxSize(1, 1);
 			smallV.getChildren().add(myB);
 		}
 		myH.getChildren().add(smallV);
