@@ -9,6 +9,7 @@ import gameengine.model.Actor;
 import gui.view.GUILibrary;
 import gui.view.IGUI;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
@@ -18,6 +19,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -100,7 +102,11 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	}
 
 	private void setBottomPane() {
-		myRoot.setBottom(getNewRuleButton());
+		HBox hbox = new HBox();
+		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		hbox.getChildren().add(getNewRuleButton());
+		hbox.setAlignment(Pos.CENTER_RIGHT);
+		myRoot.setBottom(hbox);
 	}
 
 	private Button getNewRuleButton() {

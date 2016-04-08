@@ -36,7 +36,6 @@ public class ActorRuleCreator {
 		myRuleCreator.setPrefWidth(myController.getSceneWidth()*CONTAINERS_PERCENT_WIDTH);
 		myRuleCreator.setVgap(VGAP);
 		myRuleCreator.setHgap(HGAP);
-		myRuleCreator.setGridLinesVisible(true);
 	}
 
 	public GridPane getGridPane() {
