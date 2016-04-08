@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -35,7 +34,6 @@ public class ActorRuleCreator {
 		myRules = new ArrayList<>();
 		myRuleCreator = new GridPane();
 		myRuleCreator.setVgap(VGAP);
-		myRuleCreator.setBackground(new Background(new BackgroundFill(Color.BISQUE, CornerRadii.EMPTY, Insets.EMPTY)));
 	}
 
 	public GridPane getGridPane() {

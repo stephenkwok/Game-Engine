@@ -29,7 +29,7 @@ public class ActorRule {
 
 	private void initializeEnvironment() {
 		myRule = new GridPane(); 
-		myRule.setBackground(new Background(new BackgroundFill(Color.YELLOW, new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
+		myRule.setBackground(new Background(new BackgroundFill(Color.LAVENDER, new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
 		myRule.setPrefSize(RULE_WIDTH, RULE_HEIGHT);
 	}
 

@@ -8,14 +8,19 @@ import authoringenvironment.model.IEditingEnvironment;
 import gameengine.model.Actor;
 import gui.view.GUILibrary;
 import gui.view.IGUI;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 /**
  * Returns BorderPane to represent Actor Editing Environment. 
  * @author AnnieTang
@@ -85,6 +90,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		myRuleCreator = myActorRuleCreator.getGridPane();
 		ScrollPane myScrollPane = new ScrollPane();
 		myScrollPane.setContent(myRuleCreator);
+		myScrollPane.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		myRoot.setCenter(myScrollPane);
 	}
 	

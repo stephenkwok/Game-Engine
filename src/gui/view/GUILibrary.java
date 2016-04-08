@@ -51,10 +51,8 @@ public class GUILibrary implements IGUI{
 	}
 	
 	public void updateDragEvents(){
-//		initializeEnvironment();
-//		imageLib.setContent();
-//		soundLib.setContent();
+		imageLib.updateDragEvents(myActorRuleCreator);
+		soundLib.updateDragEvents(myActorRuleCreator);
 		behaviorLib.updateDragEvents(myActorRuleCreator);
-//		System.out.println("Size of ActorRuleCreator Rules: " + myActorRuleCreator.getRules().size());
 	}
 }
