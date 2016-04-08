@@ -5,6 +5,7 @@
 	<classpathentry kind="src" path="authoringresources"/>
 	<classpathentry kind="src" path="authoringimages"/>
 	<classpathentry kind="src" path="authoringsounds"/>
+	<classpathentry kind="src" path="playerresources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/xstream-1.4.9.jar"/>
 	<classpathentry kind="lib" path="lib/xstream-benchmark-1.4.9.jar"/>
