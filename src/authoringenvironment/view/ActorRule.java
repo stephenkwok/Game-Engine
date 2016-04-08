@@ -36,6 +36,7 @@ public class ActorRule {
 	private static final String DIALOG_HEADER = "Place your Behavior in: ";
 	private static final String DIALOG_CONTENT = "Choose one: ";
 	private static final String TRIGGER = "Trigger";
+	private static final String TRIGGER_EVENTS = "ClickMouse PressKey Collision";
 	
 	private static final double RULE_PERCENT_WIDTH = 0.90;
 	private static final double STACKPANE_PERCENT_WIDTH = 0.95;
@@ -86,18 +87,24 @@ public class ActorRule {
 	}
 
 	public void addBehavior(Label behavior) {
-		//check if trigger
-		//if not
-		createDialog();
-        Optional<String> result = dialog.showAndWait();
-        result.ifPresent(choice -> {
-        	if(choice.equals(TRIGGER)){
-        		triggers.getChildren().add(behavior);
-        	}
-        	else results.getChildren().add(behavior);
-        });
+		if(isTrigger(behavior.getText())) triggers.getChildren().add(behavior);
+		else{
+			createDialog();
+	        Optional<String> result = dialog.showAndWait();
+	        result.ifPresent(choice -> {
+	        	if(choice.equals(TRIGGER)){
+	        		triggers.getChildren().add(behavior);
+	        	}
+	        	else results.getChildren().add(behavior);
+	        });
+		}
 	}
 
+	private boolean isTrigger(String behavior){
+		List<String> triggerEvents = Arrays.asList(TRIGGER_EVENTS.split(" "));
+		return triggerEvents.contains(behavior);
+	}
+	
 	private void createDialog() {
 		List<String> choices = Arrays.asList(DIALOG_CHOICES.split(" "));
 		dialog = new ChoiceDialog<>(choices.get(0),choices);
