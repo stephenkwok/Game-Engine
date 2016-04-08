@@ -49,9 +49,13 @@ public class GUIMain extends Screen implements IGUI {
 	 * Initializes resource bundle, controller, and factory class.
 	 */
 	public void init(){
+		myRoot = new BorderPane();
+		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myController = new Controller(myStage, this, this.myResources);
 		factory = new GUIFactory(myResources, myController);
+		setTopPane();
+		setCenterPane();
 	}
 	
 	/**
@@ -62,11 +66,7 @@ public class GUIMain extends Screen implements IGUI {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public Scene getScene() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		myRoot = new BorderPane();
-		setTopPane();
-		setCenterPane();
-		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
+	public Scene getScene() {
 		return myScene;
 	}
 	
@@ -78,7 +78,7 @@ public class GUIMain extends Screen implements IGUI {
 		myController.goToMainScreen();
 	}
 	
-	private void setTopPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	private void setTopPane() {
 		HBox hbox = new HBox(PADDING);
 		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));		
 		initializeTopPaneElements(hbox);
@@ -86,12 +86,15 @@ public class GUIMain extends Screen implements IGUI {
 		myRoot.setTop(hbox);
 	}
 
-	private void initializeTopPaneElements(HBox hbox) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
-		for (int i = 0; i < topPaneElements.length; i++) {
-			System.out.println(topPaneElements[i]);
-			IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
-			hbox.getChildren().add(elementToCreate.createNode());
+	private void initializeTopPaneElements(HBox hbox) {
+		try{
+			String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
+			for (int i = 0; i < topPaneElements.length; i++) {
+				IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
+				hbox.getChildren().add(elementToCreate.createNode());
+			}
+		}catch(Exception e){
+			
 		}
 	}
 	
@@ -108,5 +111,13 @@ public class GUIMain extends Screen implements IGUI {
 
 	public void goBackToGamePlayer() {
 		myStage.setScene(splashScene);
+	}
+
+	public double getWidth() {
+		return myScene.getWidth();
+	}
+
+	public double getHeight() {
+		return myScene.getHeight();
 	}
 }

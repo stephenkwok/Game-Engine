@@ -26,8 +26,8 @@ public class GUIActorImageViewer implements IGUI {
 	private static final String AVAILABLE_ACTORS = "Available Actors";
 	private static final String IMAGE_RESOURCE = "authoringimages";
 	private static final int PADDING = 10;
-	private static final String EXTENSION_FILTER_DESCRIPTION = "Image Files (.jpg, .png)";
-	private static final String EXTENSIONS = "*.jpg *.png";
+	private static final String EXTENSION_FILTER_DESCRIPTION = "Image Files (.jpg, .png .gif)";
+	private static final String EXTENSIONS = "*.jpg *.png *.gif";
 	private static final int STANDARD_IMAGE_HEIGHT = 100;
 	private static final String BUTTON_LABEL = "Load Image...";
 	private ImageView myActorIV;

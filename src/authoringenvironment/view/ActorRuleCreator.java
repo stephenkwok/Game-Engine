@@ -3,29 +3,29 @@ package authoringenvironment.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.geometry.Insets;
+import authoringenvironment.controller.Controller;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 /**
  * Space in actor editing environment where rules are created.
  * @author AnnieTang
  *
  */
 public class ActorRuleCreator {
-	private static final int RULE_COL = 0;
-	private static final int RULE_ROW_START = 0;
+	private static final int RULE_COL = 1;
+	private static final int RULE_ROW_START = 1;
 	private static final int VGAP = 10;
+	private static final int HGAP = 10;
+	private static final double CONTAINERS_PERCENT_WIDTH = 0.75;
 	private int rule_row;
 	private GridPane myRuleCreator;
 	private List<ActorRule> myRules;
 	private GUIActorEditingEnvironment aEE; 
+	private Controller myController;
 	
-	public ActorRuleCreator(GUIActorEditingEnvironment aEE) {
+	public ActorRuleCreator(GUIActorEditingEnvironment aEE, Controller myController) {
 		this.aEE = aEE;
+		this.myController = myController;
 		initializeEnvironment();
 	}
 	
@@ -33,7 +33,10 @@ public class ActorRuleCreator {
 		rule_row = RULE_ROW_START;
 		myRules = new ArrayList<>();
 		myRuleCreator = new GridPane();
+		myRuleCreator.setPrefWidth(myController.getSceneWidth()*CONTAINERS_PERCENT_WIDTH);
 		myRuleCreator.setVgap(VGAP);
+		myRuleCreator.setHgap(HGAP);
+		myRuleCreator.setGridLinesVisible(true);
 	}
 
 	public GridPane getGridPane() {
@@ -53,7 +56,7 @@ public class ActorRuleCreator {
 	}
 
 	public void addNewRule() {
-		ActorRule newRule = new ActorRule();
+		ActorRule newRule = new ActorRule(this);
 		myRuleCreator.add(newRule.getGridPane(), RULE_COL,rule_row);
 		rule_row++;
 		myRules.add(newRule);

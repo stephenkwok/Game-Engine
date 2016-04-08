@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -27,7 +28,11 @@ import javafx.scene.paint.Color;
  *
  */
 abstract class TabLibrary extends TabParent {
+	private static final int FILE_EXT_LENGTH = 4;
+	private static final String IMAGE_FILE_EXTS = ".jpg .png .gif";
+	private static final String SOUND_FILE_EXTS = ".mp3";
 	private static final int LABEL_IMAGE_HEIGHT = 50;
+	protected static final double CORNER_RADIUS = 20;
 	protected ObservableList<Label> labels;
 	protected ListView<Label> listView;
 	protected ActorRuleCreator myActorRuleCreator;
@@ -50,7 +55,7 @@ abstract class TabLibrary extends TabParent {
 			setDragOver(source, rule.getGridPane());
 			setDragEntered(source, rule.getGridPane());
 			setDragExited(source, rule.getGridPane());
-			setDragDropped(source, rule.getGridPane());
+			setDragDropped(source, rule.getGridPane(), rule);
 		}
 	}
 
@@ -100,13 +105,13 @@ abstract class TabLibrary extends TabParent {
 		});
 	}
 
-	private void setDragDropped(Label mySource, GridPane myTarget) {
+	private void setDragDropped(Label mySource, GridPane myTarget, ActorRule myActorRule) {
 		myTarget.setOnDragDropped(new EventHandler<DragEvent>() {
 		    public void handle(DragEvent event) {
 		        Dragboard db = event.getDragboard();
 		        boolean success = false;
 		        if (db.hasString()) {
-		        	addLabelToTarget(getLabelToAdd(event.getDragboard().getString()), myTarget);
+		        	addLabelToTarget(getLabelToAdd(event.getDragboard().getString()), myActorRule);
 //		        	setDragEvent(toAdd); //SET DRAG EVENT SO USER CAN REMOVE IT BY "PUTTING BACK IN LIBRARY"
 		        	success = true;
 		        }
@@ -116,15 +121,25 @@ abstract class TabLibrary extends TabParent {
 		});
 	}
 	
-	private void addLabelToTarget(Label toAdd, GridPane myTarget){ //TODO
-		myTarget.add(toAdd, 0, 0);
+	private void addLabelToTarget(Label toAdd, ActorRule myActorRule){ //TODO
+		if(matchesExtensions(toAdd.getText(), IMAGE_FILE_EXTS)) myActorRuleCreator.addImage(myActorRule, toAdd);
+		else if(matchesExtensions(toAdd.getText(), SOUND_FILE_EXTS)) myActorRuleCreator.addSound(myActorRule, toAdd);
+		else myActorRuleCreator.addBehavior(myActorRule, toAdd);
 	}
 	
 	private Label getLabelToAdd(String libraryElement) {
-		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(libraryElement)));
-		imageView.setFitHeight(LABEL_IMAGE_HEIGHT);
-		imageView.setPreserveRatio(true);
-		return new Label(libraryElement, imageView);
+		if(matchesExtensions(libraryElement, IMAGE_FILE_EXTS)){
+			ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(libraryElement)));
+			imageView.setFitHeight(LABEL_IMAGE_HEIGHT);
+			imageView.setPreserveRatio(true);
+			return new Label(libraryElement, imageView);
+		}
+		return new Label(libraryElement);
+	}
+	
+	private boolean matchesExtensions(String libraryElement, String extensions){
+		List<String> fileExts = Arrays.asList(extensions.split(" "));
+		return fileExts.contains(libraryElement.substring(libraryElement.length()-FILE_EXT_LENGTH, libraryElement.length()));
 	}
 	
 	public void updateDragEvents(ActorRuleCreator myActorRuleCreator) {

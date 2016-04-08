@@ -152,4 +152,12 @@ public class Controller implements IScreenController {
 	public void goBackToGamePlayer() {
 		guiMain.goBackToGamePlayer();
 	}
+	
+	public double getSceneWidth(){
+		return guiMain.getWidth();
+	}
+	
+	public double getSceneHeight(){
+		return guiMain.getHeight();
+	}
 }
