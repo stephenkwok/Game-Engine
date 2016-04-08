@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.EventHandler;
@@ -15,36 +16,45 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-
+/**
+ * Abstract class for library tabs, so each Node in the tabs are draggable.
+ * @author AnnieTang
+ *
+ */
 abstract class TabLibrary extends TabParent {
-	protected GUIActorRuleMaker myRuleMaker;
-	protected Pane myTarget;
+	protected ActorRuleCreator myActorRuleCreator;
+	private List<ActorRule> myActorRules; //targets
 	
-	public TabLibrary(ResourceBundle myResources, String tabText, GUIActorRuleMaker myRuleMaker) {
+	public TabLibrary(ResourceBundle myResources, String tabText, ActorRuleCreator myActorRuleCreator) {
 		super(myResources, tabText);
-		this.myRuleMaker = myRuleMaker;
-		if(myRuleMaker!=null) myTarget = this.myRuleMaker.getPane();
+		if(myActorRuleCreator!=null) myActorRules = myActorRuleCreator.getRules();
 	}
+
 
 	@Override
 	abstract Node getContent();
 	
+	abstract void setContent();
+	
 	protected void setDragEvent(Label source) {
-		setDragDetected(source);
-		setDragOver(source);
-		setDragEntered(source);
-		setDragExited(source);
-		setDragDropped(source);
+		System.out.println(myActorRules.size());
+		for(ActorRule rule: myActorRules){
+			System.out.println(source.getText() + " " + rule);
+			setDragDetected(source, rule.getGridPane());
+			setDragOver(source, rule.getGridPane());
+			setDragEntered(source, rule.getGridPane());
+			setDragExited(source, rule.getGridPane());
+			setDragDropped(source, rule.getGridPane());
+		}
 	}
 
-	private void setDragDetected(Label source) {
-		source.setOnDragDetected(new EventHandler<MouseEvent>(){
+	private void setDragDetected(Label mySource, GridPane myTarget) {
+		mySource.setOnDragDetected(new EventHandler<MouseEvent>(){
 			public void handle(MouseEvent event){
-				Dragboard db = source.startDragAndDrop(TransferMode.COPY);
+				Dragboard db = mySource.startDragAndDrop(TransferMode.COPY);
 				ClipboardContent content = new ClipboardContent();
-				content.putString(source.getText());
+				content.putString(mySource.getText());
 				db.setContent(content);
 				event.consume();
 			}
@@ -52,7 +62,7 @@ abstract class TabLibrary extends TabParent {
 		
 	}
 	
-	private void setDragOver(Label source) {
+	private void setDragOver(Label mySource, GridPane myTarget) {
 		myTarget.setOnDragOver(new EventHandler<DragEvent>() {
 		    public void handle(DragEvent event) {
 		        if (event.getGestureSource() != myTarget &&
@@ -64,7 +74,7 @@ abstract class TabLibrary extends TabParent {
 		});
 	}
 	
-	private void setDragEntered(Label source) {
+	private void setDragEntered(Label mySource, GridPane myTarget) {
 		myTarget.setOnDragEntered(new EventHandler<DragEvent>() {
 		    public void handle(DragEvent event) {
 		         if (event.getGestureSource() != myTarget &&
@@ -76,7 +86,7 @@ abstract class TabLibrary extends TabParent {
 		});
 	}
 	
-	private void setDragExited(Label source) {
+	private void setDragExited(Label mySource, GridPane myTarget) {
 		myTarget.setOnDragExited(new EventHandler<DragEvent>() {
 		    public void handle(DragEvent event) {
 		    	myTarget.setBackground(new Background(new BackgroundFill(Color.WHITE,CornerRadii.EMPTY, Insets.EMPTY)));
@@ -85,16 +95,15 @@ abstract class TabLibrary extends TabParent {
 		});
 	}
 
-	private void setDragDropped(Label source) {
+	private void setDragDropped(Label mySource, GridPane myTarget) {
 		myTarget.setOnDragDropped(new EventHandler<DragEvent>() {
 		    public void handle(DragEvent event) {
 		        Dragboard db = event.getDragboard();
 		        boolean success = false;
 		        if (db.hasString()) {
-		           GridPane gp = (GridPane) myTarget;
 		           Label toAdd = getRuleContainer(event.getDragboard().getString());
 		           setDragEvent(toAdd);
-		           gp.add(toAdd, 0, 0);
+		           myTarget.add(toAdd, 0, 0);
 		           success = true;
 		        }
 		        event.setDropCompleted(success);
