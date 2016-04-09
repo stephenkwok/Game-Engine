@@ -1,18 +1,20 @@
 package gameengine.model.Actions;
 
-import gameengine.controller.Level;
 import gameengine.model.Actor;
 
-public class Destroy extends Action{
-	
-	Level level = new Level();
-	public Destroy(Actor assignedActor) {
-		super(assignedActor);
-	}
+/**
+ * @author blakekaplan
+ */
+public class Destroy extends Action {
 
-	@Override
-	public void perform() {
-		level.removeActor(getActor());
-	}
+    public Destroy(Actor assginedActor){
+        super(assginedActor);
+    }
+
+    @Override
+    public void perform() {
+        getActor().changed();
+        getActor().notifyObservers();
+    }
 
 }
