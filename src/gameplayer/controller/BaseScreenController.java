@@ -26,8 +26,7 @@ public class BaseScreenController implements IScreenController{
 
 	@Override
 	public Stage getStage() {
-		// TODO Auto-generated method stub
-		return null;
+		return myStage;
 	}
 
 	public void toggleSound() {
