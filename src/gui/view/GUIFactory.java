@@ -104,33 +104,17 @@ public class GUIFactory {
 			return (IGUIElement) constructor.newInstance(myController);
 	}
 
-	private IGUIElement createMenu(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		String className = GUI + VIEW + myResources.getString(nodeType + CLASS);
-		try{
+	private IGUIElement createMenu(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException{
 			String text = myResources.getString(nodeType + TEXT);
 			Class<?> menu = Class.forName(className);
 			Constructor<?> constructor = menu.getConstructor(IScreenController.class, String.class);
 			return (IGUIElement) constructor.newInstance(myController, text);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
-	private IGUIElement createMenuBar(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		String className = GUI + VIEW + myResources.getString(nodeType + CLASS);
-		try{
+	private IGUIElement createMenuBar(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException{
 			Class<?> menu = Class.forName(className);
 			Constructor<?> constructor = menu.getConstructor(IScreenController.class);
 			return (IGUIElement) constructor.newInstance(myController);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	private IGUIElement createCheckBox(String nodeType) {
