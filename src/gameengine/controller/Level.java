@@ -172,6 +172,10 @@ public class Level implements Observer, ILevel, IEditableGameElement {
     @Override
     public void update(Observable o, Object arg) {
         Actor myActor = (Actor) o;
-        myActors.remove(myActor);
+        if (arg.equals("DESTROY")){
+            myActors.remove(myActor);
+        } else if (arg.equals("WINGAME")) {
+        	//method for win game
+        }
     }
 }
