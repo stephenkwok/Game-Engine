@@ -96,6 +96,16 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     public void addAttribute(Attribute newAttribute) {
         attributeMap.put(newAttribute.getType(), newAttribute);
     }
+    
+    /**
+     * Returns the Actor attribute based on attribute type
+     *
+     * @param newAttribute The new Actor Attribute
+     */
+    
+    public Attribute getAttribute(AttributeType type){
+    	return attributeMap.get(type);
+    }
 
     /**
      * Modifies the current value of an Attribute
@@ -260,5 +270,9 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	public void setMyImageViewName(String myImageViewName) {
 		this.myImageViewName = myImageViewName;
 	}
+
+    public void changed(){
+        setChanged();
+    }
 
 }
