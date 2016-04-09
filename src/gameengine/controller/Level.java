@@ -109,12 +109,20 @@ public class Level implements ILevel, IEditableGameElement {
 
     /**
      * Provides the list of Actors that are present in the Level
+
      *
      * @return The List of Actors in the Level
      */
     @Override
     public List<Actor> getActors() {
         return myActors;
+    }
+    
+    /**
+     * Removes actor from list of actors when actor dies
+     */
+    public void removeActor(Actor actor){
+    	myActors.remove(actor);
     }
 
 	@Override
