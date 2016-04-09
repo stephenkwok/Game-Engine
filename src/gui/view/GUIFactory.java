@@ -2,8 +2,13 @@ package gui.view;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
@@ -11,7 +16,7 @@ import gui.controller.IScreenController;
 /**
  * Instantiates IGUIElements based on a ResourceBundle String key passed into createNewGUIObject(String nodeTypeKey).
  *
- * @author AnnieTang
+ * @author AnnieTang, amyzhao
  */
 
 public class GUIFactory {
@@ -19,8 +24,11 @@ public class GUIFactory {
 	protected static final String ICON = "Icon";
 	protected static final String CLASS = "Class";
 	protected static final String PROMPT = "Prompt";
-	protected static final String AUTHORING_ENV = "gui.";
+	protected static final String GUI = "gui.";
 	protected static final String VIEW = "view.";
+	private static final String CREATE = "create";
+	private static final String GUI_ELEMENT_TYPES = "GUIElementTypes";
+	private static final String DELIMITER = ",";
 	protected ResourceBundle myResources;
 	protected IScreenController myController;
 
@@ -40,88 +48,66 @@ public class GUIFactory {
 	 */
 	public IGUIElement createNewGUIObject(String nodeTypeKey) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		String nodeType = myResources.getString(nodeTypeKey);
-		if (isButton(nodeType)) {
-			return createButton(nodeType);
-		} else if (isComboBox(nodeType)) {
-			return createComboBox(nodeType);
-		} else if(isMenuBar(nodeType)){
-			return createMenuBar(nodeType);
-		} else if (isMenu(nodeType)){
-			return createMenu(nodeType);
-		} else if(isPane(nodeType)){
-			return createPane(nodeType);
+		String elementType = determineElementType(nodeType);
+		return createElement(elementType, nodeType);
+	}
+
+	private String determineElementType(String nodeType) {
+		String[] keys = myResources.getString(GUI_ELEMENT_TYPES).split(DELIMITER);
+		for (int i = 0; i < keys.length; i++) {
+			if (Arrays.asList(myResources.getString(keys[i]).split(DELIMITER)).contains(nodeType)) {
+				return keys[i];
+			}
 		}
 		return null;
 	}
-	private IGUIElement createComboBox(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		String prompt = myResources.getString(nodeType + PROMPT);
-		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
+	
+	private IGUIElement createElement(String elementType, String nodeType) {
+		String className = GUI + VIEW + myResources.getString(nodeType + CLASS);
 		try {
+			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class);
+			return (IGUIElement) createMethod.invoke(this, nodeType, className);
+		} catch (NoSuchMethodException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private IGUIElement createComboBox(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+			String prompt = myResources.getString(nodeType + PROMPT);
 			Class<?> comboBox = Class.forName(className);
 			Constructor<?> constructor = comboBox.getConstructor(ResourceBundle.class, String.class, Controller.class);
 			return (IGUIElement) constructor.newInstance(myResources, prompt, myController);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
-	private boolean isButton(String nodeType) {
-		return Arrays.asList(myResources.getString("Buttons").split(",")).contains(nodeType);
-	}
-
-	private boolean isComboBox(String nodeType) {
-		return Arrays.asList(myResources.getString("ComboBoxes").split(",")).contains(nodeType);
-	}
-	
-	private boolean isMenuBar(String nodeType){
-		return Arrays.asList(myResources.getString("Menu")).contains(nodeType);
-	}
-	
-	private boolean isPane(String nodeType){
-		return Arrays.asList(myResources.getString("Panes").split(",")).contains(nodeType);
-	}
-	
-	private boolean isMenu(String nodeType){
-		return Arrays.asList(myResources.getString("Menus").split(",")).contains(nodeType);
-	}
-
-	private IGUIElement createButton(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		String text = myResources.getString(nodeType + TEXT);
-		String icon = myResources.getString(nodeType + ICON);
-		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
-		try {
+	private IGUIElement createButton(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException {
+			String text = myResources.getString(nodeType + TEXT);
+			String icon = myResources.getString(nodeType + ICON);
 			Class<?> button = Class.forName(className);
 			Constructor<?> constructor = button.getConstructor(IScreenController.class, String.class, String.class);
 			return (IGUIElement) constructor.newInstance(myController, text, icon);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
-	
-	private IGUIElement createPane(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
-		try{
+
+	private IGUIElement createPane(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException{
 			Class<?> pane = Class.forName(className);
 			Constructor<?> constructor = pane.getConstructor(IScreenController.class);
 			return (IGUIElement) constructor.newInstance(myController);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	private IGUIElement createMenu(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		String text = myResources.getString(nodeType + TEXT);
-		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
+		String className = GUI + VIEW + myResources.getString(nodeType + CLASS);
 		try{
+			String text = myResources.getString(nodeType + TEXT);
 			Class<?> menu = Class.forName(className);
 			Constructor<?> constructor = menu.getConstructor(IScreenController.class, String.class);
 			return (IGUIElement) constructor.newInstance(myController, text);
@@ -132,8 +118,9 @@ public class GUIFactory {
 		}
 		return null;
 	}
+
 	private IGUIElement createMenuBar(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
+		String className = GUI + VIEW + myResources.getString(nodeType + CLASS);
 		try{
 			Class<?> menu = Class.forName(className);
 			Constructor<?> constructor = menu.getConstructor(IScreenController.class);
@@ -143,6 +130,10 @@ public class GUIFactory {
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	private IGUIElement createCheckBox(String nodeType) {
 		return null;
 	}
 
