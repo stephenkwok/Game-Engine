@@ -57,8 +57,7 @@ public class Controller implements IScreenController {
 	 *            - list of created Actors that can be placed into the level
 	 */
 	public void goToLevelEditing(Level level) {
-		levelEnvironment.setEditable(level);
-		guiMain.setCenterPane(levelEnvironment.getPane());
+		goToEditingEnvironment(level, levelEnvironment);
 
 	}
 
@@ -69,8 +68,7 @@ public class Controller implements IScreenController {
 	 *            - Actor to edit
 	 */
 	public void goToActorEditing(Actor actor) {
-		actorEnvironment.setEditable(actor);
-		guiMain.setCenterPane(actorEnvironment.getPane());
+		goToEditingEnvironment(actor, actorEnvironment);
 	}
 	
 	
