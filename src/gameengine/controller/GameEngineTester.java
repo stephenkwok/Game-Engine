@@ -63,7 +63,7 @@ public class GameEngineTester {
         //Prints Initial State
         List<IActor> actors = (List<IActor>) myGame.getActors();
         for (IActor actor : actors){
-            System.out.printf(actor.getID() + ", " + actor.getX() + ", " + actor.getY() + "\t\t");
+            System.out.printf(actor.getID() + ", " + actor.getXPos() + ", " + actor.getYPos() + "\t\t");
         }
         System.out.println();
 
@@ -73,7 +73,7 @@ public class GameEngineTester {
         //Prints Final State
         actors = (List<IActor>) myGame.getActors();
         for (IActor actor : actors){
-            System.out.printf(actor.getID() + ", " + actor.getX() + ", " + actor.getY() + "\t\t");
+            System.out.printf(actor.getID() + ", " + actor.getXPos() + ", " + actor.getYPos() + "\t\t");
         }
     }
 

@@ -6,15 +6,15 @@ import gameengine.model.PhysicsEngine;
 
 public class LoseGame extends Action {
 	private Actor assignedActor;
+	
 	public LoseGame(Actor assignedActor) {
 		super(assignedActor);
-		this.assignedActor = assignedActor;
 	}
 
 	@Override
 	public void perform() {
-		// TODO Auto-generated method stub
-		
+		getActor().changed();
+        getActor().notifyObservers("WINGAME");		
 	}
 
 }

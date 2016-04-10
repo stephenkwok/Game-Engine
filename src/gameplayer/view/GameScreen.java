@@ -69,4 +69,7 @@ public class GameScreen extends Observable {
 		return new KeyTrigger(key);
 	}
 	
+	public void clearGame(){
+		myGroup.getChildren().clear();
+	}
 }

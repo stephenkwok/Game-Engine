@@ -2,9 +2,13 @@ package gameplayer.view;
 
 import gameengine.controller.*;
 import gameengine.model.Actor;
+import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Actions.MoveLeft;
+import gameengine.model.Actions.MoveRight;
+import gameengine.model.Actions.MoveUp;
+import gameengine.model.Actions.NextLevel;
 import gameengine.model.Triggers.KeyTrigger;
 import gameplayer.controller.GameController;
 import javafx.animation.KeyFrame;
@@ -43,17 +47,26 @@ public class Main extends Application {
 		Actor actor1 = new Actor();
 		Image actor1img = new Image(getClass().getClassLoader().getResourceAsStream("newactor.png"));
 		actor1.setImageView(new ImageView(actor1img));
+		
+		Actor actor2 = new Actor();
+		Image actor2img = new Image(getClass().getClassLoader().getResourceAsStream("newlevel.png"));
+		actor2.setImageView(new ImageView(actor2img));
+		
 		KeyTrigger trigger = new KeyTrigger(KeyCode.SPACE);
 		List<Object> args = new ArrayList<Object>();
-		args.add(50.0);
-		Action action = new MoveLeft(actor1,args);
+		Action action = new NextLevel(actor1);
 		Rule rule = new Rule(trigger,action);
 		actor1.addRule(rule);
+		
 		
 		List<Level> levels = new ArrayList<Level>();
 		Level level1 = new Level();
 		level1.addActor(actor1);
 		levels.add(level1);
+		Level level2 = new Level();
+		level2.addActor(actor2);
+		levels.add(level2);
+		
 		Game model = new Game("file",info,levels);
 		GameScreen view = new GameScreen();
 		GameController controller = new GameController();

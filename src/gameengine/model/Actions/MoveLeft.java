@@ -14,14 +14,13 @@ public class MoveLeft extends MovingAction {
 
     private static final double LEFT_DIRECTION = 180;
 
-    public MoveLeft(Actor assignedActor, List<Object> args) {
-        super(assignedActor, args);
+    public MoveLeft(Actor assignedActor) {
+        super(assignedActor);
     }
 
     @Override
 
     public void perform() {
-        //getActor().getPhysicsEngine().moveLeft(getActor());
-    	getActor().move(50, 180);
+        getActor().getPhysicsEngine().moveLeft(getActor());
     }
 }

@@ -53,8 +53,8 @@ public class PhysicsEngineUseCase{
 	 * @return Nothing
 	 */
 	public void updatePosition(Actor a){
-		a.setXPos( updateXPosition(a.getX(), a.getXVelo()) );
-		a.setYPos( updateYPosition(a.getY(), a.getYVelo()) );
+		a.setXPos( updateXPosition(a.getXPos(), a.getXVelo()) );
+		a.setYPos( updateYPosition(a.getYPos(), a.getYVelo()) );
 	}
 
 	/**

@@ -1,8 +1,7 @@
-package authoringenvironment.view;
+package gui.view;
 
 import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
-import gui.view.ButtonParent;
 
 /**
  * Button to create a new level and transition to level editing environment.

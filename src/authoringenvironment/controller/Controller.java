@@ -3,8 +3,6 @@ package authoringenvironment.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IEditableGameElement;
@@ -28,7 +26,7 @@ import javafx.stage.Stage;
 public class Controller implements IScreenController {
 	private Stage myStage;
 	private List<Level> levels;
-	private List<Actor> actors;	
+	private List<Actor> actors;
 	private GUILevelEditingEnvironment levelEnvironment;
 	private GUIActorEditingEnvironment actorEnvironment;
 	private GUIMainScreen mainScreen;
@@ -59,9 +57,7 @@ public class Controller implements IScreenController {
 	 *            - list of created Actors that can be placed into the level
 	 */
 	public void goToLevelEditing(Level level) {
-		levelEnvironment.setEditable(level);
-		clearPanes();
-		guiMain.setCenterPane(levelEnvironment.getPane());
+		goToEditingEnvironment(level, levelEnvironment);
 
 	}
 
@@ -72,21 +68,20 @@ public class Controller implements IScreenController {
 	 *            - Actor to edit
 	 */
 	public void goToActorEditing(Actor actor) {
-		actorEnvironment.setEditable(actor);
-		clearPanes();
-		guiMain.setCenterPane(actorEnvironment.getPane());
+		goToEditingEnvironment(actor, actorEnvironment);
 	}
 	
 	
 	/**
 	 * Switches screen to appropriate editing environment
 	 * 
-	 * @param editable - Level or Actor to edit
-	 * @param environment - Editing environment for editable 
+	 * @param editable
+	 *            - Level or Actor to edit
+	 * @param environment
+	 *            - Editing environment for editable
 	 */
 	public void goToEditingEnvironment(IEditableGameElement editable, IEditingEnvironment environment) {
 		environment.setEditable(editable);
-		clearPanes();
 		guiMain.setCenterPane(environment.getPane());
 	}
 
@@ -95,7 +90,6 @@ public class Controller implements IScreenController {
 	 */
 	public void goToMainScreen() {
 		mainScreen.updateAllNodes();
-		clearPanes();
 		guiMain.setCenterPane(mainScreen.getPane());
 	}
 
@@ -143,19 +137,25 @@ public class Controller implements IScreenController {
 		mainScreen.createLevelLabel(newLevel);
 		goToEditingEnvironment(newLevel, levelEnvironment);
 	}
-	
+
 	public void addActor() {
 		Actor newActor = new Actor();
 		actors.add(newActor);
 		mainScreen.createActorLabel(newActor);
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
-
-	private void clearPanes() {
-		guiMain.setBottomPane(null);
-		guiMain.setCenterPane(null);
-		guiMain.setLeftPane(null);
-		guiMain.setRightPane(null);
+	/**
+	 * Saves game and returns to splash screen of game player.
+	 */
+	public void goBackToGamePlayer() {
+		guiMain.goBackToGamePlayer();
 	}
-
+	
+	public double getSceneWidth(){
+		return guiMain.getWidth();
+	}
+	
+	public double getSceneHeight(){
+		return guiMain.getHeight();
+	}
 }

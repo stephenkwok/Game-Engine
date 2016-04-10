@@ -27,16 +27,15 @@ import javafx.stage.Stage;
 public class GUIMain extends Screen implements IGUI {
     private static final String GUI_RESOURCE = "authoringGUI";
     private static final String TOP_PANE_ELEMENTS = "TopPaneElements";
+    private static final int WINDOW_HEIGHT = 800;
+	private static final int WINDOW_WIDTH = 1300;
     private static final int PADDING = 10;
     private Scene myScene;
 	private BorderPane myRoot;
 	private ResourceBundle myResources;
-	private int windowHeight;
-	private int windowWidth;
 	private Stage myStage;
 	private Controller myController;
 	private GUIFactory factory;
-	private IGUIElement levels;
 	private Scene splashScene;
 	
 	public GUIMain(Stage s, Scene splash) {
@@ -50,9 +49,13 @@ public class GUIMain extends Screen implements IGUI {
 	 * Initializes resource bundle, controller, and factory class.
 	 */
 	public void init(){
+		myRoot = new BorderPane();
+		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myController = new Controller(myStage, this, this.myResources);
 		factory = new GUIFactory(myResources, myController);
+		setTopPane();
+		setCenterPane();
 	}
 	
 	/**
@@ -63,39 +66,19 @@ public class GUIMain extends Screen implements IGUI {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public Scene getScene() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		myRoot = new BorderPane();
-		setTopPane();
-		setCenterPane();
-		myScene = new Scene(myRoot, windowHeight, windowWidth, Color.WHITE);
+	public Scene getScene() {
 		return myScene;
-	}
-	
-	public void setLeftPane(Pane pane){
-		myRoot.setLeft(pane);
-	}
-	
-	public void setRightPane(Pane pane){
-		myRoot.setRight(pane);
 	}
 	
 	public void setCenterPane(Pane pane){
 		myRoot.setCenter(pane);
 	}
-	
-	public void setBottomPane(Pane pane){
-		myRoot.setBottom(pane);
-	}
-	
+
 	public void setCenterPane(){
 		myController.goToMainScreen();
-//		IGUI actorEditing = new GUIActorEditingEnvironment(myResources);
-//		myRoot.setCenter(actorEditing.getPane());
-//		GUIMainScreen test = new GUIMainScreen(myController);
-//		myRoot.setCenter(test.getPane());
 	}
 	
-	private void setTopPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	private void setTopPane() {
 		HBox hbox = new HBox(PADDING);
 		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));		
 		initializeTopPaneElements(hbox);
@@ -103,11 +86,15 @@ public class GUIMain extends Screen implements IGUI {
 		myRoot.setTop(hbox);
 	}
 
-	private void initializeTopPaneElements(HBox hbox) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
-		for (int i = 0; i < topPaneElements.length; i++) {
-			IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
-			hbox.getChildren().add(elementToCreate.createNode());
+	private void initializeTopPaneElements(HBox hbox) {
+		try{
+			String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
+			for (int i = 0; i < topPaneElements.length; i++) {
+				IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
+				hbox.getChildren().add(elementToCreate.createNode());
+			}
+		}catch(Exception e){
+			
 		}
 	}
 	
@@ -122,4 +109,15 @@ public class GUIMain extends Screen implements IGUI {
 		return null;
 	}
 
+	public void goBackToGamePlayer() {
+		myStage.setScene(splashScene);
+	}
+
+	public double getWidth() {
+		return myScene.getWidth();
+	}
+
+	public double getHeight() {
+		return myScene.getHeight();
+	}
 }

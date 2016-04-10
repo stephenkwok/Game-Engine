@@ -99,11 +99,20 @@ public class GameController implements Observer {
 	 * Will stop the animation timeline.
 	 */
 	public void endGame (){
-		
+		System.out.println("game over");
+	}
+	
+	/**
+	 * Will stop the animation timeline.
+	 */
+	public void winGame (){
+		System.out.println("game won");
 	}
 	
 	public void nextLevel (){
 		model.nextLevel();
+		view.clearGame();
+		begin();
 	}
 
 	@Override
@@ -112,7 +121,6 @@ public class GameController implements Observer {
 			model.handleTrigger((ITrigger)arg);
 		}
 		if(o.equals(model)){
-			
 			try{
 				this.getClass().getDeclaredMethod(((String)arg)).invoke(this);
 			}

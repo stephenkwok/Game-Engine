@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 /**
- * ComboBox with list of images that the user can choose from to modify the given Object.
+ * ComboBox with list of images from the folder specified by the image resource given.
  * @author AnnieTang
  *
  */

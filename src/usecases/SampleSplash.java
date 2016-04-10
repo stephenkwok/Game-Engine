@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.xml.sax.SAXException;
 
 import gameplayer.view.ISplashScreen;
-import gui.view.IScreen;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -27,7 +26,7 @@ import javafx.stage.Stage;
  * @author michaelfigueiras
  *
  */
-public class SampleSplash implements ISplashScreen, IScreen {
+public class SampleSplash implements ISplashScreen {
 
 	Stage myStage;
 	Scene myScene;
@@ -62,7 +61,6 @@ public class SampleSplash implements ISplashScreen, IScreen {
 		openIndividualHighScores(fileName);
 	}
 
-	@Override
 	public void setUp() {
 		myStage = new Stage();
 		myScene = new Scene(myRoot);

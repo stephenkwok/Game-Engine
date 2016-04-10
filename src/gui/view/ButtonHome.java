@@ -1,8 +1,7 @@
-package authoringenvironment.view;
+package gui.view;
 
 import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
-import gui.view.ButtonParent;
 /**
  * Button to return to main screen
  * @author AnnieTang

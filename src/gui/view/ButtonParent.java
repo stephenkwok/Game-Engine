@@ -73,9 +73,4 @@ public abstract class ButtonParent implements IGUIElement {
         }
         return fileName;
     }
-	
-	@Override
-	public void updateNode() {	
-	}
-
 }

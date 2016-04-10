@@ -14,10 +14,12 @@ import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.AttributeType;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -36,8 +38,10 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private static final double DEGREES_TO_RADIANS = Math.PI / 180;
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
-    private DoubleProperty x = new SimpleDoubleProperty();
-    private DoubleProperty y = new SimpleDoubleProperty();
+//    private DoubleProperty x = new SimpleDoubleProperty();
+//    private DoubleProperty y = new SimpleDoubleProperty();
+    private double x;
+    private double y;
     private double veloX;
     private double veloY;
     private int myID;
@@ -58,47 +62,24 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
-        //x.bindBidirectional(myImageView.xProperty());
-        x.addListener(new ChangeListener(){
-        	@Override
-            public void changed(ObservableValue o, Object oldVal, Object newVal) {
-                myImageView.setX((Double)oldVal - (Double)newVal);
-                System.out.println("left");
-            }
-        });
-        //y.bindBidirectional(myImageView.yProperty());
-        y.addListener(new ChangeListener(){
-        	@Override
-            public void changed(ObservableValue o, Object oldVal, Object newVal) {
-                myImageView.setY(myImageView.getY() - y.getValue());
-                //System.out.println("left");
-            }
-        });
-    }
-
-  
-    /**
-     * Moves the Actor based on a provided distance and direction
-     *
-     * @param distance  The distance to move the Actor
-     * @param direction The direction that the Actor should move in
-     */
-    @Override
-    public void move(double distance, double direction) {
-//        myImageView.setX(distance * Math.cos(direction * DEGREES_TO_RADIANS));
-//        myImageView.setY(distance * Math.sin(direction * DEGREES_TO_RADIANS));
-//
-//        System.out.println(myImageView.getX());
-
-        x.setValue(distance * Math.cos(direction * DEGREES_TO_RADIANS));
-        y.setValue(distance * Math.sin(direction * DEGREES_TO_RADIANS));
-
+//        x.addListener(new ChangeListener(){
+//        	@Override
+//            public void changed(ObservableValue o, Object oldVal, Object newVal) {
+//                myImageView.setX((Double)newVal);
+//            }
+//        });
+//        y.addListener(new ChangeListener(){
+//        	@Override
+//            public void changed(ObservableValue o, Object oldVal, Object newVal) {
+//                myImageView.setY((Double)newVal);
+//            }
+//        });
     }
 
     /**
      * Calls the appropriate sequence of Actions based on a provided Trigger
      *
-     * @param myPhysicsEngine
+     * @param triggerString
      */
     @Override
     public void performActionsFor(String triggerString) {
@@ -115,6 +96,16 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      */
     public void addAttribute(Attribute newAttribute) {
         attributeMap.put(newAttribute.getType(), newAttribute);
+    }
+    
+    /**
+     * Returns the Actor attribute based on attribute type
+     *
+     * @param newAttribute The new Actor Attribute
+     */
+    
+    public Attribute getAttribute(AttributeType type){
+    	return attributeMap.get(type);
     }
 
     /**
@@ -178,13 +169,17 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 
     @Override
     public void setXPos(double updateXPosition) {
-        x.set(updateXPosition);
+       x = updateXPosition;
+       System.out.println("x: "+x);
+       //x.set(updateXPosition);
 
     }
 
     @Override
     public void setYPos(double updateYPosition) {
-       y.set(updateYPosition);
+    	y = updateYPosition;
+    	System.out.println("y: "+y);
+    	//y.set(updateYPosition);
 
     }
 
@@ -224,24 +219,16 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         myImageView = imageView;
     }
 
-
-    //TODO JUSTIN ::::::::)
-    //public void typeOfCollision;
-
-    public void collidesWith(Actor a) {
-//		ClickTrigger collision = typeOfCollision(this, a);
-//		Action action = myRules.get(collision.getTriggerName()).get(0);
-//		action.performOn(a);
+    @Override
+    public double getXPos() {
+    	return x;
+        //return x.get();
     }
 
     @Override
-    public double getX() {
-        return x.get();
-    }
-
-    @Override
-    public double getY() {
-        return y.get();
+    public double getYPos() {
+        return y;
+    	//return y.get();
     }
 
 	public void setEngine(PhysicsEngine physicsEngine) {
@@ -279,6 +266,15 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 
 	public void setMyImageViewName(String myImageViewName) {
 		this.myImageViewName = myImageViewName;
+	}
+
+    public void changed(){
+        setChanged();
+    }
+
+
+	public Bounds getBounds() {
+		return this.getImageView().getLayoutBounds();
 	}
 
 }

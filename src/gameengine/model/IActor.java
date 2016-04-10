@@ -17,14 +17,14 @@ public interface IActor {
      *
      * @return The Actor's X coordinate
      */
-    public double getX();
+    public double getXPos();
 
     /**
      * Gets the Actor's Y location
      *
      * @return The Actor's Y coordinate
      */
-    public double getY();
+    public double getYPos();
     
     /**
      * Gets the Actor's velocity along the horizontal vector
@@ -63,14 +63,6 @@ public interface IActor {
      * @param updateYVelo
      */
 	public void setYVelo(double updateYVelo);
-
-    /**
-     * Moves the Actor's current position
-     *
-     * @param distance  The distance to move the Actor
-     * @param direction The direction that the Actor should move in
-     */
-    public void move(double distance, double direction);
 
     /**
      * Provides the list of Triggers that the Actor responds to

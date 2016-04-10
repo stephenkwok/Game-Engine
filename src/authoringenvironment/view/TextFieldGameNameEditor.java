@@ -32,11 +32,4 @@ public class TextFieldGameNameEditor extends TextFieldWithButton{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public void updateNode() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

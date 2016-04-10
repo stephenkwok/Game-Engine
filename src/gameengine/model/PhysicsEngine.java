@@ -15,13 +15,14 @@ public class PhysicsEngine {
 	
 	
 	//These Variable values are arbitrary, chosen by trial/error
-	private int timeStep            =  1;   //Arbitrary timeStep, will be set to the time provided by step()
+	private int    timeStep         =  1;    //Arbitrary timeStep, will be set to the time provided by step()
 	private double friction         = -.05;  //Horizontal acceleration dampening (friction) coefficient
-	private double gravity          = .1 ;  //Falling acceleration coefficient
-	private double maxHorizVelocity = 50;   //maximum horizontal velocity
-	private double maxVertVelocity  = -50;  //maximum vertical velocity 
-	private double horizontalForce  = 5;    //Force applied to Actors on horizontal movements
+	private double gravity          = .11 ;  //Falling acceleration coefficient
+	private double maxHorizVelocity = 50;    //maximum horizontal velocity
+	private double maxVertVelocity  = -50;   //maximum vertical velocity 
+	private double horizontalForce  = 5;     //Force applied to Actors on horizontal movements
 	private double jumpForce        = -5;    //Vertical Force applied to Actors on jump movements
+	private double floorHeight      =  300;  
 	
 	public PhysicsEngine(){
 		
@@ -53,34 +54,37 @@ public class PhysicsEngine {
 	private void update(Actor a,double forceX, double forceY ){
 		double xVelo     = a.getXVelo();
 		double yVelo     = a.getYVelo();
-		double xPos      = a.getX();      //May have to be changed if Actor no longer extends ImageView
-		double yPos      = a.getY();
+		double xPos      =  a.getXPos();      
+		double yPos      =  a.getYPos();
+		double nextHorzVelo;
+		double nextVertVelo;
+		double nextXPos;
+		double nextYPos;
+				
+		nextHorzVelo = xVelo;      
 		
-		double nextHorzVelo = xVelo;      
+		nextVertVelo = applyForce(yVelo, forceY);            // Apply  y force from movement action to y velocity
 		
-		double nextVertVelo = applyForce(yVelo, forceY);     // Apply  y force from movement action to y velocity
 		nextVertVelo = applyForce(nextVertVelo, gravity);    //Apply gravitational force
-		double nextYPos     = changePos(yPos, nextVertVelo); 
-		
-		if(nextVertVelo  < maxVertVelocity){ //Limits Y velocity to a given maximum value
-			nextVertVelo = maxVertVelocity;
-		}
-		
-		if(nextYPos > 0){                    //Collision detection for the actor and the ground
-			nextYPos = 0;			
+		nextYPos     = changePos(yPos, nextVertVelo); 
+		nextVertVelo = maxLimit(nextVertVelo, maxVertVelocity);
+			
+		if(nextYPos > floorHeight){                    //Collision detection for the actor and the ground
+			nextYPos = floorHeight;			
 			nextVertVelo = 0;
 		}
 		
-		if(nextVertVelo == 0){  //If the Actor is on the ground
+		if(nextVertVelo == 0){                        //If the Actor is on the ground
 			nextHorzVelo = applyForce(xVelo, forceX); // Apply  y force from movement action to y velocity
 			nextHorzVelo = applyForce(nextHorzVelo, (friction*(nextHorzVelo))); //Apply frictional force
 		}
-		double nextXPos  = changePos(xPos,nextHorzVelo);
-		
+		System.out.println("nextyvel: "+nextVertVelo);
+		System.out.println("x: "+xPos);
+		nextXPos  = changePos(xPos,nextHorzVelo);
+		System.out.println("nextx: "+nextXPos);
 		nextHorzVelo = maxLimit(nextHorzVelo, maxHorizVelocity);
-		
 		setValues(a,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );
-	
+		
 	}
 	
 	/**
@@ -100,7 +104,8 @@ public class PhysicsEngine {
 	}
 	
 	private double maxLimit(double vector, double limit){
-		if(vector > limit){
+		double v = Math.abs(vector);
+		if( v > Math.abs(limit)){
 			return limit;
 		}
 		return vector;
@@ -123,6 +128,33 @@ public class PhysicsEngine {
 
 	public void tick(Actor a1) {
 		update(a1,0.0,0.0);
+	}
+	
+	public void staticHorizontalCollision(Actor a1, Actor a2) {
+		if(a1.getXVelo() != 0){     					//If the object is moving 
+			if(a1.getXPos() <  a2.getXPos()){ 			 //if the collision is occuring on the left side
+				a1.setXPos(a2.getXPos()-a1.getBounds().getWidth());  //Offset x value to the left
+			}else{ 										//If collision is happening from right
+				a1.setXPos(a2.getBounds().getMaxX());	//Offset x value to the right		
+			}
+			a1.setXVelo(0);                             //Stop movement
+		}
+	}
+
+	public void staticVerticalCollision(Actor a1, Actor a2) {
+		if(a1.getYVelo() != 0){     					//If the object is moving 
+			if(a1.getYPos() <= a2.getYPos()){ 			 //if the collision is occuring on the top side
+				a1.setYPos(a2.getYPos()-a1.getBounds().getWidth());  //Offset y value up
+			}else{ 										//If collision is happening from right
+				a1.setYPos(a2.getBounds().getMaxY());	//Offset x value to the right		
+			}
+			a1.setYVelo(0);                             //Stop movement
+		}
+	}
+	
+	public void elasticVerticalCollision(Actor a1, Actor a2){
+		staticVerticalCollision(a1,a2);
+		a1.setYVelo(-5);
 	}
 	
 	
