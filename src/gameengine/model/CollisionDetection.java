@@ -19,11 +19,7 @@ import gameengine.model.Triggers.TopCollision;;
 public class CollisionDetection {
 
 	PhysicsEngine myPhysicsEngine;
-	Map<String,Double> actorCorners;
-	private String LEFT   =  "left";
-	private String RIGHT  =  "right";
-	private String TOP    =  "top";
-	private String BOTTOM =  "bottom";
+
 	
 	
 	
@@ -31,65 +27,67 @@ public class CollisionDetection {
 		myPhysicsEngine = physicsEngine;
 	}
 	
+	/**
+	 * Called on list of actors in Level to detect any collisions between unique actors
+	 * @return List of actors with updated position variables
+	 */
 	public List<Actor> detection(List<Actor> actors){
 		for (Actor a1 : actors){
 			for(Actor a2 : actors){
-				if(checkBoundingBoxes(a1,a2)){
-					resolveCollision(a1,a2);
+				if(a1 != a2 ){            //Checks that each actor in the pair is unique
+					if(isCollision(a1,a2))
+						resolveCollision(a1,a2);
 				}
 			}
 		}
 		return actors;
 	}
-	
-	private boolean checkBoundingBoxes(Actor a1, Actor a2) {
-		Map<String,Double> a1Corners = getCorners(a1);
-		Map<String,Double> a2Corners = getCorners(a2);
-		return isCollision(a1Corners,a2Corners);
-		}
-	
-	private Map<String, Double> getCorners(Actor a){ //This may have to change if Actor is no longer an ImageView object
-		Map<String,Double> actorMap = new HashMap<String,Double>();
-		actorMap.put(LEFT  , a.getX());
-		actorMap.put(RIGHT , a.getX()+a.getImageView().getBoundsInLocal().getWidth());
-		actorMap.put(TOP   , a.getY());
-		actorMap.put(BOTTOM, a.getY()+a.getImageView().getBoundsInLocal().getHeight());
-		return actorMap;
+		
+	/**
+	 * Determines if a collision is occurring by checking for intersecting Bounds. 
+	 * 
+	 * @param a1
+	 * @param a2
+	 * @return True = Is Collision, False = No Collision
+	 */
+	private boolean isCollision(Actor a1, Actor a2){
+		return a1.getBounds().intersects(a2.getBounds());
 	}
 	
-	private boolean isCollision(Map<String,Double> actorMap1, Map<String,Double> actorMap2){
-		if(  
-				edgeCollision(actorMap1,actorMap2,LEFT, RIGHT, LEFT) ||
-				edgeCollision(actorMap1,actorMap2,LEFT, RIGHT, RIGHT) ||
-				edgeCollision(actorMap1,actorMap2,BOTTOM, TOP, BOTTOM) ||
-				edgeCollision(actorMap1,actorMap2,BOTTOM, TOP, TOP) 
-		){
-			return true;
+	/**
+	 * Determines which type of Collision is occurring:
+	 * Side/Top/Bottom
+	 * Method does so by checking if a pair of actors overlaps more along the horizontal or vertical axis
+	 * @param a1
+	 * @param a2
+	 * @return Type of collision-String
+	 */
+	//Should this be a String? Just using Magic Strings for now
+	private String getCollisionType(Actor a1, Actor a2){
+		double xOverlap = 0;
+		double yOverlap = 0;
+		if(a1.getBounds().getMaxX() <= a2.getBounds().getMaxX()){
+			xOverlap = a1.getBounds().getMaxX() -  a2.getX();
+		}else{
+			xOverlap = a2.getBounds().getMaxX() -  a1.getX();
 		}
-		return false;
+		
+		if(a1.getBounds().getMaxY() <= a2.getBounds().getMaxY()){
+			yOverlap = a1.getBounds().getMaxY() -  a2.getY();
+		}else{
+			yOverlap = a2.getBounds().getMaxY() -  a1.getY();
+		}
+				
+		if(xOverlap <= yOverlap){
+			return "SideCollision";
+		}else{   
+			return "TopCollision";
+		}
 	}
-
-	private CollisionTrigger getCollisionType(Map<String,Double> a1Map, Map<String,Double> a2Map){
-		CollisionTrigger ct = null;
-		if( edgeCollision(a1Map,a2Map,LEFT, RIGHT, LEFT) ||
-			edgeCollision(a1Map,a2Map,LEFT, RIGHT, RIGHT) ){
-			ct = new SideCollision();
-		}
-		else if(edgeCollision(a1Map,a2Map,BOTTOM, TOP, BOTTOM)){
-			ct = new TopCollision();
-		}
-		else if(edgeCollision(a1Map,a2Map,BOTTOM, TOP, TOP)){
-			ct = new BottomCollision();
-		}
-		return ct;
-	}
-	private boolean edgeCollision(Map<String,Double> a1Map, Map<String,Double> a2Map,String edge1, String edge2, String a2Edge ) {
-		return ( (a1Map.get(edge1)   <= a2Map.get(a2Edge))   &&  (a2Map.get(a2Edge)   <= a1Map.get(edge2)) );
-	}
-
+	
 	private void resolveCollision(Actor a1, Actor a2){
-		String collisionType = getCollisionType(getCorners(a1),getCorners(a2)).getTriggerName();
+		String collisionType = getCollisionType(a1,a2);
 		String triggerString = a1.getName() + collisionType + a2.getName();
-		a1.performActionsFor(myPhysicsEngine,triggerString);   //Needs to be changed to take a string parameter
+		a1.performActionsFor(myPhysicsEngine,triggerString);   
 	}	
 }
