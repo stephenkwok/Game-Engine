@@ -11,9 +11,11 @@ import authoringenvironment.view.GUIActorEditingEnvironment;
 import authoringenvironment.view.GUILevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
+import gameengine.controller.Game;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gui.controller.IScreenController;
+import gui.view.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -160,8 +162,13 @@ public class Controller implements IScreenController {
 	}
 
 	@Override
-	public void createGameFromFile(File file) {
+	public void createGameFromFile(Game game) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Screen getScreen() {
+		return guiMain;
 	}
 }

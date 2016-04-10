@@ -25,8 +25,6 @@ public abstract class ComboBoxImageCell extends ComboBoxParent {
 		this.boxHeight = boxHeight;
 		imageMap = new HashMap<>();
 		imageNames = new ArrayList<>();
-		fillImageNames();
-		fillImageMap();
 	}
 	/**
 	 * Sets default image palette based on which images are in /Images file directory.
@@ -38,6 +36,7 @@ public abstract class ComboBoxImageCell extends ComboBoxParent {
 	 */
 	public void fillImageMap(){
 		for(String imageName: imageNames){
+			System.out.println(imageName);
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 			ImageView imageView = new ImageView(image);
 	        imageView.setPreserveRatio(true);

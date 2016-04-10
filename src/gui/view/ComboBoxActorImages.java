@@ -16,6 +16,8 @@ public class ComboBoxActorImages extends ComboBoxImageCell{
 	public ComboBoxActorImages(String promptText, String imageResource, GUIActorEditingEnvironment aEE) {
 		super(promptText,imageResource, STANDARD_IMAGE_HEIGHT);
 		this.aEE = aEE;
+		fillImageNames();
+		fillImageMap();
 		
 	}
 

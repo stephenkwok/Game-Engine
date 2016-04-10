@@ -3,8 +3,9 @@ package gameplayer.controller;
 import java.io.File;
 import java.util.ResourceBundle;
 
-
+import gameengine.controller.Game;
 import gui.controller.IScreenController;
+import gui.view.Screen;
 import gameplayer.view.SplashScreen;
 import javafx.stage.Stage;
 
@@ -45,9 +46,13 @@ public class SplashScreenController implements IScreenController {
 	}
 
 	@Override
-	public void createGameFromFile(File file) {
+	public void createGameFromFile(Game game) {
 		// TODO Auto-generated method stub
-		
+	}
+
+	@Override
+	public Screen getScreen() {
+		return mySplash;
 	}
 	
 	

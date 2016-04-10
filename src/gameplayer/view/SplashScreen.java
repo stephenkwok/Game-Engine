@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import authoringenvironment.view.GUIMain;
 import gameplayer.controller.SplashScreenController;
 import gui.controller.IScreenController;
+import gui.view.ComboBoxGame;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import gui.view.Screen;
@@ -56,6 +57,9 @@ public class SplashScreen extends Screen {
 			IGUIElement newElement = factory.createNewGUIObject(buttons[i]);
 			hbox.getChildren().add(newElement.createNode());
 		}
+		ComboBoxGame newEle =  new ComboBoxGame("SUP", "gamefiles", myController);
+		getRoot().getChildren().add((HBox) newEle.createNode());
+		
 		
 	}
 

@@ -22,7 +22,7 @@ public class ComboBoxLevel extends ComboBoxTextCell{
 	List<Level> levels;
 	private Controller myController;
 	
-	public ComboBoxLevel(ResourceBundle myResources, String promptText, IScreenController myController) {
+	public ComboBoxLevel(ResourceBundle myResources, String promptText, Controller myController) {
 		super(myResources,promptText);
 		this.myController = (Controller) myController;
 		fillLevelNamesAndMap();

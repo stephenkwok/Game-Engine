@@ -2,6 +2,8 @@ package gui.controller;
 
 import java.io.File;
 
+import gameengine.controller.Game;
+import gui.view.Screen;
 import javafx.stage.Stage;
 
 public interface IScreenController {
@@ -10,5 +12,7 @@ public interface IScreenController {
 	
 	public Stage getStage ();
 
-	public void createGameFromFile(File file);
+	public void createGameFromFile(Game game);
+	
+	public Screen getScreen();
 }

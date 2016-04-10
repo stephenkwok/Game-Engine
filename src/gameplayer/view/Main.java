@@ -13,7 +13,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.*;
+
+import gamedata.controller.CreatorController;
 
 public class Main extends Application {
 	
@@ -47,7 +50,9 @@ public class Main extends Application {
 		Level level1 = new Level();
 		level1.addActor(actor1);
 		levels.add(level1);
-		Game model = new Game("file",info,levels);
+		Game model = new Game(info,levels);
+		CreatorController c = new CreatorController(model);
+		c.saveForEditing(new File("gamefiles/test.xml"));
 		GameScreen view = new GameScreen();
 		GameController controller = new GameController();
 		controller.setGame(model);

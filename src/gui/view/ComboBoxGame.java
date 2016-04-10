@@ -1,6 +1,9 @@
 package gui.view;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import gamedata.controller.ParserController;
@@ -21,14 +24,16 @@ public class ComboBoxGame extends ComboBoxImageCell {
 	public ComboBoxGame(String promptText, String imageResource, IScreenController myController) {
 		super(promptText, imageResource, STANDARD_IMAGE_HEIGHT);
 		this.myController = myController;
+		this.myGames = new HashMap<>();
 		getGames();
+		fillImageNames();
+		fillImageMap();
 	}
 
 	@Override
 	public void setButtonAction() {
 		comboButton.setOnAction(event -> {
-			File file = new File(comboBox.getValue());
-			myController.createGameFromFile(file);
+			myController.createGameFromFile(myGames.get(comboBox.getValue()));
 		});
 		
 	}
@@ -36,16 +41,19 @@ public class ComboBoxGame extends ComboBoxImageCell {
 	private void getGames() {
 		File gameFileDir = new File(selectionResource);
 		for(File gameFile: gameFileDir.listFiles()) {
-			ParserController parserController = new ParserController();
-			Game game = parserController.loadforPlaying(gameFile);
-			myGames.put(game.getInfo().getName(),game);
+			if(!gameFile.isDirectory()){
+				ParserController parserController = new ParserController(myController.getScreen());
+				Game game = parserController.loadforPlaying(gameFile);
+				System.out.println(game);
+				myGames.put(gameFile.getPath(),game);
+			}
 		}
 	}
 	
 	@Override
 	public void fillImageNames() {
 		for (Game game: myGames.values()) {
-			imageNames.add(game.getInfo().getName());
+			imageNames.add(game.getInfo().getImageName());
 		}
 		
 	}
@@ -55,9 +63,20 @@ public class ComboBoxGame extends ComboBoxImageCell {
 		HBox hbox = new HBox();
 		VBox vbox = new VBox();
 		Game game = myGames.get(item);
-		vbox.getChildren().addAll(new Label(item, new Text(game.getInfo().getDescription())));
+		System.out.println("name: " + item);
+		System.out.println("description: " + game.getInfo().getDescription());
+		vbox.getChildren().addAll(new Label(game.getInfo().getName(), new Text("\n" + game.getInfo().getDescription())));
 		hbox.getChildren().addAll(imageMap.get(game.getInfo().getImageName()), vbox);
 		return hbox;
+	}
+	
+	@Override 
+	public List<String> getOptionsList() {
+		List<String> myGamePaths = new ArrayList<>();
+		for (String path: myGames.keySet()) {
+			myGamePaths.add(path);
+		}
+		return myGamePaths;
 	}
 
 }
