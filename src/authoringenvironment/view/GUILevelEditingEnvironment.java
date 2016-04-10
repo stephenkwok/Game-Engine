@@ -198,8 +198,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		myLevel = (Level) editable;
 		myLevelBackground = myLevel.getImageView();
 		//TODO: SHOULD THIS FIT THE PANE OR PRESERVE RATIO?
-		//myLevelBackground.setPreserveRatio(true);
-		myLevelBackground.fitHeightProperty().bind(myCenterPane.heightProperty());
+		myLevelBackground.setPreserveRatio(true);
 		myLevelBackground.fitWidthProperty().bind(myCenterPane.widthProperty());
 		myCenterPane.getChildren().add(myLevelBackground);
 		List<ImageView> actorIVs = new ArrayList<>();
