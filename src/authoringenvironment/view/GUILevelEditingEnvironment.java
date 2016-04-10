@@ -85,6 +85,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		source.setOnDragDetected(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
 				System.out.println("drag detected");
+				System.out.println(myInspector.getAttributesTab().getHUDElementsToDisplay());
 				Dragboard db = source.startDragAndDrop(TransferMode.ANY);
 				ClipboardContent content = new ClipboardContent();
 				content.putString(Integer.toString(source.getID()));
