@@ -102,7 +102,7 @@ public class GUIFactory {
 			Constructor<?> constructor = button.getConstructor(IScreenController.class, String.class, String.class);
 			return (IGUIElement) constructor.newInstance(myController, text, icon);
 	}
-
+	
 	private IGUIElement createPane(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException{
 			Class<?> pane = Class.forName(className);
 			Constructor<?> constructor = pane.getConstructor(IScreenController.class);
@@ -142,6 +142,5 @@ public class GUIFactory {
 		Constructor<?> constructor = checkbox.getConstructor(String.class, int.class, int.class);
 		return (IGUIElement) constructor.newInstance(promptText, spacing, width);
 	}
-
 
 }

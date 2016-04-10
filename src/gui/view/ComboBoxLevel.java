@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import gameengine.controller.Level;
+import gui.controller.IScreenController;
 
 /**
  * ComboBox that holds existing Levels and allows user to go to LevelEditingEnvironment to edit selected level

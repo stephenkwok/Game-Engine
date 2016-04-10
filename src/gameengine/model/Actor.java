@@ -170,7 +170,6 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     @Override
     public void setXPos(double updateXPosition) {
         x = updateXPosition;
-
     }
 
     @Override
@@ -182,7 +181,6 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     @Override
     public void setXVelo(double updateXVelo) {
         veloX = updateXVelo;
-
     }
 
     @Override

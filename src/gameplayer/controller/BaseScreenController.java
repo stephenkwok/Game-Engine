@@ -1,9 +1,12 @@
 package gameplayer.controller;
 
+import java.io.File;
 import java.util.ResourceBundle;
 
+import gameengine.controller.Game;
 import gameplayer.view.BaseScreen;
 import gui.controller.IScreenController;
+import gui.view.Screen;
 import javafx.stage.Stage;
 
 public class BaseScreenController implements IScreenController{
@@ -43,6 +46,17 @@ public class BaseScreenController implements IScreenController{
 
 	public void toggleUnPause() {
 		System.out.println("un pause game");
+	}
+
+	@Override
+	public void createGameFromFile(Game file) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Screen getScreen() {
+		return myScreen;
 	}
 
 }
