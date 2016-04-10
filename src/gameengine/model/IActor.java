@@ -93,6 +93,6 @@ public interface IActor {
      */
     public int getID();
 
-	void performActionsFor(PhysicsEngine myPhysicsEngine, String triggerString);
+	void performActionsFor(String triggerString);
 
 }

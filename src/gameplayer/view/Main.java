@@ -7,11 +7,18 @@ import gameengine.model.Actions.Action;
 import gameengine.model.Actions.MoveLeft;
 import gameengine.model.Triggers.KeyTrigger;
 import gameplayer.controller.GameController;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.PerspectiveCamera;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.*;
 
@@ -57,6 +64,28 @@ public class Main extends Application {
 		stage.setScene(view.getScene());
 		stage.show();
 		controller.begin();
+		
+//		Stage stage = new Stage();
+//		Group root = new Group();
+//		Image actor1img = new Image(getClass().getClassLoader().getResourceAsStream("newactor.png"));
+//		ImageView imgview = new ImageView(actor1img);
+//		root.getChildren().add(imgview);
+//		Scene scene = new Scene(root,800,800);
+//		PerspectiveCamera camera = new PerspectiveCamera();
+//
+//		scene.setCamera(camera);
+//		stage.setScene(scene);
+//		stage.show();
+//		
+//        KeyFrame frame = new KeyFrame(Duration.seconds(.01),
+//                e -> {
+//                	camera.setTranslateX(camera.getTranslateX()-5);
+//                	System.out.println(imgview.getX());
+//                });
+//		Timeline animation = new Timeline();
+//		animation.setCycleCount(Timeline.INDEFINITE);
+//		animation.getKeyFrames().add(frame);
+//		animation.play();
 		
 	}
 

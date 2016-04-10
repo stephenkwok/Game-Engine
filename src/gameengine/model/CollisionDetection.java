@@ -90,6 +90,6 @@ public class CollisionDetection {
 	private void resolveCollision(Actor a1, Actor a2){
 		String collisionType = getCollisionType(getCorners(a1),getCorners(a2)).getTriggerName();
 		String triggerString = a1.getName() + collisionType + a2.getName();
-		a1.performActionsFor(myPhysicsEngine,triggerString);   //Needs to be changed to take a string parameter
+		a1.performActionsFor(triggerString);   //Needs to be changed to take a string parameter
 	}	
 }

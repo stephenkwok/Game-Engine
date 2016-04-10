@@ -57,7 +57,7 @@ public class Level implements ILevel, IEditableGameElement {
         List<Actor> relevantActors = myTriggerMap.get(myTrigger.getTriggerName());
         for (Actor myActor : relevantActors) {
             if (myTrigger.evaluate(myActor)){
-                myActor.performActionsFor(myPhysicsEngine, myTrigger.getTriggerName());
+                myActor.performActionsFor(myTrigger.getTriggerName());
             }
         }
         //myCollisionDetector.detection(myActors); //Collision Detection/Resolution for each Actor
