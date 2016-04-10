@@ -16,6 +16,7 @@ public class ButtonPlay extends ButtonParent{
 	protected void setButtonAction() {
 		button.setOnAction(e ->  myControl.play());
 		
+		
 	}
 
 }

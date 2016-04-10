@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import gameengine.controller.Level;
+import gui.controller.IScreenController;
 
 /**
  * ComboBox that holds existing Levels and allows user to go to LevelEditingEnvironment to edit selected level
@@ -21,9 +22,9 @@ public class ComboBoxLevel extends ComboBoxTextCell{
 	List<Level> levels;
 	private Controller myController;
 	
-	public ComboBoxLevel(ResourceBundle myResources, String promptText, Controller myController) {
+	public ComboBoxLevel(ResourceBundle myResources, String promptText, IScreenController myController) {
 		super(myResources,promptText);
-		this.myController = myController;
+		this.myController = (Controller) myController;
 		fillLevelNamesAndMap();
 	}
 

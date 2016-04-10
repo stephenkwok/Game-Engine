@@ -1,5 +1,6 @@
 package gameplayer.controller;
 
+import java.io.File;
 import java.util.ResourceBundle;
 
 
@@ -41,6 +42,12 @@ public class SplashScreenController implements IScreenController {
 	
 	public void edit(){
 		mySplash.edit();
+	}
+
+	@Override
+	public void createGameFromFile(File file) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

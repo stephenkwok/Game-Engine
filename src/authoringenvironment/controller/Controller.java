@@ -158,4 +158,10 @@ public class Controller implements IScreenController {
 	public double getSceneHeight(){
 		return guiMain.getHeight();
 	}
+
+	@Override
+	public void createGameFromFile(File file) {
+		// TODO Auto-generated method stub
+		
+	}
 }

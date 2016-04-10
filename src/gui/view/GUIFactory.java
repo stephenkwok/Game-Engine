@@ -55,10 +55,10 @@ public class GUIFactory {
 	}
 	private IGUIElement createComboBox(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String prompt = myResources.getString(nodeType + PROMPT);
-		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
+		String className = getClassName(nodeType);
 		try {
 			Class<?> comboBox = Class.forName(className);
-			Constructor<?> constructor = comboBox.getConstructor(ResourceBundle.class, String.class, Controller.class);
+			Constructor<?> constructor = comboBox.getConstructor(ResourceBundle.class, String.class, IScreenController.class);
 			return (IGUIElement) constructor.newInstance(myResources, prompt, myController);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -91,7 +91,7 @@ public class GUIFactory {
 	private IGUIElement createButton(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String text = myResources.getString(nodeType + TEXT);
 		String icon = myResources.getString(nodeType + ICON);
-		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
+		String className = getClassName(nodeType);
 		try {
 			Class<?> button = Class.forName(className);
 			Constructor<?> constructor = button.getConstructor(IScreenController.class, String.class, String.class);
@@ -105,7 +105,7 @@ public class GUIFactory {
 	}
 	
 	private IGUIElement createPane(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
+		String className = getClassName(nodeType);
 		try{
 			Class<?> pane = Class.forName(className);
 			Constructor<?> constructor = pane.getConstructor(IScreenController.class);
@@ -120,7 +120,7 @@ public class GUIFactory {
 
 	private IGUIElement createMenu(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		String text = myResources.getString(nodeType + TEXT);
-		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
+		String className = getClassName(nodeType);
 		try{
 			Class<?> menu = Class.forName(className);
 			Constructor<?> constructor = menu.getConstructor(IScreenController.class, String.class);
@@ -133,7 +133,7 @@ public class GUIFactory {
 		return null;
 	}
 	private IGUIElement createMenuBar(String nodeType) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		String className = AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
+		String className = getClassName(nodeType);
 		try{
 			Class<?> menu = Class.forName(className);
 			Constructor<?> constructor = menu.getConstructor(IScreenController.class);
@@ -144,6 +144,10 @@ public class GUIFactory {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	private String getClassName (String nodeType) {
+		return AUTHORING_ENV + VIEW + myResources.getString(nodeType + CLASS);
 	}
 
 

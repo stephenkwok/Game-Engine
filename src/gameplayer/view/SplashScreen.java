@@ -11,6 +11,7 @@ import gui.view.IGUIElement;
 import gui.view.Screen;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -55,6 +56,7 @@ public class SplashScreen extends Screen {
 			IGUIElement newElement = factory.createNewGUIObject(buttons[i]);
 			hbox.getChildren().add(newElement.createNode());
 		}
+		
 	}
 
 	public void init() {
