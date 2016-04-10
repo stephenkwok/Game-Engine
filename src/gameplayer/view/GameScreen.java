@@ -2,6 +2,7 @@ package gameplayer.view;
 
 import java.util.Observable;
 
+import gameengine.controller.Game;
 import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 import gameengine.model.Triggers.ClickTrigger;
@@ -29,7 +30,7 @@ public class GameScreen extends Observable {
 		myScene = new Scene(myGroup);
 		myScene.setOnKeyPressed(e->handleScreenEvent(e));//
 	}
-	
+
 	public Scene getScene(){
 		return myScene;
 	}

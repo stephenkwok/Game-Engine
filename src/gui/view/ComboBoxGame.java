@@ -33,7 +33,7 @@ public class ComboBoxGame extends ComboBoxImageCell {
 	@Override
 	public void setButtonAction() {
 		comboButton.setOnAction(event -> {
-			myController.createGameFromFile(myGames.get(comboBox.getValue()));
+			myController.useGame(myGames.get(comboBox.getValue()));
 		});
 		
 	}
@@ -44,7 +44,6 @@ public class ComboBoxGame extends ComboBoxImageCell {
 			if(!gameFile.isDirectory()){
 				ParserController parserController = new ParserController(myController.getScreen());
 				Game game = parserController.loadforPlaying(gameFile);
-				System.out.println(game);
 				myGames.put(gameFile.getPath(),game);
 			}
 		}
@@ -63,9 +62,7 @@ public class ComboBoxGame extends ComboBoxImageCell {
 		HBox hbox = new HBox();
 		VBox vbox = new VBox();
 		Game game = myGames.get(item);
-		System.out.println("name: " + item);
-		System.out.println("description: " + game.getInfo().getDescription());
-		vbox.getChildren().addAll(new Label(game.getInfo().getName(), new Text("\n" + game.getInfo().getDescription())));
+		vbox.getChildren().addAll(new Label(game.getInfo().getName()), new Text("\n" + game.getInfo().getDescription()));
 		hbox.getChildren().addAll(imageMap.get(game.getInfo().getImageName()), vbox);
 		return hbox;
 	}

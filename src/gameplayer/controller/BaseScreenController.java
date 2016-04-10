@@ -49,7 +49,7 @@ public class BaseScreenController implements IScreenController{
 	}
 
 	@Override
-	public void createGameFromFile(Game file) {
+	public void useGame(Game game) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -4,7 +4,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import gameengine.controller.Game;
 import gameplayer.controller.BaseScreenController;
+import gameplayer.controller.GameController;
 import gui.controller.IScreenController;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
@@ -53,6 +55,13 @@ public class BaseScreen extends Screen {
 		addComponents();
 	}
 
+	public BaseScreen(Stage stage, Game game) {
+		this(stage);
+		GameController gameController = new GameController();
+		gameController.setGame(game);
+		gameController.setGameView(new GameScreen());
+	}
+	
 	public void init() {
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myController = new BaseScreenController(getStage(), this, this.myResources);

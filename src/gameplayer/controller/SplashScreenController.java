@@ -14,6 +14,7 @@ public class SplashScreenController implements IScreenController {
 	private Stage myStage;
 	private ResourceBundle myResources;
 	private SplashScreen mySplash;
+	private Game myGame;
 	
 	public SplashScreenController(Stage myStage, SplashScreen mySplash, ResourceBundle myResources) {
 		this.myStage = myStage;
@@ -34,7 +35,7 @@ public class SplashScreenController implements IScreenController {
 	}
 	
 	public void play(){
-		mySplash.play();
+		mySplash.play(myGame);
 	}
 	
 	public void openHighScores(){
@@ -46,8 +47,8 @@ public class SplashScreenController implements IScreenController {
 	}
 
 	@Override
-	public void createGameFromFile(Game game) {
-		// TODO Auto-generated method stub
+	public void useGame(Game game) {
+		this.myGame = game;
 	}
 
 	@Override

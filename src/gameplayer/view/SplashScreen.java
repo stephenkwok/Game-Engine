@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
 import authoringenvironment.view.GUIMain;
+import gameengine.controller.Game;
 import gameplayer.controller.SplashScreenController;
 import gui.controller.IScreenController;
 import gui.view.ComboBoxGame;
@@ -57,9 +58,6 @@ public class SplashScreen extends Screen {
 			IGUIElement newElement = factory.createNewGUIObject(buttons[i]);
 			hbox.getChildren().add(newElement.createNode());
 		}
-		ComboBoxGame newEle =  new ComboBoxGame("SUP", "gamefiles", myController);
-		getRoot().getChildren().add((HBox) newEle.createNode());
-		
 		
 	}
 
@@ -72,8 +70,9 @@ public class SplashScreen extends Screen {
 
 	/**
 	 * Will open a game playing screen.
+	 * @param game TODO
 	 */
-	public void play() {
+	public void play(Game game) {
 		BaseScreen myB = new BaseScreen(getStage());
 		getStage().setScene(myB.getMyScene());
 	}

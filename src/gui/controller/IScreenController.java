@@ -12,7 +12,7 @@ public interface IScreenController {
 	
 	public Stage getStage ();
 
-	public void createGameFromFile(Game game);
+	public void useGame(Game game);
 	
 	public Screen getScreen();
 }
