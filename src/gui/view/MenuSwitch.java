@@ -12,4 +12,10 @@ public class MenuSwitch extends MenuParent{
 		myRealController = (BaseScreenController) myRealController;
 	}
 
+	@Override
+	public void setOnButtonAction() {
+		myItem.setOnAction(e -> myRealController.switchGame());
+		
+	}
+
 }

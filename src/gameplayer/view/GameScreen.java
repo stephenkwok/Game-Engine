@@ -21,8 +21,8 @@ import javafx.scene.input.MouseEvent;
  */
 
 public class GameScreen extends Observable {
-	private Scene myScene;
-	private Group myGroup;
+	private Scene myScene; //I CHANGED THIS FROM PRIVATE TO PUBLIC
+	public Group myGroup;
 	
 	public GameScreen(){
 		myGroup = new Group();

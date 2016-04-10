@@ -1,8 +1,10 @@
 package gameplayer.controller;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
 import gameplayer.view.BaseScreen;
+import gameplayer.view.SplashScreen;
 import gui.controller.IScreenController;
 import javafx.stage.Stage;
 
@@ -43,6 +45,24 @@ public class BaseScreenController implements IScreenController{
 
 	public void toggleUnPause() {
 		System.out.println("un pause game");
+	}
+	
+	public void goToSplash(){
+		SplashScreen mySplash = new SplashScreen(myStage);
+		try {
+			myStage.setScene(mySplash.getScene());
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveGame(){
+		System.out.println("User wants to save game");
+	}
+	
+	public void switchGame(){
+		System.out.println("User wants to switch games");
 	}
 
 }
