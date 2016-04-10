@@ -14,6 +14,7 @@ import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.AttributeType;
+import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -214,16 +215,6 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         myImageView = imageView;
     }
 
-
-    //TODO JUSTIN ::::::::)
-    //public void typeOfCollision;
-
-    public void collidesWith(Actor a) {
-//		ClickTrigger collision = typeOfCollision(this, a);
-//		Action action = myRules.get(collision.getTriggerName()).get(0);
-//		action.performOn(a);
-    }
-
     @Override
     public double getX() {
         return x;
@@ -274,5 +265,10 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     public void changed(){
         setChanged();
     }
+
+
+	public Bounds getBounds() {
+		return this.getImageView().getLayoutBounds();
+	}
 
 }

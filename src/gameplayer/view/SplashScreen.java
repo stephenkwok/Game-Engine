@@ -84,6 +84,8 @@ public class SplashScreen extends Screen {
 	 * Will open a high scores options screen.
 	 */
 	public void openHighScores() {
+		HighScoreScreen myHS = new HighScoreScreen(getStage());
+		getStage().setScene(myHS.getMyScene());
 	}
 
 	/**

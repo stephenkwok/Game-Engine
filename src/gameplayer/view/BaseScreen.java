@@ -81,6 +81,7 @@ public class BaseScreen extends Screen {
 		myMB.setMinWidth(Screen.SCREEN_WIDTH);
 		String[] menuItems = myResources.getString(MENU_ITEMS).split(",");
 		for (int i = 0; i < menuItems.length; i++) {
+			//IGUIElement tempMenu = factory.createNewGUIObject(menuItems[i]);
 			myMB.getMenus().add(new Menu(menuItems[i]));
 		}
 	}
