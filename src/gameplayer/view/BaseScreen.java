@@ -79,7 +79,7 @@ public class BaseScreen extends Screen {
 
 	public void addMenu(VBox myV)
 			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		IGUIElement myMenu = factory.createNewGUIObject("Menu");
+		IGUIElement myMenu = factory.createNewGUIObject("GameMenu");
 		MenuBar myMB = (MenuBar) myMenu.createNode();
 		myV.getChildren().add(myMB);
 		myMB.setMinWidth(Screen.SCREEN_WIDTH);
@@ -90,7 +90,6 @@ public class BaseScreen extends Screen {
 			//myMB.getMenus().add(myMenuNode);
 			//create new method in gui factory called createNonNode that does the same thing but works for menus
 			myMB.getMenus().add(new Menu(menuItems[i]));
-			
 		}
 	}
 	
