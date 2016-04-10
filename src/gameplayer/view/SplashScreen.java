@@ -6,11 +6,13 @@ import java.util.ResourceBundle;
 import authoringenvironment.view.GUIMain;
 import gameplayer.controller.SplashScreenController;
 import gui.controller.IScreenController;
+import gui.view.ComboBoxGame;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import gui.view.Screen;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -55,6 +57,10 @@ public class SplashScreen extends Screen {
 			IGUIElement newElement = factory.createNewGUIObject(buttons[i]);
 			hbox.getChildren().add(newElement.createNode());
 		}
+		ComboBoxGame newEle =  new ComboBoxGame("SUP", "gamefiles", myController);
+		getRoot().getChildren().add((HBox) newEle.createNode());
+		
+		
 	}
 
 	public void init() {

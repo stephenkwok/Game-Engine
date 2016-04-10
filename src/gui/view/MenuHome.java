@@ -11,5 +11,7 @@ public class MenuHome extends MenuParent{
 		super(myController, text);
 		myRealController = (BaseScreenController) myController;
 	}
+	
+	
 
 }
