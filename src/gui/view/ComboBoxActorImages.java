@@ -16,7 +16,12 @@ public class ComboBoxActorImages extends ComboBoxImageCell{
 	public void setButtonAction() {
 		comboButton.setOnAction(event->{
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(comboBox.getValue()));
-			aEE.setActorImage(new ImageView(image));
+			try {
+				aEE.setActorImage(new ImageView(image));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		});
 	}
 

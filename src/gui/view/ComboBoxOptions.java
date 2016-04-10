@@ -3,10 +3,12 @@ package gui.view;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.Controller;
+
 public class ComboBoxOptions extends ComboBoxTextCell {
 	private List<String> myOptions;
 	
-	public ComboBoxOptions(ResourceBundle myResources, String promptText, List<String> options) {
+	public ComboBoxOptions(ResourceBundle myResources, String promptText, Controller controller) {
 		super(myResources, promptText);
 		myOptions = options;
 	}

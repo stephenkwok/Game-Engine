@@ -1,6 +1,7 @@
 package authoringenvironment.controller;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -33,14 +34,14 @@ public class Controller implements IScreenController {
 	private GUIMain guiMain;
 	private ResourceBundle myResources;
 
-	public Controller(Stage myStage, GUIMain guiMain, ResourceBundle myResources) {
+	public Controller(Stage myStage, GUIMain guiMain, ResourceBundle myResources) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		this.myStage = myStage;
 		this.guiMain = guiMain;
 		this.myResources = myResources;
 		init();
 	}
 
-	public void init() {
+	public void init() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		levels = new ArrayList<>();
 		actors = new ArrayList<>();
 		levelEnvironment = new GUILevelEditingEnvironment(this, actors);

@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -40,24 +41,26 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private List<Actor> availableActors;
 	private Pane myCenterPane;
 	private ImageView myLevelBackground;
+	private Controller myController;
 
-	public GUILevelEditingEnvironment(Controller controller, List<Actor> actors) {
+	public GUILevelEditingEnvironment(Controller controller, List<Actor> actors) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
+		myController = controller;
 		initializeEnvironment();
 	}
 
-	private void initializeEnvironment() {
+	private void initializeEnvironment() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		initializeCenter();
 		initializeLeftPane();
 		initializeDrag();
 	}
 
-	private void initializeLeftPane() {
+	private void initializeLeftPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		myLeftPane = new VBox();
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
-		myInspector = new GUILevelInspector(myResources, availableActors);
+		myInspector = new GUILevelInspector(myController, myResources, availableActors);
 		myLibrary = new GUILibrary();
 		myLeftPane.getChildren().addAll(myInspector.getPane(), myLibrary.getPane());
 		myRoot.setLeft(myLeftPane);
