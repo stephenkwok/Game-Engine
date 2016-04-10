@@ -21,8 +21,8 @@ public class ComboBoxLevel extends ComboBoxTextCell{
 	List<Level> levels;
 	private Controller myController;
 	
-	public ComboBoxLevel(ResourceBundle myResources, String promptText, Controller myController) {
-		super(myResources,promptText);
+	public ComboBoxLevel(ResourceBundle myResources, String promptText, Controller myController, String labelText) {
+		super(myResources,promptText, labelText);
 		this.myController = myController;
 		fillLevelNamesAndMap();
 	}

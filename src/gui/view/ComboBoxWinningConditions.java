@@ -9,8 +9,8 @@ public class ComboBoxWinningConditions extends ComboBoxTextCell {
 	private static final String DELIMITER = ",";
 	private List<String> myOptions;
 	
-	public ComboBoxWinningConditions(ResourceBundle myResources, String promptText) {
-		super(myResources, promptText);
+	public ComboBoxWinningConditions(ResourceBundle myResources, String promptText, String labelText) {
+		super(myResources, promptText, labelText);
 		myOptions = Arrays.asList(myResources.getString(WINNING_CONDITIONS_OPTIONS).split(DELIMITER));
 	}
 

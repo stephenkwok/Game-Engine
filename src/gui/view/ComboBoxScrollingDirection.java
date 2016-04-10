@@ -9,8 +9,8 @@ public class ComboBoxScrollingDirection extends ComboBoxTextCell {
 	private static final String DELIMITER = ",";
 	private List<String> myOptions;
 	
-	public ComboBoxScrollingDirection(ResourceBundle myResources, String promptText) {
-		super(myResources, promptText);
+	public ComboBoxScrollingDirection(ResourceBundle myResources, String promptText, String labelText) {
+		super(myResources, promptText, labelText);
 		myOptions = Arrays.asList(myResources.getString(SCROLLING_DIRECTION_OPTIONS).split(DELIMITER));
 	}
 

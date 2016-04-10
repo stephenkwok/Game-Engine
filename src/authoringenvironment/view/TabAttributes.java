@@ -1,20 +1,14 @@
 package authoringenvironment.view;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
-import gui.view.ComboBoxOptions;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
-import gui.view.TextFieldWithButton;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -26,6 +20,8 @@ public class TabAttributes extends TabParent {
 	private static final int PADDING = 10;
 	private static final String DELIMITER = ",";
 	private static final String EDITOR_ELEMENTS = "EditorElements";
+	private static final String HUD_OPTIONS = "HUDOptions";
+	private static final String HUD_PROMPT = "Choose items to display on the level scene:";
 	private ResourceBundle myAttributesResources;
 	private GUIFactory myFactory;
 	private Controller myController;
@@ -41,15 +37,27 @@ public class TabAttributes extends TabParent {
 	private void createElements() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		VBox vbox = new VBox(PADDING);
 		vbox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
-		String[] elements = myAttributesResources.getString(EDITOR_ELEMENTS).split(DELIMITER);
+		addElements(EDITOR_ELEMENTS, vbox);
+		
+		if (myAttributesResources.containsKey(HUD_OPTIONS)) {
+			addHUD(HUD_OPTIONS, vbox);
+		}
+		myContent = vbox;
+	}
+	
+	private void addHUD(String key, VBox vbox) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		vbox.getChildren().add(new Label(HUD_PROMPT));
+		addElements(HUD_OPTIONS, vbox);
+	}
+	private void addElements(String key, VBox vbox) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		String[] elements = myAttributesResources.getString(key).split(DELIMITER);
 		
 		for (int i = 0; i < elements.length; i++) {
 			IGUIElement elementToCreate = myFactory.createNewGUIObject(elements[i]);
 			vbox.getChildren().add(elementToCreate.createNode());
 		}
-		
-		myContent = vbox;
 	}
+	
 	@Override
 	Node getContent() {
 		return myContent;

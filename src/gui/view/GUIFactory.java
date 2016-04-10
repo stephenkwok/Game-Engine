@@ -32,6 +32,7 @@ public class GUIFactory {
 	private static final String WIDTH = "Width";
 	private static final String GUI_ELEMENT_TYPES = "GUIElementTypes";
 	private static final String DELIMITER = ",";
+	private static final String SPACING = "Spacing";
 	protected ResourceBundle myResources;
 	protected IScreenController myController;
 
@@ -88,9 +89,10 @@ public class GUIFactory {
 
 	private IGUIElement createComboBox(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 			String prompt = myResources.getString(nodeType + PROMPT);
+			String label = myResources.getString(nodeType + LABEL);
 			Class<?> comboBox = Class.forName(className);
-			Constructor<?> constructor = comboBox.getConstructor(ResourceBundle.class, String.class);
-			return (IGUIElement) constructor.newInstance(myResources, prompt);
+			Constructor<?> constructor = comboBox.getConstructor(ResourceBundle.class, String.class, String.class);
+			return (IGUIElement) constructor.newInstance(myResources, prompt, label);
 	}
 
 	private IGUIElement createButton(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException {
@@ -132,8 +134,13 @@ public class GUIFactory {
 
 	}
 	
-	private IGUIElement createCheckBox(String nodeType) {
-		return null;
+	private IGUIElement createCheckBoxObject(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		Class<?> checkbox = Class.forName(className);
+		String promptText = myResources.getString(nodeType + PROMPT);
+		int spacing = Integer.parseInt(myResources.getString(nodeType + SPACING));
+		int width = Integer.parseInt(myResources.getString(nodeType + WIDTH));
+		Constructor<?> constructor = checkbox.getConstructor(String.class, int.class, int.class);
+		return (IGUIElement) constructor.newInstance(promptText, spacing, width);
 	}
 
 

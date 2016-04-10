@@ -9,8 +9,8 @@ public class ComboBoxTermination extends ComboBoxTextCell {
 	private static final String DELIMITER = ",";
 	private List<String> myOptions;
 	
-	public ComboBoxTermination(ResourceBundle myResources, String promptText) {
-		super(myResources, promptText);
+	public ComboBoxTermination(ResourceBundle myResources, String promptText, String labelText) {
+		super(myResources, promptText, labelText);
 		myOptions = Arrays.asList(myResources.getString(TERMINATION_OPTIONS).split(DELIMITER));
 	}
 

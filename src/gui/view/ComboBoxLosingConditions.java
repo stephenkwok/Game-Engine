@@ -9,8 +9,8 @@ public class ComboBoxLosingConditions extends ComboBoxTextCell {
 	private static final String DELIMITER = ",";
 	private List<String> myOptions;
 	
-	public ComboBoxLosingConditions(ResourceBundle myResources, String promptText) {
-		super(myResources, promptText);
+	public ComboBoxLosingConditions(ResourceBundle myResources, String promptText, String labelText) {
+		super(myResources, promptText, labelText);
 		myOptions = Arrays.asList(myResources.getString(LOSING_CONDITIONS_OPTIONS).split(DELIMITER));
 	}
 

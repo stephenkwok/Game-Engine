@@ -9,8 +9,8 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 	private static final String DELIMITER = ",";
 	private List<String> myOptions;
 	
-	public ComboBoxIsPlayer(ResourceBundle myResources, String promptText) {
-		super(myResources, promptText);
+	public ComboBoxIsPlayer(ResourceBundle myResources, String promptText, String labelText) {
+		super(myResources, promptText, labelText);
 		myOptions = Arrays.asList(myResources.getString(IS_PLAYER_OPTIONS).split(DELIMITER));
 	}
 

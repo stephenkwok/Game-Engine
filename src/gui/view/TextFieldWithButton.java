@@ -35,6 +35,7 @@ public class TextFieldWithButton implements IGUIElement {
 			EventHandler<ActionEvent> buttonAction) {
 		this.labelText = labelText;
 		this.promptText = promptText;
+		buttonText = GO;
 		this.textFieldWidth = textFieldWidth;
 		this.buttonAction = buttonAction;
 	}

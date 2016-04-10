@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -23,6 +24,7 @@ public abstract class ComboBoxParent implements IGUIElement {
 	private static final int VISIBLE_ROW_COUNT = 5;
 	private static final int PADDING = 10;
 	private static final int HBOX_SPACING = 5;
+	private static final String GO = "Go";
 	protected static final String NO_NODE_FOR_BOX = "";
 	protected String promptText;
 	protected ObservableList<String> options;
@@ -30,9 +32,11 @@ public abstract class ComboBoxParent implements IGUIElement {
 	protected ComboBox<String> comboBox;
 	protected Button comboButton;
 	protected String paletteSource;
+	protected String labelText;
 	
 	public ComboBoxParent(String promptText) {
 		this.promptText = promptText;
+		this.labelText = null;
 	}
 	
 	/**
@@ -44,12 +48,18 @@ public abstract class ComboBoxParent implements IGUIElement {
 		options = FXCollections.observableArrayList(
 			        getOptionsList()
 			    );
+		if (labelText != null) {
+			Label label = new Label(labelText);
+			label.setAlignment(Pos.CENTER_LEFT);
+			label.setWrapText(true);
+			hbox.getChildren().add(label);
+		}
 		comboBox = new ComboBox<>(options);
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
 		comboBox.setPrefWidth(COMBOBOX_WIDTH);
 		comboBox.setPromptText(promptText);
 		comboBox.setCellFactory(factory -> new MyCustomCell());
-		comboButton = new Button("Go");
+		comboButton = new Button(GO);
 		setButtonAction();
 		hbox.getChildren().addAll(comboBox, comboButton);
 		hbox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
