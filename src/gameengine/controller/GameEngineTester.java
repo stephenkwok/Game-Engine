@@ -6,6 +6,7 @@ import java.util.List;
 import gameengine.model.Actor;
 import gameengine.model.IActor;
 import gameengine.model.ITrigger;
+import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Actions.MoveRight;
@@ -61,18 +62,20 @@ public class GameEngineTester {
         Game myGame = new Game(new GameInfo(), myLevels);
 
         //Prints Initial State
-        List<IActor> actors = (List<IActor>) myGame.getActors();
-        for (IActor actor : actors){
+        List<Actor> actors = (List<Actor>) myGame.getActors();
+        for (Actor actor : actors){
             System.out.printf(actor.getID() + ", " + actor.getX() + ", " + actor.getY() + "\t\t");
+           PhysicsEngine pe = new PhysicsEngine();
+           pe.moveRight(actor);
         }
         System.out.println();
 
         //Issues Trigger
-        myGame.handleTrigger(new TickTrigger());
+        //myGame.handleTrigger(new TickTrigger());
 
         //Prints Final State
-        actors = (List<IActor>) myGame.getActors();
-        for (IActor actor : actors){
+        actors = (List<Actor>) myGame.getActors();
+        for (Actor actor : actors){
             System.out.printf(actor.getID() + ", " + actor.getX() + ", " + actor.getY() + "\t\t");
         }
     }
