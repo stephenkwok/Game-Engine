@@ -1,12 +1,9 @@
 package gameengine.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import gameengine.model.Actor;
-import gameengine.model.IActor;
 import gameengine.model.ITrigger;
 import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
@@ -71,19 +68,26 @@ public class GameEngineTest {
         for (Actor actor : actors){
            System.out.printf(actor.getID() + ", " + actor.getXPos() + ", " + actor.getYPos() + "\t\t");
            actor.setEngine(physicsEngine);
+           actor.setInAir(false);
+           actor.setXVelo(2);
         }
         System.out.println();
 
         //Testing Actions directly. Should eventually be modified to test Triggers
+        //Only use one at a time, comment out rest
         for (Actor actor: actors){
-        	MoveRight mr = new MoveRight(actor);
-        	mr.perform();
-        	MoveLeft ml = new MoveLeft(actor);
+//        	MoveRight mr = new MoveRight(actor);  //works
+//        	mr.perform();
+        	MoveUp ml = new MoveUp(actor);
         	ml.perform();
-        	MoveUp mp = new MoveUp(actor);
-        	mp.perform();
-        	GlideLeft gl = new GlideLeft(actor);
-        	gl.perform();
+        	physicsEngine.tick(actor);
+        	physicsEngine.tick(actor);
+        	physicsEngine.tick(actor);
+        	physicsEngine.tick(actor);
+//        	MoveUp mp = new MoveUp(actor);
+//        	mp.perform();
+//        	GlideLeft gl = new GlideLeft(actor);
+//        	gl.perform();
         }
 
         //Prints Final State
