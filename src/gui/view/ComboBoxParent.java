@@ -3,6 +3,7 @@ package gui.view;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.IEditableGameElement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -19,7 +20,7 @@ import javafx.scene.layout.HBox;
  * @author AnnieTang
  */
 
-public abstract class ComboBoxParent implements IGUIElement {
+public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement {
 	private static final int COMBOBOX_WIDTH = 190;
 	private static final int VISIBLE_ROW_COUNT = 5;
 	private static final int PADDING = 10;
@@ -33,10 +34,12 @@ public abstract class ComboBoxParent implements IGUIElement {
 	protected Button comboButton;
 	protected String paletteSource;
 	protected String labelText;
+	private IEditableGameElement myEditableElement;
 	
 	public ComboBoxParent(String promptText) {
 		this.promptText = promptText;
 		this.labelText = null;
+		myEditableElement = null;
 	}
 	
 	/**
@@ -109,6 +112,15 @@ public abstract class ComboBoxParent implements IGUIElement {
 		        getOptionsList()
 		    );
 		comboBox.setItems(newOptions);
+	}
+
+	@Override
+	public void setEditableElement(IEditableGameElement element) {
+		myEditableElement = element;
+	}
+
+	protected IEditableGameElement getEditableElement() {
+		return myEditableElement;
 	}
 	
 	/**

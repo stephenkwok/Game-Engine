@@ -60,7 +60,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private void initializeLeftPane() {
 		myLeftPane = new VBox();
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
-		myInspector = new GUILevelInspector(myController, myResources, availableActors);
+		myInspector = new GUILevelInspector(myController, myResources, availableActors, myLevel);
 		myLibrary = new GUILibrary();
 		myLeftPane.getChildren().addAll(myInspector.getPane(), myLibrary.getPane());
 		myRoot.setLeft(myLeftPane);
