@@ -25,6 +25,8 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 	private static final int HBOX_SPACING = 5;
 	private static final String GO = "Go";
 	protected static final String NO_NODE_FOR_BOX = "";
+	private static final int BUTTON_HEIGHT = 30;
+	private static final int BUTTON_WIDTH = 40;
 	protected String promptText;
 	protected ObservableList<String> options;
 	protected List<String> optionsList;
@@ -56,6 +58,7 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 		comboBox.setPromptText(promptText);
 		comboBox.setCellFactory(factory -> new MyCustomCell());
 		comboButton = new Button(GO);
+		comboButton.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		HBox.setHgrow(comboBox, Priority.ALWAYS);
 		setButtonAction();
 		hbox.getChildren().addAll(comboBox, comboButton);

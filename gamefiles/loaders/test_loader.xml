@@ -46,6 +46,7 @@
           </veloY>
           <myID>0</myID>
           <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
           <myName>A1</myName>
           <myImageViewName>redball.png</myImageViewName>
           <myRules>
@@ -93,6 +94,8 @@
             <jumpForce>-5.0</jumpForce>
             <floorHeight>300.0</floorHeight>
           </myPhysicsEngine>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -136,11 +139,14 @@
           </veloY>
           <myID>0</myID>
           <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
           <myName>A2</myName>
           <myImageViewName>purplecircle.png</myImageViewName>
           <myRules/>
           <attributeMap/>
           <myPhysicsEngine reference="../../gameengine.model.Actor/myPhysicsEngine"/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap>
@@ -218,11 +224,14 @@
           </veloY>
           <myID>0</myID>
           <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
           <myName>Default Name</myName>
           <myImageViewName>elsa.png</myImageViewName>
           <myRules/>
           <attributeMap/>
           <myPhysicsEngine reference="../../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap/>
@@ -268,7 +277,7 @@
       <debugNanos>0</debugNanos>
       <theMaster>
         <inactive>true</inactive>
-        <nextPulseTime>1366911481310878</nextPulseTime>
+        <nextPulseTime>226097030083691</nextPulseTime>
         <lastPulseDuration>-2147483648</lastPulseDuration>
         <outer-class class="com.sun.javafx.tk.quantum.MasterTimer" reference="../.."/>
       </theMaster>
