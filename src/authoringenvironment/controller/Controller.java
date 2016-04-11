@@ -60,7 +60,6 @@ public class Controller implements IScreenController {
 	 */
 	public void goToLevelEditing(Level level) {
 		goToEditingEnvironment(level, levelEnvironment);
-
 	}
 
 	/**

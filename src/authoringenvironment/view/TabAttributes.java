@@ -38,6 +38,7 @@ public class TabAttributes extends TabParent {
 	private VBox myContent;
 	private List<CheckBox> myHUDElements;
 	private IEditableGameElement myEditableElement;
+	private List<IGUIEditingElement> myEditingElements;
 	
 	public TabAttributes(Controller controller, ResourceBundle myResources, String tabText, String levelOptionsResource, IEditableGameElement element) {
 		super(myResources, tabText);
@@ -45,6 +46,7 @@ public class TabAttributes extends TabParent {
 		myFactory = new GUIFactory(myAttributesResources, myController);
 		myHUDElements = new ArrayList<>();
 		myEditableElement = element;
+		myEditingElements = new ArrayList<>();
 		createElements();
 	}
 
@@ -56,6 +58,8 @@ public class TabAttributes extends TabParent {
 		if (myAttributesResources.containsKey(HUD_OPTIONS)) {
 			addHUD(HUD_OPTIONS, vbox);
 		}
+		
+		updateEditable(myEditableElement);
 		
 		myContent = vbox;
 	}
@@ -80,10 +84,17 @@ public class TabAttributes extends TabParent {
 		List<Node> createdElements = new ArrayList<>();
 		for (int i = 0; i < elements.length; i++) {
 			IGUIEditingElement elementToCreate = (IGUIEditingElement) myFactory.createNewGUIObject(elements[i]);
-			elementToCreate.setEditableElement(myEditableElement);
+			myEditingElements.add(elementToCreate);
 			createdElements.add(((IGUIElement) elementToCreate).createNode());
 		}
 		return createdElements;
+	}
+	
+	public void updateEditable(IEditableGameElement element) {
+		myEditableElement = element;
+		for (int i = 0; i < myEditingElements.size(); i++) {
+			myEditingElements.get(i).setEditableElement(element);
+		}
 	}
 		
 	public List<String> getHUDElementsToDisplay() {
