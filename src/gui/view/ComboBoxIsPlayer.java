@@ -22,7 +22,6 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 
 	@Override
 	public List<String> getOptionsList() {
-		// TODO Auto-generated method stub
 		return myOptions;
 	}
 
