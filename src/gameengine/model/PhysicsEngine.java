@@ -111,6 +111,7 @@ public class PhysicsEngine {
 	
 	public void moveRight(Actor a1) {
 		update(a1,horizontalForce, 0);
+    	System.out.println(a1.getXPos());
 	}
 
 	public void moveLeft(Actor a1) {

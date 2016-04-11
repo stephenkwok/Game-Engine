@@ -80,7 +80,7 @@ public class CollisionDetection {
 				
 		if(xOverlap <= yOverlap){
 			return "SideCollision";
-		}else{   
+		}else{ 
 			return "TopCollision";
 		}
 	}

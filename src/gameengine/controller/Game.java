@@ -50,7 +50,7 @@ public class Game extends Observable implements Observer {
 	
 
 	private void initTimeline() {
-		KeyFrame frame = new KeyFrame(Duration.millis(1000),
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> step());
 		animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
@@ -71,7 +71,7 @@ public class Game extends Observable implements Observer {
 	
 	private void step(){
 		List<Actor> currentActors = levels.get(info.getCurrentLevelNum()).getActors();
-		//physicsUpdate(currentActors);
+		physicsUpdate(currentActors);
 		myCollisionDetector.detection(currentActors);
 		
 	}
