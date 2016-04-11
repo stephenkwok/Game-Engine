@@ -12,9 +12,7 @@ public class Main extends Application{
 		Stage myStage = primaryStage;
 		SplashScreen myScreen = new SplashScreen(myStage);
 		myStage.setScene(myScreen.getScene());
-		
 		myStage.show();
-		
 	}
 	
 	public static void main(String[] args){

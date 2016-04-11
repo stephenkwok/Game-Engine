@@ -10,6 +10,7 @@ import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.GameScreen;
+import gameplayer.view.HUDScreen;
 
 
 /** 
@@ -39,6 +40,12 @@ public class GameController implements Observer {
 		view = myGameView;
 		view.addObserver(this);
 	}
+	
+	public void setHUD(HUDScreen hud) {
+		this.hud = hud;
+	}
+	
+	
 	
 	/**
 	 * Will initialize the backend (game engine) with the current level's information and actor information to set up the game for playing.  Will visualize that backend too. 

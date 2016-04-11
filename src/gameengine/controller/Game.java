@@ -28,6 +28,9 @@ public class Game extends Observable implements Observer {
 	private CollisionDetection myCollisionDetector;
 	private Timeline animation;
 	
+	private ObservableMap<String, Object> ayyLmao;
+	
+	
 	/**
 	 * A game is instantiated with a list of all levels in the game and a level to start on.
 	 * Upon instantiation, the actors from all levels are collected into a list and added to a map containing references from ID to actor.

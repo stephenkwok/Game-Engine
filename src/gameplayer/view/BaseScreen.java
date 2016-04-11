@@ -61,15 +61,15 @@ public class BaseScreen extends Screen {
 	private static final Integer BUTTON_X = 50;
 	private static final Integer BUTTON_Y = 10;
 	private BorderPane myMasterPane;
-	private GameController myGameController;
+	private GameController gameController;
 
 	public BaseScreen(Stage stage, Game game) {
 		super(stage);
 		this.myMasterPane = new BorderPane();
 		init();
-		GameController gameController = new GameController();
+		gameController = new GameController();
 		gameController.setGame(game);
-		gameController.setGameView(new GameScreen(new ParallelCamera()));
+		gameController.setGameView(new GameScreen(new ParallelCamera()));//need Blake to fill in
 		gameController.initialize(game.getInfo().getCurrentLevelNum());
 		addComponents();
 	}
@@ -84,7 +84,8 @@ public class BaseScreen extends Screen {
 	public void addComponents() {
 		try {
 			addGame();
-			addHUD();
+			//addHUD();
+			gameController.setHUD(new HUDScreen(gameController.getGame().getHUDInfo()));  //blake needs to add this
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException | SecurityException e1) {
 			e1.printStackTrace();
@@ -92,6 +93,7 @@ public class BaseScreen extends Screen {
 		getRoot().getChildren().add(myMasterPane);
 	}
 	
+	//depracated
 	public void addHUD() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		IGUIElement hudPane = factory.createNewGUIObject("hudPane");
 		Pane myP = (Pane) hudPane.createNode();
@@ -124,7 +126,7 @@ public class BaseScreen extends Screen {
 	}
 	
 	public void addGamePane(){
-		SubScene gameScene = myGameController.getView().getScene();
+		SubScene gameScene = gameController.getView().getScene();
 		myMasterPane.setCenter(gameScene);
 	}
 	

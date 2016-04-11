@@ -13,6 +13,9 @@ import javafx.scene.layout.BorderPane;
 
 public class HUDScreen extends Window implements IHUDScreen{
 	
+	private static final int DEFAULT_HEIGHT = 100;
+	private static final int DEFAULT_WIDTH = 200;
+	
 	private ObservableMap<String, Object> status;
 	Map<String, Integer> valueToRowMap;
 	Map<Integer, String> rowToValueMap;
@@ -37,6 +40,12 @@ public class HUDScreen extends Window implements IHUDScreen{
 			i++;
 		}
 	}
+	
+	public HUDScreen(ObservableMap<String, Object> status) {
+		this(DEFAULT_WIDTH, DEFAULT_HEIGHT, status);
+	}
+	
+	
 	
 	@Override
 	public void update() {
