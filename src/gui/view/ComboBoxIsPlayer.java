@@ -17,7 +17,6 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 	@Override
 	public void setButtonAction() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
