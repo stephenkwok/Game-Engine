@@ -174,6 +174,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     @Override
     public void setXPos(double updateXPosition) {
        x.set(updateXPosition);
+       System.out.println(this.x);
     }
 
     @Override
@@ -214,8 +215,10 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 
     @Override
     public void setImageView(ImageView imageView) {
-        myImageView = imageView;
-        myImageView.setFitHeight(imageView.getFitHeight());
+    	this.myImageView = imageView;
+		this.myImageView.setFitHeight(imageView.getFitHeight());
+    	this.myImageView.setX(this.getXPos());
+    	this.myImageView.setY(this.getYPos());
     }
 
     @Override
@@ -263,6 +266,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 
 	public void setMyImageViewName(String myImageViewName) {
 		this.myImageViewName = myImageViewName;
+		this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
 	}
 
     public void changed(){
