@@ -14,7 +14,7 @@ public class MenuSave extends MenuParent{
 
 	@Override
 	public void setOnButtonAction() {
-		myItem.setOnAction(e -> myRealController.saveGame());
+		myItem.setOnMenuValidation(e -> myRealController.saveGame());
 		
 	}
 

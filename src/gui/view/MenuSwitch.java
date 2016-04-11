@@ -14,7 +14,7 @@ public class MenuSwitch extends MenuParent{
 
 	@Override
 	public void setOnButtonAction() {
-		myItem.setOnAction(e -> myRealController.switchGame());
+		myItem.setOnMenuValidation(e -> myRealController.switchGame());
 		
 	}
 

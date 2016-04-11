@@ -24,5 +24,6 @@ public abstract class MenuParent implements IGUIElement{
 		return null;
 	}
 	
+	
 	public abstract void setOnButtonAction();
 }

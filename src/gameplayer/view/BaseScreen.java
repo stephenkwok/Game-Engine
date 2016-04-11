@@ -1,5 +1,6 @@
 package gameplayer.view;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -67,30 +68,27 @@ public class BaseScreen extends Screen {
 	public void addComponents() {
 		VBox myBox = new VBox(20);
 		try {
-			addMenu(myBox);
+			addTopBar(myBox);
 			addGame(myBox);
 			addHUD(myBox);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e1) {
+				| InvocationTargetException | ClassNotFoundException | NoSuchMethodException | SecurityException e1) {
 			e1.printStackTrace();
 		}
 		getRoot().getChildren().add(myBox);
 	}
 
-	public void addMenu(VBox myV)
-			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		IGUIElement myMenu = factory.createNewGUIObject("GameMenu");
-		MenuBar myMB = (MenuBar) myMenu.createNode();
-		myV.getChildren().add(myMB);
-		myMB.setMinWidth(Screen.SCREEN_WIDTH);
-		String[] menuItems = myResources.getString(MENU_ITEMS).split(",");
-		for (int i = 0; i < menuItems.length; i++) {
-			IGUIElement tempMenu = factory.createNewGUIObject(menuItems[i]);
-			//Menu myMenuNode = (Menu) tempMenu.createNode();
-			//myMB.getMenus().add(myMenuNode);
-			//create new method in gui factory called createNonNode that does the same thing but works for menus
-			myMB.getMenus().add(new Menu(menuItems[i]));
+	public void addTopBar(VBox myV)
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException {
+		String[] topButtons = myResources.getString("TopPane").split(",");
+		HBox smallH = new HBox();
+		for (int i = 0; i < topButtons.length; i++) {
+			IGUIElement newElement = factory.createNewGUIObject(topButtons[i]);
+			Button myB = (Button) newElement.createNode();
+			myB.setMinSize(10, 10);
+			smallH.getChildren().add(myB);
 		}
+		myV.getChildren().add(smallH);
 	}
 	
 	public void addHUD(VBox myV) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{

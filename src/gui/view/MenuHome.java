@@ -15,7 +15,7 @@ public class MenuHome extends MenuParent{
 
 	@Override
 	public void setOnButtonAction() {
-		this.myItem.setOnAction(e -> myRealController.goToSplash());
+		this.myItem.setOnMenuValidation(e -> myRealController.goToSplash());
 	}
 	
 
