@@ -98,7 +98,7 @@ abstract class TabLibrary extends TabParent {
 	private void setDragExited(Label mySource, GridPane myTarget) {
 		myTarget.setOnDragExited(new EventHandler<DragEvent>() {
 		    public void handle(DragEvent event) {
-		    	myTarget.setBackground(new Background(new BackgroundFill(Color.LAVENDER,new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
+		    	myTarget.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE,new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
 		        event.consume();
 		    }
 		});

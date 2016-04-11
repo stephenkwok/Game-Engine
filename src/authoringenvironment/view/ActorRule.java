@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import authoringenvironment.view.behaviors.BehaviorDouble;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
@@ -37,11 +38,10 @@ public class ActorRule {
 	private double ruleWidth; 
 	private static final double RULE_HEIGHT = 250;
 	private static final int CORNER_RADIUS = 20;
-	private static final String DIALOG_CHOICES = "Trigger Result";
-	private static final String DIALOG_HEADER = "Place your Behavior in: ";
-	private static final String DIALOG_CONTENT = "Choose one: ";
-	private static final String TRIGGER = "Trigger";
-	private String triggerBehaviors;
+//	private static final String DIALOG_CHOICES = "Trigger Result";
+//	private static final String DIALOG_HEADER = "Place your Behavior in: ";
+//	private static final String DIALOG_CONTENT = "Choose one: ";
+//	private static final String TRIGGER = "Trigger";
 	
 	private static final double RULE_PERCENT_WIDTH = 0.90;
 	private static final double STACKPANE_PERCENT_WIDTH = 0.92;
@@ -52,10 +52,11 @@ public class ActorRule {
 	private VBox results;
 	private ScrollPane trigScroll;
 	private ScrollPane resScroll;
-	private ChoiceDialog<String> dialog;
+//	private ChoiceDialog<String> dialog;
 	private ActorRuleCreator myActorRuleCreator;
 	private ResourceBundle myLibraryResources;
 	private static final String LIBRARY_BUNDLE = "library";
+	private String triggerBehaviors;
 	
 	public ActorRule(ActorRuleCreator myActorRuleCreator) {
 		this.myActorRuleCreator = myActorRuleCreator;
@@ -71,7 +72,7 @@ public class ActorRule {
 		this.myLibraryResources = ResourceBundle.getBundle(LIBRARY_BUNDLE);
 		this.triggerBehaviors = myLibraryResources.getString("TriggerBehaviors");
 		myRule = new GridPane(); 
-		myRule.setBackground(new Background(new BackgroundFill(Color.LAVENDER, new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
+		myRule.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
 		myRule.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
 		myRule.setPrefSize(ruleWidth, RULE_HEIGHT);
 		addTriggerResultLabels();
@@ -110,14 +111,17 @@ public class ActorRule {
 	public void addBehavior(Label behavior) {
 		if(isTrigger(behavior.getText())) triggers.getChildren().add(behavior);
 		else{
-			createDialog();
-	        Optional<String> result = dialog.showAndWait();
-	        result.ifPresent(choice -> {
-	        	if(choice.equals(TRIGGER)){
-	        		triggers.getChildren().add(behavior);
-	        	}
-	        	else results.getChildren().add(behavior);
-	        });
+			BehaviorDouble accelerate = new BehaviorDouble("Accelerate", myLibraryResources);
+			results.getChildren().add(accelerate.getNode());
+//			results.getChildren().add(behavior);
+//			createDialog();
+//	        Optional<String> result = dialog.showAndWait();
+//	        result.ifPresent(choice -> {
+//	        	if(choice.equals(TRIGGER)){
+//	        		triggers.getChildren().add(behavior);
+//	        	}
+//	        	else results.getChildren().add(behavior);
+//	        });
 		}
 	}
 
@@ -126,12 +130,12 @@ public class ActorRule {
 		return triggers.contains(behavior);
 	}
 	
-	private void createDialog() {
-		List<String> choices = Arrays.asList(DIALOG_CHOICES.split(" "));
-		dialog = new ChoiceDialog<>(choices.get(0),choices);
-        dialog.setHeaderText(DIALOG_HEADER);
-        dialog.setContentText(DIALOG_CONTENT);
-	}
+//	private void createDialog() {
+//		List<String> choices = Arrays.asList(DIALOG_CHOICES.split(" "));
+//		dialog = new ChoiceDialog<>(choices.get(0),choices);
+//        dialog.setHeaderText(DIALOG_HEADER);
+//        dialog.setContentText(DIALOG_CONTENT);
+//	}
 
 	public void addSound(Label sound) {
 		results.getChildren().add(sound);

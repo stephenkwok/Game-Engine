@@ -71,9 +71,6 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 
 	private void setDefaultActor() {
 		Actor defaultActor = new Actor();
-//		ImageView defaultIV = defaultActor.getImageView();
-//		defaultIV.setFitHeight(actorImageHeight);
-//		defaultIV.setPreserveRatio(true);
 		this.myActor = defaultActor;
 		this.myActorIV = new ImageviewActorIcon(defaultActor);
 	}
