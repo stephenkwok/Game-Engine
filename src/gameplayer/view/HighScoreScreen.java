@@ -32,7 +32,7 @@ public class HighScoreScreen extends Screen{
 		myMap.put("mario", new HashMap<String, Integer>());
 		myMap.get("mario").put("rihanna", 100);
 		myMap.put("flappy bird", new HashMap<String, Integer>());
-		myMap.get("flappy bird").put("mariel", 20);
+		myMap.get("flappy bird").put("michelle", -5);
 		displayScores(myMap);
 	}
 	

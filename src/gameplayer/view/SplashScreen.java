@@ -57,7 +57,7 @@ public class SplashScreen extends Screen {
 			IGUIElement newElement = factory.createNewGUIObject(buttons[i]);
 			hbox.getChildren().add(newElement.createNode());
 		}
-		ComboBoxGame newEle =  new ComboBoxGame("SUP", "gamefiles", myController);
+		ComboBoxGame newEle =  new ComboBoxGame("select game", "gamefiles", myController);
 		getRoot().getChildren().add((HBox) newEle.createNode());
 		
 		
