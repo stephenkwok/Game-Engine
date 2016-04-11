@@ -44,6 +44,7 @@ public class BaseScreenController implements IScreenController{
 	}
 
 	public void togglePause() {
+		//TODO: stop the step(), thx michael!!!!!! :)
 		System.out.println("pause the game");
 	}
 

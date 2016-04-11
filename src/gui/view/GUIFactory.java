@@ -124,8 +124,8 @@ public class GUIFactory {
 		String labelText = myResources.getString(nodeType + LABEL);
 		String promptText = myResources.getString(nodeType + PROMPT);
 		Double width = Double.valueOf(myResources.getString(nodeType + WIDTH));
-		Constructor<?> constructor = textfield.getConstructor(String.class, String.class, Double.class, EventHandler.class);
-		return (IGUIElement) constructor.newInstance(labelText, promptText, width, null);
+		Constructor<?> constructor = textfield.getConstructor(String.class, String.class, Double.class);
+		return (IGUIElement) constructor.newInstance(labelText, promptText, width);
 
 	}
 	

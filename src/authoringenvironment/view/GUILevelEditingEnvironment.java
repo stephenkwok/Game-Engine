@@ -60,7 +60,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private void initializeLeftPane() {
 		myLeftPane = new VBox();
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
-		myInspector = new GUILevelInspector(myController, myResources, availableActors);
+		myInspector = new GUILevelInspector(myController, myResources, availableActors, myLevel);
 		myLibrary = new GUILibrary();
 		myLeftPane.getChildren().addAll(myInspector.getPane(), myLibrary.getPane());
 		myRoot.setLeft(myLeftPane);
@@ -98,10 +98,6 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private void setDragDone(ImageviewActorIcon source) {
 		source.setOnDragDone(new EventHandler <DragEvent>() {
 			public void handle(DragEvent event) {
-				if (event.getTransferMode() == TransferMode.MOVE) {
-					//                    source.setText("");
-				}
-
 				event.consume();
 			}
 		});
@@ -197,7 +193,6 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		myCenterPane.getChildren().clear();
 		myLevel = (Level) editable;
 		myLevelBackground = myLevel.getImageView();
-		//TODO: SHOULD THIS FIT THE PANE OR PRESERVE RATIO?
 		myLevelBackground.setPreserveRatio(true);
 		myLevelBackground.fitWidthProperty().bind(myCenterPane.widthProperty());
 		myCenterPane.getChildren().add(myLevelBackground);
@@ -205,19 +200,5 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		for(Actor actor: myLevel.getActors()) actorIVs.add(actor.getImageView());
 		myCenterPane.getChildren().addAll(actorIVs);
 	}
-	
-	public void setLevelName() {
-		
-	}
-	
-	public void setLevelHeight() {
-		
-	}
-	
-	public void setLevelWidth() {
-		
-	}
-
-
 
 }

@@ -18,10 +18,6 @@ public class TextFieldGameNameEditor extends TextFieldWithButton{
 		this.controller = controller;
 	}
 	
-	@Override
-	protected void declareButtonAction() {
-		setButtonAction(e -> controller.setGameName());
-	}
 
 	
 }

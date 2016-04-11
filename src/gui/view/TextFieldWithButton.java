@@ -1,5 +1,6 @@
 package gui.view;
 
+import authoringenvironment.model.IEditableGameElement;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -17,7 +18,7 @@ import javafx.scene.layout.Priority;
  *
  */
 
-public abstract class TextFieldWithButton implements IGUIElement {
+public class TextFieldWithButton implements IGUIElement, IGUIEditingElement {
 	private static final int PADDING = 10;
 	private static final String GO = "Go";
 	private HBox myContainer;
@@ -28,21 +29,16 @@ public abstract class TextFieldWithButton implements IGUIElement {
 	private String promptText;
 	private Double textFieldWidth;
 	private String buttonText;
-	private EventHandler<ActionEvent> buttonAction;
+	private IEditableGameElement myEditableElement;
 
 	public TextFieldWithButton(String labelText, String promptText, Double textFieldWidth) {
 		this.labelText = labelText;
 		this.promptText = promptText;
-		buttonText = GO;
+		this.buttonText = GO;
 		this.textFieldWidth = textFieldWidth;
+		this.myEditableElement = null;
 	}
-
-	protected abstract void declareButtonAction();
 	
-	protected void setButtonAction(EventHandler<ActionEvent> buttonAction) {
-		this.buttonAction = buttonAction;
-	}
-
 	@Override
 	public Node createNode() {
 		myContainer = new HBox(PADDING);
@@ -51,10 +47,26 @@ public abstract class TextFieldWithButton implements IGUIElement {
 		myTextField.setPrefWidth(textFieldWidth);
 		HBox.setHgrow(myTextField, Priority.ALWAYS);
 		myButton = new Button(buttonText);
-		myButton.setOnAction(buttonAction);
 		myTextField.setPromptText(promptText);
 		myContainer.getChildren().addAll(myTextFieldPrompt, myTextField, myButton);
 		return myContainer;
 	}
 
+	@Override
+	public void setEditableElement(IEditableGameElement element) {
+		myEditableElement = element;
+	}
+
+
+	protected void setButtonAction(EventHandler<ActionEvent> buttonAction) {
+		myButton.setOnAction(buttonAction);
+	}
+	
+	protected IEditableGameElement getEditableElement() {
+		return myEditableElement;
+	}
+	
+	protected String getTextFieldInput() {
+		return myTextField.getText();
+	}
 }
