@@ -20,13 +20,14 @@ public class TextAreaGameDescriptionEditor extends TextAreaParent {
 	
 	private static final double VBOX_PADDING = 10.0;
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGui";
+	private static final String GAME_EDITOR_PROMPT_KEY = "enterGameDescription";
 	private ResourceBundle myResources;
 	
 	public TextAreaGameDescriptionEditor(String promptText, String buttonText, int prefRows, EventHandler<ActionEvent> handler) {
 		super(promptText, buttonText, prefRows, handler);
 		myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
 		setContainerPadding(new Insets(VBOX_PADDING));
-		setTextAreaPromptText(myResources.getString("enterGameDescription"));
+		setTextAreaPromptText(myResources.getString(GAME_EDITOR_PROMPT_KEY));
 	}
 
 }
