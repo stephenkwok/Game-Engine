@@ -17,7 +17,7 @@ import javafx.scene.layout.Priority;
  *
  */
 
-public class TextFieldWithButton implements IGUIElement {
+public abstract class TextFieldWithButton implements IGUIElement {
 	private static final int PADDING = 10;
 	private static final String GO = "Go";
 	private HBox myContainer;
@@ -29,19 +29,16 @@ public class TextFieldWithButton implements IGUIElement {
 	private Double textFieldWidth;
 	private String buttonText;
 	private EventHandler<ActionEvent> buttonAction;
-	
 
-	public TextFieldWithButton(String labelText, String promptText, Double textFieldWidth,
-			EventHandler<ActionEvent> buttonAction) {
+	public TextFieldWithButton(String labelText, String promptText, Double textFieldWidth) {
 		this.labelText = labelText;
 		this.promptText = promptText;
 		buttonText = GO;
 		this.textFieldWidth = textFieldWidth;
-		this.buttonAction = buttonAction;
 	}
-	
-	public HBox getCoupledNodes() {
-		return myContainer;
+
+	protected void setButtonAction(EventHandler<ActionEvent> buttonAction) {
+		this.buttonAction = buttonAction;
 	}
 
 	@Override
@@ -57,4 +54,5 @@ public class TextFieldWithButton implements IGUIElement {
 		myContainer.getChildren().addAll(myTextFieldPrompt, myTextField, myButton);
 		return myContainer;
 	}
+
 }

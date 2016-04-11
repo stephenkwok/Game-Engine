@@ -57,7 +57,7 @@ public class VBoxMainScreenLeftPane extends VBox {
 	private void initGameNameEditor() {
 		String mainPrompt = myResources.getString("gameName");
 		String textFieldPrompt = myResources.getString("enterGameName");
-		TextFieldWithButton nameEditor = new TextFieldWithButton(mainPrompt, textFieldPrompt, TEXT_FIELD_WIDTH,
+		TextFieldWithButton nameEditor = new TextFieldGameNameEditor(mainPrompt, textFieldPrompt, TEXT_FIELD_WIDTH,
 				saveNameButtonAction);
 		nameEditorContainer = (HBox) nameEditor.createNode();
 		nameEditorContainer.setSpacing(TEXT_FIELD_CONTAINER_SPACING);
