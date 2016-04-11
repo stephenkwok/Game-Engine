@@ -6,6 +6,7 @@ public class NextLevel extends Action {
 
 	public NextLevel(Actor assignedActor) {
 		super(assignedActor);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
