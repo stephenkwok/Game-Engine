@@ -3,21 +3,22 @@ package gameengine.model.Triggers;
 import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 
-public class BottomCollision extends CollisionTrigger implements ITrigger{
+public class BottomCollision extends CollisionTrigger implements ITrigger {
 
-	public BottomCollision() {
-		// TODO Auto-generated constructor stub
-	}
+    private static final String COLLISION_TYPE = "BottomCollision";
 
-	@Override
-	public String getTriggerName() {
-		return "BottomCollision";
-	}
+    public BottomCollision(Actor mainActor, Actor collisionActor) {
+        super(mainActor, collisionActor);
+    }
 
-	@Override
-	public boolean evaluate(Actor myActor) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public String getTriggerName() {
+        return makeName(COLLISION_TYPE);
+    }
+
+    @Override
+    public boolean evaluate(Actor myActor) {
+        return true;
+    }
 
 }
