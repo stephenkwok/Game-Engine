@@ -1,7 +1,6 @@
 package authoringenvironment.controller;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -172,5 +171,13 @@ public class Controller implements IScreenController {
 	@Override
 	public Screen getScreen() {
 		return guiMain;
+	}
+	
+	public void setGameName() {
+		
+	}
+	
+	public void setGameDescription() {
+		
 	}
 }
