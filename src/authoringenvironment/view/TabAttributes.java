@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * Abstract Tab for setting attributes to go in the Inspector Pane in either the Level or Actor Editing Environment GUI.
- * @author amyzhao, AnnieTang
+ * @author amyzhao
  *
  */
 public class TabAttributes extends TabParent {
