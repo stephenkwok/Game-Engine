@@ -37,6 +37,7 @@ public class TextFieldWithButton implements IGUIElement, IGUIEditingElement {
 		this.buttonText = GO;
 		this.textFieldWidth = textFieldWidth;
 		this.myEditableElement = null;
+		myButton = new Button(buttonText);
 	}
 	
 	@Override
@@ -46,7 +47,6 @@ public class TextFieldWithButton implements IGUIElement, IGUIEditingElement {
 		myTextField = new TextField();
 		myTextField.setPrefWidth(textFieldWidth);
 		HBox.setHgrow(myTextField, Priority.ALWAYS);
-		myButton = new Button(buttonText);
 		myTextField.setPromptText(promptText);
 		myContainer.getChildren().addAll(myTextFieldPrompt, myTextField, myButton);
 		return myContainer;
