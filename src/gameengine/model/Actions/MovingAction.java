@@ -11,15 +11,8 @@ import java.util.List;
  */
 public abstract class MovingAction extends Action {
 
-    private double distance;
-
-    public MovingAction(Actor assignedActor, List<Object> args){
+    public MovingAction(Actor assignedActor){
         super(assignedActor);
-        distance = (Double) args.get(0);
-    }
-
-    public void moveActor(double angle){
-        getActor().move(distance, angle);
     }
 
     @Override

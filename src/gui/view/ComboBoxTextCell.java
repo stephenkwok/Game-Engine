@@ -6,14 +6,15 @@ import java.util.ResourceBundle;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 /**
- * ComboBox with text options. 
+ * ComboBox with only text representation of options. 
  * @author AnnieTang
  *
  */
 public abstract class ComboBoxTextCell extends ComboBoxParent {
 	
-	public ComboBoxTextCell(ResourceBundle myResources, String promptText) {
+	public ComboBoxTextCell(ResourceBundle myResources, String promptText, String labelText) {
 		super(promptText);
+		this.labelText = labelText;
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import gui.controller.IScreenController;
 import javafx.scene.Node;
 import javafx.scene.control.Menu;
 
-public class MenuParent implements IGUIElement{
+public abstract class MenuParent implements IGUIElement{
 
 	protected IScreenController myController;
 	private String menuText;
@@ -19,13 +19,11 @@ public class MenuParent implements IGUIElement{
 	public Node createNode() {
 		myItem = new Menu();
 		myItem.setText(menuText);
+		setOnButtonAction();
+		//THIS RETURNS NULL BECAUSE A MENU IS NOT A NODE
 		return null;
 	}
-
-	@Override
-	public void updateNode() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
+	
+	public abstract void setOnButtonAction();
 }

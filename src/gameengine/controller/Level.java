@@ -18,7 +18,7 @@ import authoringenvironment.model.IEditableGameElement;
  *
  * @author blakekaplan
  */
-public class Level implements ILevel, IEditableGameElement {
+public class Level implements Observer, ILevel, IEditableGameElement {
 
 	private static final String DEFAULT_NAME = "Untitled";
 	private static final String DEFAULT_IMAGE_NAME = "default_background.png";
@@ -29,8 +29,6 @@ public class Level implements ILevel, IEditableGameElement {
     private String myBackgroundImgName;
 	@XStreamOmitField
     private ImageView myBackground;
-    private CollisionDetection myCollisionDetector;
-    private PhysicsEngine myPhysicsEngine;
 
 
     /**
@@ -42,8 +40,6 @@ public class Level implements ILevel, IEditableGameElement {
         myName = DEFAULT_NAME;
         myBackgroundImgName = DEFAULT_IMAGE_NAME;
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
-        myPhysicsEngine = new PhysicsEngine();
-        myCollisionDetector = new CollisionDetection(myPhysicsEngine);
     }
 
     /**
@@ -57,7 +53,7 @@ public class Level implements ILevel, IEditableGameElement {
         List<Actor> relevantActors = myTriggerMap.get(myTrigger.getTriggerName());
         for (Actor myActor : relevantActors) {
             if (myTrigger.evaluate(myActor)){
-                myActor.performActionsFor(myPhysicsEngine, myTrigger.getTriggerName());
+                myActor.performActionsFor(myTrigger.getTriggerName());
             }
         }
         //myCollisionDetector.detection(myActors); //Collision Detection/Resolution for each Actor
@@ -80,7 +76,7 @@ public class Level implements ILevel, IEditableGameElement {
      */
     @Override
     public void addActor(Actor newActor) {
-    	newActor.setEngine(myPhysicsEngine);
+        newActor.addObserver(this);
         myActors.add(newActor);
         Set<String> actorTriggers = newActor.getTriggers();
         for (String myTrigger : actorTriggers) {
@@ -166,7 +162,15 @@ public class Level implements ILevel, IEditableGameElement {
 	      
 	      return stringBuilder.toString();
 	}
-	
 
 
+    @Override
+    public void update(Observable o, Object arg) {
+        Actor myActor = (Actor) o;
+        if (arg.equals("DESTROY")){
+            myActors.remove(myActor);
+        } else if (arg.equals("WINGAME")) {
+        	//method for win game
+        }
+    }
 }

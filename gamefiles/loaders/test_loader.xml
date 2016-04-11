@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
+  <changed>false</changed>
+  <obs/>
+  <levels>
+    <gameengine.controller.Level>
+      <myActors>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+            <gameengine.controller.Game reference="../../../../../.."/>
+          </obs>
+          <x>0.0</x>
+          <y>0.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myName>Default Name</myName>
+          <myImageViewName>default_actor.jpg</myImageViewName>
+          <myRules>
+            <entry>
+              <string>Space</string>
+              <list>
+                <gameengine.model.Actions.MoveLeft>
+                  <myActor reference="../../../../.."/>
+                  <distance>50.0</distance>
+                </gameengine.model.Actions.MoveLeft>
+              </list>
+            </entry>
+          </myRules>
+          <attributeMap/>
+          <myPhysicsEngine>
+            <timeStep>1</timeStep>
+            <friction>-0.05</friction>
+            <gravity>0.11</gravity>
+            <maxHorizVelocity>50.0</maxHorizVelocity>
+            <maxVertVelocity>-50.0</maxVertVelocity>
+            <horizontalForce>5.0</horizontalForce>
+            <jumpForce>-5.0</jumpForce>
+            <floorHeight>300.0</floorHeight>
+          </myPhysicsEngine>
+        </gameengine.model.Actor>
+      </myActors>
+      <myTriggerMap>
+        <entry>
+          <string>Space</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+      </myTriggerMap>
+      <myName>Untitled</myName>
+      <myBackgroundImgName>default_background.png</myBackgroundImgName>
+      <myCollisionDetector>
+        <myPhysicsEngine reference="../../myActors/gameengine.model.Actor/myPhysicsEngine"/>
+      </myCollisionDetector>
+      <myPhysicsEngine reference="../myActors/gameengine.model.Actor/myPhysicsEngine"/>
+    </gameengine.controller.Level>
+  </levels>
+  <info>
+    <myName>My Game</myName>
+    <myImageName>default_game.jpg</myImageName>
+    <myDescription>This is a scrolling game.</myDescription>
+    <myCurrentLevelNum>0</myCurrentLevelNum>
+  </info>
+</gameengine.controller.Game>
