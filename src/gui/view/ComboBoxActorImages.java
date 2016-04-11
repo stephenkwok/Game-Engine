@@ -47,7 +47,7 @@ public class ComboBoxActorImages extends ComboBoxImageCell{
 	@Override
 	public Node getNodeForBox(String item){
         HBox hbox = new HBox();
-        hbox.getChildren().addAll(new Label(options.indexOf(item) + " "), imageMap.get(item));
+        hbox.getChildren().addAll(new Label(options.indexOf(item) + " "), imageMap.get(item), new Label(item + " "));
         return hbox;
 	}
 

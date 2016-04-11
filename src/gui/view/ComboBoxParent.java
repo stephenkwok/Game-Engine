@@ -90,8 +90,7 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
             setGraphic(null);
         } else {
        	 	HBox hbox = new HBox();
-       	 	Label lbl = new Label(item);
-       	 	hbox.getChildren().addAll(getNodeForBox(item), lbl);
+       	 	hbox.getChildren().addAll(getNodeForBox(item));
             setGraphic(hbox);
         }
        }
