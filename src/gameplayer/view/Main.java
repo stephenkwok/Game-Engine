@@ -94,6 +94,12 @@ public class Main extends Application {
 		stage.setWidth(800);
 		stage.setHeight(600);
 
+//		CreatorController c = new CreatorController(model);
+//		System.out.println(c);
+//		File myF = new File("gamefiles/test.xml");
+//		System.out.println(myF);
+//		c.saveForEditing(myF);
+		
 
 		sub.setCamera(camera);
 		stage.setScene(scene);

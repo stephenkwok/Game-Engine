@@ -33,6 +33,8 @@ public class CreatorController implements ICreatorController {
 		//this.myScreen = screen;
 		this.myXMLCreator = new XMLCreator();
 	}
+	
+	public CreatorController () {}
 
 	@Override
 	public void saveForEditing(File file) {
