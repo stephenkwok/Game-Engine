@@ -4,22 +4,21 @@ import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 
 public class SideCollision extends CollisionTrigger implements ITrigger {
-	private Actor a1;
-	private Actor a2;
-	
-	public SideCollision(Actor a1, Actor a2) {
-		this.a1 = a1;
-		this.a2 = a2;
-	}
 
-	@Override
-	public String getTriggerName() {
-		return a1.getName()+"SideCollision"+a2.getName();
-	}
+    private static final String COLLISION_NAME = "SideCollision";
 
-	@Override
-	public boolean evaluate(Actor myActor) {
-		return false;
-	}
+    public SideCollision(Actor mainActor, Actor collidesWith) {
+        super(mainActor, collidesWith);
+    }
+
+    @Override
+    public String getTriggerName() {
+        return makeName(COLLISION_NAME);
+    }
+
+    @Override
+    public boolean evaluate(Actor myActor) {
+        return true;
+    }
 
 }

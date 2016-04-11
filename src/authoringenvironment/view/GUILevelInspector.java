@@ -1,8 +1,10 @@
 package authoringenvironment.view;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.Controller;
 import gameengine.model.Actor;
 import gui.view.IGUI;
 import javafx.scene.control.TabPane;
@@ -18,12 +20,12 @@ public class GUILevelInspector implements IGUI {
 	private TabActors myActorsTab;
 	private TabAttributes myAttributesTab;
 	
-	public GUILevelInspector(ResourceBundle myResources, List<Actor> availActors) {
+	public GUILevelInspector(Controller controller, ResourceBundle myResources, List<Actor> availActors) {
 		this.myResources = myResources;
 		myPane = new StackPane();
 		TabPane tabPane = new TabPane();
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
-		myAttributesTab = new TabAttributes(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE);
+		myAttributesTab = new TabAttributes(controller, myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE);
 		tabPane.getTabs().addAll(myActorsTab.getTab(), myAttributesTab.getTab());
 		myPane.getChildren().add(tabPane);
 	}

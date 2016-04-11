@@ -47,6 +47,7 @@ public class Game extends Observable implements Observer {
 		initTimeline();
 		
 	}
+	
 
 	private void initTimeline() {
 		KeyFrame frame = new KeyFrame(Duration.millis(1000),
@@ -135,7 +136,7 @@ public class Game extends Observable implements Observer {
 		notifyObservers(arg);
 	}
 
-	public List<? extends IActor> getActors() {
+	public List<Actor> getActors() {
 		return getLevels().get(getInfo().getCurrentLevelNum()).getActors();
 	}
 	

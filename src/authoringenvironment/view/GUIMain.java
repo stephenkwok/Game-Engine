@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 
 /**
  * Main GUI class. Fixed tool-bar as top pane. 
- * @author AnnieTang
+ * @author AnnieTang, amyzhao
  *
  */
 public class GUIMain extends Screen implements IGUI {
@@ -38,7 +38,7 @@ public class GUIMain extends Screen implements IGUI {
 	private GUIFactory factory;
 	private Scene splashScene;
 	
-	public GUIMain(Stage s, Scene splash) {
+	public GUIMain(Stage s, Scene splash) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		super(s);
 		this.splashScene = splash;
 		this.myStage = s;
@@ -47,8 +47,12 @@ public class GUIMain extends Screen implements IGUI {
 	
 	/**
 	 * Initializes resource bundle, controller, and factory class.
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	public void init(){
+	public void init() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		myRoot = new BorderPane();
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);

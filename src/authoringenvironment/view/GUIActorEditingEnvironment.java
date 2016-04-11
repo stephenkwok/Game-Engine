@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
@@ -78,7 +79,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	}
 
 	private void setLeftPane() {
-		attributes = new TabAttributes(myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE);
+		attributes = new TabAttributes(myController, myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE);
 		VBox vbox = new VBox();
 		TabPane attributeTP = new TabPane();
 		attributeTP.getTabs().add(attributes.getTab());

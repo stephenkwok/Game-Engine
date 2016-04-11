@@ -1,5 +1,6 @@
 package gui.controller;
 
+import java.lang.reflect.InvocationTargetException;
 import java.io.File;
 
 import gameengine.controller.Game;
@@ -8,11 +9,11 @@ import javafx.stage.Stage;
 
 public interface IScreenController {
 	
-	public void init ();
+	public void init () throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
 	
 	public Stage getStage ();
 
-	public void createGameFromFile(Game game);
+	public void useGame(Game game);
 	
 	public Screen getScreen();
 }

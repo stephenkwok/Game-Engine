@@ -1,5 +1,7 @@
 package gui.view;
 
+import java.lang.reflect.InvocationTargetException;
+
 import javafx.scene.Node;
 
 /**
@@ -12,8 +14,10 @@ public interface IGUIElement {
      * This method creates the GUI element and passes it to the GUI class as a Node
      * type.
      * @return 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
      */
     Node createNode();
-    
-    
 }

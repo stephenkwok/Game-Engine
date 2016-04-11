@@ -9,13 +9,11 @@ import gameengine.model.Triggers.KeyTrigger;
 import javafx.event.Event;
 import javafx.scene.Camera;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-
 
 /** 
  * This class serves as the private interface that a Game screen must implement in order to be able to add visual elements of the game to the screen.
@@ -24,21 +22,25 @@ import javafx.scene.input.MouseEvent;
  */
 
 public class GameScreen extends Observable {
-	private SubScene myScene;
-	private Group myGroup;
+
+	private SubScene mySubscene;
+	private Group mySubgroup;
 
 	
 	private Camera camera;
 	
-	public GameScreen(Scene mainScene, Camera camera){
-		myGroup = new Group();
-		myScene = new SubScene(myGroup,600,400);
-		mainScene.setOnKeyPressed(e->handleScreenEvent(e));//
+	public GameScreen(Camera camera){
+		mySubgroup = new Group();
+		mySubscene = new SubScene(mySubgroup, 700, 500);
+		mySubscene.setFocusTraversable(true);
+		mySubscene.setOnKeyPressed(e -> handleScreenEvent(e));
+		mySubscene.setOnMouseClicked(e -> handleScreenEvent(e));
 		this.camera = camera; ///
 	}
 	
+	
 	public SubScene getScene(){
-		return myScene;
+		return mySubscene;
 	}
 	
 	/**
@@ -46,12 +48,9 @@ public class GameScreen extends Observable {
 	 * @param actor an instance of IActor
 	 */
 	public void addActor (Actor actor){
-		myGroup.getChildren().add(actor.getImageView());//
+		mySubgroup.getChildren().add(actor.getImageView());//
 	}
 	
-	public void addToRoot(Node n){
-		myGroup.getChildren().add(n);
-	}
 	
 	/**
 	 * Will receive events on screen and then pass to the game engine's handler to determine what action to take
@@ -70,6 +69,7 @@ public class GameScreen extends Observable {
 			notifyObservers(trigger);
 		}
 	}
+
 	
 	private ClickTrigger handleClick(double x, double y){
 		ClickTrigger clickTrigger = new ClickTrigger();
@@ -82,6 +82,6 @@ public class GameScreen extends Observable {
 	}
 	
 	public void clearGame(){
-		myGroup.getChildren().clear();
+		mySubgroup.getChildren().clear();
 	}
 }

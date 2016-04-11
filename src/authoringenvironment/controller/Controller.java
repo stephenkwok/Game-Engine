@@ -1,6 +1,7 @@
 package authoringenvironment.controller;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -144,6 +145,7 @@ public class Controller implements IScreenController {
 		Actor newActor = new Actor();
 		actors.add(newActor);
 		mainScreen.createActorLabel(newActor);
+		actorEnvironment.setActorImage(newActor.getImageView());
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
 	/**
@@ -162,7 +164,7 @@ public class Controller implements IScreenController {
 	}
 
 	@Override
-	public void createGameFromFile(Game game) {
+	public void useGame(Game game) {
 		// TODO Auto-generated method stub
 		
 	}
