@@ -10,10 +10,40 @@
             <gameengine.controller.Level reference="../../../.."/>
             <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
-          <x>0.0</x>
-          <y>0.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
+          <x class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
+              <listener class="gameengine.model.Actor$1">
+                <outer-class reference="../../../.."/>
+              </listener>
+              <currentValue class="double">0.0</currentValue>
+            </helper>
+            <name/>
+          </x>
+          <y class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
+              <listener class="gameengine.model.Actor$2">
+                <outer-class reference="../../../.."/>
+              </listener>
+              <currentValue class="double">0.0</currentValue>
+            </helper>
+            <name/>
+          </y>
+          <veloX class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <name/>
+          </veloX>
+          <veloY class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <name/>
+          </veloY>
           <myID>0</myID>
           <myName>Default Name</myName>
           <myImageViewName>default_actor.jpg</myImageViewName>
@@ -21,10 +51,9 @@
             <entry>
               <string>Space</string>
               <list>
-                <gameengine.model.Actions.MoveLeft>
+                <gameengine.model.Actions.MoveRight>
                   <myActor reference="../../../../.."/>
-                  <distance>50.0</distance>
-                </gameengine.model.Actions.MoveLeft>
+                </gameengine.model.Actions.MoveRight>
               </list>
             </entry>
           </myRules>
@@ -40,6 +69,53 @@
             <floorHeight>300.0</floorHeight>
           </myPhysicsEngine>
         </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+            <gameengine.controller.Game reference="../../../../../.."/>
+          </obs>
+          <x class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
+              <listener class="gameengine.model.Actor$1">
+                <outer-class reference="../../../.."/>
+              </listener>
+              <currentValue class="double">0.0</currentValue>
+            </helper>
+            <name/>
+          </x>
+          <y class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
+              <listener class="gameengine.model.Actor$2">
+                <outer-class reference="../../../.."/>
+              </listener>
+              <currentValue class="double">0.0</currentValue>
+            </helper>
+            <name/>
+          </y>
+          <veloX class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <name/>
+          </veloX>
+          <veloY class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <name/>
+          </veloY>
+          <myID>0</myID>
+          <myName>Default Name</myName>
+          <myImageViewName>default_actor.jpg</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <myPhysicsEngine reference="../../gameengine.model.Actor/myPhysicsEngine"/>
+        </gameengine.model.Actor>
       </myActors>
       <myTriggerMap>
         <entry>
@@ -51,10 +127,6 @@
       </myTriggerMap>
       <myName>Untitled</myName>
       <myBackgroundImgName>default_background.png</myBackgroundImgName>
-      <myCollisionDetector>
-        <myPhysicsEngine reference="../../myActors/gameengine.model.Actor/myPhysicsEngine"/>
-      </myCollisionDetector>
-      <myPhysicsEngine reference="../myActors/gameengine.model.Actor/myPhysicsEngine"/>
     </gameengine.controller.Level>
   </levels>
   <info>
@@ -63,4 +135,127 @@
     <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
   </info>
+  <myPhysicsEngine reference="../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
+  <myCollisionDetector>
+    <myPhysicsEngine reference="../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
+  </myCollisionDetector>
+  <animation>
+    <startTime>0</startTime>
+    <pauseTime>0</pauseTime>
+    <paused>false</paused>
+    <timer class="com.sun.javafx.tk.quantum.MasterTimer">
+      <PULSE__DURATION__NS>16666666</PULSE__DURATION__NS>
+      <PULSE__DURATION__TICKS>100</PULSE__DURATION__TICKS>
+      <paused>false</paused>
+      <totalPausedTime>0</totalPausedTime>
+      <startPauseTime>0</startPauseTime>
+      <receivers>
+        <null/>
+        <null/>
+      </receivers>
+      <receiversLength>0</receiversLength>
+      <receiversLocked>false</receiversLocked>
+      <animationTimers>
+        <null/>
+        <null/>
+      </animationTimers>
+      <animationTimersLength>0</animationTimersLength>
+      <animationTimersLocked>false</animationTimersLocked>
+      <fixedPulseLength>0</fixedPulseLength>
+      <debugNanos>0</debugNanos>
+      <theMaster>
+        <inactive>true</inactive>
+        <nextPulseTime>1340484357557981</nextPulseTime>
+        <lastPulseDuration>-2147483648</lastPulseDuration>
+        <outer-class class="com.sun.javafx.tk.quantum.MasterTimer" reference="../.."/>
+      </theMaster>
+    </timer>
+    <pulseReceiver class="javafx.animation.Animation$1">
+      <outer-class class="javafx.animation.Timeline" reference="../.."/>
+    </pulseReceiver>
+    <clipEnvelope class="com.sun.scenario.animation.shared.InfiniteClipEnvelope">
+      <animation class="javafx.animation.Timeline" reference="../.."/>
+      <rate>1.0</rate>
+      <cycleTicks>6000</cycleTicks>
+      <deltaTicks>0</deltaTicks>
+      <ticks>0</ticks>
+      <currentRate>1.0</currentRate>
+      <inTimePulse>false</inTimePulse>
+      <aborted>false</aborted>
+      <autoReverse>false</autoReverse>
+      <pos>0</pos>
+    </clipEnvelope>
+    <lastPlayedFinished>false</lastPlayedFinished>
+    <lastPlayedForward>true</lastPlayedForward>
+    <oldRate>1.0</oldRate>
+    <cycleDuration class="javafx.animation.Animation$AnimationReadOnlyProperty">
+      <name>cycleDuration</name>
+      <value class="javafx.util.Duration">
+        <millis>1000.0</millis>
+      </value>
+      <outer-class class="javafx.animation.Timeline" reference="../.."/>
+    </cycleDuration>
+    <totalDuration class="javafx.animation.Animation$AnimationReadOnlyProperty">
+      <name>totalDuration</name>
+      <value class="javafx.util.Duration">
+        <millis>Infinity</millis>
+      </value>
+      <outer-class class="javafx.animation.Timeline" reference="../.."/>
+    </totalDuration>
+    <currentTicks>0</currentTicks>
+    <cycleCount class="javafx.animation.Animation$4">
+      <value>-1</value>
+      <valid>true</valid>
+      <outer-class class="javafx.animation.Timeline" reference="../.."/>
+    </cycleCount>
+    <targetFramerate>60.0</targetFramerate>
+    <resolution>1</resolution>
+    <lastPulse>0</lastPulse>
+    <cuePoints class="com.sun.javafx.collections.ObservableMapWrapper">
+      <backingMap/>
+    </cuePoints>
+    <clipCore>
+      <timeline reference="../.."/>
+      <keyFrames>
+        <javafx.animation.KeyFrame>
+          <time reference="../../../../cycleDuration/value"/>
+          <values class="empty-set"/>
+          <onFinished class="null"/>
+        </javafx.animation.KeyFrame>
+      </keyFrames>
+      <keyFrameTicks>
+        <long>6000</long>
+      </keyFrameTicks>
+      <clipInterpolator class="com.sun.scenario.animation.shared.SimpleClipInterpolator">
+        <startKeyFrame>
+          <time>
+            <millis>0.0</millis>
+          </time>
+          <values class="empty-set"/>
+        </startKeyFrame>
+        <endKeyFrame reference="../../keyFrames/javafx.animation.KeyFrame"/>
+        <endTicks>6000</endTicks>
+        <undefinedStartValueCount>0</undefinedStartValueCount>
+        <ticks>0</ticks>
+        <invalid>true</invalid>
+      </clipInterpolator>
+      <aborted>false</aborted>
+      <lastKF>-1</lastKF>
+      <curTicks>0</curTicks>
+    </clipCore>
+    <keyFrames class="javafx.animation.Timeline$1">
+      <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+        <listener class="null"/>
+      </listenerHelper>
+      <changeBuilder>
+        <list class="javafx.animation.Timeline$1" reference="../.."/>
+        <changeLock>0</changeLock>
+        <addRemoveChanges/>
+      </changeBuilder>
+      <backingList>
+        <javafx.animation.KeyFrame reference="../../../clipCore/keyFrames/javafx.animation.KeyFrame"/>
+      </backingList>
+      <outer-class reference="../.."/>
+    </keyFrames>
+  </animation>
 </gameengine.controller.Game>
