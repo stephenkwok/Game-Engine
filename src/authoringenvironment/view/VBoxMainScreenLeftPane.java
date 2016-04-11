@@ -45,7 +45,7 @@ public class VBoxMainScreenLeftPane extends VBox {
 		initWelcomeMessage();
 		initGameNameEditor();
 		initGameDescriptionEditor();
-		this.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor.getCoupledNodes());
+
 	}
 
 	private void initWelcomeMessage() {
@@ -55,8 +55,7 @@ public class VBoxMainScreenLeftPane extends VBox {
 	private void initGameNameEditor() {
 		String mainPrompt = myResources.getString("gameName");
 		String textFieldPrompt = myResources.getString("enterGameName");
-		TextFieldWithButton nameEditor = new TextFieldGameNameEditor(mainPrompt, textFieldPrompt, TEXT_FIELD_WIDTH,
-				controller);
+		TextFieldWithButton nameEditor = new TextFieldGameNameEditor(mainPrompt, textFieldPrompt, TEXT_FIELD_WIDTH);
 		nameEditorContainer = (HBox) nameEditor.createNode();
 		nameEditorContainer.setSpacing(TEXT_FIELD_CONTAINER_SPACING);
 		nameEditorContainer.setPadding(new Insets(TEXT_FIELD_CONTAINER_PADDING));
@@ -65,7 +64,7 @@ public class VBoxMainScreenLeftPane extends VBox {
 	private void initGameDescriptionEditor() {
 		String prompt = myResources.getString("promptForGameDescription");
 		String buttonText = myResources.getString("save");
-		gameDescriptionEditor = new TextAreaGameDescriptionEditor(prompt, buttonText, TEXT_AREA_ROWS, controller);
+//		gameDescriptionEditor = new TextAreaGameDescriptionEditor(prompt, buttonText, TEXT_AREA_ROWS, controller);
 	}
 
 }

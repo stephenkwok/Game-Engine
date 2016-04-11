@@ -1,6 +1,6 @@
 package gui.view;
 
-import authoringenvironment.controller.Controller;
+import gameengine.controller.GameInfo;
 
 /**
  * This class extends the TextFieldWithButton class and allows the author to set the game's name
@@ -11,13 +11,9 @@ import authoringenvironment.controller.Controller;
 
 public class TextFieldGameNameEditor extends TextFieldWithButton{
 	
-	private Controller controller;
-	
-	public TextFieldGameNameEditor(String labelText, String prompt, Double textFieldWidth, Controller controller) {
+	public TextFieldGameNameEditor(String labelText, String prompt, Double textFieldWidth) {
 		super(labelText, prompt, textFieldWidth);
-		this.controller = controller;
+		setButtonAction(e -> ((GameInfo) getEditableElement()).setName(getTextFieldInput()));
 	}
-	
 
-	
 }

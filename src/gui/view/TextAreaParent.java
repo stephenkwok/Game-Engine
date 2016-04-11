@@ -1,8 +1,10 @@
 package gui.view;
 
+import authoringenvironment.model.IEditableGameElement;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -18,25 +20,40 @@ import javafx.scene.layout.VBox;
  *
  */
 
-public abstract class TextAreaParent {
+public abstract class TextAreaParent implements IGUIEditingElement, IGUIElement {
 	
 	private VBox myContainer;
 	private Label myPrompt;
 	private TextArea myTextArea;
 	private Button myButton;
+	private IEditableGameElement myEditableElement;
+	private String myPromptText;
+	private String myButtonText;
+	private int textAreaPreferredRows;
 	
-	public TextAreaParent(String promptText, String buttonText, int prefRows) {
-		myContainer = new VBox();
-		myPrompt = new Label(promptText);
-		myPrompt.setWrapText(true);
-		myTextArea = new TextArea();
-		myTextArea.setPrefRowCount(prefRows);
-		myButton = new Button(buttonText);
-		myButton.prefWidthProperty().bind(myContainer.widthProperty());
-		myContainer.getChildren().addAll(myPrompt, myTextArea, myButton);
+	public TextAreaParent(String promptText, String buttonText, int preferredRows) {
+		myPromptText = promptText;
+		myButtonText = buttonText;
+		textAreaPreferredRows = preferredRows;
 	}
 	
-	protected abstract void declareButtonAction();
+	@Override
+	public void setEditableElement(IEditableGameElement element) {
+		myEditableElement = element;
+	}
+	
+	@Override 
+	public Node createNode() {
+		myContainer = new VBox();
+		myPrompt = new Label(myPromptText);
+		myPrompt.setWrapText(true);
+		myTextArea = new TextArea();
+		myTextArea.setPrefRowCount(textAreaPreferredRows);
+		myButton = new Button(myButtonText);
+		myButton.prefWidthProperty().bind(myContainer.widthProperty());
+		myContainer.getChildren().addAll(myPrompt, myTextArea, myButton);
+		return myContainer;
+	}
 	
 	protected void setButtonAction(EventHandler<ActionEvent> buttonAction) {
 		myButton.setOnAction(buttonAction);
@@ -50,8 +67,12 @@ public abstract class TextAreaParent {
 		myTextArea.setPromptText(prompt);
 	}
 	
-	public VBox getCoupledNodes() {
-		return myContainer;
+	protected IEditableGameElement getEditableElement() {
+		return myEditableElement;
+	}
+	
+	protected String getTextAreaInput() {
+		return myTextArea.getText();
 	}
 
 }

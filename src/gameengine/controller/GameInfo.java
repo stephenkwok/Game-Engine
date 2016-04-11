@@ -1,6 +1,9 @@
 package gameengine.controller;
 
-public class GameInfo {
+import authoringenvironment.model.IEditableGameElement;
+import javafx.scene.image.ImageView;
+
+public class GameInfo implements IEditableGameElement {
 	private static final String DEFAULT_GAME_NAME = "My Game";
 	private static final String DEFAULT_IMAGE_NAME = "default_game.jpg";
 	private static final String DEFAULT_DESCRIPTION = "This is a scrolling game.";
@@ -10,6 +13,8 @@ public class GameInfo {
 	private String myImageName;
 	private String myDescription;
 	private int myCurrentLevelNum;
+	private ImageView myPreviewImage;
+	private int myID;
 	
 	public GameInfo(String name, String imageName, String description, int currentLevelNum ) {
 		this.myName = name;
@@ -81,6 +86,26 @@ public class GameInfo {
 	      stringBuilder.append(" ]");
 	      
 	      return stringBuilder.toString();
+	}
+
+	@Override
+	public ImageView getImageView() {
+		return myPreviewImage;
+	}
+
+	@Override
+	public void setImageView(ImageView imageView) {
+		myPreviewImage = imageView;
+	}
+
+	@Override
+	public void setID(int ID) {
+		myID = ID;
+	}
+
+	@Override
+	public int getID() {
+		return myID;
 	}
 
 }
