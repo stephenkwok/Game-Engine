@@ -1,10 +1,7 @@
 package authoringenvironment.view;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
@@ -22,7 +19,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * Abstract Tab for setting attributes to go in the Inspector Pane in either the Level or Actor Editing Environment GUI.
- * @author amyzhao, AnnieTang
+ * @author amyzhao
  *
  */
 public class TabAttributes extends TabParent {

@@ -1,6 +1,5 @@
 package authoringenvironment.view;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
