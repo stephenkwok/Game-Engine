@@ -67,10 +67,10 @@ public class BaseScreen extends Screen {
 		super(stage);
 		this.myMasterPane = new BorderPane();
 		init();
-		myGameController = new GameController();
-		myGameController.setGame(game);
-		myGameController.setGameView(new GameScreen(new ParallelCamera()));
-		myGameController.initialize(game.getInfo().getCurrentLevelNum());
+		gameController = new GameController();
+		gameController.setGame(game);
+		gameController.setGameView(new GameScreen(new ParallelCamera()));
+		gameController.initialize(game.getInfo().getCurrentLevelNum());
 		addComponents();
 	}
 	
