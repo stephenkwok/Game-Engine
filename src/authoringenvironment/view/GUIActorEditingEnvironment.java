@@ -48,7 +48,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	private GridPane myRuleCreator;
 	private GUIActorImageViewer actorImageViewer;
 
-	public GUIActorEditingEnvironment(Controller myController, ResourceBundle myResources) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public GUIActorEditingEnvironment(Controller myController, ResourceBundle myResources) {
 		this.myController = myController;
 		this.myResources = myResources;
 		this.actorImageHeight = myController.getSceneHeight()*ACTOR_PERCENT_HEIGHT;
@@ -60,7 +60,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		return myRoot;
 	}
 
-	private void initializeEnvironment() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private void initializeEnvironment() {
 		myRoot = new BorderPane();
 		myActorRuleCreator = new ActorRuleCreator(this, myController);
 		setDefaultActor();
@@ -78,7 +78,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		this.myActorIV = defaultIV;
 	}
 
-	private void setLeftPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private void setLeftPane() {
 		attributes = new TabAttributes(myController, myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE);
 		VBox vbox = new VBox();
 		TabPane attributeTP = new TabPane();

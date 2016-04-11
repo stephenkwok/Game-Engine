@@ -45,7 +45,7 @@ public class GUIFactory {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public IGUIElement createNewGUIObject(String nodeTypeKey) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	public IGUIElement createNewGUIObject(String nodeTypeKey) {
 		String nodeType = myResources.getString(nodeTypeKey);
 		String elementType = determineElementType(nodeType);
 		return createElement(elementType, nodeType);
@@ -82,7 +82,7 @@ public class GUIFactory {
 		return null;
 	}
 
-	private IGUIElement createComboBox(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+	private IGUIElement createComboBox(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 			String prompt = myResources.getString(nodeType + PROMPT);
 			String label = myResources.getString(nodeType + LABEL);
 			Class<?> comboBox = Class.forName(className);
