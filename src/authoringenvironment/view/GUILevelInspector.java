@@ -15,7 +15,6 @@ import javafx.scene.layout.StackPane;
 
 public class GUILevelInspector implements IGUI {
 	private static final String LEVEL_OPTIONS_RESOURCE = "levelEditorOptions";
-	private ResourceBundle myResources;
 	private static final String ACTORS = "Actors";
 	private static final String LEVEL_ATTRIBUTES = "Level Attributes";
 	private Pane myPane;
@@ -23,7 +22,6 @@ public class GUILevelInspector implements IGUI {
 	private TabAttributes myAttributesTab;
 	
 	public GUILevelInspector(Controller controller, ResourceBundle myResources, List<Actor> availActors, IEditableGameElement level) {
-		this.myResources = myResources;
 		myPane = new StackPane();
 		TabPane tabPane = new TabPane();
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
