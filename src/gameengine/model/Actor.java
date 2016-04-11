@@ -52,6 +52,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private Map<AttributeType, Attribute> attributeMap;
     private PhysicsEngine myPhysicsEngine;
     private boolean isMain;
+    private double myHealth;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -214,6 +215,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     @Override
     public void setImageView(ImageView imageView) {
         myImageView = imageView;
+        myImageView.setFitHeight(imageView.getFitHeight());
     }
 
     @Override
@@ -292,7 +294,10 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	public void setMain(boolean bool){
 		this.isMain = bool;
 	}
-
+	/**
+	 * Return whether the actor is a playable, main character. 
+	 * @return
+	 */
 	public boolean isMain(){
 		return this.isMain;
 	}
@@ -308,5 +313,14 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	 */
 	public void setInAir(boolean inAir) {
 		this.inAir = inAir;
+	}
+	
+	public void setSize(double size){
+		myImageView.setFitHeight(size);
+		myImageView.setPreserveRatio(true);
+	}
+	
+	public void setHealth(double size){
+		myHealth = size;
 	}
 }
