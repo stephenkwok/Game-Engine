@@ -100,7 +100,7 @@ public class BaseScreen extends Screen {
 		status.put("level", 2);
 		HUDScreen myHud = new HUDScreen(SCREEN_WIDTH,SCREEN_WIDTH,status);
 		myHud.init();
-		myP.getChildren().add(myHud.getRoot());
+		myP.getChildren().add(myHud.getScene());
 		myMasterPane.setBottom(myP);
 	}
 

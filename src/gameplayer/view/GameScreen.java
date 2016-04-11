@@ -37,12 +37,8 @@ public class GameScreen extends Observable {
 		mySubgroup = new Group();
 		mySubscene = new SubScene(mySubgroup,Screen.SCREEN_WIDTH, 500);
 		mySubscene.setFocusTraversable(true);
-		mySubscene.setOnKeyPressed(e -> {
-			mySubscene.setFill(Color.ALICEBLUE);
-		});//handleScreenEvent(e));
-		mySubscene.setOnMouseClicked(e ->{
-			mySubscene.setFill(Color.ALICEBLUE);
-		}); //handleScreenEvent(e));
+		mySubscene.setOnKeyPressed(e -> handleScreenEvent(e));
+		mySubscene.setOnMouseClicked(e -> handleScreenEvent(e));
 		this.camera = camera; ///
 	}
 	
@@ -64,6 +60,7 @@ public class GameScreen extends Observable {
 
 	public void addBackground(String filepath) {
 		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(filepath)));
+		imageView.toBack();
 		mySubgroup.getChildren().add(imageView);
 		
 	}
