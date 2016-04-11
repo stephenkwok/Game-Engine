@@ -15,6 +15,7 @@ import gui.view.IGUIEditingElement;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -30,6 +31,7 @@ public class TabAttributes extends TabParent {
 	private static final String EDITOR_ELEMENTS = "EditorElements";
 	private static final String HUD_OPTIONS = "HUDOptions";
 	private static final String HUD_PROMPT = "Choose items to display on the level scene:";
+	private static final String GO = "Go";
 	private ResourceBundle myAttributesResources;
 	private GUIFactory myFactory;
 	private Controller myController;
@@ -65,6 +67,10 @@ public class TabAttributes extends TabParent {
 			CheckBox cb = (CheckBox) checkboxes.get(i);
 			myHUDElements.add(cb);
 		}
+		Button checkHUDButton = new Button(GO);
+		checkHUDButton.setOnAction(event->{
+			((Level) myEditableElement).setHUDOptions(getHUDElementsToDisplay());
+		});
 		vbox.getChildren().addAll(checkboxes);
 	}
 	
@@ -86,6 +92,7 @@ public class TabAttributes extends TabParent {
 				toDisplay.add(myHUDElements.get(i).getId());
 			}
 		}
+		
 		return toDisplay;
 	}
 	
