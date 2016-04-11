@@ -60,17 +60,19 @@ public class PhysicsEngine {
 		double nextVertVelo;
 		double nextXPos;
 		double nextYPos;
+		
+		if (a.isInAir()) {
+			forceYdownward = gravity;
+		}
 				
-		nextHorzVelo = xVelo;      
-		
+		nextHorzVelo = xVelo;      		
 		nextVertVelo = applyForce(yVelo, forceYupward);            // Apply  y force from movement action to y velocity
-		
 		nextVertVelo = applyForce(nextVertVelo, forceYdownward);    //Apply gravitational force
 		nextYPos     = changePos(yPos, nextVertVelo); 
 		nextVertVelo = maxLimit(nextVertVelo, maxVertVelocity);
 			
 		if(nextYPos > floorHeight){                    //Collision detection for the actor and the ground
-			nextYPos = floorHeight;			
+			nextYPos = floorHeight;				//TODO: delete this if statement after the floor is implemented as an actor
 			nextVertVelo = 0;
 		}
 		
@@ -78,8 +80,7 @@ public class PhysicsEngine {
 		nextHorzVelo = applyForce(nextHorzVelo, (friction*(nextHorzVelo))); //Apply frictional force
 		nextXPos  = changePos(xPos,nextHorzVelo);
 		nextHorzVelo = maxLimit(nextHorzVelo, maxHorizVelocity);
-		setValues(a,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );
-		
+		setValues(a,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );	
 	}
 	
 	/**
@@ -120,7 +121,21 @@ public class PhysicsEngine {
 	public void jump(Actor a1){
 		update(a1,0,jumpForce, gravity, a1.getMyFriction());
 	}
+	
+	//gliding methods for when force and gravity aren't applied
+	
+	public void glideRight(Actor a1) {
+		a1.setXPos(a1.getXPos()+5);
+	}
 
+	public void glideLeft(Actor a1) {
+		a1.setXPos(a1.getXPos()-5);
+	}
+	
+	public void glideUp(Actor a1 ){
+		a1.setYPos(a1.getYPos()+5);
+	}
+	
 	public void tick(Actor a1) {
 		update(a1,0.0,0.0, gravity, a1.getMyFriction());
 	}
