@@ -29,23 +29,17 @@ public class TextFieldWithButton implements IGUIElement, IGUIEditingElement {
 	private String promptText;
 	private Double textFieldWidth;
 	private String buttonText;
-	private EventHandler<ActionEvent> buttonAction;
 	private IEditableGameElement myEditableElement;
 
-	public TextFieldWithButton(String labelText, String promptText, Double textFieldWidth,
-			EventHandler<ActionEvent> buttonAction) {
+	public TextFieldWithButton(String labelText, String promptText, Double textFieldWidth) {
 		this.labelText = labelText;
 		this.promptText = promptText;
 		this.buttonText = GO;
 		this.textFieldWidth = textFieldWidth;
-		this.buttonAction = buttonAction;
 		this.myEditableElement = null;
+		myButton = new Button(buttonText);
 	}
 	
-	public HBox getCoupledNodes() {
-		return myContainer;
-	}
-
 	@Override
 	public Node createNode() {
 		myContainer = new HBox(PADDING);
@@ -53,8 +47,6 @@ public class TextFieldWithButton implements IGUIElement, IGUIEditingElement {
 		myTextField = new TextField();
 		myTextField.setPrefWidth(textFieldWidth);
 		HBox.setHgrow(myTextField, Priority.ALWAYS);
-		myButton = new Button(buttonText);
-		myButton.setOnAction(buttonAction);
 		myTextField.setPromptText(promptText);
 		myContainer.getChildren().addAll(myTextFieldPrompt, myTextField, myButton);
 		return myContainer;
@@ -65,7 +57,17 @@ public class TextFieldWithButton implements IGUIElement, IGUIEditingElement {
 		myEditableElement = element;
 	}
 
+
+	protected void setButtonAction(EventHandler<ActionEvent> buttonAction) {
+		myButton.setOnAction(buttonAction);
+	}
+	
 	protected IEditableGameElement getEditableElement() {
 		return myEditableElement;
+	}
+	
+	protected String getTextFieldInput() {
+		System.out.println(myTextField.getText());
+		return myTextField.getText();
 	}
 }

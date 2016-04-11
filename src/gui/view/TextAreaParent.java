@@ -25,16 +25,21 @@ public abstract class TextAreaParent {
 	private TextArea myTextArea;
 	private Button myButton;
 	
-	public TextAreaParent(String promptText, String buttonText, int prefRows, EventHandler<ActionEvent> handler) {
+	public TextAreaParent(String promptText, String buttonText, int prefRows) {
 		myContainer = new VBox();
 		myPrompt = new Label(promptText);
 		myPrompt.setWrapText(true);
 		myTextArea = new TextArea();
 		myTextArea.setPrefRowCount(prefRows);
 		myButton = new Button(buttonText);
-		myButton.setOnAction(handler);
 		myButton.prefWidthProperty().bind(myContainer.widthProperty());
 		myContainer.getChildren().addAll(myPrompt, myTextArea, myButton);
+	}
+	
+	protected abstract void declareButtonAction();
+	
+	protected void setButtonAction(EventHandler<ActionEvent> buttonAction) {
+		myButton.setOnAction(buttonAction);
 	}
 	
 	protected void setContainerPadding(Insets insets) {

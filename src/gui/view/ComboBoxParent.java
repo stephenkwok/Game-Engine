@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 /**
  * Abstract class to implement different types of ComboBoxes.
@@ -21,9 +22,8 @@ import javafx.scene.layout.HBox;
  */
 
 public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement {
-	private static final int COMBOBOX_WIDTH = 190;
+	private static final int COMBOBOX_WIDTH = 150;
 	private static final int VISIBLE_ROW_COUNT = 5;
-	private static final int PADDING = 10;
 	private static final int HBOX_SPACING = 5;
 	private static final String GO = "Go";
 	protected static final String NO_NODE_FOR_BOX = "";
@@ -56,11 +56,11 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
 		comboBox.setPrefWidth(COMBOBOX_WIDTH);
 		comboBox.setPromptText(promptText);
-		comboBox.setCellFactory(factory -> new MyCustomCell());
+//		comboBox.setCellFactory(factory -> new MyCustomCell());
 		comboButton = new Button(GO);
+		HBox.setHgrow(comboBox, Priority.ALWAYS);
 		setButtonAction();
 		hbox.getChildren().addAll(comboBox, comboButton);
-		hbox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
 		hbox.setAlignment(Pos.CENTER_LEFT);
 		return hbox;
 	}
@@ -68,11 +68,11 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 	private void addLabel(HBox container) {
 		if (labelText != null) {
 			Label label = new Label(labelText);
-			label.setAlignment(Pos.CENTER_LEFT);
 			label.setWrapText(true);
 			container.getChildren().add(label);
 		}
 	}
+	
 	/**
 	 * Sets action when button is pressed.
 	 */
@@ -90,7 +90,8 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
             setGraphic(null);
         } else {
        	 	HBox hbox = new HBox();
-       	 	hbox.getChildren().addAll(getNodeForBox(item));
+       	 	Label lbl = new Label(item);
+       	 	hbox.getChildren().addAll(getNodeForBox(item),lbl);
             setGraphic(hbox);
         }
        }

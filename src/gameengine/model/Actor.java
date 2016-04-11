@@ -36,12 +36,14 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
+    private static final boolean DEFAULT_MAIN = false;
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
     private DoubleProperty veloX = new SimpleDoubleProperty();
     private DoubleProperty veloY = new SimpleDoubleProperty();
     private int myID;
     private double myFriction;
+    private boolean inAir;
     private String myName;
     private String myImageViewName;
     @XStreamOmitField
@@ -49,6 +51,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private Map<String, List<Action>> myRules;
     private Map<AttributeType, Attribute> attributeMap;
     private PhysicsEngine myPhysicsEngine;
+    private boolean isMain;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -58,6 +61,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         attributeMap = new HashMap<>();
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
+        isMain = DEFAULT_MAIN;
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
         x.addListener(new ChangeListener(){
         	@Override
@@ -285,5 +289,28 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	public void setMyFriction(double myFriction) {
 		this.myFriction = myFriction;
 	}
+	
+	/**
+	 * Set whether this actor is a playable, main character.  
+	 */
+	public void setMain(boolean bool){
+		this.isMain = bool;
+	}
 
+	public boolean isMain(){
+		return this.isMain;
+	}
+	/**
+	 * @return the inAir
+	 */
+	public boolean isInAir() {
+		return inAir;
+	}
+
+	/**
+	 * @param inAir the inAir to set
+	 */
+	public void setInAir(boolean inAir) {
+		this.inAir = inAir;
+	}
 }
