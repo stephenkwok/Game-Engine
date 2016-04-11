@@ -1,4 +1,4 @@
-package gameengine.model.Actions;
+	package gameengine.model.Actions;
 
 
 import gameengine.model.Actions.MovingAction;

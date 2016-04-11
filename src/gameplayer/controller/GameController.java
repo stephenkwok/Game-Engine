@@ -68,10 +68,11 @@ public class GameController implements Observer {
 	 * Will play the animation timeline. 
 	 */
 	public void begin (){
-		Level current = model.getLevels().get(model.getInfo().getCurrentLevelNum());
+		Level current = model.getCurrentLevel();
 		for(Actor actor: current.getActors()){
 			view.addActor(actor);
 		}
+		model.startGame();
 	}
 	
 	/**
@@ -110,8 +111,8 @@ public class GameController implements Observer {
 	}
 	
 	public void nextLevel (){
-		model.nextLevel();
 		view.clearGame();
+		model.nextLevel();
 		begin();
 	}
 

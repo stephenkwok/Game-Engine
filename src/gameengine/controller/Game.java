@@ -3,8 +3,13 @@ package gameengine.controller;
 import java.util.*;
 
 import gameengine.model.Actor;
+import gameengine.model.CollisionDetection;
 import gameengine.model.IActor;
 import gameengine.model.ITrigger;
+import gameengine.model.PhysicsEngine;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 /**
  * This class is intended to represent a game containing levels with actors.
@@ -12,11 +17,16 @@ import gameengine.model.ITrigger;
  *
  */
 public class Game extends Observable implements Observer {
-
+	 public static final int SIZE = 400;
+	   public static final int FRAMES_PER_SECOND = 60;
+	   private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 
 	private String initialGameFile;
 	private List<Level> levels;
 	private GameInfo info;
+	private PhysicsEngine myPhysicsEngine;
+	private CollisionDetection myCollisionDetector;
+	private Timeline animation;
 	
 	/**
 	 * A game is instantiated with a list of all levels in the game and a level to start on.
@@ -29,7 +39,21 @@ public class Game extends Observable implements Observer {
 		initialGameFile = gameFilePath;
 		levels = gameLevels;
 		info = gameInfo;
-		observeActors();
+        myPhysicsEngine = new PhysicsEngine();
+        myCollisionDetector = new CollisionDetection(myPhysicsEngine);
+        
+		initActors();
+		
+		initTimeline();
+		
+	}
+
+	private void initTimeline() {
+		KeyFrame frame = new KeyFrame(Duration.millis(1000),
+                e -> step());
+		animation = new Timeline();
+		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.getKeyFrames().add(frame);
 	}
 	
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
@@ -40,10 +64,28 @@ public class Game extends Observable implements Observer {
 		this(new GameInfo(), gameLevels);
 	}
 	
-	private void observeActors(){
+	public void startGame(){
+		animation.play();
+	}
+	
+	private void step(){
+		List<Actor> currentActors = levels.get(info.getCurrentLevelNum()).getActors();
+		physicsUpdate(currentActors);
+		myCollisionDetector.detection(currentActors);
+		
+	}
+	
+	private void physicsUpdate(List<Actor> actors){
+		for(Actor a: actors){
+			myPhysicsEngine.tick(a);
+		}
+	}
+	
+	private void initActors(){
 		for(Level level: levels){
 			for(Actor actor: level.getActors()){
 				actor.addObserver(this);
+				actor.setEngine(myPhysicsEngine);
 			}
 		}
 	}
@@ -84,7 +126,7 @@ public class Game extends Observable implements Observer {
 	 * @param myTrigger the trigger received from the game player 
 	 */
 	public void handleTrigger(ITrigger myTrigger) {
-		levels.get(info.getCurrentLevelNum()).handleTrigger(myTrigger);
+		getCurrentLevel().handleTrigger(myTrigger);
 	}
 
 	@Override
@@ -110,6 +152,10 @@ public class Game extends Observable implements Observer {
 	      stringBuilder.append(" ]");
 	      
 	      return stringBuilder.toString();
+	}
+	
+	public Level getCurrentLevel(){
+		return levels.get(info.getCurrentLevelNum());
 	}
 
 }

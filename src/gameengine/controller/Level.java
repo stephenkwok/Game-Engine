@@ -29,8 +29,6 @@ public class Level implements Observer, ILevel, IEditableGameElement {
     private String myBackgroundImgName;
 	@XStreamOmitField
     private ImageView myBackground;
-    private CollisionDetection myCollisionDetector;
-    private PhysicsEngine myPhysicsEngine;
 
 
     /**
@@ -42,8 +40,6 @@ public class Level implements Observer, ILevel, IEditableGameElement {
         myName = DEFAULT_NAME;
         myBackgroundImgName = DEFAULT_IMAGE_NAME;
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
-        myPhysicsEngine = new PhysicsEngine();
-        myCollisionDetector = new CollisionDetection(myPhysicsEngine);
     }
 
     /**
@@ -80,7 +76,6 @@ public class Level implements Observer, ILevel, IEditableGameElement {
      */
     @Override
     public void addActor(Actor newActor) {
-    	newActor.setEngine(myPhysicsEngine);
         newActor.addObserver(this);
         myActors.add(newActor);
         Set<String> actorTriggers = newActor.getTriggers();

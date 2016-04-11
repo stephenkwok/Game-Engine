@@ -74,14 +74,9 @@ public class PhysicsEngine {
 			nextVertVelo = 0;
 		}
 		
-		if(nextVertVelo == 0){                        //If the Actor is on the ground
-			nextHorzVelo = applyForce(xVelo, forceX); // Apply  y force from movement action to y velocity
-			nextHorzVelo = applyForce(nextHorzVelo, (friction*(nextHorzVelo))); //Apply frictional force
-		}
-		System.out.println("nextyvel: "+nextVertVelo);
-		System.out.println("x: "+xPos);
+		nextHorzVelo = applyForce(xVelo, forceX); // Apply  y force from movement action to y velocity
+		nextHorzVelo = applyForce(nextHorzVelo, (friction*(nextHorzVelo))); //Apply frictional force
 		nextXPos  = changePos(xPos,nextHorzVelo);
-		System.out.println("nextx: "+nextXPos);
 		nextHorzVelo = maxLimit(nextHorzVelo, maxHorizVelocity);
 		setValues(a,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );
 		
@@ -156,6 +151,6 @@ public class PhysicsEngine {
 		staticVerticalCollision(a1,a2);
 		a1.setYVelo(-5);
 	}
-	
+
 	
 }

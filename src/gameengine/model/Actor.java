@@ -14,7 +14,6 @@ import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.AttributeType;
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
@@ -35,15 +34,12 @@ import javafx.scene.image.ImageView;
 
 public class Actor extends Observable implements IActor, IEditableGameElement {
 
-    private static final double DEGREES_TO_RADIANS = Math.PI / 180;
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
-//    private DoubleProperty x = new SimpleDoubleProperty();
-//    private DoubleProperty y = new SimpleDoubleProperty();
-    private double x;
-    private double y;
-    private double veloX;
-    private double veloY;
+    private DoubleProperty x = new SimpleDoubleProperty();
+    private DoubleProperty y = new SimpleDoubleProperty();
+    private DoubleProperty veloX = new SimpleDoubleProperty();
+    private DoubleProperty veloY = new SimpleDoubleProperty();
     private int myID;
     private String myName;
     private String myImageViewName;
@@ -62,18 +58,18 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
-//        x.addListener(new ChangeListener(){
-//        	@Override
-//            public void changed(ObservableValue o, Object oldVal, Object newVal) {
-//                myImageView.setX((Double)newVal);
-//            }
-//        });
-//        y.addListener(new ChangeListener(){
-//        	@Override
-//            public void changed(ObservableValue o, Object oldVal, Object newVal) {
-//                myImageView.setY((Double)newVal);
-//            }
-//        });
+        x.addListener(new ChangeListener(){
+        	@Override
+            public void changed(ObservableValue o, Object oldVal, Object newVal) {
+                myImageView.setX((Double)newVal);
+            }
+        });
+        y.addListener(new ChangeListener(){
+        	@Override
+            public void changed(ObservableValue o, Object oldVal, Object newVal) {
+                myImageView.setY((Double)newVal);
+            }
+        });
     }
 
     /**
@@ -83,10 +79,12 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      */
     @Override
     public void performActionsFor(String triggerString) {
-        List<Action> myActions = myRules.get(triggerString);
-        for (Action myAction : myActions) {
-            myAction.perform();
-        }
+    	if(myRules.containsKey(triggerString)){
+            List<Action> myActions = myRules.get(triggerString);
+            for (Action myAction : myActions) {
+                myAction.perform();
+            }
+    	}
     }
 
     /**
@@ -159,39 +157,33 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 
     @Override
     public double getXVelo() {
-        return veloX;
+        return veloX.get();
     }
 
     @Override
     public double getYVelo() {
-        return veloY;
+        return veloY.get();
     }
 
     @Override
     public void setXPos(double updateXPosition) {
-       x = updateXPosition;
-       System.out.println("x: "+x);
-       //x.set(updateXPosition);
-
+       x.set(updateXPosition);
     }
 
     @Override
     public void setYPos(double updateYPosition) {
-    	y = updateYPosition;
-    	System.out.println("y: "+y);
-    	//y.set(updateYPosition);
+    	y.set(updateYPosition);
 
     }
 
     @Override
     public void setXVelo(double updateXVelo) {
-        veloX = updateXVelo;
-
+        veloX.set(updateXVelo);
     }
 
     @Override
     public void setYVelo(double updateYVelo) {
-        veloY = updateYVelo;
+        veloY.set(updateYVelo);
     }
 
     public void setID(int ID) {
@@ -221,14 +213,12 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 
     @Override
     public double getXPos() {
-    	return x;
-        //return x.get();
+        return x.get();
     }
 
     @Override
     public double getYPos() {
-        return y;
-    	//return y.get();
+    	return y.get();
     }
 
 	public void setEngine(PhysicsEngine physicsEngine) {
