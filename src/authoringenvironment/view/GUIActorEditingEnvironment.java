@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -82,6 +83,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		VBox vbox = new VBox();
 		TabPane attributeTP = new TabPane();
 		attributeTP.getTabs().add(attributes.getTab());
+		attributeTP.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		library = new GUILibrary(myActorRuleCreator);
 		vbox.getChildren().addAll(getActorImageViewer(), attributeTP, library.getPane());
 		myRoot.setLeft(vbox);

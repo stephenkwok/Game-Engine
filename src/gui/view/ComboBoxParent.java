@@ -1,12 +1,10 @@
 package gui.view;
 
 import java.util.List;
-import java.util.ResourceBundle;
 
 import authoringenvironment.model.IEditableGameElement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -56,7 +54,7 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
 		comboBox.setPrefWidth(COMBOBOX_WIDTH);
 		comboBox.setPromptText(promptText);
-//		comboBox.setCellFactory(factory -> new MyCustomCell());
+		comboBox.setCellFactory(factory -> new MyCustomCell());
 		comboButton = new Button(GO);
 		HBox.setHgrow(comboBox, Priority.ALWAYS);
 		setButtonAction();

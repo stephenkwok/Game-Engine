@@ -10,6 +10,7 @@ import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gui.view.IGUI;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
@@ -27,6 +28,7 @@ public class GUILevelInspector implements IGUI {
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
 		myAttributesTab = new TabAttributes(controller, myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, level);
 		tabPane.getTabs().addAll(myActorsTab.getTab(), myAttributesTab.getTab());
+		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		myPane.getChildren().add(tabPane);
 	}
 

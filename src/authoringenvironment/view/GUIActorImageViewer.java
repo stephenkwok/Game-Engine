@@ -71,7 +71,6 @@ public class GUIActorImageViewer implements IGUI {
 			try {
 				loadSelectedImage();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});
