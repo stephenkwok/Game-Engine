@@ -56,7 +56,7 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
 		comboBox.setPrefWidth(COMBOBOX_WIDTH);
 		comboBox.setPromptText(promptText);
-		comboBox.setCellFactory(factory -> new MyCustomCell());
+//		comboBox.setCellFactory(factory -> new MyCustomCell());
 		comboButton = new Button(GO);
 		HBox.setHgrow(comboBox, Priority.ALWAYS);
 		setButtonAction();
@@ -90,7 +90,8 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
             setGraphic(null);
         } else {
        	 	HBox hbox = new HBox();
-       	 	hbox.getChildren().addAll(getNodeForBox(item));
+       	 	Label lbl = new Label(item);
+       	 	hbox.getChildren().addAll(getNodeForBox(item),lbl);
             setGraphic(hbox);
         }
        }
