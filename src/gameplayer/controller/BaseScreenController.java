@@ -1,11 +1,14 @@
 package gameplayer.controller;
 
 import java.lang.reflect.InvocationTargetException;
+import java.io.File;
 import java.util.ResourceBundle;
 
+import gameengine.controller.Game;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.SplashScreen;
 import gui.controller.IScreenController;
+import gui.view.Screen;
 import javafx.stage.Stage;
 
 public class BaseScreenController implements IScreenController{
@@ -63,6 +66,17 @@ public class BaseScreenController implements IScreenController{
 	
 	public void switchGame(){
 		System.out.println("User wants to switch games");
+	}
+
+	@Override
+	public void createGameFromFile(Game file) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Screen getScreen() {
+		return myScreen;
 	}
 
 }

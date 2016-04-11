@@ -12,6 +12,8 @@ public class MenuHome extends MenuParent{
 		myRealController = (BaseScreenController) myController;
 		
 	}
+	
+	
 
 	@Override
 	public void setOnButtonAction() {
