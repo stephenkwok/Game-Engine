@@ -11,10 +11,22 @@ import gui.view.TextAreaParent;
 import gui.view.TextFieldGameNameEditor;
 import gui.view.TextFieldWithButton;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+/**
+ * This class enables the author to edit and set various attributes of the game
+ * including the game's name, description, and preview image. It will be
+ * displayed as the left pane of the Main Screen.
+ * 
+ * @author Stephen
+ *
+ */
 
 public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElement {
 
@@ -31,7 +43,8 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 	private Label welcomeMessage;
 	private HBox nameEditorContainer;
 	private VBox gameDescriptionEditor;
-	
+	private VBox previewImageContainer;
+
 	public GUIGameEditingEnvironment(GameInfo gameInfo) {
 		this.myGameInfo = gameInfo;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
@@ -41,13 +54,13 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 	public void setEditableElement(IEditableGameElement editable) {
 		myGameInfo = editable;
 	}
-	
+
 	private void initializeContainer() {
 		editingEnvironmentContainer = new VBox(CONTAINER_PADDING);
 		editingEnvironmentContainer.setPrefWidth(CONTAINER_PREFERRED_WIDTH);
 		editingEnvironmentContainer.setStyle(myResources.getString("defaultBorderColor"));
 	}
-	
+
 	private void initializeWelcomeMessage() {
 		welcomeMessage = new LabelMainScreenWelcome(myResources.getString("mainScreenWelcome"));
 	}
@@ -61,12 +74,22 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 		nameEditorContainer.setSpacing(TEXT_FIELD_CONTAINER_SPACING);
 		nameEditorContainer.setPadding(new Insets(TEXT_FIELD_CONTAINER_PADDING));
 	}
-	
+
 	private void initializeGameDescriptionEditor() {
 		String prompt = myResources.getString("promptForGameDescription");
 		String buttonText = myResources.getString("save");
 		TextAreaParent descriptionEditor = new TextAreaGameDescriptionEditor(prompt, buttonText, TEXT_AREA_ROWS);
 		gameDescriptionEditor = (VBox) descriptionEditor.createNode();
+	}
+
+	private void initializePreviewImageDisplay() {
+		previewImageContainer = new VBox(10.0);
+		previewImageContainer.setAlignment(Pos.CENTER);
+		previewImageContainer.setPadding(new Insets(10.0));
+		Label previewImageLabel = new Label("Current Game Preview Image:");
+		ImageView previewImage = new ImageView(
+				new Image(getClass().getClassLoader().getResourceAsStream("default_game.jpg")));
+		previewImageContainer.getChildren().addAll(previewImageLabel, previewImage);
 	}
 
 	@Override
@@ -75,7 +98,9 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 		initializeWelcomeMessage();
 		initializeGameNameEditor();
 		initializeGameDescriptionEditor();
-		editingEnvironmentContainer.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor);
+		initializePreviewImageDisplay();
+		editingEnvironmentContainer.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor,
+				previewImageContainer);
 		return editingEnvironmentContainer;
 	}
 

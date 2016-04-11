@@ -27,14 +27,16 @@ public abstract class TextAreaParent implements IGUIEditingElement, IGUIElement 
 	private TextArea myTextArea;
 	private Button myButton;
 	private IEditableGameElement myEditableElement;
-	private String myPromptText;
 	private String myButtonText;
 	private int textAreaPreferredRows;
 	
 	public TextAreaParent(String promptText, String buttonText, int preferredRows) {
-		myPromptText = promptText;
 		myButtonText = buttonText;
 		textAreaPreferredRows = preferredRows;
+		myContainer = new VBox();
+		myPrompt = new Label(promptText);
+		myTextArea = new TextArea();
+		myButton = new Button(myButtonText);
 	}
 	
 	@Override
@@ -44,12 +46,8 @@ public abstract class TextAreaParent implements IGUIEditingElement, IGUIElement 
 	
 	@Override 
 	public Node createNode() {
-		myContainer = new VBox();
-		myPrompt = new Label(myPromptText);
 		myPrompt.setWrapText(true);
-		myTextArea = new TextArea();
 		myTextArea.setPrefRowCount(textAreaPreferredRows);
-		myButton = new Button(myButtonText);
 		myButton.prefWidthProperty().bind(myContainer.widthProperty());
 		myContainer.getChildren().addAll(myPrompt, myTextArea, myButton);
 		return myContainer;
