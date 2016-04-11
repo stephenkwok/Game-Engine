@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import gameengine.controller.Level;
+
 public class ComboBoxScrollingDirection extends ComboBoxTextCell {
 	private static final String SCROLLING_DIRECTION_OPTIONS = "ScrollingDirectionOptions";
 	private static final String DELIMITER = ",";
@@ -16,8 +18,9 @@ public class ComboBoxScrollingDirection extends ComboBoxTextCell {
 
 	@Override
 	public void setButtonAction() {
-		// TODO Auto-generated method stub
-		
+		comboButton.setOnAction(event->{
+			((Level) getEditableElement()).setScrollingDirection(comboBox.getValue());
+		});
 	}
 
 	@Override
