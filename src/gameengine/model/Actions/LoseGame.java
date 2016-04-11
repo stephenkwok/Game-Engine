@@ -9,13 +9,12 @@ public class LoseGame extends Action {
 	
 	public LoseGame(Actor assignedActor) {
 		super(assignedActor);
-		this.assignedActor = assignedActor;
 	}
 
 	@Override
 	public void perform() {
-		// TODO Auto-generated method stub
-		
+		getActor().changed();
+        getActor().notifyObservers("WINGAME");		
 	}
 
 }

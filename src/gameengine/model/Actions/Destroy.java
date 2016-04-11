@@ -7,8 +7,8 @@ import gameengine.model.Actor;
  */
 public class Destroy extends Action {
 
-    public Destroy(Actor assginedActor){
-        super(assginedActor);
+    public Destroy(Actor assignedActor){
+        super(assignedActor);
     }
 
     @Override

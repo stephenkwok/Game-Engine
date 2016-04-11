@@ -14,6 +14,10 @@ import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.AttributeType;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,13 +34,12 @@ import javafx.scene.image.ImageView;
 
 public class Actor extends Observable implements IActor, IEditableGameElement {
 
-    private static final double DEGREES_TO_RADIANS = Math.PI / 180;
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
-    private double x;
-    private double y;
-    private double veloX;
-    private double veloY;
+    private DoubleProperty x = new SimpleDoubleProperty();
+    private DoubleProperty y = new SimpleDoubleProperty();
+    private DoubleProperty veloX = new SimpleDoubleProperty();
+    private DoubleProperty veloY = new SimpleDoubleProperty();
     private int myID;
     private String myName;
     private String myImageViewName;
@@ -55,38 +58,33 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
-    }
-
-  
-    /**
-     * Moves the Actor based on a provided distance and direction
-     *
-     * @param distance  The distance to move the Actor
-     * @param direction The direction that the Actor should move in
-     */
-    @Override
-    public void move(double distance, double direction) {
-//        myImageView.setX(distance * Math.cos(direction * DEGREES_TO_RADIANS));
-//        myImageView.setY(distance * Math.sin(direction * DEGREES_TO_RADIANS));
-//
-//        System.out.println(myImageView.getX());
-
-        x = distance * Math.cos(direction * DEGREES_TO_RADIANS);
-        y = distance * Math.sin(direction * DEGREES_TO_RADIANS);
-
+        x.addListener(new ChangeListener(){
+        	@Override
+            public void changed(ObservableValue o, Object oldVal, Object newVal) {
+                myImageView.setX((Double)newVal);
+            }
+        });
+        y.addListener(new ChangeListener(){
+        	@Override
+            public void changed(ObservableValue o, Object oldVal, Object newVal) {
+                myImageView.setY((Double)newVal);
+            }
+        });
     }
 
     /**
      * Calls the appropriate sequence of Actions based on a provided Trigger
      *
-     * @param myPhysicsEngine
+     * @param triggerString
      */
     @Override
-    public void performActionsFor(PhysicsEngine myPhysicsEngine, String triggerString) {
-        List<Action> myActions = myRules.get(triggerString);
-        for (Action myAction : myActions) {
-            myAction.perform();
-        }
+    public void performActionsFor(String triggerString) {
+    	if(myRules.containsKey(triggerString)){
+            List<Action> myActions = myRules.get(triggerString);
+            for (Action myAction : myActions) {
+                myAction.perform();
+            }
+    	}
     }
 
     /**
@@ -159,33 +157,33 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 
     @Override
     public double getXVelo() {
-        return veloX;
+        return veloX.get();
     }
 
     @Override
     public double getYVelo() {
-        return veloY;
+        return veloY.get();
     }
 
     @Override
     public void setXPos(double updateXPosition) {
-        x = updateXPosition;
+       x.set(updateXPosition);
     }
 
     @Override
     public void setYPos(double updateYPosition) {
-        y = updateYPosition;
+    	y.set(updateYPosition);
 
     }
 
     @Override
     public void setXVelo(double updateXVelo) {
-        veloX = updateXVelo;
+        veloX.set(updateXVelo);
     }
 
     @Override
     public void setYVelo(double updateYVelo) {
-        veloY = updateYVelo;
+        veloY.set(updateYVelo);
     }
 
     public void setID(int ID) {
@@ -214,13 +212,13 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     }
 
     @Override
-    public double getX() {
-        return x;
+    public double getXPos() {
+        return x.get();
     }
 
     @Override
-    public double getY() {
-        return y;
+    public double getYPos() {
+    	return y.get();
     }
 
 	public void setEngine(PhysicsEngine physicsEngine) {

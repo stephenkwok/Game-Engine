@@ -62,11 +62,17 @@ public class GameEngineTester {
         Game myGame = new Game(new GameInfo(), myLevels);
 
         //Prints Initial State
+<<<<<<< HEAD
+        List<IActor> actors = (List<IActor>) myGame.getActors();
+        for (IActor actor : actors){
+            System.out.printf(actor.getID() + ", " + actor.getXPos() + ", " + actor.getYPos() + "\t\t");
+=======
         List<Actor> actors = (List<Actor>) myGame.getActors();
         for (Actor actor : actors){
             System.out.printf(actor.getID() + ", " + actor.getX() + ", " + actor.getY() + "\t\t");
            PhysicsEngine pe = new PhysicsEngine();
            pe.moveRight(actor);
+>>>>>>> 0cd5bd3acbe7c7e6d98a352fe89b61bb5719e530
         }
         System.out.println();
 
@@ -74,9 +80,15 @@ public class GameEngineTester {
         //myGame.handleTrigger(new TickTrigger());
 
         //Prints Final State
+<<<<<<< HEAD
+        actors = (List<IActor>) myGame.getActors();
+        for (IActor actor : actors){
+            System.out.printf(actor.getID() + ", " + actor.getXPos() + ", " + actor.getYPos() + "\t\t");
+=======
         actors = (List<Actor>) myGame.getActors();
         for (Actor actor : actors){
             System.out.printf(actor.getID() + ", " + actor.getX() + ", " + actor.getY() + "\t\t");
+>>>>>>> 0cd5bd3acbe7c7e6d98a352fe89b61bb5719e530
         }
     }
 

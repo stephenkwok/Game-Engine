@@ -54,9 +54,8 @@ public class PhysicsEngine {
 	private void update(Actor a,double forceX, double forceY ){
 		double xVelo     = a.getXVelo();
 		double yVelo     = a.getYVelo();
-		double xPos      =  a.getX();      
-		double yPos      =  a.getY();
-
+		double xPos      =  a.getXPos();      
+		double yPos      =  a.getYPos();
 		double nextHorzVelo;
 		double nextVertVelo;
 		double nextXPos;
@@ -77,7 +76,6 @@ public class PhysicsEngine {
 		
 		nextHorzVelo = applyForce(xVelo, forceX); // Apply  y force from movement action to y velocity
 		nextHorzVelo = applyForce(nextHorzVelo, (friction*(nextHorzVelo))); //Apply frictional force
-		
 		nextXPos  = changePos(xPos,nextHorzVelo);
 		nextHorzVelo = maxLimit(nextHorzVelo, maxHorizVelocity);
 		setValues(a,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );
@@ -129,8 +127,8 @@ public class PhysicsEngine {
 	
 	public void staticHorizontalCollision(Actor a1, Actor a2) {
 		if(a1.getXVelo() != 0){     					//If the object is moving 
-			if(a1.getX() <  a2.getX()){ 			 //if the collision is occuring on the left side
-				a1.setXPos(a2.getX()-a1.getBounds().getWidth());  //Offset x value to the left
+			if(a1.getXPos() <  a2.getXPos()){ 			 //if the collision is occuring on the left side
+				a1.setXPos(a2.getXPos()-a1.getBounds().getWidth());  //Offset x value to the left
 			}else{ 										//If collision is happening from right
 				a1.setXPos(a2.getBounds().getMaxX());	//Offset x value to the right		
 			}
@@ -140,8 +138,8 @@ public class PhysicsEngine {
 
 	public void staticVerticalCollision(Actor a1, Actor a2) {
 		if(a1.getYVelo() != 0){     					//If the object is moving 
-			if(a1.getY() <= a2.getY()){ 			 //if the collision is occuring on the top side
-				a1.setYPos(a2.getY()-a1.getBounds().getWidth());  //Offset y value up
+			if(a1.getYPos() <= a2.getYPos()){ 			 //if the collision is occuring on the top side
+				a1.setYPos(a2.getYPos()-a1.getBounds().getWidth());  //Offset y value up
 			}else{ 										//If collision is happening from right
 				a1.setYPos(a2.getBounds().getMaxY());	//Offset x value to the right		
 			}
