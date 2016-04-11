@@ -10,6 +10,15 @@ public class MenuHome extends MenuParent{
 	public MenuHome(IScreenController myController, String text) {
 		super(myController, text);
 		myRealController = (BaseScreenController) myController;
+		
 	}
+	
+	
+
+	@Override
+	public void setOnButtonAction() {
+		this.myItem.setOnMenuValidation(e -> myRealController.goToSplash());
+	}
+	
 
 }

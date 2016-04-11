@@ -4,11 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
@@ -97,7 +93,7 @@ public class GUIFactory {
 			Constructor<?> constructor = button.getConstructor(IScreenController.class, String.class, String.class);
 			return (IGUIElement) constructor.newInstance(myController, text, icon);
 	}
-
+	
 	private IGUIElement createPane(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException{
 			Class<?> pane = Class.forName(className);
 			Constructor<?> constructor = pane.getConstructor(IScreenController.class);
@@ -120,6 +116,5 @@ public class GUIFactory {
 	private IGUIElement createCheckBox(String nodeType) {
 		return null;
 	}
-
 
 }

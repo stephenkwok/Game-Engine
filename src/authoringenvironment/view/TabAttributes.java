@@ -50,6 +50,7 @@ public class TabAttributes extends TabParent {
 			Label label = new Label(myAttributesResources.getString(elements[i] + LABEL));
 			label.setWrapText(true);
 			IGUIElement elementToCreate = null;
+			System.out.println(elements[i]);
 			elementToCreate = createNewGUIObject(elements[i]);
 			hbox.getChildren().addAll(label, elementToCreate.createNode());
 			vbox.getChildren().add(hbox);

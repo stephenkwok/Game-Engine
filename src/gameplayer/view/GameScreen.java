@@ -26,6 +26,7 @@ import javafx.scene.input.MouseEvent;
 public class GameScreen extends Observable {
 	private SubScene myScene;
 	private Group myGroup;
+
 	
 	private Camera camera;
 	

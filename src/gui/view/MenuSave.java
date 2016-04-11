@@ -12,4 +12,10 @@ public class MenuSave extends MenuParent{
 		myRealController = (BaseScreenController) myController;
 	}
 
+	@Override
+	public void setOnButtonAction() {
+		myItem.setOnMenuValidation(e -> myRealController.saveGame());
+		
+	}
+
 }

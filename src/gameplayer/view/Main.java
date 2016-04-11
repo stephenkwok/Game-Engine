@@ -25,7 +25,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.util.*;
+
+import gamedata.controller.CreatorController;
 
 public class Main extends Application {
 	
@@ -75,6 +78,7 @@ public class Main extends Application {
 		Game model = new Game("file",info,levels);
 		PerspectiveCamera camera = new PerspectiveCamera();
 		GameScreen view = new GameScreen(scene,camera);
+
 		GameController controller = new GameController();
 		controller.setGame(model);
 		controller.setGameView(view);

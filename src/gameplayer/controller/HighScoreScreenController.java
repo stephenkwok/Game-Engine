@@ -1,8 +1,12 @@
 package gameplayer.controller;
 
+import java.io.File;
 import java.util.ResourceBundle;
+
+import gameengine.controller.Game;
 import gameplayer.view.HighScoreScreen;
 import gui.controller.IScreenController;
+import gui.view.Screen;
 import javafx.stage.Stage;
 
 public class HighScoreScreenController implements IScreenController {
@@ -27,6 +31,17 @@ public class HighScoreScreenController implements IScreenController {
 	public Stage getStage() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void createGameFromFile(Game game) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Screen getScreen() {
+		return myScreen;
 	}
 
 }
