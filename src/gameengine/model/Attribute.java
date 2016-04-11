@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
-public abstract class Attribute {
+public class Attribute {
 	
     private AttributeType myType;
     private IntegerProperty myInitialValue;

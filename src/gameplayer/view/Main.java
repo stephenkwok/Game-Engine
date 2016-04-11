@@ -2,14 +2,19 @@ package gameplayer.view;
 
 import gameengine.controller.*;
 import gameengine.model.Actor;
+import gameengine.model.Attribute;
 import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
+import gameengine.model.Actions.GainPoints;
+import gameengine.model.Actions.LoseGame;
 import gameengine.model.Actions.MoveLeft;
 import gameengine.model.Actions.MoveRight;
 import gameengine.model.Actions.MoveUp;
 import gameengine.model.Actions.NextLevel;
+import gameengine.model.Triggers.AttributeType;
 import gameengine.model.Triggers.KeyTrigger;
+import gameengine.model.Triggers.SideCollision;
 import gameplayer.controller.GameController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -49,19 +54,25 @@ public class Main extends Application {
 		info.setCurrentLevelNum(0);
 		
 		Actor actor1 = new Actor();
-		Image actor1img = new Image(getClass().getClassLoader().getResourceAsStream("newactor.png"));
+		Image actor1img = new Image(getClass().getClassLoader().getResourceAsStream("redball.png"));
 		actor1.setImageView(new ImageView(actor1img));
+		actor1.setName("A1");
 		
 		Actor actor2 = new Actor();
-		Image actor2img = new Image(getClass().getClassLoader().getResourceAsStream("newlevel.png"));
+		Image actor2img = new Image(getClass().getClassLoader().getResourceAsStream("purplecircle.png"));
 		actor2.setImageView(new ImageView(actor2img));
+		actor2.getImageView().setX(400);
+		actor2.setName("A2");
 		
-		KeyTrigger trigger = new KeyTrigger(KeyCode.SPACE);
-		List<Object> args = new ArrayList<Object>();
-		Action action = new MoveRight(actor1);
-		Rule rule = new Rule(trigger,action);
+		KeyTrigger trigger = new KeyTrigger(KeyCode.RIGHT);
+		SideCollision trigger2 = new SideCollision(actor1,actor2);
+		Action action1 = new MoveRight(actor1);
+		Action endGame = new LoseGame(actor1);
+		Rule rule = new Rule(trigger,action1);
+		Rule rule2 = new Rule(trigger2,endGame);
 		actor1.addRule(rule);
-		
+		actor1.addRule(rule2);
+//		actor1.addAttribute(new Attribute(AttributeType.POINTS,0,3,endGame));
 		
 		List<Level> levels = new ArrayList<Level>();
 		Level level1 = new Level();

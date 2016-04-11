@@ -70,7 +70,7 @@ public class Game extends Observable implements Observer {
 	
 	private void step(){
 		List<Actor> currentActors = levels.get(info.getCurrentLevelNum()).getActors();
-		physicsUpdate(currentActors);
+		//physicsUpdate(currentActors);
 		myCollisionDetector.detection(currentActors);
 		
 	}
