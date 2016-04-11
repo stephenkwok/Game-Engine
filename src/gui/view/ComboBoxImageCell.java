@@ -36,7 +36,6 @@ public abstract class ComboBoxImageCell extends ComboBoxParent {
 	 */
 	public void fillImageMap(){
 		for(String imageName: imageNames){
-			System.out.println(imageNames);
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 			ImageView imageView = new ImageView(image);
 	        imageView.setPreserveRatio(true);

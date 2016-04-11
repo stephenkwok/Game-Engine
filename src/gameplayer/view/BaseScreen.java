@@ -118,6 +118,7 @@ public class BaseScreen extends Screen {
 			Tooltip t = new Tooltip(myResources.getString(sideButtons[i]+ "Text"));
 			t.install(myB, t);
 			myT.getItems().add(myB);
+			myB.setFocusTraversable(false);
 		}
 		myMasterPane.setTop(myT);
 		

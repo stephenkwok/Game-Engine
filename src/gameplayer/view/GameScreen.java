@@ -6,6 +6,7 @@ import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.KeyTrigger;
+import gui.view.Screen;
 import javafx.event.Event;
 import javafx.scene.Camera;
 import javafx.scene.Group;
@@ -16,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 /** 
  * This class serves as the private interface that a Game screen must implement in order to be able to add visual elements of the game to the screen.
@@ -33,10 +35,14 @@ public class GameScreen extends Observable {
 	
 	public GameScreen(Camera camera){
 		mySubgroup = new Group();
-		mySubscene = new SubScene(mySubgroup, 700, 500);
+		mySubscene = new SubScene(mySubgroup,Screen.SCREEN_WIDTH, 500);
 		mySubscene.setFocusTraversable(true);
-		mySubscene.setOnKeyPressed(e -> handleScreenEvent(e));
-		mySubscene.setOnMouseClicked(e -> handleScreenEvent(e));
+		mySubscene.setOnKeyPressed(e -> {
+			mySubscene.setFill(Color.ALICEBLUE);
+		});//handleScreenEvent(e));
+		mySubscene.setOnMouseClicked(e ->{
+			mySubscene.setFill(Color.ALICEBLUE);
+		}); //handleScreenEvent(e));
 		this.camera = camera; ///
 	}
 	
