@@ -10,6 +10,7 @@ import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.GameScreen;
+import gameplayer.view.HUDScreen;
 
 
 /** 
@@ -31,6 +32,7 @@ public class GameController implements Observer {
 		model.addObserver(this);
 	}
 	
+	
 	/**
 	 * Sets the basic game view to the given BaseScreen
 	 * @param BaseScreen
@@ -46,6 +48,7 @@ public class GameController implements Observer {
 	 */
 	public void initialize (int level){
 		model.getInfo().setCurrentLevelNum(level);
+		begin();
 	}
 	
 	/**
@@ -53,6 +56,7 @@ public class GameController implements Observer {
 	 */
 	public void begin (){
 		Level current = model.getCurrentLevel();
+		view.addBackground(current.getMyBackgroundImgName());
 		for(Actor actor: current.getActors()){
 			view.addActor(actor);
 		}

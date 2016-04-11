@@ -11,6 +11,8 @@ import javafx.scene.Camera;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -48,9 +50,17 @@ public class GameScreen extends Observable {
 	 * @param actor an instance of IActor
 	 */
 	public void addActor (Actor actor){
+		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(actor.getMyImageViewName())));
+		actor.setImageView(imageView);
 		mySubgroup.getChildren().add(actor.getImageView());//
 	}
 	
+
+	public void addBackground(String filepath) {
+		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(filepath)));
+		mySubgroup.getChildren().add(imageView);
+		
+	}
 	
 	/**
 	 * Will receive events on screen and then pass to the game engine's handler to determine what action to take
@@ -84,4 +94,5 @@ public class GameScreen extends Observable {
 	public void clearGame(){
 		mySubgroup.getChildren().clear();
 	}
+
 }
