@@ -13,8 +13,8 @@ public class MoveUp extends MovingAction {
 
     private static final double UP_ANGLE = 90.0;
 
-    public MoveUp(Actor assignedActor, List<Object> args) {
-        super(assignedActor, args);
+    public MoveUp(Actor assignedActor) {
+        super(assignedActor);
     }
 
     @Override

@@ -67,15 +67,15 @@ public class CollisionDetection {
 		double xOverlap = 0;
 		double yOverlap = 0;
 		if(a1.getBounds().getMaxX() <= a2.getBounds().getMaxX()){
-			xOverlap = a1.getBounds().getMaxX() -  a2.getX();
+			xOverlap = a1.getBounds().getMaxX() -  a2.getXPos();
 		}else{
-			xOverlap = a2.getBounds().getMaxX() -  a1.getX();
+			xOverlap = a2.getBounds().getMaxX() -  a1.getXPos();
 		}
 		
 		if(a1.getBounds().getMaxY() <= a2.getBounds().getMaxY()){
-			yOverlap = a1.getBounds().getMaxY() -  a2.getY();
+			yOverlap = a1.getBounds().getMaxY() -  a2.getYPos();
 		}else{
-			yOverlap = a2.getBounds().getMaxY() -  a1.getY();
+			yOverlap = a2.getBounds().getMaxY() -  a1.getYPos();
 		}
 				
 		if(xOverlap <= yOverlap){
@@ -88,6 +88,6 @@ public class CollisionDetection {
 	private void resolveCollision(Actor a1, Actor a2){
 		String collisionType = getCollisionType(a1,a2);
 		String triggerString = a1.getName() + collisionType + a2.getName();
-		a1.performActionsFor(myPhysicsEngine,triggerString);   
+		a1.performActionsFor(triggerString);   //Needs to be changed to take a string parameter
 	}	
 }

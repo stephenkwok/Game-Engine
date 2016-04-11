@@ -11,8 +11,8 @@ public class NextLevel extends Action {
 
 	@Override
 	public void perform() {
-		// TODO Auto-generated method stub
-		
+		getActor().changed();
+        getActor().notifyObservers("nextLevel");		
 	}
 
 }

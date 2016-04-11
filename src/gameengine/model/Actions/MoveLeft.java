@@ -1,4 +1,4 @@
-package gameengine.model.Actions;
+	package gameengine.model.Actions;
 
 
 import gameengine.model.Actions.MovingAction;
@@ -14,8 +14,8 @@ public class MoveLeft extends MovingAction {
 
     private static final double LEFT_DIRECTION = 180;
 
-    public MoveLeft(Actor assignedActor, List<Object> args) {
-        super(assignedActor, args);
+    public MoveLeft(Actor assignedActor) {
+        super(assignedActor);
     }
 
     @Override

@@ -7,8 +7,11 @@ import gameengine.model.ITrigger;
 import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.KeyTrigger;
 import javafx.event.Event;
+import javafx.scene.Camera;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -21,16 +24,20 @@ import javafx.scene.input.MouseEvent;
  */
 
 public class GameScreen extends Observable {
-	private Scene myScene;
+	private SubScene myScene;
 	private Group myGroup;
+
 	
-	public GameScreen(){
+	private Camera camera;
+	
+	public GameScreen(Scene mainScene, Camera camera){
 		myGroup = new Group();
-		myScene = new Scene(myGroup);
-		myScene.setOnKeyPressed(e->handleScreenEvent(e));//
+		myScene = new SubScene(myGroup,600,400);
+		mainScene.setOnKeyPressed(e->handleScreenEvent(e));//
+		this.camera = camera; ///
 	}
 	
-	public Scene getScene(){
+	public SubScene getScene(){
 		return myScene;
 	}
 	
@@ -40,6 +47,10 @@ public class GameScreen extends Observable {
 	 */
 	public void addActor (Actor actor){
 		myGroup.getChildren().add(actor.getImageView());//
+	}
+	
+	public void addToRoot(Node n){
+		myGroup.getChildren().add(n);
 	}
 	
 	/**
@@ -53,6 +64,7 @@ public class GameScreen extends Observable {
 			notifyObservers(trigger);
 		}
 		else if(e.getEventType()==KeyEvent.KEY_PRESSED){
+			camera.setTranslateX(camera.getTranslateX()+5);
 			ITrigger trigger = handleKeyPress(((KeyEvent)e).getCode());
 			setChanged();
 			notifyObservers(trigger);
@@ -69,4 +81,7 @@ public class GameScreen extends Observable {
 		return new KeyTrigger(key);
 	}
 	
+	public void clearGame(){
+		myGroup.getChildren().clear();
+	}
 }
