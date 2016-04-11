@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 public class ComboBoxActorImages extends ComboBoxImageCell{
 	GUIActorEditingEnvironment aEE;
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
+	private static final String EMPTY_STRING = "";
 	
 	public ComboBoxActorImages(String promptText, String imageResource, GUIActorEditingEnvironment aEE) {
 		super(promptText,imageResource, STANDARD_IMAGE_HEIGHT);
@@ -47,7 +48,7 @@ public class ComboBoxActorImages extends ComboBoxImageCell{
 	@Override
 	public Node getNodeForBox(String item){
         HBox hbox = new HBox();
-        hbox.getChildren().addAll(new Label(options.indexOf(item) + " "), imageMap.get(item), new Label(item + " "));
+        hbox.getChildren().addAll(new Label(EMPTY_STRING, imageMap.get(item)));
         return hbox;
 	}
 

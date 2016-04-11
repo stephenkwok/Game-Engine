@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.TransferMode;
 import javafx.scene.media.AudioClip;
 /**
  * Tab contains ListView of sounds
@@ -32,7 +33,7 @@ public class TabLibrarySounds extends TabLibrary{
 		for(String soundName: fileNames){
 			Label soundLabel = new Label(soundName, createPlaySoundButton(soundName));
 			if(myActorRuleCreator!=null){
-				setDragEvent(soundLabel);
+				setDragEvent(soundLabel,TransferMode.COPY);
 			}
 			labels.add(soundLabel);
 		}

@@ -146,7 +146,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 					actorIV.setOnDragDone(null);
 					actorIV.setOnMouseDragged(new EventHandler<MouseEvent>() {
 						@Override public void handle(MouseEvent event) {
-							moveActor(actorIV, event);
+							moveActor(actor, actorIV, event);
 							event.consume();
 						}
 					}); 
@@ -160,9 +160,12 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		});
 	}
 	
-	private void moveActor(ImageView actorIV, MouseEvent event) {
+	private void moveActor(Actor actor, ImageView actorIV, MouseEvent event) {
+		actor.setXPos(event.getX());
+		actor.setYPos(event.getY());
 		actorIV.setX(event.getX());
 		actorIV.setY(event.getY());
+		
 	}
 	
 	private Actor getActorById(int id) {
