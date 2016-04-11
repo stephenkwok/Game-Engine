@@ -8,14 +8,19 @@ import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 
 public class HUDScreen extends Window implements IHUDScreen{
 	
+	private static final int DEFAULT_HEIGHT = 100;
+	private static final int DEFAULT_WIDTH = 200;
+	
 	private ObservableMap<String, Object> status;
 	Map<String, Integer> valueToRowMap;
 	Map<Integer, String> rowToValueMap;
+	private SubScene myScene;
 	
 	public HUDScreen(double width, double height, ObservableMap<String, Object> status, Map<Integer, String> rowToValueMap) {
 		super(width, height);
@@ -38,14 +43,21 @@ public class HUDScreen extends Window implements IHUDScreen{
 		}
 	}
 	
+	public HUDScreen(ObservableMap<String, Object> status) {
+		this(DEFAULT_WIDTH, DEFAULT_HEIGHT, status);
+	}
+	
+	
+	
 	@Override
 	public void update() {
 		
 	}
 
 	@Override
-	public Scene init() {
-		Scene myScene = new Scene(super.getRoot(), super.getWidth(), super.getHeight());
+	public void init() {
+		myScene = new SubScene(super.getRoot(), super.getWidth(), super.getHeight());
+		myScene.setFocusTraversable(false);
 		
         ObservableList<String> keys = FXCollections.observableArrayList();
         ObservableList<String> values = FXCollections.observableArrayList();
@@ -55,6 +67,7 @@ public class HUDScreen extends Window implements IHUDScreen{
         valueView.setMaxWidth(myScene.getWidth()/2);
         
         BorderPane container = new BorderPane();
+        container.setFocusTraversable(false);
         container.setLeft(keyView);
         container.setRight(valueView);
 		
@@ -70,9 +83,11 @@ public class HUDScreen extends Window implements IHUDScreen{
 				values.set(rownum, change.getValueAdded().toString());
 			}
         });
-		
-		super.getRoot().getChildren().add(container);
-		
+        
+        super.getRoot().getChildren().add(container);
+	}
+	
+	public SubScene getScene() {
 		return myScene;
 	}
 

@@ -46,8 +46,10 @@
             <name/>
           </veloY>
           <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
           <myName>A1</myName>
-          <myImageViewName>default_actor.jpg</myImageViewName>
+          <myImageViewName>redball.png</myImageViewName>
           <myRules>
             <entry>
               <string>Space</string>
@@ -93,6 +95,8 @@
             <jumpForce>-5.0</jumpForce>
             <floorHeight>300.0</floorHeight>
           </myPhysicsEngine>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -101,14 +105,14 @@
             <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
           <x class="javafx.beans.property.SimpleDoubleProperty">
-            <value>0.0</value>
+            <value>600.0</value>
             <valid>true</valid>
             <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
               <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
               <listener class="gameengine.model.Actor$1">
                 <outer-class reference="../../../.."/>
               </listener>
-              <currentValue class="double">0.0</currentValue>
+              <currentValue class="double">600.0</currentValue>
             </helper>
             <name/>
           </x>
@@ -135,11 +139,15 @@
             <name/>
           </veloY>
           <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
           <myName>A2</myName>
-          <myImageViewName>default_actor.jpg</myImageViewName>
+          <myImageViewName>purplecircle.png</myImageViewName>
           <myRules/>
           <attributeMap/>
           <myPhysicsEngine reference="../../gameengine.model.Actor/myPhysicsEngine"/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap>
@@ -169,6 +177,8 @@
         </entry>
       </myTriggerMap>
       <myName>Untitled</myName>
+      <myHeight>0.0</myHeight>
+      <myWidth>0.0</myWidth>
       <myBackgroundImgName>default_background.png</myBackgroundImgName>
     </gameengine.controller.Level>
     <gameengine.controller.Level>
@@ -214,15 +224,21 @@
             <name/>
           </veloY>
           <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
           <myName>Default Name</myName>
-          <myImageViewName>default_actor.jpg</myImageViewName>
+          <myImageViewName>elsa.png</myImageViewName>
           <myRules/>
           <attributeMap/>
           <myPhysicsEngine reference="../../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap/>
       <myName>Untitled</myName>
+      <myHeight>0.0</myHeight>
+      <myWidth>0.0</myWidth>
       <myBackgroundImgName>default_background.png</myBackgroundImgName>
     </gameengine.controller.Level>
   </levels>
@@ -262,7 +278,7 @@
       <debugNanos>0</debugNanos>
       <theMaster>
         <inactive>true</inactive>
-        <nextPulseTime>953461961050673</nextPulseTime>
+        <nextPulseTime>226097030083691</nextPulseTime>
         <lastPulseDuration>-2147483648</lastPulseDuration>
         <outer-class class="com.sun.javafx.tk.quantum.MasterTimer" reference="../.."/>
       </theMaster>

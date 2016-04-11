@@ -32,6 +32,7 @@ public class GameController implements Observer {
 		model.addObserver(this);
 	}
 	
+	
 	/**
 	 * Sets the basic game view to the given BaseScreen
 	 * @param BaseScreen
@@ -41,12 +42,19 @@ public class GameController implements Observer {
 		view.addObserver(this);
 	}
 	
+	public void setHUD(HUDScreen hud) {
+		this.hud = hud;
+	}
+	
+	
+	
 	/**
 	 * Will initialize the backend (game engine) with the current level's information and actor information to set up the game for playing.  Will visualize that backend too. 
 	 * @param level an int representing the level to be played
 	 */
 	public void initialize (int level){
 		model.getInfo().setCurrentLevelNum(level);
+		begin();
 	}
 	
 	/**
@@ -54,6 +62,7 @@ public class GameController implements Observer {
 	 */
 	public void begin (){
 		Level current = model.getCurrentLevel();
+		view.addBackground(current.getMyBackgroundImgName());
 		for(Actor actor: current.getActors()){
 			view.addActor(actor);
 		}
