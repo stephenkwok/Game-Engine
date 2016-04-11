@@ -124,7 +124,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		myActorIV = myActor.getImageView();
 	}
 
-	public void setActorImage(ImageView newImageView) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public void setActorImage(ImageView newImageView) {
 		myActorIV = newImageView;
 		myActorIV.setFitHeight(actorImageHeight);
 		myActorIV.setPreserveRatio(true);
