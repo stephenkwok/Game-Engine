@@ -75,16 +75,16 @@ public class Main extends Application {
 		Group group = new Group();
 		Scene scene = new Scene(group);
 		
-		Game model = new Game("file",info,levels);
+		Game model = new Game(info,levels);
+		CreatorController c = new CreatorController(model);
+		c.saveForEditing(new File("gamefiles/test.xml"));
 		PerspectiveCamera camera = new PerspectiveCamera();
-		GameScreen view = new GameScreen(scene,camera);
+		GameScreen view = new GameScreen(camera);
 
 		GameController controller = new GameController();
 		controller.setGame(model);
 		controller.setGameView(view);
-		
-		
-		
+
 		SubScene sub = view.getScene();
 		sub.fillProperty().set(Color.BLUE);
 		group.getChildren().add(sub);
@@ -99,6 +99,7 @@ public class Main extends Application {
 		stage.setScene(scene);
 		stage.show();
 		controller.begin();
+
 		
 //		Stage stage = new Stage();
 //		Group root = new Group();
