@@ -34,7 +34,7 @@ public class TabAttributes extends TabParent {
 	private VBox myContent;
 	private List<CheckBox> myHUDElements;
 	
-	public TabAttributes(Controller controller, ResourceBundle myResources, String tabText, String levelOptionsResource) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public TabAttributes(Controller controller, ResourceBundle myResources, String tabText, String levelOptionsResource) {
 		super(myResources, tabText);
 		this.myAttributesResources = ResourceBundle.getBundle(levelOptionsResource);
 		myFactory = new GUIFactory(myAttributesResources, myController);
@@ -42,7 +42,7 @@ public class TabAttributes extends TabParent {
 		createElements();
 	}
 
-	private void createElements() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private void createElements() {
 		VBox vbox = new VBox(PADDING);
 		vbox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
 		vbox.getChildren().addAll(addElements(EDITOR_ELEMENTS, vbox));
@@ -54,7 +54,7 @@ public class TabAttributes extends TabParent {
 		myContent = vbox;
 	}
 	
-	private void addHUD(String key, VBox vbox) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	private void addHUD(String key, VBox vbox) {
 		vbox.getChildren().add(new Label(HUD_PROMPT));
 		List<Node> checkboxes = addElements(HUD_OPTIONS, vbox);
 		for (int i = 0; i < checkboxes.size(); i++) {
@@ -64,7 +64,7 @@ public class TabAttributes extends TabParent {
 		vbox.getChildren().addAll(checkboxes);
 	}
 	
-	private List<Node> addElements(String key, VBox vbox) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private List<Node> addElements(String key, VBox vbox) {
 		String[] elements = myAttributesResources.getString(key).split(DELIMITER);
 		List<Node> createdElements = new ArrayList<>();
 		for (int i = 0; i < elements.length; i++) {

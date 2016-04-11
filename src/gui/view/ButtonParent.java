@@ -37,7 +37,7 @@ public abstract class ButtonParent implements IGUIElement {
 	 * @throws InstantiationException 
 	 */
 	@Override
-	public Node createNode() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public Node createNode() {
 		button = new Button(buttonText);
 		button.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
 		setButtonIcon();
@@ -52,7 +52,7 @@ public abstract class ButtonParent implements IGUIElement {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	protected abstract void setButtonAction() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
+	protected abstract void setButtonAction();
 	
 	/**
 	 * Optional, sets image for button.

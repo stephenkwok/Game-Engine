@@ -19,5 +19,5 @@ public interface IGUIElement {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
      */
-    Node createNode() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
+    Node createNode();
 }
