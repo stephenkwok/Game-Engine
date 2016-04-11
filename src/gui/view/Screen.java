@@ -24,7 +24,7 @@ public abstract class Screen {
 	private IScreenController myController;
 	private Group myRoot;
 	private GUIFactory factory;
-	public static final int SCREEN_WIDTH = 1300;
+	public static final int SCREEN_WIDTH = 1000;
 	public static final int SCREEN_HEIGHT = 700;
 	
 	public Screen(Stage stage){
