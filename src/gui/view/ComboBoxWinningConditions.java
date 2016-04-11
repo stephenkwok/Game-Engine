@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import gameengine.controller.Level;
+
 public class ComboBoxWinningConditions extends ComboBoxTextCell {
 	private static final String WINNING_CONDITIONS_OPTIONS = "WinningConditionsOptions";
 	private static final String DELIMITER = ",";
@@ -17,7 +19,9 @@ public class ComboBoxWinningConditions extends ComboBoxTextCell {
 
 	@Override
 	public void setButtonAction() {
-		// TODO Auto-generated method stub
+		comboButton.setOnAction(event->{
+			((Level) getEditableElement()).setWinningCondition(comboBox.getValue());
+		});
 	}
 
 	@Override

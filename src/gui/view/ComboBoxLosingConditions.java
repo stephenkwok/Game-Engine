@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import gameengine.controller.Level;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class ComboBoxLosingConditions extends ComboBoxTextCell {
 	private static final String LOSING_CONDITIONS_OPTIONS = "LosingConditionsOptions";
 	private static final String DELIMITER = ",";
@@ -16,8 +20,9 @@ public class ComboBoxLosingConditions extends ComboBoxTextCell {
 
 	@Override
 	public void setButtonAction() {
-		// TODO Auto-generated method stub
-		
+		comboButton.setOnAction(event->{
+			((Level) getEditableElement()).setLosingCondition(comboBox.getValue());
+		});
 	}
 
 	@Override

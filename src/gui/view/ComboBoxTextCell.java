@@ -3,6 +3,7 @@ package gui.view;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.IEditableGameElement;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 /**
@@ -24,7 +25,7 @@ public abstract class ComboBoxTextCell extends ComboBoxParent {
 	protected Node getNodeForBox(String item) {
 		return new Label(NO_NODE_FOR_BOX);
 	}
-
+	
 	@Override
 	public abstract List<String> getOptionsList();
 

@@ -8,7 +8,10 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import authoringenvironment.model.IEditableGameElement;
+import gameengine.controller.Level;
 import gui.view.GUIFactory;
+import gui.view.IGUIEditingElement;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -32,12 +35,14 @@ public class TabAttributes extends TabParent {
 	private Controller myController;
 	private VBox myContent;
 	private List<CheckBox> myHUDElements;
+	private IEditableGameElement myEditableElement;
 	
-	public TabAttributes(Controller controller, ResourceBundle myResources, String tabText, String levelOptionsResource) {
+	public TabAttributes(Controller controller, ResourceBundle myResources, String tabText, String levelOptionsResource, IEditableGameElement element) {
 		super(myResources, tabText);
 		this.myAttributesResources = ResourceBundle.getBundle(levelOptionsResource);
 		myFactory = new GUIFactory(myAttributesResources, myController);
 		myHUDElements = new ArrayList<>();
+		myEditableElement = element;
 		createElements();
 	}
 
@@ -67,12 +72,13 @@ public class TabAttributes extends TabParent {
 		String[] elements = myAttributesResources.getString(key).split(DELIMITER);
 		List<Node> createdElements = new ArrayList<>();
 		for (int i = 0; i < elements.length; i++) {
-			IGUIElement elementToCreate = myFactory.createNewGUIObject(elements[i]);
-			createdElements.add(elementToCreate.createNode());
+			IGUIEditingElement elementToCreate = (IGUIEditingElement) myFactory.createNewGUIObject(elements[i]);
+			elementToCreate.setEditableElement(myEditableElement);
+			createdElements.add(((IGUIElement) elementToCreate).createNode());
 		}
 		return createdElements;
 	}
-	
+		
 	public List<String> getHUDElementsToDisplay() {
 		List<String> toDisplay = new ArrayList<>();
 		for (int i = 0; i < myHUDElements.size(); i++) {
