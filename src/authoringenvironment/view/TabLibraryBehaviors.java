@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.TransferMode;
 import javafx.collections.FXCollections;
 /**
  * Tab contains ListView of behaviors and drag/drop behavior for behaviors.
@@ -25,7 +26,7 @@ public class TabLibraryBehaviors extends TabLibrary {
 		for(String behavior: myResources.getString(tabText).split(" ")){
 			Label mySource = new Label(behavior);
 			if(myActorRuleCreator!=null){
-				setDragEvent(mySource);
+				setDragEvent(mySource,TransferMode.COPY);
 			}
 			labels.add(mySource);
 		}

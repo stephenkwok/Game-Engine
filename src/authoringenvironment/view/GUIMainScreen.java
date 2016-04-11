@@ -60,16 +60,8 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	private void initLeftPane() {
-		VBoxMainScreenLeftPane leftPane = new VBoxMainScreenLeftPane(e -> setGameName(), e -> setGameDescription());
+		VBoxMainScreenLeftPane leftPane = new VBoxMainScreenLeftPane(controller);
 		borderPane.setLeft(leftPane);
-	}
-
-	private void setGameDescription() {
-
-	}
-
-	private void setGameName() {
-
 	}
 
 	private void initBorderPane() {

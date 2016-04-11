@@ -21,6 +21,7 @@ public class ComboBoxWinningConditions extends ComboBoxTextCell {
 	public void setButtonAction() {
 		comboButton.setOnAction(event->{
 			((Level) getEditableElement()).setWinningCondition(comboBox.getValue());
+			System.out.println("hi");
 		});
 	}
 

@@ -1,10 +1,7 @@
 package authoringenvironment.view;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
@@ -15,13 +12,14 @@ import gui.view.IGUIEditingElement;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 /**
  * Abstract Tab for setting attributes to go in the Inspector Pane in either the Level or Actor Editing Environment GUI.
- * @author amyzhao, AnnieTang
+ * @author amyzhao
  *
  */
 public class TabAttributes extends TabParent {
@@ -30,12 +28,14 @@ public class TabAttributes extends TabParent {
 	private static final String EDITOR_ELEMENTS = "EditorElements";
 	private static final String HUD_OPTIONS = "HUDOptions";
 	private static final String HUD_PROMPT = "Choose items to display on the level scene:";
+	private static final String GO = "Go";
 	private ResourceBundle myAttributesResources;
 	private GUIFactory myFactory;
 	private Controller myController;
 	private VBox myContent;
 	private List<CheckBox> myHUDElements;
 	private IEditableGameElement myEditableElement;
+	private List<IGUIEditingElement> myEditingElements;
 	
 	public TabAttributes(Controller controller, ResourceBundle myResources, String tabText, String levelOptionsResource, IEditableGameElement element) {
 		super(myResources, tabText);
@@ -43,6 +43,7 @@ public class TabAttributes extends TabParent {
 		myFactory = new GUIFactory(myAttributesResources, myController);
 		myHUDElements = new ArrayList<>();
 		myEditableElement = element;
+		myEditingElements = new ArrayList<>();
 		createElements();
 	}
 
@@ -55,6 +56,8 @@ public class TabAttributes extends TabParent {
 			addHUD(HUD_OPTIONS, vbox);
 		}
 		
+		updateEditable(myEditableElement);
+		
 		myContent = vbox;
 	}
 	
@@ -66,6 +69,11 @@ public class TabAttributes extends TabParent {
 			myHUDElements.add(cb);
 		}
 		vbox.getChildren().addAll(checkboxes);
+		Button checkHUDButton = new Button(GO);
+		checkHUDButton.setOnAction(event->{
+			((Level) myEditableElement).setHUDOptions(getHUDElementsToDisplay());
+		});
+		vbox.getChildren().add(checkHUDButton);
 	}
 	
 	private List<Node> addElements(String key, VBox vbox) {
@@ -73,10 +81,17 @@ public class TabAttributes extends TabParent {
 		List<Node> createdElements = new ArrayList<>();
 		for (int i = 0; i < elements.length; i++) {
 			IGUIEditingElement elementToCreate = (IGUIEditingElement) myFactory.createNewGUIObject(elements[i]);
-			elementToCreate.setEditableElement(myEditableElement);
+			myEditingElements.add(elementToCreate);
 			createdElements.add(((IGUIElement) elementToCreate).createNode());
 		}
 		return createdElements;
+	}
+	
+	public void updateEditable(IEditableGameElement element) {
+		myEditableElement = element;
+		for (int i = 0; i < myEditingElements.size(); i++) {
+			myEditingElements.get(i).setEditableElement(element);
+		}
 	}
 		
 	public List<String> getHUDElementsToDisplay() {
@@ -86,6 +101,7 @@ public class TabAttributes extends TabParent {
 				toDisplay.add(myHUDElements.get(i).getId());
 			}
 		}
+		
 		return toDisplay;
 	}
 	

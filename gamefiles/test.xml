@@ -46,15 +46,40 @@
             <name/>
           </veloY>
           <myID>0</myID>
-          <myName>Default Name</myName>
-          <myImageViewName>default_actor.jpg</myImageViewName>
+          <myFriction>0.0</myFriction>
+          <myName>A1</myName>
+          <myImageViewName>redball.png</myImageViewName>
           <myRules>
             <entry>
               <string>Space</string>
               <list>
+                <gameengine.model.Actions.MoveUp>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.MoveUp>
+              </list>
+            </entry>
+            <entry>
+              <string>Left</string>
+              <list>
+                <gameengine.model.Actions.MoveLeft>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.MoveLeft>
+              </list>
+            </entry>
+            <entry>
+              <string>Right</string>
+              <list>
                 <gameengine.model.Actions.MoveRight>
                   <myActor reference="../../../../.."/>
                 </gameengine.model.Actions.MoveRight>
+              </list>
+            </entry>
+            <entry>
+              <string>A1SideCollisionA2</string>
+              <list>
+                <gameengine.model.Actions.NextLevel>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.NextLevel>
               </list>
             </entry>
           </myRules>
@@ -70,6 +95,88 @@
             <floorHeight>300.0</floorHeight>
           </myPhysicsEngine>
         </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+            <gameengine.controller.Game reference="../../../../../.."/>
+          </obs>
+          <x class="javafx.beans.property.SimpleDoubleProperty">
+            <value>600.0</value>
+            <valid>true</valid>
+            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
+              <listener class="gameengine.model.Actor$1">
+                <outer-class reference="../../../.."/>
+              </listener>
+              <currentValue class="double">600.0</currentValue>
+            </helper>
+            <name/>
+          </x>
+          <y class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
+              <listener class="gameengine.model.Actor$2">
+                <outer-class reference="../../../.."/>
+              </listener>
+              <currentValue class="double">0.0</currentValue>
+            </helper>
+            <name/>
+          </y>
+          <veloX class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <name/>
+          </veloX>
+          <veloY class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <name/>
+          </veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <myName>A2</myName>
+          <myImageViewName>purplecircle.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <myPhysicsEngine reference="../../gameengine.model.Actor/myPhysicsEngine"/>
+        </gameengine.model.Actor>
+      </myActors>
+      <myTriggerMap>
+        <entry>
+          <string>Space</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>Left</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>Right</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>A1SideCollisionA2</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+      </myTriggerMap>
+      <myName>Untitled</myName>
+      <myHeight>0.0</myHeight>
+      <myWidth>0.0</myWidth>
+      <myBackgroundImgName>default_background.png</myBackgroundImgName>
+    </gameengine.controller.Level>
+    <gameengine.controller.Level>
+      <myActors>
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs>
@@ -111,22 +218,18 @@
             <name/>
           </veloY>
           <myID>0</myID>
+          <myFriction>0.0</myFriction>
           <myName>Default Name</myName>
-          <myImageViewName>default_actor.jpg</myImageViewName>
+          <myImageViewName>elsa.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <myPhysicsEngine reference="../../gameengine.model.Actor/myPhysicsEngine"/>
+          <myPhysicsEngine reference="../../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
         </gameengine.model.Actor>
       </myActors>
-      <myTriggerMap>
-        <entry>
-          <string>Space</string>
-          <list>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
-          </list>
-        </entry>
-      </myTriggerMap>
+      <myTriggerMap/>
       <myName>Untitled</myName>
+      <myHeight>0.0</myHeight>
+      <myWidth>0.0</myWidth>
       <myBackgroundImgName>default_background.png</myBackgroundImgName>
     </gameengine.controller.Level>
   </levels>
@@ -166,7 +269,7 @@
       <debugNanos>0</debugNanos>
       <theMaster>
         <inactive>true</inactive>
-        <nextPulseTime>1340484357557981</nextPulseTime>
+        <nextPulseTime>1366911481310878</nextPulseTime>
         <lastPulseDuration>-2147483648</lastPulseDuration>
         <outer-class class="com.sun.javafx.tk.quantum.MasterTimer" reference="../.."/>
       </theMaster>
@@ -177,7 +280,7 @@
     <clipEnvelope class="com.sun.scenario.animation.shared.InfiniteClipEnvelope">
       <animation class="javafx.animation.Timeline" reference="../.."/>
       <rate>1.0</rate>
-      <cycleTicks>6000</cycleTicks>
+      <cycleTicks>96</cycleTicks>
       <deltaTicks>0</deltaTicks>
       <ticks>0</ticks>
       <currentRate>1.0</currentRate>
@@ -192,7 +295,7 @@
     <cycleDuration class="javafx.animation.Animation$AnimationReadOnlyProperty">
       <name>cycleDuration</name>
       <value class="javafx.util.Duration">
-        <millis>1000.0</millis>
+        <millis>16.0</millis>
       </value>
       <outer-class class="javafx.animation.Timeline" reference="../.."/>
     </cycleDuration>
@@ -225,7 +328,7 @@
         </javafx.animation.KeyFrame>
       </keyFrames>
       <keyFrameTicks>
-        <long>6000</long>
+        <long>96</long>
       </keyFrameTicks>
       <clipInterpolator class="com.sun.scenario.animation.shared.SimpleClipInterpolator">
         <startKeyFrame>
@@ -235,7 +338,7 @@
           <values class="empty-set"/>
         </startKeyFrame>
         <endKeyFrame reference="../../keyFrames/javafx.animation.KeyFrame"/>
-        <endTicks>6000</endTicks>
+        <endTicks>96</endTicks>
         <undefinedStartValueCount>0</undefinedStartValueCount>
         <ticks>0</ticks>
         <invalid>true</invalid>

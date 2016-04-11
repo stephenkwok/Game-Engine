@@ -2,14 +2,23 @@ package gameplayer.view;
 
 import gameengine.controller.*;
 import gameengine.model.Actor;
+import gameengine.model.Attribute;
 import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
+import gameengine.model.Actions.GainPoints;
+import gameengine.model.Actions.HorizontalBounceCollision;
+import gameengine.model.Actions.HorizontalStaticCollision;
+import gameengine.model.Actions.LoseGame;
 import gameengine.model.Actions.MoveLeft;
 import gameengine.model.Actions.MoveRight;
 import gameengine.model.Actions.MoveUp;
 import gameengine.model.Actions.NextLevel;
+import gameengine.model.Actions.VerticalBounceCollision;
+import gameengine.model.Triggers.AttributeType;
 import gameengine.model.Triggers.KeyTrigger;
+import gameengine.model.Triggers.SideCollision;
+import gameengine.model.Triggers.TopCollision;
 import gameplayer.controller.GameController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -49,28 +58,42 @@ public class Main extends Application {
 		info.setCurrentLevelNum(0);
 		
 		Actor actor1 = new Actor();
-		Image actor1img = new Image(getClass().getClassLoader().getResourceAsStream("newactor.png"));
-		actor1.setImageView(new ImageView(actor1img));
+		actor1.setMyImageViewName("redball.png");
+		actor1.setName("A1");
 		
 		Actor actor2 = new Actor();
-		Image actor2img = new Image(getClass().getClassLoader().getResourceAsStream("newlevel.png"));
-		actor2.setImageView(new ImageView(actor2img));
+		actor2.setMyImageViewName("purplecircle.png");
+		actor2.setXPos(600);
+		actor2.setName("A2");
 		
-		KeyTrigger trigger = new KeyTrigger(KeyCode.SPACE);
-		List<Object> args = new ArrayList<Object>();
-		Action action = new MoveRight(actor1);
-		Rule rule = new Rule(trigger,action);
+		Actor actor3 = new Actor();
+		actor3.setMyImageViewName("elsa.png");
+		
+		KeyTrigger trigger1 = new KeyTrigger(KeyCode.RIGHT);
+		KeyTrigger trigger2 = new KeyTrigger(KeyCode.LEFT);
+		SideCollision trigger3 = new SideCollision(actor1,actor2);
+		KeyTrigger trigger4 = new KeyTrigger(KeyCode.SPACE);
+		Action action1 = new MoveRight(actor1);
+		Action action2 = new MoveLeft(actor1);
+		Action action3 = new NextLevel(actor1);
+		Action action4 = new MoveUp(actor1);
+		Rule rule = new Rule(trigger1,action1);
+		Rule rule2 = new Rule(trigger2, action2);
+		Rule rule3 = new Rule(trigger3,action3);
+		Rule rule4 = new Rule(trigger4,action4);
 		actor1.addRule(rule);
-		
+		actor1.addRule(rule2);
+		actor1.addRule(rule3);
+		actor1.addRule(rule4);
 		
 		List<Level> levels = new ArrayList<Level>();
 		Level level1 = new Level();
 		levels.add(level1);
 		level1.addActor(actor1);
 		level1.addActor(actor2);
-//		Level level2 = new Level();
-//		level2.addActor(actor2);
-//		levels.add(level2);
+		Level level2 = new Level();
+		level2.addActor(actor3);
+		levels.add(level2);
 		
 		Group group = new Group();
 		Scene scene = new Scene(group);
@@ -94,11 +117,17 @@ public class Main extends Application {
 		stage.setWidth(800);
 		stage.setHeight(600);
 
+//		CreatorController c = new CreatorController(model);
+//		System.out.println(c);
+//		File myF = new File("gamefiles/test.xml");
+//		System.out.println(myF);
+//		c.saveForEditing(myF);
+		
 
 		sub.setCamera(camera);
 		stage.setScene(scene);
 		stage.show();
-		controller.begin();
+		controller.initialize(0);
 
 		
 //		Stage stage = new Stage();

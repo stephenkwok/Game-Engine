@@ -2,10 +2,11 @@ package authoringenvironment.view;
 
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.Controller;
+import gui.view.TextAreaGameDescriptionEditor;
 import gui.view.TextAreaParent;
+import gui.view.TextFieldGameNameEditor;
 import gui.view.TextFieldWithButton;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -34,14 +35,11 @@ public class VBoxMainScreenLeftPane extends VBox {
 	private Label welcomeMessage;
 	private HBox nameEditorContainer;
 	private TextAreaParent gameDescriptionEditor;
-	private EventHandler<ActionEvent> saveNameButtonAction;
-	private EventHandler<ActionEvent> saveDescriptionButtonAction;
+	private Controller controller;
 
-	public VBoxMainScreenLeftPane(EventHandler<ActionEvent> saveName, EventHandler<ActionEvent> saveDescription) {
+	public VBoxMainScreenLeftPane(Controller controller) {
 		super(VBOX_PADDING);
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
-		this.saveNameButtonAction = saveName;
-		this.saveDescriptionButtonAction = saveDescription;
 		setPrefWidth(VBOX_PREFERRED_WIDTH);
 		setStyle(myResources.getString("defaultBorderColor"));
 		initWelcomeMessage();
@@ -57,8 +55,8 @@ public class VBoxMainScreenLeftPane extends VBox {
 	private void initGameNameEditor() {
 		String mainPrompt = myResources.getString("gameName");
 		String textFieldPrompt = myResources.getString("enterGameName");
-		TextFieldWithButton nameEditor = new TextFieldWithButton(mainPrompt, textFieldPrompt, TEXT_FIELD_WIDTH,
-				saveNameButtonAction);
+		TextFieldWithButton nameEditor = new TextFieldGameNameEditor(mainPrompt, textFieldPrompt, TEXT_FIELD_WIDTH,
+				controller);
 		nameEditorContainer = (HBox) nameEditor.createNode();
 		nameEditorContainer.setSpacing(TEXT_FIELD_CONTAINER_SPACING);
 		nameEditorContainer.setPadding(new Insets(TEXT_FIELD_CONTAINER_PADDING));
@@ -67,8 +65,7 @@ public class VBoxMainScreenLeftPane extends VBox {
 	private void initGameDescriptionEditor() {
 		String prompt = myResources.getString("promptForGameDescription");
 		String buttonText = myResources.getString("save");
-		gameDescriptionEditor = new TextAreaGameDescriptionEditor(prompt, buttonText, TEXT_AREA_ROWS,
-				saveDescriptionButtonAction);
+		gameDescriptionEditor = new TextAreaGameDescriptionEditor(prompt, buttonText, TEXT_AREA_ROWS, controller);
 	}
 
 }

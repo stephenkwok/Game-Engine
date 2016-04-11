@@ -67,10 +67,10 @@ public class BaseScreen extends Screen {
 		super(stage);
 		this.myMasterPane = new BorderPane();
 		init();
-		gameController = new GameController();
-		gameController.setGame(game);
-		gameController.setGameView(new GameScreen(new ParallelCamera()));//need Blake to fill in
-		gameController.initialize(game.getInfo().getCurrentLevelNum());
+		myGameController = new GameController();
+		myGameController.setGame(game);
+		myGameController.setGameView(new GameScreen(new ParallelCamera()));
+		myGameController.initialize(game.getInfo().getCurrentLevelNum());
 		addComponents();
 	}
 	
@@ -102,7 +102,7 @@ public class BaseScreen extends Screen {
 		status.put("level", 2);
 		HUDScreen myHud = new HUDScreen(SCREEN_WIDTH,SCREEN_WIDTH,status);
 		myHud.init();
-		myP.getChildren().add(myHud.getRoot());
+		myP.getChildren().add(myHud.getScene());
 		myMasterPane.setBottom(myP);
 	}
 
@@ -120,6 +120,7 @@ public class BaseScreen extends Screen {
 			Tooltip t = new Tooltip(myResources.getString(sideButtons[i]+ "Text"));
 			t.install(myB, t);
 			myT.getItems().add(myB);
+			myB.setFocusTraversable(false);
 		}
 		myMasterPane.setTop(myT);
 		

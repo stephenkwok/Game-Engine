@@ -36,7 +36,6 @@ public abstract class ComboBoxImageCell extends ComboBoxParent {
 	 */
 	public void fillImageMap(){
 		for(String imageName: imageNames){
-			System.out.println(imageNames);
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 			ImageView imageView = new ImageView(image);
 	        imageView.setPreserveRatio(true);
@@ -49,7 +48,7 @@ public abstract class ComboBoxImageCell extends ComboBoxParent {
 	 * Returns an HBox containing the ImageView and a Label indicating index to be set as ComboBox icon.
 	 */
 	@Override
-	public abstract Node getNodeForBox(String item);
+	protected abstract Node getNodeForBox(String item);
 	
 	/**
 	 * On comboButton click, turtle ImageViews will be updated with new Image. 

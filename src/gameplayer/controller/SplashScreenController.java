@@ -50,6 +50,7 @@ public class SplashScreenController implements IScreenController {
 	@Override
 	public void useGame(Game game) {
 		this.myGame = game;
+		play();
 	}
 
 	@Override

@@ -43,26 +43,25 @@ abstract class TabLibrary extends TabParent {
 		if(myActorRuleCreator!=null) myActorRules = myActorRuleCreator.getRules();
 	}
 
-
 	@Override
 	abstract Node getContent();
 	
 	abstract void setContent();
 	
-	protected void setDragEvent(Label source) {
+	protected void setDragEvent(Label source, TransferMode transferMode) {
 		for(ActorRule rule: myActorRules){
-			setDragDetected(source, rule.getGridPane());
-			setDragOver(source, rule.getGridPane());
+			setDragDetected(source, rule.getGridPane(),transferMode);
+			setDragOver(source, rule.getGridPane(),transferMode);
 			setDragEntered(source, rule.getGridPane());
 			setDragExited(source, rule.getGridPane());
 			setDragDropped(source, rule.getGridPane(), rule);
 		}
 	}
 
-	private void setDragDetected(Label mySource, GridPane myTarget) {
+	private void setDragDetected(Label mySource, GridPane myTarget, TransferMode transferMode) {
 		mySource.setOnDragDetected(new EventHandler<MouseEvent>(){
 			public void handle(MouseEvent event){
-				Dragboard db = mySource.startDragAndDrop(TransferMode.COPY);
+				Dragboard db = mySource.startDragAndDrop(transferMode);
 				ClipboardContent content = new ClipboardContent();
 				content.putString(mySource.getText());
 				db.setContent(content);
@@ -72,12 +71,12 @@ abstract class TabLibrary extends TabParent {
 		
 	}
 	
-	private void setDragOver(Label mySource, GridPane myTarget) {
+	private void setDragOver(Label mySource, GridPane myTarget, TransferMode transferMode) {
 		myTarget.setOnDragOver(new EventHandler<DragEvent>() {
 		    public void handle(DragEvent event) {
 		        if (event.getGestureSource() != myTarget &&
 		                event.getDragboard().hasString()) {
-		            event.acceptTransferModes(TransferMode.COPY);
+		            event.acceptTransferModes(transferMode);
 		        }
 		        event.consume();
 		    }
@@ -111,8 +110,16 @@ abstract class TabLibrary extends TabParent {
 		        Dragboard db = event.getDragboard();
 		        boolean success = false;
 		        if (db.hasString()) {
-		        	addLabelToTarget(getLabelToAdd(event.getDragboard().getString()), myActorRule);
-//		        	setDragEvent(toAdd); //SET DRAG EVENT SO USER CAN REMOVE IT BY "PUTTING BACK IN LIBRARY"
+		        	Label toAdd = getLabelToAdd(event.getDragboard().getString());
+		        	addLabelToTarget(toAdd, myActorRule);
+		        	toAdd.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		        	    @Override
+		        	    public void handle(MouseEvent click) {
+		        	        if (click.getClickCount() == 2) {
+		        	           myActorRule.remove(toAdd);
+		        	        }
+		        	    }
+		        	});
 		        	success = true;
 		        }
 		        event.setDropCompleted(success);
@@ -146,7 +153,7 @@ abstract class TabLibrary extends TabParent {
 		this.myActorRuleCreator = myActorRuleCreator;
 		for(Label behaviorLabel: labels){
 			if(myActorRuleCreator!=null){
-				setDragEvent(behaviorLabel);
+				setDragEvent(behaviorLabel,TransferMode.COPY);
 			}
 		}
 	}

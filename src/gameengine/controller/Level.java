@@ -76,8 +76,11 @@ public class Level implements Observer, ILevel, IEditableGameElement {
         myName = name;
     }
     
-    public void setDimensions(double width, double height) {
+    public void setWidth(double width) {
     	myWidth = width;
+    }
+    
+    public void setHeight(double height) {
     	myHeight = height;
     }
     

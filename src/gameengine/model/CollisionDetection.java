@@ -19,9 +19,6 @@ import gameengine.model.Triggers.TopCollision;;
 public class CollisionDetection {
 
 	PhysicsEngine myPhysicsEngine;
-
-	
-	
 	
 	public CollisionDetection( PhysicsEngine physicsEngine){
 		myPhysicsEngine = physicsEngine;
@@ -33,6 +30,7 @@ public class CollisionDetection {
 	 */
 	public List<Actor> detection(List<Actor> actors){
 		for (Actor a1 : actors){
+			a1.setInAir(true);
 			for(Actor a2 : actors){
 				if(a1 != a2 ){            //Checks that each actor in the pair is unique
 					if(isCollision(a1,a2))
@@ -66,6 +64,7 @@ public class CollisionDetection {
 	private String getCollisionType(Actor a1, Actor a2){
 		double xOverlap = 0;
 		double yOverlap = 0;
+		a1.setInAir(true);
 		if(a1.getBounds().getMaxX() <= a2.getBounds().getMaxX()){
 			xOverlap = a1.getBounds().getMaxX() -  a2.getXPos();
 		}else{
@@ -80,8 +79,14 @@ public class CollisionDetection {
 				
 		if(xOverlap <= yOverlap){
 			return "SideCollision";
-		}else{   
-			return "TopCollision";
+		}else{ 
+			if(a2.getBounds().getMinY()<=a1.getBounds().getMaxY()){
+				a1.setInAir(false);
+				return "BottomCollision";
+			}else{
+				return "TopCollision";
+			}
+			
 		}
 	}
 	
