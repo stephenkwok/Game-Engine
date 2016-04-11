@@ -5,15 +5,20 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import gameengine.controller.Game;
 import gameplayer.controller.BaseScreenController;
+import gameplayer.controller.GameController;
 import gui.controller.IScreenController;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import gui.view.Screen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
+import javafx.scene.Camera;
 import javafx.scene.Node;
+import javafx.scene.ParallelCamera;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -56,14 +61,19 @@ public class BaseScreen extends Screen {
 	private static final Integer BUTTON_X = 50;
 	private static final Integer BUTTON_Y = 10;
 	private BorderPane myMasterPane;
-	
-	public BaseScreen(Stage stage) {
+	private GameController myGameController;
+
+	public BaseScreen(Stage stage, Game game) {
 		super(stage);
 		this.myMasterPane = new BorderPane();
 		init();
+		GameController gameController = new GameController();
+		gameController.setGame(game);
+		gameController.setGameView(new GameScreen(new ParallelCamera()));
+		gameController.initialize(game.getInfo().getCurrentLevelNum());
 		addComponents();
 	}
-
+	
 	public void init() {
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myController = new BaseScreenController(getStage(), this, this.myResources);
@@ -114,9 +124,8 @@ public class BaseScreen extends Screen {
 	}
 	
 	public void addGamePane(){
-		Rectangle myRect = new Rectangle(1300,600);
-		myRect.setFill(Color.AQUA);
-		myMasterPane.setCenter(myRect);
+		SubScene gameScene = myGameController.getView().getScene();
+		myMasterPane.setCenter(gameScene);
 	}
 	
 	@Override

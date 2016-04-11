@@ -35,7 +35,7 @@ public class HighScoreScreenController implements IScreenController {
 	}
 
 	@Override
-	public void createGameFromFile(Game game) {
+	public void useGame(Game game) {
 		// TODO Auto-generated method stub
 		
 	}
