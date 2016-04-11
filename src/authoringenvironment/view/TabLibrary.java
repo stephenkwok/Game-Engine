@@ -89,7 +89,7 @@ abstract class TabLibrary extends TabParent {
 		    public void handle(DragEvent event) {
 		         if (event.getGestureSource() != myTarget &&
 		                 event.getDragboard().hasString()) {
-		             myTarget.setBackground(new Background(new BackgroundFill(Color.PALEGREEN,CornerRadii.EMPTY, Insets.EMPTY)));
+		             myTarget.setBackground(new Background(new BackgroundFill(Color.PALEGREEN,new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
 		         }
 		         event.consume();
 		    }
@@ -99,7 +99,7 @@ abstract class TabLibrary extends TabParent {
 	private void setDragExited(Label mySource, GridPane myTarget) {
 		myTarget.setOnDragExited(new EventHandler<DragEvent>() {
 		    public void handle(DragEvent event) {
-		    	myTarget.setBackground(new Background(new BackgroundFill(Color.WHITE,CornerRadii.EMPTY, Insets.EMPTY)));
+		    	myTarget.setBackground(new Background(new BackgroundFill(Color.LAVENDER,new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
 		        event.consume();
 		    }
 		});

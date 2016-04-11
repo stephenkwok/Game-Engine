@@ -6,7 +6,6 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
 import javafx.event.EventHandler;
 
