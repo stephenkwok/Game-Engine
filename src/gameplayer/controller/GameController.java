@@ -70,10 +70,11 @@ public class GameController implements Observer {
 	 * Will play the animation timeline. 
 	 */
 	public void begin (){
-		Level current = model.getLevels().get(model.getInfo().getCurrentLevelNum());
+		Level current = model.getCurrentLevel();
 		for(Actor actor: current.getActors()){
 			view.addActor(actor);
 		}
+		model.startGame();
 	}
 	
 	/**
@@ -101,11 +102,20 @@ public class GameController implements Observer {
 	 * Will stop the animation timeline.
 	 */
 	public void endGame (){
-		
+		System.out.println("game over");
+	}
+	
+	/**
+	 * Will stop the animation timeline.
+	 */
+	public void winGame (){
+		System.out.println("game won");
 	}
 	
 	public void nextLevel (){
+		view.clearGame();
 		model.nextLevel();
+		begin();
 	}
 
 	@Override
@@ -114,7 +124,6 @@ public class GameController implements Observer {
 			model.handleTrigger((ITrigger)arg);
 		}
 		if(o.equals(model)){
-			
 			try{
 				this.getClass().getDeclaredMethod(((String)arg)).invoke(this);
 			}

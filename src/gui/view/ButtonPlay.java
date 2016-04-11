@@ -26,6 +26,7 @@ public class ButtonPlay extends ButtonParent{
 			fileChooseGroup.getChildren().add((HBox) fileSelector.createNode());
 			myControl.getStage().setScene(fileChooseScene);
 		});
+
 	}
 
 }

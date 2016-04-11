@@ -11,7 +11,7 @@ public class WinGame extends Action {
 	@Override
 	public void perform() {
         getActor().changed();
-        getActor().notifyObservers("WINGAME");		
+        getActor().notifyObservers("endGame");		
 	}
 
 }

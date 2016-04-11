@@ -22,8 +22,8 @@ public class MoveRight extends MovingAction {
      * @param assignedActor The Actor that will be changed
      * @param args          The arguments required to perform the change
      */
-    public MoveRight(Actor assignedActor, List<Object> args) {
-        super(assignedActor, args);
+    public MoveRight(Actor assignedActor) {
+        super(assignedActor);
     }
 
 	/**
