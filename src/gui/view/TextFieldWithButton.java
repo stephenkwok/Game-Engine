@@ -18,7 +18,7 @@ import javafx.scene.layout.Priority;
  *
  */
 
-public abstract class TextFieldWithButton implements IGUIElement, IGUIEditingElement {
+public class TextFieldWithButton implements IGUIElement, IGUIEditingElement {
 	private static final int PADDING = 10;
 	private static final String GO = "Go";
 	private HBox myContainer;
