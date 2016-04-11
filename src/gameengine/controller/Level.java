@@ -175,7 +175,6 @@ public class Level implements Observer, ILevel, IEditableGameElement {
         if (arg.equals("DESTROY")){
             myActors.remove(myActor);
         } else if (arg.equals("WINGAME")) {
-        	//method for win game
         }
     }
 }

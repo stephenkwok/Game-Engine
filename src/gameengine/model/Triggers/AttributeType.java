@@ -6,4 +6,5 @@ package gameengine.model.Triggers;
 public enum AttributeType {
 
     HEALTH, POINTS;
+	
 }
