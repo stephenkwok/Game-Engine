@@ -36,14 +36,14 @@ public class Controller implements IScreenController {
 	private GUIMain guiMain;
 	private ResourceBundle myResources;
 
-	public Controller(Stage myStage, GUIMain guiMain, ResourceBundle myResources) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public Controller(Stage myStage, GUIMain guiMain, ResourceBundle myResources) {
 		this.myStage = myStage;
 		this.guiMain = guiMain;
 		this.myResources = myResources;
 		init();
 	}
 
-	public void init() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public void init() {
 		levels = new ArrayList<>();
 		actors = new ArrayList<>();
 		levelEnvironment = new GUILevelEditingEnvironment(this, actors);
