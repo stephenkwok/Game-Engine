@@ -49,7 +49,7 @@ public abstract class ComboBoxImageCell extends ComboBoxParent {
 	 * Returns an HBox containing the ImageView and a Label indicating index to be set as ComboBox icon.
 	 */
 	@Override
-	public abstract Node getNodeForBox(String item);
+	protected abstract Node getNodeForBox(String item);
 	
 	/**
 	 * On comboButton click, turtle ImageViews will be updated with new Image. 
