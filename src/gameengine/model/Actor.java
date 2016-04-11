@@ -43,6 +43,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private DoubleProperty veloY = new SimpleDoubleProperty();
     private int myID;
     private double myFriction;
+    private boolean inAir;
     private String myName;
     private String myImageViewName;
     @XStreamOmitField
@@ -294,5 +295,18 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 
 	public boolean isMain(){
 		return this.isMain;
+	}
+	/**
+	 * @return the inAir
+	 */
+	public boolean isInAir() {
+		return inAir;
+	}
+
+	/**
+	 * @param inAir the inAir to set
+	 */
+	public void setInAir(boolean inAir) {
+		this.inAir = inAir;
 	}
 }

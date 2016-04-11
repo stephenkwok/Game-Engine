@@ -8,11 +8,11 @@ import gameengine.model.Actor;
 public class ComboBoxIsPlayer extends ComboBoxTextCell {
 	private static final String IS_PLAYER_OPTIONS = "IsPlayerOptions";
 	private static final String DELIMITER = ",";
-	private List<String> myOptions;
+	private ResourceBundle myResources;
 	
 	public ComboBoxIsPlayer(ResourceBundle myResources, String promptText, String labelText) {
 		super(myResources, promptText, labelText);
-		myOptions = Arrays.asList(myResources.getString(IS_PLAYER_OPTIONS).split(DELIMITER));
+		this.myResources = myResources;
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 
 	@Override
 	public List<String> getOptionsList() {
-		return myOptions;
+		return Arrays.asList(myResources.getString(IS_PLAYER_OPTIONS).split(DELIMITER));
 	}
 
 }

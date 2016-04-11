@@ -10,6 +10,7 @@ import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.GameScreen;
+import gameplayer.view.HUDScreen;
 
 
 /** 
