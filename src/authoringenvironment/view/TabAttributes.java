@@ -67,11 +67,12 @@ public class TabAttributes extends TabParent {
 			CheckBox cb = (CheckBox) checkboxes.get(i);
 			myHUDElements.add(cb);
 		}
+		vbox.getChildren().addAll(checkboxes);
 		Button checkHUDButton = new Button(GO);
 		checkHUDButton.setOnAction(event->{
 			((Level) myEditableElement).setHUDOptions(getHUDElementsToDisplay());
 		});
-		vbox.getChildren().addAll(checkboxes);
+		vbox.getChildren().add(checkHUDButton);
 	}
 	
 	private List<Node> addElements(String key, VBox vbox) {
