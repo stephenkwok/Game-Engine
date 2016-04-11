@@ -48,12 +48,7 @@ public abstract class ComboBoxParent implements IGUIElement {
 		options = FXCollections.observableArrayList(
 			        getOptionsList()
 			    );
-		if (labelText != null) {
-			Label label = new Label(labelText);
-			label.setAlignment(Pos.CENTER_LEFT);
-			label.setWrapText(true);
-			hbox.getChildren().add(label);
-		}
+		addLabel(hbox);
 		comboBox = new ComboBox<>(options);
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
 		comboBox.setPrefWidth(COMBOBOX_WIDTH);
@@ -63,9 +58,18 @@ public abstract class ComboBoxParent implements IGUIElement {
 		setButtonAction();
 		hbox.getChildren().addAll(comboBox, comboButton);
 		hbox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
+		hbox.setAlignment(Pos.CENTER_LEFT);
 		return hbox;
 	}
 	
+	private void addLabel(HBox container) {
+		if (labelText != null) {
+			Label label = new Label(labelText);
+			label.setAlignment(Pos.CENTER_LEFT);
+			label.setWrapText(true);
+			container.getChildren().add(label);
+		}
+	}
 	/**
 	 * Sets action when button is pressed.
 	 */
