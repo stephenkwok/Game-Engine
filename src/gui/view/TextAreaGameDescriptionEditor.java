@@ -1,10 +1,8 @@
-package authoringenvironment.view;
+package gui.view;
 
 import java.util.ResourceBundle;
 
-import gui.view.TextAreaParent;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import authoringenvironment.controller.Controller;
 import javafx.geometry.Insets;
 
 /**
@@ -22,12 +20,19 @@ public class TextAreaGameDescriptionEditor extends TextAreaParent {
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGui";
 	private static final String GAME_EDITOR_PROMPT_KEY = "enterGameDescription";
 	private ResourceBundle myResources;
+	private Controller controller;
 	
-	public TextAreaGameDescriptionEditor(String promptText, String buttonText, int prefRows, EventHandler<ActionEvent> handler) {
-		super(promptText, buttonText, prefRows, handler);
+	public TextAreaGameDescriptionEditor(String promptText, String buttonText, int prefRows, Controller controller) {
+		super(promptText, buttonText, prefRows);
+		this.controller = controller;
 		myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
 		setContainerPadding(new Insets(VBOX_PADDING));
 		setTextAreaPromptText(myResources.getString(GAME_EDITOR_PROMPT_KEY));
+	}
+
+	@Override
+	protected void declareButtonAction() {
+		setButtonAction(e -> controller.setGameDescription());
 	}
 
 }

@@ -37,6 +37,8 @@ public abstract class TextFieldWithButton implements IGUIElement {
 		this.textFieldWidth = textFieldWidth;
 	}
 
+	protected abstract void declareButtonAction();
+	
 	protected void setButtonAction(EventHandler<ActionEvent> buttonAction) {
 		this.buttonAction = buttonAction;
 	}
