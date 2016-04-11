@@ -20,7 +20,7 @@ public class GUILevelInspector implements IGUI {
 	private TabActors myActorsTab;
 	private TabAttributes myAttributesTab;
 	
-	public GUILevelInspector(Controller controller, ResourceBundle myResources, List<Actor> availActors) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public GUILevelInspector(Controller controller, ResourceBundle myResources, List<Actor> availActors) {
 		this.myResources = myResources;
 		myPane = new StackPane();
 		TabPane tabPane = new TabPane();

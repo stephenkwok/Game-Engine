@@ -15,7 +15,7 @@ public class ButtonEdit extends ButtonParent{
 	}
 
 	@Override
-	protected void setButtonAction() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	protected void setButtonAction() {
 		button.setOnAction(e -> { try { myControl.edit();
 		} catch (Exception exception) {
 			// TODO Auto-generated catch block

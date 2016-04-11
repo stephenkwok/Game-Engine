@@ -43,7 +43,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private ImageView myLevelBackground;
 	private Controller myController;
 
-	public GUILevelEditingEnvironment(Controller controller, List<Actor> actors) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public GUILevelEditingEnvironment(Controller controller, List<Actor> actors) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
@@ -51,13 +51,13 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		initializeEnvironment();
 	}
 
-	private void initializeEnvironment() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private void initializeEnvironment() {
 		initializeCenter();
 		initializeLeftPane();
 		initializeDrag();
 	}
 
-	private void initializeLeftPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private void initializeLeftPane() {
 		myLeftPane = new VBox();
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
 		myInspector = new GUILevelInspector(myController, myResources, availableActors);
