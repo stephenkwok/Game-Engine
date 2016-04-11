@@ -14,6 +14,7 @@ import gameengine.model.Triggers.KeyTrigger;
 import gameplayer.controller.GameController;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;

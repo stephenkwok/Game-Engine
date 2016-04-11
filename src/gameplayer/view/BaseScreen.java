@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -71,33 +72,18 @@ public class BaseScreen extends Screen {
 
 	public void addComponents() {
 		try {
-			addTopBar();
 			addGame();
 			addHUD();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException | ClassNotFoundException | NoSuchMethodException | SecurityException e1) {
+				| InvocationTargetException | SecurityException e1) {
 			e1.printStackTrace();
 		}
 		getRoot().getChildren().add(myMasterPane);
-	}
-
-	public void addTopBar()
-			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException {
-		String[] topButtons = myResources.getString("TopPane").split(",");
-		HBox smallH = new HBox();
-		for (int i = 0; i < topButtons.length; i++) {
-			IGUIElement newElement = factory.createNewGUIObject(topButtons[i]);
-			Button myB = (Button) newElement.createNode();
-			myB.setMinSize(10, 10);
-			smallH.getChildren().add(myB);
-		}
-		myMasterPane.setTop(smallH);
 	}
 	
 	public void addHUD() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		IGUIElement hudPane = factory.createNewGUIObject("hudPane");
 		Pane myP = (Pane) hudPane.createNode();
-		myP.setMinWidth(SCREEN_WIDTH);
 		ObservableMap<String, Object> status = FXCollections.observableHashMap();
 		status.put("health", 20);
 		status.put("level", 2);
@@ -109,7 +95,7 @@ public class BaseScreen extends Screen {
 
 	public void addGame() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		addButtonPane();
-		//addGamePane();
+		addGamePane();
 	}
 
 	public void addButtonPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
@@ -118,16 +104,20 @@ public class BaseScreen extends Screen {
 		for(int i = 0; i < sideButtons.length; i++){
 			IGUIElement newElement = factory.createNewGUIObject(sideButtons[i]);
 			Button myB = (Button) newElement.createNode();
-			myB.setMaxSize(1, 1);
+			Tooltip t = new Tooltip(myResources.getString(sideButtons[i]+ "Text"));
+			t.install(myB, t);
 			smallV.getChildren().add(myB);
 		}
 		myMasterPane.setLeft(smallV);
 	}
 	
-	public void addGamePane(Pane myP){
-		GameDisplay myGD = new GameDisplay(myP);
-		myGD.init();
+	public void addGamePane(){
+		//GameDisplay myGD = new GameDisplay(m);
+		//myGD.init();
 		//System.out.println(myP.getChildren());
+		Rectangle myRect = new Rectangle(1300,600);
+		myRect.setFill(Color.AQUA);
+		myMasterPane.setCenter(myRect);
 	}
 	
 	@Override
