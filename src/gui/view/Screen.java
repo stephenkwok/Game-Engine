@@ -35,8 +35,12 @@ public abstract class Screen {
 	
 	/**
 	 * Will instantiate the basic components of a visualized screen.
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	public void init(){
+	public void init() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myController = setController();
 		factory = new GUIFactory(myResources, myController);

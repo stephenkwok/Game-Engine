@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ToolBar;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
@@ -110,15 +111,16 @@ public class BaseScreen extends Screen {
 
 	public void addButtonPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		String[] sideButtons = myResources.getString(SIDE_BUTTONS).split(",");
-		VBox smallV = new VBox();
+		ToolBar myT = new ToolBar();
 		for(int i = 0; i < sideButtons.length; i++){
 			IGUIElement newElement = factory.createNewGUIObject(sideButtons[i]);
 			Button myB = (Button) newElement.createNode();
 			Tooltip t = new Tooltip(myResources.getString(sideButtons[i]+ "Text"));
 			t.install(myB, t);
-			smallV.getChildren().add(myB);
+			myT.getItems().add(myB);
 		}
-		myMasterPane.setLeft(smallV);
+		myMasterPane.setTop(myT);
+		
 	}
 	
 	public void addGamePane(){

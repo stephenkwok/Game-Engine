@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -40,11 +41,13 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private List<Actor> availableActors;
 	private Pane myCenterPane;
 	private ImageView myLevelBackground;
+	private Controller myController;
 
 	public GUILevelEditingEnvironment(Controller controller, List<Actor> actors) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
+		myController = controller;
 		initializeEnvironment();
 	}
 
@@ -57,7 +60,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private void initializeLeftPane() {
 		myLeftPane = new VBox();
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
-		myInspector = new GUILevelInspector(myResources, availableActors);
+		myInspector = new GUILevelInspector(myController, myResources, availableActors);
 		myLibrary = new GUILibrary();
 		myLeftPane.getChildren().addAll(myInspector.getPane(), myLibrary.getPane());
 		myRoot.setLeft(myLeftPane);
@@ -82,6 +85,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		source.setOnDragDetected(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
 				System.out.println("drag detected");
+				System.out.println(myInspector.getAttributesTab().getHUDElementsToDisplay());
 				Dragboard db = source.startDragAndDrop(TransferMode.ANY);
 				ClipboardContent content = new ClipboardContent();
 				content.putString(Integer.toString(source.getID()));
@@ -194,8 +198,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		myLevel = (Level) editable;
 		myLevelBackground = myLevel.getImageView();
 		//TODO: SHOULD THIS FIT THE PANE OR PRESERVE RATIO?
-		//myLevelBackground.setPreserveRatio(true);
-		myLevelBackground.fitHeightProperty().bind(myCenterPane.heightProperty());
+		myLevelBackground.setPreserveRatio(true);
 		myLevelBackground.fitWidthProperty().bind(myCenterPane.widthProperty());
 		myCenterPane.getChildren().add(myLevelBackground);
 		List<ImageView> actorIVs = new ArrayList<>();

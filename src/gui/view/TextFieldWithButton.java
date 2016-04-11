@@ -1,6 +1,5 @@
-package authoringenvironment.view;
+package gui.view;
 
-import gui.view.IGUIElement;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -20,6 +19,7 @@ import javafx.scene.layout.Priority;
 
 public class TextFieldWithButton implements IGUIElement {
 	private static final int PADDING = 10;
+	private static final String GO = "Go";
 	private HBox myContainer;
 	private Label myTextFieldPrompt;
 	private TextField myTextField;
@@ -31,12 +31,12 @@ public class TextFieldWithButton implements IGUIElement {
 	private EventHandler<ActionEvent> buttonAction;
 	
 
-	public TextFieldWithButton(String labelText, String promptText, Double textFieldWidth, String buttonText,
+	public TextFieldWithButton(String labelText, String promptText, Double textFieldWidth,
 			EventHandler<ActionEvent> buttonAction) {
 		this.labelText = labelText;
 		this.promptText = promptText;
+		buttonText = GO;
 		this.textFieldWidth = textFieldWidth;
-		this.buttonText = buttonText;
 		this.buttonAction = buttonAction;
 	}
 	

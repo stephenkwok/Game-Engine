@@ -1,6 +1,7 @@
 package gui.view;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 
 import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
@@ -30,6 +31,10 @@ public abstract class ButtonParent implements IGUIElement {
 	}
 	/**
 	 * Creates and returns button
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
 	@Override
 	public Node createNode() {
@@ -42,6 +47,10 @@ public abstract class ButtonParent implements IGUIElement {
 
 	/**
 	 * Sets action when button is pressed.
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
 	protected abstract void setButtonAction();
 	

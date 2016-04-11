@@ -79,8 +79,12 @@ public class SplashScreen extends Screen {
 
 	/**
 	 * Will open a authoring environment screen.
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	public void edit() {
+	public void edit() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		GUIMain myGUI = new GUIMain(getStage(), getMyScene());
 		getStage().setScene(myGUI.getScene());
 	}
