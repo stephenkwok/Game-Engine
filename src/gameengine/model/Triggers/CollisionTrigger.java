@@ -8,22 +8,18 @@ public abstract class CollisionTrigger implements ITrigger {
     Actor myMainActor;
     Actor myCollisionActor;
 
-    public CollisionTrigger(Actor mainActor, Actor collisionActor){
+    public CollisionTrigger(Actor mainActor, Actor collisionActor) {
         myMainActor = mainActor;
         myCollisionActor = collisionActor;
     }
 
-	@Override
-	public abstract String getTriggerName();
+    @Override
+    public abstract String getTriggerName();
 
-	@Override
-	public abstract boolean evaluate(Actor myActor);
+    @Override
+    public abstract boolean evaluate(Actor myActor);
 
-    public String getMainActorName(){
-        return myMainActor.getName();
-    }
-
-    public String getCollisionActorName(){
-        return myCollisionActor.getName();
+    public String makeName(String collisionType) {
+        return myMainActor.getName() + collisionType + myCollisionActor.getName();
     }
 }

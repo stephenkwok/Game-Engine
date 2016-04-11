@@ -13,8 +13,7 @@ public class SideCollision extends CollisionTrigger implements ITrigger {
 
     @Override
     public String getTriggerName() {
-
-        return getMainActorName() + COLLISION_NAME + getCollisionActorName();
+        return makeName(COLLISION_NAME);
     }
 
     @Override
