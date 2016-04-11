@@ -1,16 +1,20 @@
 package authoringenvironment.view;
 
-import java.util.Arrays;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
-import gui.view.ComboBoxOptions;
+import authoringenvironment.controller.Controller;
+import gui.view.CheckBoxObject;
+import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -20,69 +24,68 @@ import javafx.scene.layout.VBox;
  */
 public class TabAttributes extends TabParent {
 	private static final int PADDING = 10;
-	private static final double TEXTFIELD_WIDTH = 150;
-	private static final String EDITOR_ELEMENTS = "EditorElements";
-	private static final String PROMPT = "Select";
 	private static final String DELIMITER = ",";
-	private static final String LABEL = "Label";
-	private static final String OPTIONS = "Options";
-	private static final String TEXTFIELD = "Textfields";
-	private static final String COMBOBOXES = "Comboboxes";
-	private static final String TEST = "TEST";
-	private static final String GO = "GO";
+	private static final String EDITOR_ELEMENTS = "EditorElements";
+	private static final String HUD_OPTIONS = "HUDOptions";
+	private static final String HUD_PROMPT = "Choose items to display on the level scene:";
 	private ResourceBundle myAttributesResources;
+	private GUIFactory myFactory;
+	private Controller myController;
+	private VBox myContent;
+	private List<CheckBox> myHUDElements;
 	
-	public TabAttributes(ResourceBundle myResources, String tabText, String levelOptionsResource) {
+	public TabAttributes(Controller controller, ResourceBundle myResources, String tabText, String levelOptionsResource) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		super(myResources, tabText);
-		this.myAttributesResources = ResourceBundle.getBundle(levelOptionsResource); 
+		this.myAttributesResources = ResourceBundle.getBundle(levelOptionsResource);
+		myFactory = new GUIFactory(myAttributesResources, myController);
+		myHUDElements = new ArrayList<>();
+		createElements();
 	}
 
-	@Override
-	Node getContent() {
+	private void createElements() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		VBox vbox = new VBox(PADDING);
 		vbox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
-
+		vbox.getChildren().addAll(addElements(EDITOR_ELEMENTS, vbox));
 		
-		String[] elements = myAttributesResources.getString(EDITOR_ELEMENTS).split(DELIMITER);
-		for (int i = 0; i < elements.length; i++) {
-			HBox hbox = new HBox(PADDING);
-			hbox.setAlignment(Pos.CENTER_LEFT);
-			Label label = new Label(myAttributesResources.getString(elements[i] + LABEL));
-			label.setWrapText(true);
-			IGUIElement elementToCreate = null;
-			System.out.println(elements[i]);
-			elementToCreate = createNewGUIObject(elements[i]);
-			hbox.getChildren().addAll(label, elementToCreate.createNode());
-			vbox.getChildren().add(hbox);
+		if (myAttributesResources.containsKey(HUD_OPTIONS)) {
+			addHUD(HUD_OPTIONS, vbox);
 		}
-		return vbox;
-	}
-
-	private IGUIElement createNewGUIObject(String nodeType) {
-		if (isTextField(nodeType)) {
-			return createTextField(nodeType);
-		} else if (isComboBox(nodeType)) {
-			return createComboBox(nodeType);
-		}
-		return null;
+		
+		myContent = vbox;
 	}
 	
-	private boolean isTextField(String nodeType) {
-		return Arrays.asList(myAttributesResources.getString(TEXTFIELD).split(",")).contains(nodeType);
+	private void addHUD(String key, VBox vbox) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		vbox.getChildren().add(new Label(HUD_PROMPT));
+		List<Node> checkboxes = addElements(HUD_OPTIONS, vbox);
+		for (int i = 0; i < checkboxes.size(); i++) {
+			CheckBox cb = (CheckBox) checkboxes.get(i);
+			myHUDElements.add(cb);
+		}
+		vbox.getChildren().addAll(checkboxes);
 	}
-
-	private boolean isComboBox(String nodeType) {
-		return Arrays.asList(myAttributesResources.getString(COMBOBOXES).split(",")).contains(nodeType);
+	
+	private List<Node> addElements(String key, VBox vbox) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		String[] elements = myAttributesResources.getString(key).split(DELIMITER);
+		List<Node> createdElements = new ArrayList<>();
+		for (int i = 0; i < elements.length; i++) {
+			IGUIElement elementToCreate = myFactory.createNewGUIObject(elements[i]);
+			createdElements.add(elementToCreate.createNode());
+		}
+		return createdElements;
 	}
-
-	private IGUIElement createTextField(String nodeType) {
-		IGUIElement textField = new TextFieldWithButton("", TEST, TEXTFIELD_WIDTH, GO, null);
-		return textField;
+	
+	public List<String> getHUDElementsToDisplay() {
+		List<String> toDisplay = new ArrayList<>();
+		for (int i = 0; i < myHUDElements.size(); i++) {
+			if (myHUDElements.get(i).isSelected()) {
+				toDisplay.add(myHUDElements.get(i).getId());
+			}
+		}
+		return toDisplay;
 	}
-
-	private IGUIElement createComboBox(String nodeType) {
-		String options = myAttributesResources.getString(nodeType + OPTIONS);
-		List<String> optionsList = Arrays.asList(options.split(DELIMITER));
-		return (IGUIElement) new ComboBoxOptions(myAttributesResources,PROMPT,optionsList);
+	
+	@Override
+	Node getContent() {
+		return myContent;
 	}
 }

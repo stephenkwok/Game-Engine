@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
@@ -47,7 +48,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	private GridPane myRuleCreator;
 	private GUIActorImageViewer actorImageViewer;
 
-	public GUIActorEditingEnvironment(Controller myController, ResourceBundle myResources) {
+	public GUIActorEditingEnvironment(Controller myController, ResourceBundle myResources) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		this.myController = myController;
 		this.myResources = myResources;
 		this.actorImageHeight = myController.getSceneHeight()*ACTOR_PERCENT_HEIGHT;
@@ -59,7 +60,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		return myRoot;
 	}
 
-	private void initializeEnvironment() {
+	private void initializeEnvironment() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		myRoot = new BorderPane();
 		myActorRuleCreator = new ActorRuleCreator(this, myController);
 		setDefaultActor();
@@ -77,8 +78,8 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		this.myActorIV = defaultIV;
 	}
 
-	private void setLeftPane() {
-		attributes = new TabAttributes(myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE);
+	private void setLeftPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		attributes = new TabAttributes(myController, myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE);
 		VBox vbox = new VBox();
 		TabPane attributeTP = new TabPane();
 		attributeTP.getTabs().add(attributes.getTab());
@@ -123,7 +124,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		myActorIV = myActor.getImageView();
 	}
 
-	public void setActorImage(ImageView newImageView) {
+	public void setActorImage(ImageView newImageView) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		myActorIV = newImageView;
 		myActorIV.setFitHeight(actorImageHeight);
 		myActorIV.setPreserveRatio(true);

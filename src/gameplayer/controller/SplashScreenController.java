@@ -1,5 +1,6 @@
 package gameplayer.controller;
 
+import java.lang.reflect.InvocationTargetException;
 import java.io.File;
 import java.util.ResourceBundle;
 
@@ -41,7 +42,7 @@ public class SplashScreenController implements IScreenController {
 		mySplash.openHighScores();
 	}
 	
-	public void edit(){
+	public void edit() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		mySplash.edit();
 	}
 
