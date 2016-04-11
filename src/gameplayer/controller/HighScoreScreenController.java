@@ -1,10 +1,12 @@
 package gameplayer.controller;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
 import gameengine.controller.Game;
 import gameplayer.view.HighScoreScreen;
+import gameplayer.view.SplashScreen;
 import gui.controller.IScreenController;
 import gui.view.Screen;
 import javafx.stage.Stage;
@@ -29,8 +31,7 @@ public class HighScoreScreenController implements IScreenController {
 
 	@Override
 	public Stage getStage() {
-		// TODO Auto-generated method stub
-		return null;
+		return myStage;
 	}
 
 	@Override
@@ -42,6 +43,16 @@ public class HighScoreScreenController implements IScreenController {
 	@Override
 	public Screen getScreen() {
 		return myScreen;
+	}
+
+	public void goToSplash() {
+		SplashScreen mySplash = new SplashScreen(getStage());
+		try {
+			getStage().setScene(mySplash.getScene());
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
