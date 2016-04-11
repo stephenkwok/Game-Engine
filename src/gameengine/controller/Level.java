@@ -26,6 +26,13 @@ public class Level implements Observer, ILevel, IEditableGameElement {
     private List<Actor> myActors;
     private Map<String, List<Actor>> myTriggerMap;
     private String myName;
+    private double myHeight;
+    private double myWidth;
+    private List<String> myHUDOptions;
+    private String myScrollingDirection;
+    private String myTermination;
+    private String myWinningCondition;
+    private String myLosingCondition;
     private String myBackgroundImgName;
 	@XStreamOmitField
     private ImageView myBackground;
@@ -68,7 +75,32 @@ public class Level implements Observer, ILevel, IEditableGameElement {
     public void setName(String name) {
         myName = name;
     }
+    
+    public void setDimensions(double width, double height) {
+    	myWidth = width;
+    	myHeight = height;
+    }
+    
+    public void setHUDOptions(List<String> options) {
+    	myHUDOptions = options;
+    }
+    
+    public void setScrollingDirection(String scrollingDirection) {
+    	myScrollingDirection = scrollingDirection;
+    }
 
+    public void setTermination(String termination) {
+    	myTermination = termination;
+    }
+    
+    public void setWinningCondition(String winningCondition) {
+    	myWinningCondition = winningCondition;
+    }
+    
+    public void setLosingCondition(String losingCondition) {
+    	myLosingCondition = losingCondition;
+    }
+    
     /**
      * Adds a new Actor to the Level and updates the triggerMap accordingly
      *
