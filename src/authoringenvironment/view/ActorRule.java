@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -21,6 +22,9 @@ import javafx.scene.paint.Color;
  *
  */
 public class ActorRule {
+	private static final String CLOSE = "X";
+	private static final int CLOSE_ROW = 0;
+	private static final int CLOSE_COL = 2;
 	private static final int PADDING = 20;
 	private static final String TRIGGERS = "Triggers:";
 	private static final String RESULTS = "Results:";
@@ -48,8 +52,10 @@ public class ActorRule {
 	private ScrollPane trigScroll;
 	private ScrollPane resScroll;
 	private ChoiceDialog<String> dialog;
+	private ActorRuleCreator myActorRuleCreator;
 	
 	public ActorRule(ActorRuleCreator myActorRuleCreator) {
+		this.myActorRuleCreator = myActorRuleCreator;
 		this.ruleWidth = myActorRuleCreator.getGridPane().getPrefWidth()*RULE_PERCENT_WIDTH;
 		initializeEnvironment();
 	}
@@ -65,6 +71,7 @@ public class ActorRule {
 		myRule.setPrefSize(ruleWidth, RULE_HEIGHT);
 		addTriggerResultLabels();
 		addTriggerResultContainers();
+		addCloseButton();
 	}
 	
 	private void addTriggerResultLabels(){
@@ -86,6 +93,15 @@ public class ActorRule {
 		
 	}
 
+	private void addCloseButton(){
+		Button close = new Button(CLOSE);
+		close.setOnAction(event -> {
+			myActorRuleCreator.getRules().remove(myRule);
+			myActorRuleCreator.getGridPane().getChildren().remove(myRule);
+		});
+		myRule.add(close, CLOSE_COL, CLOSE_ROW);
+	}
+	
 	public void addBehavior(Label behavior) {
 		if(isTrigger(behavior.getText())) triggers.getChildren().add(behavior);
 		else{
