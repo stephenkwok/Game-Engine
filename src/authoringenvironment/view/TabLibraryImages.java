@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.TransferMode;
 /**
  * Tab contains ListView of images
  * @author AnnieTang
@@ -29,7 +30,7 @@ public class TabLibraryImages extends TabLibrary{
 			iv.setPreserveRatio(true);
 			Label imageLabel = new Label(imageName, iv); 
 			if(myActorRuleCreator!=null){
-				setDragEvent(imageLabel);
+				setDragEvent(imageLabel,TransferMode.COPY);
 			}
 			labels.add(imageLabel);
 		}
