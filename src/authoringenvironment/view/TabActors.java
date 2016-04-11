@@ -33,8 +33,9 @@ public class TabActors extends TabParent {
 	private TilePane myPane;
 	
 	public TabActors(ResourceBundle myResources, String tabText, List<Actor> availActors) {
-		super(myResources, tabText);		
-		Actor newActor1 = new Actor();
+		super(myResources, tabText);
+		actorIcons = new ArrayList<ImageviewActorIcon>();
+		/*Actor newActor1 = new Actor();
 		newActor1.setID(1);
 		Actor newActor2 = new Actor();
 		newActor2.setID(2);;
@@ -45,20 +46,16 @@ public class TabActors extends TabParent {
 		availActors.add(newActor1); // PLACEHOLDER RN, STEPHEN SHOULD'VE ADDED A DEFAULT ONE ALREADY
 		availActors.add(newActor2);
 		availActors.add(newActor3);
-		availActors.add(newActor4);
-		
-		actorIcons = actorListToIconList(availActors);
-		
+		availActors.add(newActor4);*/		
 		myPane = new TilePane(HGAP, VGAP);
 		myPane.setPrefTileHeight(TILE_HEIGHT);
 		myPane.setPrefTileWidth(TILE_WIDTH);
 		myPane.setPrefColumns(NUM_COLS);
 		myPane.setPrefRows(NUM_ROWS);
 		myPane.setOrientation(Orientation.HORIZONTAL);
-		myPane.setAlignment(Pos.TOP_CENTER);
+		myPane.setAlignment(Pos.TOP_LEFT);
 		myPane.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
-
-		myPane.getChildren().addAll(actorIcons);	
+		setAvailableActors(availActors);
 	}
 	
 	private List<ImageviewActorIcon> actorListToIconList(List<Actor> actors) {
@@ -79,6 +76,13 @@ public class TabActors extends TabParent {
 	
 	public List<ImageviewActorIcon> getIcons() {
 		return actorIcons;
+	}
+	
+	public void setAvailableActors(List<Actor> updatedActors) {
+		myPane.getChildren().removeAll(actorIcons);
+		actorIcons.clear();
+		actorIcons = actorListToIconList(updatedActors);
+		myPane.getChildren().addAll(actorIcons);	
 	}
 	
 	@Override
