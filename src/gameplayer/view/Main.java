@@ -58,19 +58,16 @@ public class Main extends Application {
 		info.setCurrentLevelNum(0);
 		
 		Actor actor1 = new Actor();
-		Image actor1img = new Image(getClass().getClassLoader().getResourceAsStream("redball.png"));
-		actor1.setImageView(new ImageView(actor1img));
+		actor1.setMyImageViewName("redball.png");
 		actor1.setName("A1");
 		
 		Actor actor2 = new Actor();
-		Image actor2img = new Image(getClass().getClassLoader().getResourceAsStream("purplecircle.png"));
-		actor2.setImageView(new ImageView(actor2img));
-		actor2.getImageView().setX(400);
+		actor2.setMyImageViewName("purplecircle.png");
+		actor2.setXPos(600);
 		actor2.setName("A2");
 		
 		Actor actor3 = new Actor();
-		Image actor3img = new Image(getClass().getClassLoader().getResourceAsStream("elsa.png"));
-		actor3.setImageView(new ImageView(actor3img));
+		actor3.setMyImageViewName("elsa.png");
 		
 		KeyTrigger trigger1 = new KeyTrigger(KeyCode.RIGHT);
 		KeyTrigger trigger2 = new KeyTrigger(KeyCode.LEFT);
@@ -130,7 +127,7 @@ public class Main extends Application {
 		sub.setCamera(camera);
 		stage.setScene(scene);
 		stage.show();
-		controller.begin();
+		controller.initialize(0);
 
 		
 //		Stage stage = new Stage();
