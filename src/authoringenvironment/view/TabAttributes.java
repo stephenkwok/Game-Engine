@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
-import gui.view.CheckBoxObject;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;

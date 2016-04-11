@@ -24,7 +24,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 public class GUIActorImageViewer implements IGUI {
-	private static final String AVAILABLE_ACTORS = "Available Actors";
+	private static final String AVAILABLE_ACTORS = "Available Images";
 	private static final String IMAGE_RESOURCE = "authoringimages";
 	private static final int PADDING = 10;
 	private static final String EXTENSION_FILTER_DESCRIPTION = "Image Files (.jpg, .png .gif)";
