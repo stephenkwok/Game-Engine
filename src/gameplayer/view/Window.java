@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
 
 public abstract class Window {
 	
@@ -42,7 +43,7 @@ public abstract class Window {
 		return WINDOW_HEIGHT;
 	}
 	
-	public abstract Scene init();
+	public abstract void init();
 	
 
 }
