@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import gameengine.controller.Level;
+
 public class ComboBoxTermination extends ComboBoxTextCell {
 	private static final String TERMINATION_OPTIONS = "TerminationOptions";
 	private static final String DELIMITER = ",";
@@ -16,8 +18,9 @@ public class ComboBoxTermination extends ComboBoxTextCell {
 
 	@Override
 	public void setButtonAction() {
-		// TODO Auto-generated method stub
-		
+		comboButton.setOnAction(event->{
+			((Level) getEditableElement()).setTermination(comboBox.getValue());
+		});
 	}
 
 	@Override

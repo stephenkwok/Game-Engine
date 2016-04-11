@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import authoringenvironment.model.IEditableGameElement;
+import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gui.view.IGUI;
 import javafx.scene.control.TabPane;
@@ -20,12 +22,12 @@ public class GUILevelInspector implements IGUI {
 	private TabActors myActorsTab;
 	private TabAttributes myAttributesTab;
 	
-	public GUILevelInspector(Controller controller, ResourceBundle myResources, List<Actor> availActors) {
+	public GUILevelInspector(Controller controller, ResourceBundle myResources, List<Actor> availActors, IEditableGameElement level) {
 		this.myResources = myResources;
 		myPane = new StackPane();
 		TabPane tabPane = new TabPane();
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
-		myAttributesTab = new TabAttributes(controller, myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE);
+		myAttributesTab = new TabAttributes(controller, myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, level);
 		tabPane.getTabs().addAll(myActorsTab.getTab(), myAttributesTab.getTab());
 		myPane.getChildren().add(tabPane);
 	}
@@ -42,5 +44,4 @@ public class GUILevelInspector implements IGUI {
 	public TabAttributes getAttributesTab() {
 		return myAttributesTab;
 	}
-
 }

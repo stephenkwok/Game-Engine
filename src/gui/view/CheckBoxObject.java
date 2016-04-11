@@ -1,5 +1,6 @@
 package gui.view;
 
+import authoringenvironment.model.IEditableGameElement;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
@@ -11,14 +12,16 @@ import javafx.scene.layout.HBox;
  * @author amyzhao
  *
  */
-public class CheckBoxObject implements IGUIElement {
+public class CheckBoxObject implements IGUIElement, IGUIEditingElement {
 	private String myPromptText;
 	private int mySpacing;
 	private int myWidth;
+	private IEditableGameElement myEditableElement;
 	
 	public CheckBoxObject(String promptText, int spacing, int width) {
 		myPromptText = promptText;
 		myWidth = width;
+		myEditableElement = null;
 	}
 	
 	@Override
@@ -29,4 +32,14 @@ public class CheckBoxObject implements IGUIElement {
 		checkbox.setId(myPromptText);
 		return checkbox;
 	}
+	
+	@Override
+	public void setEditableElement(IEditableGameElement element) {
+		myEditableElement = element;
+	}
+
+	protected IEditableGameElement getEditableElement() {
+		return myEditableElement;
+	}
+	
 }

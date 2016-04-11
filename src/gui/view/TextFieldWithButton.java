@@ -1,5 +1,6 @@
 package gui.view;
 
+import authoringenvironment.model.IEditableGameElement;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -17,7 +18,7 @@ import javafx.scene.layout.Priority;
  *
  */
 
-public class TextFieldWithButton implements IGUIElement {
+public class TextFieldWithButton implements IGUIElement, IGUIEditingElement {
 	private static final int PADDING = 10;
 	private static final String GO = "Go";
 	private HBox myContainer;
@@ -29,15 +30,16 @@ public class TextFieldWithButton implements IGUIElement {
 	private Double textFieldWidth;
 	private String buttonText;
 	private EventHandler<ActionEvent> buttonAction;
-	
+	private IEditableGameElement myEditableElement;
 
 	public TextFieldWithButton(String labelText, String promptText, Double textFieldWidth,
 			EventHandler<ActionEvent> buttonAction) {
 		this.labelText = labelText;
 		this.promptText = promptText;
-		buttonText = GO;
+		this.buttonText = GO;
 		this.textFieldWidth = textFieldWidth;
 		this.buttonAction = buttonAction;
+		this.myEditableElement = null;
 	}
 	
 	public HBox getCoupledNodes() {
@@ -56,5 +58,14 @@ public class TextFieldWithButton implements IGUIElement {
 		myTextField.setPromptText(promptText);
 		myContainer.getChildren().addAll(myTextFieldPrompt, myTextField, myButton);
 		return myContainer;
+	}
+
+	@Override
+	public void setEditableElement(IEditableGameElement element) {
+		myEditableElement = element;
+	}
+
+	protected IEditableGameElement getEditableElement() {
+		return myEditableElement;
 	}
 }

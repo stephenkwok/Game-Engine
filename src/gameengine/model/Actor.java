@@ -41,6 +41,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private DoubleProperty veloX = new SimpleDoubleProperty();
     private DoubleProperty veloY = new SimpleDoubleProperty();
     private int myID;
+    private double myFriction;
     private String myName;
     private String myImageViewName;
     @XStreamOmitField
@@ -265,6 +266,20 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 
 	public Bounds getBounds() {
 		return this.getImageView().getLayoutBounds();
+	}
+
+	/**
+	 * @return the myFriction
+	 */
+	public double getMyFriction() {
+		return myFriction;
+	}
+
+	/**
+	 * @param myFriction the myFriction to set
+	 */
+	public void setMyFriction(double myFriction) {
+		this.myFriction = myFriction;
 	}
 
 }
