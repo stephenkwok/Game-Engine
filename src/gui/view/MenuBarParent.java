@@ -21,6 +21,8 @@ public abstract class MenuBarParent implements IGUIElement {
 		myMenu = new MenuBar();
 		return myMenu;
 	}
+	
+	
 
 	
 	public void updateNode(){
