@@ -1,6 +1,7 @@
 package authoringenvironment.view;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -67,12 +68,17 @@ public class GUIActorImageViewer implements IGUI {
 	private Button getImageSettingButton(){
 		Button imageSetter = new Button(BUTTON_LABEL);
 		imageSetter.setOnAction(event->{
-			loadSelectedImage();
+			try {
+				loadSelectedImage();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		});
 		return imageSetter;
 	}
 	
-	private void loadSelectedImage(){
+	private void loadSelectedImage() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		File imageFile = promptForFileName();
 		if(imageFile!=null){
 			Image image = new Image(imageFile.toURI().toString());

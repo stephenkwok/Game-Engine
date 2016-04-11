@@ -3,6 +3,7 @@ package authoringenvironment.view;
 import java.util.ResourceBundle;
 
 import gui.view.TextAreaParent;
+import gui.view.TextFieldWithButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -56,9 +57,8 @@ public class VBoxMainScreenLeftPane extends VBox {
 	private void initGameNameEditor() {
 		String mainPrompt = myResources.getString("gameName");
 		String textFieldPrompt = myResources.getString("enterGameName");
-		String buttonText = myResources.getString("go");
 		TextFieldWithButton nameEditor = new TextFieldWithButton(mainPrompt, textFieldPrompt, TEXT_FIELD_WIDTH,
-				buttonText, saveNameButtonAction);
+				saveNameButtonAction);
 		nameEditorContainer = (HBox) nameEditor.createNode();
 		nameEditorContainer.setSpacing(TEXT_FIELD_CONTAINER_SPACING);
 		nameEditorContainer.setPadding(new Insets(TEXT_FIELD_CONTAINER_PADDING));
