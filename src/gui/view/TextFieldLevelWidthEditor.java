@@ -8,8 +8,7 @@ public class TextFieldLevelWidthEditor extends TextFieldWithButton {
 	
 	public TextFieldLevelWidthEditor(String labelText, String promptText, Double textFieldWidth) {
 		super(labelText, promptText, textFieldWidth);
-		myLevel = (Level) getEditableElement();
-		setButtonAction(e -> myLevel.setWidth(Double.valueOf(getTextFieldInput())));
+		setButtonAction(e -> ((Level) getEditableElement()).setWidth(Double.valueOf(getTextFieldInput())));
 	}
 
 }

@@ -202,6 +202,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		List<ImageView> actorIVs = new ArrayList<>();
 		for(Actor actor: myLevel.getActors()) actorIVs.add(actor.getImageView());
 		myCenterPane.getChildren().addAll(actorIVs);
+		myInspector.getAttributesTab().updateEditable(myLevel);
 	}
 
 }
