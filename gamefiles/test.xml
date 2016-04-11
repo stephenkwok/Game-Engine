@@ -60,7 +60,7 @@
   </levels>
   <info>
     <myName>My Game</myName>
-    <myImageName>game_icon.png</myImageName>
+    <myImageName>default_game.jpg</myImageName>
     <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
   </info>

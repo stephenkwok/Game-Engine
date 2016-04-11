@@ -10,6 +10,8 @@ import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.GameScreen;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /** 
  * This class serves as the private interface that any game controller must implement in order to set up the IGame with the appropriate levels and actors for the game engine to interact with

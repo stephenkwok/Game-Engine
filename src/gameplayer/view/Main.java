@@ -57,11 +57,7 @@ public class Main extends Application {
 		GameController controller = new GameController();
 		controller.setGame(model);
 		controller.setGameView(view);
-		
-		Stage stage = new Stage();
-		stage.setScene(view.getScene());
-		stage.show();
-		controller.begin();
+
 		
 	}
 
