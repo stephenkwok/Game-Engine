@@ -51,7 +51,7 @@ public class PhysicsEngine {
 		return nextPos;
 	}
 	
-	private void update(Actor a,double forceX, double forceY ){
+	private void update(Actor a,double forceX, double forceYupward, double forceYdownward, double friction){
 		double xVelo     = a.getXVelo();
 		double yVelo     = a.getYVelo();
 		double xPos      =  a.getXPos();      
@@ -63,9 +63,9 @@ public class PhysicsEngine {
 				
 		nextHorzVelo = xVelo;      
 		
-		nextVertVelo = applyForce(yVelo, forceY);            // Apply  y force from movement action to y velocity
+		nextVertVelo = applyForce(yVelo, forceYupward);            // Apply  y force from movement action to y velocity
 		
-		nextVertVelo = applyForce(nextVertVelo, gravity);    //Apply gravitational force
+		nextVertVelo = applyForce(nextVertVelo, forceYdownward);    //Apply gravitational force
 		nextYPos     = changePos(yPos, nextVertVelo); 
 		nextVertVelo = maxLimit(nextVertVelo, maxVertVelocity);
 			
@@ -110,19 +110,19 @@ public class PhysicsEngine {
 	//They differ in the force applied to the Actor
 	
 	public void moveRight(Actor a1) {
-		update(a1,horizontalForce, 0);
+		update(a1,horizontalForce, 0, 0, a1.getMyFriction());
 	}
 
 	public void moveLeft(Actor a1) {
-		update(a1,-horizontalForce, 0);
+		update(a1,-horizontalForce, 0, 0, a1.getMyFriction());
 	}
 	
 	public void jump(Actor a1){
-		update(a1,0,jumpForce);
+		update(a1,0,jumpForce, gravity, a1.getMyFriction());
 	}
 
 	public void tick(Actor a1) {
-		update(a1,0.0,0.0);
+		update(a1,0.0,0.0, gravity, a1.getMyFriction());
 	}
 	
 	public void staticHorizontalCollision(Actor a1, Actor a2) {
