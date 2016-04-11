@@ -114,9 +114,6 @@ public class BaseScreen extends Screen {
 	}
 	
 	public void addGamePane(){
-		//GameDisplay myGD = new GameDisplay(m);
-		//myGD.init();
-		//System.out.println(myP.getChildren());
 		Rectangle myRect = new Rectangle(1300,600);
 		myRect.setFill(Color.AQUA);
 		myMasterPane.setCenter(myRect);
