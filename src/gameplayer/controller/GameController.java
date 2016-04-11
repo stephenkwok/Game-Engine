@@ -10,8 +10,7 @@ import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.GameScreen;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 
 /** 
  * This class serves as the private interface that any game controller must implement in order to set up the IGame with the appropriate levels and actors for the game engine to interact with
@@ -21,24 +20,7 @@ import javafx.scene.image.ImageView;
 public class GameController implements Observer {
 	private Game model;
 	private GameScreen view;
-	
-	/**
-	 * Creates an instance of Game populated with Levels
-	 * @param list of playable levels
-	 * @return an instance of IGame
-	 */
-	public Game createGame (List<Level> myLevels){
-		return null;
-	}
-	
-	/**
-	 * Creates the basic game view which holds the other front end view components
-	 * @param Game
-	 * @return BaseScreen
-	 */
-	public BaseScreen createGameView (Game myGame){
-		return null;
-	}
+	private HUDScreen hud;
 	
 	/**
 	 * Sets the current game to the given Game
@@ -63,7 +45,7 @@ public class GameController implements Observer {
 	 * @param level an int representing the level to be played
 	 */
 	public void initialize (int level){
-		
+		model.getInfo().setCurrentLevelNum(level);
 	}
 	
 	/**
@@ -118,6 +100,15 @@ public class GameController implements Observer {
 		begin();
 	}
 
+	
+	public GameScreen getView() {
+		return view;
+	}
+	
+	public Game getGame() {
+		return model;
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o.equals(view)){

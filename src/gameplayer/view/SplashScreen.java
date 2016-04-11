@@ -73,7 +73,7 @@ public class SplashScreen extends Screen {
 	 * @param game TODO
 	 */
 	public void play(Game game) {
-		BaseScreen myB = new BaseScreen(getStage());
+		BaseScreen myB = new BaseScreen(getStage(), game);
 		getStage().setScene(myB.getMyScene());
 	}
 

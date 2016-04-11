@@ -29,7 +29,7 @@ public class GameScreen extends Observable {
 	
 	private Camera camera;
 	
-	public GameScreen(Scene mainScene, Camera camera){
+	public GameScreen(Camera camera){
 		mySubgroup = new Group();
 		mySubscene = new SubScene(mySubgroup, 700, 500);
 		mySubscene.setFocusTraversable(true);

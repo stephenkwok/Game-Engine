@@ -14,8 +14,11 @@ import gui.view.IGUIElement;
 import gui.view.Screen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
+import javafx.scene.Camera;
 import javafx.scene.Node;
+import javafx.scene.ParallelCamera;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -57,19 +60,17 @@ public class BaseScreen extends Screen {
 	private static final Integer BUTTON_X = 50;
 	private static final Integer BUTTON_Y = 10;
 	private BorderPane myMasterPane;
-	
-	public BaseScreen(Stage stage) {
+	private GameController myGameController;
+
+	public BaseScreen(Stage stage, Game game) {
 		super(stage);
 		this.myMasterPane = new BorderPane();
 		init();
-		addComponents();
-	}
-
-	public BaseScreen(Stage stage, Game game) {
-		this(stage);
 		GameController gameController = new GameController();
 		gameController.setGame(game);
-		gameController.setGameView(new GameScreen());
+		gameController.setGameView(new GameScreen(new ParallelCamera()));
+		gameController.initialize(game.getInfo().getCurrentLevelNum());
+		addComponents();
 	}
 	
 	public void init() {
@@ -121,12 +122,8 @@ public class BaseScreen extends Screen {
 	}
 	
 	public void addGamePane(){
-		//GameDisplay myGD = new GameDisplay(m);
-		//myGD.init();
-		//System.out.println(myP.getChildren());
-		Rectangle myRect = new Rectangle(1300,600);
-		myRect.setFill(Color.AQUA);
-		myMasterPane.setCenter(myRect);
+		SubScene gameScene = myGameController.getView().getScene();
+		myMasterPane.setCenter(gameScene);
 	}
 	
 	@Override

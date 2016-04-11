@@ -75,9 +75,11 @@ public class Main extends Application {
 		Group group = new Group();
 		Scene scene = new Scene(group);
 		
-		Game model = new Game("file",info,levels);
+		Game model = new Game(info,levels);
+		CreatorController c = new CreatorController(model);
+		c.saveForEditing(new File("gamefiles/test.xml"));
 		PerspectiveCamera camera = new PerspectiveCamera();
-		GameScreen view = new GameScreen(scene,camera);
+		GameScreen view = new GameScreen(camera);
 
 		GameController controller = new GameController();
 		controller.setGame(model);

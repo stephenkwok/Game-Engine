@@ -16,6 +16,7 @@ public class BaseScreenController implements IScreenController{
 	private Stage myStage;
 	private ResourceBundle myResources;
 	private BaseScreen myScreen;
+	private Game myGame;
 	
 	public BaseScreenController(Stage myStage, BaseScreen myBase, ResourceBundle myResources) {
 		this.myStage = myStage;
@@ -70,7 +71,7 @@ public class BaseScreenController implements IScreenController{
 
 	@Override
 	public void useGame(Game game) {
-		// TODO Auto-generated method stub
+		this.myGame = game;
 		
 	}
 
