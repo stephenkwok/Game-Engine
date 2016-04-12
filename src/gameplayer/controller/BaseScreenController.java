@@ -93,7 +93,7 @@ public class BaseScreenController implements IScreenController{
         	this.chooseGame();
         }
         else {
-        	this.getMyGameController().togglePause();
+        	this.getMyGameController().toggleUnPause();
         }
 	}
 

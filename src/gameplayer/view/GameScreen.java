@@ -13,6 +13,7 @@ import gui.view.Screen;
 import javafx.event.Event;
 import javafx.scene.Camera;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.image.Image;
@@ -109,6 +110,11 @@ public class GameScreen extends Observable {
 	public void clearGame(){
 		camera.setTranslateX(0);
 		getMySubgroup().getChildren().clear();
+		
+//		for(Node n: getMySubgroup().getChildren()){
+//			System.out.println("removing");
+//			getMySubgroup().getChildren().remove(n);
+//		}
 	}
 
 

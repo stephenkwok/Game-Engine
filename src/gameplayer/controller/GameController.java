@@ -74,6 +74,7 @@ public class GameController implements Observer {
 			view.addActor(actor);
 		}
 		this.toggleUnPause();
+		model.startGame();
 	}
 	
 	/**
