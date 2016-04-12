@@ -9,4 +9,10 @@ public class TextFieldActorNameEditor extends TextFieldWithButton {
 		setButtonAction(e -> ((Actor) getEditableElement()).setMyName(getTextFieldInput()));
 	}
 
+	@Override
+	protected void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

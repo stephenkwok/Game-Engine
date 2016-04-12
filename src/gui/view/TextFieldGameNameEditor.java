@@ -15,4 +15,10 @@ public class TextFieldGameNameEditor extends TextFieldWithButton{
 		super(labelText, prompt, textFieldWidth);
 		setButtonAction(e -> ((GameInfo) getEditableElement()).setMyName(getTextFieldInput()));
 	}
+
+	@Override
+	protected void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
+	}
 }

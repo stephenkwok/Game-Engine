@@ -9,4 +9,10 @@ public class TextFieldActorHealthEditor extends TextFieldWithButton {
 		setButtonAction(e -> ((Actor) getEditableElement()).setMyHealth(Double.parseDouble(getTextFieldInput())));
 	}
 
+	@Override
+	protected void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
