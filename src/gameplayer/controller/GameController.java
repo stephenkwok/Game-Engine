@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Optional;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -15,6 +16,9 @@ import gameplayer.view.BaseScreen;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
 import javafx.collections.MapChangeListener.Change;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 
 
 /** 
@@ -53,7 +57,6 @@ public class GameController implements Observer {
 	}
 	
 	
-	
 	/**
 	 * Will initialize the backend (game engine) with the current level's information and actor information to set up the game for playing.  Will visualize that backend too. 
 	 * @param level an int representing the level to be played
@@ -68,7 +71,7 @@ public class GameController implements Observer {
 	 */
 	public void begin (){
 		Level current = model.getCurrentLevel();
-		view.addBackground(current.getMyBackgroundImgName());
+		//view.addBackground(current.getMyBackgroundImgName());
 		for(Actor actor: model.getActors()){
 			view.addActor(actor);
 		}
@@ -101,7 +104,11 @@ public class GameController implements Observer {
 	 * Will stop the animation timeline.
 	 */
 	public void endGame (){
-		System.out.println("game over");
+		//TODO fix resource also implement saving functionality 
+		togglePause();
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setContentText("Game over!");
+		alert.show();
 	}
 	
 	/**

@@ -121,7 +121,6 @@ public class BaseScreenController implements IScreenController{
 		Game initialGame = parserController.loadforPlaying(new File(myGameController.getGame().getInitialGameFile()));
 		myGameController.setGame(initialGame);
 		myGameController.initialize(0);
-		myGameController.begin();
 	}
 
 	@Override
