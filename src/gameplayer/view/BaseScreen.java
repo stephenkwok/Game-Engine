@@ -70,7 +70,7 @@ public class BaseScreen extends Screen {
 		gameController = new GameController();
 		gameController.setGame(game);
 		gameController.setGameView(new GameScreen(new ParallelCamera()));
-		gameController.initialize(game.getInfo().getCurrentLevelNum());
+		gameController.initialize(game.getInfo().getMyCurrentLevelNum());
 		addComponents();
 	}
 	
@@ -85,7 +85,7 @@ public class BaseScreen extends Screen {
 		try {
 			addGame();
 			//addHUD();
-			gameController.setHUD(new HUDScreen(gameController.getGame().getHUDInfo()));  //blake needs to add this
+			//gameController.setHUD(new HUDScreen(gameController.getGame().getHUDInfo()));  //blake needs to add this
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException | SecurityException e1) {
 			e1.printStackTrace();

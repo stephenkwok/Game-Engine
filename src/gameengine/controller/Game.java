@@ -2,6 +2,8 @@ package gameengine.controller;
 
 import java.util.*;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gameengine.model.Actor;
 import gameengine.model.CollisionDetection;
 import gameengine.model.IActor;
@@ -27,6 +29,7 @@ public class Game extends Observable implements Observer {
 	private GameInfo info;
 	private PhysicsEngine myPhysicsEngine;
 	private CollisionDetection myCollisionDetector;
+	@XStreamOmitField
 	private Timeline animation;
 	private List<Actor> currentActors;
 	private List<Actor> deadActors;
@@ -48,13 +51,13 @@ public class Game extends Observable implements Observer {
 		setDeadActors(new ArrayList<Actor>());
         myPhysicsEngine = new PhysicsEngine();
         myCollisionDetector = new CollisionDetection(myPhysicsEngine);
-		
+        
 		initTimeline();
 		
 	}
 	
 
-	private void initTimeline() {
+	public void initTimeline() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> step());
 		animation = new Timeline();
@@ -71,9 +74,14 @@ public class Game extends Observable implements Observer {
 	}
 	
 	public void startGame(){
+		initCurrentActors();
+		animation.play();
+	}
+
+
+	public void initCurrentActors() {
 		setCurrentActors(getCurrentLevel().getActors());
 		initActors();
-		animation.play();
 	}
 	
 	private void step(){
@@ -124,7 +132,7 @@ public class Game extends Observable implements Observer {
 	
 	public void nextLevel(){
 		animation.stop();
-		setCurrentLevel(info.getCurrentLevelNum()+1);
+		setCurrentLevel(info.getMyCurrentLevelNum()+1);
 	}
 	
 	/**
@@ -142,7 +150,7 @@ public class Game extends Observable implements Observer {
 	}
 
 	public List<Actor> getActors() {
-		return getLevels().get(getInfo().getCurrentLevelNum()).getActors();
+		return getLevels().get(getInfo().getMyCurrentLevelNum()).getActors();
 	}
 	
 	public String toString() {
@@ -161,11 +169,11 @@ public class Game extends Observable implements Observer {
 	}
 	
 	public Level getCurrentLevel(){
-		return levels.get(info.getCurrentLevelNum());
+		return levels.get(info.getMyCurrentLevelNum());
 	}
 	
 	public void setCurrentLevel(int levelNum){
-		info.setCurrentLevelNum(levelNum);
+		info.setMyCurrentLevelNum(levelNum);
 	}
 	
 	public void updateActors(){

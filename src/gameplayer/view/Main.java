@@ -57,7 +57,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		GameInfo info = new GameInfo();
-		info.setCurrentLevelNum(0);
+		info.setMyCurrentLevelNum(0);
 		
 		Actor actor1 = new Actor();
 		actor1.setMyImageViewName("redball.png");
@@ -79,7 +79,7 @@ public class Main extends Application {
 		Action action1 = new MoveRight(actor1);
 		Action action2 = new MoveLeft(actor1);
 		Action action3 = new Destroy(actor1);
-		Action action4 = new MoveUp(actor1);
+		Action action4 = new NextLevel(actor1);
 		Action action5 = new VerticalStaticCollision(actor1);
 		Rule rule = new Rule(trigger1,action1);
 		Rule rule2 = new Rule(trigger2, action2);
@@ -97,7 +97,7 @@ public class Main extends Application {
 		levels.add(level1);
 		level1.addActor(actor1);
 		level1.addActor(actor2);
-		for(int i=1; i<=12; i++){
+		for(int i=0; i<12; i++){
 			Actor floor = new Actor();
 			floor.setMyName("floor");
 			floor.setMyImageViewName("square.png");

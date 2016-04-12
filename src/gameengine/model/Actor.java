@@ -185,7 +185,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     }
 
     @Override
-    public String getName() {
+    public String getMyName() {
         return myName;
     }
 

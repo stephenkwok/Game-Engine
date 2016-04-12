@@ -20,7 +20,7 @@ public abstract class CollisionTrigger implements ITrigger {
     public abstract boolean evaluate(Actor myActor);
 
     public String makeName(String collisionType) {
-        return getMyMainActor().getName() + collisionType + getMyCollisionActor().getName();
+        return getMyMainActor().getMyName() + collisionType + getMyCollisionActor().getMyName();
     }
 
 	public Actor getMyMainActor() {

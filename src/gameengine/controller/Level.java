@@ -106,8 +106,8 @@ public class Level implements Observer, ILevel, IEditableGameElement {
      * @return The Level's name
      */
     @Override
-    public String getName() {
-        return getMyName();
+    public String getMyName() {
+        return myName;
     }
 
 	@Override
@@ -240,10 +240,6 @@ public class Level implements Observer, ILevel, IEditableGameElement {
 
 	public void setMyLosingCondition(String myLosingCondition) {
 		this.myLosingCondition = myLosingCondition;
-	}
-
-	public String getMyName() {
-		return myName;
 	}
 
 	public void removeActors(List<Actor> deadActors) {

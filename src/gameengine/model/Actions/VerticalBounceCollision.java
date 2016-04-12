@@ -20,7 +20,7 @@ public class VerticalBounceCollision extends Action{
 	@Override
 	public void perform() {
 		//myPhysicsEngine.vertBounceCollision(getActor());
-		getActor().setYVelo(getActor().getYVelo()*-1);
+		getActor().setVeloY(getActor().getVeloY()*-1);
 	}
 
 }
