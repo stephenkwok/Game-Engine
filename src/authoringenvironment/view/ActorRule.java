@@ -22,6 +22,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import authoringenvironment.view.behaviors.ResourceOptionsBehavior;
 
 /**
  * Rule container for an actor containing behavior, images, and/or sounds.
@@ -111,7 +112,7 @@ public class ActorRule {
 	}
 	
 	public void addBehavior(Label behavior) {
-		Node toAdd = getBehaviorHBox(behavior.getText());
+		Node toAdd = getBehaviorHBox(behavior.getText(),null);
 		toAdd.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2) remove(toAdd);
 		});
@@ -126,14 +127,14 @@ public class ActorRule {
 	
 	public void addSound(Label sound) {
 		if(isInPath(sound.getText(), myLibraryResources.getString("Sounds"))){
-			Node toAdd = getBehaviorHBox(PLAY_SOUND);
+			Node toAdd = getBehaviorHBox(PLAY_SOUND, sound.getText());
 			toAdd.setOnMouseClicked(event -> {
 				if(event.getClickCount()==2) remove(toAdd);
 			});
 			results.getChildren().add(toAdd);
 		}
 		else{
-			Node toAdd = getBehaviorHBox(PLAY_MUSIC);
+			Node toAdd = getBehaviorHBox(PLAY_MUSIC, sound.getText());
 			toAdd.setOnMouseClicked(event -> {
 				if(event.getClickCount()==2) remove(toAdd);
 			});
@@ -151,7 +152,7 @@ public class ActorRule {
 	}
 
 	public void addImage(Label image) {
-		Node toAdd = getBehaviorHBox(CHANGE_IMAGE);
+		Node toAdd = getBehaviorHBox(CHANGE_IMAGE,image.getText());
 		toAdd.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2) remove(toAdd);
 		});
@@ -164,12 +165,18 @@ public class ActorRule {
 		results.getChildren().remove(toRemove);
 	}
 	
-	private Node getBehaviorHBox(String behaviorType){
+	@SuppressWarnings("unchecked")
+	private Node getBehaviorHBox(String behaviorType, String value){
 		try{
 			String className = PACKAGE + myLibraryResources.getString(behaviorType+CLASS);
 			Class<?> clazz = Class.forName(className);
 			Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class);
-			return ((IGUIElement) constructor.newInstance(behaviorType,myLibraryResources)).createNode();
+			IGUIElement element = ((IGUIElement) constructor.newInstance(behaviorType,myLibraryResources));
+			Node toReturn = element.createNode();
+			if(value!=null){
+				((ResourceOptionsBehavior) element).getComboBox().setValue(value);
+			}
+			return toReturn;
 		}catch(Exception e1){
 			try{
 				String className = PACKAGE + myLibraryResources.getString(behaviorType+CLASS);
@@ -177,6 +184,7 @@ public class ActorRule {
 				Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, Controller.class);
 				return ((IGUIElement) constructor.newInstance(behaviorType,myLibraryResources,myActorRuleCreator.getController())).createNode();
 			}catch(Exception e2){
+				e1.printStackTrace();
 				return new Label(behaviorType);
 			}
 		}

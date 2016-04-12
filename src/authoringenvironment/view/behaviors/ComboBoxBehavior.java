@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import gui.view.ComboBoxTextCell;
+import javafx.scene.control.ComboBox;
 /**
  * 
  * @author AnnieTang
@@ -37,6 +38,11 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell {
 	
 	public String getBehaviorType(){
 		return behaviorType;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public ComboBox getComboBox(){
+		return comboBox;
 	}
 
 }
