@@ -11,7 +11,10 @@ import gameengine.model.ITrigger;
 import gameengine.model.PhysicsEngine;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
+import javafx.collections.MapChangeListener.Change;
 import javafx.util.Duration;
 
 /**
@@ -55,6 +58,7 @@ public class Game extends Observable implements Observer {
 		
 		initTimeline();
 		
+		initHUDData();
 	}
 	
 
@@ -196,6 +200,17 @@ public class Game extends Observable implements Observer {
 
 	public void setAnimation(Timeline animation) {
 		this.animation = animation;
+	}
+	
+	public void initHUDData() {
+		HUDData = FXCollections.observableHashMap(); 
+		//HUDData.putAll(info.getMap()); //fill in getmap here
+		HUDData.addListener(new MapChangeListener<String, Object>() {
+			@Override
+			public void onChanged(Change<? extends String, ? extends Object> change) {
+				update((Observable) HUDData, change); //IDK if casting to observable causes issues with equality
+			}
+        });
 	}
 
 }
