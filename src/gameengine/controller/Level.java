@@ -20,9 +20,15 @@ import authoringenvironment.model.IEditableGameElement;
  */
 public class Level implements Observer, ILevel, IEditableGameElement {
 
+	// TODO: should probably set these default things via properties file but idk sry guyz
 	private static final String DEFAULT_NAME = "Untitled";
 	private static final String DEFAULT_IMAGE_NAME = "default_background.png";
-
+	private static final double DEFAULT_HEIGHT = 800;
+	private static final double DEFAULT_WIDTH = 1024;
+	private static final String DEFAULT_SCROLLING = "Vertically";
+	private static final String DEFAULT_TERMINATION = "Infinite";
+	private static final String DEFAULT_WINNING_CONDITION = "Survival time";
+	private static final String DEFAULT_LOSING_CONDITION = "Player dies";
     private List<Actor> myActors;
     private Map<String, List<Actor>> myTriggerMap;
     private String myName;
@@ -47,13 +53,13 @@ public class Level implements Observer, ILevel, IEditableGameElement {
         setMyName(DEFAULT_NAME);
         myBackgroundImgName = DEFAULT_IMAGE_NAME;
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
-        myTermination = null;
-        myScrollingDirection = null;
-        myWinningCondition = null;
-        myLosingCondition = null;
-        myName = "Untitled";
-        myHeight = 800;
-        myWidth = 1024;
+        myTermination = DEFAULT_TERMINATION;
+        myScrollingDirection = DEFAULT_SCROLLING;
+        myWinningCondition = DEFAULT_WINNING_CONDITION;
+        myLosingCondition = DEFAULT_LOSING_CONDITION;
+        myName = DEFAULT_NAME;
+        myHeight = DEFAULT_HEIGHT;
+        myWidth = DEFAULT_WIDTH;
     }
 
     /**

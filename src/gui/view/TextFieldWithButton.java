@@ -18,7 +18,7 @@ import javafx.scene.layout.Priority;
  *
  */
 
-public class TextFieldWithButton implements IGUIElement, IGUIEditingElement {
+public abstract class TextFieldWithButton implements IGUIElement, IGUIEditingElement {
 	private static final int PADDING = 10;
 	private static final String GO = "Go";
 	private HBox myContainer;
@@ -51,12 +51,16 @@ public class TextFieldWithButton implements IGUIElement, IGUIEditingElement {
 		myContainer.getChildren().addAll(myTextFieldPrompt, myTextField, myButton);
 		return myContainer;
 	}
+	
+	protected abstract void updateValueBasedOnEditable();
 
 	@Override
 	public void setEditableElement(IEditableGameElement element) {
 		myEditableElement = element;
+		if (myEditableElement != null) {
+			updateValueBasedOnEditable();
+		}
 	}
-
 
 	protected void setButtonAction(EventHandler<ActionEvent> buttonAction) {
 		myButton.setOnAction(buttonAction);
@@ -64,6 +68,10 @@ public class TextFieldWithButton implements IGUIElement, IGUIEditingElement {
 	
 	protected IEditableGameElement getEditableElement() {
 		return myEditableElement;
+	}
+	
+	protected void setTextFieldValue(String value) {
+		myTextField.setText(value);
 	}
 	
 	protected String getTextFieldInput() {

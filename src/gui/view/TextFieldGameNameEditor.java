@@ -17,4 +17,10 @@ public class TextFieldGameNameEditor extends TextFieldWithButton{
 		super(labelText, prompt, textFieldWidth);
 		this.controller = controller;
 	}
+
+	@Override
+	protected void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
+	}
 }
