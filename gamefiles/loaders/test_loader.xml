@@ -64,6 +64,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
@@ -84,6 +85,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
@@ -104,6 +106,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
@@ -124,6 +127,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
@@ -144,6 +148,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
@@ -164,6 +169,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
@@ -184,6 +190,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
@@ -204,6 +211,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
@@ -224,6 +232,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
@@ -244,6 +253,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
@@ -264,6 +274,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
@@ -284,6 +295,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
@@ -304,6 +316,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
@@ -324,6 +337,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
       </myActors>
@@ -366,7 +380,7 @@
       <myTermination>Infinite</myTermination>
       <myWinningCondition>Survival time</myWinningCondition>
       <myLosingCondition>Player dies</myLosingCondition>
-      <myBackgroundImgName>default_background.png</myBackgroundImgName>
+      <myBackgroundImgName>default_landscape.png</myBackgroundImgName>
     </gameengine.controller.Level>
     <gameengine.controller.Level>
       <myActors>
@@ -388,6 +402,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
       </myActors>
@@ -399,7 +414,7 @@
       <myTermination>Infinite</myTermination>
       <myWinningCondition>Survival time</myWinningCondition>
       <myLosingCondition>Player dies</myLosingCondition>
-      <myBackgroundImgName>default_background.png</myBackgroundImgName>
+      <myBackgroundImgName>default_landscape.png</myBackgroundImgName>
     </gameengine.controller.Level>
   </levels>
   <info>

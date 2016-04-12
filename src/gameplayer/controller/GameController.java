@@ -39,10 +39,9 @@ public class GameController implements Observer {
 		model.addObserver(this);
 	}
 	
-	
 	/**
-	 * Sets the basic game view to the given BaseScreen
-	 * @param BaseScreen
+	 * Sets the basic game view to the given GameScreen
+	 * @param GameScreen
 	 */
 	public void setGameView (GameScreen myGameView){
 		view = myGameView;
@@ -117,7 +116,7 @@ public class GameController implements Observer {
 		model.nextLevel();
 		begin();
 	}
-
+	
 	
 	public GameScreen getView() {
 		return view;
