@@ -27,6 +27,6 @@ public abstract class ComboBoxTextCell extends ComboBoxParent {
 	}
 	
 	@Override
-	public abstract List<String> getOptionsList();
+	protected abstract List<String> getOptionsList();
 
 }

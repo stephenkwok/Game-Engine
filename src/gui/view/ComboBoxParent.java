@@ -128,5 +128,5 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 	 * Returns list of items in the ComboBox.
 	 * @return
 	 */
-	public abstract List<String> getOptionsList();
+	protected abstract List<String> getOptionsList();
 }
