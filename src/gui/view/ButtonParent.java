@@ -58,6 +58,7 @@ public abstract class ButtonParent implements IGUIElement {
 	 * Optional, sets image for button.
 	 */
 	private void setButtonIcon(){
+		System.out.println(imageName);
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 		ImageView iv = new ImageView(image);
         iv.setFitHeight(ICON_SIZE);

@@ -139,6 +139,23 @@ public class GameController implements Observer {
 		}
 	}
 	
+	public void toggleSound() {
+		System.out.println("toggle sound");
+	}
+	
+	public void toggleMusic(){
+		System.out.println("toggle music");
+	}
+
+	public void togglePause() {
+		//TODO: stop the step(), thx michael!!!!!! :)
+		System.out.println("pause the game");
+	}
+
+	public void toggleUnPause() {
+		System.out.println("un pause game");
+	}
+	
 	
 	
 	
