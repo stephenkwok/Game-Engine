@@ -32,11 +32,12 @@ public class GameInfo implements IEditableGameElement {
 		
 	}
 	
-	public String getMyName() {
+	@Override
+	public String getName() {
 		return this.myName;
 	}
 
-
+	@Override
 	public void setMyName(String myName) {
 		this.myName = myName;
 	}
@@ -76,7 +77,7 @@ public class GameInfo implements IEditableGameElement {
 	      
 	      stringBuilder.append("GameInfo [ ");
 	      stringBuilder.append("\nname: ");
-	      stringBuilder.append(getMyName());
+	      stringBuilder.append(getName());
 	      stringBuilder.append("\nimgName: ");
 	      stringBuilder.append(getMyImageName());
 	      stringBuilder.append("\nmyDescription: ");
@@ -96,11 +97,6 @@ public class GameInfo implements IEditableGameElement {
 	@Override
 	public void setImageView(ImageView imageView) {
 		myPreviewImage = imageView;
-	}
-
-	@Override
-	public String getName() {
-		return myName;
 	}
 
 	@Override

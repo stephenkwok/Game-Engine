@@ -27,7 +27,7 @@ public class TextAreaGameDescriptionEditor extends TextAreaParent {
 		myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
 		setContainerPadding(new Insets(VBOX_PADDING));
 		setTextAreaPromptText(myResources.getString(GAME_EDITOR_PROMPT_KEY));
-		setButtonAction(e -> ((GameInfo) getEditableElement()).setDescription(getTextAreaInput()));
+		setButtonAction(e -> ((GameInfo) getEditableElement()).setMyDescription(getTextAreaInput()));
 	}
 
 }
