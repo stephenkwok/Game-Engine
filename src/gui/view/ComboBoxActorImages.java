@@ -45,4 +45,10 @@ public class ComboBoxActorImages extends ComboBoxImageCell{
         return imageMap.get(item);
 	}
 
+	@Override
+	protected void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

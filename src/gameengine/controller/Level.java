@@ -47,6 +47,13 @@ public class Level implements Observer, ILevel, IEditableGameElement {
         myName = DEFAULT_NAME;
         myBackgroundImgName = DEFAULT_IMAGE_NAME;
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
+        myTermination = null;
+        myScrollingDirection = null;
+        myWinningCondition = null;
+        myLosingCondition = null;
+        myName = "Untitled";
+        myHeight = 800;
+        myWidth = 1024;
     }
 
     /**
@@ -80,28 +87,56 @@ public class Level implements Observer, ILevel, IEditableGameElement {
     	myWidth = width;
     }
     
+    public double getWidth() {
+    	return myWidth;
+    }
+    
     public void setHeight(double height) {
     	myHeight = height;
+    }
+    
+    public double getHeight() {
+    	return myHeight;
     }
     
     public void setHUDOptions(List<String> options) {
     	myHUDOptions = options;
     }
     
+    public List<String> getHUDOption() {
+    	return myHUDOptions;
+    }
+    
     public void setScrollingDirection(String scrollingDirection) {
     	myScrollingDirection = scrollingDirection;
     }
 
+    public String getScrollingDirection() {
+    	return myScrollingDirection;
+    }
+    
     public void setTermination(String termination) {
     	myTermination = termination;
+    }
+    
+    public String getTermination() {
+    	return myTermination;
     }
     
     public void setWinningCondition(String winningCondition) {
     	myWinningCondition = winningCondition;
     }
     
+    public String getWinningCondition() {
+    	return myWinningCondition;
+    }
+    
     public void setLosingCondition(String losingCondition) {
     	myLosingCondition = losingCondition;
+    }
+    
+    public String getLosingCondition() {
+    	return myLosingCondition;
     }
     
     /**

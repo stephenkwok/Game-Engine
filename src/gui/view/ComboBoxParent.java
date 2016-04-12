@@ -115,9 +115,14 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 		comboBox.setItems(newOptions);
 	}
 
+	protected abstract void updateValueBasedOnEditable();
+	
 	@Override
 	public void setEditableElement(IEditableGameElement element) {
 		myEditableElement = element;
+		if (myEditableElement != null) {
+			updateValueBasedOnEditable();
+		}
 	}
 
 	protected IEditableGameElement getEditableElement() {
