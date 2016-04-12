@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import gui.controller.IScreenController;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+//import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 /** 
@@ -63,9 +63,9 @@ public abstract class Screen {
 	}
 
 	public void showError(String message) {
-		  Alert alert = new Alert(Alert.AlertType.ERROR);
-	      alert.setContentText(message);
-	      alert.showAndWait();
+//		  Alert alert = new Alert(Alert.AlertType.ERROR);
+//	      alert.setContentText(message);
+//	      alert.showAndWait();
 		
 	}
 		

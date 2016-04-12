@@ -1,9 +1,7 @@
 package gameengine.controller;
 
 import gameengine.model.Actor;
-import gameengine.model.CollisionDetection;
 import gameengine.model.ITrigger;
-import gameengine.model.PhysicsEngine;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -88,7 +86,7 @@ public class Level implements Observer, ILevel, IEditableGameElement {
     public void setMyName(String name) {
         this.myName = name;
     }
-    
+
     public void setWidth(double width) {
     	myWidth = width;
     }
@@ -175,8 +173,8 @@ public class Level implements Observer, ILevel, IEditableGameElement {
      * @return The Level's name
      */
     @Override
-    public String getName() {
-        return getMyName();
+    public String getMyName() {
+        return myName;
     }
 
 	@Override
@@ -310,9 +308,10 @@ public class Level implements Observer, ILevel, IEditableGameElement {
 	public void setMyLosingCondition(String myLosingCondition) {
 		this.myLosingCondition = myLosingCondition;
 	}
-
-	public String getMyName() {
-		return myName;
+	
+	public void removeActors(List<Actor> deadActors) {
+		myActors.removeAll(deadActors);
 	}
 
 }
+

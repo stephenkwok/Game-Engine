@@ -4,11 +4,6 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.AttributeType;
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 
 public class Attribute {
 	
@@ -63,3 +58,4 @@ public class Attribute {
 		this.myAction = myAction;
 	}
 }
+

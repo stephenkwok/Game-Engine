@@ -24,3 +24,4 @@ public interface IRule {
      */
     public Action getMyAction();
 }
+
