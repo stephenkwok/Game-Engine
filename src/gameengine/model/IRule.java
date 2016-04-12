@@ -15,12 +15,12 @@ public interface IRule {
      *
      * @return The specific Trigger from the Rule
      */
-    public ITrigger getTrigger();
+    public ITrigger getMyTrigger();
 
     /**
      * Gets the Action from the Rule
      *
      * @return The specific Action from the Rule
      */
-    public Action getAction();
+    public Action getMyAction();
 }

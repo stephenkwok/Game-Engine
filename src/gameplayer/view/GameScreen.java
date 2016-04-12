@@ -2,6 +2,8 @@ package gameplayer.view;
 
 import java.util.Observable;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 import gameengine.model.Triggers.ClickTrigger;
@@ -26,25 +28,27 @@ import javafx.scene.paint.Color;
  */
 
 public class GameScreen extends Observable {
-
-	private SubScene mySubscene;
-	private Group mySubgroup;
-
 	
+	//@XStreamOmitField
+	private SubScene mySubscene;
+	//@XStreamOmitField
+	private Group mySubgroup;
+	//@XStreamOmitField
 	private Camera camera;
 	
 	public GameScreen(Camera camera){
-		mySubgroup = new Group();
-		mySubscene = new SubScene(mySubgroup,Screen.SCREEN_WIDTH, 500);
-		mySubscene.setFocusTraversable(true);
-		mySubscene.setOnKeyPressed(e -> handleScreenEvent(e));
-		mySubscene.setOnMouseClicked(e -> handleScreenEvent(e));
+		setMySubgroup(new Group());
+		setMySubscene(new SubScene(getMySubgroup(),Screen.SCREEN_WIDTH, 500));
+		getMySubscene().setFocusTraversable(true);
+		getMySubscene().setOnKeyPressed(e -> handleScreenEvent(e));
+		getMySubscene().setOnMouseClicked(e -> handleScreenEvent(e));
 		this.camera = camera; ///
+		mySubscene.setCamera(camera);
 	}
 	
 	
 	public SubScene getScene(){
-		return mySubscene;
+		return getMySubscene();
 	}
 	
 	/**
@@ -54,14 +58,14 @@ public class GameScreen extends Observable {
 	public void addActor (Actor actor){
 		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(actor.getMyImageViewName())));
 		actor.setImageView(imageView);
-		mySubgroup.getChildren().add(actor.getImageView());//
+		getMySubgroup().getChildren().add(actor.getImageView());//
 	}
 	
 
 	public void addBackground(String filepath) {
 		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(filepath)));
 		imageView.toBack();
-		mySubgroup.getChildren().add(imageView);
+		getMySubgroup().getChildren().add(imageView);
 		
 	}
 	
@@ -95,7 +99,28 @@ public class GameScreen extends Observable {
 	}
 	
 	public void clearGame(){
-		mySubgroup.getChildren().clear();
+		camera.setTranslateX(0);
+		getMySubgroup().getChildren().clear();
+	}
+
+
+	public Group getMySubgroup() {
+		return mySubgroup;
+	}
+
+
+	public void setMySubgroup(Group mySubgroup) {
+		this.mySubgroup = mySubgroup;
+	}
+
+
+	public SubScene getMySubscene() {
+		return mySubscene;
+	}
+
+
+	public void setMySubscene(SubScene mySubscene) {
+		this.mySubscene = mySubscene;
 	}
 
 }

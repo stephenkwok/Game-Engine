@@ -18,9 +18,9 @@ public class PhysicsEngineUseCase{
 	 * @return Nothing - Methods updates Actor position/velocity attributes
 	 */
 	public void jump(Actor a){
-		a.setYVelo(jumpStrength);
+		a.setVeloY(jumpStrength);
 		updatePosition(a);
-		a.setYVelo(updateVelocity(a.getYVelo()));
+		a.setVeloY(updateVelocity(a.getVeloY()));
 	}
 	
 	/**
@@ -53,8 +53,8 @@ public class PhysicsEngineUseCase{
 	 * @return Nothing
 	 */
 	public void updatePosition(Actor a){
-		a.setXPos( updateXPosition(a.getXPos(), a.getXVelo()) );
-		a.setYPos( updateYPosition(a.getYPos(), a.getYVelo()) );
+		a.setX( updateXPosition(a.getX(), a.getVeloX()) );
+		a.setY( updateYPosition(a.getY(), a.getVeloY()) );
 	}
 
 	/**

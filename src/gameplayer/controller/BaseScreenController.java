@@ -4,11 +4,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.io.File;
 import java.util.ResourceBundle;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.SplashScreen;
 import gui.controller.IScreenController;
 import gui.view.Screen;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class BaseScreenController implements IScreenController{
@@ -16,12 +20,13 @@ public class BaseScreenController implements IScreenController{
 	private Stage myStage;
 	private ResourceBundle myResources;
 	private BaseScreen myScreen;
-	private Game myGame;
+	private GameController myGameController;
 	
 	public BaseScreenController(Stage myStage, BaseScreen myBase, ResourceBundle myResources) {
 		this.myStage = myStage;
 		this.myResources = myResources;
 		this.myScreen = myBase;
+		this.setMyGameController(new GameController());
 	}
 
 	@Override
@@ -63,7 +68,15 @@ public class BaseScreenController implements IScreenController{
 	}
 	
 	public void saveGame(){
-		System.out.println("User wants to save game");
+		try {
+			CreatorController c = new CreatorController(getMyGameController().getGame(), this.myScreen);
+			FileChooser fileChooser = new FileChooser();
+			File file = fileChooser.showSaveDialog(new Stage());
+			c.saveForPlaying(file);
+		} catch (ParserConfigurationException e) {
+			myScreen.showError(e.getMessage());
+		}
+		
 	}
 	
 	public void switchGame(){
@@ -72,13 +85,20 @@ public class BaseScreenController implements IScreenController{
 
 	@Override
 	public void useGame(Game game) {
-		this.myGame = game;
 		
 	}
 
 	@Override
 	public Screen getScreen() {
 		return myScreen;
+	}
+
+	public GameController getMyGameController() {
+		return myGameController;
+	}
+
+	public void setMyGameController(GameController myGameController) {
+		this.myGameController = myGameController;
 	}
 
 }

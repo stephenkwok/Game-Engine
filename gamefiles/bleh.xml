@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
-  <obs/>
+  <obs>
+    <gameplayer.controller.GameController/>
+  </obs>
+  <initialGameFile>gamefiles/loaders/test_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <myActors>
@@ -11,7 +14,7 @@
             <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
           <x>0.0</x>
-          <y>0.0</y>
+          <y>300.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -73,7 +76,7 @@
             <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
           <x>600.0</x>
-          <y>0.0</y>
+          <y>300.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>

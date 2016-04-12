@@ -17,6 +17,7 @@ import javafx.collections.ObservableMap;
 import javafx.scene.Camera;
 import javafx.scene.Node;
 import javafx.scene.ParallelCamera;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
@@ -61,16 +62,15 @@ public class BaseScreen extends Screen {
 	private static final Integer BUTTON_X = 50;
 	private static final Integer BUTTON_Y = 10;
 	private BorderPane myMasterPane;
-	private GameController myGameController;
 
 	public BaseScreen(Stage stage, Game game) {
 		super(stage);
 		this.myMasterPane = new BorderPane();
 		init();
-		myGameController = new GameController();
+		GameController myGameController = myController.getMyGameController();
 		myGameController.setGame(game);
-		myGameController.setGameView(new GameScreen(new ParallelCamera()));
-		myGameController.initialize(game.getInfo().getCurrentLevelNum());
+		myGameController.setGameView(new GameScreen(new PerspectiveCamera()));
+		myGameController.initialize(game.getInfo().getMyCurrentLevelNum());
 		addComponents();
 	}
 	
@@ -125,7 +125,7 @@ public class BaseScreen extends Screen {
 	}
 	
 	public void addGamePane(){
-		SubScene gameScene = myGameController.getView().getScene();
+		SubScene gameScene = myController.getMyGameController().getView().getScene();
 		myMasterPane.setCenter(gameScene);
 	}
 	

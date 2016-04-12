@@ -71,7 +71,7 @@ public class TabAttributes extends TabParent {
 		vbox.getChildren().addAll(checkboxes);
 		Button checkHUDButton = new Button(GO);
 		checkHUDButton.setOnAction(event->{
-			((Level) myEditableElement).setHUDOptions(getHUDElementsToDisplay());
+			((Level) myEditableElement).setMyHUDOptions(getHUDElementsToDisplay());
 		});
 		vbox.getChildren().add(checkHUDButton);
 	}

@@ -35,7 +35,7 @@ public class GameEngineTest {
         //  Moves Right 50 on Click
         //  Move Right 70 on Tick
         Actor actor1 = new Actor();
-        actor1.setID(1);
+        actor1.setMyID(1);
         ITrigger trigger1 = new ClickTrigger();
         List<Object> args1 = new ArrayList<>();
         args1.add(50.0);
@@ -51,7 +51,7 @@ public class GameEngineTest {
         //Rules:
         //  Moves Right 50 on Tick
         Actor actor2 = new Actor();
-        actor2.setID(2);
+        actor2.setMyID(2);
         ITrigger trigger2 = new TickTrigger();
         List<Object> args2 = new ArrayList<>();
         args2.add(50.0);
@@ -69,7 +69,7 @@ public class GameEngineTest {
         PhysicsEngine physicsEngine = new PhysicsEngine();
         List<Actor> actors = (List<Actor>) myGame.getActors();
         for (Actor actor : actors){
-           System.out.printf(actor.getID() + ", " + actor.getXPos() + ", " + actor.getYPos() + "\t\t");
+           System.out.printf(actor.getMyID() + ", " + actor.getX() + ", " + actor.getY() + "\t\t");
            actor.setEngine(physicsEngine);
         }
         System.out.println();
@@ -90,7 +90,7 @@ public class GameEngineTest {
 
         actors = (List<Actor>) myGame.getActors();
         for (Actor actor : actors){
-            System.out.printf(actor.getID() + ", " + actor.getXPos() + ", " + actor.getYPos() + "\t\t");
+            System.out.printf(actor.getMyID() + ", " + actor.getX() + ", " + actor.getY() + "\t\t");
        
         }
    }

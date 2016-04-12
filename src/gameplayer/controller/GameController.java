@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gameengine.controller.Game;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
@@ -19,8 +21,11 @@ import gameplayer.view.HUDScreen;
  */
 
 public class GameController implements Observer {
+	@XStreamOmitField
 	private Game model;
+	@XStreamOmitField
 	private GameScreen view;
+	@XStreamOmitField
 	private HUDScreen hud;
 	
 	/**
@@ -47,7 +52,7 @@ public class GameController implements Observer {
 	 * @param level an int representing the level to be played
 	 */
 	public void initialize (int level){
-		model.getInfo().setCurrentLevelNum(level);
+		model.getInfo().setMyCurrentLevelNum(level);
 		begin();
 	}
 	

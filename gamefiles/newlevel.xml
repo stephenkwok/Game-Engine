@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
-  <obs/>
+  <obs>
+    <gameplayer.controller.GameController/>
+  </obs>
+  <initialGameFile>gamefiles/loaders/test_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <myActors>
@@ -10,13 +13,13 @@
             <gameengine.controller.Level reference="../../../.."/>
             <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
-          <x>0.0</x>
-          <y>0.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
+          <x>400.0</x>
+          <y>263.9000000000001</y>
+          <veloX>5.0</veloX>
+          <veloY>4.130000000000001</veloY>
           <myID>0</myID>
           <myFriction>0.0</myFriction>
-          <inAir>false</inAir>
+          <inAir>true</inAir>
           <myName>A1</myName>
           <myImageViewName>redball.png</myImageViewName>
           <myRules>
@@ -73,12 +76,12 @@
             <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
           <x>600.0</x>
-          <y>0.0</y>
+          <y>300.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
           <myFriction>0.0</myFriction>
-          <inAir>false</inAir>
+          <inAir>true</inAir>
           <myName>A2</myName>
           <myImageViewName>purplecircle.png</myImageViewName>
           <myRules/>
@@ -127,7 +130,7 @@
             <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
           <x>0.0</x>
-          <y>0.0</y>
+          <y>300.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -152,7 +155,7 @@
     <myName>My Game</myName>
     <myImageName>default_game.jpg</myImageName>
     <myDescription>This is a scrolling game.</myDescription>
-    <myCurrentLevelNum>0</myCurrentLevelNum>
+    <myCurrentLevelNum>1</myCurrentLevelNum>
   </info>
   <myPhysicsEngine reference="../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
   <myCollisionDetector>
