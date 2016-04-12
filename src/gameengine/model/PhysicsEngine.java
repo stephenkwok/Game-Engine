@@ -37,7 +37,7 @@ public class PhysicsEngine {
 	 * @return updated velo
 	 */
 	private double applyForce(double velo, double force){  //Applies a force(acceleration because mass =1) to a velocity
-		double nextVelo = velo + force*timeStep;
+		double nextVelo = velo + force*getTimeStep();
 		return nextVelo;
 	}
 	
@@ -48,7 +48,7 @@ public class PhysicsEngine {
 	 * @return updated position
 	 */
 	private double changePos(double pos, double velo){
-		double nextPos = pos + velo*timeStep;
+		double nextPos = pos + velo*getTimeStep();
 		return nextPos;
 	}
 	
@@ -71,31 +71,27 @@ public class PhysicsEngine {
 		double nextXPos;
 		double nextYPos;
 		
-		nextHorzVelo = xVelo;  
-		
-		if (!a.isInAir()) {    //If the Actor is not in the air, gravity is null
-			forceYdownward = 0;
-		}else{
-			friction       = 0;
+
+		if (a.isInAir()) {
+			forceYdownward = getGravity();
 		}
 				
-
-		nextVertVelo = applyForce(yVelo, forceYupward);           			 // Apply  y force from movement action to y velocity
-		nextVertVelo = applyForce(nextVertVelo, forceYdownward);    		//Apply gravitational force		
-		
-		nextYPos     = changePos(yPos, nextVertVelo);                       //Update y position with y velocity
-		nextVertVelo = maxLimit(nextVertVelo, maxVertVelocity);
+		nextHorzVelo = xVelo;      		
+		nextVertVelo = applyForce(yVelo, forceYupward);            // Apply  y force from movement action to y velocity
+		nextVertVelo = applyForce(nextVertVelo, forceYdownward);    //Apply gravitational force
+		nextYPos     = changePos(yPos, nextVertVelo); 
+		nextVertVelo = maxLimit(nextVertVelo, getMaxVertVelocity());
 			
-//		if(nextYPos > floorHeight){                   						 //Collision detection for the actor and the ground
-//			nextYPos = floorHeight;											//TODO: delete this if statement after the floor is implemented as an actor
-//			nextVertVelo = 0;
-//			a.setInAir(false);
-//		}
+		if(nextYPos > getFloorHeight()){                    //Collision detection for the actor and the ground
+			nextYPos = getFloorHeight();				//TODO: delete this if statement after the floor is implemented as an actor
+			nextVertVelo = 0;
+		}
+
 		
 		nextHorzVelo = applyForce(xVelo, forceX); 							// Apply  y force from movement action to y velocity
 		nextHorzVelo = applyForce(nextHorzVelo, (friction*(nextHorzVelo))); //Apply frictional force
 		nextXPos  = changePos(xPos,nextHorzVelo);
-		nextHorzVelo = maxLimit(nextHorzVelo, maxHorizVelocity);
+		nextHorzVelo = maxLimit(nextHorzVelo, getMaxHorizVelocity());
 		setValues(a,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );	
 	}
 	
@@ -127,38 +123,36 @@ public class PhysicsEngine {
 	//They differ in the force applied to the Actor
 	
 	public void moveRight(Actor a1) {
-		update(a1,horizontalForce, 0, gravity, friction);
+		update(a1,getHorizontalForce(), 0, 0, a1.getMyFriction());
 	}
 
 	public void moveLeft(Actor a1) {
-		update(a1,-horizontalForce, 0, gravity, friction); //Do we still want friction to be a variable in the actor?
+		update(a1,-getHorizontalForce(), 0, 0, a1.getMyFriction());
 	}
 	
 	public void jump(Actor a1){
-		update(a1,0,jumpForce, gravity, friction);
+		update(a1,0,getJumpForce(), getGravity(), a1.getMyFriction());
 	}
-	
 	//gliding methods for when force and gravity aren't applied
 	
 	public void glideRight(Actor a1) {
-		a1.setVeloX(5);
-		//a1.setX(a1.getX()+5);
+		a1.setX(a1.getX()+5);
 	}
 
 	public void glideLeft(Actor a1) {
-		a1.setX(a1.getX()-.5);
+		a1.setX(a1.getX()-5);
 	}
 	
 	public void glideUp(Actor a1 ){
-		a1.setY(a1.getY()-5);
+		a1.setY(a1.getY()+5);
 	}
 	
 	public void tick(Actor a1) {
-		update(a1,0.0,0.0, gravity, friction);
+		update(a1,0.0,0.0, getGravity(), a1.getMyFriction());
 	}
 	
 	public void staticHorizontalCollision(Actor a1, Actor a2) {
-		if(a1.getX() != 0){     					//If the object is moving 
+		if(a1.getVeloX() != 0){     					//If the object is moving 
 			if(a1.getX() <  a2.getX()){ 			 //if the collision is occuring on the left side
 				a1.setX(a2.getX()-a1.getBounds().getWidth());  //Offset x value to the left
 			}else{ 										//If collision is happening from right
@@ -188,5 +182,86 @@ public class PhysicsEngine {
 		staticHorizontalCollision(a1,a2);
 		a1.setVeloX(-3);
 	}
+
+
+	public int getTimeStep() {
+		return timeStep;
+	}
+
+
+	public void setTimeStep(int timeStep) {
+		this.timeStep = timeStep;
+	}
+
+
+	public double getFriction() {
+		return friction;
+	}
+
+
+	public void setFriction(double friction) {
+		this.friction = friction;
+	}
+
+
+	public double getGravity() {
+		return gravity;
+	}
+
+
+	public void setGravity(double gravity) {
+		this.gravity = gravity;
+	}
+
+
+	public double getMaxHorizVelocity() {
+		return maxHorizVelocity;
+	}
+
+
+	public void setMaxHorizVelocity(double maxHorizVelocity) {
+		this.maxHorizVelocity = maxHorizVelocity;
+	}
+
+
+	public double getMaxVertVelocity() {
+		return maxVertVelocity;
+	}
+
+
+	public void setMaxVertVelocity(double maxVertVelocity) {
+		this.maxVertVelocity = maxVertVelocity;
+	}
+
+
+	public double getHorizontalForce() {
+		return horizontalForce;
+	}
+
+
+	public void setHorizontalForce(double horizontalForce) {
+		this.horizontalForce = horizontalForce;
+	}
+
+
+	public double getJumpForce() {
+		return jumpForce;
+	}
+
+
+	public void setJumpForce(double jumpForce) {
+		this.jumpForce = jumpForce;
+	}
+
+
+	public double getFloorHeight() {
+		return floorHeight;
+	}
+
+
+	public void setFloorHeight(double floorHeight) {
+		this.floorHeight = floorHeight;
+	}
+
 	
 }

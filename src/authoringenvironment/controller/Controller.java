@@ -38,6 +38,8 @@ public class Controller implements IScreenController {
 	private GUIMainScreen mainScreen;
 	private GUIMain guiMain;
 	private ResourceBundle myResources;
+	private Game game;
+	private GameInfo gameInfo;
 
 	public Controller(Stage myStage, GUIMain guiMain, ResourceBundle myResources) {
 		this.myStage = myStage;
@@ -49,9 +51,11 @@ public class Controller implements IScreenController {
 	public void init() {
 		levels = new ArrayList<>();
 		actors = new ArrayList<>();
+		gameInfo = new GameInfo();
+		game = new Game(gameInfo, levels);
 		levelEnvironment = new GUILevelEditingEnvironment(this, actors);
 		actorEnvironment = new GUIActorEditingEnvironment(this, myResources);
-		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment);
+		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo);
 	}
 
 	/**
@@ -63,6 +67,7 @@ public class Controller implements IScreenController {
 	 *            - list of created Actors that can be placed into the level
 	 */
 	public void goToLevelEditing(Level level) {
+		levelEnvironment.updateActorsList(actors);
 		goToEditingEnvironment(level, levelEnvironment);
 	}
 
@@ -87,7 +92,7 @@ public class Controller implements IScreenController {
 	 */
 	public void goToEditingEnvironment(IEditableGameElement editable, IEditingEnvironment environment) {
 		environment.setEditable(editable);
-		guiMain.setCenterPane(environment.getPane());
+		guiMain.setCenterPane(environment.getPane()); 
 	}
 
 	/**
@@ -148,7 +153,7 @@ public class Controller implements IScreenController {
 		Level newLevel = new Level();
 		levels.add(newLevel);
 		mainScreen.createLevelLabel(newLevel);
-		goToEditingEnvironment(newLevel, levelEnvironment);
+		goToLevelEditing(newLevel);
 	}
 
 	public void addActor() {

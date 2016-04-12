@@ -4,7 +4,7 @@ import javafx.scene.image.ImageView;
 
 /**
  * 
- * Interface for all game elements that can be edited in Game Authoring Environment (actors and levels)
+ * Interface for all game elements that can be edited in Game Authoring Environment (actors, levels, and game itself)
  * 
  * @author Stephen
  *

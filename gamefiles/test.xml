@@ -71,7 +71,7 @@
           <obs>
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
-          <x>600.0</x>
+          <x>500.0</x>
           <y>0.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -80,26 +80,6 @@
           <inAir>false</inAir>
           <myName>A2</myName>
           <myImageViewName>purplecircle.png</myImageViewName>
-          <myRules/>
-          <attributeMap/>
-          <isMain>false</isMain>
-          <myHealth>0.0</myHealth>
-          <isDead>false</isDead>
-        </gameengine.model.Actor>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs>
-            <gameengine.controller.Level reference="../../../.."/>
-          </obs>
-          <x>0.0</x>
-          <y>400.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myID>0</myID>
-          <myFriction>0.0</myFriction>
-          <inAir>false</inAir>
-          <myName>floor</myName>
-          <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
@@ -326,6 +306,26 @@
           <myHealth>0.0</myHealth>
           <isDead>false</isDead>
         </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>600.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
       </myActors>
       <myTriggerMap>
         <entry>
@@ -360,8 +360,12 @@
         </entry>
       </myTriggerMap>
       <myName>Untitled</myName>
-      <myHeight>0.0</myHeight>
-      <myWidth>0.0</myWidth>
+      <myHeight>800.0</myHeight>
+      <myWidth>1024.0</myWidth>
+      <myScrollingDirection>Vertically</myScrollingDirection>
+      <myTermination>Infinite</myTermination>
+      <myWinningCondition>Survival time</myWinningCondition>
+      <myLosingCondition>Player dies</myLosingCondition>
       <myBackgroundImgName>default_background.png</myBackgroundImgName>
     </gameengine.controller.Level>
     <gameengine.controller.Level>
@@ -389,16 +393,22 @@
       </myActors>
       <myTriggerMap/>
       <myName>Untitled</myName>
-      <myHeight>0.0</myHeight>
-      <myWidth>0.0</myWidth>
+      <myHeight>800.0</myHeight>
+      <myWidth>1024.0</myWidth>
+      <myScrollingDirection>Vertically</myScrollingDirection>
+      <myTermination>Infinite</myTermination>
+      <myWinningCondition>Survival time</myWinningCondition>
+      <myLosingCondition>Player dies</myLosingCondition>
       <myBackgroundImgName>default_background.png</myBackgroundImgName>
     </gameengine.controller.Level>
   </levels>
   <info>
-    <myName>My Game</myName>
+    <myName>Colette</myName>
     <myImageName>default_game.jpg</myImageName>
     <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
+    <myID>0</myID>
+    <myHUDElementsToDisplay/>
   </info>
   <myPhysicsEngine>
     <timeStep>1</timeStep>
@@ -415,4 +425,12 @@
   </myCollisionDetector>
   <currentActors/>
   <deadActors/>
+  <HUDData class="com.sun.javafx.collections.ObservableMapWrapper">
+    <listenerHelper class="com.sun.javafx.collections.MapListenerHelper$SingleChange">
+      <listener class="gameengine.controller.Game$1">
+        <outer-class reference="../../../.."/>
+      </listener>
+    </listenerHelper>
+    <backingMap/>
+  </HUDData>
 </gameengine.controller.Game>

@@ -352,4 +352,5 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 		this.isDead = isDead;
 	}
 
+
 }

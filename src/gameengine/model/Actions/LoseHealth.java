@@ -17,7 +17,15 @@ public class LoseHealth extends Action{
 
 	@Override
 	public void perform() {
-		getActor().changeAttribute(AttributeType.HEALTH,-numLivesLost );
+		getMyActor().changeAttribute(AttributeType.HEALTH,-getNumLivesLost() );
+	}
+
+	public int getNumLivesLost() {
+		return numLivesLost;
+	}
+
+	public void setNumLivesLost(int numLivesLost) {
+		this.numLivesLost = numLivesLost;
 	}
 	
 }

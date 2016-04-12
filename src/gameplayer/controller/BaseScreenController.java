@@ -100,5 +100,9 @@ public class BaseScreenController implements IScreenController{
 	public void setMyGameController(GameController myGameController) {
 		this.myGameController = myGameController;
 	}
+	
+	public void restartGame(){
+		System.out.print("user wants to restart game");
+	}
 
 }

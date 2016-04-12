@@ -14,6 +14,7 @@ import gameengine.model.ITrigger;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
+import javafx.collections.MapChangeListener.Change;
 
 
 /** 
@@ -141,7 +142,31 @@ public class GameController implements Observer {
 			catch (Exception e){
 				e.printStackTrace();
 			}
+		}if(o.equals(hud)){
+			hud.handleChange((Change) arg);
 		}
+	}
+	
+	public void toggleSound() {
+		System.out.println("toggle sound");
+	}
+	
+	public void toggleMusic(){
+		System.out.println("toggle music");
+	}
+
+	public void togglePause() {
+		//TODO: stop the step(), thx michael!!!!!! :)
+		System.out.println("pause the game");
+		getGame().getAnimation().pause();
+		view.getMySubscene().setDisable(true);
+	}
+
+	public void toggleUnPause() {
+		System.out.println("un pause game");
+		getGame().getAnimation().play();;
+		view.getMySubscene().setDisable(false);
+		
 	}
 	
 	

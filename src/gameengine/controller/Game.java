@@ -11,7 +11,10 @@ import gameengine.model.ITrigger;
 import gameengine.model.PhysicsEngine;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
+import javafx.collections.MapChangeListener.Change;
 import javafx.util.Duration;
 
 /**
@@ -19,6 +22,8 @@ import javafx.util.Duration;
  * @author colettetorres
  *
  */
+
+
 public class Game extends Observable implements Observer {
 	public static final int SIZE = 400;
 	public static final int FRAMES_PER_SECOND = 60;
@@ -54,15 +59,16 @@ public class Game extends Observable implements Observer {
         
 		initTimeline();
 		
+		initHUDData();
 	}
 	
 
 	public void initTimeline() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> step());
-		animation = new Timeline();
-		animation.setCycleCount(Timeline.INDEFINITE);
-		animation.getKeyFrames().add(frame);
+		setAnimation(new Timeline());
+		getAnimation().setCycleCount(Timeline.INDEFINITE);
+		getAnimation().getKeyFrames().add(frame);
 	}
 	
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
@@ -101,7 +107,9 @@ public class Game extends Observable implements Observer {
 			a.addObserver(this);
 			a.setEngine(myPhysicsEngine);
 		}
+		
 	}
+	
 	public String getInitialGameFile() {
 		return initialGameFile;
 	}
@@ -177,6 +185,7 @@ public class Game extends Observable implements Observer {
 	}
 	
 	public void updateActors(){
+		setDeadActors(new ArrayList<Actor>());
 		for(Actor a: getCurrentActors()){
 			if(a.isDead()){
 				deadActors.add(a);
@@ -214,6 +223,47 @@ public class Game extends Observable implements Observer {
 
 	public void setCurrentActors(List<Actor> currentActors) {
 		this.currentActors = currentActors;
+	}
+
+
+	public PhysicsEngine getMyPhysicsEngine() {
+		return myPhysicsEngine;
+	}
+
+
+	public void setMyPhysicsEngine(PhysicsEngine myPhysicsEngine) {
+		this.myPhysicsEngine = myPhysicsEngine;
+	}
+
+
+	public CollisionDetection getMyCollisionDetector() {
+		return myCollisionDetector;
+	}
+
+
+	public void setMyCollisionDetector(CollisionDetection myCollisionDetector) {
+		this.myCollisionDetector = myCollisionDetector;
+	}
+
+
+	public Timeline getAnimation() {
+		return animation;
+	}
+
+
+	public void setAnimation(Timeline animation) {
+		this.animation = animation;
+	}
+	
+	public void initHUDData() {
+		HUDData = FXCollections.observableHashMap(); 
+		//HUDData.putAll(info.getMap()); //fill in getmap here
+		HUDData.addListener(new MapChangeListener<String, Object>() {
+			@Override
+			public void onChanged(Change<? extends String, ? extends Object> change) {
+				update((Observable) HUDData, change); //IDK if casting to observable causes issues with equality
+			}
+        });
 	}
 
 }

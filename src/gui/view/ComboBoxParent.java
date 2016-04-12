@@ -35,11 +35,13 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 	protected String paletteSource;
 	protected String labelText;
 	private IEditableGameElement myEditableElement;
+	private boolean hasBeenSelected;
 	
 	public ComboBoxParent(String promptText) {
 		this.promptText = promptText;
 		this.labelText = null;
 		myEditableElement = null;
+		hasBeenSelected = false;
 	}
 	
 	/**
@@ -91,8 +93,8 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
             setGraphic(null);
         } else {
        	 	HBox hbox = new HBox();
-       	 	Label lbl = new Label(item);
-       	 	hbox.getChildren().addAll(getNodeForBox(item),lbl);
+       	 	//Label lbl = new Label(item);
+       	 	hbox.getChildren().addAll(getNodeForBox(item));//,lbl);
             setGraphic(hbox);
         }
        }
@@ -115,9 +117,18 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 		comboBox.setItems(newOptions);
 	}
 
+	protected abstract void updateValueBasedOnEditable();
+	
 	@Override
 	public void setEditableElement(IEditableGameElement element) {
 		myEditableElement = element;
+		if (myEditableElement != null) {
+			updateValueBasedOnEditable();
+		}
+	}
+	
+	protected void hasBeenSelected() {
+		hasBeenSelected = true;
 	}
 
 	protected IEditableGameElement getEditableElement() {

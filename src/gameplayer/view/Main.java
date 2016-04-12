@@ -58,6 +58,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		GameInfo info = new GameInfo();
 		info.setMyCurrentLevelNum(0);
+		info.setMyName("Colette");
 		
 		Actor actor1 = new Actor();
 		actor1.setMyImageViewName("redball.png");
@@ -65,7 +66,7 @@ public class Main extends Application {
 		
 		Actor actor2 = new Actor();
 		actor2.setMyImageViewName("purplecircle.png");
-		actor2.setX(600);
+		actor2.setX(500);
 		actor2.setMyName("A2");
 		
 		Actor actor3 = new Actor();
@@ -97,7 +98,7 @@ public class Main extends Application {
 		levels.add(level1);
 		level1.addActor(actor1);
 		level1.addActor(actor2);
-		for(int i=0; i<12; i++){
+		for(int i=1; i<=12; i++){
 			Actor floor = new Actor();
 			floor.setMyName("floor");
 			floor.setMyImageViewName("square.png");

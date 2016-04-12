@@ -85,7 +85,6 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		source.setOnDragDetected(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
 				System.out.println("drag detected");
-				System.out.println(myInspector.getAttributesTab().getHUDElementsToDisplay());
 				Dragboard db = source.startDragAndDrop(TransferMode.ANY);
 				ClipboardContent content = new ClipboardContent();
 				content.putString(Integer.toString(source.getID()));
@@ -203,6 +202,12 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		for(Actor actor: myLevel.getActors()) actorIVs.add(actor.getImageView());
 		myCenterPane.getChildren().addAll(actorIVs);
 		myInspector.getAttributesTab().updateEditable(myLevel);
+	}
+	
+	public void updateActorsList(List<Actor> updatedActorsList) {
+		availableActors = updatedActorsList;
+		myInspector.getActorsTab().setAvailableActors(availableActors);
+		initializeDrag();
 	}
 
 }

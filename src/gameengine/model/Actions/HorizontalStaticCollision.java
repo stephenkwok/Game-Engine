@@ -22,8 +22,8 @@ public class HorizontalStaticCollision extends Action{
 	@Override
 	public void perform() {
 		//myPhysicsEngine.horzStaticCollision(getActor());
-		getActor().setX(getActor().getX()-2);
-		getActor().setVeloX(0);
+		getMyActor().setX(getMyActor().getX()-2);
+		getMyActor().setVeloX(0);
 	}
 
 }
