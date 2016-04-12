@@ -88,7 +88,7 @@
           <myFriction>0.0</myFriction>
           <inAir>false</inAir>
           <myName>A2</myName>
-       	  <myImageViewName>block.png</myImageViewName>
+          <myImageViewName>block.png</myImageViewName>
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
@@ -101,138 +101,15 @@
           <obs>
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
-          <x>700.0</x>
+          <x>800.0</x>
           <y>100.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
           <myFriction>0.0</myFriction>
           <inAir>false</inAir>
-          <myName>floor</myName>
-          <myImageViewName>square.png</myImageViewName>
-          <myRules/>
-          <attributeMap/>
-          <isMain>false</isMain>
-          <myHealth>0.0</myHealth>
-          <myActorRules/>
-          <isDead>false</isDead>
-        </gameengine.model.Actor>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs>
-            <gameengine.controller.Level reference="../../../.."/>
-          </obs>
-          <x>400.0</x>
-          <y>400.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myID>0</myID>
-          <myFriction>0.0</myFriction>
-          <inAir>false</inAir>
-          <myName>floor</myName>
-          <myImageViewName>square.png</myImageViewName>
-          <myRules/>
-          <attributeMap/>
-          <isMain>false</isMain>
-          <myHealth>0.0</myHealth>
-          <myActorRules/>
-          <isDead>false</isDead>
-        </gameengine.model.Actor>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs>
-            <gameengine.controller.Level reference="../../../.."/>
-          </obs>
-          <x>450.0</x>
-          <y>400.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myID>0</myID>
-          <myFriction>0.0</myFriction>
-          <inAir>false</inAir>
-          <myName>floor</myName>
-          <myImageViewName>square.png</myImageViewName>
-          <myRules/>
-          <attributeMap/>
-          <isMain>false</isMain>
-          <myHealth>0.0</myHealth>
-          <myActorRules/>
-          <isDead>false</isDead>
-        </gameengine.model.Actor>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs>
-            <gameengine.controller.Level reference="../../../.."/>
-          </obs>
-          <x>500.0</x>
-          <y>400.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myID>0</myID>
-          <myFriction>0.0</myFriction>
-          <inAir>false</inAir>
-          <myName>floor</myName>
-          <myImageViewName>square.png</myImageViewName>
-          <myRules/>
-          <attributeMap/>
-          <isMain>false</isMain>
-          <myHealth>0.0</myHealth>
-          <myActorRules/>
-          <isDead>false</isDead>
-        </gameengine.model.Actor>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs>
-            <gameengine.controller.Level reference="../../../.."/>
-          </obs>
-          <x>550.0</x>
-          <y>400.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myID>0</myID>
-          <myFriction>0.0</myFriction>
-          <inAir>false</inAir>
-          <myName>floor</myName>
-          <myImageViewName>square.png</myImageViewName>
-          <myRules/>
-          <attributeMap/>
-          <isMain>false</isMain>
-          <myHealth>0.0</myHealth>
-          <myActorRules/>
-          <isDead>false</isDead>
-        </gameengine.model.Actor>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs>
-            <gameengine.controller.Level reference="../../../.."/>
-          </obs>
-          <x>600.0</x>
-          <y>400.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myID>0</myID>
-          <myFriction>0.0</myFriction>
-          <inAir>false</inAir>
-          <myName>floor</myName>
-          <myImageViewName>square.png</myImageViewName>
           <myName>Default Name</myName>
           <myImageViewName>flagpole.png</myImageViewName>
-    <gameengine.controller.Level>
-      <myActors>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs>
-            <gameengine.controller.Level reference="../../../.."/>
-          </obs>
-          <x>0.0</x>
-          <y>0.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myID>0</myID>
-          <myFriction>0.0</myFriction>
-          <inAir>false</inAir>
-          <myName>Default Name</myName>
-          <myImageViewName>elsa.png</myImageViewName>
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
@@ -241,7 +118,44 @@
           <isDead>false</isDead>
         </gameengine.model.Actor>
       </myActors>
-      <myTriggerMap/>
+      <myTriggerMap>
+        <entry>
+          <string>Space</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>Left</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>A1SideCollisionDefault Name</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>Right</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>A1SideCollisionA2</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>A1BottomCollisionA2</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+      </myTriggerMap>
       <myName>Untitled</myName>
       <myHeight>800.0</myHeight>
       <myWidth>1024.0</myWidth>
@@ -251,6 +165,7 @@
       <myLosingCondition>Player dies</myLosingCondition>
       <myBackgroundImgName>default_landscape.png</myBackgroundImgName>
     </gameengine.controller.Level>
+  </levels>
   <info>
     <myName>Colette</myName>
     <myImageName>default_game.jpg</myImageName>
