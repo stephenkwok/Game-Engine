@@ -10,7 +10,6 @@ import gui.view.GUILibrary;
 import gui.view.IGUI;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
@@ -60,6 +59,10 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	public Pane getPane() {
 		return myRoot;
 	}
+	
+	public void updateRules(){
+		myActorRuleCreator.updateRules();
+	}
 
 	private void initializeEnvironment() {
 		myRoot = new BorderPane();
@@ -72,9 +75,6 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 
 	private void setDefaultActor() {
 		Actor defaultActor = new Actor();
-//		ImageView defaultIV = defaultActor.getImageView();
-//		defaultIV.setFitHeight(actorImageHeight);
-//		defaultIV.setPreserveRatio(true);
 		this.myActor = defaultActor;
 		this.myActorIV = new ImageviewActorIcon(defaultActor);
 	}
@@ -125,7 +125,8 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	@Override
 	public void setEditable(IEditableGameElement editable) {
 		myActor = (Actor) editable;
-		myActorIV = myActor.getImageView();
+		myActorIV = new ImageviewActorIcon(myActor);
+		setLeftPane();
 	}
 	
 	public IEditableGameElement getEditable(){

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoringenvironment.controller.Controller;
+import gameengine.model.Actor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 /**
@@ -59,11 +60,38 @@ public class ActorRuleCreator {
 		myRuleCreator.add(newRule.getGridPane(), RULE_COL,rule_row);
 		rule_row++;
 		myRules.add(newRule);
+		((Actor) aEE.getEditable()).addActorRule(newRule);
 		aEE.updateDragEventsForLibrary();
+	}
+	
+	public void removeRule(ActorRule actorRule){
+		myRules.remove(actorRule);
+		myRuleCreator.getChildren().remove(actorRule.getGridPane());
+		((Actor) aEE.getEditable()).removeActorRule(actorRule);
 	}
 	
 	public List<ActorRule> getRules(){
 		return myRules;
+	}
+	
+	public Controller getController(){
+		return myController;
+	}
+
+	public void updateRules() {
+		for(ActorRule toRemove: myRules){
+			myRuleCreator.getChildren().remove(toRemove.getGridPane());
+			((Actor) aEE.getEditable()).removeActorRule(toRemove);
+		}
+		myRules = ((Actor) aEE.getEditable()).getActorRules();
+		addUpdatedRules();
+	}
+	private void addUpdatedRules(){
+		rule_row = RULE_ROW_START;
+		for(ActorRule toAdd: myRules){
+			myRuleCreator.add(toAdd.getGridPane(), RULE_COL, rule_row);
+		}
+		aEE.updateDragEventsForLibrary();
 	}
 
 }

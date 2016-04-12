@@ -1,21 +1,28 @@
 package authoringenvironment.view;
 
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.Controller;
+import gui.view.IGUIElement;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import authoringenvironment.view.behaviors.ResourceOptionsBehavior;
 
 /**
  * Rule container for an actor containing behavior, images, and/or sounds.
@@ -34,28 +41,26 @@ public class ActorRule {
 	private static final int TRIGGERS_ROW = 1;
 	private static final int RESULTS_LABEL_ROW = 2;
 	private static final int RESULTS_ROW = 3;
-	private double ruleWidth; 
 	private static final double RULE_HEIGHT = 250;
 	private static final int CORNER_RADIUS = 20;
-	private static final String DIALOG_CHOICES = "Trigger Result";
-	private static final String DIALOG_HEADER = "Place your Behavior in: ";
-	private static final String DIALOG_CONTENT = "Choose one: ";
-	private static final String TRIGGER = "Trigger";
-	private String triggerBehaviors;
-	
 	private static final double RULE_PERCENT_WIDTH = 0.90;
 	private static final double STACKPANE_PERCENT_WIDTH = 0.92;
 	private static final double STACKPANE_PERCENT_HEIGHT = 0.3;
-
+	private static final String CHANGE_IMAGE = "ChangeImage";
+	private static final String PLAY_SOUND = "PlaySound";
+	private static final String PLAY_MUSIC = "PlayMusic";
+	private double ruleWidth; 
 	private GridPane myRule;	
 	private VBox triggers;
 	private VBox results;
 	private ScrollPane trigScroll;
 	private ScrollPane resScroll;
-	private ChoiceDialog<String> dialog;
 	private ActorRuleCreator myActorRuleCreator;
 	private ResourceBundle myLibraryResources;
 	private static final String LIBRARY_BUNDLE = "library";
+	private String triggerBehaviors;
+	private static final String PACKAGE = "authoringenvironment.view.behaviors.";
+	private static final String CLASS = "Class";
 	
 	public ActorRule(ActorRuleCreator myActorRuleCreator) {
 		this.myActorRuleCreator = myActorRuleCreator;
@@ -71,7 +76,7 @@ public class ActorRule {
 		this.myLibraryResources = ResourceBundle.getBundle(LIBRARY_BUNDLE);
 		this.triggerBehaviors = myLibraryResources.getString("TriggerBehaviors");
 		myRule = new GridPane(); 
-		myRule.setBackground(new Background(new BackgroundFill(Color.LAVENDER, new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
+		myRule.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
 		myRule.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
 		myRule.setPrefSize(ruleWidth, RULE_HEIGHT);
 		addTriggerResultLabels();
@@ -101,24 +106,18 @@ public class ActorRule {
 	private void addCloseButton(){
 		Button close = new Button(CLOSE);
 		close.setOnAction(event -> {
-			myActorRuleCreator.getRules().remove(myRule);
-			myActorRuleCreator.getGridPane().getChildren().remove(myRule);
+			myActorRuleCreator.removeRule(this);
 		});
 		myRule.add(close, CLOSE_COL, CLOSE_ROW);
 	}
 	
 	public void addBehavior(Label behavior) {
-		if(isTrigger(behavior.getText())) triggers.getChildren().add(behavior);
-		else{
-			createDialog();
-	        Optional<String> result = dialog.showAndWait();
-	        result.ifPresent(choice -> {
-	        	if(choice.equals(TRIGGER)){
-	        		triggers.getChildren().add(behavior);
-	        	}
-	        	else results.getChildren().add(behavior);
-	        });
-		}
+		Node toAdd = getBehaviorHBox(behavior.getText(),null);
+		toAdd.setOnMouseClicked(event -> {
+			if(event.getClickCount()==2) remove(toAdd);
+		});
+		if(isTrigger(behavior.getText())) triggers.getChildren().add(toAdd);
+		else results.getChildren().add(toAdd);
 	}
 
 	private boolean isTrigger(String behavior){
@@ -126,23 +125,68 @@ public class ActorRule {
 		return triggers.contains(behavior);
 	}
 	
-	private void createDialog() {
-		List<String> choices = Arrays.asList(DIALOG_CHOICES.split(" "));
-		dialog = new ChoiceDialog<>(choices.get(0),choices);
-        dialog.setHeaderText(DIALOG_HEADER);
-        dialog.setContentText(DIALOG_CONTENT);
-	}
-
 	public void addSound(Label sound) {
-		results.getChildren().add(sound);
+		if(isInPath(sound.getText(), myLibraryResources.getString("Sounds"))){
+			Node toAdd = getBehaviorHBox(PLAY_SOUND, sound.getText());
+			toAdd.setOnMouseClicked(event -> {
+				if(event.getClickCount()==2) remove(toAdd);
+			});
+			results.getChildren().add(toAdd);
+		}
+		else{
+			Node toAdd = getBehaviorHBox(PLAY_MUSIC, sound.getText());
+			toAdd.setOnMouseClicked(event -> {
+				if(event.getClickCount()==2) remove(toAdd);
+			});
+			results.getChildren().add(toAdd);
+		}
+		//TODO: change value of combobox to be this image
+	}
+	private boolean isInPath(String fileName, String pathname){
+		File dir = new File(pathname);
+		List<String> fileNames = new ArrayList<>();
+		for(File file:dir.listFiles()){
+			fileNames.add(file.getName());
+		}
+		return fileNames.contains(fileName);
 	}
 
 	public void addImage(Label image) {
-		results.getChildren().add(image);
+		Node toAdd = getBehaviorHBox(CHANGE_IMAGE,image.getText());
+		toAdd.setOnMouseClicked(event -> {
+			if(event.getClickCount()==2) remove(toAdd);
+		});
+		results.getChildren().add(toAdd);
+		//TODO: change value of combobox to be this image
 	}
 	
-	public void remove(Object o){
-		triggers.getChildren().remove(o);
-		results.getChildren().remove(o);
+	public void remove(Node toRemove){
+		triggers.getChildren().remove(toRemove);
+		results.getChildren().remove(toRemove);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private Node getBehaviorHBox(String behaviorType, String value){
+		try{
+			String className = PACKAGE + myLibraryResources.getString(behaviorType+CLASS);
+			Class<?> clazz = Class.forName(className);
+			Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class);
+			IGUIElement element = ((IGUIElement) constructor.newInstance(behaviorType,myLibraryResources));
+			Node toReturn = element.createNode();
+			if(value!=null){
+				((ResourceOptionsBehavior) element).getComboBox().setValue(value);
+			}
+			return toReturn;
+		}catch(Exception e1){
+			try{
+				String className = PACKAGE + myLibraryResources.getString(behaviorType+CLASS);
+				Class<?> clazz = Class.forName(className);
+				Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, Controller.class);
+				return ((IGUIElement) constructor.newInstance(behaviorType,myLibraryResources,myActorRuleCreator.getController())).createNode();
+			}catch(Exception e2){
+				e1.printStackTrace();
+				return new Label(behaviorType);
+			}
+		}
 	}
 }

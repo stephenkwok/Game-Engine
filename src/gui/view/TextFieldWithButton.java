@@ -46,7 +46,7 @@ public abstract class TextFieldWithButton implements IGUIElement, IGUIEditingEle
 		myTextFieldPrompt = new Label(labelText);
 		myTextField = new TextField();
 		myTextField.setPrefWidth(textFieldWidth);
-		HBox.setHgrow(myTextField, Priority.ALWAYS);
+//		HBox.setHgrow(myTextField, Priority.ALWAYS);
 		myTextField.setPromptText(promptText);
 		myContainer.getChildren().addAll(myTextFieldPrompt, myTextField, myButton);
 		return myContainer;

@@ -17,6 +17,8 @@ import javafx.scene.layout.StackPane;
  */
 public class GUILibrary implements IGUI{
 	private static final String LIBRARY_RESOURCE = "library";
+	private static final String IMAGES = "Images";
+	private static final String SOUNDS = "Sounds";
 	private ResourceBundle myResources;
 	private Pane myPane;
 	private ActorRuleCreator myActorRuleCreator;
@@ -37,8 +39,8 @@ public class GUILibrary implements IGUI{
 		myResources = ResourceBundle.getBundle(LIBRARY_RESOURCE);
 		myPane = new StackPane();
 		tp = new TabPane();
-		imageLib = new TabLibraryImages(myResources, "Images", myActorRuleCreator);
-		soundLib = new TabLibrarySounds(myResources, "Sounds", myActorRuleCreator);
+		imageLib = new TabLibraryImages(myResources, IMAGES, myActorRuleCreator);
+		soundLib = new TabLibrarySounds(myResources, SOUNDS, myActorRuleCreator);
 		behaviorLib = new TabLibraryBehaviors(myResources, "Behaviors", myActorRuleCreator);
 		tp.getTabs().addAll(behaviorLib.getTab(), imageLib.getTab(), soundLib.getTab());
 		tp.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
