@@ -79,6 +79,7 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 		String prompt = myResources.getString("promptForGameDescription");
 		String buttonText = myResources.getString("save");
 		TextAreaParent descriptionEditor = new TextAreaGameDescriptionEditor(prompt, buttonText, TEXT_AREA_ROWS);
+		descriptionEditor.setEditableElement(myGameInfo);
 		gameDescriptionEditor = (VBox) descriptionEditor.createNode();
 	}
 

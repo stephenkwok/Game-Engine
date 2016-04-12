@@ -57,7 +57,6 @@ public abstract class TextFieldWithButton implements IGUIElement, IGUIEditingEle
 		myEditableElement = element;
 	}
 
-
 	protected void setButtonAction(EventHandler<ActionEvent> buttonAction) {
 		myButton.setOnAction(buttonAction);
 	}
