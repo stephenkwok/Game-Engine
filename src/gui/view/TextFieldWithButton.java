@@ -67,7 +67,6 @@ public abstract class TextFieldWithButton implements IGUIElement, IGUIEditingEle
 	}
 	
 	protected String getTextFieldInput() {
-		System.out.println(myTextField.getText());
 		return myTextField.getText();
 	}
 }

@@ -15,5 +15,4 @@ public class TextFieldGameNameEditor extends TextFieldWithButton{
 		super(labelText, prompt, textFieldWidth);
 		setButtonAction(e -> ((GameInfo) getEditableElement()).setMyName(getTextFieldInput()));
 	}
-
 }

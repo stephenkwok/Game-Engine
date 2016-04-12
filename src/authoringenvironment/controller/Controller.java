@@ -47,10 +47,10 @@ public class Controller implements IScreenController {
 	public void init() {
 		levels = new ArrayList<>();
 		actors = new ArrayList<>();
+		gameInfo = new GameInfo();
 		levelEnvironment = new GUILevelEditingEnvironment(this, actors);
 		actorEnvironment = new GUIActorEditingEnvironment(this, myResources);
 		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo);
-		gameInfo = new GameInfo();
 	}
 
 	/**
