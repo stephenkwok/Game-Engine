@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
+  <changed>false</changed>
+  <obs>
+    <gameplayer.controller.GameController/>
+    <gameplayer.controller.GameController/>
+    <gameplayer.controller.GameController/>
+  </obs>
+  <initialGameFile>gamefiles/loaders/test_loader.xml</initialGameFile>
+  <levels>
+    <gameengine.controller.Level>
+      <myActors>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+            <gameengine.controller.Game reference="../../../../../.."/>
+          </obs>
+          <x>400.0</x>
+          <y>300.0</y>
+          <veloX>5.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>true</inAir>
+          <myName>A1</myName>
+          <myImageViewName>redball.png</myImageViewName>
+          <myRules>
+            <entry>
+              <string>Space</string>
+              <list>
+                <gameengine.model.Actions.MoveUp>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.MoveUp>
+              </list>
+            </entry>
+            <entry>
+              <string>Left</string>
+              <list>
+                <gameengine.model.Actions.MoveLeft>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.MoveLeft>
+              </list>
+            </entry>
+            <entry>
+              <string>Right</string>
+              <list>
+                <gameengine.model.Actions.MoveRight>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.MoveRight>
+              </list>
+            </entry>
+            <entry>
+              <string>A1SideCollisionA2</string>
+              <list>
+                <gameengine.model.Actions.NextLevel>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.NextLevel>
+              </list>
+            </entry>
+          </myRules>
+          <attributeMap/>
+          <myPhysicsEngine>
+            <timeStep>1</timeStep>
+            <friction>-0.05</friction>
+            <gravity>0.11</gravity>
+            <maxHorizVelocity>50.0</maxHorizVelocity>
+            <maxVertVelocity>-50.0</maxVertVelocity>
+            <horizontalForce>5.0</horizontalForce>
+            <jumpForce>-5.0</jumpForce>
+            <floorHeight>300.0</floorHeight>
+          </myPhysicsEngine>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+            <gameengine.controller.Game reference="../../../../../.."/>
+          </obs>
+          <x>600.0</x>
+          <y>300.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>true</inAir>
+          <myName>A2</myName>
+          <myImageViewName>purplecircle.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <myPhysicsEngine reference="../../gameengine.model.Actor/myPhysicsEngine"/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+        </gameengine.model.Actor>
+      </myActors>
+      <myTriggerMap>
+        <entry>
+          <string>Space</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>Left</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>Right</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>A1SideCollisionA2</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+      </myTriggerMap>
+      <myName>Untitled</myName>
+      <myHeight>0.0</myHeight>
+      <myWidth>0.0</myWidth>
+      <myBackgroundImgName>default_background.png</myBackgroundImgName>
+    </gameengine.controller.Level>
+    <gameengine.controller.Level>
+      <myActors>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+            <gameengine.controller.Game reference="../../../../../.."/>
+          </obs>
+          <x>0.0</x>
+          <y>300.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>true</inAir>
+          <myName>Default Name</myName>
+          <myImageViewName>elsa.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <myPhysicsEngine reference="../../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+        </gameengine.model.Actor>
+      </myActors>
+      <myTriggerMap/>
+      <myName>Untitled</myName>
+      <myHeight>0.0</myHeight>
+      <myWidth>0.0</myWidth>
+      <myBackgroundImgName>default_background.png</myBackgroundImgName>
+    </gameengine.controller.Level>
+  </levels>
+  <info>
+    <myName>My Game 2</myName>
+    <myImageName>default_game.jpg</myImageName>
+    <myDescription>This is a scrolling game.</myDescription>
+    <myCurrentLevelNum>1</myCurrentLevelNum>
+  </info>
+  <myPhysicsEngine reference="../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
+  <myCollisionDetector>
+    <myPhysicsEngine reference="../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
+  </myCollisionDetector>
+</gameengine.controller.Game>

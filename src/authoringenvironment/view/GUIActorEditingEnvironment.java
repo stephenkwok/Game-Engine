@@ -10,6 +10,7 @@ import gui.view.GUILibrary;
 import gui.view.IGUI;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
@@ -137,4 +138,5 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	public void updateDragEventsForLibrary() {
 		library.updateDragEvents();
 	}
+
 }

@@ -4,7 +4,7 @@ import javafx.scene.image.ImageView;
 
 /**
  * 
- * Interface for all game elements that can be edited in Game Authoring Environment (actors and levels)
+ * Interface for all game elements that can be edited in Game Authoring Environment (actors, levels, and game itself)
  * 
  * @author Stephen
  *
@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 
 public interface IEditableGameElement {
 	
-	public void setName(String name);
+	public void setMyName(String name);
 
 	public String getName();
 	
@@ -20,8 +20,8 @@ public interface IEditableGameElement {
 
 	public void setImageView(ImageView imageView);
 	
-	public void setID(int ID);
+	public void setMyID(int ID);
 	
-	public int getID();
+	public int getMyID();
 }
 

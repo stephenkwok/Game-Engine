@@ -31,7 +31,7 @@ public class MoveRight extends MovingAction {
      */
     @Override
     public void perform() {
-    	getActor().getPhysicsEngine().moveRight(getActor());
+    	getMyActor().getPhysicsEngine().moveRight(getMyActor());
     }
 
     

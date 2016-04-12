@@ -55,16 +55,16 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		GameInfo info = new GameInfo();
-		info.setCurrentLevelNum(0);
+		info.setMyCurrentLevelNum(0);
 		
 		Actor actor1 = new Actor();
 		actor1.setMyImageViewName("redball.png");
-		actor1.setName("A1");
+		actor1.setMyName("A1");
 		
 		Actor actor2 = new Actor();
 		actor2.setMyImageViewName("purplecircle.png");
-		actor2.setXPos(600);
-		actor2.setName("A2");
+		actor2.setX(600);
+		actor2.setMyName("A2");
 		
 		Actor actor3 = new Actor();
 		actor3.setMyImageViewName("elsa.png");

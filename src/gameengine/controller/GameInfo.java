@@ -1,6 +1,9 @@
 package gameengine.controller;
 
-public class GameInfo {
+import authoringenvironment.model.IEditableGameElement;
+import javafx.scene.image.ImageView;
+
+public class GameInfo implements IEditableGameElement {
 	private static final String DEFAULT_GAME_NAME = "My Game";
 	private static final String DEFAULT_IMAGE_NAME = "default_game.jpg";
 	private static final String DEFAULT_DESCRIPTION = "This is a scrolling game.";
@@ -10,12 +13,14 @@ public class GameInfo {
 	private String myImageName;
 	private String myDescription;
 	private int myCurrentLevelNum;
+	private ImageView myPreviewImage;
+	private int myID;
 	
 	public GameInfo(String name, String imageName, String description, int currentLevelNum ) {
-		this.myName = name;
-		this.myImageName = imageName;
-		this.myDescription = description;
-		this.myCurrentLevelNum = currentLevelNum;
+		this.setMyName(name);
+		this.setMyImageName(imageName);
+		this.setMyDescription(description);
+		this.setMyCurrentLevelNum(currentLevelNum);
 	}
 	
 	public GameInfo(String name, String imageName, String description) {
@@ -27,42 +32,43 @@ public class GameInfo {
 		
 	}
 	
+	@Override
 	public String getName() {
-		return myName;
+		return this.myName;
 	}
 
-
-	public void setName(String myName) {
+	@Override
+	public void setMyName(String myName) {
 		this.myName = myName;
 	}
 
 
-	public String getImageName() {
-		return myImageName;
+	public String getMyImageName() {
+		return this.myImageName;
 	}
 
 
-	public void setImageName(String myImageName) {
+	public void setMyImageName(String myImageName) {
 		this.myImageName = myImageName;
 	}
 
 
-	public String getDescription() {
-		return myDescription;
+	public String getMyDescription() {
+		return this.myDescription;
 	}
 
 
-	public void setDescription(String myDescription) {
+	public void setMyDescription(String myDescription) {
 		this.myDescription = myDescription;
 	}
 
 
-	public int getCurrentLevelNum() {
-		return myCurrentLevelNum;
+	public int getMyCurrentLevelNum() {
+		return this.myCurrentLevelNum;
 	}
 
 
-	public void setCurrentLevelNum(int myCurrentLevelNum) {
+	public void setMyCurrentLevelNum(int myCurrentLevelNum) {
 		this.myCurrentLevelNum = myCurrentLevelNum;
 	}
 
@@ -71,16 +77,37 @@ public class GameInfo {
 	      
 	      stringBuilder.append("GameInfo [ ");
 	      stringBuilder.append("\nname: ");
-	      stringBuilder.append(myName);
+	      stringBuilder.append(getName());
 	      stringBuilder.append("\nimgName: ");
-	      stringBuilder.append(myImageName);
+	      stringBuilder.append(getMyImageName());
 	      stringBuilder.append("\nmyDescription: ");
-	      stringBuilder.append(myDescription);
+	      stringBuilder.append(getMyDescription());
 	      stringBuilder.append("\ncurrentLevelNum: ");
-	      stringBuilder.append(myCurrentLevelNum);
+	      stringBuilder.append(getMyCurrentLevelNum());
 	      stringBuilder.append(" ]");
 	      
 	      return stringBuilder.toString();
 	}
+
+	@Override
+	public ImageView getImageView() {
+		return myPreviewImage;
+	}
+
+	@Override
+	public void setImageView(ImageView imageView) {
+		myPreviewImage = imageView;
+	}
+
+	@Override
+	public void setMyID(int ID) {
+		myID = ID;
+	}
+
+	@Override
+	public int getMyID() {
+		return myID;
+	}
+
 
 }

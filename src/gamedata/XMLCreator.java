@@ -3,6 +3,8 @@ package gamedata;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -37,6 +39,7 @@ public class XMLCreator {
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		
 		String xml = this.myXStream.toXML(game);
+		//System.out.println(xml);
 		Document document = documentBuilder.parse(new InputSource(new StringReader(xml)));
 		//document.getDocumentElement().normalize();
 		convertDocumentToFile(document, file);

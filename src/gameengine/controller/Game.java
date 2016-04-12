@@ -2,6 +2,8 @@ package gameengine.controller;
 
 import java.util.*;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gameengine.model.Actor;
 import gameengine.model.CollisionDetection;
 import gameengine.model.IActor;
@@ -9,6 +11,7 @@ import gameengine.model.ITrigger;
 import gameengine.model.PhysicsEngine;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ObservableMap;
 import javafx.util.Duration;
 
 /**
@@ -16,6 +19,8 @@ import javafx.util.Duration;
  * @author colettetorres
  *
  */
+
+
 public class Game extends Observable implements Observer {
 	 public static final int SIZE = 400;
 	   public static final int FRAMES_PER_SECOND = 60;
@@ -26,7 +31,11 @@ public class Game extends Observable implements Observer {
 	private GameInfo info;
 	private PhysicsEngine myPhysicsEngine;
 	private CollisionDetection myCollisionDetector;
+	@XStreamOmitField
 	private Timeline animation;
+	
+	private ObservableMap<String, Object> HUDData;
+	
 	
 	/**
 	 * A game is instantiated with a list of all levels in the game and a level to start on.
@@ -39,8 +48,8 @@ public class Game extends Observable implements Observer {
 		initialGameFile = gameFilePath;
 		levels = gameLevels;
 		info = gameInfo;
-        myPhysicsEngine = new PhysicsEngine();
-        myCollisionDetector = new CollisionDetection(myPhysicsEngine);
+        setMyPhysicsEngine(new PhysicsEngine());
+        setMyCollisionDetector(new CollisionDetection(getMyPhysicsEngine()));
         
 		initActors();
 		
@@ -49,12 +58,12 @@ public class Game extends Observable implements Observer {
 	}
 	
 
-	private void initTimeline() {
+	public void initTimeline() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> step());
-		animation = new Timeline();
-		animation.setCycleCount(Timeline.INDEFINITE);
-		animation.getKeyFrames().add(frame);
+		setAnimation(new Timeline());
+		getAnimation().setCycleCount(Timeline.INDEFINITE);
+		getAnimation().getKeyFrames().add(frame);
 	}
 	
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
@@ -66,27 +75,27 @@ public class Game extends Observable implements Observer {
 	}
 	
 	public void startGame(){
-		animation.play();
+		getAnimation().play();
 	}
 	
 	private void step(){
-		List<Actor> currentActors = levels.get(info.getCurrentLevelNum()).getActors();
+		List<Actor> currentActors = levels.get(info.getMyCurrentLevelNum()).getActors();
 		physicsUpdate(currentActors);
-		myCollisionDetector.detection(currentActors);
+		getMyCollisionDetector().detection(currentActors);
 		
 	}
 	
 	private void physicsUpdate(List<Actor> actors){
 		for(Actor a: actors){
-			myPhysicsEngine.tick(a);
+			getMyPhysicsEngine().tick(a);
 		}
 	}
 	
-	private void initActors(){
+	public void initActors(){
 		for(Level level: levels){
 			for(Actor actor: level.getActors()){
 				actor.addObserver(this);
-				actor.setEngine(myPhysicsEngine);
+				actor.setEngine(getMyPhysicsEngine());
 			}
 		}
 	}
@@ -119,7 +128,7 @@ public class Game extends Observable implements Observer {
 	}
 	
 	public void nextLevel(){
-		info.setCurrentLevelNum(info.getCurrentLevelNum()+1);
+		info.setMyCurrentLevelNum(info.getMyCurrentLevelNum()+1);
 	}
 	
 	/**
@@ -137,7 +146,7 @@ public class Game extends Observable implements Observer {
 	}
 
 	public List<Actor> getActors() {
-		return getLevels().get(getInfo().getCurrentLevelNum()).getActors();
+		return getLevels().get(getInfo().getMyCurrentLevelNum()).getActors();
 	}
 	
 	public String toString() {
@@ -156,7 +165,37 @@ public class Game extends Observable implements Observer {
 	}
 	
 	public Level getCurrentLevel(){
-		return levels.get(info.getCurrentLevelNum());
+		return levels.get(info.getMyCurrentLevelNum());
+	}
+
+
+	public PhysicsEngine getMyPhysicsEngine() {
+		return myPhysicsEngine;
+	}
+
+
+	public void setMyPhysicsEngine(PhysicsEngine myPhysicsEngine) {
+		this.myPhysicsEngine = myPhysicsEngine;
+	}
+
+
+	public CollisionDetection getMyCollisionDetector() {
+		return myCollisionDetector;
+	}
+
+
+	public void setMyCollisionDetector(CollisionDetection myCollisionDetector) {
+		this.myCollisionDetector = myCollisionDetector;
+	}
+
+
+	public Timeline getAnimation() {
+		return animation;
+	}
+
+
+	public void setAnimation(Timeline animation) {
+		this.animation = animation;
 	}
 
 }

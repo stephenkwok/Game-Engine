@@ -15,7 +15,15 @@ public class GainHealth extends Action{
 
 	@Override
 	public void perform() {
-		getActor().changeAttribute(AttributeType.HEALTH,numLivesGained);
+		getMyActor().changeAttribute(AttributeType.HEALTH,getNumLivesGained());
+	}
+
+	public int getNumLivesGained() {
+		return numLivesGained;
+	}
+
+	public void setNumLivesGained(int numLivesGained) {
+		this.numLivesGained = numLivesGained;
 	}
 
 

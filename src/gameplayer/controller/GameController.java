@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gameengine.controller.Game;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
@@ -19,8 +21,11 @@ import gameplayer.view.HUDScreen;
  */
 
 public class GameController implements Observer {
+	@XStreamOmitField
 	private Game model;
+	@XStreamOmitField
 	private GameScreen view;
+	@XStreamOmitField
 	private HUDScreen hud;
 	
 	/**
@@ -42,12 +47,18 @@ public class GameController implements Observer {
 		view.addObserver(this);
 	}
 	
+	public void setHUD(HUDScreen hud) {
+		this.hud = hud;
+	}
+	
+	
+	
 	/**
 	 * Will initialize the backend (game engine) with the current level's information and actor information to set up the game for playing.  Will visualize that backend too. 
 	 * @param level an int representing the level to be played
 	 */
 	public void initialize (int level){
-		model.getInfo().setCurrentLevelNum(level);
+		model.getInfo().setMyCurrentLevelNum(level);
 		begin();
 	}
 	
@@ -126,6 +137,28 @@ public class GameController implements Observer {
 				//something with exception
 			}
 		}
+	}
+	
+	public void toggleSound() {
+		System.out.println("toggle sound");
+	}
+	
+	public void toggleMusic(){
+		System.out.println("toggle music");
+	}
+
+	public void togglePause() {
+		//TODO: stop the step(), thx michael!!!!!! :)
+		System.out.println("pause the game");
+		getGame().getAnimation().pause();
+		view.getMySubscene().setDisable(true);
+	}
+
+	public void toggleUnPause() {
+		System.out.println("un pause game");
+		getGame().getAnimation().play();;
+		view.getMySubscene().setDisable(false);
+		
 	}
 	
 	
