@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <levels>
-    <gameengine.controller.Level>
-      <myActors/>
-      <myTriggerMap/>
-      <myName>Untitled</myName>
-      <myHeight>0.0</myHeight>
-      <myWidth>0.0</myWidth>
-      <myBackgroundImgName>default_background.png</myBackgroundImgName>
-    </gameengine.controller.Level>
-  </levels>
+  <levels/>
   <info>
     <myName>My Game</myName>
     <myImageName>default_game.jpg</myImageName>

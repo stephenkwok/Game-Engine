@@ -163,7 +163,7 @@
       <myTermination>Infinite</myTermination>
       <myWinningCondition>Survival time</myWinningCondition>
       <myLosingCondition>Player dies</myLosingCondition>
-      <myBackgroundImgName>default_background.png</myBackgroundImgName>
+      <myBackgroundImgName>default_landscape.png</myBackgroundImgName>
     </gameengine.controller.Level>
   </levels>
   <info>

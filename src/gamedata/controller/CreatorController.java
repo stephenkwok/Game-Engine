@@ -28,7 +28,7 @@ public class CreatorController implements ICreatorController {
 	private XMLCreator myXMLCreator;
 	private Screen myScreen;
 	
-	public CreatorController(Game game, Screen screen) throws ParserConfigurationException { //, BaseScreen screen) {
+	public CreatorController(Game game, Screen screen) throws ParserConfigurationException { 
 		this.myGame = game;
 		this.myScreen = screen;
 		this.myXMLCreator = new XMLCreator();
@@ -41,8 +41,12 @@ public class CreatorController implements ICreatorController {
 
 	@Override
 	public void saveForEditing(File file) {
+		if (file == null) {
+			return;
+		}
 		File loaderFile = createLoaderFileFromFile(file);
 		try {
+			myGame.setInitialGameFile(loaderFile.getPath());
 			this.myXMLCreator.saveGame(myGame, loaderFile);
 			myGame.setInitialGameFile(loaderFile.getPath());
 			saveForPlaying(file);
@@ -54,6 +58,9 @@ public class CreatorController implements ICreatorController {
 
 	@Override
 	public void saveForPlaying(File file) throws ParserConfigurationException {
+		if (file == null) {
+			return;
+		}
 		try {
 			this.myXMLCreator.saveGame(myGame, file);
 		} catch (SAXException | IOException | TransformerException e) {

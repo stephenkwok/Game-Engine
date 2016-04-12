@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
+  <initialGameFile>gamefiles/loaders/test_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <myActors>
@@ -162,7 +163,7 @@
       <myTermination>Infinite</myTermination>
       <myWinningCondition>Survival time</myWinningCondition>
       <myLosingCondition>Player dies</myLosingCondition>
-      <myBackgroundImgName>default_background.png</myBackgroundImgName>
+      <myBackgroundImgName>default_landscape.png</myBackgroundImgName>
     </gameengine.controller.Level>
   </levels>
   <info>

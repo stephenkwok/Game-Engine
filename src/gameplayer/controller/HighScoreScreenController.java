@@ -35,7 +35,7 @@ public class HighScoreScreenController implements IScreenController {
 	}
 
 	@Override
-	public void useGame(Game game) {
+	public void setGame(Game game) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -53,6 +53,18 @@ public class HighScoreScreenController implements IScreenController {
 				| InvocationTargetException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void chooseGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void useGame() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
