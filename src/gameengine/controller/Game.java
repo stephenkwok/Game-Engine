@@ -74,10 +74,6 @@ public class Game extends Observable implements Observer {
 		this(new GameInfo(), gameLevels);
 	}
 	
-	public void startGame(){
-		getAnimation().play();
-	}
-	
 	private void step(){
 		List<Actor> currentActors = levels.get(info.getMyCurrentLevelNum()).getActors();
 		physicsUpdate(currentActors);

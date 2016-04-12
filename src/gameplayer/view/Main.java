@@ -63,7 +63,7 @@ public class Main extends Application {
 		
 		Actor actor2 = new Actor();
 		actor2.setMyImageViewName("purplecircle.png");
-		actor2.setX(600);
+		actor2.setX(300);
 		actor2.setMyName("A2");
 		
 		Actor actor3 = new Actor();

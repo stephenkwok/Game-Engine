@@ -39,6 +39,7 @@ public class GameScreen extends Observable {
 	public GameScreen(Camera camera){
 		setMySubgroup(new Group());
 		setMySubscene(new SubScene(getMySubgroup(),Screen.SCREEN_WIDTH, 500));
+		getMySubscene().setFill(Color.ALICEBLUE);
 		getMySubscene().setFocusTraversable(true);
 		getMySubscene().setOnKeyPressed(e -> handleScreenEvent(e));
 		getMySubscene().setOnMouseClicked(e -> handleScreenEvent(e));
