@@ -1,5 +1,6 @@
 package gameplayer.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -13,6 +14,7 @@ import gameengine.model.ITrigger;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
+import javafx.collections.MapChangeListener.Change;
 
 
 /** 
@@ -58,7 +60,7 @@ public class GameController implements Observer {
 	 * @param level an int representing the level to be played
 	 */
 	public void initialize (int level){
-		model.getInfo().setMyCurrentLevelNum(level);
+		model.setCurrentLevel(level);
 		begin();
 	}
 	
@@ -67,8 +69,8 @@ public class GameController implements Observer {
 	 */
 	public void begin (){
 		Level current = model.getCurrentLevel();
-		//view.addBackground(current.getMyBackgroundImgName());
-		for(Actor actor: current.getActors()){
+		view.addBackground(current.getMyBackgroundImgName());
+		for(Actor actor: model.getActors()){
 			view.addActor(actor);
 		}
 		this.toggleUnPause();
@@ -124,6 +126,10 @@ public class GameController implements Observer {
 		return model;
 	}
 	
+	private void updateActors(){
+		view.removeActors(model.getDeadActors());
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o.equals(view)){
@@ -134,8 +140,10 @@ public class GameController implements Observer {
 				this.getClass().getDeclaredMethod(((String)arg)).invoke(this);
 			}
 			catch (Exception e){
-				//something with exception
+				e.printStackTrace();
 			}
+		}if(o.equals(hud)){
+			hud.handleChange((Change) arg);
 		}
 	}
 	

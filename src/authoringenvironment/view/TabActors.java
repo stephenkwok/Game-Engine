@@ -37,6 +37,7 @@ public class TabActors extends TabParent {
 		actorIcons = new ArrayList<ImageviewActorIcon>();
 		/*Actor newActor1 = new Actor();
 		newActor1.setID(1);
+>>>>>>> 5e3d803bd9afa69e7f829083cd0cdcfdde9cf583
 		Actor newActor2 = new Actor();
 		newActor2.setMyID(2);;
 		Actor newActor3 = new Actor();

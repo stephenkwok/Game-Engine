@@ -14,10 +14,6 @@ import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.AttributeType;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -54,6 +50,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private PhysicsEngine myPhysicsEngine;
     private boolean isMain;
     private double myHealth;
+    private boolean isDead;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -188,7 +185,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     }
 
     @Override
-    public String getName() {
+    public String getMyName() {
         return myName;
     }
 
@@ -346,5 +343,14 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	public double getMyHealth() {
 		return myHealth;
 	}
+
+	public boolean isDead() {
+		return isDead;
+	}
+
+	public void setDead(boolean isDead) {
+		this.isDead = isDead;
+	}
+
 
 }

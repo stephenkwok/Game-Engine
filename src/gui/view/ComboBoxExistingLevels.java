@@ -33,8 +33,8 @@ public class ComboBoxExistingLevels extends ComboBoxTextCell{
 		levelMap = new HashMap<>();
 		levelNames = new ArrayList<>();
 		for(Level level: levels){
-			levelNames.add(level.getName());
-			levelMap.put(level.getName(), level);
+			levelNames.add(level.getMyName());
+			levelMap.put(level.getMyName(), level);
 		}
 	}
 	
@@ -51,5 +51,11 @@ public class ComboBoxExistingLevels extends ComboBoxTextCell{
 	public List<String> getOptionsList() {
 		levelNames.add("default");
 		return levelNames;
+	}
+
+	@Override
+	protected void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
 	}
 }

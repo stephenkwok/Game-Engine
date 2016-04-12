@@ -27,4 +27,10 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 		return Arrays.asList(myResources.getString(IS_PLAYER_OPTIONS).split(DELIMITER));
 	}
 
+	@Override
+	protected void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

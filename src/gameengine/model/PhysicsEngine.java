@@ -178,6 +178,11 @@ public class PhysicsEngine {
 		a1.setVeloY(-5);
 	}
 
+	public void elasticHorizontalCollision(Actor a1, Actor a2){
+		staticHorizontalCollision(a1,a2);
+		a1.setVeloX(-3);
+	}
+
 
 	public int getTimeStep() {
 		return timeStep;

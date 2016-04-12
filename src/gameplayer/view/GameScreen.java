@@ -1,5 +1,6 @@
 package gameplayer.view;
 
+import java.util.List;
 import java.util.Observable;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -62,6 +63,12 @@ public class GameScreen extends Observable {
 		getMySubgroup().getChildren().add(actor.getImageView());//
 	}
 	
+	public void removeActors(List<Actor> actors){
+		for(Actor a: actors){
+			mySubgroup.getChildren().remove(a.getImageView());
+		}
+	}
+	
 
 	public void addBackground(String filepath) {
 		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(filepath)));
@@ -81,7 +88,7 @@ public class GameScreen extends Observable {
 			notifyObservers(trigger);
 		}
 		else if(e.getEventType()==KeyEvent.KEY_PRESSED){
-			camera.setTranslateX(camera.getTranslateX()+94.3);
+			//camera.setTranslateX(camera.getTranslateX()+94.3);
 			ITrigger trigger = handleKeyPress(((KeyEvent)e).getCode());
 			setChanged();
 			notifyObservers(trigger);

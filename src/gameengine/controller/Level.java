@@ -1,9 +1,7 @@
 package gameengine.controller;
 
 import gameengine.model.Actor;
-import gameengine.model.CollisionDetection;
 import gameengine.model.ITrigger;
-import gameengine.model.PhysicsEngine;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -20,9 +18,15 @@ import authoringenvironment.model.IEditableGameElement;
  */
 public class Level implements Observer, ILevel, IEditableGameElement {
 
+	// TODO: should probably set these default things via properties file but idk sry guyz
 	private static final String DEFAULT_NAME = "Untitled";
 	private static final String DEFAULT_IMAGE_NAME = "default_background.png";
-
+	private static final double DEFAULT_HEIGHT = 800;
+	private static final double DEFAULT_WIDTH = 1024;
+	private static final String DEFAULT_SCROLLING = "Vertically";
+	private static final String DEFAULT_TERMINATION = "Infinite";
+	private static final String DEFAULT_WINNING_CONDITION = "Survival time";
+	private static final String DEFAULT_LOSING_CONDITION = "Player dies";
     private List<Actor> myActors;
     private Map<String, List<Actor>> myTriggerMap;
     private String myName;
@@ -47,6 +51,13 @@ public class Level implements Observer, ILevel, IEditableGameElement {
         setMyName(DEFAULT_NAME);
         myBackgroundImgName = DEFAULT_IMAGE_NAME;
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
+        myTermination = DEFAULT_TERMINATION;
+        myScrollingDirection = DEFAULT_SCROLLING;
+        myWinningCondition = DEFAULT_WINNING_CONDITION;
+        myLosingCondition = DEFAULT_LOSING_CONDITION;
+        myName = DEFAULT_NAME;
+        myHeight = DEFAULT_HEIGHT;
+        myWidth = DEFAULT_WIDTH;
     }
 
     /**
@@ -75,8 +86,62 @@ public class Level implements Observer, ILevel, IEditableGameElement {
     public void setMyName(String name) {
         this.myName = name;
     }
+
+    public void setWidth(double width) {
+    	myWidth = width;
+    }
     
+    public double getWidth() {
+    	return myWidth;
+    }
     
+    public void setHeight(double height) {
+    	myHeight = height;
+    }
+    
+    public double getHeight() {
+    	return myHeight;
+    }
+    
+    public void setHUDOptions(List<String> options) {
+    	myHUDOptions = options;
+    }
+    
+    public List<String> getHUDOption() {
+    	return myHUDOptions;
+    }
+    
+    public void setScrollingDirection(String scrollingDirection) {
+    	myScrollingDirection = scrollingDirection;
+    }
+
+    public String getScrollingDirection() {
+    	return myScrollingDirection;
+    }
+    
+    public void setTermination(String termination) {
+    	myTermination = termination;
+    }
+    
+    public String getTermination() {
+    	return myTermination;
+    }
+    
+    public void setWinningCondition(String winningCondition) {
+    	myWinningCondition = winningCondition;
+    }
+    
+    public String getWinningCondition() {
+    	return myWinningCondition;
+    }
+    
+    public void setLosingCondition(String losingCondition) {
+    	myLosingCondition = losingCondition;
+    }
+    
+    public String getLosingCondition() {
+    	return myLosingCondition;
+    }
     
     /**
      * Adds a new Actor to the Level and updates the triggerMap accordingly
@@ -108,8 +173,8 @@ public class Level implements Observer, ILevel, IEditableGameElement {
      * @return The Level's name
      */
     @Override
-    public String getName() {
-        return getMyName();
+    public String getMyName() {
+        return myName;
     }
 
 	@Override
@@ -243,9 +308,10 @@ public class Level implements Observer, ILevel, IEditableGameElement {
 	public void setMyLosingCondition(String myLosingCondition) {
 		this.myLosingCondition = myLosingCondition;
 	}
-
-	public String getMyName() {
-		return myName;
+	
+	public void removeActors(List<Actor> deadActors) {
+		myActors.removeAll(deadActors);
 	}
 
 }
+

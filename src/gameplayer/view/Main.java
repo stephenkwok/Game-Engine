@@ -6,6 +6,7 @@ import gameengine.model.Attribute;
 import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
+import gameengine.model.Actions.Destroy;
 import gameengine.model.Actions.GainPoints;
 import gameengine.model.Actions.HorizontalBounceCollision;
 import gameengine.model.Actions.HorizontalStaticCollision;
@@ -15,6 +16,7 @@ import gameengine.model.Actions.MoveRight;
 import gameengine.model.Actions.MoveUp;
 import gameengine.model.Actions.NextLevel;
 import gameengine.model.Actions.VerticalBounceCollision;
+import gameengine.model.Actions.VerticalStaticCollision;
 import gameengine.model.Triggers.AttributeType;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.SideCollision;
@@ -56,6 +58,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		GameInfo info = new GameInfo();
 		info.setMyCurrentLevelNum(0);
+		info.setMyName("Colette");
 		
 		Actor actor1 = new Actor();
 		actor1.setMyImageViewName("redball.png");
@@ -63,7 +66,7 @@ public class Main extends Application {
 		
 		Actor actor2 = new Actor();
 		actor2.setMyImageViewName("purplecircle.png");
-		actor2.setX(300);
+		actor2.setX(500);
 		actor2.setMyName("A2");
 		
 		Actor actor3 = new Actor();
@@ -73,24 +76,36 @@ public class Main extends Application {
 		KeyTrigger trigger2 = new KeyTrigger(KeyCode.LEFT);
 		SideCollision trigger3 = new SideCollision(actor1,actor2);
 		KeyTrigger trigger4 = new KeyTrigger(KeyCode.SPACE);
+		TopCollision trigger5 = new TopCollision(actor1,actor2);
 		Action action1 = new MoveRight(actor1);
 		Action action2 = new MoveLeft(actor1);
-		Action action3 = new NextLevel(actor1);
-		Action action4 = new MoveUp(actor1);
+		Action action3 = new Destroy(actor1);
+		Action action4 = new NextLevel(actor1);
+		Action action5 = new VerticalStaticCollision(actor1);
 		Rule rule = new Rule(trigger1,action1);
 		Rule rule2 = new Rule(trigger2, action2);
 		Rule rule3 = new Rule(trigger3,action3);
 		Rule rule4 = new Rule(trigger4,action4);
+		Rule rule5 = new Rule(trigger5,action5);
 		actor1.addRule(rule);
 		actor1.addRule(rule2);
 		actor1.addRule(rule3);
 		actor1.addRule(rule4);
+		actor1.addRule(rule5);
 		
 		List<Level> levels = new ArrayList<Level>();
 		Level level1 = new Level();
 		levels.add(level1);
 		level1.addActor(actor1);
 		level1.addActor(actor2);
+		for(int i=1; i<=12; i++){
+			Actor floor = new Actor();
+			floor.setMyName("floor");
+			floor.setMyImageViewName("square.png");
+			floor.setX(i*50);
+			floor.setY(400);
+			level1.addActor(floor);
+		}
 		Level level2 = new Level();
 		level2.addActor(actor3);
 		levels.add(level2);

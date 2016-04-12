@@ -9,4 +9,10 @@ public class TextFieldActorSizeEditor extends TextFieldWithButton {
 		setButtonAction(e -> ((Actor) getEditableElement()).setSize(Double.parseDouble(getTextFieldInput())));
 	}
 
+	@Override
+	protected void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

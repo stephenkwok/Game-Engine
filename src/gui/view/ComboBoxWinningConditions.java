@@ -10,7 +10,7 @@ public class ComboBoxWinningConditions extends ComboBoxTextCell {
 	private static final String WINNING_CONDITIONS_OPTIONS = "WinningConditionsOptions";
 	private static final String DELIMITER = ",";
 	private List<String> myOptions;
-	
+
 	public ComboBoxWinningConditions(ResourceBundle myResources, String promptText, String labelText) {
 		super(myResources, promptText, labelText);
 		myOptions = Arrays.asList(myResources.getString(WINNING_CONDITIONS_OPTIONS).split(DELIMITER));
@@ -20,7 +20,7 @@ public class ComboBoxWinningConditions extends ComboBoxTextCell {
 	@Override
 	public void setButtonAction() {
 		comboButton.setOnAction(event->{
-			((Level) getEditableElement()).setMyLosingCondition(comboBox.getValue());
+			((Level) getEditableElement()).setMyWinningCondition(comboBox.getValue());
 			System.out.println("hi");
 		});
 	}
@@ -28,6 +28,14 @@ public class ComboBoxWinningConditions extends ComboBoxTextCell {
 	@Override
 	public List<String> getOptionsList() {
 		return myOptions;
+	}
+
+
+	@Override
+	protected void updateValueBasedOnEditable() {
+		if (((Level) getEditableElement()).getWinningCondition() != null) {
+			comboBox.setValue(((Level) getEditableElement()).getWinningCondition());
+		}
 	}
 
 }
