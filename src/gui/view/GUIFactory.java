@@ -82,7 +82,7 @@ public class GUIFactory {
 		return null;
 	}
 
-	private IGUIElement createLevelComboBox(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private IGUIElement createComboBox(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 			String prompt = myResources.getString(nodeType + PROMPT);
 			String label = myResources.getString(nodeType + LABEL);
 			Class<?> comboBox = Class.forName(className);
