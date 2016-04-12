@@ -1,16 +1,12 @@
 package authoringenvironment.view;
 
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import authoringenvironment.view.behaviors.BehaviorDouble;
-import gui.view.IGUIEditingElement;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -110,8 +106,6 @@ public class ActorRule {
 	public void addBehavior(Label behavior) {
 		if(isTrigger(behavior.getText())) triggers.getChildren().add(behavior);
 		else{
-//			BehaviorDouble accelerate = new BehaviorDouble("Accelerate", myLibraryResources);
-//			results.getChildren().add(accelerate.createNode());
 			results.getChildren().add(getBehaviorHBoxToAdd(behavior.getText()));
 		}
 	}
