@@ -2,11 +2,12 @@ package authoringenvironment.view.behaviors;
 
 import java.util.ResourceBundle;
 
+import gui.view.IGUIElement;
 import gui.view.TextFieldWithButton;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 
-public class BehaviorDouble {
+public class BehaviorDouble implements IGUIElement{
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
 	private static final String WIDTH = "Width";
@@ -26,12 +27,13 @@ public class BehaviorDouble {
 		myHBox = (HBox) textField.createNode();
 	}
 	
-	public Node getNode(){
-		return myHBox;
-	}
-	
-	public String getBehvaiorType(){
+	public String getBehaviorType(){
 		return behaviorType;
+	}
+
+	@Override
+	public Node createNode() {
+		return myHBox;
 	}
 
 }

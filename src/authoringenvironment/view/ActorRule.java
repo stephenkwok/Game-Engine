@@ -1,20 +1,24 @@
 package authoringenvironment.view;
 
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import authoringenvironment.view.behaviors.BehaviorDouble;
+import gui.view.IGUIEditingElement;
+import gui.view.IGUIElement;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -38,25 +42,20 @@ public class ActorRule {
 	private double ruleWidth; 
 	private static final double RULE_HEIGHT = 250;
 	private static final int CORNER_RADIUS = 20;
-//	private static final String DIALOG_CHOICES = "Trigger Result";
-//	private static final String DIALOG_HEADER = "Place your Behavior in: ";
-//	private static final String DIALOG_CONTENT = "Choose one: ";
-//	private static final String TRIGGER = "Trigger";
-	
 	private static final double RULE_PERCENT_WIDTH = 0.90;
 	private static final double STACKPANE_PERCENT_WIDTH = 0.92;
 	private static final double STACKPANE_PERCENT_HEIGHT = 0.3;
-
 	private GridPane myRule;	
 	private VBox triggers;
 	private VBox results;
 	private ScrollPane trigScroll;
 	private ScrollPane resScroll;
-//	private ChoiceDialog<String> dialog;
 	private ActorRuleCreator myActorRuleCreator;
 	private ResourceBundle myLibraryResources;
 	private static final String LIBRARY_BUNDLE = "library";
 	private String triggerBehaviors;
+	private static final String PACKAGE = "authoringenvironment.view.behaviors.";
+	private static final String CLASS = "Class";
 	
 	public ActorRule(ActorRuleCreator myActorRuleCreator) {
 		this.myActorRuleCreator = myActorRuleCreator;
@@ -111,17 +110,9 @@ public class ActorRule {
 	public void addBehavior(Label behavior) {
 		if(isTrigger(behavior.getText())) triggers.getChildren().add(behavior);
 		else{
-			BehaviorDouble accelerate = new BehaviorDouble("Accelerate", myLibraryResources);
-			results.getChildren().add(accelerate.getNode());
-//			results.getChildren().add(behavior);
-//			createDialog();
-//	        Optional<String> result = dialog.showAndWait();
-//	        result.ifPresent(choice -> {
-//	        	if(choice.equals(TRIGGER)){
-//	        		triggers.getChildren().add(behavior);
-//	        	}
-//	        	else results.getChildren().add(behavior);
-//	        });
+//			BehaviorDouble accelerate = new BehaviorDouble("Accelerate", myLibraryResources);
+//			results.getChildren().add(accelerate.createNode());
+			results.getChildren().add(getBehaviorHBoxToAdd(behavior.getText()));
 		}
 	}
 
@@ -130,13 +121,6 @@ public class ActorRule {
 		return triggers.contains(behavior);
 	}
 	
-//	private void createDialog() {
-//		List<String> choices = Arrays.asList(DIALOG_CHOICES.split(" "));
-//		dialog = new ChoiceDialog<>(choices.get(0),choices);
-//        dialog.setHeaderText(DIALOG_HEADER);
-//        dialog.setContentText(DIALOG_CONTENT);
-//	}
-
 	public void addSound(Label sound) {
 		results.getChildren().add(sound);
 	}
@@ -148,5 +132,17 @@ public class ActorRule {
 	public void remove(Object o){
 		triggers.getChildren().remove(o);
 		results.getChildren().remove(o);
+	}
+	
+	private HBox getBehaviorHBoxToAdd(String behaviorType){
+		String className = PACKAGE + myLibraryResources.getString(behaviorType+CLASS);
+		try{
+		Class<?> behaviorDouble = Class.forName(className);
+		Constructor<?> constructor = behaviorDouble.getConstructor(String.class, ResourceBundle.class);
+		return (HBox) ((IGUIElement) constructor.newInstance(behaviorType,myLibraryResources)).createNode();
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
