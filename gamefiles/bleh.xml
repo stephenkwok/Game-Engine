@@ -2,6 +2,8 @@
   <changed>false</changed>
   <obs>
     <gameplayer.controller.GameController/>
+    <gameplayer.controller.GameController/>
+    <gameplayer.controller.GameController/>
   </obs>
   <initialGameFile>gamefiles/loaders/test_loader.xml</initialGameFile>
   <levels>
@@ -13,13 +15,13 @@
             <gameengine.controller.Level reference="../../../.."/>
             <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
-          <x>0.0</x>
+          <x>400.0</x>
           <y>300.0</y>
-          <veloX>0.0</veloX>
+          <veloX>5.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
           <myFriction>0.0</myFriction>
-          <inAir>false</inAir>
+          <inAir>true</inAir>
           <myName>A1</myName>
           <myImageViewName>redball.png</myImageViewName>
           <myRules>
@@ -68,6 +70,7 @@
             <floorHeight>300.0</floorHeight>
           </myPhysicsEngine>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -81,13 +84,14 @@
           <veloY>0.0</veloY>
           <myID>0</myID>
           <myFriction>0.0</myFriction>
-          <inAir>false</inAir>
+          <inAir>true</inAir>
           <myName>A2</myName>
           <myImageViewName>purplecircle.png</myImageViewName>
           <myRules/>
           <attributeMap/>
           <myPhysicsEngine reference="../../gameengine.model.Actor/myPhysicsEngine"/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap>
@@ -130,18 +134,19 @@
             <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
           <x>0.0</x>
-          <y>0.0</y>
+          <y>300.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
           <myFriction>0.0</myFriction>
-          <inAir>false</inAir>
+          <inAir>true</inAir>
           <myName>Default Name</myName>
           <myImageViewName>elsa.png</myImageViewName>
           <myRules/>
           <attributeMap/>
           <myPhysicsEngine reference="../../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap/>
@@ -152,10 +157,10 @@
     </gameengine.controller.Level>
   </levels>
   <info>
-    <myName>My Game</myName>
+    <myName>My Game 2</myName>
     <myImageName>default_game.jpg</myImageName>
     <myDescription>This is a scrolling game.</myDescription>
-    <myCurrentLevelNum>0</myCurrentLevelNum>
+    <myCurrentLevelNum>1</myCurrentLevelNum>
   </info>
   <myPhysicsEngine reference="../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
   <myCollisionDetector>
