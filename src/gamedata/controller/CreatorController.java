@@ -28,13 +28,16 @@ public class CreatorController implements ICreatorController {
 	private XMLCreator myXMLCreator;
 	private Screen myScreen;
 	
-	public CreatorController(Game game) { //, Screen screen) throws ParserConfigurationException { //, BaseScreen screen) {
+	public CreatorController(Game game, Screen screen) throws ParserConfigurationException { //, BaseScreen screen) {
 		this.myGame = game;
-		//this.myScreen = screen;
+		this.myScreen = screen;
 		this.myXMLCreator = new XMLCreator();
 	}
 	
-	public CreatorController () {}
+	public CreatorController (Game game) {
+		this.myGame = game;
+		this.myXMLCreator = new XMLCreator();
+	}
 
 	@Override
 	public void saveForEditing(File file) {
@@ -69,7 +72,7 @@ public class CreatorController implements ICreatorController {
 		List<Level> levels = new ArrayList<>();
 		Level levelOne = new Level ();
 		Actor actorOne = new Actor();
-		actorOne.setID(1);
+		actorOne.setMyID(1);
 		ArrayList<Object> bleh = new ArrayList<>();
 		bleh.add((double) 90);
 		actorOne.addRule(new Rule(new ClickTrigger(), new LoseGame(actorOne)));

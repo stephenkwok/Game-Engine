@@ -19,7 +19,7 @@ public class ComboBoxTermination extends ComboBoxTextCell {
 	@Override
 	public void setButtonAction() {
 		comboButton.setOnAction(event->{
-			((Level) getEditableElement()).setTermination(comboBox.getValue());
+			((Level) getEditableElement()).setMyTermination(comboBox.getValue());
 		});
 	}
 

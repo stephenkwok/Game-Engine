@@ -13,17 +13,33 @@ public class ClickTrigger implements ITrigger {
 
     @Override
     public boolean evaluate(Actor myActor) {
-        return myActor.getImageView().contains(myX, myY);
+        return myActor.getImageView().contains(getMyX(), getMyY());
     }
 
     @Override
-    public String getTriggerName() {
+    public String getMyKey() {
         return "Click";
     }
 
     public void setClickedAt(double x, double y) {
-        myX = x;
-        myY = y;
+        setMyX(x);
+        setMyY(y);
     }
+
+	public double getMyX() {
+		return myX;
+	}
+
+	public void setMyX(double myX) {
+		this.myX = myX;
+	}
+
+	public double getMyY() {
+		return myY;
+	}
+
+	public void setMyY(double myY) {
+		this.myY = myY;
+	}
 
 }

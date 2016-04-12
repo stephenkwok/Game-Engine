@@ -52,7 +52,7 @@ public class ComboBoxGame extends ComboBoxImageCell {
 	@Override
 	public void fillImageNames() {
 		for (Game game: myGames.values()) {
-			imageNames.add(game.getInfo().getImageName());
+			imageNames.add(game.getInfo().getMyImageName());
 		}
 		
 	}
@@ -62,8 +62,8 @@ public class ComboBoxGame extends ComboBoxImageCell {
 		HBox hbox = new HBox();
 		VBox vbox = new VBox();
 		Game game = myGames.get(item);
-		vbox.getChildren().addAll(new Label(game.getInfo().getName()), new Text("\n" + game.getInfo().getDescription()));
-		hbox.getChildren().addAll(imageMap.get(game.getInfo().getImageName()), vbox);
+		vbox.getChildren().addAll(new Label(game.getInfo().getMyName()), new Text("\n" + game.getInfo().getMyDescription()));
+		hbox.getChildren().addAll(imageMap.get(game.getInfo().getMyImageName()), vbox);
 		return hbox;
 	}
 	
