@@ -13,6 +13,7 @@ import gameengine.model.ITrigger;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
+import javafx.collections.MapChangeListener.Change;
 
 
 /** 
@@ -136,6 +137,8 @@ public class GameController implements Observer {
 			catch (Exception e){
 				//something with exception
 			}
+		}if(o.equals(hud)){
+			hud.handleChange((Change) arg);
 		}
 	}
 	

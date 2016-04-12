@@ -2,37 +2,28 @@ package gameplayer.view;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
 
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
-import javafx.collections.MapChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
-import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 
-
-public class HUDScreen extends Observable {
-
+public class HUDScreen extends Window implements IHUDScreen{
 	
 	private static final int DEFAULT_HEIGHT = 100;
 	private static final int DEFAULT_WIDTH = 200;
 	
-	private Map<String, Object> status;
+	private ObservableMap<String, Object> status;
 	Map<String, Integer> valueToRowMap;
 	Map<Integer, String> rowToValueMap;
 	private SubScene myScene;
-    ObservableList<String> keys;
-    ObservableList<String> values;
-    private Group mySubGroup;
-    
-	public HUDScreen(double width, double height, Map<String, Object> status, Map<Integer, String> rowToValueMap) {
-		mySubGroup = new Group();
-		myScene = new SubScene(mySubGroup, width, height);
-		myScene.setFocusTraversable(false);
+	
+	public HUDScreen(double width, double height, ObservableMap<String, Object> status, Map<Integer, String> rowToValueMap) {
+		super(width, height);
 		this.status = status;
 		this.rowToValueMap = rowToValueMap;
 		this.valueToRowMap = new HashMap<String, Integer>();
@@ -42,7 +33,7 @@ public class HUDScreen extends Observable {
 	}
 	
 	
-	public HUDScreen(double width, double height, Map<String, Object> status) {
+	public HUDScreen(double width, double height, ObservableMap<String, Object> status) {
 		this(width, height, status, new HashMap<Integer, String>());
 		int i = 0;
 		for (String value : status.keySet()) {
@@ -52,15 +43,24 @@ public class HUDScreen extends Observable {
 		}
 	}
 	
-	public HUDScreen(Map<String, Object> status) {
+	public HUDScreen(ObservableMap<String, Object> status) {
 		this(DEFAULT_WIDTH, DEFAULT_HEIGHT, status);
 	}
 	
 	
-	public void init() {
+	
+	@Override
+	public void update() {
 		
-		keys = FXCollections.observableArrayList();
-		values = FXCollections.observableArrayList();
+	}
+
+	@Override
+	public void init() {
+		myScene = new SubScene(super.getRoot(), super.getWidth(), super.getHeight());
+		myScene.setFocusTraversable(false);
+		
+        ObservableList<String> keys = FXCollections.observableArrayList();
+        ObservableList<String> values = FXCollections.observableArrayList();
         ListView<String> keyView = new ListView<>(keys);
         ListView<String> valueView = new ListView<>(values);
         keyView.setMaxWidth(myScene.getWidth()/2);
@@ -76,17 +76,19 @@ public class HUDScreen extends Observable {
         	values.add(status.get(rowToValueMap.get(i)).toString());
         }
         
+        status.addListener(new MapChangeListener<String, Object>() {
+			@Override
+			public void onChanged(Change<? extends String, ? extends Object> change) {
+				int rownum = valueToRowMap.get(change.getKey());
+				values.set(rownum, change.getValueAdded().toString());
+			}
+        });
+        
+        super.getRoot().getChildren().add(container);
 	}
 	
 	public SubScene getScene() {
 		return myScene;
 	}
-	
-	public void handleChange(Change<? extends String, ? extends Object> change) {
-		int rownum = valueToRowMap.get(change.getKey());
-		values.set(rownum, change.getValueAdded().toString());
-	}
-	
-	
-	
+
 }
