@@ -1,6 +1,12 @@
 package gameengine.controller;
 
-public class GameInfo {
+import java.util.ArrayList;
+import java.util.List;
+
+import authoringenvironment.model.IEditableGameElement;
+import javafx.scene.image.ImageView;
+
+public class GameInfo implements IEditableGameElement {
 	private static final String DEFAULT_GAME_NAME = "My Game";
 	private static final String DEFAULT_IMAGE_NAME = "default_game.jpg";
 	private static final String DEFAULT_DESCRIPTION = "This is a scrolling game.";
@@ -10,12 +16,16 @@ public class GameInfo {
 	private String myImageName;
 	private String myDescription;
 	private int myCurrentLevelNum;
+	private ImageView myPreviewImage;
+	private int myID;
+	private List<String> myHUDElementsToDisplay;
 	
 	public GameInfo(String name, String imageName, String description, int currentLevelNum ) {
 		this.setMyName(name);
 		this.setMyImageName(imageName);
 		this.setMyDescription(description);
 		this.setMyCurrentLevelNum(currentLevelNum);
+		this.myHUDElementsToDisplay = new ArrayList<>();
 	}
 	
 	public GameInfo(String name, String imageName, String description) {
@@ -27,15 +37,19 @@ public class GameInfo {
 		
 	}
 	
-	public String getMyName() {
+	@Override
+	public String getName() {
 		return this.myName;
 	}
 
-
+	@Override
 	public void setMyName(String myName) {
 		this.myName = myName;
 	}
 
+	public void setMyHUDOptions(List<String> options) {
+		myHUDElementsToDisplay = options;
+	}
 
 	public String getMyImageName() {
 		return this.myImageName;
@@ -71,7 +85,7 @@ public class GameInfo {
 	      
 	      stringBuilder.append("GameInfo [ ");
 	      stringBuilder.append("\nname: ");
-	      stringBuilder.append(getMyName());
+	      stringBuilder.append(getName());
 	      stringBuilder.append("\nimgName: ");
 	      stringBuilder.append(getMyImageName());
 	      stringBuilder.append("\nmyDescription: ");
@@ -81,6 +95,26 @@ public class GameInfo {
 	      stringBuilder.append(" ]");
 	      
 	      return stringBuilder.toString();
+	}
+
+	@Override
+	public ImageView getImageView() {
+		return myPreviewImage;
+	}
+
+	@Override
+	public void setImageView(ImageView imageView) {
+		myPreviewImage = imageView;
+	}
+
+	@Override
+	public void setMyID(int ID) {
+		myID = ID;
+	}
+
+	@Override
+	public int getMyID() {
+		return myID;
 	}
 
 

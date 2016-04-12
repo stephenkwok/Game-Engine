@@ -52,4 +52,10 @@ public class ComboBoxExistingLevels extends ComboBoxTextCell{
 		levelNames.add("default");
 		return levelNames;
 	}
+
+	@Override
+	protected void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
+	}
 }
