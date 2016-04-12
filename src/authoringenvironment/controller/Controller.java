@@ -35,6 +35,7 @@ public class Controller implements IScreenController {
 	private GUIMainScreen mainScreen;
 	private GUIMain guiMain;
 	private ResourceBundle myResources;
+	private Game game;
 	private GameInfo gameInfo;
 
 	public Controller(Stage myStage, GUIMain guiMain, ResourceBundle myResources) {
@@ -48,6 +49,7 @@ public class Controller implements IScreenController {
 		levels = new ArrayList<>();
 		actors = new ArrayList<>();
 		gameInfo = new GameInfo();
+		game = new Game(gameInfo, levels);
 		levelEnvironment = new GUILevelEditingEnvironment(this, actors);
 		actorEnvironment = new GUIActorEditingEnvironment(this, myResources);
 		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo);
