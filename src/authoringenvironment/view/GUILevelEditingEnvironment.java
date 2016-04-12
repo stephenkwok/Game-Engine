@@ -160,8 +160,8 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	}
 	
 	private void moveActor(Actor actor, ImageView actorIV, MouseEvent event) {
-		actor.setXPos(event.getX());
-		actor.setYPos(event.getY());
+		actor.setX(event.getX());
+		actor.setY(event.getY());
 		actorIV.setX(event.getX());
 		actorIV.setY(event.getY());
 		
@@ -169,7 +169,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	
 	private Actor getActorById(int id) {
 		for (int i = 0; i < availableActors.size(); i++) {
-			if (availableActors.get(i).getID() == id) {
+			if (availableActors.get(i).getMyID() == id) {
 				return availableActors.get(i);
 			}
 		}

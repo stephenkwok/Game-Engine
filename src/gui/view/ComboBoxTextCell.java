@@ -23,7 +23,7 @@ public abstract class ComboBoxTextCell extends ComboBoxParent {
 
 	@Override
 	protected Node getNodeForBox(String item) {
-		return new Label(NO_NODE_FOR_BOX);
+		return new Label(item);
 	}
 	
 	@Override
