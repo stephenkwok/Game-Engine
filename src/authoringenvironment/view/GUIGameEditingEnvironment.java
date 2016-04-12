@@ -38,7 +38,11 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 	private static final double TEXT_FIELD_WIDTH = 100.0;
 	private static final double TEXT_FIELD_CONTAINER_SPACING = 10.0;
 	private static final double TEXT_FIELD_CONTAINER_PADDING = 10.0;
+	private static final String HUD_OPTIONS = "HUDOptions";
+	private static final String HUD_PROMPT = "Choose items to display on the level scene:";
+	private static final String GO = "Go";
 	private final ResourceBundle myResources;
+	private ResourceBundle myAttributesResources;
 	private VBox editingEnvironmentContainer;
 	private Label welcomeMessage;
 	private HBox nameEditorContainer;
@@ -91,6 +95,10 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 		ImageView previewImage = new ImageView(
 				new Image(getClass().getClassLoader().getResourceAsStream("default_game.jpg")));
 		previewImageContainer.getChildren().addAll(previewImageLabel, previewImage);
+	}
+	
+	private void HUDDisplay() {
+		
 	}
 
 	@Override
