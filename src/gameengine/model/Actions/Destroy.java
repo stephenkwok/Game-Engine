@@ -13,8 +13,7 @@ public class Destroy extends Action {
 
     @Override
     public void perform() {
-        getActor().changed();
-        getActor().notifyObservers("removeActor");
+        getActor().setDead(true);
     }
 
 }

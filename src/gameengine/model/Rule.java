@@ -13,17 +13,26 @@ public class Rule implements IRule{
     private Action myAction;
 
     public Rule(ITrigger trigger, Action action){
-        myTrigger = trigger;
-        myAction = action;
+        setMyTrigger(trigger);
+        setMyAction(action);
     }
 
     @Override
-    public ITrigger getTrigger() {
+    public ITrigger getMyTrigger() {
         return myTrigger;
     }
 
     @Override
-    public Action getAction() {
+    public Action getMyAction() {
         return myAction;
     }
+
+
+	public void setMyTrigger(ITrigger myTrigger) {
+		this.myTrigger = myTrigger;
+	}
+
+	public void setMyAction(Action myAction) {
+		this.myAction = myAction;
+	}
 }

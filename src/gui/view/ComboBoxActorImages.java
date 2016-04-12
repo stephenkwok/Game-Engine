@@ -34,7 +34,6 @@ public class ComboBoxActorImages extends ComboBoxImageCell{
 		File imageDir = new File(selectionResource);
 		for(File imageFile: imageDir.listFiles()){
 			imageNames.add(imageFile.getName());
-			System.out.println(imageFile.getName());
 		}
 	}
 

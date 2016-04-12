@@ -14,10 +14,6 @@ import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.AttributeType;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -37,10 +33,11 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
     private static final boolean DEFAULT_MAIN = false;
-    private DoubleProperty x = new SimpleDoubleProperty();
-    private DoubleProperty y = new SimpleDoubleProperty();
-    private DoubleProperty veloX = new SimpleDoubleProperty();
-    private DoubleProperty veloY = new SimpleDoubleProperty();
+    
+    private double x;
+    private double y;
+    private double veloX;
+    private double veloY;
     private int myID;
     private double myFriction;
     private boolean inAir;
@@ -52,34 +49,20 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private Map<AttributeType, Attribute> attributeMap;
     private PhysicsEngine myPhysicsEngine;
     private boolean isMain;
+    private double myHealth;
+    private boolean isDead;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
      */
     public Actor() {
-        myRules = new HashMap<>();
-        attributeMap = new HashMap<>();
+        setMyRules(new HashMap<>());
+        setAttributeMap(new HashMap<>());
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
         isMain = DEFAULT_MAIN;
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
-        initXYBindings();
     }
-
-	private void initXYBindings() {
-		x.addListener(new ChangeListener(){
-        	@Override
-            public void changed(ObservableValue o, Object oldVal, Object newVal) {
-                myImageView.setX((Double)newVal);
-            }
-        });
-        y.addListener(new ChangeListener(){
-        	@Override
-            public void changed(ObservableValue o, Object oldVal, Object newVal) {
-                myImageView.setY((Double)newVal);
-            }
-        });
-	}
 
     /**
      * Calls the appropriate sequence of Actions based on a provided Trigger
@@ -88,8 +71,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      */
     @Override
     public void performActionsFor(String triggerString) {
-    	if(myRules.containsKey(triggerString)){
-            List<Action> myActions = myRules.get(triggerString);
+    	if(getMyRules().containsKey(triggerString)){
+            List<Action> myActions = getMyRules().get(triggerString);
             for (Action myAction : myActions) {
                 myAction.perform();
             }
@@ -102,7 +85,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * @param newAttribute The new Actor Attribute
      */
     public void addAttribute(Attribute newAttribute) {
-        attributeMap.put(newAttribute.getType(), newAttribute);
+        getAttributeMap().put(newAttribute.getMyType(), newAttribute);
     }
     
     /**
@@ -112,7 +95,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      */
     
     public Attribute getAttribute(AttributeType type){
-    	return attributeMap.get(type);
+    	return getAttributeMap().get(type);
     }
 
     /**
@@ -123,7 +106,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      */
     public void changeAttribute(AttributeType type, int change) {
 
-        Attribute myAttribute = attributeMap.get(type);
+        Attribute myAttribute = getAttributeMap().get(type);
         myAttribute.changeAttribute(change);
     }
 
@@ -134,14 +117,14 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      */
     @Override
     public void addRule(IRule newRule) {
-        if (myRules.containsKey(newRule.getTrigger().getTriggerName())) {
-            List<Action> myActions = myRules.get(newRule.getTrigger().getTriggerName());
-            myActions.add(newRule.getAction());
-            myRules.put(newRule.getTrigger().getTriggerName(), myActions);
+        if (getMyRules().containsKey(newRule.getMyTrigger().getMyKey())) {
+            List<Action> myActions = getMyRules().get(newRule.getMyTrigger().getMyKey());
+            myActions.add(newRule.getMyAction());
+            getMyRules().put(newRule.getMyTrigger().getMyKey(), myActions);
         } else {
             List<Action> myActions = new ArrayList<>();
-            myActions.add(newRule.getAction());
-            myRules.put(newRule.getTrigger().getTriggerName(), myActions);
+            myActions.add(newRule.getMyAction());
+            getMyRules().put(newRule.getMyTrigger().getMyKey(), myActions);
         }
     }
 
@@ -151,7 +134,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * @return The list of Triggers that the Actor responds to
      */
     public Set<String> getTriggers() {
-        return myRules.keySet();
+        return getMyRules().keySet();
     }
 
     /**
@@ -160,43 +143,45 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * @return The Actor's ID number
      */
     @Override
-    public int getID() {
-        return myID;
+    public int getMyID() {
+        return this.myID;
     }
 
     @Override
-    public double getXVelo() {
-        return veloX.get();
+    public double getVeloX() {
+        return veloX;
     }
 
     @Override
-    public double getYVelo() {
-        return veloY.get();
+    public double getVeloY() {
+        return veloY;
     }
 
     @Override
-    public void setXPos(double updateXPosition) {
-       x.set(updateXPosition);
+    public void setX(double updateXPosition) {
+       x = updateXPosition;
+       myImageView.setX(x);
     }
 
     @Override
-    public void setYPos(double updateYPosition) {
-    	y.set(updateYPosition);
+    public void setY(double updateYPosition) {
+    	y = updateYPosition;
+    	myImageView.setY(updateYPosition);
 
     }
 
     @Override
-    public void setXVelo(double updateXVelo) {
-        veloX.set(updateXVelo);
+    public void setVeloX(double updateXVelo) {
+        veloX = updateXVelo;
     }
 
     @Override
-    public void setYVelo(double updateYVelo) {
-        veloY.set(updateYVelo);
+    public void setVeloY(double updateYVelo) {
+        veloY = updateYVelo;
     }
 
-    public void setID(int ID) {
-        myID = ID;
+    public void setMyID(int ID) {
+        this.myID = ID;
     }
 
     @Override
@@ -205,7 +190,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     }
 
     @Override
-    public void setName(String name) {
+    public void setMyName(String name) {
         myName = name;
     }
 
@@ -218,26 +203,27 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     @Override
     public void setImageView(ImageView imageView) {
     	this.myImageView = imageView;
-    	this.myImageView.setX(this.getXPos());
-    	this.myImageView.setY(this.getYPos());
+    	this.myImageView.setX(this.getX());
+    	this.myImageView.setY(this.getY());
+		this.myImageView.setFitHeight(imageView.getFitHeight());
     }
 
     @Override
-    public double getXPos() {
-        return x.get();
+    public double getX() {
+        return x;
     }
 
     @Override
-    public double getYPos() {
-    	return y.get();
+    public double getY() {
+    	return y;
     }
 
 	public void setEngine(PhysicsEngine physicsEngine) {
-		myPhysicsEngine = physicsEngine;
+		setMyPhysicsEngine(physicsEngine);
 	}
 	
 	public PhysicsEngine getPhysicsEngine(){
-		return myPhysicsEngine;
+		return getMyPhysicsEngine();
 	}
 	
 	public String toString() {
@@ -245,7 +231,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	      
 	      stringBuilder.append("Actor[ ");
 	      stringBuilder.append("\nid: ");
-	      stringBuilder.append(myID);
+	      stringBuilder.append(getMyID());
 	      stringBuilder.append("\nname: ");
 	      stringBuilder.append(myName);
 	      stringBuilder.append("\nmyImgName: ");
@@ -253,7 +239,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	      stringBuilder.append("\nmyImg: ");
 	      stringBuilder.append(myImageView);
 	      stringBuilder.append("\nmyRules: ");
-	      stringBuilder.append(myRules.toString());
+	      stringBuilder.append(getMyRules().toString());
 	      stringBuilder.append(" ]");
 	      
 	      return stringBuilder.toString();
@@ -299,7 +285,10 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	public void setMain(boolean bool){
 		this.isMain = bool;
 	}
-
+	/**
+	 * Return whether the actor is a playable, main character. 
+	 * @return
+	 */
 	public boolean isMain(){
 		return this.isMain;
 	}
@@ -316,4 +305,51 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	public void setInAir(boolean inAir) {
 		this.inAir = inAir;
 	}
+
+	public Map<String, List<Action>> getMyRules() {
+		return myRules;
+	}
+
+	public void setMyRules(Map<String, List<Action>> myRules) {
+		this.myRules = myRules;
+	}
+
+	public Map<AttributeType, Attribute> getAttributeMap() {
+		return attributeMap;
+	}
+
+	public void setAttributeMap(Map<AttributeType, Attribute> attributeMap) {
+		this.attributeMap = attributeMap;
+	}
+
+	public PhysicsEngine getMyPhysicsEngine() {
+		return myPhysicsEngine;
+	}
+
+	public void setMyPhysicsEngine(PhysicsEngine myPhysicsEngine) {
+		this.myPhysicsEngine = myPhysicsEngine;
+	}
+
+	
+	public void setSize(double size){
+		myImageView.setFitHeight(size);
+		myImageView.setPreserveRatio(true);
+	}
+	
+	public void setMyHealth(double myHealth){
+		this.myHealth = myHealth;
+	}
+
+	public double getMyHealth() {
+		return myHealth;
+	}
+
+	public boolean isDead() {
+		return isDead;
+	}
+
+	public void setDead(boolean isDead) {
+		this.isDead = isDead;
+	}
+
 }

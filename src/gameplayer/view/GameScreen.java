@@ -1,5 +1,6 @@
 package gameplayer.view;
 
+import java.util.List;
 import java.util.Observable;
 
 import gameengine.model.Actor;
@@ -55,6 +56,12 @@ public class GameScreen extends Observable {
 		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(actor.getMyImageViewName())));
 		actor.setImageView(imageView);
 		mySubgroup.getChildren().add(actor.getImageView());//
+	}
+	
+	public void removeActors(List<Actor> actors){
+		for(Actor a: actors){
+			mySubgroup.getChildren().remove(a.getImageView());
+		}
 	}
 	
 

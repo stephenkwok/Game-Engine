@@ -6,6 +6,7 @@ import gameengine.model.Attribute;
 import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
+import gameengine.model.Actions.Destroy;
 import gameengine.model.Actions.GainPoints;
 import gameengine.model.Actions.HorizontalBounceCollision;
 import gameengine.model.Actions.HorizontalStaticCollision;
@@ -60,12 +61,12 @@ public class Main extends Application {
 		
 		Actor actor1 = new Actor();
 		actor1.setMyImageViewName("redball.png");
-		actor1.setName("A1");
+		actor1.setMyName("A1");
 		
 		Actor actor2 = new Actor();
 		actor2.setMyImageViewName("purplecircle.png");
-		actor2.setXPos(600);
-		actor2.setName("A2");
+		actor2.setX(600);
+		actor2.setMyName("A2");
 		
 		Actor actor3 = new Actor();
 		actor3.setMyImageViewName("elsa.png");
@@ -77,7 +78,7 @@ public class Main extends Application {
 		TopCollision trigger5 = new TopCollision(actor1,actor2);
 		Action action1 = new MoveRight(actor1);
 		Action action2 = new MoveLeft(actor1);
-		Action action3 = new HorizontalStaticCollision(actor1);
+		Action action3 = new Destroy(actor1);
 		Action action4 = new MoveUp(actor1);
 		Action action5 = new VerticalStaticCollision(actor1);
 		Rule rule = new Rule(trigger1,action1);
@@ -96,6 +97,14 @@ public class Main extends Application {
 		levels.add(level1);
 		level1.addActor(actor1);
 		level1.addActor(actor2);
+		for(int i=1; i<=12; i++){
+			Actor floor = new Actor();
+			floor.setMyName("floor");
+			floor.setMyImageViewName("square.png");
+			floor.setX(i*50);
+			floor.setY(400);
+			level1.addActor(floor);
+		}
 		Level level2 = new Level();
 		level2.addActor(actor3);
 		levels.add(level2);

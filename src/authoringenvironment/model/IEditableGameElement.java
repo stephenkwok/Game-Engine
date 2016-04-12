@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 
 public interface IEditableGameElement {
 	
-	public void setName(String name);
+	public void setMyName(String name);
 
 	public String getName();
 	
@@ -20,8 +20,7 @@ public interface IEditableGameElement {
 
 	public void setImageView(ImageView imageView);
 	
-	public void setID(int ID);
+	public void setMyID(int ID);
 	
-	public int getID();
+	public int getMyID();
 }
-

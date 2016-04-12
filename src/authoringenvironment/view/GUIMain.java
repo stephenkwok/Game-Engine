@@ -4,6 +4,8 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
+import gui.view.ButtonPlay;
+import gui.view.ComboBoxGame;
 import gui.view.GUIFactory;
 import gui.view.IGUI;
 import gui.view.IGUIElement;
@@ -86,6 +88,8 @@ public class GUIMain extends Screen implements IGUI {
 		HBox hbox = new HBox(PADDING);
 		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));		
 		initializeTopPaneElements(hbox);
+//		ComboBoxGame test = new ComboBoxGame("SUP", "gamefiles", myController);
+//		hbox.getChildren().add(test.createNode());
 		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		myRoot.setTop(hbox);
 	}

@@ -17,52 +17,52 @@ public interface IActor {
      *
      * @return The Actor's X coordinate
      */
-    public double getXPos();
+    public double getX();
 
     /**
      * Gets the Actor's Y location
      *
      * @return The Actor's Y coordinate
      */
-    public double getYPos();
+    public double getY();
     
     /**
      * Gets the Actor's velocity along the horizontal vector
      * 
      * @return the Actor's X velocity
      */
-    public double getXVelo();
+    public double getVeloX();
 
     /**
      * Gets the Actor's velocity along the vertical vector
      * 
      * @return the Actor's Y velocity
      */
-    public double getYVelo();
+    public double getVeloY();
     
     /**
      * Sets an Actor's X position
      * @param updateXPosition
      */
-	public void setXPos(double updateXPosition); 
+	public void setX(double updateXPosition); 
 	
 	/**
      * Sets an Actor's Y position
      * @param updateYPosition
      */
-	public void setYPos(double updateYPosition); 
+	public void setY(double updateYPosition); 
 	
 	/**
      * Sets an Actor's X velocity
      * @param updateXVelo
      */
-	public void setXVelo(double updateXVelo); 
+	public void setVeloX(double updateXVelo); 
 	
 	/**
      * Sets an Actor's Y velocity
      * @param updateYVelo
      */
-	public void setYVelo(double updateYVelo);
+	public void setVeloY(double updateYVelo);
 
     /**
      * Provides the list of Triggers that the Actor responds to
@@ -83,7 +83,7 @@ public interface IActor {
      *
      * @return The Actor's ID
      */
-    public int getID();
+    public int getMyID();
 
 	void performActionsFor(String triggerString);
 

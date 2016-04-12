@@ -9,42 +9,11 @@
           <changed>false</changed>
           <obs>
             <gameengine.controller.Level reference="../../../.."/>
-            <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
-          <x class="javafx.beans.property.SimpleDoubleProperty">
-            <value>0.0</value>
-            <valid>true</valid>
-            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
-              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
-              <listener class="gameengine.model.Actor$1">
-                <outer-class reference="../../../.."/>
-              </listener>
-              <currentValue class="double">0.0</currentValue>
-            </helper>
-            <name/>
-          </x>
-          <y class="javafx.beans.property.SimpleDoubleProperty">
-            <value>0.0</value>
-            <valid>true</valid>
-            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
-              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
-              <listener class="gameengine.model.Actor$2">
-                <outer-class reference="../../../.."/>
-              </listener>
-              <currentValue class="double">0.0</currentValue>
-            </helper>
-            <name/>
-          </y>
-          <veloX class="javafx.beans.property.SimpleDoubleProperty">
-            <value>0.0</value>
-            <valid>true</valid>
-            <name/>
-          </veloX>
-          <veloY class="javafx.beans.property.SimpleDoubleProperty">
-            <value>0.0</value>
-            <valid>true</valid>
-            <name/>
-          </veloY>
+          <x>0.0</x>
+          <y>0.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
           <myID>0</myID>
           <myFriction>0.0</myFriction>
           <inAir>false</inAir>
@@ -60,19 +29,19 @@
               </list>
             </entry>
             <entry>
-              <string>A1TopCollisionA2</string>
-              <list>
-                <gameengine.model.Actions.VerticalStaticCollision>
-                  <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.VerticalStaticCollision>
-              </list>
-            </entry>
-            <entry>
               <string>Left</string>
               <list>
                 <gameengine.model.Actions.MoveLeft>
                   <myActor reference="../../../../.."/>
                 </gameengine.model.Actions.MoveLeft>
+              </list>
+            </entry>
+            <entry>
+              <string>A1TopTriggerA2</string>
+              <list>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
               </list>
             </entry>
             <entry>
@@ -86,65 +55,26 @@
             <entry>
               <string>A1SideCollisionA2</string>
               <list>
-                <gameengine.model.Actions.HorizontalStaticCollision>
+                <gameengine.model.Actions.Destroy>
                   <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.HorizontalStaticCollision>
+                </gameengine.model.Actions.Destroy>
               </list>
             </entry>
           </myRules>
           <attributeMap/>
-          <myPhysicsEngine>
-            <timeStep>1</timeStep>
-            <friction>-0.05</friction>
-            <gravity>0.11</gravity>
-            <maxHorizVelocity>50.0</maxHorizVelocity>
-            <maxVertVelocity>-50.0</maxVertVelocity>
-            <horizontalForce>5.0</horizontalForce>
-            <jumpForce>-5.0</jumpForce>
-            <floorHeight>300.0</floorHeight>
-          </myPhysicsEngine>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs>
             <gameengine.controller.Level reference="../../../.."/>
-            <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
-          <x class="javafx.beans.property.SimpleDoubleProperty">
-            <value>600.0</value>
-            <valid>true</valid>
-            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
-              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
-              <listener class="gameengine.model.Actor$1">
-                <outer-class reference="../../../.."/>
-              </listener>
-              <currentValue class="double">600.0</currentValue>
-            </helper>
-            <name/>
-          </x>
-          <y class="javafx.beans.property.SimpleDoubleProperty">
-            <value>0.0</value>
-            <valid>true</valid>
-            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
-              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
-              <listener class="gameengine.model.Actor$2">
-                <outer-class reference="../../../.."/>
-              </listener>
-              <currentValue class="double">0.0</currentValue>
-            </helper>
-            <name/>
-          </y>
-          <veloX class="javafx.beans.property.SimpleDoubleProperty">
-            <value>0.0</value>
-            <valid>true</valid>
-            <name/>
-          </veloX>
-          <veloY class="javafx.beans.property.SimpleDoubleProperty">
-            <value>0.0</value>
-            <valid>true</valid>
-            <name/>
-          </veloY>
+          <x>600.0</x>
+          <y>0.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
           <myID>0</myID>
           <myFriction>0.0</myFriction>
           <inAir>false</inAir>
@@ -152,8 +82,249 @@
           <myImageViewName>purplecircle.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <myPhysicsEngine reference="../../gameengine.model.Actor/myPhysicsEngine"/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>50.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>100.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>150.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>200.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>250.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>300.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>350.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>400.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>450.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>500.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>550.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>600.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap>
@@ -164,13 +335,13 @@
           </list>
         </entry>
         <entry>
-          <string>A1TopCollisionA2</string>
+          <string>Left</string>
           <list>
             <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
           </list>
         </entry>
         <entry>
-          <string>Left</string>
+          <string>A1TopTriggerA2</string>
           <list>
             <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
           </list>
@@ -199,42 +370,11 @@
           <changed>false</changed>
           <obs>
             <gameengine.controller.Level reference="../../../.."/>
-            <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
-          <x class="javafx.beans.property.SimpleDoubleProperty">
-            <value>0.0</value>
-            <valid>true</valid>
-            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
-              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
-              <listener class="gameengine.model.Actor$1">
-                <outer-class reference="../../../.."/>
-              </listener>
-              <currentValue class="double">0.0</currentValue>
-            </helper>
-            <name/>
-          </x>
-          <y class="javafx.beans.property.SimpleDoubleProperty">
-            <value>0.0</value>
-            <valid>true</valid>
-            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
-              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
-              <listener class="gameengine.model.Actor$2">
-                <outer-class reference="../../../.."/>
-              </listener>
-              <currentValue class="double">0.0</currentValue>
-            </helper>
-            <name/>
-          </y>
-          <veloX class="javafx.beans.property.SimpleDoubleProperty">
-            <value>0.0</value>
-            <valid>true</valid>
-            <name/>
-          </veloX>
-          <veloY class="javafx.beans.property.SimpleDoubleProperty">
-            <value>0.0</value>
-            <valid>true</valid>
-            <name/>
-          </veloY>
+          <x>0.0</x>
+          <y>0.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
           <myID>0</myID>
           <myFriction>0.0</myFriction>
           <inAir>false</inAir>
@@ -242,8 +382,9 @@
           <myImageViewName>elsa.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <myPhysicsEngine reference="../../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <isDead>false</isDead>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap/>
@@ -259,9 +400,18 @@
     <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
   </info>
-  <myPhysicsEngine reference="../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
+  <myPhysicsEngine>
+    <timeStep>1</timeStep>
+    <friction>-0.05</friction>
+    <gravity>0.11</gravity>
+    <maxHorizVelocity>50.0</maxHorizVelocity>
+    <maxVertVelocity>-50.0</maxVertVelocity>
+    <horizontalForce>5.0</horizontalForce>
+    <jumpForce>-5.0</jumpForce>
+    <floorHeight>300.0</floorHeight>
+  </myPhysicsEngine>
   <myCollisionDetector>
-    <myPhysicsEngine reference="../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
+    <myPhysicsEngine reference="../../myPhysicsEngine"/>
   </myCollisionDetector>
   <animation>
     <startTime>0</startTime>
@@ -289,7 +439,7 @@
       <debugNanos>0</debugNanos>
       <theMaster>
         <inactive>true</inactive>
-        <nextPulseTime>974017919323618</nextPulseTime>
+        <nextPulseTime>991936797442275</nextPulseTime>
         <lastPulseDuration>-2147483648</lastPulseDuration>
         <outer-class class="com.sun.javafx.tk.quantum.MasterTimer" reference="../.."/>
       </theMaster>
@@ -382,4 +532,6 @@
       <outer-class reference="../.."/>
     </keyFrames>
   </animation>
+  <currentActors/>
+  <deadActors/>
 </gameengine.controller.Game>

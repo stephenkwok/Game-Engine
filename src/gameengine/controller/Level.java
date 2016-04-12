@@ -1,9 +1,7 @@
 package gameengine.controller;
 
 import gameengine.model.Actor;
-import gameengine.model.CollisionDetection;
 import gameengine.model.ITrigger;
-import gameengine.model.PhysicsEngine;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -42,9 +40,9 @@ public class Level implements Observer, ILevel, IEditableGameElement {
      * Instantiates the triggerMap and Actor list
      */
     public Level() {
-        myActors = new ArrayList<>();
-        myTriggerMap = new HashMap<>();
-        myName = DEFAULT_NAME;
+        setMyActors(new ArrayList<>());
+        setMyTriggerMap(new HashMap<>());
+        setMyName(DEFAULT_NAME);
         myBackgroundImgName = DEFAULT_IMAGE_NAME;
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
     }
@@ -56,11 +54,11 @@ public class Level implements Observer, ILevel, IEditableGameElement {
      */
     @Override
     public void handleTrigger(ITrigger myTrigger) {
-        if (!myTriggerMap.containsKey(myTrigger.getTriggerName())) return;
-        List<Actor> relevantActors = myTriggerMap.get(myTrigger.getTriggerName());
+        if (!getMyTriggerMap().containsKey(myTrigger.getMyKey())) return;
+        List<Actor> relevantActors = getMyTriggerMap().get(myTrigger.getMyKey());
         for (Actor myActor : relevantActors) {
             if (myTrigger.evaluate(myActor)){
-                myActor.performActionsFor(myTrigger.getTriggerName());
+                myActor.performActionsFor(myTrigger.getMyKey());
             }
         }
         //myCollisionDetector.detection(myActors); //Collision Detection/Resolution for each Actor
@@ -72,37 +70,11 @@ public class Level implements Observer, ILevel, IEditableGameElement {
      * @param name A name for the Level
      */
     @Override
-    public void setName(String name) {
-        myName = name;
+    public void setMyName(String name) {
+        this.myName = name;
     }
     
-    public void setWidth(double width) {
-    	myWidth = width;
-    }
     
-    public void setHeight(double height) {
-    	myHeight = height;
-    }
-    
-    public void setHUDOptions(List<String> options) {
-    	myHUDOptions = options;
-    }
-    
-    public void setScrollingDirection(String scrollingDirection) {
-    	myScrollingDirection = scrollingDirection;
-    }
-
-    public void setTermination(String termination) {
-    	myTermination = termination;
-    }
-    
-    public void setWinningCondition(String winningCondition) {
-    	myWinningCondition = winningCondition;
-    }
-    
-    public void setLosingCondition(String losingCondition) {
-    	myLosingCondition = losingCondition;
-    }
     
     /**
      * Adds a new Actor to the Level and updates the triggerMap accordingly
@@ -112,17 +84,17 @@ public class Level implements Observer, ILevel, IEditableGameElement {
     @Override
     public void addActor(Actor newActor) {
         newActor.addObserver(this);
-        myActors.add(newActor);
+        getActors().add(newActor);
         Set<String> actorTriggers = newActor.getTriggers();
         for (String myTrigger : actorTriggers) {
-            if (myTriggerMap.containsKey(myTrigger)) {
-                List<Actor> levelActors = myTriggerMap.get(myTrigger);
+            if (getMyTriggerMap().containsKey(myTrigger)) {
+                List<Actor> levelActors = getMyTriggerMap().get(myTrigger);
                 levelActors.add(newActor);
-                myTriggerMap.put(myTrigger, levelActors);
+                getMyTriggerMap().put(myTrigger, levelActors);
             } else {
                 List<Actor> levelActors = new ArrayList<>();
                 levelActors.add(newActor);
-                myTriggerMap.put(myTrigger, levelActors);
+                getMyTriggerMap().put(myTrigger, levelActors);
             }
         }
         
@@ -135,17 +107,7 @@ public class Level implements Observer, ILevel, IEditableGameElement {
      */
     @Override
     public String getName() {
-        return myName;
-    }
-
-    /**
-     * Provides the list of Actors that are present in the Level
-     *
-     * @return The List of Actors in the Level
-     */
-    @Override
-    public List<Actor> getActors() {
-        return myActors;
+        return getMyName();
     }
 
 	@Override
@@ -159,13 +121,13 @@ public class Level implements Observer, ILevel, IEditableGameElement {
 	}
 
 	@Override
-	public void setID(int ID) {
+	public void setMyID(int ID) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public int getID() {
+	public int getMyID() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -184,22 +146,18 @@ public class Level implements Observer, ILevel, IEditableGameElement {
 	      
 	      stringBuilder.append("\nLevel [ ");
 	      stringBuilder.append("\nmyName: ");
-	      stringBuilder.append(myName);
+	      stringBuilder.append(getMyName());
 	      stringBuilder.append("\nbckImg: ");
 	      stringBuilder.append(myBackgroundImgName);
 	      stringBuilder.append("\nmyActors: ");
-	      stringBuilder.append(myActors.toString());
+	      stringBuilder.append(getActors().toString());
 	      stringBuilder.append("\nTriggerMap: ");
-	      stringBuilder.append(myTriggerMap.toString());
+	      stringBuilder.append(getMyTriggerMap().toString());
 	      stringBuilder.append("\nimg: ");
 	      stringBuilder.append(myBackground);
 	      stringBuilder.append(" ]");
 	      
 	      return stringBuilder.toString();
-	}
-	
-	public void removeActor(Actor actor){
-		myActors.remove(actor);
 	}
 
 
@@ -207,8 +165,90 @@ public class Level implements Observer, ILevel, IEditableGameElement {
     public void update(Observable o, Object arg) {
         Actor myActor = (Actor) o;
         if (arg.equals("DESTROY")){
-            myActors.remove(myActor);
+            getActors().remove(myActor);
         } else if (arg.equals("WINGAME")) {
         }
     }
+
+	public Map<String, List<Actor>> getMyTriggerMap() {
+		return myTriggerMap;
+	}
+
+	public void setMyTriggerMap(Map<String, List<Actor>> myTriggerMap) {
+		this.myTriggerMap = myTriggerMap;
+	}
+
+	public List<Actor> getActors() {
+		return myActors;
+	}
+
+	public void setMyActors(List<Actor> myActors) {
+		this.myActors = myActors;
+	}
+
+	public double getMyHeight() {
+		return myHeight;
+	}
+
+	public void setMyHeight(double myHeight) {
+		this.myHeight = myHeight;
+	}
+
+	public double getMyWidth() {
+		return myWidth;
+	}
+
+	public void setMyWidth(double myWidth) {
+		this.myWidth = myWidth;
+	}
+
+	public List<String> getMyHUDOptions() {
+		return myHUDOptions;
+	}
+
+	public void setMyHUDOptions(List<String> myHUDOptions) {
+		this.myHUDOptions = myHUDOptions;
+	}
+
+	public String getMyScrollingDirection() {
+		return myScrollingDirection;
+	}
+
+	public void setMyScrollingDirection(String myScrollingDirection) {
+		this.myScrollingDirection = myScrollingDirection;
+	}
+
+	public String getMyTermination() {
+		return myTermination;
+	}
+
+	public void setMyTermination(String myTermination) {
+		this.myTermination = myTermination;
+	}
+
+	public String getMyWinningCondition() {
+		return myWinningCondition;
+	}
+
+	public void setMyWinningCondition(String myWinningCondition) {
+		this.myWinningCondition = myWinningCondition;
+	}
+
+	public String getMyLosingCondition() {
+		return myLosingCondition;
+	}
+
+	public void setMyLosingCondition(String myLosingCondition) {
+		this.myLosingCondition = myLosingCondition;
+	}
+
+	public String getMyName() {
+		return myName;
+	}
+
+	public void removeActors(List<Actor> deadActors) {
+		myActors.removeAll(deadActors);
+		
+	}
+
 }
