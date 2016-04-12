@@ -65,5 +65,9 @@ public class ActorRuleCreator {
 	public List<ActorRule> getRules(){
 		return myRules;
 	}
+	
+	public Controller getController(){
+		return myController;
+	}
 
 }

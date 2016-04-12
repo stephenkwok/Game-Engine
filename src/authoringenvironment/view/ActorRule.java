@@ -5,16 +5,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.Controller;
 import gui.view.IGUIElement;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -104,10 +107,17 @@ public class ActorRule {
 	}
 	
 	public void addBehavior(Label behavior) {
-		if(isTrigger(behavior.getText())) triggers.getChildren().add(behavior);
-		else{
-			results.getChildren().add(getBehaviorHBoxToAdd(behavior.getText()));
-		}
+		Node toAdd = getBehaviorHBox(behavior);
+		toAdd.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    	    @Override
+    	    public void handle(MouseEvent click) {
+    	        if (click.getClickCount() == 2) {
+    	           remove(toAdd);
+    	        }
+    	    }
+    	});
+		if(isTrigger(behavior.getText())) triggers.getChildren().add(toAdd);
+		else results.getChildren().add(toAdd);
 	}
 
 	private boolean isTrigger(String behavior){
@@ -116,27 +126,36 @@ public class ActorRule {
 	}
 	
 	public void addSound(Label sound) {
+		//PlaySound or PlayMusic
 		results.getChildren().add(sound);
 	}
 
 	public void addImage(Label image) {
+		//ChangeImage
 		results.getChildren().add(image);
 	}
 	
-	public void remove(Object o){
-		triggers.getChildren().remove(o);
-		results.getChildren().remove(o);
+	public void remove(Node toRemove){
+		triggers.getChildren().remove(toRemove);
+		results.getChildren().remove(toRemove);
 	}
 	
-	private HBox getBehaviorHBoxToAdd(String behaviorType){
-		String className = PACKAGE + myLibraryResources.getString(behaviorType+CLASS);
+	private Node getBehaviorHBox(Label behavior){
+		String behaviorType = behavior.getText();
 		try{
-		Class<?> behaviorDouble = Class.forName(className);
-		Constructor<?> constructor = behaviorDouble.getConstructor(String.class, ResourceBundle.class);
-		return (HBox) ((IGUIElement) constructor.newInstance(behaviorType,myLibraryResources)).createNode();
-		}catch(Exception e){
-			e.printStackTrace();
-			return null;
+			String className = PACKAGE + myLibraryResources.getString(behaviorType+CLASS);
+			Class<?> clazz = Class.forName(className);
+			Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class);
+			return ((IGUIElement) constructor.newInstance(behaviorType,myLibraryResources)).createNode();
+		}catch(Exception e1){
+			try{
+				String className = PACKAGE + myLibraryResources.getString(behaviorType+CLASS);
+				Class<?> clazz = Class.forName(className);
+				Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, Controller.class);
+				return ((IGUIElement) constructor.newInstance(behaviorType,myLibraryResources,myActorRuleCreator.getController())).createNode();
+			}catch(Exception e2){
+				return behavior;
+			}
 		}
 	}
 }

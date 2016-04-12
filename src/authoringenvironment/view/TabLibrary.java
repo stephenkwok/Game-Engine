@@ -112,14 +112,6 @@ abstract class TabLibrary extends TabParent {
 		        if (db.hasString()) {
 		        	Label toAdd = getLabelToAdd(event.getDragboard().getString());
 		        	addLabelToTarget(toAdd, myActorRule);
-		        	toAdd.setOnMouseClicked(new EventHandler<MouseEvent>() {
-		        	    @Override
-		        	    public void handle(MouseEvent click) {
-		        	        if (click.getClickCount() == 2) {
-		        	           myActorRule.remove(toAdd);
-		        	        }
-		        	    }
-		        	});
 		        	success = true;
 		        }
 		        event.setDropCompleted(success);

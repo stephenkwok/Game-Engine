@@ -3,7 +3,11 @@ package authoringenvironment.view.behaviors;
 import java.util.ResourceBundle;
 
 import gui.view.TextFieldWithButton;
-
+/**
+ * 
+ * @author AnnieTang
+ *
+ */
 public class DoubleBehavior extends TextFieldWithButton{
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
