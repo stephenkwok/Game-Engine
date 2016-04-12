@@ -63,6 +63,7 @@ public class Controller implements IScreenController {
 	 *            - list of created Actors that can be placed into the level
 	 */
 	public void goToLevelEditing(Level level) {
+		levelEnvironment.updateActorsList(actors);
 		goToEditingEnvironment(level, levelEnvironment);
 	}
 
@@ -148,7 +149,7 @@ public class Controller implements IScreenController {
 		Level newLevel = new Level();
 		levels.add(newLevel);
 		mainScreen.createLevelLabel(newLevel);
-		goToEditingEnvironment(newLevel, levelEnvironment);
+		goToLevelEditing(newLevel);
 	}
 
 	public void addActor() {
