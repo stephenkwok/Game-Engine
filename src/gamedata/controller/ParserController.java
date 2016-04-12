@@ -34,7 +34,6 @@ public class ParserController implements IParserController {
 			Game playingGame = loadforPlaying(file);
 			editingGame = this.myXMLParser.extractGame(new File(playingGame.getInitialGameFile()));
 			editingGame.initCurrentActors();
-
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
 			myScreen.showError(e.getMessage());
 			editingGame = null;
