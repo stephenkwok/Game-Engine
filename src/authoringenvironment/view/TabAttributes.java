@@ -24,7 +24,6 @@ import javafx.scene.layout.VBox;
  */
 public class TabAttributes extends TabParent {
 	private static final int PADDING = 10;
-	private static final String DELIMITER = ",";
 	private static final String EDITOR_ELEMENTS = "EditorElements";
 	private static final String HUD_OPTIONS = "HUDOptions";
 	private static final String HUD_PROMPT = "Choose items to display on the level scene:";
