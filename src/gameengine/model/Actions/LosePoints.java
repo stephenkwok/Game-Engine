@@ -15,7 +15,15 @@ public class LosePoints extends Action{
 
 	@Override
 	public void perform() {
-		getActor().changeAttribute(AttributeType.POINTS,-numPointsLost);
+		getMyActor().changeAttribute(AttributeType.POINTS,-getNumPointsLost());
+	}
+
+	public int getNumPointsLost() {
+		return numPointsLost;
+	}
+
+	public void setNumPointsLost(int numPointsLost) {
+		this.numPointsLost = numPointsLost;
 	}
 
 }

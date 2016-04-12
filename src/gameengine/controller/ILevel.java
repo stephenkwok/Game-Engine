@@ -26,7 +26,7 @@ public interface ILevel {
      *
      * @param name A name for the Level
      */
-    public void setName(String name);
+    public void setMyName(String name);
 
     /**
      * Provides the Level's name

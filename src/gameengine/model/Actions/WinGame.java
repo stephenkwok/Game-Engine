@@ -10,8 +10,8 @@ public class WinGame extends Action {
 
 	@Override
 	public void perform() {
-        getActor().changed();
-        getActor().notifyObservers("endGame");		
+        getMyActor().changed();
+        getMyActor().notifyObservers("endGame");		
 	}
 
 }

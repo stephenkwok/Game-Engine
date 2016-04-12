@@ -29,8 +29,9 @@ public class GUIActorImageViewer implements IGUI {
 	private static final int PADDING = 10;
 	private static final String EXTENSION_FILTER_DESCRIPTION = "Image Files (.jpg, .png .gif)";
 	private static final String EXTENSIONS = "*.jpg *.png *.gif";
-	private static final int STANDARD_IMAGE_HEIGHT = 100;
 	private static final String BUTTON_LABEL = "Load Image...";
+	private static final int BUTTON_HEIGHT = 30;
+	private static final int BUTTON_WIDTH = 150;
 	private ImageView myActorIV;
 	private StackPane myPane;
 	private Controller myController;
@@ -67,11 +68,11 @@ public class GUIActorImageViewer implements IGUI {
 	
 	private Button getImageSettingButton(){
 		Button imageSetter = new Button(BUTTON_LABEL);
+		imageSetter.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		imageSetter.setOnAction(event->{
 			try {
 				loadSelectedImage();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});
@@ -82,10 +83,7 @@ public class GUIActorImageViewer implements IGUI {
 		File imageFile = promptForFileName();
 		if(imageFile!=null){
 			Image image = new Image(imageFile.toURI().toString());
-			ImageView imageView = new ImageView(image);
-			imageView.setPreserveRatio(true);
-	        imageView.setFitHeight(STANDARD_IMAGE_HEIGHT);
-	        aEE.setActorImage(imageView);
+			aEE.setActorImage(new ImageView(image));
 		}
 	}
 	

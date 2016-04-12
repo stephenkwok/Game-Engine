@@ -4,8 +4,10 @@ import java.io.File;
 
 import authoringenvironment.view.GUIActorEditingEnvironment;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 public class ComboBoxActorImages extends ComboBoxImageCell{
 	GUIActorEditingEnvironment aEE;
@@ -34,7 +36,6 @@ public class ComboBoxActorImages extends ComboBoxImageCell{
 		File imageDir = new File(selectionResource);
 		for(File imageFile: imageDir.listFiles()){
 			imageNames.add(imageFile.getName());
-			System.out.println(imageFile.getName());
 		}
 	}
 
@@ -43,7 +44,9 @@ public class ComboBoxActorImages extends ComboBoxImageCell{
 	 */
 	@Override
 	protected Node getNodeForBox(String item){
-        return imageMap.get(item);
+		HBox hbox = new HBox();
+		hbox.getChildren().addAll(imageMap.get(item), new Label(" " + item));
+		return hbox;
 	}
 
 }

@@ -17,7 +17,4 @@ public class TextFieldGameNameEditor extends TextFieldWithButton{
 		super(labelText, prompt, textFieldWidth);
 		this.controller = controller;
 	}
-	
-
-	
 }

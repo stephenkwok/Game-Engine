@@ -23,7 +23,7 @@ public abstract class Action implements IAction {
      * @param assignedActor The Actor that will be changed
      */
     public Action(Actor assignedActor) {
-        myActor = assignedActor;
+        setMyActor(assignedActor);
     }
 
     /**
@@ -37,8 +37,13 @@ public abstract class Action implements IAction {
      *
      * @return The Actor that the Action references
      */
-    public Actor getActor() {
+    public Actor getMyActor() {
         return myActor;
     }
+    
+    public void setMyActor(Actor actor) {
+    	this.myActor = actor;
+    }
+
     
 }
