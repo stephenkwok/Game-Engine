@@ -5,13 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.view.GUIActorEditingEnvironment;
 import authoringenvironment.view.GUILevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
+import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
+import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gui.controller.IScreenController;
@@ -101,6 +105,14 @@ public class Controller implements IScreenController {
 	 *            file to write to.
 	 */
 	public void saveGame(File file) {
+		Game g = new Game(new GameInfo(), levels);  //TODO needs to be game info from AE
+		CreatorController controller;
+		try {
+			controller = new CreatorController(g, this.getScreen());
+			controller.saveForEditing(file);
+		} catch (ParserConfigurationException e) {
+			getScreen().showError(e.getMessage());
+		}
 
 	}
 
