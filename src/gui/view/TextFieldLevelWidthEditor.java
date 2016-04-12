@@ -9,4 +9,9 @@ public class TextFieldLevelWidthEditor extends TextFieldWithButton {
 		setButtonAction(e -> ((Level) getEditableElement()).setMyWidth(Double.valueOf(getTextFieldInput())));
 	}
 
+	@Override
+	protected void updateValueBasedOnEditable() {
+		setTextFieldValue(Double.toString(((Level) getEditableElement()).getWidth()));	
+	}
+
 }

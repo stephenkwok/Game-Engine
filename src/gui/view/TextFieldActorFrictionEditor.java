@@ -9,4 +9,10 @@ public class TextFieldActorFrictionEditor extends TextFieldWithButton {
 		setButtonAction(e -> ((Actor) getEditableElement()).setMyFriction(Double.parseDouble(getTextFieldInput())));
 	}
 
+	@Override
+	protected void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
