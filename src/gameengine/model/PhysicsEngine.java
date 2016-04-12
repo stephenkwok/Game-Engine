@@ -64,6 +64,10 @@ public class PhysicsEngine {
 		if (a.isInAir()) {
 			forceYdownward = gravity;
 		}
+		else{
+			forceYdownward = 0;
+			a.setInAir(true);
+		}
 				
 		nextHorzVelo = xVelo;      		
 		nextVertVelo = applyForce(yVelo, forceYupward);            // Apply  y force from movement action to y velocity

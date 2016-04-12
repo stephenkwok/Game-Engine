@@ -197,6 +197,10 @@ public class Level implements Observer, ILevel, IEditableGameElement {
 	      
 	      return stringBuilder.toString();
 	}
+	
+	public void removeActor(Actor actor){
+		myActors.remove(actor);
+	}
 
 
     @Override

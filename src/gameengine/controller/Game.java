@@ -158,5 +158,9 @@ public class Game extends Observable implements Observer {
 	public Level getCurrentLevel(){
 		return levels.get(info.getCurrentLevelNum());
 	}
+	
+	public void removeActor(Actor actor){
+		getCurrentLevel().removeActor(actor);
+	}
 
 }

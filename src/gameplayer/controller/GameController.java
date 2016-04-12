@@ -123,7 +123,7 @@ public class GameController implements Observer {
 				this.getClass().getDeclaredMethod(((String)arg)).invoke(this);
 			}
 			catch (Exception e){
-				//something with exception
+				e.printStackTrace();
 			}
 		}
 	}

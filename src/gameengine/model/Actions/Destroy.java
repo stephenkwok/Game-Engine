@@ -14,7 +14,7 @@ public class Destroy extends Action {
     @Override
     public void perform() {
         getActor().changed();
-        getActor().notifyObservers();
+        getActor().notifyObservers("removeActor");
     }
 
 }

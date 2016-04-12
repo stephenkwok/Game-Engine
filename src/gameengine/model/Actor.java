@@ -63,7 +63,11 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         myImageViewName = DEFAULT_IMAGE_NAME;
         isMain = DEFAULT_MAIN;
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
-        x.addListener(new ChangeListener(){
+        initXYBindings();
+    }
+
+	private void initXYBindings() {
+		x.addListener(new ChangeListener(){
         	@Override
             public void changed(ObservableValue o, Object oldVal, Object newVal) {
                 myImageView.setX((Double)newVal);
@@ -75,7 +79,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
                 myImageView.setY((Double)newVal);
             }
         });
-    }
+	}
 
     /**
      * Calls the appropriate sequence of Actions based on a provided Trigger
@@ -173,7 +177,6 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     @Override
     public void setXPos(double updateXPosition) {
        x.set(updateXPosition);
-       System.out.println(this.x);
     }
 
     @Override

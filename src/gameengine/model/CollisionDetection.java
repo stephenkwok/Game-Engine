@@ -71,9 +71,9 @@ public class CollisionDetection {
 		}
 		
 		if(a1.getBounds().getMaxY() <= a2.getBounds().getMaxY()){
-			yOverlap = a1.getBounds().getMaxY() -  a2.getYPos();
+			yOverlap = a1.getBounds().getMaxY() -  (a1.getYPos()-a1.getBounds().getWidth());
 		}else{
-			yOverlap = a2.getBounds().getMaxY() -  a1.getYPos();
+			yOverlap = a2.getBounds().getMaxY() -  (a1.getYPos()-a1.getBounds().getWidth());
 		}
 				
 		if(xOverlap <= yOverlap){

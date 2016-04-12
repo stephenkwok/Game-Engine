@@ -76,7 +76,7 @@ public class GameScreen extends Observable {
 			notifyObservers(trigger);
 		}
 		else if(e.getEventType()==KeyEvent.KEY_PRESSED){
-			camera.setTranslateX(camera.getTranslateX()+94.3);
+			//camera.setTranslateX(camera.getTranslateX()+94.3);
 			ITrigger trigger = handleKeyPress(((KeyEvent)e).getCode());
 			setChanged();
 			notifyObservers(trigger);

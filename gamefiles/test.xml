@@ -47,6 +47,7 @@
           </veloY>
           <myID>0</myID>
           <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
           <myName>A1</myName>
           <myImageViewName>redball.png</myImageViewName>
           <myRules>
@@ -56,6 +57,14 @@
                 <gameengine.model.Actions.MoveUp>
                   <myActor reference="../../../../.."/>
                 </gameengine.model.Actions.MoveUp>
+              </list>
+            </entry>
+            <entry>
+              <string>A1TopCollisionA2</string>
+              <list>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
               </list>
             </entry>
             <entry>
@@ -77,9 +86,9 @@
             <entry>
               <string>A1SideCollisionA2</string>
               <list>
-                <gameengine.model.Actions.NextLevel>
+                <gameengine.model.Actions.HorizontalStaticCollision>
                   <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.NextLevel>
+                </gameengine.model.Actions.HorizontalStaticCollision>
               </list>
             </entry>
           </myRules>
@@ -94,6 +103,7 @@
             <jumpForce>-5.0</jumpForce>
             <floorHeight>300.0</floorHeight>
           </myPhysicsEngine>
+          <isMain>false</isMain>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -137,16 +147,24 @@
           </veloY>
           <myID>0</myID>
           <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
           <myName>A2</myName>
           <myImageViewName>purplecircle.png</myImageViewName>
           <myRules/>
           <attributeMap/>
           <myPhysicsEngine reference="../../gameengine.model.Actor/myPhysicsEngine"/>
+          <isMain>false</isMain>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap>
         <entry>
           <string>Space</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>A1TopCollisionA2</string>
           <list>
             <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
           </list>
@@ -219,11 +237,13 @@
           </veloY>
           <myID>0</myID>
           <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
           <myName>Default Name</myName>
           <myImageViewName>elsa.png</myImageViewName>
           <myRules/>
           <attributeMap/>
           <myPhysicsEngine reference="../../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
+          <isMain>false</isMain>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap/>
@@ -269,7 +289,7 @@
       <debugNanos>0</debugNanos>
       <theMaster>
         <inactive>true</inactive>
-        <nextPulseTime>953764708554927</nextPulseTime>
+        <nextPulseTime>974017919323618</nextPulseTime>
         <lastPulseDuration>-2147483648</lastPulseDuration>
         <outer-class class="com.sun.javafx.tk.quantum.MasterTimer" reference="../.."/>
       </theMaster>
