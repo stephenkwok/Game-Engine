@@ -1,0 +1,1638 @@
+                              <yz>0.0</yz>
+                              <zx>0.0</zx>
+                              <zy>0.0</zy>
+                              <zz>1.0</zz>
+                              <xt>0.0</xt>
+                              <yt>0.0</yt>
+                              <zt>0.0</zt>
+                            </transform>
+                            <canReuse>false</canReuse>
+                            <localToSceneListeners class="linked-list">
+                              <null reference="../../../../scene/readOnlyProperty/helper/listener"/>
+                            </localToSceneListeners>
+                            <stamp>1</stamp>
+                            <parentStamp>0</parentStamp>
+                            <outer-class reference="../.."/>
+                          </localToSceneTransform>
+                          <listenerReasons>1</listenerReasons>
+                          <outer-class class="javafx.scene.ParallelCamera" reference="../.."/>
+                        </nodeTransformation>
+                        <resolvedNodeOrientation>0</resolvedNodeOrientation>
+                        <treeVisible>true</treeVisible>
+                        <treeVisibleRO>
+                          <valid>false</valid>
+                          <outer-class class="javafx.scene.ParallelCamera" reference="../.."/>
+                        </treeVisibleRO>
+                        <canReceiveFocus>false</canReceiveFocus>
+                        <cssFlag>CLEAN</cssFlag>
+                        <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+                          <bits reference="../../../../../../../parent/value/scene/value/defaultCamera/pseudoClassStates/bits"/>
+                        </pseudoClassStates>
+                        <localToSceneTx>
+                          <mxx>1.0</mxx>
+                          <myx>0.0</myx>
+                          <mxy>0.0</mxy>
+                          <myy>1.0</myy>
+                          <mxt>0.0</mxt>
+                          <myt>0.0</myt>
+                          <mxz>0.0</mxz>
+                          <myz>0.0</myz>
+                          <mzx>0.0</mzx>
+                          <mzy>0.0</mzy>
+                          <mzz>1.0</mzz>
+                          <mzt>0.0</mzt>
+                        </localToSceneTx>
+                        <farClipInScene>0.0</farClipInScene>
+                        <nearClipInScene>0.0</nearClipInScene>
+                        <ownerSubScene reference="../.."/>
+                        <projViewTx>
+                          <mat>
+                            <double>0.002</double>
+                            <double>0.0</double>
+                            <double>0.0</double>
+                            <double>-1.0</double>
+                            <double>0.0</double>
+                            <double>-0.002</double>
+                            <double>0.0</double>
+                            <double>1.0</double>
+                            <double>0.0</double>
+                            <double>0.0</double>
+                            <double>0.002</double>
+                            <double>0.0</double>
+                            <double>0.0</double>
+                            <double>0.0</double>
+                            <double>0.0</double>
+                            <double>1.0</double>
+                          </mat>
+                          <identity>false</identity>
+                        </projViewTx>
+                        <projTx>
+                          <mat>
+                            <double>0.002</double>
+                            <double>0.0</double>
+                            <double>0.0</double>
+                            <double>-1.0</double>
+                            <double>0.0</double>
+                            <double>-0.002</double>
+                            <double>0.0</double>
+                            <double>1.0</double>
+                            <double>0.0</double>
+                            <double>0.0</double>
+                            <double>0.002</double>
+                            <double>0.0</double>
+                            <double>0.0</double>
+                            <double>0.0</double>
+                            <double>0.0</double>
+                            <double>1.0</double>
+                          </mat>
+                          <identity>false</identity>
+                        </projTx>
+                        <viewTx>
+                          <mxx>1.0</mxx>
+                          <myx>0.0</myx>
+                          <mxy>0.0</mxy>
+                          <myy>1.0</myy>
+                          <mxt>0.0</mxt>
+                          <myt>0.0</myt>
+                          <mxz>0.0</mxz>
+                          <myz>0.0</myz>
+                          <mzx>0.0</mzx>
+                          <mzy>0.0</mzy>
+                          <mzz>1.0</mzz>
+                          <mzt>0.0</mzt>
+                        </viewTx>
+                        <viewWidth>1000.0</viewWidth>
+                        <viewHeight>1000.0</viewHeight>
+                        <position>
+                          <x>500.0</x>
+                          <y>500.0</y>
+                          <z>-1866.0254037844388</z>
+                        </position>
+                        <clipInSceneValid>false</clipInSceneValid>
+                        <projViewTxValid>true</projViewTxValid>
+                        <localToSceneValid>true</localToSceneValid>
+                        <sceneToLocalValid>true</sceneToLocalValid>
+                        <sceneToLocalTx>
+                          <mxx>1.0</mxx>
+                          <myx>0.0</myx>
+                          <mxy>0.0</mxy>
+                          <myy>1.0</myy>
+                          <mxt>0.0</mxt>
+                          <myt>0.0</myt>
+                          <mxz>0.0</mxz>
+                          <myz>0.0</myz>
+                          <mzx>0.0</mzx>
+                          <mzy>0.0</mzy>
+                          <mzz>1.0</mzz>
+                          <mzt>0.0</mzt>
+                        </sceneToLocalTx>
+                      </defaultCamera>
+                      <width class="javafx.scene.SubScene$3">
+                        <value>1000.0</value>
+                        <valid>true</valid>
+                        <outer-class reference="../.."/>
+                      </width>
+                      <height class="javafx.scene.SubScene$4">
+                        <value>1000.0</value>
+                        <valid>true</valid>
+                        <outer-class reference="../.."/>
+                      </height>
+                      <dirtyLayout>false</dirtyLayout>
+                      <dirtyNodes>false</dirtyNodes>
+                      <traversalEngine class="com.sun.javafx.scene.traversal.SubSceneTraversalEngine">
+                        <context class="com.sun.javafx.scene.traversal.TraversalEngine$EngineContext">
+                          <outer-class class="com.sun.javafx.scene.traversal.SubSceneTraversalEngine" defined-in="com.sun.javafx.scene.traversal.TraversalEngine$BaseEngineContext" reference="../.."/>
+                          <outer-class class="com.sun.javafx.scene.traversal.SubSceneTraversalEngine" reference="../.."/>
+                        </context>
+                        <tempEngineContext>
+                          <outer-class class="com.sun.javafx.scene.traversal.SubSceneTraversalEngine" defined-in="com.sun.javafx.scene.traversal.TraversalEngine$BaseEngineContext" reference="../.."/>
+                          <outer-class class="com.sun.javafx.scene.traversal.SubSceneTraversalEngine" reference="../.."/>
+                        </tempEngineContext>
+                        <algorithm class="com.sun.javafx.scene.traversal.ContainerTabOrder" reference="../../../../../../parent/value/scene/value/mouseHandler/pdrEventTargets/javafx.scene.control.Button/properties/backingMap/entry/javafx.scene.control.Tooltip/scene/value/traversalEngine/algorithm"/>
+                        <initialBounds class="javafx.geometry.BoundingBox">
+                          <minX>0.0</minX>
+                          <minY>0.0</minY>
+                          <minZ>0.0</minZ>
+                          <width>1.0</width>
+                          <height>1.0</height>
+                          <depth>0.0</depth>
+                          <maxX>1.0</maxX>
+                          <maxY>1.0</maxY>
+                          <maxZ>0.0</maxZ>
+                          <hash>0</hash>
+                        </initialBounds>
+                        <listeners/>
+                        <subScene reference="../.."/>
+                      </traversalEngine>
+                      <dirtyBits>0</dirtyBits>
+                      <lights/>
+                    </javafx.scene.SubScene>
+                  </childSet>
+                  <startIdx>1</startIdx>
+                  <pgChildrenSize>1</pgChildrenSize>
+                  <childrenTriggerPermutation>false</childrenTriggerPermutation>
+                  <removed/>
+                  <geomChanged>true</geomChanged>
+                  <childSetModified>true</childSetModified>
+                  <children class="javafx.scene.Parent$2">
+                    <list class="javafx.scene.Parent$1">
+                      <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$Generic">
+                        <changeListeners>
+                          <null/>
+                          <null/>
+                        </changeListeners>
+                        <invalidationSize>0</invalidationSize>
+                        <changeSize>2</changeSize>
+                        <locked>false</locked>
+                      </listenerHelper>
+                      <changeBuilder>
+                        <list class="javafx.scene.Parent$1" reference="../.."/>
+                        <changeLock>0</changeLock>
+                        <addRemoveChanges/>
+                      </changeBuilder>
+                      <backingList>
+                        <javafx.scene.SubScene reference="../../../../childSet/javafx.scene.SubScene"/>
+                      </backingList>
+                      <outer-class class="javafx.scene.layout.Pane" reference="../../.."/>
+                    </list>
+                    <modCount>1</modCount>
+                    <helper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+                      <listener class="javafx.collections.WeakListChangeListener">
+                        <ref>
+                          <referent class="null"/>
+                          <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../../parent/value/scene/value/acc/context/java.security.ProtectionDomain/classloader/ucp/loaders/sun.misc.URLClassPath_-JarLoader/lmap/entry[15]/sun.misc.URLClassPath_-JarLoader/jar/manRef/queue"/>
+                        </ref>
+                      </listener>
+                    </helper>
+                    <outer-class class="javafx.scene.layout.Pane" reference="../.."/>
+                  </children>
+                  <unmodifiableChildren class="javafx.collections.FXCollections$UnmodifiableObservableListImpl">
+                    <changeBuilder>
+                      <list class="javafx.collections.FXCollections$UnmodifiableObservableListImpl" reference="../.."/>
+                      <changeLock>0</changeLock>
+                    </changeBuilder>
+                    <backingList class="javafx.scene.Parent$2" reference="../../children"/>
+                    <listener class="null" reference="../../children/helper/listener/ref/referent"/>
+                  </unmodifiableChildren>
+                  <layoutFlag>CLEAN</layoutFlag>
+                  <performingLayout>false</performingLayout>
+                  <sizeCacheClear>false</sizeCacheClear>
+                  <prefWidthCache>1000.0</prefWidthCache>
+                  <prefHeightCache>1000.0</prefHeightCache>
+                  <minWidthCache>0.0</minWidthCache>
+                  <minHeightCache>0.0</minHeightCache>
+                  <sceneRoot>false</sceneRoot>
+                  <layoutRoot>false</layoutRoot>
+                  <stylesheets class="javafx.scene.Parent$3">
+                    <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+                      <listener class="null"/>
+                    </listenerHelper>
+                    <changeBuilder>
+                      <list class="javafx.scene.Parent$3" reference="../.."/>
+                      <changeLock>0</changeLock>
+                    </changeBuilder>
+                    <backingList/>
+                    <outer-class class="javafx.scene.layout.Pane" reference="../.."/>
+                  </stylesheets>
+                  <tmp class="com.sun.javafx.geom.RectBounds">
+                    <minX>0.0</minX>
+                    <maxX>-1.0</maxX>
+                    <minY>0.0</minY>
+                    <maxY>-1.0</maxY>
+                  </tmp>
+                  <cachedBounds class="com.sun.javafx.geom.RectBounds">
+                    <minX>0.0</minX>
+                    <maxX>1000.0</maxX>
+                    <minY>0.0</minY>
+                    <maxY>1000.0</maxY>
+                  </cachedBounds>
+                  <cachedBoundsInvalid>false</cachedBoundsInvalid>
+                  <dirtyChildrenCount>0</dirtyChildrenCount>
+                  <top class="javafx.scene.SubScene" reference="../childSet/javafx.scene.SubScene"/>
+                  <left class="javafx.scene.SubScene" reference="../childSet/javafx.scene.SubScene"/>
+                  <bottom class="javafx.scene.SubScene" reference="../childSet/javafx.scene.SubScene"/>
+                  <right class="javafx.scene.SubScene" reference="../childSet/javafx.scene.SubScene"/>
+                  <near class="javafx.scene.SubScene" reference="../childSet/javafx.scene.SubScene"/>
+                  <far class="javafx.scene.SubScene" reference="../childSet/javafx.scene.SubScene"/>
+                  <LEFT__INVALID>1</LEFT__INVALID>
+                  <TOP__INVALID>2</TOP__INVALID>
+                  <NEAR__INVALID>4</NEAR__INVALID>
+                  <RIGHT__INVALID>8</RIGHT__INVALID>
+                  <BOTTOM__INVALID>16</BOTTOM__INVALID>
+                  <FAR__INVALID>32</FAR__INVALID>
+                  <imageChangeListener class="null"/>
+                  <__snapToPixel>true</__snapToPixel>
+                  <padding class="javafx.scene.layout.Region$2">
+                    <value class="javafx.geometry.Insets" reference="../../../../parent/value/scene/value/impl__peer/root/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion[2]/children/com.sun.javafx.sg.prism.NGSubScene/root/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGGroup/children/com.sun.javafx.sg.prism.NGRegion/background/fills/elements/javafx.scene.layout.BackgroundFill/insets"/>
+                    <valid>true</valid>
+                    <lastValidValue reference="../../../../parent/value/scene/value/impl__peer/root/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion[2]/children/com.sun.javafx.sg.prism.NGSubScene/root/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGGroup/children/com.sun.javafx.sg.prism.NGRegion/background/fills/elements/javafx.scene.layout.BackgroundFill/insets"/>
+                    <outer-class class="javafx.scene.layout.Pane" reference="../.."/>
+                  </padding>
+                  <background class="javafx.scene.layout.Region$3">
+                    <valid>true</valid>
+                    <outer-class class="javafx.scene.layout.Pane" reference="../.."/>
+                  </background>
+                  <border class="javafx.scene.layout.Region$4">
+                    <valid>true</valid>
+                    <outer-class class="javafx.scene.layout.Pane" reference="../.."/>
+                  </border>
+                  <insets>
+                    <outer-class class="javafx.scene.layout.Pane" reference="../.."/>
+                  </insets>
+                  <snappedTopInset>0.0</snappedTopInset>
+                  <snappedRightInset>0.0</snappedRightInset>
+                  <snappedBottomInset>0.0</snappedBottomInset>
+                  <snappedLeftInset>0.0</snappedLeftInset>
+                  <__width>1000.0</__width>
+                  <__height>1000.0</__height>
+                  <__minWidth>-1.0</__minWidth>
+                  <__minHeight>-1.0</__minHeight>
+                  <__prefWidth>-1.0</__prefWidth>
+                  <__prefHeight>-1.0</__prefHeight>
+                  <__maxWidth>-1.0</__maxWidth>
+                  <__maxHeight>-1.0</__maxHeight>
+                  <cornersValid>true</cornersValid>
+                  <boundingBox class="javafx.geometry.BoundingBox" reference="../layoutBounds/bounds"/>
+                </javafx.scene.layout.Pane>
+                <javafx.scene.SubScene reference="../../../.."/>
+                <javafx.scene.control.ToolBar reference="../../parent/value/scene/value/mouseHandler/pdrEventTargets/javafx.scene.control.Button/parent/value/parent/value"/>
+              </childSet>
+              <startIdx>3</startIdx>
+              <pgChildrenSize>3</pgChildrenSize>
+              <childrenTriggerPermutation>false</childrenTriggerPermutation>
+              <removed/>
+              <geomChanged>true</geomChanged>
+              <childSetModified>true</childSetModified>
+              <children class="javafx.scene.Parent$2">
+                <list class="javafx.scene.Parent$1">
+                  <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$Generic">
+                    <changeListeners>
+                      <null/>
+                      <null/>
+                    </changeListeners>
+                    <invalidationSize>0</invalidationSize>
+                    <changeSize>2</changeSize>
+                    <locked>false</locked>
+                  </listenerHelper>
+                  <changeBuilder>
+                    <list class="javafx.scene.Parent$1" reference="../.."/>
+                    <changeLock>0</changeLock>
+                    <addRemoveChanges/>
+                  </changeBuilder>
+                  <backingList>
+                    <javafx.scene.control.ToolBar reference="../../../../parent/value/scene/value/mouseHandler/pdrEventTargets/javafx.scene.control.Button/parent/value/parent/value"/>
+                    <javafx.scene.SubScene reference="../../../../../.."/>
+                    <javafx.scene.layout.Pane reference="../../../../childSet/javafx.scene.layout.Pane"/>
+                  </backingList>
+                  <outer-class class="javafx.scene.layout.BorderPane" reference="../../.."/>
+                </list>
+                <modCount>3</modCount>
+                <helper class="com.sun.javafx.collections.ListListenerHelper$Generic">
+                  <changeListeners>
+                    <javafx.collections.WeakListChangeListener>
+                      <ref>
+                        <referent class="null"/>
+                        <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../parent/value/scene/value/acc/context/java.security.ProtectionDomain/classloader/ucp/loaders/sun.misc.URLClassPath_-JarLoader/lmap/entry[15]/sun.misc.URLClassPath_-JarLoader/jar/manRef/queue"/>
+                      </ref>
+                    </javafx.collections.WeakListChangeListener>
+                    <javafx.scene.layout.BorderPane_-BorderPositionProperty_-1>
+                      <val_-this_-0 reference="../../../../.."/>
+                      <outer-class>
+                        <value class="javafx.scene.control.ToolBar" reference="../../../../../../parent/value/scene/value/mouseHandler/pdrEventTargets/javafx.scene.control.Button/parent/value/parent/value"/>
+                        <valid>true</valid>
+                        <oldValue class="javafx.scene.control.ToolBar" reference="../../../../../../parent/value/scene/value/mouseHandler/pdrEventTargets/javafx.scene.control.Button/parent/value/parent/value"/>
+                        <propertyName>top</propertyName>
+                        <isBeingInvalidated>false</isBeingInvalidated>
+                        <outer-class reference="../../../../../.."/>
+                      </outer-class>
+                    </javafx.scene.layout.BorderPane_-BorderPositionProperty_-1>
+                    <javafx.scene.layout.BorderPane_-BorderPositionProperty_-1>
+                      <val_-this_-0 reference="../../../../.."/>
+                      <outer-class>
+                        <value class="javafx.scene.SubScene" reference="../../../../../../../.."/>
+                        <valid>true</valid>
+                        <oldValue class="javafx.scene.SubScene" reference="../../../../../../../.."/>
+                        <propertyName>center</propertyName>
+                        <isBeingInvalidated>false</isBeingInvalidated>
+                        <outer-class reference="../../../../../.."/>
+                      </outer-class>
+                    </javafx.scene.layout.BorderPane_-BorderPositionProperty_-1>
+                    <javafx.scene.layout.BorderPane_-BorderPositionProperty_-1>
+                      <val_-this_-0 reference="../../../../.."/>
+                      <outer-class>
+                        <value class="javafx.scene.layout.Pane" reference="../../../../../../childSet/javafx.scene.layout.Pane"/>
+                        <valid>true</valid>
+                        <oldValue class="javafx.scene.layout.Pane" reference="../../../../../../childSet/javafx.scene.layout.Pane"/>
+                        <propertyName>bottom</propertyName>
+                        <isBeingInvalidated>false</isBeingInvalidated>
+                        <outer-class reference="../../../../../.."/>
+                      </outer-class>
+                    </javafx.scene.layout.BorderPane_-BorderPositionProperty_-1>
+                  </changeListeners>
+                  <invalidationSize>0</invalidationSize>
+                  <changeSize>4</changeSize>
+                  <locked>false</locked>
+                </helper>
+                <outer-class class="javafx.scene.layout.BorderPane" reference="../.."/>
+              </children>
+              <unmodifiableChildren class="javafx.collections.FXCollections$UnmodifiableObservableListImpl">
+                <changeBuilder>
+                  <list class="javafx.collections.FXCollections$UnmodifiableObservableListImpl" reference="../.."/>
+                  <changeLock>0</changeLock>
+                </changeBuilder>
+                <backingList class="javafx.scene.Parent$2" reference="../../children"/>
+                <listener class="null" reference="../../children/helper/changeListeners/javafx.collections.WeakListChangeListener/ref/referent"/>
+              </unmodifiableChildren>
+              <layoutFlag>CLEAN</layoutFlag>
+              <performingLayout>false</performingLayout>
+              <sizeCacheClear>false</sizeCacheClear>
+              <prefWidthCache>1000.0</prefWidthCache>
+              <prefHeightCache>1562.0</prefHeightCache>
+              <minWidthCache>1000.0</minWidthCache>
+              <minHeightCache>1562.0</minHeightCache>
+              <sceneRoot>false</sceneRoot>
+              <layoutRoot>false</layoutRoot>
+              <stylesheets class="javafx.scene.Parent$3">
+                <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+                  <listener class="null"/>
+                </listenerHelper>
+                <changeBuilder>
+                  <list class="javafx.scene.Parent$3" reference="../.."/>
+                  <changeLock>0</changeLock>
+                </changeBuilder>
+                <backingList/>
+                <outer-class class="javafx.scene.layout.BorderPane" reference="../.."/>
+              </stylesheets>
+              <tmp class="com.sun.javafx.geom.RectBounds">
+                <minX>0.0</minX>
+                <maxX>1000.0</maxX>
+                <minY>562.0</minY>
+                <maxY>1562.0</maxY>
+              </tmp>
+              <cachedBounds class="com.sun.javafx.geom.RectBounds">
+                <minX>0.0</minX>
+                <maxX>1000.0</maxX>
+                <minY>0.0</minY>
+                <maxY>1562.0</maxY>
+              </cachedBounds>
+              <cachedBoundsInvalid>false</cachedBoundsInvalid>
+              <dirtyChildrenCount>0</dirtyChildrenCount>
+              <top class="javafx.scene.control.ToolBar" defined-in="javafx.scene.Parent" reference="../parent/value/scene/value/mouseHandler/pdrEventTargets/javafx.scene.control.Button/parent/value/parent/value"/>
+              <left class="javafx.scene.control.ToolBar" defined-in="javafx.scene.Parent" reference="../parent/value/scene/value/mouseHandler/pdrEventTargets/javafx.scene.control.Button/parent/value/parent/value"/>
+              <bottom class="javafx.scene.layout.Pane" defined-in="javafx.scene.Parent" reference="../childSet/javafx.scene.layout.Pane"/>
+              <right class="javafx.scene.control.ToolBar" defined-in="javafx.scene.Parent" reference="../parent/value/scene/value/mouseHandler/pdrEventTargets/javafx.scene.control.Button/parent/value/parent/value"/>
+              <near class="javafx.scene.control.ToolBar" reference="../parent/value/scene/value/mouseHandler/pdrEventTargets/javafx.scene.control.Button/parent/value/parent/value"/>
+              <far class="javafx.scene.control.ToolBar" reference="../parent/value/scene/value/mouseHandler/pdrEventTargets/javafx.scene.control.Button/parent/value/parent/value"/>
+              <LEFT__INVALID>1</LEFT__INVALID>
+              <TOP__INVALID>2</TOP__INVALID>
+              <NEAR__INVALID>4</NEAR__INVALID>
+              <RIGHT__INVALID>8</RIGHT__INVALID>
+              <BOTTOM__INVALID>16</BOTTOM__INVALID>
+              <FAR__INVALID>32</FAR__INVALID>
+              <imageChangeListener class="null"/>
+              <__snapToPixel>true</__snapToPixel>
+              <padding class="javafx.scene.layout.Region$2">
+                <value class="javafx.geometry.Insets" reference="../../parent/value/scene/value/impl__peer/root/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion[2]/children/com.sun.javafx.sg.prism.NGSubScene/root/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGGroup/children/com.sun.javafx.sg.prism.NGRegion/background/fills/elements/javafx.scene.layout.BackgroundFill/insets"/>
+                <valid>true</valid>
+                <lastValidValue reference="../../parent/value/scene/value/impl__peer/root/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion[2]/children/com.sun.javafx.sg.prism.NGSubScene/root/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGGroup/children/com.sun.javafx.sg.prism.NGRegion/background/fills/elements/javafx.scene.layout.BackgroundFill/insets"/>
+                <outer-class class="javafx.scene.layout.BorderPane" reference="../.."/>
+              </padding>
+              <background class="javafx.scene.layout.Region$3">
+                <valid>true</valid>
+                <outer-class class="javafx.scene.layout.BorderPane" reference="../.."/>
+              </background>
+              <border class="javafx.scene.layout.Region$4">
+                <valid>true</valid>
+                <outer-class class="javafx.scene.layout.BorderPane" reference="../.."/>
+              </border>
+              <insets>
+                <outer-class class="javafx.scene.layout.BorderPane" reference="../.."/>
+              </insets>
+              <snappedTopInset>0.0</snappedTopInset>
+              <snappedRightInset>0.0</snappedRightInset>
+              <snappedBottomInset>0.0</snappedBottomInset>
+              <snappedLeftInset>0.0</snappedLeftInset>
+              <__width>1000.0</__width>
+              <__height>1562.0</__height>
+              <__minWidth>-1.0</__minWidth>
+              <__minHeight>-1.0</__minHeight>
+              <__prefWidth>-1.0</__prefWidth>
+              <__prefHeight>-1.0</__prefHeight>
+              <__maxWidth>-1.0</__maxWidth>
+              <__maxHeight>-1.0</__maxHeight>
+              <cornersValid>true</cornersValid>
+              <center class="javafx.scene.layout.BorderPane$BorderPositionProperty" reference="../children/helper/changeListeners/javafx.scene.layout.BorderPane_-BorderPositionProperty_-1[2]/outer-class"/>
+              <top class="javafx.scene.layout.BorderPane$BorderPositionProperty" reference="../children/helper/changeListeners/javafx.scene.layout.BorderPane_-BorderPositionProperty_-1/outer-class"/>
+              <bottom class="javafx.scene.layout.BorderPane$BorderPositionProperty" reference="../children/helper/changeListeners/javafx.scene.layout.BorderPane_-BorderPositionProperty_-1[3]/outer-class"/>
+            </value>
+            <valid>true</valid>
+            <name></name>
+            <oldParent class="javafx.scene.layout.BorderPane" reference="../value"/>
+            <outer-class class="javafx.scene.SubScene" reference="../.."/>
+          </parent>
+          <parentDisabledChangedListener class="null" reference="../parent/value/disabled/readOnlyProperty/helper/invalidationListeners/null[2]"/>
+          <parentTreeVisibleChangedListener class="null" reference="../parent/value/treeVisibleRO/helper/invalidationListeners/null[2]"/>
+          <scene>
+            <value class="javafx.scene.Scene" reference="../../parent/value/parent/value/scene/value"/>
+            <valid>true</valid>
+            <name></name>
+            <readOnlyProperty>
+              <outer-class class="javafx.scene.Node$ReadOnlyObjectWrapperManualFire" reference="../.."/>
+            </readOnlyProperty>
+            <outer-class class="javafx.scene.SubScene" reference="../.."/>
+          </scene>
+          <styleClass class="javafx.scene.Node$3">
+            <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+              <listener class="null"/>
+            </listenerHelper>
+            <changeBuilder>
+              <list class="javafx.scene.Node$3" reference="../.."/>
+              <changeLock>0</changeLock>
+            </changeBuilder>
+            <backingList/>
+            <outer-class class="javafx.scene.SubScene" reference="../.."/>
+          </styleClass>
+          <derivedDepthTest>true</derivedDepthTest>
+          <disabled class="javafx.scene.Node$8">
+            <value>false</value>
+            <valid>true</valid>
+            <name></name>
+            <outer-class class="javafx.scene.SubScene" reference="../.."/>
+          </disabled>
+          <peer class="com.sun.javafx.sg.prism.NGSubScene" reference="../parent/value/parent/value/scene/value/impl__peer/root/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGSubScene"/>
+          <layoutX class="javafx.scene.Node$10">
+            <value>0.0</value>
+            <valid>true</valid>
+            <outer-class class="javafx.scene.SubScene" reference="../.."/>
+          </layoutX>
+          <layoutY class="javafx.scene.Node$11">
+            <value>62.0</value>
+            <valid>true</valid>
+            <outer-class class="javafx.scene.SubScene" reference="../.."/>
+          </layoutY>
+          <layoutBounds class="javafx.scene.Node$12">
+            <valid>true</valid>
+            <bounds class="javafx.geometry.BoundingBox">
+              <minX>0.0</minX>
+              <minY>0.0</minY>
+              <minZ>0.0</minZ>
+              <width>1000.0</width>
+              <height>500.0</height>
+              <depth>0.0</depth>
+              <maxX>1000.0</maxX>
+              <maxY>500.0</maxY>
+              <maxZ>0.0</maxZ>
+              <hash>0</hash>
+            </bounds>
+            <outer-class class="javafx.scene.SubScene" reference="../.."/>
+          </layoutBounds>
+          <localToParentTx class="com.sun.javafx.geom.transform.Translate2D">
+            <mxt>0.0</mxt>
+            <myt>62.0</myt>
+          </localToParentTx>
+          <transformDirty>false</transformDirty>
+          <txBounds class="com.sun.javafx.geom.RectBounds">
+            <minX>0.0</minX>
+            <maxX>1000.0</maxX>
+            <minY>62.0</minY>
+            <maxY>562.0</maxY>
+          </txBounds>
+          <geomBounds class="com.sun.javafx.geom.RectBounds">
+            <minX>0.0</minX>
+            <maxX>1000.0</maxX>
+            <minY>0.0</minY>
+            <maxY>500.0</maxY>
+          </geomBounds>
+          <boundsChanged>false</boundsChanged>
+          <geomBoundsInvalid>false</geomBoundsInvalid>
+          <localBoundsInvalid>true</localBoundsInvalid>
+          <txBoundsInvalid>false</txBoundsInvalid>
+          <nodeTransformation>
+            <localToParentTransform class="javafx.scene.Node$NodeTransformation$1">
+              <valid>0</valid>
+              <transform class="com.sun.javafx.scene.transform.TransformUtils$ImmutableTransform">
+                <impl__nodes>
+                  <garbage>
+                    <lock/>
+                    <queueLength>0</queueLength>
+                  </garbage>
+                  <strongRef/>
+                  <head>
+                    <referent reference="../../strongRef"/>
+                    <queue reference="../../garbage"/>
+                    <prev reference=".."/>
+                    <next reference=".."/>
+                  </head>
+                  <size>0</size>
+                </impl__nodes>
+                <xx>1.0</xx>
+                <xy>0.0</xy>
+                <xz>0.0</xz>
+                <yx>0.0</yx>
+                <yy>1.0</yy>
+                <yz>0.0</yz>
+                <zx>0.0</zx>
+                <zy>0.0</zy>
+                <zz>1.0</zz>
+                <xt>0.0</xt>
+                <yt>62.0</yt>
+                <zt>0.0</zt>
+              </transform>
+              <canReuse>true</canReuse>
+              <outer-class reference="../.."/>
+            </localToParentTransform>
+            <localToSceneTransform class="javafx.scene.Node$NodeTransformation$LocalToSceneTransformProperty">
+              <valid>2</valid>
+              <transform class="com.sun.javafx.scene.transform.TransformUtils$ImmutableTransform">
+                <impl__nodes>
+                  <garbage>
+                    <lock/>
+                    <queueLength>0</queueLength>
+                  </garbage>
+                  <strongRef/>
+                  <head>
+                    <referent reference="../../strongRef"/>
+                    <queue reference="../../garbage"/>
+                    <prev reference=".."/>
+                    <next reference=".."/>
+                  </head>
+                  <size>0</size>
+                </impl__nodes>
+                <xx>1.0</xx>
+                <xy>0.0</xy>
+                <xz>0.0</xz>
+                <yx>0.0</yx>
+                <yy>1.0</yy>
+                <yz>0.0</yz>
+                <zx>0.0</zx>
+                <zy>0.0</zy>
+                <zz>1.0</zz>
+                <xt>0.0</xt>
+                <yt>62.0</yt>
+                <zt>0.0</zt>
+              </transform>
+              <canReuse>false</canReuse>
+              <stamp>1</stamp>
+              <parentStamp>1</parentStamp>
+              <outer-class reference="../.."/>
+            </localToSceneTransform>
+            <listenerReasons>0</listenerReasons>
+            <outer-class class="javafx.scene.SubScene" reference="../.."/>
+          </nodeTransformation>
+          <eventHandlerProperties>
+            <eventDispatcher>
+              <previousDispatcher class="com.sun.javafx.scene.EnteredExitedHandler">
+                <nextDispatcher class="com.sun.javafx.event.EventHandlerManager" reference="../.."/>
+                <eventSource class="javafx.scene.SubScene" reference="../../../.."/>
+                <eventTypeModified>false</eventTypeModified>
+              </previousDispatcher>
+              <eventHandlerMap>
+                <entry>
+                  <javafx.event.EventType reference="../../../../../parent/value/parent/value/scene/value/mouseHandler/pdrEventTargets/javafx.scene.control.Button/parent/value/parent/value/eventDispatcher/value/enteredExitedHandler/nextDispatcher/eventHandlerMap/entry/com.sun.javafx.event.CompositeEventHandler/firstRecord/eventHandler/outer-class/children/list/backingList/com.sun.javafx.scene.control.skin.ToolBarSkin_-ToolBarOverflowMenu/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry/javafx.event.EventType"/>
+                  <com.sun.javafx.event.CompositeEventHandler>
+                    <eventHandler class="null"/>
+                  </com.sun.javafx.event.CompositeEventHandler>
+                </entry>
+                <entry>
+                  <javafx.event.EventType reference="../../../../../parent/value/parent/value/scene/value/mouseHandler/pdrEventTargets/javafx.scene.control.Button/parent/value/parent/value/items/backingList/javafx.scene.control.Button/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[9]/javafx.event.EventType"/>
+                  <com.sun.javafx.event.CompositeEventHandler>
+                    <eventHandler class="null"/>
+                  </com.sun.javafx.event.CompositeEventHandler>
+                </entry>
+              </eventHandlerMap>
+              <eventSource class="javafx.scene.SubScene" reference="../../.."/>
+            </eventDispatcher>
+            <bean class="javafx.scene.SubScene" reference="../.."/>
+            <onMouseClicked>
+              <value class="null" reference="../../eventDispatcher/eventHandlerMap/entry[2]/com.sun.javafx.event.CompositeEventHandler/eventHandler"/>
+              <valid>true</valid>
+              <bean class="javafx.scene.SubScene" reference="../../.."/>
+              <name>onMouseClicked</name>
+              <eventType reference="../../../parent/value/parent/value/scene/value/mouseHandler/pdrEventTargets/javafx.scene.control.Button/parent/value/parent/value/items/backingList/javafx.scene.control.Button/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[9]/javafx.event.EventType"/>
+              <outer-class reference="../.."/>
+            </onMouseClicked>
+            <onKeyPressed>
+              <value class="null" reference="../../eventDispatcher/eventHandlerMap/entry/com.sun.javafx.event.CompositeEventHandler/eventHandler"/>
+              <valid>true</valid>
+              <bean class="javafx.scene.SubScene" reference="../../.."/>
+              <name>onKeyPressed</name>
+              <eventType reference="../../../parent/value/parent/value/scene/value/mouseHandler/pdrEventTargets/javafx.scene.control.Button/parent/value/parent/value/eventDispatcher/value/enteredExitedHandler/nextDispatcher/eventHandlerMap/entry/com.sun.javafx.event.CompositeEventHandler/firstRecord/eventHandler/outer-class/children/list/backingList/com.sun.javafx.scene.control.skin.ToolBarSkin_-ToolBarOverflowMenu/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry/javafx.event.EventType"/>
+              <outer-class reference="../.."/>
+            </onKeyPressed>
+          </eventHandlerProperties>
+          <resolvedNodeOrientation>0</resolvedNodeOrientation>
+          <hover class="javafx.scene.Node$14">
+            <value>true</value>
+            <valid>true</valid>
+            <name></name>
+            <outer-class class="javafx.scene.SubScene" reference="../.."/>
+          </hover>
+          <focused>
+            <value>true</value>
+            <valid>true</valid>
+            <needsChangeEvent>false</needsChangeEvent>
+            <outer-class class="javafx.scene.SubScene" reference="../.."/>
+          </focused>
+          <focusTraversable class="javafx.scene.Node$16">
+            <value>true</value>
+            <valid>true</valid>
+            <origin>USER</origin>
+            <outer-class class="javafx.scene.SubScene" reference="../.."/>
+          </focusTraversable>
+          <treeVisible>true</treeVisible>
+          <treeVisibleRO>
+            <valid>true</valid>
+            <outer-class class="javafx.scene.SubScene" reference="../.."/>
+          [Fatal Error] :23867:87: Character reference "&#
+</treeVisibleRO>
+          <canReceiveFocus>true</canReceiveFocus>
+          <eventDispatcher class="javafx.beans.property.SimpleObjectProperty">
+            <value class="com.sun.javafx.scene.NodeEventDispatcher">
+              <enteredExitedHandler reference="../../../eventHandlerProperties/eventDispatcher/previousDispatcher"/>
+              <eventHandlerManager reference="../../../eventHandlerProperties/eventDispatcher"/>
+            </value>
+            <valid>true</valid>
+            <bean class="javafx.scene.SubScene" reference="../.."/>
+            <name>eventDispatcher</name>
+          </eventDispatcher>
+          <internalEventDispatcher reference="../eventDispatcher/value"/>
+          <preprocessMouseEventDispatcher class="null"/>
+          <cssFlag>CLEAN</cssFlag>
+          <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+            <bits>
+              <long>9</long>
+            </bits>
+          </pseudoClassStates>
+          <antiAliasing reference="../parent/value/parent/value/scene/value/antiAliasing"/>
+          <depthBuffer>false</depthBuffer>
+          <root class="javafx.scene.SubScene$1">
+            <value class="javafx.scene.Group" reference="../../parent/value/parent/value/scene/value/tmpTargetWrapper/node/parent/value"/>
+            <valid>true</valid>
+            <oldRoot class="javafx.scene.Group" reference="../../parent/value/parent/value/scene/value/tmpTargetWrapper/node/parent/value"/>
+            <outer-class reference="../.."/>
+          </root>
+          <defaultCamera class="javafx.scene.ParallelCamera">
+            <dirtyBits>0</dirtyBits>
+            <__geomBounds class="com.sun.javafx.geom.RectBounds">
+              <minX>0.0</minX>
+              <maxX>-1.0</maxX>
+              <minY>0.0</minY>
+              <maxY>-1.0</maxY>
+            </__geomBounds>
+            <__txBounds class="com.sun.javafx.geom.RectBounds">
+              <minX>0.0</minX>
+              <maxX>-1.0</maxX>
+              <minY>0.0</minY>
+              <maxY>-1.0</maxY>
+            </__txBounds>
+            <pendingUpdateBounds>false</pendingUpdateBounds>
+            <parentDisabledChangedListener class="null"/>
+            <parentTreeVisibleChangedListener class="null"/>
+            <scene>
+              <valid>true</valid>
+              <name></name>
+              <readOnlyProperty>
+                <helper class="com.sun.javafx.binding.ExpressionHelper$SingleInvalidation">
+                  <observable class="javafx.beans.property.ReadOnlyObjectWrapper$ReadOnlyPropertyImpl" reference="../.."/>
+                  <listener class="null"/>
+                </helper>
+                <outer-class class="javafx.scene.Node$ReadOnlyObjectWrapperManualFire" reference="../.."/>
+              </readOnlyProperty>
+              <outer-class class="javafx.scene.ParallelCamera" reference="../.."/>
+            </scene>
+            <styleClass class="javafx.scene.Node$3">
+              <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+                <listener class="null"/>
+              </listenerHelper>
+              <changeBuilder>
+                <list class="javafx.scene.Node$3" reference="../.."/>
+                <changeLock>0</changeLock>
+              </changeBuilder>
+              <backingList/>
+              <outer-class class="javafx.scene.ParallelCamera" reference="../.."/>
+            </styleClass>
+            <derivedDepthTest>true</derivedDepthTest>
+            <peer class="com.sun.javafx.sg.prism.NGParallelCamera" reference="../../parent/value/parent/value/scene/value/impl__peer/root/children/com.sun.javafx.sg.prism.NGRegion/children/com.sun.javafx.sg.prism.NGSubScene/camera"/>
+            <layoutBounds class="javafx.scene.Node$12">
+              <valid>false</valid>
+              <outer-class class="javafx.scene.ParallelCamera" reference="../.."/>
+            </layoutBounds>
+            <localToParentTx class="com.sun.javafx.geom.transform.Identity" reference="../../parent/value/parent/value/scene/value/defaultCamera/peer/transform"/>
+            <transformDirty>false</transformDirty>
+            <txBounds class="com.sun.javafx.geom.RectBounds">
+              <minX>0.0</minX>
+              <maxX>-1.0</maxX>
+              <minY>0.0</minY>
+              <maxY>-1.0</maxY>
+            </txBounds>
+            <geomBounds class="com.sun.javafx.geom.RectBounds">
+              <minX>0.0</minX>
+              <maxX>-1.0</maxX>
+              <minY>0.0</minY>
+              <maxY>-1.0</maxY>
+            </geomBounds>
+            <boundsChanged>false</boundsChanged>
+            <geomBoundsInvalid>true</geomBoundsInvalid>
+            <localBoundsInvalid>true</localBoundsInvalid>
+            <txBoundsInvalid>true</txBoundsInvalid>
+            <nodeTransformation>
+              <localToParentTransform class="javafx.scene.Node$NodeTransformation$1">
+                <valid>0</valid>
+                <transform class="com.sun.javafx.scene.transform.TransformUtils$ImmutableTransform">
+                  <impl__nodes>
+                    <garbage>
+                      <lock/>
+                      <queueLength>0</queueLength>
+                    </garbage>
+                    <strongRef/>
+                    <head>
+                      <referent reference="../../strongRef"/>
+                      <queue reference="../../garbage"/>
+                      <prev reference=".."/>
+                      <next reference=".."/>
+                    </head>
+                    <size>0</size>
+                  </impl__nodes>
+                  <xx>1.0</xx>
+                  <xy>0.0</xy>
+                  <xz>0.0</xz>
+                  <yx>0.0</yx>
+                  <yy>1.0</yy>
+                  <yz>0.0</yz>
+                  <zx>0.0</zx>
+                  <zy>0.0</zy>
+                  <zz>1.0</zz>
+                  <xt>0.0</xt>
+                  <yt>0.0</yt>
+                  <zt>0.0</zt>
+                </transform>
+                <canReuse>true</canReuse>
+                <outer-class reference="../.."/>
+              </localToParentTransform>
+              <localToSceneTransform class="javafx.scene.Node$NodeTransformation$LocalToSceneTransformProperty">
+                <valid>0</valid>
+                <helper class="com.sun.javafx.binding.ExpressionHelper$SingleInvalidation">
+                  <observable class="javafx.scene.Node$NodeTransformation$LocalToSceneTransformProperty" reference="../.."/>
+                  <listener class="null" reference="../../../../scene/readOnlyProperty/helper/listener"/>
+                </helper>
+                <transform class="com.sun.javafx.scene.transform.TransformUtils$ImmutableTransform">
+                  <impl__nodes>
+                    <garbage>
+                      <lock/>
+                      <queueLength>0</queueLength>
+                    </garbage>
+                    <strongRef/>
+                    <head>
+                      <referent reference="../../strongRef"/>
+                      <queue reference="../../garbage"/>
+                      <prev reference=".."/>
+                      <next reference=".."/>
+                    </head>
+                    <size>0</size>
+                  </impl__nodes>
+                  <xx>1.0</xx>
+                  <xy>0.0</xy>
+                  <xz>0.0</xz>
+                  <yx>0.0</yx>
+                  <yy>1.0</yy>
+                  <yz>0.0</yz>
+                  <zx>0.0</zx>
+                  <zy>0.0</zy>
+                  <zz>1.0</zz>
+                  <xt>0.0</xt>
+                  <yt>0.0</yt>
+                  <zt>0.0</zt>
+                </transform>
+                <canReuse>false</canReuse>
+                <localToSceneListeners class="linked-list">
+                  <null reference="../../../../scene/readOnlyProperty/helper/listener"/>
+                </localToSceneListeners>
+                <stamp>1</stamp>
+                <parentStamp>0</parentStamp>
+                <outer-class reference="../.."/>
+              </localToSceneTransform>
+              <listenerReasons>1</listenerReasons>
+              <outer-class class="javafx.scene.ParallelCamera" reference="../.."/>
+            </nodeTransformation>
+            <resolvedNodeOrientation>0</resolvedNodeOrientation>
+            <treeVisible>true</treeVisible>
+            <treeVisibleRO>
+              <valid>false</valid>
+              <outer-class class="javafx.scene.ParallelCamera" reference="../.."/>
+            </treeVisibleRO>
+            <canReceiveFocus>false</canReceiveFocus>
+            <cssFlag>CLEAN</cssFlag>
+            <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+              <bits reference="../../../parent/value/parent/value/scene/value/defaultCamera/pseudoClassStates/bits"/>
+            </pseudoClassStates>
+            <localToSceneTx>
+              <mxx>1.0</mxx>
+              <myx>0.0</myx>
+              <mxy>0.0</mxy>
+              <myy>1.0</myy>
+              <mxt>0.0</mxt>
+              <myt>0.0</myt>
+              <mxz>0.0</mxz>
+              <myz>0.0</myz>
+              <mzx>0.0</mzx>
+              <mzy>0.0</mzy>
+              <mzz>1.0</mzz>
+              <mzt>0.0</mzt>
+            </localToSceneTx>
+            <farClipInScene>0.0</farClipInScene>
+            <nearClipInScene>0.0</nearClipInScene>
+            <ownerSubScene reference="../.."/>
+            <projViewTx>
+              <mat>
+                <double>0.002</double>
+                <double>0.0</double>
+                <double>0.0</double>
+                <double>-1.0</double>
+                <double>0.0</double>
+                <double>-0.004</double>
+                <double>0.0</double>
+                <double>1.0</double>
+                <double>0.0</double>
+                <double>0.0</double>
+                <double>0.002</double>
+                <double>0.0</double>
+                <double>0.0</double>
+                <double>0.0</double>
+                <double>0.0</double>
+                <double>1.0</double>
+              </mat>
+              <identity>false</identity>
+            </projViewTx>
+            <projTx>
+              <mat>
+                <double>0.002</double>
+                <double>0.0</double>
+                <double>0.0</double>
+                <double>-1.0</double>
+                <double>0.0</double>
+                <double>-0.004</double>
+                <double>0.0</double>
+                <double>1.0</double>
+                <double>0.0</double>
+                <double>0.0</double>
+                <double>0.002</double>
+                <double>0.0</double>
+                <double>0.0</double>
+                <double>0.0</double>
+                <double>0.0</double>
+                <double>1.0</double>
+              </mat>
+              <identity>false</identity>
+            </projTx>
+            <viewTx>
+              <mxx>1.0</mxx>
+              <myx>0.0</myx>
+              <mxy>0.0</mxy>
+              <myy>1.0</myy>
+              <mxt>0.0</mxt>
+              <myt>0.0</myt>
+              <mxz>0.0</mxz>
+              <myz>0.0</myz>
+              <mzx>0.0</mzx>
+              <mzy>0.0</mzy>
+              <mzz>1.0</mzz>
+              <mzt>0.0</mzt>
+            </viewTx>
+            <viewWidth>1000.0</viewWidth>
+            <viewHeight>500.0</viewHeight>
+            <position>
+              <x>500.0</x>
+              <y>250.0</y>
+              <z>-933.0127018922194</z>
+            </position>
+            <clipInSceneValid>false</clipInSceneValid>
+            <projViewTxValid>true</projViewTxValid>
+            <localToSceneValid>true</localToSceneValid>
+            <sceneToLocalValid>true</sceneToLocalValid>
+            <sceneToLocalTx>
+              <mxx>1.0</mxx>
+              <myx>0.0</myx>
+              <mxy>0.0</mxy>
+              <myy>1.0</myy>
+              <mxt>0.0</mxt>
+              <myt>0.0</myt>
+              <mxz>0.0</mxz>
+              <myz>0.0</myz>
+              <mzx>0.0</mzx>
+              <mzy>0.0</mzy>
+              <mzz>1.0</mzz>
+              <mzt>0.0</mzt>
+            </sceneToLocalTx>
+          </defaultCamera>
+          <width class="javafx.scene.SubScene$3">
+            <value>1000.0</value>
+            <valid>true</valid>
+            <outer-class reference="../.."/>
+          </width>
+          <height class="javafx.scene.SubScene$4">
+            <value>500.0</value>
+            <valid>true</valid>
+            <outer-class reference="../.."/>
+          </height>
+          <dirtyLayout>false</dirtyLayout>
+          <dirtyNodes>false</dirtyNodes>
+          <traversalEngine class="com.sun.javafx.scene.traversal.SubSceneTraversalEngine">
+            <context class="com.sun.javafx.scene.traversal.TraversalEngine$EngineContext">
+              <outer-class class="com.sun.javafx.scene.traversal.SubSceneTraversalEngine" defined-in="com.sun.javafx.scene.traversal.TraversalEngine$BaseEngineContext" reference="../.."/>
+              <outer-class class="com.sun.javafx.scene.traversal.SubSceneTraversalEngine" reference="../.."/>
+            </context>
+            <tempEngineContext>
+              <outer-class class="com.sun.javafx.scene.traversal.SubSceneTraversalEngine" defined-in="com.sun.javafx.scene.traversal.TraversalEngine$BaseEngineContext" reference="../.."/>
+              <outer-class class="com.sun.javafx.scene.traversal.SubSceneTraversalEngine" reference="../.."/>
+            </tempEngineContext>
+            <algorithm class="com.sun.javafx.scene.traversal.ContainerTabOrder" reference="../../parent/value/parent/value/scene/value/mouseHandler/pdrEventTargets/javafx.scene.control.Button/properties/backingMap/entry/javafx.scene.control.Tooltip/scene/value/traversalEngine/algorithm"/>
+            <initialBounds class="javafx.geometry.BoundingBox">
+              <minX>0.0</minX>
+              <minY>0.0</minY>
+              <minZ>0.0</minZ>
+              <width>1.0</width>
+              <height>1.0</height>
+              <depth>0.0</depth>
+              <maxX>1.0</maxX>
+              <maxY>1.0</maxY>
+              <maxZ>0.0</maxZ>
+              <hash>0</hash>
+            </initialBounds>
+            <listeners/>
+            <subScene reference="../.."/>
+          </traversalEngine>
+          <dirtyBits>0</dirtyBits>
+          <lights/>
+        </mySubscene>
+        <mySubgroup reference="../mySubscene/parent/value/parent/value/scene/value/tmpTargetWrapper/node/parent/value"/>
+        <camera class="javafx.scene.PerspectiveCamera">
+          <dirtyBits>-1</dirtyBits>
+          <__geomBounds class="com.sun.javafx.geom.RectBounds">
+            <minX>0.0</minX>
+            <maxX>-1.0</maxX>
+            <minY>0.0</minY>
+            <maxY>-1.0</maxY>
+          </__geomBounds>
+          <__txBounds class="com.sun.javafx.geom.RectBounds">
+            <minX>0.0</minX>
+            <maxX>-1.0</maxX>
+            <minY>0.0</minY>
+            <maxY>-1.0</maxY>
+          </__txBounds>
+          <pendingUpdateBounds>false</pendingUpdateBounds>
+          <parentDisabledChangedListener class="null"/>
+          <parentTreeVisibleChangedListener class="null"/>
+          <scene>
+            <valid>true</valid>
+            <name></name>
+            <readOnlyProperty>
+              <helper class="com.sun.javafx.binding.ExpressionHelper$SingleInvalidation">
+                <observable class="javafx.beans.property.ReadOnlyObjectWrapper$ReadOnlyPropertyImpl" reference="../.."/>
+                <listener class="null"/>
+              </helper>
+              <outer-class class="javafx.scene.Node$ReadOnlyObjectWrapperManualFire" reference="../.."/>
+            </readOnlyProperty>
+            <outer-class class="javafx.scene.PerspectiveCamera" reference="../.."/>
+          </scene>
+          <styleClass class="javafx.scene.Node$3">
+            <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+              <listener class="null"/>
+            </listenerHelper>
+            <changeBuilder>
+              <list class="javafx.scene.Node$3" reference="../.."/>
+              <changeLock>0</changeLock>
+            </changeBuilder>
+            <backingList/>
+            <outer-class class="javafx.scene.PerspectiveCamera" reference="../.."/>
+          </styleClass>
+          <derivedDepthTest>true</derivedDepthTest>
+          <layoutBounds class="javafx.scene.Node$12">
+            <valid>false</valid>
+            <outer-class class="javafx.scene.PerspectiveCamera" reference="../.."/>
+          </layoutBounds>
+          <localToParentTx class="com.sun.javafx.geom.transform.Identity" reference="../../mySubscene/parent/value/parent/value/scene/value/defaultCamera/peer/transform"/>
+          <transformDirty>false</transformDirty>
+          <txBounds class="com.sun.javafx.geom.RectBounds">
+            <minX>0.0</minX>
+            <maxX>-1.0</maxX>
+            <minY>0.0</minY>
+            <maxY>-1.0</maxY>
+          </txBounds>
+          <geomBounds class="com.sun.javafx.geom.RectBounds">
+            <minX>0.0</minX>
+            <maxX>-1.0</maxX>
+            <minY>0.0</minY>
+            <maxY>-1.0</maxY>
+          </geomBounds>
+          <boundsChanged>false</boundsChanged>
+          <geomBoundsInvalid>true</geomBoundsInvalid>
+          <localBoundsInvalid>true</localBoundsInvalid>
+          <txBoundsInvalid>true</txBoundsInvalid>
+          <nodeTransformation>
+            <localToParentTransform class="javafx.scene.Node$NodeTransformation$1">
+              <valid>0</valid>
+              <transform class="com.sun.javafx.scene.transform.TransformUtils$ImmutableTransform">
+                <impl__nodes>
+                  <garbage>
+                    <lock/>
+                    <queueLength>0</queueLength>
+                  </garbage>
+                  <strongRef/>
+                  <head>
+                    <referent reference="../../strongRef"/>
+                    <queue reference="../../garbage"/>
+                    <prev reference=".."/>
+                    <next reference=".."/>
+                  </head>
+                  <size>0</size>
+                </impl__nodes>
+                <xx>1.0</xx>
+                <xy>0.0</xy>
+                <xz>0.0</xz>
+                <yx>0.0</yx>
+                <yy>1.0</yy>
+                <yz>0.0</yz>
+                <zx>0.0</zx>
+                <zy>0.0</zy>
+                <zz>1.0</zz>
+                <xt>0.0</xt>
+                <yt>0.0</yt>
+                <zt>0.0</zt>
+              </transform>
+              <canReuse>true</canReuse>
+              <outer-class reference="../.."/>
+            </localToParentTransform>
+            <localToSceneTransform class="javafx.scene.Node$NodeTransformation$LocalToSceneTransformProperty">
+              <valid>0</valid>
+              <helper class="com.sun.javafx.binding.ExpressionHelper$SingleInvalidation">
+                <observable class="javafx.scene.Node$NodeTransformation$LocalToSceneTransformProperty" reference="../.."/>
+                <listener class="null" reference="../../../../scene/readOnlyProperty/helper/listener"/>
+              </helper>
+              <transform class="com.sun.javafx.scene.transform.TransformUtils$ImmutableTransform">
+                <impl__nodes>
+                  <garbage>
+                    <lock/>
+                    <queueLength>0</queueLength>
+                  </garbage>
+                  <strongRef/>
+                  <head>
+                    <referent reference="../../strongRef"/>
+                    <queue reference="../../garbage"/>
+                    <prev reference=".."/>
+                    <next reference=".."/>
+                  </head>
+                  <size>0</size>
+                </impl__nodes>
+                <xx>1.0</xx>
+                <xy>0.0</xy>
+                <xz>0.0</xz>
+                <yx>0.0</yx>
+                <yy>1.0</yy>
+                <yz>0.0</yz>
+                <zx>0.0</zx>
+                <zy>0.0</zy>
+                <zz>1.0</zz>
+                <xt>0.0</xt>
+                <yt>0.0</yt>
+                <zt>0.0</zt>
+              </transform>
+              <canReuse>false</canReuse>
+              <localToSceneListeners class="linked-list">
+                <null reference="../../../../scene/readOnlyProperty/helper/listener"/>
+              </localToSceneListeners>
+              <stamp>1</stamp>
+              <parentStamp>0</parentStamp>
+              <outer-class reference="../.."/>
+            </localToSceneTransform>
+            <listenerReasons>1</listenerReasons>
+            <outer-class class="javafx.scene.PerspectiveCamera" reference="../.."/>
+          </nodeTransformation>
+          <resolvedNodeOrientation>0</resolvedNodeOrientation>
+          <treeVisible>true</treeVisible>
+          <treeVisibleRO>
+            <valid>false</valid>
+            <outer-class class="javafx.scene.PerspectiveCamera" reference="../.."/>
+          </treeVisibleRO>
+          <canReceiveFocus>false</canReceiveFocus>
+          <cssFlag>CLEAN</cssFlag>
+          <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+            <bits reference="../../../mySubscene/parent/value/parent/value/scene/value/defaultCamera/pseudoClassStates/bits"/>
+          </pseudoClassStates>
+          <localToSceneTx>
+            <mxx>1.0</mxx>
+            <myx>0.0</myx>
+            <mxy>0.0</mxy>
+            <myy>1.0</myy>
+            <mxt>0.0</mxt>
+            <myt>0.0</myt>
+            <mxz>0.0</mxz>
+            <myz>0.0</myz>
+            <mzx>0.0</mzx>
+            <mzy>0.0</mzy>
+            <mzz>1.0</mzz>
+            <mzt>0.0</mzt>
+          </localToSceneTx>
+          <farClipInScene>0.0</farClipInScene>
+          <nearClipInScene>0.0</nearClipInScene>
+          <projViewTx>
+            <mat>
+              <double>1.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>1.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>1.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>1.0</double>
+            </mat>
+            <identity>true</identity>
+          </projViewTx>
+          <projTx>
+            <mat>
+              <double>1.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>1.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>1.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>0.0</double>
+              <double>1.0</double>
+            </mat>
+            <identity>true</identity>
+          </projTx>
+          <viewTx>
+            <mxx>1.0</mxx>
+            <myx>0.0</myx>
+            <mxy>0.0</mxy>
+            <myy>1.0</myy>
+            <mxt>0.0</mxt>
+            <myt>0.0</myt>
+            <mxz>0.0</mxz>
+            <myz>0.0</myz>
+            <mzx>0.0</mzx>
+            <mzy>0.0</mzy>
+            <mzz>1.0</mzz>
+            <mzt>0.0</mzt>
+          </viewTx>
+          <viewWidth>1.0</viewWidth>
+          <viewHeight>1.0</viewHeight>
+          <position>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+          </position>
+          <clipInSceneValid>false</clipInSceneValid>
+          <projViewTxValid>false</projViewTxValid>
+          <localToSceneValid>false</localToSceneValid>
+          <sceneToLocalValid>false</sceneToLocalValid>
+          <sceneToLocalTx>
+            <mxx>1.0</mxx>
+            <myx>0.0</myx>
+            <mxy>0.0</mxy>
+            <myy>1.0</myy>
+            <mxt>0.0</mxt>
+            <myt>0.0</myt>
+            <mxz>0.0</mxz>
+            <myz>0.0</myz>
+            <mzx>0.0</mzx>
+            <mzy>0.0</mzy>
+            <mzz>1.0</mzz>
+            <mzt>0.0</mzt>
+          </sceneToLocalTx>
+          <fixedEyeAtCameraZero>false</fixedEyeAtCameraZero>
+        </camera>
+      </view>
+    </gameplayer.controller.GameController>
+  </obs>
+  <initialGameFile>gamefiles/loaders/test_loader.xml</initialGameFile>
+  <levels>
+    <gameengine.controller.Level>
+      <myActors>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+            <gameengine.controller.Game reference="../../../../../.."/>
+          </obs>
+          <x class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
+              <listener class="gameengine.model.Actor$1">
+                <outer-class reference="../../../.."/>
+              </listener>
+              <currentValue class="double">0.0</currentValue>
+            </helper>
+            <name></name>
+          </x>
+          <y class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
+              <listener class="gameengine.model.Actor$2">
+                <outer-class reference="../../../.."/>
+              </listener>
+              <currentValue class="double">0.0</currentValue>
+            </helper>
+            <name></name>
+          </y>
+          <veloX class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <name></name>
+          </veloX>
+          <veloY class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <name></name>
+          </veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>A1</myName>
+          <myImageViewName>redball.png</myImageViewName>
+          <myRules>
+            <entry>
+              <string>Space</string>
+              <list>
+                <gameengine.model.Actions.MoveUp>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.MoveUp>
+              </list>
+            </entry>
+            <entry>
+              <string>Left</string>
+              <list>
+                <gameengine.model.Actions.MoveLeft>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.MoveLeft>
+              </list>
+            </entry>
+            <entry>
+              <string>Right</string>
+              <list>
+                <gameengine.model.Actions.MoveRight>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.MoveRight>
+              </list>
+            </entry>
+            <entry>
+              <string>A1SideCollisionA2</string>
+              <list>
+                <gameengine.model.Actions.NextLevel>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.NextLevel>
+              </list>
+            </entry>
+          </myRules>
+          <attributeMap/>
+          <myPhysicsEngine>
+            <timeStep>1</timeStep>
+            <friction>-0.05</friction>
+            <gravity>0.11</gravity>
+            <maxHorizVelocity>50.0</maxHorizVelocity>
+            <maxVertVelocity>-50.0</maxVertVelocity>
+            <horizontalForce>5.0</horizontalForce>
+            <jumpForce>-5.0</jumpForce>
+            <floorHeight>300.0</floorHeight>
+          </myPhysicsEngine>
+          <isMain>false</isMain>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+            <gameengine.controller.Game reference="../../../../../.."/>
+          </obs>
+          <x class="javafx.beans.property.SimpleDoubleProperty">
+            <value>600.0</value>
+            <valid>true</valid>
+            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
+              <listener class="gameengine.model.Actor$1">
+                <outer-class reference="../../../.."/>
+              </listener>
+              <currentValue class="double">600.0</currentValue>
+            </helper>
+            <name></name>
+          </x>
+          <y class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
+              <listener class="gameengine.model.Actor$2">
+                <outer-class reference="../../../.."/>
+              </listener>
+              <currentValue class="double">0.0</currentValue>
+            </helper>
+            <name></name>
+          </y>
+          <veloX class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <name></name>
+          </veloX>
+          <veloY class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <name></name>
+          </veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>A2</myName>
+          <myImageViewName>purplecircle.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <myPhysicsEngine reference="../../gameengine.model.Actor/myPhysicsEngine"/>
+          <isMain>false</isMain>
+        </gameengine.model.Actor>
+      </myActors>
+      <myTriggerMap>
+        <entry>
+          <string>Space</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>Left</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>Right</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>A1SideCollisionA2</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+      </myTriggerMap>
+      <myName>Untitled</myName>
+      <myHeight>0.0</myHeight>
+      <myWidth>0.0</myWidth>
+      <myBackgroundImgName>default_background.png</myBackgroundImgName>
+    </gameengine.controller.Level>
+    <gameengine.controller.Level>
+      <myActors>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+            <gameengine.controller.Game reference="../../../../../.."/>
+          </obs>
+          <x class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
+              <listener class="gameengine.model.Actor$1">
+                <outer-class reference="../../../.."/>
+              </listener>
+              <currentValue class="double">0.0</currentValue>
+            </helper>
+            <name></name>
+          </x>
+          <y class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+              <observable class="javafx.beans.property.SimpleDoubleProperty" reference="../.."/>
+              <listener class="gameengine.model.Actor$2">
+                <outer-class reference="../../../.."/>
+              </listener>
+              <currentValue class="double">0.0</currentValue>
+            </helper>
+            <name></name>
+          </y>
+          <veloX class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <name></name>
+          </veloX>
+          <veloY class="javafx.beans.property.SimpleDoubleProperty">
+            <value>0.0</value>
+            <valid>true</valid>
+            <name></name>
+          </veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>Default Name</myName>
+          <myImageViewName>elsa.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <myPhysicsEngine reference="../../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
+          <isMain>false</isMain>
+        </gameengine.model.Actor>
+      </myActors>
+      <myTriggerMap/>
+      <myName>Untitled</myName>
+      <myHeight>0.0</myHeight>
+      <myWidth>0.0</myWidth>
+      <myBackgroundImgName>default_background.png</myBackgroundImgName>
+    </gameengine.controller.Level>
+  </levels>
+  <info>
+    <myName>My Game</myName>
+    <myImageName>default_game.jpg</myImageName>
+    <myDescription>This is a scrolling game.</myDescription>
+    <myCurrentLevelNum>0</myCurrentLevelNum>
+  </info>
+  <myPhysicsEngine reference="../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
+  <myCollisionDetector>
+    <myPhysicsEngine reference="../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
+  </myCollisionDetector>
+  <animation>
+    <startTime>8226870773</startTime>
+    <pauseTime>0</pauseTime>
+    <paused>false</paused>
+    <timer class="com.sun.javafx.tk.quantum.MasterTimer">
+      <PULSE__DURATION__NS>16666666</PULSE__DURATION__NS>
+      <PULSE__DURATION__TICKS>100</PULSE__DURATION__TICKS>
+      <paused>false</paused>
+      <totalPausedTime>0</totalPausedTime>
+      <startPauseTime>0</startPauseTime>
+      <receivers>
+        <javafx.animation.Animation_-1>
+          <outer-class class="javafx.animation.Timeline" reference="../../../.."/>
+        </javafx.animation.Animation_-1>
+        <null/>
+      </receivers>
+      <receiversLength>1</receiversLength>
+      <receiversLocked>false</receiversLocked>
+      <animationTimers>
+        <null/>
+        <null/>
+      </animationTimers>
+      <animationTimersLength>0</animationTimersLength>
+      <animationTimersLocked>false</animationTimersLocked>
+      <fixedPulseLength>0</fixedPulseLength>
+      <debugNanos>0</debugNanos>
+      <theMaster>
+        <inactive>false</inactive>
+        <nextPulseTime>1367398719902313</nextPulseTime>
+        <lastPulseDuration>-2147483648</lastPulseDuration>
+        <outer-class class="com.sun.javafx.tk.quantum.MasterTimer" reference="../.."/>
+      </theMaster>
+    </timer>
+    <accessCtrlCtx reference="../../obs/gameplayer.controller.GameController/view/mySubscene/parent/value/parent/value/scene/value/acc"/>
+    <pulseReceiver class="javafx.animation.Animation$1" reference="../timer/receivers/javafx.animation.Animation_-1"/>
+    <clipEnvelope class="com.sun.scenario.animation.shared.InfiniteClipEnvelope">
+      <animation class="javafx.animation.Timeline" reference="../.."/>
+      <rate>1.0</rate>
+      <cycleTicks>96</cycleTicks>
+      <deltaTicks>0</deltaTicks>
+      <ticks>0</ticks>
+      <currentRate>1.0</currentRate>
+      <inTimePulse>false</inTimePulse>
+      <aborted>false</aborted>
+      <autoReverse>false</autoReverse>
+      <pos>0</pos>
+    </clipEnvelope>
+    <lastPlayedFinished>false</lastPlayedFinished>
+    <lastPlayedForward>true</lastPlayedForward>
+    <oldRate>1.0</oldRate>
+    <currentRate class="javafx.animation.Animation$CurrentRateProperty">
+      <value>1.0</value>
+      <outer-class class="javafx.animation.Timeline" reference="../.."/>
+    </currentRate>
+    <cycleDuration class="javafx.animation.Animation$AnimationReadOnlyProperty">
+      <name>cycleDuration</name>
+      <value class="javafx.util.Duration">
+        <millis>16.0</millis>
+      </value>
+      <outer-class class="javafx.animation.Timeline" reference="../.."/>
+    </cycleDuration>
+    <totalDuration class="javafx.animation.Animation$AnimationReadOnlyProperty">
+      <name>totalDuration</name>
+      <value class="javafx.util.Duration">
+        <millis>Infinity</millis>
+      </value>
+      <outer-class class="javafx.animation.Timeline" reference="../.."/>
+    </totalDuration>
+    <currentTicks>0</currentTicks>
+    <cycleCount class="javafx.animation.Animation$4">
+      <value>-1</value>
+      <valid>true</valid>
+      <outer-class class="javafx.animation.Timeline" reference="../.."/>
+    </cycleCount>
+    <status class="javafx.animation.Animation$AnimationReadOnlyProperty">
+      <name>status</name>
+      <value class="javafx.animation.Animation$Status">RUNNING</value>
+      <outer-class class="javafx.animation.Timeline" reference="../.."/>
+    </status>
+    <targetFramerate>60.0</targetFramerate>
+    <resolution>1</resolution>
+    <lastPulse>0</lastPulse>
+    <cuePoints class="com.sun.javafx.collections.ObservableMapWrapper">
+      <backingMap/>
+    </cuePoints>
+    <clipCore>
+      <timeline reference="../.."/>
+      <keyFrames>
+        <javafx.animation.KeyFrame>
+          <time reference="../../../../cycleDuration/value"/>
+          <values class="empty-set"/>
+        </javafx.animation.KeyFrame>
+      </keyFrames>
+      <keyFrameTicks>
+        <long>96</long>
+      </keyFrameTicks>
+      <clipInterpolator class="com.sun.scenario.animation.shared.SimpleClipInterpolator">
+        <startKeyFrame>
+          <time>
+            <millis>0.0</millis>
+          </time>
+          <values class="empty-set"/>
+        </startKeyFrame>
+        <endKeyFrame reference="../../keyFrames/javafx.animation.KeyFrame"/>
+        <endTicks>96</endTicks>
+        <interval/>
+        <undefinedStartValueCount>0</undefinedStartValueCount>
+        <ticks>96</ticks>
+        <invalid>false</invalid>
+      </clipInterpolator>
+      <aborted>false</aborted>
+      <lastKF>-1</lastKF>
+      <curTicks>0</curTicks>
+    </clipCore>
+    <keyFrames class="javafx.animation.Timeline$1">
+      <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange"/>
+      <changeBuilder>
+        <list class="javafx.animation.Timeline$1" reference="../.."/>
+        <changeLock>0</changeLock>
+        <addRemoveChanges/>
+      </changeBuilder>
+      <backingList>
+        <javafx.animation.KeyFrame reference="../../../clipCore/keyFrames/javafx.animation.KeyFrame"/>
+      </backingList>
+      <outer-class reference="../.."/>
+    </keyFrames>
+  </animation>
+</gameengine.controller.Game>

@@ -6,6 +6,6 @@ public class TextFieldLevelHeightEditor extends TextFieldWithButton {
 	
 	public TextFieldLevelHeightEditor(String labelText, String promptText, Double textFieldWidth) {
 		super(labelText, promptText, textFieldWidth);
-		setButtonAction(e -> ((Level) getEditableElement()).setHeight(Double.valueOf(getTextFieldInput())));
+		setButtonAction(e -> ((Level) getEditableElement()).setMyHeight(Double.valueOf(getTextFieldInput())));
 	}
 }

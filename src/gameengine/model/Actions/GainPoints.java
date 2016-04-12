@@ -15,7 +15,15 @@ public class GainPoints extends Action{
 
 	@Override
 	public void perform() {
-		getActor().changeAttribute(AttributeType.POINTS,numPointsGained);
+		getMyActor().changeAttribute(AttributeType.POINTS,getNumPointsGained());
+	}
+
+	public int getNumPointsGained() {
+		return numPointsGained;
+	}
+
+	public void setNumPointsGained(int numPointsGained) {
+		this.numPointsGained = numPointsGained;
 	}
 
 }

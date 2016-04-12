@@ -17,10 +17,10 @@ public class GameInfo implements IEditableGameElement {
 	private int myID;
 	
 	public GameInfo(String name, String imageName, String description, int currentLevelNum ) {
-		this.myName = name;
-		this.myImageName = imageName;
-		this.myDescription = description;
-		this.myCurrentLevelNum = currentLevelNum;
+		this.setMyName(name);
+		this.setMyImageName(imageName);
+		this.setMyDescription(description);
+		this.setMyCurrentLevelNum(currentLevelNum);
 	}
 	
 	public GameInfo(String name, String imageName, String description) {
@@ -32,42 +32,42 @@ public class GameInfo implements IEditableGameElement {
 		
 	}
 	
-	public String getName() {
-		return myName;
+	public String getMyName() {
+		return this.myName;
 	}
 
 
-	public void setName(String myName) {
+	public void setMyName(String myName) {
 		this.myName = myName;
 	}
 
 
-	public String getImageName() {
-		return myImageName;
+	public String getMyImageName() {
+		return this.myImageName;
 	}
 
 
-	public void setImageName(String myImageName) {
+	public void setMyImageName(String myImageName) {
 		this.myImageName = myImageName;
 	}
 
 
-	public String getDescription() {
-		return myDescription;
+	public String getMyDescription() {
+		return this.myDescription;
 	}
 
 
-	public void setDescription(String myDescription) {
+	public void setMyDescription(String myDescription) {
 		this.myDescription = myDescription;
 	}
 
 
-	public int getCurrentLevelNum() {
-		return myCurrentLevelNum;
+	public int getMyCurrentLevelNum() {
+		return this.myCurrentLevelNum;
 	}
 
 
-	public void setCurrentLevelNum(int myCurrentLevelNum) {
+	public void setMyCurrentLevelNum(int myCurrentLevelNum) {
 		this.myCurrentLevelNum = myCurrentLevelNum;
 	}
 
@@ -76,13 +76,13 @@ public class GameInfo implements IEditableGameElement {
 	      
 	      stringBuilder.append("GameInfo [ ");
 	      stringBuilder.append("\nname: ");
-	      stringBuilder.append(myName);
+	      stringBuilder.append(getMyName());
 	      stringBuilder.append("\nimgName: ");
-	      stringBuilder.append(myImageName);
+	      stringBuilder.append(getMyImageName());
 	      stringBuilder.append("\nmyDescription: ");
-	      stringBuilder.append(myDescription);
+	      stringBuilder.append(getMyDescription());
 	      stringBuilder.append("\ncurrentLevelNum: ");
-	      stringBuilder.append(myCurrentLevelNum);
+	      stringBuilder.append(getMyCurrentLevelNum());
 	      stringBuilder.append(" ]");
 	      
 	      return stringBuilder.toString();
@@ -99,13 +99,19 @@ public class GameInfo implements IEditableGameElement {
 	}
 
 	@Override
-	public void setID(int ID) {
+	public String getName() {
+		return myName;
+	}
+
+	@Override
+	public void setMyID(int ID) {
 		myID = ID;
 	}
 
 	@Override
-	public int getID() {
+	public int getMyID() {
 		return myID;
 	}
+
 
 }

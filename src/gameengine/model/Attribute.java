@@ -1,5 +1,7 @@
 package gameengine.model;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.AttributeType;
 import javafx.beans.binding.BooleanBinding;
@@ -10,38 +12,54 @@ import javafx.beans.value.ObservableValue;
 
 public class Attribute {
 	
+	private int myValue;
+	private int myTriggerValue;
     private AttributeType myType;
-    private IntegerProperty myInitialValue;
-    private IntegerProperty myTriggerValue;
     private Action myAction;
-    private BooleanBinding isActionTriggered;
 
     public Attribute(AttributeType type, int initialValue, int triggerValue, Action action) {
-    	myType = type;
-        myInitialValue = new SimpleIntegerProperty(initialValue);
-        myTriggerValue = new SimpleIntegerProperty(triggerValue);
-        myAction = action;
-        isActionTriggered = myInitialValue.isEqualTo(myTriggerValue);
-
-        initAttribute();
+    	myValue = initialValue;
+    	myTriggerValue = triggerValue;
+	    setMyType(type);
+        setMyAction(action);
     }
 
     public void changeAttribute(int change) {
-        myInitialValue.setValue(myInitialValue.getValue() + change);
+    	myValue += change;
+        if(myValue == myTriggerValue){
+        	myAction.perform();
+        }
     }
 
-    private void initAttribute() {
-        isActionTriggered.addListener(new ChangeListener() {
-            @Override
-            public void changed(ObservableValue o, Object oldVal,
-                                Object newVal) {
-                myAction.perform();
-            }
-        });
-    }
+	public int getMyValue() {
+		return myValue;
+	}
 
-    public AttributeType getType(){
-        return myType;
-    }
+	public void setMyValue(int myValue) {
+		this.myValue = myValue;
+	}
 
+	public int getMyTriggerValue() {
+		return myTriggerValue;
+	}
+
+	public void setMyTriggerValue(int myTriggerValue) {
+		this.myTriggerValue = myTriggerValue;
+	}
+
+	public AttributeType getMyType() {
+		return myType;
+	}
+
+	public void setMyType(AttributeType myType) {
+		this.myType = myType;
+	}
+
+	public Action getMyAction() {
+		return myAction;
+	}
+
+	public void setMyAction(Action myAction) {
+		this.myAction = myAction;
+	}
 }

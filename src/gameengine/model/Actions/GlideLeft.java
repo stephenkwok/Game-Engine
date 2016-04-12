@@ -10,7 +10,7 @@ public class GlideLeft extends GlidingAction {
 
 	@Override
 	public void perform() {
-    	getActor().getPhysicsEngine().glideLeft(getActor());			
+    	getMyActor().getPhysicsEngine().glideLeft(getMyActor());			
 	}
 
 }
