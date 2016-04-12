@@ -98,7 +98,7 @@ abstract class TabLibrary extends TabParent {
 	private void setDragExited(Label mySource, GridPane myTarget) {
 		myTarget.setOnDragExited(new EventHandler<DragEvent>() {
 		    public void handle(DragEvent event) {
-		    	myTarget.setBackground(new Background(new BackgroundFill(Color.LAVENDER,new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
+		    	myTarget.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE,new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
 		        event.consume();
 		    }
 		});
@@ -112,14 +112,6 @@ abstract class TabLibrary extends TabParent {
 		        if (db.hasString()) {
 		        	Label toAdd = getLabelToAdd(event.getDragboard().getString());
 		        	addLabelToTarget(toAdd, myActorRule);
-		        	toAdd.setOnMouseClicked(new EventHandler<MouseEvent>() {
-		        	    @Override
-		        	    public void handle(MouseEvent click) {
-		        	        if (click.getClickCount() == 2) {
-		        	           myActorRule.remove(toAdd);
-		        	        }
-		        	    }
-		        	});
 		        	success = true;
 		        }
 		        event.setDropCompleted(success);
@@ -146,11 +138,13 @@ abstract class TabLibrary extends TabParent {
 	
 	private boolean matchesExtensions(String libraryElement, String extensions){
 		List<String> fileExts = Arrays.asList(extensions.split(" "));
-		return fileExts.contains(libraryElement.substring(libraryElement.length()-FILE_EXT_LENGTH, libraryElement.length()));
+		if(libraryElement.length()>4) return fileExts.contains(libraryElement.substring(libraryElement.length()-FILE_EXT_LENGTH, libraryElement.length()));
+		return false;
 	}
 	
 	public void updateDragEvents(ActorRuleCreator myActorRuleCreator) {
 		this.myActorRuleCreator = myActorRuleCreator;
+		this.myActorRules = myActorRuleCreator.getRules();
 		for(Label behaviorLabel: labels){
 			if(myActorRuleCreator!=null){
 				setDragEvent(behaviorLabel,TransferMode.COPY);
