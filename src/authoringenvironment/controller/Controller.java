@@ -92,6 +92,7 @@ public class Controller implements IScreenController {
 	 */
 	public void goToEditingEnvironment(IEditableGameElement editable, IEditingEnvironment environment) {
 		environment.setEditable(editable);
+		actorEnvironment.updateRules();
 		guiMain.setCenterPane(environment.getPane()); 
 	}
 

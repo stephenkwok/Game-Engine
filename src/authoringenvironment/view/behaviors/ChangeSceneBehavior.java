@@ -23,4 +23,8 @@ public class ChangeSceneBehavior extends ComboBoxBehavior{
 		return myController.getLevelNames();
 	}
 
+	@Override
+	protected void updateValueBasedOnEditable() {
+	}
+
 }

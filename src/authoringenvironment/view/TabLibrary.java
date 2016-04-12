@@ -138,11 +138,13 @@ abstract class TabLibrary extends TabParent {
 	
 	private boolean matchesExtensions(String libraryElement, String extensions){
 		List<String> fileExts = Arrays.asList(extensions.split(" "));
-		return fileExts.contains(libraryElement.substring(libraryElement.length()-FILE_EXT_LENGTH, libraryElement.length()));
+		if(libraryElement.length()>4) return fileExts.contains(libraryElement.substring(libraryElement.length()-FILE_EXT_LENGTH, libraryElement.length()));
+		return false;
 	}
 	
 	public void updateDragEvents(ActorRuleCreator myActorRuleCreator) {
 		this.myActorRuleCreator = myActorRuleCreator;
+		this.myActorRules = myActorRuleCreator.getRules();
 		for(Label behaviorLabel: labels){
 			if(myActorRuleCreator!=null){
 				setDragEvent(behaviorLabel,TransferMode.COPY);

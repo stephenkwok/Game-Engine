@@ -1,6 +1,8 @@
 package authoringenvironment.view;
 
+import java.io.File;
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -38,12 +40,15 @@ public class ActorRule {
 	private static final int TRIGGERS_ROW = 1;
 	private static final int RESULTS_LABEL_ROW = 2;
 	private static final int RESULTS_ROW = 3;
-	private double ruleWidth; 
 	private static final double RULE_HEIGHT = 250;
 	private static final int CORNER_RADIUS = 20;
 	private static final double RULE_PERCENT_WIDTH = 0.90;
 	private static final double STACKPANE_PERCENT_WIDTH = 0.92;
 	private static final double STACKPANE_PERCENT_HEIGHT = 0.3;
+	private static final String CHANGE_IMAGE = "ChangeImage";
+	private static final String PLAY_SOUND = "PlaySound";
+	private static final String PLAY_MUSIC = "PlayMusic";
+	private double ruleWidth; 
 	private GridPane myRule;	
 	private VBox triggers;
 	private VBox results;
@@ -100,22 +105,16 @@ public class ActorRule {
 	private void addCloseButton(){
 		Button close = new Button(CLOSE);
 		close.setOnAction(event -> {
-			myActorRuleCreator.getRules().remove(myRule);
-			myActorRuleCreator.getGridPane().getChildren().remove(myRule);
+			myActorRuleCreator.removeRule(this);
 		});
 		myRule.add(close, CLOSE_COL, CLOSE_ROW);
 	}
 	
 	public void addBehavior(Label behavior) {
-		Node toAdd = getBehaviorHBox(behavior);
-		toAdd.setOnMouseClicked(new EventHandler<MouseEvent>() {
-    	    @Override
-    	    public void handle(MouseEvent click) {
-    	        if (click.getClickCount() == 2) {
-    	           remove(toAdd);
-    	        }
-    	    }
-    	});
+		Node toAdd = getBehaviorHBox(behavior.getText());
+		toAdd.setOnMouseClicked(event -> {
+			if(event.getClickCount()==2) remove(toAdd);
+		});
 		if(isTrigger(behavior.getText())) triggers.getChildren().add(toAdd);
 		else results.getChildren().add(toAdd);
 	}
@@ -126,13 +125,38 @@ public class ActorRule {
 	}
 	
 	public void addSound(Label sound) {
-		//PlaySound or PlayMusic
-		results.getChildren().add(sound);
+		if(isInPath(sound.getText(), myLibraryResources.getString("Sounds"))){
+			Node toAdd = getBehaviorHBox(PLAY_SOUND);
+			toAdd.setOnMouseClicked(event -> {
+				if(event.getClickCount()==2) remove(toAdd);
+			});
+			results.getChildren().add(toAdd);
+		}
+		else{
+			Node toAdd = getBehaviorHBox(PLAY_MUSIC);
+			toAdd.setOnMouseClicked(event -> {
+				if(event.getClickCount()==2) remove(toAdd);
+			});
+			results.getChildren().add(toAdd);
+		}
+		//TODO: change value of combobox to be this image
+	}
+	private boolean isInPath(String fileName, String pathname){
+		File dir = new File(pathname);
+		List<String> fileNames = new ArrayList<>();
+		for(File file:dir.listFiles()){
+			fileNames.add(file.getName());
+		}
+		return fileNames.contains(fileName);
 	}
 
 	public void addImage(Label image) {
-		//ChangeImage
-		results.getChildren().add(image);
+		Node toAdd = getBehaviorHBox(CHANGE_IMAGE);
+		toAdd.setOnMouseClicked(event -> {
+			if(event.getClickCount()==2) remove(toAdd);
+		});
+		results.getChildren().add(toAdd);
+		//TODO: change value of combobox to be this image
 	}
 	
 	public void remove(Node toRemove){
@@ -140,8 +164,7 @@ public class ActorRule {
 		results.getChildren().remove(toRemove);
 	}
 	
-	private Node getBehaviorHBox(Label behavior){
-		String behaviorType = behavior.getText();
+	private Node getBehaviorHBox(String behaviorType){
 		try{
 			String className = PACKAGE + myLibraryResources.getString(behaviorType+CLASS);
 			Class<?> clazz = Class.forName(className);
@@ -154,7 +177,7 @@ public class ActorRule {
 				Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, Controller.class);
 				return ((IGUIElement) constructor.newInstance(behaviorType,myLibraryResources,myActorRuleCreator.getController())).createNode();
 			}catch(Exception e2){
-				return behavior;
+				return new Label(behaviorType);
 			}
 		}
 	}

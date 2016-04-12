@@ -32,4 +32,8 @@ public class ResourceOptionsBehavior extends ComboBoxBehavior {
 			fileNames.add(imageFile.getName());
 		}
 	}
+
+	@Override
+	protected void updateValueBasedOnEditable() {
+	}
 }

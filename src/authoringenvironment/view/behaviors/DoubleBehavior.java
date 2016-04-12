@@ -31,4 +31,8 @@ public class DoubleBehavior extends TextFieldWithButton{
 	public double getQuantity(){
 		return quantity;
 	}
+
+	@Override
+	protected void updateValueBasedOnEditable() {
+	}
 }
