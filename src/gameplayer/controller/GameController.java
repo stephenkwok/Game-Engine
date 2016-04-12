@@ -150,10 +150,15 @@ public class GameController implements Observer {
 	public void togglePause() {
 		//TODO: stop the step(), thx michael!!!!!! :)
 		System.out.println("pause the game");
+		getGame().getAnimation().pause();
+		view.getMySubscene().setDisable(true);
 	}
 
 	public void toggleUnPause() {
 		System.out.println("un pause game");
+		getGame().getAnimation().play();;
+		view.getMySubscene().setDisable(false);
+		
 	}
 	
 	
