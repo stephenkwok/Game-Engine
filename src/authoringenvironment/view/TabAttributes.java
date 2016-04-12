@@ -24,11 +24,8 @@ import javafx.scene.layout.VBox;
  */
 public class TabAttributes extends TabParent {
 	private static final int PADDING = 10;
-	private static final String DELIMITER = ",";
 	private static final String EDITOR_ELEMENTS = "EditorElements";
-	private static final String HUD_OPTIONS = "HUDOptions";
-	private static final String HUD_PROMPT = "Choose items to display on the level scene:";
-	private static final String GO = "Go";
+	private static final String DELIMITER = ",";
 	private ResourceBundle myAttributesResources;
 	private GUIFactory myFactory;
 	private Controller myController;
@@ -51,29 +48,8 @@ public class TabAttributes extends TabParent {
 		VBox vbox = new VBox(PADDING);
 		vbox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
 		vbox.getChildren().addAll(addElements(EDITOR_ELEMENTS, vbox));
-		
-		if (myAttributesResources.containsKey(HUD_OPTIONS)) {
-			addHUD(HUD_OPTIONS, vbox);
-		}
-		
 		updateEditable(myEditableElement);
-		
 		myContent = vbox;
-	}
-	
-	private void addHUD(String key, VBox vbox) {
-		vbox.getChildren().add(new Label(HUD_PROMPT));
-		List<Node> checkboxes = addElements(HUD_OPTIONS, vbox);
-		for (int i = 0; i < checkboxes.size(); i++) {
-			CheckBox cb = (CheckBox) checkboxes.get(i);
-			myHUDElements.add(cb);
-		}
-		vbox.getChildren().addAll(checkboxes);
-		Button checkHUDButton = new Button(GO);
-		checkHUDButton.setOnAction(event->{
-			((Level) myEditableElement).setMyHUDOptions(getHUDElementsToDisplay());
-		});
-		vbox.getChildren().add(checkHUDButton);
 	}
 	
 	private List<Node> addElements(String key, VBox vbox) {
@@ -92,17 +68,6 @@ public class TabAttributes extends TabParent {
 		for (int i = 0; i < myEditingElements.size(); i++) {
 			myEditingElements.get(i).setEditableElement(element);
 		}
-	}
-		
-	public List<String> getHUDElementsToDisplay() {
-		List<String> toDisplay = new ArrayList<>();
-		for (int i = 0; i < myHUDElements.size(); i++) {
-			if (myHUDElements.get(i).isSelected()) {
-				toDisplay.add(myHUDElements.get(i).getId());
-			}
-		}
-		
-		return toDisplay;
 	}
 	
 	@Override

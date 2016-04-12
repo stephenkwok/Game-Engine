@@ -1,9 +1,13 @@
 package authoringenvironment.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.GameInfo;
+import gui.view.GUIFactory;
 import gui.view.IGUIEditingElement;
 import gui.view.IGUIElement;
 import gui.view.TextAreaGameDescriptionEditor;
@@ -13,6 +17,8 @@ import gui.view.TextFieldWithButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,6 +37,7 @@ import javafx.scene.layout.VBox;
 public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElement {
 
 	private IEditableGameElement myGameInfo;
+	private static final String DELIMITER = ",";
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
 	private static final double CONTAINER_PADDING = 20;
 	private static final double CONTAINER_PREFERRED_WIDTH = 350.0;
@@ -38,16 +45,26 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 	private static final double TEXT_FIELD_WIDTH = 100.0;
 	private static final double TEXT_FIELD_CONTAINER_SPACING = 10.0;
 	private static final double TEXT_FIELD_CONTAINER_PADDING = 10.0;
+	private static final String HUD_OPTIONS = "HUDOptions";
+	private static final String HUD_PROMPT = "Choose items to display on the level scene:";
+	private static final String GO = "Go";
 	private final ResourceBundle myResources;
+	private ResourceBundle myAttributesResources;
 	private VBox editingEnvironmentContainer;
 	private Label welcomeMessage;
 	private HBox nameEditorContainer;
 	private VBox gameDescriptionEditor;
 	private VBox previewImageContainer;
+	private List<CheckBox> myHUDElements;
+	private GUIFactory myFactory;
+	private Controller myController;
 
-	public GUIGameEditingEnvironment(GameInfo gameInfo) {
+	public GUIGameEditingEnvironment(GameInfo gameInfo, Controller controller) {
 		this.myGameInfo = gameInfo;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
+		this.myAttributesResources = ResourceBundle.getBundle("HUDOptions");
+		myFactory = new GUIFactory(myAttributesResources, myController);
+		myHUDElements = new ArrayList<>();
 	}
 
 	@Override
@@ -92,6 +109,41 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 				new Image(getClass().getClassLoader().getResourceAsStream("default_game.jpg")));
 		previewImageContainer.getChildren().addAll(previewImageLabel, previewImage);
 	}
+	
+	private void initializeHUD(String key, VBox vbox) {
+		vbox.getChildren().add(new Label(HUD_PROMPT));
+		List<Node> checkboxes = addElements(HUD_OPTIONS, vbox);
+		for (int i = 0; i < checkboxes.size(); i++) {
+			CheckBox cb = (CheckBox) checkboxes.get(i);
+			myHUDElements.add(cb);
+		}
+		vbox.getChildren().addAll(checkboxes);
+		Button checkHUDButton = new Button(GO);
+		checkHUDButton.setOnAction(event->{
+			((GameInfo) myGameInfo).setMyHUDOptions(getHUDElementsToDisplay());
+		});
+		vbox.getChildren().add(checkHUDButton);
+	}
+	
+	private List<Node> addElements(String key, VBox vbox) {
+		String[] elements = myAttributesResources.getString(key).split(DELIMITER);
+		List<Node> createdElements = new ArrayList<>();
+		for (int i = 0; i < elements.length; i++) {
+			createdElements.add((myFactory.createNewGUIObject(elements[i]).createNode()));
+		}
+		return createdElements;
+	}
+	
+	public List<String> getHUDElementsToDisplay() {
+		List<String> toDisplay = new ArrayList<>();
+		for (int i = 0; i < myHUDElements.size(); i++) {
+			if (myHUDElements.get(i).isSelected()) {
+				toDisplay.add(myHUDElements.get(i).getId());
+			}
+		}	
+		return toDisplay;
+	}
+	
 
 	@Override
 	public Node createNode() {
@@ -102,6 +154,7 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 		initializePreviewImageDisplay();
 		editingEnvironmentContainer.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor,
 				previewImageContainer);
+		initializeHUD(HUD_OPTIONS, editingEnvironmentContainer);
 		return editingEnvironmentContainer;
 	}
 

@@ -11,7 +11,10 @@ import gameengine.model.ITrigger;
 import gameengine.model.PhysicsEngine;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
+import javafx.collections.MapChangeListener.Change;
 import javafx.util.Duration;
 
 /**
@@ -22,9 +25,9 @@ import javafx.util.Duration;
 
 
 public class Game extends Observable implements Observer {
-	 public static final int SIZE = 400;
-	   public static final int FRAMES_PER_SECOND = 60;
-	   private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+	public static final int SIZE = 400;
+	public static final int FRAMES_PER_SECOND = 60;
+	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 
 	private String initialGameFile;
 	private List<Level> levels;
@@ -33,7 +36,8 @@ public class Game extends Observable implements Observer {
 	private CollisionDetection myCollisionDetector;
 	@XStreamOmitField
 	private Timeline animation;
-	
+	private List<Actor> currentActors;
+	private List<Actor> deadActors;
 	private ObservableMap<String, Object> HUDData;
 	
 	
@@ -48,13 +52,14 @@ public class Game extends Observable implements Observer {
 		initialGameFile = gameFilePath;
 		levels = gameLevels;
 		info = gameInfo;
-        setMyPhysicsEngine(new PhysicsEngine());
-        setMyCollisionDetector(new CollisionDetection(getMyPhysicsEngine()));
+		setCurrentActors(new ArrayList<Actor>());
+		setDeadActors(new ArrayList<Actor>());
+        myPhysicsEngine = new PhysicsEngine();
+        myCollisionDetector = new CollisionDetection(myPhysicsEngine);
         
-		initActors();
-		
 		initTimeline();
 		
+		initHUDData();
 	}
 	
 
@@ -75,30 +80,36 @@ public class Game extends Observable implements Observer {
 	}
 	
 	public void startGame(){
-		getAnimation().play();
+		initCurrentActors();
+		animation.play();
+	}
+
+
+	public void initCurrentActors() {
+		setCurrentActors(getCurrentLevel().getActors());
+		initActors();
 	}
 	
 	private void step(){
-		List<Actor> currentActors = levels.get(info.getMyCurrentLevelNum()).getActors();
-		physicsUpdate(currentActors);
-		getMyCollisionDetector().detection(currentActors);
+		physicsUpdate();
+		myCollisionDetector.detection(getCurrentActors());
+		updateActors();
+	}
+	
+	private void physicsUpdate(){
+		for(Actor a: getCurrentActors()){
+			myPhysicsEngine.tick(a);
+		}
+	}
+	
+	private void initActors(){
+		for(Actor a: getCurrentActors()){
+			a.addObserver(this);
+			a.setEngine(myPhysicsEngine);
+		}
 		
 	}
 	
-	private void physicsUpdate(List<Actor> actors){
-		for(Actor a: actors){
-			getMyPhysicsEngine().tick(a);
-		}
-	}
-	
-	public void initActors(){
-		for(Level level: levels){
-			for(Actor actor: level.getActors()){
-				actor.addObserver(this);
-				actor.setEngine(getMyPhysicsEngine());
-			}
-		}
-	}
 	public String getInitialGameFile() {
 		return initialGameFile;
 	}
@@ -128,7 +139,8 @@ public class Game extends Observable implements Observer {
 	}
 	
 	public void nextLevel(){
-		info.setMyCurrentLevelNum(info.getMyCurrentLevelNum()+1);
+		animation.stop();
+		setCurrentLevel(info.getMyCurrentLevelNum()+1);
 	}
 	
 	/**
@@ -167,6 +179,51 @@ public class Game extends Observable implements Observer {
 	public Level getCurrentLevel(){
 		return levels.get(info.getMyCurrentLevelNum());
 	}
+	
+	public void setCurrentLevel(int levelNum){
+		info.setMyCurrentLevelNum(levelNum);
+	}
+	
+	public void updateActors(){
+		setDeadActors(new ArrayList<Actor>());
+		for(Actor a: getCurrentActors()){
+			if(a.isDead()){
+				deadActors.add(a);
+			}
+		}
+		if(deadActors.size()!=0){
+			removeDeadActors();
+		}
+		setCurrentActors(getCurrentLevel().getActors());
+	}
+
+
+	private void removeDeadActors() {
+		setChanged();
+		notifyObservers("updateActors");
+		getCurrentLevel().removeActors(deadActors);	
+		deadActors.clear();
+	}
+
+
+	public List<Actor> getDeadActors() {
+		return deadActors;
+	}
+
+
+	public void setDeadActors(List<Actor> deadActors) {
+		this.deadActors = deadActors;
+	}
+
+
+	public List<Actor> getCurrentActors() {
+		return currentActors;
+	}
+
+
+	public void setCurrentActors(List<Actor> currentActors) {
+		this.currentActors = currentActors;
+	}
 
 
 	public PhysicsEngine getMyPhysicsEngine() {
@@ -196,6 +253,17 @@ public class Game extends Observable implements Observer {
 
 	public void setAnimation(Timeline animation) {
 		this.animation = animation;
+	}
+	
+	public void initHUDData() {
+		HUDData = FXCollections.observableHashMap(); 
+		//HUDData.putAll(info.getMap()); //fill in getmap here
+		HUDData.addListener(new MapChangeListener<String, Object>() {
+			@Override
+			public void onChanged(Change<? extends String, ? extends Object> change) {
+				update((Observable) HUDData, change); //IDK if casting to observable causes issues with equality
+			}
+        });
 	}
 
 }

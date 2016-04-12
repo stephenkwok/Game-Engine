@@ -14,7 +14,7 @@ public interface IEditableGameElement {
 	
 	public void setMyName(String name);
 
-	public String getName();
+	public String getMyName();
 	
 	public ImageView getImageView();
 
@@ -24,4 +24,3 @@ public interface IEditableGameElement {
 	
 	public int getMyID();
 }
-

@@ -52,6 +52,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private boolean isMain;
     private double myHealth;
     private List<ActorRule> myActorRules;
+    private boolean isDead;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -187,7 +188,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     }
 
     @Override
-    public String getName() {
+    public String getMyName() {
         return myName;
     }
 
@@ -356,5 +357,13 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	
 	public List<ActorRule> getActorRules(){
 		return myActorRules;
+	}
+
+	public boolean isDead() {
+		return isDead;
+	}
+
+	public void setDead(boolean isDead) {
+		this.isDead = isDead;
 	}
 }

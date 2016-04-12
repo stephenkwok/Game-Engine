@@ -39,6 +39,7 @@ public class Controller implements IScreenController {
 	private GUIMainScreen mainScreen;
 	private GUIMain guiMain;
 	private ResourceBundle myResources;
+	private Game game;
 	private GameInfo gameInfo;
 
 	public Controller(Stage myStage, GUIMain guiMain, ResourceBundle myResources) {
@@ -54,6 +55,7 @@ public class Controller implements IScreenController {
 		myActors = new ArrayList<>();
 		levelEnvironment = new GUILevelEditingEnvironment(this, myActors);		
 		gameInfo = new GameInfo();
+		game = new Game(gameInfo, myLevels);
 		actorEnvironment = new GUIActorEditingEnvironment(this, myResources);
 		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo);
 	}
@@ -157,7 +159,7 @@ public class Controller implements IScreenController {
 	public void addLevel() {
 		Level newLevel = new Level();
 		myLevels.add(newLevel);
-		myLevelNames.add(newLevel.getName());
+		myLevelNames.add(newLevel.getMyName());
 		mainScreen.createLevelLabel(newLevel);
 		goToLevelEditing(newLevel);
 	}

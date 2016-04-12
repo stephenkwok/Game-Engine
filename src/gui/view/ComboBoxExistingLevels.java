@@ -33,8 +33,8 @@ public class ComboBoxExistingLevels extends ComboBoxTextCell{
 		levelMap = new HashMap<>();
 		levelNames = new ArrayList<>();
 		for(Level level: levels){
-			levelNames.add(level.getName());
-			levelMap.put(level.getName(), level);
+			levelNames.add(level.getMyName());
+			levelMap.put(level.getMyName(), level);
 		}
 	}
 	

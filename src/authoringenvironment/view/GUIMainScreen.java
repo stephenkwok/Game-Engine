@@ -64,7 +64,7 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	private void initLeftPane() {
-		GUIGameEditingEnvironment gameEditingEnvironment = new GUIGameEditingEnvironment(gameInfo);
+		GUIGameEditingEnvironment gameEditingEnvironment = new GUIGameEditingEnvironment(gameInfo, controller);
 		borderPane.setLeft((Pane) gameEditingEnvironment.createNode());
 	}
 

@@ -126,6 +126,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	public void setEditable(IEditableGameElement editable) {
 		myActor = (Actor) editable;
 		myActorIV = myActor.getImageView();
+		setLeftPane();
 	}
 	
 	public IEditableGameElement getEditable(){
