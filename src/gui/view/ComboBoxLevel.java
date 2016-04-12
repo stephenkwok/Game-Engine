@@ -1,5 +1,6 @@
 package gui.view;
 
+import java.util.List;
 import java.util.ResourceBundle;
 
 import gameengine.controller.Level;

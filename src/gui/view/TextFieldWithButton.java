@@ -51,10 +51,15 @@ public abstract class TextFieldWithButton implements IGUIElement, IGUIEditingEle
 		myContainer.getChildren().addAll(myTextFieldPrompt, myTextField, myButton);
 		return myContainer;
 	}
+	
+	protected abstract void updateValueBasedOnEditable();
 
 	@Override
 	public void setEditableElement(IEditableGameElement element) {
 		myEditableElement = element;
+		if (myEditableElement != null) {
+			updateValueBasedOnEditable();
+		}
 	}
 
 	protected void setButtonAction(EventHandler<ActionEvent> buttonAction) {
@@ -63,6 +68,10 @@ public abstract class TextFieldWithButton implements IGUIElement, IGUIEditingEle
 	
 	protected IEditableGameElement getEditableElement() {
 		return myEditableElement;
+	}
+	
+	protected void setTextFieldValue(String value) {
+		myTextField.setText(value);
 	}
 	
 	protected String getTextFieldInput() {

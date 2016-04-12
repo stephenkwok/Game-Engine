@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.view.GUIActorEditingEnvironment;
 import authoringenvironment.view.GUILevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
+import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
@@ -64,6 +67,7 @@ public class Controller implements IScreenController {
 	 *            - list of created Actors that can be placed into the level
 	 */
 	public void goToLevelEditing(Level level) {
+		levelEnvironment.updateActorsList(actors);
 		goToEditingEnvironment(level, levelEnvironment);
 	}
 
@@ -106,6 +110,14 @@ public class Controller implements IScreenController {
 	 *            file to write to.
 	 */
 	public void saveGame(File file) {
+		Game g = new Game(new GameInfo(), levels);  //TODO needs to be game info from AE
+		CreatorController controller;
+		try {
+			controller = new CreatorController(g, this.getScreen());
+			controller.saveForEditing(file);
+		} catch (ParserConfigurationException e) {
+			getScreen().showError(e.getMessage());
+		}
 
 	}
 
@@ -141,7 +153,7 @@ public class Controller implements IScreenController {
 		Level newLevel = new Level();
 		levels.add(newLevel);
 		mainScreen.createLevelLabel(newLevel);
-		goToEditingEnvironment(newLevel, levelEnvironment);
+		goToLevelEditing(newLevel);
 	}
 
 	public void addActor() {

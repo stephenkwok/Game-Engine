@@ -76,4 +76,10 @@ public class ComboBoxGame extends ComboBoxImageCell {
 		return myGamePaths;
 	}
 
+	@Override
+	protected void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
