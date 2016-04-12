@@ -71,6 +71,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
@@ -91,6 +92,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
@@ -98,7 +100,7 @@
           <obs>
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
-          <x>700.0</x>
+          <x>800.0</x>
           <y>100.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -111,6 +113,7 @@
           <attributeMap/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
       </myActors>
