@@ -16,6 +16,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -34,12 +35,13 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 
 	private IEditableGameElement myGameInfo;
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
-	private static final double CONTAINER_PADDING = 20;
+	private static final double DEFAULT_PADDING = 10;
 	private static final double CONTAINER_PREFERRED_WIDTH = 350.0;
 	private static final int TEXT_AREA_ROWS = 5;
 	private static final double TEXT_FIELD_WIDTH = 100.0;
 	private static final double TEXT_FIELD_CONTAINER_SPACING = 10.0;
 	private static final double TEXT_FIELD_CONTAINER_PADDING = 10.0;
+	private static final double SCROLLPANE_WIDTH_BINDING_OFFSET = 30.0;
 	private final ResourceBundle myResources;
 	private VBox editingEnvironmentContainer;
 	private Label welcomeMessage;
@@ -48,6 +50,7 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 	private VBox previewImageContainer;
 	private VBox HUDOptionsDisplay;
 	private Controller controller;
+	private ScrollPane myScrollPane;
 
 	public GUIGameEditingEnvironment(GameInfo gameInfo, Controller controller) {
 		this.myGameInfo = gameInfo;
@@ -61,7 +64,7 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 	}
 
 	private void initializeContainer() {
-		editingEnvironmentContainer = new VBox(CONTAINER_PADDING);
+		editingEnvironmentContainer = new VBox();
 		editingEnvironmentContainer.setPrefWidth(CONTAINER_PREFERRED_WIDTH);
 		editingEnvironmentContainer.setStyle(myResources.getString("defaultBorderColor"));
 	}
@@ -90,9 +93,9 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 
 	// hard coded values
 	private void initializePreviewImageDisplay() {
-		previewImageContainer = new VBox(10.0);
-		previewImageContainer.setAlignment(Pos.CENTER);
-		previewImageContainer.setPadding(new Insets(10.0));
+		previewImageContainer = new VBox();
+		// previewImageContainer.setAlignment(Pos.CENTER);
+		previewImageContainer.setPadding(new Insets(DEFAULT_PADDING));
 		Label previewImageLabel = new Label("Current Game Preview Image:");
 		ImageView previewImage = new ImageView(
 				new Image(getClass().getClassLoader().getResourceAsStream("default_game.jpg")));
@@ -104,6 +107,14 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 		HUDOptionsDisplay = (VBox) HUDOptions.createNode();
 	}
 
+	private void initializeScrollPane() {
+		myScrollPane = new ScrollPane();
+		myScrollPane.prefWidthProperty()
+				.bind(editingEnvironmentContainer.prefWidthProperty().add(SCROLLPANE_WIDTH_BINDING_OFFSET));
+		myScrollPane.setContent(editingEnvironmentContainer);
+		myScrollPane.setPadding(new Insets(DEFAULT_PADDING));
+	}
+
 	@Override
 	public Node createNode() {
 		initializeContainer();
@@ -112,9 +123,10 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 		initializeGameDescriptionEditor();
 		initializePreviewImageDisplay();
 		initializeHUDOptionsDisplay();
+		initializeScrollPane();
 		editingEnvironmentContainer.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor,
 				previewImageContainer, HUDOptionsDisplay);
-		return editingEnvironmentContainer;
+		return myScrollPane;
 	}
 
 }
