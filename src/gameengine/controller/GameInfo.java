@@ -1,5 +1,8 @@
 package gameengine.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import authoringenvironment.model.IEditableGameElement;
 import javafx.scene.image.ImageView;
 
@@ -15,12 +18,14 @@ public class GameInfo implements IEditableGameElement {
 	private int myCurrentLevelNum;
 	private ImageView myPreviewImage;
 	private int myID;
+	private List<String> myHUDElementsToDisplay;
 	
 	public GameInfo(String name, String imageName, String description, int currentLevelNum ) {
 		this.setMyName(name);
 		this.setMyImageName(imageName);
 		this.setMyDescription(description);
 		this.setMyCurrentLevelNum(currentLevelNum);
+		this.myHUDElementsToDisplay = new ArrayList<>();
 	}
 	
 	public GameInfo(String name, String imageName, String description) {
@@ -42,6 +47,9 @@ public class GameInfo implements IEditableGameElement {
 		this.myName = myName;
 	}
 
+	public void setMyHUDOptions(List<String> options) {
+		myHUDElementsToDisplay = options;
+	}
 
 	public String getMyImageName() {
 		return this.myImageName;
