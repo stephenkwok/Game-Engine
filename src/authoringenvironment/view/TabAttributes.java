@@ -28,6 +28,7 @@ public class TabAttributes extends TabParent {
 	private static final String HUD_OPTIONS = "HUDOptions";
 	private static final String HUD_PROMPT = "Choose items to display on the level scene:";
 	private static final String GO = "Go";
+	private static final String DELIMITER = ",";
 	private ResourceBundle myAttributesResources;
 	private GUIFactory myFactory;
 	private Controller myController;

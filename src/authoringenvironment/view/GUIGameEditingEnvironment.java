@@ -152,9 +152,9 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 		initializeGameNameEditor();
 		initializeGameDescriptionEditor();
 		initializePreviewImageDisplay();
-		initializeHUD(HUD_OPTIONS, editingEnvironmentContainer);
 		editingEnvironmentContainer.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor,
 				previewImageContainer);
+		initializeHUD(HUD_OPTIONS, editingEnvironmentContainer);
 		return editingEnvironmentContainer;
 	}
 
