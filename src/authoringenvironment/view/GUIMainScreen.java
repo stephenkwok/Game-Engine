@@ -6,6 +6,7 @@ import java.util.List;
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
+import gameengine.controller.GameInfo;
 import gui.view.IGUI;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.control.ScrollPane;
@@ -38,11 +39,14 @@ public class GUIMainScreen implements IGUI {
 	private List<LabelClickable> clickableLabels;
 	private IEditingEnvironment actorEditor;
 	private IEditingEnvironment levelEditor;
+	private GameInfo gameInfo;
 
-	public GUIMainScreen(Controller controller, IEditingEnvironment actorEditor, IEditingEnvironment levelEditor) {
+	public GUIMainScreen(Controller controller, IEditingEnvironment actorEditor, IEditingEnvironment levelEditor,
+			GameInfo gameInfo) {
 		this.controller = controller;
 		this.actorEditor = actorEditor;
 		this.levelEditor = levelEditor;
+		this.gameInfo = gameInfo;
 		clickableLabels = new ArrayList<LabelClickable>();
 		levelScrollPane = new ScrollPane();
 		actorScrollPane = new ScrollPane();
@@ -60,8 +64,8 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	private void initLeftPane() {
-		VBoxMainScreenLeftPane leftPane = new VBoxMainScreenLeftPane(controller);
-		borderPane.setLeft(leftPane);
+		GUIGameEditingEnvironment gameEditingEnvironment = new GUIGameEditingEnvironment(gameInfo);
+		borderPane.setLeft((Pane) gameEditingEnvironment.createNode());
 	}
 
 	private void initBorderPane() {

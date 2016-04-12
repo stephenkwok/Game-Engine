@@ -38,6 +38,7 @@ public class Controller implements IScreenController {
 	private GUIMainScreen mainScreen;
 	private GUIMain guiMain;
 	private ResourceBundle myResources;
+	private GameInfo gameInfo;
 
 	public Controller(Stage myStage, GUIMain guiMain, ResourceBundle myResources) {
 		this.myStage = myStage;
@@ -49,9 +50,10 @@ public class Controller implements IScreenController {
 	public void init() {
 		levels = new ArrayList<>();
 		actors = new ArrayList<>();
+		gameInfo = new GameInfo();
 		levelEnvironment = new GUILevelEditingEnvironment(this, actors);
 		actorEnvironment = new GUIActorEditingEnvironment(this, myResources);
-		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment);
+		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo);
 	}
 
 	/**
@@ -88,7 +90,7 @@ public class Controller implements IScreenController {
 	 */
 	public void goToEditingEnvironment(IEditableGameElement editable, IEditingEnvironment environment) {
 		environment.setEditable(editable);
-		guiMain.setCenterPane(environment.getPane());
+		guiMain.setCenterPane(environment.getPane()); 
 	}
 
 	/**
