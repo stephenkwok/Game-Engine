@@ -10,6 +10,7 @@ import java.util.Set;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.view.ActorRule;
 import gameengine.model.IActor;
 import gameengine.model.IRule;
 import gameengine.model.Actions.Action;
@@ -50,6 +51,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     private PhysicsEngine myPhysicsEngine;
     private boolean isMain;
     private double myHealth;
+    private List<ActorRule> myActorRules;
     private boolean isDead;
 
     /**
@@ -62,6 +64,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         myImageViewName = DEFAULT_IMAGE_NAME;
         isMain = DEFAULT_MAIN;
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
+        myActorRules = new ArrayList<>();
     }
 
     /**
@@ -343,6 +346,18 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	public double getMyHealth() {
 		return myHealth;
 	}
+	
+	public void addActorRule(ActorRule actorRule){
+		myActorRules.add(actorRule);
+	}
+	
+	public void removeActorRule(ActorRule actorRule){
+		myActorRules.remove(actorRule);
+	}
+	
+	public List<ActorRule> getActorRules(){
+		return myActorRules;
+	}
 
 	public boolean isDead() {
 		return isDead;
@@ -351,6 +366,4 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	public void setDead(boolean isDead) {
 		this.isDead = isDead;
 	}
-
-
 }

@@ -31,8 +31,9 @@ import javafx.stage.Stage;
 
 public class Controller implements IScreenController {
 	private Stage myStage;
-	private List<Level> levels;
-	private List<Actor> actors;
+	private List<Level> myLevels;
+	private List<String> myLevelNames;
+	private List<Actor> myActors;
 	private GUILevelEditingEnvironment levelEnvironment;
 	private GUIActorEditingEnvironment actorEnvironment;
 	private GUIMainScreen mainScreen;
@@ -49,11 +50,12 @@ public class Controller implements IScreenController {
 	}
 
 	public void init() {
-		levels = new ArrayList<>();
-		actors = new ArrayList<>();
+		myLevels = new ArrayList<>();
+		myLevelNames = new ArrayList<>();
+		myActors = new ArrayList<>();
+		levelEnvironment = new GUILevelEditingEnvironment(this, myActors);		
 		gameInfo = new GameInfo();
-		game = new Game(gameInfo, levels);
-		levelEnvironment = new GUILevelEditingEnvironment(this, actors);
+		game = new Game(gameInfo, myLevels);
 		actorEnvironment = new GUIActorEditingEnvironment(this, myResources);
 		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo);
 	}
@@ -67,7 +69,7 @@ public class Controller implements IScreenController {
 	 *            - list of created Actors that can be placed into the level
 	 */
 	public void goToLevelEditing(Level level) {
-		levelEnvironment.updateActorsList(actors);
+		levelEnvironment.updateActorsList(myActors);
 		goToEditingEnvironment(level, levelEnvironment);
 	}
 
@@ -92,6 +94,7 @@ public class Controller implements IScreenController {
 	 */
 	public void goToEditingEnvironment(IEditableGameElement editable, IEditingEnvironment environment) {
 		environment.setEditable(editable);
+		actorEnvironment.updateRules();
 		guiMain.setCenterPane(environment.getPane()); 
 	}
 
@@ -110,7 +113,7 @@ public class Controller implements IScreenController {
 	 *            file to write to.
 	 */
 	public void saveGame(File file) {
-		Game g = new Game(new GameInfo(), levels);  //TODO needs to be game info from AE
+		Game g = new Game(new GameInfo(), myLevels);  //TODO needs to be game info from AE
 		CreatorController controller;
 		try {
 			controller = new CreatorController(g, this.getScreen());
@@ -140,7 +143,11 @@ public class Controller implements IScreenController {
 	 * @return
 	 */
 	public List<Level> getLevels() {
-		return levels;
+		return myLevels;
+	}
+	
+	public List<String> getLevelNames(){
+		return myLevelNames;
 	}
 
 	/**
@@ -151,14 +158,15 @@ public class Controller implements IScreenController {
 	 */
 	public void addLevel() {
 		Level newLevel = new Level();
-		levels.add(newLevel);
+		myLevels.add(newLevel);
+		myLevelNames.add(newLevel.getMyName());
 		mainScreen.createLevelLabel(newLevel);
 		goToLevelEditing(newLevel);
 	}
 
 	public void addActor() {
 		Actor newActor = new Actor();
-		actors.add(newActor);
+		myActors.add(newActor);
 		mainScreen.createActorLabel(newActor);
 		actorEnvironment.setActorImage(newActor.getImageView());
 		goToEditingEnvironment(newActor, actorEnvironment);
@@ -181,7 +189,6 @@ public class Controller implements IScreenController {
 	@Override
 	public void setGame(Game game) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
