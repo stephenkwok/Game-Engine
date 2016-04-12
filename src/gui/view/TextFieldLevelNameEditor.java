@@ -13,6 +13,13 @@ import gameengine.controller.Level;
 
 public class TextFieldLevelNameEditor extends TextFieldWithButton {
 	
+	/**
+	 * Constructs a TextField to edit a level's name with a given prompt and width, and a label to the left and a 
+	 * "GO" button to the right.
+	 * @param labelText: text for the label.
+	 * @param promptText: prompt text for the textfield.
+	 * @param textFieldWidth: width of the textfield.
+	 */
 	public TextFieldLevelNameEditor(String labelText, String promptText, Double textFieldWidth) {
 		super(labelText, promptText, textFieldWidth);
 		setButtonAction(e -> 
