@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
-  <obs/>
+  <obs>
+    <gameplayer.controller.GameController/>
+  </obs>
+  <initialGameFile>gamefiles/loaders/test_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <myActors>
@@ -11,7 +14,7 @@
             <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
           <x>0.0</x>
-          <y>0.0</y>
+          <y>300.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -65,7 +68,6 @@
             <floorHeight>300.0</floorHeight>
           </myPhysicsEngine>
           <isMain>false</isMain>
-          <myHealth>0.0</myHealth>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -74,7 +76,7 @@
             <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
           <x>600.0</x>
-          <y>0.0</y>
+          <y>300.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -86,7 +88,6 @@
           <attributeMap/>
           <myPhysicsEngine reference="../../gameengine.model.Actor/myPhysicsEngine"/>
           <isMain>false</isMain>
-          <myHealth>0.0</myHealth>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap>
@@ -141,7 +142,6 @@
           <attributeMap/>
           <myPhysicsEngine reference="../../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
           <isMain>false</isMain>
-          <myHealth>0.0</myHealth>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap/>

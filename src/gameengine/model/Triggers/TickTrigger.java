@@ -12,7 +12,7 @@ public class TickTrigger implements ITrigger {
     private static final String TICK = "Tick";
 
     @Override
-    public String getTriggerName() {
+    public String getMyKey() {
         return TICK;
     }
 /*

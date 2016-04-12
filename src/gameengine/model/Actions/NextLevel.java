@@ -11,8 +11,8 @@ public class NextLevel extends Action {
 
 	@Override
 	public void perform() {
-		getActor().changed();
-        getActor().notifyObservers("nextLevel");		
+		getMyActor().changed();
+        getMyActor().notifyObservers("nextLevel");		
 	}
 
 }

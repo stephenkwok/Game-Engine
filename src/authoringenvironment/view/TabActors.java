@@ -35,13 +35,13 @@ public class TabActors extends TabParent {
 	public TabActors(ResourceBundle myResources, String tabText, List<Actor> availActors) {
 		super(myResources, tabText);		
 		Actor newActor1 = new Actor();
-		newActor1.setID(1);
+		newActor1.setMyID(1);
 		Actor newActor2 = new Actor();
-		newActor2.setID(2);;
+		newActor2.setMyID(2);;
 		Actor newActor3 = new Actor();
-		newActor3.setID(3);
+		newActor3.setMyID(3);
 		Actor newActor4 = new Actor();
-		newActor4.setID(4);
+		newActor4.setMyID(4);
 		availActors.add(newActor1); // PLACEHOLDER RN, STEPHEN SHOULD'VE ADDED A DEFAULT ONE ALREADY
 		availActors.add(newActor2);
 		availActors.add(newActor3);

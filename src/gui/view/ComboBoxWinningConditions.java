@@ -20,7 +20,7 @@ public class ComboBoxWinningConditions extends ComboBoxTextCell {
 	@Override
 	public void setButtonAction() {
 		comboButton.setOnAction(event->{
-			((Level) getEditableElement()).setWinningCondition(comboBox.getValue());
+			((Level) getEditableElement()).setMyLosingCondition(comboBox.getValue());
 			System.out.println("hi");
 		});
 	}

@@ -6,7 +6,7 @@ public class TextFieldActorHealthEditor extends TextFieldWithButton {
 
 	public TextFieldActorHealthEditor(String labelText, String promptText, Double textFieldWidth) {
 		super(labelText, promptText, textFieldWidth);
-		setButtonAction(e -> ((Actor) getEditableElement()).setHealth(Double.parseDouble(getTextFieldInput())));
+		setButtonAction(e -> ((Actor) getEditableElement()).setMyHealth(Double.parseDouble(getTextFieldInput())));
 	}
 
 }

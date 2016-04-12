@@ -12,7 +12,7 @@ public class ImageviewActorIcon extends ImageView {
 		setImage(actor.getImageView().getImage());
 		this.setFitWidth(ICON_HEIGHT);
 		this.setPreserveRatio(true);
-		myID = actor.getID();
+		myID = actor.getMyID();
 	}
 	
 	public Actor getActor() {
