@@ -12,7 +12,6 @@ public class TextFieldActorNameEditor extends TextFieldWithButton {
 	@Override
 	protected void updateValueBasedOnEditable() {
 		// TODO Auto-generated method stub
-		
 	}
 
 }
