@@ -1,5 +1,6 @@
 package gameengine.model;
 
+
 /**
  * Physics Engine Class
  * Handles calculating/assigning new positions based on positional attributes and movement vectors
@@ -51,6 +52,15 @@ public class PhysicsEngine {
 		return nextPos;
 	}
 	
+	
+	/**
+	 * Only want friction to occur on the ground, only want gravity to apply in the air
+	 * @param a
+	 * @param forceX
+	 * @param forceYupward
+	 * @param forceYdownward
+	 * @param friction
+	 */
 	private void update(Actor a,double forceX, double forceYupward, double forceYdownward, double friction){
 		double xVelo     = a.getVeloX();
 		double yVelo     = a.getVeloY();
@@ -61,6 +71,7 @@ public class PhysicsEngine {
 		double nextXPos;
 		double nextYPos;
 		
+
 		if (a.isInAir()) {
 			forceYdownward = getGravity();
 		}
@@ -75,8 +86,9 @@ public class PhysicsEngine {
 			nextYPos = getFloorHeight();				//TODO: delete this if statement after the floor is implemented as an actor
 			nextVertVelo = 0;
 		}
+
 		
-		nextHorzVelo = applyForce(xVelo, forceX); // Apply  y force from movement action to y velocity
+		nextHorzVelo = applyForce(xVelo, forceX); 							// Apply  y force from movement action to y velocity
 		nextHorzVelo = applyForce(nextHorzVelo, (friction*(nextHorzVelo))); //Apply frictional force
 		nextXPos  = changePos(xPos,nextHorzVelo);
 		nextHorzVelo = maxLimit(nextHorzVelo, getMaxHorizVelocity());
@@ -121,7 +133,6 @@ public class PhysicsEngine {
 	public void jump(Actor a1){
 		update(a1,0,getJumpForce(), getGravity(), a1.getMyFriction());
 	}
-	
 	//gliding methods for when force and gravity aren't applied
 	
 	public void glideRight(Actor a1) {

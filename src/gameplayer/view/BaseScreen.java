@@ -85,6 +85,7 @@ public class BaseScreen extends Screen {
 		try {
 			addGame();
 			addHUD();
+			//myController.getMyGameController().setHUD(new HUDScreen(myController.getMyGameController().getGame().getHUDInfo()));  //blake needs to add this
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException | SecurityException e1) {
 			e1.printStackTrace();
@@ -92,6 +93,7 @@ public class BaseScreen extends Screen {
 		getRoot().getChildren().add(myMasterPane);
 	}
 	
+	//depracated
 	public void addHUD() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		IGUIElement hudPane = factory.createNewGUIObject("hudPane");
 		Pane myP = (Pane) hudPane.createNode();

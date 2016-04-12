@@ -11,6 +11,7 @@ import gameengine.model.ITrigger;
 import gameengine.model.PhysicsEngine;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ObservableMap;
 import javafx.util.Duration;
 
 /**
@@ -32,6 +33,9 @@ public class Game extends Observable implements Observer {
 	private CollisionDetection myCollisionDetector;
 	@XStreamOmitField
 	private Timeline animation;
+	
+	private ObservableMap<String, Object> HUDData;
+	
 	
 	/**
 	 * A game is instantiated with a list of all levels in the game and a level to start on.

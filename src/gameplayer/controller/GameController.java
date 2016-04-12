@@ -47,6 +47,12 @@ public class GameController implements Observer {
 		view.addObserver(this);
 	}
 	
+	public void setHUD(HUDScreen hud) {
+		this.hud = hud;
+	}
+	
+	
+	
 	/**
 	 * Will initialize the backend (game engine) with the current level's information and actor information to set up the game for playing.  Will visualize that backend too. 
 	 * @param level an int representing the level to be played

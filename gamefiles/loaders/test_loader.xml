@@ -65,6 +65,7 @@
             <floorHeight>300.0</floorHeight>
           </myPhysicsEngine>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -85,6 +86,7 @@
           <attributeMap/>
           <myPhysicsEngine reference="../../gameengine.model.Actor/myPhysicsEngine"/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap>
@@ -139,6 +141,7 @@
           <attributeMap/>
           <myPhysicsEngine reference="../../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap/>

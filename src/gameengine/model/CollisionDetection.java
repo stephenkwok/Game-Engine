@@ -30,6 +30,7 @@ public class CollisionDetection {
 	 */
 	public List<Actor> detection(List<Actor> actors){
 		for (Actor a1 : actors){
+			a1.setInAir(true);
 			for(Actor a2 : actors){
 				if(a1 != a2 ){            //Checks that each actor in the pair is unique
 					if(isCollision(a1,a2))
@@ -78,9 +79,14 @@ public class CollisionDetection {
 				
 		if(xOverlap <= yOverlap){
 			return "SideCollision";
-		}else{   
-			a1.setInAir(false);
-			return "TopCollision";
+		}else{ 
+			if(a2.getBounds().getMinY()<=a1.getBounds().getMaxY()){
+				a1.setInAir(false);
+				return "BottomCollision";
+			}else{
+				return "TopCollision";
+			}
+			
 		}
 	}
 	
