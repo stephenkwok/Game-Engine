@@ -10,7 +10,7 @@ public class ComboBoxTermination extends ComboBoxTextCell {
 	private static final String TERMINATION_OPTIONS = "TerminationOptions";
 	private static final String DELIMITER = ",";
 	private List<String> myOptions;
-	
+
 	public ComboBoxTermination(ResourceBundle myResources, String promptText, String labelText) {
 		super(myResources, promptText, labelText);
 		myOptions = Arrays.asList(myResources.getString(TERMINATION_OPTIONS).split(DELIMITER));
@@ -19,13 +19,20 @@ public class ComboBoxTermination extends ComboBoxTextCell {
 	@Override
 	public void setButtonAction() {
 		comboButton.setOnAction(event->{
-			((Level) getEditableElement()).setTermination(comboBox.getValue());
+			((Level) getEditableElement()).setMyTermination(comboBox.getValue());
 		});
 	}
 
 	@Override
 	public List<String> getOptionsList() {
 		return myOptions;
+	}
+
+	@Override
+	protected void updateValueBasedOnEditable() {
+		if (((Level) getEditableElement()).getLosingCondition() != null) {
+			comboBox.setValue(((Level) getEditableElement()).getLosingCondition());
+		}
 	}
 
 }

@@ -1,12 +1,10 @@
 package gui.view;
 
 import java.util.List;
-import java.util.ResourceBundle;
 
 import authoringenvironment.model.IEditableGameElement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -27,6 +25,8 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 	private static final int HBOX_SPACING = 5;
 	private static final String GO = "Go";
 	protected static final String NO_NODE_FOR_BOX = "";
+	private static final int BUTTON_HEIGHT = 30;
+	private static final int BUTTON_WIDTH = 40;
 	protected String promptText;
 	protected ObservableList<String> options;
 	protected List<String> optionsList;
@@ -35,11 +35,13 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 	protected String paletteSource;
 	protected String labelText;
 	private IEditableGameElement myEditableElement;
+	private boolean hasBeenSelected;
 	
 	public ComboBoxParent(String promptText) {
 		this.promptText = promptText;
 		this.labelText = null;
 		myEditableElement = null;
+		hasBeenSelected = false;
 	}
 	
 	/**
@@ -56,8 +58,9 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
 		comboBox.setPrefWidth(COMBOBOX_WIDTH);
 		comboBox.setPromptText(promptText);
-//		comboBox.setCellFactory(factory -> new MyCustomCell());
+		comboBox.setCellFactory(factory -> new MyCustomCell());
 		comboButton = new Button(GO);
+		comboButton.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		HBox.setHgrow(comboBox, Priority.ALWAYS);
 		setButtonAction();
 		hbox.getChildren().addAll(comboBox, comboButton);
@@ -90,8 +93,8 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
             setGraphic(null);
         } else {
        	 	HBox hbox = new HBox();
-       	 	Label lbl = new Label(item);
-       	 	hbox.getChildren().addAll(getNodeForBox(item),lbl);
+       	 	//Label lbl = new Label(item);
+       	 	hbox.getChildren().addAll(getNodeForBox(item));//,lbl);
             setGraphic(hbox);
         }
        }
@@ -114,9 +117,18 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 		comboBox.setItems(newOptions);
 	}
 
+	protected abstract void updateValueBasedOnEditable();
+	
 	@Override
 	public void setEditableElement(IEditableGameElement element) {
 		myEditableElement = element;
+		if (myEditableElement != null) {
+			updateValueBasedOnEditable();
+		}
+	}
+	
+	protected void hasBeenSelected() {
+		hasBeenSelected = true;
 	}
 
 	protected IEditableGameElement getEditableElement() {

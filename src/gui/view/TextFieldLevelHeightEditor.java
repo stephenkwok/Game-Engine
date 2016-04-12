@@ -4,10 +4,13 @@ import gameengine.controller.Level;
 
 public class TextFieldLevelHeightEditor extends TextFieldWithButton {
 
-	private Level myLevel;
-	
 	public TextFieldLevelHeightEditor(String labelText, String promptText, Double textFieldWidth) {
 		super(labelText, promptText, textFieldWidth);
-		setButtonAction(e -> ((Level) getEditableElement()).setHeight(Double.valueOf(getTextFieldInput())));
+		setButtonAction(e -> ((Level) getEditableElement()).setMyHeight(Double.valueOf(getTextFieldInput())));
+	}
+
+	@Override
+	protected void updateValueBasedOnEditable() {
+		setTextFieldValue(Double.toString(((Level) getEditableElement()).getHeight()));	
 	}
 }

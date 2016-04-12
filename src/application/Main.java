@@ -13,9 +13,7 @@ public class Main extends Application{
 		myStage.setResizable(false);
 		SplashScreen myScreen = new SplashScreen(myStage);
 		myStage.setScene(myScreen.getScene());
-		
 		myStage.show();
-		
 	}
 	
 	public static void main(String[] args){

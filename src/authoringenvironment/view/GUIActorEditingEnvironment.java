@@ -10,9 +10,11 @@ import gui.view.GUILibrary;
 import gui.view.IGUI;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -34,8 +36,9 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	private static final String NEW_RULE_LABEL = "New Rule";
 	private static final String ACTOR_OPTIONS_RESOURCE = "actorEditorOptions";
 	private static final String ACTOR_ATTRIBUTES = "Actor Attributes";
-	private static final double ACTOR_PERCENT_HEIGHT = 0.1;
-	private double actorImageHeight;
+	private static final int BUTTON_HEIGHT = 30;
+	private static final int BUTTON_WIDTH = 100;
+	private static final int LEFT_PANE_WIDTH = 350;
 	private BorderPane myRoot;
 	private GUILibrary library;
 	private TabAttributes attributes;
@@ -50,7 +53,6 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	public GUIActorEditingEnvironment(Controller myController, ResourceBundle myResources) {
 		this.myController = myController;
 		this.myResources = myResources;
-		this.actorImageHeight = myController.getSceneHeight()*ACTOR_PERCENT_HEIGHT;
 		initializeEnvironment();
 	}
 
@@ -70,11 +72,11 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 
 	private void setDefaultActor() {
 		Actor defaultActor = new Actor();
-		ImageView defaultIV = defaultActor.getImageView();
-		defaultIV.setFitHeight(actorImageHeight);
-		defaultIV.setPreserveRatio(true);
+//		ImageView defaultIV = defaultActor.getImageView();
+//		defaultIV.setFitHeight(actorImageHeight);
+//		defaultIV.setPreserveRatio(true);
 		this.myActor = defaultActor;
-		this.myActorIV = defaultIV;
+		this.myActorIV = new ImageviewActorIcon(defaultActor);
 	}
 
 	private void setLeftPane() {
@@ -82,8 +84,10 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		VBox vbox = new VBox();
 		TabPane attributeTP = new TabPane();
 		attributeTP.getTabs().add(attributes.getTab());
+		attributeTP.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		library = new GUILibrary(myActorRuleCreator);
 		vbox.getChildren().addAll(getActorImageViewer(), attributeTP, library.getPane());
+		vbox.setPrefWidth(LEFT_PANE_WIDTH);
 		myRoot.setLeft(vbox);
 	}
 
@@ -111,6 +115,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 
 	private Button getNewRuleButton() {
 		Button toReturn = new Button(NEW_RULE_LABEL);
+		toReturn.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		toReturn.setOnAction(event -> {
 			myActorRuleCreator.addNewRule();
 		});
@@ -122,16 +127,19 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		myActor = (Actor) editable;
 		myActorIV = myActor.getImageView();
 	}
+	
+	public IEditableGameElement getEditable(){
+		return myActor;
+	}
 
 	public void setActorImage(ImageView newImageView) {
-		myActorIV = newImageView;
-		myActorIV.setFitHeight(actorImageHeight);
-		myActorIV.setPreserveRatio(true);
-		myActor.setImageView(myActorIV);
+		myActor.setImageView(newImageView);
+		myActorIV = new ImageviewActorIcon(myActor);
 		setLeftPane();
 	}
 
 	public void updateDragEventsForLibrary() {
 		library.updateDragEvents();
 	}
+
 }

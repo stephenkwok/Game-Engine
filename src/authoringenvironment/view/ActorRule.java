@@ -3,6 +3,7 @@ package authoringenvironment.view;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -40,7 +41,7 @@ public class ActorRule {
 	private static final String DIALOG_HEADER = "Place your Behavior in: ";
 	private static final String DIALOG_CONTENT = "Choose one: ";
 	private static final String TRIGGER = "Trigger";
-	private static final String TRIGGER_EVENTS = "ClickMouse PressKey Collision";
+	private String triggerBehaviors;
 	
 	private static final double RULE_PERCENT_WIDTH = 0.90;
 	private static final double STACKPANE_PERCENT_WIDTH = 0.92;
@@ -53,6 +54,8 @@ public class ActorRule {
 	private ScrollPane resScroll;
 	private ChoiceDialog<String> dialog;
 	private ActorRuleCreator myActorRuleCreator;
+	private ResourceBundle myLibraryResources;
+	private static final String LIBRARY_BUNDLE = "library";
 	
 	public ActorRule(ActorRuleCreator myActorRuleCreator) {
 		this.myActorRuleCreator = myActorRuleCreator;
@@ -65,6 +68,8 @@ public class ActorRule {
 	}
 	
 	private void initializeEnvironment() {
+		this.myLibraryResources = ResourceBundle.getBundle(LIBRARY_BUNDLE);
+		this.triggerBehaviors = myLibraryResources.getString("TriggerBehaviors");
 		myRule = new GridPane(); 
 		myRule.setBackground(new Background(new BackgroundFill(Color.LAVENDER, new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
 		myRule.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
@@ -117,8 +122,8 @@ public class ActorRule {
 	}
 
 	private boolean isTrigger(String behavior){
-		List<String> triggerEvents = Arrays.asList(TRIGGER_EVENTS.split(" "));
-		return triggerEvents.contains(behavior);
+		List<String> triggers = Arrays.asList(triggerBehaviors.split(" "));
+		return triggers.contains(behavior);
 	}
 	
 	private void createDialog() {

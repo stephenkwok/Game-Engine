@@ -12,7 +12,7 @@ public class TopCollision extends CollisionTrigger implements ITrigger {
     }
 
     @Override
-    public String getTriggerName() {
+    public String getMyKey() {
         return makeName(COLLISION_TYPE);
     }
 

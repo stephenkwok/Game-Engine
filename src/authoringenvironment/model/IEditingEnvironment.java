@@ -6,4 +6,5 @@ public interface IEditingEnvironment {
 	public void setEditable(IEditableGameElement editable);
 	
 	public Pane getPane();
+
 }

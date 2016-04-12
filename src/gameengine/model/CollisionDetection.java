@@ -18,10 +18,10 @@ import gameengine.model.Triggers.TopCollision;;
  */
 public class CollisionDetection {
 
-	PhysicsEngine myPhysicsEngine;
+	private PhysicsEngine myPhysicsEngine;
 	
 	public CollisionDetection( PhysicsEngine physicsEngine){
-		myPhysicsEngine = physicsEngine;
+		setMyPhysicsEngine(physicsEngine);
 	}
 	
 	/**
@@ -66,15 +66,15 @@ public class CollisionDetection {
 		double yOverlap = 0;
 		a1.setInAir(true);
 		if(a1.getBounds().getMaxX() <= a2.getBounds().getMaxX()){
-			xOverlap = a1.getBounds().getMaxX() -  a2.getXPos();
+			xOverlap = a1.getBounds().getMaxX() -  a2.getX();
 		}else{
-			xOverlap = a2.getBounds().getMaxX() -  a1.getXPos();
+			xOverlap = a2.getBounds().getMaxX() -  a1.getX();
 		}
 		
 		if(a1.getBounds().getMaxY() <= a2.getBounds().getMaxY()){
-			yOverlap = a1.getBounds().getMaxY() -  a2.getYPos();
+			yOverlap = a1.getBounds().getMaxY() -  a2.getY();
 		}else{
-			yOverlap = a2.getBounds().getMaxY() -  a1.getYPos();
+			yOverlap = a2.getBounds().getMaxY() -  a1.getY();
 		}
 				
 		if(xOverlap <= yOverlap){
@@ -94,5 +94,13 @@ public class CollisionDetection {
 		String collisionType = getCollisionType(a1,a2);
 		String triggerString = a1.getName() + collisionType + a2.getName();
 		a1.performActionsFor(triggerString);   //Needs to be changed to take a string parameter
+	}
+
+	public PhysicsEngine getMyPhysicsEngine() {
+		return myPhysicsEngine;
+	}
+
+	public void setMyPhysicsEngine(PhysicsEngine myPhysicsEngine) {
+		this.myPhysicsEngine = myPhysicsEngine;
 	}	
 }

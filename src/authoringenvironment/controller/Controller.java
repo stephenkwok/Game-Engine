@@ -5,13 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.view.GUIActorEditingEnvironment;
 import authoringenvironment.view.GUILevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
+import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
+import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gui.controller.IScreenController;
@@ -34,6 +38,8 @@ public class Controller implements IScreenController {
 	private GUIMainScreen mainScreen;
 	private GUIMain guiMain;
 	private ResourceBundle myResources;
+	private Game game;
+	private GameInfo gameInfo;
 
 	public Controller(Stage myStage, GUIMain guiMain, ResourceBundle myResources) {
 		this.myStage = myStage;
@@ -45,9 +51,11 @@ public class Controller implements IScreenController {
 	public void init() {
 		levels = new ArrayList<>();
 		actors = new ArrayList<>();
+		gameInfo = new GameInfo();
+		game = new Game(gameInfo, levels);
 		levelEnvironment = new GUILevelEditingEnvironment(this, actors);
 		actorEnvironment = new GUIActorEditingEnvironment(this, myResources);
-		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment);
+		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo);
 	}
 
 	/**
@@ -59,6 +67,7 @@ public class Controller implements IScreenController {
 	 *            - list of created Actors that can be placed into the level
 	 */
 	public void goToLevelEditing(Level level) {
+		levelEnvironment.updateActorsList(actors);
 		goToEditingEnvironment(level, levelEnvironment);
 	}
 
@@ -83,7 +92,7 @@ public class Controller implements IScreenController {
 	 */
 	public void goToEditingEnvironment(IEditableGameElement editable, IEditingEnvironment environment) {
 		environment.setEditable(editable);
-		guiMain.setCenterPane(environment.getPane());
+		guiMain.setCenterPane(environment.getPane()); 
 	}
 
 	/**
@@ -101,6 +110,14 @@ public class Controller implements IScreenController {
 	 *            file to write to.
 	 */
 	public void saveGame(File file) {
+		Game g = new Game(new GameInfo(), levels);  //TODO needs to be game info from AE
+		CreatorController controller;
+		try {
+			controller = new CreatorController(g, this.getScreen());
+			controller.saveForEditing(file);
+		} catch (ParserConfigurationException e) {
+			getScreen().showError(e.getMessage());
+		}
 
 	}
 
@@ -136,7 +153,7 @@ public class Controller implements IScreenController {
 		Level newLevel = new Level();
 		levels.add(newLevel);
 		mainScreen.createLevelLabel(newLevel);
-		goToEditingEnvironment(newLevel, levelEnvironment);
+		goToLevelEditing(newLevel);
 	}
 
 	public void addActor() {

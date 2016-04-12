@@ -13,7 +13,7 @@ public interface ITrigger {
      *
      * @return The Trigger's name
      */
-    public String getTriggerName();
+    public String getMyKey();
 
     /**
      * Checks a boolean condition against the state of an actor

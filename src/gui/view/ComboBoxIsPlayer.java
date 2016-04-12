@@ -9,7 +9,7 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 	private static final String IS_PLAYER_OPTIONS = "IsPlayerOptions";
 	private static final String DELIMITER = ",";
 	private ResourceBundle myResources;
-	
+
 	public ComboBoxIsPlayer(ResourceBundle myResources, String promptText, String labelText) {
 		super(myResources, promptText, labelText);
 		this.myResources = myResources;
@@ -17,7 +17,7 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 
 	@Override
 	public void setButtonAction() {
-		comboButton.setOnAction(event->{
+		comboButton.setOnAction(event -> {
 			((Actor) getEditableElement()).setMain(Boolean.parseBoolean(comboBox.getValue()));
 		});
 	}
@@ -25,6 +25,12 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 	@Override
 	public List<String> getOptionsList() {
 		return Arrays.asList(myResources.getString(IS_PLAYER_OPTIONS).split(DELIMITER));
+	}
+
+	@Override
+	protected void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
