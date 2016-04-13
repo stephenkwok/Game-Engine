@@ -1,7 +1,6 @@
 package gui.view;
 
 import gui.controller.IScreenController;
-import gui.controller.ScreenController;
 
 public class ButtonSplash extends ButtonParent {
 	
