@@ -1,9 +1,6 @@
 package gameengine.model;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.AttributeType;
 
 public class Attribute {
 	

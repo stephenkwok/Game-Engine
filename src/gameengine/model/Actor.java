@@ -12,7 +12,6 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.AttributeType;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

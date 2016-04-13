@@ -1,6 +1,8 @@
 package gameengine.model;
 
 
+import javafx.scene.image.ImageView;
+
 import java.util.Set;
 
 /**
@@ -66,5 +68,19 @@ public interface IActor {
      * @param triggerString The string representing the specific trigger sent to the Actor
      */
     public void performActionsFor(String triggerString);
+
+    /**
+     * Provides the Actor's ImageView
+     *
+     * @return The Actor's ImageView
+     */
+    public ImageView getImageView();
+
+    /**
+     * Provides the Actor's name
+     *
+     * @return The Actor's name
+     */
+    public String getMyName();
 
 }

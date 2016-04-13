@@ -2,7 +2,6 @@ package gameengine.model;
 
 import authoringenvironment.view.ActorRule;
 import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.AttributeType;
 import javafx.scene.image.ImageView;
 
 import java.util.List;

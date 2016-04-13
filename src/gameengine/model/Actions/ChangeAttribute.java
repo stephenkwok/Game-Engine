@@ -1,7 +1,7 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
-import gameengine.model.Triggers.AttributeType;
+import gameengine.model.AttributeType;
 
 /**
  * @author blakekaplan
