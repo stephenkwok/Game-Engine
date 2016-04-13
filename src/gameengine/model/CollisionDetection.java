@@ -1,13 +1,8 @@
 package gameengine.model;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import gameengine.model.Actor;
-import gameengine.model.Triggers.BottomCollision;
-import gameengine.model.Triggers.CollisionTrigger;
-import gameengine.model.Triggers.SideCollision;
-import gameengine.model.Triggers.TopCollision;;
+
 
 /**
  * Collision Detection class handles checking for collisions among a list of Actors
@@ -17,7 +12,11 @@ import gameengine.model.Triggers.TopCollision;;
  *
  */
 public class CollisionDetection {
-
+	
+	private String SideCollision = "SideCollision";
+	private String TopCollision = "TopCollision";
+	private String BottomCollision = "BottomCollision";
+	
 	private PhysicsEngine myPhysicsEngine;
 	
 	public CollisionDetection( PhysicsEngine physicsEngine){
@@ -32,7 +31,7 @@ public class CollisionDetection {
 		for (Actor a1 : actors){
 			a1.setInAir(true);
 			for(Actor a2 : actors){
-				if(a1 != a2 ){            //Checks that each actor in the pair is unique
+				if(a1 != a2){            //Checks that each actor in the pair is unique
 					if(isCollision(a1,a2))
 						resolveCollision(a1,a2);
 				}
@@ -60,34 +59,8 @@ public class CollisionDetection {
 	 * @param a2
 	 * @return Type of collision-String
 	 */
-	//Should this be a String? Just using Magic Strings for now
 	private String getCollisionType(Actor a1, Actor a2){
-//		double xOverlap = 0;
-//		double yOverlap = 0;
-//		a1.setInAir(true);
-//		if(a1.getBounds().getMaxX() <= a2.getBounds().getMaxX()){
-//			xOverlap = a1.getBounds().getMaxX() -  a2.getX();
-//		}else{
-//			xOverlap = a2.getBounds().getMaxX() -  a1.getX();
-//		}
-//		
-//		if(a1.getBounds().getMaxY() <= a2.getBounds().getMaxY()){
-//			yOverlap = a1.getBounds().getMaxY() -  a2.getY();
-//		}else{
-//			yOverlap = a2.getBounds().getMaxY() -  a1.getY();
-//		}
-//				
-//		if(xOverlap <= yOverlap){
-//			return "SideCollision";
-//		}else{ 
-//			if(a2.getBounds().getMinY()<=a1.getBounds().getMaxY()){
-//				a1.setInAir(false);
-//				return "BottomCollision";
-//			}else{
-//				return "TopCollision";
-//			}
-//			
-//		}
+
 		
 		double w = (0.5 * (a1.getBounds().getWidth() + a2.getBounds().getWidth()));
 		double h = (0.5 * (a1.getBounds().getHeight() + a2.getBounds().getHeight()));
@@ -124,7 +97,8 @@ public class CollisionDetection {
 	private void resolveCollision(Actor a1, Actor a2){
 		String collisionType = getCollisionType(a1,a2);
 		String triggerString = a1.getMyName() + collisionType + a2.getMyName();
-		a1.performActionsFor(triggerString);   //Needs to be changed to take a string parameter
+		System.out.print(triggerString+"\n");
+		a1.performActionsFor(triggerString);   
 	}
 
 	public PhysicsEngine getMyPhysicsEngine() {

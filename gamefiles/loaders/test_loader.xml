@@ -68,6 +68,14 @@
                 </gameengine.model.Actions.VerticalStaticCollision>
               </list>
             </entry>
+            <entry>
+              <string>A1BottomCollisionA2</string>
+              <list>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+              </list>
+            </entry>
           </myRules>
           <attributeMap/>
           <isMain>false</isMain>
@@ -132,19 +140,20 @@
           </list>
         </entry>
         <entry>
+          <string>Right</string>
           <string>A1SideCollisionDefault Name</string>
           <list>
             <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
           </list>
         </entry>
         <entry>
-          <string>Right</string>
+          <string>A1SideCollisionA2</string>
           <list>
             <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
           </list>
         </entry>
         <entry>
-          <string>A1SideCollisionA2</string>
+          <string>A1BottomCollisionA2</string>
           <list>
             <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
           </list>
