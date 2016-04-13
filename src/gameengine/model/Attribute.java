@@ -21,6 +21,13 @@ public class Attribute extends Observable {
         setMyAction(action);
     }
 
+    public Attribute(AttributeType type, int initialValue){
+        myType = type;
+        myValue = initialValue;
+        myTriggerValue = Integer.MAX_VALUE;
+        myAction = null;
+    }
+
     public void changeAttribute(int change) {
     	myValue += change;
 

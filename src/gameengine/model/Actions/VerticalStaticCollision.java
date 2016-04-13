@@ -19,11 +19,7 @@ public class VerticalStaticCollision extends Action{
 
 	@Override
 	public void perform() {
-		//getMyActor().getPhysicsEngine().staticVerticalCollision2(getMyActor());
-		//myPhysicsEngine.vertStaticCollision(getActor());
-		//getMyActor().setY(getMyActor().getY()-(getMyActor().getVeloY()+.11));
-		//getMyActor().setVeloY(0);
-	
+		//TODO a1 v a2 checking done in collision detection; generalize out?
 	}
 
 

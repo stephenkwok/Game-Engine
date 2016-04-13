@@ -1,6 +1,5 @@
 package gui.view;
 
-import java.lang.reflect.InvocationTargetException;
 
 import gameplayer.controller.SplashScreenController;
 import gui.controller.IScreenController;

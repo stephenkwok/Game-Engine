@@ -1,5 +1,6 @@
 package gameengine.model;
 
+import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.Actions.Action;
 import javafx.scene.image.ImageView;
@@ -14,7 +15,7 @@ import java.util.Set;
  *
  * @author blakekaplan
  */
-public interface IAuthoringActor {
+public interface IAuthoringActor extends IEditableGameElement{
     void performActionsFor(String triggerString);
 
     void addAttribute(Attribute newAttribute);
@@ -62,6 +63,8 @@ public interface IAuthoringActor {
     String toString();
 
     String getMyImageViewName();
+    
+    void setMyImageViewName(String imageViewName);
 
     void setInAir(boolean inAir);
 
@@ -92,4 +95,10 @@ public interface IAuthoringActor {
     boolean isDead();
 
     void setDead(boolean isDead);
+
+	boolean isMain();
+
+	void setMain(boolean parseBoolean);
+
+	void setMyFriction(double parseDouble);
 }
