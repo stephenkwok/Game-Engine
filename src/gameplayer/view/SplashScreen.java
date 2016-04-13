@@ -29,7 +29,7 @@ import javafx.stage.Stage;
  * order to be able to provide functionality for the buttons that will be on the
  * splash screen first displayed to a user.
  * 
- * @author cmt57
+ * @author cmt57, mdf15
  */
 
 public class SplashScreen extends Screen {
@@ -40,11 +40,13 @@ public class SplashScreen extends Screen {
 	private static final String GUI_RESOURCE = "splashGUI";
 	private static final String BUTTONS_ID = "buttonID";
 	private static final int PADDING = 200;
-	private Stage myStage;
-
+	
+	/**
+	 * initializes a hbox with buttons to facilitate transitions to the various parts of the program
+	 * @param stage
+	 */
 	public SplashScreen(Stage stage) {
 		super(stage);
-		this.myStage = stage;
 		init();
 	}
 
@@ -58,6 +60,14 @@ public class SplashScreen extends Screen {
 		return getMyScene();
 	}
 
+	/**
+	 * creates three buttons to change the scene to the user's choice of environment
+	 * @param hbox
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	public void setButtonsUp(HBox hbox)
 			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String[] buttons = myResources.getString(BUTTONS_ID).split(",");

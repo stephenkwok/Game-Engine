@@ -1,8 +1,7 @@
 package gameengine.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashMap;
+import java.util.*;
 import authoringenvironment.model.IEditableGameElement;
 import javafx.scene.image.ImageView;
 
@@ -18,15 +17,15 @@ public class GameInfo implements IEditableGameElement {
 	private int myCurrentLevelNum;
 	private ImageView myPreviewImage;
 	private int myID;
-	private List<String> myHUDElementsToDisplay;
+	private Map<String,Integer> myHUDElementsToDisplay;
 	private String myFile;
 	
-	public GameInfo(String name, String imageName, String description, int currentLevelNum, String file) {
+	public GameInfo(String name, String imageName, String description, int currentLevelNum, String file ) {
 		this.setMyName(name);
 		this.setMyImageName(imageName);
 		this.setMyDescription(description);
 		this.setMyCurrentLevelNum(currentLevelNum);
-		this.myHUDElementsToDisplay = new ArrayList<>();
+		this.myHUDElementsToDisplay = new HashMap<String, Integer>();
 		this.myFile = file;
 	}
 	
@@ -49,8 +48,12 @@ public class GameInfo implements IEditableGameElement {
 		this.myName = myName;
 	}
 
-	public void setMyHUDOptions(List<String> options) {
+	public void setMyHUDOptions(Map<String, Integer> options) {
 		myHUDElementsToDisplay = options;
+	}
+	
+	public List<String> getMyHUDOptions() {
+		return new ArrayList<>(myHUDElementsToDisplay.keySet());
 	}
 
 	public String getMyImageName() {
@@ -119,14 +122,10 @@ public class GameInfo implements IEditableGameElement {
 		return myID;
 	}
 
-	public String getMyFile() {
-		return myFile;
-	}
-
-	public void setMyFile(String myFile) {
-		this.myFile = myFile;
+	public void setMyFile(String name) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
 }
-

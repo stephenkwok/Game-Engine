@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.Set;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -29,7 +30,7 @@ import javafx.scene.image.ImageView;
  * @author blakekaplan
  */
 
-public class Actor extends Observable implements IActor, IEditableGameElement {
+public class Actor extends Observable implements IActor, IEditableGameElement, Observer {
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "hellokitty.gif";
@@ -88,6 +89,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * @param newAttribute The new Actor Attribute
      */
     public void addAttribute(Attribute newAttribute) {
+    	newAttribute.addObserver(this);
         getAttributeMap().put(newAttribute.getMyType(), newAttribute);
     }
     
@@ -365,5 +367,14 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 
 	public void setDead(boolean isDead) {
 		this.isDead = isDead;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if(isMain){
+			setChanged();
+			notifyObservers("updateAttribute");
+		}
+		
 	}
 }
