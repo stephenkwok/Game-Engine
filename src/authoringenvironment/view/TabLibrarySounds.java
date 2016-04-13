@@ -26,7 +26,9 @@ public class TabLibrarySounds extends TabLibrary{
 		super(myResources, tabText, myRuleMaker);
 		setContent();
 	}
-	
+	/**
+	 * Set content of tab to list of sounds
+	 */
 	@Override
 	void setContent() {
 		fillFileNames();
@@ -41,19 +43,27 @@ public class TabLibrarySounds extends TabLibrary{
 		}
 		listView = new ListView<>(labels);
 	}
-	
+	/**
+	 * Get sound files from resources 
+	 */
 	private void fillMusicNames(){
 		File directory = new File(myResources.getString(MUSIC));
 		for(File file: directory.listFiles()){
 			fileNames.add(file.getName());
 		}
 	}
-	
+	/**
+	 * Return sound content of this tab
+	 */
 	@Override
 	Node getContent() {
 		return listView;
 	}
-	
+	/**
+	 * Return button that allows player to preview sound
+	 * @param soundName
+	 * @return
+	 */
 	private Button createPlaySoundButton(String soundName){
 		ImageView iv = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(SOUND_IMAGE_NAME)));
 		iv.setFitHeight(STANDARD_IMAGE_HEIGHT);

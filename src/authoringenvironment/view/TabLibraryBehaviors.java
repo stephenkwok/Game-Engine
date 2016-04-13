@@ -19,7 +19,9 @@ public class TabLibraryBehaviors extends TabLibrary {
 		super(myResources, tabText, myRuleMaker);
 		setContent();
 	}
-	
+	/**
+	 * Set content of tab to list of behaviors
+	 */
 	@Override
 	void setContent() {
 		labels = FXCollections.observableArrayList();
@@ -32,7 +34,9 @@ public class TabLibraryBehaviors extends TabLibrary {
 		}
 		listView = new ListView<>(labels);
 	}
-
+	/**
+	 * Return behavior content of this tab
+	 */
 	@Override
 	Node getContent() {
 		return listView;

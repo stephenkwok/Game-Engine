@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import gameengine.controller.Level;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  * ComboBox for level's losing conditions.

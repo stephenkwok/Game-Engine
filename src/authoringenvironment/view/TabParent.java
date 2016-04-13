@@ -36,7 +36,10 @@ abstract class TabParent{
 			fileNames.add(file.getName());
 		}
 	}
-	
+	/**
+	 * Return scrollable tab
+	 * @return
+	 */
 	public Tab getTab() {
 		tab = new Tab(tabText);
 		try {
@@ -52,7 +55,9 @@ abstract class TabParent{
 		}
 		return tab;
 	}
-	
+	/**
+	 * Reset content of tab 
+	 */
 	public void updateNode(){
 		try {
 			sp.setContent(getContent());
@@ -63,7 +68,14 @@ abstract class TabParent{
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Get content of tab
+	 * @return
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	abstract Node getContent() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
 
 }
