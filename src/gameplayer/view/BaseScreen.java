@@ -1,8 +1,6 @@
 package gameplayer.view;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import gameengine.controller.Game;
@@ -14,42 +12,26 @@ import gui.view.IGUIElement;
 import gui.view.Screen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
-import javafx.scene.Camera;
-import javafx.scene.Node;
-import javafx.scene.ParallelCamera;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
  * This class provides for a private interface to create a base screen view that
  * will hold the other view components of the gaming program.
  * 
- * @author Carine
+ * @author Carine, Michael
  *
  */
 public class BaseScreen extends Screen {
 	/**
-	 * Adds the auxiliary views, like the HUD display, MenuBar, and GameScreen,
+	 * Adds the auxiliary views, like the HUD display, ToolBar, and GameScreen,
 	 * to the BaseScreen
 	 */
 
@@ -57,10 +39,7 @@ public class BaseScreen extends Screen {
 	private static final String GUI_RESOURCE = "gameGUI";
 	private BaseScreenController myController;
 	private GUIFactory factory;
-	private static final String MENU_ITEMS = "MenuBarMenus";
 	private static final String SIDE_BUTTONS = "SideButtons";
-	private static final Integer BUTTON_X = 50;
-	private static final Integer BUTTON_Y = 10;
 	private BorderPane myMasterPane;
 
 	public BaseScreen(Stage stage, Game game) {

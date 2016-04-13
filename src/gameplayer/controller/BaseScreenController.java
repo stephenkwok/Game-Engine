@@ -10,7 +10,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import gamedata.controller.CreatorController;
 import gamedata.controller.ParserController;
 import gameengine.controller.Game;
-import gameengine.model.Actor;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.SplashScreen;
 import gui.controller.IScreenController;

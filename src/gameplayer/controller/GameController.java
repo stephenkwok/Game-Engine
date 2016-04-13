@@ -1,10 +1,7 @@
 package gameplayer.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Optional;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -12,13 +9,10 @@ import gameengine.controller.Game;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.ITrigger;
-import gameplayer.view.BaseScreen;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
 import javafx.collections.MapChangeListener.Change;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Alert.AlertType;
 
 
 /** 

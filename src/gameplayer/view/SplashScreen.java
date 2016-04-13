@@ -22,7 +22,7 @@ import javafx.stage.Stage;
  * order to be able to provide functionality for the buttons that will be on the
  * splash screen first displayed to a user.
  * 
- * @author cmt57
+ * @author cmt57, mdf15
  */
 
 public class SplashScreen extends Screen {

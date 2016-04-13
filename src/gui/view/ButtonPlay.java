@@ -21,8 +21,6 @@ public class ButtonPlay extends ButtonParent{
 
 	@Override
 	protected void setButtonAction() {
-		//button.setOnAction(e ->  myControl.play());
-
 		button.setOnAction(e -> {
 			//TODO Add a checker for null directory
 			if ((new File("gamefiles")).listFiles().length == 1) {
