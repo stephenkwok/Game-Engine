@@ -1,8 +1,6 @@
 package gameplayer.view;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import gameengine.controller.Game;
@@ -14,70 +12,54 @@ import gui.view.IGUIElement;
 import gui.view.Screen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
-import javafx.scene.Camera;
-import javafx.scene.Node;
-import javafx.scene.ParallelCamera;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
  * This class provides for a private interface to create a base screen view that
  * will hold the other view components of the gaming program.
  * 
- * @author Carine
+ * @author Carine, Michael
  *
  */
 public class BaseScreen extends Screen {
-	/**
-	 * Adds the auxiliary views, like the HUD display, MenuBar, and GameScreen,
-	 * to the BaseScreen
-	 */
 
 	private ResourceBundle myResources;
 	private static final String GUI_RESOURCE = "gameGUI";
-	private BaseScreenController myController;
+	private BaseScreenController myBaseScreenController;
 	private GUIFactory factory;
-	private static final String MENU_ITEMS = "MenuBarMenus";
 	private static final String SIDE_BUTTONS = "SideButtons";
-	private static final Integer BUTTON_X = 50;
-	private static final Integer BUTTON_Y = 10;
 	private BorderPane myMasterPane;
 
+	
+	/**
+	 * Adds the auxiliary views, like the HUD display, ToolBar, and GameScreen,
+	 * to the BaseScreen
+	 * @param stage to change the scene
+	 * @param game to initialize the gamescreen with
+	 */
 	public BaseScreen(Stage stage, Game game) {
 		super(stage);
 		this.myMasterPane = new BorderPane();
 		init();
-		GameController myGameController = myController.getMyGameController();
+		GameController myGameController = myBaseScreenController.getMyGameController();
 		myGameController.setGame(game);
 		myGameController.setGameView(new GameScreen(new PerspectiveCamera()));
-		myGameController.initialize(game.getInfo().getMyCurrentLevelNum());
-		addComponents();
+		myGameController.initialize(game.getInfo().getMyCurrentLevelNum()); //note: main actor is define at this line
+		addComponents(); //HUD is actually added here
 	}
 	
 	public void init() {
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		myController = new BaseScreenController(getStage(), this, this.myResources);
-		factory = new GUIFactory(myResources, myController);
+		myBaseScreenController = new BaseScreenController(getStage(), this, this.myResources);
+		factory = new GUIFactory(myResources, myBaseScreenController);
 	}
 	
 
@@ -85,7 +67,6 @@ public class BaseScreen extends Screen {
 		try {
 			addGame();
 			addHUD();
-			//myController.getMyGameController().setHUD(new HUDScreen(myController.getMyGameController().getGame().getHUDInfo()));  //blake needs to add this
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException | SecurityException e1) {
 			e1.printStackTrace();
@@ -95,15 +76,22 @@ public class BaseScreen extends Screen {
 	
 	//depracated
 	public void addHUD() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		
 		IGUIElement hudPane = factory.createNewGUIObject("hudPane");
 		Pane myP = (Pane) hudPane.createNode();
+		/*
 		ObservableMap<String, Object> status = FXCollections.observableHashMap();
 		status.put("health", 20);
 		status.put("level", 2);
 		HUDScreen myHud = new HUDScreen(SCREEN_WIDTH,SCREEN_WIDTH,status);
+		*/
+		HUDScreen myHud = new HUDScreen(SCREEN_WIDTH, SCREEN_WIDTH, 
+				myBaseScreenController.getMyGameController().getGame().getHUDData());
+		myBaseScreenController.getMyGameController().setHUD(myHud);
 		myHud.init();
 		myP.getChildren().add(myHud.getScene());
 		myMasterPane.setBottom(myP);
+		//myMasterPane.setBottom(new Text("HELLO!!!!"));
 	}
 
 	public void addGame() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
@@ -127,7 +115,7 @@ public class BaseScreen extends Screen {
 	}
 	
 	public void addGamePane(){
-		SubScene gameScene = myController.getMyGameController().getView().getScene();
+		SubScene gameScene = myBaseScreenController.getMyGameController().getView().getScene();
 		myMasterPane.setCenter(gameScene);
 	}
 	

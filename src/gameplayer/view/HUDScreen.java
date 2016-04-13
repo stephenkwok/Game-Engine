@@ -76,6 +76,8 @@ public class HUDScreen extends Observable {
         	values.add(status.get(rowToValueMap.get(i)).toString());
         }
         
+        mySubGroup.getChildren().add(container);
+        
 	}
 	
 	public SubScene getScene() {
@@ -86,7 +88,5 @@ public class HUDScreen extends Observable {
 		int rownum = valueToRowMap.get(change.getKey());
 		values.set(rownum, change.getValueAdded().toString());
 	}
-	
-	
 	
 }
