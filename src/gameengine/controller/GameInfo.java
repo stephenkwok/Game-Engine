@@ -51,7 +51,7 @@ public class GameInfo implements IEditableGameElement {
 	}
 	
 	public List<String> getMyHUDOptions() {
-		return myHUDElementsToDisplay;
+		return new ArrayList<>(myHUDElementsToDisplay.keySet());
 	}
 
 	public String getMyImageName() {

@@ -1,11 +1,11 @@
 package gameengine.model;
 
+import gameengine.model.Actions.Action;
+
 import java.util.Observable;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.AttributeType;
 
 public class Attribute extends Observable {
 	

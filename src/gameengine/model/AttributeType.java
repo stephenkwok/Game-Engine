@@ -1,4 +1,4 @@
-package gameengine.model.Triggers;
+package gameengine.model;
 
 /**
  * @author blakekaplan
