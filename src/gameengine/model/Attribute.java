@@ -1,11 +1,13 @@
 package gameengine.model;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.AttributeType;
 
-public class Attribute {
+import java.util.Observable;
+
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import gameengine.model.Actions.Action;
+
+public class Attribute extends Observable {
 	
 	private int myValue;
 	private int myTriggerValue;
@@ -21,6 +23,8 @@ public class Attribute {
 
     public void changeAttribute(int change) {
     	myValue += change;
+    	setChanged();
+    	notifyObservers();
         if(myValue == myTriggerValue){
         	myAction.perform();
         }
