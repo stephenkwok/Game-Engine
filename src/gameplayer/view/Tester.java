@@ -6,18 +6,6 @@ import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
-<<<<<<< HEAD:src/gameplayer/view/Main.java
-import gameengine.model.Actions.ApplyPhysics;
-import gameengine.model.Actions.Destroy;
-import gameengine.model.Actions.HorizontalBounceCollision;
-import gameengine.model.Actions.HorizontalStaticCollision;
-import gameengine.model.Actions.MoveLeft;
-import gameengine.model.Actions.MoveRight;
-import gameengine.model.Actions.MoveUp;
-import gameengine.model.Actions.VerticalStaticCollision;
-import gameengine.model.Actions.WinGame;
-=======
->>>>>>> e4f4f95da2c4454f65ae7e4235f40f0debe0e651:src/gameplayer/view/Tester.java
 import gameengine.model.Actions.*;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.KeyTrigger;
@@ -58,9 +46,15 @@ public class Tester extends Application {
 		info.setMyCurrentLevelNum(0);
 		info.setMyName("Colette");
 		
+		Map<String, Integer> options = new HashMap<>();
+		options.put("Points", 0);
+		
+		info.setMyHUDOptions(options);
+		
 		Actor actor1 = new Actor();
 		actor1.setMyImageViewName("redball.png");
 		actor1.setMyName("A1");
+		
 		
 		Actor actor2 = new Actor();
 		actor2.setMyImageViewName("block.png");
@@ -90,7 +84,7 @@ public class Tester extends Application {
 		Action action1 = new MoveRight(actor1);
 		Action action2 = new MoveLeft(actor1);
 		Action action3 = new HorizontalStaticCollision(actor1);
-		Action action4 = new MoveUp(actor1);//new ChangeAttribute(actor1,AttributeType.POINTS,1);
+		Action action4 = new ChangeAttribute(actor1,AttributeType.POINTS,1);
 		Action action5 = new VerticalStaticCollision(actor1);
 		Action action6 = new WinGame(actor1);
 		Rule rule = new Rule(trigger1,action1);
@@ -105,9 +99,10 @@ public class Tester extends Application {
 		actor1.addRule(rule4);
 		actor1.addRule(rule5);
 		actor1.addRule(rule6);
-		
-//		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
-//		actor1.addAttribute(points);
+		actor1.setMain(true);
+//		
+		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
+		actor1.addAttribute(points);
 		
 		List<Level> levels = new ArrayList<Level>();
 		Level level1 = new Level();
@@ -120,13 +115,8 @@ public class Tester extends Application {
 			Actor floor = new Actor();
 			floor.setMyName("floor");
 			floor.setMyImageViewName("square.png");
-<<<<<<< HEAD:src/gameplayer/view/Main.java
-			floor.setX(i*50);
-			floor.setY(500-floor.getBounds().getHeight());
-=======
 			floor.setX(i*50+i);
-			floor.setY(700);
->>>>>>> e4f4f95da2c4454f65ae7e4235f40f0debe0e651:src/gameplayer/view/Tester.java
+			floor.setY(500-floor.getBounds().getHeight());
 			BottomCollision b = new BottomCollision(actor1, floor);
 			BottomCollision b2 = new BottomCollision(actor2, floor);
 			BottomCollision b3 = new BottomCollision(actor3, floor);
@@ -152,7 +142,7 @@ public class Tester extends Application {
 		
 		Game model = new Game(info,levels);
 		CreatorController c = new CreatorController(model);
-		c.saveForEditing(new File("gamefiles/test.xml"));
+		c.saveForEditing(new File("gamefiles/hudtest.xml"));
 		PerspectiveCamera camera = new PerspectiveCamera();
 		GameScreen view = new GameScreen(camera);
 
@@ -179,7 +169,7 @@ public class Tester extends Application {
 		sub.setCamera(camera);
 		stage.setScene(scene);
 		stage.show();
-		controller.initialize(0);
+		//controller.initialize(0);
 
 		
 //		Stage stage = new Stage();

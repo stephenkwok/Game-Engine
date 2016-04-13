@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <initialGameFile>gamefiles/loaders/test_loader.xml</initialGameFile>
+  <initialGameFile>gamefiles/loaders/hudtest_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <myActors>
@@ -23,9 +23,11 @@
             <entry>
               <string>Space</string>
               <list>
-                <gameengine.model.Actions.MoveUp>
+                <gameengine.model.Actions.ChangeAttribute>
                   <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.MoveUp>
+                  <myType>POINTS</myType>
+                  <myChange>1</myChange>
+                </gameengine.model.Actions.ChangeAttribute>
               </list>
             </entry>
             <entry>
@@ -136,8 +138,22 @@
               </list>
             </entry>
           </myRules>
-          <attributeMap/>
-          <isMain>false</isMain>
+          <attributeMap>
+            <entry>
+              <gameengine.model.AttributeType>POINTS</gameengine.model.AttributeType>
+              <gameengine.model.Attribute>
+                <changed>false</changed>
+                <obs>
+                  <gameengine.model.Actor reference="../../../../.."/>
+                </obs>
+                <myValue>0</myValue>
+                <myTriggerValue>10</myTriggerValue>
+                <myType>POINTS</myType>
+                <myAction class="gameengine.model.Actions.WinGame" reference="../../../../myRules/entry[3]/list/gameengine.model.Actions.WinGame"/>
+              </gameengine.model.Attribute>
+            </entry>
+          </attributeMap>
+          <isMain>true</isMain>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -731,8 +747,13 @@
     <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myID>0</myID>
-    <myHUDElementsToDisplay/>
-    <myFile>test_loader.xml</myFile>
+    <myHUDElementsToDisplay>
+      <entry>
+        <string>Points</string>
+        <int>0</int>
+      </entry>
+    </myHUDElementsToDisplay>
+    <myFile>hudtest.xml</myFile>
   </info>
   <myPhysicsEngine>
     <timeStep>1</timeStep>

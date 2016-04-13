@@ -9,7 +9,9 @@ import java.util.ResourceBundle;
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.GameInfo;
+import gameengine.model.IAuthoringActor;
 import gameengine.model.Actor;
+import gameengine.model.AttributeType;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -33,9 +35,9 @@ public class CheckBoxesHUDOptions implements IGUIElement, IGUIEditingElement {
 	private List<CheckBox> myHUDElements;
 	private GUIFactory myFactory;
 	private Controller myController;
-	private List<Actor> myActors;
+	private List<IAuthoringActor> myActors;
 
-	public CheckBoxesHUDOptions(IEditableGameElement gameInfo, Controller controller, List<Actor> actors) {
+	public CheckBoxesHUDOptions(IEditableGameElement gameInfo, Controller controller, List<IAuthoringActor> actors) {
 		this.myGameInfo = gameInfo;
 		this.myController = controller;
 		this.myAttributesResources = ResourceBundle.getBundle("HUDOptions");
@@ -81,10 +83,10 @@ public class CheckBoxesHUDOptions implements IGUIElement, IGUIEditingElement {
 		return toDisplay;
 	}
 
-	// refactor to use reflection
+	// remove this once changes are made on the other end 
 	private int getInitialValueForHUDElement(String myHUDElementID) {
-		Actor mainActor = null;
-		for (Actor actor : myActors) {
+		IAuthoringActor mainActor = null;
+		for (IAuthoringActor actor : myActors) {
 			if (actor.isMain()) {
 				mainActor = actor;
 				break;
@@ -93,7 +95,7 @@ public class CheckBoxesHUDOptions implements IGUIElement, IGUIEditingElement {
 		if (myHUDElementID.equals("Amount of Ammo Left")) {
 			return 0; // call mainActor.getMyAmmo();
 		} else if (myHUDElementID.equals("Number of Lives")) {
-			mainActor.getMyHealth();
+			((Actor) mainActor).getAttribute(AttributeType.HEALTH).getMyValue();
 		}
 		return 0;
 	}

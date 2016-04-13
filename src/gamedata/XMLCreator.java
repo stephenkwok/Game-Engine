@@ -45,7 +45,7 @@ public class XMLCreator {
 		convertDocumentToFile(document, file);
 	}
 
-	public void convertDocumentToFile (Document document, File file) throws TransformerException {
+	private void convertDocumentToFile (Document document, File file) throws TransformerException {
 
 		TransformerFactory transformerFactory =
 				TransformerFactory.newInstance();

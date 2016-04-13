@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 import gamedata.controller.FileChooserController;
 import gameengine.controller.Game;
-import gameplayer.controller.SplashScreenController;
 import gameplayer.view.BaseScreen;
 import gui.controller.IScreenController;
 import gui.view.ComboBoxGame;
@@ -20,7 +19,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class FileChooserScreen extends Screen {
+public abstract class FileChooserScreen extends Screen {
 
 	private ResourceBundle myResources;
 	private FileChooserController myController;
@@ -77,9 +76,6 @@ public class FileChooserScreen extends Screen {
 		return null;
 	}
 	
-	public void play(Game game) {
-		BaseScreen myB = new BaseScreen(getStage(), game);
-		getStage().setScene(myB.getMyScene());
-	}
+	public abstract void use(Game game);
 
 }

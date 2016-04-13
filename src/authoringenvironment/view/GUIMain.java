@@ -4,8 +4,6 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
-import gui.view.ButtonPlay;
-import gui.view.ComboBoxGame;
 import gui.view.GUIFactory;
 import gui.view.IGUI;
 import gui.view.IGUIElement;
@@ -75,25 +73,33 @@ public class GUIMain extends Screen implements IGUI {
 	public Scene getScene() {
 		return myScene;
 	}
-	
+	/**
+	 * Set center section of screen to given Pane
+	 * @param pane
+	 */
 	public void setCenterPane(Pane pane){
 		myRoot.setCenter(pane);
 	}
-
+	/**
+	 * Set center screen to default, the home screen 
+	 */
 	public void setCenterPane(){
 		myController.goToMainScreen();
 	}
-	
+	/**
+	 * Sets top section of screen to fixed toolbar 
+	 */
 	private void setTopPane() {
 		HBox hbox = new HBox(PADDING);
 		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));		
 		initializeTopPaneElements(hbox);
-//		ComboBoxGame test = new ComboBoxGame("SUP", "gamefiles", myController);
-//		hbox.getChildren().add(test.createNode());
 		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		myRoot.setTop(hbox);
 	}
-
+	/**
+	 * Initialize elements to be in toolbar
+	 * @param hbox
+	 */
 	private void initializeTopPaneElements(HBox hbox) {
 		try{
 			String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
@@ -105,26 +111,36 @@ public class GUIMain extends Screen implements IGUI {
 			
 		}
 	}
-	
+	/**
+	 * Return Pane representation of authoring environment
+	 */
 	@Override
 	public Pane getPane() {
 		return myRoot;
 	}
-
+	
 	@Override
-	public IScreenController setController() {
+	public IScreenController setController() {			//REMOVE
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	/**
+	 * Returns user back to splash screen 
+	 */
 	public void goBackToGamePlayer() {
 		myStage.setScene(splashScene);
 	}
-
+	/**
+	 * Return width of authoring environment Scene
+	 * @return
+	 */
 	public double getWidth() {
 		return myScene.getWidth();
 	}
-
+	/**
+	 * Return height of authoring environment Scene
+	 * @return
+	 */
 	public double getHeight() {
 		return myScene.getHeight();
 	}

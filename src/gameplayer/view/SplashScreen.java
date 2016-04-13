@@ -1,9 +1,18 @@
 package gameplayer.view;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
+
 import authoringenvironment.view.GUIMain;
+import gamedata.controller.HighScoresController;
+import gamedata.view.FileChooserScreen;
+import gamedata.view.FileChooserScreenScores;
 import gameengine.controller.Game;
 import gameplayer.controller.SplashScreenController;
 import gui.controller.IScreenController;
@@ -101,10 +110,20 @@ public class SplashScreen extends Screen {
 
 	/**
 	 * Will open a high scores options screen.
+	 * @throws TransformerException 
+	 * @throws IOException 
+	 * @throws SAXException 
+	 * @throws ParserConfigurationException 
 	 */
-	public void openHighScores() {
-		HighScoreScreen myHS = new HighScoreScreen(getStage());
-		getStage().setScene(myHS.getMyScene());
+	public void openHighScores() throws ParserConfigurationException, SAXException, IOException, TransformerException {
+		FileChooserScreen myFC = new FileChooserScreenScores(getStage());
+		try {
+			getStage().setScene(myFC.getScene());
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
