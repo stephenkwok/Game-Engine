@@ -1,12 +1,16 @@
 package gameengine.model.Triggers;
 
 import gameengine.model.Actor;
+import gameengine.model.IActor;
 import gameengine.model.ITrigger;
 
 public abstract class CollisionTrigger implements ITrigger {
 
-    private Actor myMainActor;
-    private Actor myCollisionActor;
+    private IActor myMainActor;
+    private IActor myCollisionActor;
+
+    @Override
+    public abstract boolean evaluate(IActor myActor);
 
     public CollisionTrigger(Actor mainActor, Actor collisionActor) {
         setMyMainActor(mainActor);
@@ -16,22 +20,19 @@ public abstract class CollisionTrigger implements ITrigger {
     @Override
     public abstract String getMyKey();
 
-    @Override
-    public abstract boolean evaluate(Actor myActor);
-
     public String makeName(String collisionType) {
         return getMyMainActor().getMyName() + collisionType + getMyCollisionActor().getMyName();
     }
 
-	public Actor getMyMainActor() {
+	public IActor getMyMainActor() {
 		return myMainActor;
 	}
 
-	public void setMyMainActor(Actor myMainActor) {
+	public void setMyMainActor(IActor myMainActor) {
 		this.myMainActor = myMainActor;
 	}
 
-	public Actor getMyCollisionActor() {
+	public IActor getMyCollisionActor() {
 		return myCollisionActor;
 	}
 

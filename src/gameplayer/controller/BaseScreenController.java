@@ -10,10 +10,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import gamedata.controller.CreatorController;
 import gamedata.controller.ParserController;
 import gameengine.controller.Game;
-import gameengine.model.Actor;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.SplashScreen;
 import gui.controller.IScreenController;
+import gui.controller.ScreenController;
 import gui.view.ComboBoxGame;
 import gui.view.Screen;
 import javafx.scene.Group;
@@ -24,15 +24,14 @@ import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class BaseScreenController implements IScreenController{
+public class BaseScreenController extends ScreenController{
 
-	private Stage myStage;
 	private ResourceBundle myResources;
 	private BaseScreen myScreen;
 	private GameController myGameController;
 	
 	public BaseScreenController(Stage myStage, BaseScreen myBase, ResourceBundle myResources) {
-		this.myStage = myStage;
+		super(myStage);
 		this.myResources = myResources;
 		this.myScreen = myBase;
 		this.setMyGameController(new GameController());
@@ -42,11 +41,6 @@ public class BaseScreenController implements IScreenController{
 	public void init() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public Stage getStage() {
-		return myStage;
 	}
 
 	public void toggleSound() {
@@ -59,9 +53,9 @@ public class BaseScreenController implements IScreenController{
 
 //TODO move to iscreen controller	
 	public void goToSplash(){
-		SplashScreen mySplash = new SplashScreen(myStage);
+		SplashScreen mySplash = new SplashScreen(getStage());
 		try {
-			myStage.setScene(mySplash.getScene());
+			getStage().setScene(mySplash.getScene());
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
 			e.printStackTrace();

@@ -38,13 +38,13 @@ public abstract class TextFieldWithButton implements IGUIElement, IGUIEditingEle
 		this.textFieldWidth = textFieldWidth;
 		this.myEditableElement = null;
 		myButton = new Button(buttonText);
+		myTextField = new TextField();
 	}
 	
 	@Override
 	public Node createNode() {
 		myContainer = new HBox(PADDING);
 		myTextFieldPrompt = new Label(labelText);
-		myTextField = new TextField();
 		myTextField.setPrefWidth(textFieldWidth);
 //		HBox.setHgrow(myTextField, Priority.ALWAYS);
 		myTextField.setPromptText(promptText);

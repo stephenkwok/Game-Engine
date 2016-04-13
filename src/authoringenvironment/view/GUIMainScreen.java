@@ -7,6 +7,7 @@ import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.GameInfo;
+import gameengine.model.Actor;
 import gui.view.IGUI;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.control.ScrollPane;
@@ -40,9 +41,10 @@ public class GUIMainScreen implements IGUI {
 	private IEditingEnvironment actorEditor;
 	private IEditingEnvironment levelEditor;
 	private GameInfo gameInfo;
+	private List<Actor> myActors;
 
 	public GUIMainScreen(Controller controller, IEditingEnvironment actorEditor, IEditingEnvironment levelEditor,
-			GameInfo gameInfo) {
+			GameInfo gameInfo, List<Actor> actors) {
 		this.controller = controller;
 		this.actorEditor = actorEditor;
 		this.levelEditor = levelEditor;
@@ -64,7 +66,7 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	private void initLeftPane() {
-		GUIGameEditingEnvironment gameEditingEnvironment = new GUIGameEditingEnvironment(gameInfo, controller);
+		GUIGameEditingEnvironment gameEditingEnvironment = new GUIGameEditingEnvironment(gameInfo, controller, myActors);
 		borderPane.setLeft(gameEditingEnvironment.createNode());
 	}
 

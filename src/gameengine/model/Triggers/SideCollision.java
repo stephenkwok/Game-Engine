@@ -1,6 +1,7 @@
 package gameengine.model.Triggers;
 
 import gameengine.model.Actor;
+import gameengine.model.IActor;
 import gameengine.model.ITrigger;
 
 public class SideCollision extends CollisionTrigger implements ITrigger {
@@ -12,13 +13,13 @@ public class SideCollision extends CollisionTrigger implements ITrigger {
     }
 
     @Override
-    public String getMyKey() {
-        return makeName(COLLISION_NAME);
+    public boolean evaluate(IActor myActor) {
+        return true;
     }
 
     @Override
-    public boolean evaluate(Actor myActor) {
-        return true;
+    public String getMyKey() {
+        return makeName(COLLISION_NAME);
     }
 
 }

@@ -2,6 +2,7 @@ package gameengine.model.Triggers;
 
 
 import gameengine.model.Actor;
+import gameengine.model.IActor;
 import gameengine.model.ITrigger;
 
 /**
@@ -15,14 +16,9 @@ public class TickTrigger implements ITrigger {
     public String getMyKey() {
         return TICK;
     }
-/*
-    @Override
-    public boolean evaluate(Actor myActor) {
-        return true;
-    }*/
 
-	@Override
-	public boolean evaluate(Actor myActor) {
-		return true;
-	}
+    @Override
+    public boolean evaluate(IActor myActor) {
+        return true;
+    }
 }
