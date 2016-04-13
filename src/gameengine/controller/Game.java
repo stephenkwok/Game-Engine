@@ -318,7 +318,7 @@ public class Game extends Observable implements Observer {
 	
 	
 	
-	public void updateAttributes() {
+	public void updateAttribute() {
 		updateHUDFields(HUDData.keySet(), HUDData);
 	}
 	
