@@ -72,6 +72,7 @@ public class HighScoreScreen extends Screen{
 
 	private void addGamePane() {
 		ToolBar myT = new ToolBar();
+		myT.setMinHeight(SCREEN_HEIGHT);
 		myT.setOrientation(Orientation.VERTICAL);
 		for(String game : myMap.keySet()){
 			Button myB = new Button(game);
@@ -90,6 +91,7 @@ public class HighScoreScreen extends Screen{
 
 	public void initialize(){
 		ToolBar myT = new ToolBar();
+		myT.setMinWidth(SCREEN_WIDTH);
 		IGUIElement newElement = factory.createNewGUIObject("Splash");
 		Button myB = (Button) newElement.createNode();
 		myB.setMinSize(8, 8);

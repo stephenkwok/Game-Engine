@@ -33,7 +33,7 @@ public class ButtonPlay extends ButtonParent{
 			else {
 				Group fileChooseGroup = new Group();
 				Scene fileChooseScene = new Scene(fileChooseGroup, myControl.getScreen().getMyScene().getWidth(), myControl.getScreen().getMyScene().getHeight());
-				ComboBoxGame fileSelector =  new ComboBoxGame("SUP", "gamefiles", myControl);
+				ComboBoxGame fileSelector =  new ComboBoxGame("Choose Game", "gamefiles", myControl);
 				fileChooseGroup.getChildren().add((HBox) fileSelector.createNode());
 				myControl.getStage().setScene(fileChooseScene); 
 			}

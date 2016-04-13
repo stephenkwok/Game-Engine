@@ -71,7 +71,8 @@ public class GameController implements Observer {
 	 */
 	public void begin (){
 		Level current = model.getCurrentLevel();
-		//view.addBackground(current.getMyBackgroundImgName());
+		view.clearGame();
+		view.addBackground(current.getMyBackgroundImgName());
 		for(Actor actor: model.getActors()){
 			view.addActor(actor);
 		}
@@ -155,11 +156,11 @@ public class GameController implements Observer {
 	}
 	
 	public void toggleSound() {
-		System.out.println("toggle sound");
+		System.out.println("toggle sound unimplemented");
 	}
 	
 	public void toggleMusic(){
-		System.out.println("toggle music");
+		System.out.println("toggle music unimplemented");
 	}
 
 	public void togglePause() {
@@ -170,7 +171,13 @@ public class GameController implements Observer {
 	public void toggleUnPause() {
 		getGame().getAnimation().play();
 		view.getMySubscene().setDisable(false);
-		
+	}
+
+
+	public void restartGame() {
+		System.out.println("restart game");
+		System.out.println(model.getInfo().getMyCurrentLevelNum() + " game level");
+		initialize(model.getInfo().getMyCurrentLevelNum());
 	}
 	
 	

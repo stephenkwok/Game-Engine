@@ -127,7 +127,7 @@ public class BaseScreenController implements IScreenController{
 	public void chooseGame() {
 		Group fileChooseGroup = new Group();
 		Scene fileChooseScene = new Scene(fileChooseGroup, this.getScreen().getMyScene().getWidth(), this.getScreen().getMyScene().getHeight());
-		ComboBoxGame fileSelector =  new ComboBoxGame("SUP", "gamefiles", this);
+		ComboBoxGame fileSelector =  new ComboBoxGame("Choose Game", "gamefiles", this);
 		fileChooseGroup.getChildren().add((HBox) fileSelector.createNode());
 		this.getStage().setScene(fileChooseScene);
 	}
