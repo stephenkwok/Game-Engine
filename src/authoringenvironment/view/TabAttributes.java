@@ -6,19 +6,15 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
-import gameengine.controller.Level;
 import gui.view.GUIFactory;
 import gui.view.IGUIEditingElement;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 /**
- * Abstract Tab for setting attributes to go in the Inspector Pane in either the Level or Actor Editing Environment GUI.
+ * Tab for setting attributes to go in the Inspector Pane in either the Level or Actor Editing Environment GUI.
  * @author amyzhao
  *
  */
@@ -30,29 +26,43 @@ public class TabAttributes extends TabParent {
 	private GUIFactory myFactory;
 	private Controller myController;
 	private VBox myContent;
-	private List<CheckBox> myHUDElements;
 	private IEditableGameElement myEditableElement;
 	private List<IGUIEditingElement> myEditingElements;
 	
-	public TabAttributes(Controller controller, ResourceBundle myResources, String tabText, String levelOptionsResource, IEditableGameElement element) {
+	/**
+	 * Constructor for an attributes tab.
+	 * @param controller: controller for this authoring environment.
+	 * @param myResources: resource bundle for the authoring environment.
+	 * @param tabText: name of this tab.
+	 * @param optionsResource: resource bundle containing info about the GUI elements for this attributes tab.
+	 * @param element: element that is being edited by this attributes tab (i.e. a level or an actor).
+	 */
+	public TabAttributes(Controller controller, ResourceBundle myResources, String tabText, String optionsResource, IEditableGameElement element) {
 		super(myResources, tabText);
-		this.myAttributesResources = ResourceBundle.getBundle(levelOptionsResource);
+		this.myAttributesResources = ResourceBundle.getBundle(optionsResource);
 		myFactory = new GUIFactory(myAttributesResources, myController);
-		myHUDElements = new ArrayList<>();
 		myEditableElement = element;
 		myEditingElements = new ArrayList<>();
-		createElements();
+		addElements();
 	}
 
-	private void createElements() {
+	/**
+	 * Adds the elements specified by the resource file to the vbox for this tab.
+	 */
+	private void addElements() {
 		VBox vbox = new VBox(PADDING);
 		vbox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
-		vbox.getChildren().addAll(addElements(EDITOR_ELEMENTS, vbox));
+		vbox.getChildren().addAll(createElements(EDITOR_ELEMENTS));
 		updateEditable(myEditableElement);
 		myContent = vbox;
 	}
 	
-	private List<Node> addElements(String key, VBox vbox) {
+	/**
+	 * Creates the elements to be added to this tab. 
+	 * @param key: key in resource file for the value that lists all the elements to create
+	 * @return list of IGUIElements to be added to the tab.
+	 */
+	private List<Node> createElements(String key) {
 		String[] elements = myAttributesResources.getString(key).split(DELIMITER);
 		List<Node> createdElements = new ArrayList<>();
 		for (int i = 0; i < elements.length; i++) {
@@ -63,6 +73,10 @@ public class TabAttributes extends TabParent {
 		return createdElements;
 	}
 	
+	/**
+	 * Updates the editable element that each attribute tab element is modifying.
+	 * @param element: the level or actor that you now want to modify.
+	 */
 	public void updateEditable(IEditableGameElement element) {
 		myEditableElement = element;
 		for (int i = 0; i < myEditingElements.size(); i++) {
@@ -70,6 +84,9 @@ public class TabAttributes extends TabParent {
 		}
 	}
 	
+	/**
+	 * Returns the content of this attributes tab.
+	 */
 	@Override
 	Node getContent() {
 		return myContent;
