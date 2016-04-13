@@ -33,7 +33,14 @@ public class ComboBoxGame extends ComboBoxImageCell {
 	@Override
 	public void setButtonAction() {
 		comboButton.setOnAction(event -> {
-			myController.useGame(myGames.get(comboBox.getValue()));
+			if (comboBox.getValue() == null) {
+				//TODO GET RESOURCE BUNDLE MESSAGE
+				myController.getScreen().showError("Please choose a game!");
+			}
+			else {
+				myController.setGame(myGames.get(comboBox.getValue()));
+				myController.useGame();
+			}
 		});
 		
 	}
@@ -41,11 +48,14 @@ public class ComboBoxGame extends ComboBoxImageCell {
 	private void getGames() {
 		File gameFileDir = new File(selectionResource);
 		for(File gameFile: gameFileDir.listFiles()) {
-			if(!gameFile.isDirectory()){
+			if(!gameFile.isDirectory()) {
 				ParserController parserController = new ParserController(myController.getScreen());
 				Game game = parserController.loadforPlaying(gameFile);
 				myGames.put(gameFile.getPath(),game);
 			}
+		}
+		if(myGames.keySet().isEmpty()) {
+			
 		}
 	}
 	
@@ -62,7 +72,7 @@ public class ComboBoxGame extends ComboBoxImageCell {
 		HBox hbox = new HBox();
 		VBox vbox = new VBox();
 		Game game = myGames.get(item);
-		vbox.getChildren().addAll(new Label(game.getInfo().getName()), new Text("\n" + game.getInfo().getMyDescription()));
+		vbox.getChildren().addAll(new Label(item), new Text("\n" + game.getInfo().getMyDescription()));
 		hbox.getChildren().addAll(imageMap.get(game.getInfo().getMyImageName()), vbox);
 		return hbox;
 	}

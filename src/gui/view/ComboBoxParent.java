@@ -35,13 +35,11 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 	protected String paletteSource;
 	protected String labelText;
 	private IEditableGameElement myEditableElement;
-	private boolean hasBeenSelected;
 	
 	public ComboBoxParent(String promptText) {
 		this.promptText = promptText;
 		this.labelText = null;
 		myEditableElement = null;
-		hasBeenSelected = false;
 	}
 	
 	/**
@@ -126,10 +124,6 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 			updateValueBasedOnEditable();
 		}
 	}
-	
-	protected void hasBeenSelected() {
-		hasBeenSelected = true;
-	}
 
 	protected IEditableGameElement getEditableElement() {
 		return myEditableElement;
@@ -139,5 +133,5 @@ public abstract class ComboBoxParent implements IGUIElement, IGUIEditingElement 
 	 * Returns list of items in the ComboBox.
 	 * @return
 	 */
-	public abstract List<String> getOptionsList();
+	protected abstract List<String> getOptionsList();
 }

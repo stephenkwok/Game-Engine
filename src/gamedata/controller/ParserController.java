@@ -33,7 +33,7 @@ public class ParserController implements IParserController {
 		try {
 			Game playingGame = loadforPlaying(file);
 			editingGame = this.myXMLParser.extractGame(new File(playingGame.getInitialGameFile()));
-			editingGame.initActors();
+			editingGame.initCurrentActors();
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
 			myScreen.showError(e.getMessage());
 			editingGame = null;
@@ -46,7 +46,7 @@ public class ParserController implements IParserController {
 		Game game;
 		try {
 			game = this.myXMLParser.extractGame(file);
-			game.initActors();
+			game.initCurrentActors();
 			game.initTimeline();
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
 			myScreen.showError(e.getMessage());

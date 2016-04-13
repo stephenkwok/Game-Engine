@@ -23,7 +23,7 @@ public class PhysicsEngine {
 	private double maxVertVelocity  = -50;   //maximum vertical velocity 
 	private double horizontalForce  = 5;     //Force applied to Actors on horizontal movements
 	private double jumpForce        = -5;    //Vertical Force applied to Actors on jump movements
-	private double floorHeight      =  300;  
+	private double floorHeight      =  500;  
 	
 	public PhysicsEngine(){
 		
@@ -82,8 +82,8 @@ public class PhysicsEngine {
 		nextYPos     = changePos(yPos, nextVertVelo); 
 		nextVertVelo = maxLimit(nextVertVelo, getMaxVertVelocity());
 			
-		if(nextYPos > getFloorHeight()){                    //Collision detection for the actor and the ground
-			nextYPos = getFloorHeight();				//TODO: delete this if statement after the floor is implemented as an actor
+		if(nextYPos+a.getBounds().getHeight() > getFloorHeight()){                    //Collision detection for the actor and the ground
+			nextYPos = getFloorHeight()-a.getBounds().getHeight();				//TODO: delete this if statement after the floor is implemented as an actor
 			nextVertVelo = 0;
 		}
 
@@ -176,6 +176,11 @@ public class PhysicsEngine {
 	public void elasticVerticalCollision(Actor a1, Actor a2){
 		staticVerticalCollision(a1,a2);
 		a1.setVeloY(-5);
+	}
+
+	public void elasticHorizontalCollision(Actor a1, Actor a2){
+		staticHorizontalCollision(a1,a2);
+		a1.setVeloX(-3);
 	}
 
 

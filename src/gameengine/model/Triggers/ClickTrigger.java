@@ -41,5 +41,4 @@ public class ClickTrigger implements ITrigger {
 	public void setMyY(double myY) {
 		this.myY = myY;
 	}
-
 }

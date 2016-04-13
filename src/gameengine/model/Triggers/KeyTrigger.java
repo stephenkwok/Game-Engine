@@ -24,5 +24,4 @@ public class KeyTrigger implements ITrigger {
 	public void setMyKey(String myKey) {
 		this.myKey = myKey;
 	}
-
 }

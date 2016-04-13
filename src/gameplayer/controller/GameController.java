@@ -1,8 +1,10 @@
 package gameplayer.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Optional;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -14,6 +16,9 @@ import gameplayer.view.BaseScreen;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
 import javafx.collections.MapChangeListener.Change;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 
 
 /** 
@@ -38,10 +43,9 @@ public class GameController implements Observer {
 		model.addObserver(this);
 	}
 	
-	
 	/**
-	 * Sets the basic game view to the given BaseScreen
-	 * @param BaseScreen
+	 * Sets the basic game view to the given GameScreen
+	 * @param GameScreen
 	 */
 	public void setGameView (GameScreen myGameView){
 		view = myGameView;
@@ -53,13 +57,12 @@ public class GameController implements Observer {
 	}
 	
 	
-	
 	/**
 	 * Will initialize the backend (game engine) with the current level's information and actor information to set up the game for playing.  Will visualize that backend too. 
 	 * @param level an int representing the level to be played
 	 */
 	public void initialize (int level){
-		model.getInfo().setMyCurrentLevelNum(level);
+		model.setCurrentLevel(level);
 		begin();
 	}
 	
@@ -68,10 +71,12 @@ public class GameController implements Observer {
 	 */
 	public void begin (){
 		Level current = model.getCurrentLevel();
+		view.clearGame();
 		view.addBackground(current.getMyBackgroundImgName());
-		for(Actor actor: current.getActors()){
+		for(Actor actor: model.getActors()){
 			view.addActor(actor);
 		}
+		this.toggleUnPause();
 		model.startGame();
 	}
 	
@@ -100,7 +105,11 @@ public class GameController implements Observer {
 	 * Will stop the animation timeline.
 	 */
 	public void endGame (){
-		System.out.println("game over");
+		//TODO fix resource also implement saving functionality 
+		togglePause();
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setContentText("Game over!");
+		alert.show();
 	}
 	
 	/**
@@ -115,7 +124,7 @@ public class GameController implements Observer {
 		model.nextLevel();
 		begin();
 	}
-
+	
 	
 	public GameScreen getView() {
 		return view;
@@ -123,6 +132,10 @@ public class GameController implements Observer {
 	
 	public Game getGame() {
 		return model;
+	}
+	
+	private void updateActors(){
+		view.removeActors(model.getDeadActors());
 	}
 	
 	@Override
@@ -135,7 +148,7 @@ public class GameController implements Observer {
 				this.getClass().getDeclaredMethod(((String)arg)).invoke(this);
 			}
 			catch (Exception e){
-				//something with exception
+				e.printStackTrace();
 			}
 		}if(o.equals(hud)){
 			hud.handleChange((Change) arg);
@@ -143,25 +156,28 @@ public class GameController implements Observer {
 	}
 	
 	public void toggleSound() {
-		System.out.println("toggle sound");
+		System.out.println("toggle sound unimplemented");
 	}
 	
 	public void toggleMusic(){
-		System.out.println("toggle music");
+		System.out.println("toggle music unimplemented");
 	}
 
 	public void togglePause() {
-		//TODO: stop the step(), thx michael!!!!!! :)
-		System.out.println("pause the game");
 		getGame().getAnimation().pause();
 		view.getMySubscene().setDisable(true);
 	}
 
 	public void toggleUnPause() {
-		System.out.println("un pause game");
-		getGame().getAnimation().play();;
+		getGame().getAnimation().play();
 		view.getMySubscene().setDisable(false);
-		
+	}
+
+
+	public void restartGame() {
+		System.out.println("restart game");
+		System.out.println(model.getInfo().getMyCurrentLevelNum() + " game level");
+		initialize(model.getInfo().getMyCurrentLevelNum());
 	}
 	
 	

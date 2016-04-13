@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
+  <initialGameFile>gamefiles/loaders/test_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <myActors>
@@ -8,7 +9,6 @@
           <changed>false</changed>
           <obs>
             <gameengine.controller.Level reference="../../../.."/>
-            <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
           <x>0.0</x>
           <y>0.0</y>
@@ -37,6 +37,14 @@
               </list>
             </entry>
             <entry>
+              <string>A1SideCollisionDefault Name</string>
+              <list>
+                <gameengine.model.Actions.WinGame>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.WinGame>
+              </list>
+            </entry>
+            <entry>
               <string>Right</string>
               <list>
                 <gameengine.model.Actions.MoveRight>
@@ -47,33 +55,32 @@
             <entry>
               <string>A1SideCollisionA2</string>
               <list>
-                <gameengine.model.Actions.NextLevel>
+                <gameengine.model.Actions.HorizontalStaticCollision>
                   <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.NextLevel>
+                </gameengine.model.Actions.HorizontalStaticCollision>
+              </list>
+            </entry>
+            <entry>
+              <string>A1BottomCollisionA2</string>
+              <list>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
               </list>
             </entry>
           </myRules>
           <attributeMap/>
-          <myPhysicsEngine>
-            <timeStep>1</timeStep>
-            <friction>-0.05</friction>
-            <gravity>0.11</gravity>
-            <maxHorizVelocity>50.0</maxHorizVelocity>
-            <maxVertVelocity>-50.0</maxVertVelocity>
-            <horizontalForce>5.0</horizontalForce>
-            <jumpForce>-5.0</jumpForce>
-            <floorHeight>300.0</floorHeight>
-          </myPhysicsEngine>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
+          <isDead>false</isDead>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs>
             <gameengine.controller.Level reference="../../../.."/>
-            <gameengine.controller.Game reference="../../../../../.."/>
           </obs>
-          <x>600.0</x>
+          <x>500.0</x>
           <y>0.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -81,12 +88,34 @@
           <myFriction>0.0</myFriction>
           <inAir>false</inAir>
           <myName>A2</myName>
-          <myImageViewName>purplecircle.png</myImageViewName>
+          <myImageViewName>block.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <myPhysicsEngine reference="../../gameengine.model.Actor/myPhysicsEngine"/>
           <isMain>false</isMain>
           <myHealth>0.0</myHealth>
+          <myActorRules/>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>800.0</x>
+          <y>100.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>Default Name</myName>
+          <myImageViewName>flagpole.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <myActorRules/>
+          <isDead>false</isDead>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap>
@@ -103,6 +132,12 @@
           </list>
         </entry>
         <entry>
+          <string>A1SideCollisionDefault Name</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
           <string>Right</string>
           <list>
             <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
@@ -114,51 +149,52 @@
             <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
           </list>
         </entry>
+        <entry>
+          <string>A1BottomCollisionA2</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
       </myTriggerMap>
       <myName>Untitled</myName>
-      <myHeight>0.0</myHeight>
-      <myWidth>0.0</myWidth>
-      <myBackgroundImgName>default_background.png</myBackgroundImgName>
-    </gameengine.controller.Level>
-    <gameengine.controller.Level>
-      <myActors>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs>
-            <gameengine.controller.Level reference="../../../.."/>
-            <gameengine.controller.Game reference="../../../../../.."/>
-          </obs>
-          <x>0.0</x>
-          <y>0.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myID>0</myID>
-          <myFriction>0.0</myFriction>
-          <inAir>false</inAir>
-          <myName>Default Name</myName>
-          <myImageViewName>elsa.png</myImageViewName>
-          <myRules/>
-          <attributeMap/>
-          <myPhysicsEngine reference="../../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
-          <isMain>false</isMain>
-          <myHealth>0.0</myHealth>
-        </gameengine.model.Actor>
-      </myActors>
-      <myTriggerMap/>
-      <myName>Untitled</myName>
-      <myHeight>0.0</myHeight>
-      <myWidth>0.0</myWidth>
-      <myBackgroundImgName>default_background.png</myBackgroundImgName>
+      <myHeight>800.0</myHeight>
+      <myWidth>1024.0</myWidth>
+      <myScrollingDirection>Vertically</myScrollingDirection>
+      <myTermination>Infinite</myTermination>
+      <myWinningCondition>Survival time</myWinningCondition>
+      <myLosingCondition>Player dies</myLosingCondition>
+      <myBackgroundImgName>default_landscape.png</myBackgroundImgName>
     </gameengine.controller.Level>
   </levels>
   <info>
-    <myName>My Game</myName>
+    <myName>Colette</myName>
     <myImageName>default_game.jpg</myImageName>
     <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
+    <myID>0</myID>
+    <myHUDElementsToDisplay/>
   </info>
-  <myPhysicsEngine reference="../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
+  <myPhysicsEngine>
+    <timeStep>1</timeStep>
+    <friction>-0.05</friction>
+    <gravity>0.11</gravity>
+    <maxHorizVelocity>50.0</maxHorizVelocity>
+    <maxVertVelocity>-50.0</maxVertVelocity>
+    <horizontalForce>5.0</horizontalForce>
+    <jumpForce>-5.0</jumpForce>
+    <floorHeight>500.0</floorHeight>
+  </myPhysicsEngine>
   <myCollisionDetector>
-    <myPhysicsEngine reference="../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/myPhysicsEngine"/>
+    <myPhysicsEngine reference="../../myPhysicsEngine"/>
   </myCollisionDetector>
+  <currentActors/>
+  <deadActors/>
+  <HUDData class="com.sun.javafx.collections.ObservableMapWrapper">
+    <listenerHelper class="com.sun.javafx.collections.MapListenerHelper$SingleChange">
+      <listener class="gameengine.controller.Game$1">
+        <outer-class reference="../../../.."/>
+      </listener>
+    </listenerHelper>
+    <backingMap/>
+  </HUDData>
 </gameengine.controller.Game>

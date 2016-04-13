@@ -33,7 +33,7 @@ public interface ILevel {
      *
      * @return The name of the Level object
      */
-    public String getName();
+    public String getMyName();
 
     /**
      * Provides all of the Actors to be visualized by the player
