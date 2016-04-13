@@ -36,14 +36,6 @@
               </list>
             </entry>
             <entry>
-              <string>A1TopTriggerA2</string>
-              <list>
-                <gameengine.model.Actions.VerticalStaticCollision>
-                  <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.VerticalStaticCollision>
-              </list>
-            </entry>
-            <entry>
               <string>Right</string>
               <list>
                 <gameengine.model.Actions.MoveRight>
@@ -57,6 +49,14 @@
                 <gameengine.model.Actions.Destroy>
                   <myActor reference="../../../../.."/>
                 </gameengine.model.Actions.Destroy>
+              </list>
+            </entry>
+            <entry>
+              <string>A1BottomCollisionA2</string>
+              <list>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
               </list>
             </entry>
           </myRules>
@@ -340,12 +340,6 @@
           </list>
         </entry>
         <entry>
-          <string>A1TopTriggerA2</string>
-          <list>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
-          </list>
-        </entry>
-        <entry>
           <string>Right</string>
           <list>
             <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
@@ -353,6 +347,12 @@
         </entry>
         <entry>
           <string>A1SideCollisionA2</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>A1BottomCollisionA2</string>
           <list>
             <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
           </list>

@@ -32,7 +32,7 @@ public class CollisionDetection {
 		for (Actor a1 : actors){
 			a1.setInAir(true);
 			for(Actor a2 : actors){
-				if(a1 != a2 ){            //Checks that each actor in the pair is unique
+				if(a1 != a2){            //Checks that each actor in the pair is unique
 					if(isCollision(a1,a2))
 						resolveCollision(a1,a2);
 				}
@@ -80,7 +80,7 @@ public class CollisionDetection {
 		if(xOverlap <= yOverlap){
 			return "SideCollision";
 		}else{ 
-			if((a1.getYPos() <= a2.getYPos())){
+			if((a1.getY() <= a2.getY())){
 				a1.setInAir(false);
 				return "BottomCollision";
 			}else{
@@ -93,6 +93,7 @@ public class CollisionDetection {
 	private void resolveCollision(Actor a1, Actor a2){
 		String collisionType = getCollisionType(a1,a2);
 		String triggerString = a1.getMyName() + collisionType + a2.getMyName();
+		System.out.print(triggerString+"\n");
 		a1.performActionsFor(triggerString);   //Needs to be changed to take a string parameter
 	}
 
