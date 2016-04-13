@@ -2,9 +2,11 @@ package gameplayer.controller;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Optional;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import gamedata.controller.HighScoresController;
 import gameengine.controller.Game;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
@@ -13,6 +15,8 @@ import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
 import javafx.collections.MapChangeListener.Change;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 
 
 /** 
@@ -99,12 +103,31 @@ public class GameController implements Observer {
 	 * Will stop the animation timeline.
 	 */
 	public void endGame (){
-		//TODO fix resource also implement saving functionality 
+		//TODO fix resource also implement saving functionality
+		
 		togglePause();
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setContentText("Game over!");
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Game over!  Do you want to save your score?", ButtonType.YES, ButtonType.NO);
 		alert.show();
+        alert.showingProperty().addListener((observable, oldValue, newValue) -> {
+        	if (!newValue) {
+        		saveScore();
+        	}
+        });
+
 	}
+	
+	private void saveScore() {
+		TextInputDialog dialog = new TextInputDialog("Name");
+		dialog.setContentText("Please enter your name if you want to save your score");
+		dialog.show();
+		dialog.showingProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue) {
+				HighScoresController c = new HighScoresController(this.getGame().getInfo().getMyFile());
+				c.saveHighScore(0, dialog.getResult());
+			}
+		});
+	}
+	
 	
 	/**
 	 * Will stop the animation timeline.
