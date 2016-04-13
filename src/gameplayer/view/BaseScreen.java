@@ -84,9 +84,7 @@ public class BaseScreen extends Screen {
 	public void addComponents() {
 		try {
 			addGame();
-			//addHUD();
-			myBaseScreenController.getMyGameController().setHUD(
-					new HUDScreen(myBaseScreenController.getMyGameController().getGame().getHUDData()));
+			addHUD();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException | SecurityException e1) {
 			e1.printStackTrace();
@@ -96,15 +94,22 @@ public class BaseScreen extends Screen {
 	
 	//depracated
 	public void addHUD() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		
 		IGUIElement hudPane = factory.createNewGUIObject("hudPane");
 		Pane myP = (Pane) hudPane.createNode();
+		/*
 		ObservableMap<String, Object> status = FXCollections.observableHashMap();
 		status.put("health", 20);
 		status.put("level", 2);
 		HUDScreen myHud = new HUDScreen(SCREEN_WIDTH,SCREEN_WIDTH,status);
+		*/
+		HUDScreen myHud = new HUDScreen(SCREEN_WIDTH, SCREEN_WIDTH, 
+				myBaseScreenController.getMyGameController().getGame().getHUDData());
+		myBaseScreenController.getMyGameController().setHUD(myHud);
 		myHud.init();
 		myP.getChildren().add(myHud.getScene());
 		myMasterPane.setBottom(myP);
+		//myMasterPane.setBottom(new Text("HELLO!!!!"));
 	}
 
 	public void addGame() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
