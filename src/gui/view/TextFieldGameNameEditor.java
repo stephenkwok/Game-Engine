@@ -11,9 +11,17 @@ import gameengine.controller.GameInfo;
 
 public class TextFieldGameNameEditor extends TextFieldWithButton{
 	
+	/**
+	 * Constructs a TextField to edit a game's name with a given prompt and width, and a label to the left and a 
+	 * "GO" button to the right.
+	 * @param labelText: text for the label.
+	 * @param promptText: prompt text for the textfield.
+	 * @param textFieldWidth: width of the textfield.
+	 */
 	public TextFieldGameNameEditor(String labelText, String prompt, Double textFieldWidth) {
 		super(labelText, prompt, textFieldWidth);
 		setButtonAction(e -> ((GameInfo) getEditableElement()).setMyName(getTextFieldInput()));
+		setTextFieldHGrow();
 	}
 
 	@Override

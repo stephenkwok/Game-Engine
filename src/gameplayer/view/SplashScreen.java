@@ -1,9 +1,18 @@
 package gameplayer.view;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
+
 import authoringenvironment.view.GUIMain;
+import gamedata.controller.HighScoresController;
+import gamedata.view.FileChooserScreen;
+import gamedata.view.FileChooserScreenScores;
 import gameengine.controller.Game;
 import gameplayer.controller.SplashScreenController;
 import gui.controller.IScreenController;
@@ -22,7 +31,7 @@ import javafx.stage.Stage;
  * order to be able to provide functionality for the buttons that will be on the
  * splash screen first displayed to a user.
  * 
- * @author cmt57
+ * @author cmt57, mdf15
  */
 
 public class SplashScreen extends Screen {
@@ -33,11 +42,13 @@ public class SplashScreen extends Screen {
 	private static final String GUI_RESOURCE = "splashGUI";
 	private static final String BUTTONS_ID = "buttonID";
 	private static final int PADDING = 200;
-	private Stage myStage;
-
+	
+	/**
+	 * initializes a hbox with buttons to facilitate transitions to the various parts of the program
+	 * @param stage
+	 */
 	public SplashScreen(Stage stage) {
 		super(stage);
-		this.myStage = stage;
 		init();
 	}
 
@@ -51,6 +62,14 @@ public class SplashScreen extends Screen {
 		return getMyScene();
 	}
 
+	/**
+	 * creates three buttons to change the scene to the user's choice of environment
+	 * @param hbox
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	public void setButtonsUp(HBox hbox)
 			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String[] buttons = myResources.getString(BUTTONS_ID).split(",");
@@ -91,10 +110,20 @@ public class SplashScreen extends Screen {
 
 	/**
 	 * Will open a high scores options screen.
+	 * @throws TransformerException 
+	 * @throws IOException 
+	 * @throws SAXException 
+	 * @throws ParserConfigurationException 
 	 */
-	public void openHighScores() {
-		HighScoreScreen myHS = new HighScoreScreen(getStage());
-		getStage().setScene(myHS.getMyScene());
+	public void openHighScores() throws ParserConfigurationException, SAXException, IOException, TransformerException {
+		FileChooserScreen myFC = new FileChooserScreenScores(getStage());
+		try {
+			getStage().setScene(myFC.getScene());
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

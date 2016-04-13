@@ -1,13 +1,13 @@
 package authoringenvironment.view;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.GameInfo;
-import gui.view.GUIFactory;
+import gameengine.model.IAuthoringActor;
+import gui.view.CheckBoxesHUDOptions;
 import gui.view.IGUIEditingElement;
 import gui.view.IGUIElement;
 import gui.view.TextAreaGameDescriptionEditor;
@@ -15,11 +15,9 @@ import gui.view.TextAreaParent;
 import gui.view.TextFieldGameNameEditor;
 import gui.view.TextFieldWithButton;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -37,51 +35,62 @@ import javafx.scene.layout.VBox;
 public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElement {
 
 	private IEditableGameElement myGameInfo;
-	private static final String DELIMITER = ",";
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
-	private static final double CONTAINER_PADDING = 20;
+	private static final double DEFAULT_PADDING = 10;
 	private static final double CONTAINER_PREFERRED_WIDTH = 350.0;
 	private static final int TEXT_AREA_ROWS = 5;
 	private static final double TEXT_FIELD_WIDTH = 100.0;
 	private static final double TEXT_FIELD_CONTAINER_SPACING = 10.0;
 	private static final double TEXT_FIELD_CONTAINER_PADDING = 10.0;
-	private static final String HUD_OPTIONS = "HUDOptions";
-	private static final String HUD_PROMPT = "Choose items to display on the level scene:";
-	private static final String GO = "Go";
+	private static final double SCROLLBAR_WIDTH = 30.0;
 	private final ResourceBundle myResources;
-	private ResourceBundle myAttributesResources;
 	private VBox editingEnvironmentContainer;
 	private Label welcomeMessage;
 	private HBox nameEditorContainer;
 	private VBox gameDescriptionEditor;
 	private VBox previewImageContainer;
-	private List<CheckBox> myHUDElements;
-	private GUIFactory myFactory;
-	private Controller myController;
+	private VBox HUDOptionsDisplay;
+	private Controller controller;
+	private ScrollPane myScrollPane;
+	private List<IAuthoringActor> myActors;
 
-	public GUIGameEditingEnvironment(GameInfo gameInfo, Controller controller) {
+	public GUIGameEditingEnvironment(GameInfo gameInfo, Controller controller, List<IAuthoringActor> actors) {
 		this.myGameInfo = gameInfo;
+		this.myActors = actors;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
-		this.myAttributesResources = ResourceBundle.getBundle("HUDOptions");
-		myFactory = new GUIFactory(myAttributesResources, myController);
-		myHUDElements = new ArrayList<>();
+		this.controller = controller;
 	}
 
+	/**
+	 * Sets the Game Editing Environment's instance of the GameInfo class
+	 */
 	@Override
 	public void setEditableElement(IEditableGameElement editable) {
 		myGameInfo = editable;
 	}
 
+	/**
+	 * Initialize the VBox containing all GUI elements in the Game Editing Environment
+	 * 
+	 */
 	private void initializeContainer() {
-		editingEnvironmentContainer = new VBox(CONTAINER_PADDING);
+		editingEnvironmentContainer = new VBox();
 		editingEnvironmentContainer.setPrefWidth(CONTAINER_PREFERRED_WIDTH);
 		editingEnvironmentContainer.setStyle(myResources.getString("defaultBorderColor"));
 	}
 
+	/**
+	 * Initialize the Label displaying text welcoming the author to the Game Authoring Environment
+	 */
 	private void initializeWelcomeMessage() {
 		welcomeMessage = new LabelMainScreenWelcome(myResources.getString("mainScreenWelcome"));
 	}
 
+	/**
+	 * Initialize the Game Name Editor, which includes a text field for the author to enter
+	 * a name for the game, and a button that, when clicked, allows the author to save the text field 
+	 * input as the game's name
+	 */
 	private void initializeGameNameEditor() {
 		String mainPrompt = myResources.getString("gameName");
 		String textFieldPrompt = myResources.getString("enterGameName");
@@ -92,6 +101,11 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 		nameEditorContainer.setPadding(new Insets(TEXT_FIELD_CONTAINER_PADDING));
 	}
 
+	/**
+	 * Initializes the Game Description Editor, which includes a text area for the author to 
+	 * enter a description for the game. The Game Description Editor also contains a button
+	 * that when clicked, sets the game's description.
+	 */
 	private void initializeGameDescriptionEditor() {
 		String prompt = myResources.getString("promptForGameDescription");
 		String buttonText = myResources.getString("save");
@@ -100,51 +114,43 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 		gameDescriptionEditor = (VBox) descriptionEditor.createNode();
 	}
 
+	/**
+	 * Initializes the GUI Elements displaying the game's current preview image
+	 */
+	// hard coded values
 	private void initializePreviewImageDisplay() {
-		previewImageContainer = new VBox(10.0);
-		previewImageContainer.setAlignment(Pos.CENTER);
-		previewImageContainer.setPadding(new Insets(10.0));
+		previewImageContainer = new VBox();
+		// previewImageContainer.setAlignment(Pos.CENTER);
+		previewImageContainer.setPadding(new Insets(DEFAULT_PADDING));
 		Label previewImageLabel = new Label("Current Game Preview Image:");
 		ImageView previewImage = new ImageView(
 				new Image(getClass().getClassLoader().getResourceAsStream("default_game.jpg")));
 		previewImageContainer.getChildren().addAll(previewImageLabel, previewImage);
 	}
-	
-	private void initializeHUD(String key, VBox vbox) {
-		vbox.getChildren().add(new Label(HUD_PROMPT));
-		List<Node> checkboxes = addElements(HUD_OPTIONS, vbox);
-		for (int i = 0; i < checkboxes.size(); i++) {
-			CheckBox cb = (CheckBox) checkboxes.get(i);
-			myHUDElements.add(cb);
-		}
-		vbox.getChildren().addAll(checkboxes);
-		Button checkHUDButton = new Button(GO);
-		checkHUDButton.setOnAction(event->{
-			((GameInfo) myGameInfo).setMyHUDOptions(getHUDElementsToDisplay());
-		});
-		vbox.getChildren().add(checkHUDButton);
-	}
-	
-	private List<Node> addElements(String key, VBox vbox) {
-		String[] elements = myAttributesResources.getString(key).split(DELIMITER);
-		List<Node> createdElements = new ArrayList<>();
-		for (int i = 0; i < elements.length; i++) {
-			createdElements.add((myFactory.createNewGUIObject(elements[i]).createNode()));
-		}
-		return createdElements;
-	}
-	
-	public List<String> getHUDElementsToDisplay() {
-		List<String> toDisplay = new ArrayList<>();
-		for (int i = 0; i < myHUDElements.size(); i++) {
-			if (myHUDElements.get(i).isSelected()) {
-				toDisplay.add(myHUDElements.get(i).getId());
-			}
-		}	
-		return toDisplay;
-	}
-	
 
+	/**
+	 * Initializes the GUI element that displays checkboxes for each HUD Option
+	 */
+	private void initializeHUDOptionsDisplay() {
+		CheckBoxesHUDOptions HUDOptions = new CheckBoxesHUDOptions(myGameInfo, controller, myActors);
+		HUDOptionsDisplay = (VBox) HUDOptions.createNode();
+	}
+
+	/**
+	 * Initializes the scroll pane that contains the Game Editing Environment's GUI elements 
+	 * and allows for additional elements to be added should the height of the combined 
+	 * elements exceed the height of the stage
+	 */
+	private void initializeScrollPane() {
+		myScrollPane = new ScrollPane();
+		myScrollPane.prefWidthProperty().bind(editingEnvironmentContainer.prefWidthProperty().add(SCROLLBAR_WIDTH));
+		myScrollPane.setContent(editingEnvironmentContainer);
+		myScrollPane.setPadding(new Insets(DEFAULT_PADDING));
+	}
+
+	/**
+	 * Creates and returns the Node containing all of the Game Editing Environment's GUI Elements 
+	 */
 	@Override
 	public Node createNode() {
 		initializeContainer();
@@ -152,10 +158,11 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 		initializeGameNameEditor();
 		initializeGameDescriptionEditor();
 		initializePreviewImageDisplay();
+		initializeHUDOptionsDisplay();
+		initializeScrollPane();
 		editingEnvironmentContainer.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor,
-				previewImageContainer);
-		initializeHUD(HUD_OPTIONS, editingEnvironmentContainer);
-		return editingEnvironmentContainer;
+				previewImageContainer, HUDOptionsDisplay);
+		return myScrollPane;
 	}
 
 }

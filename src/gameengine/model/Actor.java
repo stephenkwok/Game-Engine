@@ -5,16 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.Set;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.view.ActorRule;
-import gameengine.model.IActor;
-import gameengine.model.IRule;
 import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.AttributeType;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,12 +26,12 @@ import javafx.scene.image.ImageView;
  * @author blakekaplan
  */
 
-public class Actor extends Observable implements IActor, IEditableGameElement {
+public class Actor extends Observable implements IActor, Observer, IAuthoringActor {
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "hellokitty.gif";
     private static final boolean DEFAULT_MAIN = false;
-    
+
     private double x;
     private double y;
     private double veloX;
@@ -70,7 +67,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     /**
      * Calls the appropriate sequence of Actions based on a provided Trigger
      *
-     * @param triggerString
+     * @param triggerString The string representation of the trigger to be executed
      */
     @Override
     public void performActionsFor(String triggerString) {
@@ -87,16 +84,19 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      *
      * @param newAttribute The new Actor Attribute
      */
+    @Override
     public void addAttribute(Attribute newAttribute) {
+    	newAttribute.addObserver(this);
         getAttributeMap().put(newAttribute.getMyType(), newAttribute);
     }
-    
+
     /**
      * Returns the Actor attribute based on attribute type
      *
-     * @param newAttribute The new Actor Attribute
+     * @param type The new Actor Attribute Type
      */
-    
+
+    @Override
     public Attribute getAttribute(AttributeType type){
     	return getAttributeMap().get(type);
     }
@@ -107,6 +107,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * @param type   The type of the Attribute to be changed
      * @param change The amount to change the Attribute by
      */
+    @Override
     public void changeAttribute(AttributeType type, int change) {
 
         Attribute myAttribute = getAttributeMap().get(type);
@@ -136,6 +137,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      *
      * @return The list of Triggers that the Actor responds to
      */
+    @Override
     public Set<String> getTriggers() {
         return getMyRules().keySet();
     }
@@ -150,22 +152,38 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
         return this.myID;
     }
 
+    /**
+     * Provides the Actor's X Velocity
+     * @return  The Actors X Velocity
+     */
     @Override
     public double getVeloX() {
         return veloX;
     }
 
+    /**
+     * Provides the Actor's Y Velocity
+     * @return  The Actor's Y Velocity
+     */
     @Override
     public double getVeloY() {
         return veloY;
     }
 
+    /**
+     * Sets the Actor's X coordinate
+     * @param updateXPosition   The new X coordinate
+     */
     @Override
     public void setX(double updateXPosition) {
        x = updateXPosition;
        myImageView.setX(x);
     }
 
+    /**
+     * Sets the Actor's Y position
+     * @param updateYPosition   The new Y position
+     */
     @Override
     public void setY(double updateYPosition) {
     	y = updateYPosition;
@@ -173,65 +191,116 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 
     }
 
+    /**
+     * Sets a new X velocity
+     * @param updateXVelo   The new X velocity
+     */
     @Override
     public void setVeloX(double updateXVelo) {
         veloX = updateXVelo;
     }
 
+    /**
+     * Sets a new Y velocity
+     * @param updateYVelo   The new Y velocity
+     */
     @Override
     public void setVeloY(double updateYVelo) {
         veloY = updateYVelo;
     }
 
+    /**
+     * Sets a new Actor ID
+     * @param ID    The new ID
+     */
+    @Override
     public void setMyID(int ID) {
-        this.myID = ID;
+        myID = ID;
     }
 
+    /**
+     * Provides the Actor's name
+     * @return  The Actor's name
+     */
     @Override
     public String getMyName() {
         return myName;
     }
 
+    /**
+     * Sets a new Actor name
+     * @param name  The new Actor name
+     */
     @Override
     public void setMyName(String name) {
         myName = name;
     }
 
+    /**
+     * Provides the Actor's Imageview
+     * @return  The Actor's Imageview
+     */
     @Override
-
     public ImageView getImageView() {
         return myImageView;
     }
 
+    /**
+     * Sets a new Actor ImageView
+     * @param imageView The new ImageView
+     */
     @Override
     public void setImageView(ImageView imageView) {
-    	this.myImageView = imageView;
-    	this.myImageView.setX(this.getX());
-    	this.myImageView.setY(this.getY());
-		this.myImageView.setFitHeight(imageView.getFitHeight());
+    	myImageView = imageView;
+    	myImageView.setX(this.getX());
+    	myImageView.setY(this.getY());
+		myImageView.setFitHeight(imageView.getFitHeight());
     }
 
+    /**
+     * Provides the Actor's X coordinate
+     * @return  The Actor's X coordinate
+     */
     @Override
     public double getX() {
         return x;
     }
 
+    /**
+     * Provides the Actor's Y coordinate
+     * @return  The Actor's Y coordinate
+     */
     @Override
     public double getY() {
     	return y;
     }
 
-	public void setEngine(PhysicsEngine physicsEngine) {
+    /**
+     * Assigns a phyiscs engine to an Actor
+     * @param physicsEngine The assigned physics engine
+     */
+	@Override
+    public void setEngine(PhysicsEngine physicsEngine) {
 		setMyPhysicsEngine(physicsEngine);
 	}
-	
-	public PhysicsEngine getPhysicsEngine(){
+
+    /**
+     * Provides the Actor's physics engine
+     * @return  The Actor's physics engine
+     */
+	@Override
+    public PhysicsEngine getPhysicsEngine(){
 		return getMyPhysicsEngine();
 	}
-	
-	public String toString() {
+
+    /**
+     * Provides a string representation of the Actor
+     * @return  A string representation of the Actor
+     */
+	@Override
+    public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-	      
+
 	      stringBuilder.append("Actor[ ");
 	      stringBuilder.append("\nid: ");
 	      stringBuilder.append(getMyID());
@@ -244,26 +313,39 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	      stringBuilder.append("\nmyRules: ");
 	      stringBuilder.append(getMyRules().toString());
 	      stringBuilder.append(" ]");
-	      
+
 	      return stringBuilder.toString();
 	}
 
-
-	public String getMyImageViewName() {
+    /**
+     * Provides the Actor's ImageView
+     * @return  The Actor's ImageView
+     */
+	@Override
+    public String getMyImageViewName() {
 		return myImageViewName;
 	}
 
-
+    /**
+     * Sets the name of the Actor's ImageView
+     * @param myImageViewName   The Actor's ImageView
+     */
 	public void setMyImageViewName(String myImageViewName) {
 		this.myImageViewName = myImageViewName;
 		this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
 	}
 
+    /**
+     * Sets the Actor as changed
+     */
     public void changed(){
         setChanged();
     }
 
-
+    /**
+     * Provides the Actor's ImageView Bounds
+     * @return  The Actor's ImageView Bounds
+     */
 	public Bounds getBounds() {
 		return this.getImageView().getLayoutBounds();
 	}
@@ -281,19 +363,19 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	public void setMyFriction(double myFriction) {
 		this.myFriction = myFriction;
 	}
-	
+
 	/**
-	 * Set whether this actor is a playable, main character.  
+	 * Set whether this actor is a playable, main character.
 	 */
 	public void setMain(boolean bool){
-		this.isMain = bool;
+		isMain = bool;
 	}
 	/**
-	 * Return whether the actor is a playable, main character. 
+	 * Return whether the actor is a playable, main character.
 	 * @return
 	 */
 	public boolean isMain(){
-		return this.isMain;
+		return isMain;
 	}
 	/**
 	 * @return the inAir
@@ -305,65 +387,144 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	/**
 	 * @param inAir the inAir to set
 	 */
-	public void setInAir(boolean inAir) {
-		this.inAir = inAir;
+	@Override
+    public void setInAir(boolean inAir) {
+		inAir = inAir;
 	}
 
-	public Map<String, List<Action>> getMyRules() {
+    /**
+     * Provides the Actor's Rules
+     * @return  The Actor's Rules
+     */
+	@Override
+    public Map<String, List<Action>> getMyRules() {
 		return myRules;
 	}
 
-	public void setMyRules(Map<String, List<Action>> myRules) {
+    /**
+     * Sets the Actor's Rules
+     * @param myRules   A new set of Actor rules
+     */
+	@Override
+    public void setMyRules(Map<String, List<Action>> myRules) {
 		this.myRules = myRules;
 	}
 
-	public Map<AttributeType, Attribute> getAttributeMap() {
+    /**
+     * Provides the Attribute map
+     * @return  The Actor's Attribute Map
+     */
+	@Override
+    public Map<AttributeType, Attribute> getAttributeMap() {
 		return attributeMap;
 	}
 
-	public void setAttributeMap(Map<AttributeType, Attribute> attributeMap) {
+    /**
+     * Sets a new Attribute Map
+     * @param attributeMap  The new Attribute Map
+     */
+	@Override
+    public void setAttributeMap(Map<AttributeType, Attribute> attributeMap) {
 		this.attributeMap = attributeMap;
 	}
 
-	public PhysicsEngine getMyPhysicsEngine() {
+    /**
+     * Provides the Actor's physics engine
+     * @return  The Actor's phyiscs engine
+     */
+	@Override
+    public PhysicsEngine getMyPhysicsEngine() {
 		return myPhysicsEngine;
 	}
 
-	public void setMyPhysicsEngine(PhysicsEngine myPhysicsEngine) {
+    /**
+     * Sets a new physics engine
+     * @param myPhysicsEngine   The new physics engine
+     */
+	@Override
+    public void setMyPhysicsEngine(PhysicsEngine myPhysicsEngine) {
 		this.myPhysicsEngine = myPhysicsEngine;
 	}
 
-	
-	public void setSize(double size){
+    /**
+     * Sets the Actor's ImageView's size
+     * @param size  The ImageView's size
+     */
+	@Override
+    public void setSize(double size){
 		myImageView.setFitHeight(size);
 		myImageView.setPreserveRatio(true);
 	}
-	
-	public void setMyHealth(double myHealth){
+
+    /**
+     * Sets the Actor's health value
+     * @param myHealth  The Actor's health value
+     */
+	@Override
+    public void setMyHealth(double myHealth){
 		this.myHealth = myHealth;
 	}
 
-	public double getMyHealth() {
+    /**
+     * Provides the Actor's amount of health
+     * @return  The Actor's amount of health
+     */
+	@Override
+    public double getMyHealth() {
 		return myHealth;
 	}
-	
-	public void addActorRule(ActorRule actorRule){
+
+    /**
+     * Adds a new ActorRule
+     * @param actorRule The new ActorRule
+     */
+	@Override
+    public void addActorRule(ActorRule actorRule){
 		myActorRules.add(actorRule);
 	}
-	
-	public void removeActorRule(ActorRule actorRule){
+
+    /**
+     * Removes an Actor Rule
+     * @param actorRule The Rule to be removed
+     */
+	@Override
+    public void removeActorRule(ActorRule actorRule){
 		myActorRules.remove(actorRule);
 	}
-	
-	public List<ActorRule> getActorRules(){
+
+    /**
+     * Provides the List of the Actor's Rules
+     * @return  The Actor's ActorRules
+     */
+	@Override
+    public List<ActorRule> getActorRules(){
 		return myActorRules;
 	}
 
-	public boolean isDead() {
+    /**
+     * Marks the Actor as dead
+     * @return  A boolean representing whether or not the Actor is dead
+     */
+	@Override
+    public boolean isDead() {
 		return isDead;
 	}
 
-	public void setDead(boolean isDead) {
+    /**
+     * Sets the Actor to alive or dead
+     * @param isDead    The desired Actor state
+     */
+	@Override
+    public void setDead(boolean isDead) {
 		this.isDead = isDead;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if(isMain){
+			setChanged();
+			notifyObservers("updateAttribute");
+		}
+		
 	}
 }

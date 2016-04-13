@@ -1,25 +1,60 @@
 package authoringenvironment.view;
 
-import gameengine.model.Actor;
+import gameengine.model.IAuthoringActor;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * ImageView that serves as an icon for an actor.
+ * @author amyzhao
+ *
+ */
 public class ImageviewActorIcon extends ImageView {
-	private static final int ICON_HEIGHT = 75;
-	private Actor myActor;
+	private IAuthoringActor myActor;
 	private int myID;
+	private ImageView myImageView;
 	
-	public ImageviewActorIcon(Actor actor) {
+	/**
+	 * Construct an icon for a given actor.
+	 * @param actor: actor to construct an icon for.
+	 */
+	public ImageviewActorIcon(IAuthoringActor actor,double height) {
 		setImage(actor.getImageView().getImage());
-		this.setFitWidth(ICON_HEIGHT);
+		this.setFitWidth(height);
 		this.setPreserveRatio(true);
+		myActor = actor;
 		myID = actor.getMyID();
+		updateImageView();
 	}
 	
-	public Actor getActor() {
+	/**
+	 * Gets the actor associated with this icon.
+	 * @return my actor.
+	 */
+	public IAuthoringActor getActor() {
 		return myActor;
 	}
 	
+	/**
+	 * Gets the ID of the actor associated with this icon. (ID of actor and ID of its icon are the same).
+	 * @return my ID.
+	 */
 	public int getID() {
 		return myID;
+	}
+	
+	/**
+	 * Gets the icon's imageview.
+	 * @return copy of actor's imageview.
+	 */
+	public ImageView getImageView() {
+		return myImageView;
+	}
+	
+	/**
+	 * Update the imageview based on the actor's current image.
+	 */
+	public void updateImageView() {
+		myImageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myActor.getMyImageViewName())));
 	}
 }

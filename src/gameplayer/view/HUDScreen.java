@@ -5,10 +5,8 @@ import java.util.Map;
 import java.util.Observable;
 
 import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
 import javafx.collections.MapChangeListener.Change;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.scene.Group;
 import javafx.scene.SubScene;
 import javafx.scene.control.ListView;
@@ -76,6 +74,8 @@ public class HUDScreen extends Observable {
         	values.add(status.get(rowToValueMap.get(i)).toString());
         }
         
+        mySubGroup.getChildren().add(container);
+        
 	}
 	
 	public SubScene getScene() {
@@ -86,7 +86,5 @@ public class HUDScreen extends Observable {
 		int rownum = valueToRowMap.get(change.getKey());
 		values.set(rownum, change.getValueAdded().toString());
 	}
-	
-	
 	
 }

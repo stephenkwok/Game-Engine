@@ -1,10 +1,7 @@
 package gameplayer.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Optional;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -12,13 +9,10 @@ import gameengine.controller.Game;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.ITrigger;
-import gameplayer.view.BaseScreen;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
 import javafx.collections.MapChangeListener.Change;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Alert.AlertType;
 
 
 /** 
@@ -71,7 +65,8 @@ public class GameController implements Observer {
 	 */
 	public void begin (){
 		Level current = model.getCurrentLevel();
-		//view.addBackground(current.getMyBackgroundImgName());
+		view.clearGame();
+		view.addBackground(current.getMyBackgroundImgName());
 		for(Actor actor: model.getActors()){
 			view.addActor(actor);
 		}
@@ -155,11 +150,11 @@ public class GameController implements Observer {
 	}
 	
 	public void toggleSound() {
-		System.out.println("toggle sound");
+		System.out.println("toggle sound unimplemented");
 	}
 	
 	public void toggleMusic(){
-		System.out.println("toggle music");
+		System.out.println("toggle music unimplemented");
 	}
 
 	public void togglePause() {
@@ -170,7 +165,13 @@ public class GameController implements Observer {
 	public void toggleUnPause() {
 		getGame().getAnimation().play();
 		view.getMySubscene().setDisable(false);
-		
+	}
+
+
+	public void restartGame() {
+		System.out.println("restart game");
+		System.out.println(model.getInfo().getMyCurrentLevelNum() + " game level");
+		initialize(model.getInfo().getMyCurrentLevelNum());
 	}
 	
 	

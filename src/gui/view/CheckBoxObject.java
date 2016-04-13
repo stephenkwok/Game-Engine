@@ -4,26 +4,31 @@ import authoringenvironment.model.IEditableGameElement;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 
 /**
- * Abstract class to implement different types of CheckBoxes;
+ * Checkbox object for option selection.
  * @author amyzhao
  *
  */
 public class CheckBoxObject implements IGUIElement, IGUIEditingElement {
 	private String myPromptText;
-	private int mySpacing;
 	private int myWidth;
 	private IEditableGameElement myEditableElement;
 	
-	public CheckBoxObject(String promptText, int spacing, int width) {
+	/**
+	 * Constructs a CheckBoxObject to edit a given element.
+	 * @param promptText: option to check or un-check.
+	 * @param width: width of the checkbox.
+	 */
+	public CheckBoxObject(String promptText, int width) {
 		myPromptText = promptText;
 		myWidth = width;
 		myEditableElement = null;
 	}
 	
+	/**
+	 * Creates the checkbox.
+	 */
 	@Override
 	public Node createNode() {
 		CheckBox checkbox = new CheckBox(myPromptText);
@@ -33,11 +38,18 @@ public class CheckBoxObject implements IGUIElement, IGUIEditingElement {
 		return checkbox;
 	}
 	
+	/**
+	 * Sets the element that this checkbox is editing.
+	 */
 	@Override
 	public void setEditableElement(IEditableGameElement element) {
 		myEditableElement = element;
 	}
 
+	/**
+	 * Gets the element that this checkbox is editing.
+	 * @return game/level/actor that this checkbox is editing.
+	 */
 	protected IEditableGameElement getEditableElement() {
 		return myEditableElement;
 	}

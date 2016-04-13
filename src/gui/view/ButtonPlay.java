@@ -1,13 +1,12 @@
 package gui.view;
 
 import gui.controller.IScreenController;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.layout.HBox;
 
 import java.io.File;
 
+import gamedata.view.FileChooserScreen;
+import gamedata.view.FileChooserScreenLoad;
 import gameplayer.controller.SplashScreenController;
 
 public class ButtonPlay extends ButtonParent{
@@ -21,8 +20,6 @@ public class ButtonPlay extends ButtonParent{
 
 	@Override
 	protected void setButtonAction() {
-		//button.setOnAction(e ->  myControl.play());
-
 		button.setOnAction(e -> {
 			//TODO Add a checker for null directory
 			if ((new File("gamefiles")).listFiles().length == 1) {
@@ -31,11 +28,13 @@ public class ButtonPlay extends ButtonParent{
 				alert.showAndWait();
 			}
 			else {
-				Group fileChooseGroup = new Group();
-				Scene fileChooseScene = new Scene(fileChooseGroup, myControl.getScreen().getMyScene().getWidth(), myControl.getScreen().getMyScene().getHeight());
-				ComboBoxGame fileSelector =  new ComboBoxGame("SUP", "gamefiles", myControl);
-				fileChooseGroup.getChildren().add((HBox) fileSelector.createNode());
-				myControl.getStage().setScene(fileChooseScene); 
+				FileChooserScreen myFC = new FileChooserScreenLoad(myControl.getStage());
+				try {
+					myControl.getStage().setScene(myFC.getScene());
+				} catch (Exception e1) {
+					// DO NOT LEAVE THIS ISH!
+					e1.printStackTrace();
+				}
 			}
 		});
 

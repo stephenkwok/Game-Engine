@@ -3,7 +3,6 @@ package gui.view;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import authoringenvironment.model.IEditableGameElement;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 /**

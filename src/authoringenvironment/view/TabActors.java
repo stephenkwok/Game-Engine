@@ -5,7 +5,7 @@ import java.util.List;
 
 import java.util.ResourceBundle;
 
-import gameengine.model.Actor;
+import gameengine.model.IAuthoringActor;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -21,7 +21,7 @@ import javafx.scene.layout.TilePane;
  *
  */
 public class TabActors extends TabParent {
-	
+	private static final int ICON_HEIGHT = 75;
 	private static final int HGAP = 10;
 	private static final int VGAP = 10;
 	private static final int TILE_HEIGHT = 75;
@@ -32,22 +32,15 @@ public class TabActors extends TabParent {
 	private List<ImageviewActorIcon> actorIcons;
 	private TilePane myPane;
 	
-	public TabActors(ResourceBundle myResources, String tabText, List<Actor> availActors) {
+	/**
+	 * Constructs a tab to display icons of currently available actors.
+	 * @param myResources: authoring environment resource.
+	 * @param tabText: name of this tab.
+	 * @param availActors: list of currently available actors.
+	 */
+	public TabActors(ResourceBundle myResources, String tabText, List<IAuthoringActor> availActors) {
 		super(myResources, tabText);
-		actorIcons = new ArrayList<ImageviewActorIcon>();
-		/*Actor newActor1 = new Actor();
-		newActor1.setID(1);
->>>>>>> 5e3d803bd9afa69e7f829083cd0cdcfdde9cf583
-		Actor newActor2 = new Actor();
-		newActor2.setMyID(2);;
-		Actor newActor3 = new Actor();
-		newActor3.setMyID(3);
-		Actor newActor4 = new Actor();
-		newActor4.setMyID(4);
-		availActors.add(newActor1); // PLACEHOLDER RN, STEPHEN SHOULD'VE ADDED A DEFAULT ONE ALREADY
-		availActors.add(newActor2);
-		availActors.add(newActor3);
-		availActors.add(newActor4);*/		
+		actorIcons = new ArrayList<ImageviewActorIcon>();	
 		myPane = new TilePane(HGAP, VGAP);
 		myPane.setPrefTileHeight(TILE_HEIGHT);
 		myPane.setPrefTileWidth(TILE_WIDTH);
@@ -55,37 +48,58 @@ public class TabActors extends TabParent {
 		myPane.setPrefRows(NUM_ROWS);
 		myPane.setOrientation(Orientation.HORIZONTAL);
 		myPane.setAlignment(Pos.TOP_LEFT);
-		myPane.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
+		myPane.setPadding(new Insets(PADDING));
+		myPane.setPrefHeight(200);
 		setAvailableActors(availActors);
 	}
 	
-	private List<ImageviewActorIcon> actorListToIconList(List<Actor> actors) {
+	/**
+	 * Converts a list of actors to a list of icons for the actors.
+	 * @param actors
+	 * @return
+	 */
+	private List<ImageviewActorIcon> actorListToIconList(List<IAuthoringActor> actors) {
 		List<ImageviewActorIcon> iconList = new ArrayList<>();
 		for (int i = 0; i < actors.size(); i++) {
-			iconList.add(new ImageviewActorIcon(actors.get(i)));
+			iconList.add(new ImageviewActorIcon(actors.get(i), ICON_HEIGHT));
 		}
 		return iconList;
 	}
 	
-	public List<Actor> getActors() {
-		List<Actor> actorList = new ArrayList<>();
+	/**
+	 * Converts the current list of icons to a list of actors.
+	 * @return list of currently available actors
+	 */
+	public List<IAuthoringActor> getActors() {
+		List<IAuthoringActor> actorList = new ArrayList<>();
 		for (int i = 0; i < actorIcons.size(); i++) {
 			actorList.add(actorIcons.get(i).getActor());
 		}
 		return actorList;
 	}
 	
+	/**
+	 * Get the current list of icons.
+	 * @return list of icons of available actors.
+	 */
 	public List<ImageviewActorIcon> getIcons() {
 		return actorIcons;
 	}
 	
-	public void setAvailableActors(List<Actor> updatedActors) {
+	/**
+	 * Set the list of available actor icons based on an updated list of actors.
+	 * @param updatedActors: updated list of actors.
+	 */
+	public void setAvailableActors(List<IAuthoringActor> updatedActors) {
 		myPane.getChildren().removeAll(actorIcons);
 		actorIcons.clear();
 		actorIcons = actorListToIconList(updatedActors);
 		myPane.getChildren().addAll(actorIcons);	
 	}
 	
+	/**
+	 * Return the contents of this tab.
+	 */
 	@Override
 	Node getContent() {
 		return myPane;

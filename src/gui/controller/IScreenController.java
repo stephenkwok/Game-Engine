@@ -1,7 +1,6 @@
 package gui.controller;
 
 import java.lang.reflect.InvocationTargetException;
-import java.io.File;
 
 import gameengine.controller.Game;
 import gui.view.Screen;
@@ -20,4 +19,8 @@ public interface IScreenController {
 	public Screen getScreen();
 
 	public void useGame();
+
+	public void goToSplash();
+	
+	public void switchGame();
 }
