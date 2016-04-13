@@ -14,7 +14,7 @@ import java.util.Set;
  *
  * @author blakekaplan
  */
-public interface AuthoringActor {
+public interface IAuthoringActor {
     void performActionsFor(String triggerString);
 
     void addAttribute(Attribute newAttribute);
