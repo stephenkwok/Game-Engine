@@ -10,8 +10,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -31,7 +29,6 @@ abstract class TabLibrary extends TabParent {
 	private static final int FILE_EXT_LENGTH = 4;
 	private static final String IMAGE_FILE_EXTS = ".jpg .png .gif";
 	private static final String SOUND_FILE_EXTS = ".mp3";
-	private static final int LABEL_IMAGE_HEIGHT = 50;
 	protected static final double CORNER_RADIUS = 20;
 	protected ObservableList<Label> labels;
 	protected ListView<Label> listView;

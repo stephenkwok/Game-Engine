@@ -4,9 +4,8 @@ import java.util.ResourceBundle;
 
 import gui.view.TextFieldWithButton;
 /**
- * 
+ * GUI representation of behaviors that take in a single Double as a parameter
  * @author AnnieTang
- *
  */
 public class DoubleBehavior extends TextFieldWithButton{
 	private static final String LABEL = "Label";
@@ -23,11 +22,17 @@ public class DoubleBehavior extends TextFieldWithButton{
 			this.quantity = Double.parseDouble(getTextFieldInput());
 		});
 	}
-	
+	/**
+	 * Return String of behavior type
+	 * @return
+	 */
 	public String getBehaviorType(){
 		return behaviorType;
 	}
-	
+	/**
+	 * Return Double quantity value
+	 * @return
+	 */
 	public double getQuantity(){
 		return quantity;
 	}

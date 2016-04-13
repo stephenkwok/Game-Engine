@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 /**
- * 
+ * GUI representation of behavior that requires single input in ComboBox form, where ComboBox is populated by values from a ResourceBundle
  * @author AnnieTang
- *
  */
 public class ResourceOptionsBehavior extends ComboBoxBehavior {
 	private static final String PATHNAME = "Pathname";
