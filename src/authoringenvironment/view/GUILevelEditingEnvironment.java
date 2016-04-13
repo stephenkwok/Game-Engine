@@ -133,7 +133,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 				boolean success = false;
 				if (db.hasString()) {
 					IAuthoringActor actor = getActorById(Integer.parseInt(db.getString()));
-					actor.setMyID(myLevel.getActors().size());
+					//actor.setMyID(myLevel.getActors().size());
 					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
 					iconToAdd.getImageView().setOnDragDetected(null);
 					iconToAdd.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
@@ -164,6 +164,10 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		actor.setY(event.getY());
 		icon.getImageView().setX(event.getX());
 		icon.getImageView().setY(event.getY());
+		System.out.println(actor.getX());
+		System.out.println(actor.getY());
+		System.out.println(icon.getImageView().getX());
+		System.out.println(icon.getImageView().getY());
 	}
 	
 	/**
@@ -205,9 +209,10 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	@Override
 	public void setEditable(IEditableGameElement editable) {
 		myCenterPane.getChildren().clear();
+		myLevel = (Level) editable;
+		updateActorsList();
 		updateLevel((Level) editable);
 		myInspector.getAttributesTab().updateEditable(myLevel);
-		updateActorsList();
 	}
 	
 	/**
@@ -215,6 +220,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * @param updatedLevel: new level.
 	 */
 	private void updateLevel(Level updatedLevel) {
+		myCenterPane.getChildren().removeAll(myActorPreviews);
 		myLevel = updatedLevel;
 		updateLevelBackground();
 		addLevelActorsToScene();
@@ -234,17 +240,20 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * Add a level's actors to the preview in the center pane.
 	 */
 	private void addLevelActorsToScene() {
-		for (Actor actor: myLevel.getActors()) {
+		myActorPreviews.clear();
+		for (IAuthoringActor actor: myLevel.getActors()) {
 			ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
 			icon.getImageView().setX(actor.getX());
 			icon.getImageView().setY(actor.getY());
 			icon.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
 				@Override public void handle(MouseEvent event) {
+					System.out.println("tryna ddrag");
 					moveActor(actor, icon, event);
 					event.consume();
 				}
 			}); 			
-			myCenterPane.getChildren().add(icon);
+			myActorPreviews.add(icon);
+			myCenterPane.getChildren().add(icon.getImageView());
 		}
 	}
 	
