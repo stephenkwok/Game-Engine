@@ -87,6 +87,4 @@ public class HUDScreen extends Observable {
 		values.set(rownum, change.getValueAdded().toString());
 	}
 	
-	
-	
 }

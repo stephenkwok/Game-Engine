@@ -57,7 +57,7 @@ public class Controller implements IScreenController {
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
 		actorEnvironment = new GUIActorEditingEnvironment(this, myResources);
-		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo);
+		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo, myActors);
 	}
 
 	/**
