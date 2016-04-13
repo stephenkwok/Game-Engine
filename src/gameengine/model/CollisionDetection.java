@@ -60,61 +60,7 @@ public class CollisionDetection {
 	 * @return Type of collision-String
 	 */
 	private String getCollisionType(Actor a1, Actor a2){
-<<<<<<< HEAD
-		double xOverlap = 0;
-		double yOverlap = 0;
-		a1.setInAir(true);
-		//Calculates how much x-axis overlap there is between the two actors
-		if(a1.getBounds().getMaxX() <= a2.getBounds().getMaxX()){
-			xOverlap = a1.getBounds().getMaxX() -  a2.getX();
-		}else{
-			xOverlap = a2.getBounds().getMaxX() -  a1.getX();
-		}
-		//Calculates how much y-axis overlap there is between the two actors
-		if(a1.getBounds().getMaxY() <= a2.getBounds().getMaxY()){
-			yOverlap = a1.getBounds().getMaxY() -  a2.getY();
-		}else{
-			yOverlap = a2.getBounds().getMaxY() -  a1.getY();
-		}
-				
-		if(xOverlap <= yOverlap){
-			return SideCollision;
-		}else{ 
-			if((a1.getY() <= a2.getY())){
-				a1.setInAir(false);
-				return BottomCollision;
-			}else{
-				return TopCollision;
-			}
-			
-		}
-=======
-//		double xOverlap = 0;
-//		double yOverlap = 0;
-//		a1.setInAir(true);
-//		if(a1.getBounds().getMaxX() <= a2.getBounds().getMaxX()){
-//			xOverlap = a1.getBounds().getMaxX() -  a2.getX();
-//		}else{
-//			xOverlap = a2.getBounds().getMaxX() -  a1.getX();
-//		}
-//		
-//		if(a1.getBounds().getMaxY() <= a2.getBounds().getMaxY()){
-//			yOverlap = a1.getBounds().getMaxY() -  a2.getY();
-//		}else{
-//			yOverlap = a2.getBounds().getMaxY() -  a1.getY();
-//		}
-//				
-//		if(xOverlap <= yOverlap){
-//			return "SideCollision";
-//		}else{ 
-//			if(a2.getBounds().getMinY()<=a1.getBounds().getMaxY()){
-//				a1.setInAir(false);
-//				return "BottomCollision";
-//			}else{
-//				return "TopCollision";
-//			}
-//			
-//		}
+
 		
 		double w = (0.5 * (a1.getBounds().getWidth() + a2.getBounds().getWidth()));
 		double h = (0.5 * (a1.getBounds().getHeight() + a2.getBounds().getHeight()));
@@ -146,7 +92,6 @@ public class CollisionDetection {
 		
 		} return "TopCollision";
 		
->>>>>>> 5ec36d5ac0cc613305e32595e609b8a5a806952f
 	}
 	
 	private void resolveCollision(Actor a1, Actor a2){
