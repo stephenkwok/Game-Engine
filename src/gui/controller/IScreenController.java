@@ -20,4 +20,6 @@ public interface IScreenController {
 	public Screen getScreen();
 
 	public void useGame();
+	
+	public void goToSplash();
 }

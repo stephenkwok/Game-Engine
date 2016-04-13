@@ -57,7 +57,7 @@ public class BaseScreenController implements IScreenController{
 		System.out.println("toggle music");
 	}
 
-	
+//TODO move to iscreen controller	
 	public void goToSplash(){
 		SplashScreen mySplash = new SplashScreen(myStage);
 		try {
