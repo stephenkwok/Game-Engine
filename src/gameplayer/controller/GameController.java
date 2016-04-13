@@ -113,25 +113,41 @@ public class GameController implements Observer {
 		System.out.println("game won");
 	}
 	
+	/**
+	 * Transitions the game to the next level
+	 */
 	public void nextLevel (){
 		view.clearGame();
 		model.nextLevel();
 		begin();
 	}
 	
-	
+	/**
+	 * Gets the view component of the game
+	 * @return
+	 */
 	public GameScreen getView() {
 		return view;
 	}
 	
+	/**
+	 * Gets the model component of the game
+	 * @return
+	 */
 	public Game getGame() {
 		return model;
 	}
 	
+	/**
+	 * Updates the display of actors on the game screen
+	 */
 	private void updateActors(){
 		view.removeActors(model.getDeadActors());
 	}
 	
+	/**
+	 * Handles updates from the view and model
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o.equals(view)){
@@ -145,36 +161,51 @@ public class GameController implements Observer {
 				//e.printStackTrace();
 				hud.handleChange((Change) arg); //keep it, this works
 			}
-		}if(o.equals(hud)){
-			hud.handleChange((Change) arg);
 		}
 	}
 	
+	/**
+	 * Toggles sound effects coming from the game
+	 */
 	public void toggleSound() {
 		System.out.println("toggle sound unimplemented");
 	}
 	
+	/**
+	 * Toggles music playing in the game 
+	 */
 	public void toggleMusic(){
 		System.out.println("toggle music unimplemented");
 	}
-
+	
+	/**
+	 * Pauses the game
+	 */
 	public void togglePause() {
 		getGame().getAnimation().pause();
 		view.getMySubscene().setDisable(true);
 	}
-
+	
+	/**
+	 * Resumes the game 
+	 */
 	public void toggleUnPause() {
 		getGame().getAnimation().play();
 		view.getMySubscene().setDisable(false);
 	}
 
-
+	/**
+	 * Restarts the game 
+	 */
 	public void restartGame() {
 		System.out.println("restart game");
 		System.out.println(model.getInfo().getMyCurrentLevelNum() + " game level");
 		initialize(model.getInfo().getMyCurrentLevelNum());
 	}
 	
+	/**
+	 * Updates attributes displayed in the HUD
+	 */
 	public void updateAttribute() {
 		model.updateAttribute();
 	}
