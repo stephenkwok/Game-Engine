@@ -11,6 +11,8 @@ import gameengine.model.ITrigger;
 import gameengine.model.PhysicsEngine;
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.*;
+import gameengine.model.*;
+import gameengine.model.Triggers.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;

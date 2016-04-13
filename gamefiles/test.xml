@@ -756,7 +756,7 @@
   </info>
   <myPhysicsEngine>
     <timeStep>1</timeStep>
-    <friction>-0.01</friction>
+    <friction>-0.05</friction>
     <gravity>0.11</gravity>
     <maxHorizVelocity>50.0</maxHorizVelocity>
     <maxVertVelocity>-50.0</maxVertVelocity>
@@ -769,12 +769,4 @@
   </myCollisionDetector>
   <currentActors/>
   <deadActors/>
-  <HUDData class="com.sun.javafx.collections.ObservableMapWrapper">
-    <listenerHelper class="com.sun.javafx.collections.MapListenerHelper$SingleChange">
-      <listener class="gameengine.controller.Game$1">
-        <outer-class reference="../../../.."/>
-      </listener>
-    </listenerHelper>
-    <backingMap/>
-  </HUDData>
 </gameengine.controller.Game>

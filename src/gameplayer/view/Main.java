@@ -13,6 +13,7 @@ import gameengine.model.Actions.MoveRight;
 import gameengine.model.Actions.MoveUp;
 import gameengine.model.Actions.VerticalStaticCollision;
 import gameengine.model.Actions.WinGame;
+import gameengine.model.Actions.*;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.SideCollision;

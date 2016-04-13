@@ -95,7 +95,6 @@ public class CollisionDetection {
 	private void resolveCollision(Actor a1, Actor a2){
 		String collisionType = getCollisionType(a1,a2);
 		String triggerString = a1.getMyName() + collisionType + a2.getMyName();
-		//System.out.println(a1.isInAir());
 		a1.performActionsFor(triggerString);   //Needs to be changed to take a string parameter
 	}
 

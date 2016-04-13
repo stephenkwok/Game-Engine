@@ -17,7 +17,7 @@ public class PhysicsEngine {
 	
 	//These Variable values are arbitrary, chosen by trial/error
 	private int    timeStep         =  1;    //Arbitrary timeStep, will be set to the time provided by step()
-	private double friction         = -.01;  //Horizontal acceleration dampening (friction) coefficient
+	private double friction         = -.05;  //Horizontal acceleration dampening (friction) coefficient
 	private double gravity          = .11 ;  //Falling acceleration coefficient
 	private double maxHorizVelocity = 50;    //maximum horizontal velocity
 	private double maxVertVelocity  = -50;   //maximum vertical velocity 
