@@ -56,7 +56,7 @@ public class GUIMain extends Screen implements IGUI {
 	 */
 	public void init() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		myRoot = new BorderPane();
-		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
+		myScene = new Scene(myRoot, myStage.getWidth(), myStage.getHeight(),Color.WHITE);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myController = new Controller(myStage, this, this.myResources);
 		factory = new GUIFactory(myResources, myController);
