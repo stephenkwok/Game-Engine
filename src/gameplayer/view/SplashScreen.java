@@ -33,7 +33,6 @@ public class SplashScreen extends Screen {
 	private static final String GUI_RESOURCE = "splashGUI";
 	private static final String BUTTONS_ID = "buttonID";
 	private static final int PADDING = 200;
-	private Stage myStage;
 	
 	/**
 	 * initializes a hbox with buttons to facilitate transitions to the various parts of the program
@@ -41,7 +40,6 @@ public class SplashScreen extends Screen {
 	 */
 	public SplashScreen(Stage stage) {
 		super(stage);
-		this.myStage = stage;
 		init();
 	}
 

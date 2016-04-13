@@ -5,9 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-
 import gui.controller.IScreenController;
-import javafx.event.EventHandler;
 
 /**
  * Instantiates IGUIElements based on a ResourceBundle String key passed into createNewGUIObject(String nodeTypeKey).
