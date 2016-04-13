@@ -27,7 +27,7 @@ import javafx.scene.image.ImageView;
  * @author blakekaplan
  */
 
-public class Actor extends Observable implements IActor, IEditableGameElement {
+public class Actor extends Observable implements IActor, IEditableGameElement, AuthoringActor {
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "hellokitty.gif";
@@ -85,6 +85,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      *
      * @param newAttribute The new Actor Attribute
      */
+    @Override
     public void addAttribute(Attribute newAttribute) {
         getAttributeMap().put(newAttribute.getMyType(), newAttribute);
     }
@@ -95,6 +96,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * @param type The new Actor Attribute Type
      */
 
+    @Override
     public Attribute getAttribute(AttributeType type){
     	return getAttributeMap().get(type);
     }
@@ -105,6 +107,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * @param type   The type of the Attribute to be changed
      * @param change The amount to change the Attribute by
      */
+    @Override
     public void changeAttribute(AttributeType type, int change) {
 
         Attribute myAttribute = getAttributeMap().get(type);
@@ -134,6 +137,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      *
      * @return The list of Triggers that the Actor responds to
      */
+    @Override
     public Set<String> getTriggers() {
         return getMyRules().keySet();
     }
@@ -209,6 +213,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Sets a new Actor ID
      * @param ID    The new ID
      */
+    @Override
     public void setMyID(int ID) {
         myID = ID;
     }
@@ -274,7 +279,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Assigns a phyiscs engine to an Actor
      * @param physicsEngine The assigned physics engine
      */
-	public void setEngine(PhysicsEngine physicsEngine) {
+	@Override
+    public void setEngine(PhysicsEngine physicsEngine) {
 		setMyPhysicsEngine(physicsEngine);
 	}
 
@@ -282,7 +288,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Provides the Actor's physics engine
      * @return  The Actor's physics engine
      */
-	public PhysicsEngine getPhysicsEngine(){
+	@Override
+    public PhysicsEngine getPhysicsEngine(){
 		return getMyPhysicsEngine();
 	}
 
@@ -290,7 +297,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Provides a string representation of the Actor
      * @return  A string representation of the Actor
      */
-	public String toString() {
+	@Override
+    public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 
 	      stringBuilder.append("Actor[ ");
@@ -313,7 +321,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Provides the Actor's ImageView
      * @return  The Actor's ImageView
      */
-	public String getMyImageViewName() {
+	@Override
+    public String getMyImageViewName() {
 		return myImageViewName;
 	}
 
@@ -378,7 +387,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
 	/**
 	 * @param inAir the inAir to set
 	 */
-	public void setInAir(boolean inAir) {
+	@Override
+    public void setInAir(boolean inAir) {
 		inAir = inAir;
 	}
 
@@ -386,7 +396,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Provides the Actor's Rules
      * @return  The Actor's Rules
      */
-	public Map<String, List<Action>> getMyRules() {
+	@Override
+    public Map<String, List<Action>> getMyRules() {
 		return myRules;
 	}
 
@@ -394,7 +405,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Sets the Actor's Rules
      * @param myRules   A new set of Actor rules
      */
-	public void setMyRules(Map<String, List<Action>> myRules) {
+	@Override
+    public void setMyRules(Map<String, List<Action>> myRules) {
 		this.myRules = myRules;
 	}
 
@@ -402,7 +414,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Provides the Attribute map
      * @return  The Actor's Attribute Map
      */
-	public Map<AttributeType, Attribute> getAttributeMap() {
+	@Override
+    public Map<AttributeType, Attribute> getAttributeMap() {
 		return attributeMap;
 	}
 
@@ -410,7 +423,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Sets a new Attribute Map
      * @param attributeMap  The new Attribute Map
      */
-	public void setAttributeMap(Map<AttributeType, Attribute> attributeMap) {
+	@Override
+    public void setAttributeMap(Map<AttributeType, Attribute> attributeMap) {
 		this.attributeMap = attributeMap;
 	}
 
@@ -418,7 +432,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Provides the Actor's physics engine
      * @return  The Actor's phyiscs engine
      */
-	public PhysicsEngine getMyPhysicsEngine() {
+	@Override
+    public PhysicsEngine getMyPhysicsEngine() {
 		return myPhysicsEngine;
 	}
 
@@ -426,7 +441,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Sets a new physics engine
      * @param myPhysicsEngine   The new physics engine
      */
-	public void setMyPhysicsEngine(PhysicsEngine myPhysicsEngine) {
+	@Override
+    public void setMyPhysicsEngine(PhysicsEngine myPhysicsEngine) {
 		this.myPhysicsEngine = myPhysicsEngine;
 	}
 
@@ -434,7 +450,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Sets the Actor's ImageView's size
      * @param size  The ImageView's size
      */
-	public void setSize(double size){
+	@Override
+    public void setSize(double size){
 		myImageView.setFitHeight(size);
 		myImageView.setPreserveRatio(true);
 	}
@@ -443,7 +460,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Sets the Actor's health value
      * @param myHealth  The Actor's health value
      */
-	public void setMyHealth(double myHealth){
+	@Override
+    public void setMyHealth(double myHealth){
 		this.myHealth = myHealth;
 	}
 
@@ -451,7 +469,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Provides the Actor's amount of health
      * @return  The Actor's amount of health
      */
-	public double getMyHealth() {
+	@Override
+    public double getMyHealth() {
 		return myHealth;
 	}
 
@@ -459,7 +478,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Adds a new ActorRule
      * @param actorRule The new ActorRule
      */
-	public void addActorRule(ActorRule actorRule){
+	@Override
+    public void addActorRule(ActorRule actorRule){
 		myActorRules.add(actorRule);
 	}
 
@@ -467,7 +487,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Removes an Actor Rule
      * @param actorRule The Rule to be removed
      */
-	public void removeActorRule(ActorRule actorRule){
+	@Override
+    public void removeActorRule(ActorRule actorRule){
 		myActorRules.remove(actorRule);
 	}
 
@@ -475,7 +496,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Provides the List of the Actor's Rules
      * @return  The Actor's ActorRules
      */
-	public List<ActorRule> getActorRules(){
+	@Override
+    public List<ActorRule> getActorRules(){
 		return myActorRules;
 	}
 
@@ -483,7 +505,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Marks the Actor as dead
      * @return  A boolean representing whether or not the Actor is dead
      */
-	public boolean isDead() {
+	@Override
+    public boolean isDead() {
 		return isDead;
 	}
 
@@ -491,7 +514,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
      * Sets the Actor to alive or dead
      * @param isDead    The desired Actor state
      */
-	public void setDead(boolean isDead) {
+	@Override
+    public void setDead(boolean isDead) {
 		this.isDead = isDead;
 	}
 }
