@@ -1,10 +1,12 @@
 package authoringenvironment.view;
 
+import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.GameInfo;
+import gameengine.model.Actor;
 import gui.view.CheckBoxesHUDOptions;
 import gui.view.IGUIEditingElement;
 import gui.view.IGUIElement;
@@ -13,7 +15,6 @@ import gui.view.TextAreaParent;
 import gui.view.TextFieldGameNameEditor;
 import gui.view.TextFieldWithButton;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -41,7 +42,7 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 	private static final double TEXT_FIELD_WIDTH = 100.0;
 	private static final double TEXT_FIELD_CONTAINER_SPACING = 10.0;
 	private static final double TEXT_FIELD_CONTAINER_PADDING = 10.0;
-	private static final double SCROLLPANE_WIDTH_BINDING_OFFSET = 30.0;
+	private static final double SCROLLBAR_WIDTH = 30.0;
 	private final ResourceBundle myResources;
 	private VBox editingEnvironmentContainer;
 	private Label welcomeMessage;
@@ -51,13 +52,18 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 	private VBox HUDOptionsDisplay;
 	private Controller controller;
 	private ScrollPane myScrollPane;
+	private List<Actor> myActors;
 
-	public GUIGameEditingEnvironment(GameInfo gameInfo, Controller controller) {
+	public GUIGameEditingEnvironment(GameInfo gameInfo, Controller controller, List<Actor> actors) {
 		this.myGameInfo = gameInfo;
+		this.myActors = actors;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
 		this.controller = controller;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void setEditableElement(IEditableGameElement editable) {
 		myGameInfo = editable;
@@ -103,14 +109,13 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 	}
 
 	private void initializeHUDOptionsDisplay() {
-		CheckBoxesHUDOptions HUDOptions = new CheckBoxesHUDOptions(myGameInfo, controller);
+		CheckBoxesHUDOptions HUDOptions = new CheckBoxesHUDOptions(myGameInfo, controller, myActors);
 		HUDOptionsDisplay = (VBox) HUDOptions.createNode();
 	}
 
 	private void initializeScrollPane() {
 		myScrollPane = new ScrollPane();
-		myScrollPane.prefWidthProperty()
-				.bind(editingEnvironmentContainer.prefWidthProperty().add(SCROLLPANE_WIDTH_BINDING_OFFSET));
+		myScrollPane.prefWidthProperty().bind(editingEnvironmentContainer.prefWidthProperty().add(SCROLLBAR_WIDTH));
 		myScrollPane.setContent(editingEnvironmentContainer);
 		myScrollPane.setPadding(new Insets(DEFAULT_PADDING));
 	}
