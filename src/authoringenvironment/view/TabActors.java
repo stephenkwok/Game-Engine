@@ -6,13 +6,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import gameengine.model.IAuthoringActor;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 
 /**

@@ -66,7 +66,7 @@ public class HighScoresController implements IHighScoresController {
 
 	@Override
 	public void saveHighScore(int score, String player) {
-		HighScoresKeeper updatedKeeper = new HighScoresKeeper();
+		HighScoresKeeper updatedKeeper = new HighScoresKeeper(getAllGameScores());
 		updatedKeeper.addScore(myGameFile, player, score);
 		HighScoresCreator scoresCreator = new HighScoresCreator();
 		try {
@@ -75,11 +75,6 @@ public class HighScoresController implements IHighScoresController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	public static void main(String[] args) {
-		HighScoresController h = new HighScoresController("testGame");
-		h.saveHighScore(10, "John");
 	}
 
 }

@@ -10,7 +10,6 @@ import authoringenvironment.controller.Controller;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IAuthoringActor;
-import gui.view.GUILibrary;
 import gui.view.IGUI;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
