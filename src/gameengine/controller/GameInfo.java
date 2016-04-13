@@ -18,17 +18,19 @@ public class GameInfo implements IEditableGameElement {
 	private ImageView myPreviewImage;
 	private int myID;
 	private Map<String,Integer> myHUDElementsToDisplay;
+	private String myFile;
 	
-	public GameInfo(String name, String imageName, String description, int currentLevelNum ) {
+	public GameInfo(String name, String imageName, String description, int currentLevelNum, String file ) {
 		this.setMyName(name);
 		this.setMyImageName(imageName);
 		this.setMyDescription(description);
 		this.setMyCurrentLevelNum(currentLevelNum);
 		this.myHUDElementsToDisplay = new HashMap<String, Integer>();
+		this.myFile = file;
 	}
 	
 	public GameInfo(String name, String imageName, String description) {
-		this(name, imageName, description, DEFAULT_LEVEL_NUM);
+		this(name, imageName, description, DEFAULT_LEVEL_NUM, null);
 	}
 	
 	public GameInfo () {
@@ -120,5 +122,13 @@ public class GameInfo implements IEditableGameElement {
 		return myID;
 	}
 
-}
+	public String getMyFile() {
+		return this.myFile;
+	}
+	
+	public void setMyFile(String name) {
+		this.myFile = name;
+		
+	}
 
+}

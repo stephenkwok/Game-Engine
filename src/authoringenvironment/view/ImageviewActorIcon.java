@@ -10,7 +10,6 @@ import javafx.scene.image.ImageView;
  *
  */
 public class ImageviewActorIcon extends ImageView {
-	private static final int ICON_HEIGHT = 75;
 	private IAuthoringActor myActor;
 	private int myID;
 	private ImageView myImageView;

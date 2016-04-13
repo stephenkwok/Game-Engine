@@ -54,7 +54,12 @@ public class FileChooserController extends ScreenController {
 
 	@Override
 	public void useGame() {
-		myFC.play(myGame);
+		myFC.use(myGame);
+	}
+
+	@Override
+	public void switchGame() {
+		// TODO Auto-generated method stub
 		
 	}
 	

@@ -1,14 +1,12 @@
 package gui.view;
 
 import gui.controller.IScreenController;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.layout.HBox;
 
 import java.io.File;
 
 import gamedata.view.FileChooserScreen;
+import gamedata.view.FileChooserScreenLoad;
 import gameplayer.controller.SplashScreenController;
 
 public class ButtonPlay extends ButtonParent{
@@ -30,7 +28,7 @@ public class ButtonPlay extends ButtonParent{
 				alert.showAndWait();
 			}
 			else {
-				FileChooserScreen myFC = new FileChooserScreen(myControl.getStage());
+				FileChooserScreen myFC = new FileChooserScreenLoad(myControl.getStage());
 				try {
 					myControl.getStage().setScene(myFC.getScene());
 				} catch (Exception e1) {
