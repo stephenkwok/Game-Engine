@@ -97,7 +97,7 @@ public class GUIActorImageViewer implements IGUI {
 		File imageFile = promptForFileName();
 		if(imageFile!=null){
 			Image image = new Image(imageFile.toURI().toString());
-			aEE.setActorImage(new ImageView(image));
+			aEE.setActorImage(new ImageView(image), imageFile.getName());
 		}
 	}
 	

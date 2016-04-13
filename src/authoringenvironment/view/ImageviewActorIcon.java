@@ -1,6 +1,6 @@
 package authoringenvironment.view;
 
-import gameengine.model.Actor;
+import gameengine.model.IAuthoringActor;
 import javafx.scene.image.ImageView;
 
 /**
@@ -10,14 +10,14 @@ import javafx.scene.image.ImageView;
  */
 public class ImageviewActorIcon extends ImageView {
 	private static final int ICON_HEIGHT = 75;
-	private Actor myActor;
+	private IAuthoringActor myActor;
 	private int myID;
 	
 	/**
 	 * Construct an icon for a given actor.
 	 * @param actor: actor to construct an icon for.
 	 */
-	public ImageviewActorIcon(Actor actor) {
+	public ImageviewActorIcon(IAuthoringActor actor) {
 		setImage(actor.getImageView().getImage());
 		this.setFitWidth(ICON_HEIGHT);
 		this.setPreserveRatio(true);
@@ -28,7 +28,7 @@ public class ImageviewActorIcon extends ImageView {
 	 * Gets the actor associated with this icon.
 	 * @return my actor.
 	 */
-	public Actor getActor() {
+	public IAuthoringActor getActor() {
 		return myActor;
 	}
 	

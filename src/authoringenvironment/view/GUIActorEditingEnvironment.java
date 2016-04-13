@@ -6,6 +6,7 @@ import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.model.Actor;
+import gameengine.model.IAuthoringActor;
 import gui.view.GUILibrary;
 import gui.view.IGUI;
 import javafx.geometry.Insets;
@@ -43,7 +44,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	private TabAttributes attributes;
 	private Controller myController;
 	private ResourceBundle myResources;
-	private Actor myActor;
+	private IAuthoringActor myActor;
 	private ImageView myActorIV;
 	private ActorRuleCreator myActorRuleCreator;
 	private GridPane myRuleCreator;
@@ -83,7 +84,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * Set Actor of actor editing environment to a default new Actor
 	 */
 	private void setDefaultActor() {
-		Actor defaultActor = new Actor();
+		IAuthoringActor defaultActor = new Actor();
 		this.myActor = defaultActor;
 		this.myActorIV = new ImageviewActorIcon(defaultActor);
 	}
@@ -148,7 +149,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	 */
 	@Override
 	public void setEditable(IEditableGameElement editable) {
-		myActor = (Actor) editable;
+		myActor = (IAuthoringActor) editable;
 		myActorIV = new ImageviewActorIcon(myActor);
 		setLeftPane();
 	}
@@ -163,8 +164,9 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * Set image used for Actor currently in actor editing environment 
 	 * @param newImageView
 	 */
-	public void setActorImage(ImageView newImageView) {
+	public void setActorImage(ImageView newImageView, String imageViewName) {
 		myActor.setImageView(newImageView);
+		myActor.setMyImageViewName(imageViewName);
 		myActorIV = new ImageviewActorIcon(myActor);
 		setLeftPane();
 	}

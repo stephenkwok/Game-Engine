@@ -19,6 +19,7 @@ import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gameengine.model.IAuthoringActor;
 import gui.controller.IScreenController;
 import gui.view.Screen;
 import javafx.stage.Stage;
@@ -34,7 +35,7 @@ public class Controller implements IScreenController {
 	private Stage myStage;
 	private List<Level> myLevels;
 	private List<String> myLevelNames;
-	private List<Actor> myActors;
+	private List<IAuthoringActor> myActors;
 	private List<String> myActorNames;
 	private GUILevelEditingEnvironment levelEnvironment;
 	private GUIActorEditingEnvironment actorEnvironment;
@@ -83,7 +84,7 @@ public class Controller implements IScreenController {
 	 * @param actor
 	 *            - Actor to edit
 	 */
-	public void goToActorEditing(Actor actor) {
+	public void goToActorEditing(IAuthoringActor actor) {
 		goToEditingEnvironment(actor, actorEnvironment);
 	}
 	
@@ -176,7 +177,7 @@ public class Controller implements IScreenController {
 	}
 
 	public void addActor() {
-		Actor newActor = new Actor();
+		IAuthoringActor newActor = new Actor();
 		myActors.add(newActor);
 		myActorNames.add(newActor.getMyName());
 		mainScreen.createActorLabel(newActor);

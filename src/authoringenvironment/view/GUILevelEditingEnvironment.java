@@ -9,6 +9,7 @@ import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.controller.Controller;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gameengine.model.IAuthoringActor;
 import gui.view.GUILibrary;
 import gui.view.IGUI;
 import javafx.event.EventHandler;
@@ -37,7 +38,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private VBox myLeftPane;
 	private Canvas myCanvas;
 	private Level myLevel;
-	private List<Actor> availableActors;
+	private List<IAuthoringActor> availableActors;
 	private Pane myCenterPane;
 	private ImageView myLevelBackground;
 	private Controller myController;
@@ -47,7 +48,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * @param controller: authoring environment controller.
 	 * @param actors: list of currently available actors.
 	 */
-	public GUILevelEditingEnvironment(Controller controller, List<Actor> actors) {
+	public GUILevelEditingEnvironment(Controller controller, List<IAuthoringActor> actors) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
@@ -131,7 +132,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 				Dragboard db = event.getDragboard();
 				boolean success = false;
 				if (db.hasString()) {
-					Actor actor = getActorById(Integer.parseInt(db.getString()));
+					IAuthoringActor actor = getActorById(Integer.parseInt(db.getString()));
 					ImageView actorIV = actor.getImageView();
 					actorIV.setOnDragDetected(null);
 					actorIV.setOnMouseDragged(new EventHandler<MouseEvent>() {
@@ -140,7 +141,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 							event.consume();
 						}
 					}); 
-					myLevel.addActor(actor);
+					myLevel.addActor((Actor) actor);
 					myCenterPane.getChildren().add(actorIV);
 					success = true;
 				}
@@ -156,7 +157,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * @param actorIV: Imageview of actor to move.
 	 * @param event: drag.
 	 */
-	private void moveActor(Actor actor, ImageView actorIV, MouseEvent event) {
+	private void moveActor(IAuthoringActor actor, ImageView actorIV, MouseEvent event) {
 		actor.setX(event.getX());
 		actor.setY(event.getY());
 		actorIV.setX(event.getX());
@@ -168,7 +169,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * @param id: ID of actor of interest.
 	 * @return actor with given ID.
 	 */
-	private Actor getActorById(int id) {
+	private IAuthoringActor getActorById(int id) {
 		for (int i = 0; i < availableActors.size(); i++) {
 			if (availableActors.get(i).getMyID() == id) {
 				return availableActors.get(i);
@@ -208,7 +209,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		myLevelBackground.fitWidthProperty().bind(myCenterPane.widthProperty());
 		myCenterPane.getChildren().add(myLevelBackground);
 		List<ImageView> actorIVs = new ArrayList<>();
-		for(Actor actor: myLevel.getActors()) actorIVs.add(actor.getImageView());
+		for(IAuthoringActor actor: myLevel.getActors()) actorIVs.add(actor.getImageView());
 		myCenterPane.getChildren().addAll(actorIVs);
 		myInspector.getAttributesTab().updateEditable(myLevel);
 	}
@@ -217,7 +218,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * Update the list of available actors and update the level inspector to reflect the currently available actors.
 	 * @param updatedActorsList: up-to-date list of available actors.
 	 */
-	public void updateActorsList(List<Actor> updatedActorsList) {
+	public void updateActorsList(List<IAuthoringActor> updatedActorsList) {
 		availableActors = updatedActorsList;
 		myInspector.getActorsTab().setAvailableActors(availableActors);
 		updateDrag();

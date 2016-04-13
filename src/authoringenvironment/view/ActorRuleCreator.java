@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoringenvironment.controller.Controller;
-import gameengine.model.Actor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import gameengine.model.IAuthoringActor;
 /**
  * Space in actor editing environment where rules are created.
  * @author AnnieTang
@@ -82,7 +82,7 @@ public class ActorRuleCreator {
 		myRuleCreator.add(newRule.getGridPane(), RULE_COL,rule_row);
 		rule_row++;
 		myRules.add(newRule);
-		((Actor) aEE.getEditable()).addActorRule(newRule);
+		((IAuthoringActor) aEE.getEditable()).addActorRule(newRule);
 		aEE.updateDragEventsForLibrary();
 	}
 	/**
@@ -92,7 +92,7 @@ public class ActorRuleCreator {
 	public void removeRule(ActorRule actorRule){
 		myRules.remove(actorRule);
 		myRuleCreator.getChildren().remove(actorRule.getGridPane());
-		((Actor) aEE.getEditable()).removeActorRule(actorRule);
+		((IAuthoringActor) aEE.getEditable()).removeActorRule(actorRule);
 	}
 	/**
 	 * Get ActorRules for Actor currently in the actor editing environment
@@ -115,9 +115,9 @@ public class ActorRuleCreator {
 	public void updateRules() {
 		for(ActorRule toRemove: myRules){
 			myRuleCreator.getChildren().remove(toRemove.getGridPane());
-			((Actor) aEE.getEditable()).removeActorRule(toRemove);
+			((IAuthoringActor) aEE.getEditable()).removeActorRule(toRemove);
 		}
-		myRules = ((Actor) aEE.getEditable()).getActorRules();
+		myRules = ((IAuthoringActor) aEE.getEditable()).getActorRules();
 		addUpdatedRules()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ;
 	}
 	/**
