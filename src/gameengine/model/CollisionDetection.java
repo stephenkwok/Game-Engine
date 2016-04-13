@@ -1,13 +1,8 @@
 package gameengine.model;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import gameengine.model.Actor;
-import gameengine.model.Triggers.BottomCollision;
-import gameengine.model.Triggers.CollisionTrigger;
-import gameengine.model.Triggers.SideCollision;
-import gameengine.model.Triggers.TopCollision;;
+
 
 /**
  * Collision Detection class handles checking for collisions among a list of Actors
@@ -17,7 +12,11 @@ import gameengine.model.Triggers.TopCollision;;
  *
  */
 public class CollisionDetection {
-
+	
+	private String SideCollision = "SideCollision";
+	private String TopCollision = "TopCollision";
+	private String BottomCollision = "BottomCollision";
+	
 	private PhysicsEngine myPhysicsEngine;
 	
 	public CollisionDetection( PhysicsEngine physicsEngine){
@@ -60,17 +59,17 @@ public class CollisionDetection {
 	 * @param a2
 	 * @return Type of collision-String
 	 */
-	//Should this be a String? Just using Magic Strings for now
 	private String getCollisionType(Actor a1, Actor a2){
 		double xOverlap = 0;
 		double yOverlap = 0;
 		a1.setInAir(true);
+		//Calculates how much x-axis overlap there is between the two actors
 		if(a1.getBounds().getMaxX() <= a2.getBounds().getMaxX()){
 			xOverlap = a1.getBounds().getMaxX() -  a2.getX();
 		}else{
 			xOverlap = a2.getBounds().getMaxX() -  a1.getX();
 		}
-		
+		//Calculates how much y-axis overlap there is between the two actors
 		if(a1.getBounds().getMaxY() <= a2.getBounds().getMaxY()){
 			yOverlap = a1.getBounds().getMaxY() -  a2.getY();
 		}else{
@@ -78,13 +77,13 @@ public class CollisionDetection {
 		}
 				
 		if(xOverlap <= yOverlap){
-			return "SideCollision";
+			return SideCollision;
 		}else{ 
 			if((a1.getY() <= a2.getY())){
 				a1.setInAir(false);
-				return "BottomCollision";
+				return BottomCollision;
 			}else{
-				return "TopCollision";
+				return TopCollision;
 			}
 			
 		}
@@ -94,7 +93,7 @@ public class CollisionDetection {
 		String collisionType = getCollisionType(a1,a2);
 		String triggerString = a1.getMyName() + collisionType + a2.getMyName();
 		System.out.print(triggerString+"\n");
-		a1.performActionsFor(triggerString);   //Needs to be changed to take a string parameter
+		a1.performActionsFor(triggerString);   
 	}
 
 	public PhysicsEngine getMyPhysicsEngine() {

@@ -21,7 +21,7 @@ public class TextFieldLevelNameEditor extends TextFieldWithButton {
 
 	@Override
 	protected void updateValueBasedOnEditable() {
-		setTextFieldValue(((Level) getEditableElement()).getName());	
+		setTextFieldValue(((Level) getEditableElement()).getMyName());	
 	}
 
 }

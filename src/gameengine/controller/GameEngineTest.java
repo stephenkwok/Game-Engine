@@ -50,8 +50,12 @@ public class GameEngineTest {
         BottomCollision bc = new BottomCollision(actor1, floor);
         VerticalStaticCollision vsc = new VerticalStaticCollision(actor1);
         
+        KeyTrigger space = new KeyTrigger(KeyCode.SPACE);
+        MoveUp jump = new MoveUp(actor1);
+        
         Rule moveRight = new Rule(rightTrigger, action1);
         Rule hitFloor  = new Rule(bc,vsc);
+        Rule jumpUp    = new Rule(space,jump);
         
         actor1.setInAir(true);
         
@@ -75,8 +79,7 @@ public class GameEngineTest {
         System.out.println();
 
         myGame.handleTrigger(rightTrigger);
-        System.out.println("The Actor's X value should be greater than before \n");
-        myGame.handleTrigger(bc);
+        
         //Prints Final State
 
         actors = (List<Actor>) myGame.getActors();

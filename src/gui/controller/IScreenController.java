@@ -13,7 +13,11 @@ public interface IScreenController {
 	
 	public Stage getStage ();
 
-	public void useGame(Game game);
+	public void setGame(Game game);
+	
+	public void chooseGame();
 	
 	public Screen getScreen();
+
+	public void useGame();
 }
