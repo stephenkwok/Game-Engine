@@ -93,14 +93,27 @@ public class Tester extends Application {
 		level1.addActor(actor2);
 		level1.addActor(actor3);
 		
-//		for(int i=1; i<=18; i++){
-//			Actor floor = new Actor();
-//			floor.setMyName("floor");
-//			floor.setMyImageViewName("square.png");
-//			floor.setX(i*50);
-//			floor.setY(700);
-//			level1.addActor(floor);
-//		}
+		for(int i=0; i<=17; i++){
+			Actor floor = new Actor();
+			floor.setMyName("floor");
+			floor.setMyImageViewName("square.png");
+			floor.setX(i*50+i);
+			floor.setY(700);
+			BottomCollision b = new BottomCollision(actor1, floor);
+			BottomCollision b2 = new BottomCollision(actor2, floor);
+			BottomCollision b3 = new BottomCollision(actor3, floor);
+			Action baction = new VerticalStaticCollision(actor1);
+			Action baction2 = new VerticalStaticCollision(actor2);
+			Action baction3 = new VerticalStaticCollision(actor3);
+			Rule brule = new Rule(b, baction);
+			Rule brule2 = new Rule(b2, baction2);
+			Rule brule3 = new Rule(b3, baction3);
+			actor1.addRule(brule);
+			actor2.addRule(brule2);
+			actor3.addRule(brule3);
+
+			level1.addActor(floor);
+		}
 		
 //		Level level2 = new Level();
 //		level2.addActor(actor3);
