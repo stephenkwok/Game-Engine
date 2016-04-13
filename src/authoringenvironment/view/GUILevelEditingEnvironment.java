@@ -133,7 +133,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 				boolean success = false;
 				if (db.hasString()) {
 					Actor actor = getActorById(Integer.parseInt(db.getString()));
-					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
+					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getBackgroundImageView().getFitHeight());
 					iconToAdd.getImageView().setOnDragDetected(null);
 					iconToAdd.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
 						@Override public void handle(MouseEvent event) {
@@ -215,18 +215,25 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 */
 	private void updateLevel(Level updatedLevel) {
 		myLevel = updatedLevel;
-		myLevelBackground = myLevel.getImageView();
+		updateLevelBackground();
+		addLevelActorsToScene();
+	}
+	
+	/**
+	 * Updates the preview to show the level's background.
+	 */
+	private void updateLevelBackground() {
+		myLevelBackground = myLevel.getBackgroundImageView();
 		myLevelBackground.setPreserveRatio(true);
 		myLevelBackground.fitWidthProperty().bind(myCenterPane.widthProperty());
 		myCenterPane.getChildren().add(myLevelBackground);
-		addLevelActorsToScene();
 	}
 	
 	/**
 	 * Add a level's actors to the preview in the center pane.
 	 */
 	private void addLevelActorsToScene() {
-		for(Actor actor: myLevel.getActors()) myCenterPane.getChildren().add(actor.getImageView());
+		for (Actor actor: myLevel.getActors()) myCenterPane.getChildren().add(actor.getBackgroundImageView());
 	}
 	
 	/**

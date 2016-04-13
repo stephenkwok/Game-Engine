@@ -14,7 +14,7 @@ public class ClickTrigger implements ITrigger {
 
     @Override
     public boolean evaluate(IActor myActor) {
-        return myActor.getImageView().contains(getMyX(), getMyY());
+        return myActor.getBackgroundImageView().contains(getMyX(), getMyY());
     }
 
     @Override

@@ -16,9 +16,9 @@ public interface IEditableGameElement {
 
 	public String getMyName();
 	
-	public ImageView getImageView();
+	public ImageView getBackgroundImageView();
 
-	public void setImageView(ImageView imageView);
+	public void setBackgroundImageView(ImageView imageView);
 	
 	public void setMyID(int ID);
 	

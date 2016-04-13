@@ -135,7 +135,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	}
 
 	public void setActorImage(ImageView newImageView) {
-		myActor.setImageView(newImageView);
+		myActor.setBackgroundImageView(newImageView);
 		myActorIV = new ImageviewActorIcon(myActor, ICON_HEIGHT);
 		setLeftPane();
 	}

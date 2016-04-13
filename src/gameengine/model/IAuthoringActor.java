@@ -47,9 +47,9 @@ public interface IAuthoringActor {
 
     void setMyName(String name);
 
-    ImageView getImageView();
+    ImageView getBackgroundImageView();
 
-    void setImageView(ImageView imageView);
+    void setBackgroundImageView(ImageView imageView);
 
     double getX();
 

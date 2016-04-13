@@ -61,7 +61,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
         isMain = DEFAULT_MAIN;
-        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
+        setBackgroundImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
         myActorRules = new ArrayList<>();
     }
 
@@ -242,7 +242,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      * @return  The Actor's Imageview
      */
     @Override
-    public ImageView getImageView() {
+    public ImageView getBackgroundImageView() {
         return myImageView;
     }
 
@@ -251,7 +251,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      * @param imageView The new ImageView
      */
     @Override
-    public void setImageView(ImageView imageView) {
+    public void setBackgroundImageView(ImageView imageView) {
     	myImageView = imageView;
     	myImageView.setX(this.getX());
     	myImageView.setY(this.getY());
@@ -333,7 +333,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      */
 	public void setMyImageViewName(String myImageViewName) {
 		this.myImageViewName = myImageViewName;
-		this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
+		this.setBackgroundImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
 	}
 
     /**
@@ -348,7 +348,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      * @return  The Actor's ImageView Bounds
      */
 	public Bounds getBounds() {
-		return this.getImageView().getLayoutBounds();
+		return this.getBackgroundImageView().getLayoutBounds();
 	}
 
 	/**
