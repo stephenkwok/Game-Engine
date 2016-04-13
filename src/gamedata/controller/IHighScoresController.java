@@ -17,15 +17,9 @@ import org.xml.sax.SAXException;
  */
 public interface IHighScoresController {
 	
-	/**
-	 * Will display the high scores on a HighScoreScreen
-	 * @param highScores a map of user names associated with their high scores
-	 * @throws TransformerException 
-	 * @throws IOException 
-	 * @throws SAXException 
-	 * @throws ParserConfigurationException 
-	 */
-	public void viewHighScores() throws ParserConfigurationException, SAXException, IOException, TransformerException;
+	public Map<String, Map<String, Integer>> getAllGameScores();
+	
+	public Map<String, Integer> getGameHighScores();
 	
 	public void saveHighScore(int score, String player) throws ParserConfigurationException, SAXException, IOException, TransformerException;
 	

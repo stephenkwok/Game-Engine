@@ -54,8 +54,7 @@ public class FileChooserController extends ScreenController {
 
 	@Override
 	public void useGame() {
-		myFC.play(myGame);
-		
+		myFC.use(myGame);
 	}
 	
 	

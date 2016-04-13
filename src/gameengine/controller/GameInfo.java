@@ -122,8 +122,12 @@ public class GameInfo implements IEditableGameElement {
 		return myID;
 	}
 
+	public String getMyFile() {
+		return this.myFile;
+	}
+	
 	public void setMyFile(String name) {
-		// TODO Auto-generated method stub
+		this.myFile = name;
 		
 	}
 

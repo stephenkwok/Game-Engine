@@ -11,6 +11,8 @@ import org.xml.sax.SAXException;
 
 import authoringenvironment.view.GUIMain;
 import gamedata.controller.HighScoresController;
+import gamedata.view.FileChooserScreen;
+import gamedata.view.FileChooserScreenScores;
 import gameengine.controller.Game;
 import gameplayer.controller.SplashScreenController;
 import gui.controller.IScreenController;
@@ -114,9 +116,14 @@ public class SplashScreen extends Screen {
 	 * @throws ParserConfigurationException 
 	 */
 	public void openHighScores() throws ParserConfigurationException, SAXException, IOException, TransformerException {
-		//TODO implement game chooser
-		HighScoresController highScoresController = new HighScoresController(getStage(), "DEFAULT", this);
-		highScoresController.viewHighScores();
+		FileChooserScreen myFC = new FileChooserScreenScores(getStage());
+		try {
+			getStage().setScene(myFC.getScene());
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

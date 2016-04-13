@@ -32,11 +32,13 @@ public class HighScoresController implements IHighScoresController {
 		this.myScreen = screen;
 	}
 	
-	private Map<String, Integer> getGameHighScores() {
+	@Override
+	public Map<String, Integer> getGameHighScores() {
 		return getAllGameScores().get(myGameFile);
 	}
 	
-	private Map<String, Map<String, Integer>> getAllGameScores()  {
+	@Override
+	public Map<String, Map<String, Integer>> getAllGameScores()  {
 		HighScoresParser scoresParser = new HighScoresParser();
 		try {
 			return scoresParser.getHighScoreInfo(myFile);
@@ -47,25 +49,28 @@ public class HighScoresController implements IHighScoresController {
 	}
 
 	@Override
-	public void viewHighScores() throws ParserConfigurationException, SAXException, IOException, TransformerException {
-		Map<String, Integer> gameHighScores = getGameHighScores();
-		HighScoreScreen myHS = new HighScoreScreen(myStage);
-		myStage.setScene(myHS.getMyScene());
-	}
-
-	@Override
-	public void clearHighScores() throws SAXException, IOException, ParserConfigurationException, TransformerException {
+	public void clearHighScores() {
 		HighScoresKeeper newKeeper = new HighScoresKeeper();
 		HighScoresCreator scoresCreator = new HighScoresCreator();
-		scoresCreator.saveScore(newKeeper, myFile);
+		try {
+			scoresCreator.saveScore(newKeeper, myFile);
+		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void saveHighScore(int score, String player) throws ParserConfigurationException, SAXException, IOException, TransformerException {
+	public void saveHighScore(int score, String player) {
 		HighScoresKeeper updatedKeeper = new HighScoresKeeper(getAllGameScores());
 		updatedKeeper.addScore(myGameFile, player, score);
 		HighScoresCreator scoresCreator = new HighScoresCreator();
-		scoresCreator.saveScore(updatedKeeper, myFile);
+		try {
+			scoresCreator.saveScore(updatedKeeper, myFile);
+		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
