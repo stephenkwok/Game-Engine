@@ -32,7 +32,7 @@ import javafx.scene.image.ImageView;
 public class Actor extends Observable implements IActor, IEditableGameElement {
 
     private static final String DEFAULT_NAME = "Default Name";
-    private static final String DEFAULT_IMAGE_NAME = "default_actor.jpg";
+    private static final String DEFAULT_IMAGE_NAME = "hellokitty.gif";
     private static final boolean DEFAULT_MAIN = false;
     
     private double x;

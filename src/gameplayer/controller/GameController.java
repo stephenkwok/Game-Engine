@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Optional;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -15,6 +16,9 @@ import gameplayer.view.BaseScreen;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
 import javafx.collections.MapChangeListener.Change;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 
 
 /** 
@@ -39,10 +43,9 @@ public class GameController implements Observer {
 		model.addObserver(this);
 	}
 	
-	
 	/**
-	 * Sets the basic game view to the given BaseScreen
-	 * @param BaseScreen
+	 * Sets the basic game view to the given GameScreen
+	 * @param GameScreen
 	 */
 	public void setGameView (GameScreen myGameView){
 		view = myGameView;
@@ -52,7 +55,6 @@ public class GameController implements Observer {
 	public void setHUD(HUDScreen hud) {
 		this.hud = hud;
 	}
-	
 	
 	
 	/**
@@ -74,6 +76,7 @@ public class GameController implements Observer {
 		for(Actor actor: model.getActors()){
 			view.addActor(actor);
 		}
+		this.toggleUnPause();
 		model.startGame();
 	}
 	
@@ -102,7 +105,11 @@ public class GameController implements Observer {
 	 * Will stop the animation timeline.
 	 */
 	public void endGame (){
-		System.out.println("game over");
+		//TODO fix resource also implement saving functionality 
+		togglePause();
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setContentText("Game over!");
+		alert.show();
 	}
 	
 	/**
@@ -117,7 +124,7 @@ public class GameController implements Observer {
 		model.nextLevel();
 		begin();
 	}
-
+	
 	
 	public GameScreen getView() {
 		return view;
@@ -162,7 +169,7 @@ public class GameController implements Observer {
 	}
 
 	public void toggleUnPause() {
-		getGame().getAnimation().play();;
+		getGame().getAnimation().play();
 		view.getMySubscene().setDisable(false);
 	}
 

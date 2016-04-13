@@ -19,8 +19,8 @@ import authoringenvironment.model.IEditableGameElement;
 public class Level implements Observer, ILevel, IEditableGameElement {
 
 	// TODO: should probably set these default things via properties file but idk sry guyz
-	private static final String DEFAULT_NAME = "Untitled";
-	private static final String DEFAULT_IMAGE_NAME = "default_background.png";
+	private static final String DEFAULT_NAME = "Default";
+	private static final String DEFAULT_IMAGE_NAME = "default_landscape.png";
 	private static final double DEFAULT_HEIGHT = 800;
 	private static final double DEFAULT_WIDTH = 1024;
 	private static final String DEFAULT_SCROLLING = "Vertically";
