@@ -9,6 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import gamedata.controller.CreatorController;
 import gamedata.controller.ParserController;
+import gamedata.view.FileChooserScreen;
 import gameengine.controller.Game;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.SplashScreen;
@@ -118,11 +119,13 @@ public class BaseScreenController extends ScreenController{
 
 	@Override
 	public void chooseGame() {
-		Group fileChooseGroup = new Group();
-		Scene fileChooseScene = new Scene(fileChooseGroup, this.getScreen().getMyScene().getWidth(), this.getScreen().getMyScene().getHeight());
-		ComboBoxGame fileSelector =  new ComboBoxGame("Choose Game", "gamefiles", this);
-		fileChooseGroup.getChildren().add((HBox) fileSelector.createNode());
-		this.getStage().setScene(fileChooseScene);
+		FileChooserScreen myFC = new FileChooserScreen(getStage());
+		try {
+			getStage().setScene(myFC.getScene());
+		} catch (Exception e1) {
+			// DO NOT LEAVE THIS ISH!
+			e1.printStackTrace();
+		}
 	}
 
 	@Override
