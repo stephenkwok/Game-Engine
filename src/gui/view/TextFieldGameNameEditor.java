@@ -14,6 +14,7 @@ public class TextFieldGameNameEditor extends TextFieldWithButton{
 	public TextFieldGameNameEditor(String labelText, String prompt, Double textFieldWidth) {
 		super(labelText, prompt, textFieldWidth);
 		setButtonAction(e -> ((GameInfo) getEditableElement()).setMyName(getTextFieldInput()));
+		setTextFieldHGrow();
 	}
 
 	@Override
