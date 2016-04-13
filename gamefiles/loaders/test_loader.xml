@@ -736,7 +736,7 @@
           </list>
         </entry>
       </myTriggerMap>
-      <myName>Untitled</myName>
+      <myName>Default</myName>
       <myHeight>800.0</myHeight>
       <myWidth>1024.0</myWidth>
       <myScrollingDirection>Vertically</myScrollingDirection>
@@ -756,7 +756,7 @@
   </info>
   <myPhysicsEngine>
     <timeStep>1</timeStep>
-    <friction>-0.01</friction>
+    <friction>-0.05</friction>
     <gravity>0.11</gravity>
     <maxHorizVelocity>50.0</maxHorizVelocity>
     <maxVertVelocity>-50.0</maxVertVelocity>
