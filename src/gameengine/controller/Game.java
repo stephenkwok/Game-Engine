@@ -10,6 +10,7 @@ import gameengine.model.IActor;
 import gameengine.model.ITrigger;
 import gameengine.model.PhysicsEngine;
 import gameengine.model.Triggers.TickTrigger;
+import gameengine.model.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -41,6 +42,9 @@ public class Game extends Observable implements Observer {
 	private List<Actor> deadActors;
 	private ObservableMap<String, Object> HUDData;
 	
+	//NOTE: NEED TO INITZLIWE THIS
+	private Actor mainCharacter;
+	
 	
 	/**
 	 * A game is instantiated with a list of all levels in the game and a level to start on.
@@ -60,7 +64,7 @@ public class Game extends Observable implements Observer {
         
 		initTimeline();
 		
-		initHUDData();
+		
 	}
 	
 
@@ -82,12 +86,20 @@ public class Game extends Observable implements Observer {
 	
 	public void startGame(){
 		initCurrentActors();
+		//This is here because it needs to know who the main actor is
+		initHUDData();
+		
 		animation.play();
 	}
 
 
 	public void initCurrentActors() {
 		setCurrentActors(getCurrentLevel().getActors());
+		for (Actor actor: currentActors) {
+			if (actor.isMain()) {
+				mainCharacter = actor;
+			}
+		}
 		initActors();
 	}
 	
@@ -264,8 +276,8 @@ public class Game extends Observable implements Observer {
 	}
 	
 	public void initHUDData() {
-		HUDData = FXCollections.observableHashMap(); 
-		//HUDData.putAll(info.getMap()); //fill in getmap here
+		HUDData = FXCollections.observableHashMap();
+		updateHUDFields(info.getMyHUDOptions(), HUDData);
 		HUDData.addListener(new MapChangeListener<String, Object>() {
 			@Override
 			public void onChanged(Change<? extends String, ? extends Object> change) {
@@ -273,5 +285,41 @@ public class Game extends Observable implements Observer {
 			}
         });
 	}
+	
+	public Map<String, Object> getHUDData() {
+		return HUDData;
+	}
+	
+	
+	public void updateHUDFields(Collection<String> keys, Map<String, Object> destinationMap) {
+		for (String key : keys) {
+			Object value = null;
+			if (key.equals("Health")) {
+				value = mainCharacter.getAttribute(AttributeType.HEALTH).getMyValue();
+			} else if (key.equals("Level")) {
+				value = info.getMyCurrentLevelNum();
+			} else if (key.equals("Ammo")) {
+				//todo
+			} else if (key.equals("Coins")) {
+				//todo
+			} else if (key.equals("Time")) {
+				//todo
+			} else if (key.equals("Points")){
+				value = mainCharacter.getAttribute(AttributeType.POINTS).getMyValue();
+			} else {
+				value = "Error";
+			}
+			destinationMap.put(key, value);
+		}
+	}
+	
+	
+	
+	
+	public void updateAttributes() {
+		updateHUDFields(HUDData.keySet(), HUDData);
+	}
+	
+	
 
 }

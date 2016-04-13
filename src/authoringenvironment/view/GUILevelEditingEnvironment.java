@@ -1,6 +1,5 @@
 package authoringenvironment.view;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -25,14 +24,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
- * Front-end of the Level Editing Environment
+ * Level editing environment
  * @author amyzhao
  *
  */
 public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private static final String GUI_RESOURCE = "authoringGUI";
 	private BorderPane myRoot;
-	private GUILibrary myLibrary;
 	private GUILevelInspector myInspector;
 	private ResourceBundle myResources;
 	private VBox myLeftPane;
@@ -42,49 +40,64 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private Pane myCenterPane;
 	private ImageView myLevelBackground;
 	private Controller myController;
+	private List<ImageviewActorIcon> myActorPreviews;
 
+	/**
+	 * Constructor for a level editing environment.
+	 * @param controller: authoring environment controller.
+	 * @param actors: list of currently available actors.
+	 */
 	public GUILevelEditingEnvironment(Controller controller, List<Actor> actors) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
 		myController = controller;
 		initializeEnvironment();
+		myActorPreviews = new ArrayList<>();
 	}
 
+	/**
+	 * Initializes the level editing environment's center pane and left pane, as well as the ability to drag actors between
+	 * the left and center pane.
+	 */
 	private void initializeEnvironment() {
 		initializeCenter();
 		initializeLeftPane();
-		initializeDrag();
+		updateDrag();
 	}
 
+	/**
+	 * Initializes the left pane with a level inspector and an image/sound library.
+	 */
 	private void initializeLeftPane() {
 		myLeftPane = new VBox();
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
 		myInspector = new GUILevelInspector(myController, myResources, availableActors, myLevel);
-		myLibrary = new GUILibrary();
-		myLeftPane.getChildren().addAll(myInspector.getPane(), myLibrary.getPane());
+		myLeftPane.getChildren().add(myInspector.getPane());
 		myRoot.setLeft(myLeftPane);
+		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
 	}
 
-	private void initializeDrag() {
+	/**
+	 * Updates the drag behavior of the level editing environment to accommodate updates to currently available actors.
+	 */
+	private void updateDrag() {
 		List<ImageviewActorIcon> icons = myInspector.getActorsTab().getIcons();
-
 		setCenterPaneDragOver();
-		setCenterPaneDragEntered();
-		setCenterPaneDragExited();
 		setCenterPaneDragDropped();
-		
 		for (int i = 0; i < icons.size(); i++) {
 			ImageviewActorIcon source = icons.get(i);
 			setDragDetected(source);
-			setDragDone(source);
 		}
 	}
 
+	/**
+	 * Start drag and drop when drag is detected.
+	 * @param source: node to be dragged.
+	 */
 	private void setDragDetected(ImageviewActorIcon source) {
 		source.setOnDragDetected(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
-				System.out.println("drag detected");
 				Dragboard db = source.startDragAndDrop(TransferMode.ANY);
 				ClipboardContent content = new ClipboardContent();
 				content.putString(Integer.toString(source.getID()));
@@ -94,14 +107,9 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		});
 	}
 
-	private void setDragDone(ImageviewActorIcon source) {
-		source.setOnDragDone(new EventHandler <DragEvent>() {
-			public void handle(DragEvent event) {
-				event.consume();
-			}
-		});
-	}
-
+	/**
+	 * When dragged over the center pane, copy the gesture source.
+	 */
 	private void setCenterPaneDragOver() {
 		myCenterPane.setOnDragOver(new EventHandler <DragEvent>() {
 			public void handle(DragEvent event) {
@@ -114,25 +122,10 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		});
 	}
 
-	private void setCenterPaneDragEntered() {
-		myCenterPane.setOnDragEntered(new EventHandler <DragEvent>() {
-			public void handle(DragEvent event) {
-				if (event.getGestureSource() != myCenterPane &&
-					event.getDragboard().hasString()) {
-				}
-				event.consume();
-			}
-		});
-	}
-	
-	private void setCenterPaneDragExited() {
-		myCenterPane.setOnDragExited(new EventHandler <DragEvent>() {
-			public void handle(DragEvent event) {
-				event.consume();
-			}
-		});
-	}
-
+	/**
+	 * When an actor icon is dropped on the center pane, add its actor to the center pane and set the actor so that it moves
+	 * in response to mouse drags.
+	 */
 	private void setCenterPaneDragDropped() {
 		myCenterPane.setOnDragDropped(new EventHandler <DragEvent>() {
 			public void handle(DragEvent event) {
@@ -140,17 +133,17 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 				boolean success = false;
 				if (db.hasString()) {
 					Actor actor = getActorById(Integer.parseInt(db.getString()));
-					ImageView actorIV = actor.getImageView();
-					actorIV.setOnDragDetected(null);
-					actorIV.setOnDragDone(null);
-					actorIV.setOnMouseDragged(new EventHandler<MouseEvent>() {
+					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
+					iconToAdd.getImageView().setOnDragDetected(null);
+					iconToAdd.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
 						@Override public void handle(MouseEvent event) {
-							moveActor(actor, actorIV, event);
+							moveActor(actor, iconToAdd, event);
 							event.consume();
 						}
 					}); 
 					myLevel.addActor(actor);
-					myCenterPane.getChildren().add(actorIV);
+					myActorPreviews.add(iconToAdd);
+					myCenterPane.getChildren().add(iconToAdd.getImageView());
 					success = true;
 				}
 				event.setDropCompleted(success);
@@ -159,14 +152,24 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		});
 	}
 	
-	private void moveActor(Actor actor, ImageView actorIV, MouseEvent event) {
+	/**
+	 * Move an actor by changing its (x, y)-coordinates and visualize by moving its imageview.
+	 * @param actor: actor to move.
+	 * @param actorIV: Imageview of actor to move.
+	 * @param event: drag.
+	 */
+	private void moveActor(Actor actor, ImageviewActorIcon icon, MouseEvent event) {
 		actor.setX(event.getX());
 		actor.setY(event.getY());
-		actorIV.setX(event.getX());
-		actorIV.setY(event.getY());
-		
+		icon.getImageView().setX(event.getX());
+		icon.getImageView().setY(event.getY());
 	}
 	
+	/**
+	 * Gets an actor by its ID.
+	 * @param id: ID of actor of interest.
+	 * @return actor with given ID.
+	 */
 	private Actor getActorById(int id) {
 		for (int i = 0; i < availableActors.size(); i++) {
 			if (availableActors.get(i).getMyID() == id) {
@@ -176,7 +179,9 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		return null;
 	}
 
-	//TODO: should initialize based on the level that's loaded on here
+	/**
+	 * Initialize the center pane.
+	 */
 	private void initializeCenter() {
 		myCenterPane = new Pane();
 		myCanvas = new Canvas();
@@ -185,29 +190,55 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		myRoot.setCenter(myCenterPane);
 	}
 
+	/**
+	 * Get LevelEditingEnvironment's root pane.
+	 */
 	@Override
 	public Pane getPane() {
 		return myRoot;
 	}
 
+	/**
+	 * Update the level that is being edited and update the level inspector to reflect the current level.
+	 */
 	@Override
 	public void setEditable(IEditableGameElement editable) {
 		myCenterPane.getChildren().clear();
-		myLevel = (Level) editable;
+		updateLevel((Level) editable);
+		myInspector.getAttributesTab().updateEditable(myLevel);
+		updateActorsList();
+	}
+	
+	/**
+	 * Updates the level that's being displayed.
+	 * @param updatedLevel: new level.
+	 */
+	private void updateLevel(Level updatedLevel) {
+		myLevel = updatedLevel;
 		myLevelBackground = myLevel.getImageView();
 		myLevelBackground.setPreserveRatio(true);
 		myLevelBackground.fitWidthProperty().bind(myCenterPane.widthProperty());
 		myCenterPane.getChildren().add(myLevelBackground);
-		List<ImageView> actorIVs = new ArrayList<>();
-		for(Actor actor: myLevel.getActors()) actorIVs.add(actor.getImageView());
-		myCenterPane.getChildren().addAll(actorIVs);
-		myInspector.getAttributesTab().updateEditable(myLevel);
+		addLevelActorsToScene();
 	}
 	
-	public void updateActorsList(List<Actor> updatedActorsList) {
-		availableActors = updatedActorsList;
+	/**
+	 * Add a level's actors to the preview in the center pane.
+	 */
+	private void addLevelActorsToScene() {
+		for(Actor actor: myLevel.getActors()) myCenterPane.getChildren().add(actor.getImageView());
+	}
+	
+	/**
+	 * Update the list of available actors and update the level inspector to reflect the currently available actors.
+	 * @param updatedActorsList: up-to-date list of available actors.
+	 */
+	public void updateActorsList() {
 		myInspector.getActorsTab().setAvailableActors(availableActors);
-		initializeDrag();
+		for (ImageviewActorIcon icon: myActorPreviews) {
+			icon.updateImageView();
+		}
+		updateDrag();
 	}
 
 }

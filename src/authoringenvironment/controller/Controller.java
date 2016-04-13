@@ -57,7 +57,7 @@ public class Controller implements IScreenController {
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
 		actorEnvironment = new GUIActorEditingEnvironment(this, myResources);
-		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo);
+		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo, myActors);
 	}
 
 	/**
@@ -68,21 +68,21 @@ public class Controller implements IScreenController {
 	 * @param createdActors
 	 *            - list of created Actors that can be placed into the level
 	 */
-	public void goToLevelEditing(Level level) {
-		levelEnvironment.updateActorsList(myActors);
+/*	public void goToLevelEditing(Level level) {
+		//levelEnvironment.updateActorsList(myActors);
 		goToEditingEnvironment(level, levelEnvironment);
 	}
-
+*/
 	/**
 	 * Switches screen to Actor Editing Environment
 	 * 
 	 * @param actor
 	 *            - Actor to edit
 	 */
-	public void goToActorEditing(Actor actor) {
+/*	public void goToActorEditing(Actor actor) {
 		goToEditingEnvironment(actor, actorEnvironment);
 	}
-	
+	*/
 	
 	/**
 	 * Switches screen to appropriate editing environment
@@ -158,14 +158,16 @@ public class Controller implements IScreenController {
 	 */
 	public void addLevel() {
 		Level newLevel = new Level();
+		newLevel.setMyID(myLevels.size());
 		myLevels.add(newLevel);
 		myLevelNames.add(newLevel.getMyName());
 		mainScreen.createLevelLabel(newLevel);
-		goToLevelEditing(newLevel);
+		goToEditingEnvironment(newLevel, levelEnvironment);
 	}
 
 	public void addActor() {
 		Actor newActor = new Actor();
+		newActor.setMyID(myActors.size());
 		myActors.add(newActor);
 		mainScreen.createActorLabel(newActor);
 		actorEnvironment.setActorImage(newActor.getImageView());
@@ -212,6 +214,12 @@ public class Controller implements IScreenController {
 
 	@Override
 	public void useGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void goToSplash() {
 		// TODO Auto-generated method stub
 		
 	}

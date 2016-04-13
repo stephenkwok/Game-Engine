@@ -32,6 +32,7 @@ import javafx.scene.paint.Color;
  *
  */
 public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
+	private static final int ICON_HEIGHT = 75;
 	private static final String NEW_RULE_LABEL = "New Rule";
 	private static final String ACTOR_OPTIONS_RESOURCE = "actorEditorOptions";
 	private static final String ACTOR_ATTRIBUTES = "Actor Attributes";
@@ -76,7 +77,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	private void setDefaultActor() {
 		Actor defaultActor = new Actor();
 		this.myActor = defaultActor;
-		this.myActorIV = new ImageviewActorIcon(defaultActor);
+		this.myActorIV = new ImageviewActorIcon(defaultActor, ICON_HEIGHT);
 	}
 
 	private void setLeftPane() {
@@ -125,7 +126,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	@Override
 	public void setEditable(IEditableGameElement editable) {
 		myActor = (Actor) editable;
-		myActorIV = new ImageviewActorIcon(myActor);
+		myActorIV = new ImageviewActorIcon(myActor, ICON_HEIGHT);
 		setLeftPane();
 	}
 	
@@ -135,7 +136,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 
 	public void setActorImage(ImageView newImageView) {
 		myActor.setImageView(newImageView);
-		myActorIV = new ImageviewActorIcon(myActor);
+		myActorIV = new ImageviewActorIcon(myActor, ICON_HEIGHT);
 		setLeftPane();
 	}
 
