@@ -130,6 +130,7 @@
           </myRules>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -210,6 +211,7 @@
           </myRules>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -290,6 +292,7 @@
           </myRules>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -310,6 +313,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -330,6 +334,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -350,6 +355,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -370,6 +376,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -390,6 +397,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -410,6 +418,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -430,6 +439,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -450,6 +460,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -470,6 +481,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -490,6 +502,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -510,6 +523,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -530,6 +544,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -550,6 +565,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -570,6 +586,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -590,6 +607,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -610,6 +628,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -630,6 +649,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -650,6 +670,7 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>

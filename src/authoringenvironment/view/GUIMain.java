@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
+import gui.view.ButtonSplash;
 import gui.view.GUIFactory;
 import gui.view.IGUI;
 import gui.view.IGUIElement;
@@ -30,6 +31,7 @@ public class GUIMain extends Screen implements IGUI {
     private static final int WINDOW_HEIGHT = 800;
 	private static final int WINDOW_WIDTH = 1300;
     private static final int PADDING = 10;
+    private static final String SPLASH_IMAGE_NAME = "salad.png";
     private Scene myScene;
 	private BorderPane myRoot;
 	private ResourceBundle myResources;
@@ -107,6 +109,9 @@ public class GUIMain extends Screen implements IGUI {
 				IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
 				hbox.getChildren().add(elementToCreate.createNode());
 			}
+			//temp
+			ButtonSplash splash = new ButtonSplash(myController, null, SPLASH_IMAGE_NAME);
+			hbox.getChildren().add(splash.createNode());
 		}catch(Exception e){
 			
 		}
@@ -127,7 +132,7 @@ public class GUIMain extends Screen implements IGUI {
 	/**
 	 * Returns user back to splash screen 
 	 */
-	public void goBackToGamePlayer() {
+	public void goBackToSplash() {
 		myStage.setScene(splashScene);
 	}
 	/**
