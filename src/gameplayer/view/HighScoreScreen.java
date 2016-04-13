@@ -27,59 +27,42 @@ public class HighScoreScreen extends Screen{
 
 	private ResourceBundle myResources;
 	private static final String GUI_RESOURCE = "hsGUI";
+	private static final String TOP_BUTTONS = "TopButtons";
 	private HighScoreScreenController myController;
 	private GUIFactory factory;
 	private BorderPane myPane;
-	private Map<String, HashMap<String, Integer>> myMap;
+	private Map<String, Integer> myMap;
+	private String myName;
 	
-	public HighScoreScreen(Stage s) {
+	public HighScoreScreen(Stage s, Map<String, Integer> myMap, String gameName) {
 		super(s);
-		myPane = new BorderPane();
+		this.myMap = myMap;
+		this.myName = gameName;
+		this.myPane =  new BorderPane();
 		init();
-		myMap = new HashMap<String, HashMap<String,Integer>>();
-		myMap.put("mario", new HashMap<String, Integer>());
-		myMap.get("mario").put("rihanna", 100);
-		myMap.put("flappy bird", new HashMap<String, Integer>());
-		myMap.get("flappy bird").put("literally anyone with a pulse", 10);
-		myMap.get("flappy bird").put("michelle", -5);
-		
 		addComponents();
 	}
 	
 	private void addComponents() {
 		initialize();
-		addGamePane();
+		addScorePane();
 		getRoot().getChildren().add(myPane);
 	}
 
-	private void addScorePane(String game) {
+	private void addScorePane() {
 		VBox masterV = new VBox(20);
-		VBox myBox = new VBox(5);
-		for(String player : myMap.get(game).keySet()){
+		masterV.getChildren().add(new Text(myName));
+		for(String player : myMap.keySet()){
 			HBox myH = new HBox(10);
 			Text myPlayer = new Text(player);
 			myPlayer.setFont(Font.font("Helvetica", 30));
 			myH.getChildren().add(myPlayer);
-			Text myScore = new Text(myMap.get(game).get(player).toString());
+			Text myScore = new Text(myMap.get(player).toString());
 			myScore.setFont(Font.font("Times New Roman", 30));
 			myH.getChildren().add(myScore);
-			myBox.getChildren().add(myH);
+			masterV.getChildren().add(myH);
 		}
-		masterV.getChildren().add(myBox);
 		myPane.setCenter(masterV);
-		
-	}
-
-	private void addGamePane() {
-		ToolBar myT = new ToolBar();
-		myT.setMinHeight(SCREEN_HEIGHT);
-		myT.setOrientation(Orientation.VERTICAL);
-		for(String game : myMap.keySet()){
-			Button myB = new Button(game);
-			myB.setOnMouseClicked(e -> addScorePane(game));
-			myT.getItems().add(myB);
-		}
-		myPane.setLeft(myT);
 		
 	}
 
@@ -90,51 +73,25 @@ public class HighScoreScreen extends Screen{
 	}
 
 	public void initialize(){
+		myPane.setLeft(null);
+		String[] sideButtons = myResources.getString(TOP_BUTTONS).split(",");
 		ToolBar myT = new ToolBar();
 		myT.setMinWidth(SCREEN_WIDTH);
-		IGUIElement newElement = factory.createNewGUIObject("Splash");
-		Button myB = (Button) newElement.createNode();
-		myB.setMinSize(8, 8);
-		Tooltip t = new Tooltip(myResources.getString("SplashText"));
-		t.install(myB, t);
-		myT.getItems().add(myB);
+		myT.setOrientation(Orientation.HORIZONTAL);
+		for(int i = 0; i < sideButtons.length; i++){
+			IGUIElement newElement = factory.createNewGUIObject(sideButtons[i]);
+			Button myB = (Button) newElement.createNode();
+			Tooltip t = new Tooltip(myResources.getString(sideButtons[i]+ "Text"));
+			t.install(myB, t);
+			myT.getItems().add(myB);
+			myB.setFocusTraversable(false);
+		}
 		myPane.setTop(myT);
-	}
-	
-	public void returnToSplash(){
-		SplashScreen mySplash = new SplashScreen(getStage());
-		try {
-			getStage().setScene(mySplash.getScene());
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void displayScores(Map<String, HashMap<String, Integer>> myMap){
-		VBox masterV = new VBox(20);
-		for(String game : myMap.keySet()){
-			VBox myBox = new VBox(5);
-			myBox.getChildren().add(new Text(game));
-			for(String player : myMap.get(game).keySet()){
-				HBox myH = new HBox(10);
-				Text myPlayer = new Text(player);
-				myPlayer.setFont(Font.font("Helvetica", 30));
-				myH.getChildren().add(myPlayer);
-				Text myScore = new Text(myMap.get(game).get(player).toString());
-				myScore.setFont(Font.font("Times New Roman", 20));
-				myH.getChildren().add(myScore);
-				myBox.getChildren().add(myH);
-			}
-			masterV.getChildren().add(myBox);
-		}
-		masterV.setLayoutX(100);
-		masterV.setLayoutY(10);
-		getRoot().getChildren().add(masterV);
 	}
 
 	@Override
-	public Scene getScene() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public Scene getScene()
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		// TODO Auto-generated method stub
 		return null;
 	}

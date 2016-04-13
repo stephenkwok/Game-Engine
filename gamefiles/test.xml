@@ -173,6 +173,7 @@
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myID>0</myID>
     <myHUDElementsToDisplay/>
+    <myFile>test.xml</myFile>
   </info>
   <myPhysicsEngine>
     <timeStep>1</timeStep>

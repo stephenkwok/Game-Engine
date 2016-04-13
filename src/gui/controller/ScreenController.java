@@ -28,5 +28,6 @@ public abstract class ScreenController implements IScreenController{
 	public Stage getStage(){
 		return myStage;
 	}
+	
 
 }
