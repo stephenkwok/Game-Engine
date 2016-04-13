@@ -73,6 +73,7 @@ public class GUIFactory {
 	private IGUIElement createElement(String elementType, String nodeType) {
 		String className = GUI + VIEW + myResources.getString(nodeType + CLASS);
 		try {
+			System.out.println(className);
 			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class);
 			return (IGUIElement) createMethod.invoke(this, nodeType, className);
 		} catch (NoSuchMethodException | SecurityException e) {
