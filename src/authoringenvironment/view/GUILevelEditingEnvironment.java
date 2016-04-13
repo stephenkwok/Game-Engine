@@ -31,7 +31,6 @@ import javafx.scene.layout.VBox;
 public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private static final String GUI_RESOURCE = "authoringGUI";
 	private BorderPane myRoot;
-	private GUILibrary myLibrary;
 	private GUILevelInspector myInspector;
 	private ResourceBundle myResources;
 	private VBox myLeftPane;
@@ -72,9 +71,9 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		myLeftPane = new VBox();
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
 		myInspector = new GUILevelInspector(myController, myResources, availableActors, myLevel);
-		myLibrary = new GUILibrary();
-		myLeftPane.getChildren().addAll(myInspector.getPane(), myLibrary.getPane());
+		myLeftPane.getChildren().add(myInspector.getPane());
 		myRoot.setLeft(myLeftPane);
+		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
 	}
 
 	/**
@@ -202,16 +201,29 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	@Override
 	public void setEditable(IEditableGameElement editable) {
 		myCenterPane.getChildren().clear();
-		myLevel = (Level) editable;
+		updateLevel((Level) editable);
+		myInspector.getAttributesTab().updateEditable(myLevel);
+		updateActorsList();
+	}
+	
+	/**
+	 * Updates the level that's being displayed.
+	 * @param updatedLevel: new level.
+	 */
+	private void updateLevel(Level updatedLevel) {
+		myLevel = updatedLevel;
 		myLevelBackground = myLevel.getImageView();
 		myLevelBackground.setPreserveRatio(true);
 		myLevelBackground.fitWidthProperty().bind(myCenterPane.widthProperty());
 		myCenterPane.getChildren().add(myLevelBackground);
-		List<ImageView> actorIVs = new ArrayList<>();
-		for(Actor actor: myLevel.getActors()) actorIVs.add(actor.getImageView());
-		myCenterPane.getChildren().addAll(actorIVs);
-		myInspector.getAttributesTab().updateEditable(myLevel);
-		updateActorsList();
+		addLevelActorsToScene();
+	}
+	
+	/**
+	 * Add a level's actors to the preview in the center pane.
+	 */
+	private void addLevelActorsToScene() {
+		for(Actor actor: myLevel.getActors()) myCenterPane.getChildren().add(actor.getImageView());
 	}
 	
 	/**

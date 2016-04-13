@@ -49,6 +49,7 @@ public class TabActors extends TabParent {
 		myPane.setOrientation(Orientation.HORIZONTAL);
 		myPane.setAlignment(Pos.TOP_LEFT);
 		myPane.setPadding(new Insets(PADDING));
+		myPane.setPrefHeight(200);
 		setAvailableActors(availActors);
 	}
 	
