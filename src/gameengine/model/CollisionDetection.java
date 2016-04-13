@@ -68,36 +68,29 @@ public class CollisionDetection {
 		double dy = ((a1.getBounds().getMaxY()-a1.getBounds().getMinX())/2 - (a2.getBounds().getMaxY()-a2.getBounds().getMinX())/2);
 
 
-		if (Math.abs(dx) <= w && Math.abs(dy) <= h)
-		{
-			double wy = w * dy;
-			double hx = h * dx;
-		
+
+		double wy = w * dy;
+		double hx = h * dx;
+
 		if (wy > hx) {
 			if (wy > -hx) {
 				return "TopCollision";
-		    } else {
-		    	return "SideCollision";
-		    }
+			} else {
+				return "SideCollision";
+			}
 		} else {
-		    if (wy > -hx) {
-		    	return "SideCollision";
-		    } else {
-		    	a1.setInAir(false);
-				a1.setY(a2.getY()-a1.getBounds().getWidth());
-				a1.setVeloY(0);
-		        return "BottomCollision";
-		    }
-			} 
-		
-		} return "TopCollision";
-		
+			if (wy >= -hx) {
+				return "SideCollision";
+			} else {
+				return "BottomCollision";
+			}
+		} 
+
 	}
 	
 	private void resolveCollision(Actor a1, Actor a2){
 		String collisionType = getCollisionType(a1,a2);
 		String triggerString = a1.getMyName() + collisionType + a2.getMyName();
-		System.out.print(triggerString+"\n");
 		a1.performActionsFor(triggerString);   
 	}
 

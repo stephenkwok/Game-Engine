@@ -19,9 +19,10 @@ public class VerticalStaticCollision extends Action{
 
 	@Override
 	public void perform() {
-		//myPhysicsEngine.vertStaticCollision(getActor());
-//		getMyActor().setY(getMyActor().getY()-2);
-//		getMyActor().setVeloY(0);
+		System.out.println("Reached the Vert Static Collision");
+		getMyActor().setInAir(false);
+		getMyActor().setY(getMyActor().getY()-getMyActor().getVeloY());
+		getMyActor().setVeloY(0);
 	}
 
 

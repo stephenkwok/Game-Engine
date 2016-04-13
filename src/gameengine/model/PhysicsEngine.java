@@ -74,6 +74,7 @@ public class PhysicsEngine {
 
 		if (a.isInAir()) {
 			forceYdownward = getGravity();
+			friction = friction*.5;
 		}
 				
 		nextHorzVelo = xVelo;      		
