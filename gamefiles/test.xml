@@ -709,7 +709,7 @@
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myID>0</myID>
     <myHUDElementsToDisplay/>
-    <myFile>test_loader.xml</myFile>
+    <myFile>test.xml</myFile>
   </info>
   <myPhysicsEngine>
     <timeStep>1</timeStep>
