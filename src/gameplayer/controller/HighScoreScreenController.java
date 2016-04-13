@@ -1,24 +1,22 @@
 package gameplayer.controller;
 
-import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
 import gameengine.controller.Game;
 import gameplayer.view.HighScoreScreen;
 import gameplayer.view.SplashScreen;
-import gui.controller.IScreenController;
+import gui.controller.ScreenController;
 import gui.view.Screen;
 import javafx.stage.Stage;
 
-public class HighScoreScreenController implements IScreenController {
+public class HighScoreScreenController extends ScreenController {
 
-	private Stage myStage;
 	private ResourceBundle myResources;
 	private HighScoreScreen myScreen;
 	
 	public HighScoreScreenController(Stage myStage, HighScoreScreen myBase, ResourceBundle myResources) {
-		this.myStage = myStage;
+		super(myStage);
 		this.myResources = myResources;
 		this.myScreen = myBase;
 	}
@@ -27,11 +25,6 @@ public class HighScoreScreenController implements IScreenController {
 	public void init() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public Stage getStage() {
-		return myStage;
 	}
 
 	@Override

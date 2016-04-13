@@ -12,7 +12,6 @@ import gamedata.controller.ParserController;
 import gameengine.controller.Game;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.SplashScreen;
-import gui.controller.IScreenController;
 import gui.controller.ScreenController;
 import gui.view.ComboBoxGame;
 import gui.view.Screen;

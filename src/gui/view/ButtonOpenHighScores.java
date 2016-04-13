@@ -1,7 +1,11 @@
 package gui.view;
 
+import java.io.File;
+
+import gamedata.view.FileChooserScreen;
 import gameplayer.controller.SplashScreenController;
 import gui.controller.IScreenController;
+import javafx.scene.control.Alert;
 
 public class ButtonOpenHighScores extends ButtonParent{
 	
@@ -14,7 +18,23 @@ public class ButtonOpenHighScores extends ButtonParent{
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnMouseClicked(e -> myControl.openHighScores());
+		button.setOnAction(e -> {
+			//TODO Add a checker for null directory
+			if ((new File("gamefiles")).listFiles().length == 1) {
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setContentText("You have to create a game to play first! Press edit!");
+				alert.showAndWait();
+			}
+			else {
+				FileChooserScreen myFC = new FileChooserScreen(myControl.getStage());
+				try {
+					myControl.getStage().setScene(myFC.getScene());
+				} catch (Exception e1) {
+					// DO NOT LEAVE THIS ISH!
+					e1.printStackTrace();
+				}
+			}
+		});
 		
 	}
 
