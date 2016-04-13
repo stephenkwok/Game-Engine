@@ -32,7 +32,7 @@ public class CollisionDetection {
 		for (Actor a1 : actors){
 			a1.setInAir(true);
 			for(Actor a2 : actors){
-				if(a1 != a2 ){            //Checks that each actor in the pair is unique
+				if(a1 != a2 && a1.getMyName()!="floor"){            //Checks that each actor in the pair is unique
 					if(isCollision(a1,a2))
 						resolveCollision(a1,a2);
 				}
@@ -82,6 +82,8 @@ public class CollisionDetection {
 		}else{ 
 			if(a2.getBounds().getMinY()<=a1.getBounds().getMaxY()){
 				a1.setInAir(false);
+				a1.setY(a2.getY()-a1.getBounds().getWidth());
+				a1.setVeloY(0);
 				return "BottomCollision";
 			}else{
 				return "TopCollision";
@@ -93,7 +95,6 @@ public class CollisionDetection {
 	private void resolveCollision(Actor a1, Actor a2){
 		String collisionType = getCollisionType(a1,a2);
 		String triggerString = a1.getMyName() + collisionType + a2.getMyName();
-		System.out.println(triggerString);
 		a1.performActionsFor(triggerString);   //Needs to be changed to take a string parameter
 	}
 

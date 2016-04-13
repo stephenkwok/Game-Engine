@@ -17,7 +17,7 @@ public class PhysicsEngine {
 	
 	//These Variable values are arbitrary, chosen by trial/error
 	private int    timeStep         =  1;    //Arbitrary timeStep, will be set to the time provided by step()
-	private double friction         = -.05;  //Horizontal acceleration dampening (friction) coefficient
+	private double friction         = -.01;  //Horizontal acceleration dampening (friction) coefficient
 	private double gravity          = .11 ;  //Falling acceleration coefficient
 	private double maxHorizVelocity = 50;    //maximum horizontal velocity
 	private double maxVertVelocity  = -50;   //maximum vertical velocity 
@@ -159,11 +159,12 @@ public class PhysicsEngine {
 	//They differ in the force applied to the Actor
 	
 	public void moveRight(Actor a1) {
-		update(a1,getHorizontalForce(), 0, 0, a1.getMyFriction());
+		a1.setInAir(false);
+		update(a1,getHorizontalForce(), 0, 0, friction);
 	}
 
 	public void moveLeft(Actor a1) {
-		update(a1,-getHorizontalForce(), 0, 0, a1.getMyFriction());
+		update(a1,-getHorizontalForce(), 0, 0, friction);
 	}
 	
 	public void jump(Actor a1){
@@ -184,7 +185,7 @@ public class PhysicsEngine {
 	}
 	
 	public void tick(Actor a1) {
-		update(a1,0.0,0.0, getGravity(), a1.getMyFriction());
+		update(a1,0.0,0.0, getGravity(), friction);
 	}
 	
 	public void staticHorizontalCollision(Actor a1, Actor a2) {
@@ -207,6 +208,10 @@ public class PhysicsEngine {
 			}
 			a1.setVeloY(0);                             //Stop movement
 		}
+	}
+	
+	public void staticVerticalCollision2(Actor a1) {
+		a1.setY(a1.getY()-gravity*.5);;
 	}
 	
 	public void elasticVerticalCollision(Actor a1, Actor a2){
