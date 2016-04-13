@@ -76,6 +76,8 @@ public class HUDScreen extends Observable {
         	values.add(status.get(rowToValueMap.get(i)).toString());
         }
         
+        mySubGroup.getChildren().add(container);
+        
 	}
 	
 	public SubScene getScene() {

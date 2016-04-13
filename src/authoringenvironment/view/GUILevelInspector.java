@@ -10,7 +10,9 @@ import gui.view.IGUI;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class GUILevelInspector implements IGUI {
 	private static final String LEVEL_OPTIONS_RESOURCE = "levelEditorOptions";
@@ -19,6 +21,7 @@ public class GUILevelInspector implements IGUI {
 	private Pane myPane;
 	private TabActors myActorsTab;
 	private TabAttributes myAttributesTab;
+	private VBox myContainer;
 	
 	/**
 	 * Constructor for Level Inspector.
@@ -28,15 +31,33 @@ public class GUILevelInspector implements IGUI {
 	 * @param level: level that is being edited.
 	 */
 	public GUILevelInspector(Controller controller, ResourceBundle myResources, List<IAuthoringActor> availActors, IEditableGameElement level) {
-		myPane = new StackPane();
-		TabPane tabPane = new TabPane();
+		myPane = new StackPane();		
+		myContainer = new VBox();
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
 		myAttributesTab = new TabAttributes(controller, myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, level);
-		tabPane.getTabs().addAll(myActorsTab.getTab(), myAttributesTab.getTab());
-		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-		myPane.getChildren().add(tabPane);
+		addTabToContainer(myAttributesTab, false);
+		addTabToContainer(myActorsTab, true);
+		myPane.getChildren().addAll(myContainer);
 	}
 
+	/**
+	 * Adds a tab to the Level Inspector's container.
+	 * @param tab: tab to add.
+	 * @param bindToContainer: true if you want tab to bind to its individual container's height; false o.w.
+	 */
+	private void addTabToContainer(TabParent tab, boolean bindToContainer) {
+		VBox container = new VBox();
+		TabPane tabPane = new TabPane();
+		container.getChildren().add(tabPane);
+		tabPane.getTabs().add(tab.getTab());
+		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+		if (bindToContainer) {
+			VBox.setVgrow(container, Priority.ALWAYS);
+			tabPane.prefHeightProperty().bind(container.heightProperty());
+		}
+		myContainer.getChildren().add(container);
+	}
+	
 	/**
 	 * Returns the pane that the level inspector is built on.
 	 */

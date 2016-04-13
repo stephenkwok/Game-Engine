@@ -63,31 +63,6 @@ public class Controller implements IScreenController {
 		actorEnvironment = new GUIActorEditingEnvironment(this, myResources);
 		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo, myActors);
 	}
-
-	/**
-	 * Switches screen to Level Editing Environment
-	 * 
-	 * @param level
-	 *            - level to be edited
-	 * @param createdActors
-	 *            - list of created Actors that can be placed into the level
-	 */
-	public void goToLevelEditing(Level level) {
-		levelEnvironment.updateActorsList(myActors); 
-		System.out.println(myActors);
-		goToEditingEnvironment(level, levelEnvironment);
-	}
-
-	/**
-	 * Switches screen to Actor Editing Environment
-	 * 
-	 * @param actor
-	 *            - Actor to edit
-	 */
-	public void goToActorEditing(IAuthoringActor actor) {
-		goToEditingEnvironment(actor, actorEnvironment);
-	}
-	
 	
 	/**
 	 * Switches screen to appropriate editing environment
@@ -170,14 +145,16 @@ public class Controller implements IScreenController {
 	 */
 	public void addLevel() {
 		Level newLevel = new Level();
+		newLevel.setMyID(myLevels.size());
 		myLevels.add(newLevel);
 		myLevelNames.add(newLevel.getMyName());
 		mainScreen.createLevelLabel(newLevel);
-		goToLevelEditing(newLevel);
+		goToEditingEnvironment(newLevel, levelEnvironment);
 	}
 
 	public void addActor() {
 		IAuthoringActor newActor = new Actor();
+		newActor.setMyID(myActors.size());
 		myActors.add(newActor);
 		myActorNames.add(newActor.getMyName());
 		mainScreen.createActorLabel(newActor);
