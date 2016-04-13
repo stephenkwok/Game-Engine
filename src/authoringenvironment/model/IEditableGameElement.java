@@ -12,15 +12,43 @@ import javafx.scene.image.ImageView;
 
 public interface IEditableGameElement {
 	
+	/**
+	 * sets the IEditableGameElement's name to the given name
+	 * 
+	 * @param name to be set as IEditableGameElement's name 
+	 */
 	public void setMyName(String name);
+	
 
+	/**
+	 * 
+	 * @return the IEditableGameElement's name
+	 */
 	public String getMyName();
 	
+	/**
+	 * 
+	 * @return the IEditableGameElement's ImageView
+	 */
 	public ImageView getImageView();
 
+	/**
+	 * sets the IEditableGameElement's ImageView to the given ImageView
+	 * 
+	 * @param imageView to be set as IEditableGameElement's ImageView
+	 */
 	public void setImageView(ImageView imageView);
 	
+	/**
+	 * sets the IEditableGameElement's ID to the given ID
+	 * 
+	 * @param ID to be set as the IEditableGameElement's ID
+	 */
 	public void setMyID(int ID);
 	
+	/**
+	 * 
+	 * @return the IEditableGameElement's ID
+	 */
 	public int getMyID();
 }

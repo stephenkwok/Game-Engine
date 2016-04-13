@@ -9,6 +9,7 @@ import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.controller.Controller;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gameengine.model.IAuthoringActor;
 import gui.view.GUILibrary;
 import gui.view.IGUI;
 import javafx.event.EventHandler;
@@ -31,28 +32,29 @@ import javafx.scene.layout.VBox;
 public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private static final String GUI_RESOURCE = "authoringGUI";
 	private BorderPane myRoot;
-	private GUILibrary myLibrary;
 	private GUILevelInspector myInspector;
 	private ResourceBundle myResources;
 	private VBox myLeftPane;
 	private Canvas myCanvas;
 	private Level myLevel;
-	private List<Actor> availableActors;
+	private List<IAuthoringActor> availableActors;
 	private Pane myCenterPane;
 	private ImageView myLevelBackground;
 	private Controller myController;
+	private List<ImageviewActorIcon> myActorPreviews;
 
 	/**
 	 * Constructor for a level editing environment.
 	 * @param controller: authoring environment controller.
 	 * @param actors: list of currently available actors.
 	 */
-	public GUILevelEditingEnvironment(Controller controller, List<Actor> actors) {
+	public GUILevelEditingEnvironment(Controller controller, List<IAuthoringActor> actors) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
 		myController = controller;
 		initializeEnvironment();
+		myActorPreviews = new ArrayList<>();
 	}
 
 	/**
@@ -72,9 +74,9 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		myLeftPane = new VBox();
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
 		myInspector = new GUILevelInspector(myController, myResources, availableActors, myLevel);
-		myLibrary = new GUILibrary();
-		myLeftPane.getChildren().addAll(myInspector.getPane(), myLibrary.getPane());
+		myLeftPane.getChildren().add(myInspector.getPane());
 		myRoot.setLeft(myLeftPane);
+		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
 	}
 
 	/**
@@ -131,17 +133,18 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 				Dragboard db = event.getDragboard();
 				boolean success = false;
 				if (db.hasString()) {
-					Actor actor = getActorById(Integer.parseInt(db.getString()));
-					ImageView actorIV = actor.getImageView();
-					actorIV.setOnDragDetected(null);
-					actorIV.setOnMouseDragged(new EventHandler<MouseEvent>() {
+					IAuthoringActor actor = getActorById(Integer.parseInt(db.getString()));
+					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
+					iconToAdd.getImageView().setOnDragDetected(null);
+					iconToAdd.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
 						@Override public void handle(MouseEvent event) {
-							moveActor(actor, actorIV, event);
+							moveActor(actor, iconToAdd, event);
 							event.consume();
 						}
 					}); 
-					myLevel.addActor(actor);
-					myCenterPane.getChildren().add(actorIV);
+					myLevel.addActor((Actor) actor);
+					myActorPreviews.add(iconToAdd);
+					myCenterPane.getChildren().add(iconToAdd.getImageView());
 					success = true;
 				}
 				event.setDropCompleted(success);
@@ -156,11 +159,11 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * @param actorIV: Imageview of actor to move.
 	 * @param event: drag.
 	 */
-	private void moveActor(Actor actor, ImageView actorIV, MouseEvent event) {
+	private void moveActor(IAuthoringActor actor, ImageviewActorIcon icon, MouseEvent event) {
 		actor.setX(event.getX());
 		actor.setY(event.getY());
-		actorIV.setX(event.getX());
-		actorIV.setY(event.getY());
+		icon.getImageView().setX(event.getX());
+		icon.getImageView().setY(event.getY());
 	}
 	
 	/**
@@ -168,7 +171,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * @param id: ID of actor of interest.
 	 * @return actor with given ID.
 	 */
-	private Actor getActorById(int id) {
+	private IAuthoringActor getActorById(int id) {
 		for (int i = 0; i < availableActors.size(); i++) {
 			if (availableActors.get(i).getMyID() == id) {
 				return availableActors.get(i);
@@ -202,24 +205,40 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	@Override
 	public void setEditable(IEditableGameElement editable) {
 		myCenterPane.getChildren().clear();
-		myLevel = (Level) editable;
+		updateLevel((Level) editable);
+		myInspector.getAttributesTab().updateEditable(myLevel);
+		updateActorsList();
+	}
+	
+	/**
+	 * Updates the level that's being displayed.
+	 * @param updatedLevel: new level.
+	 */
+	private void updateLevel(Level updatedLevel) {
+		myLevel = updatedLevel;
 		myLevelBackground = myLevel.getImageView();
 		myLevelBackground.setPreserveRatio(true);
 		myLevelBackground.fitWidthProperty().bind(myCenterPane.widthProperty());
 		myCenterPane.getChildren().add(myLevelBackground);
-		List<ImageView> actorIVs = new ArrayList<>();
-		for(Actor actor: myLevel.getActors()) actorIVs.add(actor.getImageView());
-		myCenterPane.getChildren().addAll(actorIVs);
-		myInspector.getAttributesTab().updateEditable(myLevel);
+		addLevelActorsToScene();
+	}
+	
+	/**
+	 * Add a level's actors to the preview in the center pane.
+	 */
+	private void addLevelActorsToScene() {
+		for(Actor actor: myLevel.getActors()) myCenterPane.getChildren().add(actor.getImageView());
 	}
 	
 	/**
 	 * Update the list of available actors and update the level inspector to reflect the currently available actors.
 	 * @param updatedActorsList: up-to-date list of available actors.
 	 */
-	public void updateActorsList(List<Actor> updatedActorsList) {
-		availableActors = updatedActorsList;
+	public void updateActorsList() {
 		myInspector.getActorsTab().setAvailableActors(availableActors);
+		for (ImageviewActorIcon icon: myActorPreviews) {
+			icon.updateImageView();
+		}
 		updateDrag();
 	}
 
