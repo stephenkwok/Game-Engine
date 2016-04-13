@@ -43,10 +43,17 @@ public class ImageviewActorIcon extends ImageView {
 		return myID;
 	}
 	
+	/**
+	 * Gets the icon's imageview.
+	 * @return copy of actor's imageview.
+	 */
 	public ImageView getImageView() {
 		return myImageView;
 	}
 	
+	/**
+	 * Update the imageview based on the actor's current image.
+	 */
 	public void updateImageView() {
 		myImageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myActor.getMyImageViewName())));
 	}
