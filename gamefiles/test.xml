@@ -156,7 +156,7 @@
           </list>
         </entry>
       </myTriggerMap>
-      <myName>Untitled</myName>
+      <myName>Default</myName>
       <myHeight>800.0</myHeight>
       <myWidth>1024.0</myWidth>
       <myScrollingDirection>Vertically</myScrollingDirection>
@@ -173,6 +173,7 @@
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myID>0</myID>
     <myHUDElementsToDisplay/>
+    <myFile>test.xml</myFile>
   </info>
   <myPhysicsEngine>
     <timeStep>1</timeStep>
@@ -189,12 +190,4 @@
   </myCollisionDetector>
   <currentActors/>
   <deadActors/>
-  <HUDData class="com.sun.javafx.collections.ObservableMapWrapper">
-    <listenerHelper class="com.sun.javafx.collections.MapListenerHelper$SingleChange">
-      <listener class="gameengine.controller.Game$1">
-        <outer-class reference="../../../.."/>
-      </listener>
-    </listenerHelper>
-    <backingMap/>
-  </HUDData>
 </gameengine.controller.Game>

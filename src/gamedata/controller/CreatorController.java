@@ -46,11 +46,11 @@ public class CreatorController implements ICreatorController {
 		}
 		File loaderFile = createLoaderFileFromFile(file);
 		try {
-			myGame.getInfo().setMyFile(loaderFile.getName());
 			myGame.setInitialGameFile(loaderFile.getPath());
+			myGame.getInfo().setMyFile(loaderFile.getName());
 			this.myXMLCreator.saveGame(myGame, loaderFile);
 			myGame.setInitialGameFile(loaderFile.getPath());
-			myGame.getInfo().setMyName(file.getName());
+			myGame.getInfo().setMyFile(file.getName());
 			saveForPlaying(file);
 		} catch (SAXException | IOException | TransformerException | ParserConfigurationException e) {
 			myScreen.showError(e.getMessage());
@@ -64,7 +64,7 @@ public class CreatorController implements ICreatorController {
 			return;
 		}
 		try {
-			myGame.getInfo().setMyName(file.getName());
+			myGame.getInfo().setMyFile(file.getName());
 			this.myXMLCreator.saveGame(myGame, file);
 		} catch (SAXException | IOException | TransformerException e) {
 			myScreen.showError(e.getMessage());

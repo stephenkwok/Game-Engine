@@ -81,5 +81,11 @@ public class SplashScreenController extends ScreenController {
 
 	}
 
+	@Override
+	public void switchGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

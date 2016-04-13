@@ -18,18 +18,21 @@ import javafx.stage.Stage;
 
 public class HighScoresController implements IHighScoresController {
 
-	private static final String HIGH_SCORES_FILE = "resources/highScores.xml";
+	private static final String HIGH_SCORES_FILE = "src/resources/highScores.xml";
 	
-	private Stage myStage;
 	private String myGameFile;
 	private File myFile;
 	private Screen myScreen;
 	
-	public HighScoresController(Stage stage, String gameFile, Screen screen) {
-		this.myStage = stage;
+	public HighScoresController(String gameFile, Screen screen) {
 		this.myGameFile = gameFile;
 		myFile = new File(HIGH_SCORES_FILE);
 		this.myScreen = screen;
+	}
+	
+	public HighScoresController(String gameFile) {
+		this.myGameFile = gameFile;
+		myFile = new File(HIGH_SCORES_FILE);
 	}
 	
 	@Override
@@ -43,7 +46,8 @@ public class HighScoresController implements IHighScoresController {
 		try {
 			return scoresParser.getHighScoreInfo(myFile);
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-			this.myScreen.showError(e.getMessage());
+			e.printStackTrace();
+			//this.myScreen.showError(e.getMessage());
 			return null;
 		}
 	}
@@ -62,7 +66,7 @@ public class HighScoresController implements IHighScoresController {
 
 	@Override
 	public void saveHighScore(int score, String player) {
-		HighScoresKeeper updatedKeeper = new HighScoresKeeper(getAllGameScores());
+		HighScoresKeeper updatedKeeper = new HighScoresKeeper();
 		updatedKeeper.addScore(myGameFile, player, score);
 		HighScoresCreator scoresCreator = new HighScoresCreator();
 		try {
@@ -71,6 +75,11 @@ public class HighScoresController implements IHighScoresController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) {
+		HighScoresController h = new HighScoresController("testGame");
+		h.saveHighScore(10, "John");
 	}
 
 }

@@ -1,5 +1,6 @@
 package gamedata.view;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import gamedata.controller.HighScoresController;
@@ -16,10 +17,10 @@ public class FileChooserScreenScores extends FileChooserScreen {
 
 	@Override
 	public void use(Game game) {
-		HighScoresController controller = new HighScoresController(super.getStage(), game.getInfo().getMyFile(), this);
+		HighScoresController controller = new HighScoresController(game.getInfo().getMyFile(), this);
 		Map<String, Integer> gameScores = controller.getGameHighScores();
-		//HighScoreScreen screen = new HighScoreScreen(getStage(), gameScores, game.getInfo().getMyFile());
-		//getStage().setScene(screen.getMyScene());
+		HighScoreScreen screen = new HighScoreScreen(getStage(), gameScores, game.getInfo().getMyFile());
+		getStage().setScene(screen.getMyScene());
 	}
 
 }
