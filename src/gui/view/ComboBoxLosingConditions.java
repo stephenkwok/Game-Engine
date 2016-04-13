@@ -50,8 +50,8 @@ public class ComboBoxLosingConditions extends ComboBoxTextCell {
 	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
-		if (((Level) getEditableElement()).getLosingCondition() != null) {
-			comboBox.setValue(((Level) getEditableElement()).getLosingCondition());
+		if (((Level) getEditableElement()).getMyLosingCondition() != null) {
+			comboBox.setValue(((Level) getEditableElement()).getMyLosingCondition());
 		}
 	}
 
