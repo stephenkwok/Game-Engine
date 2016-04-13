@@ -184,14 +184,6 @@ public class Controller implements IScreenController {
 	public Screen getScreen() {
 		return guiMain;
 	}
-	
-	public void setGameName() {
-		
-	}
-	
-	public void setGameDescription() {
-		
-	}
 
 	@Override
 	public void chooseGame() {
