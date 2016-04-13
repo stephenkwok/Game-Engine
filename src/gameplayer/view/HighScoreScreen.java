@@ -38,6 +38,8 @@ public class HighScoreScreen extends Screen{
 		super(s);
 		this.myMap = myMap;
 		this.myName = gameName;
+		this.myPane =  new BorderPane();
+		init();
 		addComponents();
 	}
 	
@@ -71,8 +73,11 @@ public class HighScoreScreen extends Screen{
 	}
 
 	public void initialize(){
+		myPane.setLeft(null);
 		String[] sideButtons = myResources.getString(TOP_BUTTONS).split(",");
 		ToolBar myT = new ToolBar();
+		myT.setMinWidth(SCREEN_WIDTH);
+		myT.setOrientation(Orientation.HORIZONTAL);
 		for(int i = 0; i < sideButtons.length; i++){
 			IGUIElement newElement = factory.createNewGUIObject(sideButtons[i]);
 			Button myB = (Button) newElement.createNode();

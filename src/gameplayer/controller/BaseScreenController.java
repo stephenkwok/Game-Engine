@@ -10,9 +10,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import gamedata.controller.CreatorController;
 import gamedata.controller.ParserController;
 import gamedata.view.FileChooserScreen;
+import gamedata.view.FileChooserScreenLoad;
+import gamedata.view.FileChooserScreenScores;
 import gameengine.controller.Game;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.SplashScreen;
+import gui.controller.IScreenController;
 import gui.controller.ScreenController;
 import gui.view.ComboBoxGame;
 import gui.view.Screen;
@@ -119,12 +122,13 @@ public class BaseScreenController extends ScreenController{
 
 	@Override
 	public void chooseGame() {
-		FileChooserScreen myFC = new FileChooserScreen(getStage());
+		FileChooserScreen myFC = new FileChooserScreenLoad(getStage());
 		try {
 			getStage().setScene(myFC.getScene());
-		} catch (Exception e1) {
-			// DO NOT LEAVE THIS ISH!
-			e1.printStackTrace();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
