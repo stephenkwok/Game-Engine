@@ -47,6 +47,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
     private Map<AttributeType, Attribute> attributeMap;
     private PhysicsEngine myPhysicsEngine;
     private boolean isMain;
+    private double myHealth;
     private List<ActorRule> myActorRules;
     private boolean isDead;
 
