@@ -40,6 +40,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private Pane myCenterPane;
 	private ImageView myLevelBackground;
 	private Controller myController;
+	private List<ImageviewActorIcon> myActorPreviews;
 
 	/**
 	 * Constructor for a level editing environment.
@@ -52,6 +53,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		myRoot = new BorderPane();
 		myController = controller;
 		initializeEnvironment();
+		myActorPreviews = new ArrayList<>();
 	}
 
 	/**
@@ -131,16 +133,17 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 				boolean success = false;
 				if (db.hasString()) {
 					Actor actor = getActorById(Integer.parseInt(db.getString()));
-					ImageView actorIV = actor.getImageView();
-					actorIV.setOnDragDetected(null);
-					actorIV.setOnMouseDragged(new EventHandler<MouseEvent>() {
+					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
+					iconToAdd.getImageView().setOnDragDetected(null);
+					iconToAdd.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
 						@Override public void handle(MouseEvent event) {
-							moveActor(actor, actorIV, event);
+							moveActor(actor, iconToAdd, event);
 							event.consume();
 						}
 					}); 
 					myLevel.addActor(actor);
-					myCenterPane.getChildren().add(actorIV);
+					myActorPreviews.add(iconToAdd);
+					myCenterPane.getChildren().add(iconToAdd.getImageView());
 					success = true;
 				}
 				event.setDropCompleted(success);
@@ -155,11 +158,11 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * @param actorIV: Imageview of actor to move.
 	 * @param event: drag.
 	 */
-	private void moveActor(Actor actor, ImageView actorIV, MouseEvent event) {
+	private void moveActor(Actor actor, ImageviewActorIcon icon, MouseEvent event) {
 		actor.setX(event.getX());
 		actor.setY(event.getY());
-		actorIV.setX(event.getX());
-		actorIV.setY(event.getY());
+		icon.getImageView().setX(event.getX());
+		icon.getImageView().setY(event.getY());
 	}
 	
 	/**
@@ -232,6 +235,9 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 */
 	public void updateActorsList() {
 		myInspector.getActorsTab().setAvailableActors(availableActors);
+		for (ImageviewActorIcon icon: myActorPreviews) {
+			icon.updateImageView();
+		}
 		updateDrag();
 	}
 

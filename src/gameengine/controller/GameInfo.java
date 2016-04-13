@@ -50,7 +50,7 @@ public class GameInfo implements IEditableGameElement {
 		myHUDElementsToDisplay = options;
 	}
 	
-	public List<String> getMyHUDOptions() {
+	public Map<String, Integer> getMyHUDOptions() {
 		return myHUDElementsToDisplay;
 	}
 

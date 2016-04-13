@@ -1,6 +1,7 @@
 package authoringenvironment.view;
 
 import gameengine.model.Actor;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -9,19 +10,21 @@ import javafx.scene.image.ImageView;
  *
  */
 public class ImageviewActorIcon extends ImageView {
-	private static final int ICON_HEIGHT = 75;
 	private Actor myActor;
 	private int myID;
+	private ImageView myImageView;
 	
 	/**
 	 * Construct an icon for a given actor.
 	 * @param actor: actor to construct an icon for.
 	 */
-	public ImageviewActorIcon(Actor actor) {
+	public ImageviewActorIcon(Actor actor, double height) {
 		setImage(actor.getImageView().getImage());
-		this.setFitWidth(ICON_HEIGHT);
+		this.setFitWidth(height);
 		this.setPreserveRatio(true);
+		myActor = actor;
 		myID = actor.getMyID();
+		updateImageView();
 	}
 	
 	/**
@@ -38,5 +41,13 @@ public class ImageviewActorIcon extends ImageView {
 	 */
 	public int getID() {
 		return myID;
+	}
+	
+	public ImageView getImageView() {
+		return myImageView;
+	}
+	
+	public void updateImageView() {
+		myImageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myActor.getMyImageViewName())));
 	}
 }

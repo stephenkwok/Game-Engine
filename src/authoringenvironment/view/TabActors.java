@@ -21,7 +21,7 @@ import javafx.scene.layout.TilePane;
  *
  */
 public class TabActors extends TabParent {
-	
+	private static final int ICON_HEIGHT = 75;
 	private static final int HGAP = 10;
 	private static final int VGAP = 10;
 	private static final int TILE_HEIGHT = 75;
@@ -61,7 +61,7 @@ public class TabActors extends TabParent {
 	private List<ImageviewActorIcon> actorListToIconList(List<Actor> actors) {
 		List<ImageviewActorIcon> iconList = new ArrayList<>();
 		for (int i = 0; i < actors.size(); i++) {
-			iconList.add(new ImageviewActorIcon(actors.get(i)));
+			iconList.add(new ImageviewActorIcon(actors.get(i), ICON_HEIGHT));
 		}
 		return iconList;
 	}
