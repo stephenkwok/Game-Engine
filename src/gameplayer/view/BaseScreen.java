@@ -55,7 +55,7 @@ public class BaseScreen extends Screen {
 
 	private ResourceBundle myResources;
 	private static final String GUI_RESOURCE = "gameGUI";
-	private BaseScreenController myController;
+	private BaseScreenController myBaseScreenController;
 	private GUIFactory factory;
 	private static final String MENU_ITEMS = "MenuBarMenus";
 	private static final String SIDE_BUTTONS = "SideButtons";
@@ -67,25 +67,26 @@ public class BaseScreen extends Screen {
 		super(stage);
 		this.myMasterPane = new BorderPane();
 		init();
-		GameController myGameController = myController.getMyGameController();
+		GameController myGameController = myBaseScreenController.getMyGameController();
 		myGameController.setGame(game);
 		myGameController.setGameView(new GameScreen(new PerspectiveCamera()));
-		myGameController.initialize(game.getInfo().getMyCurrentLevelNum());
-		addComponents();
+		myGameController.initialize(game.getInfo().getMyCurrentLevelNum()); //note: main actor is define at this line
+		addComponents(); //HUD is actually added here
 	}
 	
 	public void init() {
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		myController = new BaseScreenController(getStage(), this, this.myResources);
-		factory = new GUIFactory(myResources, myController);
+		myBaseScreenController = new BaseScreenController(getStage(), this, this.myResources);
+		factory = new GUIFactory(myResources, myBaseScreenController);
 	}
 	
 
 	public void addComponents() {
 		try {
 			addGame();
-			addHUD();
-			//myController.getMyGameController().setHUD(new HUDScreen(myController.getMyGameController().getGame().getHUDInfo()));  //blake needs to add this
+			//addHUD();
+			myBaseScreenController.getMyGameController().setHUD(
+					new HUDScreen(myBaseScreenController.getMyGameController().getGame().getHUDData()));
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException | SecurityException e1) {
 			e1.printStackTrace();
@@ -127,7 +128,7 @@ public class BaseScreen extends Screen {
 	}
 	
 	public void addGamePane(){
-		SubScene gameScene = myController.getMyGameController().getView().getScene();
+		SubScene gameScene = myBaseScreenController.getMyGameController().getView().getScene();
 		myMasterPane.setCenter(gameScene);
 	}
 	
