@@ -6,8 +6,12 @@ import java.util.ResourceBundle;
 
 import gameengine.controller.Game;
 import gui.controller.IScreenController;
+import gui.view.ComboBoxGame;
 import gui.view.Screen;
 import gameplayer.view.SplashScreen;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class SplashScreenController implements IScreenController {
@@ -35,7 +39,7 @@ public class SplashScreenController implements IScreenController {
 		return myStage;
 	}
 	
-	public void play(){
+	public void useGame(){
 		mySplash.play(myGame);
 	}
 	
@@ -48,14 +52,23 @@ public class SplashScreenController implements IScreenController {
 	}
 
 	@Override
-	public void useGame(Game game) {
+	public void setGame(Game game) {
 		this.myGame = game;
-		play();
 	}
 
 	@Override
 	public Screen getScreen() {
 		return mySplash;
+	}
+
+	@Override
+	public void chooseGame() {
+		Group fileChooseGroup = new Group();
+		Scene fileChooseScene = new Scene(fileChooseGroup, this.getScreen().getMyScene().getWidth(), this.getScreen().getMyScene().getHeight());
+		ComboBoxGame fileSelector =  new ComboBoxGame("SUP", "gamefiles", this);
+		fileChooseGroup.getChildren().add((HBox) fileSelector.createNode());
+		this.getStage().setScene(fileChooseScene);
+		
 	}
 	
 	

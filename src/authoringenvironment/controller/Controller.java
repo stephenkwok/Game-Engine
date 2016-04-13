@@ -187,7 +187,7 @@ public class Controller implements IScreenController {
 	}
 
 	@Override
-	public void useGame(Game game) {
+	public void setGame(Game game) {
 		// TODO Auto-generated method stub
 	}
 
@@ -201,6 +201,18 @@ public class Controller implements IScreenController {
 	}
 	
 	public void setGameDescription() {
+		
+	}
+
+	@Override
+	public void chooseGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void useGame() {
+		// TODO Auto-generated method stub
 		
 	}
 }
