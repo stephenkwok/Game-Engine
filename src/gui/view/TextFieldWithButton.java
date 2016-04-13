@@ -77,4 +77,8 @@ public abstract class TextFieldWithButton implements IGUIElement, IGUIEditingEle
 	protected String getTextFieldInput() {
 		return myTextField.getText();
 	}
+	
+	protected void setTextFieldHGrow() {
+		HBox.setHgrow(myTextField, Priority.ALWAYS);
+	}
 }
