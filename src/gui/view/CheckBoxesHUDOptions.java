@@ -10,6 +10,8 @@ import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.GameInfo;
 import gameengine.model.IAuthoringActor;
+import gameengine.model.Actor;
+import gameengine.model.AttributeType;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -93,7 +95,7 @@ public class CheckBoxesHUDOptions implements IGUIElement, IGUIEditingElement {
 		if (myHUDElementID.equals("Amount of Ammo Left")) {
 			return 0; // call mainActor.getMyAmmo();
 		} else if (myHUDElementID.equals("Number of Lives")) {
-			mainActor.getMyHealth();
+			((Actor) mainActor).getAttribute(AttributeType.HEALTH).getMyValue();
 		}
 		return 0;
 	}

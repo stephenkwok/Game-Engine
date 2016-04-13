@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 import gamedata.controller.FileChooserController;
 import gameengine.controller.Game;
-import gameplayer.controller.SplashScreenController;
 import gameplayer.view.BaseScreen;
 import gui.controller.IScreenController;
 import gui.view.ComboBoxGame;

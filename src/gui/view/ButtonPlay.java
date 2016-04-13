@@ -1,10 +1,7 @@
 package gui.view;
 
 import gui.controller.IScreenController;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.layout.HBox;
 
 import java.io.File;
 
