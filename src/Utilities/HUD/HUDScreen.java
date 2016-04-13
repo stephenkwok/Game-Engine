@@ -1,4 +1,4 @@
-package gameplayer.view;
+package Utilities.HUD;
 
 import java.util.HashMap;
 import java.util.Map;
