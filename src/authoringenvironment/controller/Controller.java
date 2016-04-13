@@ -2,6 +2,7 @@ package authoringenvironment.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -34,6 +35,7 @@ public class Controller implements IScreenController {
 	private List<Level> myLevels;
 	private List<String> myLevelNames;
 	private List<Actor> myActors;
+	private List<String> myActorNames;
 	private GUILevelEditingEnvironment levelEnvironment;
 	private GUIActorEditingEnvironment actorEnvironment;
 	private GUIMainScreen mainScreen;
@@ -69,7 +71,8 @@ public class Controller implements IScreenController {
 	 *            - list of created Actors that can be placed into the level
 	 */
 	public void goToLevelEditing(Level level) {
-		levelEnvironment.updateActorsList(myActors);
+		levelEnvironment.updateActorsList(myActors); 
+		System.out.println(myActors);
 		goToEditingEnvironment(level, levelEnvironment);
 	}
 
@@ -94,7 +97,10 @@ public class Controller implements IScreenController {
 	 */
 	public void goToEditingEnvironment(IEditableGameElement editable, IEditingEnvironment environment) {
 		environment.setEditable(editable);
-		actorEnvironment.updateRules();
+		try{
+			actorEnvironment.updateRules();
+			System.out.println(myActors);
+		}catch(ConcurrentModificationException e){}
 		guiMain.setCenterPane(environment.getPane()); 
 	}
 
@@ -149,6 +155,10 @@ public class Controller implements IScreenController {
 	public List<String> getLevelNames(){
 		return myLevelNames;
 	}
+	
+	public List<String> getActorNames(){
+		return myActorNames;
+	}
 
 	/**
 	 * For each level that is created, adds it to the running list in this
@@ -168,7 +178,6 @@ public class Controller implements IScreenController {
 		Actor newActor = new Actor();
 		myActors.add(newActor);
 		mainScreen.createActorLabel(newActor);
-		actorEnvironment.setActorImage(newActor.getImageView());
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
 	/**
