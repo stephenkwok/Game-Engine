@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
-import gameengine.model.Actor;
+import gameengine.model.IAuthoringActor;
 import gui.view.IGUI;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
@@ -30,7 +30,7 @@ public class GUILevelInspector implements IGUI {
 	 * @param availActors: list of currently available actors.
 	 * @param level: level that is being edited.
 	 */
-	public GUILevelInspector(Controller controller, ResourceBundle myResources, List<Actor> availActors, IEditableGameElement level) {
+	public GUILevelInspector(Controller controller, ResourceBundle myResources, List<IAuthoringActor> availActors, IEditableGameElement level) {
 		myPane = new StackPane();		
 		myContainer = new VBox();
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);

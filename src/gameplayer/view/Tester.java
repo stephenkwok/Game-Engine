@@ -2,14 +2,11 @@ package gameplayer.view;
 
 import gameengine.controller.*;
 import gameengine.model.Actor;
+import gameengine.model.Attribute;
+import gameengine.model.AttributeType;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
-import gameengine.model.Actions.HorizontalStaticCollision;
-import gameengine.model.Actions.MoveLeft;
-import gameengine.model.Actions.MoveRight;
-import gameengine.model.Actions.MoveUp;
-import gameengine.model.Actions.VerticalStaticCollision;
-import gameengine.model.Actions.WinGame;
+import gameengine.model.Actions.*;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.SideCollision;
@@ -28,9 +25,9 @@ import java.util.*;
 
 import gamedata.controller.CreatorController;
 
-public class Main extends Application {
+public class Tester extends Application {
 	
-	public Main() {
+	public Tester() {
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -70,7 +67,7 @@ public class Main extends Application {
 		Action action1 = new MoveRight(actor1);
 		Action action2 = new MoveLeft(actor1);
 		Action action3 = new HorizontalStaticCollision(actor1);
-		Action action4 = new MoveUp(actor1);
+		Action action4 = new MoveUp(actor1);//new ChangeAttribute(actor1,AttributeType.POINTS,1);
 		Action action5 = new VerticalStaticCollision(actor1);
 		Action action6 = new WinGame(actor1);
 		Rule rule = new Rule(trigger1,action1);
@@ -86,6 +83,9 @@ public class Main extends Application {
 		actor1.addRule(rule5);
 		actor1.addRule(rule6);
 		
+//		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
+//		actor1.addAttribute(points);
+		
 		List<Level> levels = new ArrayList<Level>();
 		Level level1 = new Level();
 		levels.add(level1);
@@ -93,14 +93,27 @@ public class Main extends Application {
 		level1.addActor(actor2);
 		level1.addActor(actor3);
 		
-//		for(int i=1; i<=18; i++){
-//			Actor floor = new Actor();
-//			floor.setMyName("floor");
-//			floor.setMyImageViewName("square.png");
-//			floor.setX(i*50);
-//			floor.setY(700);
-//			level1.addActor(floor);
-//		}
+		for(int i=0; i<=17; i++){
+			Actor floor = new Actor();
+			floor.setMyName("floor");
+			floor.setMyImageViewName("square.png");
+			floor.setX(i*50+i);
+			floor.setY(700);
+			BottomCollision b = new BottomCollision(actor1, floor);
+			BottomCollision b2 = new BottomCollision(actor2, floor);
+			BottomCollision b3 = new BottomCollision(actor3, floor);
+			Action baction = new VerticalStaticCollision(actor1);
+			Action baction2 = new VerticalStaticCollision(actor2);
+			Action baction3 = new VerticalStaticCollision(actor3);
+			Rule brule = new Rule(b, baction);
+			Rule brule2 = new Rule(b2, baction2);
+			Rule brule3 = new Rule(b3, baction3);
+			actor1.addRule(brule);
+			actor2.addRule(brule2);
+			actor3.addRule(brule3);
+
+			level1.addActor(floor);
+		}
 		
 //		Level level2 = new Level();
 //		level2.addActor(actor3);

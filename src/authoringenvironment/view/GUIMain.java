@@ -4,8 +4,7 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
-import gui.view.ButtonPlay;
-import gui.view.ComboBoxGame;
+import gui.view.ButtonSplash;
 import gui.view.GUIFactory;
 import gui.view.IGUI;
 import gui.view.IGUIElement;
@@ -29,9 +28,10 @@ import javafx.stage.Stage;
 public class GUIMain extends Screen implements IGUI {
     private static final String GUI_RESOURCE = "authoringGUI";
     private static final String TOP_PANE_ELEMENTS = "TopPaneElements";
-    private static final int WINDOW_HEIGHT = 800;
+    private static final int WINDOW_HEIGHT = 700;
 	private static final int WINDOW_WIDTH = 1300;
     private static final int PADDING = 10;
+    private static final String SPLASH_IMAGE_NAME = "salad.png";
     private Scene myScene;
 	private BorderPane myRoot;
 	private ResourceBundle myResources;
@@ -75,25 +75,33 @@ public class GUIMain extends Screen implements IGUI {
 	public Scene getScene() {
 		return myScene;
 	}
-	
+	/**
+	 * Set center section of screen to given Pane
+	 * @param pane
+	 */
 	public void setCenterPane(Pane pane){
 		myRoot.setCenter(pane);
 	}
-
+	/**
+	 * Set center screen to default, the home screen 
+	 */
 	public void setCenterPane(){
 		myController.goToMainScreen();
 	}
-	
+	/**
+	 * Sets top section of screen to fixed toolbar 
+	 */
 	private void setTopPane() {
 		HBox hbox = new HBox(PADDING);
 		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));		
 		initializeTopPaneElements(hbox);
-//		ComboBoxGame test = new ComboBoxGame("SUP", "gamefiles", myController);
-//		hbox.getChildren().add(test.createNode());
 		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		myRoot.setTop(hbox);
 	}
-
+	/**
+	 * Initialize elements to be in toolbar
+	 * @param hbox
+	 */
 	private void initializeTopPaneElements(HBox hbox) {
 		try{
 			String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
@@ -101,30 +109,43 @@ public class GUIMain extends Screen implements IGUI {
 				IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
 				hbox.getChildren().add(elementToCreate.createNode());
 			}
+			//temp
+			ButtonSplash splash = new ButtonSplash(myController, null, SPLASH_IMAGE_NAME);
+			hbox.getChildren().add(splash.createNode());
 		}catch(Exception e){
 			
 		}
 	}
-	
+	/**
+	 * Return Pane representation of authoring environment
+	 */
 	@Override
 	public Pane getPane() {
 		return myRoot;
 	}
-
+	
 	@Override
-	public IScreenController setController() {
+	public IScreenController setController() {			//REMOVE
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	public void goBackToGamePlayer() {
+	/**
+	 * Returns user back to splash screen 
+	 */
+	public void goBackToSplash() {
 		myStage.setScene(splashScene);
 	}
-
+	/**
+	 * Return width of authoring environment Scene
+	 * @return
+	 */
 	public double getWidth() {
 		return myScene.getWidth();
 	}
-
+	/**
+	 * Return height of authoring environment Scene
+	 * @return
+	 */
 	public double getHeight() {
 		return myScene.getHeight();
 	}

@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.GameInfo;
-import gameengine.model.Actor;
+import gameengine.model.IAuthoringActor;
 import gui.view.CheckBoxesHUDOptions;
 import gui.view.IGUIEditingElement;
 import gui.view.IGUIElement;
@@ -52,9 +52,9 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 	private VBox HUDOptionsDisplay;
 	private Controller controller;
 	private ScrollPane myScrollPane;
-	private List<Actor> myActors;
+	private List<IAuthoringActor> myActors;
 
-	public GUIGameEditingEnvironment(GameInfo gameInfo, Controller controller, List<Actor> actors) {
+	public GUIGameEditingEnvironment(GameInfo gameInfo, Controller controller, List<IAuthoringActor> actors) {
 		this.myGameInfo = gameInfo;
 		this.myActors = actors;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);

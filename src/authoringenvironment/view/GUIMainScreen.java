@@ -7,7 +7,7 @@ import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.GameInfo;
-import gameengine.model.Actor;
+import gameengine.model.IAuthoringActor;
 import gui.view.IGUI;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.control.ScrollPane;
@@ -41,10 +41,10 @@ public class GUIMainScreen implements IGUI {
 	private IEditingEnvironment actorEditor;
 	private IEditingEnvironment levelEditor;
 	private GameInfo gameInfo;
-	private List<Actor> myActors;
+	private List<IAuthoringActor> myActors;
 
 	public GUIMainScreen(Controller controller, IEditingEnvironment actorEditor, IEditingEnvironment levelEditor,
-			GameInfo gameInfo, List<Actor> actors) {
+			GameInfo gameInfo, List<IAuthoringActor> actors) {
 		this.controller = controller;
 		this.actorEditor = actorEditor;
 		this.levelEditor = levelEditor;

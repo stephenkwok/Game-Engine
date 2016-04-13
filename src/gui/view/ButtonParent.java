@@ -1,9 +1,6 @@
 package gui.view;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-
-import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -31,13 +28,9 @@ public abstract class ButtonParent implements IGUIElement {
 	}
 	/**
 	 * Creates and returns button
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
 	 */
 	@Override
-	public Node createNode() {
+	public Node createNode()  {
 		button = new Button(buttonText);
 		button.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
 		setButtonIcon();
@@ -46,11 +39,7 @@ public abstract class ButtonParent implements IGUIElement {
 	}
 
 	/**
-	 * Sets action when button is pressed.
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
+	 * Sets action when button is pressed. 
 	 */
 	protected abstract void setButtonAction();
 	

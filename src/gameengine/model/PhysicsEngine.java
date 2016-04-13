@@ -148,7 +148,7 @@ public class PhysicsEngine {
 	}
 	
 	public void tick(Actor a1) {
-		update(a1,0.0,0.0, getGravity(), a1.getMyFriction());
+		update(a1,0.0,0.0, getGravity(), friction);
 	}
 	
 	public void staticHorizontalCollision(Actor a1, Actor a2) {

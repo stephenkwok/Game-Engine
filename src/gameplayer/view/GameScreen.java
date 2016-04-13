@@ -3,8 +3,6 @@ package gameplayer.view;
 import java.util.List;
 import java.util.Observable;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import gameengine.model.Actor;
 import gameengine.model.ITrigger;
 import gameengine.model.Triggers.ClickTrigger;
@@ -13,8 +11,6 @@ import gui.view.Screen;
 import javafx.event.Event;
 import javafx.scene.Camera;
 import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
