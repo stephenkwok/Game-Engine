@@ -4,12 +4,7 @@ import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-import gameengine.model.Actor;
-import gameengine.model.CollisionDetection;
-import gameengine.model.IActor;
-import gameengine.model.ITrigger;
-import gameengine.model.PhysicsEngine;
-import gameengine.model.Triggers.AttributeType;
+import gameengine.model.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
