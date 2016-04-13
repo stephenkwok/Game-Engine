@@ -1,8 +1,12 @@
 package gamedata.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import java.util.Map;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
@@ -14,22 +18,23 @@ import org.xml.sax.SAXException;
 public interface IHighScoresController {
 	
 	/**
-	 * Will obtain the information for users mapped to their high scores for displaying.
-	 * @return a map of user names associated with their high scores
-	 */
-	public Map<String,Integer> getHighScores ();
-	
-	/**
 	 * Will display the high scores on a HighScoreScreen
 	 * @param highScores a map of user names associated with their high scores
+	 * @throws TransformerException 
+	 * @throws IOException 
+	 * @throws SAXException 
+	 * @throws ParserConfigurationException 
 	 */
-	public void viewHighScores(Map<String,Integer> highScores);
+	public void viewHighScores() throws ParserConfigurationException, SAXException, IOException, TransformerException;
 	
+	public void saveHighScore(int score, String player) throws ParserConfigurationException, SAXException, IOException, TransformerException;
 	
 	/**
 	 * Will clear the high scores from a highScores.xml
+	 * @throws TransformerException 
+	 * @throws ParserConfigurationException 
 	 */
-	public void clearHighScores() throws SAXException, IOException;
+	public void clearHighScores() throws SAXException, IOException, ParserConfigurationException, TransformerException;
 	
 
 }

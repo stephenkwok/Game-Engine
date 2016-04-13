@@ -2,7 +2,13 @@ package gameplayer.controller;
 
 import java.lang.reflect.InvocationTargetException;
 import java.io.File;
+import java.io.IOException;
 import java.util.ResourceBundle;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
 
 import gameengine.controller.Game;
 import gui.controller.IScreenController;
@@ -43,8 +49,13 @@ public class SplashScreenController implements IScreenController {
 		mySplash.play(myGame);
 	}
 	
-	public void openHighScores(){
-		mySplash.openHighScores();
+	public void openHighScores() {
+		try {
+			mySplash.openHighScores();
+		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void edit() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
