@@ -101,12 +101,12 @@ public class GameInfo implements IEditableGameElement {
 	}
 
 	@Override
-	public ImageView getBackgroundImageView() {
+	public ImageView getImageView() {
 		return myPreviewImage;
 	}
 
 	@Override
-	public void setBackgroundImageView(ImageView imageView) {
+	public void setImageView(ImageView imageView) {
 		myPreviewImage = imageView;
 	}
 
@@ -119,7 +119,6 @@ public class GameInfo implements IEditableGameElement {
 	public int getMyID() {
 		return myID;
 	}
-
 
 }
 

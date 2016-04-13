@@ -9,6 +9,7 @@ import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.controller.Controller;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gameengine.model.IAuthoringActor;
 import gui.view.GUILibrary;
 import gui.view.IGUI;
 import javafx.event.EventHandler;
@@ -36,7 +37,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	private VBox myLeftPane;
 	private Canvas myCanvas;
 	private Level myLevel;
-	private List<Actor> availableActors;
+	private List<IAuthoringActor> availableActors;
 	private Pane myCenterPane;
 	private ImageView myLevelBackground;
 	private Controller myController;
@@ -47,7 +48,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * @param controller: authoring environment controller.
 	 * @param actors: list of currently available actors.
 	 */
-	public GUILevelEditingEnvironment(Controller controller, List<Actor> actors) {
+	public GUILevelEditingEnvironment(Controller controller, List<IAuthoringActor> actors) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
@@ -132,8 +133,8 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 				Dragboard db = event.getDragboard();
 				boolean success = false;
 				if (db.hasString()) {
-					Actor actor = getActorById(Integer.parseInt(db.getString()));
-					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getBackgroundImageView().getFitHeight());
+					IAuthoringActor actor = getActorById(Integer.parseInt(db.getString()));
+					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
 					iconToAdd.getImageView().setOnDragDetected(null);
 					iconToAdd.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
 						@Override public void handle(MouseEvent event) {
@@ -141,7 +142,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 							event.consume();
 						}
 					}); 
-					myLevel.addActor(actor);
+					myLevel.addActor((Actor) actor);
 					myActorPreviews.add(iconToAdd);
 					myCenterPane.getChildren().add(iconToAdd.getImageView());
 					success = true;
@@ -158,7 +159,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * @param actorIV: Imageview of actor to move.
 	 * @param event: drag.
 	 */
-	private void moveActor(Actor actor, ImageviewActorIcon icon, MouseEvent event) {
+	private void moveActor(IAuthoringActor actor, ImageviewActorIcon icon, MouseEvent event) {
 		actor.setX(event.getX());
 		actor.setY(event.getY());
 		icon.getImageView().setX(event.getX());
@@ -170,7 +171,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * @param id: ID of actor of interest.
 	 * @return actor with given ID.
 	 */
-	private Actor getActorById(int id) {
+	private IAuthoringActor getActorById(int id) {
 		for (int i = 0; i < availableActors.size(); i++) {
 			if (availableActors.get(i).getMyID() == id) {
 				return availableActors.get(i);
@@ -223,7 +224,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * Updates the preview to show the level's background.
 	 */
 	private void updateLevelBackground() {
-		myLevelBackground = myLevel.getBackgroundImageView();
+		myLevelBackground = myLevel.getImageView();
 		myLevelBackground.setPreserveRatio(true);
 		myLevelBackground.fitWidthProperty().bind(myCenterPane.widthProperty());
 		myCenterPane.getChildren().add(myLevelBackground);
@@ -233,7 +234,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * Add a level's actors to the preview in the center pane.
 	 */
 	private void addLevelActorsToScene() {
-		for (Actor actor: myLevel.getActors()) myCenterPane.getChildren().add(actor.getBackgroundImageView());
+		for (Actor actor: myLevel.getActors()) myCenterPane.getChildren().add(actor.getImageView());
 	}
 	
 	/**

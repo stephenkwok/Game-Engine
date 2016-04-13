@@ -3,7 +3,6 @@ package gui.view;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 
-import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
 import javafx.geometry.Insets;
 import javafx.scene.Node;

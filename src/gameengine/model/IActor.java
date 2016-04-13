@@ -74,7 +74,7 @@ public interface IActor {
      *
      * @return The Actor's ImageView
      */
-    public ImageView getBackgroundImageView();
+    public ImageView getImageView();
 
     /**
      * Provides the Actor's name

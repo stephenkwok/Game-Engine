@@ -10,6 +10,7 @@ import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gameengine.model.IAuthoringActor;
 import gui.view.IGUI;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -47,13 +48,13 @@ public class GUILevelInspector implements IGUI {
 	 * @param availActors: list of currently available actors.
 	 * @param level: level that is being edited.
 	 */
-	public GUILevelInspector(Controller controller, ResourceBundle myResources, List<Actor> availActors, Level level) {
+	public GUILevelInspector(Controller controller, ResourceBundle myResources, List<IAuthoringActor> availActors, Level level) {
 		myLevel = level;
 		myController = controller;
 		init(controller, myResources, availActors, level);
 	}
 	
-	private void init(Controller controller, ResourceBundle myResources, List<Actor> availActors, Level level) {
+	private void init(Controller controller, ResourceBundle myResources, List<IAuthoringActor> availActors, Level level) {
 		myPane = new StackPane();		
 		myContainer = new VBox(SPACING);
 		myContainer.setAlignment(Pos.CENTER);
@@ -125,7 +126,7 @@ public class GUILevelInspector implements IGUI {
 		File imageFile = promptForFileName();
 		if(imageFile!=null){
 			Image image = new Image(imageFile.toURI().toString());
-			myLevel.setBackgroundImageView(new ImageView(image));
+			myLevel.setImageView(new ImageView(image));
 			myLevel.setMyBackgroundImgName(imageFile.getPath());
 		}
 	}
