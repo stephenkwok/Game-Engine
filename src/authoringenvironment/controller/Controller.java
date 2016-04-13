@@ -215,4 +215,10 @@ public class Controller implements IScreenController {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void goToSplash() {
+		// TODO Auto-generated method stub
+		
+	}
 }
