@@ -132,10 +132,9 @@ public class GUIFactory {
 	private IGUIElement createCheckBoxObject(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		Class<?> checkbox = Class.forName(className);
 		String promptText = myResources.getString(nodeType + PROMPT);
-		int spacing = Integer.parseInt(myResources.getString(nodeType + SPACING));
 		int width = Integer.parseInt(myResources.getString(nodeType + WIDTH));
-		Constructor<?> constructor = checkbox.getConstructor(String.class, int.class, int.class);
-		return (IGUIElement) constructor.newInstance(promptText, spacing, width);
+		Constructor<?> constructor = checkbox.getConstructor(String.class, int.class);
+		return (IGUIElement) constructor.newInstance(promptText, width);
 	}
 
 }
