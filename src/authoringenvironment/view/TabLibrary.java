@@ -42,12 +42,20 @@ abstract class TabLibrary extends TabParent {
 		super(myResources, tabText);
 		if(myActorRuleCreator!=null) myActorRules = myActorRuleCreator.getRules();
 	}
-
+	/**
+	 * Get content of current Tab
+	 */
 	@Override
 	abstract Node getContent();
-	
+	/**
+	 * Set content of current Tab
+	 */
 	abstract void setContent();
-	
+	/**
+	 * Set drag event for given source and given TransferMode
+	 * @param source
+	 * @param transferMode
+	 */
 	protected void setDragEvent(Label source, TransferMode transferMode) {
 		for(ActorRule rule: myActorRules){
 			setDragDetected(source, rule.getGridPane(),transferMode);
@@ -57,7 +65,12 @@ abstract class TabLibrary extends TabParent {
 			setDragDropped(source, rule.getGridPane(), rule);
 		}
 	}
-
+	/**
+	 * Sets behavior to act on drag
+	 * @param mySource
+	 * @param myTarget
+	 * @param transferMode
+	 */
 	private void setDragDetected(Label mySource, GridPane myTarget, TransferMode transferMode) {
 		mySource.setOnDragDetected(new EventHandler<MouseEvent>(){
 			public void handle(MouseEvent event){
@@ -70,7 +83,12 @@ abstract class TabLibrary extends TabParent {
 		});
 		
 	}
-	
+	/**
+	 * Sets behavior to act on drag over 
+	 * @param mySource
+	 * @param myTarget
+	 * @param transferMode
+	 */
 	private void setDragOver(Label mySource, GridPane myTarget, TransferMode transferMode) {
 		myTarget.setOnDragOver(new EventHandler<DragEvent>() {
 		    public void handle(DragEvent event) {
@@ -82,7 +100,11 @@ abstract class TabLibrary extends TabParent {
 		    }
 		});
 	}
-	
+	/**
+	 * Sets behavior to act on drag entered 
+	 * @param mySource
+	 * @param myTarget
+	 */
 	private void setDragEntered(Label mySource, GridPane myTarget) {
 		myTarget.setOnDragEntered(new EventHandler<DragEvent>() {
 		    public void handle(DragEvent event) {
@@ -94,7 +116,11 @@ abstract class TabLibrary extends TabParent {
 		    }
 		});
 	}
-	
+	/**
+	 * Sets behavior to act on drag exited 
+	 * @param mySource
+	 * @param myTarget
+	 */
 	private void setDragExited(Label mySource, GridPane myTarget) {
 		myTarget.setOnDragExited(new EventHandler<DragEvent>() {
 		    public void handle(DragEvent event) {
@@ -103,15 +129,19 @@ abstract class TabLibrary extends TabParent {
 		    }
 		});
 	}
-
+	/**
+	 * Sets behavior to act on drag dropped
+	 * @param mySource
+	 * @param myTarget
+	 * @param myActorRule
+	 */
 	private void setDragDropped(Label mySource, GridPane myTarget, ActorRule myActorRule) {
 		myTarget.setOnDragDropped(new EventHandler<DragEvent>() {
 		    public void handle(DragEvent event) {
 		        Dragboard db = event.getDragboard();
 		        boolean success = false;
 		        if (db.hasString()) {
-		        	Label toAdd = getLabelToAdd(event.getDragboard().getString());
-		        	addLabelToTarget(toAdd, myActorRule);
+		        	addNodeToTarget(new Label(event.getDragboard().getString()), myActorRule);
 		        	success = true;
 		        }
 		        event.setDropCompleted(success);
@@ -119,29 +149,31 @@ abstract class TabLibrary extends TabParent {
 		     }
 		});
 	}
-	
-	private void addLabelToTarget(Label toAdd, ActorRule myActorRule){ //TODO
+	/**
+	 * Adds expanded Node with parameters for given library element to given ActorRule object
+	 * @param toAdd
+	 * @param myActorRule
+	 */
+	private void addNodeToTarget(Label toAdd, ActorRule myActorRule){ //TODO
 		if(matchesExtensions(toAdd.getText(), IMAGE_FILE_EXTS)) myActorRuleCreator.addImage(myActorRule, toAdd);
 		else if(matchesExtensions(toAdd.getText(), SOUND_FILE_EXTS)) myActorRuleCreator.addSound(myActorRule, toAdd);
 		else myActorRuleCreator.addBehavior(myActorRule, toAdd);
 	}
-	
-	private Label getLabelToAdd(String libraryElement) {
-		if(matchesExtensions(libraryElement, IMAGE_FILE_EXTS)){
-			ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(libraryElement)));
-			imageView.setFitHeight(LABEL_IMAGE_HEIGHT);
-			imageView.setPreserveRatio(true);
-			return new Label(libraryElement, imageView);
-		}
-		return new Label(libraryElement);
-	}
-	
+	/**
+	 * Returns whether given name of library element matches at least one of given extension(s)
+	 * @param libraryElement
+	 * @param extensions
+	 * @return
+	 */
 	private boolean matchesExtensions(String libraryElement, String extensions){
 		List<String> fileExts = Arrays.asList(extensions.split(" "));
 		if(libraryElement.length()>4) return fileExts.contains(libraryElement.substring(libraryElement.length()-FILE_EXT_LENGTH, libraryElement.length()));
 		return false;
 	}
-	
+	/**
+	 * 
+	 * @param myActorRuleCreator
+	 */
 	public void updateDragEvents(ActorRuleCreator myActorRuleCreator) {
 		this.myActorRuleCreator = myActorRuleCreator;
 		this.myActorRules = myActorRuleCreator.getRules();

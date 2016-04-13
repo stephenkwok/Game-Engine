@@ -49,7 +49,9 @@ public class GUIActorImageViewer implements IGUI {
 		this.myActorIV = myActorIV;
 		initializeEnvironment();
 	}
-	
+	/**
+	 * Initialize resources and create image viewer component, displaying Actor image and allows user to set the image
+	 */
 	private void initializeEnvironment(){
 		myPane = new StackPane();
 		VBox vbox = new VBox(PADDING);
@@ -60,12 +62,18 @@ public class GUIActorImageViewer implements IGUI {
 		myPane.getChildren().add(vbox);
 		myPane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 	}
-	
+	/**
+	 * Returns combobox of available actor images (in authoringimages resource folder)
+	 * @return
+	 */
 	private HBox getImagesComboBox(){
 		ComboBoxActorImages availableImages = new ComboBoxActorImages(AVAILABLE_ACTOR_IMAGES, IMAGE_RESOURCE,aEE);
 		return (HBox) availableImages.createNode();
 	}
-	
+	/**
+	 * Return button that allows user to load an image from personal directory as Actor's image
+	 * @return
+	 */
 	private Button getImageSettingButton(){
 		Button imageSetter = new Button(BUTTON_LABEL);
 		imageSetter.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -78,7 +86,13 @@ public class GUIActorImageViewer implements IGUI {
 		});
 		return imageSetter;
 	}
-	
+	/**
+	 * Sets Actor image to selected image from personal directory
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private void loadSelectedImage() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		File imageFile = promptForFileName();
 		if(imageFile!=null){
@@ -98,7 +112,9 @@ public class GUIActorImageViewer implements IGUI {
         myFileChooser.getExtensionFilters().add(myFilter);
         return myFileChooser.showOpenDialog(myController.getStage());
     }
-
+    /**
+     * Return Pane representation of actor image viewer
+     */
 	@Override
 	public Pane getPane() {
 		return myPane;
