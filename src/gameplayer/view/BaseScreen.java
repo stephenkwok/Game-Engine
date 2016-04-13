@@ -30,10 +30,6 @@ import javafx.stage.Stage;
  *
  */
 public class BaseScreen extends Screen {
-	/**
-	 * Adds the auxiliary views, like the HUD display, ToolBar, and GameScreen,
-	 * to the BaseScreen
-	 */
 
 	private ResourceBundle myResources;
 	private static final String GUI_RESOURCE = "gameGUI";
@@ -42,6 +38,13 @@ public class BaseScreen extends Screen {
 	private static final String SIDE_BUTTONS = "SideButtons";
 	private BorderPane myMasterPane;
 
+	
+	/**
+	 * Adds the auxiliary views, like the HUD display, ToolBar, and GameScreen,
+	 * to the BaseScreen
+	 * @param stage to change the scene
+	 * @param game to initialize the gamescreen with
+	 */
 	public BaseScreen(Stage stage, Game game) {
 		super(stage);
 		this.myMasterPane = new BorderPane();
