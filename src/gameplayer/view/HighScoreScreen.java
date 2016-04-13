@@ -53,7 +53,6 @@ public class HighScoreScreen extends Screen{
 		VBox masterV = new VBox(20);
 		masterV.getChildren().add(new Text(myName));
 		for(String player : myMap.keySet()){
-			System.out.println(player);
 			HBox myH = new HBox(10);
 			Text myPlayer = new Text(player);
 			myPlayer.setFont(Font.font("Helvetica", 30));

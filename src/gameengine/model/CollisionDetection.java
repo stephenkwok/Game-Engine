@@ -97,7 +97,6 @@ public class CollisionDetection {
 	private void resolveCollision(Actor a1, Actor a2){
 		String collisionType = getCollisionType(a1,a2);
 		String triggerString = a1.getMyName() + collisionType + a2.getMyName();
-		System.out.print(triggerString+"\n");
 		a1.performActionsFor(triggerString);   
 	}
 
