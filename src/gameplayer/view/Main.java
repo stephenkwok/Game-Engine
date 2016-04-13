@@ -6,6 +6,7 @@ import gameengine.model.Attribute;
 import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
+import gameengine.model.Actions.ApplyPhysics;
 import gameengine.model.Actions.Destroy;
 import gameengine.model.Actions.GainPoints;
 import gameengine.model.Actions.HorizontalBounceCollision;
@@ -22,6 +23,7 @@ import gameengine.model.Triggers.AttributeType;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.SideCollision;
+import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.Triggers.TopCollision;
 import gameplayer.controller.GameController;
 import javafx.animation.KeyFrame;
@@ -68,8 +70,17 @@ public class Main extends Application {
 		
 		Actor actor2 = new Actor();
 		actor2.setMyImageViewName("block.png");
-		actor2.setX(500);
+		actor2.setX(300);
 		actor2.setMyName("A2");
+		
+		TickTrigger tick = new TickTrigger();
+		Action tick1 = new ApplyPhysics(actor1);
+		Action tick2 = new ApplyPhysics(actor2);
+		Rule rule7 = new Rule(tick,tick1);
+		Rule rule8 = new Rule(tick,tick2);
+		actor1.addRule(rule7);
+		actor2.addRule(rule8);
+		
 		
 		Actor actor3 = new Actor();
 		actor3.setMyImageViewName("flagpole.png");
@@ -108,14 +119,27 @@ public class Main extends Application {
 		level1.addActor(actor2);
 		level1.addActor(actor3);
 		
-//		for(int i=1; i<=18; i++){
-//			Actor floor = new Actor();
-//			floor.setMyName("floor");
-//			floor.setMyImageViewName("square.png");
-//			floor.setX(i*50);
-//			floor.setY(700);
-//			level1.addActor(floor);
-//		}
+		for(int i=0; i<=17; i++){
+			Actor floor = new Actor();
+			floor.setMyName("floor");
+			floor.setMyImageViewName("square.png");
+			floor.setX(i*50);
+			floor.setY(500-floor.getBounds().getHeight());
+			BottomCollision b = new BottomCollision(actor1, floor);
+			BottomCollision b2 = new BottomCollision(actor2, floor);
+			BottomCollision b3 = new BottomCollision(actor3, floor);
+			Action baction = new VerticalStaticCollision(actor1);
+			Action baction2 = new VerticalStaticCollision(actor2);
+			Action baction3 = new VerticalStaticCollision(actor3);
+			Rule brule = new Rule(b, baction);
+			Rule brule2 = new Rule(b2, baction2);
+			Rule brule3 = new Rule(b3, baction3);
+			actor1.addRule(brule);
+			actor2.addRule(brule2);
+			actor3.addRule(brule3);
+
+			level1.addActor(floor);
+		}
 		
 //		Level level2 = new Level();
 //		level2.addActor(actor3);

@@ -17,11 +17,11 @@ public class PhysicsEngine {
 	
 	//These Variable values are arbitrary, chosen by trial/error
 	private int    timeStep         =  1;    //Arbitrary timeStep, will be set to the time provided by step()
-	private double friction         = -.05;  //Horizontal acceleration dampening (friction) coefficient
+	private double friction         = -.01;  //Horizontal acceleration dampening (friction) coefficient
 	private double gravity          = .11 ;  //Falling acceleration coefficient
 	private double maxHorizVelocity = 50;    //maximum horizontal velocity
 	private double maxVertVelocity  = -50;   //maximum vertical velocity 
-	private double horizontalForce  = 5;     //Force applied to Actors on horizontal movements
+	private double horizontalForce  = 1;     //Force applied to Actors on horizontal movements
 	private double jumpForce        = -5;    //Vertical Force applied to Actors on jump movements
 	private double floorHeight      =  500;  
 	
@@ -71,28 +71,64 @@ public class PhysicsEngine {
 		double nextXPos;
 		double nextYPos;
 		
-
-		if (a.isInAir()) {
-			forceYdownward = getGravity();
+		nextHorzVelo = xVelo;  
+		
+		if (!a.isInAir()) {    //If the Actor is not in the air, gravity is null
+			forceYdownward = 0;
+		}else{
+			friction       = 0;
 		}
 				
-		nextHorzVelo = xVelo;      		
-		nextVertVelo = applyForce(yVelo, forceYupward);            // Apply  y force from movement action to y velocity
-		nextVertVelo = applyForce(nextVertVelo, forceYdownward);    //Apply gravitational force
-		nextYPos     = changePos(yPos, nextVertVelo); 
-		nextVertVelo = maxLimit(nextVertVelo, getMaxVertVelocity());
-			
-		if(nextYPos+a.getBounds().getHeight() > getFloorHeight()){                    //Collision detection for the actor and the ground
-			nextYPos = getFloorHeight()-a.getBounds().getHeight();				//TODO: delete this if statement after the floor is implemented as an actor
-			nextVertVelo = 0;
-		}
 
+		nextVertVelo = applyForce(yVelo, forceYupward);           			 // Apply  y force from movement action to y velocity
+		nextVertVelo = applyForce(nextVertVelo, forceYdownward);    		//Apply gravitational force		
+		
+		nextYPos     = changePos(yPos, nextVertVelo);                       //Update y position with y velocity
+		nextVertVelo = maxLimit(nextVertVelo, maxVertVelocity);
+			
+//		if(nextYPos > floorHeight){                   						 //Collision detection for the actor and the ground
+//			nextYPos = floorHeight;											//TODO: delete this if statement after the floor is implemented as an actor
+//			nextVertVelo = 0;
+//			a.setInAir(false);
+//		}
 		
 		nextHorzVelo = applyForce(xVelo, forceX); 							// Apply  y force from movement action to y velocity
 		nextHorzVelo = applyForce(nextHorzVelo, (friction*(nextHorzVelo))); //Apply frictional force
 		nextXPos  = changePos(xPos,nextHorzVelo);
-		nextHorzVelo = maxLimit(nextHorzVelo, getMaxHorizVelocity());
-		setValues(a,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );	
+		nextHorzVelo = maxLimit(nextHorzVelo, maxHorizVelocity);
+		setValues(a,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );
+		
+//		double xVelo     = a.getVeloX();
+//		double yVelo     = a.getVeloY();
+//		double xPos      =  a.getX();      
+//		double yPos      =  a.getY();
+//		double nextHorzVelo;
+//		double nextVertVelo;
+//		double nextXPos;
+//		double nextYPos;
+//		
+//
+//		if (a.isInAir()) {
+//			forceYdownward = getGravity();
+//		}
+//				
+//		nextHorzVelo = xVelo;      		
+//		nextVertVelo = applyForce(yVelo, forceYupward);            // Apply  y force from movement action to y velocity
+//		nextVertVelo = applyForce(nextVertVelo, forceYdownward);    //Apply gravitational force
+//		nextYPos     = changePos(yPos, nextVertVelo); 
+//		nextVertVelo = maxLimit(nextVertVelo, getMaxVertVelocity());
+//			
+//		if(nextYPos+a.getBounds().getHeight() > getFloorHeight()){                    //Collision detection for the actor and the ground
+//			nextYPos = getFloorHeight()-a.getBounds().getHeight();				//TODO: delete this if statement after the floor is implemented as an actor
+//			nextVertVelo = 0;
+//		}
+//
+//		
+//		nextHorzVelo = applyForce(xVelo, forceX); 							// Apply  y force from movement action to y velocity
+//		nextHorzVelo = applyForce(nextHorzVelo, (friction*(nextHorzVelo))); //Apply frictional force
+//		nextXPos  = changePos(xPos,nextHorzVelo);
+//		nextHorzVelo = maxLimit(nextHorzVelo, getMaxHorizVelocity());
+//		setValues(a,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );	
 	}
 	
 	/**
@@ -123,11 +159,12 @@ public class PhysicsEngine {
 	//They differ in the force applied to the Actor
 	
 	public void moveRight(Actor a1) {
-		update(a1,getHorizontalForce(), 0, 0, a1.getMyFriction());
+		a1.setInAir(false);
+		update(a1,getHorizontalForce(), 0, 0, friction);
 	}
 
 	public void moveLeft(Actor a1) {
-		update(a1,-getHorizontalForce(), 0, 0, a1.getMyFriction());
+		update(a1,-getHorizontalForce(), 0, 0, friction);
 	}
 	
 	public void jump(Actor a1){
@@ -148,7 +185,7 @@ public class PhysicsEngine {
 	}
 	
 	public void tick(Actor a1) {
-		update(a1,0.0,0.0, getGravity(), a1.getMyFriction());
+		update(a1,0.0,0.0, getGravity(), friction);
 	}
 	
 	public void staticHorizontalCollision(Actor a1, Actor a2) {
@@ -171,6 +208,10 @@ public class PhysicsEngine {
 			}
 			a1.setVeloY(0);                             //Stop movement
 		}
+	}
+	
+	public void staticVerticalCollision2(Actor a1) {
+		a1.setY(a1.getY()-gravity*.5);;
 	}
 	
 	public void elasticVerticalCollision(Actor a1, Actor a2){
