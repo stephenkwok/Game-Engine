@@ -19,7 +19,9 @@ public class TabLibraryImages extends TabLibrary{
 		super(myResources,tabText,myRuleMaker);
 		setContent();
 	}
-	
+	/**
+	 * Set content of tab to list of images
+	 */
 	@Override
 	void setContent() {
 		fillFileNames();
@@ -36,6 +38,9 @@ public class TabLibraryImages extends TabLibrary{
 		}
 		listView = new ListView<>(labels);
 	}
+	/**
+	 * Return image content of this tab
+	 */
 	@Override
 	Node getContent() {
 		return listView;

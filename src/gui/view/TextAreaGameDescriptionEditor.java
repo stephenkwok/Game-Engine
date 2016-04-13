@@ -2,7 +2,6 @@ package gui.view;
 
 import java.util.ResourceBundle;
 
-import authoringenvironment.controller.Controller;
 import gameengine.controller.GameInfo;
 import javafx.geometry.Insets;
 
