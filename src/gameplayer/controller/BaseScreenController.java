@@ -9,6 +9,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import gamedata.controller.CreatorController;
 import gamedata.controller.ParserController;
+import gamedata.view.FileChooserScreen;
+import gamedata.view.FileChooserScreenLoad;
+import gamedata.view.FileChooserScreenScores;
 import gameengine.controller.Game;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.SplashScreen;
@@ -119,11 +122,14 @@ public class BaseScreenController extends ScreenController{
 
 	@Override
 	public void chooseGame() {
-		Group fileChooseGroup = new Group();
-		Scene fileChooseScene = new Scene(fileChooseGroup, this.getScreen().getMyScene().getWidth(), this.getScreen().getMyScene().getHeight());
-		ComboBoxGame fileSelector =  new ComboBoxGame("Choose Game", "gamefiles", this);
-		fileChooseGroup.getChildren().add((HBox) fileSelector.createNode());
-		this.getStage().setScene(fileChooseScene);
+		FileChooserScreen myFC = new FileChooserScreenLoad(getStage());
+		try {
+			getStage().setScene(myFC.getScene());
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

@@ -21,4 +21,6 @@ public interface IScreenController {
 	public void useGame();
 
 	public void goToSplash();
+	
+	public void switchGame();
 }

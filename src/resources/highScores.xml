@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.HighScoresKeeper>
+  <myScores>
+    <entry>
+      <string>test.xml</string>
+      <tree-map>
+        <entry>
+          <string>John</string>
+          <int>10</int>
+        </entry>
+      </tree-map>
+    </entry>
+  </myScores>
+</gameengine.controller.HighScoresKeeper>

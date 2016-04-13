@@ -210,4 +210,10 @@ public class Controller implements IScreenController {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void switchGame() {
+		// TODO Auto-generated method stub
+		
+	}
 }
