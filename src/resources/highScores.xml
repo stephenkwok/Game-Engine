@@ -13,6 +13,10 @@
       <string>test.xml</string>
       <tree-map>
         <entry>
+          <string>Amy</string>
+          <int>0</int>
+        </entry>
+        <entry>
           <string>John</string>
           <int>10</int>
         </entry>

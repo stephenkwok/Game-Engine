@@ -52,8 +52,8 @@ public class ComboBoxWinningConditions extends ComboBoxTextCell {
 	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
-		if (((Level) getEditableElement()).getWinningCondition() != null) {
-			comboBox.setValue(((Level) getEditableElement()).getWinningCondition());
+		if (((Level) getEditableElement()).getMyWinningCondition() != null) {
+			comboBox.setValue(((Level) getEditableElement()).getMyWinningCondition());
 		}
 	}
 

@@ -133,6 +133,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 				boolean success = false;
 				if (db.hasString()) {
 					IAuthoringActor actor = getActorById(Integer.parseInt(db.getString()));
+					actor.setMyID(myLevel.getActors().size());
 					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
 					iconToAdd.getImageView().setOnDragDetected(null);
 					iconToAdd.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
@@ -233,7 +234,18 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * Add a level's actors to the preview in the center pane.
 	 */
 	private void addLevelActorsToScene() {
-		for (Actor actor: myLevel.getActors()) myCenterPane.getChildren().add(actor.getImageView());
+		for (Actor actor: myLevel.getActors()) {
+			ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
+			icon.getImageView().setX(actor.getX());
+			icon.getImageView().setY(actor.getY());
+			icon.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
+				@Override public void handle(MouseEvent event) {
+					moveActor(actor, icon, event);
+					event.consume();
+				}
+			}); 			
+			myCenterPane.getChildren().add(icon);
+		}
 	}
 	
 	/**
