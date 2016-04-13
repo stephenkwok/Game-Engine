@@ -81,7 +81,7 @@ public class CheckBoxesHUDOptions implements IGUIElement, IGUIEditingElement {
 		return toDisplay;
 	}
 
-	// refactor to use reflection
+	// remove this once changes are made on the other end 
 	private int getInitialValueForHUDElement(String myHUDElementID) {
 		Actor mainActor = null;
 		for (Actor actor : myActors) {
