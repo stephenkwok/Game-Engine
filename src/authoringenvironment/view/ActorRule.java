@@ -226,7 +226,6 @@ public class ActorRule {
 				Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, Controller.class);
 				return ((IGUIElement) constructor.newInstance(behaviorType,myLibraryResources,myActorRuleCreator.getController())).createNode();
 			}catch(Exception e2){
-				e1.printStackTrace();
 				return new Label(behaviorType);
 			}
 		}

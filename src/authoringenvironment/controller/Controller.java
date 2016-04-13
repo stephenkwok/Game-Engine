@@ -55,6 +55,7 @@ public class Controller implements IScreenController {
 		myLevels = new ArrayList<>();
 		myLevelNames = new ArrayList<>();
 		myActors = new ArrayList<>();
+		myActorNames = new ArrayList<>();
 		levelEnvironment = new GUILevelEditingEnvironment(this, myActors);		
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
@@ -177,6 +178,7 @@ public class Controller implements IScreenController {
 	public void addActor() {
 		Actor newActor = new Actor();
 		myActors.add(newActor);
+		myActorNames.add(newActor.getMyName());
 		mainScreen.createActorLabel(newActor);
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
