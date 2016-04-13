@@ -6,21 +6,10 @@ import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
-import gameengine.model.Actions.ApplyPhysics;
-import gameengine.model.Actions.Destroy;
-import gameengine.model.Actions.HorizontalBounceCollision;
-import gameengine.model.Actions.HorizontalStaticCollision;
-import gameengine.model.Actions.MoveLeft;
-import gameengine.model.Actions.MoveRight;
-import gameengine.model.Actions.MoveUp;
-import gameengine.model.Actions.VerticalStaticCollision;
-import gameengine.model.Actions.WinGame;
 import gameengine.model.Actions.*;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.SideCollision;
-import gameengine.model.Triggers.TickTrigger;
-import gameengine.model.Triggers.TopCollision;
 import gameplayer.controller.GameController;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -61,17 +50,8 @@ public class Tester extends Application {
 		
 		Actor actor2 = new Actor();
 		actor2.setMyImageViewName("block.png");
-		actor2.setX(300);
+		actor2.setX(500);
 		actor2.setMyName("A2");
-		
-		TickTrigger tick = new TickTrigger();
-		Action tick1 = new ApplyPhysics(actor1);
-		Action tick2 = new ApplyPhysics(actor2);
-		Rule rule7 = new Rule(tick,tick1);
-		Rule rule8 = new Rule(tick,tick2);
-		actor1.addRule(rule7);
-		actor2.addRule(rule8);
-		
 		
 		Actor actor3 = new Actor();
 		actor3.setMyImageViewName("flagpole.png");
