@@ -48,14 +48,6 @@ public class BaseScreenController implements IScreenController{
 		System.out.println("toggle music");
 	}
 
-	public void togglePause() {
-		//TODO: stop the step(), thx michael!!!!!! :)
-		System.out.println("pause the game");
-	}
-
-	public void toggleUnPause() {
-		System.out.println("un pause game");
-	}
 	
 	public void goToSplash(){
 		SplashScreen mySplash = new SplashScreen(myStage);
@@ -101,8 +93,5 @@ public class BaseScreenController implements IScreenController{
 		this.myGameController = myGameController;
 	}
 	
-	public void restartGame(){
-		System.out.print("user wants to restart game");
-	}
 
 }
