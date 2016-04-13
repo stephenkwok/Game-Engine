@@ -97,4 +97,8 @@ public interface IAuthoringActor extends IEditableGameElement{
     void setDead(boolean isDead);
 
 	boolean isMain();
+
+	void setMain(boolean parseBoolean);
+
+	void setMyFriction(double parseDouble);
 }

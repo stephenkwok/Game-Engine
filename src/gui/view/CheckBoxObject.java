@@ -4,8 +4,6 @@ import authoringenvironment.model.IEditableGameElement;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 
 /**
  * Checkbox object for option selection.

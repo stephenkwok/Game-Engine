@@ -3,7 +3,8 @@ package gui.view;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import gameengine.model.Actor;
+
+import gameengine.model.IAuthoringActor;
 
 public class ComboBoxIsPlayer extends ComboBoxTextCell {
 	private static final String IS_PLAYER_OPTIONS = "IsPlayerOptions";
@@ -18,7 +19,7 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 	@Override
 	public void setButtonAction() {
 		comboButton.setOnAction(event -> {
-			((Actor) getEditableElement()).setMain(Boolean.parseBoolean(comboBox.getValue()));
+			((IAuthoringActor) getEditableElement()).setMain(Boolean.parseBoolean(comboBox.getValue()));
 		});
 	}
 
