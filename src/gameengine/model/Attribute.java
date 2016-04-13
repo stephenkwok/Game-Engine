@@ -21,7 +21,7 @@ public class Attribute {
 
     public void changeAttribute(int change) {
     	myValue += change;
-        if(myValue == myTriggerValue){
+        if(myValue >= myTriggerValue){
         	myAction.perform();
         }
     }

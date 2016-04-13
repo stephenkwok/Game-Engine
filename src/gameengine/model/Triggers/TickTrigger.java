@@ -23,7 +23,6 @@ public class TickTrigger implements ITrigger {
 
 	@Override
 	public boolean evaluate(Actor myActor) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }

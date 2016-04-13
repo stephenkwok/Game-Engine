@@ -9,6 +9,7 @@ import gameengine.model.CollisionDetection;
 import gameengine.model.IActor;
 import gameengine.model.ITrigger;
 import gameengine.model.PhysicsEngine;
+import gameengine.model.Triggers.TickTrigger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -91,9 +92,14 @@ public class Game extends Observable implements Observer {
 	}
 	
 	private void step(){
-		physicsUpdate();
+		//physicsUpdate();
 		myCollisionDetector.detection(getCurrentActors());
+		signalTick();
 		updateActors();
+	}
+	
+	private void signalTick(){
+		handleTrigger(new TickTrigger());
 	}
 	
 	private void physicsUpdate(){
@@ -140,7 +146,9 @@ public class Game extends Observable implements Observer {
 	
 	public void nextLevel(){
 		animation.stop();
-		setCurrentLevel(info.getMyCurrentLevelNum()+1);
+		if(levels.size()>=info.getMyCurrentLevelNum()+1){
+			setCurrentLevel(info.getMyCurrentLevelNum()+1);
+		}
 	}
 	
 	/**

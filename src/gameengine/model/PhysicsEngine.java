@@ -21,7 +21,7 @@ public class PhysicsEngine {
 	private double gravity          = .11 ;  //Falling acceleration coefficient
 	private double maxHorizVelocity = 50;    //maximum horizontal velocity
 	private double maxVertVelocity  = -50;   //maximum vertical velocity 
-	private double horizontalForce  = 5;     //Force applied to Actors on horizontal movements
+	private double horizontalForce  = 1;     //Force applied to Actors on horizontal movements
 	private double jumpForce        = -5;    //Vertical Force applied to Actors on jump movements
 	private double floorHeight      =  500;  
 	
@@ -71,28 +71,64 @@ public class PhysicsEngine {
 		double nextXPos;
 		double nextYPos;
 		
-
-		if (a.isInAir()) {
-			forceYdownward = getGravity();
+		nextHorzVelo = xVelo;  
+		
+		if (!a.isInAir()) {    //If the Actor is not in the air, gravity is null
+			forceYdownward = 0;
+		}else{
+			friction       = 0;
 		}
 				
-		nextHorzVelo = xVelo;      		
-		nextVertVelo = applyForce(yVelo, forceYupward);            // Apply  y force from movement action to y velocity
-		nextVertVelo = applyForce(nextVertVelo, forceYdownward);    //Apply gravitational force
-		nextYPos     = changePos(yPos, nextVertVelo); 
-		nextVertVelo = maxLimit(nextVertVelo, getMaxVertVelocity());
-			
-		if(nextYPos+a.getBounds().getHeight() > getFloorHeight()){                    //Collision detection for the actor and the ground
-			nextYPos = getFloorHeight()-a.getBounds().getHeight();				//TODO: delete this if statement after the floor is implemented as an actor
-			nextVertVelo = 0;
-		}
 
+		nextVertVelo = applyForce(yVelo, forceYupward);           			 // Apply  y force from movement action to y velocity
+		nextVertVelo = applyForce(nextVertVelo, forceYdownward);    		//Apply gravitational force		
+		
+		nextYPos     = changePos(yPos, nextVertVelo);                       //Update y position with y velocity
+		nextVertVelo = maxLimit(nextVertVelo, maxVertVelocity);
+			
+//		if(nextYPos > floorHeight){                   						 //Collision detection for the actor and the ground
+//			nextYPos = floorHeight;											//TODO: delete this if statement after the floor is implemented as an actor
+//			nextVertVelo = 0;
+//			a.setInAir(false);
+//		}
 		
 		nextHorzVelo = applyForce(xVelo, forceX); 							// Apply  y force from movement action to y velocity
 		nextHorzVelo = applyForce(nextHorzVelo, (friction*(nextHorzVelo))); //Apply frictional force
 		nextXPos  = changePos(xPos,nextHorzVelo);
-		nextHorzVelo = maxLimit(nextHorzVelo, getMaxHorizVelocity());
-		setValues(a,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );	
+		nextHorzVelo = maxLimit(nextHorzVelo, maxHorizVelocity);
+		setValues(a,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );
+		
+//		double xVelo     = a.getVeloX();
+//		double yVelo     = a.getVeloY();
+//		double xPos      =  a.getX();      
+//		double yPos      =  a.getY();
+//		double nextHorzVelo;
+//		double nextVertVelo;
+//		double nextXPos;
+//		double nextYPos;
+//		
+//
+//		if (a.isInAir()) {
+//			forceYdownward = getGravity();
+//		}
+//				
+//		nextHorzVelo = xVelo;      		
+//		nextVertVelo = applyForce(yVelo, forceYupward);            // Apply  y force from movement action to y velocity
+//		nextVertVelo = applyForce(nextVertVelo, forceYdownward);    //Apply gravitational force
+//		nextYPos     = changePos(yPos, nextVertVelo); 
+//		nextVertVelo = maxLimit(nextVertVelo, getMaxVertVelocity());
+//			
+//		if(nextYPos+a.getBounds().getHeight() > getFloorHeight()){                    //Collision detection for the actor and the ground
+//			nextYPos = getFloorHeight()-a.getBounds().getHeight();				//TODO: delete this if statement after the floor is implemented as an actor
+//			nextVertVelo = 0;
+//		}
+//
+//		
+//		nextHorzVelo = applyForce(xVelo, forceX); 							// Apply  y force from movement action to y velocity
+//		nextHorzVelo = applyForce(nextHorzVelo, (friction*(nextHorzVelo))); //Apply frictional force
+//		nextXPos  = changePos(xPos,nextHorzVelo);
+//		nextHorzVelo = maxLimit(nextHorzVelo, getMaxHorizVelocity());
+//		setValues(a,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );	
 	}
 	
 	/**

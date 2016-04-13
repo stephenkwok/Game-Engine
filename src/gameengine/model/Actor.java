@@ -110,7 +110,9 @@ public class Actor extends Observable implements IActor, IEditableGameElement {
     public void changeAttribute(AttributeType type, int change) {
 
         Attribute myAttribute = getAttributeMap().get(type);
-        myAttribute.changeAttribute(change);
+        if(myAttribute!=null){
+            myAttribute.changeAttribute(change);
+        }
     }
 
     /**
