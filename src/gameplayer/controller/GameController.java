@@ -142,7 +142,8 @@ public class GameController implements Observer {
 				this.getClass().getDeclaredMethod(((String)arg)).invoke(this);
 			}
 			catch (Exception e){
-				e.printStackTrace();
+				//e.printStackTrace();
+				hud.handleChange((Change) arg); //keep it, this works
 			}
 		}if(o.equals(hud)){
 			hud.handleChange((Change) arg);
@@ -174,7 +175,9 @@ public class GameController implements Observer {
 		initialize(model.getInfo().getMyCurrentLevelNum());
 	}
 	
-	
+	public void updateAttribute() {
+		model.updateAttribute();
+	}
 	
 	
 	

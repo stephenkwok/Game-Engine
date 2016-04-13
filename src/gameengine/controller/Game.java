@@ -268,7 +268,9 @@ public class Game extends Observable implements Observer {
 		HUDData.addListener(new MapChangeListener<String, Object>() {
 			@Override
 			public void onChanged(Change<? extends String, ? extends Object> change) {
-				update((Observable) HUDData, change); //IDK if casting to observable causes issues with equality
+				setChanged();
+				notifyObservers(change);
+				//update((Observable) HUDData, change); //IDK if casting to observable causes issues with equality
 			}
         });
 	}
@@ -303,7 +305,7 @@ public class Game extends Observable implements Observer {
 	
 	
 	
-	public void updateAttributes() {
+	public void updateAttribute() {
 		updateHUDFields(HUDData.keySet(), HUDData);
 	}
 	

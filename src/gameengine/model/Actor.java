@@ -1,6 +1,7 @@
 package gameengine.model;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      */
     public Actor() {
         setMyRules(new HashMap<>());
-        setAttributeMap(new HashMap<>());
+        setAttributeMap(new EnumMap<>(AttributeType.class));
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
         isMain = DEFAULT_MAIN;
@@ -99,6 +100,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
 
     @Override
     public Attribute getAttribute(AttributeType type){
+        System.out.println(getAttributeMap());
     	return getAttributeMap().get(type);
     }
 
