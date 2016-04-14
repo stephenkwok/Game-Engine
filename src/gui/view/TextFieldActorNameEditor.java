@@ -1,6 +1,6 @@
 package gui.view;
 
-import gameengine.model.IAuthoringActor;
+import authoringenvironment.model.IAuthoringActor;
 
 public class TextFieldActorNameEditor extends TextFieldWithButton {
 

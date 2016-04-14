@@ -16,7 +16,6 @@ public class GameInfo implements IEditableGameElement {
 	private String myDescription;
 	private int myCurrentLevelNum;
 	private ImageView myPreviewImage;
-	private int myID;
 	private Map<String,Integer> myHUDElementsToDisplay;
 	private String myFile;
 	

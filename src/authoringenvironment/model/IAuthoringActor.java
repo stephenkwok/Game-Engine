@@ -1,7 +1,7 @@
-package gameengine.model;
+package authoringenvironment.model;
 
-import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.view.ActorRule;
+import gameengine.model.IRule;
 import javafx.scene.image.ImageView;
 
 import java.util.List;
