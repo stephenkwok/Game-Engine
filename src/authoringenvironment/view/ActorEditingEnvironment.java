@@ -3,12 +3,11 @@ package authoringenvironment.view;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.model.Actor;
-import gameengine.model.IAuthoringActor;
 import gui.view.GUILibrary;
-import gui.view.IGUI;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -32,7 +31,7 @@ import javafx.scene.paint.Color;
  * @author AnnieTang
  *
  */
-public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
+public class ActorEditingEnvironment implements IEditingEnvironment {
 	private static final int ICON_HEIGHT = 75;
 	private static final String NEW_RULE_LABEL = "New Rule";
 	private static final String ACTOR_OPTIONS_RESOURCE = "actorEditorOptions";
@@ -51,7 +50,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	private GridPane myRuleCreator;
 	private GUIActorImageViewer actorImageViewer;
 
-	public GUIActorEditingEnvironment(Controller myController, ResourceBundle myResources) {
+	public ActorEditingEnvironment(Controller myController, ResourceBundle myResources) {
 		this.myController = myController;
 		this.myResources = myResources;
 		initializeEnvironment();
@@ -149,7 +148,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * Set Actor for actor editing environment
 	 */
 	@Override
-	public void setEditable(IEditableGameElement editable) {
+	public void setEditableElement(IEditableGameElement editable) {
 		myActor = (IAuthoringActor) editable;
 		myActorIV = new ImageviewActorIcon(myActor,ICON_HEIGHT);
 		setLeftPane();

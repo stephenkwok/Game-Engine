@@ -10,6 +10,7 @@ import java.util.Set;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.Actions.Action;
 import javafx.geometry.Bounds;

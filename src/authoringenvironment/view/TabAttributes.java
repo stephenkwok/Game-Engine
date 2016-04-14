@@ -9,9 +9,9 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IGUIEditingElement;
 import gameengine.controller.Level;
 import gui.view.GUIFactory;
-import gui.view.IGUIEditingElement;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;

@@ -112,16 +112,6 @@ public class GameInfo implements IEditableGameElement {
 		myPreviewImage = imageView;
 	}
 
-	@Override
-	public void setMyID(int ID) {
-		myID = ID;
-	}
-
-	@Override
-	public int getMyID() {
-		return myID;
-	}
-
 	public String getMyFile() {
 		return this.myFile;
 	}

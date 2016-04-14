@@ -1,6 +1,4 @@
-package gui.view;
-
-import authoringenvironment.model.IEditableGameElement;
+package authoringenvironment.model;
 
 public interface IGUIEditingElement {
 

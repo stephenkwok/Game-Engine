@@ -35,7 +35,7 @@ public class GUIActorImageViewer implements IGUI {
 	private ImageView myActorIV;
 	private StackPane myPane;
 	private Controller myController;
-	private GUIActorEditingEnvironment aEE;
+	private ActorEditingEnvironment aEE;
 	
 	/**
 	 * Module that contains actor image display and options for loading an image from available images or from computer directory.
@@ -43,7 +43,7 @@ public class GUIActorImageViewer implements IGUI {
 	 * @param myController
 	 * @param myActorIV
 	 */
-	public GUIActorImageViewer(GUIActorEditingEnvironment aEE, Controller myController, ImageView myActorIV) {
+	public GUIActorImageViewer(ActorEditingEnvironment aEE, Controller myController, ImageView myActorIV) {
 		this.aEE = aEE;
 		this.myController = myController;
 		this.myActorIV = myActorIV;

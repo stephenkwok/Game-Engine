@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gameengine.model.IAuthoringActor;
 import gui.view.IGUI;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

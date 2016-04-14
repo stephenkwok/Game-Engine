@@ -1,6 +1,7 @@
 package gui.view;
 
 import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IGUIEditingElement;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;

@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IGUIEditingElement;
 import gameengine.controller.GameInfo;
-import gameengine.model.IAuthoringActor;
 import gui.view.CheckBoxesHUDOptions;
-import gui.view.IGUIEditingElement;
 import gui.view.IGUIElement;
 import gui.view.TextAreaGameDescriptionEditor;
 import gui.view.TextAreaParent;
@@ -32,7 +32,7 @@ import javafx.scene.layout.VBox;
  *
  */
 
-public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElement {
+public class GameEditingEnvironment implements IGUIElement, IGUIEditingElement {
 
 	private IEditableGameElement myGameInfo;
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
@@ -54,7 +54,7 @@ public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElemen
 	private ScrollPane myScrollPane;
 	private List<IAuthoringActor> myActors;
 
-	public GUIGameEditingEnvironment(GameInfo gameInfo, Controller controller, List<IAuthoringActor> actors) {
+	public GameEditingEnvironment(GameInfo gameInfo, Controller controller, List<IAuthoringActor> actors) {
 		this.myGameInfo = gameInfo;
 		this.myActors = actors;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);

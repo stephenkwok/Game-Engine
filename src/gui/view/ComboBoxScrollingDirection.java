@@ -50,6 +50,7 @@ public class ComboBoxScrollingDirection extends ComboBoxTextCell {
 	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
+		System.out.println("amy sux");
 		if (((Level) getEditableElement()).getMyScrollingDirection() != null) {
 			comboBox.setValue(((Level) getEditableElement()).getMyScrollingDirection());
 		}
