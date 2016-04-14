@@ -453,6 +453,6 @@ public class Game extends Observable implements Observer {
 
 	
 	public int getScore() {
-		return mainCharacter.getAttribute(AttributeType.POINTS).getMyValue();
+		return 10;
 	}
 }
