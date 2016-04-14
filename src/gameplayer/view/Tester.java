@@ -49,7 +49,7 @@ public class Tester extends Application {
 		Map<String, Integer> options = new HashMap<>();
 		options.put("Points", 0);
 		
-		info.setMyHUDOptions(options);
+		//info.setMyHUDOptions(options);
 		
 		Actor actor1 = new Actor();
 		actor1.setMyImageViewName("redball.png");
@@ -84,7 +84,7 @@ public class Tester extends Application {
 		Action action1 = new MoveRight(actor1);
 		Action action2 = new MoveLeft(actor1);
 		Action action3 = new HorizontalStaticCollision(actor1);
-		Action action4 = new ChangeAttribute(actor1,AttributeType.POINTS,1);
+		Action action4 = new MoveUp(actor1);//new ChangeAttribute(actor1,AttributeType.POINTS,1);
 		Action action5 = new VerticalStaticCollision(actor1);
 		Action action6 = new WinGame(actor1);
 		Rule rule = new Rule(trigger1,action1);
@@ -101,8 +101,8 @@ public class Tester extends Application {
 		actor1.addRule(rule6);
 		actor1.setMain(true);
 //		
-		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
-		actor1.addAttribute(points);
+//		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
+//		actor1.addAttribute(points);
 		
 		List<Level> levels = new ArrayList<Level>();
 		Level level1 = new Level();
@@ -142,7 +142,7 @@ public class Tester extends Application {
 		
 		Game model = new Game(info,levels);
 		CreatorController c = new CreatorController(model);
-		c.saveForEditing(new File("gamefiles/hudtest.xml"));
+		c.saveForEditing(new File("gamefiles/test2.xml"));
 		PerspectiveCamera camera = new PerspectiveCamera();
 		GameScreen view = new GameScreen(camera);
 
@@ -169,7 +169,7 @@ public class Tester extends Application {
 		sub.setCamera(camera);
 		stage.setScene(scene);
 		stage.show();
-		//controller.initialize(0);
+		controller.initialize(0);
 
 		
 //		Stage stage = new Stage();
