@@ -33,6 +33,9 @@ public abstract class TextAreaParent extends EditingElementParent {
 		myTextArea = new TextArea();
 	}
 	
+	/**
+	 * Instantiates the Label, Text Area, and Button that make up this class
+	 */
 	@Override 
 	public Node createNode() {
 		myPrompt.setWrapText(true);
@@ -42,14 +45,27 @@ public abstract class TextAreaParent extends EditingElementParent {
 		return myContainer;
 	}
 	
+	/**
+	 * Sets the VBox container's padding
+	 * 
+	 * @param insets indicating the desired padding
+	 */
 	protected void setContainerPadding(Insets insets) {
 		myContainer.setPadding(insets);
 	}
 	
+	/**
+	 * Sets the text above the Text Area 
+	 * @param prompt that informs the author what to do
+	 */
 	protected void setTextAreaPromptText(String prompt) {
 		myTextArea.setPromptText(prompt);
 	}
 	
+	/**
+	 * 
+	 * @return the input in the TextArea
+	 */
 	protected String getTextAreaInput() {
 		return myTextArea.getText();
 	}
