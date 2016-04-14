@@ -64,13 +64,6 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		return myRoot;
 	}
 	/**
-	 * Each time actor editing environment is opened and set to a specific Actor, populates editing environment rules and
-	 * fields based on the Actor 
-	 */
-	public void updateRules(){
-		myActorRuleCreator.updateRules();
-	}
-	/**
 	 * Initialize resources and create actor editing environment by populating sections of the screen and setting default new Actor
 	 */
 	private void initializeEnvironment() {
@@ -153,6 +146,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 		myActor = (IAuthoringActor) editable;
 		myActorIV = new ImageviewActorIcon(myActor,ICON_HEIGHT);
 		setLeftPane();
+		myActorRuleCreator.updateRules();
 	}
 	/**
 	 * Return Actor currently in actor editing environment
