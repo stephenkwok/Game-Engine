@@ -5,10 +5,10 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingElement;
 import gameengine.controller.GameInfo;
 import gameengine.model.IAuthoringActor;
 import gui.view.CheckBoxesHUDOptions;
-import gui.view.IGUIEditingElement;
 import gui.view.IGUIElement;
 import gui.view.TextAreaGameDescriptionEditor;
 import gui.view.TextAreaParent;
@@ -32,7 +32,7 @@ import javafx.scene.layout.VBox;
  *
  */
 
-public class GUIGameEditingEnvironment implements IGUIElement, IGUIEditingElement {
+public class GUIGameEditingEnvironment implements IGUIElement, IEditingElement {
 
 	private IEditableGameElement myGameInfo;
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";

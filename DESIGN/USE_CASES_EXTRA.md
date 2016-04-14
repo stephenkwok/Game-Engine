@@ -1,0 +1,9 @@
+ - Main character jumps in the air when space bar is clicked
+	 - GameScreen detects a key press, creates a KeyPress trigger instatiated with KeyCode.SPACE and notifies GameController, passing it the KeyTrigger trigger
+	 - GameController receives a notification to handleTrigger(KeyTrigger(SPACE)), so it tells Game to handleTrigger(KeyPress(SPACE))
+	 - Game tells the current level to handleTrigger() on a KeyTrigger of type SPACE
+	 - Level retrieves the list of actors with a SpaceKeyTrigger trigger from its myTriggerMap and for each of them, performsActionsFor() the space key trigger
+ - Main character walks into block and bounces off of it Main character
+	 - actor must contain a Rule mapping a SideCollision (instatiated with mainCharacter and block) trigger to a HorizontalBounceCollision action In Game class, collisionDetector detects collision between main character actor and block actor  
+	 - In CollisionDetection class, side collision is detected and signals main character actor’s performActionsFor() method for a side collision between the maincharacter actor and the block actor 
+	 - The main character performs the HorizontalBounceCollision action to bounce backwards off the block

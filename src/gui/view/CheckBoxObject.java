@@ -1,6 +1,7 @@
 package gui.view;
 
 import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingElement;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
@@ -10,7 +11,7 @@ import javafx.scene.control.CheckBox;
  * @author amyzhao
  *
  */
-public class CheckBoxObject implements IGUIElement, IGUIEditingElement {
+public class CheckBoxObject implements IGUIElement, IEditingElement {
 	private String myPromptText;
 	private int myWidth;
 	private IEditableGameElement myEditableElement;

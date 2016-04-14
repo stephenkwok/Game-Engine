@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingElement;
 import gameengine.controller.GameInfo;
 import gameengine.model.IAuthoringActor;
 import gameengine.model.Actor;
@@ -21,7 +22,7 @@ import javafx.scene.layout.VBox;
 
 
 
-public class CheckBoxesHUDOptions implements IGUIElement, IGUIEditingElement {
+public class CheckBoxesHUDOptions implements IGUIElement, IEditingElement {
 
 	private static final String DELIMITER = ",";
 	private static final String HUD_OPTIONS = "HUDOptions";
