@@ -2,7 +2,6 @@ package authoringenvironment.controller;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -25,8 +24,7 @@ import gui.view.Screen;
 import javafx.stage.Stage;
 
 /**
- * This class serves as the interface that all authoring environment main
- * screens must implement
+ * This class serves as the main controller for the authoring environment
  * 
  * @author Stephen, AnnieTang
  */
@@ -156,12 +154,6 @@ public class Controller implements IScreenController {
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getMyImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
-	/**
-	 * Saves game and returns to splash screen of game player.
-	 */
-	public void goBackToGamePlayer() {
-		guiMain.goBackToSplash();
-	}
 	
 	public double getSceneWidth(){
 		return guiMain.getWidth();
@@ -192,7 +184,9 @@ public class Controller implements IScreenController {
 		// TODO Auto-generated method stub
 		
 	}
-
+	/**
+	 * Saves game and returns to splash screen of game player.
+	 */
 	@Override
 	public void goToSplash() {
 		guiMain.goBackToSplash();

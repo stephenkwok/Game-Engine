@@ -17,7 +17,7 @@ public class ButtonFinish extends ButtonParent {
 	protected void setButtonAction() {
 		button.setOnAction(e -> {
 //			((Controller) myController).saveGame(promptForFileName(true));
-			((Controller) myController).goBackToGamePlayer();
+			((Controller) myController).goToSplash();
 		});
 	}
 
