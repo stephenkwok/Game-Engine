@@ -131,7 +131,7 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	 * Initializes the GUI element that displays checkboxes for each HUD Option
 	 */
 	private void initializeHUDOptionsDisplay() {
-		CheckBoxesHUDOptions HUDOptions = new CheckBoxesHUDOptions(myGameInfo, controller, myActors);
+		CheckBoxesHUDOptions HUDOptions = new CheckBoxesHUDOptions(myGameInfo, controller);
 		HUDOptionsDisplay = (VBox) HUDOptions.createNode();
 	}
 
