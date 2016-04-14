@@ -55,14 +55,5 @@ public class ParserController implements IParserController {
 		return game;
 	}
 	
-	
-	public static void main (String [] args) {
-		ParserController p = new ParserController ();
-		Game g = p.loadforPlaying(new File ("gamefiles/test.xml"));
-		System.out.println(g.toString());
-
-		
-	}
-	
 
 }
