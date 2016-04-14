@@ -19,6 +19,7 @@ public class TabLibraryImages extends TabLibrary{
 		super(myResources,tabText,myRuleMaker);
 		setContent();
 	}
+	
 	/**
 	 * Set content of tab to list of images
 	 */
