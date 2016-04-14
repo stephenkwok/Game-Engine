@@ -743,6 +743,9 @@
     <floorHeight>500.0</floorHeight>
   </myPhysicsEngine>
   <myCollisionDetector>
+    <SideCollision>SideCollision</SideCollision>
+    <TopCollision>TopCollision</TopCollision>
+    <BottomCollision>BottomCollision</BottomCollision>
     <myPhysicsEngine reference="../../myPhysicsEngine"/>
   </myCollisionDetector>
   <currentActors/>

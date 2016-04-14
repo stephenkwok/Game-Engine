@@ -1,8 +1,6 @@
 package gui.view;
 
 import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import gui.controller.IScreenController;
 import javafx.geometry.Insets;
 import javafx.scene.Node;

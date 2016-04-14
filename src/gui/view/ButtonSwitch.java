@@ -1,6 +1,5 @@
 package gui.view;
 
-import gameplayer.controller.BaseScreenController;
 import gui.controller.IScreenController;
 import gui.controller.ScreenController;
 

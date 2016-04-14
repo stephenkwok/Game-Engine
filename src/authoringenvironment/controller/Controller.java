@@ -158,13 +158,14 @@ public class Controller implements IScreenController {
 		myActors.add(newActor);
 		myActorNames.add(newActor.getMyName());
 		mainScreen.createActorLabel(newActor);
+		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getMyImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
 	/**
 	 * Saves game and returns to splash screen of game player.
 	 */
 	public void goBackToGamePlayer() {
-		guiMain.goBackToGamePlayer();
+		guiMain.goBackToSplash();
 	}
 	
 	public double getSceneWidth(){
@@ -184,14 +185,6 @@ public class Controller implements IScreenController {
 	public Screen getScreen() {
 		return guiMain;
 	}
-	
-	public void setGameName() {
-		
-	}
-	
-	public void setGameDescription() {
-		
-	}
 
 	@Override
 	public void chooseGame() {
@@ -207,8 +200,7 @@ public class Controller implements IScreenController {
 
 	@Override
 	public void goToSplash() {
-		// TODO Auto-generated method stub
-		
+		guiMain.goBackToSplash();
 	}
 
 	@Override

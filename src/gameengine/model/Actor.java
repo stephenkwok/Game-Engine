@@ -84,7 +84,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      *
      * @param newAttribute The new Actor Attribute
      */
-    @Override
     public void addAttribute(Attribute newAttribute) {
     	newAttribute.addObserver(this);
         getAttributeMap().put(newAttribute.getMyType(), newAttribute);
@@ -96,7 +95,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * @param type The new Actor Attribute Type
      */
 
-    @Override
     public Attribute getAttribute(AttributeType type){
     	return getAttributeMap().get(type);
     }
@@ -107,7 +105,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * @param type   The type of the Attribute to be changed
      * @param change The amount to change the Attribute by
      */
-    @Override
     public void changeAttribute(AttributeType type, int change) {
 
         Attribute myAttribute = getAttributeMap().get(type);
@@ -195,7 +192,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * Sets a new X velocity
      * @param updateXVelo   The new X velocity
      */
-    @Override
     public void setVeloX(double updateXVelo) {
         veloX = updateXVelo;
     }
@@ -204,7 +200,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * Sets a new Y velocity
      * @param updateYVelo   The new Y velocity
      */
-    @Override
     public void setVeloY(double updateYVelo) {
         veloY = updateYVelo;
     }
@@ -279,7 +274,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * Assigns a phyiscs engine to an Actor
      * @param physicsEngine The assigned physics engine
      */
-	@Override
     public void setEngine(PhysicsEngine physicsEngine) {
 		setMyPhysicsEngine(physicsEngine);
 	}
@@ -288,7 +282,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * Provides the Actor's physics engine
      * @return  The Actor's physics engine
      */
-	@Override
     public PhysicsEngine getPhysicsEngine(){
 		return getMyPhysicsEngine();
 	}
@@ -387,16 +380,14 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
 	/**
 	 * @param inAir the inAir to set
 	 */
-	@Override
     public void setInAir(boolean inAir) {
-		inAir = inAir;
+		this.inAir = inAir;
 	}
 
     /**
      * Provides the Actor's Rules
      * @return  The Actor's Rules
      */
-	@Override
     public Map<String, List<Action>> getMyRules() {
 		return myRules;
 	}
@@ -405,7 +396,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * Sets the Actor's Rules
      * @param myRules   A new set of Actor rules
      */
-	@Override
     public void setMyRules(Map<String, List<Action>> myRules) {
 		this.myRules = myRules;
 	}
@@ -414,7 +404,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * Provides the Attribute map
      * @return  The Actor's Attribute Map
      */
-	@Override
     public Map<AttributeType, Attribute> getAttributeMap() {
 		return attributeMap;
 	}
@@ -423,7 +412,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * Sets a new Attribute Map
      * @param attributeMap  The new Attribute Map
      */
-	@Override
     public void setAttributeMap(Map<AttributeType, Attribute> attributeMap) {
 		this.attributeMap = attributeMap;
 	}
@@ -432,7 +420,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * Provides the Actor's physics engine
      * @return  The Actor's phyiscs engine
      */
-	@Override
     public PhysicsEngine getMyPhysicsEngine() {
 		return myPhysicsEngine;
 	}
@@ -441,7 +428,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * Sets a new physics engine
      * @param myPhysicsEngine   The new physics engine
      */
-	@Override
     public void setMyPhysicsEngine(PhysicsEngine myPhysicsEngine) {
 		this.myPhysicsEngine = myPhysicsEngine;
 	}
@@ -455,25 +441,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
 		myImageView.setFitHeight(size);
 		myImageView.setPreserveRatio(true);
 	}
-
-    /**
-     * Sets the Actor's health value
-     * @param myHealth  The Actor's health value
-     */
-	@Override
-    public void setMyHealth(double myHealth){
-		this.myHealth = myHealth;
-	}
-
-    /**
-     * Provides the Actor's amount of health
-     * @return  The Actor's amount of health
-     */
-	@Override
-    public double getMyHealth() {
-		return myHealth;
-	}
-
     /**
      * Adds a new ActorRule
      * @param actorRule The new ActorRule
@@ -505,7 +472,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * Marks the Actor as dead
      * @return  A boolean representing whether or not the Actor is dead
      */
-	@Override
     public boolean isDead() {
 		return isDead;
 	}
@@ -514,11 +480,15 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * Sets the Actor to alive or dead
      * @param isDead    The desired Actor state
      */
-	@Override
     public void setDead(boolean isDead) {
 		this.isDead = isDead;
 	}
 
+    /**
+     * Carries out the appropriate procedure when notified by an object that it observes
+     * @param o The Observable object that notifies the Actor
+     * @param arg   Arguments passed from the Observable object
+     */
 	@Override
 	public void update(Observable o, Object arg) {
 		if(isMain){
