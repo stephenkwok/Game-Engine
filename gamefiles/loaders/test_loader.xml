@@ -668,7 +668,6 @@
     <myImageName>default_game.jpg</myImageName>
     <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
-    <myID>0</myID>
     <myHUDElementsToDisplay/>
     <myFile>test_loader.xml</myFile>
   </info>
