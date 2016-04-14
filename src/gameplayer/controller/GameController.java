@@ -17,6 +17,7 @@ import javafx.collections.MapChangeListener.Change;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
+import javafx.util.Callback;
 
 
 /** 
@@ -104,30 +105,44 @@ public class GameController implements Observer {
 	 */
 	public void endGame (){
 		//TODO fix resource also implement saving functionality
-		
+
 		togglePause();
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Game over!  Do you want to save your score?", ButtonType.YES, ButtonType.NO);
 		alert.show();
-        alert.showingProperty().addListener((observable, oldValue, newValue) -> {
-        	if (!newValue) {
-        		saveScore();
-        	}
-        });
+		alert.showingProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue) {
+				if (alert.getResult() == ButtonType.YES) {
+					saveScorePrompt();
+				}
+			}
+		});
 
 	}
-	
-	private void saveScore() {
+
+	private void saveScorePrompt() {
 		TextInputDialog dialog = new TextInputDialog("Name");
 		dialog.setContentText("Please enter your name if you want to save your score");
 		dialog.show();
-		dialog.showingProperty().addListener((observable, oldValue, newValue) -> {
-			if (!newValue) {
-				HighScoresController c = new HighScoresController(this.getGame().getInfo().getMyFile());
-				c.saveHighScore(0, dialog.getResult());
+		dialog.setResultConverter(new Callback<ButtonType, String>() {
+			@Override
+			public String call(ButtonType b) {
+				if (b == ButtonType.OK) {
+					saveGame(dialog.getEditor().getText());
+					return dialog.getEditor().getText();
+				}
+				else {
+					return null;
+				}
 			}
 		});
 	}
-	
+
+	private void saveGame(String name) {
+		HighScoresController c = new HighScoresController(this.getGame().getInfo().getMyFile());
+		//TODO Get actual score from game
+		c.saveHighScore(getGame().getScore(), name);
+
+	}
 	
 	/**
 	 * Will stop the animation timeline.

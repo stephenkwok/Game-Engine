@@ -417,4 +417,8 @@ public class Game extends Observable implements Observer {
 		updateHUDFields(HUDData.keySet(), HUDData);
 	}
 
+	
+	public int getScore() {
+		return mainCharacter.getAttribute(AttributeType.POINTS).getMyValue();
+	}
 }
