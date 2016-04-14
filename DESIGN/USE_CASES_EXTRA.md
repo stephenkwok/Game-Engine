@@ -81,7 +81,7 @@
 	 - When called, the Action ChangeImage uses A1’s method setMyImageView(Image) to set A1’s ImageView to equal nextImage 
 	 - When the GameEngine completes its cycle and sends the Actors back to GamePlayer, they will display the Actor with the updated ImageView
 	 
- - An Actor (A1) moves upwards at a constant rate when it collides with a PowerUp Actor
+- An Actor (A1) moves upwards at a constant rate when it collides with a PowerUp Actor
 	 - A1 contains a Rule linking the Trigger SideCollision between itself and a PowerUp actor (a1SideCollisionpowerUp) to an Action GlideUp
 	 - When a collision is detected within the CollisionDetection class, it will call the method A1.performActionfor(a1SideCollisionpowerUp) 
 	 - A1 will then call the perform method within the GlideUp class 
@@ -116,7 +116,8 @@
 - User adds image to Actor rule
 	- Within the actor editing environment of the authoring environment, in the right pane, a GridPane representation of an ActorRule is shown. 
 	- The user can drag any Image tab element from the Library and drop it onto the GridPane of the ActorRule. 
-	- The image element will automatically be added to the Action section of the rule, and it will expand to be a ComboBox containing the currently available image files, with the initial value of the ComboBox set to the sound that was dragged over. 
+	- The image element will automatically be added to the Action section of the rule, and it will expand to be a ComboBox containing the currently available image files, with the initial value of the ComboBox set to the sound that was dragged over.
+
 - User clicks finish button to finish editing game in authoring environment
 	- When the finish button is clicked, the gamedata Saver will be called to save the current game.
 	- Also, the Controller will return the user to the game player’s splash screen by setting the Stage’s Scene to the splash Scene.
@@ -167,6 +168,7 @@
 	 - The GameController contains a camera that is set to the GameScreen (which is a subscene of BaseScreen)
 	 - Camera observes the main character’s x position
 	 - When the main character’s x position changes, camera’s x position will change
+
 - Character moves at the end of level, camera stops
 	 - When camera’s position changes, a base check is called that tests if camera’s x position + camera’s width surpasses a the subscene’s width - camera’s width, then camera’s position becomes final for this level
 
@@ -208,13 +210,3 @@
 	 - In endSceneReached(), GameController will set checkBounds = true.   
 	 - In the step() called by the Game’s timeline, if checkBounds == true, will check that main actor’s getX() % Controller’s GameScreen’s getScene().getWidth() < getScene().getWidth().  
 	 - If so, will not let main actor’s x increase.
-
-
-
-
-
-
-
-
-
-
