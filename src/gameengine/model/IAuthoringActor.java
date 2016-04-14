@@ -51,4 +51,8 @@ public interface IAuthoringActor extends IEditableGameElement{
 	void setMain(boolean parseBoolean);
 
 	void setMyFriction(double parseDouble);
+
+    void setMyID(int id);
+
+    int getMyID();
 }

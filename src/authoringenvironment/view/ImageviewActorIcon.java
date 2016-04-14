@@ -18,9 +18,9 @@ public class ImageviewActorIcon extends ImageView {
 	 * Construct an icon for a given actor.
 	 * @param actor: actor to construct an icon for.
 	 */
-	public ImageviewActorIcon(IAuthoringActor actor,double height) {
+	public ImageviewActorIcon(IAuthoringActor actor, double height) {
 		setImage(actor.getImageView().getImage());
-		this.setFitWidth(height);
+		this.setFitHeight(height);
 		this.setPreserveRatio(true);
 		myActor = actor;
 		myID = actor.getMyID();
@@ -56,5 +56,7 @@ public class ImageviewActorIcon extends ImageView {
 	 */
 	public void updateImageView() {
 		myImageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myActor.getMyImageViewName())));
+		myImageView.setPreserveRatio(true);
+		myImageView.setFitHeight(myActor.getImageView().getFitHeight());
 	}
 }
