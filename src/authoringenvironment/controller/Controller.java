@@ -145,7 +145,6 @@ public class Controller implements IScreenController {
 	 */
 	public void addLevel() {
 		Level newLevel = new Level();
-		newLevel.setMyID(myLevels.size());
 		myLevels.add(newLevel);
 		myLevelNames.add(newLevel.getMyName());
 		mainScreen.createLevelLabel(newLevel);
