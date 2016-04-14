@@ -1,11 +1,7 @@
 package gui.view;
 
 import authoringenvironment.model.IEditableGameElement;
-<<<<<<< HEAD
-import authoringenvironment.model.IGUIEditingElement;
-=======
 import authoringenvironment.model.IEditingElement;
->>>>>>> 491945f32ffcf2c9e25b40408068e5db271d8a2f
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;

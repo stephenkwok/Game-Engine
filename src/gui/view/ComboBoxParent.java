@@ -20,11 +20,7 @@ import javafx.scene.layout.Priority;
  * @author AnnieTang
  */
 
-<<<<<<< HEAD
 public abstract class ComboBoxParent extends EditingElementParent {
-=======
-public abstract class ComboBoxParent implements IGUIElement, IEditingElement {
->>>>>>> 491945f32ffcf2c9e25b40408068e5db271d8a2f
 	private static final int COMBOBOX_WIDTH = 150;
 	private static final int VISIBLE_ROW_COUNT = 5;
 	private static final int HBOX_SPACING = 5;
@@ -123,13 +119,6 @@ public abstract class ComboBoxParent implements IGUIElement, IEditingElement {
 
 	protected abstract void updateValueBasedOnEditable();
 	
-	@Override
-	public void setEditableElement(IEditableGameElement element) {
-		myEditableElement = element;
-		if (myEditableElement != null) {
-			updateValueBasedOnEditable();
-		}
-	}
 	
 	/**
 	 * Returns list of items in the ComboBox.
