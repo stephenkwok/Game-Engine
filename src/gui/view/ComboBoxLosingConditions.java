@@ -32,8 +32,8 @@ public class ComboBoxLosingConditions extends ComboBoxTextCell {
 	 */
 	@Override
 	public void setButtonAction() {
-		comboButton.setOnAction(event->{
-			((Level) getEditableElement()).setMyLosingCondition(comboBox.getValue());
+		getComboButton().setOnAction(event->{
+			((Level) getEditableElement()).setMyLosingCondition(getComboBox().getValue());
 		});
 	}
 
@@ -51,7 +51,7 @@ public class ComboBoxLosingConditions extends ComboBoxTextCell {
 	@Override
 	protected void updateValueBasedOnEditable() {
 		if (((Level) getEditableElement()).getMyLosingCondition() != null) {
-			comboBox.setValue(((Level) getEditableElement()).getMyLosingCondition());
+			getComboBox().setValue(((Level) getEditableElement()).getMyLosingCondition());
 		}
 	}
 

@@ -13,6 +13,14 @@
       <string>hudtest.xml</string>
       <tree-map>
         <entry>
+          <string>Camy</string>
+          <int>4</int>
+        </entry>
+        <entry>
+          <string>Carine</string>
+          <int>2</int>
+        </entry>
+        <entry>
           <string>Shubham</string>
           <int>0</int>
         </entry>

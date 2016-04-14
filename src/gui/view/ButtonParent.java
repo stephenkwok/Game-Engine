@@ -16,9 +16,9 @@ import javafx.stage.FileChooser;
 public abstract class ButtonParent implements IGUIElement {
 	private static final int ICON_SIZE = 30;
 	private static final int PADDING = 10;
-	protected IScreenController myController;
+	private IScreenController myController;
 	private String buttonText;
-	protected Button button;
+	private Button button;
 	private String imageName;
 	
 	public ButtonParent(IScreenController myController, String buttonText, String imageName) {
@@ -70,5 +70,21 @@ public abstract class ButtonParent implements IGUIElement {
             fileName = myFileChooser.showOpenDialog(myController.getStage());
         }
         return fileName;
+    }
+    
+    /**
+     * Gets the button.
+     * @return button.
+     */
+    protected Button getButton() {
+    	return button;
+    }
+    
+    /**
+     * Gets the controller used by this environment.
+     * @return controller.
+     */
+    protected IScreenController getController() {
+    	return myController;
     }
 }

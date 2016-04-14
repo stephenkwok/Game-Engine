@@ -13,8 +13,7 @@ public class ButtonSplash extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnMouseClicked(e -> myController.goToSplash());
-
+		getButton().setOnMouseClicked(e -> getController().goToSplash());
 	}
 
 }
