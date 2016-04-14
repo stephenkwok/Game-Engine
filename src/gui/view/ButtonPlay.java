@@ -20,7 +20,7 @@ public class ButtonPlay extends ButtonParent{
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnAction(e -> {
+		getButton().setOnAction(e -> {
 			//TODO Add a checker for null directory
 			if ((new File("gamefiles")).listFiles().length == 1) {
 				Alert alert = new Alert(Alert.AlertType.ERROR);
