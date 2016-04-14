@@ -6,7 +6,6 @@ import java.util.List;
 import authoringenvironment.controller.Controller;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import gameengine.model.Actor;
 import gameengine.model.IAuthoringActor;
 /**
  * Space in actor editing environment where rules are created.
@@ -82,10 +81,7 @@ public class ActorRuleCreator {
 		ActorRule newRule = new ActorRule(this);
 		myRuleCreator.add(newRule.getGridPane(), RULE_COL,rule_row);
 		rule_row++;
-		myRules.add(newRule);
 		((IAuthoringActor) aEE.getEditable()).addActorRule(newRule);
-		System.out.print("Add New Rule: ");
-		System.out.println(((IAuthoringActor) aEE.getEditable()).getActorRules());
 		aEE.updateDragEventsForLibrary();
 	}
 	/**
@@ -116,13 +112,11 @@ public class ActorRuleCreator {
 	 * fields based on the Actor 
 	 */
 	public void updateRules() {
+		System.out.println(myRules);
 		for(ActorRule toRemove: myRules){
 			myRuleCreator.getChildren().remove(toRemove.getGridPane());
-			((IAuthoringActor) aEE.getEditable()).removeActorRule(toRemove);
 		}
 		myRules = ((IAuthoringActor) aEE.getEditable()).getActorRules();
-		System.out.print("Update: ");
-		System.out.println(((IAuthoringActor) aEE.getEditable()).getActorRules());
 		addUpdatedRules()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ;
 	}
 	/**
@@ -132,6 +126,7 @@ public class ActorRuleCreator {
 		rule_row = RULE_ROW_START;
 		for(ActorRule toAdd: myRules){
 			myRuleCreator.add(toAdd.getGridPane(), RULE_COL, rule_row);
+			rule_row++;
 		}
 		aEE.updateDragEventsForLibrary();
 	}
