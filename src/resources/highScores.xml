@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.HighScoresKeeper>
   <myScores>
     <entry>
+      <string>hudtest_loader.xml</string>
+      <tree-map>
+        <entry>
+          <string>Carine</string>
+          <int>2</int>
+        </entry>
+      </tree-map>
+    </entry>
+    <entry>
       <string>testGame</string>
       <tree-map>
         <entry>
