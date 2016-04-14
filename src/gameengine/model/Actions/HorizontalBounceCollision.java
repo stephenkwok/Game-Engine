@@ -20,8 +20,7 @@ public class HorizontalBounceCollision extends Action{
 
 	@Override
 	public void perform() {
-		//myPhysicsEngine.horzBounceCollision(getActor());
-		getMyActor().setVeloX(getMyActor().getVeloX()*-1);
+		getMyActor().getMyPhysicsEngine().elasticHorizontalCollision(getMyActor());
 	}
 
 }
