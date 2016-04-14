@@ -15,7 +15,7 @@ package gameengine.model;
 public class PhysicsEngine {
 	
 	
-	//These Variable values are arbitrary, chosen by trial/error
+	//These Variable values are arbitrary, chosen by trial/error 
 	private int    timeStep         =  1;    //Arbitrary timeStep, will be set to the time provided by step()
 	private double friction         = -.05;  //Horizontal acceleration dampening (friction) coefficient
 	private double gravity          = .11 ;  //Falling acceleration coefficient
@@ -23,7 +23,6 @@ public class PhysicsEngine {
 	private double maxVertVelocity  = -50;   //maximum vertical velocity 
 	private double horizontalForce  = 5;     //Force applied to Actors on horizontal movements
 	private double jumpForce        = -5;    //Vertical Force applied to Actors on jump movements
-	private double floorHeight      =  500;  
 	
 	public PhysicsEngine(){
 		
@@ -83,10 +82,6 @@ public class PhysicsEngine {
 		nextYPos     = changePos(yPos, nextVertVelo); 
 		nextVertVelo = maxLimit(nextVertVelo, getMaxVertVelocity());
 			
-		if(nextYPos+a.getBounds().getHeight() > getFloorHeight()){                    //Collision detection for the actor and the ground
-			nextYPos = getFloorHeight()-a.getBounds().getHeight();				//TODO: delete this if statement after the floor is implemented as an actor
-			nextVertVelo = 0;
-		}
 		
 		nextHorzVelo = applyForce(xVelo, forceX); 							// Apply  y force from movement action to y velocity
 		nextHorzVelo = applyForce(nextHorzVelo, (friction*(nextHorzVelo))); //Apply frictional force
@@ -141,6 +136,7 @@ public class PhysicsEngine {
 	public void jump(Actor a1){
 		update(a1,0,getJumpForce(), getGravity(), a1.getMyFriction());
 	}
+	
 	//gliding methods for when force and gravity aren't applied
 	
 	public void glideRight(Actor a1) {
@@ -276,16 +272,5 @@ public class PhysicsEngine {
 	public void setJumpForce(double jumpForce) {
 		this.jumpForce = jumpForce;
 	}
-
-
-	public double getFloorHeight() {
-		return floorHeight;
-	}
-
-
-	public void setFloorHeight(double floorHeight) {
-		this.floorHeight = floorHeight;
-	}
-
 	
 }
