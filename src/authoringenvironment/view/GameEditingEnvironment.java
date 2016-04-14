@@ -1,10 +1,6 @@
 package authoringenvironment.view;
-
-import java.util.List;
 import java.util.ResourceBundle;
-
 import authoringenvironment.controller.Controller;
-import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
 import gameengine.controller.GameInfo;
@@ -51,11 +47,9 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	private VBox HUDOptionsDisplay;
 	private Controller controller;
 	private ScrollPane myScrollPane;
-	private List<IAuthoringActor> myActors;
 
-	public GameEditingEnvironment(GameInfo gameInfo, Controller controller, List<IAuthoringActor> actors) {
+	public GameEditingEnvironment(GameInfo gameInfo, Controller controller) {
 		this.myGameInfo = gameInfo;
-		this.myActors = actors;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
 		this.controller = controller;
 	}

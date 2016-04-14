@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoringenvironment.controller.Controller;
-import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.GameInfo;
@@ -41,10 +40,9 @@ public class GUIMainScreen implements IGUI {
 	private IEditingEnvironment actorEditor;
 	private IEditingEnvironment levelEditor;
 	private GameInfo gameInfo;
-	private List<IAuthoringActor> myActors;
 
 	public GUIMainScreen(Controller controller, IEditingEnvironment actorEditor, IEditingEnvironment levelEditor,
-			GameInfo gameInfo, List<IAuthoringActor> actors) {
+			GameInfo gameInfo) {
 		this.controller = controller;
 		this.actorEditor = actorEditor;
 		this.levelEditor = levelEditor;
@@ -72,7 +70,7 @@ public class GUIMainScreen implements IGUI {
 	 * Initializes the Game Editing Environment and sets it as the BorderPane's left pane
 	 */
 	private void initializeGameEditingEnvironment() {
-		GameEditingEnvironment gameEditingEnvironment = new GameEditingEnvironment(gameInfo, controller, myActors);
+		GameEditingEnvironment gameEditingEnvironment = new GameEditingEnvironment(gameInfo, controller);
 		borderPane.setLeft(gameEditingEnvironment.createNode());
 	}
 
