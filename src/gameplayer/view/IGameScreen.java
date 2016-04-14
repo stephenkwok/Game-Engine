@@ -29,6 +29,8 @@ public interface IGameScreen extends disableable {
 	
 	public void setUp();
 	
+	public void changeCamera(int x, int y);
+	
 	public void disableMusic(boolean disable);
 	
 	public void disableSoundFX(boolean disable);

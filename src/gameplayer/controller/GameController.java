@@ -17,6 +17,7 @@ import javafx.collections.MapChangeListener.Change;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
+import javafx.util.Callback;
 
 
 /** 
@@ -24,23 +25,24 @@ import javafx.scene.control.TextInputDialog;
  * @author cmt57
  */
 
-public class GameController implements Observer {
+public class GameController implements Observer, IGameController {
 	@XStreamOmitField
 	private Game model;
 	@XStreamOmitField
 	private GameScreen view;
 	@XStreamOmitField
 	private HUDScreen hud;
-	
+
 	/**
 	 * Sets the current game to the given Game
 	 * @param Game
 	 */
+	@Override
 	public void setGame (Game myGame){
 		model = myGame;
 		model.addObserver(this);
 	}
-	
+
 	/**
 	 * Sets the basic game view to the given GameScreen
 	 * @param GameScreen
@@ -49,12 +51,12 @@ public class GameController implements Observer {
 		view = myGameView;
 		view.addObserver(this);
 	}
-	
+
 	public void setHUD(HUDScreen hud) {
 		this.hud = hud;
 	}
-	
-	
+
+
 	/**
 	 * Will initialize the backend (game engine) with the current level's information and actor information to set up the game for playing.  Will visualize that backend too. 
 	 * @param level an int representing the level to be played
@@ -63,7 +65,7 @@ public class GameController implements Observer {
 		model.setCurrentLevel(level);
 		begin();
 	}
-	
+
 	/**
 	 * Will play the animation timeline. 
 	 */
@@ -77,84 +79,97 @@ public class GameController implements Observer {
 		this.toggleUnPause();
 		model.startGame();
 	}
-	
+
 	/**
 	 * Will reflect changes in actors' positions or values in a new "step" to simulate one round of animation.
 	 */
 	public void update (){
-		
+
 	}
-	
+
 	/**
 	 * Will ask game engine to check interactions that need to be resolved.
 	 */
 	public void checkInteractions (){
-		
+
 	}
-	
+
 	/**
 	 * Will resolve any front end outcomes determined by logic in backend checking interactions.
 	 */
 	public void cleanUp (){
-		
+
 	}
-	
+
 	/**
 	 * Will stop the animation timeline.
 	 */
 	public void endGame (){
 		//TODO fix resource also implement saving functionality
-		
+
 		togglePause();
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Game over!  Do you want to save your score?", ButtonType.YES, ButtonType.NO);
 		alert.show();
-        alert.showingProperty().addListener((observable, oldValue, newValue) -> {
-        	if (!newValue) {
-        		saveScore();
-        	}
-        });
+		alert.showingProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue) {
+				if (alert.getResult() == ButtonType.YES) {
+					saveScorePrompt();
+				}
+			}
+		});
 
 	}
-	
-	private void saveScore() {
+
+	private void saveScorePrompt() {
 		TextInputDialog dialog = new TextInputDialog("Name");
 		dialog.setContentText("Please enter your name if you want to save your score");
 		dialog.show();
-		dialog.showingProperty().addListener((observable, oldValue, newValue) -> {
-			if (!newValue) {
-				HighScoresController c = new HighScoresController(this.getGame().getInfo().getMyFile());
-				c.saveHighScore(0, dialog.getResult());
+		dialog.setResultConverter(new Callback<ButtonType, String>() {
+			@Override
+			public String call(ButtonType b) {
+				if (b == ButtonType.OK) {
+					saveGame(dialog.getEditor().getText());
+					return dialog.getEditor().getText();
+				}
+				else {
+					return null;
+				}
 			}
 		});
 	}
-	
-	
+
+	private void saveGame(String name) {
+		HighScoresController c = new HighScoresController(this.getGame().getInfo().getMyFile());
+		c.saveHighScore(getGame().getScore(), name);
+
+	}
+
 	/**
 	 * Will stop the animation timeline.
 	 */
 	public void winGame (){
 		System.out.println("game won");
 	}
-	
+
 	public void nextLevel (){
 		view.clearGame();
 		model.nextLevel();
 		begin();
 	}
-	
-	
+
+
 	public GameScreen getView() {
 		return view;
 	}
-	
+
 	public Game getGame() {
 		return model;
 	}
-	
+
 	private void updateActors(){
 		view.removeActors(model.getDeadActors());
 	}
-	
+
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o.equals(view)){
@@ -171,11 +186,11 @@ public class GameController implements Observer {
 			hud.handleChange((Change) arg);
 		}
 	}
-	
+
 	public void toggleSound() {
 		System.out.println("toggle sound unimplemented");
 	}
-	
+
 	public void toggleMusic(){
 		System.out.println("toggle music unimplemented");
 	}
@@ -196,11 +211,23 @@ public class GameController implements Observer {
 		System.out.println(model.getInfo().getMyCurrentLevelNum() + " game level");
 		initialize(model.getInfo().getMyCurrentLevelNum());
 	}
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public void preview() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void play() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+
 
 }
