@@ -63,9 +63,9 @@
             <entry>
               <string>A1BottomCollisionA2</string>
               <list>
-                <gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalBounceCollision>
                   <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.VerticalStaticCollision>
+                </gameengine.model.Actions.VerticalBounceCollision>
               </list>
             </entry>
             <entry>
