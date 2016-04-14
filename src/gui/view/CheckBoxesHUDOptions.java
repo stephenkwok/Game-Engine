@@ -20,6 +20,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+/**
+ * Checkboxes for all HUD options.
+ * @author amyzhao, stephen
+ *
+ */
 public class CheckBoxesHUDOptions implements IGUIElement, IEditingElement {
 
 	private static final String DELIMITER = ",";
@@ -34,13 +39,11 @@ public class CheckBoxesHUDOptions implements IGUIElement, IEditingElement {
 	private List<CheckBox> myHUDElements;
 	private GUIFactory myFactory;
 	private Controller myController;
-	private List<IAuthoringActor> myActors;
 
-	public CheckBoxesHUDOptions(IEditableGameElement gameInfo, Controller controller, List<IAuthoringActor> actors) {
+	public CheckBoxesHUDOptions(IEditableGameElement gameInfo, Controller controller) {
 		this.myGameInfo = gameInfo;
 		this.myController = controller;
 		this.myAttributesResources = ResourceBundle.getBundle("HUDOptions");
-		this.myActors = actors;
 		this.myContainer = new VBox(CONTAINER_SPACING);
 		myContainer.setPadding(new Insets(CONTAINER_PADDING));
 		myFactory = new GUIFactory(myAttributesResources, myController);
