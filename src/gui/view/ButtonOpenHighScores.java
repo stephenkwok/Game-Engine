@@ -14,7 +14,7 @@ public class ButtonOpenHighScores extends ButtonParent{
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnMouseClicked(e -> myControl.openHighScores());
+		getButton().setOnMouseClicked(e -> myControl.openHighScores());
 		
 	}
 

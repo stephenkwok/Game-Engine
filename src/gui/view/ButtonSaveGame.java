@@ -14,8 +14,7 @@ public class ButtonSaveGame extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnMouseClicked(e -> myControl.saveGame());
-
+		getButton().setOnMouseClicked(e -> myControl.saveGame());
 	}
 
 }

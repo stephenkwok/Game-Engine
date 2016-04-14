@@ -29,10 +29,10 @@ abstract class TabLibrary extends TabParent {
 	private static final int FILE_EXT_LENGTH = 4;
 	private static final String IMAGE_FILE_EXTS = ".jpg .png .gif";
 	private static final String SOUND_FILE_EXTS = ".mp3";
-	protected static final double CORNER_RADIUS = 20;
-	protected ObservableList<Label> labels;
-	protected ListView<Label> listView;
-	protected ActorRuleCreator myActorRuleCreator;
+	private static final double CORNER_RADIUS = 20;
+	private ObservableList<Label> labels;
+	private ListView<Label> listView;
+	private ActorRuleCreator myActorRuleCreator;
 	private List<ActorRule> myActorRules; //targets
 	
 	public TabLibrary(ResourceBundle myResources, String tabText, ActorRuleCreator myActorRuleCreator) {
@@ -179,5 +179,45 @@ abstract class TabLibrary extends TabParent {
 				setDragEvent(behaviorLabel,TransferMode.COPY);
 			}
 		}
+	}
+	
+	/**
+	 * Gets labels for the elements in this library.
+	 * @return list of labels.
+	 */
+	protected ObservableList<Label> getLabels() {
+		return labels;
+	}
+	
+	/**
+	 * Sets the labels for elements in this library.
+	 * @param labels: observable list of labels to use.
+	 */
+	protected void setLabels(ObservableList<Label> labels) {
+		this.labels = labels;
+	}
+	
+	/**
+	 * Gets the current list of labels.
+	 * @return listview of labels.
+	 */
+	protected ListView<Label> getListView() {
+		return listView;
+	}
+	
+	/**
+	 * Sets the listview of labels.
+	 * @param listview: listview to set labels to.
+	 */
+	protected void setListView(ListView<Label> listview) {
+		listView = listview;
+	}
+	
+	/**
+	 * Gets the actor rule creator used by this environment.
+	 * @return actor rule creator.
+	 */
+	protected ActorRuleCreator getActorRuleCreator() {
+		return myActorRuleCreator;
 	}
 }
