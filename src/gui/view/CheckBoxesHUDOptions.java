@@ -40,6 +40,11 @@ public class CheckBoxesHUDOptions implements IGUIElement, IEditingElement {
 	private GUIFactory myFactory;
 	private Controller myController;
 
+	/**
+	 * Constructs a CheckBoxesHUDOptions object for the given GameInfo object.
+	 * @param gameInfo: GameInfo object.
+	 * @param controller: controller for the authoring environment.
+	 */
 	public CheckBoxesHUDOptions(IEditableGameElement gameInfo, Controller controller) {
 		this.myGameInfo = gameInfo;
 		this.myController = controller;
@@ -49,7 +54,12 @@ public class CheckBoxesHUDOptions implements IGUIElement, IEditingElement {
 		myFactory = new GUIFactory(myAttributesResources, myController);
 		myHUDElements = new ArrayList<>();
 	}
-
+	
+	/**
+	 * Initializes the VBox containing the HUD checkboxes.
+	 * @param key: key in resource file for the checkboxes to add.
+	 * @param vbox: vbox to add checkboxes into.
+	 */
 	private void initializeHUD(String key, VBox vbox) {
 		vbox.getChildren().add(new Label(HUD_PROMPT));
 		List<Node> checkboxes = addElements(HUD_OPTIONS, vbox);
@@ -65,6 +75,12 @@ public class CheckBoxesHUDOptions implements IGUIElement, IEditingElement {
 		vbox.getChildren().add(checkHUDButton);
 	}
 
+	/**
+	 * Add checkbox elements to the vbox.
+	 * @param key: key in resource file for elements to add.
+	 * @param vbox: container to add checkboxes to.
+	 * @return list of elements added.
+	 */
 	private List<Node> addElements(String key, VBox vbox) {
 		String[] elements = myAttributesResources.getString(key).split(DELIMITER);
 		List<Node> createdElements = new ArrayList<>();
@@ -74,6 +90,10 @@ public class CheckBoxesHUDOptions implements IGUIElement, IEditingElement {
 		return createdElements;
 	}
 
+	/**
+	 * Get the HUD elements that the user has selected.
+	 * @return list of HUD elements that the user selected.
+	 */
 	public Map<String, Integer> getHUDElementsToDisplay() {
 		Map<String, Integer> toDisplay = new HashMap<String, Integer>();
 		for (int i = 0; i < myHUDElements.size(); i++) {
@@ -85,16 +105,27 @@ public class CheckBoxesHUDOptions implements IGUIElement, IEditingElement {
 		return toDisplay;
 	}
 
+	/**
+	 * Initializes the value for a given option to 0.
+	 * @param myHUDElementID: ID of HUD Element to initialize.
+	 * @return 0.
+	 */
 	// remove this once changes are made on the other end 
 	private int getInitialValueForHUDElement(String myHUDElementID) {
 		return 0;
 	}
 
+	/**
+	 * Sets the editable element for the CheckBoxes.
+	 */
 	@Override
 	public void setEditableElement(IEditableGameElement element) {
 		myGameInfo = element;
 	}
 
+	/**
+	 * Returns the node for this object.
+	 */
 	@Override
 	public Node createNode() {
 		initializeHUD(HUD_OPTIONS, myContainer);
