@@ -211,7 +211,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 		myCenterPane.getChildren().clear();
 		myLevel = (Level) editable;
 		updateActorsList();
-		updateLevel((Level) editable);
+		updateLevel();
 		myInspector.getAttributesTab().updateEditable(myLevel);
 	}
 	
@@ -219,9 +219,8 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * Updates the level that's being displayed.
 	 * @param updatedLevel: new level.
 	 */
-	private void updateLevel(Level updatedLevel) {
+	private void updateLevel() {
 		myCenterPane.getChildren().removeAll(myActorPreviews);
-		myLevel = updatedLevel;
 		updateLevelBackground();
 		addLevelActorsToScene();
 	}
@@ -247,7 +246,6 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 			icon.getImageView().setY(actor.getY());
 			icon.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
 				@Override public void handle(MouseEvent event) {
-					System.out.println("tryna ddrag");
 					moveActor(actor, icon, event);
 					event.consume();
 				}
