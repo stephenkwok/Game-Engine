@@ -484,6 +484,11 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
 		this.isDead = isDead;
 	}
 
+    /**
+     * Carries out the appropriate procedure when notified by an object that it observes
+     * @param o The Observable object that notifies the Actor
+     * @param arg   Arguments passed from the Observable object
+     */
 	@Override
 	public void update(Observable o, Object arg) {
 		if(isMain){
