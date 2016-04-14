@@ -10,10 +10,14 @@ import gamedata.controller.HighScoresController;
 import gameengine.controller.Game;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gameengine.model.AttributeType;
 import gameengine.model.ITrigger;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.MapChangeListener.Change;
+import javafx.collections.ObservableMap;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
@@ -63,6 +67,16 @@ public class GameController implements Observer, IGameController {
 	 */
 	public void initialize (int level){
 		model.setCurrentLevel(level);
+		//model.getMainCharacter().changeAttribute(AttributeType.POINTS, 0);
+		ObservableMap<String, Object> a = FXCollections.observableHashMap();
+		a.addListener(new MapChangeListener<String, Object>() {
+			@Override
+			public void onChanged(Change<? extends String, ? extends Object> change) {
+				if(change!=null && hud != null)
+					hud.handleChange(change);
+			}
+		});
+		a.put("Points", 0);
 		begin();
 	}
 
@@ -180,10 +194,8 @@ public class GameController implements Observer, IGameController {
 				this.getClass().getDeclaredMethod(((String)arg)).invoke(this);
 			}
 			catch (Exception e){
-				e.printStackTrace();
+				hud.handleChange((Change)arg);
 			}
-		}if(o.equals(hud)){
-			hud.handleChange((Change) arg);
 		}
 	}
 
@@ -222,6 +234,13 @@ public class GameController implements Observer, IGameController {
 	public void play() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	/**
+	 * Updates attributes 
+	 */
+	public void updateAttribute() {
+		model.updateAttribute();
 	}
 
 
