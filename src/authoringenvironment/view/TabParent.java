@@ -16,10 +16,10 @@ import javafx.scene.control.ScrollPane;
  */
 import javafx.scene.control.Tab;
 abstract class TabParent{
-	protected Tab tab;
-	protected String tabText;
-	protected ResourceBundle myResources;
-	protected List<String> fileNames;
+	private Tab tab;
+	private String tabText;
+	private ResourceBundle myResources;
+	private List<String> fileNames;
 	private ScrollPane sp;
 	
 	public TabParent(ResourceBundle myResources, String tabText) {
@@ -71,7 +71,7 @@ abstract class TabParent{
 	}
 	/**
 	 * Get content of tab
-	 * @return
+	 * @return content of tab.
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 * @throws IllegalArgumentException
@@ -79,4 +79,27 @@ abstract class TabParent{
 	 */
 	abstract Node getContent() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
 
+	/**
+	 * Get list of filenames.
+	 * @return list of filenames.
+	 */
+	protected List<String> getFileNames() {
+		return fileNames;
+	}
+	
+	/**
+	 * Get resource bundle for this tab.
+	 * @return resource bundle used by this tab.
+	 */
+	protected ResourceBundle getResources() {
+		return myResources;
+	}
+	
+	/**
+	 * Title of this tab.
+	 * @return title of this tab.
+	 */
+	protected String getTabText() {
+		return tabText;
+	}
 }

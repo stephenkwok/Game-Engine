@@ -14,8 +14,7 @@ public class ButtonSwitch extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnMouseClicked(e -> myController.switchGame());
-
+		getButton().setOnMouseClicked(e -> myController.switchGame());
 	}
 
 }

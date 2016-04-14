@@ -25,7 +25,7 @@ public class ButtonNewLevel extends ButtonParent {
 	 */
 	@Override
 	protected void setButtonAction() {
-		button.setOnAction(e -> ((Controller) myController).addLevel());
+		getButton().setOnAction(e -> ((Controller) getController()).addLevel());
 	}
 
 }

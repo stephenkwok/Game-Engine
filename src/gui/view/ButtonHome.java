@@ -17,8 +17,8 @@ public class ButtonHome extends ButtonParent{
 	 */
 	@Override
 	protected void setButtonAction() {
-		button.setOnAction(event -> {
-			((Controller) myController).goToMainScreen();
+		getButton().setOnAction(event -> {
+			((Controller) getController()).goToMainScreen();
 		});
 	}
 }
