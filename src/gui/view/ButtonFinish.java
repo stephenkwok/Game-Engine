@@ -13,6 +13,9 @@ public class ButtonFinish extends ButtonParent {
 		super(myController, buttonText, imageName);
 	}
 
+	/**
+	 * Returns to the splash screen once the user is finished editing.
+	 */
 	@Override
 	protected void setButtonAction() {
 		button.setOnAction(e -> {
