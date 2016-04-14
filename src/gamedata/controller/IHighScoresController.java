@@ -17,10 +17,27 @@ import org.xml.sax.SAXException;
  */
 public interface IHighScoresController {
 	
+	/**
+	 * Enables Game Player to obtain non game-specific (every game's) high scores for displaying purposes on a score board
+	 * @return Map<String, Map<String, Integer>> maps a game's identifier (name) to a map of that game's high scores information per player
+	 */
 	public Map<String, Map<String, Integer>> getAllGameScores();
 	
+	/**
+	 * Enables Game Player to obtain game-specific high scores for displaying purposes on a score board
+	 * @return Map<String, Integer> that maps all of a game's players to their high scores
+	 */
 	public Map<String, Integer> getGameHighScores();
 	
+	/**
+	 * Enables the Game Player to pass Game Data a high score (and associated player) to be recorded
+	 * @param score
+	 * @param player
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 * @throws TransformerException
+	 */
 	public void saveHighScore(int score, String player) throws ParserConfigurationException, SAXException, IOException, TransformerException;
 	
 	/**
