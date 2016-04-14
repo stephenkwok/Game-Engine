@@ -76,7 +76,7 @@ public class Controller implements IScreenController {
 		environment.setEditable(editable);
 		try{
 			actorEnvironment.updateRules();
-			System.out.println(myActors);
+			System.out.println(((IAuthoringActor)actorEnvironment.getEditable()).getActorRules());
 		}catch(ConcurrentModificationException e){}
 		guiMain.setCenterPane(environment.getPane()); 
 	}
