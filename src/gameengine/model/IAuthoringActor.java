@@ -82,6 +82,11 @@ public interface IAuthoringActor extends IEditableGameElement{
      */
     void setSize(double size);
     /**
+     * Sets the Actor's ImageView's size
+     * @param size  The ImageView's size
+     */
+	double getSize();
+    /**
      * Adds a new ActorRule
      * @param actorRule The new ActorRule
      */
@@ -109,8 +114,20 @@ public interface IAuthoringActor extends IEditableGameElement{
 	 * @param myFriction the myFriction to set
 	 */
 	void setMyFriction(double parseDouble);
-
+	
+	/**
+	 * @return the myFriction
+	 */
+	double getMyFriction();
+	/**
+     * Sets a new Actor ID
+     * @param ID    The new ID
+     */
     void setMyID(int id);
-
+    /**
+     * Provides the Actor's ID number
+     *
+     * @return The Actor's ID number
+     */
     int getMyID();
 }
