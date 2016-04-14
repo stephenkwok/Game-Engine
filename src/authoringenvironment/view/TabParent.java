@@ -5,9 +5,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
+
+
 /**
  * Parent tab class that holds variable content.
  * @author AnnieTang
