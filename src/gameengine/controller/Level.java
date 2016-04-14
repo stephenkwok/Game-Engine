@@ -141,28 +141,6 @@ public class Level implements Observer, ILevel, IEditableGameElement {
 	}
 
     /**
-     * Sets the Level's ID
-     *
-     * @param ID to be set as the IEditableGameElement's ID
-     */
-	@Override
-	public void setMyID(int ID) {
-		// TODO Auto-generated method stub
-
-	}
-
-    /**
-     * Provides the Level's ID
-     *
-     * @return  The Level's ID
-     */
-	@Override
-	public int getMyID() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-    /**
      * Provides the name of the Level's background image
      *
      * @return  The name of the Level's background image

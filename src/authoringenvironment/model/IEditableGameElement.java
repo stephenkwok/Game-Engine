@@ -38,17 +38,5 @@ public interface IEditableGameElement {
 	 * @param imageView to be set as IEditableGameElement's ImageView
 	 */
 	public void setImageView(ImageView imageView);
-	
-	/**
-	 * sets the IEditableGameElement's ID to the given ID
-	 * 
-	 * @param ID to be set as the IEditableGameElement's ID
-	 */
-	public void setMyID(int ID);
-	
-	/**
-	 * 
-	 * @return the IEditableGameElement's ID
-	 */
-	public int getMyID();
+
 }
