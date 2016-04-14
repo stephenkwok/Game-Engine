@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.controller.Controller;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gameengine.model.IAuthoringActor;
-import gui.view.IGUI;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.ImageView;
@@ -28,7 +27,7 @@ import javafx.scene.layout.VBox;
  * @author amyzhao
  *
  */
-public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
+public class LevelEditingEnvironment implements IEditingEnvironment {
 	private static final String GUI_RESOURCE = "authoringGUI";
 	private BorderPane myRoot;
 	private GUILevelInspector myInspector;
@@ -47,7 +46,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * @param controller: authoring environment controller.
 	 * @param actors: list of currently available actors.
 	 */
-	public GUILevelEditingEnvironment(Controller controller, List<IAuthoringActor> actors) {
+	public LevelEditingEnvironment(Controller controller, List<IAuthoringActor> actors) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
@@ -207,7 +206,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * Update the level that is being edited and update the level inspector to reflect the current level.
 	 */
 	@Override
-	public void setEditable(IEditableGameElement editable) {
+	public void setEditableElement(IEditableGameElement editable) {
 		myCenterPane.getChildren().clear();
 		myLevel = (Level) editable;
 		updateActorsList();

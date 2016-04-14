@@ -2,7 +2,7 @@ package gui.view;
 
 import java.io.File;
 
-import authoringenvironment.view.GUIActorEditingEnvironment;
+import authoringenvironment.view.ActorEditingEnvironment;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -10,10 +10,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class ComboBoxActorImages extends ComboBoxImageCell{
-	GUIActorEditingEnvironment aEE;
+	ActorEditingEnvironment aEE;
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
 	
-	public ComboBoxActorImages(String promptText, String imageResource, GUIActorEditingEnvironment aEE) {
+	public ComboBoxActorImages(String promptText, String imageResource, ActorEditingEnvironment aEE) {
 		super(promptText,imageResource, STANDARD_IMAGE_HEIGHT);
 		this.aEE = aEE;
 		fillImageNames();

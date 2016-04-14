@@ -63,20 +63,14 @@
             <entry>
               <string>A1BottomCollisionA2</string>
               <list>
-                <gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalBounceCollision>
                   <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.VerticalStaticCollision>
+                </gameengine.model.Actions.VerticalBounceCollision>
               </list>
             </entry>
             <entry>
               <string>A1BottomCollisionfloor</string>
               <list>
-                <gameengine.model.Actions.VerticalStaticCollision>
-                  <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.VerticalStaticCollision>
-                <gameengine.model.Actions.VerticalStaticCollision>
-                  <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.VerticalStaticCollision>
                 <gameengine.model.Actions.VerticalStaticCollision>
                   <myActor reference="../../../../.."/>
                 </gameengine.model.Actions.VerticalStaticCollision>
@@ -200,12 +194,6 @@
                 <gameengine.model.Actions.VerticalStaticCollision>
                   <myActor reference="../../../../.."/>
                 </gameengine.model.Actions.VerticalStaticCollision>
-                <gameengine.model.Actions.VerticalStaticCollision>
-                  <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.VerticalStaticCollision>
-                <gameengine.model.Actions.VerticalStaticCollision>
-                  <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.VerticalStaticCollision>
               </list>
             </entry>
           </myRules>
@@ -233,12 +221,6 @@
             <entry>
               <string>Default NameBottomCollisionfloor</string>
               <list>
-                <gameengine.model.Actions.VerticalStaticCollision>
-                  <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.VerticalStaticCollision>
-                <gameengine.model.Actions.VerticalStaticCollision>
-                  <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.VerticalStaticCollision>
                 <gameengine.model.Actions.VerticalStaticCollision>
                   <myActor reference="../../../../.."/>
                 </gameengine.model.Actions.VerticalStaticCollision>
@@ -632,48 +614,6 @@
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs>
-            <gameengine.controller.Level reference="../../../.."/>
-          </obs>
-          <x>816.0</x>
-          <y>700.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myID>0</myID>
-          <myFriction>0.0</myFriction>
-          <inAir>false</inAir>
-          <myName>floor</myName>
-          <myImageViewName>square.png</myImageViewName>
-          <myRules/>
-          <attributeMap/>
-          <isMain>false</isMain>
-          <myHealth>0.0</myHealth>
-          <myActorRules/>
-          <isDead>false</isDead>
-        </gameengine.model.Actor>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs>
-            <gameengine.controller.Level reference="../../../.."/>
-          </obs>
-          <x>867.0</x>
-          <y>700.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myID>0</myID>
-          <myFriction>0.0</myFriction>
-          <inAir>false</inAir>
-          <myName>floor</myName>
-          <myImageViewName>square.png</myImageViewName>
-          <myRules/>
-          <attributeMap/>
-          <isMain>false</isMain>
-          <myHealth>0.0</myHealth>
-          <myActorRules/>
-          <isDead>false</isDead>
-        </gameengine.model.Actor>
       </myActors>
       <myTriggerMap>
         <entry>
@@ -728,7 +668,6 @@
     <myImageName>default_game.jpg</myImageName>
     <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
-    <myID>0</myID>
     <myHUDElementsToDisplay/>
     <myFile>test.xml</myFile>
   </info>

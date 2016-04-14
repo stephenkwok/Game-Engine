@@ -1,6 +1,6 @@
 package authoringenvironment.view;
 
-import gameengine.model.IAuthoringActor;
+import authoringenvironment.model.IAuthoringActor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -55,7 +55,7 @@ public class ImageviewActorIcon extends ImageView {
 	 * Update the imageview based on the actor's current image.
 	 */
 	public void updateImageView() {
-		myImageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myActor.getMyImageViewName())));
+		myImageView = myActor.getImageView();
 		myImageView.setPreserveRatio(true);
 		myImageView.setFitHeight(myActor.getImageView().getFitHeight());
 	}

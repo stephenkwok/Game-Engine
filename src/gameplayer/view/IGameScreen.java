@@ -9,18 +9,30 @@ import javafx.event.Event;
  * @author cmt57
  */
 
-public interface IGameScreen {
+public interface IGameScreen extends disableable {
 	
 	/**
 	 * Will add a node to the screen's scene representing the given actor's view.
 	 * @param actor an instance of IActor
 	 */
+	@Deprecated
 	public void addActor (IActor actor);
 	
 	/**
 	 * Will receive events on screen and then pass to the game engine's handler to determine what action to take
 	 * @param e event 
 	 */
+	@Deprecated
 	public void handleScreenEvent (Event e);
+	
+	public void reset();
+	
+	public void setUp();
+	
+	public void changeCamera(int x, int y);
+	
+	public void disableMusic(boolean disable);
+	
+	public void disableSoundFX(boolean disable);
 
 }

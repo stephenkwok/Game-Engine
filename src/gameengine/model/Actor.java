@@ -10,6 +10,7 @@ import java.util.Set;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.Actions.Action;
 import javafx.geometry.Bounds;
@@ -325,7 +326,11 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      */
 	public void setMyImageViewName(String myImageViewName) {
 		this.myImageViewName = myImageViewName;
-		this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
+		try{
+			this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
+		}catch(Exception e){
+			
+		}
 	}
 
     /**
@@ -440,6 +445,14 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
     public void setSize(double size){
 		myImageView.setFitHeight(size);
 		myImageView.setPreserveRatio(true);
+	}
+	/**
+     * Sets the Actor's ImageView's size
+     * @param size  The ImageView's size
+     */
+	@Override
+    public double getSize(){
+		return myImageView.getFitHeight();
 	}
     /**
      * Adds a new ActorRule

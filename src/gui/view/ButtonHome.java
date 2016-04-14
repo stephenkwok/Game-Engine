@@ -12,6 +12,9 @@ public class ButtonHome extends ButtonParent{
 		super(myController, buttonText, imageName);
 	}
 
+	/**
+	 * Returns to the main screen of the authoring environment.
+	 */
 	@Override
 	protected void setButtonAction() {
 		button.setOnAction(event -> {

@@ -1,6 +1,6 @@
 package gui.view;
 
-import gameengine.model.IAuthoringActor;
+import authoringenvironment.model.IAuthoringActor;
 
 public class TextFieldActorNameEditor extends TextFieldWithButton {
 
@@ -8,10 +8,12 @@ public class TextFieldActorNameEditor extends TextFieldWithButton {
 		super(labelText, promptText, textFieldWidth);
 		setButtonAction(e -> ((IAuthoringActor) getEditableElement()).setMyName(getTextFieldInput()));
 	}
-
+	/**
+	 * Sets the textfield's value to reflect the current actor's name.
+	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
-		// TODO Auto-generated method stub
+		setTextFieldValue(((IAuthoringActor) getEditableElement()).getMyName());
 	}
 
 }

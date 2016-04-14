@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoringenvironment.controller.Controller;
+import authoringenvironment.model.IAuthoringActor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import gameengine.model.IAuthoringActor;
 /**
  * Space in actor editing environment where rules are created.
  * @author AnnieTang
@@ -21,10 +21,10 @@ public class ActorRuleCreator {
 	private int rule_row;
 	private GridPane myRuleCreator;
 	private List<ActorRule> myRules;
-	private GUIActorEditingEnvironment aEE; 
+	private ActorEditingEnvironment aEE; 
 	private Controller myController;
 	
-	public ActorRuleCreator(GUIActorEditingEnvironment aEE, Controller myController) {
+	public ActorRuleCreator(ActorEditingEnvironment aEE, Controller myController) {
 		this.aEE = aEE;
 		this.myController = myController;
 		initializeEnvironment();
@@ -81,7 +81,6 @@ public class ActorRuleCreator {
 		ActorRule newRule = new ActorRule(this);
 		myRuleCreator.add(newRule.getGridPane(), RULE_COL,rule_row);
 		rule_row++;
-		myRules.add(newRule);
 		((IAuthoringActor) aEE.getEditable()).addActorRule(newRule);
 		aEE.updateDragEventsForLibrary();
 	}
@@ -115,10 +114,9 @@ public class ActorRuleCreator {
 	public void updateRules() {
 		for(ActorRule toRemove: myRules){
 			myRuleCreator.getChildren().remove(toRemove.getGridPane());
-			((IAuthoringActor) aEE.getEditable()).removeActorRule(toRemove);
 		}
 		myRules = ((IAuthoringActor) aEE.getEditable()).getActorRules();
-		addUpdatedRules()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ;
+		addUpdatedRules();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ;
 	}
 	/**
 	 * Populate actor editing environment with current Actor's rules 
@@ -127,6 +125,7 @@ public class ActorRuleCreator {
 		rule_row = RULE_ROW_START;
 		for(ActorRule toAdd: myRules){
 			myRuleCreator.add(toAdd.getGridPane(), RULE_COL, rule_row);
+			rule_row++;
 		}
 		aEE.updateDragEventsForLibrary();
 	}
