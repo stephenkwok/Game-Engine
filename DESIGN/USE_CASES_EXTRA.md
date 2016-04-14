@@ -86,3 +86,56 @@
 	 - When a collision is detected within the CollisionDetection class, it will call the method A1.performActionfor(a1SideCollisionpowerUp) 
 	 - A1 will then call the perform method within the GlideUp class 
 	 - This method will increment A1’s y position by a set value
+
+- User sets Actor size within actor editing environment
+	- Within the actor editing environment, in the left pane containing Actor fields, the user types in a name within the Name: textfield.
+	- User clicks “Go”, and this calls Actor.setName(String enteredString)
+	- The textfield value is also set to the String that the user entered, so when the user goes back to edit this Actor, the previously set values will still be shown
+	
+- User sets Actor size w/in level editing environment
+	- Within the level editing environment, double click on the actor
+	- Dialog pops up with field for height, width, and preserve ratio.
+	- User enters either a height or a width + preserve ratio, or a height and width.
+	- Actor’s ImageView is updated and ActorIcons reflect change.
+	
+- User wants to edit Actor in the Level Inspector’s Actor Tab
+	- User double clicks on Actor in the Actor Tab
+	- On double click calls myController.goToActorEditingEnvironment(actor).
+
+- User adds behavior (either trigger or action) to Actor rule
+	- Within the actor editing environment of the authoring environment, in the right pane, a GridPane representation of an ActorRule is shown. 
+	- The user can drag any Behavior tab element from the Library and drop it onto the GridPane of the ActorRule. 
+	- If the Behavior is a trigger it will be added to the Trigger container, if it is an Action it will be added to the Action container. 
+	- The Behavior will expand to some sort of Node that contains settable parameters for this Behavior (e.g. dragging ChangeSize to the rule will expand to a textfield that allows the user to enter the size that the Actor will change to). 
+
+- User adds sound to Actor rule
+ 	- Within the actor editing environment of the authoring environment, in the right pane, a GridPane representation of an ActorRule is shown. 
+ 	- The user can drag any Sound tab element from the Library and drop it onto the GridPane of the ActorRule. 
+ 	- The sound element will automatically be added to the Action section of the rule, and it will expand to be a ComboBox containing the currently available sound/music files, with the initial value of the ComboBox set to the sound that was dragged over. 
+
+- User adds image to Actor rule
+	- Within the actor editing environment of the authoring environment, in the right pane, a GridPane representation of an ActorRule is shown. 
+	- The user can drag any Image tab element from the Library and drop it onto the GridPane of the ActorRule. 
+	- The image element will automatically be added to the Action section of the rule, and it will expand to be a ComboBox containing the currently available image files, with the initial value of the ComboBox set to the sound that was dragged over. 
+- User clicks finish button to finish editing game in authoring environment
+	- When the finish button is clicked, the gamedata Saver will be called to save the current game.
+	- Also, the Controller will return the user to the game player’s splash screen by setting the Stage’s Scene to the splash Scene.
+
+- User wants to go from authoring environment back to splash screen
+	- The user will click the button with the salad icon in the toolbar. 
+	- A dialog will pop up asking the user if they are sure they want to return to the splash screen without saving.
+	- If the user presses yes, the Controller will return the user to the game player’s splash screen by setting the Stage’s Scene to the splash Scene.
+	- If the user presses no, the user will remain in the authoring environment. 
+
+- User resizes level size
+	- User enters height or width into the TextFields in the Level AttributesTab.
+	- Level’s setWidth or setHeight method will be called
+	- Canvas that represents the level’s bounds resizes its display.
+
+
+
+
+
+
+
+
