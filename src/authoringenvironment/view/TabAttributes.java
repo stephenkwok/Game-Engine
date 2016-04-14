@@ -1,17 +1,25 @@
 package authoringenvironment.view;
 
+import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
+import gameengine.controller.Level;
 import gui.view.GUIFactory;
 import gui.view.IGUIEditingElement;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
 /**
  * Tab for setting attributes to go in the Inspector Pane in either the Level or Actor Editing Environment GUI.
@@ -39,6 +47,7 @@ public class TabAttributes extends TabParent {
 	 */
 	public TabAttributes(Controller controller, ResourceBundle myResources, String tabText, String optionsResource, IEditableGameElement element) {
 		super(myResources, tabText);
+		myController = controller;
 		this.myAttributesResources = ResourceBundle.getBundle(optionsResource);
 		myFactory = new GUIFactory(myAttributesResources, myController);
 		myEditableElement = element;
