@@ -326,7 +326,11 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      */
 	public void setMyImageViewName(String myImageViewName) {
 		this.myImageViewName = myImageViewName;
-		this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
+		try{
+			this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
+		}catch(Exception e){
+			
+		}
 	}
 
     /**

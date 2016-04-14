@@ -3,7 +3,6 @@ package authoringenvironment.view.behaviors;
 import java.util.ResourceBundle;
 
 import gui.view.TextFieldWithButton;
-import javafx.scene.Node;
 /**
  * GUI representation of behaviors that take in a single Double as a parameter
  * @author AnnieTang
@@ -40,10 +39,5 @@ public class DoubleBehavior extends TextFieldWithButton{
 
 	@Override
 	protected void updateValueBasedOnEditable() {
-	}
-	@Override
-	public Node createNode() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
