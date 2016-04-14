@@ -72,10 +72,18 @@ public abstract class ButtonParent implements IGUIElement {
         return fileName;
     }
     
+    /**
+     * Gets the button.
+     * @return button.
+     */
     protected Button getButton() {
     	return button;
     }
     
+    /**
+     * Gets the controller used by this environment.
+     * @return controller.
+     */
     protected IScreenController getController() {
     	return myController;
     }

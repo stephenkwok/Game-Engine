@@ -71,7 +71,7 @@ abstract class TabParent{
 	}
 	/**
 	 * Get content of tab
-	 * @return
+	 * @return content of tab.
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 * @throws IllegalArgumentException
@@ -79,14 +79,26 @@ abstract class TabParent{
 	 */
 	abstract Node getContent() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
 
+	/**
+	 * Get list of filenames.
+	 * @return list of filenames.
+	 */
 	protected List<String> getFileNames() {
 		return fileNames;
 	}
 	
+	/**
+	 * Get resource bundle for this tab.
+	 * @return resource bundle used by this tab.
+	 */
 	protected ResourceBundle getResources() {
 		return myResources;
 	}
 	
+	/**
+	 * Title of this tab.
+	 * @return title of this tab.
+	 */
 	protected String getTabText() {
 		return tabText;
 	}

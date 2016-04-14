@@ -115,10 +115,7 @@ public abstract class ComboBoxParent extends EditingElementParent {
 		        getOptionsList()
 		    );
 		comboBox.setItems(newOptions);
-	}
-
-	protected abstract void updateValueBasedOnEditable();
-	
+	}	
 	
 	/**
 	 * Returns list of items in the ComboBox.
@@ -126,18 +123,34 @@ public abstract class ComboBoxParent extends EditingElementParent {
 	 */
 	protected abstract List<String> getOptionsList();
 	
+	/**
+	 * Gets the label text for this combobox.
+	 * @return label text.
+	 */
 	protected String getLabelText() {
 		return labelText;
 	}
 	
+	/**
+	 * Sets the label text for this combobox.
+	 * @param label: label to use.
+	 */
 	protected void setLabelText(String label) {
 		labelText = label;
 	}
 	
+	/**
+	 * Gets the GO button for this combobox.
+	 * @return GO button.
+	 */
 	protected Button getComboButton() {
 		return comboButton;
 	}
 	
+	/**
+	 * Gets the combobox.
+	 * @return combobox.
+	 */
 	protected ComboBox<String> getComboBox() {
 		return comboBox;
 	}

@@ -29,7 +29,7 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell {
 		});
 	}
 	/**
-	 * Return list of elements in ComboBox
+	 * Return list of elements in ComboBoxg
 	 */
 	@Override
 	abstract protected List<String> getOptionsList();

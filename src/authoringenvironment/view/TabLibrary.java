@@ -181,22 +181,42 @@ abstract class TabLibrary extends TabParent {
 		}
 	}
 	
+	/**
+	 * Gets labels for the elements in this library.
+	 * @return list of labels.
+	 */
 	protected ObservableList<Label> getLabels() {
 		return labels;
 	}
 	
+	/**
+	 * Sets the labels for elements in this library.
+	 * @param labels: observable list of labels to use.
+	 */
 	protected void setLabels(ObservableList<Label> labels) {
 		this.labels = labels;
 	}
 	
+	/**
+	 * Gets the current list of labels.
+	 * @return listview of labels.
+	 */
 	protected ListView<Label> getListView() {
 		return listView;
 	}
 	
+	/**
+	 * Sets the listview of labels.
+	 * @param listview: listview to set labels to.
+	 */
 	protected void setListView(ListView<Label> listview) {
 		listView = listview;
 	}
 	
+	/**
+	 * Gets the actor rule creator used by this environment.
+	 * @return actor rule creator.
+	 */
 	protected ActorRuleCreator getActorRuleCreator() {
 		return myActorRuleCreator;
 	}
