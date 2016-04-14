@@ -24,8 +24,8 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell {
 	 */
 	@Override
 	public void setButtonAction() {
-		comboButton.setOnAction(event->{
-			this.value = comboBox.getValue();
+		getComboButton().setOnAction(event->{
+			this.value = (String) getComboBox().getValue();
 		});
 	}
 	/**
@@ -55,7 +55,7 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell {
 	 */
 	@SuppressWarnings("rawtypes")
 	public ComboBox getComboBox(){
-		return comboBox;
+		return getComboBox();
 	}
 
 }
