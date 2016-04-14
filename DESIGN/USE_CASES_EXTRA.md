@@ -138,6 +138,21 @@
 	- Level’s setBackground() method is called to update its background actor.
 	- Pane that represents the level updates its background actor’s imageview.
 
+- User drags actor outside of level (into other elements of the GUI)
+	- User drags actor outside of canvas boundaries.
+	- Checks bounds and prevents it from being dragged any further
+
+- User wants to re-order levels
+	- User clicks Reorder Level button
+	- Pop-Up is generated listing all the created levels, accompanied by a text field
+	- User enters a number into each text field indicating when that level should be played (so if it should be played first, the user should enter 1 into the text field next to the first level)
+
+- User changes game preview icon
+	- User clicks "Change Game Preview Image" button
+	- FileChooser is generated allowing user to upload new image
+	- Method is called to set the Game’s preview image and display that updated image in the Game Editing Environment
+
+
 
 
 
