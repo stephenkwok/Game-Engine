@@ -109,4 +109,8 @@ public interface IAuthoringActor extends IEditableGameElement{
 	 * @param myFriction the myFriction to set
 	 */
 	void setMyFriction(double parseDouble);
+
+    void setMyID(int id);
+
+    int getMyID();
 }

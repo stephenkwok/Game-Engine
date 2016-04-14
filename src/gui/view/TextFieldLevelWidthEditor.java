@@ -25,7 +25,7 @@ public class TextFieldLevelWidthEditor extends TextFieldWithButton {
 	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
-		setTextFieldValue(Double.toString(((Level) getEditableElement()).getMyWidth()));	
+		setTextFieldValue(Double.toString(((Level) getEditableElement()).getMyWidth()));
 	}
 
 }
