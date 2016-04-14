@@ -26,4 +26,10 @@ public class ActorEditor implements IEditingEnvironment {
 		
 	}
 
+	@Override
+	public void setEditableElement(IEditableGameElement element) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

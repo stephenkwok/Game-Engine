@@ -106,7 +106,7 @@ public class Controller extends Application {
 	}
 
 	private void goToEditingEnviroment(IEditingEnvironment environment, IEditableGameElement editable) {
-		environment.setEditable(editable);
+//		environment.setEditable(editable);
 //		stage.setScene(environment.getPane());
 	}
 	
