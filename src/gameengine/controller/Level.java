@@ -1,6 +1,8 @@
 package gameengine.controller;
 
 import gameengine.model.Actor;
+import gameengine.model.IAuthoringActor;
+import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,7 +18,7 @@ import authoringenvironment.model.IEditableGameElement;
  *
  * @author blakekaplan
  */
-public class Level implements Observer, ILevel, IEditableGameElement {
+public class Level implements ILevel, IEditableGameElement {
 
 	// TODO: should probably set these default things via properties file but idk sry guyz
 	private static final String DEFAULT_NAME = "Default";
@@ -27,8 +29,8 @@ public class Level implements Observer, ILevel, IEditableGameElement {
 	private static final String DEFAULT_TERMINATION = "Infinite";
 	private static final String DEFAULT_WINNING_CONDITION = "Survival time";
 	private static final String DEFAULT_LOSING_CONDITION = "Player dies";
-    private List<Actor> myActors;
-    private Map<String, List<Actor>> myTriggerMap;
+    private List<IPlayActor> myActors;
+    private Map<String, List<IPlayActor>> myTriggerMap;
     private String myName;
     private double myHeight;
     private double myWidth;
@@ -68,8 +70,8 @@ public class Level implements Observer, ILevel, IEditableGameElement {
     @Override
     public void handleTrigger(ITrigger myTrigger) {
         if (!getMyTriggerMap().containsKey(myTrigger.getMyKey())) return;
-        List<Actor> relevantActors = getMyTriggerMap().get(myTrigger.getMyKey());
-        for (Actor myActor : relevantActors) {
+        List<IPlayActor> relevantActors = getMyTriggerMap().get(myTrigger.getMyKey());
+        for (IPlayActor myActor : relevantActors) {
             if (myTrigger.evaluate(myActor)){
                 myActor.performActionsFor(myTrigger.getMyKey());
             }
@@ -149,18 +151,17 @@ public class Level implements Observer, ILevel, IEditableGameElement {
      * @param newActor The Actor to be added to the Level
      */
     @Override
-    public void addActor(Actor newActor) {
-        newActor.addObserver(this);
-        getActors().add(newActor);
+    public void addActor(IAuthoringActor newActor) {
+        getActors().add((IPlayActor)newActor);
         Set<String> actorTriggers = newActor.getTriggers();
         for (String myTrigger : actorTriggers) {
             if (getMyTriggerMap().containsKey(myTrigger)) {
-                List<Actor> levelActors = getMyTriggerMap().get(myTrigger);
-                levelActors.add(newActor);
+                List<IPlayActor> levelActors = getMyTriggerMap().get(myTrigger);
+                levelActors.add((IPlayActor)newActor);
                 getMyTriggerMap().put(myTrigger, levelActors);
             } else {
-                List<Actor> levelActors = new ArrayList<>();
-                levelActors.add(newActor);
+                List<IPlayActor> levelActors = new ArrayList<>();
+                levelActors.add((IPlayActor)newActor);
                 getMyTriggerMap().put(myTrigger, levelActors);
             }
         }
@@ -227,29 +228,19 @@ public class Level implements Observer, ILevel, IEditableGameElement {
 	      return stringBuilder.toString();
 	}
 
-
-    @Override
-    public void update(Observable o, Object arg) {
-        Actor myActor = (Actor) o;
-        if (arg.equals("DESTROY")){
-            getActors().remove(myActor);
-        } else if (arg.equals("WINGAME")) {
-        }
-    }
-
-	public Map<String, List<Actor>> getMyTriggerMap() {
+	public Map<String, List<IPlayActor>> getMyTriggerMap() {
 		return myTriggerMap;
 	}
 
-	public void setMyTriggerMap(Map<String, List<Actor>> myTriggerMap) {
+	public void setMyTriggerMap(Map<String, List<IPlayActor>> myTriggerMap) {
 		this.myTriggerMap = myTriggerMap;
 	}
 
-	public List<Actor> getActors() {
+	public List<IPlayActor> getActors() {
 		return myActors;
 	}
 
-	public void setMyActors(List<Actor> myActors) {
+	public void setMyActors(List<IPlayActor> myActors) {
 		this.myActors = myActors;
 	}
 
@@ -309,7 +300,7 @@ public class Level implements Observer, ILevel, IEditableGameElement {
 		this.myLosingCondition = myLosingCondition;
 	}
 	
-	public void removeActors(List<Actor> deadActors) {
+	public void removeActors(List<IPlayActor> deadActors) {
 		myActors.removeAll(deadActors);
 	}
 

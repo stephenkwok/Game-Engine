@@ -1,5 +1,7 @@
 package gameplayer.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -7,7 +9,8 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gameengine.controller.Game;
 import gameengine.controller.Level;
-import gameengine.model.Actor;
+import gameengine.model.IDisplayActor;
+import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
@@ -67,8 +70,8 @@ public class GameController implements Observer {
 		Level current = model.getCurrentLevel();
 		view.clearGame();
 		view.addBackground(current.getMyBackgroundImgName());
-		for(Actor actor: model.getActors()){
-			view.addActor(actor);
+		for(IPlayActor actor: model.getActors()){
+			view.addActor((IDisplayActor)actor);
 		}
 		this.toggleUnPause();
 		model.startGame();
@@ -142,7 +145,10 @@ public class GameController implements Observer {
 	 * Updates the display of actors on the game screen
 	 */
 	private void updateActors(){
-		view.removeActors(model.getDeadActors());
+		List<IDisplayActor> castedActors = new ArrayList<IDisplayActor>();
+		for(IPlayActor a: model.getDeadActors()){
+			view.removeActor((IDisplayActor)a);
+		}
 	}
 	
 	/**
@@ -204,7 +210,7 @@ public class GameController implements Observer {
 	}
 	
 	/**
-	 * Updates attributes displayed in the HUD
+	 * Updates attributes 
 	 */
 	public void updateAttribute() {
 		model.updateAttribute();

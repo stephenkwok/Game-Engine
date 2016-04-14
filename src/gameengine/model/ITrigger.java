@@ -21,6 +21,6 @@ public interface ITrigger {
      * @param myActor
      * @return A boolean that says if the condition is true or false
      */
-    public boolean evaluate(IActor myActor);
+    public boolean evaluate(IPlayActor myActor);
 
 }

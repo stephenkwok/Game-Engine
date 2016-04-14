@@ -4,11 +4,6 @@ import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-import gameengine.model.Actor;
-import gameengine.model.CollisionDetection;
-import gameengine.model.IActor;
-import gameengine.model.ITrigger;
-import gameengine.model.PhysicsEngine;
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.*;
 import gameengine.model.*;
@@ -40,12 +35,12 @@ public class Game extends Observable implements Observer {
 	private CollisionDetection myCollisionDetector;
 	@XStreamOmitField
 	private Timeline animation;
-	private List<Actor> currentActors;
-	private List<Actor> deadActors;
+	private List<IPlayActor> currentActors;
+	private List<IPlayActor> deadActors;
 	private ObservableMap<String, Object> HUDData;
 	
 	//NOTE: NEED TO INITZLIWE THIS
-	private Actor mainCharacter;
+	private IPlayActor mainCharacter;
 	
 	
 	/**
@@ -59,8 +54,8 @@ public class Game extends Observable implements Observer {
 		initialGameFile = gameFilePath;
 		levels = gameLevels;
 		info = gameInfo;
-		setCurrentActors(new ArrayList<Actor>());
-		setDeadActors(new ArrayList<Actor>());
+		setCurrentActors(new ArrayList<IPlayActor>());
+		setDeadActors(new ArrayList<IPlayActor>());
         myPhysicsEngine = new PhysicsEngine();
         myCollisionDetector = new CollisionDetection(myPhysicsEngine);
         
@@ -97,7 +92,7 @@ public class Game extends Observable implements Observer {
 
 	public void initCurrentActors() {
 		setCurrentActors(getCurrentLevel().getActors());
-		for (Actor actor: currentActors) {
+		for (IPlayActor actor: currentActors) {
 			if (actor.isMain()) {
 				mainCharacter = actor;
 			}
@@ -116,14 +111,8 @@ public class Game extends Observable implements Observer {
 		handleTrigger(new TickTrigger());
 	}
 	
-	private void physicsUpdate(){
-		for(Actor a: getCurrentActors()){
-			myPhysicsEngine.tick(a);
-		}
-	}
-	
 	private void initActors(){
-		for(Actor a: getCurrentActors()){
+		for(IPlayActor a: getCurrentActors()){
 			a.addObserver(this);
 			a.setEngine(myPhysicsEngine);
 		}
@@ -179,7 +168,7 @@ public class Game extends Observable implements Observer {
 		notifyObservers(arg);
 	}
 
-	public List<Actor> getActors() {
+	public List<IPlayActor> getActors() {
 		return getLevels().get(getInfo().getMyCurrentLevelNum()).getActors();
 	}
 	
@@ -207,8 +196,8 @@ public class Game extends Observable implements Observer {
 	}
 	
 	public void updateActors(){
-		setDeadActors(new ArrayList<Actor>());
-		for(Actor a: getCurrentActors()){
+		setDeadActors(new ArrayList<IPlayActor>());
+		for(IPlayActor a: getCurrentActors()){
 			if(a.isDead()){
 				deadActors.add(a);
 			}
@@ -228,23 +217,23 @@ public class Game extends Observable implements Observer {
 	}
 
 
-	public List<Actor> getDeadActors() {
+	public List<IPlayActor> getDeadActors() {
 		return deadActors;
 	}
 
 
-	public void setDeadActors(List<Actor> deadActors) {
+	public void setDeadActors(List<IPlayActor> deadActors) {
 		this.deadActors = deadActors;
 	}
 
 
-	public List<Actor> getCurrentActors() {
+	public List<IPlayActor> getCurrentActors() {
 		return currentActors;
 	}
 
 
-	public void setCurrentActors(List<Actor> currentActors) {
-		this.currentActors = currentActors;
+	public void setCurrentActors(List<IPlayActor> list) {
+		this.currentActors = list;
 	}
 
 
@@ -298,7 +287,7 @@ public class Game extends Observable implements Observer {
 		for (String key : keys) {
 			Object value = null;
 			if (key.equals("Health")) {
-				value = mainCharacter.getAttribute(AttributeType.HEALTH).getMyValue();
+				value = ((Attribute) mainCharacter.getAttribute(AttributeType.HEALTH)).getMyValue();
 			} else if (key.equals("Level")) {
 				value = info.getMyCurrentLevelNum();
 			} else if (key.equals("Ammo")) {
@@ -308,7 +297,7 @@ public class Game extends Observable implements Observer {
 			} else if (key.equals("Time")) {
 				//todo
 			} else if (key.equals("Points")){
-				value = mainCharacter.getAttribute(AttributeType.POINTS).getMyValue();
+				value = ((Attribute) mainCharacter.getAttribute(AttributeType.POINTS)).getMyValue();
 			} else {
 				value = "Error";
 			}

@@ -19,7 +19,7 @@ public class MoveUp extends MovingAction {
 
     @Override
     public void perform() {
-    	getMyActor().getPhysicsEngine().jump(getMyActor());
+    	getMyActor().getMyPhysicsEngine().jump(getMyActor());
     }
 
     

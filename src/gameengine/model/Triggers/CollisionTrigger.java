@@ -2,6 +2,7 @@ package gameengine.model.Triggers;
 
 import gameengine.model.Actor;
 import gameengine.model.IActor;
+import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 
 public abstract class CollisionTrigger implements ITrigger {
@@ -10,7 +11,7 @@ public abstract class CollisionTrigger implements ITrigger {
     private IActor myCollisionActor;
 
     @Override
-    public abstract boolean evaluate(IActor myActor);
+    public abstract boolean evaluate(IPlayActor myActor);
 
     public CollisionTrigger(Actor mainActor, Actor collisionActor) {
         setMyMainActor(mainActor);

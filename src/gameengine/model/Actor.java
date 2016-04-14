@@ -26,7 +26,7 @@ import javafx.scene.image.ImageView;
  * @author blakekaplan
  */
 
-public class Actor extends Observable implements IActor, Observer, IAuthoringActor {
+public class Actor extends Observable implements IActor, Observer, IAuthoringActor, IPlayActor, IDisplayActor {
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "hellokitty.gif";
@@ -364,6 +364,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
 	public void setMain(boolean bool){
 		isMain = bool;
 	}
+
 	/**
 	 * Return whether the actor is a playable, main character.
 	 * @return
@@ -419,7 +420,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
 
     /**
      * Provides the Actor's physics engine
-     * @return  The Actor's phyiscs engine
+     * @return  The Actor's physics engine
      */
     public PhysicsEngine getMyPhysicsEngine() {
 		return myPhysicsEngine;

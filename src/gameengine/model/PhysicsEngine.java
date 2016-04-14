@@ -55,24 +55,24 @@ public class PhysicsEngine {
 	
 	/**
 	 * Only want friction to occur on the ground, only want gravity to apply in the air
-	 * @param a
+	 * @param iPlayActor
 	 * @param forceX
 	 * @param forceYupward
 	 * @param forceYdownward
 	 * @param friction
 	 */
-	private void update(Actor a,double forceX, double forceYupward, double forceYdownward, double friction){
-		double xVelo     = a.getVeloX();
-		double yVelo     = a.getVeloY();
-		double xPos      =  a.getX();      
-		double yPos      =  a.getY();
+	private void update(IPlayActor iPlayActor,double forceX, double forceYupward, double forceYdownward, double friction){
+		double xVelo     = iPlayActor.getVeloX();
+		double yVelo     = iPlayActor.getVeloY();
+		double xPos      =  iPlayActor.getX();      
+		double yPos      =  iPlayActor.getY();
 		double nextHorzVelo;
 		double nextVertVelo;
 		double nextXPos;
 		double nextYPos;
 		
 
-		if (a.isInAir()) {
+		if (iPlayActor.isInAir()) {
 			forceYdownward = getGravity();
 		}
 				
@@ -82,8 +82,8 @@ public class PhysicsEngine {
 		nextYPos     = changePos(yPos, nextVertVelo); 
 		nextVertVelo = maxLimit(nextVertVelo, getMaxVertVelocity());
 			
-		if(nextYPos+a.getBounds().getHeight() > getFloorHeight()){                    //Collision detection for the actor and the ground
-			nextYPos = getFloorHeight()-a.getBounds().getHeight();				//TODO: delete this if statement after the floor is implemented as an actor
+		if(nextYPos+iPlayActor.getBounds().getHeight() > getFloorHeight()){                    //Collision detection for the actor and the ground
+			nextYPos = getFloorHeight()-iPlayActor.getBounds().getHeight();				//TODO: delete this if statement after the floor is implemented as an actor
 			nextVertVelo = 0;
 		}
 
@@ -92,23 +92,23 @@ public class PhysicsEngine {
 		nextHorzVelo = applyForce(nextHorzVelo, (friction*(nextHorzVelo))); //Apply frictional force
 		nextXPos  = changePos(xPos,nextHorzVelo);
 		nextHorzVelo = maxLimit(nextHorzVelo, getMaxHorizVelocity());
-		setValues(a,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );	
+		setValues(iPlayActor,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );	
 	}
 	
 	/**
 	 * Sets position and velocity variables for an Actor
 	 * 
-	 * @param a
+	 * @param iPlayActor
 	 * @param nextHorzVelo
 	 * @param nextVertVelo
 	 * @param nextXPos
 	 * @param nextYPos
 	 */
-	private void setValues(Actor a, double nextHorzVelo, double nextVertVelo, double nextXPos, double nextYPos){
-		a.setVeloX(nextHorzVelo);
-		a.setVeloY(nextVertVelo);
-		a.setX(nextXPos);
-		a.setY(nextYPos);	
+	private void setValues(IPlayActor iPlayActor, double nextHorzVelo, double nextVertVelo, double nextXPos, double nextYPos){
+		iPlayActor.setVeloX(nextHorzVelo);
+		iPlayActor.setVeloY(nextVertVelo);
+		iPlayActor.setX(nextXPos);
+		iPlayActor.setY(nextYPos);	
 	}
 	
 	private double maxLimit(double vector, double limit){
@@ -122,16 +122,16 @@ public class PhysicsEngine {
 	//These methods correspond to Actions that call them
 	//They differ in the force applied to the Actor
 	
-	public void moveRight(Actor a1) {
-		update(a1,getHorizontalForce(), 0, 0, a1.getMyFriction());
+	public void moveRight(IPlayActor iPlayActor) {
+		update(iPlayActor,getHorizontalForce(), 0, 0, iPlayActor.getMyFriction());
 	}
 
-	public void moveLeft(Actor a1) {
-		update(a1,-getHorizontalForce(), 0, 0, a1.getMyFriction());
+	public void moveLeft(IPlayActor iPlayActor) {
+		update(iPlayActor,-getHorizontalForce(), 0, 0, iPlayActor.getMyFriction());
 	}
 	
-	public void jump(Actor a1){
-		update(a1,0,getJumpForce(), getGravity(), a1.getMyFriction());
+	public void jump(IPlayActor iPlayActor){
+		update(iPlayActor,0,getJumpForce(), getGravity(), iPlayActor.getMyFriction());
 	}
 	//gliding methods for when force and gravity aren't applied
 	
@@ -147,8 +147,8 @@ public class PhysicsEngine {
 		a1.setY(a1.getY()+5);
 	}
 	
-	public void tick(Actor a1) {
-		update(a1,0.0,0.0, getGravity(), friction);
+	public void tick(IPlayActor iPlayActor) {
+		update(iPlayActor,0.0,0.0, getGravity(), friction);
 	}
 	
 	public void staticHorizontalCollision(Actor a1, Actor a2) {

@@ -1,5 +1,7 @@
 package gameengine.model.Actions;
 
+import java.util.Observable;
+
 import gameengine.model.Actor;
 
 public class WinGame extends Action {
@@ -11,7 +13,7 @@ public class WinGame extends Action {
 	@Override
 	public void perform() {
         getMyActor().changed();
-        getMyActor().notifyObservers("endGame");		
+        ((Observable) getMyActor()).notifyObservers("endGame");		
 	}
 
 }

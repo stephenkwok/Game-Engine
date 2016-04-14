@@ -10,6 +10,8 @@ import authoringenvironment.controller.Controller;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IAuthoringActor;
+import gameengine.model.IDisplayActor;
+import gameengine.model.IPlayActor;
 import gui.view.GUILibrary;
 import gui.view.IGUI;
 import javafx.event.EventHandler;
@@ -227,7 +229,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * Add a level's actors to the preview in the center pane.
 	 */
 	private void addLevelActorsToScene() {
-		for(Actor actor: myLevel.getActors()) myCenterPane.getChildren().add(actor.getImageView());
+		for(IPlayActor actor: myLevel.getActors()) myCenterPane.getChildren().add(((IDisplayActor) actor).getImageView());
 	}
 	
 	/**
