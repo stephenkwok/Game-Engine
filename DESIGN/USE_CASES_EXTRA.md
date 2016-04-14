@@ -9,7 +9,6 @@
 	 - In CollisionDetection class, side collision is detected and signals main character actor’s performActionsFor() method for a side collision between the maincharacter actor and the block actor 
 	 - The main character performs the HorizontalBounceCollision action to bounce backwards off the block
 	  
-
  - Main character walks on floor and doesn’t fall through it 
 	 - Main character actor must contain a Rule mapping a BottomCollision (instantiated with mainCharacter and floor) to a VerticalStaticCollision action
 	 - In Game class, collisionDetector detects collision between main character actor and floor actor 
@@ -50,7 +49,6 @@
 	 - The WinGame Action executes
 
  - A projectile actor is launched from Actor when the User presses the SpaceBar
-  
 	 - Main character contains a Rule mapping KeyTrigger(KeyCode.Space) to the Action called SpawnActor
 	 - This action creates a new Actor via the Actor constructor 
 	 - This action will also add a Rule to the Actor that links the TickTrigger to the Glide(Right/Left) Action. It does this via the addRule method 
@@ -67,3 +65,24 @@
 
  - Main character does not fall off the screen 
 	 - Every cycle through the update method in the physics engine, the method bound() called in physics engine so that if the new character position is less than 0 its position is reset to 0
+
+ - An Actor (A1) speeds up by a given amount when the user presses the Right Arrow 
+	 - Key A1 contains a Rule linking the Trigger KeyTrigger(KeyCode.RIGHT) to the Action 
+	 - Accelerate(double accelerationForce)  
+	 - Accelerate accesses the PhysicsEngine via the method applyAcceleration(A1) 
+	 - This method calculates a new velocity based on the given acceleration force and sets A1’s velocity to this velocity  
+	 - This occurs via A1.setVeloX(newVeloX)
+   
+ - An Actor (A1) changes its image when the User clicks the mouse 
+	 - A1 contains a Rule linking the Trigger ClickTrigger to the Action ChangeImage(Image) 
+	 - When this Rule is created and placed in the Actor, it receives an image that is saved within the Actor as the variable nextImage 
+	 - When the User clicks the mouse, this trigger is registered and handled  
+	 - It’s handled via the game’s handleTrigger(Trigger) method 
+	 - When called, the Action ChangeImage uses A1’s method setMyImageView(Image) to set A1’s ImageView to equal nextImage 
+	 - When the GameEngine completes its cycle and sends the Actors back to GamePlayer, they will display the Actor with the updated ImageView
+	 
+ - An Actor (A1) moves upwards at a constant rate when it collides with a PowerUp Actor
+	 - A1 contains a Rule linking the Trigger SideCollision between itself and a PowerUp actor (a1SideCollisionpowerUp) to an Action GlideUp
+	 - When a collision is detected within the CollisionDetection class, it will call the method A1.performActionfor(a1SideCollisionpowerUp) 
+	 - A1 will then call the perform method within the GlideUp class 
+	 - This method will increment A1’s y position by a set value
