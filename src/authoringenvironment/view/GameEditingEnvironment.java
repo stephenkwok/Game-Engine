@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
 import gameengine.controller.GameInfo;
-import gameengine.model.IAuthoringActor;
 import gui.view.CheckBoxesHUDOptions;
 import gui.view.IGUIElement;
 import gui.view.TextAreaGameDescriptionEditor;
@@ -32,8 +32,7 @@ import javafx.scene.layout.VBox;
  *
  */
 
-public class GUIGameEditingEnvironment implements IGUIElement, IEditingElement {
-
+public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	private IEditableGameElement myGameInfo;
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
 	private static final double DEFAULT_PADDING = 10;
@@ -54,7 +53,7 @@ public class GUIGameEditingEnvironment implements IGUIElement, IEditingElement {
 	private ScrollPane myScrollPane;
 	private List<IAuthoringActor> myActors;
 
-	public GUIGameEditingEnvironment(GameInfo gameInfo, Controller controller, List<IAuthoringActor> actors) {
+	public GameEditingEnvironment(GameInfo gameInfo, Controller controller, List<IAuthoringActor> actors) {
 		this.myGameInfo = gameInfo;
 		this.myActors = actors;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);

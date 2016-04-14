@@ -7,10 +7,10 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
 import gameengine.controller.GameInfo;
-import gameengine.model.IAuthoringActor;
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import javafx.geometry.Insets;
@@ -19,8 +19,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-
-
 
 public class CheckBoxesHUDOptions implements IGUIElement, IEditingElement {
 
@@ -86,18 +84,6 @@ public class CheckBoxesHUDOptions implements IGUIElement, IEditingElement {
 
 	// remove this once changes are made on the other end 
 	private int getInitialValueForHUDElement(String myHUDElementID) {
-		IAuthoringActor mainActor = null;
-		for (IAuthoringActor actor : myActors) {
-			if (actor.isMain()) {
-				mainActor = actor;
-				break;
-			}
-		}
-		if (myHUDElementID.equals("Amount of Ammo Left")) {
-			return 0; // call mainActor.getMyAmmo();
-		} else if (myHUDElementID.equals("Number of Lives")) {
-			((Actor) mainActor).getAttribute(AttributeType.HEALTH).getMyValue();
-		}
 		return 0;
 	}
 

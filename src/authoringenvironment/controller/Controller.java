@@ -2,16 +2,16 @@ package authoringenvironment.controller;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.view.GUIActorEditingEnvironment;
-import authoringenvironment.view.GUILevelEditingEnvironment;
+import authoringenvironment.view.ActorEditingEnvironment;
+import authoringenvironment.view.LevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
 import gamedata.controller.CreatorController;
@@ -19,14 +19,12 @@ import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gameengine.model.IAuthoringActor;
 import gui.controller.IScreenController;
 import gui.view.Screen;
 import javafx.stage.Stage;
 
 /**
- * This class serves as the interface that all authoring environment main
- * screens must implement
+ * This class serves as the main controller for the authoring environment
  * 
  * @author Stephen, AnnieTang
  */
@@ -37,8 +35,8 @@ public class Controller implements IScreenController {
 	private List<String> myLevelNames;
 	private List<IAuthoringActor> myActors;
 	private List<String> myActorNames;
-	private GUILevelEditingEnvironment levelEnvironment;
-	private GUIActorEditingEnvironment actorEnvironment;
+	private LevelEditingEnvironment levelEnvironment;
+	private ActorEditingEnvironment actorEnvironment;
 	private GUIMainScreen mainScreen;
 	private GUIMain guiMain;
 	private ResourceBundle myResources;
@@ -57,10 +55,10 @@ public class Controller implements IScreenController {
 		myLevelNames = new ArrayList<>();
 		myActors = new ArrayList<>();
 		myActorNames = new ArrayList<>();
-		levelEnvironment = new GUILevelEditingEnvironment(this, myActors);		
+		levelEnvironment = new LevelEditingEnvironment(this, myActors);		
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
-		actorEnvironment = new GUIActorEditingEnvironment(this, myResources);
+		actorEnvironment = new ActorEditingEnvironment(this, myResources);
 		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo, myActors);
 	}
 	
@@ -73,7 +71,7 @@ public class Controller implements IScreenController {
 	 *            - Editing environment for editable
 	 */
 	public void goToEditingEnvironment(IEditableGameElement editable, IEditingEnvironment environment) {
-		environment.setEditable(editable);
+		environment.setEditableElement(editable);
 		guiMain.setCenterPane(environment.getPane()); 
 	}
 
@@ -156,12 +154,6 @@ public class Controller implements IScreenController {
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getMyImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
-	/**
-	 * Saves game and returns to splash screen of game player.
-	 */
-	public void goBackToGamePlayer() {
-		guiMain.goBackToSplash();
-	}
 	
 	public double getSceneWidth(){
 		return guiMain.getWidth();
@@ -192,7 +184,9 @@ public class Controller implements IScreenController {
 		// TODO Auto-generated method stub
 		
 	}
-
+	/**
+	 * Saves game and returns to splash screen of game player.
+	 */
 	@Override
 	public void goToSplash() {
 		guiMain.goBackToSplash();

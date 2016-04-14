@@ -5,7 +5,7 @@ import java.util.List;
 
 import java.util.ResourceBundle;
 
-import gameengine.model.IAuthoringActor;
+import authoringenvironment.model.IAuthoringActor;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;

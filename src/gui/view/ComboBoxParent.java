@@ -20,7 +20,7 @@ import javafx.scene.layout.Priority;
  * @author AnnieTang
  */
 
-public abstract class ComboBoxParent implements IGUIElement, IEditingElement {
+public abstract class ComboBoxParent extends EditingElementParent {
 	private static final int COMBOBOX_WIDTH = 150;
 	private static final int VISIBLE_ROW_COUNT = 5;
 	private static final int HBOX_SPACING = 5;
@@ -38,9 +38,11 @@ public abstract class ComboBoxParent implements IGUIElement, IEditingElement {
 	private IEditableGameElement myEditableElement;
 	
 	public ComboBoxParent(String promptText) {
+		super(GO);
 		this.promptText = promptText;
 		this.labelText = null;
-		myEditableElement = null;
+		this.myEditableElement = null;
+		this.comboButton = getButton();
 	}
 	
 	/**
@@ -58,7 +60,6 @@ public abstract class ComboBoxParent implements IGUIElement, IEditingElement {
 		comboBox.setPrefWidth(COMBOBOX_WIDTH);
 		comboBox.setPromptText(promptText);
 		comboBox.setCellFactory(factory -> new MyCustomCell());
-		comboButton = new Button(GO);
 		comboButton.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		HBox.setHgrow(comboBox, Priority.ALWAYS);
 		setButtonAction();
@@ -118,17 +119,6 @@ public abstract class ComboBoxParent implements IGUIElement, IEditingElement {
 
 	protected abstract void updateValueBasedOnEditable();
 	
-	@Override
-	public void setEditableElement(IEditableGameElement element) {
-		myEditableElement = element;
-		if (myEditableElement != null) {
-			updateValueBasedOnEditable();
-		}
-	}
-
-	protected IEditableGameElement getEditableElement() {
-		return myEditableElement;
-	}
 	
 	/**
 	 * Returns list of items in the ComboBox.

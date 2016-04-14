@@ -1,6 +1,6 @@
 package authoringenvironment.view;
 
-import gameengine.model.IAuthoringActor;
+import authoringenvironment.model.IAuthoringActor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
