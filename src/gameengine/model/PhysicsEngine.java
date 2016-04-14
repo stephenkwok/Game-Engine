@@ -182,6 +182,11 @@ public class PhysicsEngine {
 		a1.setX(a1.getX()-(a1.getVeloX()*2.5));
 		a1.setVeloX( -horizontalForce*(a1.getVeloX()/Math.abs(a1.getVeloX())));
 	}
+	
+	public void elasticVerticalCollision(Actor a1){
+		a1.setY(a1.getY()-(a1.getVeloY()*2.5));
+		a1.setVeloY( -horizontalForce*(a1.getVeloY()/Math.abs(a1.getVeloY())));
+	}
 
 
 	public int getTimeStep() {
