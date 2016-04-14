@@ -161,6 +161,7 @@ public class GUIActorEditingEnvironment implements IGUI, IEditingEnvironment {
 	public IEditableGameElement getEditable(){
 		return myActor;
 	}
+	
 	/**
 	 * Set image used for Actor currently in actor editing environment 
 	 * @param newImageView

@@ -158,6 +158,7 @@ public class Controller implements IScreenController {
 		myActors.add(newActor);
 		myActorNames.add(newActor.getMyName());
 		mainScreen.createActorLabel(newActor);
+		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getMyImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
 	/**
@@ -183,14 +184,6 @@ public class Controller implements IScreenController {
 	@Override
 	public Screen getScreen() {
 		return guiMain;
-	}
-	
-	public void setGameName() {
-		
-	}
-	
-	public void setGameDescription() {
-		
 	}
 
 	@Override

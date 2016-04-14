@@ -87,62 +87,6 @@ public class Level implements Observer, ILevel, IEditableGameElement {
         this.myName = name;
     }
 
-    public void setWidth(double width) {
-    	myWidth = width;
-    }
-    
-    public double getWidth() {
-    	return myWidth;
-    }
-    
-    public void setHeight(double height) {
-    	myHeight = height;
-    }
-    
-    public double getHeight() {
-    	return myHeight;
-    }
-    
-    public void setHUDOptions(List<String> options) {
-    	myHUDOptions = options;
-    }
-    
-    public List<String> getHUDOption() {
-    	return myHUDOptions;
-    }
-    
-    public void setScrollingDirection(String scrollingDirection) {
-    	myScrollingDirection = scrollingDirection;
-    }
-
-    public String getScrollingDirection() {
-    	return myScrollingDirection;
-    }
-    
-    public void setTermination(String termination) {
-    	myTermination = termination;
-    }
-    
-    public String getTermination() {
-    	return myTermination;
-    }
-    
-    public void setWinningCondition(String winningCondition) {
-    	myWinningCondition = winningCondition;
-    }
-    
-    public String getWinningCondition() {
-    	return myWinningCondition;
-    }
-    
-    public void setLosingCondition(String losingCondition) {
-    	myLosingCondition = losingCondition;
-    }
-    
-    public String getLosingCondition() {
-    	return myLosingCondition;
-    }
-    
     /**
      * Adds a new Actor to the Level and updates the triggerMap accordingly
      *
@@ -253,20 +197,20 @@ public class Level implements Observer, ILevel, IEditableGameElement {
 		this.myActors = myActors;
 	}
 
-	public double getMyHeight() {
-		return myHeight;
-	}
-
-	public void setMyHeight(double myHeight) {
-		this.myHeight = myHeight;
-	}
-
 	public double getMyWidth() {
 		return myWidth;
 	}
 
 	public void setMyWidth(double myWidth) {
 		this.myWidth = myWidth;
+	}
+	
+	public double getMyHeight() {
+		return myHeight;
+	}
+
+	public void setMyHeight(double myHeight) {
+		this.myHeight = myHeight;
 	}
 
 	public List<String> getMyHUDOptions() {

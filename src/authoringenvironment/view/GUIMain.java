@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 public class GUIMain extends Screen implements IGUI {
     private static final String GUI_RESOURCE = "authoringGUI";
     private static final String TOP_PANE_ELEMENTS = "TopPaneElements";
-    private static final int WINDOW_HEIGHT = 800;
+    private static final int WINDOW_HEIGHT = 700;
 	private static final int WINDOW_WIDTH = 1300;
     private static final int PADDING = 10;
     private static final String SPLASH_IMAGE_NAME = "salad.png";
@@ -56,7 +56,7 @@ public class GUIMain extends Screen implements IGUI {
 	 */
 	public void init() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		myRoot = new BorderPane();
-		myScene = new Scene(myRoot, myStage.getWidth(), myStage.getHeight(),Color.WHITE);
+		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myController = new Controller(myStage, this, this.myResources);
 		factory = new GUIFactory(myResources, myController);
