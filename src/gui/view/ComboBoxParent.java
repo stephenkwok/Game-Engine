@@ -3,6 +3,7 @@ package gui.view;
 import java.util.List;
 
 import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingElement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -19,7 +20,11 @@ import javafx.scene.layout.Priority;
  * @author AnnieTang
  */
 
+<<<<<<< HEAD
 public abstract class ComboBoxParent extends EditingElementParent {
+=======
+public abstract class ComboBoxParent implements IGUIElement, IEditingElement {
+>>>>>>> 491945f32ffcf2c9e25b40408068e5db271d8a2f
 	private static final int COMBOBOX_WIDTH = 150;
 	private static final int VISIBLE_ROW_COUNT = 5;
 	private static final int HBOX_SPACING = 5;

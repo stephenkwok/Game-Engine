@@ -11,6 +11,7 @@ public class TextFieldActorFrictionEditor extends TextFieldWithButton {
 
 	@Override
 	protected void updateValueBasedOnEditable() {
+		setTextFieldValue(Double.toString(((IAuthoringActor) getEditableElement()).getMyFriction()));
 	}
 
 }

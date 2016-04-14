@@ -1,5 +1,12 @@
 package gui.view;
 
+<<<<<<< HEAD
+=======
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingElement;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+>>>>>>> 491945f32ffcf2c9e25b40408068e5db271d8a2f
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -17,7 +24,11 @@ import javafx.scene.layout.VBox;
  *
  */
 
+<<<<<<< HEAD
 public abstract class TextAreaParent extends EditingElementParent {
+=======
+public abstract class TextAreaParent implements IEditingElement, IGUIElement {
+>>>>>>> 491945f32ffcf2c9e25b40408068e5db271d8a2f
 	
 	private VBox myContainer;
 	private Label myPrompt;

@@ -30,8 +30,7 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 
 	@Override
 	protected void updateValueBasedOnEditable() {
-		// TODO Auto-generated method stub
-		
+		comboBox.setValue(Boolean.toString(((IAuthoringActor) getEditableElement()).isMain()));
 	}
 
 }

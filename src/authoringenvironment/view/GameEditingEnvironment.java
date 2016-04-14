@@ -6,7 +6,11 @@ import java.util.ResourceBundle;
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
+<<<<<<< HEAD:src/authoringenvironment/view/GameEditingEnvironment.java
 import authoringenvironment.model.IGUIEditingElement;
+=======
+import authoringenvironment.model.IEditingElement;
+>>>>>>> 491945f32ffcf2c9e25b40408068e5db271d8a2f:src/authoringenvironment/view/GUIGameEditingEnvironment.java
 import gameengine.controller.GameInfo;
 import gui.view.CheckBoxesHUDOptions;
 import gui.view.IGUIElement;
@@ -32,7 +36,11 @@ import javafx.scene.layout.VBox;
  *
  */
 
+<<<<<<< HEAD:src/authoringenvironment/view/GameEditingEnvironment.java
 public class GameEditingEnvironment implements IGUIElement, IGUIEditingElement {
+=======
+public class GUIGameEditingEnvironment implements IGUIElement, IEditingElement {
+>>>>>>> 491945f32ffcf2c9e25b40408068e5db271d8a2f:src/authoringenvironment/view/GUIGameEditingEnvironment.java
 
 	private IEditableGameElement myGameInfo;
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";

@@ -1,5 +1,12 @@
 package gui.view;
 
+<<<<<<< HEAD
+=======
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingElement;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+>>>>>>> 491945f32ffcf2c9e25b40408068e5db271d8a2f
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -14,7 +21,11 @@ import javafx.scene.layout.Priority;
  *
  */
 
+<<<<<<< HEAD
 public abstract class TextFieldWithButton extends EditingElementParent {
+=======
+public abstract class TextFieldWithButton implements IGUIElement, IEditingElement {
+>>>>>>> 491945f32ffcf2c9e25b40408068e5db271d8a2f
 	private static final int PADDING = 10;
 	private static final String GO = "Go";
 	private HBox myContainer;
