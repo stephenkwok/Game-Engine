@@ -9,9 +9,9 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingElement;
 import gameengine.controller.Level;
 import gui.view.GUIFactory;
-import gui.view.IGUIEditingElement;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -35,7 +35,7 @@ public class TabAttributes extends TabParent {
 	private Controller myController;
 	private VBox myContent;
 	private IEditableGameElement myEditableElement;
-	private List<IGUIEditingElement> myEditingElements;
+	private List<IEditingElement> myEditingElements;
 	
 	/**
 	 * Constructor for an attributes tab.
@@ -75,7 +75,7 @@ public class TabAttributes extends TabParent {
 		String[] elements = myAttributesResources.getString(key).split(DELIMITER);
 		List<Node> createdElements = new ArrayList<>();
 		for (int i = 0; i < elements.length; i++) {
-			IGUIEditingElement elementToCreate = (IGUIEditingElement) myFactory.createNewGUIObject(elements[i]);
+			IEditingElement elementToCreate = (IEditingElement) myFactory.createNewGUIObject(elements[i]);
 			myEditingElements.add(elementToCreate);
 			createdElements.add(((IGUIElement) elementToCreate).createNode());
 		}
