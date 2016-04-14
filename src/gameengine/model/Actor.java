@@ -441,6 +441,14 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
 		myImageView.setFitHeight(size);
 		myImageView.setPreserveRatio(true);
 	}
+	/**
+     * Sets the Actor's ImageView's size
+     * @param size  The ImageView's size
+     */
+	@Override
+    public double getSize(){
+		return myImageView.getFitHeight();
+	}
     /**
      * Adds a new ActorRule
      * @param actorRule The new ActorRule

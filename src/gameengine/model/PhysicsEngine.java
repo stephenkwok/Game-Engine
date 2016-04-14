@@ -15,7 +15,7 @@ package gameengine.model;
 public class PhysicsEngine {
 	
 	
-	//These Variable values are arbitrary, chosen by trial/error
+	//These Variable values are arbitrary, chosen by trial/error 
 	private int    timeStep         =  1;    //Arbitrary timeStep, will be set to the time provided by step()
 	private double friction         = -.05;  //Horizontal acceleration dampening (friction) coefficient
 	private double gravity          = .11 ;  //Falling acceleration coefficient
@@ -23,7 +23,7 @@ public class PhysicsEngine {
 	private double maxVertVelocity  = -50;   //maximum vertical velocity 
 	private double horizontalForce  = 5;     //Force applied to Actors on horizontal movements
 	private double jumpForce        = -5;    //Vertical Force applied to Actors on jump movements
-	private double floorHeight      =  500;  
+	private double floorHeight      = 500;
 	
 	public PhysicsEngine(){
 		
@@ -54,7 +54,8 @@ public class PhysicsEngine {
 	
 	
 	/**
-	 * Only want friction to occur on the ground, only want gravity to apply in the air
+	 * Primary method within the Physics Engine class, called on Actors for which gravity and friction forces apply
+	 * Calculates new values for X and Y positions as well as X and Y velocities
 	 * @param a
 	 * @param forceX
 	 * @param forceYupward
@@ -72,14 +73,14 @@ public class PhysicsEngine {
 		double nextYPos;
 		
 
-		if (a.isInAir()) {
+		if (a.isInAir()) {                      //Only applies gravity if the Actor is in the air
 			forceYdownward = getGravity();
-			friction = friction*.5;
+			friction = friction*.5;             //Friction is reduced(wind resistance) when the actor is in the air
 		}
 				
 		nextHorzVelo = xVelo;      		
-		nextVertVelo = applyForce(yVelo, forceYupward);            // Apply  y force from movement action to y velocity
-		nextVertVelo = applyForce(nextVertVelo, forceYdownward);    //Apply gravitational force
+		nextVertVelo = applyForce(yVelo, forceYupward);                      // Apply  y force from movement action to y velocity
+		nextVertVelo = applyForce(nextVertVelo, forceYdownward);             //Applies gravitational force onto Actor's velocity 
 		nextYPos     = changePos(yPos, nextVertVelo); 
 		nextVertVelo = maxLimit(nextVertVelo, getMaxVertVelocity());
 			
@@ -112,6 +113,12 @@ public class PhysicsEngine {
 		a.setY(bound(nextYPos));	
 	}
 	
+	/**
+	 * Method returns 0 if given position parameter is less than 0
+	 * Used to prevent actor from leaving screen to left or top
+	 * @param pos
+	 * @return
+	 */
 	private double bound(double pos){
 		if(pos<0){
 			return 0;
@@ -141,6 +148,7 @@ public class PhysicsEngine {
 	public void jump(Actor a1){
 		update(a1,0,getJumpForce(), getGravity(), a1.getMyFriction());
 	}
+	
 	//gliding methods for when force and gravity aren't applied
 	
 	public void glideRight(Actor a1) {
@@ -159,38 +167,6 @@ public class PhysicsEngine {
 		update(a1,0.0,0.0, getGravity(), friction);
 	}
 	
-//	public void staticHorizontalCollision(Actor a1, Actor a2) {
-//		if(a1.getVeloX() != 0){     					//If the object is moving 
-//			if(a1.getX() <  a2.getX()){ 			 //if the collision is occuring on the left side
-//				a1.setX(a2.getX()-a1.getBounds().getWidth());  //Offset x value to the left
-//			}else{ 										//If collision is happening from right
-//				a1.setX(a2.getBounds().getMaxX());	//Offset x value to the right		
-//			}
-//			a1.setVeloX(0);                             //Stop movement
-//		}
-//	}
-//
-//	public void staticVerticalCollision(Actor a1, Actor a2) {
-//		if(a1.getVeloY() != 0){     					//If the object is moving 
-//			if(a1.getY() <= a2.getY()){ 			 //if the collision is occuring on the top side
-//				a1.setY(a2.getY()-a1.getBounds().getWidth());  //Offset y value up
-//			}else{ 										//If collision is happening from right
-//				a1.setY(a2.getBounds().getMaxY());	//Offset x value to the right		
-//			}
-//			a1.setVeloY(0);                             //Stop movement
-//		}
-//	}
-//	
-//	public void elasticVerticalCollision(Actor a1, Actor a2){
-//		staticVerticalCollision(a1,a2);
-//		a1.setVeloY(-5);
-//	}
-//
-//	public void elasticHorizontalCollision(Actor a1, Actor a2){
-//		staticHorizontalCollision(a1,a2);
-//		a1.setVeloX(-3);
-//	}
-	
 	public void staticVerticalCollision(Actor a1){
 		a1.setInAir(false);
 		a1.setY(a1.getY()-a1.getVeloY());
@@ -204,7 +180,7 @@ public class PhysicsEngine {
 	
 	public void elasticHorizontalCollision(Actor a1){
 		a1.setX(a1.getX()-(a1.getVeloX()*2.5));
-		a1.setVeloX( -5*(a1.getVeloX()/Math.abs(a1.getVeloX())));
+		a1.setVeloX( -horizontalForce*(a1.getVeloX()/Math.abs(a1.getVeloX())));
 	}
 
 
@@ -276,8 +252,7 @@ public class PhysicsEngine {
 	public void setJumpForce(double jumpForce) {
 		this.jumpForce = jumpForce;
 	}
-
-
+	
 	public double getFloorHeight() {
 		return floorHeight;
 	}
@@ -286,6 +261,5 @@ public class PhysicsEngine {
 	public void setFloorHeight(double floorHeight) {
 		this.floorHeight = floorHeight;
 	}
-
 	
 }
