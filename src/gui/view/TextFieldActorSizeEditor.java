@@ -11,8 +11,6 @@ public class TextFieldActorSizeEditor extends TextFieldWithButton {
 
 	@Override
 	protected void updateValueBasedOnEditable() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
