@@ -17,7 +17,7 @@ import javafx.scene.control.Button;
  */
 public abstract class EditingElementParent implements IGUIElement, IGUIEditingElement {
 	
-	private IEditableGameElement myEditable;
+	private IEditableGameElement myEditableElement;
 	private Button myButton;
 	
 	public EditingElementParent(String buttonText) {
@@ -35,7 +35,10 @@ public abstract class EditingElementParent implements IGUIElement, IGUIEditingEl
 	 */
 	@Override
 	public void setEditableElement(IEditableGameElement element) {
-		myEditable = element;		
+		myEditableElement = element;
+		if (myEditableElement != null) {
+			updateValueBasedOnEditable();
+		}		
 	}
 	
 	/**
@@ -43,7 +46,7 @@ public abstract class EditingElementParent implements IGUIElement, IGUIEditingEl
 	 * @return the EditingElement's IEditableGameElement
 	 */
 	public IEditableGameElement getEditableElement() {
-		return myEditable; 
+		return myEditableElement; 
 	}
 	
 	/**

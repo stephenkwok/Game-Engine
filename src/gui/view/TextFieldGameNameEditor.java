@@ -1,7 +1,6 @@
 package gui.view;
 
 import gameengine.controller.GameInfo;
-import gameengine.controller.Level;
 
 /**
  * This class extends the TextFieldWithButton class and allows the author to set the game's name
