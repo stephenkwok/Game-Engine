@@ -153,6 +153,64 @@
 	- Method is called to set the Game’s preview image and display that updated image in the Game Editing Environment
 
 
+ - User clicks to replay the level
+	 - The GameScreenController will observe the Replay button
+	 - When this button is clicked, the controller notifies the Game
+	 - The Game calls the initialize() method to set the game’s level to its current level and then begin()
+
+ - User clicks to clear high scores
+	 - SplashScreenController will observe the HighScore button
+	 - When this button is clicked, the controller instantiates a FileScreenController
+	 - This new controller calls clearFile() in XMLEditor
+
+ - Character moves right, camera moves with it
+	 - The GameController contains a camera that is set to the GameScreen (which is a subscene of BaseScreen)
+	 - Camera observes the main character’s x position
+	 - When the main character’s x position changes, camera’s x position will change
+
+ - Character moves at the end of level, camera stops
+	 - When camera’s position changes, a base check is called that tests if camera’s x position + camera’s width surpasses a the subscene’s width - camera’s width, then camera’s position becomes final for this level
+
+ - Mute/unmute sound effects:
+	 - GameController observes the sound effects button. In case the sound effects button is clicked, the GameController is notified. 
+	 - The boolean (sfxOn) is flipped. 
+	 - The GameController then gets the List<Actor> currentActors through the Game. Each Actor has a JukeBox instance, and if soundOn is true for that JukeBox instance, then the MediaPlayer inside that JukeBox will play.  
+	 - soundOn is set to the value of sfxOn for each Actor in currentActors.
+
+ - Mute/unmute music:
+	 - GameController observes the music button. In case the music button is triggered, the GameController is notified. 
+	 - The boolean (musicOn) is flipped.  
+	 - The GameController then gets the List<Level> levels through the Game. 
+	 - Each Level has a JukeBox instance, and if soundOn is true for that JukeBox instance, then the MediaPlayer inside that JukeBox will play.  
+
+ - Show data from multiple main characters in HUD:
+	 - Instead of a single Actor mainCharacter, the HUD will have a List<Actor> mainCharacters that will all be observed and update the values of HUDData if anything changes.
+
+ - User toggles timeline pause/play: 
+	 - GameController observes the play/pause button. 
+	 - When the button is clicked, the GameController is notified and flips the value of its isPlaying field.  
+	 - Depending on that value, it either calls the togglePause() or toggleUnPause() methods.
+
+ - Infinite scrolling background: 
+	 - Use the JavaFX Animation feature TranslateTransition that spans a certain duration that controls how fast the background will scroll.  
+	 - Over that duration, the image will translate across an X range determined by setFromX(-backgroundImageViewWidth) and setToX(stageWidth).   
+	 - Because this TranslateTransition will run over an indefinite Timeline cycle count, the image will continue to wrap around back to its start from position and translate across indefinitely. 
+
+ - Vertical scrolling: 
+	 - From GameScreen on handleScreenEvent(e), handleKeyPress(e) will determine that the ITrigger is a KeyTrigger and evaluate(actor) based on the key code to trigger a CameraUp Action.  
+	 - The CameraUp Action’s perform() notifies the GameController to set off the GameScreen’s changeCamera(0, DEFAULT_Y_MOVEMENT)
+
+ - In Doodle Jump, actor falling doesn’t move camera: 
+	 - From GameScreen, on handleScreenEvent(e), handleKeyPress(e) will determine that the ITrigger is a KeyTrigger and evaluate(actor) based on the key code to trigger a MoveDown Action but not a CameraDown Action. 
+
+ - Making sure main character doesn’t go off screen: 
+	 - For any Move___  Action of the main actor, ensure there is a simultaneous Camera___  Action.  
+	 - If Camera has settled all the way at the “end” of the GameScreen’s subscene and no longer move, then notify GameController to invoke endSceneReached().   
+	 - In endSceneReached(), GameController will set checkBounds = true.   
+	 - In the step() called by the Game’s timeline, if checkBounds == true, will check that main actor’s getX() % Controller’s GameScreen’s getScene().getWidth() < getScene().getWidth().  
+	 - If so, will not let main actor’s x increase.
+
+
 
 
 
