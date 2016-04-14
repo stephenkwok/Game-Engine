@@ -81,7 +81,7 @@ The `ISplashScreen` is an interface, and a classes which implements this interfa
 **Display**: This module is responsible for displaying all of the actors and background objects on the gameplay area screen. It consists of the `BaseScreen`, `HUDScreen`, `GameScreen` and `MenuScreen` classes. `BaseScreen` is the base upon which other objects can be added with `addComponents()`. `HUDScreen` is a dynamically updating (with the `update()` function) overlay on top of the `BaseScreen` which shows relevant information such as the number of lives remaining and the current score to the player. `GameScreen` has two main functions: `addActor()` and `handleScreenEvent()`. The former function deals with adding various actors to the current displayed area, and the latter deals with handling what happens if an on-screen event happens. This information may get sent back to the game engine for further processing. `MenuScreen` is responsible for saving the current game, switching games, and returning to the main menu, through the `saveProgress()`, `switchGame()`, and `returnToSplash()` functions respectively. As more extensions get added to this project, the `MenuScreen` may have further increased responsibilities.
 
 
-![Game player / data overview.](design_images/revisedPlayerDesign.pdf)
+![Game player / data overview.](design_images/IMG_2657.JPG)
 
 #### GUI
 This module will be shared across all front-end features. There is a parent interface called IGUIElement.java, which contains one public method: Node createNode();
