@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import gamedata.controller.HighScoresController;
 import gameengine.model.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -11,6 +12,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import javafx.collections.MapChangeListener.Change;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import javafx.util.Duration;
 
 /**
@@ -35,11 +39,11 @@ public class Game extends Observable implements Observer {
 	private List<Actor> currentActors;
 	private List<Actor> deadActors;
 	private ObservableMap<String, Object> HUDData;
-	
+
 	//NOTE: NEED TO INITZLIWE THIS
 	private Actor mainCharacter;
-	
-	
+
+
 	/**
 	 * A game is instantiated with a list of all levels in the game and a level to start on.
 	 * Upon instantiation, the actors from all levels are collected into a list and added to a map containing references from ID to actor.
@@ -53,36 +57,37 @@ public class Game extends Observable implements Observer {
 		info = gameInfo;
 		setCurrentActors(new ArrayList<Actor>());
 		setDeadActors(new ArrayList<Actor>());
-        myPhysicsEngine = new PhysicsEngine();
-        myCollisionDetector = new CollisionDetection(myPhysicsEngine);
-        
+		myPhysicsEngine = new PhysicsEngine();
+		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
+
 		initTimeline();
-		
-		
+
+
 	}
-	
+
 
 	public void initTimeline() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-                e -> step());
+				e -> step());
 		setAnimation(new Timeline());
 		getAnimation().setCycleCount(Timeline.INDEFINITE);
 		getAnimation().getKeyFrames().add(frame);
+
 	}
-	
+
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
 		this(null, gameInfo, gameLevels);
 	}
-	
+
 	public Game(List<Level> gameLevels) {
 		this(new GameInfo(), gameLevels);
 	}
-	
+
 	public void startGame(){
 		initCurrentActors();
 		//This is here because it needs to know who the main actor is
 		initHUDData();
-		
+
 		animation.play();
 	}
 
@@ -96,27 +101,27 @@ public class Game extends Observable implements Observer {
 		}
 		initActors();
 	}
-	
+
 	private void step(){
 		physicsUpdate();
 		myCollisionDetector.detection(getCurrentActors());
 		updateActors();
 	}
-	
+
 	private void physicsUpdate(){
 		for(Actor a: getCurrentActors()){
 			myPhysicsEngine.tick(a);
 		}
 	}
-	
+
 	private void initActors(){
 		for(Actor a: getCurrentActors()){
 			a.addObserver(this);
 			a.setEngine(myPhysicsEngine);
 		}
-		
+
 	}
-	
+
 	public String getInitialGameFile() {
 		return initialGameFile;
 	}
@@ -136,7 +141,7 @@ public class Game extends Observable implements Observer {
 	public void setLevels(List<Level> levels) {
 		this.levels = levels;
 	}
-	
+
 	/**
 	 * Gets a list of all levels in the game 
 	 * @return a list of all levels in the game 
@@ -144,12 +149,12 @@ public class Game extends Observable implements Observer {
 	public List<Level> getLevels() {
 		return levels;
 	}
-	
+
 	public void nextLevel(){
 		animation.stop();
 		setCurrentLevel(info.getMyCurrentLevelNum()+1);
 	}
-	
+
 	/**
 	 * Lets current level handle a trigger 
 	 * @param myTrigger the trigger received from the game player 
@@ -167,30 +172,30 @@ public class Game extends Observable implements Observer {
 	public List<Actor> getActors() {
 		return getLevels().get(getInfo().getMyCurrentLevelNum()).getActors();
 	}
-	
+
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-	      
-	      stringBuilder.append("Game [ ");
-	      stringBuilder.append("\ninitialFile: ");
-	      stringBuilder.append(initialGameFile);
-	      stringBuilder.append("\ngameLevels: ");
-	      stringBuilder.append(levels.toString());
-	      stringBuilder.append("\nmyInfo: ");
-	      stringBuilder.append(info.toString());
-	      stringBuilder.append(" ]");
-	      
-	      return stringBuilder.toString();
+
+		stringBuilder.append("Game [ ");
+		stringBuilder.append("\ninitialFile: ");
+		stringBuilder.append(initialGameFile);
+		stringBuilder.append("\ngameLevels: ");
+		stringBuilder.append(levels.toString());
+		stringBuilder.append("\nmyInfo: ");
+		stringBuilder.append(info.toString());
+		stringBuilder.append(" ]");
+
+		return stringBuilder.toString();
 	}
-	
+
 	public Level getCurrentLevel(){
 		return levels.get(info.getMyCurrentLevelNum());
 	}
-	
+
 	public void setCurrentLevel(int levelNum){
 		info.setMyCurrentLevelNum(levelNum);
 	}
-	
+
 	public void updateActors(){
 		setDeadActors(new ArrayList<Actor>());
 		for(Actor a: getCurrentActors()){
@@ -261,7 +266,7 @@ public class Game extends Observable implements Observer {
 	public void setAnimation(Timeline animation) {
 		this.animation = animation;
 	}
-	
+
 	public void initHUDData() {
 		HUDData = FXCollections.observableHashMap();
 		updateHUDFields(info.getMyHUDOptions(), HUDData);
@@ -270,14 +275,14 @@ public class Game extends Observable implements Observer {
 			public void onChanged(Change<? extends String, ? extends Object> change) {
 				update((Observable) HUDData, change); //IDK if casting to observable causes issues with equality
 			}
-        });
+		});
 	}
-	
+
 	public Map<String, Object> getHUDData() {
 		return HUDData;
 	}
-	
-	
+
+
 	public void updateHUDFields(Collection<String> keys, Map<String, Object> destinationMap) {
 		for (String key : keys) {
 			Object value = null;
@@ -299,14 +304,14 @@ public class Game extends Observable implements Observer {
 			destinationMap.put(key, value);
 		}
 	}
-	
-	
-	
-	
+
+
+
+
 	public void updateAttributes() {
 		updateHUDFields(HUDData.keySet(), HUDData);
 	}
-	
-	
+
+
 
 }
