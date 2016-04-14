@@ -13,7 +13,7 @@ import javafx.scene.layout.Pane;
  *
  */
 
-public interface IEditingEnvironment extends IGUIEditingElement {	
+public interface IEditingEnvironment extends IEditingElement {	
 	
 	/**
 	 * 

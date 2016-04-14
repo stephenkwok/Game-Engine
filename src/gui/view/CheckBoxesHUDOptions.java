@@ -9,11 +9,7 @@ import java.util.ResourceBundle;
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
-<<<<<<< HEAD
-import authoringenvironment.model.IGUIEditingElement;
-=======
 import authoringenvironment.model.IEditingElement;
->>>>>>> 491945f32ffcf2c9e25b40408068e5db271d8a2f
 import gameengine.controller.GameInfo;
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;

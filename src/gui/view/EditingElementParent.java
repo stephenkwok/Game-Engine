@@ -1,7 +1,7 @@
 package gui.view;
 
 import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IGUIEditingElement;
+import authoringenvironment.model.IEditingElement;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -15,7 +15,7 @@ import javafx.scene.control.Button;
  * @author Stephen
  *
  */
-public abstract class EditingElementParent implements IGUIElement, IGUIEditingElement {
+public abstract class EditingElementParent implements IGUIElement, IEditingElement {
 	
 	private IEditableGameElement myEditableElement;
 	private Button myButton;
