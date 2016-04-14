@@ -9,6 +9,7 @@ import gameplayer.view.BaseScreen;
 import gameplayer.view.HighScoreScreen;
 import javafx.stage.Stage;
 
+@Deprecated
 public class FileChooserScreenScores extends FileChooserScreen {
 
 	public FileChooserScreenScores(Stage myStage) {

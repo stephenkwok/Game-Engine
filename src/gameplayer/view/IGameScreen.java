@@ -25,14 +25,34 @@ public interface IGameScreen extends disableable {
 	@Deprecated
 	public void handleScreenEvent (Event e);
 	
+	/**
+	 * Clears and reinitializes the visual elements (JavaFX nodes) of the GameScreen
+	 */
 	public void reset();
 	
+	
+	/**
+	 * Initializes the visual elements (JavaFX nodes) of the GameScreen
+	 */
 	public void setUp();
 	
+	/**
+	 * Translates the Camera set on the subscene by the given x,y values
+	 * @param x
+	 * @param y
+	 */
 	public void changeCamera(int x, int y);
 	
+	/**
+	 * Turns background music on the scene on or off.
+	 * @param disable
+	 */
 	public void disableMusic(boolean disable);
 	
+	/**
+	 * Turns all scene's actors' sound effects on or off.
+	 * @param disable
+	 */
 	public void disableSoundFX(boolean disable);
 
 }

@@ -4,6 +4,7 @@ import gameengine.controller.Game;
 import gameplayer.view.BaseScreen;
 import javafx.stage.Stage;
 
+@Deprecated
 public class FileChooserScreenLoad extends FileChooserScreen {
 
 	public FileChooserScreenLoad(Stage myStage) {
