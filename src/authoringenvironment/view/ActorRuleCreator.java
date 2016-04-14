@@ -112,7 +112,6 @@ public class ActorRuleCreator {
 	 * fields based on the Actor 
 	 */
 	public void updateRules() {
-		System.out.println(myRules);
 		for(ActorRule toRemove: myRules){
 			myRuleCreator.getChildren().remove(toRemove.getGridPane());
 		}

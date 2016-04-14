@@ -11,6 +11,7 @@ public class TextFieldActorSizeEditor extends TextFieldWithButton {
 
 	@Override
 	protected void updateValueBasedOnEditable() {
+		setTextFieldValue(Double.toString(((IAuthoringActor) getEditableElement()).getSize()));
 	}
 
 }
