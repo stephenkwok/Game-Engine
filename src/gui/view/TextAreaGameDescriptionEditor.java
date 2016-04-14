@@ -22,6 +22,10 @@ public class TextAreaGameDescriptionEditor extends TextAreaParent {
 		setButtonAction(e -> ((GameInfo) getEditableElement()).setMyDescription(getTextAreaInput()));
 	}
 
+	/**
+	 * Updates the TextArea to display the game's current description based on changes
+	 * in the game's description
+	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
 		setTextAreaPromptText(((GameInfo) getEditableElement()).getMyDescription());		
