@@ -1,10 +1,9 @@
 package gameplayer.view;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
+
 import java.util.Map;
 import java.util.ResourceBundle;
-import com.sun.prism.paint.Color;
 
 import gameplayer.controller.HighScoreScreenController;
 import gui.controller.IScreenController;
@@ -23,6 +22,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * This class displays the high score player data on a BorderPane and includes
+ * a ToolBar for necessary screen functionality
+ * @author michaelfigueiras
+ *
+ */
 public class HighScoreScreen extends Screen{
 
 	private ResourceBundle myResources;
@@ -34,6 +39,12 @@ public class HighScoreScreen extends Screen{
 	private Map<String, Integer> myMap;
 	private String myName;
 	
+	/**
+	 * 
+	 * @param Stage s to change the scene
+	 * @param myMap which contains player-score relationships, parsed from an xml file
+	 * @param gameName to specify the given data
+	 */
 	public HighScoreScreen(Stage s, Map<String, Integer> myMap, String gameName) {
 		super(s);
 		this.myMap = myMap;
@@ -49,6 +60,9 @@ public class HighScoreScreen extends Screen{
 		getRoot().getChildren().add(myPane);
 	}
 
+	/**
+	 * Populates the center pane with map elements made into HBoxes for each individual score
+	 */
 	private void addScorePane() {
 		VBox masterV = new VBox(20);
 		masterV.getChildren().add(new Text(myName));
@@ -72,6 +86,9 @@ public class HighScoreScreen extends Screen{
 		factory = new GUIFactory(myResources, myController);
 	}
 
+	/**
+	 * 
+	 */
 	public void initialize(){
 		myPane.setLeft(null);
 		String[] sideButtons = myResources.getString(TOP_BUTTONS).split(",");

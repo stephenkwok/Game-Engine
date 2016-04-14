@@ -10,8 +10,6 @@ import gui.controller.IScreenController;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import gui.view.Screen;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableMap;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
@@ -62,7 +60,9 @@ public class BaseScreen extends Screen {
 		factory = new GUIFactory(myResources, myBaseScreenController);
 	}
 	
-
+	/**
+	 * Instantiates the necessary objects to add the game subscene and HUDpane to the base scene
+	 */
 	public void addComponents() {
 		try {
 			addGame();
@@ -94,11 +94,26 @@ public class BaseScreen extends Screen {
 		//myMasterPane.setBottom(new Text("HELLO!!!!"));
 	}
 
+	
+	/**
+	 * Adds the game component in two parts: the toolbar for editing buttons and the subscene for display purposes
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	public void addGame() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		addButtonPane();
 		addGamePane();
 	}
 
+	/**
+	 * Using reflection adn the GUIFactory, each game and base screen button is created and added to the main toolbar
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	public void addButtonPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		String[] sideButtons = myResources.getString(SIDE_BUTTONS).split(",");
 		ToolBar myT = new ToolBar();
@@ -114,6 +129,9 @@ public class BaseScreen extends Screen {
 		
 	}
 	
+	/**
+	 * Instantiates the necessary game subscene classes to add to the screen
+	 */
 	public void addGamePane(){
 		SubScene gameScene = myBaseScreenController.getMyGameController().getView().getScene();
 		myMasterPane.setCenter(gameScene);
