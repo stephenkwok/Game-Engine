@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
-import javafx.scene.Node;
 
 public class CollisionBehavior extends ComboBoxBehavior {
 	Controller myController;
@@ -13,7 +12,9 @@ public class CollisionBehavior extends ComboBoxBehavior {
 		super(behaviorType, myResources);
 		this.myController = myController;
 	}
-
+	/**
+	 * Return list of Actor names to be set as ComboBox options
+	 */
 	@Override
 	protected List<String> getOptionsList() {
 		return myController.getActorNames();
@@ -21,12 +22,6 @@ public class CollisionBehavior extends ComboBoxBehavior {
 
 	@Override
 	protected void updateValueBasedOnEditable() {
-	}
-
-	@Override
-	public Node createNode() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

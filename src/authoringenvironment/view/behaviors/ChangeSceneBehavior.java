@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
-import javafx.scene.Node;
 /**
  * GUI representation of ChangeScene behavior, which requires single input in ComboBox form
  * @author AnnieTang
@@ -27,10 +26,4 @@ public class ChangeSceneBehavior extends ComboBoxBehavior{
 	@Override
 	protected void updateValueBasedOnEditable() {
 	}
-	@Override
-	public Node createNode() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
