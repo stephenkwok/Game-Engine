@@ -132,6 +132,13 @@
 	- Level’s setWidth or setHeight method will be called
 	- Canvas that represents the level’s bounds resizes its display.
 
+- User changes background image of level
+	- User clicks the change background image button.
+	- Filechooser pops up to choose an image file.
+	- Level’s setBackground() method is called to update its background actor.
+	- Pane that represents the level updates its background actor’s imageview.
+
+
 
 
 
