@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 public class PaneParent implements IGUIElement{
 
 	private Pane myPane;
-	protected IScreenController myController;
+	private IScreenController myController;
 	
 	public PaneParent(IScreenController myController) {
 		this.myController = myController;

@@ -29,10 +29,10 @@ abstract class TabLibrary extends TabParent {
 	private static final int FILE_EXT_LENGTH = 4;
 	private static final String IMAGE_FILE_EXTS = ".jpg .png .gif";
 	private static final String SOUND_FILE_EXTS = ".mp3";
-	protected static final double CORNER_RADIUS = 20;
-	protected ObservableList<Label> labels;
-	protected ListView<Label> listView;
-	protected ActorRuleCreator myActorRuleCreator;
+	private static final double CORNER_RADIUS = 20;
+	private ObservableList<Label> labels;
+	private ListView<Label> listView;
+	private ActorRuleCreator myActorRuleCreator;
 	private List<ActorRule> myActorRules; //targets
 	
 	public TabLibrary(ResourceBundle myResources, String tabText, ActorRuleCreator myActorRuleCreator) {
@@ -179,5 +179,25 @@ abstract class TabLibrary extends TabParent {
 				setDragEvent(behaviorLabel,TransferMode.COPY);
 			}
 		}
+	}
+	
+	protected ObservableList<Label> getLabels() {
+		return labels;
+	}
+	
+	protected void setLabels(ObservableList<Label> labels) {
+		this.labels = labels;
+	}
+	
+	protected ListView<Label> getListView() {
+		return listView;
+	}
+	
+	protected void setListView(ListView<Label> listview) {
+		listView = listview;
+	}
+	
+	protected ActorRuleCreator getActorRuleCreator() {
+		return myActorRuleCreator;
 	}
 }
