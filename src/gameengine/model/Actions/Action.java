@@ -40,7 +40,12 @@ public abstract class Action implements IAction {
     public Actor getMyActor() {
         return myActor;
     }
-    
+
+    /**
+     * Assigns an Actor to the actions
+     *
+     * @param actor The actor to be assigned
+     */
     public void setMyActor(Actor actor) {
     	this.myActor = actor;
     }
