@@ -108,6 +108,10 @@ public class GUILevelInspector implements IGUI {
 		return myAttributesTab;
 	}
 	
+	/**
+	 * Creates an image setting button.
+	 * @return a button whose action sets the image.
+	 */
 	private Button getImageSettingButton(){
 		Button imageSetter = new Button(BUTTON_LABEL);
 		imageSetter.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -122,6 +126,13 @@ public class GUILevelInspector implements IGUI {
 	}
 	
 	// TODO: need to have preview show up on level editing environment
+	/**
+	 * Loads the selected image from the file selected by the user.
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private void loadSelectedImage() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		File imageFile = promptForFileName();
 		if(imageFile!=null){
