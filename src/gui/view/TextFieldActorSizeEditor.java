@@ -8,7 +8,9 @@ public class TextFieldActorSizeEditor extends TextFieldWithButton {
 		super(labelText, promptText, textFieldWidth);
 		setButtonAction(e -> ((IAuthoringActor) getEditableElement()).setSize(Double.parseDouble(getTextFieldInput())));
 	}
-
+	/**
+	 * Sets the textfield's value to reflect the current actor's size.
+	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
 		setTextFieldValue(Double.toString(((IAuthoringActor) getEditableElement()).getSize()));

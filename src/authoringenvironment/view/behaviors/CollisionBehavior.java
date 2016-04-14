@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
-
+/**
+ * GUI representation of Collision behavior, which requires single Actor input in ComboBox form
+ * @author AnnieTang
+ */
 public class CollisionBehavior extends ComboBoxBehavior {
 	Controller myController;
 	

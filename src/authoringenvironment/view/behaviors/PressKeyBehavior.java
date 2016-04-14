@@ -3,7 +3,10 @@ package authoringenvironment.view.behaviors;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-
+/**
+ * GUI representation of PressKey behavior, which requires single input in ComboBox form
+ * @author AnnieTang
+ */
 public class PressKeyBehavior extends ComboBoxBehavior {
 	private ResourceBundle myResources;
 	
