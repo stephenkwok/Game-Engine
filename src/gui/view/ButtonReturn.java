@@ -14,8 +14,7 @@ public class ButtonReturn extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnMouseClicked(e -> myControl.goToSplash());
-
+		getButton().setOnMouseClicked(e -> myControl.goToSplash());
 	}
 
 }

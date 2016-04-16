@@ -24,12 +24,12 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell {
 	 */
 	@Override
 	public void setButtonAction() {
-		comboButton.setOnAction(event->{
-			this.value = comboBox.getValue();
+		getComboButton().setOnAction(event->{
+			this.value = (String) getComboBox().getValue();
 		});
 	}
 	/**
-	 * Return list of elements in ComboBox
+	 * Return list of elements in ComboBoxg
 	 */
 	@Override
 	abstract protected List<String> getOptionsList();
@@ -55,7 +55,7 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell {
 	 */
 	@SuppressWarnings("rawtypes")
 	public ComboBox getComboBox(){
-		return comboBox;
+		return getComboBox();
 	}
 
 }

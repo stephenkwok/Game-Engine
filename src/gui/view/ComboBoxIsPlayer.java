@@ -18,8 +18,8 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 
 	@Override
 	public void setButtonAction() {
-		comboButton.setOnAction(event -> {
-			((IAuthoringActor) getEditableElement()).setMain(Boolean.parseBoolean(comboBox.getValue()));
+		getComboButton().setOnAction(event -> {
+			((IAuthoringActor) getEditableElement()).setMain(Boolean.parseBoolean(getComboBox().getValue()));
 		});
 	}
 
@@ -30,7 +30,7 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 
 	@Override
 	protected void updateValueBasedOnEditable() {
-		comboBox.setValue(Boolean.toString(((IAuthoringActor) getEditableElement()).isMain()));
+		getComboBox().setValue(Boolean.toString(((IAuthoringActor) getEditableElement()).isMain()));
 	}
 
 }

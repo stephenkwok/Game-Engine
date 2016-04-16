@@ -25,16 +25,16 @@ public abstract class ComboBoxParent extends EditingElementParent {
 	private static final int VISIBLE_ROW_COUNT = 5;
 	private static final int HBOX_SPACING = 5;
 	private static final String GO = "Go";
-	protected static final String NO_NODE_FOR_BOX = "";
+	private static final String NO_NODE_FOR_BOX = "";
 	private static final int BUTTON_HEIGHT = 30;
 	private static final int BUTTON_WIDTH = 40;
-	protected String promptText;
-	protected ObservableList<String> options;
-	protected List<String> optionsList;
-	protected ComboBox<String> comboBox;
-	protected Button comboButton;
-	protected String paletteSource;
-	protected String labelText;
+	private String promptText;
+	private ObservableList<String> options;
+	private List<String> optionsList;
+	private ComboBox<String> comboBox;
+	private Button comboButton;
+	private String paletteSource;
+	private String labelText;
 	private IEditableGameElement myEditableElement;
 	
 	public ComboBoxParent(String promptText) {
@@ -115,14 +115,43 @@ public abstract class ComboBoxParent extends EditingElementParent {
 		        getOptionsList()
 		    );
 		comboBox.setItems(newOptions);
-	}
-
-	protected abstract void updateValueBasedOnEditable();
-	
+	}	
 	
 	/**
 	 * Returns list of items in the ComboBox.
 	 * @return
 	 */
 	protected abstract List<String> getOptionsList();
+	
+	/**
+	 * Gets the label text for this combobox.
+	 * @return label text.
+	 */
+	protected String getLabelText() {
+		return labelText;
+	}
+	
+	/**
+	 * Sets the label text for this combobox.
+	 * @param label: label to use.
+	 */
+	protected void setLabelText(String label) {
+		labelText = label;
+	}
+	
+	/**
+	 * Gets the GO button for this combobox.
+	 * @return GO button.
+	 */
+	protected Button getComboButton() {
+		return comboButton;
+	}
+	
+	/**
+	 * Gets the combobox.
+	 * @return combobox.
+	 */
+	protected ComboBox<String> getComboBox() {
+		return comboBox;
+	}
 }

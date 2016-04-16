@@ -15,13 +15,13 @@ public class ButtonLoad extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnAction(event -> loadProperties());
+		getButton().setOnAction(event -> loadProperties());
 	}
 	
 	/**
      * Sets workspace preferences to those specified by the given XML. 
      */
     private void loadProperties() {
-    	((Controller) myController).loadGame(promptForFileName(false));
+    	((Controller) getController()).loadGame(promptForFileName(false));
     }
 }
