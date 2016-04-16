@@ -133,7 +133,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 				if (db.hasString()) {
 					IAuthoringActor actor = getActorById(Integer.parseInt(db.getString()));
 					//actor.setMyID(myLevel.getActors().size());
-					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
+					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getMyImageView().getFitHeight());
 					iconToAdd.getImageView().setOnDragDetected(null);
 					iconToAdd.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
 						@Override public void handle(MouseEvent event) {
@@ -228,7 +228,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 * Updates the preview to show the level's background.
 	 */
 	private void updateLevelBackground() {
-		myLevelBackground = myLevel.getImageView();
+		myLevelBackground = myLevel.getMyImageView();
 		myLevelBackground.setPreserveRatio(true);
 		myLevelBackground.fitWidthProperty().bind(myCenterPane.widthProperty());
 		myCenterPane.getChildren().add(myLevelBackground);
@@ -240,7 +240,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	private void addLevelActorsToScene() {
 		myActorPreviews.clear();
 		for (IAuthoringActor actor: myLevel.getActors()) {
-			ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
+			ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getMyImageView().getFitHeight());
 			icon.getImageView().setX(actor.getX());
 			icon.getImageView().setY(actor.getY());
 			icon.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {

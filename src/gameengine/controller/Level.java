@@ -50,7 +50,7 @@ public class Level implements Observer, ILevel, IEditableGameElement {
         setMyTriggerMap(new HashMap<>());
         setMyName(DEFAULT_NAME);
         myBackgroundImgName = DEFAULT_IMAGE_NAME;
-        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
+        setMyImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
         myTermination = DEFAULT_TERMINATION;
         myScrollingDirection = DEFAULT_SCROLLING;
         myWinningCondition = DEFAULT_WINNING_CONDITION;
@@ -126,7 +126,7 @@ public class Level implements Observer, ILevel, IEditableGameElement {
      * @return  The Level's ImageView
      */
 	@Override
-	public ImageView getImageView() {
+	public ImageView getMyImageView() {
 		return myBackground;
 	}
 
@@ -136,7 +136,7 @@ public class Level implements Observer, ILevel, IEditableGameElement {
      * @param imageView to be set as IEditableGameElement's ImageView
      */
 	@Override
-	public void setImageView(ImageView imageView) {
+	public void setMyImageView(ImageView imageView) {
 		myBackground = imageView;
 	}
 

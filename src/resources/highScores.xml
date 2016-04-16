@@ -1,11 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.HighScoresKeeper>
   <myScores>
     <entry>
+      <string>hudtest_loader.xml</string>
+      <tree-map>
+        <entry>
+          <string>Carine</string>
+          <int>2</int>
+        </entry>
+      </tree-map>
+    </entry>
+    <entry>
       <string>testGame</string>
       <tree-map>
         <entry>
           <string>John</string>
           <int>10</int>
+        </entry>
+      </tree-map>
+    </entry>
+    <entry>
+      <string>hudtest.xml</string>
+      <tree-map>
+        <entry>
+          <string>Camy</string>
+          <int>4</int>
+        </entry>
+        <entry>
+          <string>Carine</string>
+          <int>2</int>
+        </entry>
+        <entry>
+          <string>Shubham</string>
+          <int>0</int>
         </entry>
       </tree-map>
     </entry>
@@ -21,15 +47,15 @@
           <int>10</int>
         </entry>
         <entry>
-          <string>bobby</string>
-          <int>0</int>
-        </entry>
-        <entry>
           <string>bella</string>
           <int>0</int>
         </entry>
         <entry>
           <string>blake</string>
+          <int>0</int>
+        </entry>
+        <entry>
+          <string>bobby</string>
           <int>0</int>
         </entry>
         <entry>
