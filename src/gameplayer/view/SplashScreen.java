@@ -23,7 +23,11 @@ import gui.view.Screen;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -59,6 +63,7 @@ public class SplashScreen extends Screen {
 		setButtonsUp(hbox);
 		getRoot().getChildren().add(hbox);
 		hbox.setLayoutY(getMyScene().getHeight() / 6);
+		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		return getMyScene();
 	}
 

@@ -7,10 +7,10 @@ import java.util.ResourceBundle;
  * GUI representation of PressKey behavior, which requires single input in ComboBox form
  * @author AnnieTang
  */
-public class PressKeyBehavior extends ComboBoxBehavior {
+public class KeyBehavior extends ComboBoxBehavior {
 	private ResourceBundle myResources;
 	
-	public PressKeyBehavior(String behaviorType, ResourceBundle myResources) {
+	public KeyBehavior(String behaviorType, ResourceBundle myResources) {
 		super(behaviorType, myResources);
 		this.myResources = myResources;
 	}
