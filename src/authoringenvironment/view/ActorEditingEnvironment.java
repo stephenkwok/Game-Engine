@@ -157,7 +157,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	 * @param newImageView
 	 */
 	public void setActorImage(ImageView newImageView, String imageViewName) {
-		myActor.setImageView(newImageView);
+		myActor.setMyImageView(newImageView);
 		myActor.setMyImageViewName(imageViewName);
 		myActorIV = new ImageviewActorIcon(myActor, ICON_HEIGHT);
 		setLeftPane();

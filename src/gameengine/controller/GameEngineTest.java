@@ -39,14 +39,14 @@ public class GameEngineTest {
         
         Actor floor = new Actor();
         floor.setMyImageViewName("square.png");
-        floor.setImageView(new ImageView(new Image(GameEngineTest.class.getClassLoader().getResourceAsStream("square.png"))));
+        floor.setMyImageView(new ImageView(new Image(GameEngineTest.class.getClassLoader().getResourceAsStream("square.png"))));
         
         Actor actor1 = new Actor();
         actor1.setMyImageViewName("redball.png");
-        actor1.setImageView(new ImageView(new Image(GameEngineTest.class.getClassLoader().getResourceAsStream("redball.png"))));
+        actor1.setMyImageView(new ImageView(new Image(GameEngineTest.class.getClassLoader().getResourceAsStream("redball.png"))));
         
-        actor1.getImageView().setFitHeight(50);
-        actor1.getImageView().setFitHeight(50);
+        actor1.getMyImageView().setFitHeight(50);
+        actor1.getMyImageView().setFitHeight(50);
 
         KeyTrigger rightTrigger  = new KeyTrigger(KeyCode.RIGHT);
         MoveRight action1 = new MoveRight(actor1);

@@ -50,12 +50,12 @@ public interface IAuthoringActor extends IEditableGameElement{
      * Provides the Actor's Imageview
      * @return  The Actor's Imageview
      */
-    ImageView getImageView();
+    ImageView getMyImageView();
     /**
      * Sets a new Actor ImageView
      * @param imageView The new ImageView
      */
-    void setImageView(ImageView imageView);
+    void setMyImageView(ImageView imageView);
     /**
      * Provides the Actor's X coordinate
      * @return  The Actor's X coordinate
