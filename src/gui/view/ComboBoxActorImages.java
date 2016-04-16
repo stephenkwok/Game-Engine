@@ -51,8 +51,6 @@ public class ComboBoxActorImages extends ComboBoxImageCell{
 
 	@Override
 	protected void updateValueBasedOnEditable() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
