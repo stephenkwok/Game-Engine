@@ -1,5 +1,7 @@
 package authoringenvironment.view;
 
+import java.util.Arrays;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
@@ -20,13 +22,14 @@ import javafx.scene.image.ImageView;
  *
  */
 
-public class LabelClickable extends Label {
+public class LabelClickable extends Observable {
 
 	private static final String IMAGE_TEXT_PADDING = "    ";
 	private static final String DEFAULT_BORDER_COLOR_KEY = "defaultBorderColor";
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
 	private static final Double FIT_SIZE = 75.0;
 	private static final Double LABEL_PADDING = 10.0;
+	private Label myLabel;
 	private ResourceBundle myResources;
 	private IEditableGameElement myEditable;
 	private IEditingEnvironment myEnvironment;
@@ -35,21 +38,35 @@ public class LabelClickable extends Label {
 		this.myEditable = editable;
 		this.myEnvironment = environment;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
-		this.setOnMouseClicked(e -> controller.goToEditingEnvironment(myEditable, myEnvironment));
-		this.setStyle(myResources.getString(DEFAULT_BORDER_COLOR_KEY));
+		this.myLabel = new Label();
+		myLabel.setOnMouseClicked(e -> notifyController());
+		myLabel.setStyle(myResources.getString(DEFAULT_BORDER_COLOR_KEY));
 	}
 
+	private void notifyController() {
+		this.setChanged();
+		this.notifyObservers(Arrays.asList(myEditable, myEnvironment));
+	}
+	
 	/**
 	 * Updates the Label's text and image to account for any changes in the 
 	 * Actor or Level's name and image
 	 */
 	public void update() {
-		this.setText(IMAGE_TEXT_PADDING + myEditable.getMyName());
+		myLabel.setText(IMAGE_TEXT_PADDING + myEditable.getMyName());
 		ImageView imageView = new ImageView(myEditable.getMyImageView().getImage());
 		imageView.setFitHeight(FIT_SIZE);
 		imageView.setPreserveRatio(true);
-		this.setPadding(new Insets(LABEL_PADDING));
-		this.setGraphic(imageView);
+		myLabel.setPadding(new Insets(LABEL_PADDING));
+		myLabel.setGraphic(imageView);
+	}
+	
+	/**
+	 * 
+	 * @return myLabel
+	 */
+	public Label getLabel() {
+		return myLabel;
 	}
 
 }

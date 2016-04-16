@@ -3,6 +3,8 @@ package authoringenvironment.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -11,9 +13,10 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.view.ActorEditingEnvironment;
-import authoringenvironment.view.LevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
+import authoringenvironment.view.LabelClickable;
+import authoringenvironment.view.LevelEditingEnvironment;
 import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
@@ -29,7 +32,7 @@ import javafx.stage.Stage;
  * @author Stephen, AnnieTang
  */
 
-public class Controller implements IScreenController {
+public class Controller implements IScreenController, Observer {
 	private Stage myStage;
 	private List<Level> myLevels;
 	private List<String> myLevelNames;
@@ -141,7 +144,7 @@ public class Controller implements IScreenController {
 		Level newLevel = new Level();
 		myLevels.add(newLevel);
 		myLevelNames.add(newLevel.getMyName());
-		mainScreen.createLevelLabel(newLevel);
+		mainScreen.createLevelLabel(newLevel).addObserver(this);
 		goToEditingEnvironment(newLevel, levelEnvironment);
 	}
 
@@ -150,10 +153,12 @@ public class Controller implements IScreenController {
 		newActor.setMyID(myActors.size());
 		myActors.add(newActor);
 		myActorNames.add(newActor.getMyName());
-		mainScreen.createActorLabel(newActor);
+		mainScreen.createActorLabel(newActor).addObserver(this);
 		actorEnvironment.setActorImage(newActor.getMyImageView(), newActor.getMyImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
+	
+	
 	
 	public double getSceneWidth(){
 		return guiMain.getWidth();
@@ -196,5 +201,22 @@ public class Controller implements IScreenController {
 	public void switchGame() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		if (arg0 instanceof LabelClickable) {
+			handleObservableGoToEditingEnvironmentCall(arg1);
+		}
+		
+	}
+	
+	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
+		if (notifyObserversArgument instanceof List) {
+			List<Object> arguments = (List<Object>) notifyObserversArgument;
+			IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
+			IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
+			goToEditingEnvironment(editable, environment);
+		}
 	}
 }

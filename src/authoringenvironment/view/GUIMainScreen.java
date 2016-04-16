@@ -9,6 +9,7 @@ import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.GameInfo;
 import gui.view.IGUI;
 import javafx.beans.binding.DoubleExpression;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -157,16 +158,16 @@ public class GUIMainScreen implements IGUI {
 	 * Creates a LabelClickable associated with an Actor
 	 * @param actor associated with the Label generated
 	 */
-	public void createActorLabel(IEditableGameElement actor) {
-		createLabel(actor, actorEditor, actorLabelContainer);
+	public LabelClickable createActorLabel(IEditableGameElement actor) {
+		return createLabel(actor, actorEditor, actorLabelContainer);
 	}
 
 	/**
 	 * Creates a LabelClickable associated with a Level
 	 * @param level associated with the Label generated
 	 */
-	public void createLevelLabel(IEditableGameElement level) {
-		createLabel(level, levelEditor, levelLabelContainer);
+	public LabelClickable createLevelLabel(IEditableGameElement level) {
+		return createLabel(level, levelEditor, levelLabelContainer);
 	}
 
 	/**
@@ -175,11 +176,13 @@ public class GUIMainScreen implements IGUI {
 	 * @param environment associated with LabelClickable
 	 * @param container to hold the Label
 	 */
-	private void createLabel(IEditableGameElement editable, IEditingEnvironment environment, VBox container) {
-		LabelClickable label = new LabelClickable(editable, environment, controller);
+	private LabelClickable createLabel(IEditableGameElement editable, IEditingEnvironment environment, VBox container) {
+		LabelClickable labelWrapper = new LabelClickable(editable, environment, controller);
+		Label label = labelWrapper.getLabel();
 		bindNodeSizeToGivenSize(label, container.widthProperty(), null);
 		container.getChildren().add(label);
-		clickableLabels.add(label);
+		clickableLabels.add(labelWrapper);
+		return labelWrapper;
 	}
 
 	/**
