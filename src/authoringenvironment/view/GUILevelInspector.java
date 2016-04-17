@@ -39,6 +39,7 @@ public class GUILevelInspector implements IGUI {
 	private TabActors myActorsTab;
 	private TabAttributes myAttributesTab;
 	private VBox myContainer;
+	private LevelEditingEnvironment myLevelEditor;
 	
 	/**
 	 * Constructor for Level Inspector.
@@ -47,8 +48,8 @@ public class GUILevelInspector implements IGUI {
 	 * @param availActors: list of currently available actors.
 	 * @param level: level that is being edited.
 	 */
-	public GUILevelInspector(Controller controller, ResourceBundle myResources, List<IAuthoringActor> availActors, Level level) {
-		myLevel = level;
+	public GUILevelInspector(Controller controller, ResourceBundle myResources, List<IAuthoringActor> availActors, Level level, LevelEditingEnvironment editor) {
+		myLevelEditor = editor;
 		myController = controller;
 		init(controller, myResources, availActors, level);
 	}
@@ -60,7 +61,7 @@ public class GUILevelInspector implements IGUI {
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
 		myAttributesTab = new TabAttributes(controller, myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, level);
 		addTabToContainer(myAttributesTab, false);
-		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(myController, BUTTON_LABEL, null, BUTTON_WIDTH, BUTTON_HEIGHT, myController.getStage(), myLevel);
+		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(myController, BUTTON_LABEL, null, BUTTON_WIDTH, BUTTON_HEIGHT, myController.getStage(), myLevelEditor);
 		myContainer.getChildren().add(button.createNode());
 		addTabToContainer(myActorsTab, true);
 		myPane.getChildren().addAll(myContainer);

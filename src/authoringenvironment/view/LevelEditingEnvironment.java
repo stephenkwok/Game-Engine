@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -12,6 +13,7 @@ import gameengine.controller.Level;
 import gameengine.model.Actor;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -71,7 +73,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	private void initializeLeftPane() {
 		myLeftPane = new VBox();
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
-		myInspector = new GUILevelInspector(myController, myResources, availableActors, myLevel);
+		myInspector = new GUILevelInspector(myController, myResources, availableActors, myLevel, this);
 		myLeftPane.getChildren().add(myInspector.getPane());
 		myRoot.setLeft(myLeftPane);
 		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
@@ -234,6 +236,11 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		myCenterPane.getChildren().add(myLevelBackground);
 	}
 	
+	public void changeBackgroundImage(Image image, File imageFile) {
+		myLevel.setMyImageView(new ImageView(image));
+		myLevel.setMyBackgroundImgName(imageFile.getPath());
+		updateLevelBackground();
+	}
 	/**
 	 * Add a level's actors to the preview in the center pane.
 	 */
