@@ -30,6 +30,8 @@ import javafx.stage.Stage;
 public class GUIMainScreen implements IGUI {
 
 	private static final int NUM_SCROLLPANES = 2;
+	private DoubleExpression screenWidth;
+	private DoubleExpression screenHeight;
 	private Controller controller;
 	private VBox actorLabelContainer;
 	private VBox levelLabelContainer;
@@ -41,13 +43,16 @@ public class GUIMainScreen implements IGUI {
 	private IEditingEnvironment actorEditor;
 	private IEditingEnvironment levelEditor;
 	private GameInfo gameInfo;
+	private GameEditingEnvironment gameEditor;
 
-	public GUIMainScreen(Controller controller, IEditingEnvironment actorEditor, IEditingEnvironment levelEditor,
-			GameInfo gameInfo) {
-		this.controller = controller;
+	public GUIMainScreen(GameEditingEnvironment gameEditor, IEditingEnvironment actorEditor, IEditingEnvironment levelEditor,
+			GameInfo gameInfo, DoubleExpression screenWidth, DoubleExpression screenHeight) {
+		this.gameEditor = gameEditor;
 		this.actorEditor = actorEditor;
 		this.levelEditor = levelEditor;
 		this.gameInfo = gameInfo;
+		this.screenWidth = screenWidth;
+		this.screenHeight = screenHeight;
 		clickableLabels = new ArrayList<LabelClickable>();
 		levelScrollPane = new ScrollPane();
 		actorScrollPane = new ScrollPane();
@@ -71,17 +76,15 @@ public class GUIMainScreen implements IGUI {
 	 * Initializes the Game Editing Environment and sets it as the BorderPane's left pane
 	 */
 	private void initializeGameEditingEnvironment() {
-		GameEditingEnvironment gameEditingEnvironment = new GameEditingEnvironment(gameInfo, controller);
-		borderPane.setLeft(gameEditingEnvironment.createNode());
+		borderPane.setLeft(gameEditor.createNode());
 	}
 
 	/**
 	 * Initializes the BorderPane for the MainScreen
 	 */
 	private void initBorderPane() {
-		Stage stage = controller.getStage();
 		borderPane = new BorderPane();
-		bindNodeSizeToGivenSize(borderPane, stage.widthProperty(), stage.heightProperty());
+		bindNodeSizeToGivenSize(borderPane, screenWidth, screenHeight);
 	}
 
 	/**
