@@ -1,6 +1,6 @@
 package authoringenvironment.view;
 import java.util.ResourceBundle;
-import authoringenvironment.controller.Controller;
+
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
 import gameengine.controller.GameInfo;
@@ -31,6 +31,7 @@ import javafx.scene.layout.VBox;
 public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	private IEditableGameElement myGameInfo;
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
+	private static final String GAME_PREVIEW_IMAGE_PROMPT_KEY = "currentGamePreviewImage";
 	private static final double DEFAULT_PADDING = 10;
 	private static final double CONTAINER_PREFERRED_WIDTH = 350.0;
 	private static final int TEXT_AREA_ROWS = 5;
@@ -45,13 +46,11 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	private VBox gameDescriptionEditor;
 	private VBox previewImageContainer;
 	private VBox HUDOptionsDisplay;
-	private Controller controller;
 	private ScrollPane myScrollPane;
 
-	public GameEditingEnvironment(GameInfo gameInfo, Controller controller) {
+	public GameEditingEnvironment(GameInfo gameInfo) {
 		this.myGameInfo = gameInfo;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
-		this.controller = controller;
 	}
 
 	/**
@@ -113,9 +112,8 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	// hard coded values
 	private void initializePreviewImageDisplay() {
 		previewImageContainer = new VBox();
-		// previewImageContainer.setAlignment(Pos.CENTER);
 		previewImageContainer.setPadding(new Insets(DEFAULT_PADDING));
-		Label previewImageLabel = new Label("Current Game Preview Image:");
+		Label previewImageLabel = new Label(GAME_PREVIEW_IMAGE_PROMPT_KEY);
 		ImageView previewImage = new ImageView(
 				new Image(getClass().getClassLoader().getResourceAsStream("default_game.jpg")));
 		previewImageContainer.getChildren().addAll(previewImageLabel, previewImage);
@@ -125,7 +123,7 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	 * Initializes the GUI element that displays checkboxes for each HUD Option
 	 */
 	private void initializeHUDOptionsDisplay() {
-		CheckBoxesHUDOptions HUDOptions = new CheckBoxesHUDOptions(myGameInfo, controller);
+		CheckBoxesHUDOptions HUDOptions = new CheckBoxesHUDOptions(myGameInfo);
 		HUDOptionsDisplay = (VBox) HUDOptions.createNode();
 	}
 

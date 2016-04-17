@@ -1,6 +1,5 @@
 package gui.view;
 
-import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
 /**
  * Button to return to main screen
@@ -17,8 +16,7 @@ public class ButtonHome extends ButtonParent{
 	 */
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnAction(event -> {
-			((Controller) getController()).goToMainScreen();
-		});
+		getButton().setOnAction(e -> notifyController(null));
 	}
+	
 }

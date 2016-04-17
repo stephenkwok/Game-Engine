@@ -15,6 +15,7 @@ import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.view.ActorEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
+import authoringenvironment.view.GameEditingEnvironment;
 import authoringenvironment.view.LabelClickable;
 import authoringenvironment.view.LevelEditingEnvironment;
 import gamedata.controller.CreatorController;
@@ -23,6 +24,13 @@ import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gui.controller.IScreenController;
+import gui.view.ButtonFinish;
+import gui.view.ButtonHome;
+import gui.view.ButtonLoad;
+import gui.view.ButtonNewActor;
+import gui.view.ButtonNewLevel;
+import gui.view.ButtonSave;
+import gui.view.GUIFactory;
 import gui.view.Screen;
 import javafx.stage.Stage;
 
@@ -40,6 +48,7 @@ public class Controller implements IScreenController, Observer {
 	private List<String> myActorNames;
 	private LevelEditingEnvironment levelEnvironment;
 	private ActorEditingEnvironment actorEnvironment;
+	private GameEditingEnvironment gameEnvironment;
 	private GUIMainScreen mainScreen;
 	private GUIMain guiMain;
 	private ResourceBundle myResources;
@@ -62,7 +71,8 @@ public class Controller implements IScreenController, Observer {
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
 		actorEnvironment = new ActorEditingEnvironment(this, myResources);
-		mainScreen = new GUIMainScreen(this, gameInfo, myStage.widthProperty(), myStage.heightProperty());
+		gameEnvironment = new GameEditingEnvironment(gameInfo);
+		mainScreen = new GUIMainScreen(gameInfo, myStage.widthProperty(), myStage.heightProperty(), gameEnvironment);
 	}
 
 	/**
@@ -205,18 +215,30 @@ public class Controller implements IScreenController, Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if (arg0 instanceof LabelClickable) {
-			handleObservableGoToEditingEnvironmentCall(arg1);
-		}
+		if (arg0 instanceof LabelClickable)
+			handleCallToGoToEditingEnvironmentCall(arg1);
+		else if (arg0 instanceof ButtonHome)
+			goToMainScreen();
+		else if (arg0 instanceof ButtonSave)
+			saveGame((File) arg1);
+		else if (arg0 instanceof ButtonLoad)
+			loadGame((File) arg1);
+		else if (arg0 instanceof ButtonNewActor)
+			addActor();
+		else if (arg0 instanceof ButtonNewLevel)
+			addLevel();
+		else if (arg0 instanceof ButtonFinish)
+			goToSplash();
+
 
 	}
 
-	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
-		if (notifyObserversArgument instanceof List) {
-			List<Object> arguments = (List<Object>) notifyObserversArgument;
-			IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
-			IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
-			goToEditingEnvironment(editable, environment);
-		}
+	private void handleCallToGoToEditingEnvironmentCall(Object argFromObservable) {
+		@SuppressWarnings("unchecked") // how can we avoid this?
+		List<Object> arguments = (List<Object>) argFromObservable;
+		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
+		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
+		goToEditingEnvironment(editable, environment);
 	}
+	
 }

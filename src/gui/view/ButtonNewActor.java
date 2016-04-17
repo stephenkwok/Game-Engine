@@ -1,6 +1,5 @@
 package gui.view;
 
-import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
 
 /**
@@ -25,7 +24,7 @@ public class ButtonNewActor extends ButtonParent {
 	 */
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnAction(e -> ((Controller) getController()).addActor());
+		getButton().setOnAction(e -> notifyController(null));
 	}
 
 }
