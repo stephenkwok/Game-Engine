@@ -73,12 +73,16 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	private void initializeLeftPane() {
 		myLeftPane = new VBox();
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
-		myInspector = new GUILevelInspector(myController, myResources, availableActors, myLevel, this);
-		myLeftPane.getChildren().add(myInspector.getPane());
 		myRoot.setLeft(myLeftPane);
-		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
+		addChildrenToLeftPane();
 	}
 
+	private void addChildrenToLeftPane() {
+		myInspector = new GUILevelInspector(myController, myResources, availableActors, myLevel, this);
+		myLeftPane.getChildren().add(myInspector.getPane());
+		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
+	}
+	
 	/**
 	 * Updates the drag behavior of the level editing environment to accommodate updates to currently available actors.
 	 */
@@ -134,7 +138,6 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 				boolean success = false;
 				if (db.hasString()) {
 					IAuthoringActor actor = getActorById(Integer.parseInt(db.getString()));
-					//actor.setMyID(myLevel.getActors().size());
 					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getMyImageView().getFitHeight());
 					iconToAdd.getImageView().setOnDragDetected(null);
 					iconToAdd.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
@@ -165,10 +168,6 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		actor.setY(event.getY());
 		icon.getImageView().setX(event.getX());
 		icon.getImageView().setY(event.getY());
-		System.out.println(actor.getX());
-		System.out.println(actor.getY());
-		System.out.println(icon.getImageView().getX());
-		System.out.println(icon.getImageView().getY());
 	}
 	
 	/**

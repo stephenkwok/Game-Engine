@@ -39,6 +39,11 @@ public class TabActors extends TabParent {
 		super(myResources, tabText);
 		actorIcons = new ArrayList<ImageviewActorIcon>();	
 		myPane = new TilePane(HGAP, VGAP);
+		formatTab();
+		setAvailableActors(availActors);
+	}
+	
+	private void formatTab() {
 		myPane.setPrefTileHeight(TILE_HEIGHT);
 		myPane.setPrefTileWidth(TILE_WIDTH);
 		myPane.setPrefColumns(NUM_COLS);
@@ -47,7 +52,6 @@ public class TabActors extends TabParent {
 		myPane.setAlignment(Pos.TOP_LEFT);
 		myPane.setPadding(new Insets(PADDING));
 		myPane.setPrefHeight(200);
-		setAvailableActors(availActors);
 	}
 	
 	/**

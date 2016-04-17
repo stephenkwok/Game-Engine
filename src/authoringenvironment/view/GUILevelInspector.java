@@ -58,15 +58,19 @@ public class GUILevelInspector implements IGUI {
 		myPane = new StackPane();		
 		myContainer = new VBox(SPACING);
 		myContainer.setAlignment(Pos.CENTER);
-		myActorsTab = new TabActors(myResources, ACTORS, availActors);
-		myAttributesTab = new TabAttributes(controller, myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, level);
-		addTabToContainer(myAttributesTab, false);
-		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(myController, BUTTON_LABEL, null, BUTTON_WIDTH, BUTTON_HEIGHT, myController.getStage(), myLevelEditor);
-		myContainer.getChildren().add(button.createNode());
-		addTabToContainer(myActorsTab, true);
+		addChildrenToLevelInspector(controller, myResources, availActors, level);
 		myPane.getChildren().addAll(myContainer);
 	}
 
+	private void addChildrenToLevelInspector(Controller controller, ResourceBundle myResources, List<IAuthoringActor> availActors, Level level) {
+		myActorsTab = new TabActors(myResources, ACTORS, availActors);
+		myAttributesTab = new TabAttributes(controller, myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, level);
+		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(myController, BUTTON_LABEL, null, BUTTON_WIDTH, BUTTON_HEIGHT, myController.getStage(), myLevelEditor);
+
+		addTabToContainer(myAttributesTab, false);
+		addTabToContainer(myActorsTab, true);
+		myContainer.getChildren().add(button.createNode());
+	}
 	/**
 	 * Adds a tab to the Level Inspector's container.
 	 * @param tab: tab to add.
