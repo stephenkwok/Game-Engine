@@ -34,7 +34,7 @@ public class LabelClickable extends Observable {
 	private IEditableGameElement myEditable;
 	private IEditingEnvironment myEnvironment;
 
-	public LabelClickable(IEditableGameElement editable, IEditingEnvironment environment, Controller controller) {
+	public LabelClickable(IEditableGameElement editable, IEditingEnvironment environment) {
 		this.myEditable = editable;
 		this.myEnvironment = environment;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);

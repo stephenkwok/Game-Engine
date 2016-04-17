@@ -2,7 +2,6 @@ package authoringenvironment.view;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
@@ -16,7 +15,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * 
@@ -30,6 +28,8 @@ import javafx.stage.Stage;
 public class GUIMainScreen implements IGUI {
 
 	private static final int NUM_SCROLLPANES = 2;
+	private DoubleExpression screenWidth;
+	private DoubleExpression screenHeight;
 	private Controller controller;
 	private VBox actorLabelContainer;
 	private VBox levelLabelContainer;
@@ -38,16 +38,14 @@ public class GUIMainScreen implements IGUI {
 	private HBox scrollPaneContainer;
 	private BorderPane borderPane;
 	private List<LabelClickable> clickableLabels;
-	private IEditingEnvironment actorEditor;
-	private IEditingEnvironment levelEditor;
 	private GameInfo gameInfo;
 
-	public GUIMainScreen(Controller controller, IEditingEnvironment actorEditor, IEditingEnvironment levelEditor,
-			GameInfo gameInfo) {
+	public GUIMainScreen(Controller controller, GameInfo gameInfo, DoubleExpression screenWidth,
+			DoubleExpression screenHeight) {
 		this.controller = controller;
-		this.actorEditor = actorEditor;
-		this.levelEditor = levelEditor;
 		this.gameInfo = gameInfo;
+		this.screenWidth = screenWidth;
+		this.screenHeight = screenHeight;
 		clickableLabels = new ArrayList<LabelClickable>();
 		levelScrollPane = new ScrollPane();
 		actorScrollPane = new ScrollPane();
@@ -68,7 +66,8 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	/**
-	 * Initializes the Game Editing Environment and sets it as the BorderPane's left pane
+	 * Initializes the Game Editing Environment and sets it as the BorderPane's
+	 * left pane
 	 */
 	private void initializeGameEditingEnvironment() {
 		GameEditingEnvironment gameEditingEnvironment = new GameEditingEnvironment(gameInfo, controller);
@@ -79,14 +78,13 @@ public class GUIMainScreen implements IGUI {
 	 * Initializes the BorderPane for the MainScreen
 	 */
 	private void initBorderPane() {
-		Stage stage = controller.getStage();
 		borderPane = new BorderPane();
-		bindNodeSizeToGivenSize(borderPane, stage.widthProperty(), stage.heightProperty());
+		bindNodeSizeToGivenSize(borderPane, screenWidth, screenHeight);
 	}
 
 	/**
-	 * Initializes the HBox containing the two ScrollPanes holding the labels representing the actors
-	 * and levels to be edited
+	 * Initializes the HBox containing the two ScrollPanes holding the labels
+	 * representing the actors and levels to be edited
 	 */
 	private void initScrollPaneContainer() {
 		scrollPaneContainer = new HBox();
@@ -94,7 +92,8 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	/**
-	 * Initializes the ScrollPanes holding the labels representing the actors and levels to be edited
+	 * Initializes the ScrollPanes holding the labels representing the actors
+	 * and levels to be edited
 	 */
 	private void initScrollPanes() {
 		initScrollPane(actorScrollPane, actorLabelContainer);
@@ -102,11 +101,15 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	/**
-	 * Initializes a ScrollPane and has its size bound to half of the center pane's width and 
-	 * sets its contents to the container holding the elements to be placed within the ScrollPane
+	 * Initializes a ScrollPane and has its size bound to half of the center
+	 * pane's width and sets its contents to the container holding the elements
+	 * to be placed within the ScrollPane
 	 * 
-	 * @param scrollPane whose size is to be bound and whose content is to be set
-	 * @param container the container holding the elements to be placed within the ScrollPane
+	 * @param scrollPane
+	 *            whose size is to be bound and whose content is to be set
+	 * @param container
+	 *            the container holding the elements to be placed within the
+	 *            ScrollPane
 	 */
 	private void initScrollPane(ScrollPane scrollPane, VBox container) {
 		bindNodeSizeToGivenSize(scrollPane, scrollPaneContainer.widthProperty().divide(NUM_SCROLLPANES), null);
@@ -114,7 +117,8 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	/**
-	 * Initializes the VBox containers holding labels representing actors and levels to be edited
+	 * Initializes the VBox containers holding labels representing actors and
+	 * levels to be edited
 	 */
 	private void initLabelContainers() {
 		actorLabelContainer = createLabelContainer(actorScrollPane);
@@ -122,9 +126,12 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	/**
-	 * Initializes a single Label container and binds its size to a ScrollPane's width and height
+	 * Initializes a single Label container and binds its size to a ScrollPane's
+	 * width and height
 	 * 
-	 * @param parentScrollPane - ScrollPane to which the Label container's width and height will be bound
+	 * @param parentScrollPane
+	 *            - ScrollPane to which the Label container's width and height
+	 *            will be bound
 	 * @return the Label container initialized
 	 */
 	private VBox createLabelContainer(ScrollPane parentScrollPane) {
@@ -134,11 +141,14 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	/**
-	 * Binds a region to a given width and height 
+	 * Binds a region to a given width and height
 	 * 
-	 * @param child - region whose width and height are to be bound
-	 * @param width - the width the child's width will be bound to
-	 * @param height - the height the child's height will be bound to
+	 * @param child
+	 *            - region whose width and height are to be bound
+	 * @param width
+	 *            - the width the child's width will be bound to
+	 * @param height
+	 *            - the height the child's height will be bound to
 	 */
 	private void bindNodeSizeToGivenSize(Region child, DoubleExpression width, DoubleExpression height) {
 		if (width != null)
@@ -156,28 +166,36 @@ public class GUIMainScreen implements IGUI {
 
 	/**
 	 * Creates a LabelClickable associated with an Actor
-	 * @param actor associated with the Label generated
+	 * 
+	 * @param actor
+	 *            associated with the Label generated
 	 */
-	public LabelClickable createActorLabel(IEditableGameElement actor) {
+	public LabelClickable createActorLabel(IEditableGameElement actor, IEditingEnvironment actorEditor) {
 		return createLabel(actor, actorEditor, actorLabelContainer);
 	}
 
 	/**
 	 * Creates a LabelClickable associated with a Level
-	 * @param level associated with the Label generated
+	 * 
+	 * @param level
+	 *            associated with the Label generated
 	 */
-	public LabelClickable createLevelLabel(IEditableGameElement level) {
+	public LabelClickable createLevelLabel(IEditableGameElement level, IEditingEnvironment levelEditor) {
 		return createLabel(level, levelEditor, levelLabelContainer);
 	}
 
 	/**
 	 * Initializes LabelClickable associated with an actor or level
-	 * @param editable associated with LabelClickable
-	 * @param environment associated with LabelClickable
-	 * @param container to hold the Label
+	 * 
+	 * @param editable
+	 *            associated with LabelClickable
+	 * @param environment
+	 *            associated with LabelClickable
+	 * @param container
+	 *            to hold the Label
 	 */
 	private LabelClickable createLabel(IEditableGameElement editable, IEditingEnvironment environment, VBox container) {
-		LabelClickable labelWrapper = new LabelClickable(editable, environment, controller);
+		LabelClickable labelWrapper = new LabelClickable(editable, environment);
 		Label label = labelWrapper.getLabel();
 		bindNodeSizeToGivenSize(label, container.widthProperty(), null);
 		container.getChildren().add(label);
@@ -186,8 +204,8 @@ public class GUIMainScreen implements IGUI {
 	}
 
 	/**
-	 * Updates all LabelClickables to account for any changes in the name or image of 
-	 * Actors and Levels
+	 * Updates all LabelClickables to account for any changes in the name or
+	 * image of Actors and Levels
 	 */
 	public void updateAllNodes() {
 		clickableLabels.stream().forEach(label -> label.update());
