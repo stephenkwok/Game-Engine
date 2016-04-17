@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import authoringenvironment.controller.Controller;
+import gui.view.ButtonFileChooserActorImage;
 import gui.view.ComboBoxActorImages;
 import gui.view.IGUI;
 import javafx.geometry.Insets;
@@ -27,8 +28,6 @@ public class GUIActorImageViewer implements IGUI {
 	private static final String AVAILABLE_ACTOR_IMAGES = "Available Images";
 	private static final String IMAGE_RESOURCE = "authoringimages";
 	private static final int PADDING = 10;
-	private static final String EXTENSION_FILTER_DESCRIPTION = "Image Files (.jpg, .png .gif)";
-	private static final String EXTENSIONS = "*.jpg *.png *.gif";
 	private static final String BUTTON_LABEL = "Load Image...";
 	private static final int BUTTON_HEIGHT = 30;
 	private static final int BUTTON_WIDTH = 150;
@@ -57,7 +56,8 @@ public class GUIActorImageViewer implements IGUI {
 		VBox vbox = new VBox(PADDING);
 		HBox hbox = new HBox(PADDING);
 		hbox.setAlignment(Pos.CENTER);
-		hbox.getChildren().addAll(myActorIV, getImageSettingButton());
+		ButtonFileChooserActorImage imageChooser = new ButtonFileChooserActorImage(myController, BUTTON_LABEL, null, BUTTON_WIDTH, BUTTON_HEIGHT, myController.getStage(), aEE);
+		hbox.getChildren().addAll(myActorIV, imageChooser.createNode());
 		vbox.getChildren().addAll(hbox, getImagesComboBox());
 		myPane.getChildren().add(vbox);
 		myPane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -70,48 +70,7 @@ public class GUIActorImageViewer implements IGUI {
 		ComboBoxActorImages availableImages = new ComboBoxActorImages(AVAILABLE_ACTOR_IMAGES, IMAGE_RESOURCE,aEE);
 		return (HBox) availableImages.createNode();
 	}
-	/**
-	 * Return button that allows user to load an image from personal directory as Actor's image
-	 * @return
-	 */
-	private Button getImageSettingButton(){
-		Button imageSetter = new Button(BUTTON_LABEL);
-		imageSetter.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		imageSetter.setOnAction(event->{
-			try {
-				loadSelectedImage();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-		return imageSetter;
-	}
-	/**
-	 * Sets Actor image to selected image from personal directory
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
-	private void loadSelectedImage() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		File imageFile = promptForFileName();
-		if(imageFile!=null){
-			Image image = new Image(imageFile.toURI().toString());
-			aEE.setActorImage(new ImageView(image), imageFile.getName());
-		}
-	}
 	
-	/**
-     * Creates a file picker to get a file name
-     * @return returns the file
-     */
-    private File promptForFileName(){
-        FileChooser myFileChooser = new FileChooser();
-        List<String> extensions = Arrays.asList(EXTENSIONS.split(" "));
-        FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter(EXTENSION_FILTER_DESCRIPTION, extensions);
-        myFileChooser.getExtensionFilters().add(myFilter);
-        return myFileChooser.showOpenDialog(myController.getStage());
-    }
     /**
      * Return Pane representation of actor image viewer
      */
