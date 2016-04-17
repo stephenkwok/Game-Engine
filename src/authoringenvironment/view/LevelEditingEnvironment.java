@@ -23,6 +23,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Level editing environment
@@ -42,19 +43,21 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	private ImageView myLevelBackground;
 	private Controller myController;
 	private List<ImageviewActorIcon> myActorPreviews;
+	private Stage myStage;
 
 	/**
 	 * Constructor for a level editing environment.
 	 * @param controller: authoring environment controller.
 	 * @param actors: list of currently available actors.
 	 */
-	public LevelEditingEnvironment(Controller controller, List<IAuthoringActor> actors) {
+	public LevelEditingEnvironment(Controller controller, List<IAuthoringActor> actors, Stage stage) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
 		myController = controller;
-		initializeEnvironment();
 		myActorPreviews = new ArrayList<>();
+		myStage = stage;
+		initializeEnvironment();
 	}
 
 	/**
@@ -78,7 +81,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	}
 
 	private void addChildrenToLeftPane() {
-		myInspector = new GUILevelInspector(myController, myResources, availableActors, myLevel, this);
+		myInspector = new GUILevelInspector(myController, myResources, availableActors, this, myStage);
 		myLeftPane.getChildren().add(myInspector.getPane());
 		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
 	}
@@ -272,4 +275,12 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		updateDrag();
 	}
 
+	public Level getLevel() {
+		return myLevel;
+	}
+	
+	@Override
+	public Stage getStage() {
+		return myStage;
+	}
 }

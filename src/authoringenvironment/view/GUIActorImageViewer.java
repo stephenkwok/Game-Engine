@@ -23,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class GUIActorImageViewer implements IGUI {
 	private static final String AVAILABLE_ACTOR_IMAGES = "Available Images";
@@ -35,6 +36,7 @@ public class GUIActorImageViewer implements IGUI {
 	private StackPane myPane;
 	private Controller myController;
 	private ActorEditingEnvironment aEE;
+	private Stage myStage;
 	
 	/**
 	 * Module that contains actor image display and options for loading an image from available images or from computer directory.
@@ -42,10 +44,11 @@ public class GUIActorImageViewer implements IGUI {
 	 * @param myController
 	 * @param myActorIV
 	 */
-	public GUIActorImageViewer(ActorEditingEnvironment aEE, Controller myController, ImageView myActorIV) {
+	public GUIActorImageViewer(ActorEditingEnvironment aEE, Controller myController, ImageView myActorIV, Stage stage) {
 		this.aEE = aEE;
 		this.myController = myController;
 		this.myActorIV = myActorIV;
+		myStage = stage;
 		initializeEnvironment();
 	}
 	/**
@@ -56,7 +59,7 @@ public class GUIActorImageViewer implements IGUI {
 		VBox vbox = new VBox(PADDING);
 		HBox hbox = new HBox(PADDING);
 		hbox.setAlignment(Pos.CENTER);
-		ButtonFileChooserActorImage imageChooser = new ButtonFileChooserActorImage(myController, BUTTON_LABEL, null, BUTTON_WIDTH, BUTTON_HEIGHT, myController.getStage(), aEE);
+		ButtonFileChooserActorImage imageChooser = new ButtonFileChooserActorImage(myController, BUTTON_LABEL, null, BUTTON_WIDTH, BUTTON_HEIGHT, aEE);
 		hbox.getChildren().addAll(myActorIV, imageChooser.createNode());
 		vbox.getChildren().addAll(hbox, getImagesComboBox());
 		myPane.getChildren().add(vbox);

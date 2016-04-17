@@ -20,15 +20,13 @@ import javafx.stage.Stage;
 public abstract class ButtonFileChooser extends ButtonParent {
 	private static final String EXTENSION_FILTER_DESCRIPTION = "Image Files (.jpg, .png .gif)";
 	private static final String EXTENSIONS = "*.jpg *.png *.gif";
-	private Stage myStage;
 	private IEditingEnvironment myEditor;
 	/**
 	 * Creates an image setting button.
 	 * @return a button whose action sets the image.
 	 */
-	public ButtonFileChooser(IScreenController myController, String buttonText, String imageName, int buttonWidth, int buttonHeight, Stage stage, IEditingEnvironment editor){
+	public ButtonFileChooser(IScreenController myController, String buttonText, String imageName, int buttonWidth, int buttonHeight, IEditingEnvironment editor){
 		super(myController, buttonText, imageName);
-		myStage = stage;
 		myEditor = editor;
 	}
 	
@@ -67,6 +65,6 @@ public abstract class ButtonFileChooser extends ButtonParent {
         List<String> extensions = Arrays.asList(EXTENSIONS.split(" "));
         FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter(EXTENSION_FILTER_DESCRIPTION, extensions);
         myFileChooser.getExtensionFilters().add(myFilter);
-        return myFileChooser.showOpenDialog(myStage);
+        return myFileChooser.showOpenDialog(myEditor.getStage());
     }
 }
