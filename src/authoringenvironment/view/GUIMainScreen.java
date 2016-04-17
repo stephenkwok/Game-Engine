@@ -6,7 +6,6 @@ import java.util.List;
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import gameengine.controller.GameInfo;
 import gui.view.IGUI;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.control.Label;
@@ -39,13 +38,11 @@ public class GUIMainScreen implements IGUI {
 	private HBox scrollPaneContainer;
 	private BorderPane borderPane;
 	private List<LabelClickable> clickableLabels;
-	private GameInfo gameInfo;
 	private GameEditingEnvironment gameEditor;
 
-	public GUIMainScreen(GameEditingEnvironment gameEditor, GameInfo gameInfo, DoubleExpression screenWidth,
+	public GUIMainScreen(GameEditingEnvironment gameEditor, DoubleExpression screenWidth,
 			DoubleExpression screenHeight) {
 		this.gameEditor = gameEditor;
-		this.gameInfo = gameInfo;
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
 		clickableLabels = new ArrayList<LabelClickable>();
