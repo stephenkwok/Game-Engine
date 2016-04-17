@@ -113,7 +113,7 @@ public class Game extends Observable implements Observer {
 	
 	private void initActors(){
 		for(IPlayActor a: getCurrentActors()){
-			a.addObserver(this);
+			((Observable)a).addObserver(this);
 			a.setEngine(myPhysicsEngine);
 		}
 		

@@ -135,16 +135,16 @@ public class PhysicsEngine {
 	}
 	//gliding methods for when force and gravity aren't applied
 	
-	public void glideRight(Actor a1) {
-		a1.setX(a1.getX()+5);
+	public void glideRight(IPlayActor iPlayActor) {
+		iPlayActor.setX(iPlayActor.getX()+5);
 	}
 
-	public void glideLeft(Actor a1) {
-		a1.setX(a1.getX()-5);
+	public void glideLeft(IPlayActor iPlayActor) {
+		iPlayActor.setX(iPlayActor.getX()-5);
 	}
 	
-	public void glideUp(Actor a1 ){
-		a1.setY(a1.getY()+5);
+	public void glideUp(IPlayActor iPlayActor ){
+		iPlayActor.setY(iPlayActor.getY()+5);
 	}
 	
 	public void tick(IPlayActor iPlayActor) {

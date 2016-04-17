@@ -22,7 +22,7 @@ public class GlideRight extends GlidingAction {
      */
 	@Override
 	public void perform() {
-    	getMyActor().getPhysicsEngine().glideRight(getMyActor());		
+    	getMyActor().getMyPhysicsEngine().glideRight(getMyActor());		
 	}
 
 }

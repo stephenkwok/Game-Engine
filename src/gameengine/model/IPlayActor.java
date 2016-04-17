@@ -114,14 +114,8 @@ public interface IPlayActor {
      * Sets the Actor as changed
      */
     public void changed();
-    
-    //public void notifyObservers(Object arg);
-    
-    public void addObserver(Observer o);
 
 	public void setInAir(boolean b);
-
-	public Bounds getBounds();
 
 	public String getMyName();
 
@@ -130,5 +124,8 @@ public interface IPlayActor {
 	public boolean isInAir();
 
 	public double getMyFriction();
+	
+	public Bounds getBounds();
+
     
 }
