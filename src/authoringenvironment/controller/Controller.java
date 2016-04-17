@@ -71,8 +71,7 @@ public class Controller implements IScreenController, Observer {
 		game = new Game(gameInfo, myLevels);
 		actorEnvironment = new ActorEditingEnvironment(this, myResources);
 		gameEnvironment = new GameEditingEnvironment(gameInfo, this);
-		mainScreen = new GUIMainScreen(gameEnvironment, actorEnvironment, levelEnvironment, gameInfo, myStage.widthProperty(),
-				myStage.heightProperty());
+		mainScreen = new GUIMainScreen(gameEnvironment, gameInfo, myStage.widthProperty(), myStage.heightProperty());
 	}
 
 	/**
@@ -155,7 +154,7 @@ public class Controller implements IScreenController, Observer {
 		Level newLevel = new Level();
 		myLevels.add(newLevel);
 		myLevelNames.add(newLevel.getMyName());
-		mainScreen.createLevelLabel(newLevel).addObserver(this);
+		mainScreen.createLevelLabel(newLevel, levelEnvironment).addObserver(this);
 		goToEditingEnvironment(newLevel, levelEnvironment);
 	}
 
@@ -164,7 +163,7 @@ public class Controller implements IScreenController, Observer {
 		newActor.setMyID(myActors.size());
 		myActors.add(newActor);
 		myActorNames.add(newActor.getMyName());
-		mainScreen.createActorLabel(newActor).addObserver(this);
+		mainScreen.createActorLabel(newActor, actorEnvironment).addObserver(this);
 		actorEnvironment.setActorImage(newActor.getMyImageView(), newActor.getMyImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
