@@ -1,6 +1,5 @@
 package gui.view;
 
-import authoringenvironment.controller.Controller;
 import gui.controller.IScreenController;
 /**
  * Button to load game.
@@ -22,6 +21,6 @@ public class ButtonLoad extends ButtonParent {
      * Sets workspace preferences to those specified by the given XML. 
      */
     private void loadProperties() {
-    	((Controller) getController()).loadGame(promptForFileName(false));
+    	notifyController(promptForFileName(false));
     }
 }

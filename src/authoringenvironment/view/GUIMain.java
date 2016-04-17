@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
@@ -58,8 +59,8 @@ public class GUIMain extends Screen implements IGUI {
 		myRoot = new BorderPane();
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		myController = new Controller(myStage, this, this.myResources);
 		factory = new GUIFactory(myResources, myController);
+		myController = new Controller(myStage, this, this.myResources);
 		setTopPane();
 		setCenterPane();
 	}
@@ -107,6 +108,8 @@ public class GUIMain extends Screen implements IGUI {
 			String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
 			for (int i = 0; i < topPaneElements.length; i++) {
 				IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
+				Observable observableButton = (Observable) elementToCreate;
+				observableButton.addObserver(myController);
 				hbox.getChildren().add(elementToCreate.createNode());
 			}
 			//temp

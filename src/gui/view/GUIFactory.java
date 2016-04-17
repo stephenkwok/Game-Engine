@@ -37,6 +37,10 @@ public class GUIFactory {
 		this.myResources = myResources;
 		this.myController = myController;
 	}
+	
+	public GUIFactory(ResourceBundle resourceBundle) {
+		this.myResources = resourceBundle;
+	}
 
 	/**
 	 * Creates new IGUIElement based on nodeTypeKey passed in. 
