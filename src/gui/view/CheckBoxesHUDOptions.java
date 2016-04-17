@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
 import gameengine.controller.GameInfo;
@@ -34,18 +35,20 @@ public class CheckBoxesHUDOptions implements IGUIElement, IEditingElement {
 	private ResourceBundle myAttributesResources;
 	private List<CheckBox> myHUDElements;
 	private GUIFactory myFactory;
+	private Controller myController;
 
 	/**
 	 * Constructs a CheckBoxesHUDOptions object for the given GameInfo object.
 	 * @param gameInfo: GameInfo object.
 	 * @param controller: controller for the authoring environment.
 	 */
-	public CheckBoxesHUDOptions(IEditableGameElement gameInfo) {
+	public CheckBoxesHUDOptions(IEditableGameElement gameInfo, Controller controller) {
 		this.myGameInfo = gameInfo;
+		this.myController = controller;
 		this.myAttributesResources = ResourceBundle.getBundle("HUDOptions");
 		this.myContainer = new VBox(CONTAINER_SPACING);
 		myContainer.setPadding(new Insets(CONTAINER_PADDING));
-		myFactory = new GUIFactory(myAttributesResources);
+		myFactory = new GUIFactory(myAttributesResources, myController);
 		myHUDElements = new ArrayList<>();
 	}
 	
