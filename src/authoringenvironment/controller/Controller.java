@@ -3,6 +3,8 @@ package authoringenvironment.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -11,9 +13,10 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.view.ActorEditingEnvironment;
-import authoringenvironment.view.LevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
+import authoringenvironment.view.LabelClickable;
+import authoringenvironment.view.LevelEditingEnvironment;
 import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
@@ -29,7 +32,7 @@ import javafx.stage.Stage;
  * @author Stephen, AnnieTang
  */
 
-public class Controller implements IScreenController {
+public class Controller implements IScreenController, Observer {
 	private Stage myStage;
 	private List<Level> myLevels;
 	private List<String> myLevelNames;
@@ -55,13 +58,13 @@ public class Controller implements IScreenController {
 		myLevelNames = new ArrayList<>();
 		myActors = new ArrayList<>();
 		myActorNames = new ArrayList<>();
-		levelEnvironment = new LevelEditingEnvironment(this, myActors);		
+		levelEnvironment = new LevelEditingEnvironment(this, myActors);
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
 		actorEnvironment = new ActorEditingEnvironment(this, myResources);
-		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo, myActors);
+		mainScreen = new GUIMainScreen(this, gameInfo, myStage.widthProperty(), myStage.heightProperty());
 	}
-	
+
 	/**
 	 * Switches screen to appropriate editing environment
 	 * 
@@ -72,7 +75,7 @@ public class Controller implements IScreenController {
 	 */
 	public void goToEditingEnvironment(IEditableGameElement editable, IEditingEnvironment environment) {
 		environment.setEditableElement(editable);
-		guiMain.setCenterPane(environment.getPane()); 
+		guiMain.setCenterPane(environment.getPane());
 	}
 
 	/**
@@ -90,7 +93,8 @@ public class Controller implements IScreenController {
 	 *            file to write to.
 	 */
 	public void saveGame(File file) {
-		Game g = new Game(new GameInfo(), myLevels);  //TODO needs to be game info from AE
+		Game g = new Game(new GameInfo(), myLevels); // TODO needs to be game
+														// info from AE
 		CreatorController controller;
 		try {
 			controller = new CreatorController(g, this.getScreen());
@@ -122,12 +126,12 @@ public class Controller implements IScreenController {
 	public List<Level> getLevels() {
 		return myLevels;
 	}
-	
-	public List<String> getLevelNames(){
+
+	public List<String> getLevelNames() {
 		return myLevelNames;
 	}
-	
-	public List<String> getActorNames(){
+
+	public List<String> getActorNames() {
 		return myActorNames;
 	}
 
@@ -141,7 +145,7 @@ public class Controller implements IScreenController {
 		Level newLevel = new Level();
 		myLevels.add(newLevel);
 		myLevelNames.add(newLevel.getMyName());
-		mainScreen.createLevelLabel(newLevel);
+		mainScreen.createLevelLabel(newLevel, levelEnvironment).addObserver(this);
 		goToEditingEnvironment(newLevel, levelEnvironment);
 	}
 
@@ -150,16 +154,16 @@ public class Controller implements IScreenController {
 		newActor.setMyID(myActors.size());
 		myActors.add(newActor);
 		myActorNames.add(newActor.getMyName());
-		mainScreen.createActorLabel(newActor);
+		mainScreen.createActorLabel(newActor, actorEnvironment).addObserver(this);
 		actorEnvironment.setActorImage(newActor.getMyImageView(), newActor.getMyImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
-	
-	public double getSceneWidth(){
+
+	public double getSceneWidth() {
 		return guiMain.getWidth();
 	}
-	
-	public double getSceneHeight(){
+
+	public double getSceneHeight() {
 		return guiMain.getHeight();
 	}
 
@@ -176,14 +180,15 @@ public class Controller implements IScreenController {
 	@Override
 	public void chooseGame() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void useGame() {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	/**
 	 * Saves game and returns to splash screen of game player.
 	 */
@@ -195,6 +200,23 @@ public class Controller implements IScreenController {
 	@Override
 	public void switchGame() {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		if (arg0 instanceof LabelClickable) {
+			handleObservableGoToEditingEnvironmentCall(arg1);
+		}
+
+	}
+
+	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
+		if (notifyObserversArgument instanceof List) {
+			List<Object> arguments = (List<Object>) notifyObserversArgument;
+			IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
+			IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
+			goToEditingEnvironment(editable, environment);
+		}
 	}
 }
