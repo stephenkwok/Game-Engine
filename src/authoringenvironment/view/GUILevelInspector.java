@@ -11,6 +11,7 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gui.view.ButtonFileChooserBackgroundImage;
 import gui.view.IGUI;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -28,8 +29,6 @@ public class GUILevelInspector implements IGUI {
 	private static final String BUTTON_LABEL = "Choose a new background image";
 	private static final int BUTTON_HEIGHT = 30;
 	private static final int BUTTON_WIDTH = 300;
-	private static final String EXTENSION_FILTER_DESCRIPTION = "Image Files (.jpg, .png .gif)";
-	private static final String EXTENSIONS = "*.jpg *.png *.gif";
 	private static final String LEVEL_OPTIONS_RESOURCE = "levelEditorOptions";
 	private static final String ACTORS = "Actors";
 	private static final String LEVEL_ATTRIBUTES = "Level Attributes";
@@ -61,7 +60,8 @@ public class GUILevelInspector implements IGUI {
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
 		myAttributesTab = new TabAttributes(controller, myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, level);
 		addTabToContainer(myAttributesTab, false);
-		myContainer.getChildren().add(getImageSettingButton());
+		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(myController, BUTTON_LABEL, null, BUTTON_WIDTH, BUTTON_HEIGHT, myController.getStage(), myLevel);
+		myContainer.getChildren().add(button.createNode());
 		addTabToContainer(myActorsTab, true);
 		myPane.getChildren().addAll(myContainer);
 	}
@@ -107,51 +107,4 @@ public class GUILevelInspector implements IGUI {
 	public TabAttributes getAttributesTab() {
 		return myAttributesTab;
 	}
-	
-	/**
-	 * Creates an image setting button.
-	 * @return a button whose action sets the image.
-	 */
-	private Button getImageSettingButton(){
-		Button imageSetter = new Button(BUTTON_LABEL);
-		imageSetter.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		imageSetter.setOnAction(event->{
-			try {
-				loadSelectedImage();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-		return imageSetter;
-	}
-	
-	// TODO: need to have preview show up on level editing environment
-	/**
-	 * Loads the selected image from the file selected by the user.
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
-	private void loadSelectedImage() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		File imageFile = promptForFileName();
-		if(imageFile!=null){
-			Image image = new Image(imageFile.toURI().toString());
-			myLevel.setMyImageView(new ImageView(image));
-			myLevel.setMyBackgroundImgName(imageFile.getPath());
-		}
-	}
-	
-	/**
-     * Creates a file picker to get a file name
-     * @return returns the file
-     */
-    private File promptForFileName(){
-        FileChooser myFileChooser = new FileChooser();
-        List<String> extensions = Arrays.asList(EXTENSIONS.split(" "));
-        FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter(EXTENSION_FILTER_DESCRIPTION, extensions);
-        myFileChooser.getExtensionFilters().add(myFilter);
-        return myFileChooser.showOpenDialog(myController.getStage());
-    }
-
 }
