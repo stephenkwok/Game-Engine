@@ -1,6 +1,6 @@
 package authoringenvironment.view;
+
 import java.util.ResourceBundle;
-import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
 import gameengine.controller.GameInfo;
@@ -45,13 +45,11 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	private VBox gameDescriptionEditor;
 	private VBox previewImageContainer;
 	private VBox HUDOptionsDisplay;
-	private Controller controller;
 	private ScrollPane myScrollPane;
 
-	public GameEditingEnvironment(GameInfo gameInfo, Controller controller) {
+	public GameEditingEnvironment(GameInfo gameInfo) {
 		this.myGameInfo = gameInfo;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
-		this.controller = controller;
 	}
 
 	/**
@@ -63,7 +61,8 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	}
 
 	/**
-	 * Initialize the VBox containing all GUI elements in the Game Editing Environment
+	 * Initialize the VBox containing all GUI elements in the Game Editing
+	 * Environment
 	 * 
 	 */
 	private void initializeContainer() {
@@ -73,16 +72,17 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	}
 
 	/**
-	 * Initialize the Label displaying text welcoming the author to the Game Authoring Environment
+	 * Initialize the Label displaying text welcoming the author to the Game
+	 * Authoring Environment
 	 */
 	private void initializeWelcomeMessage() {
 		welcomeMessage = new LabelMainScreenWelcome(myResources.getString("mainScreenWelcome"));
 	}
 
 	/**
-	 * Initialize the Game Name Editor, which includes a text field for the author to enter
-	 * a name for the game, and a button that, when clicked, allows the author to save the text field 
-	 * input as the game's name
+	 * Initialize the Game Name Editor, which includes a text field for the
+	 * author to enter a name for the game, and a button that, when clicked,
+	 * allows the author to save the text field input as the game's name
 	 */
 	private void initializeGameNameEditor() {
 		String mainPrompt = myResources.getString("gameName");
@@ -95,9 +95,10 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	}
 
 	/**
-	 * Initializes the Game Description Editor, which includes a text area for the author to 
-	 * enter a description for the game. The Game Description Editor also contains a button
-	 * that when clicked, sets the game's description.
+	 * Initializes the Game Description Editor, which includes a text area for
+	 * the author to enter a description for the game. The Game Description
+	 * Editor also contains a button that when clicked, sets the game's
+	 * description.
 	 */
 	private void initializeGameDescriptionEditor() {
 		String prompt = myResources.getString("promptForGameDescription");
@@ -125,14 +126,14 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	 * Initializes the GUI element that displays checkboxes for each HUD Option
 	 */
 	private void initializeHUDOptionsDisplay() {
-		CheckBoxesHUDOptions HUDOptions = new CheckBoxesHUDOptions(myGameInfo, controller);
+		CheckBoxesHUDOptions HUDOptions = new CheckBoxesHUDOptions(myGameInfo);
 		HUDOptionsDisplay = (VBox) HUDOptions.createNode();
 	}
 
 	/**
-	 * Initializes the scroll pane that contains the Game Editing Environment's GUI elements 
-	 * and allows for additional elements to be added should the height of the combined 
-	 * elements exceed the height of the stage
+	 * Initializes the scroll pane that contains the Game Editing Environment's
+	 * GUI elements and allows for additional elements to be added should the
+	 * height of the combined elements exceed the height of the stage
 	 */
 	private void initializeScrollPane() {
 		myScrollPane = new ScrollPane();
@@ -142,7 +143,8 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	}
 
 	/**
-	 * Creates and returns the Node containing all of the Game Editing Environment's GUI Elements 
+	 * Creates and returns the Node containing all of the Game Editing
+	 * Environment's GUI Elements
 	 */
 	@Override
 	public Node createNode() {
