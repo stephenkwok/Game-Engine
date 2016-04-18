@@ -6,11 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.Level;
-import gameengine.model.Actor;
 import gui.view.IGUI;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -23,6 +20,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class GUILevelInspector implements IGUI {
 	private static final String BUTTON_LABEL = "Choose a new background image";
@@ -35,11 +33,11 @@ public class GUILevelInspector implements IGUI {
 	private static final String LEVEL_ATTRIBUTES = "Level Attributes";
 	private static final int SPACING = 5;
 	private Level myLevel;
-	private Controller myController;
 	private Pane myPane;
 	private TabActors myActorsTab;
 	private TabAttributes myAttributesTab;
 	private VBox myContainer;
+	private Stage myStage;
 	
 	/**
 	 * Constructor for Level Inspector.
@@ -48,18 +46,18 @@ public class GUILevelInspector implements IGUI {
 	 * @param availActors: list of currently available actors.
 	 * @param level: level that is being edited.
 	 */
-	public GUILevelInspector(Controller controller, ResourceBundle myResources, List<IAuthoringActor> availActors, Level level) {
+	public GUILevelInspector(ResourceBundle myResources, List<IAuthoringActor> availActors, Level level, Stage stage) {
 		myLevel = level;
-		myController = controller;
-		init(controller, myResources, availActors, level);
+		init(myResources, availActors, level);
+		myStage = stage;
 	}
 	
-	private void init(Controller controller, ResourceBundle myResources, List<IAuthoringActor> availActors, Level level) {
+	private void init(ResourceBundle myResources, List<IAuthoringActor> availActors, Level level) {
 		myPane = new StackPane();		
 		myContainer = new VBox(SPACING);
 		myContainer.setAlignment(Pos.CENTER);
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
-		myAttributesTab = new TabAttributes(controller, myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, level);
+		myAttributesTab = new TabAttributes(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, level);
 		addTabToContainer(myAttributesTab, false);
 		myContainer.getChildren().add(getImageSettingButton());
 		addTabToContainer(myActorsTab, true);
@@ -151,7 +149,7 @@ public class GUILevelInspector implements IGUI {
         List<String> extensions = Arrays.asList(EXTENSIONS.split(" "));
         FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter(EXTENSION_FILTER_DESCRIPTION, extensions);
         myFileChooser.getExtensionFilters().add(myFilter);
-        return myFileChooser.showOpenDialog(myController.getStage());
+        return myFileChooser.showOpenDialog(myStage);
     }
 
 }

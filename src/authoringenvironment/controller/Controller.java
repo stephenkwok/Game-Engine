@@ -66,7 +66,7 @@ public class Controller implements IScreenController, Observer {
 		myLevelNames = new ArrayList<>();
 		myActors = new ArrayList<>();
 		myActorNames = new ArrayList<>();
-		levelEnvironment = new LevelEditingEnvironment(this, myActors);
+		levelEnvironment = new LevelEditingEnvironment(myActors, myStage);
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
 		actorEnvironment = new ActorEditingEnvironment(this, myResources);
