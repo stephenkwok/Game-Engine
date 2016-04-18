@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -11,6 +12,7 @@ import gameengine.controller.Level;
 import gameengine.model.Actor;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -50,9 +52,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
-		initializeEnvironment();
 		myActorPreviews = new ArrayList<>();
 		myStage = stage;
+		initializeEnvironment();
 	}
 
 	/**
@@ -71,12 +73,16 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	private void initializeLeftPane() {
 		myLeftPane = new VBox();
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
-		myInspector = new GUILevelInspector(myResources, availableActors, myLevel, myStage);
-		myLeftPane.getChildren().add(myInspector.getPane());
 		myRoot.setLeft(myLeftPane);
-		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
+		addChildrenToLeftPane();
 	}
 
+	private void addChildrenToLeftPane() {
+		myInspector = new GUILevelInspector(myResources, availableActors, this, myStage);
+		myLeftPane.getChildren().add(myInspector.getPane());
+		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
+	}
+	
 	/**
 	 * Updates the drag behavior of the level editing environment to accommodate updates to currently available actors.
 	 */
@@ -132,7 +138,6 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 				boolean success = false;
 				if (db.hasString()) {
 					IAuthoringActor actor = getActorById(Integer.parseInt(db.getString()));
-					//actor.setMyID(myLevel.getActors().size());
 					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getMyImageView().getFitHeight());
 					iconToAdd.getImageView().setOnDragDetected(null);
 					iconToAdd.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
@@ -163,10 +168,6 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		actor.setY(event.getY());
 		icon.getImageView().setX(event.getX());
 		icon.getImageView().setY(event.getY());
-		System.out.println(actor.getX());
-		System.out.println(actor.getY());
-		System.out.println(icon.getImageView().getX());
-		System.out.println(icon.getImageView().getY());
 	}
 	
 	/**
@@ -234,6 +235,11 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		myCenterPane.getChildren().add(myLevelBackground);
 	}
 	
+	public void changeBackgroundImage(Image image, File imageFile) {
+		myLevel.setMyImageView(new ImageView(image));
+		myLevel.setMyBackgroundImgName(imageFile.getPath());
+		updateLevelBackground();
+	}
 	/**
 	 * Add a level's actors to the preview in the center pane.
 	 */
@@ -266,4 +272,12 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		updateDrag();
 	}
 
+	public Level getLevel() {
+		return myLevel;
+	}
+	
+	@Override
+	public Stage getStage() {
+		return myStage;
+	}
 }

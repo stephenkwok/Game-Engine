@@ -49,11 +49,13 @@ public abstract class ButtonParent extends Observable implements IGUIElement {
 	 * Optional, sets image for button.
 	 */
 	private void setButtonIcon(){
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
-		ImageView iv = new ImageView(image);
-        iv.setFitHeight(ICON_SIZE);
-        iv.setPreserveRatio(true);
-		button.setGraphic(iv);
+		if (imageName != null) {
+			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+			ImageView iv = new ImageView(image);
+			iv.setFitHeight(ICON_SIZE);
+			iv.setPreserveRatio(true);
+			button.setGraphic(iv);
+		}
 	}
 	
 	/**

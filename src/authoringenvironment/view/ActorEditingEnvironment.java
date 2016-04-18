@@ -74,7 +74,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private void initializeEnvironment() {
 		myRoot = new BorderPane();
 		setDefaultActor();
-		myActorRuleCreator = new ActorRuleCreator(myActor, myController, myStage.getScene().getWidth());
+		myActorRuleCreator = new ActorRuleCreator(myActor, myController, myStage.getWidth());
 		setLeftPane();
 		setCenterPane();
 		setBottomPane();
@@ -97,7 +97,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 		attributeTP.getTabs().add(attributes.getTab());
 		attributeTP.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		library = new GUILibrary(myActorRuleCreator);
-		actorImageViewer = new GUIActorImageViewer(this, myActorIV, myStage);
+		actorImageViewer = new GUIActorImageViewer(this, myActorIV);
 		vbox.getChildren().addAll(actorImageViewer.getPane(), attributeTP, library.getPane());
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
 		myRoot.setLeft(vbox);
@@ -165,5 +165,10 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 		myActor.setMyImageViewName(imageViewName);
 		myActorIV = new ImageviewActorIcon(myActor, ICON_HEIGHT);
 		setLeftPane();
+	}
+	
+	@Override
+	public Stage getStage() {
+		return myStage;
 	}
 }

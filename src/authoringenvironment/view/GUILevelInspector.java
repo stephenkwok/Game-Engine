@@ -1,20 +1,15 @@
 package authoringenvironment.view;
 
-import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
-import gameengine.controller.Level;
+import authoringenvironment.view.LevelEditingEnvironment;
+import gui.view.ButtonFileChooserBackgroundImage;
 import gui.view.IGUI;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -26,17 +21,15 @@ public class GUILevelInspector implements IGUI {
 	private static final String BUTTON_LABEL = "Choose a new background image";
 	private static final int BUTTON_HEIGHT = 30;
 	private static final int BUTTON_WIDTH = 300;
-	private static final String EXTENSION_FILTER_DESCRIPTION = "Image Files (.jpg, .png .gif)";
-	private static final String EXTENSIONS = "*.jpg *.png *.gif";
 	private static final String LEVEL_OPTIONS_RESOURCE = "levelEditorOptions";
 	private static final String ACTORS = "Actors";
 	private static final String LEVEL_ATTRIBUTES = "Level Attributes";
 	private static final int SPACING = 5;
-	private Level myLevel;
 	private Pane myPane;
 	private TabActors myActorsTab;
 	private TabAttributes myAttributesTab;
 	private VBox myContainer;
+	private LevelEditingEnvironment myLevelEditor;
 	private Stage myStage;
 	
 	/**
@@ -46,24 +39,29 @@ public class GUILevelInspector implements IGUI {
 	 * @param availActors: list of currently available actors.
 	 * @param level: level that is being edited.
 	 */
-	public GUILevelInspector(ResourceBundle myResources, List<IAuthoringActor> availActors, Level level, Stage stage) {
-		myLevel = level;
-		init(myResources, availActors, level);
+	public GUILevelInspector(ResourceBundle myResources, List<IAuthoringActor> availActors, LevelEditingEnvironment editor, Stage stage) {
 		myStage = stage;
+		myLevelEditor = editor;
+		init(myResources, availActors);
 	}
 	
-	private void init(ResourceBundle myResources, List<IAuthoringActor> availActors, Level level) {
+	private void init(ResourceBundle myResources, List<IAuthoringActor> availActors) {
 		myPane = new StackPane();		
 		myContainer = new VBox(SPACING);
 		myContainer.setAlignment(Pos.CENTER);
-		myActorsTab = new TabActors(myResources, ACTORS, availActors);
-		myAttributesTab = new TabAttributes(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, level);
-		addTabToContainer(myAttributesTab, false);
-		myContainer.getChildren().add(getImageSettingButton());
-		addTabToContainer(myActorsTab, true);
+		addChildrenToLevelInspector(myResources, availActors);
 		myPane.getChildren().addAll(myContainer);
 	}
 
+	private void addChildrenToLevelInspector(ResourceBundle myResources, List<IAuthoringActor> availActors) {
+		myActorsTab = new TabActors(myResources, ACTORS, availActors);
+		myAttributesTab = new TabAttributes(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, myLevelEditor.getLevel());
+		// TODO: take out the null where the controller is later
+		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(null, BUTTON_LABEL, null, BUTTON_WIDTH, BUTTON_HEIGHT, myLevelEditor);
+		addTabToContainer(myAttributesTab, false);
+		myContainer.getChildren().add(button.createNode());
+		addTabToContainer(myActorsTab, true);
+	}
 	/**
 	 * Adds a tab to the Level Inspector's container.
 	 * @param tab: tab to add.
@@ -75,10 +73,12 @@ public class GUILevelInspector implements IGUI {
 		container.getChildren().add(tabPane);
 		tabPane.getTabs().add(tab.getTab());
 		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+		
 		if (bindToContainer) {
 			VBox.setVgrow(container, Priority.ALWAYS);
 			tabPane.prefHeightProperty().bind(container.heightProperty());
 		}
+		
 		myContainer.getChildren().add(container);
 	}
 	
@@ -105,51 +105,4 @@ public class GUILevelInspector implements IGUI {
 	public TabAttributes getAttributesTab() {
 		return myAttributesTab;
 	}
-	
-	/**
-	 * Creates an image setting button.
-	 * @return a button whose action sets the image.
-	 */
-	private Button getImageSettingButton(){
-		Button imageSetter = new Button(BUTTON_LABEL);
-		imageSetter.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		imageSetter.setOnAction(event->{
-			try {
-				loadSelectedImage();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-		return imageSetter;
-	}
-	
-	// TODO: need to have preview show up on level editing environment
-	/**
-	 * Loads the selected image from the file selected by the user.
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
-	private void loadSelectedImage() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		File imageFile = promptForFileName();
-		if(imageFile!=null){
-			Image image = new Image(imageFile.toURI().toString());
-			myLevel.setMyImageView(new ImageView(image));
-			myLevel.setMyBackgroundImgName(imageFile.getPath());
-		}
-	}
-	
-	/**
-     * Creates a file picker to get a file name
-     * @return returns the file
-     */
-    private File promptForFileName(){
-        FileChooser myFileChooser = new FileChooser();
-        List<String> extensions = Arrays.asList(EXTENSIONS.split(" "));
-        FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter(EXTENSION_FILTER_DESCRIPTION, extensions);
-        myFileChooser.getExtensionFilters().add(myFilter);
-        return myFileChooser.showOpenDialog(myStage);
-    }
-
 }
