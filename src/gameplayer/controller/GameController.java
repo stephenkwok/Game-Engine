@@ -145,7 +145,6 @@ public class GameController implements Observer {
 	 * Updates the display of actors on the game screen
 	 */
 	private void updateActors(){
-		List<IDisplayActor> castedActors = new ArrayList<IDisplayActor>();
 		for(IPlayActor a: model.getDeadActors()){
 			view.removeActor((IDisplayActor)a);
 		}

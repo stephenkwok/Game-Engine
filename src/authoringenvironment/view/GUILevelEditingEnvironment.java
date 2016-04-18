@@ -229,7 +229,7 @@ public class GUILevelEditingEnvironment implements IGUI, IEditingEnvironment {
 	 * Add a level's actors to the preview in the center pane.
 	 */
 	private void addLevelActorsToScene() {
-		for(IPlayActor actor: myLevel.getActors()) myCenterPane.getChildren().add(((IDisplayActor) actor).getImageView());
+		for(IPlayActor actor: myLevel.getActors()) myCenterPane.getChildren().add(((IAuthoringActor) actor).getImageView());
 	}
 	
 	/**
