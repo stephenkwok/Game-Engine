@@ -59,8 +59,8 @@ public class GUIMain extends Screen implements IGUI {
 		myRoot = new BorderPane();
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		factory = new GUIFactory(myResources, myController);
 		myController = new Controller(myStage, this, this.myResources);
+		factory = new GUIFactory(myResources, myController);
 		setTopPane();
 		setCenterPane();
 	}
@@ -108,9 +108,9 @@ public class GUIMain extends Screen implements IGUI {
 			String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
 			for (int i = 0; i < topPaneElements.length; i++) {
 				IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
-				Observable observableButton = (Observable) elementToCreate;
-				observableButton.addObserver(myController);
+				((Observable) elementToCreate).addObserver(myController);
 				hbox.getChildren().add(elementToCreate.createNode());
+				
 			}
 			//temp
 			ButtonSplash splash = new ButtonSplash(myController, null, SPLASH_IMAGE_NAME);

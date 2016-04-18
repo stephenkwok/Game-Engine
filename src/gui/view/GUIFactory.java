@@ -38,6 +38,10 @@ public class GUIFactory {
 		this.myController = myController;
 	}
 	
+	/**
+	 * 
+	 * @param resourceBundle: ResourceBundle containing the elements to be made
+	 */
 	public GUIFactory(ResourceBundle resourceBundle) {
 		this.myResources = resourceBundle;
 	}

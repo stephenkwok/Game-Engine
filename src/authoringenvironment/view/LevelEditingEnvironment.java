@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.controller.Controller;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import javafx.event.EventHandler;
@@ -21,6 +20,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Level editing environment
@@ -38,21 +38,21 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	private List<IAuthoringActor> availableActors;
 	private Pane myCenterPane;
 	private ImageView myLevelBackground;
-	private Controller myController;
 	private List<ImageviewActorIcon> myActorPreviews;
+	private Stage myStage;
 
 	/**
 	 * Constructor for a level editing environment.
 	 * @param controller: authoring environment controller.
 	 * @param actors: list of currently available actors.
 	 */
-	public LevelEditingEnvironment(Controller controller, List<IAuthoringActor> actors) {
+	public LevelEditingEnvironment(List<IAuthoringActor> actors, Stage stage) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
-		myController = controller;
 		initializeEnvironment();
 		myActorPreviews = new ArrayList<>();
+		myStage = stage;
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	private void initializeLeftPane() {
 		myLeftPane = new VBox();
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
-		myInspector = new GUILevelInspector(myController, myResources, availableActors, myLevel);
+		myInspector = new GUILevelInspector(myResources, availableActors, myLevel, myStage);
 		myLeftPane.getChildren().add(myInspector.getPane());
 		myRoot.setLeft(myLeftPane);
 		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());

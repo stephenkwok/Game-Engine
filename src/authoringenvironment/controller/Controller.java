@@ -30,7 +30,6 @@ import gui.view.ButtonLoad;
 import gui.view.ButtonNewActor;
 import gui.view.ButtonNewLevel;
 import gui.view.ButtonSave;
-import gui.view.GUIFactory;
 import gui.view.Screen;
 import javafx.stage.Stage;
 
@@ -60,6 +59,7 @@ public class Controller implements IScreenController, Observer {
 		this.guiMain = guiMain;
 		this.myResources = myResources;
 		init();
+
 	}
 
 	public void init() {
@@ -67,12 +67,12 @@ public class Controller implements IScreenController, Observer {
 		myLevelNames = new ArrayList<>();
 		myActors = new ArrayList<>();
 		myActorNames = new ArrayList<>();
-		levelEnvironment = new LevelEditingEnvironment(this, myActors);
+		levelEnvironment = new LevelEditingEnvironment(myActors, myStage);
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
-		actorEnvironment = new ActorEditingEnvironment(this, myResources);
+		actorEnvironment = new ActorEditingEnvironment(this, myResources, myStage);
 		gameEnvironment = new GameEditingEnvironment(gameInfo);
-		mainScreen = new GUIMainScreen(gameInfo, myStage.widthProperty(), myStage.heightProperty(), gameEnvironment);
+		mainScreen = new GUIMainScreen(gameEnvironment, myStage.widthProperty(), myStage.heightProperty());
 	}
 
 	/**
@@ -216,29 +216,27 @@ public class Controller implements IScreenController, Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg0 instanceof LabelClickable)
-			handleCallToGoToEditingEnvironmentCall(arg1);
+			handleObservableGoToEditingEnvironmentCall(arg1);
+		else if (arg0 instanceof ButtonFinish)
+			goToSplash();
 		else if (arg0 instanceof ButtonHome)
 			goToMainScreen();
-		else if (arg0 instanceof ButtonSave)
-			saveGame((File) arg1);
-		else if (arg0 instanceof ButtonLoad)
-			loadGame((File) arg1);
 		else if (arg0 instanceof ButtonNewActor)
 			addActor();
 		else if (arg0 instanceof ButtonNewLevel)
 			addLevel();
-		else if (arg0 instanceof ButtonFinish)
-			goToSplash();
-
-
+		else if (arg0 instanceof ButtonLoad)
+			loadGame((File) arg1);
+		else if (arg0 instanceof ButtonSave)
+			saveGame((File) arg1);
 	}
 
-	private void handleCallToGoToEditingEnvironmentCall(Object argFromObservable) {
-		@SuppressWarnings("unchecked") // how can we avoid this?
-		List<Object> arguments = (List<Object>) argFromObservable;
-		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
-		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
-		goToEditingEnvironment(editable, environment);
+	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
+		if (notifyObserversArgument instanceof List) {
+			List<Object> arguments = (List<Object>) notifyObserversArgument;
+			IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
+			IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
+			goToEditingEnvironment(editable, environment);
+		}
 	}
-	
 }

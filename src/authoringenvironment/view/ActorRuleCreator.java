@@ -23,10 +23,12 @@ public class ActorRuleCreator {
 	private List<ActorRule> myActorRules;
 	private IAuthoringActor myActor;
 	private Controller myController;
+	private double sceneWidth;
 	
-	public ActorRuleCreator(IAuthoringActor myActor, Controller myController) {
+	public ActorRuleCreator(IAuthoringActor myActor, Controller myController, double sceneWidth) {
 		this.myController = myController;
 		this.myActor = myActor;
+		this.sceneWidth = sceneWidth;
 		initializeEnvironment();
 	}
 	
@@ -37,7 +39,7 @@ public class ActorRuleCreator {
 		rule_row = RULE_ROW_START;
 		myActorRules = new ArrayList<>();
 		myActorRuleCreatorPane = new GridPane();
-		myActorRuleCreatorPane.setPrefWidth(myController.getSceneWidth()*CONTAINERS_PERCENT_WIDTH);
+		myActorRuleCreatorPane.setPrefWidth(sceneWidth*CONTAINERS_PERCENT_WIDTH);
 		myActorRuleCreatorPane.setVgap(VGAP);
 		myActorRuleCreatorPane.setHgap(HGAP);
 	}

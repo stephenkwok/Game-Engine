@@ -1,6 +1,6 @@
 package authoringenvironment.view;
-import java.util.ResourceBundle;
 
+import java.util.ResourceBundle;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
 import gameengine.controller.GameInfo;
@@ -31,7 +31,6 @@ import javafx.scene.layout.VBox;
 public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	private IEditableGameElement myGameInfo;
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
-	private static final String GAME_PREVIEW_IMAGE_PROMPT_KEY = "currentGamePreviewImage";
 	private static final double DEFAULT_PADDING = 10;
 	private static final double CONTAINER_PREFERRED_WIDTH = 350.0;
 	private static final int TEXT_AREA_ROWS = 5;
@@ -62,7 +61,8 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	}
 
 	/**
-	 * Initialize the VBox containing all GUI elements in the Game Editing Environment
+	 * Initialize the VBox containing all GUI elements in the Game Editing
+	 * Environment
 	 * 
 	 */
 	private void initializeContainer() {
@@ -72,16 +72,17 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	}
 
 	/**
-	 * Initialize the Label displaying text welcoming the author to the Game Authoring Environment
+	 * Initialize the Label displaying text welcoming the author to the Game
+	 * Authoring Environment
 	 */
 	private void initializeWelcomeMessage() {
 		welcomeMessage = new LabelMainScreenWelcome(myResources.getString("mainScreenWelcome"));
 	}
 
 	/**
-	 * Initialize the Game Name Editor, which includes a text field for the author to enter
-	 * a name for the game, and a button that, when clicked, allows the author to save the text field 
-	 * input as the game's name
+	 * Initialize the Game Name Editor, which includes a text field for the
+	 * author to enter a name for the game, and a button that, when clicked,
+	 * allows the author to save the text field input as the game's name
 	 */
 	private void initializeGameNameEditor() {
 		String mainPrompt = myResources.getString("gameName");
@@ -94,9 +95,10 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	}
 
 	/**
-	 * Initializes the Game Description Editor, which includes a text area for the author to 
-	 * enter a description for the game. The Game Description Editor also contains a button
-	 * that when clicked, sets the game's description.
+	 * Initializes the Game Description Editor, which includes a text area for
+	 * the author to enter a description for the game. The Game Description
+	 * Editor also contains a button that when clicked, sets the game's
+	 * description.
 	 */
 	private void initializeGameDescriptionEditor() {
 		String prompt = myResources.getString("promptForGameDescription");
@@ -112,8 +114,9 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	// hard coded values
 	private void initializePreviewImageDisplay() {
 		previewImageContainer = new VBox();
+		// previewImageContainer.setAlignment(Pos.CENTER);
 		previewImageContainer.setPadding(new Insets(DEFAULT_PADDING));
-		Label previewImageLabel = new Label(GAME_PREVIEW_IMAGE_PROMPT_KEY);
+		Label previewImageLabel = new Label("Current Game Preview Image:");
 		ImageView previewImage = new ImageView(
 				new Image(getClass().getClassLoader().getResourceAsStream("default_game.jpg")));
 		previewImageContainer.getChildren().addAll(previewImageLabel, previewImage);
@@ -128,9 +131,9 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	}
 
 	/**
-	 * Initializes the scroll pane that contains the Game Editing Environment's GUI elements 
-	 * and allows for additional elements to be added should the height of the combined 
-	 * elements exceed the height of the stage
+	 * Initializes the scroll pane that contains the Game Editing Environment's
+	 * GUI elements and allows for additional elements to be added should the
+	 * height of the combined elements exceed the height of the stage
 	 */
 	private void initializeScrollPane() {
 		myScrollPane = new ScrollPane();
@@ -140,7 +143,8 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	}
 
 	/**
-	 * Creates and returns the Node containing all of the Game Editing Environment's GUI Elements 
+	 * Creates and returns the Node containing all of the Game Editing
+	 * Environment's GUI Elements
 	 */
 	@Override
 	public Node createNode() {

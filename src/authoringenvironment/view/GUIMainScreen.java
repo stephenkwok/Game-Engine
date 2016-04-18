@@ -2,9 +2,10 @@ package authoringenvironment.view;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import gameengine.controller.GameInfo;
 import gui.view.IGUI;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.control.Label;
@@ -29,25 +30,22 @@ public class GUIMainScreen implements IGUI {
 	private static final int NUM_SCROLLPANES = 2;
 	private DoubleExpression screenWidth;
 	private DoubleExpression screenHeight;
+	private Controller controller;
 	private VBox actorLabelContainer;
 	private VBox levelLabelContainer;
 	private ScrollPane actorScrollPane;
 	private ScrollPane levelScrollPane;
 	private HBox scrollPaneContainer;
 	private BorderPane borderPane;
-	private List<LabelClickable> allClickableLabels;
-	private List<LabelClickable> levelLabels;
-	private GameInfo gameInfo;
+	private List<LabelClickable> clickableLabels;
 	private GameEditingEnvironment gameEditor;
 
-	public GUIMainScreen(GameInfo gameInfo, DoubleExpression screenWidth,
-			DoubleExpression screenHeight, GameEditingEnvironment gameEditor) {
-		this.gameInfo = gameInfo;
+	public GUIMainScreen(GameEditingEnvironment gameEditor, DoubleExpression screenWidth,
+			DoubleExpression screenHeight) {
+		this.gameEditor = gameEditor;
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
-		this.gameEditor = gameEditor;
-		allClickableLabels = new ArrayList<>();
-		levelLabels = new ArrayList<>();
+		clickableLabels = new ArrayList<LabelClickable>();
 		levelScrollPane = new ScrollPane();
 		actorScrollPane = new ScrollPane();
 		initializeEnvironment();
@@ -181,9 +179,7 @@ public class GUIMainScreen implements IGUI {
 	 *            associated with the Label generated
 	 */
 	public LabelClickable createLevelLabel(IEditableGameElement level, IEditingEnvironment levelEditor) {
-		LabelClickable levelLabel = createLabel(level, levelEditor, levelLabelContainer);
-		levelLabels.add(levelLabel);
-		return levelLabel;
+		return createLabel(level, levelEditor, levelLabelContainer);
 	}
 
 	/**
@@ -197,11 +193,11 @@ public class GUIMainScreen implements IGUI {
 	 *            to hold the Label
 	 */
 	private LabelClickable createLabel(IEditableGameElement editable, IEditingEnvironment environment, VBox container) {
-		LabelClickable labelWrapper = new LabelClickable(editable, environment);
+		LabelClickable labelWrapper = new LabelClickable(editable, environment, controller);
 		Label label = labelWrapper.getLabel();
 		bindNodeSizeToGivenSize(label, container.widthProperty(), null);
 		container.getChildren().add(label);
-		allClickableLabels.add(labelWrapper);
+		clickableLabels.add(labelWrapper);
 		return labelWrapper;
 	}
 
@@ -210,7 +206,7 @@ public class GUIMainScreen implements IGUI {
 	 * image of Actors and Levels
 	 */
 	public void updateAllNodes() {
-		allClickableLabels.stream().forEach(label -> label.update());
+		clickableLabels.stream().forEach(label -> label.update());
 	}
 
 }
