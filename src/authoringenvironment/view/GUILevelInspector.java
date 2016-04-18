@@ -3,7 +3,6 @@ package authoringenvironment.view;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.LevelEditingEnvironment;
 import gui.view.ButtonFileChooserBackgroundImage;
@@ -15,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class GUILevelInspector implements IGUI {
@@ -25,7 +25,6 @@ public class GUILevelInspector implements IGUI {
 	private static final String ACTORS = "Actors";
 	private static final String LEVEL_ATTRIBUTES = "Level Attributes";
 	private static final int SPACING = 5;
-	private Controller myController;
 	private Pane myPane;
 	private TabActors myActorsTab;
 	private TabAttributes myAttributesTab;
@@ -40,26 +39,25 @@ public class GUILevelInspector implements IGUI {
 	 * @param availActors: list of currently available actors.
 	 * @param level: level that is being edited.
 	 */
-	public GUILevelInspector(Controller controller, ResourceBundle myResources, List<IAuthoringActor> availActors, LevelEditingEnvironment editor, Stage stage) {
-		myLevelEditor = editor;
-		myController = controller;
+	public GUILevelInspector(ResourceBundle myResources, List<IAuthoringActor> availActors, LevelEditingEnvironment editor, Stage stage) {
 		myStage = stage;
-		init(controller, myResources, availActors);
+		myLevelEditor = editor;
+		init(myResources, availActors);
 	}
 	
-	private void init(Controller controller, ResourceBundle myResources, List<IAuthoringActor> availActors) {
+	private void init(ResourceBundle myResources, List<IAuthoringActor> availActors) {
 		myPane = new StackPane();		
 		myContainer = new VBox(SPACING);
 		myContainer.setAlignment(Pos.CENTER);
-		addChildrenToLevelInspector(controller, myResources, availActors);
+		addChildrenToLevelInspector(myResources, availActors);
 		myPane.getChildren().addAll(myContainer);
 	}
 
-	private void addChildrenToLevelInspector(Controller controller, ResourceBundle myResources, List<IAuthoringActor> availActors) {
+	private void addChildrenToLevelInspector(ResourceBundle myResources, List<IAuthoringActor> availActors) {
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
-		myAttributesTab = new TabAttributes(controller, myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, myLevelEditor.getLevel());
-		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(myController, BUTTON_LABEL, null, BUTTON_WIDTH, BUTTON_HEIGHT, myLevelEditor);
-
+		myAttributesTab = new TabAttributes(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, myLevelEditor.getLevel());
+		// TODO: take out the null where the controller is later
+		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(null, BUTTON_LABEL, null, BUTTON_WIDTH, BUTTON_HEIGHT, myLevelEditor);
 		addTabToContainer(myAttributesTab, false);
 		myContainer.getChildren().add(button.createNode());
 		addTabToContainer(myActorsTab, true);

@@ -1,25 +1,17 @@
 package authoringenvironment.view;
 
-import java.io.File;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
-import gameengine.controller.Level;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
+
 
 /**
  * Tab for setting attributes to go in the Inspector Pane in either the Level or Actor Editing Environment GUI.
@@ -32,7 +24,6 @@ public class TabAttributes extends TabParent {
 	private static final String DELIMITER = ",";
 	private ResourceBundle myAttributesResources;
 	private GUIFactory myFactory;
-	private Controller myController;
 	private VBox myContent;
 	private IEditableGameElement myEditableElement;
 	private List<IEditingElement> myEditingElements;
@@ -45,11 +36,10 @@ public class TabAttributes extends TabParent {
 	 * @param optionsResource: resource bundle containing info about the GUI elements for this attributes tab.
 	 * @param element: element that is being edited by this attributes tab (i.e. a level or an actor).
 	 */
-	public TabAttributes(Controller controller, ResourceBundle myResources, String tabText, String optionsResource, IEditableGameElement element) {
+	public TabAttributes(ResourceBundle myResources, String tabText, String optionsResource, IEditableGameElement element) {
 		super(myResources, tabText);
-		myController = controller;
 		this.myAttributesResources = ResourceBundle.getBundle(optionsResource);
-		myFactory = new GUIFactory(myAttributesResources, myController);
+		myFactory = new GUIFactory(myAttributesResources);
 		myEditableElement = element;
 		myEditingElements = new ArrayList<>();
 		addElements();

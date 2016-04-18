@@ -45,7 +45,6 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private TabAttributes attributes;
 	private Controller myController;
 	private ResourceBundle myResources;
-	private Stage myStage;
 	
 	private IAuthoringActor myActor;
 	private ImageView myActorIV;
@@ -53,11 +52,13 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private GUIActorImageViewer actorImageViewer;
 	private ActorRuleCreator myActorRuleCreator;
 	private GridPane myActorRuleCreatorPane;
+	
+	private Stage myStage;
 
 	public ActorEditingEnvironment(Controller myController, ResourceBundle myResources, Stage stage) {
 		this.myController = myController;
 		this.myResources = myResources;
-		myStage = stage;
+		this.myStage = stage;
 		initializeEnvironment();
 	}
 	/**
@@ -73,7 +74,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private void initializeEnvironment() {
 		myRoot = new BorderPane();
 		setDefaultActor();
-		myActorRuleCreator = new ActorRuleCreator(myActor, myController);
+		myActorRuleCreator = new ActorRuleCreator(myActor, myController, myStage.getWidth());
 		setLeftPane();
 		setCenterPane();
 		setBottomPane();
@@ -91,12 +92,12 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	 */
 	private void setLeftPane() {
 		VBox vbox = new VBox();
-		attributes = new TabAttributes(myController, myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
+		attributes = new TabAttributes(myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
 		TabPane attributeTP = new TabPane();
 		attributeTP.getTabs().add(attributes.getTab());
 		attributeTP.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		library = new GUILibrary(myActorRuleCreator);
-		actorImageViewer = new GUIActorImageViewer(this, myController, myActorIV, myStage);
+		actorImageViewer = new GUIActorImageViewer(this, myActorIV);
 		vbox.getChildren().addAll(actorImageViewer.getPane(), attributeTP, library.getPane());
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
 		myRoot.setLeft(vbox);

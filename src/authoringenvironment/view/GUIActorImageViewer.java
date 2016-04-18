@@ -1,28 +1,19 @@
 package authoringenvironment.view;
 
-import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.List;
-
-import authoringenvironment.controller.Controller;
 import gui.view.ButtonFileChooserActorImage;
 import gui.view.ComboBoxActorImages;
 import gui.view.IGUI;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class GUIActorImageViewer implements IGUI {
@@ -34,9 +25,7 @@ public class GUIActorImageViewer implements IGUI {
 	private static final int BUTTON_WIDTH = 150;
 	private ImageView myActorIV;
 	private StackPane myPane;
-	private Controller myController;
 	private ActorEditingEnvironment aEE;
-	private Stage myStage;
 	
 	/**
 	 * Module that contains actor image display and options for loading an image from available images or from computer directory.
@@ -44,11 +33,9 @@ public class GUIActorImageViewer implements IGUI {
 	 * @param myController
 	 * @param myActorIV
 	 */
-	public GUIActorImageViewer(ActorEditingEnvironment aEE, Controller myController, ImageView myActorIV, Stage stage) {
+	public GUIActorImageViewer(ActorEditingEnvironment aEE, ImageView myActorIV) {
 		this.aEE = aEE;
-		this.myController = myController;
 		this.myActorIV = myActorIV;
-		myStage = stage;
 		initializeEnvironment();
 	}
 	/**
@@ -59,7 +46,8 @@ public class GUIActorImageViewer implements IGUI {
 		VBox vbox = new VBox(PADDING);
 		HBox hbox = new HBox(PADDING);
 		hbox.setAlignment(Pos.CENTER);
-		ButtonFileChooserActorImage imageChooser = new ButtonFileChooserActorImage(myController, BUTTON_LABEL, null, BUTTON_WIDTH, BUTTON_HEIGHT, aEE);
+		// TODO: take out the null where the controller is later
+		ButtonFileChooserActorImage imageChooser = new ButtonFileChooserActorImage(null, BUTTON_LABEL, null, BUTTON_WIDTH, BUTTON_HEIGHT, aEE);
 		hbox.getChildren().addAll(myActorIV, imageChooser.createNode());
 		vbox.getChildren().addAll(hbox, getImagesComboBox());
 		myPane.getChildren().add(vbox);

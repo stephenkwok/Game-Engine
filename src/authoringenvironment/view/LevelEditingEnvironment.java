@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.controller.Controller;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import javafx.event.EventHandler;
@@ -41,7 +40,6 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	private List<IAuthoringActor> availableActors;
 	private Pane myCenterPane;
 	private ImageView myLevelBackground;
-	private Controller myController;
 	private List<ImageviewActorIcon> myActorPreviews;
 	private Stage myStage;
 
@@ -50,11 +48,10 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 * @param controller: authoring environment controller.
 	 * @param actors: list of currently available actors.
 	 */
-	public LevelEditingEnvironment(Controller controller, List<IAuthoringActor> actors, Stage stage) {
+	public LevelEditingEnvironment(List<IAuthoringActor> actors, Stage stage) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
-		myController = controller;
 		myActorPreviews = new ArrayList<>();
 		myStage = stage;
 		initializeEnvironment();
@@ -81,7 +78,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	}
 
 	private void addChildrenToLeftPane() {
-		myInspector = new GUILevelInspector(myController, myResources, availableActors, this, myStage);
+		myInspector = new GUILevelInspector(myResources, availableActors, this, myStage);
 		myLeftPane.getChildren().add(myInspector.getPane());
 		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
 	}
