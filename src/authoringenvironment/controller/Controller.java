@@ -59,6 +59,7 @@ public class Controller implements IScreenController, Observer {
 		this.guiMain = guiMain;
 		this.myResources = myResources;
 		init();
+
 	}
 
 	public void init() {
@@ -69,7 +70,7 @@ public class Controller implements IScreenController, Observer {
 		levelEnvironment = new LevelEditingEnvironment(myActors, myStage);
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
-		actorEnvironment = new ActorEditingEnvironment(this, myResources);
+		actorEnvironment = new ActorEditingEnvironment(this, myResources, myStage);
 		gameEnvironment = new GameEditingEnvironment(gameInfo);
 		mainScreen = new GUIMainScreen(gameEnvironment, myStage.widthProperty(), myStage.heightProperty());
 	}

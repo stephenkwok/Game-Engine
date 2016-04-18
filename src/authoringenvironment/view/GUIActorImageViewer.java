@@ -5,7 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
-import authoringenvironment.controller.Controller;
 import gui.view.ComboBoxActorImages;
 import gui.view.IGUI;
 import javafx.geometry.Insets;
@@ -16,12 +15,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class GUIActorImageViewer implements IGUI {
 	private static final String AVAILABLE_ACTOR_IMAGES = "Available Images";
@@ -34,8 +34,8 @@ public class GUIActorImageViewer implements IGUI {
 	private static final int BUTTON_WIDTH = 150;
 	private ImageView myActorIV;
 	private StackPane myPane;
-	private Controller myController;
 	private ActorEditingEnvironment aEE;
+	private Stage myStage;
 	
 	/**
 	 * Module that contains actor image display and options for loading an image from available images or from computer directory.
@@ -43,10 +43,10 @@ public class GUIActorImageViewer implements IGUI {
 	 * @param myController
 	 * @param myActorIV
 	 */
-	public GUIActorImageViewer(ActorEditingEnvironment aEE, Controller myController, ImageView myActorIV) {
+	public GUIActorImageViewer(ActorEditingEnvironment aEE, ImageView myActorIV, Stage stage) {
 		this.aEE = aEE;
-		this.myController = myController;
 		this.myActorIV = myActorIV;
+		this.myStage = stage;
 		initializeEnvironment();
 	}
 	/**
@@ -110,7 +110,7 @@ public class GUIActorImageViewer implements IGUI {
         List<String> extensions = Arrays.asList(EXTENSIONS.split(" "));
         FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter(EXTENSION_FILTER_DESCRIPTION, extensions);
         myFileChooser.getExtensionFilters().add(myFilter);
-        return myFileChooser.showOpenDialog(myController.getStage());
+        return myFileChooser.showOpenDialog(myStage);
     }
     /**
      * Return Pane representation of actor image viewer

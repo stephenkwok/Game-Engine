@@ -24,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 /**
  * Returns BorderPane to represent Actor Editing Environment.
@@ -51,10 +52,13 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private GUIActorImageViewer actorImageViewer;
 	private ActorRuleCreator myActorRuleCreator;
 	private GridPane myActorRuleCreatorPane;
+	
+	private Stage myStage;
 
-	public ActorEditingEnvironment(Controller myController, ResourceBundle myResources) {
+	public ActorEditingEnvironment(Controller myController, ResourceBundle myResources, Stage stage) {
 		this.myController = myController;
 		this.myResources = myResources;
+		this.myStage = stage;
 		initializeEnvironment();
 	}
 	/**
@@ -70,7 +74,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private void initializeEnvironment() {
 		myRoot = new BorderPane();
 		setDefaultActor();
-		myActorRuleCreator = new ActorRuleCreator(myActor, myController);
+		myActorRuleCreator = new ActorRuleCreator(myActor, myController, myStage.getScene().getWidth());
 		setLeftPane();
 		setCenterPane();
 		setBottomPane();
@@ -93,7 +97,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 		attributeTP.getTabs().add(attributes.getTab());
 		attributeTP.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		library = new GUILibrary(myActorRuleCreator);
-		actorImageViewer = new GUIActorImageViewer(this, myController, myActorIV);
+		actorImageViewer = new GUIActorImageViewer(this, myActorIV, myStage);
 		vbox.getChildren().addAll(actorImageViewer.getPane(), attributeTP, library.getPane());
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
 		myRoot.setLeft(vbox);
