@@ -1,7 +1,6 @@
 package gui.view;
 
 import java.io.File;
-import java.util.Observable;
 
 import gui.controller.IScreenController;
 import javafx.geometry.Insets;
@@ -15,7 +14,7 @@ import javafx.stage.FileChooser;
  * @author AnnieTang
  *
  */
-public abstract class ButtonParent extends Observable implements IGUIElement {
+public abstract class ButtonParent extends ObjectObservable implements IGUIElement {
 	private static final int ICON_SIZE = 30;
 	private static final int PADDING = 10;
 	private IScreenController myController;
@@ -91,9 +90,5 @@ public abstract class ButtonParent extends Observable implements IGUIElement {
     protected IScreenController getController() {
     	return myController;
     }
-    
-	protected void notifyController(Object objToPassToObserver) {
-		setChanged();
-		notifyObservers(objToPassToObserver);
-	}
+  
 }

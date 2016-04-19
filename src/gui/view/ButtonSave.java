@@ -13,6 +13,6 @@ public class ButtonSave extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnMouseClicked(e -> notifyController(promptForFileName(true)));
+		getButton().setOnMouseClicked(e -> notifyObservers(promptForFileName(true)));
 	}	
 }

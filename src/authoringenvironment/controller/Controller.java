@@ -16,7 +16,7 @@ import authoringenvironment.view.ActorEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
 import authoringenvironment.view.GameEditingEnvironment;
-import authoringenvironment.view.LabelClickable;
+import authoringenvironment.view.LabelWithEditable;
 import authoringenvironment.view.LevelEditingEnvironment;
 import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
@@ -154,6 +154,7 @@ public class Controller implements IScreenController, Observer {
 	public void addLevel() {
 		Level newLevel = new Level();
 		myLevels.add(newLevel);
+		newLevel.setPlayPosition(myLevels.size());
 		myLevelNames.add(newLevel.getMyName());
 		mainScreen.createLevelLabel(newLevel, levelEnvironment).addObserver(this);
 		goToEditingEnvironment(newLevel, levelEnvironment);
@@ -215,7 +216,7 @@ public class Controller implements IScreenController, Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if (arg0 instanceof LabelClickable)
+		if (arg0 instanceof LabelWithEditable)
 			handleObservableGoToEditingEnvironmentCall(arg1);
 		else if (arg0 instanceof ButtonFinish)
 			goToSplash();
@@ -232,11 +233,9 @@ public class Controller implements IScreenController, Observer {
 	}
 
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
-		if (notifyObserversArgument instanceof List) {
-			List<Object> arguments = (List<Object>) notifyObserversArgument;
-			IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
-			IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
-			goToEditingEnvironment(editable, environment);
-		}
+		List<Object> arguments = (List<Object>) notifyObserversArgument;
+		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
+		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
+		goToEditingEnvironment(editable, environment);
 	}
 }

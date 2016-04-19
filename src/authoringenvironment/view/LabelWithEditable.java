@@ -1,12 +1,9 @@
 package authoringenvironment.view;
 
 import java.util.Arrays;
-import java.util.Observable;
-import java.util.ResourceBundle;
-
-import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
+import gui.view.ObjectObservable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -22,30 +19,20 @@ import javafx.scene.image.ImageView;
  *
  */
 
-public class LabelClickable extends Observable {
+public class LabelWithEditable extends ObjectObservable {
 
 	private static final String IMAGE_TEXT_PADDING = "    ";
-	private static final String DEFAULT_BORDER_COLOR_KEY = "defaultBorderColor";
-	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
 	private static final Double FIT_SIZE = 75.0;
 	private static final Double LABEL_PADDING = 10.0;
 	private Label myLabel;
-	private ResourceBundle myResources;
 	private IEditableGameElement myEditable;
 	private IEditingEnvironment myEnvironment;
 
-	public LabelClickable(IEditableGameElement editable, IEditingEnvironment environment, Controller controller) {
+	public LabelWithEditable(IEditableGameElement editable, IEditingEnvironment environment) {
 		this.myEditable = editable;
 		this.myEnvironment = environment;
-		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
 		this.myLabel = new Label();
-		myLabel.setOnMouseClicked(e -> notifyController());
-		myLabel.setStyle(myResources.getString(DEFAULT_BORDER_COLOR_KEY));
-	}
-
-	private void notifyController() {
-		this.setChanged();
-		this.notifyObservers(Arrays.asList(myEditable, myEnvironment));
+		myLabel.setOnMouseClicked(e -> notifyObservers(Arrays.asList(myEditable, myEnvironment)));
 	}
 	
 	/**
