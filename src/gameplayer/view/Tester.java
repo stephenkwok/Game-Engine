@@ -10,6 +10,8 @@ import gameengine.model.Actions.*;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.SideCollision;
+import gameengine.model.Triggers.TickTrigger;
+import gameengine.model.Triggers.TopCollision;
 import gameplayer.controller.GameController;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -41,14 +43,29 @@ public class Tester extends Application {
 		info.setMyCurrentLevelNum(0);
 		info.setMyName("Colette");
 		
+		Map<String, Integer> options = new HashMap<>();
+		options.put("Points", 0);
+		
+		info.setMyHUDOptions(options);
+		
 		Actor actor1 = new Actor();
 		actor1.setMyImageViewName("redball.png");
 		actor1.setMyName("A1");
 		
+		
 		Actor actor2 = new Actor();
 		actor2.setMyImageViewName("block.png");
-		actor2.setX(500);
+		actor2.setX(300);
 		actor2.setMyName("A2");
+		
+		TickTrigger tick = new TickTrigger();
+		Action tick1 = new ApplyPhysics(actor1);
+		Action tick2 = new ApplyPhysics(actor2);
+		Rule rule7 = new Rule(tick,tick1);
+		Rule rule8 = new Rule(tick,tick2);
+		actor1.addRule(rule7);
+		actor2.addRule(rule8);
+		
 		
 		Actor actor3 = new Actor();
 		actor3.setMyImageViewName("flagpole.png");
@@ -61,11 +78,15 @@ public class Tester extends Application {
 		KeyTrigger trigger4 = new KeyTrigger(KeyCode.SPACE);
 		BottomCollision trigger5 = new BottomCollision(actor1,actor2);
 		SideCollision trigger6 = new SideCollision(actor1,actor3);
+		KeyTrigger trigger9 = new KeyTrigger(KeyCode.Z);
+		Action action9 = new ChangeAttribute(actor1,AttributeType.POINTS,1);
+		Rule rule9 = new Rule(trigger9,action9);
+		actor1.addRule(rule9);
 		Action action1 = new MoveRight(actor1);
 		Action action2 = new MoveLeft(actor1);
 		Action action3 = new HorizontalStaticCollision(actor1);
-		Action action4 = new MoveUp(actor1);//new ChangeAttribute(actor1,AttributeType.POINTS,1);
-		Action action5 = new VerticalStaticCollision(actor1);
+		Action action4 = new MoveUp(actor1);
+		Action action5 = new VerticalBounceCollision(actor1);
 		Action action6 = new WinGame(actor1);
 		Rule rule = new Rule(trigger1,action1);
 		Rule rule2 = new Rule(trigger2, action2);
@@ -79,6 +100,9 @@ public class Tester extends Application {
 		actor1.addRule(rule4);
 		actor1.addRule(rule5);
 		actor1.addRule(rule6);
+		actor1.setMain(true);
+		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
+		actor1.addAttribute(points);
 		
 		List<Level> levels = new ArrayList<Level>();
 		Level level1 = new Level();
@@ -92,8 +116,7 @@ public class Tester extends Application {
 			floor.setMyName("floor");
 			floor.setMyImageViewName("square.png");
 			floor.setX(i*50+i);
-			floor.setY(700);
-			
+			floor.setY(500-floor.getBounds().getHeight());
 			BottomCollision b = new BottomCollision(actor1, floor);
 			BottomCollision b2 = new BottomCollision(actor2, floor);
 			BottomCollision b3 = new BottomCollision(actor3, floor);
@@ -118,7 +141,7 @@ public class Tester extends Application {
 		
 		Game model = new Game(info,levels);
 		CreatorController c = new CreatorController(model);
-		c.saveForEditing(new File("gamefiles/test.xml"));
+		c.saveForEditing(new File("gamefiles/hudtest.xml"));
 		PerspectiveCamera camera = new PerspectiveCamera();
 		GameScreen view = new GameScreen(camera);
 
@@ -132,12 +155,18 @@ public class Tester extends Application {
 		
 		Stage stage = new Stage();
 		stage.setWidth(800);
-		stage.setHeight(600);		
+		stage.setHeight(600);
 
+//		CreatorController c = new CreatorController(model);
+//		System.out.println(c);
+//		File myF = new File("gamefiles/testhud.xml");
+//		System.out.println(myF);
+//		c.saveForEditing(myF);
+		
 		sub.setCamera(camera);
 		stage.setScene(scene);
 		stage.show();
-		controller.initialize(0);
+		//controller.initialize(0);
 
 	}
 

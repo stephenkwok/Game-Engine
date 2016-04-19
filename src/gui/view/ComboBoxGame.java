@@ -32,13 +32,13 @@ public class ComboBoxGame extends ComboBoxImageCell {
 
 	@Override
 	public void setButtonAction() {
-		comboButton.setOnAction(event -> {
-			if (comboBox.getValue() == null) {
+		getComboButton().setOnAction(event -> {
+			if (getComboBox().getValue() == null) {
 				//TODO GET RESOURCE BUNDLE MESSAGE
 				myController.getScreen().showError("Please choose a game!");
 			}
 			else {
-				myController.setGame(myGames.get(comboBox.getValue()));
+				myController.setGame(myGames.get(getComboBox().getValue()));
 				myController.useGame();
 			}
 		});

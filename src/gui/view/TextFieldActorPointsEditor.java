@@ -10,7 +10,9 @@ public class TextFieldActorPointsEditor extends TextFieldWithButton {
 		super(labelText, promptText, textFieldWidth);
 		setButtonAction(e -> ((Actor) getEditableElement()).addAttribute(new Attribute(AttributeType.POINTS, Integer.parseInt(getTextFieldInput()))));
 	}
-
+	/**
+	 * Sets the textfield's value to reflect the current actor's points.
+	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
 		try{setTextFieldValue(Double.toString(((Actor) getEditableElement()).getAttribute(AttributeType.POINTS).getMyValue()));}

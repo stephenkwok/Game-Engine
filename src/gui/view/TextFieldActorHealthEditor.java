@@ -10,7 +10,9 @@ public class TextFieldActorHealthEditor extends TextFieldWithButton {
 		super(labelText, promptText, textFieldWidth);
 		setButtonAction(e -> ((Actor) getEditableElement()).addAttribute(new Attribute(AttributeType.HEALTH, Integer.parseInt(getTextFieldInput()))));
 	}
-
+	/**
+	 * Sets the textfield's value to reflect the current actor's health.
+	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
 		try{setTextFieldValue(Double.toString(((Actor) getEditableElement()).getAttribute(AttributeType.HEALTH).getMyValue()));}

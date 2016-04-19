@@ -132,7 +132,12 @@ public class ActorRule {
 		toAdd.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2) remove(toAdd);
 		});
-		if(isTrigger(behavior.getText())) triggers.getChildren().add(toAdd);
+		if(isTrigger(behavior.getText())) {
+			triggers.getChildren().add(toAdd);
+//			TriggerFactory testFactory= new TriggerFactory(ResourceBundle.getBundle("triggeraction"));
+//			ITrigger itrigger = testFactory.createNewTrigger(behavior.getText(), new Actor());
+//			System.out.println(itrigger);
+		}
 		else actions.getChildren().add(toAdd);
 	}
 	/**
@@ -163,7 +168,6 @@ public class ActorRule {
 			});
 			actions.getChildren().add(toAdd);
 		}
-		//TODO: change value of combobox to be this image
 	}
 	/**
 	 * return if given filename is in directory of given pathname
@@ -189,7 +193,6 @@ public class ActorRule {
 			if(event.getClickCount()==2) remove(toAdd);
 		});
 		actions.getChildren().add(toAdd);
-		//TODO: change value of combobox to be this image
 	}
 	
 	/**

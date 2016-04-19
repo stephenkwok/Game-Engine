@@ -17,6 +17,8 @@ import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.TickTrigger;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 /**
@@ -37,12 +39,14 @@ public class GameEngineTest {
         
         Actor floor = new Actor();
         floor.setMyImageViewName("square.png");
+        floor.setMyImageView(new ImageView(new Image(GameEngineTest.class.getClassLoader().getResourceAsStream("square.png"))));
         
         Actor actor1 = new Actor();
         actor1.setMyImageViewName("redball.png");
+        actor1.setMyImageView(new ImageView(new Image(GameEngineTest.class.getClassLoader().getResourceAsStream("redball.png"))));
         
-        actor1.getImageView().setFitHeight(50);
-        actor1.getImageView().setFitHeight(50);
+        actor1.getMyImageView().setFitHeight(50);
+        actor1.getMyImageView().setFitHeight(50);
 
         KeyTrigger rightTrigger  = new KeyTrigger(KeyCode.RIGHT);
         MoveRight action1 = new MoveRight(actor1);

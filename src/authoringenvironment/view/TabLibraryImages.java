@@ -19,30 +19,31 @@ public class TabLibraryImages extends TabLibrary{
 		super(myResources,tabText,myRuleMaker);
 		setContent();
 	}
+	
 	/**
 	 * Set content of tab to list of images
 	 */
 	@Override
 	void setContent() {
 		fillFileNames();
-		labels = FXCollections.observableArrayList();
-		for(String imageName: fileNames){
+		setLabels(FXCollections.observableArrayList());
+		for(String imageName: getFileNames()){
 			ImageView iv = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(imageName)));
 			iv.setFitHeight(STANDARD_IMAGE_HEIGHT);
 			iv.setPreserveRatio(true);
 			Label imageLabel = new Label(imageName, iv); 
-			if(myActorRuleCreator!=null){
+			if(getActorRuleCreator()!=null){
 				setDragEvent(imageLabel,TransferMode.COPY);
 			}
-			labels.add(imageLabel);
+			getLabels().add(imageLabel);
 		}
-		listView = new ListView<>(labels);
+		setListView(new ListView<>(getLabels()));
 	}
 	/**
 	 * Return image content of this tab
 	 */
 	@Override
 	Node getContent() {
-		return listView;
+		return getListView();
 	}
 }

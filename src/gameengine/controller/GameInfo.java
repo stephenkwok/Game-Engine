@@ -16,7 +16,6 @@ public class GameInfo implements IEditableGameElement {
 	private String myDescription;
 	private int myCurrentLevelNum;
 	private ImageView myPreviewImage;
-	private int myID;
 	private Map<String,Integer> myHUDElementsToDisplay;
 	private String myFile;
 	
@@ -103,12 +102,12 @@ public class GameInfo implements IEditableGameElement {
 	}
 
 	@Override
-	public ImageView getImageView() {
+	public ImageView getMyImageView() {
 		return myPreviewImage;
 	}
 
 	@Override
-	public void setImageView(ImageView imageView) {
+	public void setMyImageView(ImageView imageView) {
 		myPreviewImage = imageView;
 	}
 

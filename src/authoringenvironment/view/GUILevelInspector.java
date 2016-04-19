@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gameengine.model.IAuthoringActor;
 import gui.view.IGUI;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -108,6 +108,10 @@ public class GUILevelInspector implements IGUI {
 		return myAttributesTab;
 	}
 	
+	/**
+	 * Creates an image setting button.
+	 * @return a button whose action sets the image.
+	 */
 	private Button getImageSettingButton(){
 		Button imageSetter = new Button(BUTTON_LABEL);
 		imageSetter.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -122,11 +126,18 @@ public class GUILevelInspector implements IGUI {
 	}
 	
 	// TODO: need to have preview show up on level editing environment
+	/**
+	 * Loads the selected image from the file selected by the user.
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private void loadSelectedImage() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		File imageFile = promptForFileName();
 		if(imageFile!=null){
 			Image image = new Image(imageFile.toURI().toString());
-			myLevel.setImageView(new ImageView(image));
+			myLevel.setMyImageView(new ImageView(image));
 			myLevel.setMyBackgroundImgName(imageFile.getPath());
 		}
 	}

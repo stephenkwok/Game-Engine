@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoringenvironment.controller.Controller;
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.GameInfo;
-import gameengine.model.IAuthoringActor;
 import gui.view.IGUI;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.control.ScrollPane;
@@ -72,7 +72,7 @@ public class GUIMainScreen implements IGUI {
 	 * Initializes the Game Editing Environment and sets it as the BorderPane's left pane
 	 */
 	private void initializeGameEditingEnvironment() {
-		GUIGameEditingEnvironment gameEditingEnvironment = new GUIGameEditingEnvironment(gameInfo, controller, myActors);
+		GameEditingEnvironment gameEditingEnvironment = new GameEditingEnvironment(gameInfo, controller, myActors);
 		borderPane.setLeft(gameEditingEnvironment.createNode());
 	}
 

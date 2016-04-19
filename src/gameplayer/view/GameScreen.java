@@ -56,13 +56,13 @@ public class GameScreen extends Observable {
 	 */
 	public void addActor (Actor actor){
 		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(actor.getMyImageViewName())));
-		actor.setImageView(imageView);
-		getMySubgroup().getChildren().add(actor.getImageView());//
+		actor.setMyImageView(imageView);
+		getMySubgroup().getChildren().add(actor.getMyImageView());//
 	}
 	
 	public void removeActors(List<Actor> actors){
 		for(Actor a: actors){
-			mySubgroup.getChildren().remove(a.getImageView());
+			mySubgroup.getChildren().remove(a.getMyImageView());
 		}
 	}
 	

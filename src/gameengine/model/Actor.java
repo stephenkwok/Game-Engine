@@ -10,6 +10,7 @@ import java.util.Set;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.Actions.Action;
 import javafx.geometry.Bounds;
@@ -60,7 +61,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
         isMain = DEFAULT_MAIN;
-        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
+        setMyImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
         myActorRules = new ArrayList<>();
     }
 
@@ -236,7 +237,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * @return  The Actor's Imageview
      */
     @Override
-    public ImageView getImageView() {
+    public ImageView getMyImageView() {
         return myImageView;
     }
 
@@ -245,7 +246,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * @param imageView The new ImageView
      */
     @Override
-    public void setImageView(ImageView imageView) {
+    public void setMyImageView(ImageView imageView) {
     	myImageView = imageView;
     	myImageView.setX(this.getX());
     	myImageView.setY(this.getY());
@@ -325,7 +326,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      */
 	public void setMyImageViewName(String myImageViewName) {
 		this.myImageViewName = myImageViewName;
-		this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
 	}
 
     /**
@@ -340,7 +340,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * @return  The Actor's ImageView Bounds
      */
 	public Bounds getBounds() {
-		return this.getImageView().getLayoutBounds();
+		return this.getMyImageView().getLayoutBounds();
 	}
 
 	/**

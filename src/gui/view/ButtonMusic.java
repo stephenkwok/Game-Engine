@@ -14,7 +14,7 @@ public class ButtonMusic extends ButtonParent{
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnAction(e -> myControl.toggleMusic());
+		getButton().setOnAction(e -> myControl.toggleMusic());
 		
 	}
 
