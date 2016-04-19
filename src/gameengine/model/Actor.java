@@ -131,16 +131,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
     }
 
     /**
-     * Provides a list of Triggers that the Actor responds to
-     *
-     * @return The list of Triggers that the Actor responds to
-     */
-    @Override
-    public Set<String> getTriggers() {
-        return getMyRules().keySet();
-    }
-
-    /**
      * Provides the Actor's ID number
      *
      * @return The Actor's ID number

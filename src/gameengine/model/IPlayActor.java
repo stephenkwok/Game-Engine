@@ -1,8 +1,11 @@
 package gameengine.model;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Observer;
 import java.util.Set;
 
+import gameengine.model.Actions.Action;
 import javafx.beans.Observable;
 import javafx.geometry.Bounds;
 import javafx.scene.image.ImageView;
@@ -16,13 +19,6 @@ public interface IPlayActor {
      * @param triggerString The string representation of the trigger to be executed
      */
     public void performActionsFor(String triggerString);
-    
-    /**
-     * Provides a list of Triggers that the Actor responds to
-     *
-     * @return The list of Triggers that the Actor responds to
-     */
-    public Set<String> getTriggers();
     
     /**
      * Assigns a phyiscs engine to an Actor
@@ -126,6 +122,8 @@ public interface IPlayActor {
 	public double getMyFriction();
 	
 	public Bounds getBounds();
+
+	public Map<String, List<Action>> getMyRules();
 
     
 }

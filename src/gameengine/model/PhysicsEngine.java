@@ -82,10 +82,10 @@ public class PhysicsEngine {
 		nextYPos     = changePos(yPos, nextVertVelo); 
 		nextVertVelo = maxLimit(nextVertVelo, getMaxVertVelocity());
 			
-		if(nextYPos+iPlayActor.getBounds().getHeight() > getFloorHeight()){                    //Collision detection for the actor and the ground
-			nextYPos = getFloorHeight()-iPlayActor.getBounds().getHeight();				//TODO: delete this if statement after the floor is implemented as an actor
-			nextVertVelo = 0;
-		}
+//		if(nextYPos+iPlayActor.getBounds().getHeight() > getFloorHeight()){                    //Collision detection for the actor and the ground
+//			nextYPos = getFloorHeight()-iPlayActor.getBounds().getHeight();				//TODO: delete this if statement after the floor is implemented as an actor
+//			nextVertVelo = 0;
+//		}
 
 		
 		nextHorzVelo = applyForce(xVelo, forceX); 							// Apply  y force from movement action to y velocity

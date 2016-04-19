@@ -5,7 +5,6 @@ import authoringenvironment.view.ActorRule;
 import javafx.scene.image.ImageView;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * This interface defines the subset of Actor functionality that will be accessible to the game authoring environment.
@@ -15,8 +14,6 @@ import java.util.Set;
  */
 public interface IAuthoringActor extends IEditableGameElement{
     void addRule(IRule newRule);
-
-    Set<String> getTriggers();
 
     void setX(double updateXPosition);
 
@@ -29,10 +26,6 @@ public interface IAuthoringActor extends IEditableGameElement{
     ImageView getImageView();
 
     void setImageView(ImageView imageView);
-
-    double getX();
-
-    double getY();
     
     String getMyImageViewName();
     

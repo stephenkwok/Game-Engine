@@ -76,7 +76,6 @@ public class Level implements ILevel, IEditableGameElement {
                 myActor.performActionsFor(myTrigger.getMyKey());
             }
         }
-        //myCollisionDetector.detection(myActors); //Collision Detection/Resolution for each Actor
     }
 
     /**
@@ -153,7 +152,7 @@ public class Level implements ILevel, IEditableGameElement {
     @Override
     public void addActor(IAuthoringActor newActor) {
         getActors().add((IPlayActor)newActor);
-        Set<String> actorTriggers = newActor.getTriggers();
+        Set<String> actorTriggers = ((IPlayActor)newActor).getMyRules().keySet();
         for (String myTrigger : actorTriggers) {
             if (getMyTriggerMap().containsKey(myTrigger)) {
                 List<IPlayActor> levelActors = getMyTriggerMap().get(myTrigger);

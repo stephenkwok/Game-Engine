@@ -83,6 +83,7 @@ public class CollisionDetection {
 		    if (wy > -hx) {
 		    	return "SideCollision";
 		    } else {
+		    	//TO DO: put this logic in actor 
 		    	a1.setInAir(false);
 				a1.setY(a2.getY()-a1.getBounds().getWidth());
 				a1.setVeloY(0);
