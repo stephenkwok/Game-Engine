@@ -3,8 +3,6 @@ package authoringenvironment.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -21,7 +19,8 @@ import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gameplayer.controller.BranchScreenController;
+import gui.controller.IScreenController;
+import gui.view.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -30,9 +29,8 @@ import javafx.stage.Stage;
  * @author Stephen, AnnieTang
  */
 
-public class Controller extends BranchScreenController implements Observer {
-	private static final String EDITING_CONTROLLER_RESOURCE = "editingActions";
-	
+public class Controller implements IScreenController {
+	private Stage myStage;
 	private List<Level> myLevels;
 	private List<String> myLevelNames;
 	private List<IAuthoringActor> myActors;
@@ -45,27 +43,11 @@ public class Controller extends BranchScreenController implements Observer {
 	private Game game;
 	private GameInfo gameInfo;
 
-	public Controller(Stage stage) {
-		this(stage, new GUIMain()); // pass GUIMain);
-    	//TODO instantiate new GUIMain
-		
-	}
-	
-	public Controller(Stage stage, GUIMain guiMain) {
-		super(stage);
+	public Controller(Stage myStage, GUIMain guiMain, ResourceBundle myResources) {
+		this.myStage = myStage;
 		this.guiMain = guiMain;
-		this.myResources = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
-		changeScreen(guiMain);
+		this.myResources = myResources;
 		init();
-	}
-	
-	//roughly what loading will look like
-	public Controller(Stage stage, Game game) {
-		this(stage);
-		this.myLevels = game.getLevels();
-		gameInfo = game.getInfo();
-		this.game = game;
-		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo, myActors);
 	}
 
 	public void init() {
@@ -76,7 +58,7 @@ public class Controller extends BranchScreenController implements Observer {
 		levelEnvironment = new LevelEditingEnvironment(this, myActors);		
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
-		actorEnvironment = new ActorEditingEnvironment(this, myResources); //change this resource to be not controller's resource
+		actorEnvironment = new ActorEditingEnvironment(this, myResources);
 		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo, myActors);
 	}
 	
@@ -111,10 +93,10 @@ public class Controller extends BranchScreenController implements Observer {
 		Game g = new Game(new GameInfo(), myLevels);  //TODO needs to be game info from AE
 		CreatorController controller;
 		try {
-			controller = new CreatorController(g, this.guiMain);
+			controller = new CreatorController(g, this.getScreen());
 			controller.saveForEditing(file);
 		} catch (ParserConfigurationException e) {
-			guiMain.showError(e.getMessage());
+			getScreen().showError(e.getMessage());
 		}
 
 	}
@@ -123,6 +105,14 @@ public class Controller extends BranchScreenController implements Observer {
 
 	}
 
+	/**
+	 * Gets the current workspace's stage.
+	 * 
+	 * @return current workspace's stage.
+	 */
+	public Stage getStage() {
+		return myStage;
+	}
 
 	/**
 	 * Returns list of created levels.
@@ -173,10 +163,37 @@ public class Controller extends BranchScreenController implements Observer {
 		return guiMain.getHeight();
 	}
 
-
+	@Override
+	public void setGame(Game game) {
+		// TODO Auto-generated method stub
+	}
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public Screen getScreen() {
+		return guiMain;
+	}
+
+	@Override
+	public void chooseGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void useGame() {
+		// TODO Auto-generated method stub
+		
+	}
+	/**
+	 * Saves game and returns to splash screen of game player.
+	 */
+	@Override
+	public void goToSplash() {
+		guiMain.goBackToSplash();
+	}
+
+	@Override
+	public void switchGame() {
 		// TODO Auto-generated method stub
 		
 	}
