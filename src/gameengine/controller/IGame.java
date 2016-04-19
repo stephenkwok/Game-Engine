@@ -15,13 +15,6 @@ import java.util.List;
 public interface IGame {
 
     /**
-     * Changes the current level that is being played in the game player
-     *
-     * @param mylevel The level to be played
-     */
-//    public void setLevel(Level mylevel);
-
-    /**
      * Provides a list of all the possible levels to be played
      *
      * @return A list of Level objects that can be played
@@ -34,12 +27,5 @@ public interface IGame {
      * @param myTrigger A Trigger object provided by the game player
      */
     public void handleTrigger(ITrigger myTrigger);
-
-//    /**
-//     * Provides a list of all actors used across all levels
-//     *
-//     * @return A List of Actor objects
-//     */
-//    public List<IActor> getActors();
 
 }

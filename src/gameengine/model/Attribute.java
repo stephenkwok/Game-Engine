@@ -4,9 +4,6 @@ import gameengine.model.Actions.Action;
 
 import java.util.Observable;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import gameengine.model.Actions.Action;
-
 /**
  * This class is purposed to store properties belonging to an actor that are updated throughout the game 
  * that may signal some action to be performed once they meet a specified criteria
@@ -14,46 +11,40 @@ import gameengine.model.Actions.Action;
  *
  */
 public class Attribute extends Observable {
-	
-	private int myValue;
-	private int myTriggerValue;
+
+    private int myValue;
+    private int myTriggerValue;
     private AttributeType myType;
     private Action myAction;
     
     public Attribute(AttributeType type, int initialValue, int triggerValue, Action action) {
-    	myValue = initialValue;
-    	myTriggerValue = triggerValue;
-	    setMyType(type);
+        myValue = initialValue;
+        myTriggerValue = triggerValue;
+        setMyType(type);
         setMyAction(action);
     }
 
-    public Attribute(AttributeType type, int initialValue){
+    public Attribute(AttributeType type, int initialValue) {
         myType = type;
         myValue = initialValue;
         myTriggerValue = Integer.MAX_VALUE;
         myAction = null;
     }
-    
+
     /**
-     * Updates the attribute's current value by the specified amount of change
-     * @param change
+     * Changes the Attribute's current value
+     *
+     * @param change The amount to change the value by
      */
     public void changeAttribute(int change) {
-    	myValue += change;
-    	setChanged();
-    	notifyObservers();
-        if(myValue == myTriggerValue){
-        	myAction.perform();
+        myValue += change;
+        setChanged();
+        notifyObservers();
+        if (myValue == myTriggerValue) {
+            myAction.perform();
         }
     }
     
-    /**
-     * Gets the attribute's current value 
-     * @return the current value of the attribute
-     */
-	public int getMyValue() {
-		return myValue;
-	}
 	
 	/**
 	 * Sets the attribute's current value 
@@ -61,14 +52,6 @@ public class Attribute extends Observable {
 	 */
 	public void setMyValue(int myValue) {
 		this.myValue = myValue;
-	}
-	
-	/**
-	 * Gets the specified value that the attribute needs to meet to signal some action
-	 * @return a particular value needed to be reached by the attribute 
-	 */
-	public int getMyTriggerValue() {
-		return myTriggerValue;
 	}
 	
 	/**
@@ -80,35 +63,52 @@ public class Attribute extends Observable {
 	}
 	
 	/**
-	 * Gets the type of attribute
-	 * @return the type of attribute
-	 */
-	public AttributeType getMyType() {
-		return myType;
-	}
-	
-	/**
-	 * Sets the type of the attribute 
-	 * @param myType
-	 */
-	public void setMyType(AttributeType myType) {
-		this.myType = myType;
-	}
-	
-	/**
 	 * Gets the action to be triggered once the attribute meets its specified criteria
 	 * @return the action to be performed once the attribute reaches a certain value 
 	 */
 	public Action getMyAction() {
 		return myAction;
 	}
-	
-	/**
-	 * Sets the action to be triggered once the attribute meets its specified criteria
-	 * @param myAction
-	 */
-	public void setMyAction(Action myAction) {
-		this.myAction = myAction;
-	}
+
+    /**
+     * Provides the Attribute's current value
+     *
+     * @return  The Attribute's current value
+     */
+    public int getMyValue() {
+        return myValue;
+    }
+
+    /**
+     * Provides the Attribute's trigger value
+     * @return  The Attribute's trigger value
+     */
+    public int getMyTriggerValue() {
+        return myTriggerValue;
+    }
+
+    /**
+     * Provides the AttributeType for the Attribute
+     * @return  The Attribute's AttributeType
+     */
+    public AttributeType getMyType() {
+        return myType;
+    }
+
+    /**
+     * Sets the Attribute's AttributeTypes
+     * @param myType    The Attribute's AttributeType
+     */
+    private void setMyType(AttributeType myType) {
+        this.myType = myType;
+    }
+
+    /**
+     * Sets the Attribute's Action
+     * @param myAction  The desired Attribute Action
+     */
+    private void setMyAction(Action myAction) {
+        this.myAction = myAction;
+    }
 }
 

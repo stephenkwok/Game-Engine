@@ -26,5 +26,4 @@ public class ChangeSceneBehavior extends ComboBoxBehavior{
 	@Override
 	protected void updateValueBasedOnEditable() {
 	}
-
 }

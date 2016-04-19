@@ -14,19 +14,19 @@ import gui.controller.IScreenController;
  */
 
 public class GUIFactory {
-	protected static final String TEXT = "Text";
-	protected static final String ICON = "Icon";
-	protected static final String CLASS = "Class";
-	protected static final String PROMPT = "Prompt";
-	protected static final String GUI = "gui.";
-	protected static final String VIEW = "view.";
+	private static final String TEXT = "Text";
+	private static final String ICON = "Icon";
+	private static final String CLASS = "Class";
+	private static final String PROMPT = "Prompt";
+	private static final String GUI = "gui.";
+	private static final String VIEW = "view.";
 	private static final String CREATE = "create";
 	private static final String LABEL = "Label";
 	private static final String WIDTH = "Width";
 	private static final String GUI_ELEMENT_TYPES = "GUIElementTypes";
 	private static final String DELIMITER = ",";
-	protected ResourceBundle myResources;
-	protected IScreenController myController;
+	private ResourceBundle myResources;
+	private IScreenController myController;
 
 	/**
 	 * Constructs a GUIFactory with elements specified in a given ResourceBundle.

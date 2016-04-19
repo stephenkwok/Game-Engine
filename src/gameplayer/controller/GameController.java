@@ -1,12 +1,11 @@
 package gameplayer.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import gamedata.controller.HighScoresController;
 import gameengine.controller.Game;
 import gameengine.controller.Level;
 import gameengine.model.IDisplayActor;
@@ -14,8 +13,14 @@ import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.MapChangeListener.Change;
+import javafx.collections.ObservableMap;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
+import javafx.util.Callback;
 
 
 /** 
@@ -23,23 +28,24 @@ import javafx.scene.control.Alert;
  * @author cmt57
  */
 
-public class GameController implements Observer {
+public class GameController implements Observer, IGameController {
 	@XStreamOmitField
 	private Game model;
 	@XStreamOmitField
 	private GameScreen view;
 	@XStreamOmitField
 	private HUDScreen hud;
-	
+
 	/**
 	 * Sets the current game to the given Game
 	 * @param Game
 	 */
+	@Override
 	public void setGame (Game myGame){
 		model = myGame;
 		model.addObserver(this);
 	}
-	
+
 	/**
 	 * Sets the basic game view to the given GameScreen
 	 * @param GameScreen
@@ -48,21 +54,31 @@ public class GameController implements Observer {
 		view = myGameView;
 		view.addObserver(this);
 	}
-	
+
 	public void setHUD(HUDScreen hud) {
 		this.hud = hud;
 	}
-	
-	
+
+
 	/**
 	 * Will initialize the backend (game engine) with the current level's information and actor information to set up the game for playing.  Will visualize that backend too. 
 	 * @param level an int representing the level to be played
 	 */
 	public void initialize (int level){
 		model.setCurrentLevel(level);
+		//model.getMainCharacter().changeAttribute(AttributeType.POINTS, 0);
+		ObservableMap<String, Object> a = FXCollections.observableHashMap();
+		a.addListener(new MapChangeListener<String, Object>() {
+			@Override
+			public void onChanged(Change<? extends String, ? extends Object> change) {
+				if(change!=null && hud != null)
+					hud.handleChange(change);
+			}
+		});
+		a.put("Points", 0);
 		begin();
 	}
-	
+
 	/**
 	 * Will play the animation timeline. 
 	 */
@@ -76,83 +92,99 @@ public class GameController implements Observer {
 		this.toggleUnPause();
 		model.startGame();
 	}
-	
+
 	/**
 	 * Will reflect changes in actors' positions or values in a new "step" to simulate one round of animation.
 	 */
 	public void update (){
-		
+
 	}
-	
+
 	/**
 	 * Will ask game engine to check interactions that need to be resolved.
 	 */
 	public void checkInteractions (){
-		
+
 	}
-	
+
 	/**
 	 * Will resolve any front end outcomes determined by logic in backend checking interactions.
 	 */
 	public void cleanUp (){
-		
+
 	}
-	
+
 	/**
 	 * Will stop the animation timeline.
 	 */
 	public void endGame (){
-		//TODO fix resource also implement saving functionality 
+		//TODO fix resource also implement saving functionality
+
 		togglePause();
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setContentText("Game over!");
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Game over!  Do you want to save your score?", ButtonType.YES, ButtonType.NO);
 		alert.show();
+		alert.showingProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue) {
+				if (alert.getResult() == ButtonType.YES) {
+					saveScorePrompt();
+				}
+			}
+		});
+
 	}
-	
+
+	private void saveScorePrompt() {
+		TextInputDialog dialog = new TextInputDialog("Name");
+		dialog.setContentText("Please enter your name if you want to save your score");
+		dialog.show();
+		dialog.setResultConverter(new Callback<ButtonType, String>() {
+			@Override
+			public String call(ButtonType b) {
+				if (b == ButtonType.OK) {
+					saveGame(dialog.getEditor().getText());
+					return dialog.getEditor().getText();
+				}
+				else {
+					return null;
+				}
+			}
+		});
+	}
+
+	private void saveGame(String name) {
+		HighScoresController c = new HighScoresController(this.getGame().getInfo().getMyFile());
+		c.saveHighScore(getGame().getScore(), name);
+
+	}
+
 	/**
 	 * Will stop the animation timeline.
 	 */
 	public void winGame (){
 		System.out.println("game won");
 	}
-	
-	/**
-	 * Transitions the game to the next level
-	 */
+
 	public void nextLevel (){
 		view.clearGame();
 		model.nextLevel();
 		begin();
 	}
-	
-	/**
-	 * Gets the view component of the game
-	 * @return
-	 */
+
+
 	public GameScreen getView() {
 		return view;
 	}
-	
-	/**
-	 * Gets the model component of the game
-	 * @return
-	 */
+
 	public Game getGame() {
 		return model;
 	}
-	
-	/**
-	 * Updates the display of actors on the game screen
-	 */
+
 	private void updateActors(){
 		for(IPlayActor a: model.getDeadActors()){
 			view.removeActor((IDisplayActor)a);
 		}
 	}
-	
-	/**
-	 * Handles updates from the view and model
-	 */
+
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o.equals(view)){
@@ -163,49 +195,46 @@ public class GameController implements Observer {
 				this.getClass().getDeclaredMethod(((String)arg)).invoke(this);
 			}
 			catch (Exception e){
-				//e.printStackTrace();
-				hud.handleChange((Change) arg); //keep it, this works
+				hud.handleChange((Change)arg);
 			}
 		}
 	}
-	
-	/**
-	 * Toggles sound effects coming from the game
-	 */
+
 	public void toggleSound() {
 		System.out.println("toggle sound unimplemented");
 	}
-	
-	/**
-	 * Toggles music playing in the game 
-	 */
+
 	public void toggleMusic(){
 		System.out.println("toggle music unimplemented");
 	}
-	
-	/**
-	 * Pauses the game
-	 */
+
 	public void togglePause() {
 		getGame().getAnimation().pause();
 		view.getMySubscene().setDisable(true);
 	}
-	
-	/**
-	 * Resumes the game 
-	 */
+
 	public void toggleUnPause() {
 		getGame().getAnimation().play();
 		view.getMySubscene().setDisable(false);
 	}
 
-	/**
-	 * Restarts the game 
-	 */
+
 	public void restartGame() {
 		System.out.println("restart game");
 		System.out.println(model.getInfo().getMyCurrentLevelNum() + " game level");
 		initialize(model.getInfo().getMyCurrentLevelNum());
+	}
+
+	@Override
+	public void preview() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void play() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/**
@@ -214,9 +243,11 @@ public class GameController implements Observer {
 	public void updateAttribute() {
 		model.updateAttribute();
 	}
-	
-	
-	
-	
+
+
+
+
+
+
 
 }

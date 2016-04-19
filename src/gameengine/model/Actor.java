@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Set;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.Actions.Action;
 import javafx.geometry.Bounds;
@@ -38,7 +38,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
     private double veloY;
     private int myID;
     private double myFriction;
-    private boolean inAir;
     private String myName;
     private String myImageViewName;
     @XStreamOmitField
@@ -49,8 +48,19 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
     private boolean isMain;
     private List<ActorRule> myActorRules;
     private boolean isDead;
+    private double heading;
+    
+    private boolean inAir;
 
-    /**
+	public boolean isInAir() {
+		return inAir;
+	}
+
+	public void setInAir(boolean isInAir) {
+		this.inAir = isInAir;
+	}
+
+	/**
      * Converts a list of Rules to a map of trigger to list of Actions
      */
     public Actor() {
@@ -59,7 +69,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
         isMain = DEFAULT_MAIN;
-        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
+        setMyImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
         myActorRules = new ArrayList<>();
     }
 
@@ -227,7 +237,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * @return  The Actor's Imageview
      */
     @Override
-    public ImageView getImageView() {
+    public ImageView getMyImageView() {
         return myImageView;
     }
 
@@ -236,11 +246,10 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * @param imageView The new ImageView
      */
     @Override
-    public void setImageView(ImageView imageView) {
+    public void setMyImageView(ImageView imageView) {
     	myImageView = imageView;
     	myImageView.setX(this.getX());
     	myImageView.setY(this.getY());
-		myImageView.setFitHeight(imageView.getFitHeight());
     }
 
     /**
@@ -316,7 +325,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      */
 	public void setMyImageViewName(String myImageViewName) {
 		this.myImageViewName = myImageViewName;
-		this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
+		setMyImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
 	}
 
     /**
@@ -331,7 +340,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * @return  The Actor's ImageView Bounds
      */
 	public Bounds getBounds() {
-		return this.getImageView().getLayoutBounds();
+		return this.getMyImageView().getLayoutBounds();
 	}
 
 	/**
@@ -362,20 +371,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
 	public boolean isMain(){
 		return isMain;
 	}
-	/**
-	 * @return the inAir
-	 */
-	public boolean isInAir() {
-		return inAir;
-	}
-
-	/**
-	 * @param inAir the inAir to set
-	 */
-    public void setInAir(boolean inAir) {
-		this.inAir = inAir;
-	}
-
     /**
      * Provides the Actor's Rules
      * @return  The Actor's Rules
@@ -433,6 +428,14 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
 		myImageView.setFitHeight(size);
 		myImageView.setPreserveRatio(true);
 	}
+	/**
+     * Sets the Actor's ImageView's size
+     * @param size  The ImageView's size
+     */
+	@Override
+    public double getSize(){
+		return myImageView.getFitHeight();
+	}
     /**
      * Adds a new ActorRule
      * @param actorRule The new ActorRule
@@ -475,7 +478,19 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
     public void setDead(boolean isDead) {
 		this.isDead = isDead;
 	}
+    public double getHeading() {
+		return heading;
+	}
 
+	public void setHeading(double heading) {
+		this.heading = heading;
+	}
+
+    /**
+     * Carries out the appropriate procedure when notified by an object that it observes
+     * @param o The Observable object that notifies the Actor
+     * @param arg   Arguments passed from the Observable object
+     */
 	@Override
 	public void update(Observable o, Object arg) {
 		if(isMain){

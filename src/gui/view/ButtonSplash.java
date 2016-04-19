@@ -1,7 +1,6 @@
 package gui.view;
 
 import gui.controller.IScreenController;
-import gui.controller.ScreenController;
 
 public class ButtonSplash extends ButtonParent {
 	
@@ -14,8 +13,7 @@ public class ButtonSplash extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnMouseClicked(e -> myController.goToSplash());
-
+		getButton().setOnMouseClicked(e -> getController().goToSplash());
 	}
 
 }

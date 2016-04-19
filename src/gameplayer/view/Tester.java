@@ -32,12 +32,9 @@ public class Tester extends Application {
 	public Tester() {
 		// TODO Auto-generated constructor stub
 	}
-	
-
-	
-	public static void main(String args[]){
-		launch(args);
 		
+	public static void main(String args[]){
+		launch(args);		
 	}
 
 	@Override
@@ -46,10 +43,12 @@ public class Tester extends Application {
 		info.setMyCurrentLevelNum(0);
 		info.setMyName("Colette");
 		
-		Map<String, Integer> options = new HashMap<>();
-		options.put("Points", 0);
+//		Map<String, Integer> options = new HashMap<>();
+//		options.put("Points", 0);
 		
+
 		//info.setMyHUDOptions(options);
+
 		
 		Actor actor1 = new Actor();
 		actor1.setMyImageViewName("redball.png");
@@ -81,11 +80,15 @@ public class Tester extends Application {
 		KeyTrigger trigger4 = new KeyTrigger(KeyCode.SPACE);
 		BottomCollision trigger5 = new BottomCollision(actor1,actor2);
 		SideCollision trigger6 = new SideCollision(actor1,actor3);
+		KeyTrigger trigger9 = new KeyTrigger(KeyCode.Z);
+		Action action9 = new ChangeAttribute(actor1,AttributeType.POINTS,1);
+		Rule rule9 = new Rule(trigger9,action9);
+		actor1.addRule(rule9);
 		Action action1 = new MoveRight(actor1);
 		Action action2 = new MoveLeft(actor1);
 		Action action3 = new HorizontalStaticCollision(actor1);
-		Action action4 = new MoveUp(actor1);//new ChangeAttribute(actor1,AttributeType.POINTS,1);
-		Action action5 = new VerticalStaticCollision(actor1);
+		Action action4 = new MoveUp(actor1);
+		Action action5 = new VerticalBounceCollision(actor1);
 		Action action6 = new WinGame(actor1);
 		Rule rule = new Rule(trigger1,action1);
 		Rule rule2 = new Rule(trigger2, action2);
@@ -99,10 +102,11 @@ public class Tester extends Application {
 		actor1.addRule(rule4);
 		actor1.addRule(rule5);
 		actor1.addRule(rule6);
-		//actor1.setMain(true);
-//		
+		
+//		actor1.setMain(true);
 //		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
 //		actor1.addAttribute(points);
+
 		
 		List<Level> levels = new ArrayList<Level>();
 		Level level1 = new Level();
@@ -120,22 +124,21 @@ public class Tester extends Application {
 			BottomCollision b = new BottomCollision(actor1, floor);
 			BottomCollision b2 = new BottomCollision(actor2, floor);
 			BottomCollision b3 = new BottomCollision(actor3, floor);
+			
 			Action baction = new VerticalStaticCollision(actor1);
 			Action baction2 = new VerticalStaticCollision(actor2);
 			Action baction3 = new VerticalStaticCollision(actor3);
+			
 			Rule brule = new Rule(b, baction);
 			Rule brule2 = new Rule(b2, baction2);
 			Rule brule3 = new Rule(b3, baction3);
+			
 			actor1.addRule(brule);
 			actor2.addRule(brule2);
 			actor3.addRule(brule3);
-
+			
 			level1.addActor(floor);
 		}
-		
-//		Level level2 = new Level();
-//		level2.addActor(actor3);
-//		levels.add(level2);
 		
 		Group group = new Group();
 		Scene scene = new Scene(group);
@@ -152,8 +155,7 @@ public class Tester extends Application {
 
 		SubScene sub = view.getScene();
 		sub.fillProperty().set(Color.BLUE);
-		group.getChildren().add(sub);
-		
+		group.getChildren().add(sub);	
 		
 		Stage stage = new Stage();
 		stage.setWidth(800);
@@ -161,39 +163,15 @@ public class Tester extends Application {
 
 //		CreatorController c = new CreatorController(model);
 //		System.out.println(c);
-//		File myF = new File("gamefiles/test.xml");
+//		File myF = new File("gamefiles/testhud.xml");
 //		System.out.println(myF);
 //		c.saveForEditing(myF);
 		
-
 		sub.setCamera(camera);
 		stage.setScene(scene);
 		stage.show();
 		controller.initialize(0);
 
-		
-//		Stage stage = new Stage();
-//		Group root = new Group();
-//		Image actor1img = new Image(getClass().getClassLoader().getResourceAsStream("newactor.png"));
-//		ImageView imgview = new ImageView(actor1img);
-//		root.getChildren().add(imgview);
-//		Scene scene = new Scene(root,800,800);
-//		PerspectiveCamera camera = new PerspectiveCamera();
-//
-//		scene.setCamera(camera);
-//		stage.setScene(scene);
-//		stage.show();
-//		
-//        KeyFrame frame = new KeyFrame(Duration.seconds(.01),
-//                e -> {
-//                	camera.setTranslateX(camera.getTranslateX()-5);
-//                	System.out.println(imgview.getX());
-//                });
-//		Timeline animation = new Timeline();
-//		animation.setCycleCount(Timeline.INDEFINITE);
-//		animation.getKeyFrames().add(frame);
-//		animation.play();
-		
 	}
 
 }

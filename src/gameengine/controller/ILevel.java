@@ -1,7 +1,6 @@
 package gameengine.controller;
 
-import gameengine.model.Actor;
-import gameengine.model.IAuthoringActor;
+import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 

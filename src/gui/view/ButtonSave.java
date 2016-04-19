@@ -14,6 +14,6 @@ public class ButtonSave extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnMouseClicked(e -> ((Controller) myController).saveGame(promptForFileName(true)));
+		getButton().setOnMouseClicked(e -> ((Controller) getController()).saveGame(promptForFileName(true)));
 	}	
 }

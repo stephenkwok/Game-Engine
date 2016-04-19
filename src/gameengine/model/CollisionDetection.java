@@ -2,6 +2,7 @@ package gameengine.model;
 
 import java.util.List;
 import gameengine.model.Actor;
+import javafx.geometry.Point2D;
 
 
 /**
@@ -29,7 +30,6 @@ public class CollisionDetection {
 	 */
 	public List<IPlayActor> detection(List<IPlayActor> list){
 		for (IPlayActor a1 : list){
-			a1.setInAir(true);
 			for(IPlayActor a2 : list){
 				if(a1 != a2){            //Checks that each actor in the pair is unique
 					if(isCollision(a1,a2))
@@ -51,6 +51,13 @@ public class CollisionDetection {
 		return a1.getBounds().intersects(a2.getBounds());
 	}
 	
+	private Point2D findCenter(IPlayActor a1){
+		double centerX  = (a1.getBounds().getWidth())*.5 + a1.getBounds().getMinX();
+		double centerY  = (a1.getBounds().getHeight())*.5 + a1.getBounds().getMinY();
+		Point2D center = new Point2D(centerX,centerY);
+		return center;
+	}
+	
 	/**
 	 * Determines which type of Collision is occurring:
 	 * Side/Top/Bottom
@@ -64,35 +71,30 @@ public class CollisionDetection {
 		
 		double w = (0.5 * (a1.getBounds().getWidth() + a2.getBounds().getWidth()));
 		double h = (0.5 * (a1.getBounds().getHeight() + a2.getBounds().getHeight()));
-		double dx = ((a1.getBounds().getMaxX()-a1.getBounds().getMinX())/2- (a2.getBounds().getMaxX()-a2.getBounds().getMinX())/2);
-		double dy = ((a1.getBounds().getMaxY()-a1.getBounds().getMinX())/2 - (a2.getBounds().getMaxY()-a2.getBounds().getMinX())/2);
-
-
-		if (Math.abs(dx) <= w && Math.abs(dy) <= h)
-		{
-			double wy = w * dy;
-			double hx = h * dx;
 		
+		Point2D a1Center = findCenter(a1);
+		Point2D a2Center = findCenter(a2);
+			
+		double dx  = (a1Center.getX() - a2Center.getX());
+		double dy  = (a1Center.getY() - a2Center.getY());
+
+
+		double wy = w * dy;
+		double hx = h * dx;
+
 		if (wy > hx) {
 			if (wy > -hx) {
-				return "TopCollision";
-		    } else {
-		    	return "SideCollision";
-		    }
+				return TopCollision;
+			} else {
+				return SideCollision;
+			}
 		} else {
-		    if (wy > -hx) {
-		    	return "SideCollision";
-		    } else {
-		    	//TO DO: put this logic in actor 
-		    	a1.setInAir(false);
-				a1.setY(a2.getY()-a1.getBounds().getWidth());
-				a1.setVeloY(0);
-		        return "BottomCollision";
-		    }
-			} 
-		
-		} return "TopCollision";
-		
+			if (wy > -hx) {
+				return SideCollision;
+			} else {
+				return BottomCollision;
+			}
+		} 
 	}
 	
 	private void resolveCollision(IPlayActor a1, IPlayActor a2){

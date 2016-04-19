@@ -63,9 +63,9 @@
             <entry>
               <string>A1BottomCollisionA2</string>
               <list>
-                <gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalBounceCollision>
                   <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.VerticalStaticCollision>
+                </gameengine.model.Actions.VerticalBounceCollision>
               </list>
             </entry>
             <entry>
@@ -128,6 +128,9 @@
               </list>
             </entry>
             <entry>
+<<<<<<< HEAD
+              <string>A1BottomCollisionfloor</string>
+=======
               <string>Tick</string>
               <list>
                 <gameengine.model.Actions.ApplyPhysics>
@@ -135,9 +138,35 @@
                 </gameengine.model.Actions.ApplyPhysics>
               </list>
             </entry>
+            <entry>
+              <string>Z</string>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
+              <list>
+                <gameengine.model.Actions.ChangeAttribute>
+                  <myActor reference="../../../../.."/>
+                  <myType>POINTS</myType>
+                  <myChange>1</myChange>
+                </gameengine.model.Actions.ChangeAttribute>
+              </list>
+            </entry>
           </myRules>
-          <attributeMap/>
-          <isMain>false</isMain>
+          <attributeMap>
+            <entry>
+              <gameengine.model.AttributeType>POINTS</gameengine.model.AttributeType>
+              <gameengine.model.Attribute>
+                <changed>false</changed>
+                <obs>
+                  <gameengine.model.Actor reference="../../../../.."/>
+                </obs>
+                <myValue>0</myValue>
+                <myTriggerValue>10</myTriggerValue>
+                <myType>POINTS</myType>
+                <myAction class="gameengine.model.Actions.WinGame" reference="../../../../myRules/entry[3]/list/gameengine.model.Actions.WinGame"/>
+              </gameengine.model.Attribute>
+            </entry>
+          </attributeMap>
+          <isMain>true</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -226,6 +255,7 @@
           </myRules>
           <attributeMap/>
           <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -241,6 +271,308 @@
           <myID>0</myID>
           <myFriction>0.0</myFriction>
           <inAir>false</inAir>
+          <myName>Default Name</myName>
+          <myImageViewName>flagpole.png</myImageViewName>
+          <myRules>
+            <entry>
+              <string>Default NameBottomCollisionfloor</string>
+              <list>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+              </list>
+            </entry>
+            <entry>
+              <string>Tick</string>
+              <list>
+                <gameengine.model.Actions.ApplyPhysics>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.ApplyPhysics>
+              </list>
+            </entry>
+          </myRules>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myActorRules/>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+<<<<<<< HEAD
+          <x>300.0</x>
+          <y>0.0</y>
+=======
+          <x>0.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <myActorRules/>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>51.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <myActorRules/>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>102.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myHealth>0.0</myHealth>
+          <myActorRules/>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>153.0</x>
+          <y>400.0</y>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+<<<<<<< HEAD
+          <myName>A2</myName>
+          <myImageViewName>block.png</myImageViewName>
+          <myRules>
+            <entry>
+              <string>A2BottomCollisionfloor</string>
+              <list>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+                <gameengine.model.Actions.VerticalStaticCollision>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.VerticalStaticCollision>
+              </list>
+            </entry>
+            <entry>
+              <string>Tick</string>
+              <list>
+                <gameengine.model.Actions.ApplyPhysics>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.ApplyPhysics>
+              </list>
+            </entry>
+          </myRules>
+=======
+          <myName>floor</myName>
+          <myImageViewName>square.png</myImageViewName>
+          <myRules/>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
+          <attributeMap/>
+          <isMain>false</isMain>
+          <myActorRules/>
+          <isDead>false</isDead>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs>
+            <gameengine.controller.Level reference="../../../.."/>
+          </obs>
+          <x>204.0</x>
+          <y>400.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myID>0</myID>
+          <myFriction>0.0</myFriction>
+          <inAir>false</inAir>
+<<<<<<< HEAD
           <myName>Default Name</myName>
           <myImageViewName>flagpole.png</myImageViewName>
           <myRules>
@@ -401,11 +733,17 @@
           <myID>0</myID>
           <myFriction>0.0</myFriction>
           <inAir>false</inAir>
+=======
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <myName>floor</myName>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+<<<<<<< HEAD
+=======
+          <myHealth>0.0</myHealth>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -415,7 +753,11 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>255.0</x>
+<<<<<<< HEAD
           <y>450.0</y>
+=======
+          <y>400.0</y>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -426,6 +768,10 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+<<<<<<< HEAD
+=======
+          <myHealth>0.0</myHealth>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -435,7 +781,11 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>306.0</x>
+<<<<<<< HEAD
           <y>450.0</y>
+=======
+          <y>400.0</y>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -446,6 +796,10 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+<<<<<<< HEAD
+=======
+          <myHealth>0.0</myHealth>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -455,7 +809,11 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>357.0</x>
+<<<<<<< HEAD
           <y>450.0</y>
+=======
+          <y>400.0</y>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -466,6 +824,10 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+<<<<<<< HEAD
+=======
+          <myHealth>0.0</myHealth>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -475,7 +837,11 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>408.0</x>
+<<<<<<< HEAD
           <y>450.0</y>
+=======
+          <y>400.0</y>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -486,6 +852,10 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+<<<<<<< HEAD
+=======
+          <myHealth>0.0</myHealth>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -495,7 +865,11 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>459.0</x>
+<<<<<<< HEAD
           <y>450.0</y>
+=======
+          <y>400.0</y>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -506,6 +880,10 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+<<<<<<< HEAD
+=======
+          <myHealth>0.0</myHealth>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -515,7 +893,11 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>510.0</x>
+<<<<<<< HEAD
           <y>450.0</y>
+=======
+          <y>400.0</y>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -526,6 +908,10 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+<<<<<<< HEAD
+=======
+          <myHealth>0.0</myHealth>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -535,7 +921,11 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>561.0</x>
+<<<<<<< HEAD
           <y>450.0</y>
+=======
+          <y>400.0</y>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -546,6 +936,10 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+<<<<<<< HEAD
+=======
+          <myHealth>0.0</myHealth>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -555,7 +949,11 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>612.0</x>
+<<<<<<< HEAD
           <y>450.0</y>
+=======
+          <y>400.0</y>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -566,6 +964,10 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+<<<<<<< HEAD
+=======
+          <myHealth>0.0</myHealth>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -575,7 +977,11 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>663.0</x>
+<<<<<<< HEAD
           <y>450.0</y>
+=======
+          <y>400.0</y>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -586,6 +992,10 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+<<<<<<< HEAD
+=======
+          <myHealth>0.0</myHealth>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -595,7 +1005,11 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>714.0</x>
+<<<<<<< HEAD
           <y>450.0</y>
+=======
+          <y>400.0</y>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -606,6 +1020,10 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+<<<<<<< HEAD
+=======
+          <myHealth>0.0</myHealth>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -615,7 +1033,11 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>765.0</x>
+<<<<<<< HEAD
           <y>450.0</y>
+=======
+          <y>400.0</y>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -626,6 +1048,10 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+<<<<<<< HEAD
+=======
+          <myHealth>0.0</myHealth>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -635,7 +1061,11 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>816.0</x>
+<<<<<<< HEAD
           <y>450.0</y>
+=======
+          <y>400.0</y>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -646,6 +1076,10 @@
           <myRules/>
           <attributeMap/>
           <isMain>false</isMain>
+<<<<<<< HEAD
+=======
+          <myHealth>0.0</myHealth>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <myActorRules/>
           <isDead>false</isDead>
         </gameengine.model.Actor>
@@ -655,7 +1089,11 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>867.0</x>
+<<<<<<< HEAD
           <y>450.0</y>
+=======
+          <y>400.0</y>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -709,6 +1147,16 @@
         </entry>
         <entry>
           <string>Tick</string>
+<<<<<<< HEAD
+=======
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor[2]"/>
+          </list>
+        </entry>
+        <entry>
+          <string>Z</string>
+>>>>>>> daf4b1197cd28de43b10a2c3df539ba60ad12983
           <list>
             <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
             <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor[2]"/>
@@ -730,8 +1178,12 @@
     <myImageName>default_game.jpg</myImageName>
     <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
-    <myID>0</myID>
-    <myHUDElementsToDisplay/>
+    <myHUDElementsToDisplay>
+      <entry>
+        <string>Points</string>
+        <int>0</int>
+      </entry>
+    </myHUDElementsToDisplay>
     <myFile>test.xml</myFile>
   </info>
   <myPhysicsEngine>

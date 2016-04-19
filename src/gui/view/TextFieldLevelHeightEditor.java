@@ -26,6 +26,6 @@ public class TextFieldLevelHeightEditor extends TextFieldWithButton {
 	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
-		setTextFieldValue(Double.toString(((Level) getEditableElement()).getHeight()));	
+		setTextFieldValue(Double.toString(((Level) getEditableElement()).getMyHeight()));
 	}
 }

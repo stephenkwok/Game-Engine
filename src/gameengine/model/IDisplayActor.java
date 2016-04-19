@@ -1,6 +1,5 @@
 package gameengine.model;
 
-import javafx.geometry.Bounds;
 import javafx.scene.image.ImageView;
 
 public interface IDisplayActor {
@@ -20,7 +19,7 @@ public interface IDisplayActor {
 	 * Gets actor's image
 	 * @return an ImageView representing actor's image
 	 */
-	public ImageView getImageView();
+	public ImageView getMyImageView();
 
     
 }

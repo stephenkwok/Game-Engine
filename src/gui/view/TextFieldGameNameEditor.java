@@ -24,9 +24,12 @@ public class TextFieldGameNameEditor extends TextFieldWithButton{
 		setTextFieldHGrow();
 	}
 
+	/**
+	 * Updates the text displayed by the text field to the GameInfo object's
+	 * current name
+	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
-		// TODO Auto-generated method stub
-		
+		setTextFieldValue(((GameInfo) getEditableElement()).getMyName());
 	}
 }

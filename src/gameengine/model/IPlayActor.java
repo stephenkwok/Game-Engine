@@ -115,7 +115,7 @@ public interface IPlayActor {
 
 	public String getMyName();
 
-	public Object getAttribute(AttributeType health);
+	public Attribute getAttribute(AttributeType type);
 
 	public boolean isInAir();
 

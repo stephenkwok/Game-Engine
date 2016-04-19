@@ -6,14 +6,11 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.*;
-import gameengine.model.*;
-import gameengine.model.Triggers.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
-import javafx.collections.MapChangeListener.Change;
 import javafx.util.Duration;
 
 /**
@@ -38,9 +35,18 @@ public class Game extends Observable implements Observer {
 	private List<IPlayActor> currentActors;
 	private List<IPlayActor> deadActors;
 	private ObservableMap<String, Object> HUDData;
-	
-	//NOTE: NEED TO INITZLIWE THIS
 	private IPlayActor mainCharacter;
+
+
+    /**
+     * A game is instantiated with a list of all levels in the game and a level to start on.
+     * Upon instantiation, the actors from all levels are collected into a list and added to a map containing references from ID to actor.
+     * In addition, a map is created mapping all the actors contained in a level to the level ID
+     *
+     * @param gameFilePath  The game's filepath
+     * @param gameInfo      The game info associated with the game
+     * @param gameLevels    All the levels in the game
+     */
 	
 	
 	/**
@@ -60,36 +66,47 @@ public class Game extends Observable implements Observer {
         myCollisionDetector = new CollisionDetection(myPhysicsEngine);
         
 		initTimeline();
-		
-		
-	}
-	
 
+
+	}
+
+
+    /**
+     * Initializes a timeline that will be used for the game loop
+     */
 	public void initTimeline() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-                e -> step());
+				e -> step());
 		setAnimation(new Timeline());
 		getAnimation().setCycleCount(Timeline.INDEFINITE);
 		getAnimation().getKeyFrames().add(frame);
+
 	}
-	
+
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
 		this(null, gameInfo, gameLevels);
 	}
-	
+
 	public Game(List<Level> gameLevels) {
 		this(new GameInfo(), gameLevels);
 	}
-	
+
+    /**
+     * Starts the game
+     */
+
 	public void startGame(){
 		initCurrentActors();
 		//This is here because it needs to know who the main actor is
 		initHUDData();
-		
+
 		animation.play();
 	}
 
 
+    /**
+     * Initializes the current actors
+     */
 	public void initCurrentActors() {
 		setCurrentActors(getCurrentLevel().getActors());
 		for (IPlayActor actor: currentActors) {
@@ -99,9 +116,13 @@ public class Game extends Observable implements Observer {
 		}
 		initActors();
 	}
-	
+
+
+    /**
+     * The step method that states what will happen with each Timeline frame
+     */
+
 	private void step(){
-		//physicsUpdate();
 		myCollisionDetector.detection(getCurrentActors());
 		signalTick();
 		updateActors();
@@ -110,58 +131,99 @@ public class Game extends Observable implements Observer {
 	private void signalTick(){
 		handleTrigger(new TickTrigger());
 	}
-	
+
+    /**
+     * Initializes the Actors
+     */
+
 	private void initActors(){
 		for(IPlayActor a: getCurrentActors()){
 			((Observable)a).addObserver(this);
 			a.setEngine(myPhysicsEngine);
 		}
-		
+
 	}
-	
+
+
+    /**
+     * Provides the initial game file
+     *
+     * @return  The initial game file
+     */
+
 	public String getInitialGameFile() {
 		return initialGameFile;
 	}
 
+    /**
+     * Sets the initial game file
+     *
+     * @param initialGameFile   The initial game file
+     */
 	public void setInitialGameFile(String initialGameFile) {
 		this.initialGameFile = initialGameFile;
 	}
 
+    /**
+     * Returns the GameInfo object for the Game
+     *
+     * @return  The Game's GameInfo objects
+     */
 	public GameInfo getInfo() {
 		return info;
 	}
 
-	public void setInfo(GameInfo info) {
-		this.info = info;
-	}
+    /**
+     * Sets the Game's GameInfo
+     *
+     * @param info  The desired GameInfo for the Game
+     */
+	public void setInfo(GameInfo info) { this.info = info; }
 
+    /**
+     * Sets the Game's Levels
+     *
+     * @param levels    The desired game Levels
+     */
 	public void setLevels(List<Level> levels) {
 		this.levels = levels;
 	}
-	
+
 	/**
-	 * Gets a list of all levels in the game 
+	 * Gets a list of all levels in the game
+     *
 	 * @return a list of all levels in the game 
 	 */
 	public List<Level> getLevels() {
 		return levels;
 	}
-	
+
+
+    /**
+     * Changes the Game to the next Level
+     */
+
 	public void nextLevel(){
 		animation.stop();
 		if(levels.size()>=info.getMyCurrentLevelNum()+1){
 			setCurrentLevel(info.getMyCurrentLevelNum()+1);
 		}
 	}
-	
+
 	/**
-	 * Lets current level handle a trigger 
+	 * Lets current level handle a trigger
+     *
 	 * @param myTrigger the trigger received from the game player 
 	 */
 	public void handleTrigger(ITrigger myTrigger) {
 		getCurrentLevel().handleTrigger(myTrigger);
 	}
 
+    /**
+     * Carries out the appropriate procedure when notified by an observed object
+     * @param o The Observable object that is being observed
+     * @param arg   Arguments that the Observable object passes
+     */
 	@Override
 	public void update(Observable o, Object arg) {
 		setChanged();
@@ -171,7 +233,12 @@ public class Game extends Observable implements Observer {
 	public List<IPlayActor> getActors() {
 		return getLevels().get(getInfo().getMyCurrentLevelNum()).getActors();
 	}
-	
+
+    /**
+     * Provides a String representation of the Game object
+     *
+     * @return  The String representation of the Game object
+     */
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 	      
@@ -186,11 +253,23 @@ public class Game extends Observable implements Observer {
 	      
 	      return stringBuilder.toString();
 	}
-	
+
+    /**
+     * Provides the Level that is currently being used
+     *
+     * @return The Level that is currently being used
+     */
 	public Level getCurrentLevel(){
 		return levels.get(info.getMyCurrentLevelNum());
 	}
-	
+
+
+    /**
+     * Sets the current Level
+     *
+     * @param levelNum  The index of the level that the user would like to load
+     */
+
 	public void setCurrentLevel(int levelNum){
 		info.setMyCurrentLevelNum(levelNum);
 	}
@@ -208,7 +287,9 @@ public class Game extends Observable implements Observer {
 		setCurrentActors(getCurrentLevel().getActors());
 	}
 
-
+    /**
+     * Calls for the removal of dead Actors
+     */
 	private void removeDeadActors() {
 		setChanged();
 		notifyObservers("updateActors");
@@ -236,36 +317,46 @@ public class Game extends Observable implements Observer {
 		this.currentActors = list;
 	}
 
-
+    /**
+     * Provides the Game's PhysicsEngine object
+     *
+     * @return  The Game's PhysicsEngine object
+     */
 	public PhysicsEngine getMyPhysicsEngine() {
 		return myPhysicsEngine;
 	}
 
-
+    /**
+     * Sets the Game's PhyicsEngine
+     *
+     * @param myPhysicsEngine   The desired PhysicsEngine
+     */
 	public void setMyPhysicsEngine(PhysicsEngine myPhysicsEngine) {
 		this.myPhysicsEngine = myPhysicsEngine;
 	}
 
-
-	public CollisionDetection getMyCollisionDetector() {
-		return myCollisionDetector;
-	}
-
-
-	public void setMyCollisionDetector(CollisionDetection myCollisionDetector) {
-		this.myCollisionDetector = myCollisionDetector;
-	}
-
-
+    /**
+     * Provides the Game's Timeline
+     *
+     * @return  The Game's Timeline
+     */
 	public Timeline getAnimation() {
 		return animation;
 	}
 
-
+    /**
+     * Sets the Game's Timeline
+     *
+     * @param animation The desired Timeline
+     */
 	public void setAnimation(Timeline animation) {
 		this.animation = animation;
 	}
-	
+
+    /**
+     * Initializes the HUDData
+     */
+
 	public void initHUDData() {
 		HUDData = FXCollections.observableHashMap();
 		updateHUDFields(info.getMyHUDOptions(), HUDData);
@@ -275,14 +366,26 @@ public class Game extends Observable implements Observer {
 				setChanged();
 				notifyObservers(change);//IDK if casting to observable causes issues with equality
 			}
-        });
+		});
 	}
-	
+
+
+    /**
+     * Provides the Game's HUDData
+     * @return  The Game's HUDData
+     */
+
 	public Map<String, Object> getHUDData() {
 		return HUDData;
 	}
-	
-	
+
+
+    /**
+     * Updates the HUD fields to be accounted for
+     * @param keys  The names of the fields to be represented
+     * @param destinationMap    The map to put the data into
+     */
+
 	public void updateHUDFields(Collection<String> keys, Map<String, Object> destinationMap) {
 		for (String key : keys) {
 			Object value = null;
@@ -304,14 +407,21 @@ public class Game extends Observable implements Observer {
 			destinationMap.put(key, value);
 		}
 	}
-	
-	
-	
-	
+
+    /**
+     * Updates the HUD values
+     */
 	public void updateAttribute() {
 		updateHUDFields(HUDData.keySet(), HUDData);
 	}
-	
-	
 
+
+	
+	public int getScore() {
+		return getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();
+	}
+	
+	public IPlayActor getMainCharacter(){
+		return mainCharacter;
+	}
 }

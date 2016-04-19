@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import gameengine.model.IAuthoringActor;
+import authoringenvironment.model.IAuthoringActor;
 
 public class ComboBoxIsPlayer extends ComboBoxTextCell {
 	private static final String IS_PLAYER_OPTIONS = "IsPlayerOptions";
@@ -18,8 +18,8 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 
 	@Override
 	public void setButtonAction() {
-		comboButton.setOnAction(event -> {
-			((IAuthoringActor) getEditableElement()).setMain(Boolean.parseBoolean(comboBox.getValue()));
+		getComboButton().setOnAction(event -> {
+			((IAuthoringActor) getEditableElement()).setMain(Boolean.parseBoolean(getComboBox().getValue()));
 		});
 	}
 
@@ -30,8 +30,7 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 
 	@Override
 	protected void updateValueBasedOnEditable() {
-		// TODO Auto-generated method stub
-		
+		getComboBox().setValue(Boolean.toString(((IAuthoringActor) getEditableElement()).isMain()));
 	}
 
 }

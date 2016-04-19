@@ -1,6 +1,5 @@
 package gui.view;
 
-import gameplayer.controller.BaseScreenController;
 import gui.controller.IScreenController;
 import gui.controller.ScreenController;
 
@@ -15,8 +14,7 @@ public class ButtonSwitch extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnMouseClicked(e -> myController.switchGame());
-
+		getButton().setOnMouseClicked(e -> myController.switchGame());
 	}
 
 }

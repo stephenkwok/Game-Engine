@@ -1,7 +1,6 @@
 package gui.view;
 
 import gameplayer.controller.BaseScreenController;
-import gameplayer.controller.SplashScreenController;
 import gui.controller.IScreenController;
 
 public class ButtonSound extends ButtonParent{
@@ -15,8 +14,7 @@ public class ButtonSound extends ButtonParent{
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnMouseClicked(e -> myControl.toggleSound());
-		
+		getButton().setOnMouseClicked(e -> myControl.toggleSound());
 	}
 
 }

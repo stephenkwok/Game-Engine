@@ -21,7 +21,6 @@ public class GameInfo implements IEditableGameElement {
 	private String myDescription;
 	private int myCurrentLevelNum;
 	private ImageView myPreviewImage;
-	private int myID;
 	private Map<String,Integer> myHUDElementsToDisplay;
 	private String myFile;
 	
@@ -147,7 +146,7 @@ public class GameInfo implements IEditableGameElement {
 	 * Gets the image representation of the game 
 	 */
 	@Override
-	public ImageView getImageView() {
+	public ImageView getMyImageView() {
 		return myPreviewImage;
 	}
 	
@@ -155,24 +154,8 @@ public class GameInfo implements IEditableGameElement {
 	 * Sets the image representation of the game 
 	 */
 	@Override
-	public void setImageView(ImageView imageView) {
+	public void setMyImageView(ImageView imageView) {
 		myPreviewImage = imageView;
-	}
-	
-	/**
-	 * Sets the game's ID
-	 */
-	@Override
-	public void setMyID(int ID) {
-		myID = ID;
-	}
-	
-	/**
-	 * Gets the ID of the game
-	 */
-	@Override
-	public int getMyID() {
-		return myID;
 	}
 	
 	/**
@@ -191,6 +174,5 @@ public class GameInfo implements IEditableGameElement {
 		this.myFile = name;
 		
 	}
-
 
 }

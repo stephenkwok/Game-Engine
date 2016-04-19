@@ -14,8 +14,7 @@ public class ButtonPause extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnMouseClicked(e -> myControl.getMyGameController().togglePause());
-		
+		getButton().setOnMouseClicked(e -> myControl.getMyGameController().togglePause());	
 	}
 
 }
