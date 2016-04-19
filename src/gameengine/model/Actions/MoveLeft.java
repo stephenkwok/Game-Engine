@@ -22,5 +22,6 @@ public class MoveLeft extends MovingAction {
 
     public void perform() {
         getMyActor().getPhysicsEngine().moveLeft(getMyActor());
+        getMyActor().setHeading(180);
     }
 }

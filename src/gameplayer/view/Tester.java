@@ -72,6 +72,11 @@ public class Tester extends Application {
 		actor3.setY(100);
 		actor3.setX(800);
 		
+		KeyTrigger triggerDown = new KeyTrigger(KeyCode.DOWN);
+		Action moveForwards = new MoveForward(actor1);
+		Rule movingForwards = new Rule(triggerDown, moveForwards);
+		actor1.addRule(movingForwards);
+		
 		KeyTrigger trigger1 = new KeyTrigger(KeyCode.RIGHT);
 		KeyTrigger trigger2 = new KeyTrigger(KeyCode.LEFT);
 		SideCollision trigger3 = new SideCollision(actor1,actor2);
