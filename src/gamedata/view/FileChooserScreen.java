@@ -1,60 +1,44 @@
 package gamedata.view;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ResourceBundle;
-
-import gamedata.controller.FileChooserController;
-import gameengine.controller.Game;
-import gameplayer.view.BaseScreen;
-import gui.controller.IScreenController;
+import java.util.Arrays;
+import java.util.Observable;
+import java.util.Observer;
 import gui.view.ComboBoxGame;
-import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import gui.view.Screen;
 import javafx.geometry.Orientation;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
-public abstract class FileChooserScreen extends Screen {
 
-	private ResourceBundle myResources;
-	private FileChooserController myController;
-	private static final String GUI_RESOURCE = "fcGUI";
-	private GUIFactory factory;
+public class FileChooserScreen extends Screen implements Observer {
+
+	private static final String CHOOSER_RESOURCE = "fcGUI";
 	private static final String FC_BUTTONS = "FCButtons";
 	
-	public FileChooserScreen(Stage myStage) {
-		super(myStage);
-		init();
-	}
-
-	public void init() {
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		myController = new FileChooserController(getStage(), this, this.myResources);
-		factory = new GUIFactory(myResources, myController);
+	public FileChooserScreen() {
+		super();
+		setUpResourceBundle(CHOOSER_RESOURCE);
+		initialize();
 	}
 
 	@Override
-	public Scene getScene()
-			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	protected void initialize() {
 		addButton();
 		addToolBar();
-		return getMyScene();
 	}
 
 	private void addToolBar() {
-		String[] sideButtons = myResources.getString(FC_BUTTONS).split(",");
+		String[] sideButtons = getResources().getString(FC_BUTTONS).split(",");
 		ToolBar myT = new ToolBar();
 		myT.setOrientation(Orientation.HORIZONTAL);
 		myT.setMinWidth(SCREEN_WIDTH);
 		for(int i = 0; i < sideButtons.length; i++){
-			IGUIElement newElement = factory.createNewGUIObject(sideButtons[i]);
+			IGUIElement newElement = getFactory().createNewGUIObject(sideButtons[i]);
 			Button myB = (Button) newElement.createNode();
-			Tooltip t = new Tooltip(myResources.getString(sideButtons[i]+ "Text"));
+			Tooltip t = new Tooltip(getResources().getString(sideButtons[i]+ "Text"));
 			t.install(myB, t);
 			myT.getItems().add(myB);
 			myB.setFocusTraversable(false);
@@ -63,7 +47,7 @@ public abstract class FileChooserScreen extends Screen {
 	}
 
 	private void addButton() {
-		ComboBoxGame fileSelector = new ComboBoxGame("Choose Game", "gamefiles", myController);
+		ComboBoxGame fileSelector = new ComboBoxGame("Choose Game", "gamefiles");
 		HBox myBox = (HBox) fileSelector.createNode();
 		myBox.setLayoutX(SCREEN_WIDTH/2 - 100);
 		myBox.setLayoutY(SCREEN_HEIGHT/2);
@@ -71,11 +55,10 @@ public abstract class FileChooserScreen extends Screen {
 	}
 
 	@Override
-	public IScreenController setController() {
-		// TODO Auto-generated method stub
-		return null;
+	public void update(Observable o, Object arg) {
+		Object[] methodArgPair = {o.getClass().getName(), arg};
+		notifyObservers(Arrays.asList(methodArgPair));
 	}
-	
-	public abstract void use(Game game);
+
 
 }

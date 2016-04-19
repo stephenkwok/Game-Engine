@@ -1,9 +1,10 @@
 package authoringenvironment.view;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
-import gui.controller.IScreenController;
 import gui.view.ButtonSplash;
 import gui.view.GUIFactory;
 import gui.view.IGUI;
@@ -25,8 +26,8 @@ import javafx.stage.Stage;
  * @author AnnieTang, amyzhao
  *
  */
-public class GUIMain extends Screen implements IGUI {
-    private static final String GUI_RESOURCE = "authoringGUI";
+public class GUIMain extends Screen implements IGUI, Observer {
+    private static final String EDITING_RESOURCE = "authoringGUI";
     private static final String TOP_PANE_ELEMENTS = "TopPaneElements";
     private static final int WINDOW_HEIGHT = 700;
 	private static final int WINDOW_WIDTH = 1300;
@@ -34,47 +35,14 @@ public class GUIMain extends Screen implements IGUI {
     private static final String SPLASH_IMAGE_NAME = "salad.png";
     private Scene myScene;
 	private BorderPane myRoot;
-	private ResourceBundle myResources;
-	private Stage myStage;
-	private Controller myController;
-	private GUIFactory factory;
-	private Scene splashScene;
 	
-	public GUIMain(Stage s, Scene splash) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		super(s);
-		this.splashScene = splash;
-		this.myStage = s;
-		init();
+	public GUIMain() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		super();
+		setUpResourceBundle(EDITING_RESOURCE);
+		initialize();
 	}
+
 	
-	/**
-	 * Initializes resource bundle, controller, and factory class.
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 */
-	public void init() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		myRoot = new BorderPane();
-		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		myController = new Controller(myStage, this, this.myResources);
-		factory = new GUIFactory(myResources, myController);
-		setTopPane();
-		setCenterPane();
-	}
-	
-	/**
-	 * Creates the fixed tool-bar and sets up over-arching BorderPane. 
-	 * @return Scene
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 */
-	public Scene getScene() {
-		return myScene;
-	}
 	/**
 	 * Set center section of screen to given Pane
 	 * @param pane
@@ -104,13 +72,13 @@ public class GUIMain extends Screen implements IGUI {
 	 */
 	private void initializeTopPaneElements(HBox hbox) {
 		try{
-			String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
+			String[] topPaneElements = getResources().getString(TOP_PANE_ELEMENTS).split(",");
 			for (int i = 0; i < topPaneElements.length; i++) {
-				IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
+				IGUIElement elementToCreate = getFactory().createNewGUIObject(topPaneElements[i]);
 				hbox.getChildren().add(elementToCreate.createNode());
 			}
 			//temp
-			ButtonSplash splash = new ButtonSplash(myController, null, SPLASH_IMAGE_NAME);
+			//ButtonSplash splash = new ButtonSplash(null, SPLASH_IMAGE_NAME);
 			hbox.getChildren().add(splash.createNode());
 		}catch(Exception e){
 			
@@ -123,18 +91,7 @@ public class GUIMain extends Screen implements IGUI {
 	public Pane getPane() {
 		return myRoot;
 	}
-	
-	@Override
-	public IScreenController setController() {			//REMOVE
-		// TODO Auto-generated method stub
-		return null;
-	}
-	/**
-	 * Returns user back to splash screen 
-	 */
-	public void goBackToSplash() {
-		myStage.setScene(splashScene);
-	}
+
 	/**
 	 * Return width of authoring environment Scene
 	 * @return
@@ -148,5 +105,21 @@ public class GUIMain extends Screen implements IGUI {
 	 */
 	public double getHeight() {
 		return myScene.getHeight();
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void initialize()
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		myRoot = new BorderPane();
+		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
+		setTopPane();
+		setCenterPane();
+		
 	}
 }

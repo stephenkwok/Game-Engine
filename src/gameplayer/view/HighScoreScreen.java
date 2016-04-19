@@ -3,15 +3,12 @@ package gameplayer.view;
 import java.lang.reflect.InvocationTargetException;
 
 import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.Observable;
+import java.util.Observer;
 
-import gameplayer.controller.HighScoreScreenController;
-import gui.controller.IScreenController;
-import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import gui.view.Screen;
 import javafx.geometry.Orientation;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.Tooltip;
@@ -20,7 +17,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 /**
  * This class displays the high score player data on a BorderPane and includes
@@ -28,13 +24,11 @@ import javafx.stage.Stage;
  * @author michaelfigueiras
  *
  */
-public class HighScoreScreen extends Screen{
+public class HighScoreScreen extends Screen implements Observer{
 
-	private ResourceBundle myResources;
-	private static final String GUI_RESOURCE = "hsGUI";
+	private static final String SCORES_RESOURCE = "hsGUI";
 	private static final String TOP_BUTTONS = "TopButtons";
-	private HighScoreScreenController myController;
-	private GUIFactory factory;
+
 	private BorderPane myPane;
 	private Map<String, Integer> myMap;
 	private String myName;
@@ -45,17 +39,18 @@ public class HighScoreScreen extends Screen{
 	 * @param myMap which contains player-score relationships, parsed from an xml file
 	 * @param gameName to specify the given data
 	 */
-	public HighScoreScreen(Stage s, Map<String, Integer> myMap, String gameName) {
-		super(s);
+	public HighScoreScreen(Map<String, Integer> myMap, String gameName) {
+		super();
+		setUpResourceBundle(SCORES_RESOURCE);
 		this.myMap = myMap;
 		this.myName = gameName;
 		this.myPane =  new BorderPane();
-		init();
-		addComponents();
+		initialize();
 	}
 	
-	private void addComponents() {
-		initialize();
+	@Override
+	protected void initialize() {
+		addComponents();
 		addScorePane();
 		getRoot().getChildren().add(myPane);
 	}
@@ -80,25 +75,19 @@ public class HighScoreScreen extends Screen{
 		
 	}
 
-	public void init() {
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		myController = new HighScoreScreenController(getStage(), this, this.myResources);
-		factory = new GUIFactory(myResources, myController);
-	}
-
 	/**
 	 * 
 	 */
-	public void initialize(){
+	private void addComponents(){
 		myPane.setLeft(null);
-		String[] sideButtons = myResources.getString(TOP_BUTTONS).split(",");
+		String[] sideButtons = getResources().getString(TOP_BUTTONS).split(",");
 		ToolBar myT = new ToolBar();
 		myT.setMinWidth(SCREEN_WIDTH);
 		myT.setOrientation(Orientation.HORIZONTAL);
 		for(int i = 0; i < sideButtons.length; i++){
-			IGUIElement newElement = factory.createNewGUIObject(sideButtons[i]);
+			IGUIElement newElement = getFactory().createNewGUIObject(sideButtons[i]);
 			Button myB = (Button) newElement.createNode();
-			Tooltip t = new Tooltip(myResources.getString(sideButtons[i]+ "Text"));
+			Tooltip t = new Tooltip(getResources().getString(sideButtons[i]+ "Text"));
 			t.install(myB, t);
 			myT.getItems().add(myB);
 			myB.setFocusTraversable(false);
@@ -107,16 +96,9 @@ public class HighScoreScreen extends Screen{
 	}
 
 	@Override
-	public Scene getScene()
-			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public IScreenController setController() {
-		// TODO Auto-generated method stub
-		return null;
+	public void update(Observable o, Object arg) {
+		notifyObservers(o.getClass().getName());
+		
 	}
 
 }

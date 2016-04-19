@@ -1,11 +1,11 @@
 package gui.view;
 
 import java.lang.reflect.InvocationTargetException;
-
+import java.util.Observable;
 import java.util.ResourceBundle;
 
-import gui.controller.IScreenController;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
@@ -15,59 +15,65 @@ import javafx.stage.Stage;
  * @author cmt57
  */
 
-public abstract class Screen {
+public abstract class Screen extends Observable implements IScreen {
 
 	private Scene myScene;
 	private Stage myStage;
-	private ResourceBundle myResources;
-	private String GUI_RESOURCE;
-	private IScreenController myController;
 	private Group myRoot;
-	private GUIFactory factory;
+	private ResourceBundle myResources;
+	private GUIFactory myFactory;
 	public static final int SCREEN_WIDTH = 1000;
 	public static final int SCREEN_HEIGHT = 700;
 	
-	public Screen(Stage stage){
-		myRoot = new Group();
+	public Screen(){
+		this.myRoot = new Group();
 		this.myScene = new Scene(myRoot, SCREEN_WIDTH, SCREEN_HEIGHT);
-		myStage = stage;
+		// Title
 	}
 	
-	/**
-	 * Will instantiate the basic components of a visualized screen.
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 */
-	public void init() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		myController = setController();
-		factory = new GUIFactory(myResources, myController);
-		myStage.setTitle("Welcome to Vooga Salad!");
+	protected void setUpResourceBundle(String resource) {
+		this.myResources = ResourceBundle.getBundle(resource);
+		setUpGUIFactory();
 	}
 	
-	public abstract Scene getScene() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
-	public abstract IScreenController setController();
+	private void setUpGUIFactory() {
+		//this.myFactory = new GUIFactory(myResources);
+	}
 	
-	public Stage getStage(){
+	protected Stage getStage(){
 		return myStage;
 	}
 	
-	public Group getRoot(){
+	protected ResourceBundle getResources() {
+		return this.myResources;
+	}
+	
+	protected GUIFactory getFactory() {
+		return this.myFactory;
+	}
+	
+	protected Group getRoot(){
 		return (Group) myScene.getRoot();
 	}
 	
-	public Scene getMyScene(){
-		return myScene;
+	public Scene getScene(){
+		return this.myScene;
+	}
+	
+	protected void addToScene(Node object) {
+		this.myRoot.getChildren().add(object);
 	}
 
 	public void showError(String message) {
 		  Alert alert = new Alert(Alert.AlertType.ERROR);
 	      alert.setContentText(message);
 	      alert.showAndWait();
-		
 	}
+	
+	protected abstract void initialize() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
+	
+	
+	
 		
 	
 }

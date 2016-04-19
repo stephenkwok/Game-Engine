@@ -30,7 +30,7 @@ public class ButtonPlay extends ButtonParent{
 			else {
 				FileChooserScreen myFC = new FileChooserScreenLoad(myControl.getStage());
 				try {
-					myControl.getStage().setScene(myFC.getScene());
+					myControl.getStage().setScene(myFC.initializeScreen());
 				} catch (Exception e1) {
 					// DO NOT LEAVE THIS ISH!
 					e1.printStackTrace();
