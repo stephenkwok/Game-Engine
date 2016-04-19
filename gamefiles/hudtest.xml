@@ -342,7 +342,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>0.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -363,7 +363,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>51.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -384,7 +384,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>102.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -405,7 +405,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>153.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -426,7 +426,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>204.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -447,7 +447,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>255.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -468,7 +468,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>306.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -489,7 +489,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>357.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -510,7 +510,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>408.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -531,7 +531,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>459.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -552,7 +552,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>510.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -573,7 +573,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>561.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -594,7 +594,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>612.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -615,7 +615,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>663.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -636,7 +636,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>714.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -657,7 +657,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>765.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -678,7 +678,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>816.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
@@ -699,7 +699,7 @@
             <gameengine.controller.Level reference="../../../.."/>
           </obs>
           <x>867.0</x>
-          <y>450.0</y>
+          <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myID>0</myID>
