@@ -53,8 +53,8 @@ public class CollisionDetection {
 	}
 	
 	private Point2D findCenter(Actor a){
-		double centerX  = a.getBounds().getWidth() + a.getBounds().getMinX();
-		double centerY  = a.getBounds().getHeight() + a.getBounds().getMinY();
+		double centerX  = a.getBounds().getWidth()*.5 + a.getBounds().getMinX();
+		double centerY  = a.getBounds().getHeight()*.5 + a.getBounds().getMinY();
 		Point2D center = new Point2D(centerX,centerY);
 		return center;
 	}

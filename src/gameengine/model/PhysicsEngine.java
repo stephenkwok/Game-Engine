@@ -71,12 +71,6 @@ public class PhysicsEngine {
 		double nextVertVelo;
 		double nextXPos;
 		double nextYPos;
-		
-
-		if (a.isInAir()) {                      //Only applies gravity if the Actor is in the air
-			forceYdownward = getGravity();
-			friction = friction*.5;             //Friction is reduced(wind resistance) when the actor is in the air
-		}
 				
 		nextHorzVelo = xVelo;      		
 		nextVertVelo = applyForce(yVelo, forceYupward);                      // Apply  y force from movement action to y velocity
