@@ -39,7 +39,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
     private double veloY;
     private int myID;
     private double myFriction;
-    private boolean inAir;
     private String myName;
     private String myImageViewName;
     @XStreamOmitField
@@ -370,20 +369,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
 	public boolean isMain(){
 		return isMain;
 	}
-	/**
-	 * @return the inAir
-	 */
-	public boolean isInAir() {
-		return inAir;
-	}
-
-	/**
-	 * @param inAir the inAir to set
-	 */
-    public void setInAir(boolean inAir) {
-		this.inAir = inAir;
-	}
-
     /**
      * Provides the Actor's Rules
      * @return  The Actor's Rules

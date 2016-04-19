@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <initialGameFile>gamefiles/loaders/hudtest_loader.xml</initialGameFile>
+  <initialGameFile>gamefiles/loaders/test_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <myActors>
@@ -787,7 +787,7 @@
         <int>0</int>
       </entry>
     </myHUDElementsToDisplay>
-    <myFile>hudtest.xml</myFile>
+    <myFile>test.xml</myFile>
   </info>
   <myPhysicsEngine>
     <timeStep>1</timeStep>
