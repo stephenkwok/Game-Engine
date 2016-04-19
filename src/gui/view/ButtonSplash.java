@@ -9,7 +9,10 @@ public class ButtonSplash extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnMouseClicked(e -> notifyObservers("ButtonSplash"));
+		getButton().setOnMouseClicked(e -> {
+			setChanged();
+			notifyObservers("ButtonSplash");
+		});
 	}
 
 }

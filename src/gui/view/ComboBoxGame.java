@@ -30,7 +30,8 @@ public class ComboBoxGame extends ComboBoxImageCell {
 	@Override
 	public void setButtonAction() {
 		getComboButton().setOnAction(event -> {
-			notifyObservers(myGames.get(getComboBox().getValue()));
+			this.setChanged();
+			this.notifyObservers(myGames.get(getComboBox().getValue()));
 		});
 		
 	}

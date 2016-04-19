@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
 import gamedata.controller.FileChooserController;
 import gamedata.controller.ParserController;
@@ -28,15 +29,17 @@ public class BaseScreenController extends BranchScreenController{
 	
 	public BaseScreenController(Stage myStage, GameController gameController) {
 		super(myStage);
-		try {
-			this.myScreen = new BaseScreen();
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			this.myScreen.showError(e.getMessage());
-		}
+		//DEPENDENCY!!
 		this.myGameController = gameController;
+		setUpScreen();
 		this.myResources = ResourceBundle.getBundle("baseActions");
 		changeScreen(myScreen);
+	}
+	
+	private void setUpScreen() {
+		this.myScreen = new BaseScreen();
+		this.myScreen.addObserver(this);
+		setUpGameScreen();
 	}
 
 	private void toggleSound() {
@@ -62,22 +65,11 @@ public class BaseScreenController extends BranchScreenController{
 	
 	private void switchGame(){
 		this.myGameController.togglePause();
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, myResources.getString("SwitchConfirmation"), ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-		Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.YES) {
-            this.saveGame();
-            this.chooseGame();
-        }
-        else if (result.get() == ButtonType.NO) {
-        	this.chooseGame();
-        }
-        else {
-        	this.myGameController.toggleUnPause();
-        }
+		this.myScreen.switchAlert();
 	}
 	
 	private void chooseGame() {
-		FileChooserController fileChooserController = new FileChooserController(getStage(), "play");
+		FileChooserController fileChooserController = new FileChooserController(getStage(), ChooserType.PLAY);
 	}
 
 	private void togglePause() {
@@ -108,7 +100,25 @@ public class BaseScreenController extends BranchScreenController{
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		String method = myResources.getString((String)arg);
+		try {
+			try {
+				this.getClass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| SecurityException e) {
+				e.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
+		} catch (NoSuchMethodException e) {
+			try {
+				this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e1) {
+				e.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
+		}
+		
 		
 	}
 

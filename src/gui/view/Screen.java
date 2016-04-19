@@ -37,7 +37,7 @@ public abstract class Screen extends Observable implements IScreen {
 	}
 	
 	private void setUpGUIFactory() {
-		//this.myFactory = new GUIFactory(myResources);
+		this.myFactory = new GUIFactory(myResources);
 	}
 	
 	protected Stage getStage(){

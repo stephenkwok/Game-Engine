@@ -1,21 +1,18 @@
 package gui.view;
 
-import gui.controller.IScreenController;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 public class PaneParent implements IGUIElement{
 
 	private Pane myPane;
-	private IScreenController myController;
 	
-	public PaneParent(IScreenController myController) {
-		this.myController = myController;
+	public PaneParent() {
+		myPane = new Pane();
 	}
 
 	@Override
 	public Node createNode() {
-		myPane = new Pane();
 		return myPane;
 	}
 

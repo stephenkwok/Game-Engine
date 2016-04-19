@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
+import gamedata.controller.ChooserType;
 import gamedata.controller.FileChooserController;
 import gameplayer.view.HighScoreScreen;
 import javafx.stage.Stage;
@@ -28,7 +29,7 @@ public class HighScoreScreenController extends BranchScreenController {
 	}
 
 	private void switchGame() {
-		FileChooserController fileChooserController = new FileChooserController(getStage(), "scores");
+		FileChooserController fileChooserController = new FileChooserController(getStage(), ChooserType.SCORES);
 	}
 	
 	private void clearScores() {

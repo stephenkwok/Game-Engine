@@ -6,6 +6,7 @@ import java.util.Observer;
 import gui.view.IGUIElement;
 import gui.view.Screen;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -34,18 +35,22 @@ public class SplashScreen extends Screen implements Observer {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public SplashScreen() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public SplashScreen() {
 		super();
 		setUpResourceBundle(SPLASH_RESOURCE);
 		initialize();
 	}
 
 	@Override
-	protected void initialize() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	protected void initialize() {
 		HBox hbox = new HBox(PADDING);
 		hbox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
-		setButtonsUp(hbox);
-		getRoot().getChildren().add(hbox);
+		try {
+			setButtonsUp(hbox);
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			showError(e.getMessage());
+		}
 		//TODO Magic constant
 		hbox.setLayoutY(getScene().getHeight() / 6);
 		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -65,13 +70,15 @@ public class SplashScreen extends Screen implements Observer {
 		String[] buttons = getResources().getString(BUTTONS_ID).split(",");
 		for (int i = 0; i < buttons.length; i++) {
 			IGUIElement newElement = getFactory().createNewGUIObject(buttons[i]);
+			newElement.addNodeObserver(this);
 			hbox.getChildren().add(newElement.createNode());
 		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		notifyObservers(o.getClass().getName());
+		setChanged();
+		notifyObservers(arg);
 	}
 
 

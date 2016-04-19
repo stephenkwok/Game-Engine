@@ -3,9 +3,13 @@ package gameplayer.view;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Optional;
+
 import gui.view.IGUIElement;
 import gui.view.Screen;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
@@ -38,7 +42,7 @@ public class BaseScreen extends Screen implements Observer {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public BaseScreen() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public BaseScreen() {
 		super();
 		this.myMasterPane = new BorderPane();
 		setUpResourceBundle(BASE_RESOURCE);
@@ -54,8 +58,13 @@ public class BaseScreen extends Screen implements Observer {
 	 * @throws InstantiationException 
 	 */
 	@Override
-	protected void initialize() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		addGame();
+	protected void initialize() {
+		try {
+			addGame();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			showError(e.getMessage());
+		}
 		addHUD();
 		getRoot().getChildren().add(myMasterPane);
 	}
@@ -90,7 +99,6 @@ public class BaseScreen extends Screen implements Observer {
 	 */
 	private void addGame() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		addButtonPane();
-		addGamePane();
 	}
 
 	/**
@@ -105,6 +113,7 @@ public class BaseScreen extends Screen implements Observer {
 		ToolBar myT = new ToolBar();
 		for(int i = 0; i < sideButtons.length; i++){
 			IGUIElement newElement = getFactory().createNewGUIObject(sideButtons[i]);
+			newElement.addNodeObserver(this);
 			Button myB = (Button) newElement.createNode();
 			Tooltip t = new Tooltip(getResources().getString(sideButtons[i]+ "Text"));
 			t.install(myB, t);
@@ -113,13 +122,6 @@ public class BaseScreen extends Screen implements Observer {
 		}
 		myMasterPane.setTop(myT);
 		
-	}
-	
-	/**
-	 * Instantiates the necessary game subscene classes to add to the screen
-	 */
-	private void addGamePane(){
-		notifyObservers("addGamePane");
 	}
 	
 	public void setGameScreen(GameScreen screen) {
@@ -137,7 +139,29 @@ public class BaseScreen extends Screen implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		notifyObservers(o.getClass().getName());
+		setChanged();
+		notifyObservers(o.getClass().getSimpleName());
+	}
+
+
+	public void switchAlert() {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, getResources().getString("SwitchConfirmation"), ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+		Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.YES) {
+            setChanged();
+            notifyObservers("ButtonSaveGame");
+            setChanged();
+            notifyObservers("choose");
+        }
+        else if (result.get() == ButtonType.NO) {
+        	setChanged();
+        	notifyObservers("choose");
+        }
+        else {
+        	setChanged();
+        	notifyObservers("ButtonUnPause");
+        }
+		
 	}
 
 }

@@ -2,6 +2,7 @@ package gui.view;
 
 import java.io.File;
 import java.util.Observable;
+import java.util.Observer;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -36,7 +37,10 @@ public abstract class ButtonParent extends Observable implements IGUIElement {
 		setButtonAction();
 		return button; 
 	}
-
+	
+	public void addNodeObserver(Observer observer) {
+		addObserver(observer);
+	}
 	/**
 	 * Sets action when button is pressed. 
 	 */

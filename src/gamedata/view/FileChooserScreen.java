@@ -37,6 +37,7 @@ public class FileChooserScreen extends Screen implements Observer {
 		myT.setMinWidth(SCREEN_WIDTH);
 		for(int i = 0; i < sideButtons.length; i++){
 			IGUIElement newElement = getFactory().createNewGUIObject(sideButtons[i]);
+			newElement.addNodeObserver(this);
 			Button myB = (Button) newElement.createNode();
 			Tooltip t = new Tooltip(getResources().getString(sideButtons[i]+ "Text"));
 			t.install(myB, t);
@@ -48,6 +49,7 @@ public class FileChooserScreen extends Screen implements Observer {
 
 	private void addButton() {
 		ComboBoxGame fileSelector = new ComboBoxGame("Choose Game", "gamefiles");
+		fileSelector.addNodeObserver(this);
 		HBox myBox = (HBox) fileSelector.createNode();
 		myBox.setLayoutX(SCREEN_WIDTH/2 - 100);
 		myBox.setLayoutY(SCREEN_HEIGHT/2);
@@ -56,7 +58,8 @@ public class FileChooserScreen extends Screen implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		Object[] methodArgPair = {o.getClass().getName(), arg};
+		setChanged();
+		Object[] methodArgPair = {o, arg};
 		notifyObservers(Arrays.asList(methodArgPair));
 	}
 

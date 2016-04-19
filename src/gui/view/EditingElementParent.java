@@ -1,6 +1,7 @@
 package gui.view;
 
 import java.util.Observable;
+import java.util.Observer;
 
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
@@ -24,6 +25,11 @@ public abstract class EditingElementParent extends Observable implements IGUIEle
 	
 	public EditingElementParent(String buttonText) {
 		myButton = new Button(buttonText);
+	}
+	
+	@Override
+	public void addNodeObserver(Observer observer) {
+		this.addObserver(observer);
 	}
 	
 	/**
