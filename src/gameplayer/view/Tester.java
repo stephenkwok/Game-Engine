@@ -32,12 +32,9 @@ public class Tester extends Application {
 	public Tester() {
 		// TODO Auto-generated constructor stub
 	}
-	
-
-	
-	public static void main(String args[]){
-		launch(args);
 		
+	public static void main(String args[]){
+		launch(args);		
 	}
 
 	@Override
@@ -104,7 +101,6 @@ public class Tester extends Application {
 		actor1.addRule(rule5);
 		actor1.addRule(rule6);
 		actor1.setMain(true);
-//		
 		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
 		actor1.addAttribute(points);
 		
@@ -124,22 +120,21 @@ public class Tester extends Application {
 			BottomCollision b = new BottomCollision(actor1, floor);
 			BottomCollision b2 = new BottomCollision(actor2, floor);
 			BottomCollision b3 = new BottomCollision(actor3, floor);
+			
 			Action baction = new VerticalStaticCollision(actor1);
 			Action baction2 = new VerticalStaticCollision(actor2);
 			Action baction3 = new VerticalStaticCollision(actor3);
+			
 			Rule brule = new Rule(b, baction);
 			Rule brule2 = new Rule(b2, baction2);
 			Rule brule3 = new Rule(b3, baction3);
+			
 			actor1.addRule(brule);
 			actor2.addRule(brule2);
 			actor3.addRule(brule3);
-
+			
 			level1.addActor(floor);
 		}
-		
-//		Level level2 = new Level();
-//		level2.addActor(actor3);
-//		levels.add(level2);
 		
 		Group group = new Group();
 		Scene scene = new Scene(group);
@@ -156,8 +151,7 @@ public class Tester extends Application {
 
 		SubScene sub = view.getScene();
 		sub.fillProperty().set(Color.BLUE);
-		group.getChildren().add(sub);
-		
+		group.getChildren().add(sub);	
 		
 		Stage stage = new Stage();
 		stage.setWidth(800);
@@ -169,35 +163,11 @@ public class Tester extends Application {
 //		System.out.println(myF);
 //		c.saveForEditing(myF);
 		
-
 		sub.setCamera(camera);
 		stage.setScene(scene);
 		stage.show();
 		//controller.initialize(0);
 
-		
-//		Stage stage = new Stage();
-//		Group root = new Group();
-//		Image actor1img = new Image(getClass().getClassLoader().getResourceAsStream("newactor.png"));
-//		ImageView imgview = new ImageView(actor1img);
-//		root.getChildren().add(imgview);
-//		Scene scene = new Scene(root,800,800);
-//		PerspectiveCamera camera = new PerspectiveCamera();
-//
-//		scene.setCamera(camera);
-//		stage.setScene(scene);
-//		stage.show();
-//		
-//        KeyFrame frame = new KeyFrame(Duration.seconds(.01),
-//                e -> {
-//                	camera.setTranslateX(camera.getTranslateX()-5);
-//                	System.out.println(imgview.getX());
-//                });
-//		Timeline animation = new Timeline();
-//		animation.setCycleCount(Timeline.INDEFINITE);
-//		animation.getKeyFrames().add(frame);
-//		animation.play();
-		
 	}
 
 }
