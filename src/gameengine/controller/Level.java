@@ -363,5 +363,8 @@ public class Level implements Observer, ILevel, IEditableGameElement {
 		myActors.removeAll(deadActors);
 	}
 
+	public void removeActor(Actor actor) {
+		myActors.remove(actor);
+	}
 }
 

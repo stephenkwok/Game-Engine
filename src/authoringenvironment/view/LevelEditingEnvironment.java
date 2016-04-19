@@ -15,8 +15,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
@@ -138,17 +140,8 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 				boolean success = false;
 				if (db.hasString()) {
 					IAuthoringActor actor = getActorById(Integer.parseInt(db.getString()));
-					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getMyImageView().getFitHeight());
-					iconToAdd.getImageView().setOnDragDetected(null);
-					iconToAdd.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
-						@Override public void handle(MouseEvent event) {
-							moveActor(actor, iconToAdd, event);
-							event.consume();
-						}
-					}); 
 					myLevel.addActor((Actor) actor);
-					myActorPreviews.add(iconToAdd);
-					myCenterPane.getChildren().add(iconToAdd.getImageView());
+					addActorToScene(actor);
 					success = true;
 				}
 				event.setDropCompleted(success);
@@ -166,8 +159,8 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	private void moveActor(IAuthoringActor actor, ImageviewActorIcon icon, MouseEvent event) {
 		actor.setX(event.getX());
 		actor.setY(event.getY());
-		icon.getImageView().setX(event.getX());
-		icon.getImageView().setY(event.getY());
+		icon.setX(event.getX());
+		icon.setY(event.getY());
 	}
 	
 	/**
@@ -240,26 +233,60 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		myLevel.setMyBackgroundImgName(imageFile.getPath());
 		updateLevelBackground();
 	}
+	
 	/**
 	 * Add a level's actors to the preview in the center pane.
 	 */
 	private void addLevelActorsToScene() {
 		myActorPreviews.clear();
 		for (IAuthoringActor actor: myLevel.getActors()) {
-			ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getMyImageView().getFitHeight());
-			icon.getImageView().setX(actor.getX());
-			icon.getImageView().setY(actor.getY());
-			icon.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
-				@Override public void handle(MouseEvent event) {
-					moveActor(actor, icon, event);
-					event.consume();
-				}
-			}); 			
-			myActorPreviews.add(icon);
-			myCenterPane.getChildren().add(icon.getImageView());
+			ImageviewActorIcon icon = addActorToScene(actor);
+			icon.setX(actor.getX());
+			icon.setY(actor.getY());
 		}
 	}
 	
+	private ImageviewActorIcon addActorToScene(IAuthoringActor actor) {
+		ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getMyImageView().getFitHeight());
+		/*icon.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent event) {
+				moveActor(actor, icon, event);
+				event.consume();
+			}
+		}); 	*/
+		setIconBehavior(icon);
+		icon.setOnLevel(true);
+		myActorPreviews.add(icon);
+		myCenterPane.getChildren().add(icon);
+		return icon;
+	}
+	
+	private void setIconBehavior(ImageviewActorIcon icon) {
+		icon.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent event) {
+				moveActor(icon.getActor(), icon, event);
+				event.consume();
+			}
+		}); 
+		
+		ContextMenuActorInLevel contextMenu = new ContextMenuActorInLevel(this);
+		icon.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+	        @Override
+	        public void handle(ContextMenuEvent t) {
+				contextMenu.show(icon, t.getSceneX(), t.getScreenY());
+				System.out.println("pressed");
+	        }
+	    });
+		/*icon.addEventHandler(MouseEvent.MOUSE_CLICKED,
+				new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent e) {
+				if (e.getButton() == MouseButton.SECONDARY) {
+					System.out.println("pressed");
+					contextMenu.show(icon, e.getSceneX(), e.getScreenY());
+				}
+			}
+		});*/
+	}
 	/**
 	 * Update the list of available actors and update the level inspector to reflect the currently available actors.
 	 * @param updatedActorsList: up-to-date list of available actors.
@@ -279,5 +306,11 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	@Override
 	public Stage getStage() {
 		return myStage;
+	}
+	
+	public void removeActorFromLevel(IAuthoringActor actor) {
+		// TODO: need to remove icon
+		myLevel.removeActor((Actor) actor);
+		
 	}
 }

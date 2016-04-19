@@ -57,7 +57,7 @@ public class GUILevelInspector implements IGUI {
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
 		myAttributesTab = new TabAttributes(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, myLevelEditor.getLevel());
 		// TODO: take out the null where the controller is later
-		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(null, BUTTON_LABEL, null, BUTTON_WIDTH, BUTTON_HEIGHT, myLevelEditor);
+		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(null, BUTTON_LABEL, null, myLevelEditor);
 		addTabToContainer(myAttributesTab, false);
 		myContainer.getChildren().add(button.createNode());
 		addTabToContainer(myActorsTab, true);

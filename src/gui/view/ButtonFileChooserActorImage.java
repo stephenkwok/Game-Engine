@@ -13,8 +13,8 @@ import javafx.stage.Stage;
 public class ButtonFileChooserActorImage extends ButtonFileChooser {
 
 	public ButtonFileChooserActorImage(IScreenController myController, String buttonText, String imageName,
-			int buttonWidth, int buttonHeight, IEditingEnvironment editor) {
-		super(myController, buttonText, imageName, buttonWidth, buttonHeight, editor);
+			IEditingEnvironment editor) {
+		super(myController, buttonText, imageName, editor);
 	}
 
 	@Override

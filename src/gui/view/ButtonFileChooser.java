@@ -25,7 +25,7 @@ public abstract class ButtonFileChooser extends ButtonParent {
 	 * Creates an image setting button.
 	 * @return a button whose action sets the image.
 	 */
-	public ButtonFileChooser(IScreenController myController, String buttonText, String imageName, int buttonWidth, int buttonHeight, IEditingEnvironment editor){
+	public ButtonFileChooser(IScreenController myController, String buttonText, String imageName, IEditingEnvironment editor){
 		super(myController, buttonText, imageName);
 		myEditor = editor;
 	}

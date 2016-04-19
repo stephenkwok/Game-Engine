@@ -213,6 +213,7 @@ public class Controller implements IScreenController, Observer {
 
 	}
 
+	// Use reflection - properties file linking button name to a method name
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg0 instanceof LabelClickable)

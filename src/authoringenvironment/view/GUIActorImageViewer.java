@@ -47,7 +47,7 @@ public class GUIActorImageViewer implements IGUI {
 		HBox hbox = new HBox(PADDING);
 		hbox.setAlignment(Pos.CENTER);
 		// TODO: take out the null where the controller is later
-		ButtonFileChooserActorImage imageChooser = new ButtonFileChooserActorImage(null, BUTTON_LABEL, null, BUTTON_WIDTH, BUTTON_HEIGHT, aEE);
+		ButtonFileChooserActorImage imageChooser = new ButtonFileChooserActorImage(null, BUTTON_LABEL, null, aEE);
 		hbox.getChildren().addAll(myActorIV, imageChooser.createNode());
 		vbox.getChildren().addAll(hbox, getImagesComboBox());
 		myPane.getChildren().add(vbox);
