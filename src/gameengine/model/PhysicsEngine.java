@@ -60,10 +60,8 @@ public class PhysicsEngine {
 		double nextYPos;
 		
 
-		if (a.isInAir()) {                      //Only applies gravity if the Actor is in the air
-			forceYdownward = getGravity();
-			friction = friction*.5;             //Friction is reduced(wind resistance) when the actor is in the air
-		}
+		forceYdownward = getGravity();
+	
 				
 		nextHorzVelo = xVelo;      		
 		nextVertVelo = applyForce(yVelo, forceYupward);                      // Apply  y force from movement action to y velocity
@@ -72,7 +70,7 @@ public class PhysicsEngine {
 		nextVertVelo = maxLimit(nextVertVelo, getMaxVertVelocity());
 			
 		if(nextYPos+a.getBounds().getHeight() > getFloorHeight()){                    //Collision detection for the actor and the ground
-			nextYPos = getFloorHeight()-a.getBounds().getHeight();				//TODO: delete this if statement after the floor is implemented as an actor
+			nextYPos = getFloorHeight()-a.getBounds().getHeight();				      //TODO: delete this if statement after the floor is implemented as an actor
 			nextVertVelo = 0;
 		}
 		
@@ -154,7 +152,6 @@ public class PhysicsEngine {
 	}
 	
 	public void staticVerticalCollision(Actor a1){
-		a1.setInAir(false);
 		a1.setY(a1.getY()-a1.getVeloY());
 		a1.setVeloY(0);
 	}
