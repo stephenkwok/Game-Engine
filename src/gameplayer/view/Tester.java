@@ -73,7 +73,7 @@ public class Tester extends Application {
 		actor3.setX(800);
 		
 		KeyTrigger triggerDown = new KeyTrigger(KeyCode.DOWN);
-		Action moveForwards = new MoveForward(actor1);
+		Action moveForwards = new MoveBackward(actor1);
 		Rule movingForwards = new Rule(triggerDown, moveForwards);
 		actor1.addRule(movingForwards);
 		

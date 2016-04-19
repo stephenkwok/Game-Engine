@@ -30,9 +30,9 @@
             <entry>
               <string>Down</string>
               <list>
-                <gameengine.model.Actions.MoveForward>
+                <gameengine.model.Actions.MoveBackward>
                   <myActor reference="../../../../.."/>
-                </gameengine.model.Actions.MoveForward>
+                </gameengine.model.Actions.MoveBackward>
               </list>
             </entry>
             <entry>

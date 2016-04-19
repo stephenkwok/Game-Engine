@@ -23,7 +23,6 @@ import javafx.util.Duration;
  *
  */
 
-
 public class Game extends Observable implements Observer {
 	public static final int SIZE = 400;
 	public static final int FRAMES_PER_SECOND = 60;

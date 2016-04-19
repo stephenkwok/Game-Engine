@@ -8,7 +8,7 @@ import gameengine.model.Actor;
  *
  * @author justinbergkamp
  */
-public class MoveForward extends MovingAction {
+public class MoveBackward extends MovingAction {
 
 
     /**
@@ -17,7 +17,7 @@ public class MoveForward extends MovingAction {
      * @param assignedActor The Actor that will be changed
      * @param args          The arguments required to perform the change
      */
-    public MoveForward(Actor assignedActor) {
+    public MoveBackward(Actor assignedActor) {
         super(assignedActor);
     }
 
@@ -26,7 +26,7 @@ public class MoveForward extends MovingAction {
      */
     @Override
     public void perform() {
-    	getMyActor().getPhysicsEngine().moveForward(getMyActor());    	
+    	getMyActor().getPhysicsEngine().moveBackward(getMyActor());    	
     }
 
     
