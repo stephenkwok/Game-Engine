@@ -19,8 +19,8 @@ import javafx.scene.text.Font;
 
 public abstract class HBoxDisplayHeader extends ObjectObservable {
 	
-	private static final double HBOX_HEIGHT = 80.0;
 	private static final String LABEL_FONT = "Calibri";
+	private static final double HBOX_HEIGHT = 80.0;
 	private static final int LABEL_FONT_SIZE = 30;
 	private static final int HBOX_SPACING = 30;
 	private final HBox myHBox;
@@ -31,8 +31,9 @@ public abstract class HBoxDisplayHeader extends ObjectObservable {
 		myHBox.setMinHeight(HBOX_HEIGHT);
 		myHBox.prefWidthProperty().bind(bindWidth);
 		myHBox.setAlignment(Pos.CENTER);
+		myHBox.setStyle("-fx-border-color: gray;");
 		myLabel = new Label(labelText);
-		myLabel.setPrefHeight(HBOX_HEIGHT);
+		myLabel.prefHeightProperty().bind(myHBox.heightProperty());
 		myLabel.setFont(new Font(LABEL_FONT, LABEL_FONT_SIZE));
 		myLabel.setAlignment(Pos.CENTER);
 		addToHBox(myLabel);

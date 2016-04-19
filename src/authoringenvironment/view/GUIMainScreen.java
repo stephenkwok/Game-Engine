@@ -67,7 +67,6 @@ public class GUIMainScreen implements IGUI, Observer {
 		initializeGameEditingEnvironment();
 		createdActorsDisplay.getChildren().addAll(actorsDisplayHeader.getHBox(), actorScrollPane);
 		createdLevelsDisplay.getChildren().addAll(levelsDisplayHeader.getHBox(), levelScrollPane);
-		createdActorsDisplay.setStyle("-fx-border-color: red;");
 		centerPane.getChildren().addAll(createdActorsDisplay, createdLevelsDisplay);
 		borderPane.setCenter(centerPane);
 	}
@@ -245,6 +244,7 @@ public class GUIMainScreen implements IGUI, Observer {
 	 */
 	private void reorderLevelLabels() {
 		levelPreviewContainer.getChildren().clear();
+		// sort levels
 		levels.stream().forEach(level -> createLabel(level, levelEditor, levelPreviewContainer));
 		allLabels.stream().filter(label -> levelPreviewContainer.getChildren().contains(label));
 	}
