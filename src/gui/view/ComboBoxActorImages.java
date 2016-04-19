@@ -22,10 +22,10 @@ public class ComboBoxActorImages extends ComboBoxImageCell{
 
 	@Override
 	public void setButtonAction() {
-		comboButton.setOnAction(event->{
-			Image image = new Image(getClass().getClassLoader().getResourceAsStream(comboBox.getValue()));
+		getComboButton().setOnAction(event->{
+			Image image = new Image(getClass().getClassLoader().getResourceAsStream(getComboBox().getValue()));
 			try {
-				aEE.setActorImage(new ImageView(image), comboBox.getValue());
+				aEE.setActorImage(new ImageView(image), getComboBox().getValue());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -51,8 +51,6 @@ public class ComboBoxActorImages extends ComboBoxImageCell{
 
 	@Override
 	protected void updateValueBasedOnEditable() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

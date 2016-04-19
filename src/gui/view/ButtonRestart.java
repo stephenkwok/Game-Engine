@@ -14,8 +14,7 @@ public class ButtonRestart extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnMouseClicked(e -> myControl.restartGame());
-
+		getButton().setOnMouseClicked(e -> myControl.restartGame());
 	}
 
 }

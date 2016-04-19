@@ -27,11 +27,11 @@ import javafx.scene.paint.Color;
 
 /**
  * Returns BorderPane to represent Actor Editing Environment.
- * 
  * @author AnnieTang
  *
  */
 public class ActorEditingEnvironment implements IEditingEnvironment {
+	private static final Color DEFAULT_COLOR = Color.CORNFLOWERBLUE;
 	private static final int ICON_HEIGHT = 75;
 	private static final String NEW_RULE_LABEL = "New Rule";
 	private static final String ACTOR_OPTIONS_RESOURCE = "actorEditorOptions";
@@ -44,11 +44,13 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private TabAttributes attributes;
 	private Controller myController;
 	private ResourceBundle myResources;
+	
 	private IAuthoringActor myActor;
 	private ImageView myActorIV;
-	private ActorRuleCreator myActorRuleCreator;
-	private GridPane myRuleCreator;
+	
 	private GUIActorImageViewer actorImageViewer;
+	private ActorRuleCreator myActorRuleCreator;
+	private GridPane myActorRuleCreatorPane;
 
 	public ActorEditingEnvironment(Controller myController, ResourceBundle myResources) {
 		this.myController = myController;
@@ -67,8 +69,8 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	 */
 	private void initializeEnvironment() {
 		myRoot = new BorderPane();
-		myActorRuleCreator = new ActorRuleCreator(this, myController);
 		setDefaultActor();
+		myActorRuleCreator = new ActorRuleCreator(myActor, myController);
 		setLeftPane();
 		setCenterPane();
 		setBottomPane();
@@ -85,33 +87,25 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	 * Populate left section of the actor editing environment
 	 */
 	private void setLeftPane() {
-		attributes = new TabAttributes(myController, myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
 		VBox vbox = new VBox();
+		attributes = new TabAttributes(myController, myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
 		TabPane attributeTP = new TabPane();
 		attributeTP.getTabs().add(attributes.getTab());
 		attributeTP.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		library = new GUILibrary(myActorRuleCreator);
-		vbox.getChildren().addAll(getActorImageViewer(), attributeTP, library.getPane());
+		actorImageViewer = new GUIActorImageViewer(this, myController, myActorIV);
+		vbox.getChildren().addAll(actorImageViewer.getPane(), attributeTP, library.getPane());
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
 		myRoot.setLeft(vbox);
 	}
-	/**
-	 * Returns visual of the current Actor's image as well as options to set the image.
-	 * @return
-	 */
-	private Pane getActorImageViewer() {
-		actorImageViewer = new GUIActorImageViewer(this, myController, myActorIV);
-		return actorImageViewer.getPane();
-	}
+
 	/**
 	 * Populate center section of the actor editing environment
 	 */
 	private void setCenterPane() {
-		myRuleCreator = myActorRuleCreator.getGridPane();
+		myActorRuleCreatorPane = myActorRuleCreator.getGridPane();
 		ScrollPane myScrollPane = new ScrollPane();
-		myScrollPane.setContent(myRuleCreator);
-		myScrollPane.setBackground(
-				new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		myScrollPane.setContent(myActorRuleCreatorPane);
 		myRoot.setCenter(myScrollPane);
 	}
 	/**
@@ -119,7 +113,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	 */
 	private void setBottomPane() {
 		HBox hbox = new HBox();
-		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		hbox.setBackground(new Background(new BackgroundFill(DEFAULT_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
 		hbox.getChildren().add(getNewRuleButton());
 		hbox.setAlignment(Pos.CENTER_RIGHT);
 		myRoot.setBottom(hbox);
@@ -133,6 +127,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 		toReturn.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		toReturn.setOnAction(event -> {
 			myActorRuleCreator.addNewRule();
+			library.updateDragEvents();
 		});
 		return toReturn;
 	}
@@ -145,7 +140,9 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 		myActor = (IAuthoringActor) editable;
 		myActorIV = new ImageviewActorIcon(myActor,ICON_HEIGHT);
 		setLeftPane();
-		myActorRuleCreator.updateRules();
+		myActorRuleCreator.setActor(myActor);
+		myActorRuleCreator.updateActorRules();
+		library.updateDragEvents();
 	}
 	/**
 	 * Return Actor currently in actor editing environment
@@ -160,16 +157,9 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	 * @param newImageView
 	 */
 	public void setActorImage(ImageView newImageView, String imageViewName) {
-		myActor.setImageView(newImageView);
+		myActor.setMyImageView(newImageView);
 		myActor.setMyImageViewName(imageViewName);
 		myActorIV = new ImageviewActorIcon(myActor, ICON_HEIGHT);
 		setLeftPane();
 	}
-	/**
-	 * Each time a new rule is created, updates drag events for library elements to set new rule as a target 
-	 */
-	public void updateDragEventsForLibrary() {
-		library.updateDragEvents();
-	}
-
 }

@@ -151,7 +151,7 @@ public class Controller implements IScreenController {
 		myActors.add(newActor);
 		myActorNames.add(newActor.getMyName());
 		mainScreen.createActorLabel(newActor);
-		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getMyImageViewName());
+		actorEnvironment.setActorImage(newActor.getMyImageView(), newActor.getMyImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
 	

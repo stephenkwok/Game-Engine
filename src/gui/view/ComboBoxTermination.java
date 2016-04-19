@@ -33,8 +33,8 @@ public class ComboBoxTermination extends ComboBoxTextCell {
 	 */
 	@Override
 	public void setButtonAction() {
-		comboButton.setOnAction(event->{
-			((Level) getEditableElement()).setMyTermination(comboBox.getValue());
+		getComboButton().setOnAction(event->{
+			((Level) getEditableElement()).setMyTermination(getComboBox().getValue());
 		});
 	}
 
@@ -52,7 +52,7 @@ public class ComboBoxTermination extends ComboBoxTextCell {
 	@Override
 	protected void updateValueBasedOnEditable() {
 		if (((Level) getEditableElement()).getMyLosingCondition() != null) {
-			comboBox.setValue(((Level) getEditableElement()).getMyLosingCondition());
+			getComboBox().setValue(((Level) getEditableElement()).getMyLosingCondition());
 		}
 	}
 

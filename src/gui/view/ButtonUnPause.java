@@ -14,8 +14,7 @@ public class ButtonUnPause extends ButtonParent{
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnAction(e -> myControl.getMyGameController().toggleUnPause());
-		
+		getButton().setOnAction(e -> myControl.getMyGameController().toggleUnPause());
 	}
 
 }

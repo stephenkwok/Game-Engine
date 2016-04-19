@@ -9,7 +9,7 @@ import authoringenvironment.controller.Controller;
  * @author AnnieTang
  */
 public class CollisionBehavior extends ComboBoxBehavior {
-	Controller myController;
+	private Controller myController;
 	
 	public CollisionBehavior(String behaviorType, ResourceBundle myResources,Controller myController) {
 		super(behaviorType, myResources);

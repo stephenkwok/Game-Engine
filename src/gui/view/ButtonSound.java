@@ -14,8 +14,7 @@ public class ButtonSound extends ButtonParent{
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnMouseClicked(e -> myControl.toggleSound());
-		
+		getButton().setOnMouseClicked(e -> myControl.toggleSound());
 	}
 
 }
