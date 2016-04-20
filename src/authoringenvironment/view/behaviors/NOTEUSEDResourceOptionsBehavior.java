@@ -11,13 +11,13 @@ import gameengine.model.ITrigger;
  * GUI representation of behaviors: ChangeMusic, PlaySound, PlayMusic
  * @author AnnieTang
  */
-public class ResourceOptionsBehavior extends ComboBoxBehavior {
+public class NOTEUSEDResourceOptionsBehavior extends ComboBoxBehavior {
 	private static final String PATHNAME = "Pathname";
 	private List<String> fileNames;
 	private String pathname;
 	private IAction myAction;
 	
-	public ResourceOptionsBehavior(String behaviorType, ResourceBundle myResources){
+	public NOTEUSEDResourceOptionsBehavior(String behaviorType, ResourceBundle myResources){
 		super(behaviorType, myResources);
 		this.pathname = myResources.getString(behaviorType+PATHNAME);
 		fileNames = new ArrayList<>();

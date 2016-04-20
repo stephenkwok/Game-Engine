@@ -11,7 +11,9 @@ import gui.view.TextFieldWithButton;
  * GUI representation of behaviors that take in a single Double as a parameter
  * @author AnnieTang
  */
-public abstract class DoubleBehavior extends TextFieldWithButton implements IAuthoringRule{
+//remove abstract and make TickBehavior? Tick only behavior that needs textfield input atm
+
+public abstract class NOTUSEDDoubleBehavior extends TextFieldWithButton implements IAuthoringRule{
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
 	private static final String WIDTH = "Width";
@@ -19,7 +21,7 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	private TriggerFactory triggerFactory;
 	private ActionFactory actionFactory;
 	
-	public DoubleBehavior(String behaviorType, ResourceBundle myResources) {
+	public NOTUSEDDoubleBehavior(String behaviorType, ResourceBundle myResources) {
 		super(myResources.getString(behaviorType+LABEL), 
 				myResources.getString(behaviorType+PROMPT), Double.parseDouble(myResources.getString(behaviorType+WIDTH)));
 		this.triggerFactory = new TriggerFactory();

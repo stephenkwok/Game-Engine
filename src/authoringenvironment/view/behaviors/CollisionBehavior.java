@@ -23,7 +23,6 @@ public class CollisionBehavior extends IEditableGameElementBehavior {
 			arguments.add(myActor);
 			arguments.add(otherActor);
 			myTrigger = getTriggerFactory().createNewTrigger(behaviorType, arguments);
-			//add ITrigger 
 			System.out.println(myTrigger);
 		});
 	}

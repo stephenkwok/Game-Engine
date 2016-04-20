@@ -109,5 +109,10 @@ public class TriggerFactory {
 		Class<?> collisionClass = Class.forName(className);
 		Constructor<?> constructor = collisionClass.getConstructor();
 		return (ITrigger) constructor.newInstance();
+//		//This is actually right, based on master: 
+//		Actor myActor = (Actor) arguments.get(0);
+//		Class<?> collisionClass = Class.forName(className);
+//		Constructor<?> constructor = collisionClass.getConstructor(Actor.class);
+//		return (ITrigger) constructor.newInstance(myActor);
 	}
 }

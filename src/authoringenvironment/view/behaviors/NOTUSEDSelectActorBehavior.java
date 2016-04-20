@@ -9,12 +9,12 @@ import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IAction;
 import gameengine.model.ITrigger;
 
-public class SelectActorBehavior extends IEditableGameElementBehavior{
+public class NOTUSEDSelectActorBehavior extends IEditableGameElementBehavior{
 	private IAction myAction;
 	private List<IAuthoringActor> myActors;
 	private IAuthoringActor selectedActor;
 	
-	public SelectActorBehavior(String behaviorType, ResourceBundle myResources, List<IAuthoringActor> myActors) {
+	public NOTUSEDSelectActorBehavior(String behaviorType, ResourceBundle myResources, List<IAuthoringActor> myActors) {
 		super(behaviorType,myResources);
 		this.myActors = myActors;
 		setButtonAction(e -> {
