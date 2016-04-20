@@ -1,15 +1,14 @@
 package authoringenvironment.view;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.view.behaviors.ResourceOptionsBehavior;
 import gameengine.controller.Level;
 import gui.view.IGUIElement;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
 
 public class ActorRuleFactory {
 	private static final String PACKAGE = "authoringenvironment.view.behaviors.";
@@ -18,6 +17,8 @@ public class ActorRuleFactory {
 	private IAuthoringActor myActor;
 	private List<IAuthoringActor> myActors;
 	private List<Level> myLevels;
+	private static final String CREATE = "create";
+	private static final String ELEMENT = "Element";
 	
 	public ActorRuleFactory(ResourceBundle myLibraryResources, IAuthoringActor myActor, List<IAuthoringActor> myActors, List<Level> myLevels){
 		this.myResources = myLibraryResources;
@@ -32,54 +33,70 @@ public class ActorRuleFactory {
 	 * @param value
 	 * @return
 	 */
-	public Node getBehaviorNode(String behaviorType, String value){
-		try{
-			String className = PACKAGE + myResources.getString(behaviorType+CLASS);
-			Class<?> clazz = Class.forName(className);
-			Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class);
-			IGUIElement element = ((IGUIElement) constructor.newInstance(behaviorType,myResources));
-			Node toReturn = element.createNode();
-			if(value!=null){
-				((ResourceOptionsBehavior) element).getComboBox().setValue(value);
-			}
-			return toReturn;
-		}catch(Exception e){
-			return getComboBoxHBox(behaviorType, value);
-		}
-	}
-	/**
-	 * Return Node type with parameter options for Collision behavior type
-	 * @param behaviorType
-	 * @param value
-	 * @return
-	 */
-	private Node getComboBoxHBox(String behaviorType, String value){
+	public IGUIElement getAuthoringRule(String behaviorType, String value){ //IGUIElement?
 		String className = PACKAGE + myResources.getString(behaviorType+CLASS);
+		String elementType = myResources.getString(behaviorType + ELEMENT);
+		try{
+			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class);
+			return (IGUIElement) createMethod.invoke(this, behaviorType, className);
+		}catch (NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * Return ComboBox IGUIElement type with parameter options for Collision behavior type
+	 * @param behaviorType
+	 * @param className
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
+	private IGUIElement createCollisionBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		try{
 			Class<?> clazz = Class.forName(className);
 			Constructor<?> constructor = clazz.getConstructor(String.class, IAuthoringActor.class, ResourceBundle.class, List.class);
-			return ((IGUIElement) constructor.newInstance(behaviorType,myActor,myResources,myActors)).createNode();
-		}catch(Exception e1){
-			try{
-				Class<?> clazz = Class.forName(className);
-				Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, List.class);
-				return ((IGUIElement) constructor.newInstance(behaviorType,myResources,myLevels)).createNode();
-			} catch(Exception e2){
-				return getClickBehaviorNode(behaviorType, value);
-			}
+			return (IGUIElement) constructor.newInstance(behaviorType,myActor,myResources,myActors);
+		}catch(Exception e){
+			Class<?> clazz = Class.forName(className);
+			Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, List.class);
+			return (IGUIElement) constructor.newInstance(behaviorType,myResources,myLevels);
 		}
+	}
+	/**
+	 * Return Label IGUIElement type with parameter options for behavior type
+	 * @param behaviorType
+	 * @param className
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
+	private IGUIElement createLabelBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		Class<?> clazz = Class.forName(className);
+		Constructor<?> constructor = clazz.getConstructor(IAuthoringActor.class, String.class, ResourceBundle.class);
+		return (IGUIElement) constructor.newInstance(myActor,behaviorType,myResources);
 	}
 	
-	private Node getClickBehaviorNode(String behaviorType, String value){
-		String className = PACKAGE + myResources.getString(behaviorType+CLASS);
-		try{
-			Class<?> clazz = Class.forName(className);
-			Constructor<?> constructor = clazz.getConstructor(IAuthoringActor.class, String.class, ResourceBundle.class);
-			return ((IGUIElement) constructor.newInstance(myActor,behaviorType,myResources)).createNode();
-		} catch(Exception e2){
-			e2.printStackTrace();
-			return new Label(behaviorType);
-		}
+	private IGUIElement createComboBoxBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		Class<?> clazz = Class.forName(className);
+		Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class);
+		return (IGUIElement) constructor.newInstance(behaviorType,myResources);
 	}
-
 }

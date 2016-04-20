@@ -19,6 +19,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import gameengine.controller.Level;
+import gameengine.model.IAction;
+import gameengine.model.ITrigger;
 
 /**
  * Rule container for an actor containing behavior, images, and/or sounds.
@@ -54,6 +56,9 @@ public class ActorRule {
 	private static final String LIBRARY_BUNDLE = "library";
 	private String triggerBehaviors;
 	private ActorRuleFactory actorRuleFactory;
+	
+	private List<ITrigger> myTriggers;
+	private List<IAction> myActions;
 	
 	public ActorRule(ActorRuleCreator myActorRuleCreator, List<IAuthoringActor> myActors, List<Level> myLevels) {
 		this.myActorRuleCreator = myActorRuleCreator;
@@ -123,13 +128,12 @@ public class ActorRule {
 	 * @param behavior
 	 */
 	public void addBehavior(Label behavior) {
-		Node toAdd = actorRuleFactory.getBehaviorNode(behavior.getText(),null);
+		Node toAdd = actorRuleFactory.getAuthoringRule(behavior.getText(),null).createNode();
 		toAdd.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2) remove(toAdd);
 		});
 		if(isTrigger(behavior.getText())) {
 			triggers.getChildren().add(toAdd);
-			//TODO: Create ITrigger and add to list of ITriggers
 		}
 		else actions.getChildren().add(toAdd);
 	}
@@ -148,14 +152,14 @@ public class ActorRule {
 	 */
 	public void addSound(Label sound) {
 		if(isInPath(sound.getText(), myLibraryResources.getString("Sounds"))){
-			Node toAdd = actorRuleFactory.getBehaviorNode(PLAY_SOUND, sound.getText());
+			Node toAdd = actorRuleFactory.getAuthoringRule(PLAY_SOUND, sound.getText()).createNode();
 			toAdd.setOnMouseClicked(event -> {
 				if(event.getClickCount()==2) remove(toAdd);
 			});
 			actions.getChildren().add(toAdd);
 		}
 		else{
-			Node toAdd = actorRuleFactory.getBehaviorNode(PLAY_MUSIC, sound.getText());
+			Node toAdd = actorRuleFactory.getAuthoringRule(PLAY_MUSIC, sound.getText()).createNode();
 			toAdd.setOnMouseClicked(event -> {
 				if(event.getClickCount()==2) remove(toAdd);
 			});
@@ -181,7 +185,7 @@ public class ActorRule {
 	 * @param image
 	 */
 	public void addImage(Label image) {
-		Node toAdd = actorRuleFactory.getBehaviorNode(CHANGE_IMAGE,image.getText());
+		Node toAdd = actorRuleFactory.getAuthoringRule(CHANGE_IMAGE,image.getText()).createNode();
 		toAdd.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2) remove(toAdd);
 		});

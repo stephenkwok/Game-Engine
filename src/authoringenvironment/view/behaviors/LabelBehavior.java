@@ -3,12 +3,13 @@ package authoringenvironment.view.behaviors;
 import java.util.ResourceBundle;
 
 import authoringenvironment.view.TriggerFactory;
-import gui.view.EditingElementParent;
+import gameengine.model.IAction;
+import gameengine.model.ITrigger;
 import gui.view.IGUIElement;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 
-public abstract class LabelBehavior implements IGUIElement{
+public abstract class LabelBehavior implements IGUIElement, IAuthoringRule{
 	private String behaviorType;
 	private TriggerFactory triggerFactory;
 	
@@ -32,4 +33,10 @@ public abstract class LabelBehavior implements IGUIElement{
 	}
 	
 	abstract void createTriggerOrAction();
+
+	@Override
+	public abstract IAction getAction();
+
+	@Override
+	public abstract ITrigger getTrigger();
 }

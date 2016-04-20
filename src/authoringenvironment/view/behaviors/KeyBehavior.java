@@ -5,13 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import gameengine.model.IAction;
 import gameengine.model.ITrigger;
 import javafx.scene.input.KeyCode;
 /**
  * GUI representation of PressKey behavior, which requires single input in ComboBox form
  * @author AnnieTang
  */
-public class KeyBehavior extends ComboBoxTextBehavior {
+public class KeyBehavior extends ComboBoxBehavior {
 	private ITrigger myTrigger;
 	
 	public KeyBehavior(String behaviorType, ResourceBundle myResources) {
@@ -38,6 +39,14 @@ public class KeyBehavior extends ComboBoxTextBehavior {
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
 		//add ITrigger 
 		System.out.println(myTrigger);
+	}
+	@Override
+	public IAction getAction() {
+		return null;
+	}
+	@Override
+	public ITrigger getTrigger() {
+		return this.myTrigger;
 	}
 
 }

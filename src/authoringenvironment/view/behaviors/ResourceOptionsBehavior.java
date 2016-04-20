@@ -4,14 +4,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import gameengine.model.IAction;
+import gameengine.model.ITrigger;
 /**
  * GUI representation of behaviors: ChangeMusic, PlaySound, PlayMusic
  * @author AnnieTang
  */
-public class ResourceOptionsBehavior extends ComboBoxTextBehavior {
+public class ResourceOptionsBehavior extends ComboBoxBehavior {
 	private static final String PATHNAME = "Pathname";
 	private List<String> fileNames;
 	private String pathname;
+	private IAction myAction;
 	
 	public ResourceOptionsBehavior(String behaviorType, ResourceBundle myResources){
 		super(behaviorType, myResources);
@@ -44,6 +48,15 @@ public class ResourceOptionsBehavior extends ComboBoxTextBehavior {
 	@Override
 	void createTriggerOrAction() {
 		// TODO Auto-generated method stub
+		//myAction = 
 		
+	}
+	@Override
+	public IAction getAction() {
+		return this.myAction;
+	}
+	@Override
+	public ITrigger getTrigger() {
+		return null;
 	}
 }

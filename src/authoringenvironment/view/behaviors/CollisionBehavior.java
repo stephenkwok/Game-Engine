@@ -6,9 +6,10 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
+import gameengine.model.IAction;
 import gameengine.model.ITrigger;
 
-public class CollisionBehavior extends ComboBoxBehavior {
+public class CollisionBehavior extends IEditableGameElementBehavior {
 	private List<IAuthoringActor> myActors;
 	private IAuthoringActor otherActor;
 	private ITrigger myTrigger;
@@ -39,6 +40,16 @@ public class CollisionBehavior extends ComboBoxBehavior {
 	@Override
 	protected void updateValueBasedOnEditable() {
 		getComboBox().setValue(otherActor);
+	}
+
+	@Override
+	public IAction getAction() {
+		return null;
+	}
+
+	@Override
+	public ITrigger getTrigger() {
+		return this.myTrigger;
 	}
 
 }

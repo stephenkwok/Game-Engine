@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
+import gameengine.model.IAction;
 import gameengine.model.ITrigger;
 
 public class ClickBehavior extends LabelBehavior {
@@ -20,8 +21,17 @@ public class ClickBehavior extends LabelBehavior {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(myActor);
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
-		//add ITrigger 
 		System.out.println(myTrigger);
+	}
+
+	@Override
+	public IAction getAction() {
+		return null;
+	}
+
+	@Override
+	public ITrigger getTrigger() {
+		return this.myTrigger;
 	}
 
 }
