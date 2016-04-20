@@ -24,6 +24,7 @@ public class Game extends Observable implements Observer {
 	public static final int SIZE = 400;
 	public static final int FRAMES_PER_SECOND = 60;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+	private static final int BACKGROUND_SCROLL_SPEED = -1;
 
 	private String initialGameFile;
 	private List<Level> levels;
@@ -126,7 +127,19 @@ public class Game extends Observable implements Observer {
 		myCollisionDetector.detection(getCurrentActors());
 		signalTick();
 		updateActors();
+		updateBackground();
 	}
+
+
+	private void updateBackground() {
+		this.levels.get(info.getMyCurrentLevelNum()).scrollBackground(BACKGROUND_SCROLL_SPEED);
+	}
+	
+
+    /**
+     * Updates the physics for each Actor
+     */
+
 	
 	private void signalTick(){
 		handleTrigger(new TickTrigger());
