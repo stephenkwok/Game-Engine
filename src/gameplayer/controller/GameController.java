@@ -73,7 +73,6 @@ public class GameController implements Observer, IGameController {
 	 */
 	public void initialize (int level){
 		model.setCurrentLevel(level);
-		//model.getMainCharacter().changeAttribute(AttributeType.POINTS, 0);
 		ObservableMap<String, Object> a = FXCollections.observableHashMap();
 		a.addListener(new MapChangeListener<String, Object>() {
 			@Override
