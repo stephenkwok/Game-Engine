@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import gameengine.model.Actor;
+import gameengine.model.AttributeType;
 import gameengine.model.IAction;
 
 public class ActionFactory {	
@@ -80,6 +81,12 @@ public class ActionFactory {
 		Class<?> clazz = Class.forName(className);
 		Constructor<?> constructor = clazz.getConstructor(Actor.class);
 		return (IAction) constructor.newInstance(myActor);
+	}
+	
+	private IAction createChangeAttributeBehavior(String actionType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Class<?> clazz = Class.forName(className);
+		Constructor<?> constructor = clazz.getConstructor(Actor.class, AttributeType.class, int.class);
+		return (IAction) constructor.newInstance(arguments.get(0),arguments.get(1),arguments.get(2));
 	}
 	
 	

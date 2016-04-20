@@ -106,4 +106,9 @@ public class ActorRuleFactory {
 		Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, List.class);
 		return (IGUIElement) constructor.newInstance(behaviorType,myResources, myActors);
 	}
+	
+	private IGUIElement createChangeAttributeBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		//same constructor
+		return createLabelBehavior(behaviorType, className);
+	}
 }
