@@ -3,6 +3,7 @@ package gameengine.model.Triggers;
 import gameengine.model.Actor;
 import gameengine.model.IActor;
 import gameengine.model.ITrigger;
+import javafx.geometry.Bounds;
 
 /**
  * @author blakekaplan
@@ -11,10 +12,15 @@ public class ClickTrigger implements ITrigger {
 
     private double myX;
     private double myY;
+    private Actor myActor;
 
-    @Override
-    public boolean evaluate(IActor myActor) {
-        return myActor.getMyImageView().contains(getMyX(), getMyY());
+    public ClickTrigger(Actor actor) {
+        myActor = actor;
+    }
+
+    public ClickTrigger(int x, int y) {
+        myX = x;
+        myY = y;
     }
 
     @Override
@@ -22,24 +28,25 @@ public class ClickTrigger implements ITrigger {
         return "Click";
     }
 
-    public void setClickedAt(double x, double y) {
-        setMyX(x);
-        setMyY(y);
+    public double getMyX() {
+        return myX;
     }
 
-	public double getMyX() {
-		return myX;
-	}
+    public double getMyY() {
+        return myY;
+    }
 
-	public void setMyX(double myX) {
-		this.myX = myX;
-	}
+    /**
+     * Checks a boolean condition against the state of an actor
+     *
+     * @param otherTrigger A trigger to check information against
+     * @return A boolean that says if the condition is true or false
+     */
+    @Override
+    public boolean evaluate(ITrigger otherTrigger) {
+        ClickTrigger otherClick = (ClickTrigger) otherTrigger;
+        return (myActor.getBounds().contains(otherClick.getMyX(), otherClick.getMyY()));
+    }
 
-	public double getMyY() {
-		return myY;
-	}
 
-	public void setMyY(double myY) {
-		this.myY = myY;
-	}
 }

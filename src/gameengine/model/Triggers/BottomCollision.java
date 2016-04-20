@@ -13,13 +13,14 @@ public class BottomCollision extends CollisionTrigger implements ITrigger {
     }
 
     @Override
-    public boolean evaluate(IActor myActor) {
-        return true;
+    public boolean evaluate(ITrigger otherTrigger) {
+        BottomCollision otherCollision = (BottomCollision) otherTrigger;
+        return this.equals(otherCollision);
     }
 
     @Override
     public String getMyKey() {
-        return makeName(COLLISION_TYPE);
+        return COLLISION_TYPE;
     }
 
 }
