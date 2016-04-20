@@ -90,7 +90,7 @@ public class Tester extends Application {
 		Action action3 = new HorizontalStaticCollision((IPlayActor)actor1);
 		Action action4 = new MoveUp((IPlayActor)actor1);
 		Action action5 = new VerticalBounceCollision((IPlayActor)actor1);
-		Action action6 = new HorizontalStaticCollision((IPlayActor)actor1);
+		Action action6 = new WinGame((IPlayActor)actor1);
 		Rule rule = new Rule(trigger1,action1);
 		Rule rule2 = new Rule(trigger2, action2);
 		Rule rule3 = new Rule(trigger3,action3);

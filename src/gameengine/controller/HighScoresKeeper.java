@@ -16,6 +16,9 @@ public class HighScoresKeeper {
 		setMyScores(scoresMap);
 	}
 	
+	public void clearGameScores(String gameIdentifier) {
+		myScores.put(gameIdentifier, new TreeMap<>());
+	}
 	
 	public void addScore(String gameIdentifier, String player, int score) {
 		Map<String, Integer> gameScores;
