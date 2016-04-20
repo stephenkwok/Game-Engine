@@ -39,7 +39,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
     private double veloY;
     private int myID;
     private double myFriction;
-    private boolean inAir;
     private String myName;
     private String myImageViewName;
     @XStreamOmitField
@@ -51,8 +50,19 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
     private double myHealth;
     private List<ActorRule> myActorRules;
     private boolean isDead;
+    private double heading;
+    
+    private boolean inAir;
 
-    /**
+	public boolean isInAir() {
+		return inAir;
+	}
+
+	public void setInAir(boolean isInAir) {
+		this.inAir = isInAir;
+	}
+
+	/**
      * Converts a list of Rules to a map of trigger to list of Actions
      */
     public Actor() {
@@ -370,20 +380,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
 	public boolean isMain(){
 		return isMain;
 	}
-	/**
-	 * @return the inAir
-	 */
-	public boolean isInAir() {
-		return inAir;
-	}
-
-	/**
-	 * @param inAir the inAir to set
-	 */
-    public void setInAir(boolean inAir) {
-		this.inAir = inAir;
-	}
-
     /**
      * Provides the Actor's Rules
      * @return  The Actor's Rules
@@ -490,6 +486,13 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      */
     public void setDead(boolean isDead) {
 		this.isDead = isDead;
+	}
+    public double getHeading() {
+		return heading;
+	}
+
+	public void setHeading(double heading) {
+		this.heading = heading;
 	}
 
     /**
