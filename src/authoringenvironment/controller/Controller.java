@@ -52,7 +52,7 @@ public class Controller extends BranchScreenController {
 
 	public Controller(Stage stage) {
 		super(stage);
-		this.guiMain = new GUIMain();
+		setUpScreen();
 		this.myResources = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
 		changeScreen(guiMain);
 	}
@@ -60,6 +60,7 @@ public class Controller extends BranchScreenController {
 	
 	private void setUpScreen(){
 		this.guiMain = new GUIMain();
+		//init();
 		this.guiMain.addObserver(this);
 	}
 	//TODO This constructor is not parallel with other BranchScreenController subclasses
