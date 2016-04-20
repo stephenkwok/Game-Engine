@@ -271,60 +271,6 @@ public class Level implements ILevel, IEditableGameElement {
 	public void setMyScrollingDirection(String myScrollingDirection) {
 		this.myScrollingDirection = myScrollingDirection;
 	}
-
-    /**
-     * Provides the Level's termination string
-     *
-     * @return  The Level's termination strings
-     */
-	public String getMyTermination() {
-		return myTermination;
-	}
-
-    /**
-     * Sets the Level's termination string
-     *
-     * @param myTermination The Level's termination string
-     */
-	public void setMyTermination(String myTermination) {
-		this.myTermination = myTermination;
-	}
-
-    /**
-     * Provides the Level's winning condition string
-     *
-     * @return  The Level's winning condition string
-     */
-	public String getMyWinningCondition() {
-		return myWinningCondition;
-	}
-
-    /**
-     * Sets the Level's winning condition string
-     *
-     * @param myWinningCondition    The desired winning condition string
-     */
-	public void setMyWinningCondition(String myWinningCondition) {
-		this.myWinningCondition = myWinningCondition;
-	}
-
-    /**
-     * Provides the Level's losing condition string
-     *
-     * @return  The Level's losing condition string
-     */
-	public String getMyLosingCondition() {
-		return myLosingCondition;
-	}
-
-    /**
-     * Sets the Level's losing condition string
-     *
-     * @param myLosingCondition The desired losing condition string
-     */
-	public void setMyLosingCondition(String myLosingCondition) {
-		this.myLosingCondition = myLosingCondition;
-	}
 	
 	public void removeActors(List<IPlayActor> deadActors) {
 		myActors.removeAll(deadActors);
