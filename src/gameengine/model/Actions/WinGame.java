@@ -1,17 +1,20 @@
 package gameengine.model.Actions;
 
+import java.util.Observable;
+
 import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
 
 public class WinGame extends Action {
 
-	public WinGame(Actor assignedActor) {
-		super(assignedActor);
+	public WinGame(IPlayActor actor) {
+		super(actor);
 	}
 
 	@Override
 	public void perform() {
         getMyActor().changed();
-        getMyActor().notifyObservers("endGame");		
+        ((Observable) getMyActor()).notifyObservers("endGame");		
 	}
 
 }

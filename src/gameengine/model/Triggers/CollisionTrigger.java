@@ -2,33 +2,34 @@ package gameengine.model.Triggers;
 
 import gameengine.model.Actor;
 import gameengine.model.IActor;
+import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 
 public abstract class CollisionTrigger implements ITrigger {
 
-    private IActor myMainActor;
-    private IActor myCollisionActor;
+    private IPlayActor myMainActor;
+    private IPlayActor myCollisionActor;
 
     @Override
     public abstract boolean evaluate(ITrigger otherTrigger);
 
-    public CollisionTrigger(Actor mainActor, Actor collisionActor) {
-        setMyMainActor(mainActor);
-        setMyCollisionActor(collisionActor);
+    public CollisionTrigger(IPlayActor actor1, IPlayActor actor2) {
+        myMainActor = actor1;
+        myCollisionActor = actor2;
     }
 
     @Override
     public abstract String getMyKey();
 
-    public IActor getMyMainActor() {
+    public IPlayActor getMyMainActor() {
         return myMainActor;
     }
 
-    public void setMyMainActor(IActor myMainActor) {
+    public void setMyMainActor(IPlayActor myMainActor) {
         this.myMainActor = myMainActor;
     }
 
-    public IActor getMyCollisionActor() {
+    public IPlayActor getMyCollisionActor() {
         return myCollisionActor;
     }
 
@@ -39,7 +40,7 @@ public abstract class CollisionTrigger implements ITrigger {
     @Override
     public boolean equals(Object o) {
         CollisionTrigger otherTrigger = (CollisionTrigger) o;
-        if (myMainActor.getMyName().equals(otherTrigger.getMyMainActor().getMyName()) && myCollisionActor.getMyName().equals(otherTrigger.getMyCollisionActor().getMyName())) {
+        if (myMainActor.getName().equals(otherTrigger.getMyMainActor().getName()) && myCollisionActor.getName().equals(otherTrigger.getMyCollisionActor().getName())) {
             return true;
         }
         return false;

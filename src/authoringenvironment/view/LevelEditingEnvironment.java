@@ -9,7 +9,7 @@ import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.controller.Controller;
 import gameengine.controller.Level;
-import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.ImageView;
@@ -133,7 +133,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 				if (db.hasString()) {
 					IAuthoringActor actor = getActorById(Integer.parseInt(db.getString()));
 					//actor.setMyID(myLevel.getActors().size());
-					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getMyImageView().getFitHeight());
+					ImageviewActorIcon iconToAdd = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
 					iconToAdd.getImageView().setOnDragDetected(null);
 					iconToAdd.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {
 						@Override public void handle(MouseEvent event) {
@@ -141,7 +141,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 							event.consume();
 						}
 					}); 
-					myLevel.addActor((Actor) actor);
+					myLevel.addActor(actor);
 					myActorPreviews.add(iconToAdd);
 					myCenterPane.getChildren().add(iconToAdd.getImageView());
 					success = true;
@@ -228,7 +228,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 * Updates the preview to show the level's background.
 	 */
 	private void updateLevelBackground() {
-		myLevelBackground = myLevel.getMyImageView();
+		myLevelBackground = myLevel.getImageView();
 		myLevelBackground.setPreserveRatio(true);
 		myLevelBackground.fitWidthProperty().bind(myCenterPane.widthProperty());
 		myCenterPane.getChildren().add(myLevelBackground);
@@ -239,8 +239,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 */
 	private void addLevelActorsToScene() {
 		myActorPreviews.clear();
-		for (IAuthoringActor actor: myLevel.getActors()) {
-			ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getMyImageView().getFitHeight());
+		for (IPlayActor playActor: myLevel.getActors()) {
+			IAuthoringActor actor = (IAuthoringActor)playActor;
+			ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
 			icon.getImageView().setX(actor.getX());
 			icon.getImageView().setY(actor.getY());
 			icon.getImageView().setOnMouseDragged(new EventHandler<MouseEvent>() {

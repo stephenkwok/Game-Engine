@@ -1,7 +1,6 @@
 package gameengine.model.Triggers;
 
-import gameengine.model.Actor;
-import gameengine.model.IActor;
+import gameengine.model.*; 
 import gameengine.model.ITrigger;
 import javafx.geometry.Bounds;
 
@@ -47,6 +46,5 @@ public class ClickTrigger implements ITrigger {
         ClickTrigger otherClick = (ClickTrigger) otherTrigger;
         return (myActor.getBounds().contains(otherClick.getMyX(), otherClick.getMyY()));
     }
-
 
 }

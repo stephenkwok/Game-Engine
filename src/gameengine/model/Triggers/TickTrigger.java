@@ -3,6 +3,7 @@ package gameengine.model.Triggers;
 
 import gameengine.model.Actor;
 import gameengine.model.IActor;
+import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 
 /**

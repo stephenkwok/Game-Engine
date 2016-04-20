@@ -42,25 +42,11 @@ public interface IActor {
     public double getVeloY();
 
     /**
-     * Provides the list of Triggers that the Actor responds to
-     *
-     * @return The list of Triggers
-     */
-    public Set<String> getTriggers();
-
-    /**
      * Adds a new Rule to the Actor
      *
      * @param newRule The Rule to be added to the Actor
      */
     public void addRule(Rule newRule);
-
-    /**
-     * Provides the Actor's ID
-     *
-     * @return The Actor's ID
-     */
-    public int getMyID();
 
     /**
      * Perform's the Actor's actions for a particular trigger
