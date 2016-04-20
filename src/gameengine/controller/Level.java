@@ -3,6 +3,8 @@ package gameengine.controller;
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -41,6 +43,8 @@ public class Level implements ILevel, IEditableGameElement {
     private String myBackgroundImgName;
 	@XStreamOmitField
     private ImageView myBackground;
+	@XStreamOmitField
+	private DoubleProperty myBackgroundX = new SimpleDoubleProperty();
 
 
     /**
@@ -136,6 +140,7 @@ public class Level implements ILevel, IEditableGameElement {
 	@Override
 	public void setImageView(ImageView imageView) {
 		myBackground = imageView;
+		myBackgroundX  = new SimpleDoubleProperty(myBackground.getX());
 	}
 
     /**
@@ -323,6 +328,24 @@ public class Level implements ILevel, IEditableGameElement {
 	
 	public void removeActors(List<IPlayActor> deadActors) {
 		myActors.removeAll(deadActors);
+	}
+
+	public DoubleProperty getMyBackgroundX() {
+		return myBackgroundX;
+	}
+
+	public void setMyBackgroundX(DoubleProperty myBackgroundX) {
+		this.myBackgroundX = myBackgroundX;
+	}
+	
+	public void scrollBackground(int change) {
+		this.myBackground.setX((this.myBackground.getX()+change)%this.myBackground.getImage().getWidth());
+		this.myBackgroundX.set(myBackground.getX());
+	}
+
+	public void setMyImageView(ImageView imageView) {
+		myBackground = imageView;
+		myBackgroundX = new SimpleDoubleProperty(myBackground.getX());
 	}
 
 }
