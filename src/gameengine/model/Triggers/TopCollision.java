@@ -2,6 +2,7 @@ package gameengine.model.Triggers;
 
 import gameengine.model.Actor;
 import gameengine.model.IActor;
+import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 
 public class TopCollision extends CollisionTrigger implements ITrigger {
@@ -18,7 +19,7 @@ public class TopCollision extends CollisionTrigger implements ITrigger {
     }
 
     @Override
-    public boolean evaluate(IActor myActor) {
+    public boolean evaluate(IPlayActor myActor) {
         return true;
     }
 }

@@ -3,6 +3,7 @@
 
 import gameengine.model.Actions.MovingAction;
 import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
 import gameengine.model.PhysicsEngine;
 
 import java.util.List;
@@ -14,8 +15,8 @@ public class MoveLeft extends MovingAction {
 
     private static final double LEFT_DIRECTION = 180;
 
-    public MoveLeft(Actor assignedActor) {
-        super(assignedActor);
+    public MoveLeft(IPlayActor actor) {
+        super(actor);
     }
 
     @Override

@@ -3,6 +3,7 @@ package gameengine.model.Actions;
 
 import gameengine.model.Actor;
 import gameengine.model.IAction;
+import gameengine.model.IPlayActor;
 import gameengine.model.PhysicsEngine;
 
 
@@ -15,15 +16,15 @@ import gameengine.model.PhysicsEngine;
  */
 public abstract class Action implements IAction {
 
-    private Actor myActor;
+    private IPlayActor myActor;
 
     /**
      * Creates a reference to the Actor that will be changed
      *
-     * @param assignedActor The Actor that will be changed
+     * @param actor The Actor that will be changed
      */
-    public Action(Actor assignedActor) {
-        setMyActor(assignedActor);
+    public Action(IPlayActor actor) {
+        myActor = actor;
     }
 
     /**
@@ -37,18 +38,10 @@ public abstract class Action implements IAction {
      *
      * @return The Actor that the Action references
      */
-    public Actor getMyActor() {
+    public IPlayActor getMyActor() {
         return myActor;
     }
 
-    /**
-     * Assigns an Actor to the actions
-     *
-     * @param actor The actor to be assigned
-     */
-    public void setMyActor(Actor actor) {
-    	this.myActor = actor;
-    }
 
     
 }

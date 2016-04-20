@@ -6,6 +6,8 @@ import java.util.Observable;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IActor;
+import gameengine.model.IDisplayActor;
+import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.KeyTrigger;
@@ -65,16 +67,13 @@ public class GameScreen extends Observable implements IGameScreen {
 	 * Will add a node to the screen's scene representing the given actor's view.
 	 * @param actor an instance of IActor
 	 */
-	public void addActor (Actor actor){
-		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(actor.getMyImageViewName())));
-		actor.setMyImageView(imageView);
-		getMySubgroup().getChildren().add(actor.getMyImageView());//
+	public void addActor (IDisplayActor actor){
+		actor.setImageViewName(actor.getImageViewName());
+		getMySubgroup().getChildren().add(actor.getImageView());
 	}
 	
-	public void removeActors(List<Actor> actors){
-		for(Actor a: actors){
-			mySubgroup.getChildren().remove(a.getMyImageView());
-		}
+	public void removeActor(IDisplayActor a){
+		mySubgroup.getChildren().remove(a.getImageView());
 	}
 	
 

@@ -28,16 +28,16 @@ public class CollisionDetection {
 	 * Called on list of actors in Level to detect any collisions between unique actors
 	 * @return List of actors with updated position variables
 	 */
-	public List<Actor> detection(List<Actor> actors){
-		for (Actor a1 : actors){
-			for(Actor a2 : actors){
+	public List<IPlayActor> detection(List<IPlayActor> list){
+		for (IPlayActor a1 : list){
+			for(IPlayActor a2 : list){
 				if(a1 != a2){            //Checks that each actor in the pair is unique
 					if(isCollision(a1,a2))
 						resolveCollision(a1,a2);
 				}
 			}
 		}
-		return actors;
+		return list;
 	}
 		
 	/**
@@ -47,13 +47,13 @@ public class CollisionDetection {
 	 * @param a2
 	 * @return True = Is Collision, False = No Collision
 	 */
-	private boolean isCollision(Actor a1, Actor a2){
+	private boolean isCollision(IPlayActor a1, IPlayActor a2){
 		return a1.getBounds().intersects(a2.getBounds());
 	}
 	
-	private Point2D findCenter(Actor a){
-		double centerX  = (a.getBounds().getWidth())*.5 + a.getBounds().getMinX();
-		double centerY  = (a.getBounds().getHeight())*.5 + a.getBounds().getMinY();
+	private Point2D findCenter(IPlayActor a1){
+		double centerX  = (a1.getBounds().getWidth())*.5 + a1.getBounds().getMinX();
+		double centerY  = (a1.getBounds().getHeight())*.5 + a1.getBounds().getMinY();
 		Point2D center = new Point2D(centerX,centerY);
 		return center;
 	}
@@ -66,7 +66,7 @@ public class CollisionDetection {
 	 * @param a2
 	 * @return Type of collision-String
 	 */
-	private String getCollisionType(Actor a1, Actor a2){
+	private String getCollisionType(IPlayActor a1, IPlayActor a2){
 
 		
 		double w = (0.5 * (a1.getBounds().getWidth() + a2.getBounds().getWidth()));
@@ -95,12 +95,11 @@ public class CollisionDetection {
 				return BottomCollision;
 			}
 		} 
-
 	}
 	
-	private void resolveCollision(Actor a1, Actor a2){
+	private void resolveCollision(IPlayActor a1, IPlayActor a2){
 		String collisionType = getCollisionType(a1,a2);
-		String triggerString = a1.getMyName() + collisionType + a2.getMyName();
+		String triggerString = a1.getName() + collisionType + a2.getName();
 		a1.performActionsFor(triggerString);   
 	}
 

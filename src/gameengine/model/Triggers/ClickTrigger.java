@@ -1,7 +1,6 @@
 package gameengine.model.Triggers;
 
-import gameengine.model.Actor;
-import gameengine.model.IActor;
+import gameengine.model.*; 
 import gameengine.model.ITrigger;
 
 /**
@@ -13,8 +12,8 @@ public class ClickTrigger implements ITrigger {
     private double myY;
 
     @Override
-    public boolean evaluate(IActor myActor) {
-        return myActor.getMyImageView().contains(getMyX(), getMyY());
+    public boolean evaluate(IPlayActor myActor) {
+        return ((IDisplayActor) myActor).getImageView().contains(myX, myY);
     }
 
     @Override
@@ -23,23 +22,8 @@ public class ClickTrigger implements ITrigger {
     }
 
     public void setClickedAt(double x, double y) {
-        setMyX(x);
-        setMyY(y);
+        myX = x;
+        myY = y;
     }
 
-	public double getMyX() {
-		return myX;
-	}
-
-	public void setMyX(double myX) {
-		this.myX = myX;
-	}
-
-	public double getMyY() {
-		return myY;
-	}
-
-	public void setMyY(double myY) {
-		this.myY = myY;
-	}
 }
