@@ -1,6 +1,7 @@
 package authoringenvironment.view;
 
 import authoringenvironment.model.IAuthoringActor;
+import gameengine.model.Actor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -12,7 +13,6 @@ import javafx.scene.image.ImageView;
 public class ImageviewActorIcon extends ImageView {
 	private IAuthoringActor myActor;
 	private int myID;
-	private ImageView myImageView;
 	private boolean onLevel;
 	
 	/**
@@ -20,21 +20,39 @@ public class ImageviewActorIcon extends ImageView {
 	 * @param actor: actor to construct an icon for.
 	 */
 	public ImageviewActorIcon(IAuthoringActor actor, double height) {
+		myActor = actor;
 		setImage(actor.getMyImageView().getImage());
 		this.setFitHeight(height);
 		this.setPreserveRatio(true);
-		myActor = actor;
 		myID = actor.getMyID();
 		onLevel = false;
 		updateImageView();
 	}
 	
+	public IAuthoringActor getActor() {
+		Actor actor = new Actor();
+		actor.setMyName(myActor.getMyName());
+		actor.setMyImageViewName(myActor.getMyImageViewName());
+		actor.setMyImageView(myActor.getMyImageView());
+		actor.setMyID(myActor.getMyID());
+		actor.setSize(myActor.getSize());
+		actor.setX(0);
+		actor.setY(0);
+		return actor;
+	}
+	
+	public IAuthoringActor getRefActor() {
+		return myActor;
+	}
+	
+	// if you have this already on the board, then it should reference the already new actor not the original actor the icon was made from
 	/**
 	 * Gets the actor associated with this icon.
 	 * @return my actor.
 	 */
-	public IAuthoringActor getActor() {
-		return myActor;
+	public void updateIconActorPosition(double x, double y) {
+		myActor.setX(x);
+		myActor.setY(y);
 	}
 	
 	/**
@@ -44,14 +62,6 @@ public class ImageviewActorIcon extends ImageView {
 	public int getID() {
 		return myID;
 	}
-	
-	/**
-	 * Gets the icon's imageview.
-	 * @return copy of actor's imageview.
-	 */
-/*	public ImageView getImageView() {
-		return myImageView;
-	}*/
 	
 	/**
 	 * Update the imageview based on the actor's current image.

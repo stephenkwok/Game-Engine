@@ -74,7 +74,7 @@ public class TabActors extends TabParent {
 	public List<IAuthoringActor> getActors() {
 		List<IAuthoringActor> actorList = new ArrayList<>();
 		for (int i = 0; i < actorIcons.size(); i++) {
-			actorList.add(actorIcons.get(i).getActor());
+			actorList.add(actorIcons.get(i).getRefActor());
 		}
 		return actorList;
 	}

@@ -153,7 +153,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 				Dragboard db = event.getDragboard();
 				boolean success = false;
 				if (db.hasString()) {
-					IAuthoringActor actor = getActorById(Integer.parseInt(db.getString()));
+					IAuthoringActor actor = getActorByIconId(Integer.parseInt(db.getString()));
 					myLevel.addActor((Actor) actor);
 					addActorToScene(actor);
 					success = true;
@@ -170,9 +170,8 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 * @param actorIV: Imageview of actor to move.
 	 * @param event: drag.
 	 */
-	private void moveActor(IAuthoringActor actor, ImageviewActorIcon icon, MouseEvent event) {
-		actor.setX(event.getX());
-		actor.setY(event.getY());
+	private void moveActor(ImageviewActorIcon icon, MouseEvent event) {
+		icon.updateIconActorPosition(event.getX(), event.getY());
 		icon.setX(event.getX());
 		icon.setY(event.getY());
 	}
@@ -182,10 +181,11 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 * @param id: ID of actor of interest.
 	 * @return actor with given ID.
 	 */
-	private IAuthoringActor getActorById(int id) {
-		for (int i = 0; i < availableActors.size(); i++) {
-			if (availableActors.get(i).getMyID() == id) {
-				return availableActors.get(i);
+	private IAuthoringActor getActorByIconId(int id) {
+		List<ImageviewActorIcon> icons = myInspector.getActorsTab().getIcons();
+		for (int i = 0; i < icons.size(); i++) {
+			if (icons.get(i).getID() == id) {
+				return icons.get(i).getActor();
 			}
 		}
 		return null;
@@ -249,7 +249,6 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		resizeBackgroundBasedOnScrolling();
 		myStackPane.getChildren().addAll(myLevelBackground, myLevelPane);
 		myLevelPane.getChildren().addAll(myBoundary);
-		//myStackPane.getChildren().add(myBoundary);
 	}
 	
 	public void changeBackgroundImage(Image image, File imageFile) {
@@ -290,7 +289,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	private void setIconBehavior(ImageviewActorIcon icon) {
 		icon.setOnMouseDragged(new EventHandler<MouseEvent>() {
 			@Override public void handle(MouseEvent event) {
-				moveActor(icon.getActor(), icon, event);
+				moveActor(icon, event);
 				event.consume();
 			}
 		}); 
