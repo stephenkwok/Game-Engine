@@ -18,13 +18,13 @@ public class CollisionBehavior extends IEditableGameElementBehavior {
 		super(behaviorType, myResources);
 		this.myActors = myActors;
 		setButtonAction(e -> {
-		this.otherActor = (IAuthoringActor) getComboBox().getValue();
-		List<Object> arguments = new ArrayList<>();
-		arguments.add(myActor);
-		arguments.add(otherActor);
-		myTrigger = getTriggerFactory().createNewTrigger(behaviorType, arguments);
-		//add ITrigger 
-		System.out.println(myTrigger);
+			this.otherActor = (IAuthoringActor) getComboBox().getValue();
+			List<Object> arguments = new ArrayList<>();
+			arguments.add(myActor);
+			arguments.add(otherActor);
+			myTrigger = getTriggerFactory().createNewTrigger(behaviorType, arguments);
+			//add ITrigger 
+			System.out.println(myTrigger);
 		});
 	}
 
