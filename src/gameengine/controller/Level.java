@@ -70,9 +70,7 @@ public class Level implements Observer, ILevel, IEditableGameElement {
         if (!getMyTriggerMap().containsKey(myTrigger.getMyKey())) return;
         List<Actor> relevantActors = getMyTriggerMap().get(myTrigger.getMyKey());
         for (Actor myActor : relevantActors) {
-            if (myTrigger.evaluate(myActor)){
-                myActor.performActionsFor(myTrigger.getMyKey());
-            }
+            myActor.performActionsFor(myTrigger);
         }
     }
 

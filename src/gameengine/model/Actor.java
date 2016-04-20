@@ -43,7 +43,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
     private String myImageViewName;
     @XStreamOmitField
     private ImageView myImageView;
-    private Map<String, List<Action>> myRules;
+    private Map<String, List<Rule>> myRules;
     private Map<AttributeType, Attribute> attributeMap;
     private PhysicsEngine myPhysicsEngine;
     private boolean isMain;
@@ -78,14 +78,14 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
     /**
      * Calls the appropriate sequence of Actions based on a provided Trigger
      *
-     * @param triggerString The string representation of the trigger to be executed
+     * @param myTrigger The trigger to be used
      */
     @Override
-    public void performActionsFor(String triggerString) {
-    	if(getMyRules().containsKey(triggerString)){
-            List<Action> myActions = getMyRules().get(triggerString);
-            for (Action myAction : myActions) {
-                myAction.perform();
+    public void performActionsFor(ITrigger myTrigger) {
+    	if(getMyRules().containsKey(myTrigger.getMyKey())){
+            List<Rule> myBehaviors = getMyRules().get(myTrigger.getMyKey());
+            for (Rule myRule : myBehaviors) {
+                if (myRule.getMyTrigger().evaluate(myTrigger)) myRule.getMyAction().perform();
             }
     	}
     }
@@ -128,15 +128,15 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * @param newRule The Rule to be added to the Actor
      */
     @Override
-    public void addRule(IRule newRule) {
+    public void addRule(Rule newRule) {
         if (getMyRules().containsKey(newRule.getMyTrigger().getMyKey())) {
-            List<Action> myActions = getMyRules().get(newRule.getMyTrigger().getMyKey());
-            myActions.add(newRule.getMyAction());
-            getMyRules().put(newRule.getMyTrigger().getMyKey(), myActions);
+            List<Rule> myBehaviors = getMyRules().get(newRule.getMyTrigger().getMyKey());
+            myBehaviors.add(newRule);
+            getMyRules().put(newRule.getMyTrigger().getMyKey(), myBehaviors);
         } else {
-            List<Action> myActions = new ArrayList<>();
-            myActions.add(newRule.getMyAction());
-            getMyRules().put(newRule.getMyTrigger().getMyKey(), myActions);
+            List<Rule> myBehaviors = new ArrayList<>();
+            myBehaviors.add(newRule);
+            getMyRules().put(newRule.getMyTrigger().getMyKey(), myBehaviors);
         }
     }
 
@@ -152,7 +152,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
 
     /**
      * Provides the Actor's ID number
-     *
+     *O
      * @return The Actor's ID number
      */
     @Override
@@ -384,7 +384,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * Provides the Actor's Rules
      * @return  The Actor's Rules
      */
-    public Map<String, List<Action>> getMyRules() {
+    public Map<String, List<Rule>> getMyRules() {
 		return myRules;
 	}
 
@@ -392,7 +392,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      * Sets the Actor's Rules
      * @param myRules   A new set of Actor rules
      */
-    public void setMyRules(Map<String, List<Action>> myRules) {
+    public void setMyRules(Map<String, List<Rule>> myRules) {
 		this.myRules = myRules;
 	}
 
@@ -439,7 +439,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
 	}
 	/**
      * Sets the Actor's ImageView's size
-     * @param size  The ImageView's size
      */
 	@Override
     public double getSize(){

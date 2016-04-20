@@ -2,6 +2,7 @@ package authoringenvironment.model;
 
 import authoringenvironment.view.ActorRule;
 import gameengine.model.IRule;
+import gameengine.model.Rule;
 import javafx.scene.image.ImageView;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface IAuthoringActor extends IEditableGameElement{
      *
      * @param newRule The Rule to be added to the Actor
      */
-	void addRule(IRule newRule);
+	void addRule(Rule newRule);
 	/**
      * Provides a list of Triggers that the Actor responds to
      *
