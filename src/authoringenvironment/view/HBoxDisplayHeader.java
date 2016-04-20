@@ -4,7 +4,6 @@ package authoringenvironment.view;
 import gui.view.ObjectObservable;
 import javafx.beans.binding.DoubleExpression;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -29,23 +28,15 @@ public abstract class HBoxDisplayHeader extends ObjectObservable {
 	public HBoxDisplayHeader(String labelText, DoubleExpression bindWidth) {
 		myHBox = new HBox(HBOX_SPACING);
 		myHBox.setMinHeight(HBOX_HEIGHT);
+		myHBox.setMaxHeight(HBOX_HEIGHT);
 		myHBox.prefWidthProperty().bind(bindWidth);
 		myHBox.setAlignment(Pos.CENTER);
-		myHBox.setStyle("-fx-border-color: gray;");
+		myHBox.setStyle("-fx-border-color: gray;"); // put this in resource file
 		myLabel = new Label(labelText);
 		myLabel.prefHeightProperty().bind(myHBox.heightProperty());
 		myLabel.setFont(new Font(LABEL_FONT, LABEL_FONT_SIZE));
 		myLabel.setAlignment(Pos.CENTER);
-		addToHBox(myLabel);
-	}
-
-	/**
-	 * Adds node to myHBox
-	 * 
-	 * @param node: node to add to the HBox
-	 */
-	protected void addToHBox(Node node) {
-		myHBox.getChildren().add(node);
+		myHBox.getChildren().add(myLabel);
 	}
 	
 	/**

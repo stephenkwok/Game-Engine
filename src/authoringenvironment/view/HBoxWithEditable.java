@@ -1,12 +1,15 @@
 package authoringenvironment.view;
 
 import java.util.Arrays;
+
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gui.view.ObjectObservable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 /**
  * 
@@ -19,21 +22,29 @@ import javafx.scene.image.ImageView;
  *
  */
 
-public class LabelWithEditable extends ObjectObservable {
+public class HBoxWithEditable extends ObjectObservable {
 
 	private static final String IMAGE_TEXT_PADDING = "    ";
-	private static final Double FIT_SIZE = 75.0;
+	private static final Double IMAGE_FIT_SIZE = 75.0;
 	private static final Double LABEL_PADDING = 10.0;
+	private static final Double HBOX_SPACING = 10.0;
+	private HBox myHBox;
 	private Label myLabel;
 	private IEditableGameElement myEditable;
 	private IEditingEnvironment myEnvironment;
 
-	public LabelWithEditable(IEditableGameElement editable, IEditingEnvironment environment) {
-		this.myEditable = editable;
-		this.myEnvironment = environment;
-		this.myLabel = new Label();
+	public HBoxWithEditable(IEditableGameElement editable, IEditingEnvironment environment) {
+		myEditable = editable;
+		myEnvironment = environment;
+		myLabel = new Label();
+		myHBox = new HBox(myLabel);
+		myHBox.setAlignment(Pos.CENTER_LEFT);
+		myHBox.setSpacing(HBOX_SPACING);
+		System.out.println(myEditable);
+		System.out.println(myEnvironment);
 		myLabel.setOnMouseClicked(e -> notifyObservers(Arrays.asList(myEditable, myEnvironment)));
 	}
+	
 	
 	/**
 	 * Updates the Label's text and image to account for any changes in the 
@@ -42,7 +53,7 @@ public class LabelWithEditable extends ObjectObservable {
 	public void update() {
 		myLabel.setText(IMAGE_TEXT_PADDING + myEditable.getMyName());
 		ImageView imageView = new ImageView(myEditable.getMyImageView().getImage());
-		imageView.setFitHeight(FIT_SIZE);
+		imageView.setFitHeight(IMAGE_FIT_SIZE);
 		imageView.setPreserveRatio(true);
 		myLabel.setPadding(new Insets(LABEL_PADDING));
 		myLabel.setGraphic(imageView);
@@ -54,6 +65,10 @@ public class LabelWithEditable extends ObjectObservable {
 	 */
 	public Label getLabel() {
 		return myLabel;
+	}
+	
+	public HBox getHBox() {
+		return myHBox;
 	}
 
 }

@@ -16,7 +16,7 @@ import authoringenvironment.view.ActorEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
 import authoringenvironment.view.GameEditingEnvironment;
-import authoringenvironment.view.LabelWithEditable;
+import authoringenvironment.view.HBoxWithEditable;
 import authoringenvironment.view.LevelEditingEnvironment;
 import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
@@ -72,7 +72,7 @@ public class Controller implements IScreenController, Observer {
 		game = new Game(gameInfo, myLevels);
 		actorEnvironment = new ActorEditingEnvironment(this, myResources, myStage);
 		gameEnvironment = new GameEditingEnvironment(gameInfo);
-		mainScreen = new GUIMainScreen(gameEnvironment, myStage.widthProperty(), myStage.heightProperty());
+		mainScreen = new GUIMainScreen(gameEnvironment, myStage.widthProperty(), myStage.heightProperty(), myLevels);
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class Controller implements IScreenController, Observer {
 	 * Switches screen to main screen
 	 */
 	public void goToMainScreen() {
-		mainScreen.updateAllNodes();
+		mainScreen.updatePreviewDisplays();
 		guiMain.setCenterPane(mainScreen.getPane());
 	}
 
@@ -216,7 +216,7 @@ public class Controller implements IScreenController, Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if (arg0 instanceof LabelWithEditable)
+		if (arg0 instanceof HBoxWithEditable)
 			handleObservableGoToEditingEnvironmentCall(arg1);
 		else if (arg0 instanceof ButtonFinish)
 			goToSplash();
@@ -234,8 +234,11 @@ public class Controller implements IScreenController, Observer {
 
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
 		List<Object> arguments = (List<Object>) notifyObserversArgument;
+		System.out.println(arguments.size());
 		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
 		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
+//		System.out.println(editable);
+		System.out.println(environment);
 		goToEditingEnvironment(editable, environment);
 	}
 }
