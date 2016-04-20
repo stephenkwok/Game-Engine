@@ -37,7 +37,6 @@ public class KeyBehavior extends ComboBoxBehavior {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(keyCode);
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
-		//add ITrigger 
 		System.out.println(myTrigger);
 	}
 	@Override

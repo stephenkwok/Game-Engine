@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
+import gameengine.model.Actor;
 import gameengine.model.IAction;
 import gameengine.model.ITrigger;
 
@@ -20,8 +21,8 @@ public class CollisionBehavior extends IEditableGameElementBehavior {
 		setButtonAction(e -> {
 			this.otherActor = (IAuthoringActor) getComboBox().getValue();
 			List<Object> arguments = new ArrayList<>();
-			arguments.add(myActor);
-			arguments.add(otherActor);
+			arguments.add((Actor) myActor);
+			arguments.add((Actor) otherActor);
 			myTrigger = getTriggerFactory().createNewTrigger(behaviorType, arguments);
 			System.out.println(myTrigger);
 		});
