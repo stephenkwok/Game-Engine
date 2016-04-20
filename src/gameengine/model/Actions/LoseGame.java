@@ -1,6 +1,9 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actions.Action;
+
+import java.util.Observable;
+
 import gameengine.model.Actor;
 import gameengine.model.PhysicsEngine;
 
@@ -14,7 +17,7 @@ public class LoseGame extends Action {
 	@Override
 	public void perform() {
 		getMyActor().changed();
-        getMyActor().notifyObservers("endGame");		
+        ((Observable) getMyActor()).notifyObservers("endGame");		
 	}
 
 	public Actor getAssignedActor() {

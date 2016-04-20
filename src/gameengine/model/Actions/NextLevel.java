@@ -1,5 +1,7 @@
 package gameengine.model.Actions;
 
+import java.util.Observable;
+
 import gameengine.model.Actor;
 
 public class NextLevel extends Action {
@@ -12,7 +14,7 @@ public class NextLevel extends Action {
 	@Override
 	public void perform() {
 		getMyActor().changed();
-        getMyActor().notifyObservers("nextLevel");		
+        ((Observable) getMyActor()).notifyObservers("nextLevel");		
 	}
 
 }

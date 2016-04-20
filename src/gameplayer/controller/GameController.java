@@ -2,15 +2,14 @@ package gameplayer.controller;
 
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Optional;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gamedata.controller.HighScoresController;
 import gameengine.controller.Game;
 import gameengine.controller.Level;
-import gameengine.model.Actor;
-import gameengine.model.AttributeType;
+import gameengine.model.IDisplayActor;
+import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
@@ -94,8 +93,8 @@ public class GameController implements Observer, IGameController {
 		Level current = model.getCurrentLevel();
 		view.clearGame();
 		view.addBackground(current.getMyBackgroundImgName());
-		for(Actor actor: model.getActors()){
-			view.addActor(actor);
+		for(IPlayActor actor: model.getActors()){
+			view.addActor((IDisplayActor)actor);
 		}
 		this.toggleUnPause();
 		model.startGame();
@@ -188,7 +187,9 @@ public class GameController implements Observer, IGameController {
 	}
 
 	private void updateActors(){
-		view.removeActors(model.getDeadActors());
+		for(IPlayActor a: model.getDeadActors()){
+			view.removeActor((IDisplayActor)a);
+		}
 	}
 
 	@Override

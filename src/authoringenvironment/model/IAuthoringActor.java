@@ -1,11 +1,11 @@
 package authoringenvironment.model;
 
 import authoringenvironment.view.ActorRule;
+import gameengine.model.ActorState;
 import gameengine.model.IRule;
 import javafx.scene.image.ImageView;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * This interface defines the subset of Actor functionality that will be accessible to the game authoring environment.
@@ -20,12 +20,7 @@ public interface IAuthoringActor extends IEditableGameElement{
      * @param newRule The Rule to be added to the Actor
      */
 	void addRule(IRule newRule);
-	/**
-     * Provides a list of Triggers that the Actor responds to
-     *
-     * @return The list of Triggers that the Actor responds to
-     */
-    Set<String> getTriggers();
+	
     /**
      * Sets the Actor's X coordinate
      * @param updateXPosition   The new X coordinate
@@ -40,22 +35,22 @@ public interface IAuthoringActor extends IEditableGameElement{
      * Provides the Actor's name
      * @return  The Actor's name
      */
-    String getMyName();
+    String getName();
     /**
      * Sets a new Actor name
      * @param name  The new Actor name
      */
-    void setMyName(String name);
+    void setName(String name);
     /**
      * Provides the Actor's Imageview
      * @return  The Actor's Imageview
      */
-    ImageView getMyImageView();
+    ImageView getImageView();
     /**
      * Sets a new Actor ImageView
      * @param imageView The new ImageView
      */
-    void setMyImageView(ImageView imageView);
+    void setImageView(ImageView imageView);
     /**
      * Provides the Actor's X coordinate
      * @return  The Actor's X coordinate
@@ -70,64 +65,39 @@ public interface IAuthoringActor extends IEditableGameElement{
      * Provides the Actor's ImageView
      * @return  The Actor's ImageView
      */
-    String getMyImageViewName();
+    String getImageViewName();
     /**
      * Sets the name of the Actor's ImageView
      * @param myImageViewName   The Actor's ImageView
      */
-    void setMyImageViewName(String imageViewName);
+    void setImageViewName(String imageViewName);
     /**
      * Sets the Actor's ImageView's size
      * @param size  The ImageView's size
      */
     void setSize(double size);
-    /**
-     * Sets the Actor's ImageView's size
-     * @param size  The ImageView's size
-     */
-	double getSize();
-    /**
-     * Adds a new ActorRule
-     * @param actorRule The new ActorRule
-     */
-    void addActorRule(ActorRule actorRule);
-    /**
-     * Removes an Actor Rule
-     * @param actorRule The Rule to be removed
-     */
-    void removeActorRule(ActorRule actorRule);
+
     /**
      * Provides the List of the Actor's Rules
      * @return  The Actor's ActorRules
      */
     List<ActorRule> getActorRules();
-    /**
-	 * Return whether the actor is a playable, main character.
-	 * @return
-	 */
-	boolean isMain();
-	/**
-	 * Set whether this actor is a playable, main character.
-	 */
-	void setMain(boolean parseBoolean);
-	/**
-	 * @param myFriction the myFriction to set
-	 */
-	void setMyFriction(double parseDouble);
+
+	void setFriction(double parseDouble);
 	
 	/**
 	 * @return the myFriction
 	 */
-	double getMyFriction();
-	/**
-     * Sets a new Actor ID
-     * @param ID    The new ID
-     */
-    void setMyID(int id);
-    /**
-     * Provides the Actor's ID number
-     *
-     * @return The Actor's ID number
-     */
-    int getMyID();
+	double getFriction();
+
+	int getMyID();
+
+	void addState(ActorState state);
+
+	boolean checkState(ActorState main);
+
+	double getSize();
+
+	void setID(int ID);
+
 }
