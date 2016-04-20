@@ -199,7 +199,7 @@ public class GUIMainScreen implements IGUI, Observer {
 	 * @return a LabelClickable associated with an Actor
 	 */
 	public HBoxWithEditable createActorLabel(IEditableGameElement actor, IEditingEnvironment actorEditor) {
-		HBoxWithEditable actorPreviewUnit = new HBoxWithEditable(actor, levelEditor);
+		HBoxWithEditable actorPreviewUnit = new HBoxWithEditable(actor, actorEditor);
 		initializePreviewUnit(actorPreviewUnit, actorPreviewContainer);
 		return actorPreviewUnit;
 	}
