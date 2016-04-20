@@ -1,11 +1,9 @@
 package gameengine.model;
 
-import java.util.Observer;
-import java.util.Set;
-
-import javafx.beans.Observable;
+import java.util.List;
+import java.util.Map;
+import gameengine.model.Actions.Action;
 import javafx.geometry.Bounds;
-import javafx.scene.image.ImageView;
 
 public interface IPlayActor {
 	
@@ -13,28 +11,21 @@ public interface IPlayActor {
 	/**
      * Calls the appropriate sequence of Actions based on a provided Trigger
      *
-     * @param triggerString The string representation of the trigger to be executed
+     * @param myTrigger The string representation of the trigger to be executed
      */
-    public void performActionsFor(String triggerString);
-    
-    /**
-     * Provides a list of Triggers that the Actor responds to
-     *
-     * @return The list of Triggers that the Actor responds to
-     */
-    public Set<String> getTriggers();
+    public void performActionsFor(ITrigger myTrigger);
     
     /**
      * Assigns a phyiscs engine to an Actor
      * @param physicsEngine The assigned physics engine
      */
-    public void setEngine(PhysicsEngine physicsEngine);
+    public void setPhysicsEngine(PhysicsEngine physicsEngine);
     
     /**
      * Provides the Actor's physics engine
      * @return  The Actor's phyiscs engine
      */
-    public PhysicsEngine getMyPhysicsEngine();
+    public PhysicsEngine getPhysicsEngine();
 	
     /**
      * Modifies the current value of an Attribute
@@ -97,12 +88,11 @@ public interface IPlayActor {
      */
     public void changed();
 
+	public String getName();
 
-	public String getMyName();
+	public Attribute getAttribute(AttributeType health);
 
-	public Object getAttribute(AttributeType health);
-
-	public double getMyFriction();
+	public double getFriction();
 	
 	public Bounds getBounds();
 
@@ -111,6 +101,8 @@ public interface IPlayActor {
 	public void removeState(ActorState state);
 
 	public void addState(ActorState state);
+
+	public Map<String, List<Rule>> getRules();
 
     
 }

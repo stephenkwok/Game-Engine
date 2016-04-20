@@ -49,19 +49,11 @@ public class ParserController implements IParserController {
 			game.initCurrentActors();
 			game.initTimeline();
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
+			System.out.println(myScreen);
 			myScreen.showError(e.getMessage());
 			game = null;
 		}
 		return game;
-	}
-	
-	
-	public static void main (String [] args) {
-		ParserController p = new ParserController ();
-		Game g = p.loadforPlaying(new File ("gamefiles/test.xml"));
-		System.out.println(g.toString());
-
-		
 	}
 	
 

@@ -16,8 +16,8 @@ public class ButtonNewLevel extends ButtonParent {
 	 * @param buttonText: text for the button.
 	 * @param imageName: image for the button.
 	 */
-	public ButtonNewLevel(IScreenController myController, String buttonText, String imageName) {
-		super(myController, buttonText, imageName);
+	public ButtonNewLevel(String buttonText, String imageName) {
+		super(buttonText, imageName);
 	}
 	
 	/**
@@ -25,7 +25,7 @@ public class ButtonNewLevel extends ButtonParent {
 	 */
 	@Override
 	protected void setButtonAction() {
-		button.setOnAction(e -> ((Controller) myController).addLevel());
+		getButton().setOnAction(e -> ((Controller) getController()).addLevel());
 	}
 
 }

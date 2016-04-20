@@ -3,7 +3,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
-import gui.controller.IScreenController;
+import gui.view.ButtonSplash;
 import gui.view.GUIFactory;
 import gui.view.IGUI;
 import gui.view.IGUIElement;
@@ -27,9 +27,10 @@ import javafx.stage.Stage;
 public class GUIMain extends Screen implements IGUI {
     private static final String GUI_RESOURCE = "authoringGUI";
     private static final String TOP_PANE_ELEMENTS = "TopPaneElements";
-    private static final int WINDOW_HEIGHT = 800;
+    private static final int WINDOW_HEIGHT = 700;
 	private static final int WINDOW_WIDTH = 1300;
     private static final int PADDING = 10;
+    private static final String SPLASH_IMAGE_NAME = "salad.png";
     private Scene myScene;
 	private BorderPane myRoot;
 	private ResourceBundle myResources;
@@ -38,10 +39,8 @@ public class GUIMain extends Screen implements IGUI {
 	private GUIFactory factory;
 	private Scene splashScene;
 	
-	public GUIMain(Stage s, Scene splash) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		super(s);
-		this.splashScene = splash;
-		this.myStage = s;
+	public GUIMain() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		super();
 		init();
 	}
 	
@@ -57,7 +56,7 @@ public class GUIMain extends Screen implements IGUI {
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myController = new Controller(myStage, this, this.myResources);
-		factory = new GUIFactory(myResources, myController);
+		factory = new GUIFactory(myResources);
 		setTopPane();
 		setCenterPane();
 	}
@@ -107,6 +106,9 @@ public class GUIMain extends Screen implements IGUI {
 				IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
 				hbox.getChildren().add(elementToCreate.createNode());
 			}
+			//temp
+			ButtonSplash splash = new ButtonSplash(null, SPLASH_IMAGE_NAME);
+			hbox.getChildren().add(splash.createNode());
 		}catch(Exception e){
 			
 		}
@@ -119,17 +121,6 @@ public class GUIMain extends Screen implements IGUI {
 		return myRoot;
 	}
 	
-	@Override
-	public IScreenController setController() {			//REMOVE
-		// TODO Auto-generated method stub
-		return null;
-	}
-	/**
-	 * Returns user back to splash screen 
-	 */
-	public void goBackToGamePlayer() {
-		myStage.setScene(splashScene);
-	}
 	/**
 	 * Return width of authoring environment Scene
 	 * @return
@@ -143,5 +134,12 @@ public class GUIMain extends Screen implements IGUI {
 	 */
 	public double getHeight() {
 		return myScene.getHeight();
+	}
+
+	@Override
+	protected void initialize()
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		// TODO Auto-generated method stub
+		
 	}
 }

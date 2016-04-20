@@ -19,12 +19,16 @@ public class ResourceOptionsBehavior extends ComboBoxBehavior {
 		fileNames = new ArrayList<>();
 		fillFileNames();
 	}
-
+	/**
+	 * Return list of file names to be set as combobox options
+	 */
 	@Override
 	protected List<String> getOptionsList(){
 		return fileNames;
 	}
-	
+	/**
+	 * Fills list of file names to be set as combobox options
+	 */
 	private void fillFileNames(){
 		File imageDir = new File(pathname);
 		for(File imageFile: imageDir.listFiles()){

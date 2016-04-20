@@ -44,7 +44,7 @@ public class LabelClickable extends Label {
 	 * Actor or Level's name and image
 	 */
 	public void update() {
-		this.setText(IMAGE_TEXT_PADDING + myEditable.getMyName());
+		this.setText(IMAGE_TEXT_PADDING + myEditable.getName());
 		ImageView imageView = new ImageView(myEditable.getImageView().getImage());
 		imageView.setFitHeight(FIT_SIZE);
 		imageView.setPreserveRatio(true);

@@ -21,12 +21,11 @@ public class GameInfo implements IEditableGameElement {
 	private String myDescription;
 	private int myCurrentLevelNum;
 	private ImageView myPreviewImage;
-	private int myID;
 	private Map<String,Integer> myHUDElementsToDisplay;
 	private String myFile;
 	
 	public GameInfo(String name, String imageName, String description, int currentLevelNum, String file ) {
-		this.setMyName(name);
+		this.setName(name);
 		this.setMyImageName(imageName);
 		this.setMyDescription(description);
 		this.setMyCurrentLevelNum(currentLevelNum);
@@ -47,7 +46,7 @@ public class GameInfo implements IEditableGameElement {
 	 * Returns the name of the game
 	 */
 	@Override
-	public String getMyName() {
+	public String getName() {
 		return this.myName;
 	}
 	
@@ -55,7 +54,7 @@ public class GameInfo implements IEditableGameElement {
 	 * Sets the name of the game
 	 */
 	@Override
-	public void setMyName(String myName) {
+	public void setName(String myName) {
 		this.myName = myName;
 	}
 
@@ -131,7 +130,7 @@ public class GameInfo implements IEditableGameElement {
 	      
 	      stringBuilder.append("GameInfo [ ");
 	      stringBuilder.append("\nname: ");
-	      stringBuilder.append(getMyName());
+	      stringBuilder.append(getName());
 	      stringBuilder.append("\nimgName: ");
 	      stringBuilder.append(getMyImageName());
 	      stringBuilder.append("\nmyDescription: ");
@@ -160,22 +159,6 @@ public class GameInfo implements IEditableGameElement {
 	}
 	
 	/**
-	 * Sets the game's ID
-	 */
-	@Override
-	public void setMyID(int ID) {
-		myID = ID;
-	}
-	
-	/**
-	 * Gets the ID of the game
-	 */
-	@Override
-	public int getMyID() {
-		return myID;
-	}
-	
-	/**
 	 * Gets the filepath of the game
 	 * @return the filepath of the gane
 	 */
@@ -191,6 +174,5 @@ public class GameInfo implements IEditableGameElement {
 		this.myFile = name;
 		
 	}
-
 
 }

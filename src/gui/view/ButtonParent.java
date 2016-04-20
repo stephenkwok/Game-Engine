@@ -1,9 +1,9 @@
 package gui.view;
 
 import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import gui.controller.IScreenController;
+import java.util.Observable;
+import java.util.Observer;
+
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -15,16 +15,14 @@ import javafx.stage.FileChooser;
  * @author AnnieTang
  *
  */
-public abstract class ButtonParent implements IGUIElement {
+public abstract class ButtonParent extends Observable implements IGUIElement {
 	private static final int ICON_SIZE = 30;
 	private static final int PADDING = 10;
-	protected IScreenController myController;
 	private String buttonText;
-	protected Button button;
+	private Button button;
 	private String imageName;
 	
-	public ButtonParent(IScreenController myController, String buttonText, String imageName) {
-		this.myController = myController;
+	public ButtonParent(String buttonText, String imageName) {
 		this.buttonText = buttonText;
 		this.imageName = imageName;
 	}
@@ -39,7 +37,10 @@ public abstract class ButtonParent implements IGUIElement {
 		setButtonAction();
 		return button; 
 	}
-
+	
+	public void addNodeObserver(Observer observer) {
+		addObserver(observer);
+	}
 	/**
 	 * Sets action when button is pressed. 
 	 */
@@ -60,6 +61,7 @@ public abstract class ButtonParent implements IGUIElement {
      * Creates a file picker to get a file name
      * @return returns the file
      */
+	/*
     protected File promptForFileName(boolean isSaving){
         FileChooser myFileChooser = new FileChooser();
         FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter("XML Files (.xml)", "*.xml");
@@ -72,5 +74,14 @@ public abstract class ButtonParent implements IGUIElement {
             fileName = myFileChooser.showOpenDialog(myController.getStage());
         }
         return fileName;
+    }*/
+    
+    /**
+     * Gets the button.
+     * @return button.
+     */
+    protected Button getButton() {
+    	return button;
     }
+
 }

@@ -1,21 +1,11 @@
 package gui.view;
 
 import gameplayer.controller.HighScoreScreenController;
-import gui.controller.IScreenController;
 
-public class ButtonReturn extends ButtonParent {
+public class ButtonReturn extends ButtonSplash {
 
-	public HighScoreScreenController myControl;
 	
-	public ButtonReturn(IScreenController myController, String buttonText, String imageName) {
-		super(myController, buttonText, imageName);
-		this.myControl = (HighScoreScreenController) myController;
+	public ButtonReturn(String buttonText, String imageName) {
+		super(buttonText, imageName);
 	}
-
-	@Override
-	protected void setButtonAction() {
-		button.setOnMouseClicked(e -> myControl.goToSplash());
-
-	}
-
 }

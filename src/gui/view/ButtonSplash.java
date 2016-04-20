@@ -1,21 +1,18 @@
 package gui.view;
 
-import gui.controller.IScreenController;
-import gui.controller.ScreenController;
 
 public class ButtonSplash extends ButtonParent {
-	
-	//private ScreenController myController;
 
-	public ButtonSplash(IScreenController myController, String buttonText, String imageName) {
-		super(myController, buttonText, imageName);
-		//this.myController  = (ScreenController) myController;
+	public ButtonSplash(String buttonText, String imageName) {
+		super(buttonText, imageName);
 	}
 
 	@Override
 	protected void setButtonAction() {
-		button.setOnMouseClicked(e -> myController.goToSplash());
-
+		getButton().setOnMouseClicked(e -> {
+			setChanged();
+			notifyObservers("ButtonSplash");
+		});
 	}
 
 }

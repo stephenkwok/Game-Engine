@@ -2,16 +2,17 @@ package authoringenvironment.controller;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.List;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.view.GUIActorEditingEnvironment;
-import authoringenvironment.view.GUILevelEditingEnvironment;
+import authoringenvironment.view.ActorEditingEnvironment;
+import authoringenvironment.view.LevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
 import gamedata.controller.CreatorController;
@@ -19,48 +20,56 @@ import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gameengine.model.IAuthoringActor;
-import gui.controller.IScreenController;
+import gameplayer.controller.BranchScreenController;
 import gui.view.Screen;
 import javafx.stage.Stage;
 
 /**
- * This class serves as the interface that all authoring environment main
- * screens must implement
+ * This class serves as the main controller for the authoring environment
  * 
  * @author Stephen, AnnieTang
  */
 
-public class Controller implements IScreenController {
+public class Controller extends BranchScreenController {
 	private Stage myStage;
 	private List<Level> myLevels;
 	private List<String> myLevelNames;
 	private List<IAuthoringActor> myActors;
 	private List<String> myActorNames;
-	private GUILevelEditingEnvironment levelEnvironment;
-	private GUIActorEditingEnvironment actorEnvironment;
+	private LevelEditingEnvironment levelEnvironment;
+	private ActorEditingEnvironment actorEnvironment;
 	private GUIMainScreen mainScreen;
 	private GUIMain guiMain;
 	private ResourceBundle myResources;
 	private Game game;
 	private GameInfo gameInfo;
 
+	public Controller(Stage stage) {
+		super(stage);
+	}
+	
+	//TODO This constructor is not parallel with other BranchScreenController subclasses
+	//Create a resource bundle for the Controller's actions associated to buttons it handles, but the resource bundle for the GUIFactory should be stored in and set up in the GUIMain
+	//Stage should not be contained in the subclass (already in BranchScreenController parent)
 	public Controller(Stage myStage, GUIMain guiMain, ResourceBundle myResources) {
+		super(myStage);
 		this.myStage = myStage;
 		this.guiMain = guiMain;
 		this.myResources = myResources;
 		init();
 	}
 
+	//TODO Need a constructor that takes in a game passed by data and sets up Authoring Environment accordingly 
+
 	public void init() {
 		myLevels = new ArrayList<>();
 		myLevelNames = new ArrayList<>();
 		myActors = new ArrayList<>();
 		myActorNames = new ArrayList<>();
-		levelEnvironment = new GUILevelEditingEnvironment(this, myActors);		
+		levelEnvironment = new LevelEditingEnvironment(this, myActors);		
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
-		actorEnvironment = new GUIActorEditingEnvironment(this, myResources);
+		actorEnvironment = new ActorEditingEnvironment(this, myResources);
 		mainScreen = new GUIMainScreen(this, actorEnvironment, levelEnvironment, gameInfo, myActors);
 	}
 	
@@ -73,11 +82,7 @@ public class Controller implements IScreenController {
 	 *            - Editing environment for editable
 	 */
 	public void goToEditingEnvironment(IEditableGameElement editable, IEditingEnvironment environment) {
-		environment.setEditable(editable);
-		try{
-			actorEnvironment.updateRules();
-			System.out.println(myActors);
-		}catch(ConcurrentModificationException e){}
+		environment.setEditableElement(editable);
 		guiMain.setCenterPane(environment.getPane()); 
 	}
 
@@ -96,13 +101,13 @@ public class Controller implements IScreenController {
 	 *            file to write to.
 	 */
 	public void saveGame(File file) {
-		Game g = new Game(new GameInfo(), myLevels);  //TODO needs to be game info from AE
+		Game g = new Game(gameInfo, myLevels); 
 		CreatorController controller;
 		try {
-			controller = new CreatorController(g, this.getScreen());
+			controller = new CreatorController(g, guiMain);
 			controller.saveForEditing(file);
 		} catch (ParserConfigurationException e) {
-			getScreen().showError(e.getMessage());
+			guiMain.showError(e.getMessage());
 		}
 
 	}
@@ -145,26 +150,20 @@ public class Controller implements IScreenController {
 	 */
 	public void addLevel() {
 		Level newLevel = new Level();
-		newLevel.setMyID(myLevels.size());
 		myLevels.add(newLevel);
-		myLevelNames.add(newLevel.getMyName());
+		myLevelNames.add(newLevel.getName());
 		mainScreen.createLevelLabel(newLevel);
 		goToEditingEnvironment(newLevel, levelEnvironment);
 	}
 
 	public void addActor() {
-		IAuthoringActor newActor = new Actor();
-		newActor.setMyID(myActors.size());
+		IAuthoringActor newActor = (IAuthoringActor) new Actor();
+		newActor.setID(myActors.size());
 		myActors.add(newActor);
-		myActorNames.add(newActor.getMyName());
+		myActorNames.add(newActor.getName());
 		mainScreen.createActorLabel(newActor);
+		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
-	}
-	/**
-	 * Saves game and returns to splash screen of game player.
-	 */
-	public void goBackToGamePlayer() {
-		guiMain.goBackToGamePlayer();
 	}
 	
 	public double getSceneWidth(){
@@ -176,44 +175,11 @@ public class Controller implements IScreenController {
 	}
 
 	@Override
-	public void setGame(Game game) {
+	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public Screen getScreen() {
-		return guiMain;
-	}
-	
-	public void setGameName() {
-		
-	}
-	
-	public void setGameDescription() {
+		//Needs to handle buttons, comboboxes, tabs, etc.
 		
 	}
 
-	@Override
-	public void chooseGame() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void useGame() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void goToSplash() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void switchGame() {
-		// TODO Auto-generated method stub
-		
-	}
 }

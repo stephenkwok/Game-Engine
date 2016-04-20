@@ -1,7 +1,6 @@
 package gameengine.controller;
 
-import gameengine.model.Actor;
-import gameengine.model.IAuthoringActor;
+import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 
@@ -28,14 +27,14 @@ public interface ILevel {
      *
      * @param name A name for the Level
      */
-    public void setMyName(String name);
+    public void setName(String name);
 
     /**
      * Provides the Level's name
      *
      * @return The name of the Level object
      */
-    public String getMyName();
+    public String getName();
 
     /**
      * Provides all of the Actors to be visualized by the player
