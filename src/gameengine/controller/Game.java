@@ -127,7 +127,7 @@ public class Game extends Observable implements Observer {
 		myCollisionDetector.detection(getCurrentActors());
 		signalTick();
 		updateActors();
-		updateBackground();
+		//updateBackground();
 	}
 
 

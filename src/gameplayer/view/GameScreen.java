@@ -113,6 +113,7 @@ public class GameScreen extends Observable implements IGameScreen {
 		}
 		else if(e.getEventType()==KeyEvent.KEY_PRESSED){
 			//myCamera.setTranslateX(changeCamera(93.4, 0));
+			//changeCamera(0,-10);
 			ITrigger trigger = handleKeyPress(((KeyEvent)e).getCode());
 			setChanged();
 			notifyObservers(trigger);
@@ -183,8 +184,7 @@ public class GameScreen extends Observable implements IGameScreen {
 
 
 	@Override
-	public void changeCamera(int x, int y) {
-		/*
+	public void changeCamera(double x, double y) {
 		if (myCamera.getTranslateX()+x < myEndHorizontal - getScene().getWidth() &&
 				myCamera.getTranslateX()+x > 0) {
 			myCamera.setTranslateX(myCamera.getTranslateX()+x);
@@ -192,7 +192,7 @@ public class GameScreen extends Observable implements IGameScreen {
 		
 		if (myCamera.getTranslateY()+y > 0 && myCamera.getTranslateY()+y < myEndVertical - getScene().getHeight()) {		
 			myCamera.setTranslateY(myCamera.getTranslateY()+y);
-		}*/
+		}
 	}
 
 
