@@ -29,7 +29,7 @@ public class CollisionDetection {
 	 */
 	public List<IPlayActor> detection(List<IPlayActor> list){
 		for (IPlayActor a1 : list){
-			a1.setInAir(true);
+			a1.addState(ActorState.AIR);
 			for(IPlayActor a2 : list){
 				if(a1 != a2){            //Checks that each actor in the pair is unique
 					if(isCollision(a1,a2))
@@ -83,7 +83,7 @@ public class CollisionDetection {
 		    if (wy > -hx) {
 		    	return "SideCollision";
 		    } else {
-		    	a1.setInAir(false);
+		    	a1.removeState(ActorState.AIR);
 				a1.setY(a2.getY()-a1.getBounds().getWidth());
 				a1.setVeloY(0);
 		        return "BottomCollision";

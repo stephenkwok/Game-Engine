@@ -93,7 +93,7 @@ public class Game extends Observable implements Observer {
 	public void initCurrentActors() {
 		setCurrentActors(getCurrentLevel().getActors());
 		for (IPlayActor actor: currentActors) {
-			if (actor.isMain()) {
+			if (actor.checkState(ActorState.MAIN)) {
 				mainCharacter = actor;
 			}
 		}
@@ -198,7 +198,7 @@ public class Game extends Observable implements Observer {
 	public void updateActors(){
 		setDeadActors(new ArrayList<IPlayActor>());
 		for(IPlayActor a: getCurrentActors()){
-			if(a.isDead()){
+			if(a.checkState(ActorState.DEAD)){
 				deadActors.add(a);
 			}
 		}

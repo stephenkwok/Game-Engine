@@ -35,18 +35,6 @@ public interface IPlayActor {
      * @return  The Actor's phyiscs engine
      */
     public PhysicsEngine getMyPhysicsEngine();
-    
-    /**
-     * Marks the Actor as dead
-     * @return  A boolean representing whether or not the Actor is dead
-     */
-    public boolean isDead();
-    
-	/**
-	 * Return whether the actor is a playable, main character.
-	 * @return
-	 */
-	public boolean isMain();
 	
     /**
      * Modifies the current value of an Attribute
@@ -55,12 +43,6 @@ public interface IPlayActor {
      * @param change The amount to change the Attribute by
      */
     public void changeAttribute(AttributeType type, int change);
-    
-    /**
-     * Sets the Actor to alive or dead
-     * @param isDead    The desired Actor state
-     */
-    public void setDead(boolean isDead);
     
     /**
      * Sets the Actor's X coordinate
@@ -115,17 +97,20 @@ public interface IPlayActor {
      */
     public void changed();
 
-	public void setInAir(boolean b);
 
 	public String getMyName();
 
 	public Object getAttribute(AttributeType health);
 
-	public boolean isInAir();
-
 	public double getMyFriction();
 	
 	public Bounds getBounds();
+
+	public boolean checkState(ActorState state);
+
+	public void removeState(ActorState state);
+
+	public void addState(ActorState state);
 
     
 }

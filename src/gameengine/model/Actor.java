@@ -49,6 +49,7 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
     private boolean isMain;
     private List<ActorRule> myActorRules;
     private boolean isDead;
+    private Set<ActorState> myStates;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -358,34 +359,6 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
 		this.myFriction = myFriction;
 	}
 
-	/**
-	 * Set whether this actor is a playable, main character.
-	 */
-	public void setMain(boolean bool){
-		isMain = bool;
-	}
-
-	/**
-	 * Return whether the actor is a playable, main character.
-	 * @return
-	 */
-	public boolean isMain(){
-		return isMain;
-	}
-	/**
-	 * @return the inAir
-	 */
-	public boolean isInAir() {
-		return inAir;
-	}
-
-	/**
-	 * @param inAir the inAir to set
-	 */
-    public void setInAir(boolean inAir) {
-		this.inAir = inAir;
-	}
-
     /**
      * Provides the Actor's Rules
      * @return  The Actor's Rules
@@ -470,28 +443,27 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
 		return myActorRules;
 	}
 
-    /**
-     * Marks the Actor as dead
-     * @return  A boolean representing whether or not the Actor is dead
-     */
-    public boolean isDead() {
-		return isDead;
-	}
-
-    /**
-     * Sets the Actor to alive or dead
-     * @param isDead    The desired Actor state
-     */
-    public void setDead(boolean isDead) {
-		this.isDead = isDead;
-	}
-
 	@Override
 	public void update(Observable o, Object arg) {
-		if(isMain){
+		if(checkState(ActorState.MAIN)){
 			setChanged();
 			notifyObservers("updateAttribute");
 		}
 		
+	}
+	
+	@Override
+	public boolean checkState(ActorState state){
+		return myStates.contains(state);
+	}
+	
+	@Override
+	public void addState(ActorState state){
+		myStates.add(state);
+	}
+	
+	@Override
+	public void removeState(ActorState state){
+		myStates.remove(state);
 	}
 }

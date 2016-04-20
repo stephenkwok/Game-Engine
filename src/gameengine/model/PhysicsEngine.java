@@ -72,7 +72,7 @@ public class PhysicsEngine {
 		double nextYPos;
 		
 
-		if (iPlayActor.isInAir()) {
+		if (iPlayActor.checkState(ActorState.AIR)) {
 			forceYdownward = getGravity();
 		}
 				

@@ -11,6 +11,7 @@ import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.GameInfo;
 import gameengine.model.IAuthoringActor;
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 import gameengine.model.AttributeType;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -87,7 +88,7 @@ public class CheckBoxesHUDOptions implements IGUIElement, IGUIEditingElement {
 	private int getInitialValueForHUDElement(String myHUDElementID) {
 		IAuthoringActor mainActor = null;
 		for (IAuthoringActor actor : myActors) {
-			if (actor.isMain()) {
+			if (actor.checkState(ActorState.MAIN)) {
 				mainActor = actor;
 				break;
 			}

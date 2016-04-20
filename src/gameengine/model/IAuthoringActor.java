@@ -46,9 +46,9 @@ public interface IAuthoringActor extends IEditableGameElement{
 
     List<ActorRule> getActorRules();
 
-	boolean isMain();
-
-	void setMain(boolean parseBoolean);
-
 	void setMyFriction(double parseDouble);
+	
+	boolean checkState(ActorState state);
+	
+	void addState(ActorState state);
 }

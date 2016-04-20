@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import gameengine.model.ActorState;
 import gameengine.model.IAuthoringActor;
 
 public class ComboBoxIsPlayer extends ComboBoxTextCell {
@@ -19,7 +20,9 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 	@Override
 	public void setButtonAction() {
 		comboButton.setOnAction(event -> {
-			((IAuthoringActor) getEditableElement()).setMain(Boolean.parseBoolean(comboBox.getValue()));
+			if(Boolean.parseBoolean(comboBox.getValue())){
+				((IAuthoringActor) getEditableElement()).addState(ActorState.MAIN);
+			}
 		});
 	}
 
