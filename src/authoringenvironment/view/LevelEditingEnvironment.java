@@ -3,6 +3,7 @@ package authoringenvironment.view;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
@@ -47,7 +48,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	private VBox myLeftPane;
 	private Canvas myCanvas;
 	private Level myLevel;
-	private List<IAuthoringActor> availableActors;
+	private Map<IAuthoringActor, List<IAuthoringActor>> availableActors;
 	private Pane myLevelPane;
 	private StackPane myStackPane;	// try setting stackpane to scrollpane's content, then adding imageview for background to stackpane and level on top
 	private ScrollPane myCenterPane;
@@ -63,7 +64,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 * @param controller: authoring environment controller.
 	 * @param actors: list of currently available actors.
 	 */
-	public LevelEditingEnvironment(List<IAuthoringActor> actors, Stage stage) {
+	public LevelEditingEnvironment(Map<IAuthoringActor, List<IAuthoringActor>> actors, Stage stage) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
@@ -94,7 +95,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	}
 
 	private void addChildrenToLeftPane() {
-		myInspector = new GUILevelInspector(myResources, availableActors, this, myStage);
+		myInspector = new GUILevelInspector(myResources, availableActors.keySet(), this, myStage);
 		myLeftPane.getChildren().add(myInspector.getPane());
 		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
 	}
@@ -153,7 +154,11 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 				Dragboard db = event.getDragboard();
 				boolean success = false;
 				if (db.hasString()) {
-					IAuthoringActor actor = getActorByIconId(Integer.parseInt(db.getString()));
+					ImageviewActorIcon icon = getIconById(Integer.parseInt(db.getString()));
+					List<IAuthoringActor> val = availableActors.get(icon.getRefActor());
+					IAuthoringActor actor = icon.getActor();
+					val.add(actor);
+					availableActors.put(icon.getRefActor(), val);
 					myLevel.addActor((Actor) actor);
 					addActorToScene(actor);
 					success = true;
@@ -181,11 +186,11 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 * @param id: ID of actor of interest.
 	 * @return actor with given ID.
 	 */
-	private IAuthoringActor getActorByIconId(int id) {
+	private ImageviewActorIcon getIconById(int id) {
 		List<ImageviewActorIcon> icons = myInspector.getActorsTab().getIcons();
 		for (int i = 0; i < icons.size(); i++) {
 			if (icons.get(i).getID() == id) {
-				return icons.get(i).getActor();
+				return icons.get(i);
 			}
 		}
 		return null;
@@ -239,6 +244,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		myLevelPane.getChildren().removeAll(myActorPreviews);
 		updateLevelBackground();
 		addLevelActorsToScene();
+		myLevelPane.getChildren().addAll(myBoundary);
 	}
 	
 	/**
@@ -248,10 +254,10 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		myLevelBackground = myLevel.getMyImageView();
 		resizeBackgroundBasedOnScrolling();
 		myStackPane.getChildren().addAll(myLevelBackground, myLevelPane);
-		myLevelPane.getChildren().addAll(myBoundary);
 	}
 	
 	public void changeBackgroundImage(Image image, File imageFile) {
+		myStackPane.getChildren().clear();
 		myLevel.setMyImageView(new ImageView(image));
 		myLevel.setMyBackgroundImgName(imageFile.getPath());
 		updateLevelBackground();
@@ -308,7 +314,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 * @param updatedActorsList: up-to-date list of available actors.
 	 */
 	public void updateActorsList() {
-		myInspector.getActorsTab().setAvailableActors(availableActors);
+		myInspector.getActorsTab().setAvailableActors(availableActors.keySet());
 		for (ImageviewActorIcon icon: myActorPreviews) {
 			icon.updateImageView();
 		}

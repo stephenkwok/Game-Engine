@@ -2,7 +2,9 @@ package authoringenvironment.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -31,6 +33,7 @@ import gui.view.ButtonNewActor;
 import gui.view.ButtonNewLevel;
 import gui.view.ButtonSave;
 import gui.view.Screen;
+import gui.view.TextFieldActorNameEditor;
 import javafx.stage.Stage;
 
 /**
@@ -43,7 +46,7 @@ public class Controller implements IScreenController, Observer {
 	private Stage myStage;
 	private List<Level> myLevels;
 	private List<String> myLevelNames;
-	private List<IAuthoringActor> myActors;
+	private Map<IAuthoringActor, List<IAuthoringActor>> myActors;
 	private List<String> myActorNames;
 	private LevelEditingEnvironment levelEnvironment;
 	private ActorEditingEnvironment actorEnvironment;
@@ -65,7 +68,7 @@ public class Controller implements IScreenController, Observer {
 	public void init() {
 		myLevels = new ArrayList<>();
 		myLevelNames = new ArrayList<>();
-		myActors = new ArrayList<>();
+		myActors = new HashMap<>();
 		myActorNames = new ArrayList<>();
 		levelEnvironment = new LevelEditingEnvironment(myActors, myStage);
 		gameInfo = new GameInfo();
@@ -162,7 +165,7 @@ public class Controller implements IScreenController, Observer {
 	public void addActor() {
 		IAuthoringActor newActor = new Actor();
 		newActor.setMyID(myActors.size());
-		myActors.add(newActor);
+		myActors.put(newActor, new ArrayList<>());
 		myActorNames.add(newActor.getMyName());
 		mainScreen.createActorLabel(newActor, actorEnvironment).addObserver(this);
 		actorEnvironment.setActorImage(newActor.getMyImageView(), newActor.getMyImageViewName());
@@ -230,8 +233,18 @@ public class Controller implements IScreenController, Observer {
 			loadGame((File) arg1);
 		else if (arg0 instanceof ButtonSave)
 			saveGame((File) arg1);
+		else if (arg0 instanceof TextFieldActorNameEditor) 
+			updateActors((IAuthoringActor) arg1);
 	}
 
+	// checking to see if this works with name
+	private void updateActors(IAuthoringActor actor) {
+		List<IAuthoringActor> listToUpdate = myActors.get(actor);
+		for (int i = 0; i < listToUpdate.size(); i++) {
+			listToUpdate.get(i).setMyName(actor.getMyName());
+		}
+	}
+	
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
 		if (notifyObserversArgument instanceof List) {
 			List<Object> arguments = (List<Object>) notifyObserversArgument;

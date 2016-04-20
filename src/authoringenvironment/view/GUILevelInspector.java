@@ -2,6 +2,7 @@ package authoringenvironment.view;
 
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.LevelEditingEnvironment;
@@ -39,13 +40,13 @@ public class GUILevelInspector implements IGUI {
 	 * @param availActors: list of currently available actors.
 	 * @param level: level that is being edited.
 	 */
-	public GUILevelInspector(ResourceBundle myResources, List<IAuthoringActor> availActors, LevelEditingEnvironment editor, Stage stage) {
+	public GUILevelInspector(ResourceBundle myResources, Set<IAuthoringActor> availActors, LevelEditingEnvironment editor, Stage stage) {
 		myStage = stage;
 		myLevelEditor = editor;
 		init(myResources, availActors);
 	}
 	
-	private void init(ResourceBundle myResources, List<IAuthoringActor> availActors) {
+	private void init(ResourceBundle myResources, Set<IAuthoringActor> availActors) {
 		myPane = new StackPane();		
 		myContainer = new VBox(SPACING);
 		myContainer.setAlignment(Pos.CENTER);
@@ -53,7 +54,7 @@ public class GUILevelInspector implements IGUI {
 		myPane.getChildren().addAll(myContainer);
 	}
 
-	private void addChildrenToLevelInspector(ResourceBundle myResources, List<IAuthoringActor> availActors) {
+	private void addChildrenToLevelInspector(ResourceBundle myResources, Set<IAuthoringActor> availActors) {
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
 		myAttributesTab = new TabAttributes(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, myLevelEditor.getLevel());
 		// TODO: take out the null where the controller is later
