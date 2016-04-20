@@ -259,5 +259,15 @@ public class PhysicsEngine {
 		update(a1, -getHorizontalForce()*Math.cos(Math.toRadians(a1.getHeading())), 0, 0, a1.getMyFriction());
 		update(a1,  getHorizontalForce()*Math.sin(Math.toRadians(a1.getHeading())), 0, 0, a1.getMyFriction());
 	}
+
+	public void glideBackward(Actor myActor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void glideForward(Actor myActor) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

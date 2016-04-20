@@ -5,7 +5,6 @@ import gameengine.model.Actor;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.Rule;
-import gameengine.model.Actions.Action;
 import gameengine.model.Actions.*;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.KeyTrigger;

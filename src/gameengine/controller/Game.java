@@ -85,6 +85,7 @@ public class Game extends Observable implements Observer {
 		setAnimation(new Timeline());
 		getAnimation().setCycleCount(Timeline.INDEFINITE);
 		getAnimation().getKeyFrames().add(frame);
+		
 
 	}
 
@@ -128,6 +129,8 @@ public class Game extends Observable implements Observer {
      */
 
 	private void step(){
+		System.out.println("Hello:");
+		System.out.println(getAnimation().getCurrentTime().toMillis()  );
 		physicsUpdate();
 		myCollisionDetector.detection(getCurrentActors());
 		updateActors();
