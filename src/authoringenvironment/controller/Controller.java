@@ -3,6 +3,7 @@ package authoringenvironment.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -19,7 +20,7 @@ import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gui.controller.IScreenController;
+import gameplayer.controller.BranchScreenController;
 import gui.view.Screen;
 import javafx.stage.Stage;
 
@@ -29,7 +30,7 @@ import javafx.stage.Stage;
  * @author Stephen, AnnieTang
  */
 
-public class Controller implements IScreenController {
+public class Controller extends BranchScreenController {
 	private Stage myStage;
 	private List<Level> myLevels;
 	private List<String> myLevelNames;
@@ -43,12 +44,22 @@ public class Controller implements IScreenController {
 	private Game game;
 	private GameInfo gameInfo;
 
+	public Controller(Stage stage) {
+		super(stage);
+	}
+	
+	//TODO This constructor is not parallel with other BranchScreenController subclasses
+	//Create a resource bundle for the Controller's actions associated to buttons it handles, but the resource bundle for the GUIFactory should be stored in and set up in the GUIMain
+	//Stage should not be contained in the subclass (already in BranchScreenController parent)
 	public Controller(Stage myStage, GUIMain guiMain, ResourceBundle myResources) {
+		super(myStage);
 		this.myStage = myStage;
 		this.guiMain = guiMain;
 		this.myResources = myResources;
 		init();
 	}
+
+	//TODO Need a constructor that takes in a game passed by data and sets up Authoring Environment accordingly 
 
 	public void init() {
 		myLevels = new ArrayList<>();
@@ -90,13 +101,13 @@ public class Controller implements IScreenController {
 	 *            file to write to.
 	 */
 	public void saveGame(File file) {
-		Game g = new Game(new GameInfo(), myLevels);  //TODO needs to be game info from AE
+		Game g = new Game(gameInfo, myLevels); 
 		CreatorController controller;
 		try {
-			controller = new CreatorController(g, this.getScreen());
+			controller = new CreatorController(g, guiMain);
 			controller.saveForEditing(file);
 		} catch (ParserConfigurationException e) {
-			getScreen().showError(e.getMessage());
+			guiMain.showError(e.getMessage());
 		}
 
 	}
@@ -164,37 +175,11 @@ public class Controller implements IScreenController {
 	}
 
 	@Override
-	public void setGame(Game game) {
+	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public Screen getScreen() {
-		return guiMain;
-	}
-
-	@Override
-	public void chooseGame() {
-		// TODO Auto-generated method stub
+		//Needs to handle buttons, comboboxes, tabs, etc.
 		
 	}
 
-	@Override
-	public void useGame() {
-		// TODO Auto-generated method stub
-		
-	}
-	/**
-	 * Saves game and returns to splash screen of game player.
-	 */
-	@Override
-	public void goToSplash() {
-		guiMain.goBackToSplash();
-	}
 
-	@Override
-	public void switchGame() {
-		// TODO Auto-generated method stub
-		
-	}
 }

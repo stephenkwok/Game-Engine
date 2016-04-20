@@ -17,6 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.MapChangeListener.Change;
 import javafx.collections.ObservableMap;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
@@ -36,6 +37,12 @@ public class GameController implements Observer, IGameController {
 	@XStreamOmitField
 	private HUDScreen hud;
 
+	
+	public GameController(Game game) {
+		this.setGame(game);
+		this.setGameView(new GameScreen(new PerspectiveCamera()));
+		this.initialize(game.getInfo().getMyCurrentLevelNum()); //note: main actor is define at this line
+	}
 	/**
 	 * Sets the current game to the given Game
 	 * @param Game

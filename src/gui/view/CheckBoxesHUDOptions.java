@@ -51,7 +51,7 @@ public class CheckBoxesHUDOptions implements IGUIElement, IEditingElement {
 		this.myAttributesResources = ResourceBundle.getBundle("HUDOptions");
 		this.myContainer = new VBox(CONTAINER_SPACING);
 		myContainer.setPadding(new Insets(CONTAINER_PADDING));
-		myFactory = new GUIFactory(myAttributesResources, myController);
+		myFactory = new GUIFactory(myAttributesResources);
 		myHUDElements = new ArrayList<>();
 	}
 	
