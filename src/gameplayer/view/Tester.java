@@ -150,7 +150,7 @@ public class Tester extends Application {
 		PerspectiveCamera camera = new PerspectiveCamera();
 		GameScreen view = new GameScreen(camera);
 
-		GameController controller = new GameController();
+		GameController controller = new GameController(model);
 		controller.setGame(model);
 		controller.setGameView(view);
 

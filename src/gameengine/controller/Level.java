@@ -345,5 +345,10 @@ public class Level implements ILevel, IEditableGameElement {
 		this.myBackgroundX.set(myBackground.getX());
 	}
 
+	public void setMyImageView(ImageView imageView) {
+		myBackground = imageView;
+		myBackgroundX = new SimpleDoubleProperty(myBackground.getX());
+	}
+
 }
 
