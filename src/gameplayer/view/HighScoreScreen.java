@@ -86,6 +86,7 @@ public class HighScoreScreen extends Screen implements Observer{
 		myT.setOrientation(Orientation.HORIZONTAL);
 		for(int i = 0; i < sideButtons.length; i++){
 			IGUIElement newElement = getFactory().createNewGUIObject(sideButtons[i]);
+			newElement.addNodeObserver(this);
 			Button myB = (Button) newElement.createNode();
 			Tooltip t = new Tooltip(getResources().getString(sideButtons[i]+ "Text"));
 			t.install(myB, t);
@@ -97,7 +98,8 @@ public class HighScoreScreen extends Screen implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		notifyObservers(o.getClass().getName());
+		setChanged();
+		notifyObservers(o.getClass().getSimpleName());
 		
 	}
 

@@ -1,6 +1,5 @@
 package gui.view;
 
-import gameplayer.controller.SplashScreenController;
 
 public class ButtonOpenHighScores extends ButtonParent{
 
@@ -10,7 +9,10 @@ public class ButtonOpenHighScores extends ButtonParent{
 
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnMouseClicked(e -> notifyObservers("ButtonOpenHighScores"));
+		getButton().setOnMouseClicked(e -> {
+			setChanged();
+			notifyObservers("ButtonOpenHighScores");
+		});
 		
 	}
 

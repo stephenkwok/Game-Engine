@@ -2,7 +2,7 @@ package gamedata.controller;
 
 public enum ChooserType {
 	
-	PLAY("Play"), EDIT("Edit"), SCORES("Edit");
+	PLAY("Play"), EDIT("Edit"), SCORES("Scores");
 	
 	private String myName;
 	

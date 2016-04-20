@@ -24,10 +24,15 @@ public class HighScoreScreenController extends BranchScreenController {
 		super(myStage);
 		this.myModel = scores;
 		this.myGame = game;
-		this.myScreen = new HighScoreScreen(this.myModel, this.myGame);
+		setUpScreen(this.myModel, this.myGame);
 		this.myResources = ResourceBundle.getBundle(SCORE_CONTROLLER_RESOURCE);
+		changeScreen(myScreen);
 	}
 
+	private void setUpScreen(Map<String,Integer> model, String gameName) {
+		this.myScreen = new HighScoreScreen(model, gameName);
+		this.myScreen.addObserver(this);
+	}
 	private void switchGame() {
 		FileChooserController fileChooserController = new FileChooserController(getStage(), ChooserType.SCORES);
 	}
@@ -38,13 +43,26 @@ public class HighScoreScreenController extends BranchScreenController {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		String method = myResources.getString((String) arg);
+		String method = myResources.getString((String)arg);
 		try {
-			this.getClass().getDeclaredMethod(method).invoke(this);
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
-				| SecurityException e) {
-			this.myScreen.showError(e.getMessage());
+			try {
+				this.getClass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| SecurityException e) {
+				e.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
+		} catch (NoSuchMethodException e) {
+			try {
+				this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e1) {
+				e.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
 		}
+		
+		
 	}
 
 }
