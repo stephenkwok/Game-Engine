@@ -11,15 +11,14 @@ public class BottomCollision extends CollisionTrigger implements ITrigger {
         super(actor1, actor2);
     }
 
+    @Override
+    public boolean evaluate(ITrigger otherTrigger) {
+        BottomCollision otherCollision = (BottomCollision) otherTrigger;
+        return this.equals(otherCollision);
+    }
 
     @Override
     public String getMyKey() {
-        return makeName(COLLISION_TYPE);
+        return COLLISION_TYPE;
     }
-
-	@Override
-	public boolean evaluate(IPlayActor myActor) {
-		return true;
-	}
-
 }

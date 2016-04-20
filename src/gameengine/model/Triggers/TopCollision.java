@@ -14,12 +14,14 @@ public class TopCollision extends CollisionTrigger implements ITrigger {
     }
 
     @Override
-    public String getMyKey() {
-        return makeName(COLLISION_TYPE);
+    public boolean evaluate(ITrigger otherTrigger) {
+        TopCollision otherCollision = (TopCollision) otherTrigger;
+        return this.equals(otherCollision);
     }
 
     @Override
-    public boolean evaluate(IPlayActor myActor) {
-        return true;
+    public String getMyKey() {
+        return COLLISION_TYPE;
     }
+
 }

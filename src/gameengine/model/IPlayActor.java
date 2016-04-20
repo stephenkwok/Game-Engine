@@ -11,9 +11,9 @@ public interface IPlayActor {
 	/**
      * Calls the appropriate sequence of Actions based on a provided Trigger
      *
-     * @param triggerString The string representation of the trigger to be executed
+     * @param myTrigger The string representation of the trigger to be executed
      */
-    public void performActionsFor(String triggerString);
+    public void performActionsFor(ITrigger myTrigger);
     
     /**
      * Assigns a phyiscs engine to an Actor
@@ -103,7 +103,7 @@ public interface IPlayActor {
 
 	public void addState(ActorState state);
 
-	public Map<String, List<Action>> getRules();
+	public Map<String, List<Rule>> getRules();
 
     
 }

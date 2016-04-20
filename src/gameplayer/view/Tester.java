@@ -97,6 +97,7 @@ public class Tester extends Application {
 		Rule rule4 = new Rule(trigger4,action4);
 		Rule rule5 = new Rule(trigger5,action5);
 		Rule rule6 = new Rule(trigger6,action6);
+
 		actor1.addRule(rule);
 		actor1.addRule(rule2);
 		actor1.addRule(rule3);
@@ -107,7 +108,6 @@ public class Tester extends Application {
 //		actor1.setMain(true);
 //		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
 //		actor1.addAttribute(points);
-
 		
 		List<Level> levels = new ArrayList<Level>();
 		Level level1 = new Level();

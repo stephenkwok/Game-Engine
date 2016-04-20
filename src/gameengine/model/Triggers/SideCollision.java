@@ -14,13 +14,14 @@ public class SideCollision extends CollisionTrigger implements ITrigger {
     }
 
     @Override
-    public boolean evaluate(IPlayActor myActor) {
-        return true;
+    public boolean evaluate(ITrigger otherTrigger) {
+        SideCollision otherCollision = (SideCollision) otherTrigger;
+        return this.equals(otherCollision);
+
     }
 
     @Override
     public String getMyKey() {
-        return makeName(COLLISION_NAME);
+        return COLLISION_NAME;
     }
-
 }

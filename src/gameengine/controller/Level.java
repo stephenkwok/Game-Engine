@@ -75,9 +75,7 @@ public class Level implements ILevel, IEditableGameElement {
         if (!getMyTriggerMap().containsKey(myTrigger.getMyKey())) return;
         List<IPlayActor> relevantActors = getMyTriggerMap().get(myTrigger.getMyKey());
         for (IPlayActor myActor : relevantActors) {
-            if (myTrigger.evaluate(myActor)){
-                myActor.performActionsFor(myTrigger.getMyKey());
-            }
+            myActor.performActionsFor(myTrigger);
         }
     }
 
