@@ -1,7 +1,7 @@
 package gameengine.model.Actions;
 
-import gameengine.model.Actor;
-import gameengine.model.PhysicsEngine;
+
+import gameengine.model.IPlayActor;
 import gameengine.model.Actions.Action;
 
 /**
@@ -13,15 +13,14 @@ import gameengine.model.Actions.Action;
  */
 public class HorizontalStaticCollision extends Action{
 
-	public HorizontalStaticCollision(Actor assignedActor) {
-		super(assignedActor);
-		// TODO Auto-generated constructor stub
+	public HorizontalStaticCollision(IPlayActor actor) {
+		super(actor);
 	}
 
 	
 	@Override
 	public void perform() {
-		getMyActor().getMyPhysicsEngine().staticHorizontalCollision(getMyActor());
+		getMyActor().getPhysicsEngine().staticHorizontalCollision(getMyActor());
 	}
 
 }

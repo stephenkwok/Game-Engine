@@ -7,7 +7,6 @@ import java.util.List;
 
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import gui.controller.IScreenController;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -25,8 +24,8 @@ public abstract class ButtonFileChooser extends ButtonParent {
 	 * Creates an image setting button.
 	 * @return a button whose action sets the image.
 	 */
-	public ButtonFileChooser(IScreenController myController, String buttonText, String imageName, IEditingEnvironment editor){
-		super(myController, buttonText, imageName);
+	public ButtonFileChooser(String buttonText, String imageName, IEditingEnvironment editor){
+		super(buttonText, imageName);
 		myEditor = editor;
 	}
 	

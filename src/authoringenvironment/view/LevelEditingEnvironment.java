@@ -11,6 +11,7 @@ import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
@@ -160,7 +161,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 					IAuthoringActor actor = icon.getActor();
 					val.add(actor);
 					availableActors.put(icon.getRefActor(), val);
-					myLevel.addActor((Actor) actor);
+					myLevel.addActor(actor);
 					addActorToScene(actor);
 					success = true;
 				}
@@ -253,14 +254,14 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 * Updates the preview to show the level's background.
 	 */
 	private void updateLevelBackground() {
-		myLevelBackground = myLevel.getMyImageView();
+		myLevelBackground = myLevel.getImageView();
 		resizeBackgroundBasedOnScrolling();
 		myStackPane.getChildren().addAll(myLevelBackground, myLevelPane);
 	}
 	
 	public void changeBackgroundImage(Image image, File imageFile) {
 		myStackPane.getChildren().clear();
-		myLevel.setMyImageView(new ImageView(image));
+		myLevel.setImageView(new ImageView(image));
 		myLevel.setMyBackgroundImgName(imageFile.getPath());
 		updateLevelBackground();
 	}
@@ -278,15 +279,15 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 */
 	private void addLevelActorsToScene() {
 		myActorPreviews.clear();
-		for (IAuthoringActor actor: myLevel.getActors()) {
-			ImageviewActorIcon icon = addActorToScene(actor);
+		for (IPlayActor actor: myLevel.getActors()) {
+			ImageviewActorIcon icon = addActorToScene((IAuthoringActor) actor);
 			icon.setX(actor.getX());
 			icon.setY(actor.getY());
 		}
 	}
 	
 	private ImageviewActorIcon addActorToScene(IAuthoringActor actor) {
-		ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getMyImageView().getFitHeight());
+		ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
 		setIconBehavior(icon);
 		icon.setOnLevel(true);
 		myActorPreviews.add(icon);
@@ -336,7 +337,6 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	public void removeActorFromLevel(ImageviewActorIcon icon) {
 		myActorPreviews.remove(icon);
 		myLevelPane.getChildren().remove(icon);
-		myLevel.removeActor((Actor) icon.getActor());
-		
+		myLevel.removeActor((Actor) icon.getActor()); 
 	}
 }

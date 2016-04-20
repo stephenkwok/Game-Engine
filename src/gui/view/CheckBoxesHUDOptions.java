@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IEditableGameElement;
@@ -124,6 +125,12 @@ public class CheckBoxesHUDOptions implements IGUIElement, IEditingElement {
 	public Node createNode() {
 		initializeHUD(HUD_OPTIONS, myContainer);
 		return myContainer;
+	}
+
+	@Override
+	public void addNodeObserver(Observer observer) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

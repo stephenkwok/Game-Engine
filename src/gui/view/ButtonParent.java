@@ -2,8 +2,7 @@ package gui.view;
 
 import java.io.File;
 import java.util.Observable;
-
-import gui.controller.IScreenController;
+import java.util.Observer;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -18,13 +17,11 @@ import javafx.stage.FileChooser;
 public abstract class ButtonParent extends Observable implements IGUIElement {
 	private static final int ICON_SIZE = 30;
 	private static final int PADDING = 10;
-	private IScreenController myController;
 	private String buttonText;
 	private Button button;
 	private String imageName;
 	
-	public ButtonParent(IScreenController myController, String buttonText, String imageName) {
-		this.myController = myController;
+	public ButtonParent(String buttonText, String imageName) {
 		this.buttonText = buttonText;
 		this.imageName = imageName;
 	}
@@ -39,7 +36,10 @@ public abstract class ButtonParent extends Observable implements IGUIElement {
 		setButtonAction();
 		return button; 
 	}
-
+	
+	public void addNodeObserver(Observer observer) {
+		addObserver(observer);
+	}
 	/**
 	 * Sets action when button is pressed. 
 	 */
@@ -58,23 +58,6 @@ public abstract class ButtonParent extends Observable implements IGUIElement {
 		}
 	}
 	
-	/**
-     * Creates a file picker to get a file name
-     * @return returns the file
-     */
-    protected File promptForFileName(boolean isSaving){
-        FileChooser myFileChooser = new FileChooser();
-        FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter("XML Files (.xml)", "*.xml");
-        myFileChooser.getExtensionFilters().add(myFilter);
-        File fileName;
-        if (isSaving){
-            fileName = myFileChooser.showSaveDialog(myController.getStage());
-        }
-        else{
-            fileName = myFileChooser.showOpenDialog(myController.getStage());
-        }
-        return fileName;
-    }
     
     /**
      * Gets the button.
@@ -82,14 +65,6 @@ public abstract class ButtonParent extends Observable implements IGUIElement {
      */
     protected Button getButton() {
     	return button;
-    }
-    
-    /**
-     * Gets the controller used by this environment.
-     * @return controller.
-     */
-    protected IScreenController getController() {
-    	return myController;
     }
     
 	protected void notifyController(Object objToPassToObserver) {

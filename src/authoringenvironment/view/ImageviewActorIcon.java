@@ -22,7 +22,7 @@ public class ImageviewActorIcon extends ImageView {
 	 */
 	public ImageviewActorIcon(IAuthoringActor actor, double height) {
 		myActor = actor;
-		setImage(actor.getMyImageView().getImage());
+		setImage(actor.getImageView().getImage());
 		this.setFitHeight(height);
 		this.setPreserveRatio(true);
 		myID = actor.getMyID();
@@ -34,10 +34,10 @@ public class ImageviewActorIcon extends ImageView {
 	public IAuthoringActor getActor() {
 		if (associatedActor == null) {
 			associatedActor = new Actor();
-			associatedActor.setMyName(myActor.getMyName());
-			associatedActor.setMyImageViewName(myActor.getMyImageViewName());
-			associatedActor.setMyImageView(myActor.getMyImageView());
-			associatedActor.setMyID(myActor.getMyID());
+			associatedActor.setName(myActor.getName());
+			associatedActor.setImageViewName(myActor.getImageViewName());
+			associatedActor.setImageView(myActor.getImageView());
+			associatedActor.setID(myActor.getMyID());
 			associatedActor.setSize(myActor.getSize());
 			associatedActor.setX(0);
 			associatedActor.setY(0);
@@ -71,10 +71,10 @@ public class ImageviewActorIcon extends ImageView {
 	 * Update the imageview based on the actor's current image.
 	 */
 	public void updateImageView() {
-		setImage(myActor.getMyImageView().getImage());
+		setImage(myActor.getImageView().getImage());
 		setPreserveRatio(true);
 		if (onLevel) {
-			setFitHeight(myActor.getMyImageView().getFitHeight());
+			setFitHeight(myActor.getImageView().getFitHeight());
 		}
 	}
 

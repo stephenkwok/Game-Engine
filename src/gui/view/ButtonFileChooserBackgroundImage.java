@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import gameengine.controller.Level;
-import gui.controller.IScreenController;
 
 /**
  * 
@@ -18,8 +17,8 @@ import gui.controller.IScreenController;
  */
 public class ButtonFileChooserBackgroundImage extends ButtonFileChooser {
 
-	public ButtonFileChooserBackgroundImage(IScreenController myController, String buttonText, String imageName, IEditingEnvironment editor) {
-		super(myController, buttonText, imageName, editor);
+	public ButtonFileChooserBackgroundImage(String buttonText, String imageName, IEditingEnvironment editor) {
+		super(buttonText, imageName, editor);
 	}
 
 	@Override

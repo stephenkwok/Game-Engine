@@ -1,91 +1,65 @@
 package gameplayer.controller;
 
 import java.lang.reflect.InvocationTargetException;
-import java.io.File;
-import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-
-import org.xml.sax.SAXException;
-
-import gameengine.controller.Game;
-import gui.controller.IScreenController;
-import gui.controller.ScreenController;
-import gui.view.ComboBoxGame;
-import gui.view.Screen;
+import gamedata.controller.ChooserType;
+import gamedata.controller.FileChooserController;
 import gameplayer.view.SplashScreen;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import authoringenvironment.controller.Controller;
+import authoringenvironment.view.GUIMain;
 
-public class SplashScreenController extends ScreenController {
-
+public class SplashScreenController implements Observer {
+	
+	private static final String SPLASH_CONTROLLER_RESOURCE = "splashActions";
+	
 	private ResourceBundle myResources;
-	private SplashScreen mySplash;
-	private Game myGame;
+	private SplashScreen myScreen;
+	private Stage myStage;
+	
 
-	public SplashScreenController(Stage myStage, SplashScreen mySplash, ResourceBundle myResources) {
-		super(myStage);
-		this.myResources = myResources;
-		this.mySplash = mySplash;
-		init();
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	public void useGame() {
-		mySplash.play(myGame);
+	public SplashScreenController(Stage stage) {
+		this.myStage = stage;
+		setUpScreen();
+		this.myStage.setScene(myScreen.getScene());
+		this.myResources = ResourceBundle.getBundle(SPLASH_CONTROLLER_RESOURCE);
 	}
 	
-	public void openHighScores() {
+	private void setUpScreen() {
+		this.myScreen = new SplashScreen();
+		this.myScreen.addObserver(this);
+	}
+	
+	private void play() {
+		FileChooserController fileChooserController = new FileChooserController(myStage, ChooserType.PLAY);
+	}
+	
+	
+	private void openHighScores() {
+		FileChooserController fileChooserController = new FileChooserController(myStage, ChooserType.SCORES);
+	}
+	
+	private void edit() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		System.out.println("just tryna edit");
+		Controller GUIMainController = new Controller(myStage, new GUIMain());
+	}
+
+
+	@Override
+	public void update(Observable o, Object arg) {
+		System.out.println("updatin");
+		String method = myResources.getString((String) arg);
 		try {
-			mySplash.openHighScores();
-		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.getClass().getDeclaredMethod(method).invoke(this);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+				| SecurityException e) {
+			this.myScreen.showError(e.getMessage());
 		}
-
-	}
-	
-	public void edit()
-			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		mySplash.edit();
 	}
 
-	@Override
-	public void setGame(Game game) {
-		this.myGame = game;
-	}
-
-	@Override
-	public Screen getScreen() {
-		return mySplash;
-	}
-
-	@Override
-	public void chooseGame() {
-		Group fileChooseGroup = new Group();
-		Scene fileChooseScene = new Scene(fileChooseGroup, this.getScreen().getMyScene().getWidth(),
-				this.getScreen().getMyScene().getHeight());
-		ComboBoxGame fileSelector = new ComboBoxGame("Choose Game", "gamefiles", this);
-		fileChooseGroup.getChildren().add((HBox) fileSelector.createNode());
-		this.getStage().setScene(fileChooseScene);
-
-	}
-
-	@Override
-	public void switchGame() {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 }
