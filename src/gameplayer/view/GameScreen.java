@@ -112,8 +112,7 @@ public class GameScreen extends Observable implements IGameScreen {
 
 	
 	private ClickTrigger handleClick(double x, double y){
-		ClickTrigger clickTrigger = new ClickTrigger();
-		clickTrigger.setClickedAt(x, y);
+		ClickTrigger clickTrigger = new ClickTrigger(x,y);
 		return clickTrigger;
 	}
 	
