@@ -61,7 +61,6 @@ public class GameEngineTest {
         Rule hitFloor  = new Rule(bc,vsc);
         Rule jumpUp    = new Rule(space,jump);
         
-        actor1.setInAir(true);
         
         actor1.addRule(moveRight);
         actor1.addRule(hitFloor);

@@ -29,7 +29,6 @@ public class PhysicsEngine {
 		
 	}
 	
-	
 	/**
 	 * This method updates a given velocity by applying a given force
 	 * @param velo
@@ -40,19 +39,7 @@ public class PhysicsEngine {
 		double nextVelo = velo + force*getTimeStep();
 		return nextVelo;
 	}
-	
-	/**
-	 * This method updates a given position by adding a velocity value scaled by a timeStep
-	 * @param pos
-	 * @param velo
-	 * @return updated position
-	 */
-	private double changePos(double pos, double velo){
-		double nextPos = pos + velo*getTimeStep();
-		return nextPos;
-	}
-	
-	
+		
 	/**
 	 * Primary method within the Physics Engine class, called on Actors for which gravity and friction forces apply
 	 * Calculates new values for X and Y positions as well as X and Y velocities
@@ -71,21 +58,21 @@ public class PhysicsEngine {
 		double nextVertVelo;
 		double nextXPos;
 		double nextYPos;
-				
+		forceYdownward = getGravity();				
 		nextHorzVelo = xVelo;      		
 		nextVertVelo = applyForce(yVelo, forceYupward);                      // Apply  y force from movement action to y velocity
 		nextVertVelo = applyForce(nextVertVelo, forceYdownward);             //Applies gravitational force onto Actor's velocity 
-		nextYPos     = changePos(yPos, nextVertVelo); 
+		nextYPos     = applyForce(yPos, nextVertVelo); 
 		nextVertVelo = maxLimit(nextVertVelo, getMaxVertVelocity());
 			
 		if(nextYPos+a.getBounds().getHeight() > getFloorHeight()){                    //Collision detection for the actor and the ground
-			nextYPos = getFloorHeight()-a.getBounds().getHeight();				//TODO: delete this if statement after the floor is implemented as an actor
+			nextYPos = getFloorHeight()-a.getBounds().getHeight();				      //TODO: delete this if statement after the floor is implemented as an actor
 			nextVertVelo = 0;
 		}
 		
 		nextHorzVelo = applyForce(xVelo, forceX); 							// Apply  y force from movement action to y velocity
 		nextHorzVelo = applyForce(nextHorzVelo, (friction*(nextHorzVelo))); //Apply frictional force
-		nextXPos  = changePos(xPos,nextHorzVelo);
+		nextXPos  = applyForce(xPos,nextHorzVelo);
 		nextHorzVelo = maxLimit(nextHorzVelo, getMaxHorizVelocity());
 		setValues(a,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );	
 	}
@@ -100,7 +87,6 @@ public class PhysicsEngine {
 	 * @param nextYPos
 	 */
 	private void setValues(Actor a, double nextHorzVelo, double nextVertVelo, double nextXPos, double nextYPos){
-		
 		a.setVeloX(nextHorzVelo);
 		a.setVeloY(nextVertVelo);
 		a.setX(bound(nextXPos));
@@ -162,7 +148,6 @@ public class PhysicsEngine {
 	}
 	
 	public void staticVerticalCollision(Actor a1){
-		a1.setInAir(false);
 		a1.setY(a1.getY()-a1.getVeloY());
 		a1.setVeloY(0);
 	}

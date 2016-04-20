@@ -30,7 +30,6 @@ public class CollisionDetection {
 	 */
 	public List<Actor> detection(List<Actor> actors){
 		for (Actor a1 : actors){
-			a1.setInAir(true);
 			for(Actor a2 : actors){
 				if(a1 != a2){            //Checks that each actor in the pair is unique
 					if(isCollision(a1,a2))
@@ -53,8 +52,8 @@ public class CollisionDetection {
 	}
 	
 	private Point2D findCenter(Actor a){
-		double centerX  = a.getBounds().getWidth()*.5 + a.getBounds().getMinX();
-		double centerY  = a.getBounds().getHeight()*.5 + a.getBounds().getMinY();
+		double centerX  = (a.getBounds().getWidth())*.5 + a.getBounds().getMinX();
+		double centerY  = (a.getBounds().getHeight())*.5 + a.getBounds().getMinY();
 		Point2D center = new Point2D(centerX,centerY);
 		return center;
 	}
@@ -85,15 +84,15 @@ public class CollisionDetection {
 
 		if (wy > hx) {
 			if (wy > -hx) {
-				return "TopCollision";
+				return TopCollision;
 			} else {
-				return "SideCollision";
+				return SideCollision;
 			}
 		} else {
 			if (wy > -hx) {
-				return "SideCollision";
+				return SideCollision;
 			} else {
-				return "BottomCollision";
+				return BottomCollision;
 			}
 		} 
 
