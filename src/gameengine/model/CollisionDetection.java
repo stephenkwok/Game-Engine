@@ -1,7 +1,9 @@
 package gameengine.model;
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 import gameengine.model.Actor;
+import gameengine.model.Triggers.CollisionTrigger;
 import javafx.geometry.Point2D;
 
 
@@ -17,6 +19,7 @@ public class CollisionDetection {
 	private String SideCollision = "SideCollision";
 	private String TopCollision = "TopCollision";
 	private String BottomCollision = "BottomCollision";
+    private static final String TRIGGER_PREFIX = "gameengine.model.Triggers.";
 	
 	private PhysicsEngine myPhysicsEngine;
 	
@@ -100,8 +103,15 @@ public class CollisionDetection {
 	
 	private void resolveCollision(Actor a1, Actor a2){
 		String collisionType = getCollisionType(a1,a2);
-		String triggerString = a1.getMyName() + collisionType + a2.getMyName();
-		a1.performActionsFor(triggerString);   
+        try {
+            Class<?> className = Class.forName(TRIGGER_PREFIX + collisionType);
+            Constructor[] myConstructors = className.getConstructors();
+            CollisionTrigger myTrigger = (CollisionTrigger) myConstructors[0].newInstance(a1, a2);
+            a1.performActionsFor(myTrigger);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
 	}
 
 	public PhysicsEngine getMyPhysicsEngine() {
