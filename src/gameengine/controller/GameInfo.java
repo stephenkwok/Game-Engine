@@ -25,7 +25,7 @@ public class GameInfo implements IEditableGameElement {
 	private String myFile;
 	
 	public GameInfo(String name, String imageName, String description, int currentLevelNum, String file ) {
-		this.setMyName(name);
+		this.setName(name);
 		this.setMyImageName(imageName);
 		this.setMyDescription(description);
 		this.setMyCurrentLevelNum(currentLevelNum);
@@ -46,7 +46,7 @@ public class GameInfo implements IEditableGameElement {
 	 * Returns the name of the game
 	 */
 	@Override
-	public String getMyName() {
+	public String getName() {
 		return this.myName;
 	}
 	
@@ -54,7 +54,7 @@ public class GameInfo implements IEditableGameElement {
 	 * Sets the name of the game
 	 */
 	@Override
-	public void setMyName(String myName) {
+	public void setName(String myName) {
 		this.myName = myName;
 	}
 
@@ -130,7 +130,7 @@ public class GameInfo implements IEditableGameElement {
 	      
 	      stringBuilder.append("GameInfo [ ");
 	      stringBuilder.append("\nname: ");
-	      stringBuilder.append(getMyName());
+	      stringBuilder.append(getName());
 	      stringBuilder.append("\nimgName: ");
 	      stringBuilder.append(getMyImageName());
 	      stringBuilder.append("\nmyDescription: ");
@@ -146,7 +146,7 @@ public class GameInfo implements IEditableGameElement {
 	 * Gets the image representation of the game 
 	 */
 	@Override
-	public ImageView getMyImageView() {
+	public ImageView getImageView() {
 		return myPreviewImage;
 	}
 	
@@ -154,7 +154,7 @@ public class GameInfo implements IEditableGameElement {
 	 * Sets the image representation of the game 
 	 */
 	@Override
-	public void setMyImageView(ImageView imageView) {
+	public void setImageView(ImageView imageView) {
 		myPreviewImage = imageView;
 	}
 	

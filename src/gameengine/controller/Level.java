@@ -49,9 +49,9 @@ public class Level implements ILevel, IEditableGameElement {
     public Level() {
         setMyActors(new ArrayList<>());
         setMyTriggerMap(new HashMap<>());
-        setMyName(DEFAULT_NAME);
+        setName(DEFAULT_NAME);
         myBackgroundImgName = DEFAULT_IMAGE_NAME;
-        setMyImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
+        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
         myTermination = DEFAULT_TERMINATION;
         myScrollingDirection = DEFAULT_SCROLLING;
         myWinningCondition = DEFAULT_WINNING_CONDITION;
@@ -83,7 +83,7 @@ public class Level implements ILevel, IEditableGameElement {
      * @param name A name for the Level
      */
     @Override
-    public void setMyName(String name) {
+    public void setName(String name) {
         this.myName = name;
     }
 
@@ -95,7 +95,7 @@ public class Level implements ILevel, IEditableGameElement {
     @Override
     public void addActor(IAuthoringActor actor) {
         getActors().add((IPlayActor)actor);
-        Set<String> actorTriggers = ((IPlayActor)actor).getMyRules().keySet();
+        Set<String> actorTriggers = ((IPlayActor)actor).getRules().keySet();
         for (String myTrigger : actorTriggers) {
             if (getMyTriggerMap().containsKey(myTrigger)) {
                 List<IPlayActor> levelActors = getMyTriggerMap().get(myTrigger);
@@ -116,7 +116,7 @@ public class Level implements ILevel, IEditableGameElement {
      * @return The Level's name
      */
     @Override
-    public String getMyName() {
+    public String getName() {
         return myName;
     }
 
@@ -126,7 +126,7 @@ public class Level implements ILevel, IEditableGameElement {
      * @return  The Level's ImageView
      */
 	@Override
-	public ImageView getMyImageView() {
+	public ImageView getImageView() {
 		return myBackground;
 	}
 
@@ -136,7 +136,7 @@ public class Level implements ILevel, IEditableGameElement {
      * @param imageView to be set as IEditableGameElement's ImageView
      */
 	@Override
-	public void setMyImageView(ImageView imageView) {
+	public void setImageView(ImageView imageView) {
 		myBackground = imageView;
 	}
 
@@ -169,7 +169,7 @@ public class Level implements ILevel, IEditableGameElement {
 
 	      stringBuilder.append("\nLevel [ ");
 	      stringBuilder.append("\nmyName: ");
-	      stringBuilder.append(getMyName());
+	      stringBuilder.append(getName());
 	      stringBuilder.append("\nbckImg: ");
 	      stringBuilder.append(myBackgroundImgName);
 	      stringBuilder.append("\nmyActors: ");

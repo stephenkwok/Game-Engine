@@ -15,7 +15,7 @@ public class UpdateActor extends MovingAction {
 
     @Override
     public void perform() {
-    	getMyActor().getMyPhysicsEngine().tick(getMyActor());
+    	getMyActor().getPhysicsEngine().tick(getMyActor());
     }
 
     

@@ -122,15 +122,15 @@ public class PhysicsEngine {
 	//They differ in the force applied to the Actor
 	
 	public void moveRight(IPlayActor a1) {
-		update(a1,getHorizontalForce(), 0, 0, a1.getMyFriction());
+		update(a1,getHorizontalForce(), 0, 0, a1.getFriction());
 	}
 
 	public void moveLeft(IPlayActor a1) {
-		update(a1,-getHorizontalForce(), 0, 0, a1.getMyFriction());
+		update(a1,-getHorizontalForce(), 0, 0, a1.getFriction());
 	}
 	
 	public void jump(IPlayActor a1){
-		update(a1,0,getJumpForce(), getGravity(), a1.getMyFriction());
+		update(a1,0,getJumpForce(), getGravity(), a1.getFriction());
 	}
 	
 	//gliding methods for when force and gravity aren't applied

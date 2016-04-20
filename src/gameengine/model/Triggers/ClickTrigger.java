@@ -13,7 +13,7 @@ public class ClickTrigger implements ITrigger {
 
     @Override
     public boolean evaluate(IPlayActor myActor) {
-        return ((IDisplayActor) myActor).getMyImageView().contains(myX, myY);
+        return ((IDisplayActor) myActor).getImageView().contains(myX, myY);
     }
 
     @Override

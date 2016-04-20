@@ -57,12 +57,12 @@ public class GameScreen extends Observable {
 	 * @param actor an instance of IActor
 	 */
 	public void addActor (IDisplayActor actor){
-		actor.setMyImageViewName(actor.getMyImageViewName());
-		getMySubgroup().getChildren().add(actor.getMyImageView());
+		actor.setImageViewName(actor.getImageViewName());
+		getMySubgroup().getChildren().add(actor.getImageView());
 	}
 	
 	public void removeActor(IDisplayActor a){
-		mySubgroup.getChildren().remove(a.getMyImageView());
+		mySubgroup.getChildren().remove(a.getImageView());
 	}
 	
 

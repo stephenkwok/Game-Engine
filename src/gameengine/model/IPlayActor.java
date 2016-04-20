@@ -2,13 +2,8 @@ package gameengine.model;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Observer;
-import java.util.Set;
-
 import gameengine.model.Actions.Action;
-import javafx.beans.Observable;
 import javafx.geometry.Bounds;
-import javafx.scene.image.ImageView;
 
 public interface IPlayActor {
 	
@@ -24,25 +19,13 @@ public interface IPlayActor {
      * Assigns a phyiscs engine to an Actor
      * @param physicsEngine The assigned physics engine
      */
-    public void setEngine(PhysicsEngine physicsEngine);
+    public void setPhysicsEngine(PhysicsEngine physicsEngine);
     
     /**
      * Provides the Actor's physics engine
      * @return  The Actor's phyiscs engine
      */
-    public PhysicsEngine getMyPhysicsEngine();
-    
-    /**
-     * Marks the Actor as dead
-     * @return  A boolean representing whether or not the Actor is dead
-     */
-    public boolean isDead();
-    
-	/**
-	 * Return whether the actor is a playable, main character.
-	 * @return
-	 */
-	public boolean isMain();
+    public PhysicsEngine getPhysicsEngine();
 	
     /**
      * Modifies the current value of an Attribute
@@ -51,12 +34,6 @@ public interface IPlayActor {
      * @param change The amount to change the Attribute by
      */
     public void changeAttribute(AttributeType type, int change);
-    
-    /**
-     * Sets the Actor to alive or dead
-     * @param isDead    The desired Actor state
-     */
-    public void setDead(boolean isDead);
     
     /**
      * Sets the Actor's X coordinate
@@ -111,19 +88,22 @@ public interface IPlayActor {
      */
     public void changed();
 
-	public void setInAir(boolean b);
 
-	public String getMyName();
+	public String getName();
 
-	public Attribute getAttribute(AttributeType type);
+	public Attribute getAttribute(AttributeType health);
 
-	public boolean isInAir();
-
-	public double getMyFriction();
+	public double getFriction();
 	
 	public Bounds getBounds();
 
-	public Map<String, List<Action>> getMyRules();
+	public boolean checkState(ActorState state);
+
+	public void removeState(ActorState state);
+
+	public void addState(ActorState state);
+
+	public Map<String, List<Action>> getRules();
 
     
 }

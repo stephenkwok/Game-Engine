@@ -9,8 +9,8 @@ public class SideCollision extends CollisionTrigger implements ITrigger {
 
     private static final String COLLISION_NAME = "SideCollision";
 
-    public SideCollision(Actor mainActor, Actor collidesWith) {
-        super(mainActor, collidesWith);
+    public SideCollision(IPlayActor actor1, IPlayActor actor2) {
+        super(actor1, actor2);
     }
 
     @Override

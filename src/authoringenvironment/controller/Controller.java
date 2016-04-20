@@ -140,18 +140,18 @@ public class Controller implements IScreenController {
 	public void addLevel() {
 		Level newLevel = new Level();
 		myLevels.add(newLevel);
-		myLevelNames.add(newLevel.getMyName());
+		myLevelNames.add(newLevel.getName());
 		mainScreen.createLevelLabel(newLevel);
 		goToEditingEnvironment(newLevel, levelEnvironment);
 	}
 
 	public void addActor() {
-		IAuthoringActor newActor = new Actor();
-		newActor.setMyID(myActors.size());
+		IAuthoringActor newActor = (IAuthoringActor) new Actor();
+		newActor.setID(myActors.size());
 		myActors.add(newActor);
-		myActorNames.add(newActor.getMyName());
+		myActorNames.add(newActor.getName());
 		mainScreen.createActorLabel(newActor);
-		actorEnvironment.setActorImage(newActor.getMyImageView(), newActor.getMyImageViewName());
+		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
 	

@@ -12,9 +12,9 @@
           <y>0.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>A1</myName>
+          <myID>0</myID>
           <myImageViewName>redball.png</myImageViewName>
           <myRules>
             <entry>
@@ -144,11 +144,8 @@
             </entry>
           </myRules>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -157,9 +154,9 @@
           <y>0.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>A2</myName>
+          <myID>0</myID>
           <myImageViewName>block.png</myImageViewName>
           <myRules>
             <entry>
@@ -231,11 +228,8 @@
             </entry>
           </myRules>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -244,9 +238,9 @@
           <y>100.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>Default Name</myName>
+          <myID>0</myID>
           <myImageViewName>flagpole.png</myImageViewName>
           <myRules>
             <entry>
@@ -310,11 +304,8 @@
             </entry>
           </myRules>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -323,17 +314,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -342,17 +330,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -361,17 +346,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -380,17 +362,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -399,17 +378,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -418,17 +394,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -437,17 +410,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -456,17 +426,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -475,17 +442,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -494,17 +458,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -513,17 +474,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -532,17 +490,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -551,17 +506,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -570,17 +522,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -589,17 +538,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -608,17 +554,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -627,17 +570,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -646,17 +586,14 @@
           <y>450.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
-          <myID>0</myID>
           <myFriction>0.0</myFriction>
           <myName>floor</myName>
+          <myID>0</myID>
           <myImageViewName>square.png</myImageViewName>
           <myRules/>
           <attributeMap/>
-          <isMain>false</isMain>
           <myActorRules/>
-          <isDead>false</isDead>
-          <heading>0.0</heading>
-          <inAir>false</inAir>
+          <myStates/>
         </gameengine.model.Actor>
       </myActors>
       <myTriggerMap>

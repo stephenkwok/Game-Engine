@@ -21,10 +21,10 @@ public abstract class Action implements IAction {
     /**
      * Creates a reference to the Actor that will be changed
      *
-     * @param assignedActor The Actor that will be changed
+     * @param actor The Actor that will be changed
      */
-    public Action(Actor assignedActor) {
-        setMyActor(assignedActor);
+    public Action(IPlayActor actor) {
+        myActor = actor;
     }
 
     /**
@@ -41,10 +41,7 @@ public abstract class Action implements IAction {
     public IPlayActor getMyActor() {
         return myActor;
     }
-    
-    public void setMyActor(IPlayActor actor) {
-    	this.myActor = actor;
-    }
+
 
     
 }

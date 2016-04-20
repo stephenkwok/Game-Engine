@@ -99,7 +99,7 @@ public class CollisionDetection {
 	
 	private void resolveCollision(IPlayActor a1, IPlayActor a2){
 		String collisionType = getCollisionType(a1,a2);
-		String triggerString = a1.getMyName() + collisionType + a2.getMyName();
+		String triggerString = a1.getName() + collisionType + a2.getName();
 		a1.performActionsFor(triggerString);   
 	}
 

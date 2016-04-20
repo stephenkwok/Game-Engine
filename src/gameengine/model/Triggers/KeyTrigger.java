@@ -1,6 +1,5 @@
 package gameengine.model.Triggers;
 
-import gameengine.model.IActor;
 import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 import javafx.scene.input.KeyCode;
