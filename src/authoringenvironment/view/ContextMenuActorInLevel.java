@@ -13,12 +13,12 @@ import javafx.scene.control.MenuItem;
 public class ContextMenuActorInLevel extends ContextMenu {
 	private static final String DELETE = "Remove actor";
 	private static final String EDIT_SIZE = "Edit actor size";
-	private IAuthoringActor curActor;
+	private ImageviewActorIcon curIcon;
 	private LevelEditingEnvironment myLevelEditingEnvironment;
 	
 	public ContextMenuActorInLevel(LevelEditingEnvironment levelEditor) {
 		myLevelEditingEnvironment = levelEditor;
-		curActor = null;
+		curIcon = null;
 		initMenuItems();
 	}
 	
@@ -28,8 +28,9 @@ public class ContextMenuActorInLevel extends ContextMenu {
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
-				if (curActor != null) {
-					myLevelEditingEnvironment.removeActorFromLevel(curActor);
+				if (curIcon != null) {
+					System.out.println("blurp");
+					myLevelEditingEnvironment.removeActorFromLevel(curIcon);
 				}
 			}
 			
@@ -47,7 +48,7 @@ public class ContextMenuActorInLevel extends ContextMenu {
 		getItems().addAll(delete, editSize);
 	}
 	
-	public void setActor(IAuthoringActor actor) {
-		curActor = actor;
+	public void setIcon(ImageviewActorIcon icon) {
+		curIcon = icon;
 	}
 }

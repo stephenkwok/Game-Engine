@@ -14,7 +14,8 @@ public class ImageviewActorIcon extends ImageView {
 	private IAuthoringActor myActor;
 	private int myID;
 	private boolean onLevel;
-	
+	private IAuthoringActor associatedActor;
+
 	/**
 	 * Construct an icon for a given actor.
 	 * @param actor: actor to construct an icon for.
@@ -26,25 +27,28 @@ public class ImageviewActorIcon extends ImageView {
 		this.setPreserveRatio(true);
 		myID = actor.getMyID();
 		onLevel = false;
+		associatedActor = null;
 		updateImageView();
 	}
-	
+
 	public IAuthoringActor getActor() {
-		Actor actor = new Actor();
-		actor.setMyName(myActor.getMyName());
-		actor.setMyImageViewName(myActor.getMyImageViewName());
-		actor.setMyImageView(myActor.getMyImageView());
-		actor.setMyID(myActor.getMyID());
-		actor.setSize(myActor.getSize());
-		actor.setX(0);
-		actor.setY(0);
-		return actor;
+		if (associatedActor == null) {
+			associatedActor = new Actor();
+			associatedActor.setMyName(myActor.getMyName());
+			associatedActor.setMyImageViewName(myActor.getMyImageViewName());
+			associatedActor.setMyImageView(myActor.getMyImageView());
+			associatedActor.setMyID(myActor.getMyID());
+			associatedActor.setSize(myActor.getSize());
+			associatedActor.setX(0);
+			associatedActor.setY(0);
+		}
+		return associatedActor;
 	}
-	
+
 	public IAuthoringActor getRefActor() {
 		return myActor;
 	}
-	
+
 	// if you have this already on the board, then it should reference the already new actor not the original actor the icon was made from
 	/**
 	 * Gets the actor associated with this icon.
@@ -54,7 +58,7 @@ public class ImageviewActorIcon extends ImageView {
 		myActor.setX(x);
 		myActor.setY(y);
 	}
-	
+
 	/**
 	 * Gets the ID of the actor associated with this icon. (ID of actor and ID of its icon are the same).
 	 * @return my ID.
@@ -62,7 +66,7 @@ public class ImageviewActorIcon extends ImageView {
 	public int getID() {
 		return myID;
 	}
-	
+
 	/**
 	 * Update the imageview based on the actor's current image.
 	 */
@@ -73,7 +77,7 @@ public class ImageviewActorIcon extends ImageView {
 			setFitHeight(myActor.getMyImageView().getFitHeight());
 		}
 	}
-	
+
 	public void setOnLevel(boolean bool) {
 		onLevel = bool;
 	}

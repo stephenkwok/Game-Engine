@@ -12,6 +12,7 @@ import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ScrollPane;
@@ -202,6 +203,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	private void initializeCenter() {
 		myLevelPane = new Pane();
 		myStackPane = new StackPane();
+		myStackPane.setAlignment(Pos.CENTER);
 		myBoundary = new Rectangle(SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
 		myBoundary.setFill(Color.TRANSPARENT);
 		myBoundary.setStroke(Color.BLACK);
@@ -304,6 +306,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		icon.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
 	        @Override
 	        public void handle(ContextMenuEvent t) {
+	        	contextMenu.setIcon(icon);
 				contextMenu.show(icon, t.getSceneX(), t.getScreenY());
 				System.out.println("pressed");
 	        }
@@ -330,9 +333,10 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		return myStage;
 	}
 	
-	public void removeActorFromLevel(IAuthoringActor actor) {
-		// TODO: need to remove icon
-		myLevel.removeActor((Actor) actor);
+	public void removeActorFromLevel(ImageviewActorIcon icon) {
+		myActorPreviews.remove(icon);
+		myLevelPane.getChildren().remove(icon);
+		myLevel.removeActor((Actor) icon.getActor());
 		
 	}
 }
