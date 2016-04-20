@@ -139,16 +139,6 @@ public class Game extends Observable implements Observer {
     }
 
     /**
-     * Updates the physics for each Actor
-     */
-
-	private void physicsUpdate(){
-		for(Actor a: getCurrentActors()){
-			myPhysicsEngine.tick(a);
-		}
-	}
-
-    /**
      * Initializes the Actors
      */
 
