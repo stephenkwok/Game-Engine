@@ -94,12 +94,18 @@ public class Tester extends Application {
 		Rule rule4 = new Rule(trigger4,action4);
 		Rule rule5 = new Rule(trigger5,action5);
 		Rule rule6 = new Rule(trigger6,action6);
+
+        TickTrigger intTick = new TickTrigger(50);
+        Action intAction = new MoveUp(actor1);
+        Rule intRule = new Rule(intTick, intAction);
+
 		actor1.addRule(rule);
 		actor1.addRule(rule2);
 		actor1.addRule(rule3);
 		actor1.addRule(rule4);
 		actor1.addRule(rule5);
 		actor1.addRule(rule6);
+        actor1.addRule(intRule);
 		actor1.setMain(true);
 		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
 		actor1.addAttribute(points);
@@ -145,8 +151,7 @@ public class Tester extends Application {
 		PerspectiveCamera camera = new PerspectiveCamera();
 		GameScreen view = new GameScreen(camera);
 
-		GameController controller = new GameController();
-		controller.setGame(model);
+		GameController controller = new GameController(model);
 		controller.setGameView(view);
 
 		SubScene sub = view.getScene();

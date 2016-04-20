@@ -6,6 +6,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gamedata.controller.HighScoresController;
 import gameengine.model.*;
+import gameengine.model.Triggers.TickTrigger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -39,6 +40,7 @@ public class Game extends Observable implements Observer {
 	private List<Actor> currentActors;
 	private List<Actor> deadActors;
 	private ObservableMap<String, Object> HUDData;
+    private int count;
 
 
     /**
@@ -124,16 +126,17 @@ public class Game extends Observable implements Observer {
 	}
 
 
-    /**
-     * The step method that states what will happen with each Timeline frame
-     */
+    private void step(){
+        //physicsUpdate();
+        myCollisionDetector.detection(getCurrentActors());
+        signalTick();
+        updateActors();
+        count++;
+    }
 
-	private void step(){
-		physicsUpdate();
-		myCollisionDetector.detection(getCurrentActors());
-		updateActors();
-	}
-
+    private void signalTick(){
+        handleTrigger(new TickTrigger(count));
+    }
 
     /**
      * Updates the physics for each Actor

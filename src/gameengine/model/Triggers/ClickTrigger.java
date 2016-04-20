@@ -18,7 +18,7 @@ public class ClickTrigger implements ITrigger {
         myActor = actor;
     }
 
-    public ClickTrigger(int x, int y) {
+    public ClickTrigger(double x, double y) {
         myX = x;
         myY = y;
     }
