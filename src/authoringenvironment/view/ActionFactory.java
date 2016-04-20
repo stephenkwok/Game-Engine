@@ -8,32 +8,33 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import gameengine.model.Actor;
-import gameengine.model.ITrigger;
+import gameengine.model.IAction;
 
-public class TriggerFactory {
-	private static final String TRIGGER_RESOURCE = "trigger";
+public class ActionFactory {	
+	private static final String ACTION_RESOURCE = "action";
 	private static final String DELIMITER = ",";
-	private static final String TRIGGER_TYPES= "TriggerTypes";
+	private static final String ACTION_TYPES= "ActionTypes";
 	private static final String GAME_ENGINE = "gameengine.";
 	private static final String MODEL = "model.";
-	private static final String TRIGGERS = "Triggers.";
+	private static final String ACTIONS = "Actions.";
 	private static final String CLASS = "Class";
 	private static final String CREATE = "create";
 	private ResourceBundle myResources;
 	private List<Object> arguments;
 	
-	public TriggerFactory() {
-		this.myResources = ResourceBundle.getBundle(TRIGGER_RESOURCE);
+	public ActionFactory() {
+		this.myResources = ResourceBundle.getBundle(ACTION_RESOURCE);
 	}
+	
 	/**
-	 * Creates new ITrigger based on nodeTypeKey passed in. 
-	 * @param nodeTypeKey: Name of object you want to create.
-	 * @return ITrigger: element corresponding to nodeTypeKey in ResourceBundle.
+	 * Creates new IAction based on actionType passed in. 
+	 * @param actionType: Type of action you want to create
+	 * @return IAction: element corresponding to actionType in ResourceBundle.
 	 */
-	public ITrigger createNewTrigger(String triggerType, List<Object> arguments) {
+	public IAction createNewAction(String actionType, List<Object> arguments) {
 		this.arguments = arguments;
-		String elementType = determineTriggerType(triggerType);
-		return createTrigger(elementType, triggerType);
+		String elementType = determineActionType(actionType);
+		return createAction(elementType, actionType);
 	}
 
 	/**
@@ -41,10 +42,10 @@ public class TriggerFactory {
 	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
 	 * @return trigger type (e.g. CollisionTrigger, KeyTrigger, etc.)
 	 */
-	private String determineTriggerType(String triggerType) {
-		String[] keys = myResources.getString(TRIGGER_TYPES).split(DELIMITER);
+	private String determineActionType(String actionType) {
+		String[] keys = myResources.getString(ACTION_TYPES).split(DELIMITER);
 		for (int i = 0; i < keys.length; i++) {
-			if (Arrays.asList(myResources.getString(keys[i]).split(DELIMITER)).contains(triggerType)) {
+			if (Arrays.asList(myResources.getString(keys[i]).split(DELIMITER)).contains(actionType)) {
 				return keys[i];
 			}
 		}
@@ -57,11 +58,11 @@ public class TriggerFactory {
 	 * @param nodeType: name of the elementType as specified in the properties file.
 	 * @return IGUIElement for the desired element.
 	 */
-	private ITrigger createTrigger(String elementType, String triggerType) {
-		String className = GAME_ENGINE + MODEL + TRIGGERS + myResources.getString(triggerType + CLASS);
+	private IAction createAction(String elementType, String actionType) {
+		String className = GAME_ENGINE + MODEL + ACTIONS + myResources.getString(actionType + CLASS);
 		try {
 			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class);
-			return (ITrigger) createMethod.invoke(this, triggerType, className);
+			return (IAction) createMethod.invoke(this, actionType, className);
 		} catch (NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -87,27 +88,21 @@ public class TriggerFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private ITrigger createCollisionTrigger(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		//hardcoded indices 
-		Actor myActor = (Actor) this.arguments.get(0);
-		Actor otherActor = (Actor) this.arguments.get(1);
+	private IAction createDoubleBehavior(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Double value = Double.parseDouble((String) arguments.get(0));
 		Class<?> collisionClass = Class.forName(className);
-		Constructor<?> constructor = collisionClass.getConstructor(Actor.class, Actor.class);
-		return (ITrigger) constructor.newInstance(myActor, otherActor);
+		Constructor<?> constructor = collisionClass.getConstructor(Double.class);
+		return (IAction) constructor.newInstance(value);
 	}
 	
-	private ITrigger createKeyTrigger(String nodeType, String className){
+	private IAction createLabel(){
 		//TODO:
 		return null;
 	}
 	
-	private ITrigger createTickTrigger(String nodeType, String className){
+	private IAction createComboBoxBehavior(){
 		//TODO:
 		return null;
 	}
 	
-	private ITrigger createClickTrigger(String nodeType, String className){
-		//TODO:
-		return null;
-	}
 }

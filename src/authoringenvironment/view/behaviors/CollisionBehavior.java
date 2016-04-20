@@ -1,30 +1,44 @@
 package authoringenvironment.view.behaviors;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import authoringenvironment.controller.Controller;
-/**
- * GUI representation of Collision behavior, which requires single Actor input in ComboBox form
- * @author AnnieTang
- */
+import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.IEditableGameElement;
+import gameengine.model.ITrigger;
+
 public class CollisionBehavior extends ComboBoxBehavior {
-	private Controller myController;
+	private List<IAuthoringActor> myActors;
+	private IAuthoringActor otherActor;
+	private ITrigger myTrigger;
 	
-	public CollisionBehavior(String behaviorType, ResourceBundle myResources,Controller myController) {
+	public CollisionBehavior(String behaviorType, IAuthoringActor myActor, ResourceBundle myResources, List<IAuthoringActor> myActors) {
 		super(behaviorType, myResources);
-		this.myController = myController;
+		this.myActors = myActors;
+		setButtonAction(e -> {
+		this.otherActor = (IAuthoringActor) getComboBox().getValue();
+		List<Object> arguments = new ArrayList<>();
+		arguments.add(myActor);
+		arguments.add(otherActor);
+		myTrigger = getTriggerFactory().createNewTrigger(behaviorType, arguments);
+		//add ITrigger 
+		System.out.println(myTrigger);
+		});
 	}
-	/**
-	 * Return list of Actor names to be set as ComboBox options
-	 */
+
 	@Override
-	protected List<String> getOptionsList() {
-		return myController.getActorNames();
+	List<IEditableGameElement> getOptionsList() {
+		List<IEditableGameElement> toReturn = new ArrayList<>();
+		for(IAuthoringActor actor: myActors){
+			toReturn.add(actor);
+		}
+		return toReturn;
 	}
 
 	@Override
 	protected void updateValueBasedOnEditable() {
+		getComboBox().setValue(otherActor);
 	}
 
 }

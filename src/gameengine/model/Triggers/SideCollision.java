@@ -21,5 +21,4 @@ public class SideCollision extends CollisionTrigger implements ITrigger {
     public String getMyKey() {
         return makeName(COLLISION_NAME);
     }
-
 }
