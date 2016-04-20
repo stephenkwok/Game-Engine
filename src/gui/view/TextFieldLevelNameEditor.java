@@ -23,7 +23,7 @@ public class TextFieldLevelNameEditor extends TextFieldWithButton {
 	public TextFieldLevelNameEditor(String labelText, String promptText, Double textFieldWidth) {
 		super(labelText, promptText, textFieldWidth);
 		setButtonAction(e -> 
-		((Level) getEditableElement()).setMyName(getTextFieldInput()));
+		((Level) getEditableElement()).setName(getTextFieldInput()));
 	}
 
 	/**
@@ -31,7 +31,7 @@ public class TextFieldLevelNameEditor extends TextFieldWithButton {
 	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
-		setTextFieldValue(((Level) getEditableElement()).getMyName());	
+		setTextFieldValue(((Level) getEditableElement()).getName());	
 	}
 
 }
