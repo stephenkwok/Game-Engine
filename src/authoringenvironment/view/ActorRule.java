@@ -123,7 +123,7 @@ public class ActorRule {
 	 * @param behavior
 	 */
 	public void addBehavior(Label behavior) {
-		Node toAdd = actorRuleFactory.getBehaviorHBox(behavior.getText(),null);
+		Node toAdd = actorRuleFactory.getBehaviorNode(behavior.getText(),null);
 		toAdd.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2) remove(toAdd);
 		});
@@ -148,14 +148,14 @@ public class ActorRule {
 	 */
 	public void addSound(Label sound) {
 		if(isInPath(sound.getText(), myLibraryResources.getString("Sounds"))){
-			Node toAdd = actorRuleFactory.getBehaviorHBox(PLAY_SOUND, sound.getText());
+			Node toAdd = actorRuleFactory.getBehaviorNode(PLAY_SOUND, sound.getText());
 			toAdd.setOnMouseClicked(event -> {
 				if(event.getClickCount()==2) remove(toAdd);
 			});
 			actions.getChildren().add(toAdd);
 		}
 		else{
-			Node toAdd = actorRuleFactory.getBehaviorHBox(PLAY_MUSIC, sound.getText());
+			Node toAdd = actorRuleFactory.getBehaviorNode(PLAY_MUSIC, sound.getText());
 			toAdd.setOnMouseClicked(event -> {
 				if(event.getClickCount()==2) remove(toAdd);
 			});
@@ -181,7 +181,7 @@ public class ActorRule {
 	 * @param image
 	 */
 	public void addImage(Label image) {
-		Node toAdd = actorRuleFactory.getBehaviorHBox(CHANGE_IMAGE,image.getText());
+		Node toAdd = actorRuleFactory.getBehaviorNode(CHANGE_IMAGE,image.getText());
 		toAdd.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2) remove(toAdd);
 		});

@@ -12,7 +12,7 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 	private ResourceBundle myResources;
 
 	public ComboBoxIsPlayer(ResourceBundle myResources, String promptText, String labelText) {
-		super(myResources, promptText, labelText);
+		super(promptText, labelText);
 		this.myResources = myResources;
 	}
 

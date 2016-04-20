@@ -35,15 +35,24 @@ public abstract class ComboBoxBehavior extends EditingElementParent{
 	private ComboBox<IEditableGameElement> comboBox;
 	private String labelText;
 	private TriggerFactory triggerFactory;
+	private String behaviorType;
 //	private ActionFactory actionFactory;
 	
 	public ComboBoxBehavior(String behaviorType, ResourceBundle myResources) {
 		super(GO);
+		this.behaviorType = behaviorType;
 		this.promptText =  myResources.getString(behaviorType+PROMPT);
 		this.labelText = myResources.getString(behaviorType+LABEL);
 		this.triggerFactory = new TriggerFactory();
 	}
 	
+	/**
+	 * Return String of behavior type
+	 * @return
+	 */
+	protected String getBehaviorType(){
+		return behaviorType;
+	}
 	/**
 	 * Creates ComboBox Node.
 	 */
@@ -130,6 +139,5 @@ public abstract class ComboBoxBehavior extends EditingElementParent{
 	 */
 	protected TriggerFactory getTriggerFactory(){
 		return this.triggerFactory;
-	}
-	
+	}	
 }

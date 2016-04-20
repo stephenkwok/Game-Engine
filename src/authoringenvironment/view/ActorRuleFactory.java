@@ -32,7 +32,7 @@ public class ActorRuleFactory {
 	 * @param value
 	 * @return
 	 */
-	public Node getBehaviorHBox(String behaviorType, String value){
+	public Node getBehaviorNode(String behaviorType, String value){
 		try{
 			String className = PACKAGE + myResources.getString(behaviorType+CLASS);
 			Class<?> clazz = Class.forName(className);
@@ -65,9 +65,20 @@ public class ActorRuleFactory {
 				Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, List.class);
 				return ((IGUIElement) constructor.newInstance(behaviorType,myResources,myLevels)).createNode();
 			} catch(Exception e2){
-				e2.printStackTrace();
-				return new Label(behaviorType);
+				return getClickBehaviorNode(behaviorType, value);
 			}
+		}
+	}
+	
+	private Node getClickBehaviorNode(String behaviorType, String value){
+		String className = PACKAGE + myResources.getString(behaviorType+CLASS);
+		try{
+			Class<?> clazz = Class.forName(className);
+			Constructor<?> constructor = clazz.getConstructor(IAuthoringActor.class, String.class, ResourceBundle.class);
+			return ((IGUIElement) constructor.newInstance(myActor,behaviorType,myResources)).createNode();
+		} catch(Exception e2){
+			e2.printStackTrace();
+			return new Label(behaviorType);
 		}
 	}
 

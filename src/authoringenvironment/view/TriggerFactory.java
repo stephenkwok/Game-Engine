@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import gameengine.model.Actor;
 import gameengine.model.ITrigger;
+import javafx.scene.input.KeyCode;
 
 public class TriggerFactory {
 	private static final String TRIGGER_RESOURCE = "trigger";
@@ -89,16 +90,18 @@ public class TriggerFactory {
 	 */
 	private ITrigger createCollisionTrigger(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		//hardcoded indices 
-		Actor myActor = (Actor) this.arguments.get(0);
-		Actor otherActor = (Actor) this.arguments.get(1);
+		Actor myActor = (Actor) arguments.get(0);
+		Actor otherActor = (Actor) arguments.get(1);
 		Class<?> collisionClass = Class.forName(className);
 		Constructor<?> constructor = collisionClass.getConstructor(Actor.class, Actor.class);
 		return (ITrigger) constructor.newInstance(myActor, otherActor);
 	}
 	
-	private ITrigger createKeyTrigger(String nodeType, String className){
-		//TODO:
-		return null;
+	private ITrigger createKeyTrigger(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		KeyCode keyCode = (KeyCode) arguments.get(0);
+		Class<?> keyClass = Class.forName(className);
+		Constructor<?> constructor = keyClass.getConstructor(KeyCode.class);
+		return (ITrigger) constructor.newInstance(keyCode);
 	}
 	
 	private ITrigger createTickTrigger(String nodeType, String className){
@@ -106,8 +109,10 @@ public class TriggerFactory {
 		return null;
 	}
 	
-	private ITrigger createClickTrigger(String nodeType, String className){
-		//TODO:
-		return null;
+	private ITrigger createClickTrigger(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+//		Actor myActor = (Actor) arguments.get(0);
+		Class<?> collisionClass = Class.forName(className);
+		Constructor<?> constructor = collisionClass.getConstructor();
+		return (ITrigger) constructor.newInstance();
 	}
 }

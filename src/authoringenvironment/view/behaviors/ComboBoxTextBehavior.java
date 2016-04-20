@@ -3,6 +3,7 @@ package authoringenvironment.view.behaviors;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.view.TriggerFactory;
 import gui.view.ComboBoxTextCell;
 import javafx.scene.control.ComboBox;
 /**
@@ -14,10 +15,14 @@ public abstract class ComboBoxTextBehavior extends ComboBoxTextCell {
 	private static final String PROMPT = "Prompt";
 	private String value;
 	private String behaviorType;
+	private TriggerFactory triggerFactory;
+	private ResourceBundle myResources;
 	
 	public ComboBoxTextBehavior(String behaviorType, ResourceBundle myResources){
-		super(myResources, myResources.getString(behaviorType+PROMPT), myResources.getString(behaviorType+LABEL));
+		super(myResources.getString(behaviorType+PROMPT), myResources.getString(behaviorType+LABEL));
 		this.behaviorType = behaviorType;
+		this.triggerFactory = new TriggerFactory();
+		this.myResources = myResources;
 	}
 	/**
 	 * On click, set general field to ComboBox content
@@ -26,10 +31,15 @@ public abstract class ComboBoxTextBehavior extends ComboBoxTextCell {
 	public void setButtonAction() {
 		getComboButton().setOnAction(event->{
 			this.value = (String) getComboBox().getValue();
+			createTriggerOrAction();
 		});
 	}
 	/**
-	 * Return list of elements in ComboBoxg
+	 * Create ITrigger or IAction depending on type of behavior
+	 */
+	abstract void createTriggerOrAction();
+	/**
+	 * Return list of elements in ComboBox
 	 */
 	@Override
 	abstract protected List<String> getOptionsList();
@@ -39,14 +49,29 @@ public abstract class ComboBoxTextBehavior extends ComboBoxTextCell {
 	 * @return
 	 */
 	public String getValue(){
-		return value;
+		return this.value;
 	}
 	
 	/**
 	 * Return String of behavior type
 	 * @return
 	 */
-	public String getBehaviorType(){
-		return behaviorType;
+	protected String getBehaviorType(){
+		return this.behaviorType;
+	}
+	
+	/**
+	 * Gets the trigger factory. 
+	 * @return factory
+	 */
+	protected TriggerFactory getTriggerFactory(){
+		return this.triggerFactory;
+	}
+	/**
+	 * Get Resource Bundle
+	 * @return
+	 */
+	protected ResourceBundle getResources(){
+		return this.myResources;
 	}
 }

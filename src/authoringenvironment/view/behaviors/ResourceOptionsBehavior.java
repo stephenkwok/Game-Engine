@@ -40,4 +40,10 @@ public class ResourceOptionsBehavior extends ComboBoxTextBehavior {
 	protected void updateValueBasedOnEditable() {
 		getComboBox().setValue(getValue());
 	}
+	
+	@Override
+	void createTriggerOrAction() {
+		// TODO Auto-generated method stub
+		
+	}
 }

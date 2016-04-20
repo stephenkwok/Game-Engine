@@ -23,7 +23,7 @@ public class ComboBoxScrollingDirection extends ComboBoxTextCell {
 	 * @param labelText: text for label.
 	 */
 	public ComboBoxScrollingDirection(ResourceBundle myResources, String promptText, String labelText) {
-		super(myResources, promptText, labelText);
+		super(promptText, labelText);
 		myOptions = Arrays.asList(myResources.getString(SCROLLING_DIRECTION_OPTIONS).split(DELIMITER));
 	}
 
