@@ -32,7 +32,6 @@ public class TabAttributes extends TabParent {
 	private static final String DELIMITER = ",";
 	private ResourceBundle myAttributesResources;
 	private GUIFactory myFactory;
-	private Controller myController;
 	private VBox myContent;
 	private IEditableGameElement myEditableElement;
 	private List<IEditingElement> myEditingElements;
@@ -47,9 +46,8 @@ public class TabAttributes extends TabParent {
 	 */
 	public TabAttributes(Controller controller, ResourceBundle myResources, String tabText, String optionsResource, IEditableGameElement element) {
 		super(myResources, tabText);
-		myController = controller;
 		this.myAttributesResources = ResourceBundle.getBundle(optionsResource);
-		myFactory = new GUIFactory(myAttributesResources, myController);
+		myFactory = new GUIFactory(myAttributesResources);
 		myEditableElement = element;
 		myEditingElements = new ArrayList<>();
 		addElements();

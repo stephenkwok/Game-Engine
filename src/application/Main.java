@@ -1,6 +1,6 @@
 package application;
 
-import gameplayer.view.SplashScreen;
+import gameplayer.controller.SplashScreenController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -11,8 +11,7 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		Stage myStage = primaryStage;
 		myStage.setResizable(false);
-		SplashScreen myScreen = new SplashScreen(myStage);
-		myStage.setScene(myScreen.getScene());
+		SplashScreenController splashScreenController = new SplashScreenController(myStage);
 		myStage.show();
 	}
 	
