@@ -93,7 +93,7 @@ public class GameController implements Observer, IGameController {
 	public void begin (){
 		Level current = model.getCurrentLevel();
 		view.clearGame();
-		view.addBackground(current.getMyBackgroundImgName());
+		view.addBackground(current);
 		for(Actor actor: model.getActors()){
 			view.addActor(actor);
 		}
