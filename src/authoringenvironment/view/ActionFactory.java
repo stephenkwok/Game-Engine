@@ -11,7 +11,7 @@ import gameengine.model.Actor;
 import gameengine.model.IAction;
 
 public class ActionFactory {	
-	private static final String ACTION_RESOURCE = "action";
+	private static final String ACTION_RESOURCE = "iaction";
 	private static final String DELIMITER = ",";
 	private static final String ACTION_TYPES= "ActionTypes";
 	private static final String GAME_ENGINE = "gameengine.";
@@ -27,42 +27,38 @@ public class ActionFactory {
 	}
 	
 	/**
-	 * Creates new IAction based on actionType passed in. 
-	 * @param actionType: Type of action you want to create
-	 * @return IAction: element corresponding to actionType in ResourceBundle.
+	 * Creates new IAction based on behavior type passed in. 
+	 * @return IAction
 	 */
-	public IAction createNewAction(String actionType, List<Object> arguments) {
+	public IAction createNewAction(String behaviorType, List<Object> arguments) {
 		this.arguments = arguments;
-		String elementType = determineActionType(actionType);
-		return createAction(elementType, actionType);
+		String actionType = determineActionType(behaviorType);
+		return createAction(actionType, behaviorType);
 	}
 
 	/**
-	 * Determines the element type based on the list of possible Trigger Types given by the resource file.
-	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
-	 * @return trigger type (e.g. CollisionTrigger, KeyTrigger, etc.)
+	 * Determines the element type based on the list of possible ACTIONTypes given by the resource file.
+	 * @return Action type
 	 */
-	private String determineActionType(String actionType) {
+	private String determineActionType(String behaviorType) {
 		String[] keys = myResources.getString(ACTION_TYPES).split(DELIMITER);
 		for (int i = 0; i < keys.length; i++) {
-			if (Arrays.asList(myResources.getString(keys[i]).split(DELIMITER)).contains(actionType)) {
+			if (Arrays.asList(myResources.getString(keys[i]).split(DELIMITER)).contains(behaviorType)) {
 				return keys[i];
 			}
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Create the desired element.
-	 * @param elementType: ComboBox, TextFieldWithButton, Button, Menu, Pane, MenuBar, or CheckBoxObject.
-	 * @param nodeType: name of the elementType as specified in the properties file.
 	 * @return IGUIElement for the desired element.
 	 */
-	private IAction createAction(String elementType, String actionType) {
-		String className = GAME_ENGINE + MODEL + ACTIONS + myResources.getString(actionType + CLASS);
+	private IAction createAction(String actionType, String behaviorType) {
+		String className = GAME_ENGINE + MODEL + ACTIONS + myResources.getString(behaviorType + CLASS);
 		try {
-			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class);
-			return (IAction) createMethod.invoke(this, actionType, className);
+			Method createMethod = this.getClass().getDeclaredMethod(CREATE + actionType, String.class, String.class);
+			return (IAction) createMethod.invoke(this, behaviorType, className);
 		} catch (NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -75,34 +71,16 @@ public class ActionFactory {
 		return null;
 	}
 
-	/**
-	 * Creates a Collision Trigger.
-	 * @param nodeType: Type corresponding to the nodeTypeKey originally specified.
-	 * @param className: specific subclass of CollisionTrigger.
-	 * @return ITrigger.
-	 * @throws ClassNotFoundException
-	 * @throws NoSuchMethodException
-	 * @throws SecurityException
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
-	private IAction createDoubleBehavior(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Double value = Double.parseDouble((String) arguments.get(0));
-		Class<?> collisionClass = Class.forName(className);
-		Constructor<?> constructor = collisionClass.getConstructor(Double.class);
-		return (IAction) constructor.newInstance(value);
+//	private IAction createSelectActorAction(String actionType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+//		return createSelfActionAction(actionType, className);
+//	}
+	
+	private IAction createSelfActionAction(String actionType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Actor myActor = (Actor) arguments.get(0);
+		Class<?> clazz = Class.forName(className);
+		Constructor<?> constructor = clazz.getConstructor(Actor.class);
+		return (IAction) constructor.newInstance(myActor);
 	}
 	
-	private IAction createLabel(){
-		//TODO:
-		return null;
-	}
-	
-	private IAction createComboBoxBehavior(){
-		//TODO:
-		return null;
-	}
 	
 }

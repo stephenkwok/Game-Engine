@@ -9,12 +9,12 @@ import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IAction;
 import gameengine.model.ITrigger;
 
-public class MovingActionBehavior extends IEditableGameElementBehavior{
+public class SelectActorBehavior extends IEditableGameElementBehavior{
 	private IAction myAction;
 	private List<IAuthoringActor> myActors;
 	private IAuthoringActor selectedActor;
 	
-	public MovingActionBehavior(String behaviorType, ResourceBundle myResources, List<IAuthoringActor> myActors) {
+	public SelectActorBehavior(String behaviorType, ResourceBundle myResources, List<IAuthoringActor> myActors) {
 		super(behaviorType,myResources);
 		this.myActors = myActors;
 		setButtonAction(e -> {
@@ -22,7 +22,6 @@ public class MovingActionBehavior extends IEditableGameElementBehavior{
 			List<Object> arguments = new ArrayList<>();
 			arguments.add(selectedActor);
 			myAction = getActionFactory().createNewAction(behaviorType, arguments);
-			//
 			System.out.println(myAction);
 		});
 	}

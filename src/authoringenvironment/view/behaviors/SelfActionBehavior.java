@@ -7,11 +7,11 @@ import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.IAction;
 import gameengine.model.ITrigger;
 
-public class ClickBehavior extends LabelBehavior {
-	private ITrigger myTrigger;
+public class SelfActionBehavior extends LabelBehavior {
+	private IAction myAction;
 	private IAuthoringActor myActor;
 	
-	public ClickBehavior(IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
+	public SelfActionBehavior(IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
 		super(behaviorType, myResources);
 		this.myActor = myActor;
 	}
@@ -20,18 +20,18 @@ public class ClickBehavior extends LabelBehavior {
 	void createTriggerOrAction() {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(myActor);
-		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
-		System.out.println(myTrigger);
+		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
+		System.out.println(myAction);
 	}
 
 	@Override
 	public IAction getAction() {
-		return null;
+		return this.myAction;
 	}
 
 	@Override
 	public ITrigger getTrigger() {
-		return this.myTrigger;
+		return null;
 	}
 
 }

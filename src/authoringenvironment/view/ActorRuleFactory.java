@@ -93,10 +93,17 @@ public class ActorRuleFactory {
 		Constructor<?> constructor = clazz.getConstructor(IAuthoringActor.class, String.class, ResourceBundle.class);
 		return (IGUIElement) constructor.newInstance(myActor,behaviorType,myResources);
 	}
-	
+
 	private IGUIElement createComboBoxBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		Class<?> clazz = Class.forName(className);
 		Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class);
 		return (IGUIElement) constructor.newInstance(behaviorType,myResources);
+	}
+	
+	//only parameter is to select an actor
+	private IGUIElement createSelectActorBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		Class<?> clazz = Class.forName(className);
+		Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, List.class);
+		return (IGUIElement) constructor.newInstance(behaviorType,myResources, myActors);
 	}
 }

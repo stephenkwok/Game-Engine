@@ -12,7 +12,7 @@ import gameengine.model.ITrigger;
 import javafx.scene.input.KeyCode;
 
 public class TriggerFactory {
-	private static final String TRIGGER_RESOURCE = "trigger";
+	private static final String TRIGGER_RESOURCE = "itrigger";
 	private static final String DELIMITER = ",";
 	private static final String TRIGGER_TYPES= "TriggerTypes";
 	private static final String GAME_ENGINE = "gameengine.";
@@ -28,24 +28,22 @@ public class TriggerFactory {
 	}
 	/**
 	 * Creates new ITrigger based on nodeTypeKey passed in. 
-	 * @param nodeTypeKey: Name of object you want to create.
 	 * @return ITrigger: element corresponding to nodeTypeKey in ResourceBundle.
 	 */
-	public ITrigger createNewTrigger(String triggerType, List<Object> arguments) {
+	public ITrigger createNewTrigger(String behaviorType, List<Object> arguments) {
 		this.arguments = arguments;
-		String elementType = determineTriggerType(triggerType);
-		return createTrigger(elementType, triggerType);
+		String triggerType = determineTriggerType(behaviorType);
+		return createTrigger(triggerType, behaviorType);
 	}
 
 	/**
 	 * Determines the element type based on the list of possible Trigger Types given by the resource file.
-	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
 	 * @return trigger type (e.g. CollisionTrigger, KeyTrigger, etc.)
 	 */
-	private String determineTriggerType(String triggerType) {
+	private String determineTriggerType(String behaviorType) {
 		String[] keys = myResources.getString(TRIGGER_TYPES).split(DELIMITER);
 		for (int i = 0; i < keys.length; i++) {
-			if (Arrays.asList(myResources.getString(keys[i]).split(DELIMITER)).contains(triggerType)) {
+			if (Arrays.asList(myResources.getString(keys[i]).split(DELIMITER)).contains(behaviorType)) {
 				return keys[i];
 			}
 		}
@@ -54,15 +52,13 @@ public class TriggerFactory {
 	
 	/**
 	 * Create the desired element.
-	 * @param elementType: ComboBox, TextFieldWithButton, Button, Menu, Pane, MenuBar, or CheckBoxObject.
-	 * @param nodeType: name of the elementType as specified in the properties file.
 	 * @return IGUIElement for the desired element.
 	 */
-	private ITrigger createTrigger(String elementType, String triggerType) {
-		String className = GAME_ENGINE + MODEL + TRIGGERS + myResources.getString(triggerType + CLASS);
+	private ITrigger createTrigger(String triggerType, String behaviorType) {
+		String className = GAME_ENGINE + MODEL + TRIGGERS + myResources.getString(behaviorType + CLASS);
 		try {
-			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class);
-			return (ITrigger) createMethod.invoke(this, triggerType, className);
+			Method createMethod = this.getClass().getDeclaredMethod(CREATE + triggerType, String.class, String.class);
+			return (ITrigger) createMethod.invoke(this, behaviorType, className);
 		} catch (NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -88,7 +84,7 @@ public class TriggerFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private ITrigger createCollisionTrigger(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private ITrigger createCollisionTrigger(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		//hardcoded indices 
 		Actor myActor = (Actor) arguments.get(0);
 		Actor otherActor = (Actor) arguments.get(1);
@@ -97,20 +93,19 @@ public class TriggerFactory {
 		return (ITrigger) constructor.newInstance(myActor, otherActor);
 	}
 	
-	private ITrigger createKeyTrigger(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private ITrigger createKeyTrigger(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		KeyCode keyCode = (KeyCode) arguments.get(0);
 		Class<?> keyClass = Class.forName(className);
 		Constructor<?> constructor = keyClass.getConstructor(KeyCode.class);
 		return (ITrigger) constructor.newInstance(keyCode);
 	}
 	
-	private ITrigger createTickTrigger(String nodeType, String className){
+	private ITrigger createTickTrigger(String behaviorType, String className){
 		//TODO:
 		return null;
 	}
 	
-	private ITrigger createClickTrigger(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-//		Actor myActor = (Actor) arguments.get(0);
+	private ITrigger createClickTrigger(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> collisionClass = Class.forName(className);
 		Constructor<?> constructor = collisionClass.getConstructor();
 		return (ITrigger) constructor.newInstance();
