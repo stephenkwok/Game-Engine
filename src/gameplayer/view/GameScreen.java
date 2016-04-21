@@ -1,6 +1,7 @@
 package gameplayer.view;
 
 import java.util.Observable;
+import java.util.Arrays;
 import gameengine.controller.Level;
 import gameengine.model.IActor;
 import gameengine.model.IDisplayActor;
@@ -14,12 +15,16 @@ import javafx.event.Event;
 import javafx.scene.Camera;
 import javafx.scene.Group;
 import javafx.scene.SubScene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.util.Callback;
 
 /** 
  * This class serves as the private interface that a Game screen must implement in order to be able to add visual elements of the game to the screen.
@@ -102,7 +107,8 @@ public class GameScreen extends Observable implements IGameScreen {
 		else if(e.getEventType()==KeyEvent.KEY_PRESSED){
 			ITrigger trigger = handleKeyPress(((KeyEvent)e).getCode());
 			setChanged();
-			notifyObservers(trigger);
+			Object[] methodArg = {"handleTrigger", trigger};
+			notifyObservers(Arrays.asList(methodArg));
 		}
 	}
 
@@ -191,6 +197,47 @@ public class GameScreen extends Observable implements IGameScreen {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void terminateGame(){
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Game over!  Do you want to save your score?", ButtonType.YES, ButtonType.NO);
+		alert.show();
+		alert.showingProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue) {
+				if (alert.getResult() == ButtonType.YES) {
+					saveScorePrompt();
+				}
+			}
+		});
+
+
+	}
+	
+	public String saveScorePrompt() {
+		TextInputDialog dialog = new TextInputDialog("Name");
+		dialog.setContentText("Please enter your name if you want to save your score");
+		dialog.show();
+		dialog.setResultConverter(new Callback<ButtonType, String>() {
+			@Override
+			public String call(ButtonType b) {
+				if (b == ButtonType.OK) {
+					//setChanged();
+					//notifyObservers(dialog.getEditor().getText());
+					//saveGameScore(dialog.getEditor().getText());
+					return dialog.getEditor().getText();
+				}
+				else {
+					return null;
+				}
+			}
+		});
+		return null;
+	}
+
+//	private void saveGameScore(String name) {
+//		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
+//		c.saveHighScore(getGame().getScore(), name);
+//
+//	} 
 	
 
 }

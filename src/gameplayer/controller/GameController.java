@@ -1,10 +1,14 @@
 package gameplayer.controller;
 
 import java.util.List;
-
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -17,6 +21,7 @@ import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
+import gui.view.IGUIElement;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
@@ -39,12 +44,15 @@ public class GameController implements Observer, IGameController {
 	private GameScreen view;
 	@XStreamOmitField
 	private HUDScreen hud;
+	
+	private ResourceBundle myResources;
 
 	
 	public GameController(Game game) {
 		this.setGame(game);
 		this.setGameView(new GameScreen(new ParallelCamera()));
 		this.initialize(game.getInfo().getMyCurrentLevelNum()); //note: main actor is define at this line
+		this.myResources = ResourceBundle.getBundle("gameActions");
 	}
 	/**
 	 * Sets the current game to the given Game
@@ -130,36 +138,38 @@ public class GameController implements Observer, IGameController {
 		//TODO fix resource also implement saving functionality
 
 		togglePause();
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Game over!  Do you want to save your score?", ButtonType.YES, ButtonType.NO);
-		alert.show();
-		alert.showingProperty().addListener((observable, oldValue, newValue) -> {
-			if (!newValue) {
-				if (alert.getResult() == ButtonType.YES) {
-					saveScorePrompt();
-				}
-			}
-		});
+		view.terminateGame();
+		}
+//		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Game over!  Do you want to save your score?", ButtonType.YES, ButtonType.NO);
+//		alert.show();
+//		alert.showingProperty().addListener((observable, oldValue, newValue) -> {
+//			if (!newValue) {
+//				if (alert.getResult() == ButtonType.YES) {
+//					saveScorePrompt();
+//				}
+//			}
+//		});
 
-	}
+	//}
 
-	private void saveScorePrompt() {
-		TextInputDialog dialog = new TextInputDialog("Name");
-		dialog.setContentText("Please enter your name if you want to save your score");
-		dialog.show();
-		dialog.setResultConverter(new Callback<ButtonType, String>() {
-			@Override
-			public String call(ButtonType b) {
-				if (b == ButtonType.OK) {
-					saveGameScore(dialog.getEditor().getText());
-					return dialog.getEditor().getText();
-				}
-				else {
-					return null;
-				}
-			}
-		});
-	}
-
+//	private void saveScorePrompt() {
+//		TextInputDialog dialog = new TextInputDialog("Name");
+//		dialog.setContentText("Please enter your name if you want to save your score");
+//		dialog.show();
+//		dialog.setResultConverter(new Callback<ButtonType, String>() {
+//			@Override
+//			public String call(ButtonType b) {
+//				if (b == ButtonType.OK) {
+//					saveGameScore(dialog.getEditor().getText());
+//					return dialog.getEditor().getText();
+//				}
+//				else {
+//					return null;
+//				}
+//			}
+//		});
+//	}
+//
 	private void saveGameScore(String name) {
 		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
 		c.saveHighScore(getGame().getScore(), name);
@@ -196,15 +206,53 @@ public class GameController implements Observer, IGameController {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		List<Object> myList = (List<Object>) arg;
+		String methodName = (String) myList.get(0);
+		//Actor myActor = (Actor) myList.get(1);
+		Object arg2 = null;
+		Class<?> myClass = null;
+		try {
+			if (myResources.getString(methodName).equals("null")){
+				this.getClass().getDeclaredMethod(methodName).invoke(this);
+			}
+			else {
+			myClass = Class.forName(myResources.getString(methodName));
+			arg2 = myClass.cast(myList.get(1));
+			}
+			} catch (IllegalArgumentException
+					 | SecurityException |ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+		}
+		if(o.equals(view)){
+			try {
+//				for(Method item : this.getClass().getMethods()){
+//					System.out.println(item);
+//				}
+//				System.out.println(methodName + " is the methodName");
+				//this.getClass().getMethod(methodName).invoke(model, arg2);
+			
+		
+					Class[] parameterTypes = {myClass};
+					Object[] parameters = {arg2};
+					
+					model.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(model, parameters);
+				
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 //		List<Object> myList = (List<Object>) arg;
 //		String methodName = (String) myList.get(0);
 //		Actor myActor = (Actor) myList.get(1);
 		
-		if(o.equals(view)){
-			model.getCurrentLevel().handleTrigger((ITrigger)arg);
-		}
 		if(o.equals(model)){
+			
 			try{
+				if (arg instanceof ArrayList<?>) {
+					this.getClass().getDeclaredMethod(methodName).invoke(this, arg2);
+				}
 //				if (arg instanceof ArrayList<?>) {
 //					this.getClass().getDeclaredMethod(methodName).invoke(this, myActor);
 //				}
@@ -213,7 +261,7 @@ public class GameController implements Observer, IGameController {
 			catch (Exception e){
 				//hud.handleChange((Change)arg);
 			}
-		}
+		}}
 	}
 
 	public void addActor(Actor a) {
@@ -247,10 +295,12 @@ public class GameController implements Observer, IGameController {
 	}
 	
 	public void updateCamera(){
-		if(model.getCurrentLevel().getMyScrollingDirection().equals("Horizontally")){
-			view.changeCamera(model.getCurrentLevel().getMainCharacter().getX(), 0);
-		}else{
-			view.changeCamera(0, model.getCurrentLevel().getMainCharacter().getY());
+		if(model.getCurrentLevel().getMainCharacter()!=null){
+			if(model.getCurrentLevel().getMyScrollingDirection().equals("Horizontally")){
+				view.changeCamera(model.getCurrentLevel().getMainCharacter().getX(), 0);
+			}else{
+				view.changeCamera(0, model.getCurrentLevel().getMainCharacter().getY());
+			}
 		}
 	}
 	
