@@ -102,7 +102,8 @@ public class GameScreen extends Observable implements IGameScreen {
 		if(e.getEventType()==MouseEvent.MOUSE_CLICKED){
 			ITrigger trigger = handleClick(((MouseEvent)e).getSceneX(),((MouseEvent)e).getSceneY());
 			setChanged();
-			notifyObservers(trigger);
+			Object[] methodArg = {"handleTrigger", trigger};
+			notifyObservers(Arrays.asList(methodArg));
 		}
 		else if(e.getEventType()==KeyEvent.KEY_PRESSED){
 			ITrigger trigger = handleKeyPress(((KeyEvent)e).getCode());
@@ -212,7 +213,7 @@ public class GameScreen extends Observable implements IGameScreen {
 
 	}
 	
-	public String saveScorePrompt() {
+	public void saveScorePrompt() {
 		TextInputDialog dialog = new TextInputDialog("Name");
 		dialog.setContentText("Please enter your name if you want to save your score");
 		dialog.show();
@@ -220,8 +221,10 @@ public class GameScreen extends Observable implements IGameScreen {
 			@Override
 			public String call(ButtonType b) {
 				if (b == ButtonType.OK) {
-					//setChanged();
-					//notifyObservers(dialog.getEditor().getText());
+					setChanged();
+					Object[] args = {"saveGameScore", dialog.getEditor().getText()};
+					notifyObservers(Arrays.asList(args));
+					//notifyObservers();
 					//saveGameScore(dialog.getEditor().getText());
 					return dialog.getEditor().getText();
 				}
@@ -230,7 +233,7 @@ public class GameScreen extends Observable implements IGameScreen {
 				}
 			}
 		});
-		return null;
+		//return null;
 	}
 
 //	private void saveGameScore(String name) {
