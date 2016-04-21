@@ -245,9 +245,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 */
 	private void updateLevel() {
 		myLevelPane.getChildren().removeAll(myActorPreviews);
+		myLevelPane.getChildren().add(myBoundary);
 		updateLevelBackground();
 		addLevelActorsToScene();
-		myLevelPane.getChildren().addAll(myBoundary);
 	}
 	
 	/**
