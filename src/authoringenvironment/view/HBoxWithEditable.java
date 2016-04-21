@@ -1,15 +1,16 @@
 package authoringenvironment.view;
 
 import java.util.Arrays;
-import java.util.Observable;
-import java.util.ResourceBundle;
 
-import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingElement;
 import authoringenvironment.model.IEditingEnvironment;
+import gui.view.ObjectObservable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 /**
  * 
@@ -22,30 +23,30 @@ import javafx.scene.image.ImageView;
  *
  */
 
-public class LabelClickable extends Observable {
+public class HBoxWithEditable extends ObjectObservable implements IEditingElement {
 
 	private static final String IMAGE_TEXT_PADDING = "    ";
-	private static final String DEFAULT_BORDER_COLOR_KEY = "defaultBorderColor";
-	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
-	private static final Double FIT_SIZE = 75.0;
+	private static final Double IMAGE_FIT_SIZE = 75.0;
 	private static final Double LABEL_PADDING = 10.0;
+	private static final Double HBOX_SPACING = 10.0;
+	private HBox myHBox;
 	private Label myLabel;
-	private ResourceBundle myResources;
 	private IEditableGameElement myEditable;
 	private IEditingEnvironment myEnvironment;
 
-	public LabelClickable(IEditableGameElement editable, IEditingEnvironment environment, Controller controller) {
-		this.myEditable = editable;
-		this.myEnvironment = environment;
-		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
-		this.myLabel = new Label();
-		myLabel.setOnMouseClicked(e -> notifyController());
-		myLabel.setStyle(myResources.getString(DEFAULT_BORDER_COLOR_KEY));
+	public HBoxWithEditable(IEditableGameElement editable, IEditingEnvironment environment) {
+		myEditable = editable;
+		myEnvironment = environment;
+		myLabel = new Label();
+		myHBox = new HBox(myLabel);
+		myHBox.setAlignment(Pos.CENTER_LEFT);
+		myHBox.setSpacing(HBOX_SPACING);
+		myLabel.setOnMouseClicked(e -> setButtonAction());
 	}
-
-	private void notifyController() {
-		this.setChanged();
-		this.notifyObservers(Arrays.asList(myEditable, myEnvironment));
+	
+	//testing
+	private void setButtonAction() {
+		notifyObservers(Arrays.asList(myEditable, myEnvironment));
 	}
 	
 	/**
@@ -55,18 +56,23 @@ public class LabelClickable extends Observable {
 	public void update() {
 		myLabel.setText(IMAGE_TEXT_PADDING + myEditable.getName());
 		ImageView imageView = new ImageView(myEditable.getImageView().getImage());
-		imageView.setFitHeight(FIT_SIZE);
+		imageView.setFitHeight(IMAGE_FIT_SIZE);
 		imageView.setPreserveRatio(true);
 		myLabel.setPadding(new Insets(LABEL_PADDING));
 		myLabel.setGraphic(imageView);
 	}
 	
-	/**
-	 * 
-	 * @return myLabel
-	 */
-	public Label getLabel() {
-		return myLabel;
+	public IEditableGameElement getEditable() {
+		return myEditable;
+	}
+	
+	public HBox getHBox() {
+		return myHBox;
+	}
+
+	@Override
+	public void setEditableElement(IEditableGameElement editable) {
+		myEditable = editable;
 	}
 
 }

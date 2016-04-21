@@ -14,7 +14,7 @@ import javafx.stage.FileChooser;
  * @author AnnieTang
  *
  */
-public abstract class ButtonParent extends Observable implements IGUIElement {
+public abstract class ButtonParent extends ObjectObservable implements IGUIElement {
 	private static final int ICON_SIZE = 30;
 	private static final int PADDING = 10;
 	private String buttonText;

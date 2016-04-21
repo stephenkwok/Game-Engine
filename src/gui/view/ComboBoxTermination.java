@@ -24,7 +24,7 @@ public class ComboBoxTermination extends ComboBoxTextCell {
 	 * @param labelText: text for label.
 	 */
 	public ComboBoxTermination(ResourceBundle myResources, String promptText, String labelText) {
-		super(myResources, promptText, labelText);
+		super(promptText, labelText);
 		myOptions = Arrays.asList(myResources.getString(TERMINATION_OPTIONS).split(DELIMITER));
 	}
 

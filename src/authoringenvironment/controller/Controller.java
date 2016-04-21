@@ -19,7 +19,7 @@ import authoringenvironment.view.ActorEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
 import authoringenvironment.view.GameEditingEnvironment;
-import authoringenvironment.view.LabelClickable;
+import authoringenvironment.view.HBoxWithEditable;
 import authoringenvironment.view.LevelEditingEnvironment;
 import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
@@ -108,9 +108,10 @@ public class Controller extends BranchScreenController implements Observer {
 		levelEnvironment = new LevelEditingEnvironment(myActors, getStage());
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
-		actorEnvironment = new ActorEditingEnvironment(this, myResources, getStage());
+		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), myActors, myLevels);
 		gameEnvironment = new GameEditingEnvironment(gameInfo);
-		mainScreen = new GUIMainScreen(gameEnvironment, getStage().widthProperty(), getStage().heightProperty());
+		mainScreen = new GUIMainScreen(gameEnvironment, getStage().widthProperty(), getStage().heightProperty(), myLevels,
+				levelEnvironment);
 		setTopPane();
 		setCenterPane();
 	}
@@ -197,7 +198,7 @@ public class Controller extends BranchScreenController implements Observer {
 	 * Switches screen to main screen
 	 */
 	public void goToMainScreen() {
-		mainScreen.updateAllNodes();
+		mainScreen.updatePreviewDisplays();
 		setCenterPane(mainScreen.getPane());
 	}
 
@@ -250,6 +251,7 @@ public class Controller extends BranchScreenController implements Observer {
 	public void addLevel() {
 		Level newLevel = new Level();
 		myLevels.add(newLevel);
+		newLevel.setPlayPosition(myLevels.size());
 		myLevelNames.add(newLevel.getName());
 		mainScreen.createLevelLabel(newLevel, levelEnvironment).addObserver(this);
 		goToEditingEnvironment(newLevel, levelEnvironment);
@@ -293,7 +295,7 @@ public class Controller extends BranchScreenController implements Observer {
 	// Use reflection - properties file linking button name to a method name
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if (arg0 instanceof LabelClickable)
+		if (arg0 instanceof HBoxWithEditable)
 			handleObservableGoToEditingEnvironmentCall(arg1);
 		else if (arg0 instanceof ButtonFinish)
 			goToSplash();
@@ -320,12 +322,10 @@ public class Controller extends BranchScreenController implements Observer {
 	}
 	
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
-		if (notifyObserversArgument instanceof List) {
-			List<Object> arguments = (List<Object>) notifyObserversArgument;
-			IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
-			IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
-			goToEditingEnvironment(editable, environment);
-		}
+		List<Object> arguments = (List<Object>) notifyObserversArgument;
+		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
+		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
+		goToEditingEnvironment(editable, environment);
 	}
 	
 	/**

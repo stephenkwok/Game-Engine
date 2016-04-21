@@ -1,7 +1,5 @@
 package gui.view;
 
-import authoringenvironment.controller.Controller;
-
 /**
  * Button to create a new level and transition to level editing environment.
  * @author amyzhao
@@ -24,7 +22,7 @@ public class ButtonNewLevel extends ButtonParent {
 	 */
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnAction(e -> notifyController(null));
+		getButton().setOnAction(e -> notifyObservers(null));
 	}
 
 }
