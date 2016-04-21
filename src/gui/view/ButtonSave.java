@@ -13,9 +13,6 @@ public class ButtonSave extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnMouseClicked(e -> {
-			setChanged();
-			notifyObservers();
-		});
-	}	
+		getButton().setOnMouseClicked(e -> notifyController("ButtonSave"));
+	}
 }

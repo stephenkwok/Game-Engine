@@ -1,11 +1,13 @@
 package authoringenvironment.view;
 
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
-import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
+import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gui.view.GUILibrary;
 import javafx.geometry.Insets;
@@ -24,6 +26,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 /**
  * Returns BorderPane to represent Actor Editing Environment.
@@ -42,7 +45,6 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private BorderPane myRoot;
 	private GUILibrary library;
 	private TabAttributes attributes;
-	private Controller myController;
 	private ResourceBundle myResources;
 	
 	private IAuthoringActor myActor;
@@ -51,11 +53,13 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private GUIActorImageViewer actorImageViewer;
 	private ActorRuleCreator myActorRuleCreator;
 	private GridPane myActorRuleCreatorPane;
+	
+	private Stage myStage;
 
-	public ActorEditingEnvironment(Controller myController, ResourceBundle myResources) {
-		this.myController = myController;
+	public ActorEditingEnvironment(ResourceBundle myResources, Stage stage, Map<IAuthoringActor, List<IAuthoringActor>> myActors, List<Level> myLevels) {
 		this.myResources = myResources;
-		initializeEnvironment();
+		this.myStage = stage;
+		initializeEnvironment(myActors, myLevels);
 	}
 	/**
 	 * Return Pane representation of actor editing environment
@@ -67,10 +71,10 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	/**
 	 * Initialize resources and create actor editing environment by populating sections of the screen and setting default new Actor
 	 */
-	private void initializeEnvironment() {
+	private void initializeEnvironment(Map<IAuthoringActor, List<IAuthoringActor>> myActors, List<Level> myLevels) {
 		myRoot = new BorderPane();
 		setDefaultActor();
-		myActorRuleCreator = new ActorRuleCreator(myActor, myController);
+		myActorRuleCreator = new ActorRuleCreator(myActor, myStage.getWidth(), myActors, myLevels);
 		setLeftPane();
 		setCenterPane();
 		setBottomPane();
@@ -88,12 +92,12 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	 */
 	private void setLeftPane() {
 		VBox vbox = new VBox();
-		attributes = new TabAttributes(myController, myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
+		attributes = new TabAttributes(myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
 		TabPane attributeTP = new TabPane();
 		attributeTP.getTabs().add(attributes.getTab());
 		attributeTP.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		library = new GUILibrary(myActorRuleCreator);
-		actorImageViewer = new GUIActorImageViewer(this, myController, myActorIV);
+		actorImageViewer = new GUIActorImageViewer(this, myActorIV);
 		vbox.getChildren().addAll(actorImageViewer.getPane(), attributeTP, library.getPane());
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
 		myRoot.setLeft(vbox);
@@ -161,5 +165,10 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 		myActor.setImageViewName(imageViewName);
 		myActorIV = new ImageviewActorIcon(myActor, ICON_HEIGHT);
 		setLeftPane();
+	}
+	
+	@Override
+	public Stage getStage() {
+		return myStage;
 	}
 }
