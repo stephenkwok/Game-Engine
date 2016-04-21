@@ -10,8 +10,12 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.view.behaviors.IAuthoringRule;
+import gameengine.model.Actor;
 import gameengine.model.IAction;
+import gameengine.model.IRule;
 import gameengine.model.ITrigger;
+import gameengine.model.Rule;
+import gameengine.model.Actions.Action;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -47,7 +51,7 @@ public class ActorRule {
 	private ActorRuleFactory actorRuleFactory;
 	private Controller myController;
 	private Map<IAuthoringRule, List<Object>> actorRuleMap;
-	private List<ITrigger> myTriggers;
+	private ITrigger myTrigger;
 	private List<IAction> myActions;
 	
 	public ActorRule(ActorRuleCreator myActorRuleCreator) {
@@ -72,12 +76,11 @@ public class ActorRule {
 		this.myActorRuleResources = ResourceBundle.getBundle(ACTORRULE_BUNDLE);
 		this.actorRuleFactory = new ActorRuleFactory(myFactoryResources, myActorRuleCreator.getActor(), myController, this);
 		this.actorRuleMap = new HashMap<>();
-		this.myTriggers = new ArrayList<>();
 		this.myActions = new ArrayList<>();
 		myRule = new GridPane(); 
 		myRule.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(Integer.parseInt(myActorRuleResources.getString("CornerRadius"))), Insets.EMPTY)));
 		myRule.setPadding(new Insets(Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding"))));
-		myRule.setPrefSize(myActorRuleCreator.getGridPane().getWidth()*Double.parseDouble(myActorRuleResources.getString("RuleWidthPercent")), Integer.parseInt(myActorRuleResources.getString("RuleHeight")));
+		myRule.setPrefSize(myActorRuleCreator.getGridPane().getPrefWidth()*Double.parseDouble(myActorRuleResources.getString("RuleWidthPercent")), Integer.parseInt(myActorRuleResources.getString("RuleHeight")));
 		addTriggerActionLabels();
 		addTriggerActionContainers();
 		addCloseButton();
@@ -111,7 +114,9 @@ public class ActorRule {
 	 */
 	private void addCloseButton(){
 		Button close = new Button(myActorRuleResources.getString("Close"));
-		close.setOnAction(event -> {myActorRuleCreator.removeRule(this);});
+		close.setOnAction(event -> {
+			myActorRuleCreator.removeRule(this);
+		});
 		myRule.add(close, Integer.parseInt(myActorRuleResources.getString("CloseCol")), Integer.parseInt(myActorRuleResources.getString("CloseRow")));
 	}
 	
@@ -119,15 +124,15 @@ public class ActorRule {
 	 * Add a behavior from library to rule.
 	 * @param behavior
 	 */
-	public void addBehavior(Label behavior) {
-		IAuthoringRule element = actorRuleFactory.getAuthoringRule(behavior.getText(),null);
+	public void addBehavior(String behaviorType) {
+		IAuthoringRule element = actorRuleFactory.getAuthoringRule(behaviorType,null);
 		List<Object> value = new ArrayList<>();
 		actorRuleMap.put(element, value);
 		Node node = ((IGUIElement) element).createNode();
 		node.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2) remove(element);
 		});
-		if(isTrigger(behavior.getText())) myTriggerNodes.getChildren().add(node);
+		if(isTrigger(behaviorType)) myTriggerNodes.getChildren().add(node);
 		else myActionNodes.getChildren().add(node);
 		actorRuleMap.get(element).add(NODE_INDEX, node);
 	}
@@ -142,17 +147,17 @@ public class ActorRule {
 	}
 	/**
 	 * Add sound from library to rule
-	 * @param sound
+	 * @param soundName
 	 */
-	public void addSound(Label sound) {
+	public void addSound(String soundName) {
 		IAuthoringRule element; 
 		Node node;
-		if(isInPath(sound.getText(), myActorRuleResources.getString("Sounds"))){
-			element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlaySoundBehavior"), sound.getText());
+		if(isInPath(soundName, myActorRuleResources.getString("Sounds"))){
+			element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlaySoundBehavior"), soundName);
 			node = element.createNode();
 		}
 		else{
-			element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlayMusicBehavior"), sound.getText());
+			element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlayMusicBehavior"), soundName);
 			node = element.createNode();
 		}
 		node.setOnMouseClicked(event -> {
@@ -176,10 +181,10 @@ public class ActorRule {
 	}
 	/**
 	 * Add image from library to rule
-	 * @param image
+	 * @param imageName
 	 */
-	public void addImage(Label image) {
-		IAuthoringRule element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("ChangeImageBehavior"),image.getText()); 
+	public void addImage(String imageName) {
+		IAuthoringRule element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("ChangeImageBehavior"),imageName); 
 		Node node = element.createNode();
 		node.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2) remove(element);
@@ -194,19 +199,38 @@ public class ActorRule {
 	public void remove(IAuthoringRule toRemove){
 		myTriggerNodes.getChildren().remove(actorRuleMap.get(toRemove).get(NODE_INDEX));
 		myActionNodes.getChildren().remove(actorRuleMap.get(toRemove).get(NODE_INDEX));
-		myTriggers.remove(actorRuleMap.get(toRemove).get(TRIGGERACTION_INDEX));
+		myTrigger = null;
 		myActions.remove(actorRuleMap.get(toRemove).get(TRIGGERACTION_INDEX));
 		actorRuleMap.remove(toRemove);
+		
 	}
 	
 	public void addTrigger(IAuthoringRule key, ITrigger value){
 		actorRuleMap.get(key).add(value);
-		myTriggers.add(value);
+		myTrigger = value;
+		System.out.println(myTrigger);
+		addIRulesForTrigger();
+		//add IRule to map
 	}
 	
 	public void addAction(IAuthoringRule key, IAction value){
 		actorRuleMap.get(key).add(value);
+		System.out.println(actorRuleMap);
 		myActions.add(value);
+		addIRulesForTrigger();
+		//add IRule to map
+	}
+	
+	private void addIRulesForTrigger(){
+		List<Rule> value = new ArrayList<>();
+		for(IAction action: myActions){
+			value.add(new Rule(myTrigger, (Action) action));
+		}
+		try{
+			((Actor) myActorRuleCreator.getActor()).getRules().put(myTrigger.getMyKey(),value);
+		}catch(Exception e){
+			System.out.println("Trigger not yet set for IRule");
+		}
 	}
 	
 }
