@@ -16,6 +16,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+/**
+ * 
+ * This class reorders the levels created as specified by the author and generates 
+ * a pop up informing the author whether the reordering was successful, or if 
+ * invalid input was entered
+ * 
+ * @author Stephen
+ *
+ */
+
 public class PopUpLevelReorderer extends PopUpParent {
 
 	private static final String SUCCESS_MESSAGE = "Reorder Successful!";

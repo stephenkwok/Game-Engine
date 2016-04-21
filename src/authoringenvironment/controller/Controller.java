@@ -1,7 +1,6 @@
 package authoringenvironment.controller;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -115,7 +114,7 @@ public class Controller extends BranchScreenController implements Observer {
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), myActors, myLevels);
-		gameEnvironment = new GameEditingEnvironment(gameInfo);
+		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
 		mainScreen = new GUIMainScreen(gameEnvironment, getStage().widthProperty(), getStage().heightProperty(), myLevels,
 				levelEnvironment);
 		setTopPane();
@@ -220,7 +219,7 @@ public class Controller extends BranchScreenController implements Observer {
 		Game g = new Game(gameInfo, myLevels); 
 		CreatorController controller;
 		try {
-			controller = new CreatorController(g, guiMain);
+			controller = new CreatorController(game, guiMain);
 			controller.saveForEditing(file);
 		} catch (ParserConfigurationException e) {
 			guiMain.showError(e.getMessage());

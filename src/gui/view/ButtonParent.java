@@ -1,14 +1,11 @@
 package gui.view;
 
-import java.io.File;
-import java.util.Observable;
 import java.util.Observer;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 /**
  * Abstract class to implement JavaFX Buttons
  * @author AnnieTang
@@ -66,9 +63,5 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
     protected Button getButton() {
     	return button;
     }
-    
-	protected void notifyController(Object objToPassToObserver) {
-		setChanged();
-		notifyObservers(objToPassToObserver);
-	}
+
 }

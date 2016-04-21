@@ -29,6 +29,7 @@ public class GameInfo implements IEditableGameElement {
 		this.setMyImageName(imageName);
 		this.setMyDescription(description);
 		this.setMyCurrentLevelNum(currentLevelNum);
+		this.setImageView(new ImageView(DEFAULT_IMAGE_NAME));
 		this.myHUDElementsToDisplay = new HashMap<String, Integer>();
 		this.myFile = file;
 	}

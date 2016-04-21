@@ -1,8 +1,9 @@
 package authoringenvironment.view;
 
-import java.util.List;
+import java.io.File;
 import java.util.Observer;
 import java.util.ResourceBundle;
+
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
 import gameengine.controller.GameInfo;
@@ -16,10 +17,11 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * This class enables the author to edit and set various attributes of the game
@@ -41,14 +43,16 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	private static final double TEXT_FIELD_CONTAINER_PADDING = 10.0;
 	private static final double SCROLLBAR_WIDTH = 30.0;
 	private IEditableGameElement myGameInfo;
+	private Stage myStage;
 	private final ResourceBundle myResources;
 	private Label welcomeMessage;
 	private HBox nameEditorContainer;
 	private VBox editingEnvironmentContainer, gameDescriptionEditor, previewImageContainer, HUDOptionsDisplay;
 	private ScrollPane myScrollPane;
 
-	public GameEditingEnvironment(GameInfo gameInfo) {
+	public GameEditingEnvironment(GameInfo gameInfo, Stage stage) {
 		this.myGameInfo = gameInfo;
+		this.myStage = stage;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
 	}
 
@@ -116,11 +120,26 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 		previewImageContainer = new VBox();
 		previewImageContainer.setPadding(new Insets(DEFAULT_PADDING));
 		Label previewImageLabel = new Label("Current Game Preview Image:");
-		ImageView previewImage = new ImageView(
-				new Image(getClass().getClassLoader().getResourceAsStream("default_game.jpg")));
+		previewImageLabel.setOnMouseClicked(e -> promptUserForImageFile());
+//		ImageView previewImage = new ImageView(
+//				new Image(getClass().getClassLoader().getResourceAsStream("default_game.jpg")));
+		ImageView previewImage = new ImageView(myGameInfo.getImageView().getImage());
 		previewImageContainer.getChildren().addAll(previewImageLabel, previewImage);
 	}
 
+	private void promptUserForImageFile() {
+		FileChooser filechooser = new FileChooser();
+		filechooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG", "*.png"));
+		File file = filechooser.showOpenDialog(myStage);
+		String imagePath = file.getPath();
+		System.out.println(imagePath);
+		ImageView imageView = new ImageView(imagePath);
+		myGameInfo.setImageView(imageView);
+		Label previewImageLabel = new Label("Current Game Preview Image:");
+		previewImageContainer.getChildren().clear();
+		previewImageContainer.getChildren().addAll(previewImageLabel, imageView);
+	}
+	
 	/**
 	 * Initializes the GUI element that displays checkboxes for each HUD Option
 	 */
