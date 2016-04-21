@@ -20,7 +20,7 @@ public class ActionFactory {
 	private static final int ZERO = 0;
 	private static final int ONE = 1;
 	private static final int TWO = 2;
-	private static final String ACTION_RESOURCE = "iaction";
+	private static final String ACTION_RESOURCE = "actionfactory";
 	private static final String DELIMITER = ",";
 	private static final String ACTION_TYPES= "ActionTypes";
 	private static final String GAME_ENGINE = "gameengine.";

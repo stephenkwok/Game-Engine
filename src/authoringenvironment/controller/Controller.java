@@ -68,7 +68,7 @@ public class Controller extends BranchScreenController implements Observer {
 	private static final String EDITING_CONTROLLER_RESOURCE = "editingActions";
 	private List<Level> myLevels;
 	private List<String> myLevelNames;
-	private Map<IAuthoringActor, List<IAuthoringActor>> myActors;
+	private Map<IAuthoringActor, List<IAuthoringActor>> myActorMap;
 	private List<String> myActorNames;
 	private LevelEditingEnvironment levelEnvironment;
 	private ActorEditingEnvironment actorEnvironment;
@@ -109,12 +109,12 @@ public class Controller extends BranchScreenController implements Observer {
 		factory = new GUIFactory(myResources);
 		myLevels = new ArrayList<>();
 		myLevelNames = new ArrayList<>();
-		myActors = new HashMap<>();
+		myActorMap = new HashMap<>();
 		myActorNames = new ArrayList<>();
-		levelEnvironment = new LevelEditingEnvironment(myActors, getStage());
+		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage());
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
-		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), myActors, myLevels);
+		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
 		gameEnvironment = new GameEditingEnvironment(gameInfo);
 		mainScreen = new GUIMainScreen(gameEnvironment, getStage().widthProperty(), getStage().heightProperty(), myLevels,
 				levelEnvironment);
@@ -245,6 +245,9 @@ public class Controller extends BranchScreenController implements Observer {
 		return myLevelNames;
 	}
 
+	public Map<IAuthoringActor, List<IAuthoringActor>> getActorMap(){
+		return myActorMap;
+	}
 	public List<String> getActorNames() {
 		return myActorNames;
 	}
@@ -266,8 +269,8 @@ public class Controller extends BranchScreenController implements Observer {
 
 	public void addActor() {
 		IAuthoringActor newActor = (IAuthoringActor) new Actor();
-		newActor.setID(myActors.size());
-		myActors.put(newActor, new ArrayList<>());
+		newActor.setID(myActorMap.size());
+		myActorMap.put(newActor, new ArrayList<>());
 		myActorNames.add(newActor.getName());
 		mainScreen.createActorLabel(newActor, actorEnvironment).addObserver(this);;
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
@@ -343,7 +346,7 @@ public class Controller extends BranchScreenController implements Observer {
 
 	// checking to see if this works with name
 	private void updateActors(IAuthoringActor actor) {
-		List<IAuthoringActor> listToUpdate = myActors.get(actor);
+		List<IAuthoringActor> listToUpdate = myActorMap.get(actor);
 		for (int i = 0; i < listToUpdate.size(); i++) {
 			listToUpdate.get(i).setName(actor.getName());
 		}

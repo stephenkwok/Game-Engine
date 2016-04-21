@@ -4,10 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
-import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -19,9 +18,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import gameengine.controller.Level;
-import gameengine.model.IAction;
-import gameengine.model.ITrigger;
 
 /**
  * Rule container for an actor containing behavior, images, and/or sounds.
@@ -29,44 +25,26 @@ import gameengine.model.ITrigger;
  *
  */
 public class ActorRule {
-	private static final String CLOSE = "x";
-	private static final int CLOSE_ROW = 0;
-	private static final int CLOSE_COL = 2;
 	private static final int PADDING = 20;
-	private static final String TRIGGERS = "Triggers:";
-	private static final String ACTIONS = "Actions:";
-	private static final int DEFAULT_COL = 0;
-	private static final int TRIGGERS_LABEL_ROW = 0;
-	private static final int TRIGGERS_ROW = 1;
-	private static final int ACTIONS_LABEL_ROW = 2;
-	private static final int ACTIONS_ROW = 3;
 	private static final double RULE_HEIGHT = 250;
 	private static final int CORNER_RADIUS = 20;
-	private static final double STACKPANE_PERCENT_WIDTH = 0.90;
-	private static final double STACKPANE_PERCENT_HEIGHT = 0.3;
-	private static final double GRIDPANE_PERCENT_WIDTH = 0.90;
-	private static final String CHANGE_IMAGE = "ChangeImage";
-	private static final String PLAY_SOUND = "PlaySound";
-	private static final String PLAY_MUSIC = "PlayMusic";
 	private GridPane myRule;	
 	private VBox triggers;
 	private VBox actions;
 	private ScrollPane trigScroll;
 	private ScrollPane actScroll;
 	private ActorRuleCreator myActorRuleCreator;
-	private ResourceBundle myLibraryResources;
+	private ResourceBundle myFactoryResources;
+	private ResourceBundle myActorRuleResources;
 	private static final String LIBRARY_BUNDLE = "library";
+	private static final String ACTORRULE_BUNDLE = "actorrule";
 	private String triggerBehaviors;
 	private ActorRuleFactory actorRuleFactory;
-	
-	private List<ITrigger> myTriggers;
-	private List<IAction> myActions;
-	
-	public ActorRule(ActorRuleCreator myActorRuleCreator, Map<IAuthoringActor, List<IAuthoringActor>> myActors, List<Level> myLevels) {
+	private Controller myController;
+		
+	public ActorRule(ActorRuleCreator myActorRuleCreator, Controller myController) {
 		this.myActorRuleCreator = myActorRuleCreator;
-		this.myLibraryResources = ResourceBundle.getBundle(LIBRARY_BUNDLE);
-		this.actorRuleFactory = new ActorRuleFactory(myLibraryResources, myActorRuleCreator.getActor(), myActors, myLevels);
-		this.triggerBehaviors = myLibraryResources.getString("TriggerBehaviors");
+		this.myController = myController;
 		initializeEnvironment();
 	}
 	
@@ -82,10 +60,14 @@ public class ActorRule {
 	 * Create rule container and set preferences 
 	 */
 	private void initializeEnvironment() {
+		this.myFactoryResources = ResourceBundle.getBundle(LIBRARY_BUNDLE);
+		this.myActorRuleResources = ResourceBundle.getBundle(ACTORRULE_BUNDLE);
+		this.actorRuleFactory = new ActorRuleFactory(myFactoryResources, myActorRuleCreator.getActor(), myController.getActorMap(), myController.getLevels());
+		this.triggerBehaviors = myFactoryResources.getString("TriggerBehaviors");
 		myRule = new GridPane(); 
 		myRule.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
 		myRule.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
-		myRule.setPrefSize(myActorRuleCreator.getGridPane().getWidth()*GRIDPANE_PERCENT_WIDTH, RULE_HEIGHT);
+		myRule.setPrefSize(myActorRuleCreator.getGridPane().getWidth()*Double.parseDouble(myActorRuleResources.getString("RuleWidthPercent")), RULE_HEIGHT);
 		addTriggerActionLabels();
 		addTriggerActionContainers();
 		addCloseButton();
@@ -95,34 +77,36 @@ public class ActorRule {
 	 * Add labels for each section of rule container (trigger and action)
 	 */
 	private void addTriggerActionLabels(){
-		Label triggerLabel = new Label(TRIGGERS);
-		Label actionLabel = new Label(ACTIONS);
-		myRule.add(triggerLabel, DEFAULT_COL, TRIGGERS_LABEL_ROW);
-		myRule.add(actionLabel, DEFAULT_COL, ACTIONS_LABEL_ROW);
+		Label triggerLabel = new Label(myActorRuleResources.getString("TriggerLabel"));
+		Label actionLabel = new Label(myActorRuleResources.getString("ActionLabel"));
+		myRule.add(triggerLabel, Integer.parseInt(myActorRuleResources.getString("DefaultCol")), Integer.parseInt(myActorRuleResources.getString("TriggerLabelRow")));
+		myRule.add(actionLabel, Integer.parseInt(myActorRuleResources.getString("DefaultCol")), Integer.parseInt(myActorRuleResources.getString("ActionLabelRow")));
 	}
 	/**
 	 * Add containers for triggers and actions where user can drop behaviors.
 	 */
 	private void addTriggerActionContainers(){
 		triggers = new VBox(PADDING);
-		triggers.setPrefSize(myRule.getPrefWidth()*STACKPANE_PERCENT_WIDTH, myRule.getPrefHeight()*STACKPANE_PERCENT_HEIGHT);
+		triggers.setPrefSize(myRule.getPrefWidth()*Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")), 
+				myRule.getPrefHeight()*Double.parseDouble(myActorRuleResources.getString("ContainerHeightPercent")));
 		actions = new VBox(PADDING);
-		actions.setPrefSize(myRule.getPrefWidth()*STACKPANE_PERCENT_WIDTH, myRule.getPrefHeight()*STACKPANE_PERCENT_HEIGHT);
+		actions.setPrefSize(myRule.getPrefWidth()*Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")), 
+				myRule.getPrefHeight()*Double.parseDouble(myActorRuleResources.getString("ContainerHeightPercent")));
 		trigScroll = new ScrollPane(triggers);
 		actScroll = new ScrollPane(actions);
-		myRule.add(trigScroll, DEFAULT_COL, TRIGGERS_ROW);
-		myRule.add(actScroll, DEFAULT_COL, ACTIONS_ROW);
+		myRule.add(trigScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")), Integer.parseInt(myActorRuleResources.getString("TriggerRow")));
+		myRule.add(actScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")), Integer.parseInt(myActorRuleResources.getString("ActionRow")));
 		
 	}
 	/**
 	 * Close button to remove a rule
 	 */
 	private void addCloseButton(){
-		Button close = new Button(CLOSE);
+		Button close = new Button(myActorRuleResources.getString("Close"));
 		close.setOnAction(event -> {
 			myActorRuleCreator.removeRule(this);
 		});
-		myRule.add(close, CLOSE_COL, CLOSE_ROW);
+		myRule.add(close, Integer.parseInt(myActorRuleResources.getString("CloseCol")), Integer.parseInt(myActorRuleResources.getString("CloseRow")));
 	}
 	
 	/**
@@ -153,15 +137,15 @@ public class ActorRule {
 	 * @param sound
 	 */
 	public void addSound(Label sound) {
-		if(isInPath(sound.getText(), myLibraryResources.getString("Sounds"))){
-			Node toAdd = actorRuleFactory.getAuthoringRule(PLAY_SOUND, sound.getText()).createNode();
+		if(isInPath(sound.getText(), myActorRuleResources.getString("Sounds"))){
+			Node toAdd = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlaySoundBehavior"), sound.getText()).createNode();
 			toAdd.setOnMouseClicked(event -> {
 				if(event.getClickCount()==2) remove(toAdd);
 			});
 			actions.getChildren().add(toAdd);
 		}
 		else{
-			Node toAdd = actorRuleFactory.getAuthoringRule(PLAY_MUSIC, sound.getText()).createNode();
+			Node toAdd = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlayMusicBehavior"), sound.getText()).createNode();
 			toAdd.setOnMouseClicked(event -> {
 				if(event.getClickCount()==2) remove(toAdd);
 			});
@@ -187,7 +171,7 @@ public class ActorRule {
 	 * @param image
 	 */
 	public void addImage(Label image) {
-		Node toAdd = actorRuleFactory.getAuthoringRule(CHANGE_IMAGE,image.getText()).createNode();
+		Node toAdd = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("ChangeImageBehavior"),image.getText()).createNode();
 		toAdd.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2) remove(toAdd);
 		});

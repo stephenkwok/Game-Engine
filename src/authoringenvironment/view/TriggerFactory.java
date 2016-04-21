@@ -19,7 +19,7 @@ import javafx.scene.input.KeyCode;
 public class TriggerFactory {
 	private static final int ZERO = 0;
 	private static final int ONE = 1;
-	private static final String TRIGGER_RESOURCE = "itrigger";
+	private static final String TRIGGER_RESOURCE = "triggerfactory";
 	private static final String DELIMITER = ",";
 	private static final String TRIGGER_TYPES= "TriggerTypes";
 	private static final String GAME_ENGINE = "gameengine.";
