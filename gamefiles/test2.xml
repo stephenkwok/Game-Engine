@@ -1133,11 +1133,9 @@
       <myName>Default</myName>
       <myHeight>800.0</myHeight>
       <myWidth>1024.0</myWidth>
-      <myScrollingDirection>Vertically</myScrollingDirection>
-      <myTermination>Infinite</myTermination>
-      <myWinningCondition>Survival time</myWinningCondition>
-      <myLosingCondition>Player dies</myLosingCondition>
-      <myBackgroundImgName>default_landscape.png</myBackgroundImgName>
+      <myPlayPosition>0</myPlayPosition>
+      <myScrollingDirection>Horizontally</myScrollingDirection>
+      <myBackgroundImgName>cartoon_park.png</myBackgroundImgName>
     </gameengine.controller.Level>
   </levels>
   <info>
