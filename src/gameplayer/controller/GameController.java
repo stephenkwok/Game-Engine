@@ -148,7 +148,7 @@ public class GameController implements Observer, IGameController {
 			@Override
 			public String call(ButtonType b) {
 				if (b == ButtonType.OK) {
-					saveGame(dialog.getEditor().getText());
+					saveGameScore(dialog.getEditor().getText());
 					return dialog.getEditor().getText();
 				}
 				else {
@@ -158,8 +158,8 @@ public class GameController implements Observer, IGameController {
 		});
 	}
 
-	private void saveGame(String name) {
-		HighScoresController c = new HighScoresController(this.getGame().getInfo().getMyFile());
+	private void saveGameScore(String name) {
+		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
 		c.saveHighScore(getGame().getScore(), name);
 
 	}

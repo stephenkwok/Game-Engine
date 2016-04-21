@@ -30,8 +30,10 @@ public class Main extends Application{
     	root.getChildren().add(label);
     	//
     	
+    	Controller c = new Controller(s);
+    	/*
     	myGUI = new GUIMain(s, scene);
-    	s.setScene(myGUI.initializeScreen());
+    	s.setScene(myGUI.initializeScreen());*/
     	s.show();
     }
 

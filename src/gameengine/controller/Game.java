@@ -413,7 +413,8 @@ public class Game extends Observable implements Observer {
 
 	
 	public int getScore() {
-		return getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();
+		//return getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();
+		return 0;
 	}
 	
 	public IPlayActor getMainCharacter(){

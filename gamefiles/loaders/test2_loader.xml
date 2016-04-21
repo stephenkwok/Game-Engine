@@ -36,9 +36,9 @@
             <entry>
               <string>A1SideCollisionDefault Name</string>
               <list>
-                <gameengine.model.Actions.HorizontalStaticCollision>
+                <gameengine.model.Actions.WinGame>
                   <myActor class="gameengine.model.Actor" reference="../../../../.."/>
-                </gameengine.model.Actions.HorizontalStaticCollision>
+                </gameengine.model.Actions.WinGame>
               </list>
             </entry>
             <entry>
