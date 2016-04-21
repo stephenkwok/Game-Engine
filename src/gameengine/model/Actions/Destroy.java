@@ -1,6 +1,7 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 
 /**
  * @author blakekaplan
@@ -13,7 +14,7 @@ public class Destroy extends Action {
 
     @Override
     public void perform() {
-        getMyActor().setDead(true);
+        getMyActor().addState(ActorState.DEAD);
     }
 
 }

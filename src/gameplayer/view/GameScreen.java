@@ -3,11 +3,15 @@ package gameplayer.view;
 import java.util.List;
 import java.util.Observable;
 
-import gameengine.model.Actor;
+import gameengine.controller.Level;
+import gameengine.model.IActor;
+import gameengine.model.IDisplayActor;
 import gameengine.model.ITrigger;
 import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.KeyTrigger;
 import gui.view.Screen;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.scene.Camera;
 import javafx.scene.Group;
@@ -25,14 +29,13 @@ import javafx.scene.paint.Color;
  * @author cmt57
  */
 
-public class GameScreen extends Observable {
+public class GameScreen extends Observable implements IGameScreen {
 	
-	//@XStreamOmitField
 	private SubScene mySubscene;
-	//@XStreamOmitField
 	private Group mySubgroup;
-	//@XStreamOmitField
-	private Camera camera;
+	private Camera myCamera;
+	private double myEndHorizontal;
+	private double myEndVertical;
 	
 	public GameScreen(Camera camera){
 		setMySubgroup(new Group());
@@ -41,7 +44,7 @@ public class GameScreen extends Observable {
 		getMySubscene().setFocusTraversable(true);
 		getMySubscene().setOnKeyPressed(e -> handleScreenEvent(e));
 		getMySubscene().setOnMouseClicked(e -> handleScreenEvent(e));
-		this.camera = camera; ///
+		this.myCamera = camera; ///
 		mySubscene.setCamera(camera);
 	}
 	
@@ -54,23 +57,37 @@ public class GameScreen extends Observable {
 	 * Will add a node to the screen's scene representing the given actor's view.
 	 * @param actor an instance of IActor
 	 */
-	public void addActor (Actor actor){
-		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(actor.getMyImageViewName())));
-		actor.setImageView(imageView);
-		getMySubgroup().getChildren().add(actor.getImageView());//
+	public void addActor (IDisplayActor actor){
+		actor.setImageViewName(actor.getImageViewName());
+		getMySubgroup().getChildren().add(actor.getImageView());
 	}
 	
-	public void removeActors(List<Actor> actors){
-		for(Actor a: actors){
-			mySubgroup.getChildren().remove(a.getImageView());
-		}
+	public void removeActor(IDisplayActor a){
+		mySubgroup.getChildren().remove(a.getImageView());
 	}
 	
 
-	public void addBackground(String filepath) {
-		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(filepath)));
-		imageView.toBack();
-		getMySubgroup().getChildren().add(imageView);
+	public void addBackground(Level level) {
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(level.getMyBackgroundImgName()));
+		this.myEndHorizontal = image.getWidth();
+		this.myEndVertical = image.getHeight();
+		ImageView imageView = new ImageView(image);
+		level.setMyImageView(imageView);
+		
+		
+		ImageView imageView2 = new ImageView(image);
+		imageView2.setX(imageView.getImage().getWidth());
+		
+		level.getMyBackgroundX().addListener(new ChangeListener() {
+			@Override
+			public void changed(ObservableValue o, Object oldVal, Object newVal) {
+				//TODO Watch that magic constant!
+				imageView2.setX((Double) newVal + imageView.getImage().getWidth() - 10);
+			}
+		});
+		
+		getMySubgroup().getChildren().addAll(imageView, imageView2); 
+		//getMySubgroup().getChildren().add(imageView);
 		
 	}
 	
@@ -85,7 +102,8 @@ public class GameScreen extends Observable {
 			notifyObservers(trigger);
 		}
 		else if(e.getEventType()==KeyEvent.KEY_PRESSED){
-			//camera.setTranslateX(camera.getTranslateX()+94.3);
+			//myCamera.setTranslateX(changeCamera(93.4, 0));
+			//changeCamera(0,-10);
 			ITrigger trigger = handleKeyPress(((KeyEvent)e).getCode());
 			setChanged();
 			notifyObservers(trigger);
@@ -94,8 +112,7 @@ public class GameScreen extends Observable {
 
 	
 	private ClickTrigger handleClick(double x, double y){
-		ClickTrigger clickTrigger = new ClickTrigger();
-		clickTrigger.setClickedAt(x, y);
+		ClickTrigger clickTrigger = new ClickTrigger(x,y);
 		return clickTrigger;
 	}
 	
@@ -104,7 +121,7 @@ public class GameScreen extends Observable {
 	}
 	
 	public void clearGame(){
-		camera.setTranslateX(0);
+		myCamera.setTranslateX(0);
 		getMySubgroup().getChildren().clear();
 		
 //		for(Node n: getMySubgroup().getChildren()){
@@ -131,6 +148,54 @@ public class GameScreen extends Observable {
 
 	public void setMySubscene(SubScene mySubscene) {
 		this.mySubscene = mySubscene;
+	}
+
+
+	@Override
+	public void addActor(IActor actor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void reset() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void setUp() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void changeCamera(double x, double y) {
+		if (myCamera.getTranslateX()+x < myEndHorizontal - getScene().getWidth() &&
+				myCamera.getTranslateX()+x > 0) {
+			myCamera.setTranslateX(myCamera.getTranslateX()+x);
+		}
+		
+		if (myCamera.getTranslateY()+y > 0 && myCamera.getTranslateY()+y < myEndVertical - getScene().getHeight()) {		
+			myCamera.setTranslateY(myCamera.getTranslateY()+y);
+		}
+	}
+
+
+	@Override
+	public void disableMusic(boolean disable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void disableSoundFX(boolean disable) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

@@ -29,7 +29,6 @@ public class PhysicsEngine {
 		
 	}
 	
-	
 	/**
 	 * This method updates a given velocity by applying a given force
 	 * @param velo
@@ -40,19 +39,7 @@ public class PhysicsEngine {
 		double nextVelo = velo + force*getTimeStep();
 		return nextVelo;
 	}
-	
-	/**
-	 * This method updates a given position by adding a velocity value scaled by a timeStep
-	 * @param pos
-	 * @param velo
-	 * @return updated position
-	 */
-	private double changePos(double pos, double velo){
-		double nextPos = pos + velo*getTimeStep();
-		return nextPos;
-	}
-	
-	
+		
 	/**
 	 * Primary method within the Physics Engine class, called on Actors for which gravity and friction forces apply
 	 * Calculates new values for X and Y positions as well as X and Y velocities
@@ -62,7 +49,7 @@ public class PhysicsEngine {
 	 * @param forceYdownward
 	 * @param friction
 	 */
-	private void update(Actor a,double forceX, double forceYupward, double forceYdownward, double friction){
+	private void update(IPlayActor a,double forceX, double forceYupward, double forceYdownward, double friction){
 		double xVelo     = a.getVeloX();
 		double yVelo     = a.getVeloY();
 		double xPos      =  a.getX();      
@@ -73,25 +60,23 @@ public class PhysicsEngine {
 		double nextYPos;
 		
 
-		if (a.isInAir()) {                      //Only applies gravity if the Actor is in the air
-			forceYdownward = getGravity();
-			friction = friction*.5;             //Friction is reduced(wind resistance) when the actor is in the air
-		}
+		forceYdownward = getGravity();
+	
 				
 		nextHorzVelo = xVelo;      		
 		nextVertVelo = applyForce(yVelo, forceYupward);                      // Apply  y force from movement action to y velocity
 		nextVertVelo = applyForce(nextVertVelo, forceYdownward);             //Applies gravitational force onto Actor's velocity 
-		nextYPos     = changePos(yPos, nextVertVelo); 
+		nextYPos     = applyForce(yPos, nextVertVelo); 
 		nextVertVelo = maxLimit(nextVertVelo, getMaxVertVelocity());
 			
 		if(nextYPos+a.getBounds().getHeight() > getFloorHeight()){                    //Collision detection for the actor and the ground
-			nextYPos = getFloorHeight()-a.getBounds().getHeight();				//TODO: delete this if statement after the floor is implemented as an actor
+			nextYPos = getFloorHeight()-a.getBounds().getHeight();				      //TODO: delete this if statement after the floor is implemented as an actor
 			nextVertVelo = 0;
 		}
 		
 		nextHorzVelo = applyForce(xVelo, forceX); 							// Apply  y force from movement action to y velocity
 		nextHorzVelo = applyForce(nextHorzVelo, (friction*(nextHorzVelo))); //Apply frictional force
-		nextXPos  = changePos(xPos,nextHorzVelo);
+		nextXPos  = applyForce(xPos,nextHorzVelo);
 		nextHorzVelo = maxLimit(nextHorzVelo, getMaxHorizVelocity());
 		setValues(a,  nextHorzVelo,  nextVertVelo,  nextXPos,  nextYPos );	
 	}
@@ -105,8 +90,7 @@ public class PhysicsEngine {
 	 * @param nextXPos
 	 * @param nextYPos
 	 */
-	private void setValues(Actor a, double nextHorzVelo, double nextVertVelo, double nextXPos, double nextYPos){
-		
+	private void setValues(IPlayActor a, double nextHorzVelo, double nextVertVelo, double nextXPos, double nextYPos){
 		a.setVeloX(nextHorzVelo);
 		a.setVeloY(nextVertVelo);
 		a.setX(bound(nextXPos));
@@ -137,53 +121,52 @@ public class PhysicsEngine {
 	//These methods correspond to Actions that call them
 	//They differ in the force applied to the Actor
 	
-	public void moveRight(Actor a1) {
-		update(a1,getHorizontalForce(), 0, 0, a1.getMyFriction());
+	public void moveRight(IPlayActor a1) {
+		update(a1,getHorizontalForce(), 0, 0, a1.getFriction());
 	}
 
-	public void moveLeft(Actor a1) {
-		update(a1,-getHorizontalForce(), 0, 0, a1.getMyFriction());
+	public void moveLeft(IPlayActor a1) {
+		update(a1,-getHorizontalForce(), 0, 0, a1.getFriction());
 	}
 	
-	public void jump(Actor a1){
-		update(a1,0,getJumpForce(), getGravity(), a1.getMyFriction());
+	public void jump(IPlayActor a1){
+		update(a1,0,getJumpForce(), getGravity(), a1.getFriction());
 	}
 	
 	//gliding methods for when force and gravity aren't applied
 	
-	public void glideRight(Actor a1) {
+	public void glideRight(IPlayActor a1) {
 		a1.setX(a1.getX()+5);
 	}
 
-	public void glideLeft(Actor a1) {
+	public void glideLeft(IPlayActor a1) {
 		a1.setX(a1.getX()-5);
 	}
 	
-	public void glideUp(Actor a1 ){
+	public void glideUp(IPlayActor a1 ){
 		a1.setY(a1.getY()+5);
 	}
 	
-	public void tick(Actor a1) {
+	public void tick(IPlayActor a1) {
 		update(a1,0.0,0.0, getGravity(), friction);
 	}
 	
-	public void staticVerticalCollision(Actor a1){
-		a1.setInAir(false);
+	public void staticVerticalCollision(IPlayActor a1){
 		a1.setY(a1.getY()-a1.getVeloY());
 		a1.setVeloY(0);
 	}
 	
-	public void staticHorizontalCollision(Actor a1){
+	public void staticHorizontalCollision(IPlayActor a1){
 		a1.setX(a1.getX()-(a1.getVeloX()*2.5));
 		a1.setVeloX(0);
 	}
 	
-	public void elasticHorizontalCollision(Actor a1){
+	public void elasticHorizontalCollision(IPlayActor a1){
 		a1.setX(a1.getX()-(a1.getVeloX()*2.5));
 		a1.setVeloX( -horizontalForce*(a1.getVeloX()/Math.abs(a1.getVeloX())));
 	}
 	
-	public void elasticVerticalCollision(Actor a1){
+	public void elasticVerticalCollision(IPlayActor a1){
 		a1.setY(a1.getY()-(a1.getVeloY()*2.5));
 		a1.setVeloY( -horizontalForce*(a1.getVeloY()/Math.abs(a1.getVeloY())));
 	}

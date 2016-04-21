@@ -2,73 +2,58 @@ package gameplayer.controller;
 
 import java.lang.reflect.InvocationTargetException;
 import java.io.File;
+import java.util.Observable;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
+import gamedata.controller.FileChooserController;
 import gamedata.controller.ParserController;
-import gamedata.view.FileChooserScreen;
-import gamedata.view.FileChooserScreenLoad;
-import gamedata.view.FileChooserScreenScores;
 import gameengine.controller.Game;
 import gameplayer.view.BaseScreen;
-import gameplayer.view.SplashScreen;
-import gui.controller.IScreenController;
-import gui.controller.ScreenController;
-import gui.view.ComboBoxGame;
-import gui.view.Screen;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class BaseScreenController extends ScreenController{
+public class BaseScreenController extends BranchScreenController{
 
+	private static final String BASE_CONTROLLER_RESOURCE = "baseActions";
+	
 	private ResourceBundle myResources;
 	private BaseScreen myScreen;
 	private GameController myGameController;
 	
-	public BaseScreenController(Stage myStage, BaseScreen myBase, ResourceBundle myResources) {
+	public BaseScreenController(Stage myStage, GameController gameController) {
 		super(myStage);
-		this.myResources = myResources;
-		this.myScreen = myBase;
-		this.setMyGameController(new GameController());
+		//DEPENDENCY!!
+		this.myGameController = gameController;
+		setUpScreen();
+		this.myResources = ResourceBundle.getBundle("baseActions");
+		changeScreen(myScreen);
+	}
+	
+	private void setUpScreen() {
+		this.myScreen = new BaseScreen();
+		this.myScreen.addObserver(this);
+		setUpGameScreen();
 	}
 
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void toggleSound() {
+	private void toggleSound() {
 		System.out.println("toggle sound");
 	}
 	
-	public void toggleMusic(){
+	private void toggleMusic(){
 		System.out.println("toggle music");
 	}
 
-	
-	public void goToSplash(){
-		SplashScreen mySplash = new SplashScreen(getStage());
+	private void saveGame(){
+		this.myGameController.togglePause();
 		try {
-			getStage().setScene(mySplash.getScene());
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void saveGame(){
-		this.getMyGameController().togglePause();
-		try {
-			CreatorController c = new CreatorController(getMyGameController().getGame(), this.myScreen);
+			CreatorController c = new CreatorController(myGameController.getGame(), this.myScreen);
 			FileChooser fileChooser = new FileChooser();
 			File file = fileChooser.showSaveDialog(new Stage());
 			c.saveForPlaying(file);
@@ -78,64 +63,62 @@ public class BaseScreenController extends ScreenController{
 		
 	}
 	
-	public void switchGame(){
-		this.getMyGameController().togglePause();
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, myResources.getString("SwitchConfirmation"), ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-		Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.YES) {
-            this.saveGame();
-            this.chooseGame();
-        }
-        else if (result.get() == ButtonType.NO) {
-        	this.chooseGame();
-        }
-        else {
-        	this.getMyGameController().toggleUnPause();
-        }
-	}
-
-	@Override
-	public void setGame(Game game) {
-		myGameController.setGame(game);
-	}
-
-	@Override
-	public Screen getScreen() {
-		return myScreen;
-	}
-
-	public GameController getMyGameController() {
-		return myGameController;
-	}
-
-	public void setMyGameController(GameController myGameController) {
-		this.myGameController = myGameController;
+	private void switchGame(){
+		this.myGameController.togglePause();
+		this.myScreen.switchAlert();
 	}
 	
-	public void restartGame(){
+	private void chooseGame() {
+		FileChooserController fileChooserController = new FileChooserController(getStage(), ChooserType.PLAY);
+	}
+
+	private void togglePause() {
+		this.myGameController.togglePause();
+	}
+	
+	private void toggleUnPause() {
+		this.myGameController.toggleUnPause();
+	}
+
+	private void restartGame(){
 		myGameController.getView().clearGame();
 		ParserController parserController = new ParserController(myScreen);
 		Game initialGame = parserController.loadforPlaying(new File(myGameController.getGame().getInitialGameFile()));
 		myGameController.setGame(initialGame);
 		myGameController.initialize(0);
 	}
-
-	@Override
-	public void chooseGame() {
-		FileChooserScreen myFC = new FileChooserScreenLoad(getStage());
-		try {
-			getStage().setScene(myFC.getScene());
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
+	private void setUpGameScreen(){
+		this.myScreen.setGameScreen(this.myGameController.getView());
 	}
-
+	
+	
+	private void setUpHUDScreen() {
+		//TODO FIX THIS BOBBY
+		//this.myScreen.setHUDScreen(new HUDScreen(Screen.SCREEN_WIDTH, Screen.SCREEN_WIDTH, this.myGameController.getGame().getHUDData()));
+	}
+	
 	@Override
-	public void useGame() {
-		BaseScreen myB = new BaseScreen(getStage(), myGameController.getGame());
-		getStage().setScene(myB.getMyScene());
+	public void update(Observable o, Object arg) {
+		String method = myResources.getString((String)arg);
+		try {
+			try {
+				this.getClass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| SecurityException e) {
+				e.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
+		} catch (NoSuchMethodException e) {
+			try {
+				this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e1) {
+				e.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
+		}
+		
 		
 	}
 

@@ -1,20 +1,19 @@
 package gui.view;
 
-import gui.controller.IScreenController;
-import gui.controller.ScreenController;
-
 public class ButtonSwitch extends ButtonParent {
-	
-	private ScreenController myController;
 
-	public ButtonSwitch(IScreenController myController, String buttonText, String imageName) {
-		super(myController, buttonText, imageName);
-		this.myController = (ScreenController) myController;
+
+	public ButtonSwitch(String buttonText, String imageName) {
+		super(buttonText, imageName);
 	}
 
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnMouseClicked(e -> myController.switchGame());
+		getButton().setOnAction(e -> {
+			setChanged();
+			notifyObservers();
+		});
+		
 	}
 
 }

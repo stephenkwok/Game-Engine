@@ -17,14 +17,14 @@ public interface IEditableGameElement {
 	 * 
 	 * @param name to be set as IEditableGameElement's name 
 	 */
-	public void setMyName(String name);
+	public void setName(String name);
 	
 
 	/**
 	 * 
 	 * @return the IEditableGameElement's name
 	 */
-	public String getMyName();
+	public String getName();
 	
 	/**
 	 * 

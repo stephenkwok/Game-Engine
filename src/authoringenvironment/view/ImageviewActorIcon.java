@@ -1,7 +1,6 @@
 package authoringenvironment.view;
 
 import authoringenvironment.model.IAuthoringActor;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**

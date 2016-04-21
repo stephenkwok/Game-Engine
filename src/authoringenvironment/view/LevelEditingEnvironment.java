@@ -9,7 +9,7 @@ import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.controller.Controller;
 import gameengine.controller.Level;
-import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.ImageView;
@@ -141,7 +141,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 							event.consume();
 						}
 					}); 
-					myLevel.addActor((Actor) actor);
+					myLevel.addActor(actor);
 					myActorPreviews.add(iconToAdd);
 					myCenterPane.getChildren().add(iconToAdd.getImageView());
 					success = true;
@@ -239,7 +239,8 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 */
 	private void addLevelActorsToScene() {
 		myActorPreviews.clear();
-		for (IAuthoringActor actor: myLevel.getActors()) {
+		for (IPlayActor playActor: myLevel.getActors()) {
+			IAuthoringActor actor = (IAuthoringActor)playActor;
 			ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
 			icon.getImageView().setX(actor.getX());
 			icon.getImageView().setY(actor.getY());
