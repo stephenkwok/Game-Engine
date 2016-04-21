@@ -26,16 +26,15 @@ import javafx.scene.paint.Color;
  */
 public class ActorRule {
 	private GridPane myRule;	
-	private VBox triggers;
-	private VBox actions;
-	private ScrollPane trigScroll;
-	private ScrollPane actScroll;
+	private VBox triggerNodes;
+	private VBox actionNodes;
+	private ScrollPane trigNodesScroll;
+	private ScrollPane actNodesScroll;
 	private ActorRuleCreator myActorRuleCreator;
 	private ResourceBundle myFactoryResources;
-	private ResourceBundle myActorRuleResources;
 	private static final String LIBRARY_BUNDLE = "library";
+	private ResourceBundle myActorRuleResources;
 	private static final String ACTORRULE_BUNDLE = "actorrule";
-	private String triggerBehaviors;
 	private ActorRuleFactory actorRuleFactory;
 	private Controller myController;
 		
@@ -59,8 +58,7 @@ public class ActorRule {
 	private void initializeEnvironment() {
 		this.myFactoryResources = ResourceBundle.getBundle(LIBRARY_BUNDLE);
 		this.myActorRuleResources = ResourceBundle.getBundle(ACTORRULE_BUNDLE);
-		this.actorRuleFactory = new ActorRuleFactory(myFactoryResources, myActorRuleCreator.getActor(), myController.getActorMap(), myController.getLevels());
-		this.triggerBehaviors = myFactoryResources.getString("TriggerBehaviors");
+		this.actorRuleFactory = new ActorRuleFactory(myFactoryResources, myActorRuleCreator.getActor(), myController);
 		myRule = new GridPane(); 
 		myRule.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(Integer.parseInt(myActorRuleResources.getString("CornerRadius"))), Insets.EMPTY)));
 		myRule.setPadding(new Insets(Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding"))));
@@ -83,16 +81,16 @@ public class ActorRule {
 	 * Add containers for triggers and actions where user can drop behaviors.
 	 */
 	private void addTriggerActionContainers(){
-		triggers = new VBox(Integer.parseInt(myActorRuleResources.getString("Padding")));
-		triggers.setPrefSize(myRule.getPrefWidth()*Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")), 
+		triggerNodes = new VBox(Integer.parseInt(myActorRuleResources.getString("Padding")));
+		triggerNodes.setPrefSize(myRule.getPrefWidth()*Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")), 
 				myRule.getPrefHeight()*Double.parseDouble(myActorRuleResources.getString("ContainerHeightPercent")));
-		actions = new VBox(Integer.parseInt(myActorRuleResources.getString("Padding")));
-		actions.setPrefSize(myRule.getPrefWidth()*Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")), 
+		actionNodes = new VBox(Integer.parseInt(myActorRuleResources.getString("Padding")));
+		actionNodes.setPrefSize(myRule.getPrefWidth()*Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")), 
 				myRule.getPrefHeight()*Double.parseDouble(myActorRuleResources.getString("ContainerHeightPercent")));
-		trigScroll = new ScrollPane(triggers);
-		actScroll = new ScrollPane(actions);
-		myRule.add(trigScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")), Integer.parseInt(myActorRuleResources.getString("TriggerRow")));
-		myRule.add(actScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")), Integer.parseInt(myActorRuleResources.getString("ActionRow")));
+		trigNodesScroll = new ScrollPane(triggerNodes);
+		actNodesScroll = new ScrollPane(actionNodes);
+		myRule.add(trigNodesScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")), Integer.parseInt(myActorRuleResources.getString("TriggerRow")));
+		myRule.add(actNodesScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")), Integer.parseInt(myActorRuleResources.getString("ActionRow")));
 		
 	}
 	/**
@@ -116,9 +114,9 @@ public class ActorRule {
 			if(event.getClickCount()==2) remove(toAdd);
 		});
 		if(isTrigger(behavior.getText())) {
-			triggers.getChildren().add(toAdd);
+			triggerNodes.getChildren().add(toAdd);
 		}
-		else actions.getChildren().add(toAdd);
+		else actionNodes.getChildren().add(toAdd);
 	}
 	/**
 	 * Return if given behavior is a trigger type behavior
@@ -126,7 +124,7 @@ public class ActorRule {
 	 * @return
 	 */
 	private boolean isTrigger(String behavior){
-		List<String> triggers = Arrays.asList(triggerBehaviors.split(" "));
+		List<String> triggers = Arrays.asList(myFactoryResources.getString("TriggerBehaviors").split(" "));
 		return triggers.contains(behavior);
 	}
 	/**
@@ -139,14 +137,14 @@ public class ActorRule {
 			toAdd.setOnMouseClicked(event -> {
 				if(event.getClickCount()==2) remove(toAdd);
 			});
-			actions.getChildren().add(toAdd);
+			actionNodes.getChildren().add(toAdd);
 		}
 		else{
 			Node toAdd = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlayMusicBehavior"), sound.getText()).createNode();
 			toAdd.setOnMouseClicked(event -> {
 				if(event.getClickCount()==2) remove(toAdd);
 			});
-			actions.getChildren().add(toAdd);
+			actionNodes.getChildren().add(toAdd);
 		}
 	}
 	/**
@@ -172,7 +170,7 @@ public class ActorRule {
 		toAdd.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2) remove(toAdd);
 		});
-		actions.getChildren().add(toAdd);
+		actionNodes.getChildren().add(toAdd);
 	}
 	
 	/**
@@ -180,7 +178,7 @@ public class ActorRule {
 	 * @param toRemove
 	 */
 	public void remove(Node toRemove){
-		triggers.getChildren().remove(toRemove);
-		actions.getChildren().remove(toRemove);
+		triggerNodes.getChildren().remove(toRemove);
+		actionNodes.getChildren().remove(toRemove);
 	}
 }

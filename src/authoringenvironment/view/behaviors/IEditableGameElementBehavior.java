@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
@@ -25,6 +26,7 @@ import javafx.scene.layout.Priority;
  */
 
 public abstract class IEditableGameElementBehavior extends EditingElementParent implements IAuthoringRule{
+	private static final double IMAGE_HEIGHT = 20;
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
 	private static final int COMBOBOX_WIDTH = 150;
@@ -89,7 +91,10 @@ public abstract class IEditableGameElementBehavior extends EditingElementParent 
             setGraphic(null);
         } else {
         	HBox graphic = new HBox();
-        	graphic.getChildren().addAll(item.getImageView(), new Label(item.getName()));
+        	ImageView imageView = item.getImageView();
+        	imageView.setFitHeight(IMAGE_HEIGHT);
+        	imageView.setPreserveRatio(true);
+        	graphic.getChildren().addAll(imageView, new Label(item.getName()));
             setGraphic(graphic);
         }
        }

@@ -5,7 +5,7 @@ import java.util.List;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
-import gameengine.model.IRule;
+//import gameengine.model.IRule;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 /**
@@ -26,7 +26,7 @@ public class ActorRuleCreator {
 	private double sceneWidth;
 	private Controller myController;
 	
-	private List<IRule> myIRules;
+//	private List<IRule> myIRules;
 	
 	public ActorRuleCreator(IAuthoringActor myActor,double sceneWidth,Controller myController) {
 		this.myActor = myActor;

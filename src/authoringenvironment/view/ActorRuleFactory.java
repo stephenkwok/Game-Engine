@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.controller.Level;
 import gui.view.IGUIElement;
@@ -21,16 +22,18 @@ public class ActorRuleFactory {
 	private static final String CLASS = "Class";
 	private ResourceBundle myResources;
 	private IAuthoringActor myActor;
-	private Map<IAuthoringActor, List<IAuthoringActor>> myActorsMap;
-	private List<Level> myLevels;
+//	private Map<IAuthoringActor, List<IAuthoringActor>> myActorsMap;
+//	private List<Level> myLevels;
 	private static final String CREATE = "create";
 	private static final String ELEMENT = "Element";
+	private Controller myController;
 	
-	public ActorRuleFactory(ResourceBundle myLibraryResources, IAuthoringActor myActor, Map<IAuthoringActor, List<IAuthoringActor>> myActorsMap, List<Level> myLevels){
+	public ActorRuleFactory(ResourceBundle myLibraryResources, IAuthoringActor myActor, Controller myController){
 		this.myResources = myLibraryResources;
 		this.myActor = myActor;
-		this.myActorsMap = myActorsMap;
-		this.myLevels = myLevels;
+		this.myController = myController;
+//		this.myActorsMap = myActorsMap;
+//		this.myLevels = myLevels;
 	}
 	
 	/**
@@ -74,12 +77,13 @@ public class ActorRuleFactory {
 		try{
 			Class<?> clazz = Class.forName(className);
 			Constructor<?> constructor = clazz.getConstructor(String.class, IAuthoringActor.class, ResourceBundle.class, List.class);
-			List<IAuthoringActor> myActors = new ArrayList<>(myActorsMap.keySet());
+			List<IAuthoringActor> myActors = new ArrayList<>(myController.getActorMap().keySet());
 			return (IGUIElement) constructor.newInstance(behaviorType,myActor,myResources,myActors);
 		}catch(Exception e){
+			e.printStackTrace();
 			Class<?> clazz = Class.forName(className);
 			Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, List.class);
-			return (IGUIElement) constructor.newInstance(behaviorType,myResources,myLevels);
+			return (IGUIElement) constructor.newInstance(behaviorType,myResources,myController.getLevels());
 		}
 	}
 	/**
