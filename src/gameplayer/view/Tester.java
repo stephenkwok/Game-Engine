@@ -45,8 +45,8 @@ public class Tester extends Application {
         info.setMyCurrentLevelNum(0);
         info.setName("Colette");
 
-//      Map<String, Integer> options = new HashMap<>();
-//      options.put("Points", 0);
+//		Map<String, Integer> options = new HashMap<>();
+//		options.put("Points", 0);
 
 
         //info.setMyHUDOptions(options);
@@ -55,7 +55,7 @@ public class Tester extends Application {
         IAuthoringActor actor1 = (IAuthoringActor) new Actor();
         actor1.setImageViewName("redball.png");
         actor1.setName("A1");
-        actor1.setID(11);
+        actor1.setID(1);
 
 
         IAuthoringActor actor2 = (IAuthoringActor) new Actor();
@@ -63,12 +63,12 @@ public class Tester extends Application {
         actor2.setX(300);
         actor2.setY(300);
         actor2.setName("A2");
-        actor2.setID(68);
+        actor2.setID(2);
 
         IPlayActor actor4 = new Actor();
         ((Actor) actor4).setName("enemy");
-        ((Actor) actor4).setID(56);
         ((IAuthoringActor)actor4).setImageViewName("redball.png");
+        ((Actor) actor4).setID(3);
         actor4.setX(315);
         BottomCollision enemyTrigger = new BottomCollision((IPlayActor)actor4, (IPlayActor)actor2);
         Action enemyAction = new VerticalBounceCollision((IPlayActor) actor4);
@@ -148,9 +148,9 @@ public class Tester extends Application {
         actor1.addRule(rule5);
         actor1.addRule(rule6);
 
-//      actor1.setMain(true);
-//      Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
-//      actor1.addAttribute(points);
+        actor1.addState(ActorState.MAIN);
+//		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
+//		actor1.addAttribute(points);
 
         List<Level> levels = new ArrayList<Level>();
         Level level1 = new Level();
@@ -163,7 +163,7 @@ public class Tester extends Application {
         for(int i=0; i<=17; i++){
             Actor floor = new Actor();
             floor.setName("floor");
-            floor.setID(40);
+            floor.setID(5);
             floor.setImageViewName("square.png");
             floor.setX(i*50+i);
             floor.setY(500-floor.getBounds().getHeight());
@@ -192,7 +192,7 @@ public class Tester extends Application {
         Game model = new Game(info,levels);
         CreatorController c = new CreatorController(model);
         c.saveForEditing(new File("gamefiles/test2.xml"));
-        PerspectiveCamera camera = new PerspectiveCamera();
+        ParallelCamera camera = new ParallelCamera();
         GameScreen view = new GameScreen(camera);
 
         GameController controller = new GameController(model);
@@ -206,12 +206,6 @@ public class Tester extends Application {
         Stage stage = new Stage();
         stage.setWidth(800);
         stage.setHeight(600);
-
-//      CreatorController c = new CreatorController(model);
-//      System.out.println(c);
-//      File myF = new File("gamefiles/testhud.xml");
-//      System.out.println(myF);
-//      c.saveForEditing(myF);
 
         sub.setCamera(camera);
         stage.setScene(scene);
