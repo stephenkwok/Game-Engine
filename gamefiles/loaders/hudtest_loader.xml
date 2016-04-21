@@ -40,6 +40,14 @@
               </list>
             </entry>
             <entry>
+              <string>Down</string>
+              <list>
+                <gameengine.model.Actions.MoveBackward>
+                  <myActor reference="../../../../.."/>
+                </gameengine.model.Actions.MoveBackward>
+              </list>
+            </entry>
+            <entry>
               <string>Left</string>
               <list>
                 <gameengine.model.Actions.MoveLeft>
@@ -177,7 +185,7 @@
                 <myValue>0</myValue>
                 <myTriggerValue>10</myTriggerValue>
                 <myType>POINTS</myType>
-                <myAction class="gameengine.model.Actions.WinGame" reference="../../../../myRules/entry[3]/list/gameengine.model.Actions.WinGame"/>
+                <myAction class="gameengine.model.Actions.WinGame" reference="../../../../myRules/entry[4]/list/gameengine.model.Actions.WinGame"/>
               </gameengine.model.Attribute>
             </entry>
           </attributeMap>
@@ -1017,6 +1025,12 @@
       <myTriggerMap>
         <entry>
           <string>Space</string>
+          <list>
+            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
+          </list>
+        </entry>
+        <entry>
+          <string>Down</string>
           <list>
             <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
           </list>

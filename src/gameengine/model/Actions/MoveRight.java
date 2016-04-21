@@ -32,7 +32,10 @@ public class MoveRight extends MovingAction {
      */
     @Override
     public void perform() {
+    	System.out.println(getMyActor().getHeading()+" 1");
     	getMyActor().getPhysicsEngine().moveRight(getMyActor());
+    	getMyActor().setHeading(0);
+    	System.out.println(getMyActor().getHeading());
     }
 
     

@@ -10,6 +10,7 @@ import gamedata.controller.FileChooserController;
 import gameplayer.view.SplashScreen;
 import javafx.stage.Stage;
 import authoringenvironment.controller.Controller;
+import authoringenvironment.view.GUIMain;
 
 public class SplashScreenController implements Observer {
 	
@@ -42,6 +43,7 @@ public class SplashScreenController implements Observer {
 	}
 	
 	private void edit() {
+		System.out.println("check");
 		Controller GUIMainController = new Controller(myStage);
 	}
 
@@ -55,7 +57,6 @@ public class SplashScreenController implements Observer {
 				| SecurityException e) {
 			this.myScreen.showError(e.getMessage());
 		}
-		
 	}
 
 

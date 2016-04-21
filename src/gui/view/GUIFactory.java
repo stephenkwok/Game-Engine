@@ -34,7 +34,6 @@ public class GUIFactory {
 	public GUIFactory(ResourceBundle myResources) {
 		this.myResources = myResources;
 	}
-
 	/**
 	 * Creates new IGUIElement based on nodeTypeKey passed in. 
 	 * @param nodeTypeKey: Name of object you want to create.

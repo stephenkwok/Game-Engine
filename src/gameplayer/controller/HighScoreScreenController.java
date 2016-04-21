@@ -7,7 +7,15 @@ import java.util.ResourceBundle;
 
 import gamedata.controller.ChooserType;
 import gamedata.controller.FileChooserController;
+import gamedata.controller.HighScoresController;
 import gameplayer.view.HighScoreScreen;
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
+import javafx.collections.ObservableMap;
+import javafx.collections.MapChangeListener.Change;
 import javafx.stage.Stage;
 
 public class HighScoreScreenController extends BranchScreenController {
@@ -16,21 +24,29 @@ public class HighScoreScreenController extends BranchScreenController {
 	
 	private ResourceBundle myResources;
 	private HighScoreScreen myScreen;
-	private Map<String, Integer> myModel;
-	private String myGame;
+	private ObservableMap<String, Integer> myModel;
+	private String myGameName;
 	
 	
 	public HighScoreScreenController(Stage myStage, Map<String, Integer> scores, String game) {
 		super(myStage);
-		this.myModel = scores;
-		this.myGame = game;
-		setUpScreen(this.myModel, this.myGame);
+		this.myModel = FXCollections.observableMap(scores);
+		this.myModel.addListener(new MapChangeListener<String, Object>() {
+			@Override
+			public void onChanged(Change<? extends String, ? extends Object> change) {
+				if(change!=null && myScreen != null)
+					myScreen.displayScores(myGameName, (Map<String, Integer>) change);;
+			}
+		});
+		this.myGameName = game;
+		setUpScreen();
 		this.myResources = ResourceBundle.getBundle(SCORE_CONTROLLER_RESOURCE);
 		changeScreen(myScreen);
 	}
 
-	private void setUpScreen(Map<String,Integer> model, String gameName) {
-		this.myScreen = new HighScoreScreen(model, gameName);
+	private void setUpScreen() {
+		this.myScreen = new HighScoreScreen();
+		this.myScreen.displayScores(myGameName, myModel);
 		this.myScreen.addObserver(this);
 	}
 	private void switchGame() {
@@ -38,7 +54,10 @@ public class HighScoreScreenController extends BranchScreenController {
 	}
 	
 	private void clearScores() {
-		
+		HighScoresController dataController = new HighScoresController(myGameName, myScreen);
+		dataController.clearHighScores();
+		myModel.putAll(dataController.getGameHighScores());
+		//notify
 	}
 
 	@Override
