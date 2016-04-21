@@ -80,7 +80,7 @@ public class GUIMainScreen implements IGUI, Observer {
 	 * left pane
 	 */
 	private void initializeGameEditingEnvironment() {
-		borderPane.setLeft(gameEditor.createNode());
+		borderPane.setLeft(gameEditor.getNode());
 	}
 
 	/**

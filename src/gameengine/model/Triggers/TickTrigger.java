@@ -9,7 +9,7 @@ import gameengine.model.ITrigger;
 /**
  * @author blakekaplan
  */
-public class TickTrigger implements ITrigger {
+public class TickTrigger extends ITrigger {
 
     private static final String TICK = "Tick";
     private int myInterval;

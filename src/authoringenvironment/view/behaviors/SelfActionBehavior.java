@@ -5,15 +5,15 @@ import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.view.ActorRule;
 import gameengine.model.IAction;
-import gameengine.model.ITrigger;
 
 public class SelfActionBehavior extends LabelBehavior {
 	private IAction myAction;
 	private IAuthoringActor myActor;
 	
-	public SelfActionBehavior(IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
-		super(behaviorType, myResources);
+	public SelfActionBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
+		super(myActorRule, behaviorType, myResources);
 		this.myActor = myActor;
 	}
 
@@ -22,23 +22,13 @@ public class SelfActionBehavior extends LabelBehavior {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(myActor);
 		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
+		addAction(this, myAction);
 		System.out.println(myAction);
 	}
 
 	@Override
-	public IAction getAction() {
-		return this.myAction;
-	}
-
-	@Override
-	public ITrigger getTrigger() {
-		return null;
-	}
-
-	@Override
 	public void addNodeObserver(Observer observer) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 }

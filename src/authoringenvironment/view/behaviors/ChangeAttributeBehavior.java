@@ -5,39 +5,30 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.view.ActorRule;
 import gameengine.model.AttributeType;
 import gameengine.model.IAction;
-import gameengine.model.ITrigger;
+import gameengine.model.IPlayActor;
 
 public class ChangeAttributeBehavior extends DoubleBehavior {
 	private static final String CHANGE_HEALTH = "ChangeHealth";
 	private IAuthoringActor myActor;
 	private IAction myAction;
 	
-	public ChangeAttributeBehavior(IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
-		super(behaviorType, myResources);
+	public ChangeAttributeBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
+		super(myActorRule, behaviorType, myResources);
 		this.myActor = myActor;
 	}
 
 	@Override
 	void createRuleTriggerOrAction() {
 		List<Object> arguments = new ArrayList<>();
-		arguments.add(myActor);
+		arguments.add((IPlayActor) myActor);
 		if(getBehaviorType().equals(CHANGE_HEALTH)) arguments.add(AttributeType.HEALTH);
 		else arguments.add(AttributeType.POINTS);
 		arguments.add((int) getValue());
 		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
+		addAction(this, myAction);
 		System.out.println(myAction);
 	}
-
-	@Override
-	public IAction getAction() {
-		return myAction;
-	}
-
-	@Override
-	public ITrigger getTrigger() {
-		return null;
-	}
-
 }

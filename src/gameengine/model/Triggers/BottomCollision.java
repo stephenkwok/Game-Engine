@@ -3,7 +3,7 @@ package gameengine.model.Triggers;
 import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 
-public class BottomCollision extends CollisionTrigger implements ITrigger {
+public class BottomCollision extends CollisionTrigger {
 
     private static final String COLLISION_TYPE = "BottomCollision";
 

@@ -21,17 +21,22 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
 	public ButtonParent(String buttonText, String imageName) {
 		this.buttonText = buttonText;
 		this.imageName = imageName;
+		initializeButton();
 	}
-	/**
-	 * Creates and returns button
-	 */
-	@Override
-	public Node createNode()  {
+	
+	private void initializeButton() {
 		button = new Button(buttonText);
 		button.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
 		setButtonIcon();
 		setButtonAction();
-		return button; 
+	}
+	/**
+	 *
+	 * Creates and returns button
+	 */
+	@Override
+	public Node createNode()  {
+		return button;
 	}
 	
 	public void addNodeObserver(Observer observer) {
@@ -45,7 +50,7 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
 	/**
 	 * Optional, sets image for button.
 	 */
-	private void setButtonIcon(){
+	protected void setButtonIcon(){
 		if (imageName != null) {
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 			ImageView iv = new ImageView(image);
@@ -62,6 +67,10 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
      */
     protected Button getButton() {
     	return button;
+    }
+    
+    protected void setImageName(String newImageName) {
+    	imageName = newImageName;
     }
 
 }

@@ -7,7 +7,7 @@ public class TextFieldActorNameEditor extends TextFieldWithButton {
 	public TextFieldActorNameEditor(String labelText, String promptText, Double textFieldWidth) {
 		super(labelText, promptText, textFieldWidth);
 		setButtonAction(e -> {((IAuthoringActor) getEditableElement()).setName(getTextFieldInput());
-			notifyController((IAuthoringActor) getEditableElement());
+			notifyObservers((IAuthoringActor) getEditableElement());
 			});
 	}
 	/**
