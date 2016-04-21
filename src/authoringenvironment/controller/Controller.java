@@ -217,10 +217,10 @@ public class Controller extends BranchScreenController implements Observer {
 	public void saveGame() {
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showSaveDialog(new Stage());
-		Game g = new Game(gameInfo, myLevels); 
+		//Game g = new Game(gameInfo, myLevels); 
 		CreatorController controller;
 		try {
-			controller = new CreatorController(g, guiMain);
+			controller = new CreatorController(game, guiMain);
 			controller.saveForEditing(file);
 		} catch (ParserConfigurationException e) {
 			guiMain.showError(e.getMessage());
@@ -229,7 +229,8 @@ public class Controller extends BranchScreenController implements Observer {
 	}
 
 	public void loadGame() {
-		promptForFileName(false);
+		//promptForFileName(false);
+		FileChooserController fileChooserController = new FileChooserController(getStage(),ChooserType.EDIT);
 	}
 
 	/**
