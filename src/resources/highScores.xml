@@ -24,7 +24,16 @@
     </entry>
     <entry>
       <string>gamefiles/loaders/test2_loader.xml</string>
-      <tree-map/>
+      <tree-map>
+        <entry>
+          <string>micahel f</string>
+          <int>0</int>
+        </entry>
+        <entry>
+          <string>michael f</string>
+          <int>0</int>
+        </entry>
+      </tree-map>
     </entry>
     <entry>
       <string>testGame</string>
