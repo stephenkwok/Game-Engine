@@ -44,6 +44,7 @@ public class ActorRule {
 	private static final int CORNER_RADIUS = 20;
 	private static final double STACKPANE_PERCENT_WIDTH = 0.90;
 	private static final double STACKPANE_PERCENT_HEIGHT = 0.3;
+	private static final double GRIDPANE_PERCENT_WIDTH = 0.90;
 	private static final String CHANGE_IMAGE = "ChangeImage";
 	private static final String PLAY_SOUND = "PlaySound";
 	private static final String PLAY_MUSIC = "PlayMusic";
@@ -84,7 +85,7 @@ public class ActorRule {
 		myRule = new GridPane(); 
 		myRule.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
 		myRule.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
-		myRule.setPrefSize(myActorRuleCreator.getGridPane().getWidth(), RULE_HEIGHT);
+		myRule.setPrefSize(myActorRuleCreator.getGridPane().getWidth()*GRIDPANE_PERCENT_WIDTH, RULE_HEIGHT);
 		addTriggerActionLabels();
 		addTriggerActionContainers();
 		addCloseButton();

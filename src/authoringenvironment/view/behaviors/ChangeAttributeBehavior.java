@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.AttributeType;
 import gameengine.model.IAction;
+import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 
 public class ChangeAttributeBehavior extends DoubleBehavior {
@@ -22,7 +23,7 @@ public class ChangeAttributeBehavior extends DoubleBehavior {
 	@Override
 	void createRuleTriggerOrAction() {
 		List<Object> arguments = new ArrayList<>();
-		arguments.add(myActor);
+		arguments.add((IPlayActor) myActor);
 		if(getBehaviorType().equals(CHANGE_HEALTH)) arguments.add(AttributeType.HEALTH);
 		else arguments.add(AttributeType.POINTS);
 		arguments.add((int) getValue());

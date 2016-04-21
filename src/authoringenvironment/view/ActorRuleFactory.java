@@ -3,6 +3,7 @@ package authoringenvironment.view;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -20,15 +21,15 @@ public class ActorRuleFactory {
 	private static final String CLASS = "Class";
 	private ResourceBundle myResources;
 	private IAuthoringActor myActor;
-	private Map<IAuthoringActor, List<IAuthoringActor>> myActors;
+	private Map<IAuthoringActor, List<IAuthoringActor>> myActorsMap;
 	private List<Level> myLevels;
 	private static final String CREATE = "create";
 	private static final String ELEMENT = "Element";
 	
-	public ActorRuleFactory(ResourceBundle myLibraryResources, IAuthoringActor myActor, Map<IAuthoringActor, List<IAuthoringActor>> myActors2, List<Level> myLevels){
+	public ActorRuleFactory(ResourceBundle myLibraryResources, IAuthoringActor myActor, Map<IAuthoringActor, List<IAuthoringActor>> myActorsMap, List<Level> myLevels){
 		this.myResources = myLibraryResources;
 		this.myActor = myActor;
-		this.myActors = myActors2;
+		this.myActorsMap = myActorsMap;
 		this.myLevels = myLevels;
 	}
 	
@@ -73,6 +74,7 @@ public class ActorRuleFactory {
 		try{
 			Class<?> clazz = Class.forName(className);
 			Constructor<?> constructor = clazz.getConstructor(String.class, IAuthoringActor.class, ResourceBundle.class, List.class);
+			List<IAuthoringActor> myActors = new ArrayList<>(myActorsMap.keySet());
 			return (IGUIElement) constructor.newInstance(behaviorType,myActor,myResources,myActors);
 		}catch(Exception e){
 			Class<?> clazz = Class.forName(className);
