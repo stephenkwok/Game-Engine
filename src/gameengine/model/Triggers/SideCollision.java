@@ -5,7 +5,7 @@ import gameengine.model.IActor;
 import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 
-public class SideCollision extends CollisionTrigger implements ITrigger {
+public class SideCollision extends CollisionTrigger implements ITrigger{
 
     private static final String COLLISION_NAME = "SideCollision";
 

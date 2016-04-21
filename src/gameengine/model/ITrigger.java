@@ -22,5 +22,4 @@ public interface ITrigger {
      * @return A boolean that says if the condition is true or false
      */
     public boolean evaluate(ITrigger otherTrigger);
-
 }

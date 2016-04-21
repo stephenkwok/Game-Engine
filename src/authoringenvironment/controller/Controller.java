@@ -121,7 +121,7 @@ public class Controller extends BranchScreenController {
 	public void saveGame() {
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showSaveDialog(new Stage());
-		Game g = new Game(gameInfo, myLevels); 
+		Game g = new Game(gameInfo, myLevels); //replace your g 
 		CreatorController controller;
 		try {
 			controller = new CreatorController(g, guiMain);
