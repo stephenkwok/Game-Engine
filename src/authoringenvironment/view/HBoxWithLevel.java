@@ -3,6 +3,7 @@ package authoringenvironment.view;
 
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
+import gameengine.controller.Level;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -20,11 +21,17 @@ public class HBoxWithLevel extends HBoxWithEditable {
 		myTextField.setPromptText(TEXT_FIELD_PROMPT_TEXT);
 		HBox.setHgrow(myTextField, Priority.ALWAYS);
 		getHBox().getChildren().add(myTextField);
+		getHBox().setStyle("-fx-border-color: gray;");
 	}
 	
 	public int getLevelPlayPosition() {
 		String textFieldInput = myTextField.getText();
-		return textFieldInput.isEmpty() ? -1 : Integer.parseInt(textFieldInput);
+		// need more error checking
+		return textFieldInput.trim().isEmpty() ? -1 : Integer.parseInt(textFieldInput);
+	}
+	
+	public void updateLevelPlayPosition() {
+		((Level) getEditable()).setPlayPosition(getLevelPlayPosition());
 	}
 
 }

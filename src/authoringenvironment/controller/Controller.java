@@ -72,7 +72,8 @@ public class Controller implements IScreenController, Observer {
 		game = new Game(gameInfo, myLevels);
 		actorEnvironment = new ActorEditingEnvironment(this, myResources, myStage);
 		gameEnvironment = new GameEditingEnvironment(gameInfo);
-		mainScreen = new GUIMainScreen(gameEnvironment, myStage.widthProperty(), myStage.heightProperty(), myLevels);
+		mainScreen = new GUIMainScreen(gameEnvironment, myStage.widthProperty(), myStage.heightProperty(), myLevels,
+				levelEnvironment);
 	}
 
 	/**
@@ -234,11 +235,8 @@ public class Controller implements IScreenController, Observer {
 
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
 		List<Object> arguments = (List<Object>) notifyObserversArgument;
-		System.out.println(arguments.size());
 		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
 		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
-//		System.out.println(editable);
-		System.out.println(environment);
 		goToEditingEnvironment(editable, environment);
 	}
 }

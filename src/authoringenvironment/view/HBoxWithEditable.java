@@ -3,6 +3,7 @@ package authoringenvironment.view;
 import java.util.Arrays;
 
 import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gui.view.ObjectObservable;
 import javafx.geometry.Insets;
@@ -22,7 +23,7 @@ import javafx.scene.layout.HBox;
  *
  */
 
-public class HBoxWithEditable extends ObjectObservable {
+public class HBoxWithEditable extends ObjectObservable implements IEditingElement {
 
 	private static final String IMAGE_TEXT_PADDING = "    ";
 	private static final Double IMAGE_FIT_SIZE = 75.0;
@@ -40,11 +41,13 @@ public class HBoxWithEditable extends ObjectObservable {
 		myHBox = new HBox(myLabel);
 		myHBox.setAlignment(Pos.CENTER_LEFT);
 		myHBox.setSpacing(HBOX_SPACING);
-		System.out.println(myEditable);
-		System.out.println(myEnvironment);
-		myLabel.setOnMouseClicked(e -> notifyObservers(Arrays.asList(myEditable, myEnvironment)));
+		myLabel.setOnMouseClicked(e -> setButtonAction());
 	}
 	
+	//testing
+	private void setButtonAction() {
+		notifyObservers(Arrays.asList(myEditable, myEnvironment));
+	}
 	
 	/**
 	 * Updates the Label's text and image to account for any changes in the 
@@ -59,16 +62,17 @@ public class HBoxWithEditable extends ObjectObservable {
 		myLabel.setGraphic(imageView);
 	}
 	
-	/**
-	 * 
-	 * @return myLabel
-	 */
-	public Label getLabel() {
-		return myLabel;
+	public IEditableGameElement getEditable() {
+		return myEditable;
 	}
 	
 	public HBox getHBox() {
 		return myHBox;
+	}
+
+	@Override
+	public void setEditableElement(IEditableGameElement editable) {
+		myEditable = editable;
 	}
 
 }
