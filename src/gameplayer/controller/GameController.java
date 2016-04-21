@@ -215,9 +215,15 @@ public class GameController implements Observer, IGameController {
 			if (myResources.getString(methodName).equals("null")){
 				this.getClass().getDeclaredMethod(methodName).invoke(this);
 			}
+			else if (myResources.getString(methodName).equals("String")){
+				Class[] parameterTypes = {String.class};
+				Object[] parameters = {(String) myList.get(1)};
+				this.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(this, parameters);
+				return;
+			}
 			else {
-			myClass = Class.forName(myResources.getString(methodName));
-			arg2 = myClass.cast(myList.get(1));
+				myClass = Class.forName(myResources.getString(methodName));
+				arg2 = myClass.cast(myList.get(1));
 			}
 			} catch (IllegalArgumentException
 					 | SecurityException |ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e1) {
