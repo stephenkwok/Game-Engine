@@ -9,7 +9,11 @@ import java.util.ResourceBundle;
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.controller.Level;
 import gui.view.IGUIElement;
-
+/**
+ * Factory to create visual representations of triggers and actions that go into an ActorRule object
+ * @author AnnieTang
+ *
+ */
 public class ActorRuleFactory {
 	private static final String PACKAGE = "authoringenvironment.view.behaviors.";
 	private static final String CLASS = "Class";
@@ -100,12 +104,12 @@ public class ActorRuleFactory {
 		return (IGUIElement) constructor.newInstance(behaviorType,myResources);
 	}
 	
-	//only parameter is to select an actor
-	private IGUIElement createSelectActorBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		Class<?> clazz = Class.forName(className);
-		Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, List.class);
-		return (IGUIElement) constructor.newInstance(behaviorType,myResources, myActors);
-	}
+//	//only parameter is to select an actor
+//	private IGUIElement createSelectActorBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+//		Class<?> clazz = Class.forName(className);
+//		Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, List.class);
+//		return (IGUIElement) constructor.newInstance(behaviorType,myResources, myActors);
+//	}
 	
 	private IGUIElement createChangeAttributeBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		//same constructor

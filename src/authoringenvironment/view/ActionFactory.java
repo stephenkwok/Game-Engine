@@ -10,8 +10,15 @@ import java.util.ResourceBundle;
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import gameengine.model.IAction;
-
+/**
+ * Factory to create IAction objects
+ * @author AnnieTang
+ *
+ */
 public class ActionFactory {	
+	private static final int ZERO = 0;
+	private static final int ONE = 1;
+	private static final int TWO = 2;
 	private static final String ACTION_RESOURCE = "iaction";
 	private static final String DELIMITER = ",";
 	private static final String ACTION_TYPES= "ActionTypes";
@@ -77,16 +84,15 @@ public class ActionFactory {
 //	}
 	
 	private IAction createSelfActionAction(String actionType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Actor myActor = (Actor) arguments.get(0);
 		Class<?> clazz = Class.forName(className);
 		Constructor<?> constructor = clazz.getConstructor(Actor.class);
-		return (IAction) constructor.newInstance(myActor);
+		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO));
 	}
 	
 	private IAction createChangeAttributeBehavior(String actionType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> clazz = Class.forName(className);
 		Constructor<?> constructor = clazz.getConstructor(Actor.class, AttributeType.class, int.class);
-		return (IAction) constructor.newInstance(arguments.get(0),arguments.get(1),arguments.get(2));
+		return (IAction) constructor.newInstance(arguments.get(ZERO),arguments.get(ONE),arguments.get(TWO));
 	}
 	
 	
