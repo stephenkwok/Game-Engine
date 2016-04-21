@@ -120,7 +120,8 @@ public class Game extends Observable implements Observer {
 
     private void updateCamera(){
     	setChanged();
-    	notifyObservers("updateCamera");
+    	Object[] args = {"updateCamera"};
+    	notifyObservers(Arrays.asList(args));
     }
     
     private void signalTick(){
@@ -280,7 +281,8 @@ public class Game extends Observable implements Observer {
      */
 	private void removeDeadActors() {
 		setChanged();
-		notifyObservers("updateActors");
+		Object[] args = {"updateActors"};
+		notifyObservers(Arrays.asList(args));
 		getCurrentLevel().removeActors(deadActors);	
 		deadActors.clear();
 	}
