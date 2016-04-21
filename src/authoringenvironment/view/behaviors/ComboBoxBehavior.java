@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.view.ActionFactory;
+import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.TriggerFactory;
 import gameengine.model.IAction;
 import gameengine.model.ITrigger;
@@ -20,13 +21,15 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 	private TriggerFactory triggerFactory;
 	private ActionFactory actionFactory;
 	private ResourceBundle myResources;
+	private ActorRule myActorRule; 
 	
-	public ComboBoxBehavior(String behaviorType, ResourceBundle myResources){
+	public ComboBoxBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources){
 		super(myResources.getString(behaviorType+PROMPT), myResources.getString(behaviorType+LABEL));
 		this.behaviorType = behaviorType;
 		this.triggerFactory = new TriggerFactory();
 		this.actionFactory = new ActionFactory(); 
 		this.myResources = myResources;
+		this.myActorRule = myActorRule;
 	}
 	/**
 	 * On click, set general field to ComboBox content
@@ -95,4 +98,12 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 	
 	@Override
 	protected abstract void updateValueBasedOnEditable();
+	
+	protected void addTrigger(IAuthoringRule key, ITrigger value){
+		myActorRule.addTrigger(key, value);
+	}
+	
+	protected void addAction(IAuthoringRule key, IAction value){
+		myActorRule.addAction(key, value);
+	}
 }

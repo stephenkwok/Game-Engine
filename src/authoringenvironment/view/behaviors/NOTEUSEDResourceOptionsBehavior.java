@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.view.ActorRule;
 import gameengine.model.IAction;
 import gameengine.model.ITrigger;
 /**
@@ -17,8 +18,8 @@ public class NOTEUSEDResourceOptionsBehavior extends ComboBoxBehavior {
 	private String pathname;
 	private IAction myAction;
 	
-	public NOTEUSEDResourceOptionsBehavior(String behaviorType, ResourceBundle myResources){
-		super(behaviorType, myResources);
+	public NOTEUSEDResourceOptionsBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources){
+		super(myActorRule, behaviorType, myResources);
 		this.pathname = myResources.getString(behaviorType+PATHNAME);
 		fileNames = new ArrayList<>();
 		fillFileNames();

@@ -3,10 +3,16 @@ package authoringenvironment.view;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import authoringenvironment.view.behaviors.IAuthoringRule;
+import gameengine.model.IAction;
+import gameengine.model.ITrigger;
+import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -18,7 +24,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-
+//make the IRule and add to Actor
+//Then when re-populating based on IRule, lists should update
 /**
  * Rule container for an actor containing behavior, images, and/or sounds.
  * @author AnnieTang
@@ -26,8 +33,8 @@ import javafx.scene.paint.Color;
  */
 public class ActorRule {
 	private GridPane myRule;	
-	private VBox triggerNodes;
-	private VBox actionNodes;
+	private VBox myTriggerNodes;
+	private VBox myActionNodes;
 	private ScrollPane trigNodesScroll;
 	private ScrollPane actNodesScroll;
 	private ActorRuleCreator myActorRuleCreator;
@@ -35,9 +42,12 @@ public class ActorRule {
 	private static final String LIBRARY_BUNDLE = "library";
 	private ResourceBundle myActorRuleResources;
 	private static final String ACTORRULE_BUNDLE = "actorrule";
+	private static final int NODE_INDEX = 0;
+	private static final int TRIGGERACTION_INDEX = 1;
 	private ActorRuleFactory actorRuleFactory;
 	private Controller myController;
-		
+	private Map<IAuthoringRule, List<Object>> actorRuleMap;
+	
 	public ActorRule(ActorRuleCreator myActorRuleCreator) {
 		this.myActorRuleCreator = myActorRuleCreator;
 		this.myController = myActorRuleCreator.getController();
@@ -58,7 +68,8 @@ public class ActorRule {
 	private void initializeEnvironment() {
 		this.myFactoryResources = ResourceBundle.getBundle(LIBRARY_BUNDLE);
 		this.myActorRuleResources = ResourceBundle.getBundle(ACTORRULE_BUNDLE);
-		this.actorRuleFactory = new ActorRuleFactory(myFactoryResources, myActorRuleCreator.getActor(), myController);
+		this.actorRuleFactory = new ActorRuleFactory(myFactoryResources, myActorRuleCreator.getActor(), myController, this);
+		this.actorRuleMap = new HashMap<>();
 		myRule = new GridPane(); 
 		myRule.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(Integer.parseInt(myActorRuleResources.getString("CornerRadius"))), Insets.EMPTY)));
 		myRule.setPadding(new Insets(Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding"))));
@@ -81,14 +92,12 @@ public class ActorRule {
 	 * Add containers for triggers and actions where user can drop behaviors.
 	 */
 	private void addTriggerActionContainers(){
-		triggerNodes = new VBox(Integer.parseInt(myActorRuleResources.getString("Padding")));
-		triggerNodes.setPrefSize(myRule.getPrefWidth()*Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")), 
-				myRule.getPrefHeight()*Double.parseDouble(myActorRuleResources.getString("ContainerHeightPercent")));
-		actionNodes = new VBox(Integer.parseInt(myActorRuleResources.getString("Padding")));
-		actionNodes.setPrefSize(myRule.getPrefWidth()*Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")), 
-				myRule.getPrefHeight()*Double.parseDouble(myActorRuleResources.getString("ContainerHeightPercent")));
-		trigNodesScroll = new ScrollPane(triggerNodes);
-		actNodesScroll = new ScrollPane(actionNodes);
+		myTriggerNodes = new VBox(Integer.parseInt(myActorRuleResources.getString("Padding")));
+		myTriggerNodes.setPrefSize(myRule.getPrefWidth()*Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")), myRule.getPrefHeight()*Double.parseDouble(myActorRuleResources.getString("ContainerHeightPercent")));
+		myActionNodes = new VBox(Integer.parseInt(myActorRuleResources.getString("Padding")));
+		myActionNodes.setPrefSize(myRule.getPrefWidth()*Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")), myRule.getPrefHeight()*Double.parseDouble(myActorRuleResources.getString("ContainerHeightPercent")));
+		trigNodesScroll = new ScrollPane(myTriggerNodes);
+		actNodesScroll = new ScrollPane(myActionNodes);
 		myRule.add(trigNodesScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")), Integer.parseInt(myActorRuleResources.getString("TriggerRow")));
 		myRule.add(actNodesScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")), Integer.parseInt(myActorRuleResources.getString("ActionRow")));
 		
@@ -98,9 +107,7 @@ public class ActorRule {
 	 */
 	private void addCloseButton(){
 		Button close = new Button(myActorRuleResources.getString("Close"));
-		close.setOnAction(event -> {
-			myActorRuleCreator.removeRule(this);
-		});
+		close.setOnAction(event -> {myActorRuleCreator.removeRule(this);});
 		myRule.add(close, Integer.parseInt(myActorRuleResources.getString("CloseCol")), Integer.parseInt(myActorRuleResources.getString("CloseRow")));
 	}
 	
@@ -109,14 +116,20 @@ public class ActorRule {
 	 * @param behavior
 	 */
 	public void addBehavior(Label behavior) {
-		Node toAdd = actorRuleFactory.getAuthoringRule(behavior.getText(),null).createNode();
-		toAdd.setOnMouseClicked(event -> {
-			if(event.getClickCount()==2) remove(toAdd);
+		IAuthoringRule element = actorRuleFactory.getAuthoringRule(behavior.getText(),null);
+		Node node = ((IGUIElement) element).createNode();
+		node.setOnMouseClicked(event -> {
+			if(event.getClickCount()==2) remove(element);
 		});
-		if(isTrigger(behavior.getText())) {
-			triggerNodes.getChildren().add(toAdd);
+		if(isTrigger(behavior.getText())){
+			myTriggerNodes.getChildren().add(node);
 		}
-		else actionNodes.getChildren().add(toAdd);
+		else{
+			myActionNodes.getChildren().add(node);
+		}
+		List<Object> value = new ArrayList<>();
+		value.add(node);
+		actorRuleMap.put(element, value);
 	}
 	/**
 	 * Return if given behavior is a trigger type behavior
@@ -132,20 +145,20 @@ public class ActorRule {
 	 * @param sound
 	 */
 	public void addSound(Label sound) {
+		IAuthoringRule element; 
+		Node node;
 		if(isInPath(sound.getText(), myActorRuleResources.getString("Sounds"))){
-			Node toAdd = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlaySoundBehavior"), sound.getText()).createNode();
-			toAdd.setOnMouseClicked(event -> {
-				if(event.getClickCount()==2) remove(toAdd);
-			});
-			actionNodes.getChildren().add(toAdd);
+			element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlaySoundBehavior"), sound.getText());
+			node = element.createNode();
 		}
 		else{
-			Node toAdd = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlayMusicBehavior"), sound.getText()).createNode();
-			toAdd.setOnMouseClicked(event -> {
-				if(event.getClickCount()==2) remove(toAdd);
-			});
-			actionNodes.getChildren().add(toAdd);
+			element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlayMusicBehavior"), sound.getText());
+			node = element.createNode();
 		}
+		node.setOnMouseClicked(event -> {
+			if(event.getClickCount()==2) remove(element);
+		});
+		myActionNodes.getChildren().add(node);
 	}
 	/**
 	 * return if given filename is in directory of given pathname
@@ -166,19 +179,31 @@ public class ActorRule {
 	 * @param image
 	 */
 	public void addImage(Label image) {
-		Node toAdd = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("ChangeImageBehavior"),image.getText()).createNode();
-		toAdd.setOnMouseClicked(event -> {
-			if(event.getClickCount()==2) remove(toAdd);
+		IAuthoringRule element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("ChangeImageBehavior"),image.getText()); 
+		Node node = element.createNode();
+		node.setOnMouseClicked(event -> {
+			if(event.getClickCount()==2) remove(element);
 		});
-		actionNodes.getChildren().add(toAdd);
+		myActionNodes.getChildren().add(node);
 	}
 	
 	/**
 	 * Remove trigger or action from rule 
 	 * @param toRemove
 	 */
-	public void remove(Node toRemove){
-		triggerNodes.getChildren().remove(toRemove);
-		actionNodes.getChildren().remove(toRemove);
+	public void remove(IAuthoringRule toRemove){
+		myTriggerNodes.getChildren().remove(actorRuleMap.get(toRemove).get(NODE_INDEX));
+		myActionNodes.getChildren().remove(actorRuleMap.get(toRemove).get(NODE_INDEX));
+		actorRuleMap.remove(toRemove);
+		System.out.println(actorRuleMap);
 	}
+	
+	public void addTrigger(IAuthoringRule key, ITrigger value){
+		actorRuleMap.get(key).add(value);
+	}
+	
+	public void addAction(IAuthoringRule key, IAction value){
+		actorRuleMap.get(key).add(value);
+	}
+	
 }

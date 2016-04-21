@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.view.ActorRule;
 import gameengine.model.IAction;
 import gameengine.model.ITrigger;
 import javafx.scene.input.KeyCode;
@@ -15,8 +16,8 @@ import javafx.scene.input.KeyCode;
 public class KeyBehavior extends ComboBoxBehavior {
 	private ITrigger myTrigger;
 	
-	public KeyBehavior(String behaviorType, ResourceBundle myResources) {
-		super(behaviorType, myResources);
+	public KeyBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
+		super(myActorRule, behaviorType, myResources);
 	}
 	/**
 	 * Return possible KeyInputs as options for ComboBox
@@ -37,6 +38,7 @@ public class KeyBehavior extends ComboBoxBehavior {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(keyCode);
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
+		addTrigger(this,myTrigger);
 		System.out.println(myTrigger);
 	}
 	@Override
