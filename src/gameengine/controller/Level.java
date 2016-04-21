@@ -26,7 +26,7 @@ public class Level implements ILevel, IEditableGameElement {
 	private static final String DEFAULT_IMAGE_NAME = "default_landscape.png";
 	private static final double DEFAULT_HEIGHT = 800;
 	private static final double DEFAULT_WIDTH = 1024;
-	private static final String DEFAULT_SCROLLING = "Vertically";
+	private static final String DEFAULT_SCROLLING = "Horizontally";
 	private static final String DEFAULT_TERMINATION = "Infinite";
 	private static final String DEFAULT_WINNING_CONDITION = "Survival time";
 	private static final String DEFAULT_LOSING_CONDITION = "Player dies";
