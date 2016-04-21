@@ -2,9 +2,11 @@ package authoringenvironment.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
+import gameengine.controller.Level;
+import gameengine.model.IRule;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 /**
@@ -22,13 +24,17 @@ public class ActorRuleCreator {
 	private GridPane myActorRuleCreatorPane;
 	private List<ActorRule> myActorRules;
 	private IAuthoringActor myActor;
-	private Controller myController;
 	private double sceneWidth;
+	private Map<IAuthoringActor, List<IAuthoringActor>> myActors;
+	private List<Level> myLevels;
 	
-	public ActorRuleCreator(IAuthoringActor myActor, Controller myController, double sceneWidth) {
-		this.myController = myController;
+	private List<IRule> myIRules;
+	
+	public ActorRuleCreator(IAuthoringActor myActor,double sceneWidth, Map<IAuthoringActor, List<IAuthoringActor>> myActors, List<Level> myLevels) {
 		this.myActor = myActor;
 		this.sceneWidth = sceneWidth;
+		this.myActors = myActors;
+		this.myLevels = myLevels;
 		initializeEnvironment();
 	}
 	
@@ -80,10 +86,10 @@ public class ActorRuleCreator {
 	 * Create new rule for Actor currently in the actor editing environment and add to gridpane
 	 */
 	public void addNewRule() {
-		ActorRule newRule = new ActorRule(this);
+		ActorRule newRule = new ActorRule(this, myActors, myLevels);
 		myActorRuleCreatorPane.add(newRule.getGridPane(), RULE_COL,rule_row);
 		rule_row++;
-		myActor.addActorRule(newRule);
+		myActor.getActorRules().add(newRule);
 	}
 	/**
 	 * Remove given rule from environment and from Actor currently in the environment 
@@ -92,7 +98,7 @@ public class ActorRuleCreator {
 	public void removeRule(ActorRule actorRule){
 		myActorRules.remove(actorRule);
 		myActorRuleCreatorPane.getChildren().remove(actorRule.getGridPane());
-		myActor.removeActorRule(actorRule);
+		myActor.getActorRules().remove(actorRule);
 	}
 	/**
 	 * Get ActorRules for Actor currently in the actor editing environment
@@ -100,13 +106,6 @@ public class ActorRuleCreator {
 	 */
 	public List<ActorRule> getRules(){
 		return myActorRules;
-	}
-	/**
-	 * Return reference to Controller
-	 * @return
-	 */
-	public Controller getController(){
-		return myController;
 	}
 	/**
 	 * Each time actor editing environment is opened and set to a specific Actor, populates editing environment rules and
@@ -123,6 +122,7 @@ public class ActorRuleCreator {
 	 * Populate actor editing environment with current Actor's rules 
 	 */
 	private void addUpdatedRules(){
+		//recreate from IRules?
 		rule_row = RULE_ROW_START;
 		for(ActorRule toAdd: myActorRules){
 			myActorRuleCreatorPane.add(toAdd.getGridPane(), RULE_COL, rule_row);
@@ -135,5 +135,12 @@ public class ActorRuleCreator {
 	 */
 	public void setActor(IAuthoringActor myActor) {
 		this.myActor = myActor;
+	}
+	/**
+	 * Get the current IAuthoringActor
+	 * @return IAuthoringActor
+	 */
+	public IAuthoringActor getActor(){
+		return this.myActor;
 	}
 }

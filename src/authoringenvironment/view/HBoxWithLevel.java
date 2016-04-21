@@ -28,15 +28,15 @@ public class HBoxWithLevel extends HBoxWithEditable {
 	
 	public int getLevelPlayPosition() {
 		String textFieldInput = myTextField.getText().trim();
-		return inputIsNumeric(textFieldInput) ? Integer.parseInt(textFieldInput) : -1; 
+		return inputIsValid(textFieldInput) ? Integer.parseInt(textFieldInput) : -1; 
 	}
 	
-	public boolean inputIsNumeric(String input) {
+	public boolean inputIsValid(String input) {
 		for (Character character : input.toCharArray()) {
 			if (!Character.isDigit(character)) 
 				return false;
 		}
-		return true;
+		return !input.isEmpty();
 	}
 
 }

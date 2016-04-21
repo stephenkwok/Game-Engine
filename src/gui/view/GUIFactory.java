@@ -5,7 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-import gui.controller.IScreenController;
 
 /**
  * Instantiates IGUIElements based on a ResourceBundle String key passed into createNewGUIObject(String nodeTypeKey).
@@ -26,26 +25,15 @@ public class GUIFactory {
 	private static final String GUI_ELEMENT_TYPES = "GUIElementTypes";
 	private static final String DELIMITER = ",";
 	private ResourceBundle myResources;
-	private IScreenController myController;
 
 	/**
 	 * Constructs a GUIFactory with elements specified in a given ResourceBundle.
 	 * @param myResources: ResourceBundle containing the elements to be made.
 	 * @param myController: environment's controller.
 	 */
-	public GUIFactory(ResourceBundle myResources, IScreenController myController){
+	public GUIFactory(ResourceBundle myResources) {
 		this.myResources = myResources;
-		this.myController = myController;
 	}
-	
-	/**
-	 * 
-	 * @param resourceBundle: ResourceBundle containing the elements to be made
-	 */
-	public GUIFactory(ResourceBundle resourceBundle) {
-		this.myResources = resourceBundle;
-	}
-
 	/**
 	 * Creates new IGUIElement based on nodeTypeKey passed in. 
 	 * @param nodeTypeKey: Name of object you want to create.
@@ -137,8 +125,8 @@ public class GUIFactory {
 			String text = myResources.getString(nodeType + TEXT);
 			String icon = myResources.getString(nodeType + ICON);
 			Class<?> button = Class.forName(className);
-			Constructor<?> constructor = button.getConstructor(IScreenController.class, String.class, String.class);
-			return (IGUIElement) constructor.newInstance(myController, text, icon);
+			Constructor<?> constructor = button.getConstructor(String.class, String.class);
+			return (IGUIElement) constructor.newInstance(text, icon);
 	}
 	
 	/**
@@ -156,8 +144,8 @@ public class GUIFactory {
 	 */
 	private IGUIElement createPane(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException{
 			Class<?> pane = Class.forName(className);
-			Constructor<?> constructor = pane.getConstructor(IScreenController.class);
-			return (IGUIElement) constructor.newInstance(myController);
+			Constructor<?> constructor = pane.getConstructor();
+			return (IGUIElement) constructor.newInstance();
 	}
 
 	/**
@@ -176,8 +164,8 @@ public class GUIFactory {
 	private IGUIElement createMenu(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException{
 			String text = myResources.getString(nodeType + TEXT);
 			Class<?> menu = Class.forName(className);
-			Constructor<?> constructor = menu.getConstructor(IScreenController.class, String.class);
-			return (IGUIElement) constructor.newInstance(myController, text);
+			Constructor<?> constructor = menu.getConstructor(String.class);
+			return (IGUIElement) constructor.newInstance(text);
 	}
 
 	/**
@@ -195,8 +183,8 @@ public class GUIFactory {
 	 */
 	private IGUIElement createMenuBar(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException{
 			Class<?> menu = Class.forName(className);
-			Constructor<?> constructor = menu.getConstructor(IScreenController.class);
-			return (IGUIElement) constructor.newInstance(myController);
+			Constructor<?> constructor = menu.getConstructor();
+			return (IGUIElement) constructor.newInstance();
 	}
 
 	/**

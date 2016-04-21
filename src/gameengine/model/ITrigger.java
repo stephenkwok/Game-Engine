@@ -18,9 +18,9 @@ public interface ITrigger {
     /**
      * Checks a boolean condition against the state of an actor
      *
-     * @param myActor
+     * @param otherTrigger A trigger to check information against
      * @return A boolean that says if the condition is true or false
      */
-    public boolean evaluate(IActor myActor);
+    public boolean evaluate(ITrigger otherTrigger);
 
 }

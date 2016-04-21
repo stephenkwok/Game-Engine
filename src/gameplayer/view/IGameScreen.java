@@ -39,7 +39,7 @@ public interface IGameScreen {
 	 * @param x
 	 * @param y
 	 */
-	public void changeCamera(int x, int y);
+	public void changeCamera(double x, double y);
 	
 	/**
 	 * Turns background music on the scene on or off.

@@ -1,16 +1,16 @@
 package gameengine.model.Actions;
 
-import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
 
 public class ApplyPhysics extends Action {
 
-	public ApplyPhysics(Actor assignedActor) {
-		super(assignedActor);
+	public ApplyPhysics(IPlayActor actor) {
+		super(actor);
 	}
 
 	@Override
 	public void perform() {
-		getMyActor().getMyPhysicsEngine().tick(getMyActor());
+		getMyActor().getPhysicsEngine().tick(getMyActor());
 
 	}
 

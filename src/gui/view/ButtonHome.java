@@ -1,14 +1,13 @@
 package gui.view;
 
-import gui.controller.IScreenController;
 /**
  * Button to return to main screen
  * @author AnnieTang
  *
  */
 public class ButtonHome extends ButtonParent{
-	public ButtonHome(IScreenController myController, String buttonText, String imageName) {
-		super(myController, buttonText, imageName);
+	public ButtonHome(String buttonText, String imageName) {
+		super(buttonText, imageName);
 	}
 
 	/**
@@ -16,7 +15,7 @@ public class ButtonHome extends ButtonParent{
 	 */
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnAction(e -> notifyObservers(null));
+		getButton().setOnAction(e -> notifyController("ButtonHome"));
 	}
 	
 }

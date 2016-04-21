@@ -1,5 +1,7 @@
 package gui.view;
 
+import java.util.Observable;
+import java.util.Observer;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
 import javafx.event.ActionEvent;
@@ -15,15 +17,19 @@ import javafx.scene.control.Button;
  * @author Stephen
  *
  */
-public abstract class EditingElementParent implements IGUIElement, IEditingElement {
-	
+public abstract class EditingElementParent extends Observable implements IGUIElement, IEditingElement {
 	private IEditableGameElement myEditableElement;
 	private Button myButton;
-	
+
 	public EditingElementParent(String buttonText) {
 		myButton = new Button(buttonText);
 	}
 	
+	@Override
+	public void addNodeObserver(Observer observer) {
+		this.addObserver(observer);
+	}
+
 	/**
 	 * Updates the class' GUI Elements to display the IEditableGameElement's
 	 * current value for the attribute the class is editing 
@@ -40,7 +46,7 @@ public abstract class EditingElementParent implements IGUIElement, IEditingEleme
 			updateValueBasedOnEditable();
 		}		
 	}
-	
+
 	/**
 	 * 
 	 * @return the EditingElement's IEditableGameElement
@@ -48,7 +54,7 @@ public abstract class EditingElementParent implements IGUIElement, IEditingEleme
 	public IEditableGameElement getEditableElement() {
 		return myEditableElement; 
 	}
-	
+
 	/**
 	 * Sets the EditingElement's button's action on click
 	 * 
@@ -57,7 +63,7 @@ public abstract class EditingElementParent implements IGUIElement, IEditingEleme
 	protected void setButtonAction(EventHandler<ActionEvent> buttonAction) {
 		myButton.setOnAction(buttonAction);
 	}
-	
+
 	/**
 	 * 
 	 * @return the EditingElement's button
@@ -65,6 +71,10 @@ public abstract class EditingElementParent implements IGUIElement, IEditingEleme
 	protected Button getButton() {
 		return myButton;
 	}
-	
-	
+
+
+	protected void notifyController(Object objToPassToObserver) {
+		setChanged();
+		notifyObservers(objToPassToObserver);
+	}
 }

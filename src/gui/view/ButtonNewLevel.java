@@ -1,7 +1,5 @@
 package gui.view;
 
-import gui.controller.IScreenController;
-
 /**
  * Button to create a new level and transition to level editing environment.
  * @author amyzhao
@@ -15,8 +13,8 @@ public class ButtonNewLevel extends ButtonParent {
 	 * @param buttonText: text for the button.
 	 * @param imageName: image for the button.
 	 */
-	public ButtonNewLevel(IScreenController myController, String buttonText, String imageName) {
-		super(myController, buttonText, imageName);
+	public ButtonNewLevel(String buttonText, String imageName) {
+		super(buttonText, imageName);
 	}
 	
 	/**
@@ -24,7 +22,7 @@ public class ButtonNewLevel extends ButtonParent {
 	 */
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnAction(e -> notifyObservers(null));
+		getButton().setOnAction(e -> notifyController("ButtonNewLevel"));
 	}
 
 }

@@ -1,78 +1,84 @@
 package gameplayer.controller;
 
-import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
-import gamedata.view.FileChooserScreen;
-import gamedata.view.FileChooserScreenScores;
-import gameengine.controller.Game;
+import gamedata.controller.ChooserType;
+import gamedata.controller.FileChooserController;
+import gamedata.controller.HighScoresController;
 import gameplayer.view.HighScoreScreen;
-import gameplayer.view.SplashScreen;
-import gui.controller.IScreenController;
-import gui.controller.ScreenController;
-import gui.view.Screen;
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
+import javafx.collections.ObservableMap;
+import javafx.collections.MapChangeListener.Change;
 import javafx.stage.Stage;
 
-public class HighScoreScreenController extends ScreenController {
+public class HighScoreScreenController extends BranchScreenController {
 
+	private static final String SCORE_CONTROLLER_RESOURCE = "scoresActions";
+	
 	private ResourceBundle myResources;
 	private HighScoreScreen myScreen;
+	private ObservableMap<String, Integer> myModel;
+	private String myGameName;
 	
-	public HighScoreScreenController(Stage myStage, HighScoreScreen myBase, ResourceBundle myResources) {
+	
+	public HighScoreScreenController(Stage myStage, Map<String, Integer> scores, String game) {
 		super(myStage);
-		this.myResources = myResources;
-		this.myScreen = myBase;
+		this.myModel = FXCollections.observableMap(scores);
+		this.myModel.addListener(new MapChangeListener<String, Object>() {
+			@Override
+			public void onChanged(Change<? extends String, ? extends Object> change) {
+				if(change!=null && myScreen != null)
+					myScreen.displayScores(myGameName, (Map<String, Integer>) change);;
+			}
+		});
+		this.myGameName = game;
+		setUpScreen();
+		this.myResources = ResourceBundle.getBundle(SCORE_CONTROLLER_RESOURCE);
+		changeScreen(myScreen);
+	}
+
+	private void setUpScreen() {
+		this.myScreen = new HighScoreScreen();
+		this.myScreen.displayScores(myGameName, myModel);
+		this.myScreen.addObserver(this);
+	}
+	private void switchGame() {
+		FileChooserController fileChooserController = new FileChooserController(getStage(), ChooserType.SCORES);
+	}
+	
+	private void clearScores() {
+		HighScoresController dataController = new HighScoresController(myGameName, myScreen);
+		dataController.clearHighScores();
+		myModel.putAll(dataController.getGameHighScores());
+		//notify
 	}
 
 	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setGame(Game game) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Screen getScreen() {
-		return myScreen;
-	}
-
-	public void goToSplash() {
-		SplashScreen mySplash = new SplashScreen(getStage());
+	public void update(Observable o, Object arg) {
+		String method = myResources.getString((String)arg);
 		try {
-			getStage().setScene(mySplash.getScene());
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void chooseGame() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void useGame() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void switchGame() {
-		FileChooserScreen myFC = new FileChooserScreenScores(getStage());
-		try {
-			getStage().setScene(myFC.getScene());
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			try {
+				this.getClass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| SecurityException e) {
+				e.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
+		} catch (NoSuchMethodException e) {
+			try {
+				this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e1) {
+				e.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
 		}
 		
 		

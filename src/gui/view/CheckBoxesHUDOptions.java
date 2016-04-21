@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IEditableGameElement;
@@ -21,7 +23,7 @@ import javafx.scene.layout.VBox;
  * @author amyzhao, stephen
  *
  */
-public class CheckBoxesHUDOptions implements IGUIElement, IEditingElement {
+public class CheckBoxesHUDOptions extends Observable implements IGUIElement, IEditingElement {
 
 	private static final String DELIMITER = ",";
 	private static final String HUD_OPTIONS = "HUDOptions";
@@ -124,6 +126,11 @@ public class CheckBoxesHUDOptions implements IGUIElement, IEditingElement {
 	public Node createNode() {
 		initializeHUD(HUD_OPTIONS, myContainer);
 		return myContainer;
+	}
+
+	@Override
+	public void addNodeObserver(Observer observer) {
+		this.addObserver(observer);
 	}
 
 }
