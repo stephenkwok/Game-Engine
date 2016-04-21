@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import gameengine.model.IAction;
+import authoringenvironment.view.ActorRule;
 import gameengine.model.ITrigger;
 
 public class TickBehavior extends DoubleBehavior {
 	private ITrigger myTrigger;
 	
-	public TickBehavior(String behaviorType, ResourceBundle myResources) {
-		super(behaviorType, myResources);
+	public TickBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
+		super(myActorRule, behaviorType, myResources);
 	}
 
 	@Override
@@ -19,17 +19,7 @@ public class TickBehavior extends DoubleBehavior {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add((int) getValue());
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
+		addTrigger(this, myTrigger);
 		System.out.println(myTrigger);
 	}
-
-	@Override
-	public IAction getAction() {
-		return null;
-	}
-
-	@Override
-	public ITrigger getTrigger() {
-		return this.myTrigger;
-	}
-
 }
