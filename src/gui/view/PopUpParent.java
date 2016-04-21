@@ -1,5 +1,6 @@
 package gui.view;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -8,8 +9,8 @@ import javafx.stage.Stage;
 
 public abstract class PopUpParent {
 	
-	private static final double DEFAULT_CONTAINER_PADDING = 10.0;
-	private String myBackgroundColor;
+	private static final double DEFAULT_CONTAINER_PADDING = 25.0;
+	private static final double DEFAULT_CONTAINER_SPACING = 10.0;
 	private VBox myContainer;
 	private int myWidth;
 	private int myHeight;
@@ -17,8 +18,7 @@ public abstract class PopUpParent {
 	private Group myRoot;
 	private Scene myScene;
 	
-	public PopUpParent(String backgroundColor, int popUpWidth, int popUpHeight) {
-		myBackgroundColor = backgroundColor;
+	public PopUpParent(int popUpWidth, int popUpHeight) {
 		myWidth = popUpWidth;
 		myHeight = popUpHeight;
 		initializePopUp();
@@ -33,11 +33,11 @@ public abstract class PopUpParent {
 	}
 
 	private void initializeContainer() {
-		myContainer = new VBox(DEFAULT_CONTAINER_PADDING);
-		myContainer.setStyle(myBackgroundColor);
+		myContainer = new VBox(DEFAULT_CONTAINER_SPACING);
+		myContainer.setPadding(new Insets(DEFAULT_CONTAINER_PADDING));
 		myContainer.prefWidthProperty().bind(myScene.widthProperty());
 		myContainer.prefHeightProperty().bind(myScene.heightProperty());
-		myContainer.setAlignment(Pos.TOP_LEFT);
+		myContainer.setAlignment(Pos.CENTER);
 		myRoot.getChildren().add(myContainer);
 	}
 	
@@ -46,6 +46,7 @@ public abstract class PopUpParent {
 	}
 	
 	protected void showPopUp() {
+		myStage.setScene(myScene);
 		myStage.show();
 	}
 	

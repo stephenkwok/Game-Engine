@@ -1,17 +1,16 @@
 package authoringenvironment.view;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Set;
 
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Level;
 import gui.view.IGUI;
+import gui.view.PopUpLevelReorderer;
+import gui.view.PopUpParent;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
@@ -39,8 +38,8 @@ public class GUIMainScreen implements IGUI, Observer {
 	private HBoxDisplayHeader actorsDisplayHeader, levelsDisplayHeader;
 	private HBox centerPane;
 	private BorderPane borderPane;
-	private List<HBoxWithEditable> allPreviewDisplays;
-	private List<HBoxWithLevel> levelPreviewDisplays;
+	private List<HBoxWithEditable> allPreviewUnits;
+	private List<HBoxWithLevel> levelPreviewUnits;
 	private List<Level> levels;
 	private IEditingEnvironment levelEditor;
 	private GameEditingEnvironment gameEditor;
@@ -52,8 +51,8 @@ public class GUIMainScreen implements IGUI, Observer {
 		this.screenHeight = screenHeight;
 		this.levels = levels;
 		this.levelEditor = levelEditor;
-		allPreviewDisplays = new ArrayList<>();
-		levelPreviewDisplays = new ArrayList<>();
+		allPreviewUnits = new ArrayList<>();
+		levelPreviewUnits = new ArrayList<>();
 		actorScrollPane = new ScrollPane();
 		levelScrollPane = new ScrollPane();
 		initializeEnvironment();
@@ -218,7 +217,7 @@ public class GUIMainScreen implements IGUI, Observer {
 	public HBoxWithEditable createLevelLabel(IEditableGameElement level, IEditingEnvironment levelEditor) {
 		HBoxWithLevel levelPreviewUnit = new HBoxWithLevel(level, levelEditor);
 		initializePreviewUnit(levelPreviewUnit, levelPreviewContainer);
-		levelPreviewDisplays.add(levelPreviewUnit);
+		levelPreviewUnits.add(levelPreviewUnit);
 		return levelPreviewUnit;
 	}
 
@@ -226,37 +225,16 @@ public class GUIMainScreen implements IGUI, Observer {
 		HBox previewUnitHBox = previewUnit.getHBox();
 		bindNodeSizeToGivenSize(previewUnitHBox, parent.widthProperty(), null);
 		parent.getChildren().add(previewUnitHBox);
-		allPreviewDisplays.add(previewUnit);
+		allPreviewUnits.add(previewUnit);
 	}
 
-	// /**
-	// * Initializes LabelClickable associated with an actor or level
-	// *
-	// * @param editable:
-	// * IEditableGameElement associated with LabelClickable
-	// * @param environment:
-	// * IEditingEnvironment in which editable is to be edited
-	// * @param container:
-	// * Node that will contain the LabelClickable created
-	// */
-	// private HBoxWithEditable createLabel(IEditableGameElement editable,
-	// IEditingEnvironment environment,
-	// VBox container) {
-	// HBoxWithEditable labelWrapper = new HBoxWithEditable(editable,
-	// environment);
-	// Label label = labelWrapper.getLabel();
-	// bindNodeSizeToGivenSize(label, container.widthProperty(), null);
-	// container.getChildren().add(label);
-	// allLabels.add(labelWrapper);
-	// return labelWrapper;
-	// }
 
 	/**
 	 * Updates all LabelClickables to account for any changes in the name or
 	 * image of Actors and Levels
 	 */
-	public void updatePreviewDisplays() {
-		allPreviewDisplays.stream().forEach(label -> label.update());
+	public void updatePreviewUnits() {
+		allPreviewUnits.stream().forEach(label -> label.update());
 	}
 
 	/**
@@ -265,44 +243,14 @@ public class GUIMainScreen implements IGUI, Observer {
 	 * Level Labels
 	 */
 	private void reorderLevelLabels() {
-		levelPreviewDisplays.stream().forEach(display -> display.updateLevelPlayPosition());
-		levelPreviewDisplays.clear();
-		levelPreviewContainer.getChildren().clear();
-		Collections.sort(levels);
-		// labels aren't adding controller as observer
-		levels.stream().forEach(level -> createLevelLabel(level, levelEditor));
-		// levelPreviewDisplays.stream()
-		// .forEach(display ->
-		// display.setEditableElement(levels.get(levelPreviewDisplays.indexOf(display))));
-		allPreviewDisplays.stream().filter(label -> levelPreviewContainer.getChildren().contains(label));
-		updatePreviewDisplays();
+		@SuppressWarnings("unused")
+		PopUpParent levelReorderer = new PopUpLevelReorderer(levelPreviewUnits, levelPreviewContainer, levels,
+				levelEditor, allPreviewUnits, this);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		errorCheckPlayPositions();
-	}
-
-	private void errorCheckPlayPositions() {
-		List<Integer> playPositions = new ArrayList<Integer>();
-		levelPreviewDisplays.stream().forEach(display -> playPositions.add(display.getLevelPlayPosition()));
-		// System.out.println("Play Positions: " + playPositions);
-		Collections.sort(playPositions);
-		// System.out.println("Sorted Play Positions: " + playPositions);
-		Set<Integer> uniquePlayPositions = new HashSet<Integer>(playPositions);
-		// System.out.println(!playPositions.isEmpty());
-		// System.out.println(playPositions.get(0) == 1);
-		// System.out.println(playPositions.get(playPositions.size() - 1) ==
-		// playPositions.size());
-		// System.out.println(playPositions.size() ==
-		// uniquePlayPositions.size());
-		if (!playPositions.isEmpty() && playPositions.get(0) == 1
-				&& playPositions.get(playPositions.size() - 1) == playPositions.size()
-				&& playPositions.size() == uniquePlayPositions.size()) {
-			reorderLevelLabels();
-		} else {
-			System.out.println("Fail");
-		}
+		reorderLevelLabels();
 	}
 
 }

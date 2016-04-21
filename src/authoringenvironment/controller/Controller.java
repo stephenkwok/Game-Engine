@@ -93,7 +93,7 @@ public class Controller implements IScreenController, Observer {
 	 * Switches screen to main screen
 	 */
 	public void goToMainScreen() {
-		mainScreen.updatePreviewDisplays();
+		mainScreen.updatePreviewUnits();
 		guiMain.setCenterPane(mainScreen.getPane());
 	}
 
