@@ -487,6 +487,8 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
     public void setDead(boolean isDead) {
 		this.isDead = isDead;
 	}
+    
+    
     public double getHeading() {
 		return heading;
 	}
@@ -502,10 +504,15 @@ public class Actor extends Observable implements IActor, Observer, IAuthoringAct
      */
 	@Override
 	public void update(Observable o, Object arg) {
+		if (o.getClass().equals(this.getClass())) {
+			setChanged();
+			notifyObservers(arg);
+		}
 		if(isMain){
 			setChanged();
 			notifyObservers("updateAttribute");
 		}
+		
 		
 	}
 }
