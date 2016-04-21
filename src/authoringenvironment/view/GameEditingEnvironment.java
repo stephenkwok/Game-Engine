@@ -29,7 +29,7 @@ import javafx.scene.layout.VBox;
  */
 
 public class GameEditingEnvironment implements IGUIElement, IEditingElement {
-	private IEditableGameElement myGameInfo;
+	
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
 	private static final double DEFAULT_PADDING = 10;
 	private static final double CONTAINER_PREFERRED_WIDTH = 350.0;
@@ -38,13 +38,11 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	private static final double TEXT_FIELD_CONTAINER_SPACING = 10.0;
 	private static final double TEXT_FIELD_CONTAINER_PADDING = 10.0;
 	private static final double SCROLLBAR_WIDTH = 30.0;
+	private IEditableGameElement myGameInfo;
 	private final ResourceBundle myResources;
-	private VBox editingEnvironmentContainer;
 	private Label welcomeMessage;
 	private HBox nameEditorContainer;
-	private VBox gameDescriptionEditor;
-	private VBox previewImageContainer;
-	private VBox HUDOptionsDisplay;
+	private VBox editingEnvironmentContainer, gameDescriptionEditor, previewImageContainer, HUDOptionsDisplay;
 	private ScrollPane myScrollPane;
 
 	public GameEditingEnvironment(GameInfo gameInfo) {
@@ -114,7 +112,6 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	// hard coded values
 	private void initializePreviewImageDisplay() {
 		previewImageContainer = new VBox();
-		// previewImageContainer.setAlignment(Pos.CENTER);
 		previewImageContainer.setPadding(new Insets(DEFAULT_PADDING));
 		Label previewImageLabel = new Label("Current Game Preview Image:");
 		ImageView previewImage = new ImageView(

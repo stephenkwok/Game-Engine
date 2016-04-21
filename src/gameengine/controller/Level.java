@@ -16,7 +16,7 @@ import authoringenvironment.model.IEditableGameElement;
  *
  * @author blakekaplan
  */
-public class Level implements Observer, ILevel, IEditableGameElement {
+public class Level implements Observer, ILevel, IEditableGameElement, Comparable<Level> {
 
 	// TODO: should probably set these default things via properties file but idk sry guyz
 	private static final String DEFAULT_NAME = "Default";
@@ -32,6 +32,7 @@ public class Level implements Observer, ILevel, IEditableGameElement {
     private String myName;
     private double myHeight;
     private double myWidth;
+    private int myPlayPosition;
     private List<String> myHUDOptions;
     private String myScrollingDirection;
     private String myTermination;
@@ -361,6 +362,29 @@ public class Level implements Observer, ILevel, IEditableGameElement {
      */
 	public void removeActors(List<Actor> deadActors) {
 		myActors.removeAll(deadActors);
+	}
+	
+	/**
+	 * 
+	 * @return: the level's play position
+	 */
+	public int getPlayPosition() {
+		return myPlayPosition;
+	}
+	
+	// add play position to constructor later
+	public void setPlayPosition(int playPosition) {
+		myPlayPosition = playPosition;
+	}
+
+	/**
+	 * Returns a negative number if this Level's play position is lower than
+	 * the other Level's play position or a positive number if this Level's 
+	 * play position is higher than the other Level's play position
+	 */
+	@Override
+	public int compareTo(Level otherLevel) {
+		return this.myPlayPosition - otherLevel.getPlayPosition();
 	}
 
 }

@@ -21,6 +21,6 @@ public class ButtonLoad extends ButtonParent {
      * Sets workspace preferences to those specified by the given XML. 
      */
     private void loadProperties() {
-    	notifyController(promptForFileName(false));
+    	notifyObservers(promptForFileName(false));
     }
 }
