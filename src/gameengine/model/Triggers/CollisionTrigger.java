@@ -40,7 +40,7 @@ public abstract class CollisionTrigger implements ITrigger {
     @Override
     public boolean equals(Object o) {
         CollisionTrigger otherTrigger = (CollisionTrigger) o;
-        if (myMainActor.getName().equals(otherTrigger.getMyMainActor().getName()) && myCollisionActor.getName().equals(otherTrigger.getMyCollisionActor().getName())) {
+        if (myMainActor.getID() == otherTrigger.getMyMainActor().getID() && myCollisionActor.getID() == otherTrigger.getMyCollisionActor().getID()) {
             return true;
         }
         return false;

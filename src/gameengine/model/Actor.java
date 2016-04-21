@@ -417,4 +417,9 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	public double getHeading() {
 		return myHeading;
 	}
+
+    @Override
+    public int getID() {
+        return myID;
+    }
 }

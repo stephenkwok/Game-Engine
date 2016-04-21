@@ -108,5 +108,7 @@ public interface IPlayActor {
 	public void setHeading(double h);
 
 	public double getHeading();
+
+    public int getID();
     
 }
