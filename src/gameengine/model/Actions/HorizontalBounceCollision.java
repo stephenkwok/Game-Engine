@@ -1,6 +1,7 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
 import gameengine.model.PhysicsEngine;
 import gameengine.model.Actions.Action;
 
@@ -13,7 +14,7 @@ import gameengine.model.Actions.Action;
 
 public class HorizontalBounceCollision extends Action{
 
-	public HorizontalBounceCollision(Actor assignedActor) {
+	public HorizontalBounceCollision(IPlayActor assignedActor) {
 		super(assignedActor);
 		// TODO Auto-generated constructor stub
 	}
