@@ -75,7 +75,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private void initializeEnvironment() {
 		myRoot = new BorderPane();
 		setDefaultActor();
-		myActorRuleCreator = new ActorRuleCreator(myActor, myStage.getWidth(), myController);
+		myActorRuleCreator = new ActorRuleCreator(this);
 		setLeftPane();
 		setCenterPane();
 		setBottomPane();
@@ -145,7 +145,6 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 		myActor = (IAuthoringActor) editable;
 		myActorIV = new ImageviewActorIcon(myActor,ICON_HEIGHT);
 		setLeftPane();
-		myActorRuleCreator.setActor(myActor);
 		myActorRuleCreator.updateActorRules();
 		library.updateDragEvents();
 	}
@@ -171,5 +170,8 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	@Override
 	public Stage getStage() {
 		return myStage;
+	}
+	public Controller getController() {
+		return this.myController;
 	}
 }

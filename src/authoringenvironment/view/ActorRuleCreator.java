@@ -22,16 +22,12 @@ public class ActorRuleCreator {
 	private int rule_row;
 	private GridPane myActorRuleCreatorPane;
 	private List<ActorRule> myActorRules;
-	private IAuthoringActor myActor;
-	private double sceneWidth;
-	private Controller myController;
+	private ActorEditingEnvironment aEE;
 	
 //	private List<IRule> myIRules;
 	
-	public ActorRuleCreator(IAuthoringActor myActor,double sceneWidth,Controller myController) {
-		this.myActor = myActor;
-		this.sceneWidth = sceneWidth;
-		this.myController = myController;
+	public ActorRuleCreator(ActorEditingEnvironment aEE) {
+		this.aEE = aEE;
 		initializeEnvironment();
 	}
 	
@@ -42,7 +38,7 @@ public class ActorRuleCreator {
 		rule_row = RULE_ROW_START;
 		myActorRules = new ArrayList<>();
 		myActorRuleCreatorPane = new GridPane();
-		myActorRuleCreatorPane.setPrefWidth(sceneWidth*CONTAINERS_PERCENT_WIDTH);
+		myActorRuleCreatorPane.setPrefWidth(aEE.getStage().getWidth()*CONTAINERS_PERCENT_WIDTH);
 		myActorRuleCreatorPane.setVgap(VGAP);
 		myActorRuleCreatorPane.setHgap(HGAP);
 	}
@@ -83,10 +79,10 @@ public class ActorRuleCreator {
 	 * Create new rule for Actor currently in the actor editing environment and add to gridpane
 	 */
 	public void addNewRule() {
-		ActorRule newRule = new ActorRule(this, myController);
+		ActorRule newRule = new ActorRule(this);
 		myActorRuleCreatorPane.add(newRule.getGridPane(), RULE_COL,rule_row);
 		rule_row++;
-		myActor.getActorRules().add(newRule);
+		((IAuthoringActor) aEE.getEditable()).getActorRules().add(newRule);
 	}
 	/**
 	 * Remove given rule from environment and from Actor currently in the environment 
@@ -95,7 +91,7 @@ public class ActorRuleCreator {
 	public void removeRule(ActorRule actorRule){
 		myActorRules.remove(actorRule);
 		myActorRuleCreatorPane.getChildren().remove(actorRule.getGridPane());
-		myActor.getActorRules().remove(actorRule);
+		((IAuthoringActor) aEE.getEditable()).getActorRules().remove(actorRule);
 	}
 	/**
 	 * Get ActorRules for Actor currently in the actor editing environment
@@ -112,7 +108,7 @@ public class ActorRuleCreator {
 		for(ActorRule toRemove: myActorRules){
 			myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
 		}
-		myActorRules = myActor.getActorRules();
+		myActorRules = ((IAuthoringActor) aEE.getEditable()).getActorRules();
 		addUpdatedRules();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ;
 	}
 	/**
@@ -127,17 +123,14 @@ public class ActorRuleCreator {
 		}
 	}
 	/**
-	 * Set the Actor that the ActorRules are being added to/removed from
-	 * @param myActor
-	 */
-	public void setActor(IAuthoringActor myActor) {
-		this.myActor = myActor;
-	}
-	/**
 	 * Get the current IAuthoringActor
 	 * @return IAuthoringActor
 	 */
 	public IAuthoringActor getActor(){
-		return this.myActor;
+		return (IAuthoringActor) aEE.getEditable();
+	}
+
+	public Controller getController() {
+		return aEE.getController();
 	}
 }

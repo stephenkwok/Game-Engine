@@ -38,9 +38,9 @@ public class ActorRule {
 	private ActorRuleFactory actorRuleFactory;
 	private Controller myController;
 		
-	public ActorRule(ActorRuleCreator myActorRuleCreator, Controller myController) {
+	public ActorRule(ActorRuleCreator myActorRuleCreator) {
 		this.myActorRuleCreator = myActorRuleCreator;
-		this.myController = myController;
+		this.myController = myActorRuleCreator.getController();
 		initializeEnvironment();
 	}
 	

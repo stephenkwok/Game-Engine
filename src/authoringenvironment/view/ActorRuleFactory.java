@@ -119,12 +119,10 @@ public class ActorRuleFactory {
 //	}
 	
 	private IGUIElement createChangeAttributeBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		//same constructor
 		return createLabelBehavior(behaviorType, className);
 	}
 	
 	private IGUIElement createTickBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		//same constructor
 		return createComboBoxBehavior(behaviorType, className);
 	}
 }
