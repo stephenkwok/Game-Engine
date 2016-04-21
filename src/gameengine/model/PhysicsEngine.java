@@ -58,11 +58,7 @@ public class PhysicsEngine {
 		double nextVertVelo;
 		double nextXPos;
 		double nextYPos;
-		
-
-		forceYdownward = getGravity();
-	
-				
+		forceYdownward = getGravity();				
 		nextHorzVelo = xVelo;      		
 		nextVertVelo = applyForce(yVelo, forceYupward);                      // Apply  y force from movement action to y velocity
 		nextVertVelo = applyForce(nextVertVelo, forceYdownward);             //Applies gravitational force onto Actor's velocity 
