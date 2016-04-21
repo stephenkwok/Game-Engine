@@ -1,5 +1,8 @@
 package gameengine.model.Actions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gameengine.model.Actor;
 
 public class Spawn extends Action{
@@ -12,12 +15,10 @@ public class Spawn extends Action{
 		spawnedActor.setHeading(getMyActor().getHeading());
 		spawnedActor.setX(getMyActor().getX());
 		spawnedActor.setY(getMyActor().getY());
-		
-		//getMyActor().update(spawnedActor, spawnedActor);
-		
-//		Now have to add spawnedActor to the list of Actors
-//		Could it be created with isDead set to true 
-//		and here we set it false?
+		List<Object> args = new ArrayList<>();
+		args.add("addActor");
+		args.add(spawnedActor);
+		//getMyActor().update(spawnedActor, args);
 		
 	}
 
