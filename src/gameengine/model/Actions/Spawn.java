@@ -18,11 +18,7 @@ public class Spawn extends Action{
 		List<Object> args = new ArrayList<>();
 		args.add("addActor");
 		args.add(spawnedActor);
-		getMyActor().update(spawnedActor, args);
-		
-//		Now have to add spawnedActor to the list of Actors
-//		Could it be created with isDead set to true 
-//		and here we set it false?
+		//getMyActor().update(spawnedActor, args);
 		
 	}
 

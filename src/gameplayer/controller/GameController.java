@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Optional;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -13,7 +12,8 @@ import gamedata.controller.HighScoresController;
 import gameengine.controller.Game;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gameengine.model.AttributeType;
+import gameengine.model.IDisplayActor;
+import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
@@ -21,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.MapChangeListener.Change;
 import javafx.collections.ObservableMap;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
@@ -40,6 +41,12 @@ public class GameController implements Observer, IGameController {
 	@XStreamOmitField
 	private HUDScreen hud;
 
+	
+	public GameController(Game game) {
+		this.setGame(game);
+		this.setGameView(new GameScreen(new PerspectiveCamera()));
+		this.initialize(game.getInfo().getMyCurrentLevelNum()); //note: main actor is define at this line
+	}
 	/**
 	 * Sets the current game to the given Game
 	 * @param Game
@@ -89,9 +96,9 @@ public class GameController implements Observer, IGameController {
 	public void begin (){
 		Level current = model.getCurrentLevel();
 		view.clearGame();
-		view.addBackground(current.getMyBackgroundImgName());
-		for(Actor actor: model.getActors()){
-			view.addActor(actor);
+		view.addBackground(current);
+		for(IPlayActor actor: model.getActors()){
+			view.addActor((IDisplayActor)actor);
 		}
 		this.toggleUnPause();
 		model.startGame();
@@ -145,7 +152,7 @@ public class GameController implements Observer, IGameController {
 			@Override
 			public String call(ButtonType b) {
 				if (b == ButtonType.OK) {
-					saveGame(dialog.getEditor().getText());
+					saveGameScore(dialog.getEditor().getText());
 					return dialog.getEditor().getText();
 				}
 				else {
@@ -155,8 +162,8 @@ public class GameController implements Observer, IGameController {
 		});
 	}
 
-	private void saveGame(String name) {
-		HighScoresController c = new HighScoresController(this.getGame().getInfo().getMyFile());
+	private void saveGameScore(String name) {
+		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
 		c.saveHighScore(getGame().getScore(), name);
 
 	}
@@ -184,7 +191,9 @@ public class GameController implements Observer, IGameController {
 	}
 
 	private void updateActors(){
-		view.removeActors(model.getDeadActors());
+		for(IPlayActor a: model.getDeadActors()){
+			view.removeActor((IDisplayActor)a);
+		}
 	}
 
 	@Override

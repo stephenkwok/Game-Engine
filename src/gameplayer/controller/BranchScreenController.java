@@ -1,9 +1,12 @@
 package gameplayer.controller;
 
-import java.lang.reflect.InvocationTargetException;
 
-import gameplayer.view.SplashScreen;
-import gui.controller.ScreenController;
+import gui.view.Screen;
+
+import java.util.Observable;
+import java.util.Observer;
+
+import gameplayer.controller.SplashScreenController;
 import javafx.stage.Stage;
 
 /**
@@ -11,29 +14,28 @@ import javafx.stage.Stage;
  * @author Carine
  *
  */
-public abstract class BranchScreenController extends ScreenController {
+public abstract class BranchScreenController implements Observer {
 	
-	/**
-	 * Instantiates BranchScreenController
-	 * @param myStage
-	 */
-	public BranchScreenController(Stage myStage) {
-		super(myStage);
+	private Stage myStage;
+	
+	public BranchScreenController(Stage stage) {
+		this.myStage = stage;
 	}
-
+	
 	/**
 	 * Creates a splash screen and swaps the stage scene for the splash screen stage
 	 */
-	public void goToSplash(){
+	protected void goToSplash(){
 		//TODO create a splash screen controller
-		SplashScreen mySplash = new SplashScreen(getStage());
-		try {
-			getStage().setScene(mySplash.getScene());
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			//GET RID OF THIS STACK TRACE DO NOT FORGET OR YOU WILL BE CURSED!
-			e.printStackTrace();
-		}
+		SplashScreenController splashScreenController = new SplashScreenController(myStage);
+	}
+	
+	protected void changeScreen (Screen newScreen) {
+		this.myStage.setScene(newScreen.getScene());
+	}
+	
+	protected Stage getStage() {
+		return this.myStage;
 	}
 
 

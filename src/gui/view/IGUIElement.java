@@ -1,6 +1,7 @@
 package gui.view;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Observer;
 
 import javafx.scene.Node;
 
@@ -19,5 +20,7 @@ public interface IGUIElement {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
      */
-    Node createNode();
+    public Node createNode();
+    
+    public void addNodeObserver(Observer observer);
 }

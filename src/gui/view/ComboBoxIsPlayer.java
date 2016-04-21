@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
+import gameengine.model.ActorState;
 
 public class ComboBoxIsPlayer extends ComboBoxTextCell {
 	private static final String IS_PLAYER_OPTIONS = "IsPlayerOptions";
@@ -19,7 +20,9 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 	@Override
 	public void setButtonAction() {
 		getComboButton().setOnAction(event -> {
-			((IAuthoringActor) getEditableElement()).setMain(Boolean.parseBoolean(getComboBox().getValue()));
+			if(Boolean.parseBoolean(getComboBox().getValue())){
+				((IAuthoringActor) getEditableElement()).addState(ActorState.MAIN);
+			}
 		});
 	}
 
@@ -30,7 +33,7 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 
 	@Override
 	protected void updateValueBasedOnEditable() {
-		getComboBox().setValue(Boolean.toString(((IAuthoringActor) getEditableElement()).isMain()));
+		getComboBox().setValue(Boolean.toString(((IAuthoringActor) getEditableElement()).checkState(ActorState.MAIN)));
 	}
 
 }

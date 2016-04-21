@@ -10,6 +10,23 @@
       </tree-map>
     </entry>
     <entry>
+      <string>test2.xml</string>
+      <tree-map>
+        <entry>
+          <string>Carine</string>
+          <int>0</int>
+        </entry>
+        <entry>
+          <string>Test</string>
+          <int>0</int>
+        </entry>
+      </tree-map>
+    </entry>
+    <entry>
+      <string>gamefiles/loaders/test2_loader.xml</string>
+      <tree-map/>
+    </entry>
+    <entry>
       <string>testGame</string>
       <tree-map>
         <entry>

@@ -1,8 +1,10 @@
 package authoringenvironment.controller;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -14,13 +16,16 @@ import authoringenvironment.view.ActorEditingEnvironment;
 import authoringenvironment.view.LevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
+import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
+import gamedata.controller.FileChooserController;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gui.controller.IScreenController;
+import gameplayer.controller.BranchScreenController;
 import gui.view.Screen;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -29,7 +34,9 @@ import javafx.stage.Stage;
  * @author Stephen, AnnieTang
  */
 
-public class Controller implements IScreenController {
+public class Controller extends BranchScreenController {
+	
+	private static final String EDITING_CONTROLLER_RESOURCE = "editingActions";
 	private Stage myStage;
 	private List<Level> myLevels;
 	private List<String> myLevelNames;
@@ -43,12 +50,31 @@ public class Controller implements IScreenController {
 	private Game game;
 	private GameInfo gameInfo;
 
+	public Controller(Stage stage) {
+		super(stage);
+		setUpScreen();
+		this.myResources = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
+		changeScreen(guiMain);
+	}
+	
+	
+	private void setUpScreen(){
+		this.guiMain = new GUIMain();
+		//init();
+		this.guiMain.addObserver(this);
+	}
+	//TODO This constructor is not parallel with other BranchScreenController subclasses
+	//Create a resource bundle for the Controller's actions associated to buttons it handles, but the resource bundle for the GUIFactory should be stored in and set up in the GUIMain
+	//Stage should not be contained in the subclass (already in BranchScreenController parent)
 	public Controller(Stage myStage, GUIMain guiMain, ResourceBundle myResources) {
+		super(myStage);
 		this.myStage = myStage;
 		this.guiMain = guiMain;
 		this.myResources = myResources;
 		init();
 	}
+
+	//TODO Need a constructor that takes in a game passed by data and sets up Authoring Environment accordingly 
 
 	public void init() {
 		myLevels = new ArrayList<>();
@@ -89,20 +115,22 @@ public class Controller implements IScreenController {
 	 * @param file:
 	 *            file to write to.
 	 */
-	public void saveGame(File file) {
-		Game g = new Game(new GameInfo(), myLevels);  //TODO needs to be game info from AE
+	public void saveGame() {
+		FileChooser fileChooser = new FileChooser();
+		File file = fileChooser.showSaveDialog(new Stage());
+		Game g = new Game(gameInfo, myLevels); 
 		CreatorController controller;
 		try {
-			controller = new CreatorController(g, this.getScreen());
+			controller = new CreatorController(g, guiMain);
 			controller.saveForEditing(file);
 		} catch (ParserConfigurationException e) {
-			getScreen().showError(e.getMessage());
+			guiMain.showError(e.getMessage());
 		}
 
 	}
 
-	public void loadGame(File file) {
-
+	public void loadGame() {
+		FileChooserController fileChooserController = new FileChooserController(myStage,ChooserType.EDIT);
 	}
 
 	/**
@@ -140,18 +168,18 @@ public class Controller implements IScreenController {
 	public void addLevel() {
 		Level newLevel = new Level();
 		myLevels.add(newLevel);
-		myLevelNames.add(newLevel.getMyName());
+		myLevelNames.add(newLevel.getName());
 		mainScreen.createLevelLabel(newLevel);
 		goToEditingEnvironment(newLevel, levelEnvironment);
 	}
 
 	public void addActor() {
-		IAuthoringActor newActor = new Actor();
-		newActor.setMyID(myActors.size());
+		IAuthoringActor newActor = (IAuthoringActor) new Actor();
+		newActor.setID(myActors.size());
 		myActors.add(newActor);
-		myActorNames.add(newActor.getMyName());
+		myActorNames.add(newActor.getName());
 		mainScreen.createActorLabel(newActor);
-		actorEnvironment.setActorImage(newActor.getMyImageView(), newActor.getMyImageViewName());
+		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
 	
@@ -164,37 +192,24 @@ public class Controller implements IScreenController {
 	}
 
 	@Override
-	public void setGame(Game game) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public Screen getScreen() {
-		return guiMain;
-	}
-
-	@Override
-	public void chooseGame() {
-		// TODO Auto-generated method stub
+	public void update(Observable o, Object arg) {
+		String method = (String) arg;
+		try {
+			this.getClass().getDeclaredMethod(method).invoke(this);
+		} catch (NoSuchMethodException e) {
+			try {
+				this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
 	}
 
-	@Override
-	public void useGame() {
-		// TODO Auto-generated method stub
-		
-	}
-	/**
-	 * Saves game and returns to splash screen of game player.
-	 */
-	@Override
-	public void goToSplash() {
-		guiMain.goBackToSplash();
-	}
 
-	@Override
-	public void switchGame() {
-		// TODO Auto-generated method stub
-		
-	}
 }
