@@ -88,7 +88,6 @@ public interface IPlayActor {
      */
     public void changed();
 
-
 	public String getName();
 
 	public Attribute getAttribute(AttributeType health);
@@ -108,5 +107,7 @@ public interface IPlayActor {
 	public void setHeading(double h);
 
 	public double getHeading();
+
+    public int getID();
     
 }

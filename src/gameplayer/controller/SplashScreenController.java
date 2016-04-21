@@ -43,7 +43,6 @@ public class SplashScreenController implements Observer {
 	}
 	
 	private void edit() {
-		System.out.println("check");
 		Controller GUIMainController = new Controller(myStage);
 	}
 

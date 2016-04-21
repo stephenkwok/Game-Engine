@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import gamedata.controller.ChooserType;
 import gamedata.controller.FileChooserController;
 import gamedata.controller.HighScoresController;
+import gameengine.controller.HighScoresKeeper;
 import gameplayer.view.HighScoreScreen;
 import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
@@ -24,10 +25,24 @@ public class HighScoreScreenController extends BranchScreenController {
 	
 	private ResourceBundle myResources;
 	private HighScoreScreen myScreen;
-	private ObservableMap<String, Integer> myModel;
 	private String myGameName;
 	
+	private HighScoresKeeper myScores;
+	private HighScoresController myDataController;
 	
+	
+	public HighScoreScreenController(Stage myStage, HighScoresController dataController) {
+		super(myStage);
+		this.myDataController = dataController;
+		this.myGameName = dataController.getGameFile();
+		this.myScores = new HighScoresKeeper(this.myDataController.getAllGameScores());
+		this.myScores.addObserver(this);
+		setUpScreen();
+		this.myResources = ResourceBundle.getBundle(SCORE_CONTROLLER_RESOURCE);
+		changeScreen(myScreen);
+	}
+	
+	/*
 	public HighScoreScreenController(Stage myStage, Map<String, Integer> scores, String game) {
 		super(myStage);
 		this.myModel = FXCollections.observableMap(scores);
@@ -42,22 +57,25 @@ public class HighScoreScreenController extends BranchScreenController {
 		setUpScreen();
 		this.myResources = ResourceBundle.getBundle(SCORE_CONTROLLER_RESOURCE);
 		changeScreen(myScreen);
-	}
+	}*/
 
 	private void setUpScreen() {
 		this.myScreen = new HighScoreScreen();
-		this.myScreen.displayScores(myGameName, myModel);
+		this.myScreen.displayScores(myGameName, myDataController.getGameHighScores());
 		this.myScreen.addObserver(this);
 	}
+	
+	private void updateScores(){
+		myScreen.displayScores(myGameName, myScores.getGameScores(myGameName));
+	}
+	
 	private void switchGame() {
 		FileChooserController fileChooserController = new FileChooserController(getStage(), ChooserType.SCORES);
 	}
 	
 	private void clearScores() {
-		HighScoresController dataController = new HighScoresController(myGameName, myScreen);
-		dataController.clearHighScores();
-		myModel.putAll(dataController.getGameHighScores());
-		//notify
+		myScores.clearGameScores(myDataController.getGameFile());
+		myDataController.clearHighScores();
 	}
 
 	@Override

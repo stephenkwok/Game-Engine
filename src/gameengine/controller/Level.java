@@ -2,6 +2,7 @@ package gameengine.controller;
 
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 import javafx.beans.property.DoubleProperty;
@@ -24,7 +25,7 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 
 	// TODO: should probably set these default things via properties file but idk sry guyz
 	private static final String DEFAULT_NAME = "Default";
-	private static final String DEFAULT_IMAGE_NAME = "cartoon_park.png";
+	private static final String DEFAULT_IMAGE_NAME = "default_landscape.png";
 	private static final double DEFAULT_HEIGHT = 800;
 	private static final double DEFAULT_WIDTH = 1024;
 	private static final String DEFAULT_SCROLLING = "Horizontally";
@@ -314,10 +315,18 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 		myBackgroundX = new SimpleDoubleProperty(myBackground.getX());
 	}
 
+	public IPlayActor getMainCharacter(){
+		for(IPlayActor a: myActors){
+			if(a.checkState(ActorState.MAIN)){
+				return a;
+			}
+		}
+		return null;
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		
 	}
 }
-

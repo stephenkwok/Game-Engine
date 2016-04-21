@@ -37,7 +37,6 @@ public class Game extends Observable implements Observer {
 	private List<IPlayActor> deadActors;
 	private ObservableMap<String, Object> HUDData;
     private int count;
-	private IPlayActor mainCharacter;
 
 
     /**
@@ -53,14 +52,12 @@ public class Game extends Observable implements Observer {
 		initialGameFile = gameFilePath;
 		levels = gameLevels;
 		info = gameInfo;
-		setCurrentActors(new ArrayList<IPlayActor>());
+		currentActors = new ArrayList<IPlayActor>();
 		setDeadActors(new ArrayList<IPlayActor>());
         myPhysicsEngine = new PhysicsEngine();
         myCollisionDetector = new CollisionDetection(myPhysicsEngine);
         
 		initTimeline();
-
-
 	}
 
 
@@ -102,23 +99,27 @@ public class Game extends Observable implements Observer {
      * Initializes the current actors
      */
 	public void initCurrentActors() {
-		setCurrentActors(getCurrentLevel().getActors());
+		currentActors = getCurrentLevel().getActors();
 		for (IPlayActor actor: currentActors) {
-			if (actor.checkState(ActorState.MAIN)) {
-				mainCharacter = actor;
-			}
+			((Observable)actor).addObserver(this);
+			actor.setPhysicsEngine(myPhysicsEngine);
 		}
-		initActors();
 	}
 
     private void step(){
-        //physicsUpdate();
         myCollisionDetector.detection(getCurrentActors());
         signalTick();
+        updateCamera();
         updateActors();
         count++;
     }
 
+    private void updateCamera(){
+    	setChanged();
+    	Object[] args = {"updateCamera"};
+    	notifyObservers(Arrays.asList(args));
+    }
+    
     private void signalTick(){
         handleTrigger(new TickTrigger(count));
     }
@@ -126,17 +127,6 @@ public class Game extends Observable implements Observer {
 
 	private void updateBackground() {
 		this.levels.get(info.getMyCurrentLevelNum()).scrollBackground(BACKGROUND_SCROLL_SPEED);
-	}
-
-    /**
-     * Initializes the Actors
-     */
-	private void initActors(){
-		for(IPlayActor a: getCurrentActors()){
-			((Observable)a).addObserver(this);
-			a.setPhysicsEngine(myPhysicsEngine);
-		}
-
 	}
 
 
@@ -270,7 +260,7 @@ public class Game extends Observable implements Observer {
 	}
 	
 	public void updateActors(){
-		setDeadActors(new ArrayList<IPlayActor>());
+		deadActors = new ArrayList<IPlayActor>();
 		for(IPlayActor a: getCurrentActors()){
 			if(a.checkState(ActorState.DEAD)){
 				deadActors.add(a);
@@ -279,7 +269,7 @@ public class Game extends Observable implements Observer {
 		if(deadActors.size()!=0){
 			removeDeadActors();
 		}
-		setCurrentActors(getCurrentLevel().getActors());
+		currentActors = getCurrentLevel().getActors();
 	}
 
     /**
@@ -287,7 +277,8 @@ public class Game extends Observable implements Observer {
      */
 	private void removeDeadActors() {
 		setChanged();
-		notifyObservers("updateActors");
+		Object[] args = {"updateActors"};
+		notifyObservers(Arrays.asList(args));
 		getCurrentLevel().removeActors(deadActors);	
 		deadActors.clear();
 	}
@@ -314,11 +305,6 @@ public class Game extends Observable implements Observer {
 
 	public List<IPlayActor> getCurrentActors() {
 		return currentActors;
-	}
-
-
-	public void setCurrentActors(List<IPlayActor> list) {
-		this.currentActors = list;
 	}
 
     /**
@@ -394,7 +380,7 @@ public class Game extends Observable implements Observer {
 		for (String key : keys) {
 			Object value = null;
 			if (key.equals("Health")) {
-				value = ((Attribute) mainCharacter.getAttribute(AttributeType.HEALTH)).getMyValue();
+				//value = ((Attribute) mainCharacter.getAttribute(AttributeType.HEALTH)).getMyValue();
 			} else if (key.equals("Level")) {
 				value = info.getMyCurrentLevelNum();
 			} else if (key.equals("Ammo")) {
@@ -404,7 +390,7 @@ public class Game extends Observable implements Observer {
 			} else if (key.equals("Time")) {
 				//todo
 			} else if (key.equals("Points")){
-				value = ((Attribute) mainCharacter.getAttribute(AttributeType.POINTS)).getMyValue();
+				//value = ((Attribute) mainCharacter.getAttribute(AttributeType.POINTS)).getMyValue();
 			} else {
 				value = "Error";
 			}
@@ -426,7 +412,4 @@ public class Game extends Observable implements Observer {
 		return 0;
 	}
 	
-	public IPlayActor getMainCharacter(){
-		return mainCharacter;
-	}
 }
