@@ -1,6 +1,7 @@
 package authoringenvironment.controller;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -15,13 +16,16 @@ import authoringenvironment.view.ActorEditingEnvironment;
 import authoringenvironment.view.LevelEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
+import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
+import gamedata.controller.FileChooserController;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameplayer.controller.BranchScreenController;
 import gui.view.Screen;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -31,6 +35,8 @@ import javafx.stage.Stage;
  */
 
 public class Controller extends BranchScreenController {
+	
+	private static final String EDITING_CONTROLLER_RESOURCE = "editingActions";
 	private Stage myStage;
 	private List<Level> myLevels;
 	private List<String> myLevelNames;
@@ -46,8 +52,17 @@ public class Controller extends BranchScreenController {
 
 	public Controller(Stage stage) {
 		super(stage);
+		setUpScreen();
+		this.myResources = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
+		changeScreen(guiMain);
 	}
 	
+	
+	private void setUpScreen(){
+		this.guiMain = new GUIMain();
+		//init();
+		this.guiMain.addObserver(this);
+	}
 	//TODO This constructor is not parallel with other BranchScreenController subclasses
 	//Create a resource bundle for the Controller's actions associated to buttons it handles, but the resource bundle for the GUIFactory should be stored in and set up in the GUIMain
 	//Stage should not be contained in the subclass (already in BranchScreenController parent)
@@ -100,7 +115,9 @@ public class Controller extends BranchScreenController {
 	 * @param file:
 	 *            file to write to.
 	 */
-	public void saveGame(File file) {
+	public void saveGame() {
+		FileChooser fileChooser = new FileChooser();
+		File file = fileChooser.showSaveDialog(new Stage());
 		Game g = new Game(gameInfo, myLevels); 
 		CreatorController controller;
 		try {
@@ -112,8 +129,8 @@ public class Controller extends BranchScreenController {
 
 	}
 
-	public void loadGame(File file) {
-
+	public void loadGame() {
+		FileChooserController fileChooserController = new FileChooserController(myStage,ChooserType.EDIT);
 	}
 
 	/**
@@ -176,8 +193,21 @@ public class Controller extends BranchScreenController {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		//Needs to handle buttons, comboboxes, tabs, etc.
+		String method = (String) arg;
+		try {
+			this.getClass().getDeclaredMethod(method).invoke(this);
+		} catch (NoSuchMethodException e) {
+			try {
+				this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
 	}
 

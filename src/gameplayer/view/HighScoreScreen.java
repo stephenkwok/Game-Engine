@@ -30,8 +30,7 @@ public class HighScoreScreen extends Screen implements Observer{
 	private static final String TOP_BUTTONS = "TopButtons";
 
 	private BorderPane myPane;
-	private Map<String, Integer> myMap;
-	private String myName;
+	private VBox myScoreBox;
 	
 	/**
 	 * 
@@ -39,11 +38,9 @@ public class HighScoreScreen extends Screen implements Observer{
 	 * @param myMap which contains player-score relationships, parsed from an xml file
 	 * @param gameName to specify the given data
 	 */
-	public HighScoreScreen(Map<String, Integer> myMap, String gameName) {
+	public HighScoreScreen() {
 		super();
 		setUpResourceBundle(SCORES_RESOURCE);
-		this.myMap = myMap;
-		this.myName = gameName;
 		this.myPane =  new BorderPane();
 		initialize();
 	}
@@ -59,20 +56,24 @@ public class HighScoreScreen extends Screen implements Observer{
 	 * Populates the center pane with map elements made into HBoxes for each individual score
 	 */
 	private void addScorePane() {
-		VBox masterV = new VBox(20);
-		masterV.getChildren().add(new Text(myName));
-		for(String player : myMap.keySet()){
+		myScoreBox = new VBox(20);
+		myPane.setCenter(myScoreBox);
+		
+	}
+	
+	public void displayScores(String gameName, Map<String,Integer> scores) {
+		myScoreBox.getChildren().clear();
+		myScoreBox.getChildren().add(new Text(gameName));
+		for(String player : scores.keySet()){
 			HBox myH = new HBox(10);
 			Text myPlayer = new Text(player);
 			myPlayer.setFont(Font.font("Helvetica", 30));
 			myH.getChildren().add(myPlayer);
-			Text myScore = new Text(myMap.get(player).toString());
+			Text myScore = new Text(scores.get(player).toString());
 			myScore.setFont(Font.font("Times New Roman", 30));
 			myH.getChildren().add(myScore);
-			masterV.getChildren().add(myH);
+			myScoreBox.getChildren().add(myH);
 		}
-		myPane.setCenter(masterV);
-		
 	}
 
 	/**

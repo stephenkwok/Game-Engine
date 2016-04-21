@@ -2,6 +2,7 @@ package gamedata.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -37,6 +38,9 @@ public class HighScoresController implements IHighScoresController {
 	
 	@Override
 	public Map<String, Integer> getGameHighScores() {
+		if (getAllGameScores().get(myGameFile) == null) {
+			return new HashMap<String,Integer>();
+		}
 		return getAllGameScores().get(myGameFile);
 	}
 	
@@ -54,7 +58,8 @@ public class HighScoresController implements IHighScoresController {
 
 	@Override
 	public void clearHighScores() {
-		HighScoresKeeper newKeeper = new HighScoresKeeper();
+		HighScoresKeeper newKeeper = new HighScoresKeeper(getAllGameScores());
+		newKeeper.clearGameScores(myGameFile);
 		HighScoresCreator scoresCreator = new HighScoresCreator();
 		try {
 			scoresCreator.saveScore(newKeeper, myFile);
