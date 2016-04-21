@@ -128,36 +128,38 @@ public class GameController implements Observer, IGameController {
 		//TODO fix resource also implement saving functionality
 
 		togglePause();
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Game over!  Do you want to save your score?", ButtonType.YES, ButtonType.NO);
-		alert.show();
-		alert.showingProperty().addListener((observable, oldValue, newValue) -> {
-			if (!newValue) {
-				if (alert.getResult() == ButtonType.YES) {
-					saveScorePrompt();
-				}
-			}
-		});
+		view.terminateGame();
+		}
+//		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Game over!  Do you want to save your score?", ButtonType.YES, ButtonType.NO);
+//		alert.show();
+//		alert.showingProperty().addListener((observable, oldValue, newValue) -> {
+//			if (!newValue) {
+//				if (alert.getResult() == ButtonType.YES) {
+//					saveScorePrompt();
+//				}
+//			}
+//		});
 
 	}
 
-	private void saveScorePrompt() {
-		TextInputDialog dialog = new TextInputDialog("Name");
-		dialog.setContentText("Please enter your name if you want to save your score");
-		dialog.show();
-		dialog.setResultConverter(new Callback<ButtonType, String>() {
-			@Override
-			public String call(ButtonType b) {
-				if (b == ButtonType.OK) {
-					saveGameScore(dialog.getEditor().getText());
-					return dialog.getEditor().getText();
-				}
-				else {
-					return null;
-				}
-			}
-		});
-	}
-
+//	private void saveScorePrompt() {
+//		TextInputDialog dialog = new TextInputDialog("Name");
+//		dialog.setContentText("Please enter your name if you want to save your score");
+//		dialog.show();
+//		dialog.setResultConverter(new Callback<ButtonType, String>() {
+//			@Override
+//			public String call(ButtonType b) {
+//				if (b == ButtonType.OK) {
+//					saveGameScore(dialog.getEditor().getText());
+//					return dialog.getEditor().getText();
+//				}
+//				else {
+//					return null;
+//				}
+//			}
+//		});
+//	}
+//
 	private void saveGameScore(String name) {
 		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
 		c.saveHighScore(getGame().getScore(), name);
