@@ -49,7 +49,7 @@ public class PhysicsEngine {
 	 * @param forceYdownward
 	 * @param friction
 	 */
-	private void update(Actor a,double forceX, double forceYupward, double forceYdownward, double friction){
+	private void update(IPlayActor a,double forceX, double forceYupward, double forceYdownward, double friction){
 		double xVelo     = a.getVeloX();
 		double yVelo     = a.getVeloY();
 		double xPos      =  a.getX();      
@@ -90,7 +90,7 @@ public class PhysicsEngine {
 	 * @param nextXPos
 	 * @param nextYPos
 	 */
-	private void setValues(Actor a, double nextHorzVelo, double nextVertVelo, double nextXPos, double nextYPos){
+	private void setValues(IPlayActor a, double nextHorzVelo, double nextVertVelo, double nextXPos, double nextYPos){
 		a.setVeloX(nextHorzVelo);
 		a.setVeloY(nextVertVelo);
 		a.setX(bound(nextXPos));
@@ -121,52 +121,52 @@ public class PhysicsEngine {
 	//These methods correspond to Actions that call them
 	//They differ in the force applied to the Actor
 	
-	public void moveRight(Actor a1) {
-		update(a1,getHorizontalForce(), 0, 0, a1.getMyFriction());
+	public void moveRight(IPlayActor a1) {
+		update(a1,getHorizontalForce(), 0, 0, a1.getFriction());
 	}
 
-	public void moveLeft(Actor a1) {
-		update(a1,-getHorizontalForce(), 0, 0, a1.getMyFriction());
+	public void moveLeft(IPlayActor a1) {
+		update(a1,-getHorizontalForce(), 0, 0, a1.getFriction());
 	}
 	
-	public void jump(Actor a1){
-		update(a1,0,getJumpForce(), getGravity(), a1.getMyFriction());
+	public void jump(IPlayActor a1){
+		update(a1,0,getJumpForce(), getGravity(), a1.getFriction());
 	}
 	
 	//gliding methods for when force and gravity aren't applied
 	
-	public void glideRight(Actor a1) {
+	public void glideRight(IPlayActor a1) {
 		a1.setX(a1.getX()+5);
 	}
 
-	public void glideLeft(Actor a1) {
+	public void glideLeft(IPlayActor a1) {
 		a1.setX(a1.getX()-5);
 	}
 	
-	public void glideUp(Actor a1 ){
+	public void glideUp(IPlayActor a1 ){
 		a1.setY(a1.getY()+5);
 	}
 	
-	public void tick(Actor a1) {
+	public void tick(IPlayActor a1) {
 		update(a1,0.0,0.0, getGravity(), friction);
 	}
 	
-	public void staticVerticalCollision(Actor a1){
+	public void staticVerticalCollision(IPlayActor a1){
 		a1.setY(a1.getY()-a1.getVeloY());
 		a1.setVeloY(0);
 	}
 	
-	public void staticHorizontalCollision(Actor a1){
+	public void staticHorizontalCollision(IPlayActor a1){
 		a1.setX(a1.getX()-(a1.getVeloX()*2.5));
 		a1.setVeloX(0);
 	}
 	
-	public void elasticHorizontalCollision(Actor a1){
+	public void elasticHorizontalCollision(IPlayActor a1){
 		a1.setX(a1.getX()-(a1.getVeloX()*2.5));
 		a1.setVeloX( -horizontalForce*(a1.getVeloX()/Math.abs(a1.getVeloX())));
 	}
 	
-	public void elasticVerticalCollision(Actor a1){
+	public void elasticVerticalCollision(IPlayActor a1){
 		a1.setY(a1.getY()-(a1.getVeloY()*2.5));
 		a1.setVeloY( -horizontalForce*(a1.getVeloY()/Math.abs(a1.getVeloY())));
 	}
@@ -250,22 +250,22 @@ public class PhysicsEngine {
 		this.floorHeight = floorHeight;
 	}
 
-	public void moveForward(Actor a1) {
-		update(a1, getHorizontalForce()*Math.cos(Math.toRadians(a1.getHeading())), 0, 0, a1.getMyFriction());
-		update(a1,-getHorizontalForce()*Math.sin(Math.toRadians(a1.getHeading())), 0, 0, a1.getMyFriction());
+	public void moveForward(IPlayActor a1) {
+		update(a1, getHorizontalForce()*Math.cos(Math.toRadians(a1.getHeading())), 0, 0, a1.getFriction());
+		update(a1,-getHorizontalForce()*Math.sin(Math.toRadians(a1.getHeading())), 0, 0, a1.getFriction());
 	}
 
-	public void moveBackward(Actor a1) {
-		update(a1, -getHorizontalForce()*Math.cos(Math.toRadians(a1.getHeading())), 0, 0, a1.getMyFriction());
-		update(a1,  getHorizontalForce()*Math.sin(Math.toRadians(a1.getHeading())), 0, 0, a1.getMyFriction());
+	public void moveBackward(IPlayActor iPlayActor) {
+		update(iPlayActor, -getHorizontalForce()*Math.cos(Math.toRadians(iPlayActor.getHeading())), 0, 0, iPlayActor.getFriction());
+		update(iPlayActor,  getHorizontalForce()*Math.sin(Math.toRadians(iPlayActor.getHeading())), 0, 0, iPlayActor.getFriction());
 	}
 
-	public void glideBackward(Actor myActor) {
+	public void glideBackward(IPlayActor myActor) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void glideForward(Actor myActor) {
+	public void glideForward(IPlayActor myActor) {
 		// TODO Auto-generated method stub
 		
 	}

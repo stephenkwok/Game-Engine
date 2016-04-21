@@ -13,7 +13,7 @@ public class Spawn extends Action{
 		spawnedActor.setX(getMyActor().getX());
 		spawnedActor.setY(getMyActor().getY());
 		
-		getMyActor().update(spawnedActor, spawnedActor);
+		//getMyActor().update(spawnedActor, spawnedActor);
 		
 //		Now have to add spawnedActor to the list of Actors
 //		Could it be created with isDead set to true 

@@ -4,17 +4,14 @@ import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-import gamedata.controller.HighScoresController;
+import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.*;
+import gameengine.model.Triggers.TickTrigger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
-import javafx.collections.MapChangeListener.Change;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextInputDialog;
 import javafx.util.Duration;
 
 /**
@@ -27,6 +24,7 @@ public class Game extends Observable implements Observer {
 	public static final int SIZE = 400;
 	public static final int FRAMES_PER_SECOND = 60;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+	private static final int BACKGROUND_SCROLL_SPEED = -1;
 
 	private String initialGameFile;
 	private List<Level> levels;
@@ -35,9 +33,11 @@ public class Game extends Observable implements Observer {
 	private CollisionDetection myCollisionDetector;
 	@XStreamOmitField
 	private Timeline animation;
-	private List<Actor> currentActors;
-	private List<Actor> deadActors;
+	private List<IPlayActor> currentActors;
+	private List<IPlayActor> deadActors;
 	private ObservableMap<String, Object> HUDData;
+    private int count;
+	private IPlayActor mainCharacter;
 
 
     /**
@@ -49,27 +49,15 @@ public class Game extends Observable implements Observer {
      * @param gameInfo      The game info associated with the game
      * @param gameLevels    All the levels in the game
      */
-
-	//NOTE: NEED TO INITZLIWE THIS
-	private Actor mainCharacter;
-
-
-	/**
-	 * A game is instantiated with a list of all levels in the game and a level to start on.
-	 * Upon instantiation, the actors from all levels are collected into a list and added to a map containing references from ID to actor.
-	 * In addition, a map is created mapping all the actors contained in a level to the level ID 
-	 * @param levelNum the first level to play in the game
-	 * @param gameLevels all the levels in the game 
-	 */
 	public Game(String gameFilePath, GameInfo gameInfo, List<Level> gameLevels) {
 		initialGameFile = gameFilePath;
 		levels = gameLevels;
 		info = gameInfo;
-		setCurrentActors(new ArrayList<Actor>());
-		setDeadActors(new ArrayList<Actor>());
-		myPhysicsEngine = new PhysicsEngine();
-		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
-
+		setCurrentActors(new ArrayList<IPlayActor>());
+		setDeadActors(new ArrayList<IPlayActor>());
+        myPhysicsEngine = new PhysicsEngine();
+        myCollisionDetector = new CollisionDetection(myPhysicsEngine);
+        
 		initTimeline();
 
 
@@ -115,46 +103,38 @@ public class Game extends Observable implements Observer {
      */
 	public void initCurrentActors() {
 		setCurrentActors(getCurrentLevel().getActors());
-		for (Actor actor: currentActors) {
-			if (actor.isMain()) {
+		for (IPlayActor actor: currentActors) {
+			if (actor.checkState(ActorState.MAIN)) {
 				mainCharacter = actor;
 			}
 		}
 		initActors();
 	}
 
+    private void step(){
+        //physicsUpdate();
+        myCollisionDetector.detection(getCurrentActors());
+        signalTick();
+        updateActors();
+        count++;
+    }
 
-    /**
-     * The step method that states what will happen with each Timeline frame
-     */
-
-	private void step(){
-		System.out.println("Hello:");
-		System.out.println(getAnimation().getCurrentTime().toMillis()  );
-		physicsUpdate();
-		myCollisionDetector.detection(getCurrentActors());
-		updateActors();
-	}
+    private void signalTick(){
+        handleTrigger(new TickTrigger(count));
+    }
 
 
-    /**
-     * Updates the physics for each Actor
-     */
-
-	private void physicsUpdate(){
-		for(Actor a: getCurrentActors()){
-			myPhysicsEngine.tick(a);
-		}
+	private void updateBackground() {
+		this.levels.get(info.getMyCurrentLevelNum()).scrollBackground(BACKGROUND_SCROLL_SPEED);
 	}
 
     /**
      * Initializes the Actors
      */
-
 	private void initActors(){
-		for(Actor a: getCurrentActors()){
-			a.addObserver(this);
-			a.setEngine(myPhysicsEngine);
+		for(IPlayActor a: getCurrentActors()){
+			((Observable)a).addObserver(this);
+			a.setPhysicsEngine(myPhysicsEngine);
 		}
 
 	}
@@ -220,7 +200,9 @@ public class Game extends Observable implements Observer {
 
 	public void nextLevel(){
 		animation.stop();
-		setCurrentLevel(info.getMyCurrentLevelNum()+1);
+		if(levels.size()>=info.getMyCurrentLevelNum()+1){
+			setCurrentLevel(info.getMyCurrentLevelNum()+1);
+		}
 	}
 
 	/**
@@ -243,12 +225,7 @@ public class Game extends Observable implements Observer {
 		notifyObservers(arg);
 	}
 
-    /**
-     * Provides the Game's Actors
-     *
-     * @return The Game's Actors
-     */
-	public List<Actor> getActors() {
+	public List<IPlayActor> getActors() {
 		return getLevels().get(getInfo().getMyCurrentLevelNum()).getActors();
 	}
 
@@ -291,15 +268,11 @@ public class Game extends Observable implements Observer {
 	public void setCurrentLevel(int levelNum){
 		info.setMyCurrentLevelNum(levelNum);
 	}
-
-
-    /**
-     * Updates the current actors based on gameplay
-     */
-    public void updateActors(){
-		setDeadActors(new ArrayList<Actor>());
-		for(Actor a: getCurrentActors()){
-			if(a.isDead()){
+	
+	public void updateActors(){
+		setDeadActors(new ArrayList<IPlayActor>());
+		for(IPlayActor a: getCurrentActors()){
+			if(a.checkState(ActorState.DEAD)){
 				deadActors.add(a);
 			}
 		}
@@ -319,40 +292,24 @@ public class Game extends Observable implements Observer {
 		deadActors.clear();
 	}
 
-    /**
-     * Provides a list of the dead Actors
-     *
-     * @return  A list of the dead Actors
-     */
-	public List<Actor> getDeadActors() {
+
+	public List<IPlayActor> getDeadActors() {
 		return deadActors;
 	}
 
-    /**
-     * Sets the list of dead Actors
-     *
-     * @param deadActors    The desired list of dead Actors
-     */
-	public void setDeadActors(List<Actor> deadActors) {
+
+	public void setDeadActors(List<IPlayActor> deadActors) {
 		this.deadActors = deadActors;
 	}
 
-    /**
-     * Provides a list of the current Actors
-     *
-     * @return  A list of the current Actors
-     */
-	public List<Actor> getCurrentActors() {
+
+	public List<IPlayActor> getCurrentActors() {
 		return currentActors;
 	}
 
-    /**
-     * Sets the list of current Actors
-     *
-     * @param currentActors The list of current Actors
-     */
-	public void setCurrentActors(List<Actor> currentActors) {
-		this.currentActors = currentActors;
+
+	public void setCurrentActors(List<IPlayActor> list) {
+		this.currentActors = list;
 	}
 
     /**
@@ -428,7 +385,7 @@ public class Game extends Observable implements Observer {
 		for (String key : keys) {
 			Object value = null;
 			if (key.equals("Health")) {
-				value = mainCharacter.getAttribute(AttributeType.HEALTH).getMyValue();
+				value = ((Attribute) mainCharacter.getAttribute(AttributeType.HEALTH)).getMyValue();
 			} else if (key.equals("Level")) {
 				value = info.getMyCurrentLevelNum();
 			} else if (key.equals("Ammo")) {
@@ -438,7 +395,7 @@ public class Game extends Observable implements Observer {
 			} else if (key.equals("Time")) {
 				//todo
 			} else if (key.equals("Points")){
-				value = mainCharacter.getAttribute(AttributeType.POINTS).getMyValue();
+				value = ((Attribute) mainCharacter.getAttribute(AttributeType.POINTS)).getMyValue();
 			} else {
 				value = "Error";
 			}
@@ -456,10 +413,11 @@ public class Game extends Observable implements Observer {
 
 	
 	public int getScore() {
-		return getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();
+		//return getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();
+		return 0;
 	}
 	
-	public Actor getMainCharacter(){
+	public IPlayActor getMainCharacter(){
 		return mainCharacter;
 	}
 }

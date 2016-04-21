@@ -1,21 +1,14 @@
 package gui.view;
 
-import gui.controller.IScreenController;
 import javafx.scene.control.Alert;
 
 import java.io.File;
 
-import gamedata.view.FileChooserScreen;
-import gamedata.view.FileChooserScreenLoad;
-import gameplayer.controller.SplashScreenController;
 
 public class ButtonPlay extends ButtonParent{
 
-	private SplashScreenController myControl; 
-
-	public ButtonPlay(IScreenController myController, String buttonText, String imageName) {
-		super(myController, buttonText, imageName);
-		this.myControl = (SplashScreenController) myController;
+	public ButtonPlay(String buttonText, String imageName) {
+		super(buttonText, imageName);
 	}
 
 	@Override
@@ -28,13 +21,8 @@ public class ButtonPlay extends ButtonParent{
 				alert.showAndWait();
 			}
 			else {
-				FileChooserScreen myFC = new FileChooserScreenLoad(myControl.getStage());
-				try {
-					myControl.getStage().setScene(myFC.getScene());
-				} catch (Exception e1) {
-					// DO NOT LEAVE THIS ISH!
-					e1.printStackTrace();
-				}
+				setChanged();
+				notifyObservers("ButtonPlay");
 			}
 		});
 

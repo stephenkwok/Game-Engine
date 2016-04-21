@@ -137,7 +137,7 @@ public class GUILevelInspector implements IGUI {
 		File imageFile = promptForFileName();
 		if(imageFile!=null){
 			Image image = new Image(imageFile.toURI().toString());
-			myLevel.setMyImageView(new ImageView(image));
+			myLevel.setImageView(new ImageView(image));
 			myLevel.setMyBackgroundImgName(imageFile.getPath());
 		}
 	}
