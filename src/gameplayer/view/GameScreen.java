@@ -105,7 +105,8 @@ public class GameScreen extends Observable implements IGameScreen {
 		if(e.getEventType()==MouseEvent.MOUSE_CLICKED){
 			ITrigger trigger = handleClick(((MouseEvent)e).getSceneX(),((MouseEvent)e).getSceneY());
 			setChanged();
-			notifyObservers(trigger);
+			Object[] methodArg = {"handleTrigger", trigger};
+			notifyObservers(Arrays.asList(methodArg));
 		}
 		else if(e.getEventType()==KeyEvent.KEY_PRESSED){
 			ITrigger trigger = handleKeyPress(((KeyEvent)e).getCode());
