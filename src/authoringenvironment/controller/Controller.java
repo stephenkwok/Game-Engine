@@ -204,7 +204,7 @@ public class Controller extends BranchScreenController implements Observer {
 	 * Switches screen to main screen
 	 */
 	public void goToMainScreen() {
-		mainScreen.updatePreviewDisplays();
+		mainScreen.updatePreviewUnits();
 		setCenterPane(mainScreen.getPane());
 	}
 

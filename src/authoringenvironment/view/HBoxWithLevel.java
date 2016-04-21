@@ -1,6 +1,5 @@
 package authoringenvironment.view;
 
-
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Level;
@@ -21,17 +20,23 @@ public class HBoxWithLevel extends HBoxWithEditable {
 		myTextField.setPromptText(TEXT_FIELD_PROMPT_TEXT);
 		HBox.setHgrow(myTextField, Priority.ALWAYS);
 		getHBox().getChildren().add(myTextField);
-		getHBox().setStyle("-fx-border-color: gray;");
-	}
-	
-	public int getLevelPlayPosition() {
-		String textFieldInput = myTextField.getText();
-		// need more error checking
-		return textFieldInput.trim().isEmpty() ? -1 : Integer.parseInt(textFieldInput);
 	}
 	
 	public void updateLevelPlayPosition() {
 		((Level) getEditable()).setPlayPosition(getLevelPlayPosition());
+	}
+	
+	public int getLevelPlayPosition() {
+		String textFieldInput = myTextField.getText().trim();
+		return inputIsValid(textFieldInput) ? Integer.parseInt(textFieldInput) : -1; 
+	}
+	
+	public boolean inputIsValid(String input) {
+		for (Character character : input.toCharArray()) {
+			if (!Character.isDigit(character)) 
+				return false;
+		}
+		return !input.isEmpty();
 	}
 
 }
