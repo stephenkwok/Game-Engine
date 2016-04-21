@@ -330,4 +330,3 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 		
 	}
 }
-

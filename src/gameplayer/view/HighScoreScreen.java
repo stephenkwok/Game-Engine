@@ -3,8 +3,10 @@ package gameplayer.view;
 import java.lang.reflect.InvocationTargetException;
 
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.TreeMap;
 
 import gui.view.IGUIElement;
 import gui.view.Screen;
@@ -62,14 +64,18 @@ public class HighScoreScreen extends Screen implements Observer{
 	}
 	
 	public void displayScores(String gameName, Map<String,Integer> scores) {
+		TreeMap<Integer, String> sortedScores = new TreeMap<>();
+		for(String player : scores.keySet()){
+			sortedScores.put(scores.get(player), player);
+		}
 		myScoreBox.getChildren().clear();
 		myScoreBox.getChildren().add(new Text(gameName));
-		for(String player : scores.keySet()){
+		for(Integer score: sortedScores.descendingKeySet()){
 			HBox myH = new HBox(10);
-			Text myPlayer = new Text(player);
+			Text myPlayer = new Text(sortedScores.get(score));
 			myPlayer.setFont(Font.font("Helvetica", 30));
 			myH.getChildren().add(myPlayer);
-			Text myScore = new Text(scores.get(player).toString());
+			Text myScore = new Text(score.toString());
 			myScore.setFont(Font.font("Times New Roman", 30));
 			myH.getChildren().add(myScore);
 			myScoreBox.getChildren().add(myH);
