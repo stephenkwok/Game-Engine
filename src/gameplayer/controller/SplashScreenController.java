@@ -42,15 +42,14 @@ public class SplashScreenController implements Observer {
 		FileChooserController fileChooserController = new FileChooserController(myStage, ChooserType.SCORES);
 	}
 	
-	private void edit() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private void edit() {
 		System.out.println("just tryna edit");
-		Controller GUIMainController = new Controller(myStage, new GUIMain());
+		Controller GUIMainController = new Controller(myStage);
 	}
 
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("updatin");
 		String method = myResources.getString((String) arg);
 		try {
 			this.getClass().getDeclaredMethod(method).invoke(this);

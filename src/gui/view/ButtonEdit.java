@@ -9,7 +9,7 @@ public class ButtonEdit extends ButtonParent{
 
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnAction(e -> notifyObservers("ButtonEdit"));
+		getButton().setOnAction(e -> {setChanged(); notifyObservers("ButtonEdit");});
 	}
 
 }

@@ -79,8 +79,11 @@ public class Controller extends BranchScreenController implements Observer {
 	private GUIFactory factory;
 	private Scene splashScene;
 
-	
-	
+	public Controller(Stage myStage) {
+		super(myStage);
+		init();
+	}
+
 	//TODO This constructor is not parallel with other BranchScreenController subclasses
 	//Create a resource bundle for the Controller's actions associated to buttons it handles, but the resource bundle for the GUIFactory should be stored in and set up in the GUIMain
 	//Stage should not be contained in the subclass (already in BranchScreenController parent)
@@ -98,8 +101,6 @@ public class Controller extends BranchScreenController implements Observer {
 		getStage().setScene(myScene);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		factory = new GUIFactory(myResources);
-		setTopPane();
-		setCenterPane();
 		myLevels = new ArrayList<>();
 		myLevelNames = new ArrayList<>();
 		myActors = new HashMap<>();
@@ -110,6 +111,8 @@ public class Controller extends BranchScreenController implements Observer {
 		actorEnvironment = new ActorEditingEnvironment(this, myResources, getStage());
 		gameEnvironment = new GameEditingEnvironment(gameInfo);
 		mainScreen = new GUIMainScreen(gameEnvironment, getStage().widthProperty(), getStage().heightProperty());
+		setTopPane();
+		setCenterPane();
 	}
 
 	/**
@@ -187,7 +190,7 @@ public class Controller extends BranchScreenController implements Observer {
 	 */
 	public void goToEditingEnvironment(IEditableGameElement editable, IEditingEnvironment environment) {
 		environment.setEditableElement(editable);
-		guiMain.setCenterPane(environment.getPane());
+		setCenterPane(environment.getPane());
 	}
 
 	/**
@@ -195,7 +198,7 @@ public class Controller extends BranchScreenController implements Observer {
 	 */
 	public void goToMainScreen() {
 		mainScreen.updateAllNodes();
-		guiMain.setCenterPane(mainScreen.getPane());
+		setCenterPane(mainScreen.getPane());
 	}
 
 	/**

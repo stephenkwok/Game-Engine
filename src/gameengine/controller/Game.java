@@ -6,6 +6,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.*;
+import gameengine.model.Triggers.TickTrigger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -24,6 +25,7 @@ public class Game extends Observable implements Observer {
 	public static final int SIZE = 400;
 	public static final int FRAMES_PER_SECOND = 60;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+	private static final int BACKGROUND_SCROLL_SPEED = -1;
 
 	private String initialGameFile;
 	private List<Level> levels;
@@ -35,6 +37,7 @@ public class Game extends Observable implements Observer {
 	private List<IPlayActor> currentActors;
 	private List<IPlayActor> deadActors;
 	private ObservableMap<String, Object> HUDData;
+    private int count;
 	private IPlayActor mainCharacter;
 
 
@@ -47,15 +50,6 @@ public class Game extends Observable implements Observer {
      * @param gameInfo      The game info associated with the game
      * @param gameLevels    All the levels in the game
      */
-	
-	
-	/**
-	 * A game is instantiated with a list of all levels in the game and a level to start on.
-	 * Upon instantiation, the actors from all levels are collected into a list and added to a map containing references from ID to actor.
-	 * In addition, a map is created mapping all the actors contained in a level to the level ID 
-	 * @param levelNum the first level to play in the game
-	 * @param gameLevels all the levels in the game 
-	 */
 	public Game(String gameFilePath, GameInfo gameInfo, List<Level> gameLevels) {
 		initialGameFile = gameFilePath;
 		levels = gameLevels;
@@ -117,25 +111,26 @@ public class Game extends Observable implements Observer {
 		initActors();
 	}
 
+    private void step(){
+        //physicsUpdate();
+        myCollisionDetector.detection(getCurrentActors());
+        signalTick();
+        updateActors();
+        count++;
+    }
 
-    /**
-     * The step method that states what will happen with each Timeline frame
-     */
+    private void signalTick(){
+        handleTrigger(new TickTrigger(count));
+    }
 
-	private void step(){
-		myCollisionDetector.detection(getCurrentActors());
-		signalTick();
-		updateActors();
-	}
-	
-	private void signalTick(){
-		handleTrigger(new TickTrigger());
+
+	private void updateBackground() {
+		this.levels.get(info.getMyCurrentLevelNum()).scrollBackground(BACKGROUND_SCROLL_SPEED);
 	}
 
     /**
      * Initializes the Actors
      */
-
 	private void initActors(){
 		for(IPlayActor a: getCurrentActors()){
 			((Observable)a).addObserver(this);

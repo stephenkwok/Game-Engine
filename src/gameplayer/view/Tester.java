@@ -90,13 +90,14 @@ public class Tester extends Application {
 		Action action3 = new HorizontalStaticCollision((IPlayActor)actor1);
 		Action action4 = new MoveUp((IPlayActor)actor1);
 		Action action5 = new VerticalBounceCollision((IPlayActor)actor1);
-		Action action6 = new WinGame((IPlayActor)actor1);
+		Action action6 = new HorizontalStaticCollision((IPlayActor)actor1);
 		Rule rule = new Rule(trigger1,action1);
 		Rule rule2 = new Rule(trigger2, action2);
 		Rule rule3 = new Rule(trigger3,action3);
 		Rule rule4 = new Rule(trigger4,action4);
 		Rule rule5 = new Rule(trigger5,action5);
 		Rule rule6 = new Rule(trigger6,action6);
+
 		actor1.addRule(rule);
 		actor1.addRule(rule2);
 		actor1.addRule(rule3);
@@ -107,7 +108,6 @@ public class Tester extends Application {
 //		actor1.setMain(true);
 //		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
 //		actor1.addAttribute(points);
-
 		
 		List<Level> levels = new ArrayList<Level>();
 		Level level1 = new Level();

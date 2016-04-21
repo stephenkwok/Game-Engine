@@ -41,7 +41,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	private String myImageViewName;
     @XStreamOmitField
     private ImageView myImageView;
-    private Map<String, List<Action>> myRules;
+    private Map<String, List<Rule>> myRules;
     private Map<AttributeType, Attribute> attributeMap;
     private PhysicsEngine myPhysicsEngine;
     private List<ActorRule> myActorRules;
@@ -67,14 +67,13 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     /**
      * Calls the appropriate sequence of Actions based on a provided Trigger
      *
-     * @param triggerString The string representation of the trigger to be executed
+     * @param myTrigger The trigger to be used
      */
-    @Override
-    public void performActionsFor(String triggerString) {
-    	if(myRules.containsKey(triggerString)){
-            List<Action> myActions = myRules.get(triggerString);
-            for (Action myAction : myActions) {
-                myAction.perform();
+    public void performActionsFor(ITrigger myTrigger) {
+    	if(getRules().containsKey(myTrigger.getMyKey())){
+            List<Rule> myBehaviors = myRules.get(myTrigger.getMyKey());
+            for (Rule myRule : myBehaviors) {
+                if (myRule.getMyTrigger().evaluate(myTrigger)) myRule.getMyAction().perform();
             }
     	}
     }
@@ -119,15 +118,15 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      * @param newRule The Rule to be added to the Actor
      */
     @Override
-    public void addRule(IRule newRule) {
+    public void addRule(Rule newRule) {
         if (myRules.containsKey(newRule.getMyTrigger().getMyKey())) {
-            List<Action> myActions = myRules.get(newRule.getMyTrigger().getMyKey());
-            myActions.add(newRule.getMyAction());
-            myRules.put(newRule.getMyTrigger().getMyKey(), myActions);
+            List<Rule> myBehaviors = myRules.get(newRule.getMyTrigger().getMyKey());
+            myBehaviors.add(newRule);
+            myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
         } else {
-            List<Action> myActions = new ArrayList<>();
-            myActions.add(newRule.getMyAction());
-            myRules.put(newRule.getMyTrigger().getMyKey(), myActions);
+            List<Rule> myBehaviors = new ArrayList<>();
+            myBehaviors.add(newRule);
+            myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
         }
     }
 
@@ -319,8 +318,16 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      * Provides the Actor's Rules
      * @return  The Actor's Rules
      */
-    public Map<String, List<Action>> getRules() {
+    public Map<String, List<Rule>> getRules() {
 		return myRules;
+	}
+
+    /**
+     * Sets the Actor's Rules
+     * @param myRules   A new set of Actor rules
+     */
+    public void setMyRules(Map<String, List<Rule>> myRules) {
+		this.myRules = myRules;
 	}
 
     /**
