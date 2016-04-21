@@ -2,6 +2,7 @@ package gameengine.controller;
 
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 import javafx.beans.property.DoubleProperty;
@@ -314,6 +315,15 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 		myBackgroundX = new SimpleDoubleProperty(myBackground.getX());
 	}
 
+	public IPlayActor getMainCharacter(){
+		for(IPlayActor a: myActors){
+			if(a.checkState(ActorState.MAIN)){
+				return a;
+			}
+		}
+		return null;
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
