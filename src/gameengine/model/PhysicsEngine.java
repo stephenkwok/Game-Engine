@@ -58,11 +58,7 @@ public class PhysicsEngine {
 		double nextVertVelo;
 		double nextXPos;
 		double nextYPos;
-		
-
-		forceYdownward = getGravity();
-	
-				
+		forceYdownward = getGravity();				
 		nextHorzVelo = xVelo;      		
 		nextVertVelo = applyForce(yVelo, forceYupward);                      // Apply  y force from movement action to y velocity
 		nextVertVelo = applyForce(nextVertVelo, forceYdownward);             //Applies gravitational force onto Actor's velocity 
@@ -248,6 +244,26 @@ public class PhysicsEngine {
 
 	public void setFloorHeight(double floorHeight) {
 		this.floorHeight = floorHeight;
+	}
+
+	public void moveForward(IPlayActor a1) {
+		update(a1, getHorizontalForce()*Math.cos(Math.toRadians(a1.getHeading())), 0, 0, a1.getFriction());
+		update(a1,-getHorizontalForce()*Math.sin(Math.toRadians(a1.getHeading())), 0, 0, a1.getFriction());
+	}
+
+	public void moveBackward(IPlayActor iPlayActor) {
+		update(iPlayActor, -getHorizontalForce()*Math.cos(Math.toRadians(iPlayActor.getHeading())), 0, 0, iPlayActor.getFriction());
+		update(iPlayActor,  getHorizontalForce()*Math.sin(Math.toRadians(iPlayActor.getHeading())), 0, 0, iPlayActor.getFriction());
+	}
+
+	public void glideBackward(IPlayActor myActor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void glideForward(IPlayActor myActor) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
