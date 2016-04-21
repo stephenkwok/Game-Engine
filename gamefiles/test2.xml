@@ -14,7 +14,7 @@
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>
           <myName>A1</myName>
-          <myID>0</myID>
+          <myID>11</myID>
           <myImageViewName>redball.png</myImageViewName>
           <myHeading>0.0</myHeading>
           <myRules>
@@ -72,7 +72,7 @@
                       <veloY>0.0</veloY>
                       <myFriction>0.0</myFriction>
                       <myName>A2</myName>
-                      <myID>0</myID>
+                      <myID>68</myID>
                       <myImageViewName>block.png</myImageViewName>
                       <myHeading>0.0</myHeading>
                       <myRules>
@@ -104,7 +104,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -129,7 +129,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -154,7 +154,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -179,7 +179,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -204,7 +204,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -229,7 +229,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -254,7 +254,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -279,7 +279,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -304,7 +304,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -329,7 +329,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -354,7 +354,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -379,7 +379,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -404,7 +404,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -429,7 +429,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -454,7 +454,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -479,7 +479,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -504,7 +504,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -529,7 +529,7 @@
                                   <veloY>0.0</veloY>
                                   <myFriction>0.0</myFriction>
                                   <myName>floor</myName>
-                                  <myID>0</myID>
+                                  <myID>40</myID>
                                   <myImageViewName>square.png</myImageViewName>
                                   <myHeading>0.0</myHeading>
                                   <myRules/>
@@ -967,9 +967,7 @@
           </myRules>
           <attributeMap/>
           <myActorRules/>
-          <myStates>
-            <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
-          </myStates>
+          <myStates/>
         </gameengine.model.Actor>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRules/entry[4]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRules/entry[4]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
@@ -982,7 +980,7 @@
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>
           <myName>enemy</myName>
-          <myID>0</myID>
+          <myID>56</myID>
           <myImageViewName>redball.png</myImageViewName>
           <myHeading>0.0</myHeading>
           <myRules>
