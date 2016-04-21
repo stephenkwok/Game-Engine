@@ -5,7 +5,6 @@ import gameengine.model.Actor;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.Rule;
-import gameengine.model.Actions.Action;
 import gameengine.model.Actions.*;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.KeyTrigger;
@@ -75,6 +74,11 @@ public class Tester extends Application {
 		actor3.setY(100);
 		actor3.setX(800);
 		
+		KeyTrigger triggerDown = new KeyTrigger(KeyCode.DOWN);
+		Action moveForwards = new MoveBackward((IPlayActor) actor1);
+		Rule movingForwards = new Rule(triggerDown, moveForwards);
+		actor1.addRule(movingForwards);
+		
 		KeyTrigger trigger1 = new KeyTrigger(KeyCode.RIGHT);
 		KeyTrigger trigger2 = new KeyTrigger(KeyCode.LEFT);
 		SideCollision trigger3 = new SideCollision((IPlayActor)actor1,(IPlayActor)actor2);
@@ -90,7 +94,7 @@ public class Tester extends Application {
 		Action action3 = new HorizontalStaticCollision((IPlayActor)actor1);
 		Action action4 = new MoveUp((IPlayActor)actor1);
 		Action action5 = new VerticalBounceCollision((IPlayActor)actor1);
-		Action action6 = new HorizontalStaticCollision((IPlayActor)actor1);
+		Action action6 = new WinGame((IPlayActor)actor1);
 		Rule rule = new Rule(trigger1,action1);
 		Rule rule2 = new Rule(trigger2, action2);
 		Rule rule3 = new Rule(trigger3,action3);

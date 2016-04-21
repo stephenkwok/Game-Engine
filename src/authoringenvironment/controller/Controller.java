@@ -21,7 +21,9 @@ import authoringenvironment.view.GUIMainScreen;
 import authoringenvironment.view.GameEditingEnvironment;
 import authoringenvironment.view.HBoxWithEditable;
 import authoringenvironment.view.LevelEditingEnvironment;
+import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
+import gamedata.controller.FileChooserController;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
@@ -46,6 +48,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import gui.view.Screen;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -62,6 +65,7 @@ public class Controller extends BranchScreenController implements Observer {
 	private static final int WINDOW_WIDTH = 1300;
 	private static final int PADDING = 10;
 	private static final String SPLASH_IMAGE_NAME = "salad.png";
+	private static final String EDITING_CONTROLLER_RESOURCE = "editingActions";
 	private List<Level> myLevels;
 	private List<String> myLevelNames;
 	private Map<IAuthoringActor, List<IAuthoringActor>> myActors;
@@ -72,6 +76,7 @@ public class Controller extends BranchScreenController implements Observer {
 	private GUIMainScreen mainScreen;
 	private GUIMain guiMain;
 	private ResourceBundle myResources;
+	private ResourceBundle myButtonResource;
 	private Game game;
 	private GameInfo gameInfo;
 	private Scene myScene;
@@ -81,6 +86,7 @@ public class Controller extends BranchScreenController implements Observer {
 
 	public Controller(Stage myStage) {
 		super(myStage);
+		this.myButtonResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
 		init();
 	}
 
@@ -209,7 +215,8 @@ public class Controller extends BranchScreenController implements Observer {
 	 *            file to write to.
 	 */
 	public void saveGame() {
-		File file = promptForFileName(true);
+		FileChooser fileChooser = new FileChooser();
+		File file = fileChooser.showSaveDialog(new Stage());
 		Game g = new Game(gameInfo, myLevels); 
 		CreatorController controller;
 		try {
@@ -289,9 +296,30 @@ public class Controller extends BranchScreenController implements Observer {
 
 	public void switchGame() {
 		// TODO Auto-generated method stub
-
 	}
-
+	
+/*	@Override
+	public void update(Observable o, Object arg) {
+		String button = (String) arg;
+		String method = myButtonResource.getString(button);
+		System.out.println(method);
+		try {
+			this.getClass().getDeclaredMethod(method).invoke(this);
+		} catch (NoSuchMethodException e) {
+			try {
+				this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+*/
 	// Use reflection - properties file linking button name to a method name
 	@Override
 	public void update(Observable arg0, Object arg1) {

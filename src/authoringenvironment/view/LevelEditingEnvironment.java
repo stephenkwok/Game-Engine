@@ -337,6 +337,6 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	public void removeActorFromLevel(ImageviewActorIcon icon) {
 		myActorPreviews.remove(icon);
 		myLevelPane.getChildren().remove(icon);
-		myLevel.removeActor((Actor) icon.getActor()); 
+		myLevel.removeActor((Actor) icon.getRefActor()); 
 	}
 }

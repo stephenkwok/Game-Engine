@@ -1,10 +1,10 @@
 	package gameengine.model.Actions;
 
 
-import gameengine.model.Actions.MovingAction;
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
 import gameengine.model.PhysicsEngine;
+import gameengine.model.Actions.MovingAction;
 
 import java.util.List;
 
@@ -23,5 +23,6 @@ public class MoveLeft extends MovingAction {
 
     public void perform() {
         getMyActor().getPhysicsEngine().moveLeft(getMyActor());
+        getMyActor().setHeading(180);
     }
 }

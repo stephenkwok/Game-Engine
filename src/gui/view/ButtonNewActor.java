@@ -1,5 +1,7 @@
 package gui.view;
 
+import authoringenvironment.controller.Controller;
+
 /**
  * Button for adding a new actor.
  * @author amyzhao
@@ -22,7 +24,7 @@ public class ButtonNewActor extends ButtonParent {
 	 */
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnAction(e -> notifyObservers(null));
+		getButton().setOnAction(e -> notifyController("ButtonNewActor"));
 	}
 
 }

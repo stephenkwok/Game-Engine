@@ -22,7 +22,7 @@ public class ButtonNewLevel extends ButtonParent {
 	 */
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnAction(e -> notifyObservers(null));
+		getButton().setOnAction(e -> notifyController("ButtonNewLevel"));
 	}
 
 }

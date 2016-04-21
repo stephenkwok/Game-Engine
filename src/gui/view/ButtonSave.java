@@ -1,4 +1,5 @@
 package gui.view;
+
 /**
  * Button to save game
  * @author AnnieTang
@@ -12,6 +13,6 @@ public class ButtonSave extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnMouseClicked(e -> notifyController(null));
-	}	
+		getButton().setOnMouseClicked(e -> notifyController("ButtonSave"));
+	}
 }

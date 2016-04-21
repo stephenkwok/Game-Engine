@@ -1,11 +1,12 @@
 package gui.view;
 
+import java.util.Observable;
 import java.util.Observer;
 
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
-public class PaneParent implements IGUIElement{
+public class PaneParent extends Observable implements IGUIElement{
 
 	private Pane myPane;
 	
@@ -20,8 +21,7 @@ public class PaneParent implements IGUIElement{
 
 	@Override
 	public void addNodeObserver(Observer observer) {
-		// TODO Auto-generated method stub
-		
+		this.addObserver(observer);		
 	}
 
 }
