@@ -104,5 +104,8 @@ public interface IPlayActor {
 
 	public Map<String, List<Rule>> getRules();
 
+	public void setHeading(double h);
+
+	public double getHeading();
     
 }

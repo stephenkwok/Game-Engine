@@ -1,5 +1,8 @@
 package gameplayer.controller;
 
+import java.util.List;
+
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -8,6 +11,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import gamedata.controller.HighScoresController;
 import gameengine.controller.Game;
 import gameengine.controller.Level;
+import gameengine.model.Actor;
 import gameengine.model.IDisplayActor;
 import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
@@ -146,7 +150,7 @@ public class GameController implements Observer, IGameController {
 			@Override
 			public String call(ButtonType b) {
 				if (b == ButtonType.OK) {
-					saveGame(dialog.getEditor().getText());
+					saveGameScore(dialog.getEditor().getText());
 					return dialog.getEditor().getText();
 				}
 				else {
@@ -156,8 +160,8 @@ public class GameController implements Observer, IGameController {
 		});
 	}
 
-	private void saveGame(String name) {
-		HighScoresController c = new HighScoresController(this.getGame().getInfo().getMyFile());
+	private void saveGameScore(String name) {
+		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
 		c.saveHighScore(getGame().getScore(), name);
 
 	}
@@ -192,11 +196,18 @@ public class GameController implements Observer, IGameController {
 
 	@Override
 	public void update(Observable o, Object arg) {
+//		List<Object> myList = (List<Object>) arg;
+//		String methodName = (String) myList.get(0);
+//		Actor myActor = (Actor) myList.get(1);
+		
 		if(o.equals(view)){
 			model.getCurrentLevel().handleTrigger((ITrigger)arg);
 		}
 		if(o.equals(model)){
 			try{
+//				if (arg instanceof ArrayList<?>) {
+//					this.getClass().getDeclaredMethod(methodName).invoke(this, myActor);
+//				}
 				this.getClass().getDeclaredMethod(((String)arg)).invoke(this);
 			}
 			catch (Exception e){
@@ -205,6 +216,11 @@ public class GameController implements Observer, IGameController {
 		}
 	}
 
+	public void addActor(Actor a) {
+		model.addActor(a);
+		view.addActor(a);
+	}
+	
 	public void toggleSound() {
 		System.out.println("toggle sound unimplemented");
 	}

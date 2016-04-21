@@ -4,26 +4,17 @@ import java.util.List;
 import java.util.Observable;
 
 import gameengine.controller.Level;
-import gameengine.model.Actor;
 import gameengine.model.IActor;
 import gameengine.model.IDisplayActor;
-import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.KeyTrigger;
 import gui.view.Screen;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.NumberBinding;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.scene.Camera;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.SubScene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,7 +22,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
 
 /** 
  * This class serves as the private interface that a Game screen must implement in order to be able to add visual elements of the game to the screen.
@@ -112,8 +102,6 @@ public class GameScreen extends Observable implements IGameScreen {
 			notifyObservers(trigger);
 		}
 		else if(e.getEventType()==KeyEvent.KEY_PRESSED){
-			//myCamera.setTranslateX(changeCamera(93.4, 0));
-			//changeCamera(0,-10);
 			ITrigger trigger = handleKeyPress(((KeyEvent)e).getCode());
 			setChanged();
 			notifyObservers(trigger);
@@ -184,8 +172,8 @@ public class GameScreen extends Observable implements IGameScreen {
 
 	@Override
 	public void changeCamera(double x, double y) {
-		if (myCamera.getTranslateX()+x < myEndHorizontal - getScene().getWidth() &&
-				myCamera.getTranslateX()+x > 0) {
+		if (myCamera.getTranslateX()+x < myEndHorizontal - getScene().getWidth() && myCamera.getTranslateX()+x > 0) {
+			System.out.println("translate"+x);
 			myCamera.setTranslateX(myCamera.getTranslateX()+x);
 		}
 		

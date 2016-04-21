@@ -20,7 +20,6 @@ import javafx.util.Duration;
  *
  */
 
-
 public class Game extends Observable implements Observer {
 	public static final int SIZE = 400;
 	public static final int FRAMES_PER_SECOND = 60;
@@ -72,6 +71,7 @@ public class Game extends Observable implements Observer {
 		setAnimation(new Timeline());
 		getAnimation().setCycleCount(Timeline.INDEFINITE);
 		getAnimation().getKeyFrames().add(frame);
+		
 
 	}
 
@@ -295,6 +295,15 @@ public class Game extends Observable implements Observer {
 		this.deadActors = deadActors;
 	}
 
+	public void addActor(Actor newActor) {
+		currentActors.add(newActor);
+	}
+	
+    /**
+     * Provides a list of the current Actors
+     *
+     * @return  A list of the current Actors
+     */
 
 	public List<IPlayActor> getCurrentActors() {
 		return currentActors;
@@ -401,7 +410,8 @@ public class Game extends Observable implements Observer {
 
 	
 	public int getScore() {
-		return getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();
+		//return getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();
+		return 0;
 	}
 	
 	public IPlayActor getMainCharacter(){

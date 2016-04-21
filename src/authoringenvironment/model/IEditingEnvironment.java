@@ -1,6 +1,7 @@
 package authoringenvironment.model;
 
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * This class serves as the interface for all editing environments that edit an IEditableGameElement.
@@ -21,4 +22,5 @@ public interface IEditingEnvironment extends IEditingElement {
 	 */
 	public Pane getPane();
 
+	public Stage getStage();
 }

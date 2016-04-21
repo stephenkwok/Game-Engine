@@ -3,21 +3,30 @@ package authoringenvironment.view.behaviors;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.view.ActionFactory;
+import authoringenvironment.view.TriggerFactory;
+import gameengine.model.IAction;
+import gameengine.model.ITrigger;
 import gui.view.ComboBoxTextCell;
-import javafx.scene.control.ComboBox;
 /**
  * Parent abstract class for GUI representation of behaviors that take in a single parameter in ComboBox form
  * @author AnnieTang
- */
-public abstract class ComboBoxBehavior extends ComboBoxTextCell {
+ */ 
+public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuthoringRule{
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
 	private String value;
 	private String behaviorType;
+	private TriggerFactory triggerFactory;
+	private ActionFactory actionFactory;
+	private ResourceBundle myResources;
 	
 	public ComboBoxBehavior(String behaviorType, ResourceBundle myResources){
-		super(myResources, myResources.getString(behaviorType+PROMPT), myResources.getString(behaviorType+LABEL));
+		super(myResources.getString(behaviorType+PROMPT), myResources.getString(behaviorType+LABEL));
 		this.behaviorType = behaviorType;
+		this.triggerFactory = new TriggerFactory();
+		this.actionFactory = new ActionFactory(); 
+		this.myResources = myResources;
 	}
 	/**
 	 * On click, set general field to ComboBox content
@@ -26,10 +35,15 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell {
 	public void setButtonAction() {
 		getComboButton().setOnAction(event->{
 			this.value = (String) getComboBox().getValue();
+			createTriggerOrAction();
 		});
 	}
 	/**
-	 * Return list of elements in ComboBoxg
+	 * Create ITrigger or IAction depending on type of behavior
+	 */
+	abstract void createTriggerOrAction();
+	/**
+	 * Return list of elements in ComboBox
 	 */
 	@Override
 	abstract protected List<String> getOptionsList();
@@ -39,23 +53,46 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell {
 	 * @return
 	 */
 	public String getValue(){
-		return value;
+		return this.value;
 	}
 	
 	/**
 	 * Return String of behavior type
 	 * @return
 	 */
-	public String getBehaviorType(){
-		return behaviorType;
+	protected String getBehaviorType(){
+		return this.behaviorType;
+	}
+	
+	/**
+	 * Gets the trigger factory. 
+	 * @return factory
+	 */
+	protected TriggerFactory getTriggerFactory(){
+		return this.triggerFactory;
+	}
+	
+	/**
+	 * Gets the action factory. 
+	 * @return factory
+	 */
+	protected ActionFactory getActionFactory(){
+		return this.actionFactory;
 	}
 	/**
-	 * Return ComboBox
+	 * Get Resource Bundle
 	 * @return
 	 */
-	@SuppressWarnings("rawtypes")
-	public ComboBox getComboBox(){
-		return getComboBox();
+	protected ResourceBundle getResources(){
+		return this.myResources;
 	}
-
+	
+	@Override
+	public abstract IAction getAction();
+	
+	@Override
+	public abstract ITrigger getTrigger();
+	
+	@Override
+	protected abstract void updateValueBasedOnEditable();
 }
