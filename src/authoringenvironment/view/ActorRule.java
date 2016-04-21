@@ -25,9 +25,6 @@ import javafx.scene.paint.Color;
  *
  */
 public class ActorRule {
-	private static final int PADDING = 20;
-	private static final double RULE_HEIGHT = 250;
-	private static final int CORNER_RADIUS = 20;
 	private GridPane myRule;	
 	private VBox triggers;
 	private VBox actions;
@@ -65,9 +62,9 @@ public class ActorRule {
 		this.actorRuleFactory = new ActorRuleFactory(myFactoryResources, myActorRuleCreator.getActor(), myController.getActorMap(), myController.getLevels());
 		this.triggerBehaviors = myFactoryResources.getString("TriggerBehaviors");
 		myRule = new GridPane(); 
-		myRule.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
-		myRule.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
-		myRule.setPrefSize(myActorRuleCreator.getGridPane().getWidth()*Double.parseDouble(myActorRuleResources.getString("RuleWidthPercent")), RULE_HEIGHT);
+		myRule.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(Integer.parseInt(myActorRuleResources.getString("CornerRadius"))), Insets.EMPTY)));
+		myRule.setPadding(new Insets(Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding"))));
+		myRule.setPrefSize(myActorRuleCreator.getGridPane().getWidth()*Double.parseDouble(myActorRuleResources.getString("RuleWidthPercent")), Integer.parseInt(myActorRuleResources.getString("RuleHeight")));
 		addTriggerActionLabels();
 		addTriggerActionContainers();
 		addCloseButton();
@@ -86,10 +83,10 @@ public class ActorRule {
 	 * Add containers for triggers and actions where user can drop behaviors.
 	 */
 	private void addTriggerActionContainers(){
-		triggers = new VBox(PADDING);
+		triggers = new VBox(Integer.parseInt(myActorRuleResources.getString("Padding")));
 		triggers.setPrefSize(myRule.getPrefWidth()*Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")), 
 				myRule.getPrefHeight()*Double.parseDouble(myActorRuleResources.getString("ContainerHeightPercent")));
-		actions = new VBox(PADDING);
+		actions = new VBox(Integer.parseInt(myActorRuleResources.getString("Padding")));
 		actions.setPrefSize(myRule.getPrefWidth()*Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")), 
 				myRule.getPrefHeight()*Double.parseDouble(myActorRuleResources.getString("ContainerHeightPercent")));
 		trigScroll = new ScrollPane(triggers);
