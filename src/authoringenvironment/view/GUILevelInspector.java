@@ -23,6 +23,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class GUILevelInspector implements IGUI {
 	private static final String BUTTON_LABEL = "Choose a new background image";
@@ -151,7 +152,7 @@ public class GUILevelInspector implements IGUI {
         List<String> extensions = Arrays.asList(EXTENSIONS.split(" "));
         FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter(EXTENSION_FILTER_DESCRIPTION, extensions);
         myFileChooser.getExtensionFilters().add(myFilter);
-        return myFileChooser.showOpenDialog(myController.getStage());
+        return myFileChooser.showOpenDialog(new Stage());
     }
 
 }

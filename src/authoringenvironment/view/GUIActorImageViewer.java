@@ -22,6 +22,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class GUIActorImageViewer implements IGUI {
 	private static final String AVAILABLE_ACTOR_IMAGES = "Available Images";
@@ -110,7 +111,7 @@ public class GUIActorImageViewer implements IGUI {
         List<String> extensions = Arrays.asList(EXTENSIONS.split(" "));
         FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter(EXTENSION_FILTER_DESCRIPTION, extensions);
         myFileChooser.getExtensionFilters().add(myFilter);
-        return myFileChooser.showOpenDialog(myController.getStage());
+        return myFileChooser.showOpenDialog(new Stage());
     }
     /**
      * Return Pane representation of actor image viewer

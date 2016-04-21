@@ -52,16 +52,19 @@ public class Controller extends BranchScreenController {
 
 	public Controller(Stage stage) {
 		super(stage);
-		setUpScreen();
+		this.myStage = stage;
 		this.myResources = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
+		//DEPENDENCY
+		setUpScreen();
 		changeScreen(guiMain);
 	}
 	
 	
 	private void setUpScreen(){
 		this.guiMain = new GUIMain();
-		//init();
+		init();
 		this.guiMain.addObserver(this);
+		guiMain.init();
 	}
 	//TODO This constructor is not parallel with other BranchScreenController subclasses
 	//Create a resource bundle for the Controller's actions associated to buttons it handles, but the resource bundle for the GUIFactory should be stored in and set up in the GUIMain
@@ -130,7 +133,7 @@ public class Controller extends BranchScreenController {
 	}
 
 	public void loadGame() {
-		FileChooserController fileChooserController = new FileChooserController(myStage,ChooserType.EDIT);
+		FileChooserController fileChooserController = new FileChooserController(super.getStage(),ChooserType.EDIT);
 	}
 
 	/**
@@ -193,7 +196,7 @@ public class Controller extends BranchScreenController {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		String method = (String) arg;
+		String method = myResources.getString((String) arg);
 		try {
 			this.getClass().getDeclaredMethod(method).invoke(this);
 		} catch (NoSuchMethodException e) {

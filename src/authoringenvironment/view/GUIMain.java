@@ -39,7 +39,7 @@ public class GUIMain extends Screen implements IGUI, Observer {
 	public GUIMain()  {
 		super();
 		setUpResourceBundle(GUI_RESOURCE);
-		init();
+		//init();
 	}
 	
 	/**
@@ -121,14 +121,14 @@ public class GUIMain extends Screen implements IGUI, Observer {
 	 * @return
 	 */
 	public double getWidth() {
-		return myScene.getWidth();
+		return WINDOW_WIDTH;
 	}
 	/**
 	 * Return height of authoring environment Scene
 	 * @return
 	 */
 	public double getHeight() {
-		return myScene.getHeight();
+		return WINDOW_HEIGHT;
 	}
 
 	@Override
