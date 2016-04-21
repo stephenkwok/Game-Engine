@@ -2,6 +2,7 @@ package gameplayer.view;
 
 import gameengine.controller.*;
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.Rule;
@@ -14,6 +15,7 @@ import gameengine.model.Triggers.TopCollision;
 import gameplayer.controller.GameController;
 import javafx.application.Application;
 import javafx.scene.Group;
+import javafx.scene.ParallelCamera;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
@@ -143,7 +145,7 @@ public class Tester extends Application {
 		actor1.addRule(rule5);
 		actor1.addRule(rule6);
 		
-//		actor1.setMain(true);
+		actor1.addState(ActorState.MAIN);
 //		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
 //		actor1.addAttribute(points);
 		
@@ -186,7 +188,7 @@ public class Tester extends Application {
 		Game model = new Game(info,levels);
 		CreatorController c = new CreatorController(model);
 		c.saveForEditing(new File("gamefiles/test2.xml"));
-		PerspectiveCamera camera = new PerspectiveCamera();
+		ParallelCamera camera = new ParallelCamera();
 		GameScreen view = new GameScreen(camera);
 
 		GameController controller = new GameController(model);
@@ -200,12 +202,6 @@ public class Tester extends Application {
 		Stage stage = new Stage();
 		stage.setWidth(800);
 		stage.setHeight(600);
-
-//		CreatorController c = new CreatorController(model);
-//		System.out.println(c);
-//		File myF = new File("gamefiles/testhud.xml");
-//		System.out.println(myF);
-//		c.saveForEditing(myF);
 		
 		sub.setCamera(camera);
 		stage.setScene(scene);
