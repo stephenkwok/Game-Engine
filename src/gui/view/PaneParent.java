@@ -21,8 +21,7 @@ public class PaneParent extends Observable implements IGUIElement{
 
 	@Override
 	public void addNodeObserver(Observer observer) {
-		this.addObserver(observer);
-		
+		this.addObserver(observer);		
 	}
 
 }

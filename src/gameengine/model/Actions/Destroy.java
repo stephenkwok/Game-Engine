@@ -14,6 +14,7 @@ public class Destroy extends Action {
 
     @Override
     public void perform() {
+    	System.out.println("blahaahhaaHAHAHAH");
         getMyActor().addState(ActorState.DEAD);
     }
 

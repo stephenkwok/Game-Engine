@@ -1,6 +1,5 @@
 package gui.view;
 
-import authoringenvironment.controller.Controller;
 /**
  * Button to return to main screen
  * @author AnnieTang
@@ -16,9 +15,7 @@ public class ButtonHome extends ButtonParent{
 	 */
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnAction(event -> {
-			setChanged();
-			notifyObservers();
-		});
+		getButton().setOnAction(e -> notifyController("ButtonHome"));
 	}
+	
 }

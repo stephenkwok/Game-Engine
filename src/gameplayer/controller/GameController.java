@@ -24,9 +24,8 @@ import gameplayer.view.HUDScreen;
 import gui.view.IGUIElement;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
-import javafx.collections.MapChangeListener.Change;
 import javafx.collections.ObservableMap;
-import javafx.scene.PerspectiveCamera;
+import javafx.scene.ParallelCamera;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
@@ -51,7 +50,7 @@ public class GameController implements Observer, IGameController {
 	
 	public GameController(Game game) {
 		this.setGame(game);
-		this.setGameView(new GameScreen(new PerspectiveCamera()));
+		this.setGameView(new GameScreen(new ParallelCamera()));
 		this.initialize(game.getInfo().getMyCurrentLevelNum()); //note: main actor is define at this line
 		this.myResources = ResourceBundle.getBundle("gameActions");
 	}
@@ -85,16 +84,15 @@ public class GameController implements Observer, IGameController {
 	 */
 	public void initialize (int level){
 		model.setCurrentLevel(level);
-		//model.getMainCharacter().changeAttribute(AttributeType.POINTS, 0);
-		ObservableMap<String, Object> a = FXCollections.observableHashMap();
-		a.addListener(new MapChangeListener<String, Object>() {
-			@Override
-			public void onChanged(Change<? extends String, ? extends Object> change) {
-				if(change!=null && hud != null)
-					hud.handleChange(change);
-			}
-		});
-		a.put("Points", 0);
+//		ObservableMap<String, Object> a = FXCollections.observableHashMap();
+//		a.addListener(new MapChangeListener<String, Object>() {
+//			@Override
+//			public void onChanged(Change<? extends String, ? extends Object> change) {
+//				if(change!=null && hud != null)
+//					hud.handleChange(change);
+//			}
+//		});
+//		a.put("Points", 0);
 		begin();
 	}
 
@@ -245,19 +243,25 @@ public class GameController implements Observer, IGameController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+//		List<Object> myList = (List<Object>) arg;
+//		String methodName = (String) myList.get(0);
+//		Actor myActor = (Actor) myList.get(1);
+		
 		if(o.equals(model)){
 			
 			try{
 				if (arg instanceof ArrayList<?>) {
 					this.getClass().getDeclaredMethod(methodName).invoke(this, arg2);
 				}
+//				if (arg instanceof ArrayList<?>) {
+//					this.getClass().getDeclaredMethod(methodName).invoke(this, myActor);
+//				}
 				this.getClass().getDeclaredMethod(((String)arg)).invoke(this);
 			}
 			catch (Exception e){
 				//hud.handleChange((Change)arg);
 			}
-		}
+		}}
 	}
 
 	public void addActor(Actor a) {
@@ -289,7 +293,15 @@ public class GameController implements Observer, IGameController {
 		System.out.println(model.getInfo().getMyCurrentLevelNum() + " game level");
 		initialize(model.getInfo().getMyCurrentLevelNum());
 	}
-
+	
+	public void updateCamera(){
+		if(model.getCurrentLevel().getMyScrollingDirection().equals("Horizontally")){
+			view.changeCamera(model.getMainCharacter().getVeloX(), 0);
+		}else{
+			view.changeCamera(0, model.getMainCharacter().getVeloY());
+		}
+	}
+	
 	@Override
 	public void preview() {
 		// TODO Auto-generated method stub

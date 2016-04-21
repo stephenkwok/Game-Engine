@@ -25,7 +25,6 @@ public abstract class ComboBoxParent extends EditingElementParent {
 	private static final int VISIBLE_ROW_COUNT = 5;
 	private static final int HBOX_SPACING = 5;
 	private static final String GO = "Go";
-	private static final String NO_NODE_FOR_BOX = "";
 	private static final int BUTTON_HEIGHT = 30;
 	private static final int BUTTON_WIDTH = 40;
 	private String promptText;
@@ -151,7 +150,7 @@ public abstract class ComboBoxParent extends EditingElementParent {
 	 * Gets the combobox.
 	 * @return combobox.
 	 */
-	protected ComboBox<String> getComboBox() {
+	public ComboBox<String> getComboBox() {
 		return comboBox;
 	}
 }

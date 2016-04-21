@@ -1,14 +1,13 @@
 package authoringenvironment.view;
 
 import java.io.File;
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
-import authoringenvironment.controller.Controller;
-import gui.view.IGUIElement;
+import authoringenvironment.model.IAuthoringActor;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -20,7 +19,9 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import authoringenvironment.view.behaviors.ResourceOptionsBehavior;
+import gameengine.controller.Level;
+import gameengine.model.IAction;
+import gameengine.model.ITrigger;
 
 /**
  * Rule container for an actor containing behavior, images, and/or sounds.
@@ -41,13 +42,11 @@ public class ActorRule {
 	private static final int ACTIONS_ROW = 3;
 	private static final double RULE_HEIGHT = 250;
 	private static final int CORNER_RADIUS = 20;
-	private static final double RULE_PERCENT_WIDTH = 0.90;
-	private static final double STACKPANE_PERCENT_WIDTH = 0.92;
+	private static final double STACKPANE_PERCENT_WIDTH = 0.90;
 	private static final double STACKPANE_PERCENT_HEIGHT = 0.3;
 	private static final String CHANGE_IMAGE = "ChangeImage";
 	private static final String PLAY_SOUND = "PlaySound";
 	private static final String PLAY_MUSIC = "PlayMusic";
-	private double ruleWidth; 
 	private GridPane myRule;	
 	private VBox triggers;
 	private VBox actions;
@@ -57,12 +56,16 @@ public class ActorRule {
 	private ResourceBundle myLibraryResources;
 	private static final String LIBRARY_BUNDLE = "library";
 	private String triggerBehaviors;
-	private static final String PACKAGE = "authoringenvironment.view.behaviors.";
-	private static final String CLASS = "Class";
+	private ActorRuleFactory actorRuleFactory;
 	
-	public ActorRule(ActorRuleCreator myActorRuleCreator) {
+	private List<ITrigger> myTriggers;
+	private List<IAction> myActions;
+	
+	public ActorRule(ActorRuleCreator myActorRuleCreator, Map<IAuthoringActor, List<IAuthoringActor>> myActors, List<Level> myLevels) {
 		this.myActorRuleCreator = myActorRuleCreator;
-		this.ruleWidth = myActorRuleCreator.getGridPane().getPrefWidth()*RULE_PERCENT_WIDTH;
+		this.myLibraryResources = ResourceBundle.getBundle(LIBRARY_BUNDLE);
+		this.actorRuleFactory = new ActorRuleFactory(myLibraryResources, myActorRuleCreator.getActor(), myActors, myLevels);
+		this.triggerBehaviors = myLibraryResources.getString("TriggerBehaviors");
 		initializeEnvironment();
 	}
 	
@@ -78,12 +81,10 @@ public class ActorRule {
 	 * Create rule container and set preferences 
 	 */
 	private void initializeEnvironment() {
-		this.myLibraryResources = ResourceBundle.getBundle(LIBRARY_BUNDLE);
-		this.triggerBehaviors = myLibraryResources.getString("TriggerBehaviors");
 		myRule = new GridPane(); 
 		myRule.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
 		myRule.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
-		myRule.setPrefSize(ruleWidth, RULE_HEIGHT);
+		myRule.setPrefSize(myActorRuleCreator.getGridPane().getWidth(), RULE_HEIGHT);
 		addTriggerActionLabels();
 		addTriggerActionContainers();
 		addCloseButton();
@@ -128,15 +129,12 @@ public class ActorRule {
 	 * @param behavior
 	 */
 	public void addBehavior(Label behavior) {
-		Node toAdd = getBehaviorHBox(behavior.getText(),null);
+		Node toAdd = actorRuleFactory.getAuthoringRule(behavior.getText(),null).createNode();
 		toAdd.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2) remove(toAdd);
 		});
 		if(isTrigger(behavior.getText())) {
 			triggers.getChildren().add(toAdd);
-//			TriggerFactory testFactory= new TriggerFactory(ResourceBundle.getBundle("triggeraction"));
-//			ITrigger itrigger = testFactory.createNewTrigger(behavior.getText(), new Actor());
-//			System.out.println(itrigger);
 		}
 		else actions.getChildren().add(toAdd);
 	}
@@ -155,14 +153,14 @@ public class ActorRule {
 	 */
 	public void addSound(Label sound) {
 		if(isInPath(sound.getText(), myLibraryResources.getString("Sounds"))){
-			Node toAdd = getBehaviorHBox(PLAY_SOUND, sound.getText());
+			Node toAdd = actorRuleFactory.getAuthoringRule(PLAY_SOUND, sound.getText()).createNode();
 			toAdd.setOnMouseClicked(event -> {
 				if(event.getClickCount()==2) remove(toAdd);
 			});
 			actions.getChildren().add(toAdd);
 		}
 		else{
-			Node toAdd = getBehaviorHBox(PLAY_MUSIC, sound.getText());
+			Node toAdd = actorRuleFactory.getAuthoringRule(PLAY_MUSIC, sound.getText()).createNode();
 			toAdd.setOnMouseClicked(event -> {
 				if(event.getClickCount()==2) remove(toAdd);
 			});
@@ -188,7 +186,7 @@ public class ActorRule {
 	 * @param image
 	 */
 	public void addImage(Label image) {
-		Node toAdd = getBehaviorHBox(CHANGE_IMAGE,image.getText());
+		Node toAdd = actorRuleFactory.getAuthoringRule(CHANGE_IMAGE,image.getText()).createNode();
 		toAdd.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2) remove(toAdd);
 		});
@@ -202,35 +200,5 @@ public class ActorRule {
 	public void remove(Node toRemove){
 		triggers.getChildren().remove(toRemove);
 		actions.getChildren().remove(toRemove);
-	}
-	
-	/**
-	 * Return expanded Node with parameter options for given behavior type
-	 * @param behaviorType
-	 * @param value
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	private Node getBehaviorHBox(String behaviorType, String value){
-		try{
-			String className = PACKAGE + myLibraryResources.getString(behaviorType+CLASS);
-			Class<?> clazz = Class.forName(className);
-			Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class);
-			IGUIElement element = ((IGUIElement) constructor.newInstance(behaviorType,myLibraryResources));
-			Node toReturn = element.createNode();
-			if(value!=null){
-				((ResourceOptionsBehavior) element).getComboBox().setValue(value);
-			}
-			return toReturn;
-		}catch(Exception e1){
-			try{
-				String className = PACKAGE + myLibraryResources.getString(behaviorType+CLASS);
-				Class<?> clazz = Class.forName(className);
-				Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, Controller.class);
-				return ((IGUIElement) constructor.newInstance(behaviorType,myLibraryResources,myActorRuleCreator.getController())).createNode();
-			}catch(Exception e2){
-				return new Label(behaviorType);
-			}
-		}
 	}
 }

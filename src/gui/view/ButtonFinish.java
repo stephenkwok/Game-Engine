@@ -1,6 +1,5 @@
 package gui.view;
 
-import authoringenvironment.controller.Controller;
 /**
  * On click, saves the game and returns user to the game player splash screen.
  * @author AnnieTang
@@ -17,10 +16,7 @@ public class ButtonFinish extends ButtonParent {
 	 */
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnAction(e -> {
-			setChanged();
-			notifyObservers();
-		});
+		getButton().setOnAction(e -> notifyController("ButtonFinish"));
 	}
 
 }
