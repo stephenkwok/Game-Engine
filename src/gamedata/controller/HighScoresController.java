@@ -51,7 +51,7 @@ public class HighScoresController implements IHighScoresController {
 			return scoresParser.getHighScoreInfo(myFile);
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
 			e.printStackTrace();
-			//this.myScreen.showError(e.getMessage());
+			this.myScreen.showError(e.getMessage());
 			return null;
 		}
 	}
@@ -80,6 +80,10 @@ public class HighScoresController implements IHighScoresController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public String getGameFile(){
+		return this.myGameFile;
 	}
 
 }

@@ -37,6 +37,8 @@ public abstract class BranchScreenController implements Observer {
 	protected Stage getStage() {
 		return this.myStage;
 	}
+	
+	
 
 
 }

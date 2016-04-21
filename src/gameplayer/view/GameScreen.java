@@ -1,10 +1,7 @@
 package gameplayer.view;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Observable;
-
-import gamedata.controller.HighScoresController;
+import java.util.Arrays;
 import gameengine.controller.Level;
 import gameengine.model.IActor;
 import gameengine.model.IDisplayActor;
@@ -179,12 +176,11 @@ public class GameScreen extends Observable implements IGameScreen {
 
 	@Override
 	public void changeCamera(double x, double y) {
-		if (myCamera.getTranslateX()+x < myEndHorizontal - getScene().getWidth() && myCamera.getTranslateX()+x > 0) {
-			myCamera.setTranslateX(myCamera.getTranslateX()+x);
+		if (x < myEndHorizontal - getScene().getWidth() && x > 0) {
+			myCamera.setTranslateX(x);
 		}
-		
-		if (myCamera.getTranslateY()+y > 0 && myCamera.getTranslateY()+y < myEndVertical - getScene().getHeight()) {		
-			myCamera.setTranslateY(myCamera.getTranslateY()+y);
+		if (y > 0 && y < myEndVertical - getScene().getHeight()) {		
+			myCamera.setTranslateY(y);
 		}
 	}
 
@@ -216,7 +212,7 @@ public class GameScreen extends Observable implements IGameScreen {
 
 	}
 	
-	public String saveScorePrompt() {
+	public void saveScorePrompt() {
 		TextInputDialog dialog = new TextInputDialog("Name");
 		dialog.setContentText("Please enter your name if you want to save your score");
 		dialog.show();
@@ -224,8 +220,10 @@ public class GameScreen extends Observable implements IGameScreen {
 			@Override
 			public String call(ButtonType b) {
 				if (b == ButtonType.OK) {
-					//setChanged();
-					//notifyObservers(dialog.getEditor().getText());
+					setChanged();
+					Object[] args = {"saveGameScore", dialog.getEditor().getText()};
+					notifyObservers(Arrays.asList(args));
+					//notifyObservers();
 					//saveGameScore(dialog.getEditor().getText());
 					return dialog.getEditor().getText();
 				}
@@ -234,7 +232,7 @@ public class GameScreen extends Observable implements IGameScreen {
 				}
 			}
 		});
-		return null;
+		//return null;
 	}
 
 //	private void saveGameScore(String name) {
