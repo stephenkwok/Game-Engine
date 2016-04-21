@@ -53,14 +53,12 @@ public class Game extends Observable implements Observer {
 		initialGameFile = gameFilePath;
 		levels = gameLevels;
 		info = gameInfo;
-		setCurrentActors(new ArrayList<IPlayActor>());
+		currentActors = new ArrayList<IPlayActor>();
 		setDeadActors(new ArrayList<IPlayActor>());
         myPhysicsEngine = new PhysicsEngine();
         myCollisionDetector = new CollisionDetection(myPhysicsEngine);
         
 		initTimeline();
-
-
 	}
 
 
@@ -102,23 +100,29 @@ public class Game extends Observable implements Observer {
      * Initializes the current actors
      */
 	public void initCurrentActors() {
-		setCurrentActors(getCurrentLevel().getActors());
+		currentActors = getCurrentLevel().getActors();
 		for (IPlayActor actor: currentActors) {
 			if (actor.checkState(ActorState.MAIN)) {
 				mainCharacter = actor;
 			}
+			((Observable)actor).addObserver(this);
+			actor.setPhysicsEngine(myPhysicsEngine);
 		}
-		initActors();
 	}
 
     private void step(){
-        //physicsUpdate();
         myCollisionDetector.detection(getCurrentActors());
         signalTick();
+        updateCamera();
         updateActors();
         count++;
     }
 
+    private void updateCamera(){
+    	setChanged();
+    	notifyObservers("updateCamera");
+    }
+    
     private void signalTick(){
         handleTrigger(new TickTrigger(count));
     }
@@ -126,17 +130,6 @@ public class Game extends Observable implements Observer {
 
 	private void updateBackground() {
 		this.levels.get(info.getMyCurrentLevelNum()).scrollBackground(BACKGROUND_SCROLL_SPEED);
-	}
-
-    /**
-     * Initializes the Actors
-     */
-	private void initActors(){
-		for(IPlayActor a: getCurrentActors()){
-			((Observable)a).addObserver(this);
-			a.setPhysicsEngine(myPhysicsEngine);
-		}
-
 	}
 
 
@@ -270,7 +263,7 @@ public class Game extends Observable implements Observer {
 	}
 	
 	public void updateActors(){
-		setDeadActors(new ArrayList<IPlayActor>());
+		deadActors = new ArrayList<IPlayActor>();
 		for(IPlayActor a: getCurrentActors()){
 			if(a.checkState(ActorState.DEAD)){
 				deadActors.add(a);
@@ -279,7 +272,7 @@ public class Game extends Observable implements Observer {
 		if(deadActors.size()!=0){
 			removeDeadActors();
 		}
-		setCurrentActors(getCurrentLevel().getActors());
+		currentActors = getCurrentLevel().getActors();
 	}
 
     /**
@@ -314,11 +307,6 @@ public class Game extends Observable implements Observer {
 
 	public List<IPlayActor> getCurrentActors() {
 		return currentActors;
-	}
-
-
-	public void setCurrentActors(List<IPlayActor> list) {
-		this.currentActors = list;
 	}
 
     /**

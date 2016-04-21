@@ -2,6 +2,7 @@ package gameplayer.view;
 
 import gameengine.controller.*;
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.Rule;
@@ -14,6 +15,7 @@ import gameengine.model.Triggers.TopCollision;
 import gameplayer.controller.GameController;
 import javafx.application.Application;
 import javafx.scene.Group;
+import javafx.scene.ParallelCamera;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
@@ -58,21 +60,52 @@ public class Tester extends Application {
 		IAuthoringActor actor2 = (IAuthoringActor) new Actor();
 		actor2.setImageViewName("block.png");
 		actor2.setX(300);
+		actor2.setY(300);
 		actor2.setName("A2");
+
+		IPlayActor actor4 = new Actor();
+		((Actor) actor4).setName("enemy");
+		((IAuthoringActor)actor4).setImageViewName("redball.png");
+		actor4.setX(315);
+		BottomCollision enemyTrigger = new BottomCollision((IPlayActor)actor4, (IPlayActor)actor2);
+		Action enemyAction = new VerticalBounceCollision((IPlayActor) actor4);
+		Rule enemyRule = new Rule(enemyTrigger, enemyAction);
+		((Actor) actor4).addRule(enemyRule);
+		
+		//main character killed if it hits enemy from side or is bounced on by enemy
+		SideCollision kill = new SideCollision(actor4, (IPlayActor) actor1);
+		BottomCollision kill2 = new BottomCollision(actor4, (IPlayActor) actor1);
+		Action killAction = new Destroy((Actor) actor1);
+		Action killAction2 = new Destroy((Actor) actor1);
+		Rule killRule = new Rule(kill, killAction);
+		Rule killRule2 = new Rule(kill2, killAction2);
+		((Actor) actor4).addRule(killRule);
+		((Actor) actor4).addRule(killRule2);
+
+		//main character kills enemy if it hits it from above
+		TopCollision kill3 = new TopCollision(actor4, (IPlayActor)actor1);
+		Action killAction3 = new Destroy((Actor) actor4);
+		Rule killRule3 = new Rule(kill3, killAction3);
+		((Actor) actor4).addRule(killRule3);
 		
 		TickTrigger tick = new TickTrigger();
 		Action tick1 = new ApplyPhysics((IPlayActor)actor1);
 		Action tick2 = new ApplyPhysics((IPlayActor)actor2);
+		Action tick4 = new ApplyPhysics((IPlayActor) actor4);
 		Rule rule7 = new Rule(tick,tick1);
 		Rule rule8 = new Rule(tick,tick2);
+		Rule ruleEnemy = new Rule(tick, tick4);
 		actor1.addRule(rule7);
 		actor2.addRule(rule8);
+		((Actor) actor4).addRule(ruleEnemy);
 		
 		
 		IPlayActor actor3 = new Actor();
 		((IAuthoringActor)actor3).setImageViewName("flagpole.png");
 		actor3.setY(100);
 		actor3.setX(800);
+		
+		
 		
 		KeyTrigger triggerDown = new KeyTrigger(KeyCode.DOWN);
 		Action moveForwards = new MoveBackward((IPlayActor) actor1);
@@ -89,12 +122,15 @@ public class Tester extends Application {
 		Action action9 = new ChangeAttribute((IPlayActor)actor1,AttributeType.POINTS,1);
 		Rule rule9 = new Rule(trigger9,action9);
 		actor1.addRule(rule9);
+		
+		
 		Action action1 = new MoveRight((IPlayActor)actor1);
 		Action action2 = new MoveLeft((IPlayActor)actor1);
 		Action action3 = new HorizontalStaticCollision((IPlayActor)actor1);
 		Action action4 = new MoveUp((IPlayActor)actor1);
 		Action action5 = new VerticalBounceCollision((IPlayActor)actor1);
 		Action action6 = new WinGame((IPlayActor)actor1);
+		
 		Rule rule = new Rule(trigger1,action1);
 		Rule rule2 = new Rule(trigger2, action2);
 		Rule rule3 = new Rule(trigger3,action3);
@@ -109,7 +145,7 @@ public class Tester extends Application {
 		actor1.addRule(rule5);
 		actor1.addRule(rule6);
 		
-//		actor1.setMain(true);
+		actor1.addState(ActorState.MAIN);
 //		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
 //		actor1.addAttribute(points);
 		
@@ -119,7 +155,8 @@ public class Tester extends Application {
 		level1.addActor(actor1);
 		level1.addActor(actor2);
 		level1.addActor((IAuthoringActor)actor3);
-		
+		level1.addActor((IAuthoringActor) actor4);
+
 		for(int i=0; i<=17; i++){
 			Actor floor = new Actor();
 			floor.setName("floor");
@@ -151,7 +188,7 @@ public class Tester extends Application {
 		Game model = new Game(info,levels);
 		CreatorController c = new CreatorController(model);
 		c.saveForEditing(new File("gamefiles/test2.xml"));
-		PerspectiveCamera camera = new PerspectiveCamera();
+		ParallelCamera camera = new ParallelCamera();
 		GameScreen view = new GameScreen(camera);
 
 		GameController controller = new GameController(model);
@@ -165,12 +202,6 @@ public class Tester extends Application {
 		Stage stage = new Stage();
 		stage.setWidth(800);
 		stage.setHeight(600);
-
-//		CreatorController c = new CreatorController(model);
-//		System.out.println(c);
-//		File myF = new File("gamefiles/testhud.xml");
-//		System.out.println(myF);
-//		c.saveForEditing(myF);
 		
 		sub.setCamera(camera);
 		stage.setScene(scene);
