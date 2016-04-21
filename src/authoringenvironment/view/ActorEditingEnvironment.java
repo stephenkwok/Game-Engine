@@ -1,6 +1,7 @@
 package authoringenvironment.view;
 
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
@@ -55,7 +56,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	
 	private Stage myStage;
 
-	public ActorEditingEnvironment(ResourceBundle myResources, Stage stage, List<IAuthoringActor> myActors, List<Level> myLevels) {
+	public ActorEditingEnvironment(ResourceBundle myResources, Stage stage, Map<IAuthoringActor, List<IAuthoringActor>> myActors, List<Level> myLevels) {
 		this.myResources = myResources;
 		this.myStage = stage;
 		initializeEnvironment(myActors, myLevels);
@@ -70,7 +71,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	/**
 	 * Initialize resources and create actor editing environment by populating sections of the screen and setting default new Actor
 	 */
-	private void initializeEnvironment(List<IAuthoringActor> myActors, List<Level> myLevels) {
+	private void initializeEnvironment(Map<IAuthoringActor, List<IAuthoringActor>> myActors, List<Level> myLevels) {
 		myRoot = new BorderPane();
 		setDefaultActor();
 		myActorRuleCreator = new ActorRuleCreator(myActor, myStage.getWidth(), myActors, myLevels);
@@ -82,7 +83,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	 * Set Actor of actor editing environment to a default new Actor
 	 */
 	private void setDefaultActor() {
-		IAuthoringActor defaultActor = new Actor();
+		IAuthoringActor defaultActor = (IAuthoringActor) new Actor();
 		this.myActor = defaultActor;
 		this.myActorIV = new ImageviewActorIcon(defaultActor, ICON_HEIGHT);
 	}
@@ -160,8 +161,8 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	 * @param newImageView
 	 */
 	public void setActorImage(ImageView newImageView, String imageViewName) {
-		myActor.setMyImageView(newImageView);
-		myActor.setMyImageViewName(imageViewName);
+		myActor.setImageView(newImageView);
+		myActor.setImageViewName(imageViewName);
 		myActorIV = new ImageviewActorIcon(myActor, ICON_HEIGHT);
 		setLeftPane();
 	}

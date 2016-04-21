@@ -1,5 +1,7 @@
 package gui.view;
 
+import java.util.Observer;
+
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
 import javafx.geometry.Pos;
@@ -53,6 +55,12 @@ public class CheckBoxObject implements IGUIElement, IEditingElement {
 	 */
 	protected IEditableGameElement getEditableElement() {
 		return myEditableElement;
+	}
+
+	@Override
+	public void addNodeObserver(Observer observer) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

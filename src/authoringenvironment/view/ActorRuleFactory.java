@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
@@ -19,15 +20,15 @@ public class ActorRuleFactory {
 	private static final String CLASS = "Class";
 	private ResourceBundle myResources;
 	private IAuthoringActor myActor;
-	private List<IAuthoringActor> myActors;
+	private Map<IAuthoringActor, List<IAuthoringActor>> myActors;
 	private List<Level> myLevels;
 	private static final String CREATE = "create";
 	private static final String ELEMENT = "Element";
 	
-	public ActorRuleFactory(ResourceBundle myLibraryResources, IAuthoringActor myActor, List<IAuthoringActor> myActors, List<Level> myLevels){
+	public ActorRuleFactory(ResourceBundle myLibraryResources, IAuthoringActor myActor, Map<IAuthoringActor, List<IAuthoringActor>> myActors2, List<Level> myLevels){
 		this.myResources = myLibraryResources;
 		this.myActor = myActor;
-		this.myActors = myActors;
+		this.myActors = myActors2;
 		this.myLevels = myLevels;
 	}
 	

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
@@ -60,7 +61,7 @@ public class ActorRule {
 	private List<ITrigger> myTriggers;
 	private List<IAction> myActions;
 	
-	public ActorRule(ActorRuleCreator myActorRuleCreator, List<IAuthoringActor> myActors, List<Level> myLevels) {
+	public ActorRule(ActorRuleCreator myActorRuleCreator, Map<IAuthoringActor, List<IAuthoringActor>> myActors, List<Level> myLevels) {
 		this.myActorRuleCreator = myActorRuleCreator;
 		this.myLibraryResources = ResourceBundle.getBundle(LIBRARY_BUNDLE);
 		this.actorRuleFactory = new ActorRuleFactory(myLibraryResources, myActorRuleCreator.getActor(), myActors, myLevels);

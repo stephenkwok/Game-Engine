@@ -89,7 +89,7 @@ public abstract class IEditableGameElementBehavior extends EditingElementParent 
             setGraphic(null);
         } else {
         	HBox graphic = new HBox();
-        	graphic.getChildren().addAll(item.getMyImageView(), new Label(item.getMyName()));
+        	graphic.getChildren().addAll(item.getImageView(), new Label(item.getName()));
             setGraphic(graphic);
         }
        }

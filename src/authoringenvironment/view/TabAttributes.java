@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
+import gui.view.EditingElementParent;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
@@ -27,6 +29,7 @@ public class TabAttributes extends TabParent {
 	private VBox myContent;
 	private IEditableGameElement myEditableElement;
 	private List<IEditingElement> myEditingElements;
+	private Controller myController;
 	
 	/**
 	 * Constructor for an attributes tab.
@@ -43,6 +46,13 @@ public class TabAttributes extends TabParent {
 		myEditableElement = element;
 		myEditingElements = new ArrayList<>();
 		addElements();
+	}
+	
+	public void setController(Controller control) {
+		myController = control;
+		for (int i = 0; i < myEditingElements.size(); i++) {
+			((EditingElementParent) myEditingElements.get(i)).addObserver(control);
+		}
 	}
 
 	/**

@@ -54,8 +54,8 @@ public class HBoxWithEditable extends ObjectObservable implements IEditingElemen
 	 * Actor or Level's name and image
 	 */
 	public void update() {
-		myLabel.setText(IMAGE_TEXT_PADDING + myEditable.getMyName());
-		ImageView imageView = new ImageView(myEditable.getMyImageView().getImage());
+		myLabel.setText(IMAGE_TEXT_PADDING + myEditable.getName());
+		ImageView imageView = new ImageView(myEditable.getImageView().getImage());
 		imageView.setFitHeight(IMAGE_FIT_SIZE);
 		imageView.setPreserveRatio(true);
 		myLabel.setPadding(new Insets(LABEL_PADDING));

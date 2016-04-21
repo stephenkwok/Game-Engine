@@ -1,6 +1,7 @@
 package authoringenvironment.view.behaviors;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
@@ -32,6 +33,12 @@ public class SelfActionBehavior extends LabelBehavior {
 	@Override
 	public ITrigger getTrigger() {
 		return null;
+	}
+
+	@Override
+	public void addNodeObserver(Observer observer) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

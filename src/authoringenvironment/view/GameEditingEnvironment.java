@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import java.util.Observer;
 import java.util.ResourceBundle;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
@@ -155,6 +156,12 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 		editingEnvironmentContainer.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor,
 				previewImageContainer, HUDOptionsDisplay);
 		return myScrollPane;
+	}
+
+	@Override
+	public void addNodeObserver(Observer observer) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

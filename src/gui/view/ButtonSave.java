@@ -1,5 +1,4 @@
 package gui.view;
-import gui.controller.IScreenController;
 /**
  * Button to save game
  * @author AnnieTang
@@ -7,12 +6,12 @@ import gui.controller.IScreenController;
  */
 public class ButtonSave extends ButtonParent {
 
-	public ButtonSave(IScreenController myController, String buttonText, String imageName) {
-		super(myController, buttonText, imageName);
+	public ButtonSave(String buttonText, String imageName) {
+		super(buttonText, imageName);
 	}
 
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnMouseClicked(e -> notifyObservers(promptForFileName(true)));
+		getButton().setOnMouseClicked(e -> notifyController(null));
 	}	
 }

@@ -4,7 +4,6 @@ import java.util.Observable;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
-import gui.controller.IScreenController;
 import gui.view.ButtonSplash;
 import gui.view.GUIFactory;
 import gui.view.IGUI;
@@ -41,10 +40,8 @@ public class GUIMain extends Screen implements IGUI {
 	private GUIFactory factory;
 	private Scene splashScene;
 	
-	public GUIMain(Stage s, Scene splash) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		super(s);
-		this.splashScene = splash;
-		this.myStage = s;
+	public GUIMain() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		super();
 		init();
 	}
 	
@@ -59,8 +56,7 @@ public class GUIMain extends Screen implements IGUI {
 		myRoot = new BorderPane();
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		myController = new Controller(myStage, this, this.myResources);
-		factory = new GUIFactory(myResources, myController);
+		factory = new GUIFactory(myResources);
 		setTopPane();
 		setCenterPane();
 	}
@@ -113,7 +109,7 @@ public class GUIMain extends Screen implements IGUI {
 				
 			}
 			//temp
-			ButtonSplash splash = new ButtonSplash(myController, null, SPLASH_IMAGE_NAME);
+			ButtonSplash splash = new ButtonSplash(null, SPLASH_IMAGE_NAME);
 			hbox.getChildren().add(splash.createNode());
 		}catch(Exception e){
 			
@@ -127,17 +123,6 @@ public class GUIMain extends Screen implements IGUI {
 		return myRoot;
 	}
 	
-	@Override
-	public IScreenController setController() {			//REMOVE
-		// TODO Auto-generated method stub
-		return null;
-	}
-	/**
-	 * Returns user back to splash screen 
-	 */
-	public void goBackToSplash() {
-		myStage.setScene(splashScene);
-	}
 	/**
 	 * Return width of authoring environment Scene
 	 * @return
@@ -151,5 +136,12 @@ public class GUIMain extends Screen implements IGUI {
 	 */
 	public double getHeight() {
 		return myScene.getHeight();
+	}
+
+	@Override
+	protected void initialize()
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -17,26 +17,26 @@ public interface IEditableGameElement {
 	 * 
 	 * @param name to be set as IEditableGameElement's name 
 	 */
-	public void setMyName(String name);
+	public void setName(String name);
 	
 
 	/**
 	 * 
 	 * @return the IEditableGameElement's name
 	 */
-	public String getMyName();
+	public String getName();
 	
 	/**
 	 * 
 	 * @return the IEditableGameElement's ImageView
 	 */
-	public ImageView getMyImageView();
+	public ImageView getImageView();
 
 	/**
 	 * sets the IEditableGameElement's ImageView to the given ImageView
 	 * 
 	 * @param imageView to be set as IEditableGameElement's ImageView
 	 */
-	public void setMyImageView(ImageView imageView);
+	public void setImageView(ImageView imageView);
 
 }

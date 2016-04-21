@@ -2,6 +2,7 @@ package authoringenvironment.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.controller.Level;
@@ -24,12 +25,12 @@ public class ActorRuleCreator {
 	private List<ActorRule> myActorRules;
 	private IAuthoringActor myActor;
 	private double sceneWidth;
-	private List<IAuthoringActor> myActors;
+	private Map<IAuthoringActor, List<IAuthoringActor>> myActors;
 	private List<Level> myLevels;
 	
 	private List<IRule> myIRules;
 	
-	public ActorRuleCreator(IAuthoringActor myActor,double sceneWidth, List<IAuthoringActor> myActors, List<Level> myLevels) {
+	public ActorRuleCreator(IAuthoringActor myActor,double sceneWidth, Map<IAuthoringActor, List<IAuthoringActor>> myActors, List<Level> myLevels) {
 		this.myActor = myActor;
 		this.sceneWidth = sceneWidth;
 		this.myActors = myActors;
@@ -88,7 +89,7 @@ public class ActorRuleCreator {
 		ActorRule newRule = new ActorRule(this, myActors, myLevels);
 		myActorRuleCreatorPane.add(newRule.getGridPane(), RULE_COL,rule_row);
 		rule_row++;
-		myActor.addActorRule(newRule);
+		myActor.getActorRules().add(newRule);
 	}
 	/**
 	 * Remove given rule from environment and from Actor currently in the environment 
@@ -97,7 +98,7 @@ public class ActorRuleCreator {
 	public void removeRule(ActorRule actorRule){
 		myActorRules.remove(actorRule);
 		myActorRuleCreatorPane.getChildren().remove(actorRule.getGridPane());
-		myActor.removeActorRule(actorRule);
+		myActor.getActorRules().remove(actorRule);
 	}
 	/**
 	 * Get ActorRules for Actor currently in the actor editing environment

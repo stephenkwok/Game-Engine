@@ -1,6 +1,5 @@
 package gui.view;
 
-import gui.controller.IScreenController;
 /**
  * On click, saves the game and returns user to the game player splash screen.
  * @author AnnieTang
@@ -8,8 +7,8 @@ import gui.controller.IScreenController;
  */
 public class ButtonFinish extends ButtonParent {
 
-	public ButtonFinish(IScreenController myController, String buttonText, String imageName) {
-		super(myController, buttonText, imageName);
+	public ButtonFinish(String buttonText, String imageName) {
+		super(buttonText, imageName);
 	}
 
 	/**

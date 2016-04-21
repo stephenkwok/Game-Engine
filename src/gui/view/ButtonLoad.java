@@ -1,6 +1,5 @@
 package gui.view;
 
-import gui.controller.IScreenController;
 /**
  * Button to load game.
  * @author AnnieTang
@@ -8,8 +7,8 @@ import gui.controller.IScreenController;
  */
 public class ButtonLoad extends ButtonParent {
 	
-	public ButtonLoad(IScreenController myController, String buttonText, String imageName) {
-		super(myController, buttonText, imageName);
+	public ButtonLoad(String buttonText, String imageName) {
+		super(buttonText, imageName);
 	}
 
 	@Override
@@ -21,6 +20,6 @@ public class ButtonLoad extends ButtonParent {
      * Sets workspace preferences to those specified by the given XML. 
      */
     private void loadProperties() {
-    	notifyObservers(promptForFileName(false));
+    	notifyController(null);
     }
 }
