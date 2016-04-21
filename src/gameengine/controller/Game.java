@@ -37,7 +37,6 @@ public class Game extends Observable implements Observer {
 	private List<IPlayActor> deadActors;
 	private ObservableMap<String, Object> HUDData;
     private int count;
-	private IPlayActor mainCharacter;
 
 
     /**
@@ -102,9 +101,6 @@ public class Game extends Observable implements Observer {
 	public void initCurrentActors() {
 		currentActors = getCurrentLevel().getActors();
 		for (IPlayActor actor: currentActors) {
-			if (actor.checkState(ActorState.MAIN)) {
-				mainCharacter = actor;
-			}
 			((Observable)actor).addObserver(this);
 			actor.setPhysicsEngine(myPhysicsEngine);
 		}
@@ -120,7 +116,8 @@ public class Game extends Observable implements Observer {
 
     private void updateCamera(){
     	setChanged();
-    	notifyObservers("updateCamera");
+    	Object[] args = {"updateCamera"};
+    	notifyObservers(Arrays.asList(args));
     }
     
     private void signalTick(){
@@ -280,7 +277,8 @@ public class Game extends Observable implements Observer {
      */
 	private void removeDeadActors() {
 		setChanged();
-		notifyObservers("updateActors");
+		Object[] args = {"updateActors"};
+		notifyObservers(Arrays.asList(args));
 		getCurrentLevel().removeActors(deadActors);	
 		deadActors.clear();
 	}
@@ -382,7 +380,7 @@ public class Game extends Observable implements Observer {
 		for (String key : keys) {
 			Object value = null;
 			if (key.equals("Health")) {
-				value = ((Attribute) mainCharacter.getAttribute(AttributeType.HEALTH)).getMyValue();
+				//value = ((Attribute) mainCharacter.getAttribute(AttributeType.HEALTH)).getMyValue();
 			} else if (key.equals("Level")) {
 				value = info.getMyCurrentLevelNum();
 			} else if (key.equals("Ammo")) {
@@ -392,7 +390,7 @@ public class Game extends Observable implements Observer {
 			} else if (key.equals("Time")) {
 				//todo
 			} else if (key.equals("Points")){
-				value = ((Attribute) mainCharacter.getAttribute(AttributeType.POINTS)).getMyValue();
+				//value = ((Attribute) mainCharacter.getAttribute(AttributeType.POINTS)).getMyValue();
 			} else {
 				value = "Error";
 			}
@@ -414,7 +412,4 @@ public class Game extends Observable implements Observer {
 		return 0;
 	}
 	
-	public IPlayActor getMainCharacter(){
-		return mainCharacter;
-	}
 }

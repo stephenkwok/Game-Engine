@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import gameengine.model.IAction;
+import gameengine.model.IPlayActor;
 /**
  * Factory to create IAction objects
  * @author AnnieTang
@@ -19,7 +20,7 @@ public class ActionFactory {
 	private static final int ZERO = 0;
 	private static final int ONE = 1;
 	private static final int TWO = 2;
-	private static final String ACTION_RESOURCE = "iaction";
+	private static final String ACTION_RESOURCE = "actionfactory";
 	private static final String DELIMITER = ",";
 	private static final String ACTION_TYPES= "ActionTypes";
 	private static final String GAME_ENGINE = "gameengine.";
@@ -27,6 +28,7 @@ public class ActionFactory {
 	private static final String ACTIONS = "Actions.";
 	private static final String CLASS = "Class";
 	private static final String CREATE = "create";
+	private static final String GLIDE = "Glide";
 	private ResourceBundle myResources;
 	private List<Object> arguments;
 	
@@ -83,7 +85,13 @@ public class ActionFactory {
 //		return createSelfActionAction(actionType, className);
 //	}
 	
-	private IAction createSelfActionAction(String actionType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private IAction createSelfActionActionIPlayActor(String actionType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Class<?> clazz = Class.forName(className);
+		Constructor<?> constructor = clazz.getConstructor(IPlayActor.class);
+		return (IAction) constructor.newInstance((IPlayActor) arguments.get(ZERO));
+	}
+	
+	private IAction createSelfActionActionActor(String actionType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> clazz = Class.forName(className);
 		Constructor<?> constructor = clazz.getConstructor(Actor.class);
 		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO));
@@ -91,7 +99,7 @@ public class ActionFactory {
 	
 	private IAction createChangeAttributeBehavior(String actionType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> clazz = Class.forName(className);
-		Constructor<?> constructor = clazz.getConstructor(Actor.class, AttributeType.class, int.class);
+		Constructor<?> constructor = clazz.getConstructor(IPlayActor.class, AttributeType.class, int.class);
 		return (IAction) constructor.newInstance(arguments.get(ZERO),arguments.get(ONE),arguments.get(TWO));
 	}
 	

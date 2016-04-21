@@ -2,10 +2,9 @@ package authoringenvironment.view;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
+import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
-import gameengine.controller.Level;
 import gameengine.model.IRule;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -25,16 +24,14 @@ public class ActorRuleCreator {
 	private List<ActorRule> myActorRules;
 	private IAuthoringActor myActor;
 	private double sceneWidth;
-	private Map<IAuthoringActor, List<IAuthoringActor>> myActors;
-	private List<Level> myLevels;
+	private Controller myController;
 	
 	private List<IRule> myIRules;
 	
-	public ActorRuleCreator(IAuthoringActor myActor,double sceneWidth, Map<IAuthoringActor, List<IAuthoringActor>> myActors, List<Level> myLevels) {
+	public ActorRuleCreator(IAuthoringActor myActor,double sceneWidth,Controller myController) {
 		this.myActor = myActor;
 		this.sceneWidth = sceneWidth;
-		this.myActors = myActors;
-		this.myLevels = myLevels;
+		this.myController = myController;
 		initializeEnvironment();
 	}
 	
@@ -86,7 +83,7 @@ public class ActorRuleCreator {
 	 * Create new rule for Actor currently in the actor editing environment and add to gridpane
 	 */
 	public void addNewRule() {
-		ActorRule newRule = new ActorRule(this, myActors, myLevels);
+		ActorRule newRule = new ActorRule(this, myController);
 		myActorRuleCreatorPane.add(newRule.getGridPane(), RULE_COL,rule_row);
 		rule_row++;
 		myActor.getActorRules().add(newRule);
