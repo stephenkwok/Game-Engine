@@ -216,7 +216,6 @@ public class Controller extends BranchScreenController implements Observer {
 	public void saveGame() {
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showSaveDialog(new Stage());
-		//Game g = new Game(gameInfo, myLevels); 
 		CreatorController controller;
 		try {
 			controller = new CreatorController(game, guiMain);
@@ -228,7 +227,6 @@ public class Controller extends BranchScreenController implements Observer {
 	}
 
 	public void loadGame() {
-		//promptForFileName(false);
 		FileChooserController fileChooserController = new FileChooserController(getStage(),ChooserType.EDIT);
 	}
 
@@ -358,23 +356,4 @@ public class Controller extends BranchScreenController implements Observer {
 		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
 		goToEditingEnvironment(editable, environment);
 	}
-	
-	/**
-     * Creates a file picker to get a file name
-     * @return returns the file
-     */
-	
-    protected File promptForFileName(boolean isSaving){
-        FileChooser myFileChooser = new FileChooser();
-        FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter("XML Files (.xml)", "*.xml");
-        myFileChooser.getExtensionFilters().add(myFilter);
-        File fileName;
-        if (isSaving){
-            fileName = myFileChooser.showSaveDialog(getStage());
-        }
-        else{
-            fileName = myFileChooser.showOpenDialog(getStage());
-        }
-        return fileName;
-    }
 }
