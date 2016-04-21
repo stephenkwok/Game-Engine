@@ -1,5 +1,8 @@
 package gui.view;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
 import javafx.geometry.Pos;
@@ -11,7 +14,7 @@ import javafx.scene.control.CheckBox;
  * @author amyzhao
  *
  */
-public class CheckBoxObject implements IGUIElement, IEditingElement {
+public class CheckBoxObject extends Observable implements IGUIElement, IEditingElement {
 	private String myPromptText;
 	private int myWidth;
 	private IEditableGameElement myEditableElement;
@@ -53,6 +56,12 @@ public class CheckBoxObject implements IGUIElement, IEditingElement {
 	 */
 	protected IEditableGameElement getEditableElement() {
 		return myEditableElement;
+	}
+
+	@Override
+	public void addNodeObserver(Observer observer) {
+		this.addObserver(observer);
+		
 	}
 	
 }

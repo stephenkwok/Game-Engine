@@ -2,6 +2,7 @@ package gameengine.model.Actions;
 
 
 import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
 import gameengine.model.PhysicsEngine;
 
 import java.util.ArrayList;
@@ -19,11 +20,11 @@ public class MoveRight extends MovingAction {
     /**
      * Takes in reference to the Actor it will change along with the argument it will require to do so
      *
-     * @param assignedActor The Actor that will be changed
+     * @param actor1 The Actor that will be changed
      * @param args          The arguments required to perform the change
      */
-    public MoveRight(Actor assignedActor) {
-        super(assignedActor);
+    public MoveRight(IPlayActor actor) {
+        super(actor);
     }
 
 	/**
@@ -31,7 +32,10 @@ public class MoveRight extends MovingAction {
      */
     @Override
     public void perform() {
+    	System.out.println(getMyActor().getHeading()+" 1");
     	getMyActor().getPhysicsEngine().moveRight(getMyActor());
+    	getMyActor().setHeading(0);
+    	System.out.println(getMyActor().getHeading());
     }
 
     

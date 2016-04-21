@@ -20,7 +20,7 @@ public class TextFieldGameNameEditor extends TextFieldWithButton{
 	 */
 	public TextFieldGameNameEditor(String labelText, String prompt, Double textFieldWidth) {
 		super(labelText, prompt, textFieldWidth);
-		setButtonAction(e -> ((GameInfo) getEditableElement()).setMyName(getTextFieldInput()));
+		setButtonAction(e -> ((GameInfo) getEditableElement()).setName(getTextFieldInput()));
 		setTextFieldHGrow();
 	}
 
@@ -30,6 +30,6 @@ public class TextFieldGameNameEditor extends TextFieldWithButton{
 	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
-		setTextFieldValue(((GameInfo) getEditableElement()).getMyName());
+		setTextFieldValue(((GameInfo) getEditableElement()).getName());
 	}
 }

@@ -79,7 +79,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	 * Set Actor of actor editing environment to a default new Actor
 	 */
 	private void setDefaultActor() {
-		IAuthoringActor defaultActor = new Actor();
+		IAuthoringActor defaultActor = (IAuthoringActor) new Actor();
 		this.myActor = defaultActor;
 		this.myActorIV = new ImageviewActorIcon(defaultActor, ICON_HEIGHT);
 	}
@@ -157,8 +157,8 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	 * @param newImageView
 	 */
 	public void setActorImage(ImageView newImageView, String imageViewName) {
-		myActor.setMyImageView(newImageView);
-		myActor.setMyImageViewName(imageViewName);
+		myActor.setImageView(newImageView);
+		myActor.setImageViewName(imageViewName);
 		myActorIV = new ImageviewActorIcon(myActor, ICON_HEIGHT);
 		setLeftPane();
 	}

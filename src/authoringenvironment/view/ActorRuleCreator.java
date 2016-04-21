@@ -81,7 +81,7 @@ public class ActorRuleCreator {
 		ActorRule newRule = new ActorRule(this);
 		myActorRuleCreatorPane.add(newRule.getGridPane(), RULE_COL,rule_row);
 		rule_row++;
-		myActor.addActorRule(newRule);
+		myActor.getActorRules().add(newRule);
 	}
 	/**
 	 * Remove given rule from environment and from Actor currently in the environment 
@@ -90,7 +90,7 @@ public class ActorRuleCreator {
 	public void removeRule(ActorRule actorRule){
 		myActorRules.remove(actorRule);
 		myActorRuleCreatorPane.getChildren().remove(actorRule.getGridPane());
-		myActor.removeActorRule(actorRule);
+		myActor.getActorRules().remove(actorRule);
 	}
 	/**
 	 * Get ActorRules for Actor currently in the actor editing environment

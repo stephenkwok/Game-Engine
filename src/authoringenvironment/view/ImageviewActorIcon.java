@@ -1,7 +1,6 @@
 package authoringenvironment.view;
 
 import authoringenvironment.model.IAuthoringActor;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -19,7 +18,7 @@ public class ImageviewActorIcon extends ImageView {
 	 * @param actor: actor to construct an icon for.
 	 */
 	public ImageviewActorIcon(IAuthoringActor actor, double height) {
-		setImage(actor.getMyImageView().getImage());
+		setImage(actor.getImageView().getImage());
 		this.setFitHeight(height);
 		this.setPreserveRatio(true);
 		myActor = actor;
@@ -55,8 +54,8 @@ public class ImageviewActorIcon extends ImageView {
 	 * Update the imageview based on the actor's current image.
 	 */
 	public void updateImageView() {
-		myImageView = myActor.getMyImageView();
+		myImageView = myActor.getImageView();
 		myImageView.setPreserveRatio(true);
-		myImageView.setFitHeight(myActor.getMyImageView().getFitHeight());
+		myImageView.setFitHeight(myActor.getImageView().getFitHeight());
 	}
 }
