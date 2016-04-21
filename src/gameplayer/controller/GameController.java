@@ -198,18 +198,18 @@ public class GameController implements Observer, IGameController {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		List<Object> myList = (List<Object>) arg;
-		String methodName = (String) myList.get(0);
-		Actor myActor = (Actor) myList.get(1);
+//		List<Object> myList = (List<Object>) arg;
+//		String methodName = (String) myList.get(0);
+//		Actor myActor = (Actor) myList.get(1);
 		
 		if(o.equals(view)){
 			model.handleTrigger((ITrigger)arg);
 		}
 		if(o.equals(model)){
 			try{
-				if (arg instanceof ArrayList<?>) {
-					this.getClass().getDeclaredMethod(methodName).invoke(this, myActor);
-				}
+//				if (arg instanceof ArrayList<?>) {
+//					this.getClass().getDeclaredMethod(methodName).invoke(this, myActor);
+//				}
 				this.getClass().getDeclaredMethod(((String)arg)).invoke(this);
 			}
 			catch (Exception e){
