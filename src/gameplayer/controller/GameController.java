@@ -248,9 +248,9 @@ public class GameController implements Observer, IGameController {
 	
 	public void updateCamera(){
 		if(model.getCurrentLevel().getMyScrollingDirection().equals("Horizontally")){
-			view.changeCamera(model.getMainCharacter().getVeloX(), 0);
+			view.changeCamera(model.getCurrentLevel().getMainCharacter().getX(), 0);
 		}else{
-			view.changeCamera(0, model.getMainCharacter().getVeloY());
+			view.changeCamera(0, model.getCurrentLevel().getMainCharacter().getY());
 		}
 	}
 	

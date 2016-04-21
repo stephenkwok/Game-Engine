@@ -1,8 +1,6 @@
 package gameplayer.view;
 
-import java.util.List;
 import java.util.Observable;
-
 import gameengine.controller.Level;
 import gameengine.model.IActor;
 import gameengine.model.IDisplayActor;
@@ -172,13 +170,11 @@ public class GameScreen extends Observable implements IGameScreen {
 
 	@Override
 	public void changeCamera(double x, double y) {
-		if (myCamera.getTranslateX()+x < myEndHorizontal - getScene().getWidth() && myCamera.getTranslateX()+x > 0) {
-			System.out.println("translate"+x);
-			myCamera.setTranslateX(myCamera.getTranslateX()+x);
+		if (x < myEndHorizontal - getScene().getWidth() && x > 0) {
+			myCamera.setTranslateX(x);
 		}
-		
-		if (myCamera.getTranslateY()+y > 0 && myCamera.getTranslateY()+y < myEndVertical - getScene().getHeight()) {		
-			myCamera.setTranslateY(myCamera.getTranslateY()+y);
+		if (y > 0 && y < myEndVertical - getScene().getHeight()) {		
+			myCamera.setTranslateY(y);
 		}
 	}
 
