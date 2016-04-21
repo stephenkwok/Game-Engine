@@ -39,6 +39,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private String myName;
     private int myID;
 	private String myImageViewName;
+	private double myHeading;
     @XStreamOmitField
     private ImageView myImageView;
     private Map<String, List<Rule>> myRules;
@@ -364,15 +365,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     public List<ActorRule> getActorRules(){
 		return myActorRules;
 	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		if(checkState(ActorState.MAIN)){
-			setChanged();
-			notifyObservers("updateAttribute");
-		}
-		
-	}
 	
 	@Override
 	public boolean checkState(ActorState state){
@@ -383,6 +375,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	public void addState(ActorState state){
 		myStates.add(state);
 	}
+
 	
 	@Override
 	public void removeState(ActorState state){
@@ -395,13 +388,33 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	}
 
 	@Override
-	public double getSize() {
+	public void update(Observable o, Object arg) {
+		if (o.getClass().equals(this.getClass())) {
+			setChanged();
+			notifyObservers(arg);
+		}
+		if(checkState(ActorState.MAIN)){
+			setChanged();
+			notifyObservers("updateAttribute");
+		}
+	}
+	
+		public double getSize() {
 		return myImageView.getFitHeight();
 	}
 
 	@Override
 	public void setID(int ID) {
 		myID = ID;
-		
+	}
+
+	@Override
+	public void setHeading(double h) {
+		myHeading = h;
+	}
+
+	@Override
+	public double getHeading() {
+		return myHeading;
 	}
 }

@@ -1,5 +1,6 @@
 package gameplayer.view;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 
@@ -111,7 +112,8 @@ public class GameScreen extends Observable implements IGameScreen {
 			//changeCamera(0,-10);
 			ITrigger trigger = handleKeyPress(((KeyEvent)e).getCode());
 			setChanged();
-			notifyObservers(trigger);
+			Object[] methodArg = {"handleTrigger", trigger};
+			notifyObservers(Arrays.asList(methodArg));
 		}
 	}
 

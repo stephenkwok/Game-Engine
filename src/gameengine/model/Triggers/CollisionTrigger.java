@@ -5,7 +5,7 @@ import gameengine.model.IActor;
 import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 
-public abstract class CollisionTrigger implements ITrigger {
+public abstract class CollisionTrigger extends ITrigger {
 
     private IPlayActor myMainActor;
     private IPlayActor myCollisionActor;

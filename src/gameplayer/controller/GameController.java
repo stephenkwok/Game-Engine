@@ -1,18 +1,27 @@
 package gameplayer.controller;
 
+import java.util.List;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gamedata.controller.HighScoresController;
 import gameengine.controller.Game;
 import gameengine.controller.Level;
+import gameengine.model.Actor;
 import gameengine.model.IDisplayActor;
 import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
+import gui.view.IGUIElement;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.MapChangeListener.Change;
@@ -36,12 +45,15 @@ public class GameController implements Observer, IGameController {
 	private GameScreen view;
 	@XStreamOmitField
 	private HUDScreen hud;
+	
+	private ResourceBundle myResources;
 
 	
 	public GameController(Game game) {
 		this.setGame(game);
 		this.setGameView(new GameScreen(new PerspectiveCamera()));
 		this.initialize(game.getInfo().getMyCurrentLevelNum()); //note: main actor is define at this line
+		this.myResources = ResourceBundle.getBundle("gameActions");
 	}
 	/**
 	 * Sets the current game to the given Game
@@ -140,7 +152,7 @@ public class GameController implements Observer, IGameController {
 //			}
 //		});
 
-	}
+	//}
 
 //	private void saveScorePrompt() {
 //		TextInputDialog dialog = new TextInputDialog("Name");
@@ -196,19 +208,63 @@ public class GameController implements Observer, IGameController {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		List<Object> myList = (List<Object>) arg;
+		String methodName = (String) myList.get(0);
+		//Actor myActor = (Actor) myList.get(1);
+		Object arg2 = null;
+		Class<?> myClass = null;
+		try {
+			if (myResources.getString(methodName).equals("null")){
+				this.getClass().getDeclaredMethod(methodName).invoke(this);
+			}
+			else {
+			myClass = Class.forName(myResources.getString(methodName));
+			arg2 = myClass.cast(myList.get(1));
+			}
+			} catch (IllegalArgumentException
+					 | SecurityException |ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+		}
 		if(o.equals(view)){
-			model.handleTrigger((ITrigger)arg);
+			try {
+//				for(Method item : this.getClass().getMethods()){
+//					System.out.println(item);
+//				}
+//				System.out.println(methodName + " is the methodName");
+				//this.getClass().getMethod(methodName).invoke(model, arg2);
+			
+		
+					Class[] parameterTypes = {myClass};
+					Object[] parameters = {arg2};
+					
+					model.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(model, parameters);
+				
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		if(o.equals(model)){
+			
 			try{
+				if (arg instanceof ArrayList<?>) {
+					this.getClass().getDeclaredMethod(methodName).invoke(this, arg2);
+				}
 				this.getClass().getDeclaredMethod(((String)arg)).invoke(this);
 			}
 			catch (Exception e){
-				hud.handleChange((Change)arg);
+				//hud.handleChange((Change)arg);
 			}
 		}
 	}
 
+	public void addActor(Actor a) {
+		model.addActor(a);
+		view.addActor(a);
+	}
+	
 	public void toggleSound() {
 		System.out.println("toggle sound unimplemented");
 	}

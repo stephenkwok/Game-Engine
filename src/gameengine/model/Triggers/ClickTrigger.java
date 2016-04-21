@@ -7,7 +7,7 @@ import javafx.geometry.Bounds;
 /**
  * @author blakekaplan
  */
-public class ClickTrigger implements ITrigger {
+public class ClickTrigger extends ITrigger {
 
     private double myX;
     private double myY;
