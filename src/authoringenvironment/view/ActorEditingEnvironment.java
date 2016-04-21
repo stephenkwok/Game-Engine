@@ -1,11 +1,12 @@
 package authoringenvironment.view;
 
+import java.util.List;
 import java.util.ResourceBundle;
 
-import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
+import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gui.view.GUILibrary;
 import javafx.geometry.Insets;
@@ -43,7 +44,6 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private BorderPane myRoot;
 	private GUILibrary library;
 	private TabAttributes attributes;
-	private Controller myController;
 	private ResourceBundle myResources;
 	
 	private IAuthoringActor myActor;
@@ -55,11 +55,10 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	
 	private Stage myStage;
 
-	public ActorEditingEnvironment(Controller myController, ResourceBundle myResources, Stage stage) {
-		this.myController = myController;
+	public ActorEditingEnvironment(ResourceBundle myResources, Stage stage, List<IAuthoringActor> myActors, List<Level> myLevels) {
 		this.myResources = myResources;
 		this.myStage = stage;
-		initializeEnvironment();
+		initializeEnvironment(myActors, myLevels);
 	}
 	/**
 	 * Return Pane representation of actor editing environment
@@ -71,10 +70,10 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	/**
 	 * Initialize resources and create actor editing environment by populating sections of the screen and setting default new Actor
 	 */
-	private void initializeEnvironment() {
+	private void initializeEnvironment(List<IAuthoringActor> myActors, List<Level> myLevels) {
 		myRoot = new BorderPane();
 		setDefaultActor();
-		myActorRuleCreator = new ActorRuleCreator(myActor, myController, myStage.getWidth());
+		myActorRuleCreator = new ActorRuleCreator(myActor, myStage.getWidth(), myActors, myLevels);
 		setLeftPane();
 		setCenterPane();
 		setBottomPane();

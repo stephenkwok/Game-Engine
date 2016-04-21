@@ -23,7 +23,7 @@ public class ComboBoxLosingConditions extends ComboBoxTextCell {
 	 * @param labelText: text for label.
 	 */
 	public ComboBoxLosingConditions(ResourceBundle myResources, String promptText, String labelText) {
-		super(myResources, promptText, labelText);
+		super(promptText, labelText);
 		myOptions = Arrays.asList(myResources.getString(LOSING_CONDITIONS_OPTIONS).split(DELIMITER));
 	}
 

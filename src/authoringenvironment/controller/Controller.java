@@ -70,7 +70,7 @@ public class Controller implements IScreenController, Observer {
 		levelEnvironment = new LevelEditingEnvironment(myActors, myStage);
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
-		actorEnvironment = new ActorEditingEnvironment(this, myResources, myStage);
+		actorEnvironment = new ActorEditingEnvironment(myResources, myStage, myActors, myLevels);
 		gameEnvironment = new GameEditingEnvironment(gameInfo);
 		mainScreen = new GUIMainScreen(gameEnvironment, myStage.widthProperty(), myStage.heightProperty());
 	}

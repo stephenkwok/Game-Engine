@@ -24,7 +24,7 @@ public class ComboBoxWinningConditions extends ComboBoxTextCell {
 	 * @param labelText: text for label.
 	 */
 	public ComboBoxWinningConditions(ResourceBundle myResources, String promptText, String labelText) {
-		super(myResources, promptText, labelText);
+		super(promptText, labelText);
 		myOptions = Arrays.asList(myResources.getString(WINNING_CONDITIONS_OPTIONS).split(DELIMITER));
 	}
 
