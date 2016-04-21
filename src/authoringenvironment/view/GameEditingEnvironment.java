@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import java.util.List;
 import java.util.Observer;
 import java.util.ResourceBundle;
 import authoringenvironment.model.IEditableGameElement;

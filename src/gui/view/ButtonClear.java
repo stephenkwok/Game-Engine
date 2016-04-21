@@ -1,9 +1,9 @@
 package gui.view;
 
+public class ButtonClear extends ButtonParent {
 
-public class ButtonEdit extends ButtonParent{
 
-	public ButtonEdit(String buttonText, String imageName) {
+	public ButtonClear(String buttonText, String imageName) {
 		super(buttonText, imageName);
 	}
 
@@ -11,8 +11,9 @@ public class ButtonEdit extends ButtonParent{
 	protected void setButtonAction() {
 		getButton().setOnAction(e -> {
 			setChanged();
-			notifyObservers("ButtonEdit");
+			notifyObservers();
 		});
+		
 	}
 
 }

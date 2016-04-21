@@ -1,6 +1,8 @@
 package authoringenvironment.view;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
+
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
@@ -25,23 +27,19 @@ import javafx.stage.Stage;
  * @author AnnieTang, amyzhao
  *
  */
-public class GUIMain extends Screen implements IGUI {
+public class GUIMain extends Screen implements IGUI, Observer {
     private static final String GUI_RESOURCE = "authoringGUI";
     private static final String TOP_PANE_ELEMENTS = "TopPaneElements";
     private static final int WINDOW_HEIGHT = 700;
 	private static final int WINDOW_WIDTH = 1300;
     private static final int PADDING = 10;
-    private static final String SPLASH_IMAGE_NAME = "salad.png";
     private Scene myScene;
 	private BorderPane myRoot;
-	private ResourceBundle myResources;
-	private Stage myStage;
-	private Controller myController;
-	private GUIFactory factory;
-	private Scene splashScene;
+
 	
-	public GUIMain() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public GUIMain()  {
 		super();
+		setUpResourceBundle(GUI_RESOURCE);
 		init();
 	}
 	
@@ -52,11 +50,9 @@ public class GUIMain extends Screen implements IGUI {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public void init() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	public void init() {
 		myRoot = new BorderPane();
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		factory = new GUIFactory(myResources);
 		setTopPane();
 		setCenterPane();
 	}
@@ -83,7 +79,8 @@ public class GUIMain extends Screen implements IGUI {
 	 * Set center screen to default, the home screen 
 	 */
 	public void setCenterPane(){
-		myController.goToMainScreen();
+		setChanged();
+		notifyObservers("goMain");
 	}
 	/**
 	 * Sets top section of screen to fixed toolbar 
@@ -101,16 +98,14 @@ public class GUIMain extends Screen implements IGUI {
 	 */
 	private void initializeTopPaneElements(HBox hbox) {
 		try{
-			String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
+			String[] topPaneElements = getResources().getString(TOP_PANE_ELEMENTS).split(",");
 			for (int i = 0; i < topPaneElements.length; i++) {
-				IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
-				((Observable) elementToCreate).addObserver(myController);
+				IGUIElement elementToCreate = getFactory().createNewGUIObject(topPaneElements[i]);
+				elementToCreate.addNodeObserver(this); // NOT SURE IF THIS WILL WORK, CARINE ADDED THIS.......
 				hbox.getChildren().add(elementToCreate.createNode());
 				
 			}
-			//temp
-			ButtonSplash splash = new ButtonSplash(null, SPLASH_IMAGE_NAME);
-			hbox.getChildren().add(splash.createNode());
+
 		}catch(Exception e){
 			
 		}
@@ -142,6 +137,13 @@ public class GUIMain extends Screen implements IGUI {
 	protected void initialize()
 			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		setChanged();
+		notifyObservers(o.getClass().getSimpleName());
 		
 	}
 }

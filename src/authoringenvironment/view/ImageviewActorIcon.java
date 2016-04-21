@@ -14,7 +14,6 @@ public class ImageviewActorIcon extends ImageView {
 	private IAuthoringActor myActor;
 	private int myID;
 	private boolean onLevel;
-	private IAuthoringActor associatedActor;
 
 	/**
 	 * Construct an icon for a given actor.
@@ -27,22 +26,17 @@ public class ImageviewActorIcon extends ImageView {
 		this.setPreserveRatio(true);
 		myID = actor.getMyID();
 		onLevel = false;
-		associatedActor = null;
 		updateImageView();
 	}
 
 	public IAuthoringActor getActor() {
-		if (associatedActor == null) {
-			associatedActor = new Actor();
-			associatedActor.setName(myActor.getName());
-			associatedActor.setImageViewName(myActor.getImageViewName());
-			associatedActor.setImageView(myActor.getImageView());
-			associatedActor.setID(myActor.getMyID());
-			associatedActor.setSize(myActor.getSize());
-			associatedActor.setX(0);
-			associatedActor.setY(0);
-		}
-		return associatedActor;
+		IAuthoringActor actor = new Actor();
+		actor.setName(myActor.getName());
+		actor.setImageViewName(myActor.getImageViewName());
+		actor.setImageView(myActor.getImageView());
+		actor.setID(myActor.getMyID());
+		actor.setSize(myActor.getSize());
+		return actor;
 	}
 
 	public IAuthoringActor getRefActor() {
