@@ -28,9 +28,6 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 	private static final double DEFAULT_HEIGHT = 800;
 	private static final double DEFAULT_WIDTH = 1024;
 	private static final String DEFAULT_SCROLLING = "Horizontally";
-	private static final String DEFAULT_TERMINATION = "Infinite";
-	private static final String DEFAULT_WINNING_CONDITION = "Survival time";
-	private static final String DEFAULT_LOSING_CONDITION = "Player dies";
 	private List<IPlayActor> myActors;
 	private Map<String, List<IPlayActor>> myTriggerMap;
 	private String myName;
@@ -39,9 +36,6 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 	private int myPlayPosition;
 	private List<String> myHUDOptions;
 	private String myScrollingDirection;
-	private String myTermination;
-	private String myWinningCondition;
-	private String myLosingCondition;
 	private String myBackgroundImgName;
 	@XStreamOmitField
 	private ImageView myBackground;
@@ -58,10 +52,7 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 		setName(DEFAULT_NAME);
 		myBackgroundImgName = DEFAULT_IMAGE_NAME;
 		setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
-		myTermination = DEFAULT_TERMINATION;
 		myScrollingDirection = DEFAULT_SCROLLING;
-		myWinningCondition = DEFAULT_WINNING_CONDITION;
-		myLosingCondition = DEFAULT_LOSING_CONDITION;
 		myName = DEFAULT_NAME;
 		myHeight = DEFAULT_HEIGHT;
 		myWidth = DEFAULT_WIDTH;
@@ -272,60 +263,6 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 	 */
 	public void setMyScrollingDirection(String myScrollingDirection) {
 		this.myScrollingDirection = myScrollingDirection;
-	}
-
-	/**
-	 * Provides the Level's termination string
-	 *
-	 * @return  The Level's termination strings
-	 */
-	public String getMyTermination() {
-		return myTermination;
-	}
-
-	/**
-	 * Sets the Level's termination string
-	 *
-	 * @param myTermination The Level's termination string
-	 */
-	public void setMyTermination(String myTermination) {
-		this.myTermination = myTermination;
-	}
-
-	/**
-	 * Provides the Level's winning condition string
-	 *
-	 * @return  The Level's winning condition string
-	 */
-	public String getMyWinningCondition() {
-		return myWinningCondition;
-	}
-
-	/**
-	 * Sets the Level's winning condition string
-	 *
-	 * @param myWinningCondition    The desired winning condition string
-	 */
-	public void setMyWinningCondition(String myWinningCondition) {
-		this.myWinningCondition = myWinningCondition;
-	}
-
-	/**
-	 * Provides the Level's losing condition string
-	 *
-	 * @return  The Level's losing condition string
-	 */
-	public String getMyLosingCondition() {
-		return myLosingCondition;
-	}
-
-	/**
-	 * Sets the Level's losing condition string
-	 *
-	 * @param myLosingCondition The desired losing condition string
-	 */
-	public void setMyLosingCondition(String myLosingCondition) {
-		this.myLosingCondition = myLosingCondition;
 	}
 
 	public void removeActors(List<IPlayActor> deadActors) {
