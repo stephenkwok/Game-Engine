@@ -3,7 +3,6 @@ package gui.view;
 import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
-
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -15,7 +14,7 @@ import javafx.stage.FileChooser;
  * @author AnnieTang
  *
  */
-public abstract class ButtonParent extends Observable implements IGUIElement {
+public abstract class ButtonParent extends ObjectObservable implements IGUIElement {
 	private static final int ICON_SIZE = 30;
 	private static final int PADDING = 10;
 	private String buttonText;
@@ -50,31 +49,15 @@ public abstract class ButtonParent extends Observable implements IGUIElement {
 	 * Optional, sets image for button.
 	 */
 	private void setButtonIcon(){
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
-		ImageView iv = new ImageView(image);
-        iv.setFitHeight(ICON_SIZE);
-        iv.setPreserveRatio(true);
-		button.setGraphic(iv);
+		if (imageName != null) {
+			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+			ImageView iv = new ImageView(image);
+			iv.setFitHeight(ICON_SIZE);
+			iv.setPreserveRatio(true);
+			button.setGraphic(iv);
+		}
 	}
 	
-	/**
-     * Creates a file picker to get a file name
-     * @return returns the file
-     */
-	/*
-    protected File promptForFileName(boolean isSaving){
-        FileChooser myFileChooser = new FileChooser();
-        FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter("XML Files (.xml)", "*.xml");
-        myFileChooser.getExtensionFilters().add(myFilter);
-        File fileName;
-        if (isSaving){
-            fileName = myFileChooser.showSaveDialog(myController.getStage());
-        }
-        else{
-            fileName = myFileChooser.showOpenDialog(myController.getStage());
-        }
-        return fileName;
-    }*/
     
     /**
      * Gets the button.
@@ -83,5 +66,9 @@ public abstract class ButtonParent extends Observable implements IGUIElement {
     protected Button getButton() {
     	return button;
     }
-
+    
+	protected void notifyController(Object objToPassToObserver) {
+		setChanged();
+		notifyObservers(objToPassToObserver);
+	}
 }

@@ -151,7 +151,7 @@ abstract class TabLibrary extends TabParent {
 	 * @param toAdd
 	 * @param myActorRule
 	 */
-	private void addNodeToTarget(Label toAdd, ActorRule myActorRule){ //TODO
+	private void addNodeToTarget(Label toAdd, ActorRule myActorRule){ 
 		if(matchesExtensions(toAdd.getText(), IMAGE_FILE_EXTS)) myActorRuleCreator.addImage(myActorRule, toAdd);
 		else if(matchesExtensions(toAdd.getText(), SOUND_FILE_EXTS)) myActorRuleCreator.addSound(myActorRule, toAdd);
 		else myActorRuleCreator.addBehavior(myActorRule, toAdd);

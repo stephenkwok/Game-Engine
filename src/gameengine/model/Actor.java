@@ -418,3 +418,4 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		return myHeading;
 	}
 }
+

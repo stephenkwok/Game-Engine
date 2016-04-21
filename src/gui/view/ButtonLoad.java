@@ -14,9 +14,15 @@ public class ButtonLoad extends ButtonParent {
 	@Override
 	protected void setButtonAction() {
 		getButton().setOnAction(event -> {
-			setChanged();
-			notifyObservers();
+			notifyController("ButtonLoad");
 		});
 	}
-	
+
+	/**
+     * Sets workspace preferences to those specified by the given XML. 
+     */
+    private void loadProperties() {
+    	notifyController(null);
+    }
+
 }
