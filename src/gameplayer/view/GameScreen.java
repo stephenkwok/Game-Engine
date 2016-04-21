@@ -180,7 +180,6 @@ public class GameScreen extends Observable implements IGameScreen {
 	@Override
 	public void changeCamera(double x, double y) {
 		if (myCamera.getTranslateX()+x < myEndHorizontal - getScene().getWidth() && myCamera.getTranslateX()+x > 0) {
-			System.out.println("translate"+x);
 			myCamera.setTranslateX(myCamera.getTranslateX()+x);
 		}
 		
