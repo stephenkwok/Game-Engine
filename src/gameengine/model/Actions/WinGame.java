@@ -1,5 +1,7 @@
 package gameengine.model.Actions;
 
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.Observable;
 
 import gameengine.model.Actor;
@@ -14,7 +16,9 @@ public class WinGame extends Action {
 	@Override
 	public void perform() {
         getMyActor().changed();
-        ((Observable) getMyActor()).notifyObservers("endGame");		
+        ArrayList<String> myList = new ArrayList<String>();
+        myList.add("endGame");
+        ((Observable) getMyActor()).notifyObservers(myList);		
 	}
 
 }

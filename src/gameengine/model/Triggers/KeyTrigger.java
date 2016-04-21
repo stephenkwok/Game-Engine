@@ -4,7 +4,7 @@ import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 import javafx.scene.input.KeyCode;
 
-public class KeyTrigger implements ITrigger {
+public class KeyTrigger extends ITrigger {
 
     private String myKey;
 

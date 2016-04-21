@@ -6,14 +6,16 @@ package gameengine.model;
  *
  * @author blakekaplan
  */
-public interface ITrigger {
+public class ITrigger {
 
     /**
      * Provides the name of the Trigger
      *
      * @return The Trigger's name
      */
-    public String getMyKey();
+    public String getMyKey() {
+		return null;
+	}
 
     /**
      * Checks a boolean condition against the state of an actor
@@ -21,6 +23,8 @@ public interface ITrigger {
      * @param otherTrigger A trigger to check information against
      * @return A boolean that says if the condition is true or false
      */
-    public boolean evaluate(ITrigger otherTrigger);
+    public boolean evaluate(ITrigger otherTrigger) {
+		return false;
+	}
 
 }
