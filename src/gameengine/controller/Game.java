@@ -302,6 +302,15 @@ public class Game extends Observable implements Observer {
 		this.deadActors = deadActors;
 	}
 
+	public void addActor(Actor newActor) {
+		currentActors.add(newActor);
+	}
+	
+    /**
+     * Provides a list of the current Actors
+     *
+     * @return  A list of the current Actors
+     */
 
 	public List<IPlayActor> getCurrentActors() {
 		return currentActors;

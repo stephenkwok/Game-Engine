@@ -1,5 +1,6 @@
 package gui.view;
 
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -60,8 +61,7 @@ public class CheckBoxObject extends Observable implements IGUIElement, IEditingE
 
 	@Override
 	public void addNodeObserver(Observer observer) {
-		this.addObserver(observer);
-		
+		this.addObserver(observer);	
 	}
 	
 }

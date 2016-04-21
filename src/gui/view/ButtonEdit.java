@@ -13,7 +13,6 @@ public class ButtonEdit extends ButtonParent{
 			setChanged();
 			notifyObservers("ButtonEdit");
 		});
-
 	}
 
 }

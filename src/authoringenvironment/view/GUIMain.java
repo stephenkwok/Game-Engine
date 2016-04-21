@@ -1,6 +1,7 @@
 package authoringenvironment.view;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
+
 import java.util.Observer;
 import java.util.ResourceBundle;
 
@@ -100,8 +101,9 @@ public class GUIMain extends Screen implements IGUI, Observer {
 			String[] topPaneElements = getResources().getString(TOP_PANE_ELEMENTS).split(",");
 			for (int i = 0; i < topPaneElements.length; i++) {
 				IGUIElement elementToCreate = getFactory().createNewGUIObject(topPaneElements[i]);
-				elementToCreate.addNodeObserver(this);
+				elementToCreate.addNodeObserver(this); // NOT SURE IF THIS WILL WORK, CARINE ADDED THIS.......
 				hbox.getChildren().add(elementToCreate.createNode());
+				
 			}
 
 		}catch(Exception e){
