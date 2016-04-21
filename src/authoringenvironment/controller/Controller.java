@@ -83,26 +83,7 @@ public class Controller extends BranchScreenController implements Observer {
 	private BorderPane myRoot;
 	private GUIFactory factory;
 	private Scene splashScene;
-	private Stage myStage;
 
-	/*
-	public Controller(Stage stage) {
-		super(stage);
-		this.myStage = stage;
-		this.myResources = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
-		//DEPENDENCY
-		setUpScreen();
-		changeScreen(guiMain);
-	}*/
-	
-	
-	private void setUpScreen(){
-		this.guiMain = new GUIMain();
-		init();
-		this.guiMain.addObserver(this);
-		guiMain.init();
-	}
-	
 	public Controller(Stage myStage) {
 		super(myStage);
 		this.myButtonResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
@@ -236,10 +217,10 @@ public class Controller extends BranchScreenController implements Observer {
 	public void saveGame() {
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showSaveDialog(new Stage());
-		Game g = new Game(gameInfo, myLevels); //replace your g 
+		//Game g = new Game(gameInfo, myLevels); 
 		CreatorController controller;
 		try {
-			controller = new CreatorController(g, guiMain);
+			controller = new CreatorController(game, guiMain);
 			controller.saveForEditing(file);
 		} catch (ParserConfigurationException e) {
 			guiMain.showError(e.getMessage());
@@ -248,16 +229,8 @@ public class Controller extends BranchScreenController implements Observer {
 	}
 
 	public void loadGame() {
-		FileChooserController fileChooserController = new FileChooserController(super.getStage(),ChooserType.EDIT);
-	}
-
-	/**
-	 * Gets the current workspace's stage.
-	 * 
-	 * @return current workspace's stage.
-	 */
-	public Stage getStage() {
-		return myStage;
+		//promptForFileName(false);
+		FileChooserController fileChooserController = new FileChooserController(getStage(),ChooserType.EDIT);
 	}
 
 	/**
@@ -328,13 +301,9 @@ public class Controller extends BranchScreenController implements Observer {
 	
 /*	@Override
 	public void update(Observable o, Object arg) {
-<<<<<<< HEAD
-		String method = myResources.getString((String) arg);
-=======
 		String button = (String) arg;
 		String method = myButtonResource.getString(button);
 		System.out.println(method);
->>>>>>> df33557e76e9ab711559f0228015ac19a457c751
 		try {
 			this.getClass().getDeclaredMethod(method).invoke(this);
 		} catch (NoSuchMethodException e) {

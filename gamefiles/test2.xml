@@ -1700,7 +1700,9 @@
           </myRules>
           <attributeMap/>
           <myActorRules/>
-          <myStates/>
+          <myStates>
+            <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
+          </myStates>
         </gameengine.model.Actor>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRules/entry[4]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRules/entry[4]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
@@ -2047,10 +2049,8 @@
       <myName>Default</myName>
       <myHeight>800.0</myHeight>
       <myWidth>1024.0</myWidth>
-      <myScrollingDirection>Vertically</myScrollingDirection>
-      <myTermination>Infinite</myTermination>
-      <myWinningCondition>Survival time</myWinningCondition>
-      <myLosingCondition>Player dies</myLosingCondition>
+      <myPlayPosition>0</myPlayPosition>
+      <myScrollingDirection>Horizontally</myScrollingDirection>
       <myBackgroundImgName>default_landscape.png</myBackgroundImgName>
     </gameengine.controller.Level>
   </levels>
