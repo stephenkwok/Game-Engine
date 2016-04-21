@@ -5,7 +5,6 @@ import gameengine.model.Actor;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.Rule;
-import gameengine.model.Actions.Action;
 import gameengine.model.Actions.*;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.KeyTrigger;
@@ -74,6 +73,11 @@ public class Tester extends Application {
 		((IAuthoringActor)actor3).setImageViewName("flagpole.png");
 		actor3.setY(100);
 		actor3.setX(800);
+		
+		KeyTrigger triggerDown = new KeyTrigger(KeyCode.DOWN);
+		Action moveForwards = new MoveBackward((IPlayActor) actor1);
+		Rule movingForwards = new Rule(triggerDown, moveForwards);
+		actor1.addRule(movingForwards);
 		
 		KeyTrigger trigger1 = new KeyTrigger(KeyCode.RIGHT);
 		KeyTrigger trigger2 = new KeyTrigger(KeyCode.LEFT);
