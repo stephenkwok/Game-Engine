@@ -20,7 +20,6 @@ import javafx.util.Duration;
  *
  */
 
-
 public class Game extends Observable implements Observer {
 	public static final int SIZE = 400;
 	public static final int FRAMES_PER_SECOND = 60;
@@ -74,6 +73,7 @@ public class Game extends Observable implements Observer {
 		setAnimation(new Timeline());
 		getAnimation().setCycleCount(Timeline.INDEFINITE);
 		getAnimation().getKeyFrames().add(frame);
+		
 
 	}
 

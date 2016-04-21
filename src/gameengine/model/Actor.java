@@ -39,6 +39,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private String myName;
     private int myID;
 	private String myImageViewName;
+	private double myHeading;
     @XStreamOmitField
     private ImageView myImageView;
     private Map<String, List<Rule>> myRules;
@@ -403,5 +404,15 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	public void setID(int ID) {
 		myID = ID;
 		
+	}
+
+	@Override
+	public void setHeading(double h) {
+		myHeading = h;
+	}
+
+	@Override
+	public double getHeading() {
+		return myHeading;
 	}
 }
