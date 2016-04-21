@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.view.ActionFactory;
+import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.TriggerFactory;
 import gameengine.model.IAction;
 import gameengine.model.ITrigger;
@@ -41,13 +42,15 @@ public abstract class IEditableGameElementBehavior extends EditingElementParent 
 	private String labelText;
 	private TriggerFactory triggerFactory;
 	private ActionFactory actionFactory;
+	private ActorRule myActorRule; 
 	
-	public IEditableGameElementBehavior(String behaviorType, ResourceBundle myResources) {
+	public IEditableGameElementBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
 		super(GO);
 		this.promptText =  myResources.getString(behaviorType+PROMPT);
 		this.labelText = myResources.getString(behaviorType+LABEL);
 		this.triggerFactory = new TriggerFactory();
 		this.actionFactory = new ActionFactory();
+		this.myActorRule = myActorRule;
 	}
 
 	/**
@@ -139,11 +142,15 @@ public abstract class IEditableGameElementBehavior extends EditingElementParent 
 		return this.actionFactory;
 	}
 
-	@Override
-	public abstract IAction getAction();
-
-	@Override
-	public abstract ITrigger getTrigger();
-
 	protected abstract void updateValueBasedOnEditable();
+	
+	@Override
+	public void addTrigger(IAuthoringRule key, ITrigger value){
+		myActorRule.addTrigger(key, value);
+	}
+	
+	@Override
+	public void addAction(IAuthoringRule key, IAction value){
+		myActorRule.addAction(key, value);
+	}
 }

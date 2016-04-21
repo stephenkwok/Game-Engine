@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.view.ActorRule;
-import gameengine.model.IAction;
-import gameengine.model.ITrigger;
+//import gameengine.model.IAction;
 /**
  * GUI representation of behaviors: ChangeMusic, PlaySound, PlayMusic
  * @author AnnieTang
@@ -16,7 +15,7 @@ public class NOTEUSEDResourceOptionsBehavior extends ComboBoxBehavior {
 	private static final String PATHNAME = "Pathname";
 	private List<String> fileNames;
 	private String pathname;
-	private IAction myAction;
+//	private IAction myAction;
 	
 	public NOTEUSEDResourceOptionsBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources){
 		super(myActorRule, behaviorType, myResources);
@@ -48,16 +47,7 @@ public class NOTEUSEDResourceOptionsBehavior extends ComboBoxBehavior {
 	
 	@Override
 	void createTriggerOrAction() {
-		// TODO Auto-generated method stub
 		//myAction = 
 		
-	}
-	@Override
-	public IAction getAction() {
-		return this.myAction;
-	}
-	@Override
-	public ITrigger getTrigger() {
-		return null;
 	}
 }

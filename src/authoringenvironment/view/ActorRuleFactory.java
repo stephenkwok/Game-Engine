@@ -79,14 +79,14 @@ public class ActorRuleFactory {
 	private IGUIElement createCollisionBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		try{
 			Class<?> clazz = Class.forName(className);
-			Constructor<?> constructor = clazz.getConstructor(String.class, IAuthoringActor.class, ResourceBundle.class, List.class);
+			Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, IAuthoringActor.class, ResourceBundle.class, List.class);
 			List<IAuthoringActor> myActors = new ArrayList<>(myController.getActorMap().keySet());
-			return (IGUIElement) constructor.newInstance(behaviorType,myActor,myResources,myActors);
+			return (IGUIElement) constructor.newInstance(myActorRule, behaviorType,myActor,myResources,myActors);
 		}catch(Exception e){
 			e.printStackTrace();
 			Class<?> clazz = Class.forName(className);
-			Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, List.class);
-			return (IGUIElement) constructor.newInstance(behaviorType,myResources,myController.getLevels());
+			Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, ResourceBundle.class, List.class);
+			return (IGUIElement) constructor.newInstance(myActorRule, behaviorType,myResources,myController.getLevels());
 		}
 	}
 	/**
@@ -104,8 +104,8 @@ public class ActorRuleFactory {
 	 */
 	private IGUIElement createLabelBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		Class<?> clazz = Class.forName(className);
-		Constructor<?> constructor = clazz.getConstructor(IAuthoringActor.class, String.class, ResourceBundle.class);
-		return (IGUIElement) constructor.newInstance(myActor,behaviorType,myResources);
+		Constructor<?> constructor = clazz.getConstructor(ActorRule.class, IAuthoringActor.class, String.class, ResourceBundle.class);
+		return (IGUIElement) constructor.newInstance(myActorRule, myActor,behaviorType,myResources);
 	}
 
 	private IGUIElement createComboBoxBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
@@ -113,13 +113,6 @@ public class ActorRuleFactory {
 		Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, ResourceBundle.class);
 		return (IGUIElement) constructor.newInstance(myActorRule,behaviorType,myResources);
 	}
-	
-//	//only parameter is to select an actor
-//	private IGUIElement createSelectActorBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-//		Class<?> clazz = Class.forName(className);
-//		Constructor<?> constructor = clazz.getConstructor(String.class, ResourceBundle.class, List.class);
-//		return (IGUIElement) constructor.newInstance(behaviorType,myResources, myActors);
-//	}
 	
 	private IGUIElement createChangeAttributeBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		return createLabelBehavior(behaviorType, className);

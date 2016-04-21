@@ -91,19 +91,15 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 	}
 	
 	@Override
-	public abstract IAction getAction();
-	
-	@Override
-	public abstract ITrigger getTrigger();
-	
-	@Override
 	protected abstract void updateValueBasedOnEditable();
 	
-	protected void addTrigger(IAuthoringRule key, ITrigger value){
+	@Override
+	public void addTrigger(IAuthoringRule key, ITrigger value){
 		myActorRule.addTrigger(key, value);
 	}
 	
-	protected void addAction(IAuthoringRule key, IAction value){
+	@Override
+	public void addAction(IAuthoringRule key, IAction value){
 		myActorRule.addAction(key, value);
 	}
 }

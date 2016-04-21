@@ -47,6 +47,8 @@ public class ActorRule {
 	private ActorRuleFactory actorRuleFactory;
 	private Controller myController;
 	private Map<IAuthoringRule, List<Object>> actorRuleMap;
+	private List<ITrigger> myTriggers;
+	private List<IAction> myActions;
 	
 	public ActorRule(ActorRuleCreator myActorRuleCreator) {
 		this.myActorRuleCreator = myActorRuleCreator;
@@ -70,6 +72,8 @@ public class ActorRule {
 		this.myActorRuleResources = ResourceBundle.getBundle(ACTORRULE_BUNDLE);
 		this.actorRuleFactory = new ActorRuleFactory(myFactoryResources, myActorRuleCreator.getActor(), myController, this);
 		this.actorRuleMap = new HashMap<>();
+		this.myTriggers = new ArrayList<>();
+		this.myActions = new ArrayList<>();
 		myRule = new GridPane(); 
 		myRule.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(Integer.parseInt(myActorRuleResources.getString("CornerRadius"))), Insets.EMPTY)));
 		myRule.setPadding(new Insets(Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding"))));
@@ -117,19 +121,15 @@ public class ActorRule {
 	 */
 	public void addBehavior(Label behavior) {
 		IAuthoringRule element = actorRuleFactory.getAuthoringRule(behavior.getText(),null);
+		List<Object> value = new ArrayList<>();
+		actorRuleMap.put(element, value);
 		Node node = ((IGUIElement) element).createNode();
 		node.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2) remove(element);
 		});
-		if(isTrigger(behavior.getText())){
-			myTriggerNodes.getChildren().add(node);
-		}
-		else{
-			myActionNodes.getChildren().add(node);
-		}
-		List<Object> value = new ArrayList<>();
-		value.add(node);
-		actorRuleMap.put(element, value);
+		if(isTrigger(behavior.getText())) myTriggerNodes.getChildren().add(node);
+		else myActionNodes.getChildren().add(node);
+		actorRuleMap.get(element).add(NODE_INDEX, node);
 	}
 	/**
 	 * Return if given behavior is a trigger type behavior
@@ -194,16 +194,19 @@ public class ActorRule {
 	public void remove(IAuthoringRule toRemove){
 		myTriggerNodes.getChildren().remove(actorRuleMap.get(toRemove).get(NODE_INDEX));
 		myActionNodes.getChildren().remove(actorRuleMap.get(toRemove).get(NODE_INDEX));
+		myTriggers.remove(actorRuleMap.get(toRemove).get(TRIGGERACTION_INDEX));
+		myActions.remove(actorRuleMap.get(toRemove).get(TRIGGERACTION_INDEX));
 		actorRuleMap.remove(toRemove);
-		System.out.println(actorRuleMap);
 	}
 	
 	public void addTrigger(IAuthoringRule key, ITrigger value){
 		actorRuleMap.get(key).add(value);
+		myTriggers.add(value);
 	}
 	
 	public void addAction(IAuthoringRule key, IAction value){
 		actorRuleMap.get(key).add(value);
+		myActions.add(value);
 	}
 	
 }

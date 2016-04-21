@@ -6,8 +6,8 @@ import gui.view.IGUIElement;
 
 public interface IAuthoringRule extends IGUIElement {
 	
-	IAction getAction();
+	void addTrigger(IAuthoringRule key, ITrigger value);
 	
-	ITrigger getTrigger();
+	void addAction(IAuthoringRule key, IAction value);
 	
 }

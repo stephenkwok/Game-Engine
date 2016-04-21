@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.view.ActorRule;
-import gameengine.model.IAction;
 import gameengine.model.ITrigger;
 import javafx.scene.input.KeyCode;
 /**
@@ -40,14 +39,6 @@ public class KeyBehavior extends ComboBoxBehavior {
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
 		addTrigger(this,myTrigger);
 		System.out.println(myTrigger);
-	}
-	@Override
-	public IAction getAction() {
-		return null;
-	}
-	@Override
-	public ITrigger getTrigger() {
-		return this.myTrigger;
 	}
 
 }
