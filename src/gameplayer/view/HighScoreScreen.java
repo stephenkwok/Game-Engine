@@ -47,7 +47,7 @@ public class HighScoreScreen extends Screen implements Observer{
 	
 	@Override
 	protected void initialize() {
-		addComponents();
+		myPane.setTop(addToolbar(TOP_BUTTONS));
 		addScorePane();
 		getRoot().getChildren().add(myPane);
 	}
@@ -83,26 +83,7 @@ public class HighScoreScreen extends Screen implements Observer{
 		}
 	}
 
-	/**
-	 * 
-	 */
-	private void addComponents(){
-		myPane.setLeft(null);
-		String[] sideButtons = getResources().getString(TOP_BUTTONS).split(",");
-		ToolBar myT = new ToolBar();
-		myT.setMinWidth(SCREEN_WIDTH);
-		myT.setOrientation(Orientation.HORIZONTAL);
-		for(int i = 0; i < sideButtons.length; i++){
-			IGUIElement newElement = getFactory().createNewGUIObject(sideButtons[i]);
-			newElement.addNodeObserver(this);
-			Button myB = (Button) newElement.createNode();
-			Tooltip t = new Tooltip(getResources().getString(sideButtons[i]+ "Text"));
-			t.install(myB, t);
-			myT.getItems().add(myB);
-			myB.setFocusTraversable(false);
-		}
-		myPane.setTop(myT);
-	}
+
 
 	@Override
 	public void update(Observable o, Object arg) {
