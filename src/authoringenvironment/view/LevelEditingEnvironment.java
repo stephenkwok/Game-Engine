@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
@@ -40,7 +42,7 @@ import javafx.stage.Stage;
  * @author amyzhao
  *
  */
-public class LevelEditingEnvironment implements IEditingEnvironment {
+public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final String GUI_RESOURCE = "authoringGUI";
 	private static final String VERTICAL = "Vertically";
 	private BorderPane myRoot;
@@ -345,5 +347,10 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		myActorPreviews.remove(icon);
 		myLevelPane.getChildren().remove(icon);
 		myLevel.removeActor((Actor) icon.getRefActor()); 
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		resizeBackgroundBasedOnScrolling();
 	}
 }

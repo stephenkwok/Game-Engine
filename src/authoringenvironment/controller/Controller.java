@@ -349,18 +349,10 @@ public class Controller extends BranchScreenController implements Observer {
 			loadGame();
 		else if (arg0 instanceof ButtonSave)
 			saveGame();
-		else if (arg0 instanceof TextFieldActorNameEditor) 
-			updateActors((IAuthoringActor) arg1);
-		else if (arg0 instanceof TextFieldActorSizeEditor) 
-			updateActors((IAuthoringActor) arg1);
-		else if (arg0 instanceof TextFieldActorFrictionEditor) 
-			updateActors((IAuthoringActor) arg1);
-		else if (arg0 instanceof ButtonFileChooserActorImage) 
-			updateActors((IAuthoringActor) arg1);
 	}
 
 	// checking to see if this works with name
-	private void updateActors(IAuthoringActor actor) {
+	public void updateActors(IAuthoringActor actor) {
 		List<IAuthoringActor> listToUpdate = myActorMap.get(actor);
 		for (int i = 0; i < listToUpdate.size(); i++) {
 			IAuthoringActor toUpdate = listToUpdate.get(i);
