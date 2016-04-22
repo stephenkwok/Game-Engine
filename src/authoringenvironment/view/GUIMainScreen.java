@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Level;
@@ -19,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * 
@@ -32,25 +34,26 @@ import javafx.scene.layout.VBox;
 public class GUIMainScreen implements IGUI, Observer {
 
 	private static final int NUM_SCROLLPANES = 2;
-	private DoubleExpression screenWidth, screenHeight;
 	private VBox actorPreviewContainer, levelPreviewContainer, createdLevelsDisplay, createdActorsDisplay;
 	private ScrollPane actorScrollPane, levelScrollPane;
 	private HBoxDisplayHeader actorsDisplayHeader, levelsDisplayHeader;
 	private HBox centerPane;
 	private BorderPane borderPane;
-	private List<HBoxWithEditable> allPreviewUnits;
-	private List<HBoxWithLevel> levelPreviewUnits;
+	private List<PreviewUnitWithEditable> allPreviewUnits;
+	private List<PreviewUnitWithLevel> levelPreviewUnits;
 	private List<Level> levels;
 	private IEditingEnvironment levelEditor;
 	private GameEditingEnvironment gameEditor;
+	private Stage stage;
+	private Controller controller;
 
-	public GUIMainScreen(GameEditingEnvironment gameEditor, DoubleExpression screenWidth, DoubleExpression screenHeight,
-			List<Level> levels, IEditingEnvironment levelEditor) {
+	public GUIMainScreen(GameEditingEnvironment gameEditor, Controller controller, Stage stage, List<Level> levels,
+			IEditingEnvironment levelEditor) {
 		this.gameEditor = gameEditor;
-		this.screenWidth = screenWidth;
-		this.screenHeight = screenHeight;
 		this.levels = levels;
 		this.levelEditor = levelEditor;
+		this.controller = controller;
+		this.stage = stage;
 		allPreviewUnits = new ArrayList<>();
 		levelPreviewUnits = new ArrayList<>();
 		actorScrollPane = new ScrollPane();
@@ -88,7 +91,7 @@ public class GUIMainScreen implements IGUI, Observer {
 	 */
 	private void initializeBorderPane() {
 		borderPane = new BorderPane();
-		bindNodeSizeToGivenSize(borderPane, screenWidth, screenHeight);
+		bindNodeSizeToGivenSize(borderPane, stage.widthProperty(), stage.heightProperty());
 	}
 
 	/**
@@ -200,10 +203,9 @@ public class GUIMainScreen implements IGUI, Observer {
 	 *            IEditingEnvironment in which Actor is to be edited
 	 * @return a LabelClickable associated with an Actor
 	 */
-	public HBoxWithEditable createActorLabel(IEditableGameElement actor, IEditingEnvironment actorEditor) {
-		HBoxWithEditable actorPreviewUnit = new HBoxWithEditable(actor, actorEditor);
+	public void createActorPreviewUnit(IEditableGameElement actor, IEditingEnvironment actorEditor) {
+		PreviewUnitWithEditable actorPreviewUnit = new PreviewUnitWithEditable(actor, actorEditor);
 		initializePreviewUnit(actorPreviewUnit, actorPreviewContainer);
-		return actorPreviewUnit;
 	}
 
 	/**
@@ -214,27 +216,26 @@ public class GUIMainScreen implements IGUI, Observer {
 	 *            IEditingEnvironment in which Level is to be edited
 	 * @return a LabelClickable associated with a Level
 	 */
-	public HBoxWithEditable createLevelLabel(IEditableGameElement level, IEditingEnvironment levelEditor) {
-		HBoxWithLevel levelPreviewUnit = new HBoxWithLevel(level, levelEditor);
+	public void createLevelPreviewUnit(IEditableGameElement level, IEditingEnvironment levelEditor) {
+		PreviewUnitWithLevel levelPreviewUnit = new PreviewUnitWithLevel(level, levelEditor);
 		initializePreviewUnit(levelPreviewUnit, levelPreviewContainer);
 		levelPreviewUnits.add(levelPreviewUnit);
-		return levelPreviewUnit;
 	}
 
-	private void initializePreviewUnit(HBoxWithEditable previewUnit, VBox parent) {
+	private void initializePreviewUnit(PreviewUnitWithEditable previewUnit, VBox parent) {
+		previewUnit.addObserver(controller);
 		HBox previewUnitHBox = previewUnit.getHBox();
 		bindNodeSizeToGivenSize(previewUnitHBox, parent.widthProperty(), null);
 		parent.getChildren().add(previewUnitHBox);
 		allPreviewUnits.add(previewUnit);
 	}
 
-
 	/**
 	 * Updates all LabelClickables to account for any changes in the name or
 	 * image of Actors and Levels
 	 */
 	public void updatePreviewUnits() {
-		allPreviewUnits.stream().forEach(label -> label.update());
+		allPreviewUnits.stream().forEach(unit -> unit.update());
 	}
 
 	/**

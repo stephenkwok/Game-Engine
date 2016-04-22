@@ -18,7 +18,7 @@ import authoringenvironment.view.ActorEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
 import authoringenvironment.view.GameEditingEnvironment;
-import authoringenvironment.view.HBoxWithEditable;
+import authoringenvironment.view.PreviewUnitWithEditable;
 import authoringenvironment.view.LevelEditingEnvironment;
 import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
@@ -88,26 +88,31 @@ public class Controller extends BranchScreenController implements Observer {
 		initNewGame();
 	}
 
-	//TODO This constructor is not parallel with other BranchScreenController subclasses
-	//Create a resource bundle for the Controller's actions associated to buttons it handles, but the resource bundle for the GUIFactory should be stored in and set up in the GUIMain
-	//Stage should not be contained in the subclass (already in BranchScreenController parent)
+	// TODO This constructor is not parallel with other BranchScreenController
+	// subclasses
+	// Create a resource bundle for the Controller's actions associated to
+	// buttons it handles, but the resource bundle for the GUIFactory should be
+	// stored in and set up in the GUIMain
+	// Stage should not be contained in the subclass (already in
+	// BranchScreenController parent)
 	public Controller(Stage myStage, GUIMain guiMain) {
 		super(myStage);
 		this.guiMain = guiMain;
 		initNewGame();
 	}
 
-	//TODO Need a constructor that takes in a game passed by data and sets up Authoring Environment accordingly 
+	// TODO Need a constructor that takes in a game passed by data and sets up
+	// Authoring Environment accordingly
 	public Controller(Game game, Stage myStage) {
 		super(myStage);
 		this.game = game;
 	}
-	
+
 	public void initExistingGame() {
 		myLevels = game.getLevels();
 		gameInfo = game.getInfo();
 	}
-	
+
 	public void init() {
 		myRoot = new BorderPane();
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
@@ -122,86 +127,94 @@ public class Controller extends BranchScreenController implements Observer {
 		getStage().setScene(myScene);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		factory = new GUIFactory(myResources);
-		myLevels = new ArrayList<>(); // get from Game
+		myLevels = new ArrayList<>(); // HANDLED
 		myLevelNames = new ArrayList<>(); // not found
 		myActorMap = new HashMap<>(); // not found
 		myActorNames = new ArrayList<>(); // not found
 		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage());
-		gameInfo = new GameInfo(); // within Game
-		game = new Game(gameInfo, myLevels); // passed in
+		gameInfo = new GameInfo(); // HANDLED
+		game = new Game(gameInfo, myLevels); // HANDLED
 		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
-		mainScreen = new GUIMainScreen(gameEnvironment, getStage().widthProperty(), getStage().heightProperty(), myLevels,
-				levelEnvironment);
+		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);
 		setTopPane();
 		setCenterPane();
 	}
 
 	/**
 	 * Set center section of screen to given Pane
+	 * 
 	 * @param pane
 	 */
-	public void setCenterPane(Pane pane){
+	public void setCenterPane(Pane pane) {
 		myRoot.setCenter(pane);
 	}
+
 	/**
-	 * Set center screen to default, the home screen 
+	 * Set center screen to default, the home screen
 	 */
-	public void setCenterPane(){
+	public void setCenterPane() {
 		goToMainScreen();
 	}
+
 	/**
-	 * Sets top section of screen to fixed toolbar 
+	 * Sets top section of screen to fixed toolbar
 	 */
 	private void setTopPane() {
 		HBox hbox = new HBox(PADDING);
-		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));		
+		hbox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
 		initializeTopPaneElements(hbox);
 		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		myRoot.setTop(hbox);
 	}
+
 	/**
 	 * Initialize elements to be in toolbar
+	 * 
 	 * @param hbox
 	 */
 	private void initializeTopPaneElements(HBox hbox) {
-		try{
+		try {
 			String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
 			for (int i = 0; i < topPaneElements.length; i++) {
 				IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
 				((Observable) elementToCreate).addObserver(this);
 				hbox.getChildren().add(elementToCreate.createNode());
-				
+
 			}
-			//temp
+			// temp
 			ButtonSplash splash = new ButtonSplash(null, SPLASH_IMAGE_NAME);
 			hbox.getChildren().add(splash.createNode());
-		}catch(Exception e){
-			
+		} catch (Exception e) {
+
 		}
 	}
+
 	/**
 	 * Return Pane representation of authoring environment
 	 */
 	public Pane getPane() {
 		return myRoot;
 	}
-	
+
 	/**
 	 * Return width of authoring environment Scene
+	 * 
 	 * @return
 	 */
 	public double getWidth() {
 		return myScene.getWidth();
 	}
+
 	/**
 	 * Return height of authoring environment Scene
+	 * 
 	 * @return
 	 */
 	public double getHeight() {
 		return myScene.getHeight();
 	}
-	
+
 	/**
 	 * Switches screen to appropriate editing environment
 	 * 
@@ -243,7 +256,7 @@ public class Controller extends BranchScreenController implements Observer {
 	}
 
 	public void loadGame() {
-		FileChooserController fileChooserController = new FileChooserController(getStage(),ChooserType.EDIT);
+		FileChooserController fileChooserController = new FileChooserController(getStage(), ChooserType.EDIT);
 	}
 
 	/**
@@ -259,9 +272,10 @@ public class Controller extends BranchScreenController implements Observer {
 		return myLevelNames;
 	}
 
-	public Map<IAuthoringActor, List<IAuthoringActor>> getActorMap(){
+	public Map<IAuthoringActor, List<IAuthoringActor>> getActorMap() {
 		return myActorMap;
 	}
+
 	public List<String> getActorNames() {
 		return myActorNames;
 	}
@@ -277,7 +291,7 @@ public class Controller extends BranchScreenController implements Observer {
 		myLevels.add(newLevel);
 		newLevel.setPlayPosition(myLevels.size());
 		myLevelNames.add(newLevel.getName());
-		mainScreen.createLevelLabel(newLevel, levelEnvironment).addObserver(this);
+		mainScreen.createLevelPreviewUnit(newLevel, levelEnvironment);
 		goToEditingEnvironment(newLevel, levelEnvironment);
 	}
 
@@ -286,7 +300,7 @@ public class Controller extends BranchScreenController implements Observer {
 		newActor.setID(myActorMap.size());
 		myActorMap.put(newActor, new ArrayList<>());
 		myActorNames.add(newActor.getName());
-		mainScreen.createActorLabel(newActor, actorEnvironment).addObserver(this);;
+		mainScreen.createActorPreviewUnit(newActor, actorEnvironment);
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
@@ -307,40 +321,34 @@ public class Controller extends BranchScreenController implements Observer {
 	/**
 	 * Saves game and returns to splash screen of game player.
 	 */
-	/*public void goToSplash() {
-		guiMain.goBackToSplash();
-	}*/
+	/*
+	 * public void goToSplash() { guiMain.goBackToSplash(); }
+	 */
 
 	public void switchGame() {
 		// TODO Auto-generated method stub
 	}
-	
-/*	@Override
-	public void update(Observable o, Object arg) {
-		String button = (String) arg;
-		String method = myButtonResource.getString(button);
-		System.out.println(method);
-		try {
-			this.getClass().getDeclaredMethod(method).invoke(this);
-		} catch (NoSuchMethodException e) {
-			try {
-				this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
-			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
-					| NoSuchMethodException | SecurityException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-	}
-*/
+
+	/*
+	 * @Override public void update(Observable o, Object arg) { String button =
+	 * (String) arg; String method = myButtonResource.getString(button);
+	 * System.out.println(method); try {
+	 * this.getClass().getDeclaredMethod(method).invoke(this); } catch
+	 * (NoSuchMethodException e) { try {
+	 * this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this); }
+	 * catch (IllegalAccessException | IllegalArgumentException |
+	 * InvocationTargetException | NoSuchMethodException | SecurityException e1)
+	 * { // TODO Auto-generated catch block e1.printStackTrace(); } } catch
+	 * (IllegalAccessException | IllegalArgumentException |
+	 * InvocationTargetException | SecurityException e) { // TODO Auto-generated
+	 * catch block e.printStackTrace(); }
+	 * 
+	 * }
+	 */
 	// Use reflection - properties file linking button name to a method name
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if (arg0 instanceof HBoxWithEditable)
+		if (arg0 instanceof PreviewUnitWithEditable)
 			handleObservableGoToEditingEnvironmentCall(arg1);
 		else if (arg0 instanceof ButtonFinish)
 			goToSplash();
@@ -354,7 +362,7 @@ public class Controller extends BranchScreenController implements Observer {
 			loadGame();
 		else if (arg0 instanceof ButtonSave)
 			saveGame();
-		else if (arg0 instanceof TextFieldActorNameEditor) 
+		else if (arg0 instanceof TextFieldActorNameEditor)
 			updateActors((IAuthoringActor) arg1);
 	}
 
@@ -365,7 +373,7 @@ public class Controller extends BranchScreenController implements Observer {
 			listToUpdate.get(i).setName(actor.getName());
 		}
 	}
-	
+
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
 		List<Object> arguments = (List<Object>) notifyObserversArgument;
 		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);

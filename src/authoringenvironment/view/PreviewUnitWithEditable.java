@@ -23,7 +23,7 @@ import javafx.scene.layout.HBox;
  *
  */
 
-public class HBoxWithEditable extends ObjectObservable implements IEditingElement {
+public class PreviewUnitWithEditable extends ObjectObservable implements IEditingElement {
 
 	private static final String IMAGE_TEXT_PADDING = "    ";
 	private static final Double IMAGE_FIT_SIZE = 75.0;
@@ -34,7 +34,7 @@ public class HBoxWithEditable extends ObjectObservable implements IEditingElemen
 	private IEditableGameElement myEditable;
 	private IEditingEnvironment myEnvironment;
 
-	public HBoxWithEditable(IEditableGameElement editable, IEditingEnvironment environment) {
+	public PreviewUnitWithEditable(IEditableGameElement editable, IEditingEnvironment environment) {
 		myEditable = editable;
 		myEnvironment = environment;
 		myLabel = new Label();
@@ -62,14 +62,25 @@ public class HBoxWithEditable extends ObjectObservable implements IEditingElemen
 		myLabel.setGraphic(imageView);
 	}
 	
+	/**
+	 * 
+	 * @return the preview unit's instance of IEditableGameElement
+	 */
 	public IEditableGameElement getEditable() {
 		return myEditable;
 	}
 	
+	/**
+	 * 
+	 * @return the HBox containing all nodes in the preview unit
+	 */
 	public HBox getHBox() {
 		return myHBox;
 	}
 
+	/**
+	 * Sets the preview unit's IEditableGameElement to new IEditableGameElement
+	 */
 	@Override
 	public void setEditableElement(IEditableGameElement editable) {
 		myEditable = editable;

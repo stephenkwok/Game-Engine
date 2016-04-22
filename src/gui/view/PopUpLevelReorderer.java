@@ -8,8 +8,8 @@ import java.util.Set;
 
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.view.GUIMainScreen;
-import authoringenvironment.view.HBoxWithEditable;
-import authoringenvironment.view.HBoxWithLevel;
+import authoringenvironment.view.PreviewUnitWithEditable;
+import authoringenvironment.view.PreviewUnitWithLevel;
 import gameengine.controller.Level;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -35,19 +35,19 @@ public class PopUpLevelReorderer extends PopUpParent {
 	private static final int HEIGHT = 100;
 	private static final int MINIMUM_PLAY_POSITION = 1;
 	private static final int MINIMUM_LIST_INDEX = 0;
-	private List<HBoxWithLevel> myLevelPreviewUnits;
+	private List<PreviewUnitWithLevel> myLevelPreviewUnits;
 	private VBox myPreviewUnitsContainer;
 	private List<Level> myLevels;
 	private IEditingEnvironment myLevelEditor;
-	private List<HBoxWithEditable> myPreviewUnits;
+	private List<PreviewUnitWithEditable> myPreviewUnits;
 	private GUIMainScreen myMainScreen;
 	private List<Integer> playPositions;
 	private Set<Integer> uniquePlayPositions;
 	private Button myCloseButton;
 	private Label myLabel;
 
-	public PopUpLevelReorderer(List<HBoxWithLevel> levelPreviewUnits, VBox previewUnitsContainer,
-			List<Level> levels, IEditingEnvironment levelEditor, List<HBoxWithEditable> allPreviewUnits,
+	public PopUpLevelReorderer(List<PreviewUnitWithLevel> levelPreviewUnits, VBox previewUnitsContainer,
+			List<Level> levels, IEditingEnvironment levelEditor, List<PreviewUnitWithEditable> allPreviewUnits,
 			GUIMainScreen mainScreen) {
 		super(WIDTH, HEIGHT);
 		myLevelPreviewUnits = levelPreviewUnits;
@@ -96,7 +96,7 @@ public class PopUpLevelReorderer extends PopUpParent {
 		myLevelPreviewUnits.clear();
 		myPreviewUnitsContainer.getChildren().clear();
 		Collections.sort(myLevels);
-		myLevels.stream().forEach(level -> myMainScreen.createLevelLabel(level, myLevelEditor));
+		myLevels.stream().forEach(level -> myMainScreen.createLevelPreviewUnit(level, myLevelEditor));
 		myPreviewUnits.stream().filter(unit -> myPreviewUnitsContainer.getChildren().contains(unit));
 		myMainScreen.updatePreviewUnits();
 	}

@@ -27,7 +27,6 @@ public class ButtonFileChooserGameImage extends ButtonFileChooser {
 		super(BUTTON_TEXT, imageName, editor, stage);
 		setIconSize(BUTTON_ICON_SIZE);
 		setButtonIcon();
-		
 	}
 
 	/**
