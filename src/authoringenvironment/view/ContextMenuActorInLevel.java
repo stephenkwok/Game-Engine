@@ -14,10 +14,10 @@ public class ContextMenuActorInLevel extends ContextMenu {
 	private static final String DELETE = "Remove actor";
 	private static final String EDIT_SIZE = "Edit actor size";
 	private ImageviewActorIcon curIcon;
-	private LevelEditingEnvironment myLevelEditingEnvironment;
+	private LevelPreview myLevelPreview;
 	
-	public ContextMenuActorInLevel(LevelEditingEnvironment levelEditor) {
-		myLevelEditingEnvironment = levelEditor;
+	public ContextMenuActorInLevel(LevelPreview levelPreview) {
+		myLevelPreview = levelPreview;
 		curIcon = null;
 		initMenuItems();
 	}
@@ -30,22 +30,13 @@ public class ContextMenuActorInLevel extends ContextMenu {
 				// TODO Auto-generated method stub
 				if (curIcon != null) {
 					System.out.println("blurp");
-					myLevelEditingEnvironment.removeActorFromLevel(curIcon);
+					myLevelPreview.removeActorFromLevel(curIcon);
 				}
 			}
 			
 		});
 		
-		MenuItem editSize = new MenuItem(EDIT_SIZE);
-		editSize.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				//TODO: FILL THIS IN - pop up thing?
-			}
-			
-		});
-		
-		getItems().addAll(delete, editSize);
+		getItems().add(delete);
 	}
 	
 	public void setIcon(ImageviewActorIcon icon) {
