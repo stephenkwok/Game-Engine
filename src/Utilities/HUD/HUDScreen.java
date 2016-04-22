@@ -1,4 +1,4 @@
-package Utilities.HUD;
+package utilities.hud;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -86,5 +86,4 @@ public class HUDScreen extends Observable {
 		int rownum = valueToRowMap.get(change.getKey());
 		values.set(rownum, change.getValueAdded().toString());
 	}
-	
 }

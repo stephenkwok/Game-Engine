@@ -1,4 +1,4 @@
-package Utilities.HUD;
+package utilities.hud;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class Container implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println(arg);
+		System.out.println("UPDATED: " + arg);
 	}
 
 	
@@ -44,9 +44,16 @@ public class Container implements Observer{
 	}
 	
 	public static void main(String[] args) {
-		Container c = new Container(new Property(1), new Property("hello"), new Property("aylmao"));
+		Property p1 = new Property(1.5);
+		Property p2 = new Property(p1);
+		Property p3 = new Property (0.001);
+		Container c = new Container(p1, p2, p3);
 		System.out.println(c.toString());
-		c.value1.setValue(5);
+		c.value1.setValue(5.111111);
+		System.out.println(c.toString());
+		p2.bind(p3);
+		System.out.println(c.toString());
+		p1.setValue(0.333);
 		System.out.println(c.toString());
 //		XMLCreator x = new XMLCreator();
 //		try {
