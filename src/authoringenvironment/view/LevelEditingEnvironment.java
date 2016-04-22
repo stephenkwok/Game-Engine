@@ -4,14 +4,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
+import gui.view.PopUpActorResize;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
@@ -40,10 +44,11 @@ import javafx.stage.Stage;
  * @author amyzhao
  *
  */
-public class LevelEditingEnvironment implements IEditingEnvironment {
+public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final String GUI_RESOURCE = "authoringGUI";
 	private static final String VERTICAL = "Vertically";
-	private static final String HORIZONTAL = "Horizontally";
+	private static final int POP_UP_WIDTH = 300;
+	private static final int POP_UP_HEIGHT = 100;
 	private BorderPane myRoot;
 	private GUILevelInspector myInspector;
 	private ResourceBundle myResources;
@@ -53,26 +58,29 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	private Map<IAuthoringActor, List<IAuthoringActor>> availableActors;
 	private Pane myLevelPane;
 	private StackPane myStackPane;	// try setting stackpane to scrollpane's content, then adding imageview for background to stackpane and level on top
-	private ScrollPane myCenterPane;
+	private ScrollPane myScrollPane;
+	private Pane myCenterPane;
 	private ImageView myLevelBackground;
 	private List<ImageviewActorIcon> myActorPreviews;
 	private Stage myStage;
 	private static final double SUBSCENE_HEIGHT = 525; // 700 * 3/4
 	private static final double SUBSCENE_WIDTH = 1000;
 	private Rectangle myBoundary;
+	private Controller myController;
 
 	/**
 	 * Constructor for a level editing environment.
 	 * @param controller: authoring environment controller.
 	 * @param actors: list of currently available actors.
 	 */
-	public LevelEditingEnvironment(Map<IAuthoringActor, List<IAuthoringActor>> actors, Stage stage) {
+	public LevelEditingEnvironment(Map<IAuthoringActor, List<IAuthoringActor>> actors, Stage stage, Controller controller) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
 		myActorPreviews = new ArrayList<>();
-		myCenterPane = new ScrollPane();
+		myScrollPane = new ScrollPane();
 		myStage = stage;
+		myController = controller;
 		initializeEnvironment();
 	}
 
@@ -202,20 +210,27 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 * Initialize the center pane.
 	 */
 	private void initializeCenter() {
+		myCenterPane = new Pane();
 		myLevelPane = new Pane();
 		myStackPane = new StackPane();
 		myStackPane.setAlignment(Pos.CENTER);
 		myBoundary = new Rectangle(SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
 		myBoundary.setFill(Color.TRANSPARENT);
 		myBoundary.setStroke(Color.BLACK);
-		myCenterPane.setContent(myStackPane);
+		myScrollPane.setContent(myStackPane);
+		//myStackPane.getChildren().add(myLevelPane);
 		myStackPane.getChildren().addAll(myLevelPane, myBoundary);
-		myCenterPane.setStyle("-fx-background-color: lightgray");
+		myScrollPane.setStyle("-fx-background-color: lightgray");
+		myScrollPane.setMinViewportWidth(SUBSCENE_WIDTH);
+		myScrollPane.setMinViewportHeight(SUBSCENE_HEIGHT);
+		myScrollPane.setPrefViewportWidth(SUBSCENE_WIDTH);
+		myScrollPane.setPrefViewportHeight(SUBSCENE_HEIGHT);
+		myCenterPane.getChildren().add(myScrollPane);
 		myRoot.setCenter(myCenterPane);
-		myCenterPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-		myCenterPane.setHbarPolicy(ScrollBarPolicy.ALWAYS);
-		myCenterPane.setFitToHeight(true);
-		myCenterPane.setFitToWidth(true);
+		myScrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+		myScrollPane.setHbarPolicy(ScrollBarPolicy.ALWAYS);
+		myScrollPane.setFitToHeight(true);
+		myScrollPane.setFitToWidth(true);
 	}
 
 	/**
@@ -277,7 +292,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	/**
 	 * Add a level's actors to the preview in the center pane.
 	 */
-	private void addLevelActorsToScene() {
+	public void addLevelActorsToScene() {
 		myActorPreviews.clear();
 		for (IPlayActor actor: myLevel.getActors()) {
 			ImageviewActorIcon icon = addActorToScene((IAuthoringActor) actor);
@@ -287,7 +302,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	}
 	
 	private ImageviewActorIcon addActorToScene(IAuthoringActor actor) {
-		ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
+		ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getSize());
 		setIconBehavior(icon);
 		icon.setOnLevel(true);
 		myActorPreviews.add(icon);
@@ -312,6 +327,18 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 				System.out.println("pressed");
 	        }
 	    });
+		
+		icon.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent mouseEvent) {
+		        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+		            if(mouseEvent.getClickCount() == 2){
+		                System.out.println("Double clicked");
+		                PopUpActorResize popUp = new PopUpActorResize(POP_UP_WIDTH, POP_UP_HEIGHT, icon.getRefActor(), myController);
+		            }
+		        }
+		    }
+		});
 	}
 	/**
 	 * Update the list of available actors and update the level inspector to reflect the currently available actors.
@@ -338,5 +365,20 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		myActorPreviews.remove(icon);
 		myLevelPane.getChildren().remove(icon);
 		myLevel.removeActor((Actor) icon.getRefActor()); 
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if (arg == null) {
+			resizeBackgroundBasedOnScrolling();
+		} else {
+			myController.updateRefActorSize((IAuthoringActor) arg);
+			myLevelPane.getChildren().removeAll(myActorPreviews);
+			addLevelActorsToScene();
+		}
+	}
+	
+	public Controller getController() {
+		return myController;
 	}
 }

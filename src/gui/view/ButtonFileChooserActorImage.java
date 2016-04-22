@@ -19,6 +19,7 @@ public class ButtonFileChooserActorImage extends ButtonFileChooser {
 	@Override
 	protected void updateImage(IEditingElement editor, Image image, File imageFile) {
 		((ActorEditingEnvironment) editor).setActorImage(new ImageView(image), imageFile.getName());
+		notifyController(null);
 	}
 
 }

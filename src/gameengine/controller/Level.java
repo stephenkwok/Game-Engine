@@ -23,17 +23,12 @@ import authoringenvironment.model.IEditableGameElement;
  */
 public class Level implements Observer, ILevel, IEditableGameElement, Comparable<Level> {
 
-	// TODO: should probably set these default things via properties file but idk sry guyz
 	private static final String DEFAULT_NAME = "Default";
 	private static final String DEFAULT_IMAGE_NAME = "default_landscape.png";
-	private static final double DEFAULT_HEIGHT = 800;
-	private static final double DEFAULT_WIDTH = 1024;
 	private static final String DEFAULT_SCROLLING = "Horizontally";
 	private List<IPlayActor> myActors;
 	private Map<String, List<IPlayActor>> myTriggerMap;
 	private String myName;
-	private double myHeight;
-	private double myWidth;
 	private int myPlayPosition;
 	private List<String> myHUDOptions;
 	private String myScrollingDirection;
@@ -55,8 +50,6 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 		setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
 		myScrollingDirection = DEFAULT_SCROLLING;
 		myName = DEFAULT_NAME;
-		myHeight = DEFAULT_HEIGHT;
-		myWidth = DEFAULT_WIDTH;
 	}
 
 	/**
@@ -195,41 +188,6 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 
 	public void setMyActors(List<IPlayActor> myActors) {
 		this.myActors = myActors;
-	}
-
-	/**
-	 * Provides the Level's Height
-	 * @return  The Level's Height
-	 */
-	public double getMyHeight() {
-		return myHeight;
-	}
-
-	/**
-	 * Sets the Level's Height
-	 *
-	 * @param myHeight  The desired Level height
-	 */
-	public void setMyHeight(double myHeight) {
-		this.myHeight = myHeight;
-	}
-
-	/**
-	 * Provides the Level's width
-	 *
-	 * @return The Level's width
-	 */
-	public double getMyWidth() {
-		return myWidth;
-	}
-
-	/**
-	 * Sets the Level's width
-	 *
-	 * @param myWidth   The desired Level width
-	 */
-	public void setMyWidth(double myWidth) {
-		this.myWidth = myWidth;
 	}
 
 	/**

@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -16,6 +17,7 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.view.ActorEditingEnvironment;
+import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
 import authoringenvironment.view.GameEditingEnvironment;
@@ -28,6 +30,7 @@ import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gui.view.ButtonFileChooserActorImage;
 import gui.view.ButtonFinish;
 import gui.view.ButtonHome;
 import gui.view.ButtonLoad;
@@ -39,8 +42,11 @@ import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import gameplayer.controller.BranchScreenController;
 import gui.view.TextFieldActorNameEditor;
+import gui.view.TextFieldActorSizeEditor;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -49,6 +55,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import gui.view.Screen;
+import gui.view.TextFieldActorFrictionEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -100,7 +107,10 @@ public class Controller extends BranchScreenController implements Observer {
 	}
 
 	//TODO Need a constructor that takes in a game passed by data and sets up Authoring Environment accordingly 
-
+	public Controller(Stage myStage, Game newGame) {
+		super(myStage);
+	}
+	
 	public void init() {
 		myRoot = new BorderPane();
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
@@ -111,7 +121,7 @@ public class Controller extends BranchScreenController implements Observer {
 		myLevelNames = new ArrayList<>();
 		myActorMap = new HashMap<>();
 		myActorNames = new ArrayList<>();
-		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage());
+		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
@@ -339,22 +349,58 @@ public class Controller extends BranchScreenController implements Observer {
 			loadGame();
 		else if (arg0 instanceof ButtonSave)
 			saveGame();
-		else if (arg0 instanceof TextFieldActorNameEditor) 
-			updateActors((IAuthoringActor) arg1);
 	}
 
 	// checking to see if this works with name
-	private void updateActors(IAuthoringActor actor) {
+	public void updateActors(IAuthoringActor actor) {
 		List<IAuthoringActor> listToUpdate = myActorMap.get(actor);
 		for (int i = 0; i < listToUpdate.size(); i++) {
-			listToUpdate.get(i).setName(actor.getName());
+			IAuthoringActor toUpdate = listToUpdate.get(i);
+			copyActor(toUpdate, actor);
+			toUpdate.setName(actor.getName());
 		}
 	}
+	
+	public void updateRefActorSize(IAuthoringActor actor) {
+		for (IAuthoringActor refActor: myActorMap.keySet()) {
+			if (myActorMap.get(refActor).contains(actor)) {
+				refActor.setSize(actor.getSize());
+				updateActors(refActor);
+			}
+		}
+	}
+	
+	// copy IDs
+	private void copyActor(IAuthoringActor toUpdate, IAuthoringActor toCopy) {
+		toUpdate.setName(toCopy.getName());
+		toUpdate.setFriction(toCopy.getFriction());
+		toUpdate.setImageView(toCopy.getImageView());
+		toUpdate.setSize(toCopy.getSize());
+		toUpdate.setImageViewName(toCopy.getImageViewName());
+	//	copyRules(toUpdate, toCopy.getActorRules());		copy actor rules or normal rules?? what?? annie halp
+		//copyAttributes(toUpdate,)
+	}
+	
+	/*
+	private void copyRules(IAuthoringActor toUpdate, List<ActorRule> rulesToCopy) {
+		toUpdate.getActorRules().clear();
+		for (int i = 0; i < rulesToCopy.size(); i++) {
+			toUpdate.addRule(rulesToCopy.get(i));
+		}
+	}*/
 	
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
 		List<Object> arguments = (List<Object>) notifyObserversArgument;
 		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
 		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
 		goToEditingEnvironment(editable, environment);
+	}
+	
+	public ActorEditingEnvironment getActorEditingEnvironment() {
+		return actorEnvironment;
+	}
+	
+	public LevelEditingEnvironment getLevelEditingEnvironment() {
+		return levelEnvironment;
 	}
 }
