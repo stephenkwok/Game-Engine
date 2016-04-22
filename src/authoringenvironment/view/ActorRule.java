@@ -196,17 +196,25 @@ public class ActorRule {
 		//remove visual
 		myTriggerNodes.getChildren().remove(actorRuleMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("NodeIndex"))));
 		myActionNodes.getChildren().remove(actorRuleMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("NodeIndex"))));
-		//if is a trigger: myTrigger = null;
-		myActions.remove(actorRuleMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex"))));
-		actorRuleMap.remove(toRemove);
-		System.out.println(actorRuleMap.get(toRemove));
-		Rule ruleToRemove = (Rule) actorRuleMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")));
-		removeIRuleFromActor(ruleToRemove);
+		try{
+			//if is a trigger: myTrigger = null;
+			myActions.remove(actorRuleMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex"))));
+			System.out.println("before: " + actorRuleMap.get(toRemove));
+			Rule ruleToRemove = (Rule) actorRuleMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")));
+			removeIRuleFromActor(ruleToRemove);
+			actorRuleMap.remove(toRemove);
+			System.out.println("after: " + actorRuleMap.get(toRemove));
+		}catch(Exception e){
+			//only removing visual is okay 
+		}
 	}
 	
 	private void removeIRuleFromActor(IRule toRemove){
 		List<Rule> rulesForCurrentTrigger = ((Actor) myActorRuleCreator.getActor()).getRules().get(myTrigger.getMyKey());
+		System.out.println(rulesForCurrentTrigger);
 		rulesForCurrentTrigger.remove(toRemove);
+		System.out.println(rulesForCurrentTrigger);
+		System.out.println("Map: " + ((Actor) myActorRuleCreator.getActor()).getRules());
 	}
 	
 	public void addTrigger(IAuthoringBehavior key, ITrigger value){
