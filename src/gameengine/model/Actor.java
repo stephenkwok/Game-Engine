@@ -422,4 +422,9 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     public int getID() {
         return myID;
     }
+
+    public void setDirection(){
+        if (getHeading() == 0) myImageView.setScaleX(1);
+        else if (getHeading() == 180){ myImageView.setScaleX(-1); }
+    }
 }

@@ -15,7 +15,7 @@
           <myFriction>0.0</myFriction>
           <myName>A1</myName>
           <myID>1</myID>
-          <myImageViewName>redball.png</myImageViewName>
+          <myImageViewName>16bitmario.png</myImageViewName>
           <myHeading>0.0</myHeading>
           <myRules>
             <entry>
@@ -983,7 +983,7 @@
           <myFriction>0.0</myFriction>
           <myName>enemy</myName>
           <myID>3</myID>
-          <myImageViewName>redball.png</myImageViewName>
+          <myImageViewName>goomba.png</myImageViewName>
           <myHeading>0.0</myHeading>
           <myRules>
             <entry>
@@ -1137,7 +1137,7 @@
       <myWidth>1024.0</myWidth>
       <myPlayPosition>0</myPlayPosition>
       <myScrollingDirection>Horizontally</myScrollingDirection>
-      <myBackgroundImgName>default_landscape.png</myBackgroundImgName>
+      <myBackgroundImgName>mariobackground.png</myBackgroundImgName>
     </gameengine.controller.Level>
   </levels>
   <info>
