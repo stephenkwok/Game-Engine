@@ -222,46 +222,19 @@ public class GameController implements Observer, IGameController {
 	public void update(Observable o, Object arg) {
 		List<Object> myList = (List<Object>) arg;
 		String methodName = (String) myList.get(0);
-		Object arg2 = null;
-		Class<?> myClass = null;
 		try {
 			if (myResources.getString(methodName).equals("null")) {
 				this.getClass().getDeclaredMethod(methodName).invoke(this);
 			} else if (myResources.getString(methodName).equals("String")) {
-				Class[] parameterTypes = { String.class };
-				Object[] parameters = { (String) myList.get(1) };
-				this.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(this, parameters);
-				return;
+				this.getClass().getDeclaredMethod(methodName, String.class).invoke(this, (String) myList.get(1));
 			} else {
-				myClass = Class.forName(myResources.getString(methodName));
-				arg2 = myClass.cast(myList.get(1));
+				Class<?> myClass = Class.forName(myResources.getString(methodName));
+				Object arg2 = myClass.cast(myList.get(1));
+				model.getClass().getDeclaredMethod(methodName, myClass).invoke(model, arg2);
 			}
-		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException
-				| InvocationTargetException | NoSuchMethodException e1) {
+		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
-		if (o.equals(view)) {
-			try {
-				Class[] parameterTypes = { myClass };
-				Object[] parameters = { arg2 };
-				model.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(model, parameters);
-
-			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
-					| NoSuchMethodException | SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		if (o.equals(model)) {
-			try {
-				if (arg instanceof ArrayList<?>) {
-					this.getClass().getDeclaredMethod(methodName).invoke(this, arg2);
-				}
-				this.getClass().getDeclaredMethod(((String) arg)).invoke(this);
-			} catch (Exception e) {
-				// hud.handleChange((Change)arg);
-			}
 		}
 	}
 
