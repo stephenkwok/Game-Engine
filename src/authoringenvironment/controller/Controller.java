@@ -377,6 +377,7 @@ public class Controller extends BranchScreenController implements Observer {
 		toUpdate.setImageView(toCopy.getImageView());
 		toUpdate.setSize(toCopy.getSize());
 		toUpdate.setImageViewName(toCopy.getImageViewName());
+		toUpdate.setID(toCopy.getMyID());
 	//	copyRules(toUpdate, toCopy.getActorRules());		copy actor rules or normal rules?? what?? annie halp
 		//copyAttributes(toUpdate,)
 	}
