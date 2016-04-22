@@ -94,6 +94,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private void setLeftPane() {
 		VBox vbox = new VBox();
 		attributes = new TabAttributes(myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
+		attributes.setController(myController);
 		TabPane attributeTP = new TabPane();
 		attributeTP.getTabs().add(attributes.getTab());
 		attributeTP.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);

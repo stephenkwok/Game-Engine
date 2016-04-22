@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -28,6 +29,7 @@ import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gui.view.ButtonFileChooserActorImage;
 import gui.view.ButtonFinish;
 import gui.view.ButtonHome;
 import gui.view.ButtonLoad;
@@ -39,8 +41,11 @@ import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import gameplayer.controller.BranchScreenController;
 import gui.view.TextFieldActorNameEditor;
+import gui.view.TextFieldActorSizeEditor;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -49,6 +54,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import gui.view.Screen;
+import gui.view.TextFieldActorFrictionEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -341,14 +347,33 @@ public class Controller extends BranchScreenController implements Observer {
 			saveGame();
 		else if (arg0 instanceof TextFieldActorNameEditor) 
 			updateActors((IAuthoringActor) arg1);
+		else if (arg0 instanceof TextFieldActorSizeEditor) 
+			updateActors((IAuthoringActor) arg1);
+		else if (arg0 instanceof TextFieldActorFrictionEditor) 
+			updateActors((IAuthoringActor) arg1);
+		else if (arg0 instanceof ButtonFileChooserActorImage) 
+			updateActors((IAuthoringActor) arg1);
 	}
 
 	// checking to see if this works with name
 	private void updateActors(IAuthoringActor actor) {
 		List<IAuthoringActor> listToUpdate = myActorMap.get(actor);
 		for (int i = 0; i < listToUpdate.size(); i++) {
-			listToUpdate.get(i).setName(actor.getName());
+			IAuthoringActor toUpdate = listToUpdate.get(i);
+			copyActor(toUpdate, actor);
+			toUpdate.setName(actor.getName());
 		}
+	}
+	
+	private void copyActor(IAuthoringActor toUpdate, IAuthoringActor toCopy) {
+		toUpdate.setName(toCopy.getName());
+		toUpdate.setFriction(toCopy.getFriction());
+		toUpdate.setImageView(toCopy.getImageView());
+		toUpdate.setImageViewName(toCopy.getImageViewName());
+//		myRules =  new HashMap<>();
+    //    attributeMap = new HashMap<>();
+  //      myActorRules = new ArrayList<>();
+//        myStates = new HashSet<>();
 	}
 	
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
