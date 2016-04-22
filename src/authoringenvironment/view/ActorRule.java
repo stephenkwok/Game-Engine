@@ -107,7 +107,6 @@ public class ActorRule {
 		actNodesScroll = new ScrollPane(myActionNodes);
 		myRule.add(trigNodesScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")), Integer.parseInt(myActorRuleResources.getString("TriggerRow")));
 		myRule.add(actNodesScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")), Integer.parseInt(myActorRuleResources.getString("ActionRow")));
-		
 	}
 	/**
 	 * Close button to remove a rule
@@ -116,6 +115,7 @@ public class ActorRule {
 		Button close = new Button(myActorRuleResources.getString("Close"));
 		close.setOnAction(event -> {
 			myActorRuleCreator.removeRule(this);
+			//TODO:
 		});
 		myRule.add(close, Integer.parseInt(myActorRuleResources.getString("CloseCol")), Integer.parseInt(myActorRuleResources.getString("CloseRow")));
 	}
@@ -127,12 +127,17 @@ public class ActorRule {
 	public void addBehavior(String behaviorType) {
 		if(!(isTrigger(behaviorType) && myTriggerNodes.getChildren().size()!=0)){
 			IAuthoringBehavior element = actorRuleFactory.getAuthoringRule(behaviorType,null);
-			List<Object> value = new ArrayList<>();
-			authoringBehaviorMap.put(element, value);
+			authoringBehaviorMap.put(element, new ArrayList<>());
 			Node node = ((IGUIElement) element).createNode();
-			setRemoveEvent(node, element);
-			if(isTrigger(behaviorType)) myTriggerNodes.getChildren().add(node);
-			else myActionNodes.getChildren().add(node);
+			setRemoveEvent(node, element);			
+			if(isTrigger(behaviorType)){
+				myTriggerNodes.getChildren().add(node);
+				//set myTrigger
+			}
+			else{
+				myActionNodes.getChildren().add(node);
+				//add IAction to list of Actions
+			}
 			authoringBehaviorMap.get(element).add(Integer.parseInt(myActorRuleResources.getString("NodeIndex")), node);
 		}
 	}
@@ -144,48 +149,6 @@ public class ActorRule {
 	private boolean isTrigger(String behavior){
 		List<String> triggers = Arrays.asList(myFactoryResources.getString("TriggerBehaviors").split(" "));
 		return triggers.contains(behavior);
-	}
-	/**
-	 * Add sound from library to rule
-	 * @param soundName
-	 */
-	public void addSound(String soundName) {
-		IAuthoringBehavior element; 
-		Node node;
-		if(isInPath(soundName, myActorRuleResources.getString("Sounds"))){
-			element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlaySoundBehavior"), soundName);
-			node = element.createNode();
-		}
-		else{
-			element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlayMusicBehavior"), soundName);
-			node = element.createNode();
-		}
-		setRemoveEvent(node, element);
-		myActionNodes.getChildren().add(node);
-	}
-	/**
-	 * return if given filename is in directory of given pathname
-	 * @param fileName
-	 * @param pathname
-	 * @return
-	 */
-	private boolean isInPath(String fileName, String pathname){
-		File dir = new File(pathname);
-		List<String> fileNames = new ArrayList<>();
-		for(File file:dir.listFiles()){
-			fileNames.add(file.getName());
-		}
-		return fileNames.contains(fileName);
-	}
-	/**
-	 * Add image from library to rule
-	 * @param imageName
-	 */
-	public void addImage(String imageName) {
-		IAuthoringBehavior element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("ChangeImageBehavior"),imageName); 
-		Node node = element.createNode();
-		setRemoveEvent(node, element);
-		myActionNodes.getChildren().add(node);
 	}
 	
 	/**
@@ -199,7 +162,9 @@ public class ActorRule {
 			if(myTrigger == authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex")))){
 				removeTrigger(toRemove);
 			}else{
+				System.out.println(myActions);
 				myActions.remove(authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex"))));
+				System.out.println(myActions);
 				Rule ruleToRemove = (Rule) authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")));
 				removeIRuleFromActor(ruleToRemove);
 				authoringBehaviorMap.remove(toRemove);
@@ -212,14 +177,20 @@ public class ActorRule {
 		((Actor) myActorRuleCreator.getActor()).getRules().remove(myTrigger.getMyKey());
 		//remove trigger from authoring behavior
 		authoringBehaviorMap.remove(toRemove);
-		//remove rules from actorRuleMap that have the current trigger as their trigger
+		//remove authoringbehavior from actorRuleMap that have the current trigger as their trigger
 		for(IAuthoringBehavior authoringBehavior: authoringBehaviorMap.keySet()){
 			String otherTriggerKey = ((Rule) authoringBehaviorMap.get(authoringBehavior).get(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")))).getMyTrigger().getMyKey();
 			if(otherTriggerKey.equals(myTrigger.getMyKey())){
-				authoringBehaviorMap.get(authoringBehavior).remove(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")));
+				authoringBehaviorMap.remove(authoringBehavior);
+//				authoringBehaviorMap.get(authoringBehavior).remove(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")));
 			}
 		}
 		myTrigger = null;
+		System.out.println("reached");
+		setTriggersAndActions(true);
+		System.out.println("next");
+		System.out.println("Rule Map: " + ((Actor) myActorRuleCreator.getActor()).getRules());
+		System.out.println("Authoring Behavior Map: " + authoringBehaviorMap);
 	}
 	
 	private void removeIRuleFromActor(IRule toRemove){
@@ -228,12 +199,13 @@ public class ActorRule {
 	}
 	
 	public void addTrigger(IAuthoringBehavior key, ITrigger value){
-		authoringBehaviorMap.get(key).add(value);
 		if(myTrigger!=value){
+			authoringBehaviorMap.get(key).add(value);
 			myTrigger = value;
 			resetIRulesForTrigger();
+			setTriggersAndActions(false);
 		}
-		setTriggersAndActions(false);
+//		setTriggersAndActions(false);
 		System.out.println("Rule Map: " + ((Actor) myActorRuleCreator.getActor()).getRules());
 		System.out.println("Authoring Behavior Map: " + authoringBehaviorMap);
 	}
@@ -248,7 +220,8 @@ public class ActorRule {
 		List<Rule> value = new ArrayList<>();
 		for(IAction action: myActions){
 			value.add(new Rule(myTrigger, (Action) action));
-		}//don't do this it makes new rules?
+		}
+		//add new list of rules for this trigger
 		((Actor) myActorRuleCreator.getActor()).getRules().put(myTrigger.getMyKey(),value);
 	}
 	

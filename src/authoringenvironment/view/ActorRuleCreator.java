@@ -72,7 +72,7 @@ public class ActorRuleCreator {
 	 * @param sound
 	 */
 	public void addSound(ActorRule rule, Label sound){
-		rule.addSound(sound.getText());
+//		rule.addSound(sound.getText());
 	}
 	/**
 	 * Add given image to given ActorRule
@@ -80,7 +80,7 @@ public class ActorRuleCreator {
 	 * @param image
 	 */
 	public void addImage(ActorRule rule, Label image){
-		rule.addImage(image.getText());
+//		rule.addImage(image.getText());
 	}
 	
 	/**
