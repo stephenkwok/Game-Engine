@@ -2,12 +2,17 @@ package gui.view;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
+import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToolBar;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
 
 /** 
@@ -73,6 +78,22 @@ public abstract class Screen extends Observable implements IScreen {
 	protected abstract void initialize() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
 	
 	
+	protected ToolBar addToolbar(String buttonList){
+		String[] sideButtons = getResources().getString(buttonList).split(",");
+		ToolBar myT = new ToolBar();
+		myT.setMinWidth(SCREEN_WIDTH);
+		myT.setOrientation(Orientation.HORIZONTAL);
+		for(int i = 0; i < sideButtons.length; i++){
+			IGUIElement newElement = getFactory().createNewGUIObject(sideButtons[i]);
+			newElement.addNodeObserver((Observer) this);
+			Button myB = (Button) newElement.createNode();
+			Tooltip t = new Tooltip(getResources().getString(sideButtons[i]+ "Text"));
+			t.install(myB, t);
+			myT.getItems().add(myB);
+			myB.setFocusTraversable(false);
+		}
+		return myT;
+	}
 	
 		
 	
