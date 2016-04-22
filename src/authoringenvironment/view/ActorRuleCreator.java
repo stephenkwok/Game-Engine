@@ -5,7 +5,9 @@ import java.util.List;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
+import gameengine.model.Actor;
 import gameengine.model.IRule;
+//import gameengine.model.IRule;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 /**
@@ -19,19 +21,13 @@ public class ActorRuleCreator {
 	private static final int VGAP = 10;
 	private static final int HGAP = 10;
 	private static final double CONTAINERS_PERCENT_WIDTH = 0.75;
-	private int rule_row;
+	private int ruleRow;
 	private GridPane myActorRuleCreatorPane;
 	private List<ActorRule> myActorRules;
-	private IAuthoringActor myActor;
-	private double sceneWidth;
-	private Controller myController;
+	private ActorEditingEnvironment aEE;
 	
-	private List<IRule> myIRules;
-	
-	public ActorRuleCreator(IAuthoringActor myActor,double sceneWidth,Controller myController) {
-		this.myActor = myActor;
-		this.sceneWidth = sceneWidth;
-		this.myController = myController;
+	public ActorRuleCreator(ActorEditingEnvironment aEE) {
+		this.aEE = aEE;
 		initializeEnvironment();
 	}
 	
@@ -39,13 +35,14 @@ public class ActorRuleCreator {
 	 * Initialize and create actor rule creator, the rightmost section of the actor editing environment
 	 */
 	private void initializeEnvironment(){
-		rule_row = RULE_ROW_START;
+		ruleRow = RULE_ROW_START;
 		myActorRules = new ArrayList<>();
 		myActorRuleCreatorPane = new GridPane();
-		myActorRuleCreatorPane.setPrefWidth(sceneWidth*CONTAINERS_PERCENT_WIDTH);
+		myActorRuleCreatorPane.setPrefWidth(aEE.getStage().getWidth()*CONTAINERS_PERCENT_WIDTH);
 		myActorRuleCreatorPane.setVgap(VGAP);
 		myActorRuleCreatorPane.setHgap(HGAP);
 	}
+	
 
 	/**
 	 * Get GridPane representation of actor rule creator
@@ -61,7 +58,7 @@ public class ActorRuleCreator {
 	 * @param behavior
 	 */
 	public void addBehavior(ActorRule rule, Label behavior){
-		rule.addBehavior(behavior);
+		rule.addBehavior(behavior.getText());
 	}
 	/**
 	 * Add given sound to given ActorRule
@@ -69,7 +66,7 @@ public class ActorRuleCreator {
 	 * @param sound
 	 */
 	public void addSound(ActorRule rule, Label sound){
-		rule.addSound(sound);
+		rule.addSound(sound.getText());
 	}
 	/**
 	 * Add given image to given ActorRule
@@ -77,17 +74,19 @@ public class ActorRuleCreator {
 	 * @param image
 	 */
 	public void addImage(ActorRule rule, Label image){
-		rule.addImage(image);
+		rule.addImage(image.getText());
 	}
+	
 	/**
 	 * Create new rule for Actor currently in the actor editing environment and add to gridpane
 	 */
-	public void addNewRule() {
-		ActorRule newRule = new ActorRule(this, myController);
-		myActorRuleCreatorPane.add(newRule.getGridPane(), RULE_COL,rule_row);
-		rule_row++;
-		myActor.getActorRules().add(newRule);
+	public void addNewRule() {  
+		ActorRule newRule = new ActorRule(this);
+		myActorRuleCreatorPane.add(newRule.getGridPane(), RULE_COL,ruleRow);
+		myActorRules.add(newRule);
+		ruleRow++;
 	}
+	
 	/**
 	 * Remove given rule from environment and from Actor currently in the environment 
 	 * @param actorRule
@@ -95,8 +94,10 @@ public class ActorRuleCreator {
 	public void removeRule(ActorRule actorRule){
 		myActorRules.remove(actorRule);
 		myActorRuleCreatorPane.getChildren().remove(actorRule.getGridPane());
-		myActor.getActorRules().remove(actorRule);
+		//remove IRule from Actor
 	}
+	
+	
 	/**
 	 * Get ActorRules for Actor currently in the actor editing environment
 	 * @return
@@ -109,35 +110,28 @@ public class ActorRuleCreator {
 	 * fields based on the Actor 
 	 */
 	public void updateActorRules() {
-		for(ActorRule toRemove: myActorRules){
-			myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
-		}
-		myActorRules = myActor.getActorRules();
-		addUpdatedRules();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ;
-	}
-	/**
-	 * Populate actor editing environment with current Actor's rules 
-	 */
-	private void addUpdatedRules(){
-		//recreate from IRules?
-		rule_row = RULE_ROW_START;
-		for(ActorRule toAdd: myActorRules){
-			myActorRuleCreatorPane.add(toAdd.getGridPane(), RULE_COL, rule_row);
-			rule_row++;
+		initializeEnvironment();
+		for(String behaviorType: ((Actor) aEE.getEditable()).getRules().keySet()){
+			ActorRule toAdd = new ActorRule(this);
+			toAdd.addBehavior(behaviorType);
+			for(IRule rule: ((Actor) aEE.getEditable()).getRules().get(behaviorType)){
+				toAdd.addBehavior(rule.getMyAction().toString()); // name of Action
+			}
+			myActorRuleCreatorPane.add(toAdd.getGridPane(), RULE_COL, ruleRow);
+			myActorRules.add(toAdd);
+			ruleRow++;
 		}
 	}
-	/**
-	 * Set the Actor that the ActorRules are being added to/removed from
-	 * @param myActor
-	 */
-	public void setActor(IAuthoringActor myActor) {
-		this.myActor = myActor;
-	}
+
 	/**
 	 * Get the current IAuthoringActor
 	 * @return IAuthoringActor
 	 */
 	public IAuthoringActor getActor(){
-		return this.myActor;
+		return (IAuthoringActor) aEE.getEditable();
+	}
+
+	public Controller getController() {
+		return aEE.getController();
 	}
 }

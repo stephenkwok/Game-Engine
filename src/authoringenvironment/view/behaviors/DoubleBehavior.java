@@ -3,6 +3,7 @@ package authoringenvironment.view.behaviors;
 import java.util.ResourceBundle;
 
 import authoringenvironment.view.ActionFactory;
+import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.TriggerFactory;
 import gameengine.model.IAction;
 import gameengine.model.ITrigger;
@@ -11,7 +12,6 @@ import gui.view.TextFieldWithButton;
  * GUI representation of behaviors that take in a single Double as a parameter
  * @author AnnieTang
  */
-//remove abstract and make TickBehavior? Tick only behavior that needs textfield input atm
 
 public abstract class DoubleBehavior extends TextFieldWithButton implements IAuthoringRule{
 	private static final String LABEL = "Label";
@@ -21,13 +21,15 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	private TriggerFactory triggerFactory;
 	private ActionFactory actionFactory;
 	private String behaviorType;
+	private ActorRule myActorRule;
 	
-	public DoubleBehavior(String behaviorType, ResourceBundle myResources) {
+	public DoubleBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
 		super(myResources.getString(behaviorType+LABEL), 
 				myResources.getString(behaviorType+PROMPT), Double.parseDouble(myResources.getString(behaviorType+WIDTH)));
 		this.behaviorType = behaviorType;
 		this.triggerFactory = new TriggerFactory();
 		this.actionFactory = new ActionFactory();
+		this.myActorRule = myActorRule;
 		setButtonAction(event -> {
 			this.value = Double.parseDouble(getTextFieldInput());
 			createRuleTriggerOrAction();
@@ -59,10 +61,14 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	}
 
 	abstract void createRuleTriggerOrAction();
-
+	
 	@Override
-	public abstract IAction getAction();
-
+	public void addTrigger(IAuthoringRule key, ITrigger value){
+		myActorRule.addTrigger(key, value);
+	}
+	
 	@Override
-	public abstract ITrigger getTrigger();
+	public void addAction(IAuthoringRule key, IAction value){
+		myActorRule.addAction(key, value);
+	}
 }
