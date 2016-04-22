@@ -100,6 +100,7 @@ public class GameEditingEnvironment implements IEditingElement {
 		TextFieldWithButton nameEditor = new TextFieldGameNameEditor(mainPrompt, textFieldPrompt, TEXT_FIELD_WIDTH);
 		nameEditor.setEditableElement(myGameInfo);
 		nameEditorContainer = (HBox) nameEditor.createNode();
+		nameEditorContainer.prefWidthProperty().bind(editingEnvironmentContainer.widthProperty());
 		nameEditorContainer.setSpacing(TEXT_FIELD_CONTAINER_SPACING);
 		nameEditorContainer.setPadding(new Insets(DEFAULT_PADDING));
 	}

@@ -3,11 +3,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
 
 import java.util.Observer;
-import java.util.ResourceBundle;
-
-import authoringenvironment.controller.Controller;
-import gui.view.ButtonSplash;
-import gui.view.GUIFactory;
 import gui.view.IGUI;
 import gui.view.IGUIElement;
 import gui.view.Screen;
@@ -20,7 +15,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 /**
  * Main GUI class. Fixed tool-bar as top pane. 

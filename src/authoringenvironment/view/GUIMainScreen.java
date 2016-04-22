@@ -10,7 +10,6 @@ import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Level;
 import gui.view.IGUI;
-import gui.view.PopUpParent;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
