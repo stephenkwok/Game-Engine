@@ -53,7 +53,7 @@ public class Tester extends Application {
 
 
         IAuthoringActor actor1 = (IAuthoringActor) new Actor();
-        actor1.setImageViewName("redball.png");
+        actor1.setImageViewName("16bitmario.png");
         actor1.setName("A1");
         actor1.setID(1);
 
@@ -67,7 +67,7 @@ public class Tester extends Application {
 
         IPlayActor actor4 = new Actor();
         ((Actor) actor4).setName("enemy");
-        ((IAuthoringActor)actor4).setImageViewName("redball.png");
+        ((IAuthoringActor)actor4).setImageViewName("goomba.png");
         ((Actor) actor4).setID(3);
         actor4.setX(315);
         BottomCollision enemyTrigger = new BottomCollision((IPlayActor)actor4, (IPlayActor)actor2);
@@ -154,6 +154,7 @@ public class Tester extends Application {
 
         List<Level> levels = new ArrayList<Level>();
         Level level1 = new Level();
+        level1.setMyBackgroundImgName("mariobackground.png");
         levels.add(level1);
         level1.addActor(actor1);
         level1.addActor(actor2);
