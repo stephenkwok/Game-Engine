@@ -1,9 +1,7 @@
 package gameplayer.view;
 
-import java.lang.reflect.InvocationTargetException;
 
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.TreeMap;
@@ -58,12 +56,14 @@ public class HighScoreScreen extends Screen implements Observer{
 	 * Populates the center pane with map elements made into HBoxes for each individual score
 	 */
 	private void addScorePane() {
+		//TODO magic number
 		myScoreBox = new VBox(20);
 		myPane.setCenter(myScoreBox);
 		
 	}
 	
 	public void displayScores(String gameName, Map<String,Integer> scores) {
+		//TODO magic number
 		TreeMap<Integer, String> sortedScores = new TreeMap<>();
 		for(String player : scores.keySet()){
 			sortedScores.put(scores.get(player), player);
@@ -71,6 +71,7 @@ public class HighScoreScreen extends Screen implements Observer{
 		myScoreBox.getChildren().clear();
 		myScoreBox.getChildren().add(new Text(gameName));
 		for(Integer score: sortedScores.descendingKeySet()){
+			//TODO figure out font/styling specifics
 			HBox myH = new HBox(10);
 			Text myPlayer = new Text(sortedScores.get(score));
 			myPlayer.setFont(Font.font("Helvetica", 30));

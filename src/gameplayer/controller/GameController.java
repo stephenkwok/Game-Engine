@@ -1,11 +1,8 @@
 package gameplayer.controller;
 
 import java.util.List;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -18,18 +15,9 @@ import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IDisplayActor;
 import gameengine.model.IPlayActor;
-import gameengine.model.ITrigger;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
-import gui.view.IGUIElement;
-import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
-import javafx.collections.ObservableMap;
 import javafx.scene.ParallelCamera;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextInputDialog;
-import javafx.util.Callback;
 
 /**
  * This class serves as the private interface that any game controller must
@@ -48,6 +36,7 @@ public class GameController implements Observer, IGameController {
 	private HUDScreen hud;
 
 	private ResourceBundle myResources;
+	private static final String GAME_CONTROLLER_RESOURCE = "gameActions";
 
 	public GameController(Game game) {
 		this.setGame(game);
@@ -56,7 +45,7 @@ public class GameController implements Observer, IGameController {
 																// actor is
 																// define at
 																// this line
-		this.myResources = ResourceBundle.getBundle("gameActions");
+		this.myResources = ResourceBundle.getBundle(GAME_CONTROLLER_RESOURCE);
 	}
 
 	/**
@@ -269,7 +258,7 @@ public class GameController implements Observer, IGameController {
 	
 	public void updateCamera(){
 		if(model.getCurrentLevel().getMainCharacter()!=null){
-			if(model.getCurrentLevel().getMyScrollingDirection().equals("Horizontally")){
+			if(model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))){
 				view.changeCamera(model.getCurrentLevel().getMainCharacter().getX(), 0);
 			}else{
 				view.changeCamera(0, model.getCurrentLevel().getMainCharacter().getY());
