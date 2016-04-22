@@ -3,7 +3,6 @@ package gameplayer.controller;
 import java.lang.reflect.InvocationTargetException;
 import java.io.File;
 import java.util.Observable;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -14,8 +13,6 @@ import gamedata.controller.FileChooserController;
 import gamedata.controller.ParserController;
 import gameengine.controller.Game;
 import gameplayer.view.BaseScreen;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -32,7 +29,7 @@ public class BaseScreenController extends BranchScreenController{
 		//DEPENDENCY!!
 		this.myGameController = gameController;
 		setUpScreen();
-		this.myResources = ResourceBundle.getBundle("baseActions");
+		this.myResources = ResourceBundle.getBundle(BASE_CONTROLLER_RESOURCE);
 		changeScreen(myScreen);
 	}
 	
