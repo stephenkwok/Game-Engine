@@ -436,8 +436,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     }
 
     public void nextImage(){
-        //setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getNextImage()))));
         myImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getNextImage())));
-        //notifyObservers("updateActors");
     }
 }
