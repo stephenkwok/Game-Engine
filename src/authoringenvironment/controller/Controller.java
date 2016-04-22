@@ -27,6 +27,7 @@ import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gameplayer.controller.BranchScreenController;
 import gui.view.ButtonFinish;
 import gui.view.ButtonHome;
 import gui.view.ButtonLoad;
@@ -36,7 +37,6 @@ import gui.view.ButtonSave;
 import gui.view.ButtonSplash;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
-import gameplayer.controller.BranchScreenController;
 import gui.view.TextFieldActorNameEditor;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -47,7 +47,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import gui.view.Screen;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -86,7 +85,7 @@ public class Controller extends BranchScreenController implements Observer {
 	public Controller(Stage myStage) {
 		super(myStage);
 		this.myButtonResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
-		init();
+		initNewGame();
 	}
 
 	//TODO This constructor is not parallel with other BranchScreenController subclasses
@@ -95,24 +94,41 @@ public class Controller extends BranchScreenController implements Observer {
 	public Controller(Stage myStage, GUIMain guiMain) {
 		super(myStage);
 		this.guiMain = guiMain;
-		init();
+		initNewGame();
 	}
 
 	//TODO Need a constructor that takes in a game passed by data and sets up Authoring Environment accordingly 
-
+	public Controller(Game game, Stage myStage) {
+		super(myStage);
+		this.game = game;
+	}
+	
+	public void initExistingGame() {
+		myLevels = game.getLevels();
+		gameInfo = game.getInfo();
+	}
+	
 	public void init() {
 		myRoot = new BorderPane();
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
 		getStage().setScene(myScene);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		factory = new GUIFactory(myResources);
-		myLevels = new ArrayList<>();
-		myLevelNames = new ArrayList<>();
-		myActorMap = new HashMap<>();
-		myActorNames = new ArrayList<>();
+	}
+
+	public void initNewGame() {
+		myRoot = new BorderPane();
+		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
+		getStage().setScene(myScene);
+		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
+		factory = new GUIFactory(myResources);
+		myLevels = new ArrayList<>(); // get from Game
+		myLevelNames = new ArrayList<>(); // not found
+		myActorMap = new HashMap<>(); // not found
+		myActorNames = new ArrayList<>(); // not found
 		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage());
-		gameInfo = new GameInfo();
-		game = new Game(gameInfo, myLevels);
+		gameInfo = new GameInfo(); // within Game
+		game = new Game(gameInfo, myLevels); // passed in
 		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
 		mainScreen = new GUIMainScreen(gameEnvironment, getStage().widthProperty(), getStage().heightProperty(), myLevels,
