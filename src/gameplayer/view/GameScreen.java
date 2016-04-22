@@ -229,8 +229,6 @@ public class GameScreen extends Observable implements IGameScreen {
 					setChanged();
 					Object[] args = {myResources.getString("SaveScore"), dialog.getEditor().getText()};
 					notifyObservers(Arrays.asList(args));
-					//notifyObservers();
-					//saveGameScore(dialog.getEditor().getText());
 					return dialog.getEditor().getText();
 				}
 				else {
@@ -238,14 +236,6 @@ public class GameScreen extends Observable implements IGameScreen {
 				}
 			}
 		});
-		//return null;
 	}
-
-//	private void saveGameScore(String name) {
-//		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
-//		c.saveHighScore(getGame().getScore(), name);
-//
-//	} 
-	
 
 }
