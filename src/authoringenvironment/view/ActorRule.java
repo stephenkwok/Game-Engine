@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
-import authoringenvironment.view.behaviors.IAuthoringRule;
+import authoringenvironment.view.behaviors.IAuthoringBehavior;
 import gameengine.model.Actor;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
@@ -19,6 +19,8 @@ import gameengine.model.Actions.Action;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -28,8 +30,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-//make the IRule and add to Actor
-//Then when re-populating based on IRule, lists should update
 /**
  * Rule container for an actor containing behavior, images, and/or sounds.
  * @author AnnieTang
@@ -46,13 +46,12 @@ public class ActorRule {
 	private static final String LIBRARY_BUNDLE = "library";
 	private ResourceBundle myActorRuleResources;
 	private static final String ACTORRULE_BUNDLE = "actorrule";
-	private static final int NODE_INDEX = 0;
-	private static final int TRIGGERACTION_INDEX = 1;
 	private ActorRuleFactory actorRuleFactory;
 	private Controller myController;
-	private Map<IAuthoringRule, List<Object>> actorRuleMap;
+	private Map<IAuthoringBehavior, List<Object>> actorRuleMap;
 	private ITrigger myTrigger;
 	private List<IAction> myActions;
+//	private boolean showAlert;
 	
 	public ActorRule(ActorRuleCreator myActorRuleCreator) {
 		this.myActorRuleCreator = myActorRuleCreator;
@@ -77,6 +76,7 @@ public class ActorRule {
 		this.actorRuleFactory = new ActorRuleFactory(myFactoryResources, myActorRuleCreator.getActor(), myController, this);
 		this.actorRuleMap = new HashMap<>();
 		this.myActions = new ArrayList<>();
+//		this.showAlert = true;
 		myRule = new GridPane(); 
 		myRule.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(Integer.parseInt(myActorRuleResources.getString("CornerRadius"))), Insets.EMPTY)));
 		myRule.setPadding(new Insets(Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding"))));
@@ -126,16 +126,14 @@ public class ActorRule {
 	 */
 	public void addBehavior(String behaviorType) {
 		if(!(isTrigger(behaviorType) && myTriggerNodes.getChildren().size()!=0)){
-			IAuthoringRule element = actorRuleFactory.getAuthoringRule(behaviorType,null);
+			IAuthoringBehavior element = actorRuleFactory.getAuthoringRule(behaviorType,null);
 			List<Object> value = new ArrayList<>();
 			actorRuleMap.put(element, value);
 			Node node = ((IGUIElement) element).createNode();
-			node.setOnMouseClicked(event -> {
-				if(event.getClickCount()==2) remove(element);
-			});
+			setRemoveEvent(node, element);
 			if(isTrigger(behaviorType)) myTriggerNodes.getChildren().add(node);
 			else myActionNodes.getChildren().add(node);
-			actorRuleMap.get(element).add(NODE_INDEX, node);
+			actorRuleMap.get(element).add(Integer.parseInt(myActorRuleResources.getString("NodeIndex")), node);
 		}
 	}
 	/**
@@ -152,7 +150,7 @@ public class ActorRule {
 	 * @param soundName
 	 */
 	public void addSound(String soundName) {
-		IAuthoringRule element; 
+		IAuthoringBehavior element; 
 		Node node;
 		if(isInPath(soundName, myActorRuleResources.getString("Sounds"))){
 			element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlaySoundBehavior"), soundName);
@@ -162,9 +160,7 @@ public class ActorRule {
 			element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlayMusicBehavior"), soundName);
 			node = element.createNode();
 		}
-		node.setOnMouseClicked(event -> {
-			if(event.getClickCount()==2) remove(element);
-		});
+		setRemoveEvent(node, element);
 		myActionNodes.getChildren().add(node);
 	}
 	/**
@@ -186,11 +182,9 @@ public class ActorRule {
 	 * @param imageName
 	 */
 	public void addImage(String imageName) {
-		IAuthoringRule element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("ChangeImageBehavior"),imageName); 
+		IAuthoringBehavior element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("ChangeImageBehavior"),imageName); 
 		Node node = element.createNode();
-		node.setOnMouseClicked(event -> {
-			if(event.getClickCount()==2) remove(element);
-		});
+		setRemoveEvent(node, element);
 		myActionNodes.getChildren().add(node);
 	}
 	
@@ -198,43 +192,94 @@ public class ActorRule {
 	 * Remove trigger or action from rule 
 	 * @param toRemove
 	 */
-	public void remove(IAuthoringRule toRemove){
-		myTriggerNodes.getChildren().remove(actorRuleMap.get(toRemove).get(NODE_INDEX));
-		myActionNodes.getChildren().remove(actorRuleMap.get(toRemove).get(NODE_INDEX));
-		myTrigger = null;
-		myActions.remove(actorRuleMap.get(toRemove).get(TRIGGERACTION_INDEX));
+	public void remove(IAuthoringBehavior toRemove){
+		//remove visual
+		myTriggerNodes.getChildren().remove(actorRuleMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("NodeIndex"))));
+		myActionNodes.getChildren().remove(actorRuleMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("NodeIndex"))));
+		//if is a trigger: myTrigger = null;
+		myActions.remove(actorRuleMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex"))));
 		actorRuleMap.remove(toRemove);
-		
+		System.out.println(actorRuleMap.get(toRemove));
+		Rule ruleToRemove = (Rule) actorRuleMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")));
+		removeIRuleFromActor(ruleToRemove);
 	}
 	
-	public void addTrigger(IAuthoringRule key, ITrigger value){
-		actorRuleMap.get(key).add(value);
-		myTrigger = value;
-		System.out.println(myTrigger);
-		addIRulesForTrigger();
-		//add IRule to map
+	private void removeIRuleFromActor(IRule toRemove){
+		List<Rule> rulesForCurrentTrigger = ((Actor) myActorRuleCreator.getActor()).getRules().get(myTrigger.getMyKey());
+		rulesForCurrentTrigger.remove(toRemove);
 	}
 	
-	public void addAction(IAuthoringRule key, IAction value){
+	public void addTrigger(IAuthoringBehavior key, ITrigger value){
 		actorRuleMap.get(key).add(value);
-//		System.out.println(actorRuleMap);
+		if(myTrigger!=value){
+			myTrigger = value;
+			resetIRulesForTrigger();
+		}
+		setTriggersAndActions(false);
+		System.out.println("Map: " + ((Actor) myActorRuleCreator.getActor()).getRules());
+		//add IRule to map?
+	}
+	
+	public void addAction(IAuthoringBehavior key, IAction value){
+		actorRuleMap.get(key).add(value);
 		myActions.add(value);
-		System.out.println(value);
-		addIRulesForTrigger();
-		//add IRule to map
+		addIRuleForAction(key,value);
 	}
 	
-	private void addIRulesForTrigger(){
+	private void resetIRulesForTrigger(){
 		List<Rule> value = new ArrayList<>();
 		for(IAction action: myActions){
 			value.add(new Rule(myTrigger, (Action) action));
+		}//don't do this it makes new rules?
+		((Actor) myActorRuleCreator.getActor()).getRules().put(myTrigger.getMyKey(),value);
+	}
+	
+	private void addIRuleForAction(IAuthoringBehavior key, IAction value){
+		if(actionNotYetAdded(value)){
+			Rule toAdd = new Rule(myTrigger, (Action) value);
+			((Actor) myActorRuleCreator.getActor()).getRules().get(myTrigger.getMyKey()).add(toAdd);
+			actorRuleMap.get(key).add(toAdd);
 		}
-		try{
-			((Actor) myActorRuleCreator.getActor()).getRules().put(myTrigger.getMyKey(),value);
-		}catch(Exception e){
-			System.out.println("Trigger not yet set for IRule");
+	}
+	
+	private boolean actionNotYetAdded(IAction value){
+		List<Rule> rules = ((Actor) myActorRuleCreator.getActor()).getRules().get(myTrigger.getMyKey());
+		for(Rule rule:rules){
+			if(rule.getMyAction()==value) return false;
 		}
-//		System.out.println(((Actor) myActorRuleCreator.getActor()).getRules());
+		return true;
+	}
+	
+	private void showAlert(String alertHeader, String alertContent){
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setHeaderText(alertHeader);
+		alert.setContentText(alertContent);
+		alert.showAndWait();
+	}
+	
+	public void setTriggersAndActions(boolean triggersOnly) {
+		for(IAuthoringBehavior authoringBehavior: actorRuleMap.keySet()){
+			if(triggersOnly){
+				if(authoringBehavior.isTrigger()){
+//					showAlert = false;
+					authoringBehavior.setTriggerOrAction();
+				}
+			}
+			else{
+				if(!authoringBehavior.isTrigger()){
+					authoringBehavior.setTriggerOrAction();
+				}
+			}
+		}
+//		if(showAlert) showAlert(myActorRuleResources.getString("TriggerNotSet"),myActorRuleResources.getString("SetATrigger"));
+	}
+	
+	private void setRemoveEvent(Node node, IAuthoringBehavior element){
+		node.setOnMouseClicked(event -> {
+			if(event.getClickCount()==2){
+				remove(element);
+			}
+		});
 	}
 	
 }

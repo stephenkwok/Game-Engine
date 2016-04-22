@@ -40,6 +40,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private static final int BUTTON_HEIGHT = 30;
 	private static final int BUTTON_WIDTH = 100;
 	private static final int LEFT_PANE_WIDTH = 350;
+	private static final String SET_RULE_LABEL = "Set Rules";
 	private BorderPane myRoot;
 	private GUILibrary library;
 	private TabAttributes attributes;
@@ -119,7 +120,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private void setBottomPane() {
 		HBox hbox = new HBox();
 		hbox.setBackground(new Background(new BackgroundFill(DEFAULT_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
-		hbox.getChildren().add(getNewRuleButton());
+		hbox.getChildren().addAll(newRuleButton(), setRuleButton());
 		hbox.setAlignment(Pos.CENTER_RIGHT);
 		myRoot.setBottom(hbox);
 	}
@@ -127,13 +128,22 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	 * Returns button to allow users to create a new rule
 	 * @return
 	 */
-	private Button getNewRuleButton() {
+	private Button newRuleButton() {
 		Button toReturn = new Button(NEW_RULE_LABEL);
 		toReturn.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		toReturn.setOnAction(event -> {
 			myActorRuleCreator.addNewRule(); //
 			setCenterPane();
 			library.updateDragEvents();
+		});
+		return toReturn;
+	}
+	
+	private Button setRuleButton(){
+		Button toReturn = new Button(SET_RULE_LABEL);
+		toReturn.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		toReturn.setOnAction(event -> {
+			myActorRuleCreator.setRules();
 		});
 		return toReturn;
 	}

@@ -113,7 +113,7 @@ public class ActorRuleCreator {
 		for(ActorRule toRemove: myActorRules) myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
 		myActorRules.clear();
 		ruleRow = RULE_ROW_START;
-		System.out.println(((Actor) aEE.getEditable()).getRules());
+//		System.out.println(((Actor) aEE.getEditable()).getRules());
 		for(String behaviorType: ((Actor) aEE.getEditable()).getRules().keySet()){
 			System.out.println("has IRules");
 			ActorRule toAdd = new ActorRule(this);
@@ -138,5 +138,11 @@ public class ActorRuleCreator {
 
 	public Controller getController() {
 		return aEE.getController();
+	}
+
+	public void setRules() {
+		for(ActorRule actorRule: myActorRules){
+			actorRule.setTriggersAndActions(true); //triggers only 
+		}
 	}
 }

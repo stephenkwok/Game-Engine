@@ -33,13 +33,18 @@ public class KeyBehavior extends ComboBoxBehavior {
 	}
 
 	@Override
-	void createTriggerOrAction() {
+	public void setTriggerOrAction() {
+		addTrigger(this,myTrigger);
+	}
+	@Override
+	protected void createTriggerOrAction() {
 		KeyCode keyCode = KeyCode.getKeyCode(getValue());
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(keyCode);
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
-		addTrigger(this,myTrigger);
-		System.out.println(myTrigger);
 	}
-
+	@Override
+	public boolean isTrigger() {
+		return true;
+	}
 }
