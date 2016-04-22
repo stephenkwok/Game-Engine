@@ -120,15 +120,14 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      */
     @Override
     public void addRule(Rule newRule) {
+    	List<Rule> myBehaviors;
         if (myRules.containsKey(newRule.getMyTrigger().getMyKey())) {
-            List<Rule> myBehaviors = myRules.get(newRule.getMyTrigger().getMyKey());
-            myBehaviors.add(newRule);
-            myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
+            myBehaviors = myRules.get(newRule.getMyTrigger().getMyKey());
         } else {
-            List<Rule> myBehaviors = new ArrayList<>();
-            myBehaviors.add(newRule);
-            myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
+            myBehaviors = new ArrayList<>();
         }
+        myBehaviors.add(newRule);
+        myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
     }
 
     /**
