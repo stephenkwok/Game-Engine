@@ -115,7 +115,6 @@ public class ActorRuleCreator {
 		ruleRow = RULE_ROW_START;
 //		System.out.println(((Actor) aEE.getEditable()).getRules());
 		for(String behaviorType: ((Actor) aEE.getEditable()).getRules().keySet()){
-			System.out.println("has IRules");
 			ActorRule toAdd = new ActorRule(this);
 			toAdd.addBehavior(behaviorType);
 			for(IRule rule: ((Actor) aEE.getEditable()).getRules().get(behaviorType)){

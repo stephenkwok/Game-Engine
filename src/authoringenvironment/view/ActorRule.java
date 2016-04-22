@@ -48,7 +48,7 @@ public class ActorRule {
 	private static final String ACTORRULE_BUNDLE = "actorrule";
 	private ActorRuleFactory actorRuleFactory;
 	private Controller myController;
-	private Map<IAuthoringBehavior, List<Object>> actorRuleMap;
+	private Map<IAuthoringBehavior, List<Object>> authoringBehaviorMap;
 	private ITrigger myTrigger;
 	private List<IAction> myActions;
 //	private boolean showAlert;
@@ -74,7 +74,7 @@ public class ActorRule {
 		this.myFactoryResources = ResourceBundle.getBundle(LIBRARY_BUNDLE);
 		this.myActorRuleResources = ResourceBundle.getBundle(ACTORRULE_BUNDLE);
 		this.actorRuleFactory = new ActorRuleFactory(myFactoryResources, myActorRuleCreator.getActor(), myController, this);
-		this.actorRuleMap = new HashMap<>();
+		this.authoringBehaviorMap = new HashMap<>();
 		this.myActions = new ArrayList<>();
 //		this.showAlert = true;
 		myRule = new GridPane(); 
@@ -128,12 +128,12 @@ public class ActorRule {
 		if(!(isTrigger(behaviorType) && myTriggerNodes.getChildren().size()!=0)){
 			IAuthoringBehavior element = actorRuleFactory.getAuthoringRule(behaviorType,null);
 			List<Object> value = new ArrayList<>();
-			actorRuleMap.put(element, value);
+			authoringBehaviorMap.put(element, value);
 			Node node = ((IGUIElement) element).createNode();
 			setRemoveEvent(node, element);
 			if(isTrigger(behaviorType)) myTriggerNodes.getChildren().add(node);
 			else myActionNodes.getChildren().add(node);
-			actorRuleMap.get(element).add(Integer.parseInt(myActorRuleResources.getString("NodeIndex")), node);
+			authoringBehaviorMap.get(element).add(Integer.parseInt(myActorRuleResources.getString("NodeIndex")), node);
 		}
 	}
 	/**
@@ -193,43 +193,53 @@ public class ActorRule {
 	 * @param toRemove
 	 */
 	public void remove(IAuthoringBehavior toRemove){
-		//remove visual
-		myTriggerNodes.getChildren().remove(actorRuleMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("NodeIndex"))));
-		myActionNodes.getChildren().remove(actorRuleMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("NodeIndex"))));
+		myTriggerNodes.getChildren().remove(authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("NodeIndex"))));
+		myActionNodes.getChildren().remove(authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("NodeIndex"))));
 		try{
-			//if is a trigger: myTrigger = null;
-			myActions.remove(actorRuleMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex"))));
-			System.out.println("before: " + actorRuleMap.get(toRemove));
-			Rule ruleToRemove = (Rule) actorRuleMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")));
-			removeIRuleFromActor(ruleToRemove);
-			actorRuleMap.remove(toRemove);
-			System.out.println("after: " + actorRuleMap.get(toRemove));
-		}catch(Exception e){
-			//only removing visual is okay 
+			if(myTrigger == authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex")))){
+				removeTrigger(toRemove);
+			}else{
+				myActions.remove(authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex"))));
+				Rule ruleToRemove = (Rule) authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")));
+				removeIRuleFromActor(ruleToRemove);
+				authoringBehaviorMap.remove(toRemove);
+			}
+		}catch(Exception e){}
+	}
+	
+	private void removeTrigger(IAuthoringBehavior toRemove){
+		//remove rules corresponding to this trigger key 
+		((Actor) myActorRuleCreator.getActor()).getRules().remove(myTrigger.getMyKey());
+		//remove trigger from authoring behavior
+		authoringBehaviorMap.remove(toRemove);
+		//remove rules from actorRuleMap that have the current trigger as their trigger
+		for(IAuthoringBehavior authoringBehavior: authoringBehaviorMap.keySet()){
+			String otherTriggerKey = ((Rule) authoringBehaviorMap.get(authoringBehavior).get(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")))).getMyTrigger().getMyKey();
+			if(otherTriggerKey.equals(myTrigger.getMyKey())){
+				authoringBehaviorMap.get(authoringBehavior).remove(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")));
+			}
 		}
+		myTrigger = null;
 	}
 	
 	private void removeIRuleFromActor(IRule toRemove){
 		List<Rule> rulesForCurrentTrigger = ((Actor) myActorRuleCreator.getActor()).getRules().get(myTrigger.getMyKey());
-		System.out.println(rulesForCurrentTrigger);
 		rulesForCurrentTrigger.remove(toRemove);
-		System.out.println(rulesForCurrentTrigger);
-		System.out.println("Map: " + ((Actor) myActorRuleCreator.getActor()).getRules());
 	}
 	
 	public void addTrigger(IAuthoringBehavior key, ITrigger value){
-		actorRuleMap.get(key).add(value);
+		authoringBehaviorMap.get(key).add(value);
 		if(myTrigger!=value){
 			myTrigger = value;
 			resetIRulesForTrigger();
 		}
 		setTriggersAndActions(false);
-		System.out.println("Map: " + ((Actor) myActorRuleCreator.getActor()).getRules());
-		//add IRule to map?
+		System.out.println("Rule Map: " + ((Actor) myActorRuleCreator.getActor()).getRules());
+		System.out.println("Authoring Behavior Map: " + authoringBehaviorMap);
 	}
 	
 	public void addAction(IAuthoringBehavior key, IAction value){
-		actorRuleMap.get(key).add(value);
+		authoringBehaviorMap.get(key).add(value);
 		myActions.add(value);
 		addIRuleForAction(key,value);
 	}
@@ -246,7 +256,7 @@ public class ActorRule {
 		if(actionNotYetAdded(value)){
 			Rule toAdd = new Rule(myTrigger, (Action) value);
 			((Actor) myActorRuleCreator.getActor()).getRules().get(myTrigger.getMyKey()).add(toAdd);
-			actorRuleMap.get(key).add(toAdd);
+			authoringBehaviorMap.get(key).add(toAdd);
 		}
 	}
 	
@@ -266,7 +276,7 @@ public class ActorRule {
 	}
 	
 	public void setTriggersAndActions(boolean triggersOnly) {
-		for(IAuthoringBehavior authoringBehavior: actorRuleMap.keySet()){
+		for(IAuthoringBehavior authoringBehavior: authoringBehaviorMap.keySet()){
 			if(triggersOnly){
 				if(authoringBehavior.isTrigger()){
 //					showAlert = false;
@@ -289,5 +299,4 @@ public class ActorRule {
 			}
 		});
 	}
-	
 }
