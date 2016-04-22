@@ -3,10 +3,13 @@ package gameplayer.controller;
 
 import gui.view.Screen;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
 import gameplayer.controller.SplashScreenController;
+import gameplayer.view.BaseScreen;
 import javafx.stage.Stage;
 
 /**
@@ -15,7 +18,8 @@ import javafx.stage.Stage;
  *
  */
 public abstract class BranchScreenController implements Observer {
-	
+	private ResourceBundle myResources;
+	private BaseScreen myScreen;
 	private Stage myStage;
 	
 	public BranchScreenController(Stage stage) {
@@ -38,5 +42,28 @@ public abstract class BranchScreenController implements Observer {
 		return this.myStage;
 	}
 
+	@Override
+	public void update(Observable o, Object arg) {
+		String method = myResources.getString((String)arg);
+		try {
+			try {
+				this.getClass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| SecurityException e) {
+				e.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
+		} catch (NoSuchMethodException e) {
+			try {
+				this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e1) {
+				e.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
+		}
+		
+		
+	}
 
 }

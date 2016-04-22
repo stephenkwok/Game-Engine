@@ -129,9 +129,7 @@ public class ActorRule {
 		List<Object> value = new ArrayList<>();
 		actorRuleMap.put(element, value);
 		Node node = ((IGUIElement) element).createNode();
-		node.setOnMouseClicked(event -> {
-			if(event.getClickCount()==2) remove(element);
-		});
+		addRule(node, element);
 		if(isTrigger(behaviorType)) myTriggerNodes.getChildren().add(node);
 		else myActionNodes.getChildren().add(node);
 		actorRuleMap.get(element).add(NODE_INDEX, node);
@@ -160,10 +158,14 @@ public class ActorRule {
 			element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("PlayMusicBehavior"), soundName);
 			node = element.createNode();
 		}
+		addRule(node, element);
+		myActionNodes.getChildren().add(node);
+	}
+	
+	private void addRule(Node node, IAuthoringRule element){
 		node.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2) remove(element);
 		});
-		myActionNodes.getChildren().add(node);
 	}
 	/**
 	 * return if given filename is in directory of given pathname
@@ -186,10 +188,9 @@ public class ActorRule {
 	public void addImage(String imageName) {
 		IAuthoringRule element = actorRuleFactory.getAuthoringRule(myActorRuleResources.getString("ChangeImageBehavior"),imageName); 
 		Node node = element.createNode();
-		node.setOnMouseClicked(event -> {
-			if(event.getClickCount()==2) remove(element);
-		});
+		addRule(node, element);
 		myActionNodes.getChildren().add(node);
+
 	}
 	
 	/**
