@@ -28,7 +28,6 @@ public class ActionFactory {
 	private static final String ACTIONS = "Actions.";
 	private static final String CLASS = "Class";
 	private static final String CREATE = "create";
-	private static final String GLIDE = "Glide";
 	private ResourceBundle myResources;
 	private List<Object> arguments;
 	

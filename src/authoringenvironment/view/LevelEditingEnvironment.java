@@ -97,7 +97,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	}
 
 	private void addChildrenToLeftPane() {
-		myInspector = new GUILevelInspector(myResources, availableActors.keySet(), this, myStage);
+		myInspector = new GUILevelInspector(myResources, availableActors.keySet(), this);
 		myLeftPane.getChildren().add(myInspector.getPane());
 		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
 	}
