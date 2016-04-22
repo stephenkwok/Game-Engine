@@ -125,16 +125,18 @@ public class ActorRule {
 	 * @param behavior
 	 */
 	public void addBehavior(String behaviorType) {
-		IAuthoringRule element = actorRuleFactory.getAuthoringRule(behaviorType,null);
-		List<Object> value = new ArrayList<>();
-		actorRuleMap.put(element, value);
-		Node node = ((IGUIElement) element).createNode();
-		node.setOnMouseClicked(event -> {
-			if(event.getClickCount()==2) remove(element);
-		});
-		if(isTrigger(behaviorType)) myTriggerNodes.getChildren().add(node);
-		else myActionNodes.getChildren().add(node);
-		actorRuleMap.get(element).add(NODE_INDEX, node);
+		if(!(isTrigger(behaviorType) && myTriggerNodes.getChildren().size()!=0)){
+			IAuthoringRule element = actorRuleFactory.getAuthoringRule(behaviorType,null);
+			List<Object> value = new ArrayList<>();
+			actorRuleMap.put(element, value);
+			Node node = ((IGUIElement) element).createNode();
+			node.setOnMouseClicked(event -> {
+				if(event.getClickCount()==2) remove(element);
+			});
+			if(isTrigger(behaviorType)) myTriggerNodes.getChildren().add(node);
+			else myActionNodes.getChildren().add(node);
+			actorRuleMap.get(element).add(NODE_INDEX, node);
+		}
 	}
 	/**
 	 * Return if given behavior is a trigger type behavior
@@ -215,8 +217,9 @@ public class ActorRule {
 	
 	public void addAction(IAuthoringRule key, IAction value){
 		actorRuleMap.get(key).add(value);
-		System.out.println(actorRuleMap);
+//		System.out.println(actorRuleMap);
 		myActions.add(value);
+		System.out.println(value);
 		addIRulesForTrigger();
 		//add IRule to map
 	}
@@ -231,6 +234,7 @@ public class ActorRule {
 		}catch(Exception e){
 			System.out.println("Trigger not yet set for IRule");
 		}
+//		System.out.println(((Actor) myActorRuleCreator.getActor()).getRules());
 	}
 	
 }

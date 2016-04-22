@@ -31,6 +31,7 @@ public class KeyBehavior extends ComboBoxBehavior {
 	protected void updateValueBasedOnEditable() {
 		getComboBox().setValue(getValue());
 	}
+
 	@Override
 	void createTriggerOrAction() {
 		KeyCode keyCode = KeyCode.getKeyCode(getValue());

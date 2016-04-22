@@ -41,10 +41,12 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 			createTriggerOrAction();
 		});
 	}
+	
 	/**
 	 * Create ITrigger or IAction depending on type of behavior
 	 */
 	abstract void createTriggerOrAction();
+	
 	/**
 	 * Return list of elements in ComboBox
 	 */

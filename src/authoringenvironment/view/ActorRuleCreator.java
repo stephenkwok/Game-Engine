@@ -110,19 +110,24 @@ public class ActorRuleCreator {
 	 * fields based on the Actor 
 	 */
 	public void updateActorRules() {
-		initializeEnvironment();
+		for(ActorRule toRemove: myActorRules) myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
+		myActorRules.clear();
+		ruleRow = RULE_ROW_START;
+		System.out.println(((Actor) aEE.getEditable()).getRules());
 		for(String behaviorType: ((Actor) aEE.getEditable()).getRules().keySet()){
+			System.out.println("has IRules");
 			ActorRule toAdd = new ActorRule(this);
 			toAdd.addBehavior(behaviorType);
 			for(IRule rule: ((Actor) aEE.getEditable()).getRules().get(behaviorType)){
-				toAdd.addBehavior(rule.getMyAction().toString()); // name of Action
+//				System.out.println("Simple name: " + rule.getMyAction().getClass().getSimpleName());
+				toAdd.addBehavior(rule.getMyAction().getClass().getSimpleName()); // name of Action
 			}
 			myActorRuleCreatorPane.add(toAdd.getGridPane(), RULE_COL, ruleRow);
 			myActorRules.add(toAdd);
 			ruleRow++;
 		}
 	}
-
+	
 	/**
 	 * Get the current IAuthoringActor
 	 * @return IAuthoringActor
