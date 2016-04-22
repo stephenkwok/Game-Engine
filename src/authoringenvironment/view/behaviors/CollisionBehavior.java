@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
-import gameengine.model.IAction;
+import authoringenvironment.view.ActorRule;
 import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 
@@ -15,8 +15,8 @@ public class CollisionBehavior extends IEditableGameElementBehavior {
 	private IAuthoringActor otherActor;
 	private ITrigger myTrigger;
 	
-	public CollisionBehavior(String behaviorType, IAuthoringActor myActor, ResourceBundle myResources, List<IAuthoringActor> myActors) {
-		super(behaviorType, myResources);
+	public CollisionBehavior(ActorRule myActorRule, String behaviorType, IAuthoringActor myActor, ResourceBundle myResources, List<IAuthoringActor> myActors) {
+		super(myActorRule, behaviorType, myResources);
 		this.myActors = myActors;
 		setButtonAction(e -> {
 			this.otherActor = (IAuthoringActor) getComboBox().getValue();
@@ -24,6 +24,7 @@ public class CollisionBehavior extends IEditableGameElementBehavior {
 			arguments.add((IPlayActor) myActor);
 			arguments.add((IPlayActor) otherActor);
 			myTrigger = getTriggerFactory().createNewTrigger(behaviorType, arguments);
+			addTrigger(this, myTrigger);
 			System.out.println(myTrigger);
 		});
 	}
@@ -41,15 +42,4 @@ public class CollisionBehavior extends IEditableGameElementBehavior {
 	protected void updateValueBasedOnEditable() {
 		getComboBox().setValue(otherActor);
 	}
-
-	@Override
-	public IAction getAction() {
-		return null;
-	}
-
-	@Override
-	public ITrigger getTrigger() {
-		return this.myTrigger;
-	}
-
 }

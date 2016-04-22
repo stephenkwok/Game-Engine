@@ -75,7 +75,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private void initializeEnvironment() {
 		myRoot = new BorderPane();
 		setDefaultActor();
-		myActorRuleCreator = new ActorRuleCreator(myActor, myStage.getWidth(), myController);
+		myActorRuleCreator = new ActorRuleCreator(this);
 		setLeftPane();
 		setCenterPane();
 		setBottomPane();
@@ -131,7 +131,8 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 		Button toReturn = new Button(NEW_RULE_LABEL);
 		toReturn.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		toReturn.setOnAction(event -> {
-			myActorRuleCreator.addNewRule();
+			myActorRuleCreator.addNewRule(); //
+			setCenterPane();
 			library.updateDragEvents();
 		});
 		return toReturn;
@@ -145,7 +146,6 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 		myActor = (IAuthoringActor) editable;
 		myActorIV = new ImageviewActorIcon(myActor,ICON_HEIGHT);
 		setLeftPane();
-		myActorRuleCreator.setActor(myActor);
 		myActorRuleCreator.updateActorRules();
 		library.updateDragEvents();
 	}
@@ -171,5 +171,8 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	@Override
 	public Stage getStage() {
 		return myStage;
+	}
+	public Controller getController() {
+		return this.myController;
 	}
 }

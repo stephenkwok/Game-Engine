@@ -3,6 +3,7 @@ package authoringenvironment.view.behaviors;
 import java.util.ResourceBundle;
 
 import authoringenvironment.view.ActionFactory;
+import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.TriggerFactory;
 import gameengine.model.IAction;
 import gameengine.model.ITrigger;
@@ -14,11 +15,13 @@ public abstract class LabelBehavior implements IGUIElement, IAuthoringRule{
 	private String behaviorType;
 	private TriggerFactory triggerFactory;
 	private ActionFactory actionFactory;
+	private ActorRule myActorRule;
 	
-	public LabelBehavior(String behaviorType, ResourceBundle myResources) {
+	public LabelBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
 		this.behaviorType = behaviorType;
 		this.triggerFactory = new TriggerFactory();
 		this.actionFactory = new ActionFactory();
+		this.myActorRule = myActorRule;
 	}
 
 	@Override
@@ -42,8 +45,13 @@ public abstract class LabelBehavior implements IGUIElement, IAuthoringRule{
 	abstract void createTriggerOrAction();
 
 	@Override
-	public abstract IAction getAction();
-
+	public void addTrigger(IAuthoringRule key, ITrigger value){
+		myActorRule.addTrigger(key, value);
+	}
+	
 	@Override
-	public abstract ITrigger getTrigger();
+	public void addAction(IAuthoringRule key, IAction value){
+		System.out.println(key);
+		myActorRule.addAction(key, value);
+	}
 }
