@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Utilities.HUD.Container>
+  <value1>
+    <changed>false</changed>
+    <obs>
+      <Utilities.HUD.Container reference="../../.."/>
+    </obs>
+    <type>java.lang.Integer</type>
+    <value class="int">5</value>
+  </value1>
+  <value2>
+    <changed>false</changed>
+    <obs>
+      <Utilities.HUD.Container reference="../../.."/>
+    </obs>
+    <type>java.lang.String</type>
+    <value class="string">hello</value>
+  </value2>
+  <value3>
+    <changed>false</changed>
+    <obs>
+      <Utilities.HUD.Container reference="../../.."/>
+    </obs>
+    <type>java.lang.String</type>
+    <value class="string">aylmao</value>
+  </value3>
+</Utilities.HUD.Container>

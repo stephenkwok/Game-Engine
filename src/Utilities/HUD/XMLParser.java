@@ -31,9 +31,9 @@ public class XMLParser {
 		myXStream.autodetectAnnotations(true);
 	}
 	
-	public Game extractGame (File file) throws ParserConfigurationException, SAXException, IOException, TransformerException {
+	public Container extractGame (File file) throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		String xml = convertFileToString(file);
-		Game game = (Game) myXStream.fromXML(xml);
+		Container game = (Container) myXStream.fromXML(xml);
 		return game;
 	}
 	

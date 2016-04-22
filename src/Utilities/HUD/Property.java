@@ -16,7 +16,7 @@ public class Property extends Observable{
 		if (newValue.getClass().equals(type)) {
 			value = newValue;
 			setChanged();
-			notifyObservers();
+			notifyObservers(newValue);
 		} else {
 			throw new IllegalArgumentException();
 		}
