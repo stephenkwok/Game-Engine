@@ -53,9 +53,12 @@ public class Tester extends Application {
 
 
         IAuthoringActor actor1 = (IAuthoringActor) new Actor();
-        actor1.setImageViewName("16bitmario.png");
+        actor1.setImageViewName("runningmario1.png");
         actor1.setName("A1");
         actor1.setID(1);
+
+        actor1.addSpriteImage("runningmario2.png");
+        actor1.addSpriteImage("runningmario3.png");
 
 
         IAuthoringActor actor2 = (IAuthoringActor) new Actor();
@@ -147,6 +150,12 @@ public class Tester extends Application {
         actor1.addRule(rule4);
         actor1.addRule(rule5);
         actor1.addRule(rule6);
+
+
+
+        TickTrigger intTick = new TickTrigger(10);
+        Action animate = new NextImage((IPlayActor) actor1);
+        actor1.addRule(new Rule(intTick, animate));
 
         actor1.addState(ActorState.MAIN);
 //		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
