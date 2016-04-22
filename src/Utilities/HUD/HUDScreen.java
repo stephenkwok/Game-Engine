@@ -82,8 +82,8 @@ public class HUDScreen extends Observable {
 		return myScene;
 	}
 	
-	public void handleChange(Change<? extends String, ? extends Object> change) {
-		int rownum = valueToRowMap.get(change.getKey());
-		values.set(rownum, change.getValueAdded().toString());
+	public void handleChange(ValueChange change) {
+		int rownum = valueToRowMap.get(change.getFieldName());
+		values.set(rownum, change.getNewValue().toString());
 	}
 }
