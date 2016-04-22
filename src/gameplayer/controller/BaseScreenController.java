@@ -2,6 +2,7 @@ package gameplayer.controller;
 
 import java.lang.reflect.InvocationTargetException;
 import java.io.File;
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
@@ -78,6 +79,7 @@ public class BaseScreenController extends BranchScreenController{
 	}
 
 	private void restartGame(){
+		//TODO fix this ish
 		myGameController.getView().clearGame();
 		ParserController parserController = new ParserController(myScreen);
 		Game initialGame = parserController.loadforPlaying(new File(myGameController.getGame().getInitialGameFile()));
@@ -98,22 +100,19 @@ public class BaseScreenController extends BranchScreenController{
 	@Override
 	public void update(Observable o, Object arg) {
 		String method = myResources.getString((String)arg);
+		System.out.println(method + " : METHOD");
 		try {
-			try {
-				this.getClass().getDeclaredMethod(method).invoke(this);
-			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
-					| SecurityException e) {
-				e.printStackTrace();
-				this.myScreen.showError(e.getMessage());
-			}
-		} catch (NoSuchMethodException e) {
-			try {
+			if(Arrays.asList(myResources.getString("SuperMethods").split(",")).contains(method)){
 				this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
-			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
-					| NoSuchMethodException | SecurityException e1) {
-				e.printStackTrace();
-				this.myScreen.showError(e.getMessage());
 			}
+			else {
+				this.getClass().getDeclaredMethod(method).invoke(this);
+			}
+		} catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| SecurityException e) {
+			
+			e.printStackTrace();
+			this.myScreen.showError(e.getMessage());
 		}
 		
 		
