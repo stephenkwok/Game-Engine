@@ -1,7 +1,8 @@
 package gameplayer.view;
 
 import java.lang.reflect.InvocationTargetException;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Observable;
@@ -64,21 +65,31 @@ public class HighScoreScreen extends Screen implements Observer{
 	}
 	
 	public void displayScores(String gameName, Map<String,Integer> scores) {
-		TreeMap<Integer, String> sortedScores = new TreeMap<>();
+		TreeMap<Integer, List<String>> sortedScores = new TreeMap<>();
 		for(String player : scores.keySet()){
-			sortedScores.put(scores.get(player), player);
+			int score = scores.get(player);
+			if (sortedScores.keySet().contains(score)) {
+				sortedScores.get(score).add(player);
+			}
+			else {
+				List<String> players = new ArrayList<>();
+				players.add(player);
+				sortedScores.put(score, players);
+			}
 		}
 		myScoreBox.getChildren().clear();
 		myScoreBox.getChildren().add(new Text(gameName));
 		for(Integer score: sortedScores.descendingKeySet()){
+			for (String player: sortedScores.get(score)) {
 			HBox myH = new HBox(10);
-			Text myPlayer = new Text(sortedScores.get(score));
+			Text myPlayer = new Text(player);
 			myPlayer.setFont(Font.font("Helvetica", 30));
 			myH.getChildren().add(myPlayer);
 			Text myScore = new Text(score.toString());
 			myScore.setFont(Font.font("Times New Roman", 30));
 			myH.getChildren().add(myScore);
 			myScoreBox.getChildren().add(myH);
+			}
 		}
 	}
 
