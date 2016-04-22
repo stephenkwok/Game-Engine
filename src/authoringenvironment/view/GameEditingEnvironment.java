@@ -1,9 +1,11 @@
 package authoringenvironment.view;
 
-import java.io.File;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingElement;
 import gameengine.controller.GameInfo;
+import gui.view.ButtonFileChooserGameImage;
 import gui.view.ButtonGameType;
 import gui.view.CheckBoxesHUDOptions;
 import gui.view.TextAreaGameDescriptionEditor;
@@ -15,10 +17,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -30,7 +30,7 @@ import javafx.stage.Stage;
  *
  */
 
-public class GameEditingEnvironment {
+public class GameEditingEnvironment implements IEditingElement {
 
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
 	private static final double DEFAULT_PADDING = 10;
@@ -38,14 +38,13 @@ public class GameEditingEnvironment {
 	private static final int TEXT_AREA_ROWS = 3;
 	private static final double TEXT_FIELD_WIDTH = 100.0;
 	private static final double TEXT_FIELD_CONTAINER_SPACING = 10.0;
-	private static final double TEXT_FIELD_CONTAINER_PADDING = 10.0;
 	private static final double SCROLLBAR_WIDTH = 30.0;
-	private GameInfo myGameInfo;
+	private IEditableGameElement myGameInfo;
 	private Stage myStage;
 	private final ResourceBundle myResources;
 	private Label welcomeMessage;
-	private HBox nameEditorContainer, gameTypeButtonContainer;
-	private VBox editingEnvironmentContainer, gameDescriptionEditor, previewImageContainer, HUDOptionsDisplay;
+	private HBox nameEditorContainer, gameTypeButtonContainer, previewImageContainer;
+	private VBox editingEnvironmentContainer, gameDescriptionEditor, HUDOptionsDisplay;
 	private ScrollPane myScrollPane;
 
 	public GameEditingEnvironment(GameInfo gameInfo, Stage stage) {
@@ -102,7 +101,7 @@ public class GameEditingEnvironment {
 		nameEditor.setEditableElement(myGameInfo);
 		nameEditorContainer = (HBox) nameEditor.createNode();
 		nameEditorContainer.setSpacing(TEXT_FIELD_CONTAINER_SPACING);
-		nameEditorContainer.setPadding(new Insets(TEXT_FIELD_CONTAINER_PADDING));
+		nameEditorContainer.setPadding(new Insets(DEFAULT_PADDING));
 	}
 
 	/**
@@ -120,7 +119,7 @@ public class GameEditingEnvironment {
 	}
 
 	private void initializeGameTypeButton() {
-		ButtonGameType buttonGameType = new ButtonGameType(myGameInfo);
+		ButtonGameType buttonGameType = new ButtonGameType(getGameInfo());
 		Button button = (Button) buttonGameType.createNode();
 		gameTypeButtonContainer = new HBox(button);
 		gameTypeButtonContainer.prefWidthProperty().bind(editingEnvironmentContainer.widthProperty());
@@ -131,29 +130,15 @@ public class GameEditingEnvironment {
 	/**
 	 * Initializes the GUI Elements displaying the game's current preview image
 	 */
-	// hard coded values
 	private void initializePreviewImageDisplay() {
-		previewImageContainer = new VBox();
+		previewImageContainer = new HBox();
+		String gameImageName = ((GameInfo) myGameInfo).getMyImageName();
+		ButtonFileChooserGameImage buttonGameImage = new ButtonFileChooserGameImage(gameImageName, this, myStage);
+		Button button = (Button) buttonGameImage.createNode();
+		button.prefWidthProperty().bind(previewImageContainer.widthProperty());
+		previewImageContainer.getChildren().add(button);
 		previewImageContainer.setPadding(new Insets(DEFAULT_PADDING));
-		Label previewImageLabel = new Label("Current Game Preview Image:");
-		previewImageLabel.setOnMouseClicked(e -> promptUserForImageFile());
-		// ImageView previewImage = new ImageView(
-		// new
-		// Image(getClass().getClassLoader().getResourceAsStream("default_game.jpg")));
-		ImageView previewImage = new ImageView(myGameInfo.getImageView().getImage());
-		previewImageContainer.getChildren().addAll(previewImageLabel, previewImage);
-	}
-
-	private void promptUserForImageFile() {
-		FileChooser filechooser = new FileChooser();
-		filechooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG", "*.png"));
-		File file = filechooser.showOpenDialog(myStage);
-		String imagePath = file.getPath();
-		ImageView imageView = new ImageView(imagePath);
-		myGameInfo.setImageView(imageView);
-		Label previewImageLabel = new Label("Current Game Preview Image:");
-		previewImageContainer.getChildren().clear();
-		previewImageContainer.getChildren().addAll(previewImageLabel, imageView);
+		previewImageContainer.prefWidthProperty().bind(editingEnvironmentContainer.widthProperty());
 	}
 
 	/**
@@ -176,8 +161,26 @@ public class GameEditingEnvironment {
 		myScrollPane.setPadding(new Insets(DEFAULT_PADDING));
 	}
 
+	/**
+	 * 
+	 * @return the Node containing all Nodes in the Game Editing Environment
+	 */
 	public Node getNode() {
 		return myScrollPane;
 	}
+	
+	/**
+	 * 
+	 * @return the Game Editing Environment's instance of GameInfo
+	 */
+	public GameInfo getGameInfo() {
+		return (GameInfo) myGameInfo;
+	}
+
+	@Override
+	public void setEditableElement(IEditableGameElement element) {
+		myGameInfo = element;
+	}
+	
 
 }
