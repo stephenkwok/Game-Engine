@@ -1,4 +1,4 @@
-package Utilities.HUD;
+package utilities.hud;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,7 @@ public class HUDScreen extends Observable {
 	private static final int DEFAULT_HEIGHT = 100;
 	private static final int DEFAULT_WIDTH = 200;
 	
-	private Map<String, Object> status;
+	private Map<String, Property> status;
 	Map<String, Integer> valueToRowMap;
 	Map<Integer, String> rowToValueMap;
 	private SubScene myScene;
@@ -27,7 +27,7 @@ public class HUDScreen extends Observable {
     ObservableList<String> values;
     private Group mySubGroup;
     
-	public HUDScreen(double width, double height, Map<String, Object> status, Map<Integer, String> rowToValueMap) {
+	public HUDScreen(double width, double height, Map<String, Property> status, Map<Integer, String> rowToValueMap) {
 		mySubGroup = new Group();
 		myScene = new SubScene(mySubGroup, width, height);
 		myScene.setFocusTraversable(false);
@@ -40,7 +40,7 @@ public class HUDScreen extends Observable {
 	}
 	
 	
-	public HUDScreen(double width, double height, Map<String, Object> status) {
+	public HUDScreen(double width, double height, Map<String, Property> status) {
 		this(width, height, status, new HashMap<Integer, String>());
 		int i = 0;
 		for (String value : status.keySet()) {
@@ -50,7 +50,7 @@ public class HUDScreen extends Observable {
 		}
 	}
 	
-	public HUDScreen(Map<String, Object> status) {
+	public HUDScreen(Map<String, Property> status) {
 		this(DEFAULT_WIDTH, DEFAULT_HEIGHT, status);
 	}
 	
@@ -82,9 +82,8 @@ public class HUDScreen extends Observable {
 		return myScene;
 	}
 	
-	public void handleChange(Change<? extends String, ? extends Object> change) {
-		int rownum = valueToRowMap.get(change.getKey());
-		values.set(rownum, change.getValueAdded().toString());
+	public void handleChange(ValueChange change) {
+		int rownum = valueToRowMap.get(change.getFieldName());
+		values.set(rownum, change.getNewValue().toString());
 	}
-	
 }

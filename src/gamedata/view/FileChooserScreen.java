@@ -4,12 +4,7 @@ import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 import gui.view.ComboBoxGame;
-import gui.view.IGUIElement;
 import gui.view.Screen;
-import javafx.geometry.Orientation;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToolBar;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 
 
@@ -27,24 +22,7 @@ public class FileChooserScreen extends Screen implements Observer {
 	@Override
 	protected void initialize() {
 		addButton();
-		addToolBar();
-	}
-
-	private void addToolBar() {
-		String[] sideButtons = getResources().getString(FC_BUTTONS).split(",");
-		ToolBar myT = new ToolBar();
-		myT.setOrientation(Orientation.HORIZONTAL);
-		myT.setMinWidth(SCREEN_WIDTH);
-		for(int i = 0; i < sideButtons.length; i++){
-			IGUIElement newElement = getFactory().createNewGUIObject(sideButtons[i]);
-			newElement.addNodeObserver(this);
-			Button myB = (Button) newElement.createNode();
-			Tooltip t = new Tooltip(getResources().getString(sideButtons[i]+ "Text"));
-			t.install(myB, t);
-			myT.getItems().add(myB);
-			myB.setFocusTraversable(false);
-		}
-		getRoot().getChildren().add(myT);
+		getRoot().getChildren().add(addToolbar(FC_BUTTONS));
 	}
 
 	private void addButton() {

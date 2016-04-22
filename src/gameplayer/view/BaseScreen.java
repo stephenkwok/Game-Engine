@@ -27,7 +27,7 @@ public class BaseScreen extends Screen implements Observer {
 	private static final String BASE_RESOURCE = "gameGUI";
 	private static final String SIDE_BUTTONS = "SideButtons";
 
-	private BorderPane myMasterPane;
+	private BorderPane myPane;
 	private HUDScreen myHUD;
 	private GameScreen myGameScreen;
 
@@ -44,29 +44,17 @@ public class BaseScreen extends Screen implements Observer {
 	 */
 	public BaseScreen() {
 		super();
-		this.myMasterPane = new BorderPane();
+		this.myPane = new BorderPane();
 		setUpResourceBundle(BASE_RESOURCE);
 		initialize(); //HUD is actually added here
 	}
 
-	
-	/**
-	 * Instantiates the necessary objects to add the game subscene and HUDpane to the base scene
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 */
+
 	@Override
 	protected void initialize() {
-		try {
-			addGame();
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			showError(e.getMessage());
-		}
+		myPane.setTop(addToolbar(SIDE_BUTTONS));
 		addHUD();
-		getRoot().getChildren().add(myMasterPane);
+		getRoot().getChildren().add(myPane);
 	}
 	
 	//depracated
@@ -90,43 +78,11 @@ public class BaseScreen extends Screen implements Observer {
 	}
 
 	
-	/**
-	 * Adds the game component in two parts: the toolbar for editing buttons and the subscene for display purposes
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
-	private void addGame() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		addButtonPane();
-	}
 
-	/**
-	 * Using reflection adn the GUIFactory, each game and base screen button is created and added to the main toolbar
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
-	private void addButtonPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		String[] sideButtons = getResources().getString(SIDE_BUTTONS).split(",");
-		ToolBar myT = new ToolBar();
-		for(int i = 0; i < sideButtons.length; i++){
-			IGUIElement newElement = getFactory().createNewGUIObject(sideButtons[i]);
-			newElement.addNodeObserver(this);
-			Button myB = (Button) newElement.createNode();
-			Tooltip t = new Tooltip(getResources().getString(sideButtons[i]+ "Text"));
-			t.install(myB, t);
-			myT.getItems().add(myB);
-			myB.setFocusTraversable(false);
-		}
-		myMasterPane.setTop(myT);
-		
-	}
 	
 	public void setGameScreen(GameScreen screen) {
 		this.myGameScreen = screen;
-		this.myMasterPane.setCenter(myGameScreen.getScene());
+		this.myPane.setCenter(myGameScreen.getScene());
 	}
 	
 	public void setHUDScreen(HUDScreen screen) {
@@ -134,7 +90,7 @@ public class BaseScreen extends Screen implements Observer {
 		IGUIElement hudPane = getFactory().createNewGUIObject("hudPane");
 		Pane myP = (Pane) hudPane.createNode();
 		myP.getChildren().add(myHUD.getScene());
-		this.myMasterPane.setBottom(myP);
+		this.myPane.setBottom(myP);
 	}
 
 	@Override
