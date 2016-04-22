@@ -121,7 +121,7 @@ public class Controller extends BranchScreenController implements Observer {
 		myLevelNames = new ArrayList<>();
 		myActorMap = new HashMap<>();
 		myActorNames = new ArrayList<>();
-		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage());
+		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
@@ -360,11 +360,22 @@ public class Controller extends BranchScreenController implements Observer {
 			toUpdate.setName(actor.getName());
 		}
 	}
+	
+	public void updateRefActorSize(IAuthoringActor actor) {
+		for (IAuthoringActor refActor: myActorMap.keySet()) {
+			if (myActorMap.get(refActor).contains(actor)) {
+				refActor.setSize(actor.getSize());
+				updateActors(refActor);
+			}
+		}
+	}
+	
 	// copy IDs
 	private void copyActor(IAuthoringActor toUpdate, IAuthoringActor toCopy) {
 		toUpdate.setName(toCopy.getName());
 		toUpdate.setFriction(toCopy.getFriction());
 		toUpdate.setImageView(toCopy.getImageView());
+		toUpdate.setSize(toCopy.getSize());
 		toUpdate.setImageViewName(toCopy.getImageViewName());
 	//	copyRules(toUpdate, toCopy.getActorRules());		copy actor rules or normal rules?? what?? annie halp
 		//copyAttributes(toUpdate,)
@@ -383,5 +394,13 @@ public class Controller extends BranchScreenController implements Observer {
 		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
 		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
 		goToEditingEnvironment(editable, environment);
+	}
+	
+	public ActorEditingEnvironment getActorEditingEnvironment() {
+		return actorEnvironment;
+	}
+	
+	public LevelEditingEnvironment getLevelEditingEnvironment() {
+		return levelEnvironment;
 	}
 }

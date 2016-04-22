@@ -47,6 +47,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private PhysicsEngine myPhysicsEngine;
     private List<ActorRule> myActorRules;
     private Set<ActorState> myStates;
+    private double myHeight;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -59,6 +60,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
+        myHeight = myImageView.getFitHeight();
     }
 
     public List<ActorRule> getMyActorRules() {
@@ -355,6 +357,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     public void setSize(double size){
 		myImageView.setFitHeight(size);
 		myImageView.setPreserveRatio(true);
+		myHeight = size;
 	}
 
     /**
@@ -399,8 +402,8 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		}
 	}
 	
-		public double getSize() {
-		return myImageView.getFitHeight();
+	public double getSize() {
+		return myHeight;
 	}
 
 	@Override

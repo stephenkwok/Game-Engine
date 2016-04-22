@@ -8,12 +8,14 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
+import gui.view.PopUpActorResize;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
@@ -45,6 +47,8 @@ import javafx.stage.Stage;
 public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final String GUI_RESOURCE = "authoringGUI";
 	private static final String VERTICAL = "Vertically";
+	private static final int POP_UP_WIDTH = 300;
+	private static final int POP_UP_HEIGHT = 100;
 	private BorderPane myRoot;
 	private GUILevelInspector myInspector;
 	private ResourceBundle myResources;
@@ -62,19 +66,21 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final double SUBSCENE_HEIGHT = 525; // 700 * 3/4
 	private static final double SUBSCENE_WIDTH = 1000;
 	private Rectangle myBoundary;
+	private Controller myController;
 
 	/**
 	 * Constructor for a level editing environment.
 	 * @param controller: authoring environment controller.
 	 * @param actors: list of currently available actors.
 	 */
-	public LevelEditingEnvironment(Map<IAuthoringActor, List<IAuthoringActor>> actors, Stage stage) {
+	public LevelEditingEnvironment(Map<IAuthoringActor, List<IAuthoringActor>> actors, Stage stage, Controller controller) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
 		myActorPreviews = new ArrayList<>();
 		myScrollPane = new ScrollPane();
 		myStage = stage;
+		myController = controller;
 		initializeEnvironment();
 	}
 
@@ -286,7 +292,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	/**
 	 * Add a level's actors to the preview in the center pane.
 	 */
-	private void addLevelActorsToScene() {
+	public void addLevelActorsToScene() {
 		myActorPreviews.clear();
 		for (IPlayActor actor: myLevel.getActors()) {
 			ImageviewActorIcon icon = addActorToScene((IAuthoringActor) actor);
@@ -296,7 +302,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	}
 	
 	private ImageviewActorIcon addActorToScene(IAuthoringActor actor) {
-		ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
+		ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getSize());
 		setIconBehavior(icon);
 		icon.setOnLevel(true);
 		myActorPreviews.add(icon);
@@ -321,6 +327,18 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 				System.out.println("pressed");
 	        }
 	    });
+		
+		icon.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent mouseEvent) {
+		        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+		            if(mouseEvent.getClickCount() == 2){
+		                System.out.println("Double clicked");
+		                PopUpActorResize popUp = new PopUpActorResize(POP_UP_WIDTH, POP_UP_HEIGHT, icon.getRefActor(), myController);
+		            }
+		        }
+		    }
+		});
 	}
 	/**
 	 * Update the list of available actors and update the level inspector to reflect the currently available actors.
@@ -351,6 +369,16 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		resizeBackgroundBasedOnScrolling();
+		if (arg == null) {
+			resizeBackgroundBasedOnScrolling();
+		} else {
+			myController.updateRefActorSize((IAuthoringActor) arg);
+			myLevelPane.getChildren().removeAll(myActorPreviews);
+			addLevelActorsToScene();
+		}
+	}
+	
+	public Controller getController() {
+		return myController;
 	}
 }
