@@ -17,10 +17,12 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
 	private String buttonText;
 	private Button button;
 	private String imageName;
+	private int iconSize;
 	
 	public ButtonParent(String buttonText, String imageName) {
 		this.buttonText = buttonText;
 		this.imageName = imageName;
+		this.iconSize = ICON_SIZE;
 		initializeButton();
 	}
 	
@@ -54,7 +56,7 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
 		if (imageName != null) {
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 			ImageView iv = new ImageView(image);
-			iv.setFitHeight(ICON_SIZE);
+			iv.setFitHeight(iconSize);
 			iv.setPreserveRatio(true);
 			button.setGraphic(iv);
 		}
@@ -71,6 +73,10 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
     
     protected void setImageName(String newImageName) {
     	imageName = newImageName;
+    }
+    
+    protected void setIconSize(int size) {
+    	iconSize = size;
     }
 
 }

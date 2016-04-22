@@ -1,6 +1,7 @@
 package gui.view;
 
 import gameengine.controller.GameInfo;
+import javafx.scene.image.ImageView;
 
 /**
  * 
@@ -16,10 +17,13 @@ public class ButtonGameType extends ButtonParent {
 	private static final String BUTTON_IMAGE_DESTINATION = "destination_game.gif";
 	private static final String BUTTON_TEXT_INFINITE = "Infinite-Scrolling Game" + TOGGLE_PROMPT;
 	private static final String BUTTON_IMAGE_INFINITE = "infinite_scrolling_game.jpg";
+	private static final int BUTTON_ICON_SIZE = 45;
 	
 	public ButtonGameType(GameInfo gameInfo) {
 		super(BUTTON_TEXT_DESTINATION, BUTTON_IMAGE_DESTINATION);
 		myGameInfo = gameInfo;
+		setIconSize(BUTTON_ICON_SIZE);
+		updateButton();
 	}
 
 	@Override
