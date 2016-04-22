@@ -1,5 +1,6 @@
 package utilities.hud;
 
+import java.util.Collection;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -7,6 +8,15 @@ public class HUDController implements Observer{
 	
 	HUDModel model;
 	HUDScreen view;
+	
+	public void grabData(Collection<String> fieldsToObserve) {
+		setModel(new HUDModel());
+		IValueFinder valueFinder = new ValueFinder();
+		for (String field : fieldsToObserve) {
+			model.getData().put(field, valueFinder.find(field));
+		}
+		setView(new HUDScreen(model.getData()));
+	}
 	
 	public void setModel(HUDModel model) {
 		this.model = model;
@@ -21,7 +31,7 @@ public class HUDController implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		ValueChange change = (ValueChange) arg;
-		model.getData().get(change.getFieldName()).setValue(change.getNewValue());
+		model.handleChange(change);
 		view.handleChange(change);
 	}
 
