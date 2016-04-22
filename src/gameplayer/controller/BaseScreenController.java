@@ -97,6 +97,29 @@ public class BaseScreenController extends BranchScreenController{
 		//TODO FIX THIS BOBBY
 		//this.myScreen.setHUDScreen(new HUDScreen(Screen.SCREEN_WIDTH, Screen.SCREEN_WIDTH, this.myGameController.getGame().getHUDData()));
 	}
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		String method = myResources.getString((String)arg);
+		try {
+			try {
+				this.getClass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| SecurityException e) {
+				e.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
+		} catch (NoSuchMethodException e) {
+			try {
+				this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e1) {
+				e.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
+		}
 		
+		
+	}
 
 }

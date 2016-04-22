@@ -78,4 +78,28 @@ public class HighScoreScreenController extends BranchScreenController {
 		myDataController.clearHighScores();
 	}
 
+	@Override
+	public void update(Observable o, Object arg) {
+		String method = myResources.getString((String)arg);
+		try {
+			try {
+				this.getClass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| SecurityException e) {
+				e.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
+		} catch (NoSuchMethodException e) {
+			try {
+				this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e1) {
+				e.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
+		}
+		
+		
+	}
+
 }
