@@ -43,7 +43,6 @@ import javafx.stage.Stage;
 public class LevelEditingEnvironment implements IEditingEnvironment {
 	private static final String GUI_RESOURCE = "authoringGUI";
 	private static final String VERTICAL = "Vertically";
-	private static final String HORIZONTAL = "Horizontally";
 	private BorderPane myRoot;
 	private GUILevelInspector myInspector;
 	private ResourceBundle myResources;
@@ -53,7 +52,8 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	private Map<IAuthoringActor, List<IAuthoringActor>> availableActors;
 	private Pane myLevelPane;
 	private StackPane myStackPane;	// try setting stackpane to scrollpane's content, then adding imageview for background to stackpane and level on top
-	private ScrollPane myCenterPane;
+	private ScrollPane myScrollPane;
+	private Pane myCenterPane;
 	private ImageView myLevelBackground;
 	private List<ImageviewActorIcon> myActorPreviews;
 	private Stage myStage;
@@ -71,7 +71,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		availableActors = actors;
 		myRoot = new BorderPane();
 		myActorPreviews = new ArrayList<>();
-		myCenterPane = new ScrollPane();
+		myScrollPane = new ScrollPane();
 		myStage = stage;
 		initializeEnvironment();
 	}
@@ -202,20 +202,27 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 * Initialize the center pane.
 	 */
 	private void initializeCenter() {
+		myCenterPane = new Pane();
 		myLevelPane = new Pane();
 		myStackPane = new StackPane();
 		myStackPane.setAlignment(Pos.CENTER);
 		myBoundary = new Rectangle(SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
 		myBoundary.setFill(Color.TRANSPARENT);
 		myBoundary.setStroke(Color.BLACK);
-		myCenterPane.setContent(myStackPane);
+		myScrollPane.setContent(myStackPane);
+		//myStackPane.getChildren().add(myLevelPane);
 		myStackPane.getChildren().addAll(myLevelPane, myBoundary);
-		myCenterPane.setStyle("-fx-background-color: lightgray");
+		myScrollPane.setStyle("-fx-background-color: lightgray");
+		myScrollPane.setMinViewportWidth(SUBSCENE_WIDTH);
+		myScrollPane.setMinViewportHeight(SUBSCENE_HEIGHT);
+		myScrollPane.setPrefViewportWidth(SUBSCENE_WIDTH);
+		myScrollPane.setPrefViewportHeight(SUBSCENE_HEIGHT);
+		myCenterPane.getChildren().add(myScrollPane);
 		myRoot.setCenter(myCenterPane);
-		myCenterPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-		myCenterPane.setHbarPolicy(ScrollBarPolicy.ALWAYS);
-		myCenterPane.setFitToHeight(true);
-		myCenterPane.setFitToWidth(true);
+		myScrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+		myScrollPane.setHbarPolicy(ScrollBarPolicy.ALWAYS);
+		myScrollPane.setFitToHeight(true);
+		myScrollPane.setFitToWidth(true);
 	}
 
 	/**

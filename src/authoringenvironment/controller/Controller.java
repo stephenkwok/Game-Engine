@@ -17,6 +17,7 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.view.ActorEditingEnvironment;
+import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
 import authoringenvironment.view.GameEditingEnvironment;
@@ -106,7 +107,10 @@ public class Controller extends BranchScreenController implements Observer {
 	}
 
 	//TODO Need a constructor that takes in a game passed by data and sets up Authoring Environment accordingly 
-
+	public Controller(Stage myStage, Game newGame) {
+		super(myStage);
+	}
+	
 	public void init() {
 		myRoot = new BorderPane();
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
@@ -364,17 +368,23 @@ public class Controller extends BranchScreenController implements Observer {
 			toUpdate.setName(actor.getName());
 		}
 	}
-	
+	// copy IDs
 	private void copyActor(IAuthoringActor toUpdate, IAuthoringActor toCopy) {
 		toUpdate.setName(toCopy.getName());
 		toUpdate.setFriction(toCopy.getFriction());
 		toUpdate.setImageView(toCopy.getImageView());
 		toUpdate.setImageViewName(toCopy.getImageViewName());
-//		myRules =  new HashMap<>();
-    //    attributeMap = new HashMap<>();
-  //      myActorRules = new ArrayList<>();
-//        myStates = new HashSet<>();
+	//	copyRules(toUpdate, toCopy.getActorRules());		copy actor rules or normal rules?? what?? annie halp
+		//copyAttributes(toUpdate,)
 	}
+	
+	/*
+	private void copyRules(IAuthoringActor toUpdate, List<ActorRule> rulesToCopy) {
+		toUpdate.getActorRules().clear();
+		for (int i = 0; i < rulesToCopy.size(); i++) {
+			toUpdate.addRule(rulesToCopy.get(i));
+		}
+	}*/
 	
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
 		List<Object> arguments = (List<Object>) notifyObserversArgument;
