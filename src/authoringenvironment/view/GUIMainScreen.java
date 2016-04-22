@@ -10,7 +10,6 @@ import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Level;
 import gui.view.IGUI;
-import gui.view.PopUpLevelReorderer;
 import gui.view.PopUpParent;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.Node;
@@ -245,8 +244,8 @@ public class GUIMainScreen implements IGUI, Observer {
 	 */
 	private void reorderLevelLabels() {
 		@SuppressWarnings("unused")
-		PopUpParent levelReorderer = new PopUpLevelReorderer(levelPreviewUnits, levelPreviewContainer, levels,
-				levelEditor, allPreviewUnits, this);
+		LevelPreviewUnitReorderer levelReorderer = new LevelPreviewUnitReorderer(levelPreviewUnits,
+				levelPreviewContainer, levels, levelEditor, allPreviewUnits, this);
 	}
 
 	@Override
