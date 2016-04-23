@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 public class GUIMainScreen implements IGUI, Observer {
 
 	private static final int NUM_SCROLLPANES = 2;
+	private static final int SCROLLPANE_BAR_WIDTH = 30;
 	private VBox actorPreviewContainer, levelPreviewContainer, createdLevelsDisplay, createdActorsDisplay;
 	private ScrollPane actorScrollPane, levelScrollPane;
 	private HBoxDisplayHeader actorsDisplayHeader, levelsDisplayHeader;
@@ -155,7 +156,8 @@ public class GUIMainScreen implements IGUI, Observer {
 	 */
 	private VBox createEditableGameElementPreviewContainer(ScrollPane parentScrollPane) {
 		VBox container = new VBox();
-		bindNodeSizeToGivenSize(container, parentScrollPane.widthProperty(), parentScrollPane.heightProperty());
+		bindNodeSizeToGivenSize(container, parentScrollPane.widthProperty().subtract(SCROLLPANE_BAR_WIDTH),
+				parentScrollPane.heightProperty());
 		return container;
 	}
 
