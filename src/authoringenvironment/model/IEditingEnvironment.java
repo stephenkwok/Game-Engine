@@ -1,5 +1,7 @@
 package authoringenvironment.model;
 
+import java.util.Observer;
+
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -14,7 +16,7 @@ import javafx.stage.Stage;
  *
  */
 
-public interface IEditingEnvironment extends IEditingElement {	
+public interface IEditingEnvironment extends IEditingElement, Observer {	
 	
 	/**
 	 * 

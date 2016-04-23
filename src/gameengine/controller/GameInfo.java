@@ -1,6 +1,5 @@
 package gameengine.controller;
 
-import java.util.HashMap;
 import java.util.*;
 import authoringenvironment.model.IEditableGameElement;
 import javafx.scene.image.ImageView;
@@ -21,15 +20,18 @@ public class GameInfo implements IEditableGameElement {
 	private String myDescription;
 	private int myCurrentLevelNum;
 	private ImageView myPreviewImage;
-	private Map<String,Integer> myHUDElementsToDisplay;
+	private List<String> myHUDElementsToDisplay;
 	private String myFile;
-	
+	private boolean isDestinationGame;
+
 	public GameInfo(String name, String imageName, String description, int currentLevelNum, String file ) {
 		this.setName(name);
 		this.setMyImageName(imageName);
 		this.setMyDescription(description);
 		this.setMyCurrentLevelNum(currentLevelNum);
-		this.myHUDElementsToDisplay = new HashMap<String, Integer>();
+		this.setImageView(new ImageView(DEFAULT_IMAGE_NAME));
+		this.setIsDestinationGame(true);
+		this.myHUDElementsToDisplay = new ArrayList<String>();
 		this.myFile = file;
 	}
 	
@@ -62,7 +64,7 @@ public class GameInfo implements IEditableGameElement {
 	 * Specifies the types of game information to be displayed in the HUD 
 	 * @param options
 	 */
-	public void setMyHUDOptions(Map<String, Integer> options) {
+	public void setMyHUDOptions(List<String> options) {
 		myHUDElementsToDisplay = options;
 	}
 	
@@ -71,7 +73,7 @@ public class GameInfo implements IEditableGameElement {
 	 * @return a list of strings representing the types of information displayed in the HUD
 	 */
 	public List<String> getMyHUDOptions() {
-		return new ArrayList<>(myHUDElementsToDisplay.keySet());
+		return myHUDElementsToDisplay;
 	}
 	
 	/**
@@ -171,8 +173,25 @@ public class GameInfo implements IEditableGameElement {
 	 * @param name
 	 */
 	public void setMyFile(String name) {
-		this.myFile = name;
-		
+		this.myFile = name;	
 	}
+	
+	/**
+	 * 
+	 * @return isDestinationGame
+	 */
+	public boolean isDestinationGame() {
+		return isDestinationGame;
+	}
+
+	/**
+	 * 
+	 * @param isDestinationGame: true if game is destination game; false if infinitely scrolling
+	 */
+	public void setIsDestinationGame(boolean isDestinationGame) {
+		this.isDestinationGame = isDestinationGame;
+	}
+	
+
 
 }

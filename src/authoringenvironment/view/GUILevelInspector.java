@@ -31,7 +31,6 @@ public class GUILevelInspector implements IGUI {
 	private TabAttributes myAttributesTab;
 	private VBox myContainer;
 	private LevelEditingEnvironment myLevelEditor;
-	private Stage myStage;
 	
 	/**
 	 * Constructor for Level Inspector.
@@ -40,8 +39,7 @@ public class GUILevelInspector implements IGUI {
 	 * @param availActors: list of currently available actors.
 	 * @param level: level that is being edited.
 	 */
-	public GUILevelInspector(ResourceBundle myResources, Set<IAuthoringActor> availActors, LevelEditingEnvironment editor, Stage stage) {
-		myStage = stage;
+	public GUILevelInspector(ResourceBundle myResources, Set<IAuthoringActor> availActors, LevelEditingEnvironment editor) {
 		myLevelEditor = editor;
 		init(myResources, availActors);
 	}
@@ -57,8 +55,8 @@ public class GUILevelInspector implements IGUI {
 	private void addChildrenToLevelInspector(ResourceBundle myResources, Set<IAuthoringActor> availActors) {
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
 		myAttributesTab = new TabAttributes(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, myLevelEditor.getLevel());
-		// TODO: take out the null where the controller is later
-		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(BUTTON_LABEL, null, myLevelEditor);
+		myAttributesTab.setObserver(myLevelEditor);
+		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(BUTTON_LABEL, null, myLevelEditor, myLevelEditor.getStage());
 		addTabToContainer(myAttributesTab, false);
 		myContainer.getChildren().add(button.createNode());
 		addTabToContainer(myActorsTab, true);

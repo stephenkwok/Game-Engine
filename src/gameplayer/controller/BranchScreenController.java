@@ -2,8 +2,6 @@ package gameplayer.controller;
 
 
 import gui.view.Screen;
-
-import java.util.Observable;
 import java.util.Observer;
 
 import gameplayer.controller.SplashScreenController;

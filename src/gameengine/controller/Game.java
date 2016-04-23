@@ -6,7 +6,6 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.*;
-import gameengine.model.Triggers.TickTrigger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -56,7 +55,7 @@ public class Game extends Observable implements Observer {
 		setDeadActors(new ArrayList<IPlayActor>());
         myPhysicsEngine = new PhysicsEngine();
         myCollisionDetector = new CollisionDetection(myPhysicsEngine);
-        
+        count = 1;
 		initTimeline();
 	}
 

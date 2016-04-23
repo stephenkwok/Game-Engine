@@ -34,6 +34,8 @@ public class ComboBoxScrollingDirection extends ComboBoxTextCell {
 	public void setButtonAction() {
 		getComboButton().setOnAction(event->{
 			((Level) getEditableElement()).setMyScrollingDirection(getComboBox().getValue());
+			setChanged();
+			notifyObservers();
 		});
 	}
 

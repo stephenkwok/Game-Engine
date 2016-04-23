@@ -5,8 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.model.IEditingElement;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -19,14 +18,16 @@ import javafx.stage.Stage;
 public abstract class ButtonFileChooser extends ButtonParent {
 	private static final String EXTENSION_FILTER_DESCRIPTION = "Image Files (.jpg, .png .gif)";
 	private static final String EXTENSIONS = "*.jpg *.png *.gif";
-	private IEditingEnvironment myEditor;
+	private IEditingElement myEditor;
+	private Stage myStage;
 	/**
 	 * Creates an image setting button.
 	 * @return a button whose action sets the image.
 	 */
-	public ButtonFileChooser(String buttonText, String imageName, IEditingEnvironment editor){
+	public ButtonFileChooser(String buttonText, String imageName, IEditingElement editor, Stage stage){
 		super(buttonText, imageName);
 		myEditor = editor;
+		myStage = stage;
 	}
 	
 	protected void setButtonAction() {
@@ -53,7 +54,7 @@ public abstract class ButtonFileChooser extends ButtonParent {
 		}
 	}
 	
-	protected abstract void updateImage(IEditingEnvironment editor, Image image, File imageFile);
+	protected abstract void updateImage(IEditingElement editor, Image image, File imageFile);
 	
 	/**
      * Creates a file picker to get a file name
@@ -64,6 +65,6 @@ public abstract class ButtonFileChooser extends ButtonParent {
         List<String> extensions = Arrays.asList(EXTENSIONS.split(" "));
         FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter(EXTENSION_FILTER_DESCRIPTION, extensions);
         myFileChooser.getExtensionFilters().add(myFilter);
-        return myFileChooser.showOpenDialog(myEditor.getStage());
+        return myFileChooser.showOpenDialog(myStage);
     }
 }

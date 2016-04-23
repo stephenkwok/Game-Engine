@@ -36,6 +36,7 @@ public class MoveRight extends MovingAction {
     	getMyActor().getPhysicsEngine().moveRight(getMyActor());
     	getMyActor().setHeading(0);
     	System.out.println(getMyActor().getHeading());
+        getMyActor().setDirection();
     }
 
     

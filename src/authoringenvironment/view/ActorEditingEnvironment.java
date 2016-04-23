@@ -1,5 +1,7 @@
 package authoringenvironment.view;
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
@@ -7,7 +9,11 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.model.Actor;
+import gui.view.ButtonFileChooserActorImage;
 import gui.view.GUILibrary;
+import gui.view.TextFieldActorFrictionEditor;
+import gui.view.TextFieldActorNameEditor;
+import gui.view.TextFieldActorSizeEditor;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -31,7 +37,7 @@ import javafx.stage.Stage;
  * @author AnnieTang
  *
  */
-public class ActorEditingEnvironment implements IEditingEnvironment {
+public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final Color DEFAULT_COLOR = Color.CORNFLOWERBLUE;
 	private static final int ICON_HEIGHT = 75;
 	private static final String NEW_RULE_LABEL = "New Rule";
@@ -95,6 +101,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private void setLeftPane() {
 		VBox vbox = new VBox();
 		attributes = new TabAttributes(myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
+		attributes.setObserver(this);
 		TabPane attributeTP = new TabPane();
 		attributeTP.getTabs().add(attributes.getTab());
 		attributeTP.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
@@ -184,5 +191,9 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	}
 	public Controller getController() {
 		return this.myController;
+	}
+	@Override
+	public void update(Observable o, Object arg) {
+		myController.updateActors((IAuthoringActor) arg);
 	}
 }
