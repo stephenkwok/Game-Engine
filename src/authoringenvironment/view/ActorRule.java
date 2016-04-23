@@ -12,7 +12,6 @@ import authoringenvironment.view.behaviors.IAuthoringBehavior;
 import gameengine.model.Actor;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
-import gameengine.model.ITrigger;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
 import gui.view.IGUIElement;
@@ -29,6 +28,9 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import gameengine.controller.Level;
+import gameengine.model.Triggers.ITrigger;
+
 /**
  * Rule container for an actor containing behavior, images, and/or sounds.
  * @author AnnieTang

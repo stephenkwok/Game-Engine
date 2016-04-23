@@ -1,8 +1,8 @@
 package gameengine.model;
 
 import gameengine.model.IRule;
-import gameengine.model.ITrigger;
 import gameengine.model.Actions.Action;
+import gameengine.model.Triggers.ITrigger;
 
 /**
  * Contains a trigger and linked action to be performed when the trigger is signaled

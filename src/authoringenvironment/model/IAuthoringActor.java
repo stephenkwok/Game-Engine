@@ -5,6 +5,7 @@ import java.util.List;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;
+import gameengine.model.IRule;
 import gameengine.model.Rule;
 import javafx.scene.image.ImageView;
 

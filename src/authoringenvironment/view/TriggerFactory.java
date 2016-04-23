@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 import javafx.scene.input.KeyCode;
 /**
  * Factory to create ITrigger objects

@@ -3,6 +3,7 @@ package gameengine.model;
 import java.util.List;
 import java.util.Map;
 import gameengine.model.Actions.Action;
+import gameengine.model.Triggers.ITrigger;
 import javafx.geometry.Bounds;
 
 public interface IPlayActor {

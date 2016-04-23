@@ -3,9 +3,8 @@ package authoringenvironment.view.behaviors;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import authoringenvironment.view.ActorRule;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 
 public class TickBehavior extends DoubleBehavior {
 	private ITrigger myTrigger;

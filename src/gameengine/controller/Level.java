@@ -4,7 +4,8 @@ import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
 import gameengine.model.ActorState;
 import gameengine.model.IPlayActor;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.AttributeReached;
+import gameengine.model.Triggers.ITrigger;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.image.Image;
@@ -21,7 +22,7 @@ import authoringenvironment.model.IEditableGameElement;
  *
  * @author blakekaplan
  */
-public class Level implements Observer, ILevel, IEditableGameElement, Comparable<Level> {
+public class Level extends Observable implements ILevel, IEditableGameElement, Comparable<Level> {
 
 	private static final String DEFAULT_NAME = "Default";
 	private static final String DEFAULT_IMAGE_NAME = "default_landscape.png";
@@ -282,9 +283,4 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 		return null;
 	}
 	
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
 }
