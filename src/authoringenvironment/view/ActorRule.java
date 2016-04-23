@@ -271,7 +271,6 @@ public class ActorRule {
 	
 	private boolean isITrigger(IAuthoringBehavior authoringBehavior){
 		return authoringBehavior.isTrigger();
-//		try{return myTrigger == authoringBehaviorMap.get(authoringBehavior).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex")));
 	}
 
 	private void setRemoveEvent(Node node, IAuthoringBehavior element){
