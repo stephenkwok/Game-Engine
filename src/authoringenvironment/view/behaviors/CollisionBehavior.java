@@ -23,6 +23,7 @@ public class CollisionBehavior extends SelectEditableBehavior {
 		setButtonAction(e -> {
 			this.otherActor = (IAuthoringActor) getComboBox().getValue();
 			createTriggerOrAction();
+			setTriggerOrAction();
 		});
 	}
 
@@ -42,7 +43,7 @@ public class CollisionBehavior extends SelectEditableBehavior {
 
 	@Override
 	public void setTriggerOrAction() {
-		addTrigger(this, myTrigger);
+		setTrigger(this, myTrigger);
 	}
 
 	@Override

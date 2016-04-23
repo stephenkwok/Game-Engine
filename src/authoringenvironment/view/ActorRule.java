@@ -1,6 +1,5 @@
 package authoringenvironment.view;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -51,7 +50,6 @@ public class ActorRule {
 	private Map<IAuthoringBehavior, List<Object>> authoringBehaviorMap;
 	private ITrigger myTrigger;
 	private List<IAction> myActions;
-//	private boolean showAlert;
 	
 	public ActorRule(ActorRuleCreator myActorRuleCreator) {
 		this.myActorRuleCreator = myActorRuleCreator;
@@ -76,7 +74,6 @@ public class ActorRule {
 		this.actorRuleFactory = new ActorRuleFactory(myFactoryResources, myActorRuleCreator.getActor(), myController, this);
 		this.authoringBehaviorMap = new HashMap<>();
 		this.myActions = new ArrayList<>();
-//		this.showAlert = true;
 		myRule = new GridPane(); 
 		myRule.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(Integer.parseInt(myActorRuleResources.getString("CornerRadius"))), Insets.EMPTY)));
 		myRule.setPadding(new Insets(Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding"))));
@@ -132,14 +129,13 @@ public class ActorRule {
 			setRemoveEvent(node, element);			
 			if(isTrigger(behaviorType)){
 				myTriggerNodes.getChildren().add(node);
-				//set myTrigger
 			}
 			else{
 				myActionNodes.getChildren().add(node);
-				//add IAction to list of Actions
 			}
 			authoringBehaviorMap.get(element).add(Integer.parseInt(myActorRuleResources.getString("NodeIndex")), node);
 		}
+		System.out.println("Authoring Behavior Map After Adding Behavior: " + authoringBehaviorMap);
 	}
 	/**
 	 * Return if given behavior is a trigger type behavior
@@ -186,8 +182,7 @@ public class ActorRule {
 			}
 		}
 		myTrigger = null;
-		System.out.println("reached");
-		setTriggersAndActions(true);
+//		setTriggersAndActions(true);
 		System.out.println("next");
 		System.out.println("Rule Map: " + ((Actor) myActorRuleCreator.getActor()).getRules());
 		System.out.println("Authoring Behavior Map: " + authoringBehaviorMap);
@@ -198,48 +193,51 @@ public class ActorRule {
 		rulesForCurrentTrigger.remove(toRemove);
 	}
 	
-	public void addTrigger(IAuthoringBehavior key, ITrigger value){
-		if(myTrigger!=value){
-			authoringBehaviorMap.get(key).add(value);
-			myTrigger = value;
-			resetIRulesForTrigger();
-			setTriggersAndActions(false);
-		}
-//		setTriggersAndActions(false);
-		System.out.println("Rule Map: " + ((Actor) myActorRuleCreator.getActor()).getRules());
-		System.out.println("Authoring Behavior Map: " + authoringBehaviorMap);
-	}
-	
-	public void addAction(IAuthoringBehavior key, IAction value){
+	public void setTrigger(IAuthoringBehavior key, ITrigger value){
+		myTrigger = value;
 		authoringBehaviorMap.get(key).add(value);
+	}
+	
+	public void setAction(IAuthoringBehavior key, IAction value){
 		myActions.add(value);
-		addIRuleForAction(key,value);
+		authoringBehaviorMap.get(key).add(value);
 	}
+
+//	@Deprecated
+//	public void addTrigger(IAuthoringBehavior key, ITrigger value){
+//		if(myTrigger!=value){
+//			authoringBehaviorMap.get(key).add(value);
+//			myTrigger = value;
+//			resetIRulesForTrigger();
+//			setTriggersAndActions(false);
+//		}
+//		System.out.println("Rule Map: " + ((Actor) myActorRuleCreator.getActor()).getRules());
+//		System.out.println("Authoring Behavior Map: " + authoringBehaviorMap);
+//	}
 	
-	private void resetIRulesForTrigger(){
-		List<Rule> value = new ArrayList<>();
-		for(IAction action: myActions){
-			value.add(new Rule(myTrigger, (Action) action));
-		}
-		//add new list of rules for this trigger
-		((Actor) myActorRuleCreator.getActor()).getRules().put(myTrigger.getMyKey(),value);
-	}
+//	@Deprecated
+//	public void addAction(IAuthoringBehavior key, IAction value){
+//		authoringBehaviorMap.get(key).add(value);
+//		myActions.add(value);
+//		addIRuleForAction(key,value);
+//	}
 	
-	private void addIRuleForAction(IAuthoringBehavior key, IAction value){
-		if(actionNotYetAdded(value)){
-			Rule toAdd = new Rule(myTrigger, (Action) value);
-			((Actor) myActorRuleCreator.getActor()).getRules().get(myTrigger.getMyKey()).add(toAdd);
-			authoringBehaviorMap.get(key).add(toAdd);
-		}
-	}
+//	private void resetIRulesForTrigger(){
+//		List<Rule> value = new ArrayList<>();
+//		for(IAction action: myActions){
+//			value.add(new Rule(myTrigger, (Action) action));
+//		}
+//		//add new list of rules for this trigger
+//		((Actor) myActorRuleCreator.getActor()).getRules().put(myTrigger.getMyKey(),value);
+//	}
 	
-	private boolean actionNotYetAdded(IAction value){
-		List<Rule> rules = ((Actor) myActorRuleCreator.getActor()).getRules().get(myTrigger.getMyKey());
-		for(Rule rule:rules){
-			if(rule.getMyAction()==value) return false;
-		}
-		return true;
-	}
+//	private void addIRuleForAction(IAuthoringBehavior key, IAction value){
+//		if(actionNotYetAdded(value)){
+//			Rule toAdd = new Rule(myTrigger, (Action) value);
+//			((Actor) myActorRuleCreator.getActor()).getRules().get(myTrigger.getMyKey()).add(toAdd);
+//			authoringBehaviorMap.get(key).add(toAdd);
+//		}
+//	}
 	
 	private void showAlert(String alertHeader, String alertContent){
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -248,23 +246,48 @@ public class ActorRule {
 		alert.showAndWait();
 	}
 	
-	public void setTriggersAndActions(boolean triggersOnly) {
-		for(IAuthoringBehavior authoringBehavior: authoringBehaviorMap.keySet()){
-			if(triggersOnly){
-				if(authoringBehavior.isTrigger()){
-//					showAlert = false;
-					authoringBehavior.setTriggerOrAction();
-				}
-			}
-			else{
-				if(!authoringBehavior.isTrigger()){
-					authoringBehavior.setTriggerOrAction();
+	public void setRules(){
+		if(myTrigger==null || myActions.size()==0){
+			showAlert(myActorRuleResources.getString("SomethingNotSet"),myActorRuleResources.getString("SetBoth"));
+		}
+		else{
+			for(IAuthoringBehavior authoringBehavior: authoringBehaviorMap.keySet()){
+				//for each authoringbehavior that is an action, create a new rule
+				if(!isMyTrigger(authoringBehavior)){
+					Action myAction = (Action) authoringBehaviorMap.get(authoringBehavior).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex")));
+					Rule newRule = new Rule(myTrigger, myAction);
+					//add this rule to the actor for the current trigger value
+					Map<String, List<Rule>> ruleMap = ((Actor) myActorRuleCreator.getActor()).getRules(); 
+					if(!(ruleMap.containsKey(myTrigger.toString()))){
+						List<Rule> newList = new ArrayList<>();
+						newList.add(newRule);
+						ruleMap.put(myTrigger.toString(), newList);
+						((Actor) myActorRuleCreator.getActor()).setMyRules(ruleMap);
+						authoringBehaviorMap.get(authoringBehavior).add(newRule);
+					} else if(actionNotYetAdded(ruleMap, myAction)){
+						ruleMap.get(myTrigger.toString()).add(newRule);
+						((Actor) myActorRuleCreator.getActor()).setMyRules(ruleMap);
+						//add this new rule to map as third thing for this authoring behavior
+						authoringBehaviorMap.get(authoringBehavior).add(newRule);
+					}
 				}
 			}
 		}
-//		if(showAlert) showAlert(myActorRuleResources.getString("TriggerNotSet"),myActorRuleResources.getString("SetATrigger"));
+		System.out.println("Authoring Behavior Map After Setting Rules: " + authoringBehaviorMap);
+		System.out.println("Rule Map: " + ((Actor) myActorRuleCreator.getActor()).getRules());
 	}
 	
+	private boolean actionNotYetAdded(Map<String, List<Rule>> ruleMap, IAction value){
+		for(Rule rule: ruleMap.get(myTrigger.toString())){
+			if(rule.getMyAction()==value) return false;
+		}
+		return true;
+	}
+	
+	private boolean isMyTrigger(IAuthoringBehavior authoringBehavior){
+		return myTrigger == authoringBehaviorMap.get(authoringBehavior).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex")));
+	}
+
 	private void setRemoveEvent(Node node, IAuthoringBehavior element){
 		node.setOnMouseClicked(event -> {
 			if(event.getClickCount()==2){

@@ -19,7 +19,7 @@ public class SelfTriggerBehavior extends LabelBehavior {
 
 	@Override
 	public void setTriggerOrAction() {
-		addTrigger(this, myTrigger);
+		setTrigger(this, myTrigger);
 	}
 
 	@Override

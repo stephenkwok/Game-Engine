@@ -150,7 +150,8 @@ public class ActorRuleCreator {
 
 	public void setRules() {
 		for(ActorRule actorRule: myActorRules){
-			actorRule.setTriggersAndActions(true); 
+//			actorRule.setTriggersAndActions(true); 
+			actorRule.setRules();
 		}
 	}
 }
