@@ -13,7 +13,7 @@ import gui.view.TextFieldWithButton;
  * @author AnnieTang
  */
 
-public abstract class DoubleBehavior extends TextFieldWithButton implements IAuthoringRule{
+public abstract class DoubleBehavior extends TextFieldWithButton implements IAuthoringBehavior{
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
 	private static final String WIDTH = "Width";
@@ -32,13 +32,29 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 		this.myActorRule = myActorRule;
 		setButtonAction(event -> {
 			this.value = Double.parseDouble(getTextFieldInput());
-			createRuleTriggerOrAction();
+			createTriggerOrAction();
 		});
 	}
+
+	@Override
+	protected void updateValueBasedOnEditable(){	
+		setTextFieldValue(String.valueOf(value));
+	}
+	
 	/**
-	 * Return Double quantity value
-	 * @return
+	 * Create ITrigger or IAction depending on type of behavior
 	 */
+	protected abstract void createTriggerOrAction();
+	/**
+	 * Add ITrigger or IAction to actor IRule
+	 */
+	public abstract void setTriggerOrAction();
+	/**
+	 * Return if this behavior is a trigger
+	 */
+	public abstract boolean isTrigger();
+
+
 	public double getValue(){
 		return value;
 	}
@@ -46,12 +62,7 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	protected String getBehaviorType(){
 		return this.behaviorType;
 	}
-
-	@Override
-	protected void updateValueBasedOnEditable(){	
-		setTextFieldValue(String.valueOf(value));
-	}
-
+	
 	protected TriggerFactory getTriggerFactory() {
 		return this.triggerFactory;
 	}
@@ -59,16 +70,12 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	protected ActionFactory getActionFactory() {
 		return this.actionFactory;
 	}
-
-	abstract void createRuleTriggerOrAction();
 	
-	@Override
-	public void addTrigger(IAuthoringRule key, ITrigger value){
+	public void addTrigger(IAuthoringBehavior key, ITrigger value){
 		myActorRule.addTrigger(key, value);
 	}
 	
-	@Override
-	public void addAction(IAuthoringRule key, IAction value){
+	public void addAction(IAuthoringBehavior key, IAction value){
 		myActorRule.addAction(key, value);
 	}
 }

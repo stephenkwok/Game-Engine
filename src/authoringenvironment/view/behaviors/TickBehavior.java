@@ -15,11 +15,19 @@ public class TickBehavior extends DoubleBehavior {
 	}
 
 	@Override
-	void createRuleTriggerOrAction() {
+	public void setTriggerOrAction() {
+		addTrigger(this, myTrigger);
+	}
+
+	@Override
+	protected void createTriggerOrAction() {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add((int) getValue());
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
-		addTrigger(this, myTrigger);
-		System.out.println(myTrigger);
+	}
+
+	@Override
+	public boolean isTrigger() {
+		return true;
 	}
 }

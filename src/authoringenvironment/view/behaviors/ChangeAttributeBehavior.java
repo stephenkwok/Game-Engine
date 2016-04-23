@@ -21,14 +21,22 @@ public class ChangeAttributeBehavior extends DoubleBehavior {
 	}
 
 	@Override
-	void createRuleTriggerOrAction() {
+	public void setTriggerOrAction() {
+		addAction(this, myAction);
+	}
+
+	@Override
+	protected void createTriggerOrAction() {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add((IPlayActor) myActor);
 		if(getBehaviorType().equals(CHANGE_HEALTH)) arguments.add(AttributeType.HEALTH);
 		else arguments.add(AttributeType.POINTS);
 		arguments.add((int) getValue());
 		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
-		addAction(this, myAction);
-		System.out.println(myAction);
+	}
+
+	@Override
+	public boolean isTrigger() {
+		return false;
 	}
 }
