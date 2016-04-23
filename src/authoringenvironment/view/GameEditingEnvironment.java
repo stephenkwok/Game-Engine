@@ -28,9 +28,9 @@ public class GameEditingEnvironment implements IEditingElement {
 	private static final double TEXT_FIELD_WIDTH = 100.0;
 	private static final double TEXT_FIELD_CONTAINER_SPACING = 10.0;
 	private static final double SCROLLBAR_WIDTH = 30.0;
-	private IEditableGameElement myGameInfo;
-	private Stage myStage;
+	private final Stage myStage;
 	private final ResourceBundle myResources;
+	private IEditableGameElement myGameInfo;
 	private Label welcomeMessage;
 	private HBox nameEditorContainer, gameTypeButtonContainer, previewImageContainer;
 	private VBox editingEnvironmentContainer, gameDescriptionEditor, HUDOptionsDisplay;
@@ -106,6 +106,7 @@ public class GameEditingEnvironment implements IEditingElement {
 		TextAreaParent descriptionEditor = new TextAreaGameDescriptionEditor(prompt, buttonText, TEXT_AREA_ROWS);
 		descriptionEditor.setEditableElement(myGameInfo);
 		gameDescriptionEditor = (VBox) descriptionEditor.createNode();
+		gameDescriptionEditor.prefWidthProperty().bind(editingEnvironmentContainer.widthProperty());
 	}
 
 	private void initializeGameTypeButton() {
@@ -167,6 +168,9 @@ public class GameEditingEnvironment implements IEditingElement {
 		return (GameInfo) myGameInfo;
 	}
 
+	/**
+	 * Sets the Game Editing Environment's editable to a new editable
+	 */
 	@Override
 	public void setEditableElement(IEditableGameElement element) {
 		myGameInfo = element;
