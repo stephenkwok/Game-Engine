@@ -111,6 +111,7 @@ public class Controller extends BranchScreenController implements Observer {
 	public void initExistingGame() {
 		myLevels = game.getLevels();
 		gameInfo = game.getInfo();
+		init();
 	}
 
 	public void init() {
@@ -119,6 +120,12 @@ public class Controller extends BranchScreenController implements Observer {
 		getStage().setScene(myScene);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		factory = new GUIFactory(myResources);
+		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage()); // need to initialize myActorMap first
+		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
+		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
+		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);
+		setTopPane();
+		setCenterPane();
 	}
 
 	public void initNewGame() {
@@ -127,13 +134,13 @@ public class Controller extends BranchScreenController implements Observer {
 		getStage().setScene(myScene);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		factory = new GUIFactory(myResources);
-		myLevels = new ArrayList<>(); // HANDLED
-		myLevelNames = new ArrayList<>(); // not found
-		myActorMap = new HashMap<>(); // not found
-		myActorNames = new ArrayList<>(); // not found
+		myLevels = new ArrayList<>(); 
+		myLevelNames = new ArrayList<>(); 
+		myActorMap = new HashMap<>(); //
+		myActorNames = new ArrayList<>(); 
+		gameInfo = new GameInfo(); 
+		game = new Game(gameInfo, myLevels); 
 		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage());
-		gameInfo = new GameInfo(); // HANDLED
-		game = new Game(gameInfo, myLevels); // HANDLED
 		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
 		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);

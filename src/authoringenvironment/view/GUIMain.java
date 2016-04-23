@@ -1,19 +1,10 @@
 package authoringenvironment.view;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Observable;
-
-import java.util.Observer;
-import gui.view.IGUI;
-import gui.view.IGUIElement;
-import gui.view.Screen;
+import java.util.*;
+import gui.view.*;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 /**

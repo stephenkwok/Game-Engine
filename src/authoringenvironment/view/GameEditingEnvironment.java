@@ -1,24 +1,13 @@
 package authoringenvironment.view;
 
-import java.util.ResourceBundle;
-
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingElement;
+import java.util.*;
+import authoringenvironment.model.*;
 import gameengine.controller.GameInfo;
-import gui.view.ButtonFileChooserGameImage;
-import gui.view.ButtonGameType;
-import gui.view.CheckBoxesHUDOptions;
-import gui.view.TextAreaGameDescriptionEditor;
-import gui.view.TextAreaParent;
-import gui.view.TextFieldGameNameEditor;
-import gui.view.TextFieldWithButton;
+import gui.view.*;
 import javafx.geometry.Insets;
+import javafx.scene.layout.*;
+import javafx.scene.control.*;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -183,5 +172,4 @@ public class GameEditingEnvironment implements IEditingElement {
 		myGameInfo = element;
 	}
 	
-
 }

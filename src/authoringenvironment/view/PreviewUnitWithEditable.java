@@ -2,15 +2,13 @@ package authoringenvironment.view;
 
 import java.util.Arrays;
 
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingElement;
-import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.model.*;
 import gui.view.ObjectObservable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 
 /**
  * 
@@ -41,6 +39,7 @@ public class PreviewUnitWithEditable extends ObjectObservable implements IEditin
 		myHBox = new HBox(myLabel);
 		myHBox.setAlignment(Pos.CENTER_LEFT);
 		myHBox.setSpacing(HBOX_SPACING);
+		myLabel.setPadding(new Insets(LABEL_PADDING));
 		myLabel.setOnMouseClicked(e -> setButtonAction());
 	}
 	
@@ -58,7 +57,6 @@ public class PreviewUnitWithEditable extends ObjectObservable implements IEditin
 		ImageView imageView = new ImageView(myEditable.getImageView().getImage());
 		imageView.setFitHeight(IMAGE_FIT_SIZE);
 		imageView.setPreserveRatio(true);
-		myLabel.setPadding(new Insets(LABEL_PADDING));
 		myLabel.setGraphic(imageView);
 	}
 	

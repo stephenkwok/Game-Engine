@@ -1,6 +1,5 @@
 package gameengine.controller;
 
-import java.util.HashMap;
 import java.util.*;
 import authoringenvironment.model.IEditableGameElement;
 import javafx.scene.image.ImageView;
