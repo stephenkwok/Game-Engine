@@ -100,7 +100,6 @@ public class BaseScreenController extends BranchScreenController{
 	@Override
 	public void update(Observable o, Object arg) {
 		String method = myResources.getString((String)arg);
-		System.out.println(method + " : METHOD");
 		try {
 			if(Arrays.asList(myResources.getString("SuperMethods").split(",")).contains(method)){
 				this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
@@ -110,7 +109,6 @@ public class BaseScreenController extends BranchScreenController{
 			}
 		} catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| SecurityException e) {
-			
 			e.printStackTrace();
 			this.myScreen.showError(e.getMessage());
 		}
