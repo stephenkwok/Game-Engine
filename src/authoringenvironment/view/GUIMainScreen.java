@@ -112,9 +112,9 @@ public class GUIMainScreen implements IGUI, Observer {
 	 */
 	private void initializeScrollPanes() {
 		initScrollPane(actorScrollPane, createdActorsDisplay.widthProperty(), createdActorsDisplay.heightProperty(),
-				actorPreviewContainer);
+				actorPreviewContainer, actorsDisplayHeader.getHBox().heightProperty());
 		initScrollPane(levelScrollPane, createdLevelsDisplay.widthProperty(), createdLevelsDisplay.heightProperty(),
-				levelPreviewContainer);
+				levelPreviewContainer, levelsDisplayHeader.getHBox().heightProperty());
 	}
 
 	/**
@@ -122,18 +122,17 @@ public class GUIMainScreen implements IGUI, Observer {
 	 * pane's width and sets its contents to the container holding the elements
 	 * to be placed within the ScrollPane
 	 * 
-	 * @param scrollPane
-	 *            whose size is to be bound and whose content is to be set
-	 * @param container
+	 * @param scrollPane:
+	 *            scrollPane whose size is to be bound and whose content is to
+	 *            be set
+	 * @param container:
 	 *            the container holding the elements to be placed within the
 	 *            ScrollPane
 	 */
 	private void initScrollPane(ScrollPane scrollPane, DoubleExpression bindWidth, DoubleExpression bindHeight,
-			Node initialContent) {
-		bindNodeSizeToGivenSize(scrollPane, bindWidth,
-				bindHeight.subtract(levelsDisplayHeader.getHBox().heightProperty()));
-		scrollPane.setContent(initialContent); // can't just subtract by
-												// levelsDisplayHeader
+			Node initialContent, DoubleExpression bindHeightOffset) {
+		bindNodeSizeToGivenSize(scrollPane, bindWidth, bindHeight.subtract(bindHeightOffset));
+		scrollPane.setContent(initialContent);
 	}
 
 	/**
@@ -233,15 +232,18 @@ public class GUIMainScreen implements IGUI, Observer {
 	 * the game are displayed toward the top of the ScrollPane containing all
 	 * Level Labels
 	 */
-	private void reorderLevelLabels() {
+	private void reorderLevels() {
 		@SuppressWarnings("unused")
 		LevelPreviewUnitReorderer levelReorderer = new LevelPreviewUnitReorderer(levelPreviewUnits,
 				levelPreviewContainer, levels, levelEditor, allPreviewUnits, this);
 	}
 
+	/**
+	 * Reorders levels when observable Reorder Levels button is clicked
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		reorderLevelLabels();
+		reorderLevels();
 	}
 
 }
