@@ -38,6 +38,8 @@ public class KeyBehavior extends ComboBoxBehavior {
 	}
 	@Override
 	protected void createTriggerOrAction() {
+//		KeyCode shift = KeyCode.SHIFT;
+//		System.out.println(shift.toString());
 		KeyCode keyCode = KeyCode.getKeyCode(getValue());
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(keyCode);
