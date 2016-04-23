@@ -1,7 +1,6 @@
 package gui.view;
 
 import javafx.scene.control.Alert;
-
 import java.io.File;
 
 
@@ -15,7 +14,14 @@ public class ButtonPlay extends ButtonParent{
 	protected void setButtonAction() {
 		getButton().setOnAction(e -> {
 			//TODO Add a checker for null directory
-			if ((new File("gamefiles")).listFiles().length == 1) {
+			//strings should come from a resource bundle
+			//why two checks??
+			if((new File("gamefiles")).listFiles() == null){
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setContentText("No games in your file directory!");
+				alert.showAndWait();
+			}
+			else if ((new File("gamefiles")).listFiles().length == 1) {
 				Alert alert = new Alert(Alert.AlertType.ERROR);
 				alert.setContentText("You have to create a game to play first! Press edit!");
 				alert.showAndWait();

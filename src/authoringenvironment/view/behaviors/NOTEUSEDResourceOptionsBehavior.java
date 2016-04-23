@@ -46,8 +46,17 @@ public class NOTEUSEDResourceOptionsBehavior extends ComboBoxBehavior {
 	}
 	
 	@Override
-	void createTriggerOrAction() {
-		//myAction = 
+	public void setTriggerOrAction() {
+		//TODO 
+	}
+	@Override
+	protected void createTriggerOrAction() {
+		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public boolean isTrigger() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -10,9 +10,8 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.view.behaviors.IAuthoringRule;
+import authoringenvironment.view.behaviors.IAuthoringBehavior;
 //import gameengine.controller.Level;
-import gui.view.IGUIElement;
 /**
  * Factory to create visual representations of triggers and actions that go into an ActorRule object
  * @author AnnieTang
@@ -45,12 +44,12 @@ public class ActorRuleFactory {
 	 * @param value
 	 * @return
 	 */
-	public IAuthoringRule getAuthoringRule(String behaviorType, String value){ //IGUIElement?
+	public IAuthoringBehavior getAuthoringRule(String behaviorType, String value){ 
 		String className = PACKAGE + myResources.getString(behaviorType+CLASS);
 		String elementType = myResources.getString(behaviorType + ELEMENT);
 		try{
 			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class);
-			return (IAuthoringRule) createMethod.invoke(this, behaviorType, className);
+			return (IAuthoringBehavior) createMethod.invoke(this, behaviorType, className);
 		}catch (NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -64,7 +63,7 @@ public class ActorRuleFactory {
 	}
 	
 	/**
-	 * Return ComboBox IGUIElement type with parameter options for Collision behavior type
+	 * Return ComboBox IAuthoringRule type with parameter options for Collision behavior type
 	 * @param behaviorType
 	 * @param className
 	 * @return
@@ -76,21 +75,21 @@ public class ActorRuleFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private IGUIElement createCollisionBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	private IAuthoringBehavior createCollisionBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		try{
 			Class<?> clazz = Class.forName(className);
 			Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, IAuthoringActor.class, ResourceBundle.class, List.class);
 			List<IAuthoringActor> myActors = new ArrayList<>(myController.getActorMap().keySet());
-			return (IGUIElement) constructor.newInstance(myActorRule, behaviorType,myActor,myResources,myActors);
+			return (IAuthoringBehavior) constructor.newInstance(myActorRule, behaviorType,myActor,myResources,myActors);
 		}catch(Exception e){
 			e.printStackTrace();
 			Class<?> clazz = Class.forName(className);
 			Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, ResourceBundle.class, List.class);
-			return (IGUIElement) constructor.newInstance(myActorRule, behaviorType,myResources,myController.getLevels());
+			return (IAuthoringBehavior) constructor.newInstance(myActorRule, behaviorType,myResources,myController.getLevels());
 		}
 	}
 	/**
-	 * Return Label IGUIElement type with parameter options for behavior type
+	 * Return Label IAuthoringRule type with parameter options for behavior type
 	 * @param behaviorType
 	 * @param className
 	 * @return
@@ -102,23 +101,23 @@ public class ActorRuleFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private IGUIElement createLabelBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	private IAuthoringBehavior createLabelBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		Class<?> clazz = Class.forName(className);
 		Constructor<?> constructor = clazz.getConstructor(ActorRule.class, IAuthoringActor.class, String.class, ResourceBundle.class);
-		return (IGUIElement) constructor.newInstance(myActorRule, myActor,behaviorType,myResources);
+		return (IAuthoringBehavior) constructor.newInstance(myActorRule, myActor,behaviorType,myResources);
 	}
 
-	private IGUIElement createComboBoxBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	private IAuthoringBehavior createComboBoxBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		Class<?> clazz = Class.forName(className);
 		Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, ResourceBundle.class);
-		return (IGUIElement) constructor.newInstance(myActorRule,behaviorType,myResources);
+		return (IAuthoringBehavior) constructor.newInstance(myActorRule,behaviorType,myResources);
 	}
 	
-	private IGUIElement createChangeAttributeBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	private IAuthoringBehavior createChangeAttributeBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		return createLabelBehavior(behaviorType, className);
 	}
 	
-	private IGUIElement createTickBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	private IAuthoringBehavior createTickBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		return createComboBoxBehavior(behaviorType, className);
 	}
 }

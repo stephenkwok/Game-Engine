@@ -21,4 +21,8 @@ public class ChangeAttribute extends Action{
     public void perform() {
         getMyActor().changeAttribute(myType,myChange);
     }
+
+	public String getMyAttributeType() {
+		return myType.toString();
+	}
 }

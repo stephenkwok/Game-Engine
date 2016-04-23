@@ -18,16 +18,24 @@ public class SelfTriggerBehavior extends LabelBehavior {
 	}
 
 	@Override
-	void createTriggerOrAction() {
-		List<Object> arguments = new ArrayList<>();
-		arguments.add(myActor);
-		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
+	public void setTriggerOrAction() {
 		addTrigger(this, myTrigger);
-		System.out.println(myTrigger);
 	}
 
 	@Override
 	public void addNodeObserver(Observer observer) {
+	}
+
+	@Override
+	protected void createTriggerOrAction() {
+		List<Object> arguments = new ArrayList<>();
+		arguments.add(myActor);
+		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
+	}
+
+	@Override
+	public boolean isTrigger() {
+		return true;
 	}
 
 }

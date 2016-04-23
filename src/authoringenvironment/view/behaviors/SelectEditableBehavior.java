@@ -26,7 +26,7 @@ import javafx.scene.layout.Priority;
  * @author AnnieTang
  */
 
-public abstract class IEditableGameElementBehavior extends EditingElementParent implements IAuthoringRule{
+public abstract class SelectEditableBehavior extends EditingElementParent implements IAuthoringBehavior{
 	private static final double IMAGE_HEIGHT = 20;
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
@@ -43,9 +43,11 @@ public abstract class IEditableGameElementBehavior extends EditingElementParent 
 	private TriggerFactory triggerFactory;
 	private ActionFactory actionFactory;
 	private ActorRule myActorRule; 
+	private String behaviorType;
 	
-	public IEditableGameElementBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
+	public SelectEditableBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
 		super(GO);
+		this.behaviorType = behaviorType;
 		this.promptText =  myResources.getString(behaviorType+PROMPT);
 		this.labelText = myResources.getString(behaviorType+LABEL);
 		this.triggerFactory = new TriggerFactory();
@@ -120,12 +122,30 @@ public abstract class IEditableGameElementBehavior extends EditingElementParent 
 	abstract List<IEditableGameElement> getOptionsList();
 	
 	/**
+	 * Create ITrigger or IAction depending on type of behavior
+	 */
+	protected abstract void createTriggerOrAction();
+	/**
+	 * Add ITrigger or IAction to actor IRule
+	 */
+	public abstract void setTriggerOrAction();
+	
+	/**
+	 * Return if this behavior is a trigger
+	 */
+	public abstract boolean isTrigger();
+	
+	
+	protected abstract void updateValueBasedOnEditable();
+	
+	/**
 	 * Gets the combobox.
 	 * @return combobox.
 	 */
 	protected ComboBox<IEditableGameElement> getComboBox() {
 		return comboBox;
 	}
+	
 	/**
 	 * Gets the trigger factory. 
 	 * @return factory
@@ -141,16 +161,16 @@ public abstract class IEditableGameElementBehavior extends EditingElementParent 
 	protected ActionFactory getActionFactory(){
 		return this.actionFactory;
 	}
-
-	protected abstract void updateValueBasedOnEditable();
 	
-	@Override
-	public void addTrigger(IAuthoringRule key, ITrigger value){
+	public void addTrigger(IAuthoringBehavior key, ITrigger value){
 		myActorRule.addTrigger(key, value);
 	}
 	
-	@Override
-	public void addAction(IAuthoringRule key, IAction value){
+	public void addAction(IAuthoringBehavior key, IAction value){
 		myActorRule.addAction(key, value);
+	}
+	
+	protected String getBehaviorType(){
+		return this.behaviorType;
 	}
 }
