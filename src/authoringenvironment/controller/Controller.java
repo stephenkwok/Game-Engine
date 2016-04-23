@@ -1,51 +1,18 @@
 package authoringenvironment.controller;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.ResourceBundle;
-
+import java.util.*;
 import javax.xml.parsers.ParserConfigurationException;
-
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.view.ActorEditingEnvironment;
-import authoringenvironment.view.GUIMain;
-import authoringenvironment.view.GUIMainScreen;
-import authoringenvironment.view.GameEditingEnvironment;
-import authoringenvironment.view.PreviewUnitWithEditable;
-import authoringenvironment.view.LevelEditingEnvironment;
-import gamedata.controller.ChooserType;
-import gamedata.controller.CreatorController;
-import gamedata.controller.FileChooserController;
-import gameengine.controller.Game;
-import gameengine.controller.GameInfo;
-import gameengine.controller.Level;
+import authoringenvironment.model.*;
+import authoringenvironment.view.*;
+import gamedata.controller.*;
+import gameengine.controller.*;
 import gameengine.model.Actor;
 import gameplayer.controller.BranchScreenController;
-import gui.view.ButtonFinish;
-import gui.view.ButtonHome;
-import gui.view.ButtonLoad;
-import gui.view.ButtonNewActor;
-import gui.view.ButtonNewLevel;
-import gui.view.ButtonSave;
-import gui.view.ButtonSplash;
-import gui.view.GUIFactory;
-import gui.view.IGUIElement;
-import gui.view.TextFieldActorNameEditor;
+import gui.view.*;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -120,7 +87,7 @@ public class Controller extends BranchScreenController implements Observer {
 		getStage().setScene(myScene);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		factory = new GUIFactory(myResources);
-		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage()); // need to initialize myActorMap first
+		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this); // need to initialize myActorMap first
 		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
 		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);
@@ -140,8 +107,15 @@ public class Controller extends BranchScreenController implements Observer {
 		myActorNames = new ArrayList<>(); 
 		gameInfo = new GameInfo(); 
 		game = new Game(gameInfo, myLevels); 
-		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage());
+		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
 		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
+		myLevels = new ArrayList<>();
+		myLevelNames = new ArrayList<>();
+		myActorMap = new HashMap<>();
+		myActorNames = new ArrayList<>();
+		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
+		gameInfo = new GameInfo();
+		game = new Game(gameInfo, myLevels);
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
 		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);
 		setTopPane();
@@ -374,17 +348,56 @@ public class Controller extends BranchScreenController implements Observer {
 	}
 
 	// checking to see if this works with name
-	private void updateActors(IAuthoringActor actor) {
+	public void updateActors(IAuthoringActor actor) {
 		List<IAuthoringActor> listToUpdate = myActorMap.get(actor);
 		for (int i = 0; i < listToUpdate.size(); i++) {
-			listToUpdate.get(i).setName(actor.getName());
+			IAuthoringActor toUpdate = listToUpdate.get(i);
+			copyActor(toUpdate, actor);
+			toUpdate.setName(actor.getName());
 		}
 	}
-
+	
+	public void updateRefActorSize(IAuthoringActor actor) {
+		for (IAuthoringActor refActor: myActorMap.keySet()) {
+			if (myActorMap.get(refActor).contains(actor)) {
+				refActor.setSize(actor.getSize());
+				updateActors(refActor);
+			}
+		}
+	}
+	
+	// copy IDs
+	private void copyActor(IAuthoringActor toUpdate, IAuthoringActor toCopy) {
+		toUpdate.setName(toCopy.getName());
+		toUpdate.setFriction(toCopy.getFriction());
+		toUpdate.setImageView(toCopy.getImageView());
+		toUpdate.setSize(toCopy.getSize());
+		toUpdate.setImageViewName(toCopy.getImageViewName());
+		toUpdate.setID(toCopy.getMyID());
+	//	copyRules(toUpdate, toCopy.getActorRules());		copy actor rules or normal rules?? what?? annie halp
+		//copyAttributes(toUpdate,)
+	}
+	
+	/*
+	private void copyRules(IAuthoringActor toUpdate, List<ActorRule> rulesToCopy) {
+		toUpdate.getActorRules().clear();
+		for (int i = 0; i < rulesToCopy.size(); i++) {
+			toUpdate.addRule(rulesToCopy.get(i));
+		}
+	}*/
+	
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
 		List<Object> arguments = (List<Object>) notifyObserversArgument;
 		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
 		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
 		goToEditingEnvironment(editable, environment);
+	}
+	
+	public ActorEditingEnvironment getActorEditingEnvironment() {
+		return actorEnvironment;
+	}
+	
+	public LevelEditingEnvironment getLevelEditingEnvironment() {
+		return levelEnvironment;
 	}
 }
