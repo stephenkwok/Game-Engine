@@ -155,13 +155,19 @@ public class ActorRule {
 	public void remove(IAuthoringBehavior toRemove){
 		myTriggerNodes.getChildren().remove(authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("NodeIndex"))));
 		myActionNodes.getChildren().remove(authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("NodeIndex"))));
-		if(isMyTrigger(toRemove)) removeTrigger(toRemove);
-		else removeAction(toRemove);
+		if(isMyTrigger(toRemove)){
+			try{ removeTrigger(toRemove);}
+			catch(Exception e){ myTrigger = null;}
+		}else{
+			try{ removeAction(toRemove);}
+			catch(Exception e){authoringBehaviorMap.remove(toRemove);}
+		}
 	}
+	//myActions.add(value);
+//	authoringBehaviorMap.get(key).add(value);
 	
 	private void removeTrigger(IAuthoringBehavior toRemove){
 		//remove rules corresponding to this trigger key from actor
-		System.out.println(myTrigger.getMyKey());
 		((Actor) myActorRuleCreator.getActor()).getRules().remove(myTrigger.getMyKey());
 		//remove trigger from authoring behavior
 		authoringBehaviorMap.remove(toRemove);
@@ -179,19 +185,17 @@ public class ActorRule {
 	}
 	
 	private void removeAction(IAuthoringBehavior toRemove){
-		System.out.println(myActions);
 		myActions.remove(authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex"))));
-		System.out.println(myActions);
 		Rule ruleToRemove = (Rule) authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")));
-//		removeIRuleFromActor(ruleToRemove);
+		removeIRuleFromActor(ruleToRemove);
 		authoringBehaviorMap.remove(toRemove);
 	}
 	
-//	private void removeIRuleFromActor(IRule toRemove){
-//		List<Rule> rulesForCurrentTrigger = ((Actor) myActorRuleCreator.getActor()).getRules().get(myTrigger.getMyKey());
-//		rulesForCurrentTrigger.remove(toRemove);
-//	}
-//	
+	private void removeIRuleFromActor(IRule toRemove){
+		List<Rule> rulesForCurrentTrigger = ((Actor) myActorRuleCreator.getActor()).getRules().get(myTrigger.getMyKey());
+		rulesForCurrentTrigger.remove(toRemove);
+	}
+	
 	public void setTrigger(IAuthoringBehavior key, ITrigger value){
 		myTrigger = value;
 		authoringBehaviorMap.get(key).add(value);
