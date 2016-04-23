@@ -85,16 +85,15 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 	public void addActor(IAuthoringActor actor) {
 		getActors().add((IPlayActor)actor);
 		Set<String> actorTriggers = ((IPlayActor)actor).getRules().keySet();
+		List<IPlayActor> levelActors;
 		for (String myTrigger : actorTriggers) {
 			if (getMyTriggerMap().containsKey(myTrigger)) {
-				List<IPlayActor> levelActors = getMyTriggerMap().get(myTrigger);
-				levelActors.add((IPlayActor)actor);
-				getMyTriggerMap().put(myTrigger, levelActors);
+				levelActors = getMyTriggerMap().get(myTrigger);
 			} else {
-				List<IPlayActor> levelActors = new ArrayList<>();
-				levelActors.add((IPlayActor)actor);
-				getMyTriggerMap().put(myTrigger, levelActors);
+				levelActors = new ArrayList<>();
 			}
+			levelActors.add((IPlayActor)actor);
+			getMyTriggerMap().put(myTrigger, levelActors);
 		}
 
 	}

@@ -193,7 +193,7 @@ public class ActorRule {
 		System.out.println("Rule Map: " + ((Actor) myActorRuleCreator.getActor()).getRules().size() + ((Actor) myActorRuleCreator.getActor()).getRules());
 		System.out.println("Authoring Behavior Map: " + authoringBehaviorMap.size() + authoringBehaviorMap);
 	}
-	
+
 	private void removeAction(IAuthoringBehavior toRemove){
 		myActions.remove(authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex"))));
 		Rule ruleToRemove = (Rule) authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")));
