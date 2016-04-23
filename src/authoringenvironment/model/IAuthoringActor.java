@@ -1,14 +1,13 @@
 package authoringenvironment.model;
 
+import java.util.List;
+
 import authoringenvironment.view.ActorRule;
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;
-import gameengine.model.IRule;
 import gameengine.model.Rule;
 import javafx.scene.image.ImageView;
 
-import java.util.List;
-import java.util.Set;
 
 /**
  * This interface defines the subset of Actor functionality that will be accessible to the game authoring environment.
@@ -103,5 +102,7 @@ public interface IAuthoringActor extends IEditableGameElement{
 	void setID(int ID);
 
     void addAttribute(Attribute newAttribute);
+
+    void addSpriteImage(String newImage);
 
 }

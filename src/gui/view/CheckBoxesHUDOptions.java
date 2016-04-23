@@ -1,25 +1,17 @@
 package gui.view;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.ResourceBundle;
+import java.util.*;
 
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingElement;
+import authoringenvironment.model.*;
 import gameengine.controller.GameInfo;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 
 /**
  * Checkboxes for all HUD options.
+ * 
  * @author amyzhao, stephen
  *
  */
@@ -39,6 +31,7 @@ public class CheckBoxesHUDOptions extends Observable implements IGUIElement, IEd
 
 	/**
 	 * Constructs a CheckBoxesHUDOptions object for the given GameInfo object.
+	 * 
 	 * @param gameInfo: GameInfo object.
 	 * @param controller: controller for the authoring environment.
 	 */
@@ -50,9 +43,10 @@ public class CheckBoxesHUDOptions extends Observable implements IGUIElement, IEd
 		myFactory = new GUIFactory(myAttributesResources);
 		myHUDElements = new ArrayList<>();
 	}
-	
+
 	/**
 	 * Initializes the VBox containing the HUD checkboxes.
+	 * 
 	 * @param key: key in resource file for the checkboxes to add.
 	 * @param vbox: vbox to add checkboxes into.
 	 */
@@ -73,6 +67,7 @@ public class CheckBoxesHUDOptions extends Observable implements IGUIElement, IEd
 
 	/**
 	 * Add checkbox elements to the vbox.
+	 * 
 	 * @param key: key in resource file for elements to add.
 	 * @param vbox: container to add checkboxes to.
 	 * @return list of elements added.
@@ -88,27 +83,14 @@ public class CheckBoxesHUDOptions extends Observable implements IGUIElement, IEd
 
 	/**
 	 * Get the HUD elements that the user has selected.
+	 * 
 	 * @return list of HUD elements that the user selected.
 	 */
-	public Map<String, Integer> getHUDElementsToDisplay() {
-		Map<String, Integer> toDisplay = new HashMap<String, Integer>();
-		for (int i = 0; i < myHUDElements.size(); i++) {
-			if (myHUDElements.get(i).isSelected()) {
-				String myHUDElementID = myHUDElements.get(i).getId();
-				toDisplay.put(myHUDElementID, getInitialValueForHUDElement(myHUDElementID));
-			}
-		}
+	public List<String> getHUDElementsToDisplay() {
+		List<String> toDisplay = new ArrayList<String>();
+		myHUDElements.stream().filter(checkbox -> checkbox.isSelected())
+				.forEach(checkbox -> toDisplay.add(checkbox.getId()));
 		return toDisplay;
-	}
-
-	/**
-	 * Initializes the value for a given option to 0.
-	 * @param myHUDElementID: ID of HUD Element to initialize.
-	 * @return 0.
-	 */
-	// remove this once changes are made on the other end 
-	private int getInitialValueForHUDElement(String myHUDElementID) {
-		return 0;
 	}
 
 	/**

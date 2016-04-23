@@ -1,54 +1,19 @@
 package authoringenvironment.controller;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.ResourceBundle;
-
+import java.util.*;
 import javax.xml.parsers.ParserConfigurationException;
-
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.view.ActorEditingEnvironment;
-import authoringenvironment.view.GUIMain;
-import authoringenvironment.view.GUIMainScreen;
-import authoringenvironment.view.GameEditingEnvironment;
-import authoringenvironment.view.HBoxWithEditable;
-import authoringenvironment.view.LevelEditingEnvironment;
-import gamedata.controller.ChooserType;
-import gamedata.controller.CreatorController;
-import gamedata.controller.FileChooserController;
-import gameengine.controller.Game;
-import gameengine.controller.GameInfo;
-import gameengine.controller.Level;
+import authoringenvironment.model.*;
+import authoringenvironment.view.*;
+import gamedata.controller.*;
+import gameengine.controller.*;
 import gameengine.model.Actor;
-import gui.view.ButtonFinish;
-import gui.view.ButtonHome;
-import gui.view.ButtonLoad;
-import gui.view.ButtonNewActor;
-import gui.view.ButtonNewLevel;
-import gui.view.ButtonSave;
-import gui.view.ButtonSplash;
-import gui.view.GUIFactory;
-import gui.view.IGUIElement;
 import gameplayer.controller.BranchScreenController;
-import gui.view.TextFieldActorNameEditor;
+import gui.view.*;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import gui.view.Screen;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -87,19 +52,37 @@ public class Controller extends BranchScreenController implements Observer {
 	public Controller(Stage myStage) {
 		super(myStage);
 		this.myButtonResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
-		init();
+		initNewGame();
 	}
 
-	//TODO This constructor is not parallel with other BranchScreenController subclasses
-	//Create a resource bundle for the Controller's actions associated to buttons it handles, but the resource bundle for the GUIFactory should be stored in and set up in the GUIMain
-	//Stage should not be contained in the subclass (already in BranchScreenController parent)
+	// TODO This constructor is not parallel with other BranchScreenController
+	// subclasses
+	// Create a resource bundle for the Controller's actions associated to
+	// buttons it handles, but the resource bundle for the GUIFactory should be
+	// stored in and set up in the GUIMain
+	// Stage should not be contained in the subclass (already in
+	// BranchScreenController parent)
 	public Controller(Stage myStage, GUIMain guiMain) {
 		super(myStage);
 		this.guiMain = guiMain;
-		init();
+		initNewGame();
 	}
 
-	//TODO Need a constructor that takes in a game passed by data and sets up Authoring Environment accordingly 
+	// TODO Need a constructor that takes in a game passed by data and sets up
+	// Authoring Environment accordingly
+	public Controller(Game game, Stage myStage) {
+		super(myStage);
+		this.game = game;
+	}
+
+	public void initExistingGame() {
+		myLevels = game.getLevels();
+		gameInfo = game.getInfo();
+		init();
+		myLevels.stream().forEach(level -> mainScreen.createLevelPreviewUnit(level, levelEnvironment));
+		// for each actor, create preview unit
+		mainScreen.updatePreviewUnits();
+	}
 
 	public void init() {
 		myRoot = new BorderPane();
@@ -107,86 +90,115 @@ public class Controller extends BranchScreenController implements Observer {
 		getStage().setScene(myScene);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		factory = new GUIFactory(myResources);
+		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this); // need to initialize myActorMap first
+		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
+		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
+		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);
+		setTopPane();
+		setCenterPane();
+	}
+
+	public void initNewGame() {
+		myRoot = new BorderPane();
+		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
+		getStage().setScene(myScene);
+		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
+		factory = new GUIFactory(myResources);
+		myLevels = new ArrayList<>(); 
+		myLevelNames = new ArrayList<>(); 
+		myActorMap = new HashMap<>(); //
+		myActorNames = new ArrayList<>(); 
+		gameInfo = new GameInfo(); 
+		game = new Game(gameInfo, myLevels); 
+		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
+		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
 		myLevels = new ArrayList<>();
 		myLevelNames = new ArrayList<>();
 		myActorMap = new HashMap<>();
 		myActorNames = new ArrayList<>();
-		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage());
+		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
 		gameInfo = new GameInfo();
 		game = new Game(gameInfo, myLevels);
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
-		gameEnvironment = new GameEditingEnvironment(gameInfo);
-		mainScreen = new GUIMainScreen(gameEnvironment, getStage().widthProperty(), getStage().heightProperty(), myLevels,
-				levelEnvironment);
+		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);
 		setTopPane();
 		setCenterPane();
 	}
 
 	/**
 	 * Set center section of screen to given Pane
+	 * 
 	 * @param pane
 	 */
-	public void setCenterPane(Pane pane){
+	public void setCenterPane(Pane pane) {
 		myRoot.setCenter(pane);
 	}
+
 	/**
-	 * Set center screen to default, the home screen 
+	 * Set center screen to default, the home screen
 	 */
-	public void setCenterPane(){
+	public void setCenterPane() {
 		goToMainScreen();
 	}
+
 	/**
-	 * Sets top section of screen to fixed toolbar 
+	 * Sets top section of screen to fixed toolbar
 	 */
 	private void setTopPane() {
 		HBox hbox = new HBox(PADDING);
-		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));		
+		hbox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
 		initializeTopPaneElements(hbox);
 		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		myRoot.setTop(hbox);
 	}
+
 	/**
 	 * Initialize elements to be in toolbar
+	 * 
 	 * @param hbox
 	 */
 	private void initializeTopPaneElements(HBox hbox) {
-		try{
+		try {
 			String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
 			for (int i = 0; i < topPaneElements.length; i++) {
 				IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
 				((Observable) elementToCreate).addObserver(this);
 				hbox.getChildren().add(elementToCreate.createNode());
-				
+
 			}
-			//temp
+			// temp
 			ButtonSplash splash = new ButtonSplash(null, SPLASH_IMAGE_NAME);
 			hbox.getChildren().add(splash.createNode());
-		}catch(Exception e){
-			
+		} catch (Exception e) {
+
 		}
 	}
+
 	/**
 	 * Return Pane representation of authoring environment
 	 */
 	public Pane getPane() {
 		return myRoot;
 	}
-	
+
 	/**
 	 * Return width of authoring environment Scene
+	 * 
 	 * @return
 	 */
 	public double getWidth() {
 		return myScene.getWidth();
 	}
+
 	/**
 	 * Return height of authoring environment Scene
+	 * 
 	 * @return
 	 */
 	public double getHeight() {
 		return myScene.getHeight();
 	}
-	
+
 	/**
 	 * Switches screen to appropriate editing environment
 	 * 
@@ -228,7 +240,7 @@ public class Controller extends BranchScreenController implements Observer {
 	}
 
 	public void loadGame() {
-		FileChooserController fileChooserController = new FileChooserController(getStage(),ChooserType.EDIT);
+		FileChooserController fileChooserController = new FileChooserController(getStage(), ChooserType.EDIT);
 	}
 
 	/**
@@ -244,9 +256,10 @@ public class Controller extends BranchScreenController implements Observer {
 		return myLevelNames;
 	}
 
-	public Map<IAuthoringActor, List<IAuthoringActor>> getActorMap(){
+	public Map<IAuthoringActor, List<IAuthoringActor>> getActorMap() {
 		return myActorMap;
 	}
+
 	public List<String> getActorNames() {
 		return myActorNames;
 	}
@@ -262,7 +275,7 @@ public class Controller extends BranchScreenController implements Observer {
 		myLevels.add(newLevel);
 		newLevel.setPlayPosition(myLevels.size());
 		myLevelNames.add(newLevel.getName());
-		mainScreen.createLevelLabel(newLevel, levelEnvironment).addObserver(this);
+		mainScreen.createLevelPreviewUnit(newLevel, levelEnvironment);
 		goToEditingEnvironment(newLevel, levelEnvironment);
 	}
 
@@ -271,7 +284,7 @@ public class Controller extends BranchScreenController implements Observer {
 		newActor.setID(myActorMap.size());
 		myActorMap.put(newActor, new ArrayList<>());
 		myActorNames.add(newActor.getName());
-		mainScreen.createActorLabel(newActor, actorEnvironment).addObserver(this);;
+		mainScreen.createActorPreviewUnit(newActor, actorEnvironment);
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
 	}
@@ -292,40 +305,34 @@ public class Controller extends BranchScreenController implements Observer {
 	/**
 	 * Saves game and returns to splash screen of game player.
 	 */
-	/*public void goToSplash() {
-		guiMain.goBackToSplash();
-	}*/
+	/*
+	 * public void goToSplash() { guiMain.goBackToSplash(); }
+	 */
 
 	public void switchGame() {
 		// TODO Auto-generated method stub
 	}
-	
-/*	@Override
-	public void update(Observable o, Object arg) {
-		String button = (String) arg;
-		String method = myButtonResource.getString(button);
-		System.out.println(method);
-		try {
-			this.getClass().getDeclaredMethod(method).invoke(this);
-		} catch (NoSuchMethodException e) {
-			try {
-				this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
-			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
-					| NoSuchMethodException | SecurityException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-	}
-*/
+
+	/*
+	 * @Override public void update(Observable o, Object arg) { String button =
+	 * (String) arg; String method = myButtonResource.getString(button);
+	 * System.out.println(method); try {
+	 * this.getClass().getDeclaredMethod(method).invoke(this); } catch
+	 * (NoSuchMethodException e) { try {
+	 * this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this); }
+	 * catch (IllegalAccessException | IllegalArgumentException |
+	 * InvocationTargetException | NoSuchMethodException | SecurityException e1)
+	 * { // TODO Auto-generated catch block e1.printStackTrace(); } } catch
+	 * (IllegalAccessException | IllegalArgumentException |
+	 * InvocationTargetException | SecurityException e) { // TODO Auto-generated
+	 * catch block e.printStackTrace(); }
+	 * 
+	 * }
+	 */
 	// Use reflection - properties file linking button name to a method name
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if (arg0 instanceof HBoxWithEditable)
+		if (arg0 instanceof PreviewUnitWithEditable)
 			handleObservableGoToEditingEnvironmentCall(arg1);
 		else if (arg0 instanceof ButtonFinish)
 			goToSplash();
@@ -339,22 +346,61 @@ public class Controller extends BranchScreenController implements Observer {
 			loadGame();
 		else if (arg0 instanceof ButtonSave)
 			saveGame();
-		else if (arg0 instanceof TextFieldActorNameEditor) 
+		else if (arg0 instanceof TextFieldActorNameEditor)
 			updateActors((IAuthoringActor) arg1);
 	}
 
 	// checking to see if this works with name
-	private void updateActors(IAuthoringActor actor) {
+	public void updateActors(IAuthoringActor actor) {
 		List<IAuthoringActor> listToUpdate = myActorMap.get(actor);
 		for (int i = 0; i < listToUpdate.size(); i++) {
-			listToUpdate.get(i).setName(actor.getName());
+			IAuthoringActor toUpdate = listToUpdate.get(i);
+			copyActor(toUpdate, actor);
+			toUpdate.setName(actor.getName());
 		}
 	}
+	
+	public void updateRefActorSize(IAuthoringActor actor) {
+		for (IAuthoringActor refActor: myActorMap.keySet()) {
+			if (myActorMap.get(refActor).contains(actor)) {
+				refActor.setSize(actor.getSize());
+				updateActors(refActor);
+			}
+		}
+	}
+	
+	// copy IDs
+	private void copyActor(IAuthoringActor toUpdate, IAuthoringActor toCopy) {
+		toUpdate.setName(toCopy.getName());
+		toUpdate.setFriction(toCopy.getFriction());
+		toUpdate.setImageView(toCopy.getImageView());
+		toUpdate.setSize(toCopy.getSize());
+		toUpdate.setImageViewName(toCopy.getImageViewName());
+		toUpdate.setID(toCopy.getMyID());
+	//	copyRules(toUpdate, toCopy.getActorRules());		copy actor rules or normal rules?? what?? annie halp
+		//copyAttributes(toUpdate,)
+	}
+	
+	/*
+	private void copyRules(IAuthoringActor toUpdate, List<ActorRule> rulesToCopy) {
+		toUpdate.getActorRules().clear();
+		for (int i = 0; i < rulesToCopy.size(); i++) {
+			toUpdate.addRule(rulesToCopy.get(i));
+		}
+	}*/
 	
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
 		List<Object> arguments = (List<Object>) notifyObserversArgument;
 		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
 		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
 		goToEditingEnvironment(editable, environment);
+	}
+	
+	public ActorEditingEnvironment getActorEditingEnvironment() {
+		return actorEnvironment;
+	}
+	
+	public LevelEditingEnvironment getLevelEditingEnvironment() {
+		return levelEnvironment;
 	}
 }

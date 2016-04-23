@@ -10,10 +10,9 @@ import gameengine.model.IAction;
 import gameengine.model.ITrigger;
 import gui.view.ComboBoxTextCell;
 /**
- * Parent abstract class for GUI representation of behaviors that take in a single parameter in ComboBox form
  * @author AnnieTang
  */ 
-public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuthoringRule{
+public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuthoringBehavior{
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
 	private String value;
@@ -41,10 +40,20 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 			createTriggerOrAction();
 		});
 	}
+	
 	/**
 	 * Create ITrigger or IAction depending on type of behavior
 	 */
-	abstract void createTriggerOrAction();
+	protected abstract void createTriggerOrAction();
+	/**
+	 * Add ITrigger or IAction to actor IRule
+	 */
+	public abstract void setTriggerOrAction();
+	/**
+	 * Return if this behavior is a trigger
+	 */
+	public abstract boolean isTrigger();
+	
 	/**
 	 * Return list of elements in ComboBox
 	 */
@@ -93,13 +102,11 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 	@Override
 	protected abstract void updateValueBasedOnEditable();
 	
-	@Override
-	public void addTrigger(IAuthoringRule key, ITrigger value){
-		myActorRule.addTrigger(key, value);
+	protected void setTrigger(IAuthoringBehavior key, ITrigger value){
+		myActorRule.setTrigger(key, value);
 	}
 	
-	@Override
-	public void addAction(IAuthoringRule key, IAction value){
-		myActorRule.addAction(key, value);
+	protected void setAction(IAuthoringBehavior key, IAction value){
+		myActorRule.setAction(key, value);
 	}
 }

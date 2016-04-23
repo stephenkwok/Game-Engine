@@ -1,6 +1,7 @@
 package gameplayer.view;
 
 import java.util.Observable;
+import java.util.ResourceBundle;
 import java.util.Arrays;
 import gameengine.controller.Level;
 import gameengine.model.IActor;
@@ -39,6 +40,9 @@ public class GameScreen extends Observable implements IGameScreen {
 	private Camera myCamera;
 	private double myEndHorizontal;
 	private double myEndVertical;
+
+	private ResourceBundle myResources;
+	private static final String GAME_RESOURCE = "gameActions";
 	
 	public GameScreen(Camera camera){
 		setMySubgroup(new Group());
@@ -49,6 +53,7 @@ public class GameScreen extends Observable implements IGameScreen {
 		getMySubscene().setOnMouseClicked(e -> handleScreenEvent(e));
 		this.myCamera = camera; ///
 		mySubscene.setCamera(camera);
+		this.myResources = ResourceBundle.getBundle(GAME_RESOURCE);
 	}
 	
 	
@@ -77,7 +82,7 @@ public class GameScreen extends Observable implements IGameScreen {
 		ImageView imageView = new ImageView(image);
 		level.setMyImageView(imageView);
 		
-		
+				
 		ImageView imageView2 = new ImageView(image);
 		imageView2.setX(imageView.getImage().getWidth());
 		
@@ -198,7 +203,7 @@ public class GameScreen extends Observable implements IGameScreen {
 	}
 	
 	public void terminateGame(){
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Game over!  Do you want to save your score?", ButtonType.YES, ButtonType.NO);
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, myResources.getString("EndMessage"), ButtonType.YES, ButtonType.NO);
 		alert.show();
 		alert.showingProperty().addListener((observable, oldValue, newValue) -> {
 			if (!newValue) {
@@ -212,18 +217,16 @@ public class GameScreen extends Observable implements IGameScreen {
 	}
 	
 	public void saveScorePrompt() {
-		TextInputDialog dialog = new TextInputDialog("Name");
-		dialog.setContentText("Please enter your name if you want to save your score");
+		TextInputDialog dialog = new TextInputDialog(myResources.getString("Name"));
+		dialog.setContentText(myResources.getString("SaveMessage"));
 		dialog.show();
 		dialog.setResultConverter(new Callback<ButtonType, String>() {
 			@Override
 			public String call(ButtonType b) {
 				if (b == ButtonType.OK) {
 					setChanged();
-					Object[] args = {"saveGameScore", dialog.getEditor().getText()};
+					Object[] args = {myResources.getString("SaveScore"), dialog.getEditor().getText()};
 					notifyObservers(Arrays.asList(args));
-					//notifyObservers();
-					//saveGameScore(dialog.getEditor().getText());
 					return dialog.getEditor().getText();
 				}
 				else {
@@ -231,14 +234,6 @@ public class GameScreen extends Observable implements IGameScreen {
 				}
 			}
 		});
-		//return null;
 	}
-
-//	private void saveGameScore(String name) {
-//		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
-//		c.saveHighScore(getGame().getScore(), name);
-//
-//	} 
-	
 
 }

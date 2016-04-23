@@ -109,5 +109,8 @@ public interface IPlayActor {
 	public double getHeading();
 
     public int getID();
-    
+
+    public void setDirection();
+
+    public void nextImage();
 }

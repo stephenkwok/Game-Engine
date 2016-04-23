@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
+import authoringenvironment.model.IEditingEnvironment;
 import gui.view.EditingElementParent;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
@@ -29,7 +30,6 @@ public class TabAttributes extends TabParent {
 	private VBox myContent;
 	private IEditableGameElement myEditableElement;
 	private List<IEditingElement> myEditingElements;
-	private Controller myController;
 	
 	/**
 	 * Constructor for an attributes tab.
@@ -48,10 +48,9 @@ public class TabAttributes extends TabParent {
 		addElements();
 	}
 	
-	public void setController(Controller control) {
-		myController = control;
+	public void setObserver(IEditingEnvironment observer) {
 		for (int i = 0; i < myEditingElements.size(); i++) {
-			((EditingElementParent) myEditingElements.get(i)).addObserver(control);
+			((EditingElementParent) myEditingElements.get(i)).addObserver(observer);
 		}
 	}
 

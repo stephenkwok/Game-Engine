@@ -1,27 +1,20 @@
 package authoringenvironment.view;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Level;
-import gameengine.model.Actor;
-import gameengine.model.IPlayActor;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
@@ -29,10 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /**
@@ -40,39 +30,30 @@ import javafx.stage.Stage;
  * @author amyzhao
  *
  */
-public class LevelEditingEnvironment implements IEditingEnvironment {
+public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final String GUI_RESOURCE = "authoringGUI";
-	private static final String VERTICAL = "Vertically";
-	private static final String HORIZONTAL = "Horizontally";
 	private BorderPane myRoot;
 	private GUILevelInspector myInspector;
 	private ResourceBundle myResources;
 	private VBox myLeftPane;
-	private Canvas myCanvas;
 	private Level myLevel;
 	private Map<IAuthoringActor, List<IAuthoringActor>> availableActors;
-	private Pane myLevelPane;
-	private StackPane myStackPane;	// try setting stackpane to scrollpane's content, then adding imageview for background to stackpane and level on top
-	private ScrollPane myCenterPane;
-	private ImageView myLevelBackground;
-	private List<ImageviewActorIcon> myActorPreviews;
+	private Pane myCenterPane;
 	private Stage myStage;
-	private static final double SUBSCENE_HEIGHT = 525; // 700 * 3/4
-	private static final double SUBSCENE_WIDTH = 1000;
-	private Rectangle myBoundary;
-
+	private Controller myController;
+	private LevelPreview myLevelPreview;
+ 
 	/**
 	 * Constructor for a level editing environment.
 	 * @param controller: authoring environment controller.
 	 * @param actors: list of currently available actors.
 	 */
-	public LevelEditingEnvironment(Map<IAuthoringActor, List<IAuthoringActor>> actors, Stage stage) {
+	public LevelEditingEnvironment(Map<IAuthoringActor, List<IAuthoringActor>> actors, Stage stage, Controller controller) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
-		myActorPreviews = new ArrayList<>();
-		myCenterPane = new ScrollPane();
 		myStage = stage;
+		myController = controller;
 		initializeEnvironment();
 	}
 
@@ -112,6 +93,17 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 		for (int i = 0; i < icons.size(); i++) {
 			ImageviewActorIcon source = icons.get(i);
 			setDragDetected(source);
+			source.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			    @Override
+			    public void handle(MouseEvent mouseEvent) {
+			        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+			            if(mouseEvent.getClickCount() == 2){
+			                System.out.println("Double clicked");
+			                myController.goToEditingEnvironment(source.getRefActor(), myController.getActorEditingEnvironment());
+			            }
+			        }
+			    }
+			});
 		}
 	}
 
@@ -135,9 +127,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 * When dragged over the center pane, copy the gesture source.
 	 */
 	private void setCenterPaneDragOver() {
-		myLevelPane.setOnDragOver(new EventHandler <DragEvent>() {
+		myLevelPreview.getLevelPane().setOnDragOver(new EventHandler <DragEvent>() {
 			public void handle(DragEvent event) {
-			if (event.getGestureSource() != myLevelPane &&
+			if (event.getGestureSource() != myLevelPreview.getLevelPane() &&
 						event.getDragboard().hasString()) {
 					event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
 				}
@@ -151,7 +143,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 * in response to mouse drags.
 	 */
 	private void setCenterPaneDragDropped() {
-		myLevelPane.setOnDragDropped(new EventHandler <DragEvent>() {
+		myLevelPreview.getLevelPane().setOnDragDropped(new EventHandler <DragEvent>() {
 			public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
 				boolean success = false;
@@ -162,25 +154,13 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 					val.add(actor);
 					availableActors.put(icon.getRefActor(), val);
 					myLevel.addActor(actor);
-					addActorToScene(actor);
+					myLevelPreview.addActorToScene(actor);
 					success = true;
 				}
 				event.setDropCompleted(success);
 				event.consume();
 			}
 		});
-	}
-	
-	/**
-	 * Move an actor by changing its (x, y)-coordinates and visualize by moving its imageview.
-	 * @param actor: actor to move.
-	 * @param actorIV: Imageview of actor to move.
-	 * @param event: drag.
-	 */
-	private void moveActor(ImageviewActorIcon icon, MouseEvent event) {
-		icon.updateIconActorPosition(event.getX(), event.getY());
-		icon.setX(event.getX());
-		icon.setY(event.getY());
 	}
 	
 	/**
@@ -202,20 +182,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 * Initialize the center pane.
 	 */
 	private void initializeCenter() {
-		myLevelPane = new Pane();
-		myStackPane = new StackPane();
-		myStackPane.setAlignment(Pos.CENTER);
-		myBoundary = new Rectangle(SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
-		myBoundary.setFill(Color.TRANSPARENT);
-		myBoundary.setStroke(Color.BLACK);
-		myCenterPane.setContent(myStackPane);
-		myStackPane.getChildren().addAll(myLevelPane, myBoundary);
-		myCenterPane.setStyle("-fx-background-color: lightgray");
+		myLevelPreview = new LevelPreview(this);
+		myCenterPane = myLevelPreview.getPane();
 		myRoot.setCenter(myCenterPane);
-		myCenterPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-		myCenterPane.setHbarPolicy(ScrollBarPolicy.ALWAYS);
-		myCenterPane.setFitToHeight(true);
-		myCenterPane.setFitToWidth(true);
 	}
 
 	/**
@@ -231,97 +200,22 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	 */
 	@Override
 	public void setEditableElement(IEditableGameElement editable) {
-		myLevelPane.getChildren().clear();
-		myStackPane.getChildren().clear();
 		myLevel = (Level) editable;
+		myLevelPreview.updateLevelPreview(myLevel);
 		updateActorsList();
-		updateLevel();
 		myInspector.getAttributesTab().updateEditable(myLevel);
 	}
 	
-	/**
-	 * Updates the level that's being displayed.
-	 * @param updatedLevel: new level.
-	 */
-	private void updateLevel() {
-		myLevelPane.getChildren().removeAll(myActorPreviews);
-		myLevelPane.getChildren().add(myBoundary);
-		updateLevelBackground();
-		addLevelActorsToScene();
-	}
-	
-	/**
-	 * Updates the preview to show the level's background.
-	 */
-	private void updateLevelBackground() {
-		myLevelBackground = myLevel.getImageView();
-		resizeBackgroundBasedOnScrolling();
-		myStackPane.getChildren().addAll(myLevelBackground, myLevelPane);
-	}
-	
 	public void changeBackgroundImage(Image image, File imageFile) {
-		myStackPane.getChildren().clear();
-		myLevel.setImageView(new ImageView(image));
-		myLevel.setMyBackgroundImgName(imageFile.getPath());
-		updateLevelBackground();
+		myLevelPreview.changeBackgroundImage(image, imageFile);
 	}
-	
-	private void resizeBackgroundBasedOnScrolling() {
-		if (myLevel.getMyScrollingDirection().equals(VERTICAL)) {
-			myLevelBackground.setFitWidth(SUBSCENE_WIDTH);
-		} else {
-			myLevelBackground.setFitHeight(SUBSCENE_HEIGHT);
-		}
-		myLevelBackground.setPreserveRatio(true);
-	}
-	/**
-	 * Add a level's actors to the preview in the center pane.
-	 */
-	private void addLevelActorsToScene() {
-		myActorPreviews.clear();
-		for (IPlayActor actor: myLevel.getActors()) {
-			ImageviewActorIcon icon = addActorToScene((IAuthoringActor) actor);
-			icon.setX(actor.getX());
-			icon.setY(actor.getY());
-		}
-	}
-	
-	private ImageviewActorIcon addActorToScene(IAuthoringActor actor) {
-		ImageviewActorIcon icon = new ImageviewActorIcon(actor, actor.getImageView().getFitHeight());
-		setIconBehavior(icon);
-		icon.setOnLevel(true);
-		myActorPreviews.add(icon);
-		myLevelPane.getChildren().add(icon);
-		return icon;
-	}
-	
-	private void setIconBehavior(ImageviewActorIcon icon) {
-		icon.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent event) {
-				moveActor(icon, event);
-				event.consume();
-			}
-		}); 
-		
-		ContextMenuActorInLevel contextMenu = new ContextMenuActorInLevel(this);
-		icon.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
-	        @Override
-	        public void handle(ContextMenuEvent t) {
-	        	contextMenu.setIcon(icon);
-				contextMenu.show(icon, t.getSceneX(), t.getScreenY());
-				System.out.println("pressed");
-	        }
-	    });
-	}
+
 	/**
 	 * Update the list of available actors and update the level inspector to reflect the currently available actors.
 	 * @param updatedActorsList: up-to-date list of available actors.
 	 */
 	public void updateActorsList() {
 		myInspector.getActorsTab().setAvailableActors(availableActors.keySet());
-		for (ImageviewActorIcon icon: myActorPreviews) {
-			icon.updateImageView();
-		}
 		updateDrag();
 	}
 
@@ -333,10 +227,18 @@ public class LevelEditingEnvironment implements IEditingEnvironment {
 	public Stage getStage() {
 		return myStage;
 	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if (arg == null) {
+			myLevelPreview.resizeBackgroundBasedOnScrolling();
+		} else {
+			myController.updateRefActorSize((IAuthoringActor) arg);
+			myLevelPreview.addLevelActorsToScene();
+		}
+	}
 	
-	public void removeActorFromLevel(ImageviewActorIcon icon) {
-		myActorPreviews.remove(icon);
-		myLevelPane.getChildren().remove(icon);
-		myLevel.removeActor((Actor) icon.getRefActor()); 
+	public Controller getController() {
+		return myController;
 	}
 }
