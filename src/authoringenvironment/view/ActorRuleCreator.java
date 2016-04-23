@@ -30,6 +30,8 @@ public class ActorRuleCreator {
 	private List<ActorRule> myActorRules;
 	private ActorEditingEnvironment aEE;
 	private ResourceBundle myActionResources;
+	private static final String BEFORE_TRIGGER = "gameengine.model.Triggers.";
+	private static final String AFTER_TRIGGER = "Trigger@";
 	
 	public ActorRuleCreator(ActorEditingEnvironment aEE) {
 		this.aEE = aEE;
@@ -150,8 +152,13 @@ public class ActorRuleCreator {
 
 	public void setRules() {
 		for(ActorRule actorRule: myActorRules){
-//			actorRule.setTriggersAndActions(true); 
 			actorRule.setRules();
 		}
 	}
+	
+//	private String stripTriggerName(String triggerName){
+//		String[] split1 = triggerName.split(BEFORE_TRIGGER);
+//		String[] split2 = split1[split1.length-1].split(AFTER_TRIGGER);
+//		return split2[0];
+//	}
 }
