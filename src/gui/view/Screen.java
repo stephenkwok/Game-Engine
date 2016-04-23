@@ -71,6 +71,7 @@ public abstract class Screen extends Observable implements IScreen {
 
 	public void showError(String message) {
 		  Alert alert = new Alert(Alert.AlertType.ERROR);
+		  if(message == null) message = "Hmm, something went wrong! ¯\\_(ツ)_/¯";
 	      alert.setContentText(message);
 	      alert.showAndWait();
 	}
