@@ -11,7 +11,7 @@ import gui.view.IGUIElement;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 
-public abstract class LabelBehavior implements IGUIElement, IAuthoringRule{
+public abstract class LabelBehavior implements IGUIElement, IAuthoringBehavior{
 	private String behaviorType;
 	private TriggerFactory triggerFactory;
 	private ActionFactory actionFactory;
@@ -30,6 +30,20 @@ public abstract class LabelBehavior implements IGUIElement, IAuthoringRule{
 		return new Label(behaviorType);
 	}
 	
+	/**
+	 * Create ITrigger or IAction depending on type of behavior
+	 */
+	protected abstract void createTriggerOrAction();
+	/**
+	 * Add ITrigger or IAction to actor IRule
+	 */
+	public abstract void setTriggerOrAction();
+	/**
+	 * Return if this behavior is a trigger
+	 */
+	public abstract boolean isTrigger();
+	
+	
 	protected String getBehaviorType(){
 		return this.behaviorType;
 	}
@@ -41,17 +55,12 @@ public abstract class LabelBehavior implements IGUIElement, IAuthoringRule{
 	protected ActionFactory getActionFactory(){
 		return this.actionFactory;
 	}
-	
-	abstract void createTriggerOrAction();
 
-	@Override
-	public void addTrigger(IAuthoringRule key, ITrigger value){
+	public void addTrigger(IAuthoringBehavior key, ITrigger value){
 		myActorRule.addTrigger(key, value);
 	}
 	
-	@Override
-	public void addAction(IAuthoringRule key, IAction value){
-		System.out.println(key);
+	public void addAction(IAuthoringBehavior key, IAction value){
 		myActorRule.addAction(key, value);
 	}
 }

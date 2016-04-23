@@ -1,5 +1,7 @@
 package authoringenvironment.view;
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
@@ -7,7 +9,11 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.model.Actor;
+import gui.view.ButtonFileChooserActorImage;
 import gui.view.GUILibrary;
+import gui.view.TextFieldActorFrictionEditor;
+import gui.view.TextFieldActorNameEditor;
+import gui.view.TextFieldActorSizeEditor;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -31,7 +37,7 @@ import javafx.stage.Stage;
  * @author AnnieTang
  *
  */
-public class ActorEditingEnvironment implements IEditingEnvironment {
+public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final Color DEFAULT_COLOR = Color.CORNFLOWERBLUE;
 	private static final int ICON_HEIGHT = 75;
 	private static final String NEW_RULE_LABEL = "New Rule";
@@ -40,6 +46,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private static final int BUTTON_HEIGHT = 30;
 	private static final int BUTTON_WIDTH = 100;
 	private static final int LEFT_PANE_WIDTH = 350;
+	private static final String SET_RULE_LABEL = "Set Rules";
 	private BorderPane myRoot;
 	private GUILibrary library;
 	private TabAttributes attributes;
@@ -94,6 +101,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private void setLeftPane() {
 		VBox vbox = new VBox();
 		attributes = new TabAttributes(myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
+		attributes.setObserver(this);
 		TabPane attributeTP = new TabPane();
 		attributeTP.getTabs().add(attributes.getTab());
 		attributeTP.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
@@ -119,7 +127,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	private void setBottomPane() {
 		HBox hbox = new HBox();
 		hbox.setBackground(new Background(new BackgroundFill(DEFAULT_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
-		hbox.getChildren().add(getNewRuleButton());
+		hbox.getChildren().addAll(newRuleButton(), setRuleButton());
 		hbox.setAlignment(Pos.CENTER_RIGHT);
 		myRoot.setBottom(hbox);
 	}
@@ -127,13 +135,22 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	 * Returns button to allow users to create a new rule
 	 * @return
 	 */
-	private Button getNewRuleButton() {
+	private Button newRuleButton() {
 		Button toReturn = new Button(NEW_RULE_LABEL);
 		toReturn.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		toReturn.setOnAction(event -> {
 			myActorRuleCreator.addNewRule(); //
 			setCenterPane();
 			library.updateDragEvents();
+		});
+		return toReturn;
+	}
+	
+	private Button setRuleButton(){
+		Button toReturn = new Button(SET_RULE_LABEL);
+		toReturn.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		toReturn.setOnAction(event -> {
+			myActorRuleCreator.setRules();
 		});
 		return toReturn;
 	}
@@ -174,5 +191,9 @@ public class ActorEditingEnvironment implements IEditingEnvironment {
 	}
 	public Controller getController() {
 		return this.myController;
+	}
+	@Override
+	public void update(Observable o, Object arg) {
+		myController.updateActors((IAuthoringActor) arg);
 	}
 }

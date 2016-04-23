@@ -28,7 +28,11 @@
       <string>gamefiles/loaders/test2_loader.xml</string>
       <tree-map>
         <entry>
-          <string>Name</string>
+          <string>Carine</string>
+          <int>0</int>
+        </entry>
+        <entry>
+          <string>Michael</string>
           <int>0</int>
         </entry>
         <entry>

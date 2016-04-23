@@ -55,6 +55,7 @@ public class GUILevelInspector implements IGUI {
 	private void addChildrenToLevelInspector(ResourceBundle myResources, Set<IAuthoringActor> availActors) {
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
 		myAttributesTab = new TabAttributes(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, myLevelEditor.getLevel());
+		myAttributesTab.setObserver(myLevelEditor);
 		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(BUTTON_LABEL, null, myLevelEditor, myLevelEditor.getStage());
 		addTabToContainer(myAttributesTab, false);
 		myContainer.getChildren().add(button.createNode());

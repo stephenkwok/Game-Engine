@@ -104,4 +104,6 @@ public interface IAuthoringActor extends IEditableGameElement{
 
     void addAttribute(Attribute newAttribute);
 
+    void addSpriteImage(String newImage);
+
 }
