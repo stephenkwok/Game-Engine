@@ -163,8 +163,6 @@ public class ActorRule {
 			catch(Exception e){authoringBehaviorMap.remove(toRemove);}
 		}
 	}
-	//myActions.add(value);
-//	authoringBehaviorMap.get(key).add(value);
 	
 	private void removeTrigger(IAuthoringBehavior toRemove){
 		//remove rules corresponding to this trigger key from actor
