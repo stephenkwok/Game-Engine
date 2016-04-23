@@ -111,4 +111,6 @@ public interface IPlayActor {
     public int getID();
 
     public void setDirection();
+
+    public void nextImage();
 }

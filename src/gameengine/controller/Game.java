@@ -56,7 +56,7 @@ public class Game extends Observable implements Observer {
 		setDeadActors(new ArrayList<IPlayActor>());
         myPhysicsEngine = new PhysicsEngine();
         myCollisionDetector = new CollisionDetection(myPhysicsEngine);
-        
+        count = 1;
 		initTimeline();
 	}
 
