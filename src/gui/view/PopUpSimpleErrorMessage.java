@@ -1,11 +1,10 @@
 package gui.view;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 
 /**
- * This class generates a simple error notficaiton in the form of a pop up
+ * This class generates a simple error notification in the form of a pop up
  * 
  * @author Stephen
  *

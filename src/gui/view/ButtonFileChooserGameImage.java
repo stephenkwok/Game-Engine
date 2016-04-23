@@ -6,7 +6,7 @@ import authoringenvironment.model.IEditingElement;
 import authoringenvironment.view.GameEditingEnvironment;
 import gameengine.controller.GameInfo;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
 import javafx.stage.Stage;
 
 /**
@@ -40,7 +40,7 @@ public class ButtonFileChooserGameImage extends ButtonFileChooser {
 		GameInfo myGameInfo = ((GameEditingEnvironment) editor).getGameInfo();
 		String imageName = imageFile.getPath();
 		myGameInfo.setImageView(new ImageView(image));
-		myGameInfo.setMyImageName(imageName); // confirm whether this is correct
+		myGameInfo.setMyImageName(imageName);
 		setImageName(imageName);
 		setButtonIcon();
 	}

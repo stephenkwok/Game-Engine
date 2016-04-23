@@ -71,10 +71,18 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
     	return button;
     }
     
+    /**
+     * Sets the button's image's name
+     * @param newImageName: name of button's new image
+     */
     protected void setImageName(String newImageName) {
     	imageName = newImageName;
     }
     
+    /**
+     * Sets the button's icon size
+     * @param size: size to set button's icon to
+     */
     protected void setIconSize(int size) {
     	iconSize = size;
     }

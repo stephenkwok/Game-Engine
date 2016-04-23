@@ -20,7 +20,7 @@ public class GameInfo implements IEditableGameElement {
 	private String myDescription;
 	private int myCurrentLevelNum;
 	private ImageView myPreviewImage;
-	private Map<String,Integer> myHUDElementsToDisplay;
+	private List<String> myHUDElementsToDisplay;
 	private String myFile;
 	private boolean isDestinationGame;
 
@@ -31,7 +31,7 @@ public class GameInfo implements IEditableGameElement {
 		this.setMyCurrentLevelNum(currentLevelNum);
 		this.setImageView(new ImageView(DEFAULT_IMAGE_NAME));
 		this.setIsDestinationGame(true);
-		this.myHUDElementsToDisplay = new HashMap<String, Integer>();
+		this.myHUDElementsToDisplay = new ArrayList<String>();
 		this.myFile = file;
 	}
 	
@@ -64,7 +64,7 @@ public class GameInfo implements IEditableGameElement {
 	 * Specifies the types of game information to be displayed in the HUD 
 	 * @param options
 	 */
-	public void setMyHUDOptions(Map<String, Integer> options) {
+	public void setMyHUDOptions(List<String> options) {
 		myHUDElementsToDisplay = options;
 	}
 	
@@ -73,7 +73,7 @@ public class GameInfo implements IEditableGameElement {
 	 * @return a list of strings representing the types of information displayed in the HUD
 	 */
 	public List<String> getMyHUDOptions() {
-		return new ArrayList<>(myHUDElementsToDisplay.keySet());
+		return myHUDElementsToDisplay;
 	}
 	
 	/**

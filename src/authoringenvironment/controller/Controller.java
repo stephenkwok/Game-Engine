@@ -79,6 +79,9 @@ public class Controller extends BranchScreenController implements Observer {
 		myLevels = game.getLevels();
 		gameInfo = game.getInfo();
 		init();
+		myLevels.stream().forEach(level -> mainScreen.createLevelPreviewUnit(level, levelEnvironment));
+		// for each actor, create preview unit
+		mainScreen.updatePreviewUnits();
 	}
 
 	public void init() {
