@@ -1,4 +1,4 @@
-package Utilities.HUD;
+package utilities.hud;
 
 import java.util.Collection;
 import java.util.Observable;
@@ -6,12 +6,12 @@ import java.util.Observer;
 
 public class HUDController implements Observer{
 	
-	HUDModel model;
+	IHUDModel model;
 	HUDScreen view;
 	
 	public void grabData(Collection<String> fieldsToObserve) {
 		setModel(new HUDModel());
-		IValueFinder valueFinder = new ValueFinder();
+		IValueFinder valueFinder = new ValueFinder(this);
 		for (String field : fieldsToObserve) {
 			model.getData().put(field, valueFinder.find(field));
 		}
