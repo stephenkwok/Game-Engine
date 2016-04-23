@@ -1,6 +1,7 @@
 package gameengine.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.Set;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import authoringenvironment.model.*;
 import authoringenvironment.view.ActorRule;
-import gameengine.model.Actions.Action;
+import gameengine.model.Triggers.AttributeReached;
+import gameengine.model.Triggers.ITrigger;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,7 +29,7 @@ import javafx.scene.image.ImageView;
  * @author blakekaplan
  */
 
-public class Actor extends Observable implements Observer, IPlayActor, IDisplayActor, IAuthoringActor {
+public class Actor extends Observable implements Observer, IPlayActor, IDisplayActor, IAuthoringActor, IAttributable {
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "hellokitty.gif";
@@ -42,7 +44,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	private double myHeading;
     @XStreamOmitField
     private ImageView myImageView;
-    private Map<String, List<Rule>> myRules;
+    private RuleManager myRuleManager;
     private Map<AttributeType, Attribute> attributeMap;
     private PhysicsEngine myPhysicsEngine;
     private List<ActorRule> myActorRules;
@@ -52,7 +54,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      * Converts a list of Rules to a map of trigger to list of Actions
      */
     public Actor() {
-    	myRules =  new HashMap<>();
+    	myRuleManager = new RuleManager();
         attributeMap = new HashMap<>();
         myActorRules = new ArrayList<>();
         myStates = new HashSet<>();
@@ -71,12 +73,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      * @param myTrigger The trigger to be used
      */
     public void performActionsFor(ITrigger myTrigger) {
-    	if(getRules().containsKey(myTrigger.getMyKey())){
-            List<Rule> myBehaviors = myRules.get(myTrigger.getMyKey());
-            for (Rule myRule : myBehaviors) {
-                if (myRule.getMyTrigger().evaluate(myTrigger)) myRule.getMyAction().perform();
-            }
-    	}
+    	myRuleManager.handleTrigger(myTrigger);
     }
 
     /**
@@ -94,7 +91,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      *
      * @param type The new Actor Attribute Type
      */
-
+    @Override
     public Attribute getAttribute(AttributeType type){
     	return getAttributeMap().get(type);
     }
@@ -120,15 +117,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      */
     @Override
     public void addRule(Rule newRule) {
-        if (myRules.containsKey(newRule.getMyTrigger().getMyKey())) {
-            List<Rule> myBehaviors = myRules.get(newRule.getMyTrigger().getMyKey());
-            myBehaviors.add(newRule);
-            myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
-        } else {
-            List<Rule> myBehaviors = new ArrayList<>();
-            myBehaviors.add(newRule);
-            myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
-        }
+        myRuleManager.addRule(newRule);
     }
 
     /**
@@ -320,15 +309,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      * @return  The Actor's Rules
      */
     public Map<String, List<Rule>> getRules() {
-		return myRules;
-	}
-
-    /**
-     * Sets the Actor's Rules
-     * @param myRules   A new set of Actor rules
-     */
-    public void setMyRules(Map<String, List<Rule>> myRules) {
-		this.myRules = myRules;
+		return myRuleManager.getRules();
 	}
 
     /**
@@ -393,10 +374,10 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 			setChanged();
 			notifyObservers(arg);
 		}
-		if(checkState(ActorState.MAIN)){
-			setChanged();
-			notifyObservers("updateAttribute");
-		}
+//		if(checkState(ActorState.MAIN)){
+//			setChanged();
+//			notifyObservers("updateAttribute");
+//		}
 	}
 	
 		public double getSize() {
@@ -422,4 +403,10 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     public int getID() {
         return myID;
     }
+
+	@Override
+	public void handleReachedAttribute(AttributeReached trigger) {
+		setChanged();
+		notifyObservers(Arrays.asList(new Object[]{"handleTrigger",trigger}));
+	}
 }

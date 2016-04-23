@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import gameengine.model.IAction;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 
 public class TickBehavior extends DoubleBehavior {
 	private ITrigger myTrigger;

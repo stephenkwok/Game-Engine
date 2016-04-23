@@ -7,7 +7,7 @@ import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.view.ActionFactory;
 import authoringenvironment.view.TriggerFactory;
 import gameengine.model.IAction;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 import gui.view.EditingElementParent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

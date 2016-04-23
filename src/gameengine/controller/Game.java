@@ -4,13 +4,15 @@ import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import gameengine.model.Triggers.AttributeReached;
+import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.*;
-import gameengine.model.Triggers.TickTrigger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
+import javafx.collections.MapChangeListener.Change;
 import javafx.collections.ObservableMap;
 import javafx.util.Duration;
 
@@ -53,7 +55,7 @@ public class Game extends Observable implements Observer {
 		levels = gameLevels;
 		info = gameInfo;
 		currentActors = new ArrayList<IPlayActor>();
-		setDeadActors(new ArrayList<IPlayActor>());
+		deadActors = new ArrayList<IPlayActor>();
         myPhysicsEngine = new PhysicsEngine();
         myCollisionDetector = new CollisionDetection(myPhysicsEngine);
         
@@ -87,6 +89,7 @@ public class Game extends Observable implements Observer {
      */
 
 	public void startGame(){
+		initCurrentLevel();
 		initCurrentActors();
 		//This is here because it needs to know who the main actor is
 		initHUDData();
@@ -94,7 +97,10 @@ public class Game extends Observable implements Observer {
 		animation.play();
 	}
 
-
+	private void initCurrentLevel(){
+		getCurrentLevel().addObserver(this);
+	}
+	
     /**
      * Initializes the current actors
      */
@@ -288,11 +294,6 @@ public class Game extends Observable implements Observer {
 		return deadActors;
 	}
 
-
-	public void setDeadActors(List<IPlayActor> deadActors) {
-		this.deadActors = deadActors;
-	}
-
 	public void addActor(Actor newActor) {
 		currentActors.add(newActor);
 	}
@@ -404,8 +405,6 @@ public class Game extends Observable implements Observer {
 	public void updateAttribute() {
 		updateHUDFields(HUDData.keySet(), HUDData);
 	}
-
-
 	
 	public int getScore() {
 		//return getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();

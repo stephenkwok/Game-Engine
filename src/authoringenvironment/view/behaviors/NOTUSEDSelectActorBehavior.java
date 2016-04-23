@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IAction;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 
 public class NOTUSEDSelectActorBehavior extends IEditableGameElementBehavior{
 	private IAction myAction;

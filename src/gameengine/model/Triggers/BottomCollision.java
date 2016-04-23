@@ -1,7 +1,6 @@
 package gameengine.model.Triggers;
 
 import gameengine.model.IPlayActor;
-import gameengine.model.ITrigger;
 
 public class BottomCollision extends CollisionTrigger {
 

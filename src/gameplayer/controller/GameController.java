@@ -18,7 +18,7 @@ import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IDisplayActor;
 import gameengine.model.IPlayActor;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
 import gui.view.IGUIElement;
@@ -130,6 +130,10 @@ public class GameController implements Observer, IGameController {
 	public void cleanUp (){
 
 	}
+	
+	public void handleTrigger(ITrigger trigger){
+		model.handleTrigger(trigger);
+	}
 
 	/**
 	 * Will stop the animation timeline.
@@ -216,52 +220,18 @@ public class GameController implements Observer, IGameController {
 				this.getClass().getDeclaredMethod(methodName).invoke(this);
 			}
 			else {
-			myClass = Class.forName(myResources.getString(methodName));
-			arg2 = myClass.cast(myList.get(1));
+				myClass = Class.forName(myResources.getString(methodName));
+				arg2 = myClass.cast(myList.get(1));
+				
+				Class[] parameterTypes = {myClass};
+				Object[] parameters = {arg2};
+				this.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(this, parameters);
 			}
 			} catch (IllegalArgumentException
 					 | SecurityException |ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 		}
-		if(o.equals(view)){
-			try {
-//				for(Method item : this.getClass().getMethods()){
-//					System.out.println(item);
-//				}
-//				System.out.println(methodName + " is the methodName");
-				//this.getClass().getMethod(methodName).invoke(model, arg2);
-			
-		
-					Class[] parameterTypes = {myClass};
-					Object[] parameters = {arg2};
-					
-					model.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(model, parameters);
-				
-			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
-					| NoSuchMethodException | SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-//		List<Object> myList = (List<Object>) arg;
-//		String methodName = (String) myList.get(0);
-//		Actor myActor = (Actor) myList.get(1);
-		
-		if(o.equals(model)){
-			
-			try{
-				if (arg instanceof ArrayList<?>) {
-					this.getClass().getDeclaredMethod(methodName).invoke(this, arg2);
-				}
-//				if (arg instanceof ArrayList<?>) {
-//					this.getClass().getDeclaredMethod(methodName).invoke(this, myActor);
-//				}
-				this.getClass().getDeclaredMethod(((String)arg)).invoke(this);
-			}
-			catch (Exception e){
-				//hud.handleChange((Change)arg);
-			}
-		}}
 	}
 
 	public void addActor(Actor a) {

@@ -2,6 +2,7 @@ package authoringenvironment.model;
 
 import authoringenvironment.view.ActorRule;
 import gameengine.model.ActorState;
+import gameengine.model.Attribute;
 import gameengine.model.IRule;
 import gameengine.model.Rule;
 import javafx.scene.image.ImageView;
@@ -100,5 +101,6 @@ public interface IAuthoringActor extends IEditableGameElement{
 	double getSize();
 
 	void setID(int ID);
+	void addAttribute(Attribute points);
 
 }

@@ -21,7 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import gameengine.controller.Level;
 import gameengine.model.IAction;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 
 /**
  * Rule container for an actor containing behavior, images, and/or sounds.

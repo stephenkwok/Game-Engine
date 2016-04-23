@@ -8,7 +8,8 @@ public class TextFieldActorPointsEditor extends TextFieldWithButton {
 	private static final double DEFAULT_POINTS = 0;
 	public TextFieldActorPointsEditor(String labelText, String promptText, Double textFieldWidth) {
 		super(labelText, promptText, textFieldWidth);
-		setButtonAction(e -> ((Actor) getEditableElement()).addAttribute(new Attribute(AttributeType.POINTS, Integer.parseInt(getTextFieldInput()))));
+		Actor a = (Actor) getEditableElement();
+		setButtonAction(e -> a.addAttribute(new Attribute(AttributeType.POINTS, Integer.parseInt(getTextFieldInput()),a)));
 	}
 	/**
 	 * Sets the textfield's value to reflect the current actor's points.

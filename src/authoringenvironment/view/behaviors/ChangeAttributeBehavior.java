@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.AttributeType;
 import gameengine.model.IAction;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 
 public class ChangeAttributeBehavior extends DoubleBehavior {
 	private static final String CHANGE_HEALTH = "ChangeHealth";

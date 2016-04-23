@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import gameengine.model.IAction;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 /**
  * GUI representation of behaviors: ChangeMusic, PlaySound, PlayMusic
  * @author AnnieTang

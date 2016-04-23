@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 import authoringenvironment.view.ActionFactory;
 import authoringenvironment.view.TriggerFactory;
 import gameengine.model.IAction;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 import gui.view.ComboBoxTextCell;
 /**
  * Parent abstract class for GUI representation of behaviors that take in a single parameter in ComboBox form
