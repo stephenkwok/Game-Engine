@@ -37,7 +37,7 @@ abstract class TabLibrary extends TabParent {
 	
 	public TabLibrary(ResourceBundle myResources, String tabText, ActorRuleCreator myActorRuleCreator) {
 		super(myResources, tabText);
-		if(myActorRuleCreator!=null) myActorRules = myActorRuleCreator.getRules();
+		if(myActorRuleCreator!=null) myActorRules = myActorRuleCreator.getActorRules();
 	}
 	/**
 	 * Get content of current Tab
@@ -173,7 +173,7 @@ abstract class TabLibrary extends TabParent {
 	 */
 	public void updateDragEvents(ActorRuleCreator myActorRuleCreator) {
 		this.myActorRuleCreator = myActorRuleCreator;
-		this.myActorRules = myActorRuleCreator.getRules();
+		this.myActorRules = myActorRuleCreator.getActorRules();
 		for(Label behaviorLabel: labels){
 			if(myActorRuleCreator!=null){
 				setDragEvent(behaviorLabel,TransferMode.COPY);

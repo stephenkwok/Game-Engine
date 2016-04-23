@@ -30,8 +30,6 @@ public class ActorRuleCreator {
 	private List<ActorRule> myActorRules;
 	private ActorEditingEnvironment aEE;
 	private ResourceBundle myActionResources;
-	private static final String BEFORE_TRIGGER = "gameengine.model.Triggers.";
-	private static final String AFTER_TRIGGER = "Trigger@";
 	
 	public ActorRuleCreator(ActorEditingEnvironment aEE) {
 		this.aEE = aEE;
@@ -51,7 +49,6 @@ public class ActorRuleCreator {
 		myActorRuleCreatorPane.setHgap(HGAP);
 	}
 	
-
 	/**
 	 * Get GridPane representation of actor rule creator
 	 * @return
@@ -88,7 +85,7 @@ public class ActorRuleCreator {
 	/**
 	 * Create new rule for Actor currently in the actor editing environment and add to gridpane
 	 */
-	public void addNewRule() {  
+	public void addNewActorRule() {  
 		ActorRule newRule = new ActorRule(this);
 		myActorRuleCreatorPane.add(newRule.getGridPane(), RULE_COL,ruleRow);
 		myActorRules.add(newRule);
@@ -99,18 +96,16 @@ public class ActorRuleCreator {
 	 * Remove given rule from environment and from Actor currently in the environment 
 	 * @param actorRule
 	 */
-	public void removeRule(ActorRule actorRule){
+	public void removeActorRule(ActorRule actorRule){
 		myActorRules.remove(actorRule);
 		myActorRuleCreatorPane.getChildren().remove(actorRule.getGridPane());
-		//remove IRule from Actor
 	}
-	
 	
 	/**
 	 * Get ActorRules for Actor currently in the actor editing environment
 	 * @return
 	 */
-	public List<ActorRule> getRules(){
+	public List<ActorRule> getActorRules(){
 		return myActorRules;
 	}
 	/**
@@ -121,6 +116,7 @@ public class ActorRuleCreator {
 		for(ActorRule toRemove: myActorRules) myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
 		myActorRules.clear();
 		ruleRow = RULE_ROW_START;
+		System.out.println(((Actor) aEE.getEditable()).getRules());
 		for(String triggerType: ((Actor) aEE.getEditable()).getRules().keySet()){
 			ActorRule toAdd = new ActorRule(this);
 			toAdd.addBehavior(triggerType);
@@ -155,10 +151,4 @@ public class ActorRuleCreator {
 			actorRule.setRules();
 		}
 	}
-	
-//	private String stripTriggerName(String triggerName){
-//		String[] split1 = triggerName.split(BEFORE_TRIGGER);
-//		String[] split2 = split1[split1.length-1].split(AFTER_TRIGGER);
-//		return split2[0];
-//	}
 }
