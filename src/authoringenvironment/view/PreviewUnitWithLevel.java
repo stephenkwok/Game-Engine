@@ -7,13 +7,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
-public class HBoxWithLevel extends HBoxWithEditable {
+public class PreviewUnitWithLevel extends PreviewUnitWithEditable {
 
 	private static final String TEXT_FIELD_PROMPT_TEXT = "Enter Play Position";
 	private static final Double TEXT_FIELD_WIDTH = 125.0;
 	private TextField myTextField;
 	
-	public HBoxWithLevel(IEditableGameElement editable, IEditingEnvironment environment) {
+	public PreviewUnitWithLevel(IEditableGameElement editable, IEditingEnvironment environment) {
 		super(editable, environment);
 		myTextField = new TextField();
 		myTextField.setPrefWidth(TEXT_FIELD_WIDTH);

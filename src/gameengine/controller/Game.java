@@ -6,7 +6,6 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.*;
-import gameengine.model.Triggers.TickTrigger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;

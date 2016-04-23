@@ -1,14 +1,11 @@
 package gui.view;
 
-import java.io.File;
-import java.util.Observable;
 import java.util.Observer;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 /**
  * Abstract class to implement JavaFX Buttons
  * @author AnnieTang
@@ -20,21 +17,28 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
 	private String buttonText;
 	private Button button;
 	private String imageName;
+	private int iconSize;
 	
 	public ButtonParent(String buttonText, String imageName) {
 		this.buttonText = buttonText;
 		this.imageName = imageName;
+		this.iconSize = ICON_SIZE;
+		initializeButton();
 	}
-	/**
-	 * Creates and returns button
-	 */
-	@Override
-	public Node createNode()  {
+	
+	private void initializeButton() {
 		button = new Button(buttonText);
 		button.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
 		setButtonIcon();
 		setButtonAction();
-		return button; 
+	}
+	/**
+	 *
+	 * Creates and returns button
+	 */
+	@Override
+	public Node createNode()  {
+		return button;
 	}
 	
 	public void addNodeObserver(Observer observer) {
@@ -48,11 +52,11 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
 	/**
 	 * Optional, sets image for button.
 	 */
-	private void setButtonIcon(){
+	protected void setButtonIcon(){
 		if (imageName != null) {
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 			ImageView iv = new ImageView(image);
-			iv.setFitHeight(ICON_SIZE);
+			iv.setFitHeight(iconSize);
 			iv.setPreserveRatio(true);
 			button.setGraphic(iv);
 		}
@@ -67,8 +71,12 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
     	return button;
     }
     
-	protected void notifyController(Object objToPassToObserver) {
-		setChanged();
-		notifyObservers(objToPassToObserver);
-	}
+    protected void setImageName(String newImageName) {
+    	imageName = newImageName;
+    }
+    
+    protected void setIconSize(int size) {
+    	iconSize = size;
+    }
+
 }

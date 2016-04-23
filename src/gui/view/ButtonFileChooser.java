@@ -5,9 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
-import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
-import authoringenvironment.model.IEditingEnvironment;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;

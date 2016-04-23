@@ -1,25 +1,14 @@
 package authoringenvironment.view;
 
-import java.util.List;
-import java.util.Observer;
-import java.util.ResourceBundle;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingElement;
+import java.util.*;
+import authoringenvironment.model.*;
 import gameengine.controller.GameInfo;
-import gui.view.CheckBoxesHUDOptions;
-import gui.view.IGUIElement;
-import gui.view.TextAreaGameDescriptionEditor;
-import gui.view.TextAreaParent;
-import gui.view.TextFieldGameNameEditor;
-import gui.view.TextFieldWithButton;
+import gui.view.*;
 import javafx.geometry.Insets;
+import javafx.scene.layout.*;
+import javafx.scene.control.*;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * This class enables the author to edit and set various attributes of the game
@@ -30,34 +19,44 @@ import javafx.scene.layout.VBox;
  *
  */
 
-public class GameEditingEnvironment implements IGUIElement, IEditingElement {
-	
+public class GameEditingEnvironment implements IEditingElement {
+
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
 	private static final double DEFAULT_PADDING = 10;
 	private static final double CONTAINER_PREFERRED_WIDTH = 350.0;
-	private static final int TEXT_AREA_ROWS = 5;
+	private static final int TEXT_AREA_ROWS = 3;
 	private static final double TEXT_FIELD_WIDTH = 100.0;
 	private static final double TEXT_FIELD_CONTAINER_SPACING = 10.0;
-	private static final double TEXT_FIELD_CONTAINER_PADDING = 10.0;
 	private static final double SCROLLBAR_WIDTH = 30.0;
 	private IEditableGameElement myGameInfo;
+	private Stage myStage;
 	private final ResourceBundle myResources;
 	private Label welcomeMessage;
-	private HBox nameEditorContainer;
-	private VBox editingEnvironmentContainer, gameDescriptionEditor, previewImageContainer, HUDOptionsDisplay;
+	private HBox nameEditorContainer, gameTypeButtonContainer, previewImageContainer;
+	private VBox editingEnvironmentContainer, gameDescriptionEditor, HUDOptionsDisplay;
 	private ScrollPane myScrollPane;
 
-	public GameEditingEnvironment(GameInfo gameInfo) {
+	public GameEditingEnvironment(GameInfo gameInfo, Stage stage) {
 		this.myGameInfo = gameInfo;
+		this.myStage = stage;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
+		initializeEditingEnvironment();
 	}
 
 	/**
-	 * Sets the Game Editing Environment's instance of the GameInfo class
+	 * Initializes the Game Editing Environment
 	 */
-	@Override
-	public void setEditableElement(IEditableGameElement editable) {
-		myGameInfo = editable;
+	private void initializeEditingEnvironment() {
+		initializeContainer();
+		initializeWelcomeMessage();
+		initializeGameNameEditor();
+		initializeGameDescriptionEditor();
+		initializeGameTypeButton();
+		initializePreviewImageDisplay();
+		initializeHUDOptionsDisplay();
+		initializeScrollPane();
+		editingEnvironmentContainer.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor,
+				gameTypeButtonContainer, previewImageContainer, HUDOptionsDisplay);
 	}
 
 	/**
@@ -90,8 +89,9 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 		TextFieldWithButton nameEditor = new TextFieldGameNameEditor(mainPrompt, textFieldPrompt, TEXT_FIELD_WIDTH);
 		nameEditor.setEditableElement(myGameInfo);
 		nameEditorContainer = (HBox) nameEditor.createNode();
+		nameEditorContainer.prefWidthProperty().bind(editingEnvironmentContainer.widthProperty());
 		nameEditorContainer.setSpacing(TEXT_FIELD_CONTAINER_SPACING);
-		nameEditorContainer.setPadding(new Insets(TEXT_FIELD_CONTAINER_PADDING));
+		nameEditorContainer.setPadding(new Insets(DEFAULT_PADDING));
 	}
 
 	/**
@@ -108,17 +108,27 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 		gameDescriptionEditor = (VBox) descriptionEditor.createNode();
 	}
 
+	private void initializeGameTypeButton() {
+		ButtonGameType buttonGameType = new ButtonGameType(getGameInfo());
+		Button button = (Button) buttonGameType.createNode();
+		gameTypeButtonContainer = new HBox(button);
+		gameTypeButtonContainer.prefWidthProperty().bind(editingEnvironmentContainer.widthProperty());
+		button.prefWidthProperty().bind(gameTypeButtonContainer.widthProperty());
+		gameTypeButtonContainer.setPadding(new Insets(DEFAULT_PADDING));
+	}
+
 	/**
 	 * Initializes the GUI Elements displaying the game's current preview image
 	 */
-	// hard coded values
 	private void initializePreviewImageDisplay() {
-		previewImageContainer = new VBox();
+		previewImageContainer = new HBox();
+		String gameImageName = ((GameInfo) myGameInfo).getMyImageName();
+		ButtonFileChooserGameImage buttonGameImage = new ButtonFileChooserGameImage(gameImageName, this, myStage);
+		Button button = (Button) buttonGameImage.createNode();
+		button.prefWidthProperty().bind(previewImageContainer.widthProperty());
+		previewImageContainer.getChildren().add(button);
 		previewImageContainer.setPadding(new Insets(DEFAULT_PADDING));
-		Label previewImageLabel = new Label("Current Game Preview Image:");
-		ImageView previewImage = new ImageView(
-				new Image(getClass().getClassLoader().getResourceAsStream("default_game.jpg")));
-		previewImageContainer.getChildren().addAll(previewImageLabel, previewImage);
+		previewImageContainer.prefWidthProperty().bind(editingEnvironmentContainer.widthProperty());
 	}
 
 	/**
@@ -142,27 +152,24 @@ public class GameEditingEnvironment implements IGUIElement, IEditingElement {
 	}
 
 	/**
-	 * Creates and returns the Node containing all of the Game Editing
-	 * Environment's GUI Elements
+	 * 
+	 * @return the Node containing all Nodes in the Game Editing Environment
 	 */
-	@Override
-	public Node createNode() {
-		initializeContainer();
-		initializeWelcomeMessage();
-		initializeGameNameEditor();
-		initializeGameDescriptionEditor();
-		initializePreviewImageDisplay();
-		initializeHUDOptionsDisplay();
-		initializeScrollPane();
-		editingEnvironmentContainer.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor,
-				previewImageContainer, HUDOptionsDisplay);
+	public Node getNode() {
 		return myScrollPane;
 	}
-
-	@Override
-	public void addNodeObserver(Observer observer) {
-		// TODO Auto-generated method stub
-		
+	
+	/**
+	 * 
+	 * @return the Game Editing Environment's instance of GameInfo
+	 */
+	public GameInfo getGameInfo() {
+		return (GameInfo) myGameInfo;
 	}
 
+	@Override
+	public void setEditableElement(IEditableGameElement element) {
+		myGameInfo = element;
+	}
+	
 }
