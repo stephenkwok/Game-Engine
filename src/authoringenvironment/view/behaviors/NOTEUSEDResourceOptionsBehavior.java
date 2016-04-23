@@ -52,6 +52,7 @@ public class NOTEUSEDResourceOptionsBehavior extends ComboBoxBehavior {
 	@Override
 	protected void createTriggerOrAction() {
 		// TODO Auto-generated method stub
+		//set trigger from here
 		
 	}
 	@Override

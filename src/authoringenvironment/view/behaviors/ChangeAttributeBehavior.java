@@ -22,7 +22,7 @@ public class ChangeAttributeBehavior extends DoubleBehavior {
 
 	@Override
 	public void setTriggerOrAction() {
-		addAction(this, myAction);
+		setAction(this, myAction);
 	}
 
 	@Override
@@ -33,6 +33,7 @@ public class ChangeAttributeBehavior extends DoubleBehavior {
 		else arguments.add(AttributeType.POINTS);
 		arguments.add((int) getValue());
 		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
+		setTriggerOrAction();
 	}
 
 	@Override
