@@ -62,6 +62,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 * the left and center pane.
 	 */
 	private void initializeEnvironment() {
+		myRoot.setStyle("-fx-background-color: darkgray");
 		initializeCenter();
 		initializeLeftPane();
 		updateDrag();
