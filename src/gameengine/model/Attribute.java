@@ -14,9 +14,9 @@ public class Attribute extends Observable {
     private int myValue;
     private Set<Integer> myTriggerValues;
     private AttributeType myType;
-    private IAttributable myOwner;
+    private IGameElement myOwner;
 
-    public Attribute(AttributeType type, int initialValue, IAttributable owner) {
+    public Attribute(AttributeType type, int initialValue, IGameElement owner) {
         myType = type;
         myValue = initialValue;
         myTriggerValues = new HashSet<Integer>();

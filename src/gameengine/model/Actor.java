@@ -29,7 +29,7 @@ import javafx.scene.image.ImageView;
  * @author blakekaplan
  */
 
-public class Actor extends Observable implements Observer, IPlayActor, IDisplayActor, IAuthoringActor, IAttributable {
+public class Actor extends Observable implements Observer, IPlayActor, IDisplayActor, IAuthoringActor {
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "hellokitty.gif";
@@ -45,7 +45,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     @XStreamOmitField
     private ImageView myImageView;
     private RuleManager myRuleManager;
-    private Map<AttributeType, Attribute> attributeMap;
+    private AttributeManager myAttributeManager;
     private PhysicsEngine myPhysicsEngine;
     private List<ActorRule> myActorRules;
     private Set<ActorState> myStates;
@@ -55,7 +55,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      */
     public Actor() {
     	myRuleManager = new RuleManager();
-        attributeMap = new HashMap<>();
+    	myAttributeManager = new AttributeManager();
         myActorRules = new ArrayList<>();
         myStates = new HashSet<>();
         myName = DEFAULT_NAME;
@@ -72,7 +72,8 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      *
      * @param myTrigger The trigger to be used
      */
-    public void performActionsFor(ITrigger myTrigger) {
+    @Override
+    public void handleTrigger(ITrigger myTrigger) {
     	myRuleManager.handleTrigger(myTrigger);
     }
 
@@ -81,9 +82,9 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      *
      * @param newAttribute The new Actor Attribute
      */
-    public void addAttribute(Attribute newAttribute) {
-    	newAttribute.addObserver(this);
-        getAttributeMap().put(newAttribute.getMyType(), newAttribute);
+    @Override
+    public void addAttribute(Attribute attribute) {
+        myAttributeManager.addAttribute(attribute);
     }
 
     /**
@@ -93,7 +94,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      */
     @Override
     public Attribute getAttribute(AttributeType type){
-    	return getAttributeMap().get(type);
+    	return myAttributeManager.getAttribute(type);
     }
 
     /**
@@ -103,11 +104,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      * @param change The amount to change the Attribute by
      */
     public void changeAttribute(AttributeType type, int change) {
-
-        Attribute myAttribute = getAttributeMap().get(type);
-        if(myAttribute!=null){
-            myAttribute.changeAttribute(change);
-        }
+    	myAttributeManager.changeAttribute(type, change);
     }
 
     /**
@@ -313,14 +310,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	}
 
     /**
-     * Provides the Attribute map
-     * @return  The Actor's Attribute Map
-     */
-    public Map<AttributeType, Attribute> getAttributeMap() {
-		return attributeMap;
-	}
-
-    /**
      * Sets a new physics engine
      * @param myPhysicsEngine   The new physics engine
      */
@@ -408,5 +397,17 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	public void handleReachedAttribute(AttributeReached trigger) {
 		setChanged();
 		notifyObservers(Arrays.asList(new Object[]{"handleTrigger",trigger}));
+	}
+
+	@Override
+	public void removeAttribute(Attribute attribute) {
+		myAttributeManager.removeAttribute(attribute);
+		
+	}
+
+	@Override
+	public void removeRule(Rule rule) {
+		myRuleManager.removeRule(rule);
+		
 	}
 }

@@ -5,7 +5,7 @@ import gameengine.model.Actor;
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
-import gameengine.model.IAttributable;
+import gameengine.model.IGameElement;
 import gameengine.model.Rule;
 import gameengine.model.Actions.*;
 import gameengine.model.Triggers.AttributeReached;
@@ -151,10 +151,10 @@ public class Tester extends Application {
         actor1.addRule(rule6);
 
         actor1.addState(ActorState.MAIN);
-		Attribute points = new Attribute(AttributeType.POINTS,0,(IAttributable)actor1);
+		Attribute points = new Attribute(AttributeType.POINTS,0,(IGameElement)actor1);
 		actor1.addAttribute(points);
 		
-		ITrigger attreached = new AttributeReached(AttributeType.POINTS,(IAttributable)actor1,5);
+		ITrigger attreached = new AttributeReached(AttributeType.POINTS,(IGameElement)actor1,5);
 		Action wingame = new WinGame((IPlayActor) actor1);
 		
 		actor1.addRule(new Rule(attreached,wingame));

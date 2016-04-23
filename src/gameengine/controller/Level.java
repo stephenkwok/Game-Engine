@@ -3,7 +3,13 @@ package gameengine.controller;
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
 import gameengine.model.ActorState;
+import gameengine.model.Attribute;
+import gameengine.model.AttributeManager;
+import gameengine.model.AttributeType;
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
+import gameengine.model.Rule;
+import gameengine.model.RuleManager;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
 import javafx.beans.property.DoubleProperty;
@@ -22,7 +28,7 @@ import authoringenvironment.model.IEditableGameElement;
  *
  * @author blakekaplan
  */
-public class Level extends Observable implements ILevel, IEditableGameElement, Comparable<Level> {
+public class Level extends Observable implements ILevel, IEditableGameElement, Comparable<Level>, IGameElement {
 
 	// TODO: should probably set these default things via properties file but idk sry guyz
 	private static final String DEFAULT_NAME = "Default";
@@ -43,12 +49,16 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	private ImageView myBackground;
 	@XStreamOmitField
 	private DoubleProperty myBackgroundX = new SimpleDoubleProperty();
+	private RuleManager myRuleManager;
+	private AttributeManager myAttributeManager;
 
 
 	/**
 	 * Instantiates the triggerMap and Actor list
 	 */
 	public Level() {
+		myRuleManager = new RuleManager();
+		myAttributeManager = new AttributeManager();
 		setMyActors(new ArrayList<>());
 		setMyTriggerMap(new HashMap<>());
 		setName(DEFAULT_NAME);
@@ -58,6 +68,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		myName = DEFAULT_NAME;
 		myHeight = DEFAULT_HEIGHT;
 		myWidth = DEFAULT_WIDTH;
+		myRuleManager = new RuleManager();
 	}
 
 	/**
@@ -67,11 +78,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	 */
 	@Override
 	public void handleTrigger(ITrigger myTrigger) {
-		if (!getMyTriggerMap().containsKey(myTrigger.getMyKey())) return;
-		List<IPlayActor> relevantActors = getMyTriggerMap().get(myTrigger.getMyKey());
-		for (IPlayActor myActor : relevantActors) {
-			myActor.performActionsFor(myTrigger);
-		}
+		myRuleManager.handleTrigger(myTrigger);
 	}
 
 	/**
@@ -92,19 +99,6 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	@Override
 	public void addActor(IAuthoringActor actor) {
 		getActors().add((IPlayActor)actor);
-		Set<String> actorTriggers = ((IPlayActor)actor).getRules().keySet();
-		for (String myTrigger : actorTriggers) {
-			if (getMyTriggerMap().containsKey(myTrigger)) {
-				List<IPlayActor> levelActors = getMyTriggerMap().get(myTrigger);
-				levelActors.add((IPlayActor)actor);
-				getMyTriggerMap().put(myTrigger, levelActors);
-			} else {
-				List<IPlayActor> levelActors = new ArrayList<>();
-				levelActors.add((IPlayActor)actor);
-				getMyTriggerMap().put(myTrigger, levelActors);
-			}
-		}
-
 	}
 
 	/**
@@ -323,6 +317,52 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void addAttribute(Attribute attribute) {
+		myAttributeManager.addAttribute(attribute);
+		
+	}
+
+	@Override
+	public void removeAttribute(Attribute attribute) {
+		myAttributeManager.removeAttribute(attribute);
+		
+	}
+
+	@Override
+	public void handleReachedAttribute(AttributeReached trigger) {
+		setChanged();
+		notifyObservers(Arrays.asList(new Object[]{"handleTrigger",trigger}));		
+	}
+
+	@Override
+	public Attribute getAttribute(AttributeType type) {
+		return myAttributeManager.getAttribute(type);
+	}
+
+	@Override
+	public void changeAttribute(AttributeType type, int change) {
+		myAttributeManager.changeAttribute(type, change);
+		
+	}
+
+	@Override
+	public void addRule(Rule rule) {
+		myRuleManager.addRule(rule);
+		
+	}
+
+	@Override
+	public void removeRule(Rule rule) {
+		myRuleManager.removeRule(rule);
+		
+	}
+
+	@Override
+	public Map<String, List<Rule>> getRules() {
+		return myRuleManager.getRules();
 	}
 	
 }

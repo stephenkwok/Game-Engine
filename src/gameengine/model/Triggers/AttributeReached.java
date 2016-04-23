@@ -1,12 +1,12 @@
 package gameengine.model.Triggers;
 
 import gameengine.model.AttributeType;
-import gameengine.model.IAttributable;
+import gameengine.model.IGameElement;
 
 public class AttributeReached extends ITrigger {
 	String myKey;
 	
-	public AttributeReached(AttributeType type,IAttributable target, int triggerValue){
+	public AttributeReached(AttributeType type,IGameElement target, int triggerValue){
 		target.getAttribute(type).addTriggerValue(triggerValue);
 		myKey = target.getName()+type.toString()+triggerValue;
 	}
