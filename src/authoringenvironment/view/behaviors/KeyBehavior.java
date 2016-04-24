@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.view.ActorRule;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 import javafx.scene.input.KeyCode;
 /**
  * GUI representation of PressKey behavior, which requires single input in ComboBox form
@@ -34,14 +34,18 @@ public class KeyBehavior extends ComboBoxBehavior {
 
 	@Override
 	public void setTriggerOrAction() {
-		addTrigger(this,myTrigger);
+		setTrigger(this,myTrigger);
 	}
 	@Override
 	protected void createTriggerOrAction() {
+		if(myTrigger!=null){
+			//remove this trigger from ActorRule
+		}
 		KeyCode keyCode = KeyCode.getKeyCode(getValue());
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(keyCode);
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
+		setTriggerOrAction();
 	}
 	@Override
 	public boolean isTrigger() {

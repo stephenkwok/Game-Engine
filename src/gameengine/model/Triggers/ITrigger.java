@@ -1,4 +1,4 @@
-package gameengine.model;
+package gameengine.model.Triggers;
 
 /**
  * This interface defines the public methods for Trigger objects. Trigger correspond with the different events that can

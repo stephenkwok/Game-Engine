@@ -19,7 +19,7 @@ public class SelfActionBehavior extends LabelBehavior {
 
 	@Override
 	public void setTriggerOrAction() {
-		addAction(this, myAction);
+		setAction(this, myAction);
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package gameengine.model.Actions;
 
-import gameengine.model.Actor;
 import gameengine.model.ActorState;
 import gameengine.model.IPlayActor;
 

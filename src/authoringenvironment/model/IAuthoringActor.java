@@ -1,14 +1,14 @@
 package authoringenvironment.model;
 
-import authoringenvironment.view.ActorRule;
+
+import java.util.List;
+import java.util.Map;
+
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;
-import gameengine.model.IRule;
 import gameengine.model.Rule;
 import javafx.scene.image.ImageView;
 
-import java.util.List;
-import java.util.Set;
 
 /**
  * This interface defines the subset of Actor functionality that will be accessible to the game authoring environment.
@@ -23,6 +23,19 @@ public interface IAuthoringActor extends IEditableGameElement{
      * @param newRule The Rule to be added to the Actor
      */
 	void addRule(Rule newRule);
+	
+	/**
+	 * Gets Map<String, List<Rule>> 
+	 * @return
+	 */
+	public Map<String, List<Rule>> getRules();
+	
+	/**
+	 * Removes given Rule from Actor
+	 * @return
+	 */
+	public void removeRule(Rule rule);
+	
     /**
      * Sets the Actor's X coordinate
      * @param updateXPosition   The new X coordinate
@@ -78,12 +91,6 @@ public interface IAuthoringActor extends IEditableGameElement{
      * @param size  The ImageView's size
      */
     void setSize(double size);
-
-    /**
-     * Provides the List of the Actor's Rules
-     * @return  The Actor's ActorRules
-     */
-    List<ActorRule> getActorRules();
 
 	void setFriction(double parseDouble);
 	

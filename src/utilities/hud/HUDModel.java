@@ -1,4 +1,4 @@
-package Utilities.HUD;
+package utilities.hud;
 
 
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Observable;
 
 public class HUDModel extends Observable {
 	
-	Map<String, Property> data;
+	private Map<String, Property> data;
 	
 	public HUDModel(Map<String, Property> data) {
 		this.data = data;

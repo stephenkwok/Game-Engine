@@ -6,8 +6,8 @@ import java.util.Arrays;
 import gameengine.controller.Level;
 import gameengine.model.IActor;
 import gameengine.model.IDisplayActor;
-import gameengine.model.ITrigger;
 import gameengine.model.Triggers.ClickTrigger;
+import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.KeyTrigger;
 import gui.view.Screen;
 import javafx.beans.value.ChangeListener;
@@ -104,18 +104,16 @@ public class GameScreen extends Observable implements IGameScreen {
 	 * @param e event 
 	 */
 	public void handleScreenEvent (Event e){
+		ITrigger trigger = null;
 		if(e.getEventType()==MouseEvent.MOUSE_CLICKED){
-			ITrigger trigger = handleClick(((MouseEvent)e).getSceneX(),((MouseEvent)e).getSceneY());
-			setChanged();
-			Object[] methodArg = {myResources.getString("Trigger"), trigger};
-			notifyObservers(Arrays.asList(methodArg));
+			trigger = handleClick(((MouseEvent)e).getSceneX(),((MouseEvent)e).getSceneY());
 		}
 		else if(e.getEventType()==KeyEvent.KEY_PRESSED){
-			ITrigger trigger = handleKeyPress(((KeyEvent)e).getCode());
-			setChanged();
-			Object[] methodArg = {myResources.getString("Trigger"), trigger};
-			notifyObservers(Arrays.asList(methodArg));
+			trigger = handleKeyPress(((KeyEvent)e).getCode());
 		}
+		setChanged();
+		Object[] methodArg = {"handleTrigger", trigger};
+		notifyObservers(Arrays.asList(methodArg));
 	}
 
 	

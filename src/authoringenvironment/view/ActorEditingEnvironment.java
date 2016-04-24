@@ -139,7 +139,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		Button toReturn = new Button(NEW_RULE_LABEL);
 		toReturn.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		toReturn.setOnAction(event -> {
-			myActorRuleCreator.addNewRule(); //
+			myActorRuleCreator.addNewActorRule(); //
 			setCenterPane();
 			library.updateDragEvents();
 		});

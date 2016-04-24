@@ -2,9 +2,7 @@ package gui.view;
 
 import java.io.File;
 
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingElement;
-import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.model.*;
 import authoringenvironment.view.ActorEditingEnvironment;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,7 +17,7 @@ public class ButtonFileChooserActorImage extends ButtonFileChooser {
 	@Override
 	protected void updateImage(IEditingElement editor, Image image, File imageFile) {
 		((ActorEditingEnvironment) editor).setActorImage(new ImageView(image), imageFile.getName());
-		notifyController(null);
+		notifyObservers(null);
 	}
 
 }

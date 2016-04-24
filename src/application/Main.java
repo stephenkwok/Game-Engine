@@ -2,6 +2,7 @@ package application;
 
 import gameplayer.controller.SplashScreenController;
 import javafx.application.Application;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class Main extends Application{

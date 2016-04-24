@@ -3,9 +3,8 @@ package authoringenvironment.view.behaviors;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import authoringenvironment.view.ActorRule;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 
 public class TickBehavior extends DoubleBehavior {
 	private ITrigger myTrigger;
@@ -16,7 +15,7 @@ public class TickBehavior extends DoubleBehavior {
 
 	@Override
 	public void setTriggerOrAction() {
-		addTrigger(this, myTrigger);
+		setTrigger(this, myTrigger);
 	}
 
 	@Override
@@ -24,6 +23,7 @@ public class TickBehavior extends DoubleBehavior {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add((int) getValue());
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
+		setTriggerOrAction();
 	}
 
 	@Override

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.view.ActorRule;
-//import gameengine.model.IAction;
 /**
  * GUI representation of behaviors: ChangeMusic, PlaySound, PlayMusic
  * @author AnnieTang
@@ -52,6 +51,7 @@ public class NOTEUSEDResourceOptionsBehavior extends ComboBoxBehavior {
 	@Override
 	protected void createTriggerOrAction() {
 		// TODO Auto-generated method stub
+		//set trigger from here
 		
 	}
 	@Override

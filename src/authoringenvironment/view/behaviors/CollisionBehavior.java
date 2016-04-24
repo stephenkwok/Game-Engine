@@ -8,7 +8,7 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.IPlayActor;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 
 public class CollisionBehavior extends SelectEditableBehavior {
 	private List<IAuthoringActor> myActors;
@@ -23,6 +23,7 @@ public class CollisionBehavior extends SelectEditableBehavior {
 		setButtonAction(e -> {
 			this.otherActor = (IAuthoringActor) getComboBox().getValue();
 			createTriggerOrAction();
+			setTriggerOrAction();
 		});
 	}
 
@@ -42,7 +43,7 @@ public class CollisionBehavior extends SelectEditableBehavior {
 
 	@Override
 	public void setTriggerOrAction() {
-		addTrigger(this, myTrigger);
+		setTrigger(this, myTrigger);
 	}
 
 	@Override

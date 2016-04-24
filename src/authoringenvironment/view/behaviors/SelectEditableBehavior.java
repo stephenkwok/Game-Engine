@@ -8,7 +8,7 @@ import authoringenvironment.view.ActionFactory;
 import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.TriggerFactory;
 import gameengine.model.IAction;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 import gui.view.EditingElementParent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -162,12 +162,12 @@ public abstract class SelectEditableBehavior extends EditingElementParent implem
 		return this.actionFactory;
 	}
 	
-	public void addTrigger(IAuthoringBehavior key, ITrigger value){
-		myActorRule.addTrigger(key, value);
+	public void setTrigger(IAuthoringBehavior key, ITrigger value){
+		myActorRule.setTrigger(key, value);
 	}
 	
-	public void addAction(IAuthoringBehavior key, IAction value){
-		myActorRule.addAction(key, value);
+	public void setAction(IAuthoringBehavior key, IAction value){
+		myActorRule.setAction(key, value);
 	}
 	
 	protected String getBehaviorType(){

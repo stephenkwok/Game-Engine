@@ -6,7 +6,8 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
-import gameengine.model.ITrigger;
+import gameengine.model.IAction;
+import gameengine.model.Triggers.ITrigger;
 
 public class SelfTriggerBehavior extends LabelBehavior {
 	private ITrigger myTrigger;
@@ -19,7 +20,7 @@ public class SelfTriggerBehavior extends LabelBehavior {
 
 	@Override
 	public void setTriggerOrAction() {
-		addTrigger(this, myTrigger);
+		setTrigger(this, myTrigger);
 	}
 
 	@Override
