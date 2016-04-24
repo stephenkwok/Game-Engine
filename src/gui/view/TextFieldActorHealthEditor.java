@@ -3,14 +3,14 @@ package gui.view;
 import gameengine.model.Actor;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
-import gameengine.model.IAttributable;
+import gameengine.model.IGameElement;
 
 public class TextFieldActorHealthEditor extends TextFieldWithButton {
 	private static final double DEFAULT_HEALTH = 0;
 	public TextFieldActorHealthEditor(String labelText, String promptText, Double textFieldWidth) {
 		super(labelText, promptText, textFieldWidth);
 		Actor a = (Actor) getEditableElement();
-		setButtonAction(e -> a.addAttribute(new Attribute(AttributeType.HEALTH, Integer.parseInt(getTextFieldInput()),(IAttributable) a)));
+		setButtonAction(e -> a.addAttribute(new Attribute(AttributeType.HEALTH, Integer.parseInt(getTextFieldInput()),(IGameElement) a)));
 	}
 	/**
 	 * Sets the textfield's value to reflect the current actor's health.

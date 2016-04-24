@@ -1,15 +1,14 @@
 package gameengine.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import gameengine.model.Triggers.AttributeReached;
+import java.util.*;
 import gameengine.model.Triggers.ITrigger;
 
 public class RuleManager {
-	private Map<String, List<Rule>> myRules = new HashMap<String,List<Rule>>();
+	private Map<String, List<Rule>> myRules;
+	
+	public RuleManager(){
+		myRules = new HashMap<String,List<Rule>>();
+	}
 	
 	public void addRule(Rule newRule){
 		 if (myRules.containsKey(newRule.getMyTrigger().getMyKey())) {
@@ -22,6 +21,10 @@ public class RuleManager {
 	            myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
 	        }
 	}
+	
+    public void removeRule(Rule rule){
+    	myRules.get(rule.getMyTrigger()).remove(rule);
+    }
 	
     public void handleTrigger(ITrigger myTrigger) {
     	if(myRules.containsKey(myTrigger.getMyKey())){

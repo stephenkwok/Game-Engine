@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.AttributeType;
-import gameengine.model.IAttributable;
+import gameengine.model.IGameElement;
 import gameengine.model.Triggers.ITrigger;
 
 public class AttributeReachedBehavior extends DoubleBehavior {
@@ -31,8 +31,8 @@ public class AttributeReachedBehavior extends DoubleBehavior {
 		List<Object> arguments = new ArrayList<>();
 		if(getBehaviorType().equals(CHANGE_HEALTH)) arguments.add(AttributeType.HEALTH);
 		else arguments.add(AttributeType.POINTS);
-		arguments.add((IAttributable) myActor);
 		arguments.add((int) getValue());
+		arguments.add((IGameElement) myActor);
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
 		setTriggerOrAction();
 	}

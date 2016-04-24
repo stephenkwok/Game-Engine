@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;
-import gameengine.model.IAttributable;
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 import gameengine.model.Triggers.ITrigger;
 import javafx.scene.input.KeyCode;
@@ -121,7 +121,7 @@ public class TriggerFactory {
 	
 	private ITrigger createAttributeReached(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> collisionClass = Class.forName(className);
-		Constructor<?> constructor = collisionClass.getConstructor(AttributeType.class, IAttributable.class, int.class);
+		Constructor<?> constructor = collisionClass.getConstructor(AttributeType.class,int.class, IGameElement.class);
 		return (ITrigger) constructor.newInstance(arguments.get(ZERO), arguments.get(ONE), arguments.get(TWO));
 	}
 }

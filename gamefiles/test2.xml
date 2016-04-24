@@ -127,7 +127,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -154,7 +156,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -181,7 +185,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -208,7 +214,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -235,7 +243,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -262,7 +272,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -289,7 +301,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -316,7 +330,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -343,7 +359,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -370,7 +388,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -397,7 +417,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -424,7 +446,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -451,7 +475,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -478,7 +504,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -505,7 +533,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -532,7 +562,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -559,7 +591,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -586,7 +620,9 @@
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
-                                      <attributeMap/>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
                                       <myActorRules/>
                                       <myStates/>
                                     </myCollisionActor>
@@ -599,7 +635,9 @@
                             </entry>
                           </myRules>
                         </myRuleManager>
-                        <attributeMap/>
+                        <myAttributeManager>
+                          <attributeMap/>
+                        </myAttributeManager>
                         <myActorRules/>
                         <myStates/>
                       </myCollisionActor>
@@ -794,7 +832,9 @@
                             </entry>
                           </myRules>
                         </myRuleManager>
-                        <attributeMap/>
+                        <myAttributeManager>
+                          <attributeMap/>
+                        </myAttributeManager>
                         <myActorRules/>
                         <myStates/>
                       </myCollisionActor>
@@ -1022,6 +1062,7 @@
               </entry>
             </myRules>
           </myRuleManager>
+<<<<<<< HEAD
           <attributeMap>
             <entry>
               <gameengine.model.AttributeType>POINTS</gameengine.model.AttributeType>
@@ -2125,6 +2166,25 @@
 =======
           </attributeMap>
 >>>>>>> 4c70b9db910408f6b2006cb398e757c6eaae2540
+=======
+          <myAttributeManager>
+            <attributeMap>
+              <entry>
+                <gameengine.model.AttributeType>POINTS</gameengine.model.AttributeType>
+                <gameengine.model.Attribute>
+                  <changed>false</changed>
+                  <obs/>
+                  <myValue>0</myValue>
+                  <myTriggerValues>
+                    <int>5</int>
+                  </myTriggerValues>
+                  <myType>POINTS</myType>
+                  <myOwner class="gameengine.model.Actor" reference="../../../../.."/>
+                </gameengine.model.Attribute>
+              </entry>
+            </attributeMap>
+          </myAttributeManager>
+>>>>>>> 7b17742655702164522111c196754b247f3d38bf
           <myActorRules/>
           <myStates>
             <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
@@ -2219,7 +2279,9 @@
               </entry>
             </myRules>
           </myRuleManager>
-          <attributeMap/>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
           <myActorRules/>
           <myStates/>
           <myHeight>0.0</myHeight>
@@ -2249,76 +2311,21 @@
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[5]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[17]/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[5]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[18]/myTrigger/myCollisionActor"/>
       </myActors>
-      <myTriggerMap>
-        <entry>
-          <string>Space</string>
-          <list>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
-          </list>
-        </entry>
-        <entry>
-          <string>Down</string>
-          <list>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
-          </list>
-        </entry>
-        <entry>
-          <string>Left</string>
-          <list>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
-          </list>
-        </entry>
-        <entry>
-          <string>A1POINTS5</string>
-          <list>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
-          </list>
-        </entry>
-        <entry>
-          <string>SideCollision</string>
-          <list>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor[4]"/>
-          </list>
-        </entry>
-        <entry>
-          <string>TopTrigger</string>
-          <list>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor[4]"/>
-          </list>
-        </entry>
-        <entry>
-          <string>Right</string>
-          <list>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
-          </list>
-        </entry>
-        <entry>
-          <string>Tick</string>
-          <list>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[5]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor[4]"/>
-          </list>
-        </entry>
-        <entry>
-          <string>Z</string>
-          <list>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
-          </list>
-        </entry>
-        <entry>
-          <string>BottomCollision</string>
-          <list>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
-            <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor[4]"/>
-          </list>
-        </entry>
-      </myTriggerMap>
+      <myTriggerMap/>
       <myName>Default</myName>
       <myPlayPosition>0</myPlayPosition>
       <myScrollingDirection>Horizontally</myScrollingDirection>
+<<<<<<< HEAD
       <myBackgroundImgName>mariobackground.png</myBackgroundImgName>
+=======
+      <myBackgroundImgName>default_landscape.png</myBackgroundImgName>
+      <myRuleManager>
+        <myRules/>
+      </myRuleManager>
+      <myAttributeManager>
+        <attributeMap/>
+      </myAttributeManager>
+>>>>>>> 7b17742655702164522111c196754b247f3d38bf
     </gameengine.controller.Level>
   </levels>
   <info>
