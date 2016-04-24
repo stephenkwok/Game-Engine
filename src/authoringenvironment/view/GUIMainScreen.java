@@ -4,12 +4,12 @@ import java.util.*;
 
 import authoringenvironment.controller.*;
 import authoringenvironment.model.*;
-import gameengine.controller.Level;
+import gameengine.controller.*;
 import gui.view.IGUI;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.layout.*;
 import javafx.scene.Node;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 /**

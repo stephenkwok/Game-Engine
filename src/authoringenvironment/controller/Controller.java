@@ -50,6 +50,7 @@ public class Controller extends BranchScreenController implements Observer {
 	private BorderPane myRoot;
 	private GUIFactory factory;
 	private Scene splashScene;
+	private PopUpAuthoringHelpPage helpPage;
 
 	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException {
@@ -97,7 +98,7 @@ public class Controller extends BranchScreenController implements Observer {
 		gameInfo = new GameInfo();
 		gameInfo.setActorMap(myActorMap);
 		game = new Game(gameInfo, myLevels);
-		initializeSceneAndEditingEnvironments();
+		initializeGeneralComponents();
 		initializePresetActors();
 	}
 
@@ -110,14 +111,14 @@ public class Controller extends BranchScreenController implements Observer {
 		myActorMap = gameInfo.getActorMap();
 		myLevels.stream().forEach(level -> mainScreen.createLevelPreviewUnit(level, levelEnvironment));
 		myActorMap.keySet().stream().forEach(actor -> mainScreen.createActorPreviewUnit(actor, actorEnvironment));
-		initializeSceneAndEditingEnvironments();
+		initializeGeneralComponents();
 	}
 
 	/**
 	 * Initializes controller components that remain the same regardless of
 	 * whether the Game to be edited is new or previously created
 	 */
-	public void initializeSceneAndEditingEnvironments() {
+	public void initializeGeneralComponents() {
 		myRoot = new BorderPane();
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
 		getStage().setScene(myScene);
@@ -371,6 +372,9 @@ public class Controller extends BranchScreenController implements Observer {
 			saveGame();
 		else if (arg0 instanceof TextFieldActorNameEditor)
 			updateActors((IAuthoringActor) arg1);
+		else if (arg0 instanceof ButtonHelpPage) {
+			helpPage = new PopUpAuthoringHelpPage();
+		}
 	}
 
 	// checking to see if this works with name
