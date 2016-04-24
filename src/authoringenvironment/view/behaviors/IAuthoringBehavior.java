@@ -7,5 +7,5 @@ public interface IAuthoringBehavior extends IGUIElement{
 	void setTriggerOrAction();
 	
 	boolean isTrigger();
-	
+		
 }
