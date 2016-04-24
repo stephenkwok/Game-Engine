@@ -1,4 +1,4 @@
-package util;
+package utilities.hud;
 
 import java.util.HashMap;
 import java.util.Map;

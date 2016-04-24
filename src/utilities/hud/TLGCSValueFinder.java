@@ -1,4 +1,4 @@
-package util;
+package utilities.hud;
 
 import gameengine.controller.Game;
 

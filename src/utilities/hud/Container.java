@@ -1,4 +1,4 @@
-package util;
+package utilities.hud;
 
 import java.io.File;
 import java.io.IOException;
