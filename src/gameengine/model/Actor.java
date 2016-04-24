@@ -44,6 +44,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private AttributeManager myAttributeManager;
     private PhysicsEngine myPhysicsEngine;
     private Set<ActorState> myStates;
+    private Sprite mySprite;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -54,7 +55,8 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
         myStates = new HashSet<>();
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
-        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
+        mySprite = new Sprite();
+        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
     }
     
     /**
@@ -70,7 +72,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     /**
      * Adds a new Attribute to an Actors
      *
-     * @param newAttribute The new Actor Attribute
+     * @param attribute The new Actor Attribute
      */
     @Override
     public void addAttribute(Attribute attribute) {
@@ -255,7 +257,8 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      */
 	public void setImageViewName(String myImageViewName) {
 		this.myImageViewName = myImageViewName;
-		this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
+        mySprite.setImage(myImageViewName);
+        this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
 	}
 
     /**
@@ -392,21 +395,16 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		
 	}
 
-	@Override
-	public void addSpriteImage(String newImage) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void setDirection(){
+        if (getHeading() == 0) myImageView.setScaleX(1);
+        else if (getHeading() == 180){ myImageView.setScaleX(-1); }
+    }
 
-	@Override
-	public void setDirection() {
-		// TODO Auto-generated method stub
-		
-	}
+    public void addSpriteImage(String newImage){
+        mySprite.addImage(newImage);
+    }
 
-	@Override
-	public void nextImage() {
-		// TODO Auto-generated method stub
-		
-	}
+    public void nextImage(){
+        myImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getNextImage())));
+    }
 }
