@@ -1,8 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <initialGameFile>C:\Users\Stephen\workspace\voogasalad_LoopsGoatCheeseSalad\gamefiles\loaders\mygame</initialGameFile>
-  <levels/>
+  <initialGameFile>/Users/colettetorres/Documents/CS_308/voogasalad_LoopsGoatCheeseSalad/gamefiles/loaders/test_loader.xml</initialGameFile>
+  <levels>
+    <gameengine.controller.Level>
+      <changed>false</changed>
+      <obs/>
+      <myActors>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>0.0</x>
+          <y>0.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Default Name</myName>
+          <myID>0</myID>
+          <myImageViewName>hellokitty.gif</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+        </gameengine.model.Actor>
+      </myActors>
+      <myTriggerMap/>
+      <myName>Default</myName>
+      <myHeight>800.0</myHeight>
+      <myWidth>1024.0</myWidth>
+      <myPlayPosition>1</myPlayPosition>
+      <myScrollingDirection>Horizontally</myScrollingDirection>
+      <myBackgroundImgName>default_landscape.png</myBackgroundImgName>
+      <myRuleManager>
+        <myRules/>
+      </myRuleManager>
+      <myAttributeManager>
+        <attributeMap/>
+      </myAttributeManager>
+    </gameengine.controller.Level>
+  </levels>
   <info>
     <myName>My Game</myName>
     <myImageName>default_game.jpg</myImageName>
@@ -92,7 +132,7 @@
       </accessibleRole>
       <image class="javafx.scene.image.ImageView$1">
         <value class="javafx.scene.image.Image">
-          <url>file:/C:/Users/Stephen/workspace/voogasalad_LoopsGoatCheeseSalad/bin/default_game.jpg</url>
+          <url>file:/Users/colettetorres/Documents/CS_308/voogasalad_LoopsGoatCheeseSalad/bin/default_game.jpg</url>
           <progress>
             <value>1.0</value>
             <valid>true</valid>
@@ -341,7 +381,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
       <validWH>false</validWH>
     </myPreviewImage>
     <myHUDElementsToDisplay/>
-    <myFile>mygame</myFile>
+    <myFile>test_loader.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
   </info>
   <myPhysicsEngine>
@@ -362,5 +402,5 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
   </myCollisionDetector>
   <currentActors/>
   <deadActors/>
-  <count>0</count>
+  <count>1</count>
 </gameengine.controller.Game>
