@@ -1,4 +1,4 @@
-package utilities.hud;
+package util;
 
 public class ValueChange {
 	private Object oldValue;
