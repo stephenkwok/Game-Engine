@@ -8,7 +8,7 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.IPlayActor;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 
 public class CollisionBehavior extends SelectEditableBehavior {
 	private List<IAuthoringActor> myActors;
