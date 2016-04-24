@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.ResourceBundle;
+import java.util.Set;
 
-import gameengine.model.Actor;
-import javafx.event.EventHandler;
+import authoringenvironment.model.IAuthoringActor;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 
 /**
@@ -38,10 +36,15 @@ public class TabActors extends TabParent {
 	 * @param tabText: name of this tab.
 	 * @param availActors: list of currently available actors.
 	 */
-	public TabActors(ResourceBundle myResources, String tabText, List<Actor> availActors) {
+	public TabActors(ResourceBundle myResources, String tabText, Set<IAuthoringActor> availActors) {
 		super(myResources, tabText);
 		actorIcons = new ArrayList<ImageviewActorIcon>();	
 		myPane = new TilePane(HGAP, VGAP);
+		formatTab();
+		setAvailableActors(availActors);
+	}
+	
+	private void formatTab() {
 		myPane.setPrefTileHeight(TILE_HEIGHT);
 		myPane.setPrefTileWidth(TILE_WIDTH);
 		myPane.setPrefColumns(NUM_COLS);
@@ -50,7 +53,6 @@ public class TabActors extends TabParent {
 		myPane.setAlignment(Pos.TOP_LEFT);
 		myPane.setPadding(new Insets(PADDING));
 		myPane.setPrefHeight(200);
-		setAvailableActors(availActors);
 	}
 	
 	/**
@@ -58,10 +60,10 @@ public class TabActors extends TabParent {
 	 * @param actors
 	 * @return
 	 */
-	private List<ImageviewActorIcon> actorListToIconList(List<Actor> actors) {
+	private List<ImageviewActorIcon> actorSetToIconList(Set<IAuthoringActor> actors) {
 		List<ImageviewActorIcon> iconList = new ArrayList<>();
-		for (int i = 0; i < actors.size(); i++) {
-			iconList.add(new ImageviewActorIcon(actors.get(i), ICON_HEIGHT));
+		for (IAuthoringActor actor: actors) {
+			iconList.add(new ImageviewActorIcon(actor, ICON_HEIGHT));
 		}
 		return iconList;
 	}
@@ -70,10 +72,10 @@ public class TabActors extends TabParent {
 	 * Converts the current list of icons to a list of actors.
 	 * @return list of currently available actors
 	 */
-	public List<Actor> getActors() {
-		List<Actor> actorList = new ArrayList<>();
+	public List<IAuthoringActor> getActors() {
+		List<IAuthoringActor> actorList = new ArrayList<>();
 		for (int i = 0; i < actorIcons.size(); i++) {
-			actorList.add(actorIcons.get(i).getActor());
+			actorList.add(actorIcons.get(i).getRefActor());
 		}
 		return actorList;
 	}
@@ -90,10 +92,10 @@ public class TabActors extends TabParent {
 	 * Set the list of available actor icons based on an updated list of actors.
 	 * @param updatedActors: updated list of actors.
 	 */
-	public void setAvailableActors(List<Actor> updatedActors) {
+	public void setAvailableActors(Set<IAuthoringActor> updatedActors) {
 		myPane.getChildren().removeAll(actorIcons);
 		actorIcons.clear();
-		actorIcons = actorListToIconList(updatedActors);
+		actorIcons = actorSetToIconList(updatedActors);
 		myPane.getChildren().addAll(actorIcons);	
 	}
 	

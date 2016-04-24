@@ -1,21 +1,15 @@
 package authoringenvironment.view;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import authoringenvironment.controller.Controller;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingEnvironment;
-import gameengine.controller.GameInfo;
-import gameengine.model.Actor;
+import authoringenvironment.controller.*;
+import authoringenvironment.model.*;
+import gameengine.controller.Level;
 import gui.view.IGUI;
 import javafx.beans.binding.DoubleExpression;
+import javafx.scene.layout.*;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -27,81 +21,155 @@ import javafx.stage.Stage;
  *
  */
 
-public class GUIMainScreen implements IGUI {
+public class GUIMainScreen implements IGUI, Observer {
 
 	private static final int NUM_SCROLLPANES = 2;
-	private Controller controller;
-	private VBox actorLabelContainer;
-	private VBox levelLabelContainer;
-	private ScrollPane actorScrollPane;
-	private ScrollPane levelScrollPane;
-	private HBox scrollPaneContainer;
+	private VBox actorPreviewContainer, levelPreviewContainer, createdLevelsDisplay, createdActorsDisplay;
+	private ScrollPane actorScrollPane, levelScrollPane;
+	private HBoxDisplayHeader actorsDisplayHeader, levelsDisplayHeader;
+	private HBox centerPane;
 	private BorderPane borderPane;
-	private List<LabelClickable> clickableLabels;
-	private IEditingEnvironment actorEditor;
+	private List<PreviewUnitWithEditable> allPreviewUnits;
+	private List<PreviewUnitWithLevel> levelPreviewUnits;
+	private List<Level> levels;
 	private IEditingEnvironment levelEditor;
-	private GameInfo gameInfo;
-	private List<Actor> myActors;
+	private GameEditingEnvironment gameEditor;
+	private Stage stage;
+	private Controller controller;
 
-	public GUIMainScreen(Controller controller, IEditingEnvironment actorEditor, IEditingEnvironment levelEditor,
-			GameInfo gameInfo, List<Actor> actors) {
-		this.controller = controller;
-		this.actorEditor = actorEditor;
+	public GUIMainScreen(GameEditingEnvironment gameEditor, Controller controller, Stage stage, List<Level> levels,
+			IEditingEnvironment levelEditor) {
+		this.gameEditor = gameEditor;
+		this.levels = levels;
 		this.levelEditor = levelEditor;
-		this.gameInfo = gameInfo;
-		clickableLabels = new ArrayList<LabelClickable>();
-		levelScrollPane = new ScrollPane();
+		this.controller = controller;
+		this.stage = stage;
+		allPreviewUnits = new ArrayList<>();
+		levelPreviewUnits = new ArrayList<>();
 		actorScrollPane = new ScrollPane();
+		levelScrollPane = new ScrollPane();
 		initializeEnvironment();
 	}
 
+	/**
+	 * Initializes the Main Screen's GUI Elements
+	 */
 	public void initializeEnvironment() {
-		initBorderPane();
-		initScrollPaneContainer();
-		initLabelContainers();
-		initScrollPanes();
-		initLeftPane();
-		scrollPaneContainer.getChildren().addAll(levelScrollPane, actorScrollPane);
-		borderPane.setCenter(scrollPaneContainer);
+		initializeBorderPane();
+		initializeCenterPane();
+		initializeCreatedEditablesDisplay();
+		initializeCreatedEditablesDisplayHeaders();
+		initializeEditableGameElementPreviewContainers();
+		initializeScrollPanes();
+		initializeGameEditingEnvironment();
+		createdActorsDisplay.getChildren().addAll(actorsDisplayHeader.getHBox(), actorScrollPane);
+		createdLevelsDisplay.getChildren().addAll(levelsDisplayHeader.getHBox(), levelScrollPane);
+		centerPane.getChildren().addAll(createdActorsDisplay, createdLevelsDisplay);
+		borderPane.setCenter(centerPane);
 	}
 
-	private void initLeftPane() {
-		GUIGameEditingEnvironment gameEditingEnvironment = new GUIGameEditingEnvironment(gameInfo, controller, myActors);
-		borderPane.setLeft(gameEditingEnvironment.createNode());
+	/**
+	 * Initializes the Game Editing Environment and sets it as the BorderPane's
+	 * left pane
+	 */
+	private void initializeGameEditingEnvironment() {
+		borderPane.setLeft(gameEditor.getNode());
 	}
 
-	private void initBorderPane() {
-		Stage stage = controller.getStage();
+	/**
+	 * Initializes the BorderPane for the MainScreen
+	 */
+	private void initializeBorderPane() {
 		borderPane = new BorderPane();
 		bindNodeSizeToGivenSize(borderPane, stage.widthProperty(), stage.heightProperty());
 	}
 
-	private void initScrollPaneContainer() {
-		scrollPaneContainer = new HBox();
-		bindNodeSizeToGivenSize(scrollPaneContainer, borderPane.widthProperty(), borderPane.heightProperty());
+	/**
+	 * Initializes the HBox containing the two ScrollPanes holding the labels
+	 * representing the actors and levels to be edited
+	 */
+	private void initializeCenterPane() {
+		centerPane = new HBox();
+		bindNodeSizeToGivenSize(centerPane, borderPane.widthProperty(), borderPane.heightProperty());
 	}
 
-	private void initScrollPanes() {
-		initScrollPane(actorScrollPane, actorLabelContainer);
-		initScrollPane(levelScrollPane, levelLabelContainer);
+	private void initializeCreatedEditablesDisplay() {
+		createdActorsDisplay = new VBox();
+		createdLevelsDisplay = new VBox();
+		bindNodeSizeToGivenSize(createdActorsDisplay, centerPane.widthProperty().divide(NUM_SCROLLPANES), null);
+		bindNodeSizeToGivenSize(createdLevelsDisplay, centerPane.widthProperty().divide(NUM_SCROLLPANES), null);
 	}
 
-	private void initScrollPane(ScrollPane scrollPane, VBox container) {
-		bindNodeSizeToGivenSize(scrollPane, scrollPaneContainer.widthProperty().divide(NUM_SCROLLPANES), null);
-		scrollPane.setContent(container);
+	private void initializeCreatedEditablesDisplayHeaders() {
+		actorsDisplayHeader = new HBoxDisplayHeaderActor(createdActorsDisplay.prefWidthProperty());
+		levelsDisplayHeader = new HBoxDisplayHeaderLevel(createdLevelsDisplay.prefWidthProperty());
+		levelsDisplayHeader.addObserver(this);
 	}
 
-	private void initLabelContainers() {
-		actorLabelContainer = createLabelContainer(actorScrollPane);
-		levelLabelContainer = createLabelContainer(levelScrollPane);
+	/**
+	 * Initializes the ScrollPanes holding the labels representing the actors
+	 * and levels to be edited
+	 */
+	private void initializeScrollPanes() {
+		initScrollPane(actorScrollPane, createdActorsDisplay.widthProperty(), createdActorsDisplay.heightProperty(),
+				actorPreviewContainer);
+		initScrollPane(levelScrollPane, createdLevelsDisplay.widthProperty(), createdLevelsDisplay.heightProperty(),
+				levelPreviewContainer);
 	}
 
-	private VBox createLabelContainer(ScrollPane parentScrollPane) {
+	/**
+	 * Initializes a ScrollPane and has its size bound to half of the center
+	 * pane's width and sets its contents to the container holding the elements
+	 * to be placed within the ScrollPane
+	 * 
+	 * @param scrollPane
+	 *            whose size is to be bound and whose content is to be set
+	 * @param container
+	 *            the container holding the elements to be placed within the
+	 *            ScrollPane
+	 */
+	private void initScrollPane(ScrollPane scrollPane, DoubleExpression bindWidth, DoubleExpression bindHeight,
+			Node initialContent) {
+		bindNodeSizeToGivenSize(scrollPane, bindWidth,
+				bindHeight.subtract(levelsDisplayHeader.getHBox().heightProperty()));
+		scrollPane.setContent(initialContent); // can't just subtract by
+												// levelsDisplayHeader
+	}
+
+	/**
+	 * Initializes the VBox containers holding labels representing actors and
+	 * levels to be edited
+	 */
+	private void initializeEditableGameElementPreviewContainers() {
+		actorPreviewContainer = createEditableGameElementPreviewContainer(actorScrollPane);
+		levelPreviewContainer = createEditableGameElementPreviewContainer(levelScrollPane);
+	}
+
+	/**
+	 * Initializes a single Label container and binds its size to a ScrollPane's
+	 * width and height
+	 * 
+	 * @param parentScrollPane
+	 *            - ScrollPane to which the Label container's width and height
+	 *            will be bound
+	 * @return the Label container initialized
+	 */
+	private VBox createEditableGameElementPreviewContainer(ScrollPane parentScrollPane) {
 		VBox container = new VBox();
 		bindNodeSizeToGivenSize(container, parentScrollPane.widthProperty(), parentScrollPane.heightProperty());
 		return container;
 	}
 
+	/**
+	 * Binds a region to a given width and height
+	 * 
+	 * @param child
+	 *            - region whose width and height are to be bound
+	 * @param width
+	 *            - the width the child's width will be bound to
+	 * @param height
+	 *            - the height the child's height will be bound to
+	 */
 	private void bindNodeSizeToGivenSize(Region child, DoubleExpression width, DoubleExpression height) {
 		if (width != null)
 			child.prefWidthProperty().bind(width);
@@ -109,27 +177,71 @@ public class GUIMainScreen implements IGUI {
 			child.prefHeightProperty().bind(height);
 	}
 
+	/**
+	 * Returns the BorderPane containing all GUI elements in the MainScreen
+	 */
 	public Pane getPane() {
 		return borderPane;
 	}
 
-	public void createActorLabel(IEditableGameElement actor) {
-		createLabel(actor, actorEditor, actorLabelContainer);
+	/**
+	 * Creates a LabelClickable associated with an Actor
+	 * 
+	 * @param actor:
+	 *            actor to be linked to LabelClickable being created
+	 * @param actorEditor:
+	 *            IEditingEnvironment in which Actor is to be edited
+	 * @return a LabelClickable associated with an Actor
+	 */
+	public void createActorPreviewUnit(IEditableGameElement actor, IEditingEnvironment actorEditor) {
+		PreviewUnitWithEditable actorPreviewUnit = new PreviewUnitWithEditable(actor, actorEditor);
+		initializePreviewUnit(actorPreviewUnit, actorPreviewContainer);
 	}
 
-	public void createLevelLabel(IEditableGameElement level) {
-		createLabel(level, levelEditor, levelLabelContainer);
+	/**
+	 * 
+	 * @param level:
+	 *            level to be linked to LabelClickable being created
+	 * @param levelEditor:
+	 *            IEditingEnvironment in which Level is to be edited
+	 * @return a LabelClickable associated with a Level
+	 */
+	public void createLevelPreviewUnit(IEditableGameElement level, IEditingEnvironment levelEditor) {
+		PreviewUnitWithLevel levelPreviewUnit = new PreviewUnitWithLevel(level, levelEditor);
+		initializePreviewUnit(levelPreviewUnit, levelPreviewContainer);
+		levelPreviewUnits.add(levelPreviewUnit);
 	}
 
-	private void createLabel(IEditableGameElement editable, IEditingEnvironment environment, VBox container) {
-		LabelClickable label = new LabelClickable(editable, environment, controller);
-		bindNodeSizeToGivenSize(label, container.widthProperty(), null);
-		container.getChildren().add(label);
-		clickableLabels.add(label);
+	private void initializePreviewUnit(PreviewUnitWithEditable previewUnit, VBox parent) {
+		previewUnit.addObserver(controller);
+		HBox previewUnitHBox = previewUnit.getHBox();
+		bindNodeSizeToGivenSize(previewUnitHBox, parent.widthProperty(), null);
+		parent.getChildren().add(previewUnitHBox);
+		allPreviewUnits.add(previewUnit);
 	}
 
-	public void updateAllNodes() {
-		clickableLabels.stream().forEach(label -> label.update());
+	/**
+	 * Updates all LabelClickables to account for any changes in the name or
+	 * image of Actors and Levels
+	 */
+	public void updatePreviewUnits() {
+		allPreviewUnits.stream().forEach(unit -> unit.update());
+	}
+
+	/**
+	 * Reorders Level Labels so that Labels with Levels that appear earlier in
+	 * the game are displayed toward the top of the ScrollPane containing all
+	 * Level Labels
+	 */
+	private void reorderLevelLabels() {
+		@SuppressWarnings("unused")
+		LevelPreviewUnitReorderer levelReorderer = new LevelPreviewUnitReorderer(levelPreviewUnits,
+				levelPreviewContainer, levels, levelEditor, allPreviewUnits, this);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		reorderLevelLabels();
 	}
 
 }

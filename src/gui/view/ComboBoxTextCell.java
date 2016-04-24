@@ -3,7 +3,6 @@ package gui.view;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import authoringenvironment.model.IEditableGameElement;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 /**
@@ -13,9 +12,9 @@ import javafx.scene.control.Label;
  */
 public abstract class ComboBoxTextCell extends ComboBoxParent {
 	
-	public ComboBoxTextCell(ResourceBundle myResources, String promptText, String labelText) {
+	public ComboBoxTextCell(String promptText, String labelText) {
 		super(promptText);
-		this.labelText = labelText;
+		setLabelText(labelText);
 	}
 
 	@Override

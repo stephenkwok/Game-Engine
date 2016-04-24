@@ -1,7 +1,6 @@
 package gui.view;
 
 import authoringenvironment.controller.Controller;
-import gui.controller.IScreenController;
 
 /**
  * Button for adding a new actor.
@@ -16,8 +15,8 @@ public class ButtonNewActor extends ButtonParent {
 	 * @param buttonText: text for the button.
 	 * @param imageName: image for the button.
 	 */
-	public ButtonNewActor(IScreenController myController, String buttonText, String imageName) {
-		super(myController, buttonText, imageName);
+	public ButtonNewActor(String buttonText, String imageName) {
+		super(buttonText, imageName);
 	}
 
 	/**
@@ -25,7 +24,7 @@ public class ButtonNewActor extends ButtonParent {
 	 */
 	@Override
 	protected void setButtonAction() {
-		button.setOnAction(e -> ((Controller) myController).addActor());
+		getButton().setOnAction(e -> notifyObservers("ButtonNewActor"));
 	}
 
 }

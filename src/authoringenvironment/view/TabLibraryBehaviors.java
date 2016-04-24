@@ -19,22 +19,26 @@ public class TabLibraryBehaviors extends TabLibrary {
 		super(myResources, tabText, myRuleMaker);
 		setContent();
 	}
-	
+	/**
+	 * Set content of tab to list of behaviors
+	 */
 	@Override
 	void setContent() {
-		labels = FXCollections.observableArrayList();
-		for(String behavior: myResources.getString(tabText).split(" ")){
+		setLabels(FXCollections.observableArrayList());
+		for(String behavior: getResources().getString(getTabText()).split(" ")){
 			Label mySource = new Label(behavior);
-			if(myActorRuleCreator!=null){
+			if(getActorRuleCreator()!=null){
 				setDragEvent(mySource,TransferMode.COPY);
 			}
-			labels.add(mySource);
+			getLabels().add(mySource);
 		}
-		listView = new ListView<>(labels);
+		setListView(new ListView<>(getLabels()));
 	}
-
+	/**
+	 * Return behavior content of this tab
+	 */
 	@Override
 	Node getContent() {
-		return listView;
+		return getListView();
 	}
 }

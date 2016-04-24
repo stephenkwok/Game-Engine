@@ -1,11 +1,18 @@
 package authoringenvironment.view;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
+import gameengine.model.IRule;
+import gameengine.model.Actions.ChangeAttribute;
+//import gameengine.model.IRule;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 /**
  * Space in actor editing environment where rules are created.
@@ -15,83 +22,143 @@ import javafx.scene.layout.GridPane;
 public class ActorRuleCreator {
 	private static final int RULE_COL = 1;
 	private static final int RULE_ROW_START = 1;
+	private static final String RESOURCE_BASE = "actionfactory";
+	private static final String KEY_TRIGGER = "Key";
 	private static final int VGAP = 10;
 	private static final int HGAP = 10;
 	private static final double CONTAINERS_PERCENT_WIDTH = 0.75;
-	private int rule_row;
-	private GridPane myRuleCreator;
-	private List<ActorRule> myRules;
-	private GUIActorEditingEnvironment aEE; 
-	private Controller myController;
+	private static final Object CHANGE_ATTRIBUTE = "ChangeAttribute";
+	private int ruleRow;
+	private GridPane myActorRuleCreatorPane;
+	private List<ActorRule> myActorRules;
+	private ActorEditingEnvironment aEE;
+	private ResourceBundle myActionResources;
 	
-	public ActorRuleCreator(GUIActorEditingEnvironment aEE, Controller myController) {
+	public ActorRuleCreator(ActorEditingEnvironment aEE) {
 		this.aEE = aEE;
-		this.myController = myController;
 		initializeEnvironment();
 	}
 	
+	/**
+	 * Initialize and create actor rule creator, the rightmost section of the actor editing environment
+	 */
 	private void initializeEnvironment(){
-		rule_row = RULE_ROW_START;
-		myRules = new ArrayList<>();
-		myRuleCreator = new GridPane();
-		myRuleCreator.setPrefWidth(myController.getSceneWidth()*CONTAINERS_PERCENT_WIDTH);
-		myRuleCreator.setVgap(VGAP);
-		myRuleCreator.setHgap(HGAP);
+		this.ruleRow = RULE_ROW_START;
+		this.myActorRules = new ArrayList<>();
+		this.myActionResources = ResourceBundle.getBundle(RESOURCE_BASE);
+		myActorRuleCreatorPane = new GridPane();
+		myActorRuleCreatorPane.setPrefWidth(aEE.getStage().getWidth()*CONTAINERS_PERCENT_WIDTH);
+		myActorRuleCreatorPane.setVgap(VGAP);
+		myActorRuleCreatorPane.setHgap(HGAP);
 	}
-
+	
+	/**
+	 * Get GridPane representation of actor rule creator
+	 * @return
+	 */
 	public GridPane getGridPane() {
-		return myRuleCreator;
+		return myActorRuleCreatorPane;
 	}
 
+	/**
+	 * Add given behavior to given ActorRule   
+	 * @param rule
+	 * @param behavior
+	 */
 	public void addBehavior(ActorRule rule, Label behavior){
-		rule.addBehavior(behavior);
+		rule.addBehavior(behavior.getText());
 	}
-	
+	/**
+	 * Add given sound to given ActorRule
+	 * @param rule
+	 * @param sound
+	 */
 	public void addSound(ActorRule rule, Label sound){
-		rule.addSound(sound);
+//		rule.addSound(sound.getText());
 	}
-	
+	/**
+	 * Add given image to given ActorRule
+	 * @param rule
+	 * @param image
+	 */
 	public void addImage(ActorRule rule, Label image){
-		rule.addImage(image);
+//		rule.addImage(image.getText());
 	}
-
-	public void addNewRule() {
+	
+	/**
+	 * Create new rule for Actor currently in the actor editing environment and add to gridpane
+	 */
+	public void addNewActorRule() {  
 		ActorRule newRule = new ActorRule(this);
-		myRuleCreator.add(newRule.getGridPane(), RULE_COL,rule_row);
-		rule_row++;
-		myRules.add(newRule);
-		((Actor) aEE.getEditable()).addActorRule(newRule);
-		aEE.updateDragEventsForLibrary();
+		myActorRuleCreatorPane.add(newRule.getGridPane(), RULE_COL,ruleRow);
+		myActorRules.add(newRule);
+		ruleRow++;
 	}
 	
-	public void removeRule(ActorRule actorRule){
-		myRules.remove(actorRule);
-		myRuleCreator.getChildren().remove(actorRule.getGridPane());
-		((Actor) aEE.getEditable()).removeActorRule(actorRule);
+	/**
+	 * Remove given rule from environment and from Actor currently in the environment 
+	 * @param actorRule
+	 */
+	public void removeActorRule(ActorRule actorRule){
+		myActorRules.remove(actorRule);
+		myActorRuleCreatorPane.getChildren().remove(actorRule.getGridPane());
 	}
 	
-	public List<ActorRule> getRules(){
-		return myRules;
+	/**
+	 * Get ActorRules for Actor currently in the actor editing environment
+	 * @return
+	 */
+	public List<ActorRule> getActorRules(){
+		return myActorRules;
+	}
+	/**
+	 * Each time actor editing environment is opened and set to a specific Actor, populates editing environment rules and
+	 * fields based on the Actor 
+	 */
+	public void updateActorRules() {
+		for(ActorRule toRemove: myActorRules) myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
+		myActorRules.clear();
+		ruleRow = RULE_ROW_START;
+		System.out.println(((Actor) aEE.getEditable()).getRules());
+		for(String triggerType: ((Actor) aEE.getEditable()).getRules().keySet()){
+			ActorRule toAdd = new ActorRule(this);
+			toAdd.addBehavior(checkForKeyTrigger(triggerType));
+			for(IRule rule: ((Actor) aEE.getEditable()).getRules().get(triggerType)){
+				String simpleName = rule.getMyAction().getClass().getSimpleName();
+				if(simpleName.equals(CHANGE_ATTRIBUTE)){
+					String attributeType = ((ChangeAttribute) rule.getMyAction()).getMyAttributeType();
+					toAdd.addBehavior(myActionResources.getString(attributeType));
+				}
+				else toAdd.addBehavior(simpleName); // name of Action
+			}
+			myActorRuleCreatorPane.add(toAdd.getGridPane(), RULE_COL, ruleRow);
+			myActorRules.add(toAdd);
+			ruleRow++;
+		}
 	}
 	
-	public Controller getController(){
-		return myController;
+	/**
+	 * Get the current IAuthoringActor
+	 * @return IAuthoringActor
+	 */
+	public IAuthoringActor getActor(){
+		return (IAuthoringActor) aEE.getEditable();
 	}
 
-	public void updateRules() {
-		for(ActorRule toRemove: myRules){
-			myRuleCreator.getChildren().remove(toRemove.getGridPane());
-			((Actor) aEE.getEditable()).removeActorRule(toRemove);
-		}
-		myRules = ((Actor) aEE.getEditable()).getActorRules();
-		addUpdatedRules();
-	}
-	private void addUpdatedRules(){
-		rule_row = RULE_ROW_START;
-		for(ActorRule toAdd: myRules){
-			myRuleCreator.add(toAdd.getGridPane(), RULE_COL, rule_row);
-		}
-		aEE.updateDragEventsForLibrary();
+	public Controller getController() {
+		return aEE.getController();
 	}
 
+	public void setRules() {
+		for(ActorRule actorRule: myActorRules){
+			actorRule.setRules();
+		}
+	}
+	
+	private String checkForKeyTrigger(String triggerType){
+		if(Arrays.asList(myActionResources.getString("KeyInputs").split(" ")).contains(triggerType)){
+			return KEY_TRIGGER;
+		}
+		return triggerType;
+	}
 }

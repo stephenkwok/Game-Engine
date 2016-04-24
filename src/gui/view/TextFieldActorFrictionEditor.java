@@ -1,18 +1,22 @@
 package gui.view;
 
-import gameengine.model.Actor;
+import authoringenvironment.model.IAuthoringActor;
 
 public class TextFieldActorFrictionEditor extends TextFieldWithButton {
 
 	public TextFieldActorFrictionEditor(String labelText, String promptText, Double textFieldWidth) {
 		super(labelText, promptText, textFieldWidth);
-		setButtonAction(e -> ((Actor) getEditableElement()).setMyFriction(Double.parseDouble(getTextFieldInput())));
+		setButtonAction(e -> {
+			((IAuthoringActor) getEditableElement()).setFriction(Double.parseDouble(getTextFieldInput()));
+			setChanged(); notifyObservers((IAuthoringActor) getEditableElement());
+		});
 	}
-
+	/**
+	 * Sets the textfield's value to reflect the current actor's friction.
+	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
-		// TODO Auto-generated method stub
-		
+		setTextFieldValue(Double.toString(((IAuthoringActor) getEditableElement()).getFriction()));
 	}
 
 }

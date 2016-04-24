@@ -24,7 +24,7 @@ public class ComboBoxTermination extends ComboBoxTextCell {
 	 * @param labelText: text for label.
 	 */
 	public ComboBoxTermination(ResourceBundle myResources, String promptText, String labelText) {
-		super(myResources, promptText, labelText);
+		super(promptText, labelText);
 		myOptions = Arrays.asList(myResources.getString(TERMINATION_OPTIONS).split(DELIMITER));
 	}
 
@@ -33,9 +33,9 @@ public class ComboBoxTermination extends ComboBoxTextCell {
 	 */
 	@Override
 	public void setButtonAction() {
-		comboButton.setOnAction(event->{
-			((Level) getEditableElement()).setMyTermination(comboBox.getValue());
-		});
+		/*getComboButton().setOnAction(event->{
+			((Level) getEditableElement()).setMyTermination(getComboBox().getValue());
+		});*/
 	}
 
 	/**
@@ -51,9 +51,9 @@ public class ComboBoxTermination extends ComboBoxTextCell {
 	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
-		if (((Level) getEditableElement()).getLosingCondition() != null) {
-			comboBox.setValue(((Level) getEditableElement()).getLosingCondition());
-		}
+	/*	if (((Level) getEditableElement()).getMyLosingCondition() != null) {
+			getComboBox().setValue(((Level) getEditableElement()).getMyLosingCondition());
+		}*/
 	}
 
 }

@@ -1,13 +1,11 @@
 package gameengine.model;
 
-import java.util.HashMap;
+import java.lang.reflect.Constructor;
 import java.util.List;
-import java.util.Map;
 import gameengine.model.Actor;
-import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.CollisionTrigger;
-import gameengine.model.Triggers.SideCollision;
-import gameengine.model.Triggers.TopCollision;;
+import javafx.geometry.Point2D;
+
 
 /**
  * Collision Detection class handles checking for collisions among a list of Actors
@@ -17,7 +15,12 @@ import gameengine.model.Triggers.TopCollision;;
  *
  */
 public class CollisionDetection {
-
+	
+	private String SideCollision = "SideCollision";
+	private String TopCollision = "TopCollision";
+	private String BottomCollision = "BottomCollision";
+    private static final String TRIGGER_PREFIX = "gameengine.model.Triggers.";
+	
 	private PhysicsEngine myPhysicsEngine;
 	
 	public CollisionDetection( PhysicsEngine physicsEngine){
@@ -28,17 +31,16 @@ public class CollisionDetection {
 	 * Called on list of actors in Level to detect any collisions between unique actors
 	 * @return List of actors with updated position variables
 	 */
-	public List<Actor> detection(List<Actor> actors){
-		for (Actor a1 : actors){
-			a1.setInAir(true);
-			for(Actor a2 : actors){
-				if(a1 != a2 ){            //Checks that each actor in the pair is unique
+	public List<IPlayActor> detection(List<IPlayActor> list){
+		for (IPlayActor a1 : list){
+			for(IPlayActor a2 : list){
+				if(a1 != a2){            //Checks that each actor in the pair is unique
 					if(isCollision(a1,a2))
 						resolveCollision(a1,a2);
 				}
 			}
 		}
-		return actors;
+		return list;
 	}
 		
 	/**
@@ -48,8 +50,15 @@ public class CollisionDetection {
 	 * @param a2
 	 * @return True = Is Collision, False = No Collision
 	 */
-	private boolean isCollision(Actor a1, Actor a2){
+	private boolean isCollision(IPlayActor a1, IPlayActor a2){
 		return a1.getBounds().intersects(a2.getBounds());
+	}
+	
+	private Point2D findCenter(IPlayActor a1){
+		double centerX  = (a1.getBounds().getWidth())*.5 + a1.getBounds().getMinX();
+		double centerY  = (a1.getBounds().getHeight())*.5 + a1.getBounds().getMinY();
+		Point2D center = new Point2D(centerX,centerY);
+		return center;
 	}
 	
 	/**
@@ -60,40 +69,48 @@ public class CollisionDetection {
 	 * @param a2
 	 * @return Type of collision-String
 	 */
-	//Should this be a String? Just using Magic Strings for now
-	private String getCollisionType(Actor a1, Actor a2){
-		double xOverlap = 0;
-		double yOverlap = 0;
-		a1.setInAir(true);
-		if(a1.getBounds().getMaxX() <= a2.getBounds().getMaxX()){
-			xOverlap = a1.getBounds().getMaxX() -  a2.getX();
-		}else{
-			xOverlap = a2.getBounds().getMaxX() -  a1.getX();
-		}
+	private String getCollisionType(IPlayActor a1, IPlayActor a2){
+
 		
-		if(a1.getBounds().getMaxY() <= a2.getBounds().getMaxY()){
-			yOverlap = a1.getBounds().getMaxY() -  a2.getY();
-		}else{
-			yOverlap = a2.getBounds().getMaxY() -  a1.getY();
-		}
-				
-		if(xOverlap <= yOverlap){
-			return "SideCollision";
-		}else{ 
-			if(a2.getBounds().getMinY()<=a1.getBounds().getMaxY()){
-				a1.setInAir(false);
-				return "BottomCollision";
-			}else{
-				return "TopCollision";
-			}
+		double w = (0.5 * (a1.getBounds().getWidth() + a2.getBounds().getWidth()));
+		double h = (0.5 * (a1.getBounds().getHeight() + a2.getBounds().getHeight()));
+		
+		Point2D a1Center = findCenter(a1);
+		Point2D a2Center = findCenter(a2);
 			
-		}
+		double dx  = (a1Center.getX() - a2Center.getX());
+		double dy  = (a1Center.getY() - a2Center.getY());
+
+
+		double wy = w * dy;
+		double hx = h * dx;
+
+		if (wy > hx) {
+			if (wy > -hx) {
+				return TopCollision;
+			} else {
+				return SideCollision;
+			}
+		} else {
+			if (wy > -hx) {
+				return SideCollision;
+			} else {
+				return BottomCollision;
+			}
+		} 
 	}
 	
-	private void resolveCollision(Actor a1, Actor a2){
+	private void resolveCollision(IPlayActor a1, IPlayActor a2){
 		String collisionType = getCollisionType(a1,a2);
-		String triggerString = a1.getMyName() + collisionType + a2.getMyName();
-		a1.performActionsFor(triggerString);   //Needs to be changed to take a string parameter
+        try {
+            Class<?> className = Class.forName(TRIGGER_PREFIX + collisionType);
+            Constructor[] myConstructors = className.getConstructors();
+            CollisionTrigger myTrigger = (CollisionTrigger) myConstructors[0].newInstance(a1, a2);
+            a1.performActionsFor(myTrigger);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
 	}
 
 	public PhysicsEngine getMyPhysicsEngine() {

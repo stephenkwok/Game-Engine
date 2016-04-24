@@ -23,7 +23,7 @@ public class ComboBoxScrollingDirection extends ComboBoxTextCell {
 	 * @param labelText: text for label.
 	 */
 	public ComboBoxScrollingDirection(ResourceBundle myResources, String promptText, String labelText) {
-		super(myResources, promptText, labelText);
+		super(promptText, labelText);
 		myOptions = Arrays.asList(myResources.getString(SCROLLING_DIRECTION_OPTIONS).split(DELIMITER));
 	}
 
@@ -32,8 +32,10 @@ public class ComboBoxScrollingDirection extends ComboBoxTextCell {
 	 */
 	@Override
 	public void setButtonAction() {
-		comboButton.setOnAction(event->{
-			((Level) getEditableElement()).setMyScrollingDirection(comboBox.getValue());
+		getComboButton().setOnAction(event->{
+			((Level) getEditableElement()).setMyScrollingDirection(getComboBox().getValue());
+			setChanged();
+			notifyObservers();
 		});
 	}
 
@@ -50,8 +52,8 @@ public class ComboBoxScrollingDirection extends ComboBoxTextCell {
 	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
-		if (((Level) getEditableElement()).getScrollingDirection() != null) {
-			comboBox.setValue(((Level) getEditableElement()).getScrollingDirection());
+		if (((Level) getEditableElement()).getMyScrollingDirection() != null) {
+			getComboBox().setValue(((Level) getEditableElement()).getMyScrollingDirection());
 		}
 	}
 

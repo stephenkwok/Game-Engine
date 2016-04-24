@@ -1,26 +1,19 @@
 package gameplayer.view;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ResourceBundle;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Optional;
 
-import gameengine.controller.Game;
-import gameplayer.controller.BaseScreenController;
-import gameplayer.controller.GameController;
-import gui.controller.IScreenController;
-import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import gui.view.Screen;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableMap;
-import javafx.scene.PerspectiveCamera;
-import javafx.scene.Scene;
-import javafx.scene.SubScene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 /**
  * This class provides for a private interface to create a base screen view that
@@ -29,14 +22,14 @@ import javafx.stage.Stage;
  * @author Carine, Michael
  *
  */
-public class BaseScreen extends Screen {
-
-	private ResourceBundle myResources;
-	private static final String GUI_RESOURCE = "gameGUI";
-	private BaseScreenController myBaseScreenController;
-	private GUIFactory factory;
+public class BaseScreen extends Screen implements Observer {
+	
+	private static final String BASE_RESOURCE = "gameGUI";
 	private static final String SIDE_BUTTONS = "SideButtons";
-	private BorderPane myMasterPane;
+
+	private BorderPane myPane;
+	private HUDScreen myHUD;
+	private GameScreen myGameScreen;
 
 	
 	/**
@@ -44,91 +37,87 @@ public class BaseScreen extends Screen {
 	 * to the BaseScreen
 	 * @param stage to change the scene
 	 * @param game to initialize the gamescreen with
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	public BaseScreen(Stage stage, Game game) {
-		super(stage);
-		this.myMasterPane = new BorderPane();
-		init();
-		GameController myGameController = myBaseScreenController.getMyGameController();
-		myGameController.setGame(game);
-		myGameController.setGameView(new GameScreen(new PerspectiveCamera()));
-		myGameController.initialize(game.getInfo().getMyCurrentLevelNum()); //note: main actor is define at this line
-		addComponents(); //HUD is actually added here
+	public BaseScreen() {
+		super();
+		this.myPane = new BorderPane();
+		setUpResourceBundle(BASE_RESOURCE);
+		initialize(); //HUD is actually added here
 	}
-	
-	public void init() {
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		myBaseScreenController = new BaseScreenController(getStage(), this, this.myResources);
-		factory = new GUIFactory(myResources, myBaseScreenController);
-	}
-	
 
-	public void addComponents() {
-		try {
-			addGame();
-			addHUD();
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException | SecurityException e1) {
-			e1.printStackTrace();
-		}
-		getRoot().getChildren().add(myMasterPane);
+
+	@Override
+	protected void initialize() {
+		myPane.setTop(addToolbar(SIDE_BUTTONS));
+		addHUD();
+		getRoot().getChildren().add(myPane);
 	}
 	
 	//depracated
-	public void addHUD() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	private void addHUD() {
 		
-		IGUIElement hudPane = factory.createNewGUIObject("hudPane");
-		Pane myP = (Pane) hudPane.createNode();
+		notifyObservers("addHUD");
 		/*
 		ObservableMap<String, Object> status = FXCollections.observableHashMap();
 		status.put("health", 20);
 		status.put("level", 2);
 		HUDScreen myHud = new HUDScreen(SCREEN_WIDTH,SCREEN_WIDTH,status);
 		*/
+		/*
 		HUDScreen myHud = new HUDScreen(SCREEN_WIDTH, SCREEN_WIDTH, 
 				myBaseScreenController.getMyGameController().getGame().getHUDData());
 		myBaseScreenController.getMyGameController().setHUD(myHud);
 		myHud.init();
 		myP.getChildren().add(myHud.getScene());
 		myMasterPane.setBottom(myP);
-		//myMasterPane.setBottom(new Text("HELLO!!!!"));
+		//myMasterPane.setBottom(new Text("HELLO!!!!")); */
 	}
 
-	public void addGame() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		addButtonPane();
-		addGamePane();
+	
+
+	
+	public void setGameScreen(GameScreen screen) {
+		this.myGameScreen = screen;
+		this.myPane.setCenter(myGameScreen.getScene());
+	}
+	
+	public void setHUDScreen(HUDScreen screen) {
+		this.myHUD = screen;
+		IGUIElement hudPane = getFactory().createNewGUIObject("hudPane");
+		Pane myP = (Pane) hudPane.createNode();
+		myP.getChildren().add(myHUD.getScene());
+		this.myPane.setBottom(myP);
 	}
 
-	public void addButtonPane() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		String[] sideButtons = myResources.getString(SIDE_BUTTONS).split(",");
-		ToolBar myT = new ToolBar();
-		for(int i = 0; i < sideButtons.length; i++){
-			IGUIElement newElement = factory.createNewGUIObject(sideButtons[i]);
-			Button myB = (Button) newElement.createNode();
-			Tooltip t = new Tooltip(myResources.getString(sideButtons[i]+ "Text"));
-			t.install(myB, t);
-			myT.getItems().add(myB);
-			myB.setFocusTraversable(false);
-		}
-		myMasterPane.setTop(myT);
+	@Override
+	public void update(Observable o, Object arg) {
+		setChanged();
+		notifyObservers(o.getClass().getSimpleName());
+	}
+
+
+	public void switchAlert() {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, getResources().getString("SwitchConfirmation"), ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+		Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.YES) {
+            setChanged();
+            notifyObservers("ButtonSaveGame");
+            setChanged();
+            notifyObservers("choose");
+        }
+        else if (result.get() == ButtonType.NO) {
+        	setChanged();
+        	notifyObservers("choose");
+        }
+        else {
+        	setChanged();
+        	notifyObservers("ButtonUnPause");
+        }
 		
 	}
-	
-	public void addGamePane(){
-		SubScene gameScene = myBaseScreenController.getMyGameController().getView().getScene();
-		myMasterPane.setCenter(gameScene);
-	}
-	
-	@Override
-	public Scene getScene()
-			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public IScreenController setController() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

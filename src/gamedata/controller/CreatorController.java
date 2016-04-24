@@ -47,8 +47,10 @@ public class CreatorController implements ICreatorController {
 		File loaderFile = createLoaderFileFromFile(file);
 		try {
 			myGame.setInitialGameFile(loaderFile.getPath());
+			myGame.getInfo().setMyFile(loaderFile.getName());
 			this.myXMLCreator.saveGame(myGame, loaderFile);
 			myGame.setInitialGameFile(loaderFile.getPath());
+			myGame.getInfo().setMyFile(file.getName());
 			saveForPlaying(file);
 		} catch (SAXException | IOException | TransformerException | ParserConfigurationException e) {
 			myScreen.showError(e.getMessage());
@@ -62,6 +64,7 @@ public class CreatorController implements ICreatorController {
 			return;
 		}
 		try {
+			myGame.getInfo().setMyFile(file.getName());
 			this.myXMLCreator.saveGame(myGame, file);
 		} catch (SAXException | IOException | TransformerException e) {
 			myScreen.showError(e.getMessage());
@@ -73,27 +76,6 @@ public class CreatorController implements ICreatorController {
 		File loaderFile = new File(f.getParent() + "/loaders/" + loaderFileName);
 		return loaderFile;
 	}
-	
-	
-	public static void main(String[] args) {
-		List<Level> levels = new ArrayList<>();
-		Level levelOne = new Level ();
-		Actor actorOne = new Actor();
-		actorOne.setMyID(1);
-		ArrayList<Object> bleh = new ArrayList<>();
-		bleh.add((double) 90);
-		actorOne.addRule(new Rule(new ClickTrigger(), new LoseGame(actorOne)));
-		levelOne.addActor(actorOne);
-		HashMap<String, List<Actor>> map = new HashMap<>();
-		List<Actor> actors = new ArrayList<>();
-		actors.add(actorOne);
-		map.put("Click", actors);
-		levels.add(levelOne);
-		Game g = new Game(new GameInfo(), levels);
-		CreatorController c;
-		c = new CreatorController(g); //, new GUIMain(null, null));
-		c.saveForEditing(new File ("src/resources/test.xml"));
-	} 
 	
 
 }

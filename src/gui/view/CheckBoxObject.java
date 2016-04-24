@@ -1,18 +1,21 @@
 package gui.view;
 
+
+import java.util.Observable;
+import java.util.Observer;
+
 import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingElement;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 
 /**
  * Checkbox object for option selection.
  * @author amyzhao
  *
  */
-public class CheckBoxObject implements IGUIElement, IGUIEditingElement {
+public class CheckBoxObject extends Observable implements IGUIElement, IEditingElement {
 	private String myPromptText;
 	private int myWidth;
 	private IEditableGameElement myEditableElement;
@@ -54,6 +57,11 @@ public class CheckBoxObject implements IGUIElement, IGUIEditingElement {
 	 */
 	protected IEditableGameElement getEditableElement() {
 		return myEditableElement;
+	}
+
+	@Override
+	public void addNodeObserver(Observer observer) {
+		this.addObserver(observer);	
 	}
 	
 }

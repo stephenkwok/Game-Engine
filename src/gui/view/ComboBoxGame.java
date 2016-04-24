@@ -8,8 +8,8 @@ import java.util.Map;
 
 import gamedata.controller.ParserController;
 import gameengine.controller.Game;
-import gui.controller.IScreenController;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -18,12 +18,10 @@ import javafx.scene.text.Text;
 public class ComboBoxGame extends ComboBoxImageCell {
 
 	private static final int STANDARD_IMAGE_HEIGHT = 50;
-	private IScreenController myController;
 	private Map<String, Game> myGames;
 	
-	public ComboBoxGame(String promptText, String imageResource, IScreenController myController) {
+	public ComboBoxGame(String promptText, String imageResource) {
 		super(promptText, imageResource, STANDARD_IMAGE_HEIGHT);
-		this.myController = myController;
 		this.myGames = new HashMap<>();
 		getGames();
 		fillImageNames();
@@ -32,24 +30,19 @@ public class ComboBoxGame extends ComboBoxImageCell {
 
 	@Override
 	public void setButtonAction() {
-		comboButton.setOnAction(event -> {
-			if (comboBox.getValue() == null) {
-				//TODO GET RESOURCE BUNDLE MESSAGE
-				myController.getScreen().showError("Please choose a game!");
-			}
-			else {
-				myController.setGame(myGames.get(comboBox.getValue()));
-				myController.useGame();
-			}
+		getComboButton().setOnAction(event -> {
+			this.setChanged();
+			this.notifyObservers(myGames.get(getComboBox().getValue()));
 		});
 		
 	}
 
 	private void getGames() {
+		//TODO implement error checking
 		File gameFileDir = new File(selectionResource);
 		for(File gameFile: gameFileDir.listFiles()) {
 			if(!gameFile.isDirectory()) {
-				ParserController parserController = new ParserController(myController.getScreen());
+				ParserController parserController = new ParserController();
 				Game game = parserController.loadforPlaying(gameFile);
 				myGames.put(gameFile.getPath(),game);
 			}

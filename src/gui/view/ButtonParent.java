@@ -1,85 +1,90 @@
 package gui.view;
 
-import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-
-import authoringenvironment.controller.Controller;
-import gui.controller.IScreenController;
+import java.util.Observer;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 /**
  * Abstract class to implement JavaFX Buttons
  * @author AnnieTang
  *
  */
-public abstract class ButtonParent implements IGUIElement {
+public abstract class ButtonParent extends ObjectObservable implements IGUIElement {
 	private static final int ICON_SIZE = 30;
 	private static final int PADDING = 10;
-	protected IScreenController myController;
 	private String buttonText;
-	protected Button button;
+	private Button button;
 	private String imageName;
+	private int iconSize;
 	
-	public ButtonParent(IScreenController myController, String buttonText, String imageName) {
-		this.myController = myController;
+	public ButtonParent(String buttonText, String imageName) {
 		this.buttonText = buttonText;
 		this.imageName = imageName;
+		this.iconSize = ICON_SIZE;
+		initializeButton();
 	}
-	/**
-	 * Creates and returns button
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 */
-	@Override
-	public Node createNode() {
+	
+	private void initializeButton() {
 		button = new Button(buttonText);
 		button.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
 		setButtonIcon();
 		setButtonAction();
-		return button; 
 	}
-
 	/**
-	 * Sets action when button is pressed.
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
+	 *
+	 * Creates and returns button
+	 */
+	@Override
+	public Node createNode()  {
+		return button;
+	}
+	
+	public void addNodeObserver(Observer observer) {
+		addObserver(observer);
+	}
+	/**
+	 * Sets action when button is pressed. 
 	 */
 	protected abstract void setButtonAction();
 	
 	/**
 	 * Optional, sets image for button.
 	 */
-	private void setButtonIcon(){
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
-		ImageView iv = new ImageView(image);
-        iv.setFitHeight(ICON_SIZE);
-        iv.setPreserveRatio(true);
-		button.setGraphic(iv);
+	protected void setButtonIcon(){
+		if (imageName != null) {
+			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+			ImageView iv = new ImageView(image);
+			iv.setFitHeight(iconSize);
+			iv.setPreserveRatio(true);
+			button.setGraphic(iv);
+		}
 	}
 	
-	/**
-     * Creates a file picker to get a file name
-     * @return returns the file
+    
+    /**
+     * Gets the button.
+     * @return button.
      */
-    protected File promptForFileName(boolean isSaving){
-        FileChooser myFileChooser = new FileChooser();
-        FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter("XML Files (.xml)", "*.xml");
-        myFileChooser.getExtensionFilters().add(myFilter);
-        File fileName;
-        if (isSaving){
-            fileName = myFileChooser.showSaveDialog(myController.getStage());
-        }
-        else{
-            fileName = myFileChooser.showOpenDialog(myController.getStage());
-        }
-        return fileName;
+    protected Button getButton() {
+    	return button;
     }
+    
+    /**
+     * Sets the button's image's name
+     * @param newImageName: name of button's new image
+     */
+    protected void setImageName(String newImageName) {
+    	imageName = newImageName;
+    }
+    
+    /**
+     * Sets the button's icon size
+     * @param size: size to set button's icon to
+     */
+    protected void setIconSize(int size) {
+    	iconSize = size;
+    }
+
 }

@@ -1,18 +1,20 @@
 package gui.view;
 
-import gameengine.model.Actor;
+import authoringenvironment.model.IAuthoringActor;
 
 public class TextFieldActorSizeEditor extends TextFieldWithButton {
 
 	public TextFieldActorSizeEditor(String labelText, String promptText, Double textFieldWidth) {
 		super(labelText, promptText, textFieldWidth);
-		setButtonAction(e -> ((Actor) getEditableElement()).setSize(Double.parseDouble(getTextFieldInput())));
+		setButtonAction(e -> {((IAuthoringActor) getEditableElement()).setSize(Double.parseDouble(getTextFieldInput()));
+			notifyObservers((IAuthoringActor) getEditableElement());});
 	}
-
+	/**
+	 * Sets the textfield's value to reflect the current actor's size.
+	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
-		// TODO Auto-generated method stub
-		
+		setTextFieldValue(Double.toString(((IAuthoringActor) getEditableElement()).getSize()));
 	}
 
 }

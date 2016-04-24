@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><utilities.hud.Container>
+  <value1>
+    <changed>false</changed>
+    <obs>
+      <utilities.hud.Container reference="../../.."/>
+    </obs>
+    <type>java.lang.Double</type>
+    <value class="double">0.333</value>
+    <bindings>
+      <utilities.hud.Property>
+        <changed>false</changed>
+        <obs>
+          <utilities.hud.Container reference="../../../../.."/>
+        </obs>
+        <type>java.lang.Double</type>
+        <value class="double">0.333</value>
+        <bindings>
+          <utilities.hud.Property reference="../../../.."/>
+          <utilities.hud.Property>
+            <changed>false</changed>
+            <obs>
+              <utilities.hud.Container reference="../../../../../../.."/>
+            </obs>
+            <type>java.lang.Double</type>
+            <value class="double">0.333</value>
+            <bindings>
+              <utilities.hud.Property reference="../../../.."/>
+            </bindings>
+          </utilities.hud.Property>
+        </bindings>
+      </utilities.hud.Property>
+    </bindings>
+  </value1>
+  <value2 reference="../value1/bindings/utilities.hud.Property"/>
+  <value3 reference="../value1/bindings/utilities.hud.Property/bindings/utilities.hud.Property[2]"/>
+</utilities.hud.Container>

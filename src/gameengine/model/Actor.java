@@ -1,8 +1,8 @@
 package gameengine.model;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -10,8 +10,7 @@ import java.util.Observer;
 import java.util.Set;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
-import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.*;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.Actions.Action;
 import javafx.geometry.Bounds;
@@ -28,55 +27,58 @@ import javafx.scene.image.ImageView;
  * @author blakekaplan
  */
 
-public class Actor extends Observable implements IActor, IEditableGameElement, Observer, IAuthoringActor {
+public class Actor extends Observable implements Observer, IPlayActor, IDisplayActor, IAuthoringActor {
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_IMAGE_NAME = "hellokitty.gif";
-    private static final boolean DEFAULT_MAIN = false;
-
     private double x;
     private double y;
     private double veloX;
     private double veloY;
-    private int myID;
     private double myFriction;
-    private boolean inAir;
     private String myName;
-    private String myImageViewName;
+    private int myID;
+	private String myImageViewName;
+	private double myHeading;
     @XStreamOmitField
     private ImageView myImageView;
-    private Map<String, List<Action>> myRules;
+    private Map<String, List<Rule>> myRules;
     private Map<AttributeType, Attribute> attributeMap;
     private PhysicsEngine myPhysicsEngine;
-    private boolean isMain;
-    private double myHealth;
     private List<ActorRule> myActorRules;
-    private boolean isDead;
+    private Set<ActorState> myStates;
+    private double myHeight;
+    private Sprite mySprite;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
      */
     public Actor() {
-        setMyRules(new HashMap<>());
-        setAttributeMap(new EnumMap<>(AttributeType.class));
+    	myRules =  new HashMap<>();
+        attributeMap = new HashMap<>();
+        myActorRules = new ArrayList<>();
+        myStates = new HashSet<>();
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
-        isMain = DEFAULT_MAIN;
-        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
-        myActorRules = new ArrayList<>();
+        mySprite = new Sprite();
+        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
+        myHeight = myImageView.getFitHeight();
     }
 
+    public List<ActorRule> getMyActorRules() {
+		return myActorRules;
+	}
+    
     /**
      * Calls the appropriate sequence of Actions based on a provided Trigger
      *
-     * @param triggerString The string representation of the trigger to be executed
+     * @param myTrigger The trigger to be used
      */
-    @Override
-    public void performActionsFor(String triggerString) {
-    	if(getMyRules().containsKey(triggerString)){
-            List<Action> myActions = getMyRules().get(triggerString);
-            for (Action myAction : myActions) {
-                myAction.perform();
+    public void performActionsFor(ITrigger myTrigger) {
+    	if(getRules().containsKey(myTrigger.getMyKey())){
+            List<Rule> myBehaviors = myRules.get(myTrigger.getMyKey());
+            for (Rule myRule : myBehaviors) {
+                if (myRule.getMyTrigger().evaluate(myTrigger)) myRule.getMyAction().perform();
             }
     	}
     }
@@ -86,7 +88,6 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      *
      * @param newAttribute The new Actor Attribute
      */
-    @Override
     public void addAttribute(Attribute newAttribute) {
     	newAttribute.addObserver(this);
         getAttributeMap().put(newAttribute.getMyType(), newAttribute);
@@ -98,9 +99,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      * @param type The new Actor Attribute Type
      */
 
-    @Override
     public Attribute getAttribute(AttributeType type){
-        System.out.println(getAttributeMap());
     	return getAttributeMap().get(type);
     }
 
@@ -110,11 +109,12 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      * @param type   The type of the Attribute to be changed
      * @param change The amount to change the Attribute by
      */
-    @Override
     public void changeAttribute(AttributeType type, int change) {
 
         Attribute myAttribute = getAttributeMap().get(type);
-        myAttribute.changeAttribute(change);
+        if(myAttribute!=null){
+            myAttribute.changeAttribute(change);
+        }
     }
 
     /**
@@ -123,36 +123,15 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      * @param newRule The Rule to be added to the Actor
      */
     @Override
-    public void addRule(IRule newRule) {
-        if (getMyRules().containsKey(newRule.getMyTrigger().getMyKey())) {
-            List<Action> myActions = getMyRules().get(newRule.getMyTrigger().getMyKey());
-            myActions.add(newRule.getMyAction());
-            getMyRules().put(newRule.getMyTrigger().getMyKey(), myActions);
+    public void addRule(Rule newRule) {
+    	List<Rule> myBehaviors;
+        if (myRules.containsKey(newRule.getMyTrigger().getMyKey())) {
+            myBehaviors = myRules.get(newRule.getMyTrigger().getMyKey());
         } else {
-            List<Action> myActions = new ArrayList<>();
-            myActions.add(newRule.getMyAction());
-            getMyRules().put(newRule.getMyTrigger().getMyKey(), myActions);
+            myBehaviors = new ArrayList<>();
         }
-    }
-
-    /**
-     * Provides a list of Triggers that the Actor responds to
-     *
-     * @return The list of Triggers that the Actor responds to
-     */
-    @Override
-    public Set<String> getTriggers() {
-        return getMyRules().keySet();
-    }
-
-    /**
-     * Provides the Actor's ID number
-     *
-     * @return The Actor's ID number
-     */
-    @Override
-    public int getMyID() {
-        return this.myID;
+        myBehaviors.add(newRule);
+        myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
     }
 
     /**
@@ -198,7 +177,6 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      * Sets a new X velocity
      * @param updateXVelo   The new X velocity
      */
-    @Override
     public void setVeloX(double updateXVelo) {
         veloX = updateXVelo;
     }
@@ -207,18 +185,8 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      * Sets a new Y velocity
      * @param updateYVelo   The new Y velocity
      */
-    @Override
     public void setVeloY(double updateYVelo) {
         veloY = updateYVelo;
-    }
-
-    /**
-     * Sets a new Actor ID
-     * @param ID    The new ID
-     */
-    @Override
-    public void setMyID(int ID) {
-        myID = ID;
     }
 
     /**
@@ -226,7 +194,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      * @return  The Actor's name
      */
     @Override
-    public String getMyName() {
+    public String getName() {
         return myName;
     }
 
@@ -235,24 +203,15 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      * @param name  The new Actor name
      */
     @Override
-    public void setMyName(String name) {
+    public void setName(String name) {
         myName = name;
     }
 
-    /**
-     * Provides the Actor's Imageview
-     * @return  The Actor's Imageview
-     */
-    @Override
-    public ImageView getImageView() {
-        return myImageView;
-    }
 
     /**
      * Sets a new Actor ImageView
      * @param imageView The new ImageView
      */
-    @Override
     public void setImageView(ImageView imageView) {
     	myImageView = imageView;
     	myImageView.setX(this.getX());
@@ -279,21 +238,11 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
     }
 
     /**
-     * Assigns a phyiscs engine to an Actor
-     * @param physicsEngine The assigned physics engine
-     */
-	@Override
-    public void setEngine(PhysicsEngine physicsEngine) {
-		setMyPhysicsEngine(physicsEngine);
-	}
-
-    /**
      * Provides the Actor's physics engine
      * @return  The Actor's physics engine
      */
-	@Override
     public PhysicsEngine getPhysicsEngine(){
-		return getMyPhysicsEngine();
+		return myPhysicsEngine;
 	}
 
     /**
@@ -305,8 +254,6 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
 		StringBuilder stringBuilder = new StringBuilder();
 
 	      stringBuilder.append("Actor[ ");
-	      stringBuilder.append("\nid: ");
-	      stringBuilder.append(getMyID());
 	      stringBuilder.append("\nname: ");
 	      stringBuilder.append(myName);
 	      stringBuilder.append("\nmyImgName: ");
@@ -314,7 +261,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
 	      stringBuilder.append("\nmyImg: ");
 	      stringBuilder.append(myImageView);
 	      stringBuilder.append("\nmyRules: ");
-	      stringBuilder.append(getMyRules().toString());
+	      stringBuilder.append(getRules().toString());
 	      stringBuilder.append(" ]");
 
 	      return stringBuilder.toString();
@@ -325,7 +272,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      * @return  The Actor's ImageView
      */
 	@Override
-    public String getMyImageViewName() {
+    public String getImageViewName() {
 		return myImageViewName;
 	}
 
@@ -333,9 +280,10 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      * Sets the name of the Actor's ImageView
      * @param myImageViewName   The Actor's ImageView
      */
-	public void setMyImageViewName(String myImageViewName) {
+	public void setImageViewName(String myImageViewName) {
 		this.myImageViewName = myImageViewName;
-		this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
+        mySprite.setImage(myImageViewName);
+		this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
 	}
 
     /**
@@ -344,63 +292,38 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
     public void changed(){
         setChanged();
     }
-
+    
+    public ImageView getImageView(){
+    	return myImageView;
+    }
+    
     /**
      * Provides the Actor's ImageView Bounds
      * @return  The Actor's ImageView Bounds
      */
 	public Bounds getBounds() {
-		return this.getImageView().getLayoutBounds();
+		return myImageView.getLayoutBounds();
 	}
 
 	/**
 	 * @return the myFriction
 	 */
-	public double getMyFriction() {
+	public double getFriction() {
 		return myFriction;
 	}
 
 	/**
 	 * @param myFriction the myFriction to set
 	 */
-	public void setMyFriction(double myFriction) {
+	public void setFriction(double myFriction) {
 		this.myFriction = myFriction;
-	}
-
-	/**
-	 * Set whether this actor is a playable, main character.
-	 */
-	public void setMain(boolean bool){
-		isMain = bool;
-	}
-	/**
-	 * Return whether the actor is a playable, main character.
-	 * @return
-	 */
-	public boolean isMain(){
-		return isMain;
-	}
-	/**
-	 * @return the inAir
-	 */
-	public boolean isInAir() {
-		return inAir;
-	}
-
-	/**
-	 * @param inAir the inAir to set
-	 */
-	@Override
-    public void setInAir(boolean inAir) {
-		inAir = inAir;
 	}
 
     /**
      * Provides the Actor's Rules
      * @return  The Actor's Rules
      */
-	@Override
-    public Map<String, List<Action>> getMyRules() {
+    public Map<String, List<Rule>> getRules() {
 		return myRules;
 	}
 
@@ -408,8 +331,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      * Sets the Actor's Rules
      * @param myRules   A new set of Actor rules
      */
-	@Override
-    public void setMyRules(Map<String, List<Action>> myRules) {
+    public void setMyRules(Map<String, List<Rule>> myRules) {
 		this.myRules = myRules;
 	}
 
@@ -417,35 +339,15 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
      * Provides the Attribute map
      * @return  The Actor's Attribute Map
      */
-	@Override
     public Map<AttributeType, Attribute> getAttributeMap() {
 		return attributeMap;
-	}
-
-    /**
-     * Sets a new Attribute Map
-     * @param attributeMap  The new Attribute Map
-     */
-	@Override
-    public void setAttributeMap(Map<AttributeType, Attribute> attributeMap) {
-		this.attributeMap = attributeMap;
-	}
-
-    /**
-     * Provides the Actor's physics engine
-     * @return  The Actor's phyiscs engine
-     */
-	@Override
-    public PhysicsEngine getMyPhysicsEngine() {
-		return myPhysicsEngine;
 	}
 
     /**
      * Sets a new physics engine
      * @param myPhysicsEngine   The new physics engine
      */
-	@Override
-    public void setMyPhysicsEngine(PhysicsEngine myPhysicsEngine) {
+    public void setPhysicsEngine(PhysicsEngine myPhysicsEngine) {
 		this.myPhysicsEngine = myPhysicsEngine;
 	}
 
@@ -457,42 +359,7 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
     public void setSize(double size){
 		myImageView.setFitHeight(size);
 		myImageView.setPreserveRatio(true);
-	}
-
-    /**
-     * Sets the Actor's health value
-     * @param myHealth  The Actor's health value
-     */
-	@Override
-    public void setMyHealth(double myHealth){
-		this.myHealth = myHealth;
-	}
-
-    /**
-     * Provides the Actor's amount of health
-     * @return  The Actor's amount of health
-     */
-	@Override
-    public double getMyHealth() {
-		return myHealth;
-	}
-
-    /**
-     * Adds a new ActorRule
-     * @param actorRule The new ActorRule
-     */
-	@Override
-    public void addActorRule(ActorRule actorRule){
-		myActorRules.add(actorRule);
-	}
-
-    /**
-     * Removes an Actor Rule
-     * @param actorRule The Rule to be removed
-     */
-	@Override
-    public void removeActorRule(ActorRule actorRule){
-		myActorRules.remove(actorRule);
+		myHeight = size;
 	}
 
     /**
@@ -503,31 +370,74 @@ public class Actor extends Observable implements IActor, IEditableGameElement, O
     public List<ActorRule> getActorRules(){
 		return myActorRules;
 	}
-
-    /**
-     * Marks the Actor as dead
-     * @return  A boolean representing whether or not the Actor is dead
-     */
+	
 	@Override
-    public boolean isDead() {
-		return isDead;
+	public boolean checkState(ActorState state){
+		return myStates.contains(state);
+	}
+	
+	@Override
+	public void addState(ActorState state){
+		myStates.add(state);
 	}
 
-    /**
-     * Sets the Actor to alive or dead
-     * @param isDead    The desired Actor state
-     */
+	
 	@Override
-    public void setDead(boolean isDead) {
-		this.isDead = isDead;
+	public void removeState(ActorState state){
+		myStates.remove(state);
+	}
+
+	@Override
+	public int getMyID() {
+		return myID;
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(isMain){
+		if (o.getClass().equals(this.getClass())) {
+			setChanged();
+			notifyObservers(arg);
+		}
+		if(checkState(ActorState.MAIN)){
 			setChanged();
 			notifyObservers("updateAttribute");
 		}
-		
 	}
+	
+	public double getSize() {
+		return myHeight;
+	}
+
+	@Override
+	public void setID(int ID) {
+		myID = ID;
+	}
+
+	@Override
+	public void setHeading(double h) {
+		myHeading = h;
+	}
+
+	@Override
+	public double getHeading() {
+		return myHeading;
+	}
+
+    @Override
+    public int getID() {
+        return myID;
+    }
+
+    public void setDirection(){
+        if (getHeading() == 0) myImageView.setScaleX(1);
+        else if (getHeading() == 180){ myImageView.setScaleX(-1); }
+    }
+
+    public void addSpriteImage(String newImage){
+        mySprite.addImage(newImage);
+    }
+
+    public void nextImage(){
+        myImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getNextImage())));
+    }
 }

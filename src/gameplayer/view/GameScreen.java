@@ -1,27 +1,31 @@
 package gameplayer.view;
 
-import java.util.List;
 import java.util.Observable;
-
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
-import gameengine.model.Actor;
+import java.util.ResourceBundle;
+import java.util.Arrays;
+import gameengine.controller.Level;
+import gameengine.model.IActor;
+import gameengine.model.IDisplayActor;
 import gameengine.model.ITrigger;
 import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.KeyTrigger;
 import gui.view.Screen;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.scene.Camera;
 import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.SubScene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.util.Callback;
 
 /** 
  * This class serves as the private interface that a Game screen must implement in order to be able to add visual elements of the game to the screen.
@@ -29,14 +33,16 @@ import javafx.scene.paint.Color;
  * @author cmt57
  */
 
-public class GameScreen extends Observable {
+public class GameScreen extends Observable implements IGameScreen {
 	
-	//@XStreamOmitField
 	private SubScene mySubscene;
-	//@XStreamOmitField
 	private Group mySubgroup;
-	//@XStreamOmitField
-	private Camera camera;
+	private Camera myCamera;
+	private double myEndHorizontal;
+	private double myEndVertical;
+
+	private ResourceBundle myResources;
+	private static final String GAME_RESOURCE = "gameActions";
 	
 	public GameScreen(Camera camera){
 		setMySubgroup(new Group());
@@ -45,8 +51,9 @@ public class GameScreen extends Observable {
 		getMySubscene().setFocusTraversable(true);
 		getMySubscene().setOnKeyPressed(e -> handleScreenEvent(e));
 		getMySubscene().setOnMouseClicked(e -> handleScreenEvent(e));
-		this.camera = camera; ///
+		this.myCamera = camera; ///
 		mySubscene.setCamera(camera);
+		this.myResources = ResourceBundle.getBundle(GAME_RESOURCE);
 	}
 	
 	
@@ -58,23 +65,37 @@ public class GameScreen extends Observable {
 	 * Will add a node to the screen's scene representing the given actor's view.
 	 * @param actor an instance of IActor
 	 */
-	public void addActor (Actor actor){
-		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(actor.getMyImageViewName())));
-		actor.setImageView(imageView);
-		getMySubgroup().getChildren().add(actor.getImageView());//
+	public void addActor (IDisplayActor actor){
+		actor.setImageViewName(actor.getImageViewName());
+		getMySubgroup().getChildren().add(actor.getImageView());
 	}
 	
-	public void removeActors(List<Actor> actors){
-		for(Actor a: actors){
-			mySubgroup.getChildren().remove(a.getImageView());
-		}
+	public void removeActor(IDisplayActor a){
+		mySubgroup.getChildren().remove(a.getImageView());
 	}
 	
 
-	public void addBackground(String filepath) {
-		ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(filepath)));
-		imageView.toBack();
-		getMySubgroup().getChildren().add(imageView);
+	public void addBackground(Level level) {
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(level.getMyBackgroundImgName()));
+		this.myEndHorizontal = image.getWidth();
+		this.myEndVertical = image.getHeight();
+		ImageView imageView = new ImageView(image);
+		level.setImageView(imageView);
+		
+				
+		ImageView imageView2 = new ImageView(image);
+		imageView2.setX(imageView.getImage().getWidth());
+		
+		level.getMyBackgroundX().addListener(new ChangeListener() {
+			@Override
+			public void changed(ObservableValue o, Object oldVal, Object newVal) {
+				//TODO Watch that magic constant!
+				imageView2.setX((Double) newVal + imageView.getImage().getWidth() - 10);
+			}
+		});
+		
+		getMySubgroup().getChildren().addAll(imageView, imageView2); 
+		//getMySubgroup().getChildren().add(imageView);
 		
 	}
 	
@@ -83,23 +104,21 @@ public class GameScreen extends Observable {
 	 * @param e event 
 	 */
 	public void handleScreenEvent (Event e){
+		ITrigger trigger = null;
 		if(e.getEventType()==MouseEvent.MOUSE_CLICKED){
-			ITrigger trigger = handleClick(((MouseEvent)e).getSceneX(),((MouseEvent)e).getSceneY());
-			setChanged();
-			notifyObservers(trigger);
+			trigger = handleClick(((MouseEvent)e).getSceneX(),((MouseEvent)e).getSceneY());
 		}
 		else if(e.getEventType()==KeyEvent.KEY_PRESSED){
-			//camera.setTranslateX(camera.getTranslateX()+94.3);
-			ITrigger trigger = handleKeyPress(((KeyEvent)e).getCode());
-			setChanged();
-			notifyObservers(trigger);
+			trigger = handleKeyPress(((KeyEvent)e).getCode());
 		}
+		setChanged();
+		Object[] methodArg = {"handleTrigger", trigger};
+		notifyObservers(Arrays.asList(methodArg));
 	}
 
 	
 	private ClickTrigger handleClick(double x, double y){
-		ClickTrigger clickTrigger = new ClickTrigger();
-		clickTrigger.setClickedAt(x, y);
+		ClickTrigger clickTrigger = new ClickTrigger(x,y);
 		return clickTrigger;
 	}
 	
@@ -108,7 +127,7 @@ public class GameScreen extends Observable {
 	}
 	
 	public void clearGame(){
-		camera.setTranslateX(0);
+		myCamera.setTranslateX(0);
 		getMySubgroup().getChildren().clear();
 		
 //		for(Node n: getMySubgroup().getChildren()){
@@ -136,6 +155,85 @@ public class GameScreen extends Observable {
 	public void setMySubscene(SubScene mySubscene) {
 		this.mySubscene = mySubscene;
 	}
+
+
+	@Override
+	public void addActor(IActor actor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void reset() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void setUp() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void changeCamera(double x, double y) {
+		if (x < myEndHorizontal - getScene().getWidth() && x > 0) {
+			myCamera.setTranslateX(x);
+		}
+		if (y > 0 && y < myEndVertical - getScene().getHeight()) {		
+			myCamera.setTranslateY(y);
+		}
+	}
+
+
+	@Override
+	public void disableMusic(boolean disable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void disableSoundFX(boolean disable) {
+		// TODO Auto-generated method stub
+		
+	}
 	
+	public void terminateGame(){
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, myResources.getString("EndMessage"), ButtonType.YES, ButtonType.NO);
+		alert.show();
+		alert.showingProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue) {
+				if (alert.getResult() == ButtonType.YES) {
+					saveScorePrompt();
+				}
+			}
+		});
+
+
+	}
+	
+	public void saveScorePrompt() {
+		TextInputDialog dialog = new TextInputDialog(myResources.getString("Name"));
+		dialog.setContentText(myResources.getString("SaveMessage"));
+		dialog.show();
+		dialog.setResultConverter(new Callback<ButtonType, String>() {
+			@Override
+			public String call(ButtonType b) {
+				if (b == ButtonType.OK) {
+					setChanged();
+					Object[] args = {myResources.getString("SaveScore"), dialog.getEditor().getText()};
+					notifyObservers(Arrays.asList(args));
+					return dialog.getEditor().getText();
+				}
+				else {
+					return null;
+				}
+			}
+		});
+	}
 
 }

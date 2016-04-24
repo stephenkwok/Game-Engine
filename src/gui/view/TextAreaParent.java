@@ -1,14 +1,9 @@
 package gui.view;
 
-import authoringenvironment.model.IEditableGameElement;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 
 /**
  * 
@@ -20,30 +15,25 @@ import javafx.scene.layout.VBox;
  *
  */
 
-public abstract class TextAreaParent implements IGUIEditingElement, IGUIElement {
-	
+public abstract class TextAreaParent extends EditingElementParent {	
 	private VBox myContainer;
 	private Label myPrompt;
 	private TextArea myTextArea;
 	private Button myButton;
-	private IEditableGameElement myEditableElement;
-	private String myButtonText;
 	private int textAreaPreferredRows;
 	
 	public TextAreaParent(String promptText, String buttonText, int preferredRows) {
-		myButtonText = buttonText;
+		super(buttonText);
 		textAreaPreferredRows = preferredRows;
+		myButton = getButton();
 		myContainer = new VBox();
 		myPrompt = new Label(promptText);
 		myTextArea = new TextArea();
-		myButton = new Button(myButtonText);
 	}
 	
-	@Override
-	public void setEditableElement(IEditableGameElement element) {
-		myEditableElement = element;
-	}
-	
+	/**
+	 * Instantiates the Label, Text Area, and Button that make up this class
+	 */
 	@Override 
 	public Node createNode() {
 		myPrompt.setWrapText(true);
@@ -53,22 +43,27 @@ public abstract class TextAreaParent implements IGUIEditingElement, IGUIElement 
 		return myContainer;
 	}
 	
-	protected void setButtonAction(EventHandler<ActionEvent> buttonAction) {
-		myButton.setOnAction(buttonAction);
-	}
-	
+	/**
+	 * Sets the VBox container's padding
+	 * 
+	 * @param insets indicating the desired padding
+	 */
 	protected void setContainerPadding(Insets insets) {
 		myContainer.setPadding(insets);
 	}
 	
+	/**
+	 * Sets the text above the Text Area 
+	 * @param prompt that informs the author what to do
+	 */
 	protected void setTextAreaPromptText(String prompt) {
 		myTextArea.setPromptText(prompt);
 	}
 	
-	protected IEditableGameElement getEditableElement() {
-		return myEditableElement;
-	}
-	
+	/**
+	 * 
+	 * @return the input in the TextArea
+	 */
 	protected String getTextAreaInput() {
 		return myTextArea.getText();
 	}

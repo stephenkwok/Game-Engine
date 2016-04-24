@@ -10,10 +10,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
+ * Class to test Authoring Environment
  * Created by AnnieTang on 3/31/16.
  */
 public class Main extends Application{
-	
+	private static final String SPLASH_MESSAGE = "TEMPORARY. Will go back to splash screen.";
 	private Stage s;
 	GUIMain myGUI;
 	
@@ -22,15 +23,17 @@ public class Main extends Application{
     @Override
     public void start(Stage myStage) throws Exception {
     	s = new Stage();
-    	//test scene
+    	//test splash screen
     	Group root = new Group();
     	Scene scene = new Scene(root, 300, 300, Color.THISTLE);
-    	Label label = new Label("TEMPORARY. Will go back to splash screen.");
+    	Label label = new Label(SPLASH_MESSAGE);
     	root.getChildren().add(label);
     	//
     	
+    	Controller c = new Controller(s);
+    	/*
     	myGUI = new GUIMain(s, scene);
-    	s.setScene(myGUI.getScene());
+    	s.setScene(myGUI.initializeScreen());*/
     	s.show();
     }
 

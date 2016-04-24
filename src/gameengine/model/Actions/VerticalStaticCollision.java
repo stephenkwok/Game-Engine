@@ -1,6 +1,7 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
 import gameengine.model.Actions.Action;
 
 /**
@@ -12,16 +13,13 @@ import gameengine.model.Actions.Action;
  */
 public class VerticalStaticCollision extends Action{
 
-	public VerticalStaticCollision(Actor assignedActor) {
-		super(assignedActor);
-		// TODO Auto-generated constructor stub
+	public VerticalStaticCollision(IPlayActor actor) {
+		super(actor);
 	}
 
 	@Override
 	public void perform() {
-		//myPhysicsEngine.vertStaticCollision(getActor());
-		getMyActor().setX(getMyActor().getX()-2);
-		getMyActor().setVeloY(0);
+		getMyActor().getPhysicsEngine().staticVerticalCollision(getMyActor());
 	}
 
 

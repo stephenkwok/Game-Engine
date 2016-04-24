@@ -1,49 +1,30 @@
 package authoringenvironment.view;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ResourceBundle;
-
-import authoringenvironment.controller.Controller;
-import gui.controller.IScreenController;
-import gui.view.ButtonPlay;
-import gui.view.ComboBoxGame;
-import gui.view.GUIFactory;
-import gui.view.IGUI;
-import gui.view.IGUIElement;
-import gui.view.Screen;
+import java.util.*;
+import gui.view.*;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 /**
  * Main GUI class. Fixed tool-bar as top pane. 
  * @author AnnieTang, amyzhao
  *
  */
-public class GUIMain extends Screen implements IGUI {
+public class GUIMain extends Screen implements IGUI, Observer {
     private static final String GUI_RESOURCE = "authoringGUI";
     private static final String TOP_PANE_ELEMENTS = "TopPaneElements";
-    private static final int WINDOW_HEIGHT = 800;
+    private static final int WINDOW_HEIGHT = 700;
 	private static final int WINDOW_WIDTH = 1300;
     private static final int PADDING = 10;
     private Scene myScene;
 	private BorderPane myRoot;
-	private ResourceBundle myResources;
-	private Stage myStage;
-	private Controller myController;
-	private GUIFactory factory;
-	private Scene splashScene;
+
 	
-	public GUIMain(Stage s, Scene splash) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		super(s);
-		this.splashScene = splash;
-		this.myStage = s;
+	public GUIMain()  {
+		super();
+		setUpResourceBundle(GUI_RESOURCE);
 		init();
 	}
 	
@@ -54,12 +35,9 @@ public class GUIMain extends Screen implements IGUI {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public void init() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	public void init() {
 		myRoot = new BorderPane();
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		myController = new Controller(myStage, this, this.myResources);
-		factory = new GUIFactory(myResources, myController);
 		setTopPane();
 		setCenterPane();
 	}
@@ -75,57 +53,82 @@ public class GUIMain extends Screen implements IGUI {
 	public Scene getScene() {
 		return myScene;
 	}
-	
+	/**
+	 * Set center section of screen to given Pane
+	 * @param pane
+	 */
 	public void setCenterPane(Pane pane){
 		myRoot.setCenter(pane);
 	}
-
+	/**
+	 * Set center screen to default, the home screen 
+	 */
 	public void setCenterPane(){
-		myController.goToMainScreen();
+		setChanged();
+		notifyObservers("goMain");
 	}
-	
+	/**
+	 * Sets top section of screen to fixed toolbar 
+	 */
 	private void setTopPane() {
 		HBox hbox = new HBox(PADDING);
 		hbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));		
 		initializeTopPaneElements(hbox);
-//		ComboBoxGame test = new ComboBoxGame("SUP", "gamefiles", myController);
-//		hbox.getChildren().add(test.createNode());
 		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		myRoot.setTop(hbox);
 	}
-
+	/**
+	 * Initialize elements to be in toolbar
+	 * @param hbox
+	 */
 	private void initializeTopPaneElements(HBox hbox) {
 		try{
-			String[] topPaneElements = myResources.getString(TOP_PANE_ELEMENTS).split(",");
+			String[] topPaneElements = getResources().getString(TOP_PANE_ELEMENTS).split(",");
 			for (int i = 0; i < topPaneElements.length; i++) {
-				IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
+				IGUIElement elementToCreate = getFactory().createNewGUIObject(topPaneElements[i]);
+				elementToCreate.addNodeObserver(this); // NOT SURE IF THIS WILL WORK, CARINE ADDED THIS.......
 				hbox.getChildren().add(elementToCreate.createNode());
+				
 			}
+
 		}catch(Exception e){
 			
 		}
 	}
-	
+	/**
+	 * Return Pane representation of authoring environment
+	 */
 	@Override
 	public Pane getPane() {
 		return myRoot;
 	}
-
-	@Override
-	public IScreenController setController() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void goBackToGamePlayer() {
-		myStage.setScene(splashScene);
-	}
-
+	
+	/**
+	 * Return width of authoring environment Scene
+	 * @return
+	 */
 	public double getWidth() {
 		return myScene.getWidth();
 	}
-
+	/**
+	 * Return height of authoring environment Scene
+	 * @return
+	 */
 	public double getHeight() {
 		return myScene.getHeight();
+	}
+
+	@Override
+	protected void initialize()
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		setChanged();
+		notifyObservers(o.getClass().getSimpleName());
+		
 	}
 }

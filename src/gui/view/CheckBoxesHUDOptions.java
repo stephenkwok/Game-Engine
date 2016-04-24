@@ -1,25 +1,21 @@
 package gui.view;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
-import authoringenvironment.controller.Controller;
-import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.*;
 import gameengine.controller.GameInfo;
-import gameengine.model.Actor;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 
-
-
-public class CheckBoxesHUDOptions implements IGUIElement, IGUIEditingElement {
+/**
+ * Checkboxes for all HUD options.
+ * 
+ * @author amyzhao, stephen
+ *
+ */
+public class CheckBoxesHUDOptions extends Observable implements IGUIElement, IEditingElement {
 
 	private static final String DELIMITER = ",";
 	private static final String HUD_OPTIONS = "HUDOptions";
@@ -32,20 +28,28 @@ public class CheckBoxesHUDOptions implements IGUIElement, IGUIEditingElement {
 	private ResourceBundle myAttributesResources;
 	private List<CheckBox> myHUDElements;
 	private GUIFactory myFactory;
-	private Controller myController;
-	private List<Actor> myActors;
 
-	public CheckBoxesHUDOptions(IEditableGameElement gameInfo, Controller controller, List<Actor> actors) {
+	/**
+	 * Constructs a CheckBoxesHUDOptions object for the given GameInfo object.
+	 * 
+	 * @param gameInfo: GameInfo object.
+	 * @param controller: controller for the authoring environment.
+	 */
+	public CheckBoxesHUDOptions(IEditableGameElement gameInfo) {
 		this.myGameInfo = gameInfo;
-		this.myController = controller;
 		this.myAttributesResources = ResourceBundle.getBundle("HUDOptions");
-		this.myActors = actors;
 		this.myContainer = new VBox(CONTAINER_SPACING);
 		myContainer.setPadding(new Insets(CONTAINER_PADDING));
-		myFactory = new GUIFactory(myAttributesResources, myController);
+		myFactory = new GUIFactory(myAttributesResources);
 		myHUDElements = new ArrayList<>();
 	}
 
+	/**
+	 * Initializes the VBox containing the HUD checkboxes.
+	 * 
+	 * @param key: key in resource file for the checkboxes to add.
+	 * @param vbox: vbox to add checkboxes into.
+	 */
 	private void initializeHUD(String key, VBox vbox) {
 		vbox.getChildren().add(new Label(HUD_PROMPT));
 		List<Node> checkboxes = addElements(HUD_OPTIONS, vbox);
@@ -61,6 +65,13 @@ public class CheckBoxesHUDOptions implements IGUIElement, IGUIEditingElement {
 		vbox.getChildren().add(checkHUDButton);
 	}
 
+	/**
+	 * Add checkbox elements to the vbox.
+	 * 
+	 * @param key: key in resource file for elements to add.
+	 * @param vbox: container to add checkboxes to.
+	 * @return list of elements added.
+	 */
 	private List<Node> addElements(String key, VBox vbox) {
 		String[] elements = myAttributesResources.getString(key).split(DELIMITER);
 		List<Node> createdElements = new ArrayList<>();
@@ -70,43 +81,38 @@ public class CheckBoxesHUDOptions implements IGUIElement, IGUIEditingElement {
 		return createdElements;
 	}
 
-	public Map<String, Integer> getHUDElementsToDisplay() {
-		Map<String, Integer> toDisplay = new HashMap<String, Integer>();
-		for (int i = 0; i < myHUDElements.size(); i++) {
-			if (myHUDElements.get(i).isSelected()) {
-				String myHUDElementID = myHUDElements.get(i).getId();
-				toDisplay.put(myHUDElementID, getInitialValueForHUDElement(myHUDElementID));
-			}
-		}
+	/**
+	 * Get the HUD elements that the user has selected.
+	 * 
+	 * @return list of HUD elements that the user selected.
+	 */
+	public List<String> getHUDElementsToDisplay() {
+		List<String> toDisplay = new ArrayList<String>();
+		myHUDElements.stream().filter(checkbox -> checkbox.isSelected())
+				.forEach(checkbox -> toDisplay.add(checkbox.getId()));
 		return toDisplay;
 	}
 
-	// refactor to use reflection
-	private int getInitialValueForHUDElement(String myHUDElementID) {
-		Actor mainActor = null;
-		for (Actor actor : myActors) {
-			if (actor.isMain()) {
-				mainActor = actor;
-				break;
-			}
-		}
-		if (myHUDElementID.equals("Amount of Ammo Left")) {
-			return 0; // call mainActor.getMyAmmo();
-		} else if (myHUDElementID.equals("Number of Lives")) {
-			mainActor.getMyHealth();
-		}
-		return 0;
-	}
-
+	/**
+	 * Sets the editable element for the CheckBoxes.
+	 */
 	@Override
 	public void setEditableElement(IEditableGameElement element) {
 		myGameInfo = element;
 	}
 
+	/**
+	 * Returns the node for this object.
+	 */
 	@Override
 	public Node createNode() {
 		initializeHUD(HUD_OPTIONS, myContainer);
 		return myContainer;
+	}
+
+	@Override
+	public void addNodeObserver(Observer observer) {
+		this.addObserver(observer);
 	}
 
 }

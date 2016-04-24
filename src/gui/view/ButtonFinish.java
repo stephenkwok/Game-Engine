@@ -1,7 +1,5 @@
 package gui.view;
 
-import authoringenvironment.controller.Controller;
-import gui.controller.IScreenController;
 /**
  * On click, saves the game and returns user to the game player splash screen.
  * @author AnnieTang
@@ -9,17 +7,16 @@ import gui.controller.IScreenController;
  */
 public class ButtonFinish extends ButtonParent {
 
-	public ButtonFinish(IScreenController myController, String buttonText, String imageName) {
-		super(myController, buttonText, imageName);
-		// TODO Auto-generated constructor stub
+	public ButtonFinish(String buttonText, String imageName) {
+		super(buttonText, imageName);
 	}
 
+	/**
+	 * Returns to the splash screen once the user is finished editing.
+	 */
 	@Override
 	protected void setButtonAction() {
-		button.setOnAction(e -> {
-			((Controller) myController).saveGame(promptForFileName(true));
-			((Controller) myController).goBackToGamePlayer();
-		});
+		getButton().setOnAction(e -> notifyObservers("ButtonFinish"));
 	}
 
 }

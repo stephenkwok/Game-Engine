@@ -26,34 +26,44 @@ public class TabLibrarySounds extends TabLibrary{
 		super(myResources, tabText, myRuleMaker);
 		setContent();
 	}
-	
+	/**
+	 * Set content of tab to list of sounds
+	 */
 	@Override
-	void setContent() {
+	public void setContent() {
 		fillFileNames();
 		fillMusicNames(); //also add music files
-		labels = FXCollections.observableArrayList();
-		for(String soundName: fileNames){
+		setLabels(FXCollections.observableArrayList());
+		for(String soundName: getFileNames()){
 			Label soundLabel = new Label(soundName, createPlaySoundButton(soundName));
-			if(myActorRuleCreator!=null){
+			if(getActorRuleCreator()!=null){
 				setDragEvent(soundLabel,TransferMode.COPY);
 			}
-			labels.add(soundLabel);
+			getLabels().add(soundLabel);
 		}
-		listView = new ListView<>(labels);
+		setListView(new ListView<>(getLabels()));
 	}
-	
+	/**
+	 * Get sound files from resources 
+	 */
 	private void fillMusicNames(){
-		File directory = new File(myResources.getString(MUSIC));
+		File directory = new File(getResources().getString(MUSIC));
 		for(File file: directory.listFiles()){
-			fileNames.add(file.getName());
+			getFileNames().add(file.getName());
 		}
 	}
-	
+	/**
+	 * Return sound content of this tab
+	 */
 	@Override
 	Node getContent() {
-		return listView;
+		return getListView();
 	}
-	
+	/**
+	 * Return button that allows player to preview sound
+	 * @param soundName
+	 * @return
+	 */
 	private Button createPlaySoundButton(String soundName){
 		ImageView iv = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(SOUND_IMAGE_NAME)));
 		iv.setFitHeight(STANDARD_IMAGE_HEIGHT);
