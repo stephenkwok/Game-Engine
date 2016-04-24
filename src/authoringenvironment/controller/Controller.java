@@ -8,6 +8,8 @@ import authoringenvironment.view.*;
 import gamedata.controller.*;
 import gameengine.controller.*;
 import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
+import gameengine.model.Rule;
 import gameplayer.controller.BranchScreenController;
 import gui.view.*;
 import javafx.geometry.Insets;
@@ -227,6 +229,8 @@ public class Controller extends BranchScreenController implements Observer {
 	 *            file to write to.
 	 */
 	public void saveGame() {
+		System.out.println(myLevels.get(0).getActors().get(0).getRules().size());
+		IPlayActor actor = myLevels.get(0).getActors().get(0); 
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showSaveDialog(new Stage());
 		CreatorController controller;
@@ -377,17 +381,21 @@ public class Controller extends BranchScreenController implements Observer {
 		toUpdate.setSize(toCopy.getSize());
 		toUpdate.setImageViewName(toCopy.getImageViewName());
 		toUpdate.setID(toCopy.getMyID());
-	//	copyRules(toUpdate, toCopy.getActorRules());		copy actor rules or normal rules?? what?? annie halp
+		copyRules(toUpdate, toCopy.getRules());
+		toUpdate.setPhysicsEngine(toCopy.getPhysicsEngine());
 		//copyAttributes(toUpdate,)
 	}
 	
-	/*
-	private void copyRules(IAuthoringActor toUpdate, List<ActorRule> rulesToCopy) {
+	
+	private void copyRules(IAuthoringActor toUpdate, Map<String, List<Rule>> rulesToCopy) {
 		toUpdate.getActorRules().clear();
-		for (int i = 0; i < rulesToCopy.size(); i++) {
-			toUpdate.addRule(rulesToCopy.get(i));
+		for (String trigger : rulesToCopy.keySet()) {
+			List<Rule> toAdd = rulesToCopy.get(trigger);
+			for (int i = 0; i < toAdd.size(); i++) {
+				toUpdate.addRule(toAdd.get(i));
+			}
 		}
-	}*/
+	}
 	
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
 		List<Object> arguments = (List<Object>) notifyObserversArgument;

@@ -441,4 +441,12 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     public void nextImage(){
         myImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getNextImage())));
     }
+    
+    /*public Map<String, List<Rule>> getRuleMap() {
+    	return myRules;
+    }
+    
+    public void setRuleMap(Map<String, List<Rule>> updatedRules) {
+    	myRules = updatedRules;
+    }*/
 }
