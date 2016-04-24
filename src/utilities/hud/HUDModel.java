@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 
-public class HUDModel extends Observable implements IHUDModel {
+public class HUDModel extends Observable {
 	
 	private Map<String, Property> data;
 	

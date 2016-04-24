@@ -2,10 +2,8 @@ package utilities.hud;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
 
 import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.SubScene;
@@ -13,7 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 
 
-public class HUDScreen extends Observable {
+public class HUDScreen extends AbstractHUDScreen {
 
 	
 	private static final int DEFAULT_HEIGHT = 100;

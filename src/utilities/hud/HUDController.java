@@ -6,7 +6,7 @@ import java.util.Observer;
 
 public class HUDController implements Observer{
 	
-	IHUDModel model;
+	HUDModel model;
 	HUDScreen view;
 	
 	public void grabData(Collection<String> fieldsToObserve) {

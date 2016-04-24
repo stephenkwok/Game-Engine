@@ -14,11 +14,11 @@ public class ValueFinder implements IValueFinder {
 	public Property find(String key) {
 		Property ret = null;
 		switch (key) {
-		case "points":
+			case "points":
 			//
-		case "health":
+			case "health":
 			//
-		case "ammo":
+			case "ammo":
 			//...you get the point
 		
 		}
