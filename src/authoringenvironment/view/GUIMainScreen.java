@@ -219,10 +219,11 @@ public class GUIMainScreen implements IGUI, Observer {
 		bindNodeSizeToGivenSize(previewUnitHBox, parent.widthProperty(), null);
 		parent.getChildren().add(previewUnitHBox);
 		allPreviewUnits.add(previewUnit);
+		updatePreviewUnits();
 	}
 
 	/**
-	 * Updates all LabelClickables to account for any changes in the name or
+	 * Updates all preview units to account for any changes in the name or
 	 * image of Actors and Levels
 	 */
 	public void updatePreviewUnits() {

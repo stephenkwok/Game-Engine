@@ -1,18 +1,10 @@
 package gameengine.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Set;
+import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import authoringenvironment.model.*;
 import authoringenvironment.view.ActorRule;
-import gameengine.model.Actions.Action;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -49,6 +41,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private Set<ActorState> myStates;
     private double myHeight;
     private Sprite mySprite;
+    private boolean isMainPlayer;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -63,6 +56,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
         mySprite = new Sprite();
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
         myHeight = myImageView.getFitHeight();
+        isMainPlayer = false;
     }
 
     public List<ActorRule> getMyActorRules() {
@@ -439,5 +433,13 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 
     public void nextImage(){
         myImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getNextImage())));
+    }
+    
+    public void setIsMainPlayer(boolean isMainPlayer) {
+    	this.isMainPlayer = isMainPlayer;
+    }
+    
+    public boolean isMainPlayer() {
+    	return isMainPlayer;
     }
 }
