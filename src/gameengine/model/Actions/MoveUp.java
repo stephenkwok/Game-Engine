@@ -13,7 +13,7 @@ public class MoveUp extends MovingAction {
 
     @Override
     public void perform() {
-    	getMyActor().getPhysicsEngine().jump(getMyActor());
+    	getMyActor().getPhysicsEngine().moveUp(getMyActor());
     	getMyActor().setHeading(90);
     }
 
