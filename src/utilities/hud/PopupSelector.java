@@ -14,6 +14,14 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+/**
+ * @author bobby_mac
+ *
+ */
+/**
+ * @author bobby_mac
+ *
+ */
 public class PopupSelector {
 	
 	private Group root;
@@ -79,7 +87,4 @@ public class PopupSelector {
 	public Scene getScene() {
 		return scene;
 	}
-	
-	
-	//todo: implement popup screen that saves preferences for what to display and row num to display in for
 }
