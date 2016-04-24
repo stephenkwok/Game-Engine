@@ -2,28 +2,27 @@ package gameengine.model.Actions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
 
 public class Spawn extends Action{
 
-	public Spawn(Actor assignedActor) {
-		super(assignedActor);
+	public Spawn(IPlayActor actor1) {
+		super(actor1);
 	}
 
-	public void perform(Actor spawnedActor) {
-		spawnedActor.setHeading(getMyActor().getHeading());
-		spawnedActor.setX(getMyActor().getX());
-		spawnedActor.setY(getMyActor().getY());
-		List<Object> args = new ArrayList<>();
-		args.add("addActor");
-		args.add(spawnedActor);
-		//getMyActor().update(spawnedActor, args);
-		
+	public void perform() {
+//		spawnedActor.setHeading(getMyActor().getHeading());
+//		spawnedActor.setX(getMyActor().getX());
+//		spawnedActor.setY(getMyActor().getY());
+		getMyActor().changed();
+		List<Object> myList = new ArrayList<>();
+		myList.add("addActor");
+		//args.add(spawnedActor);
+		System.out.println("In Spawn Action");
+        ((Observable) getMyActor()).notifyObservers(myList);				
 	}
-
-	@Override
-	public void perform() {}
-	
 
 }

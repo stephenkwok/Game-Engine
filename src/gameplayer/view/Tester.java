@@ -131,13 +131,15 @@ public class Tester extends Application {
         Rule rule9 = new Rule(trigger9,action9);
         actor1.addRule(rule9);
 
-
+        KeyTrigger triggerSpawn = new KeyTrigger(KeyCode.S);
+        
         Action action1 = new MoveRight((IPlayActor)actor1);
         Action action2 = new MoveLeft((IPlayActor)actor1);
         Action action3 = new HorizontalStaticCollision((IPlayActor)actor1);
         Action action4 = new MoveUp((IPlayActor)actor1);
         Action action5 = new VerticalBounceCollision((IPlayActor)actor1);
         Action action6 = new WinGame((IPlayActor)actor1);
+        Action actionSpawn = new Spawn((IPlayActor) actor1);
 
         Rule rule = new Rule(trigger1,action1);
         Rule rule2 = new Rule(trigger2, action2);
@@ -145,6 +147,7 @@ public class Tester extends Application {
         Rule rule4 = new Rule(trigger4,action4);
         Rule rule5 = new Rule(trigger5,action5);
         Rule rule6 = new Rule(trigger6,action6);
+        Rule ruleSpawn = new Rule(triggerSpawn, actionSpawn);
 
         actor1.addRule(rule);
         actor1.addRule(rule2);
@@ -152,6 +155,7 @@ public class Tester extends Application {
         actor1.addRule(rule4);
         actor1.addRule(rule5);
         actor1.addRule(rule6);
+        actor1.addRule(ruleSpawn);
 
 
 

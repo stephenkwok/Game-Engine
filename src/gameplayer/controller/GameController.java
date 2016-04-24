@@ -211,12 +211,17 @@ public class GameController implements Observer, IGameController {
 	public void update(Observable o, Object arg) {
 		List<Object> myList = (List<Object>) arg;
 		String methodName = (String) myList.get(0);
+		System.out.println(methodName);
+		System.out.println(methodName.equals("addActor"));
 		try {
 			if (myResources.getString(methodName).equals("null")) {
 				this.getClass().getDeclaredMethod(methodName).invoke(this);
 			} else if (myResources.getString(methodName).equals("String")) {
 				this.getClass().getDeclaredMethod(methodName, String.class).invoke(this, (String) myList.get(1));
-			} else {
+			} else if(methodName.equals("addActor")){   //TODO: change this to use reflection
+				System.out.println("Suh");
+				this.addActor(new Actor());
+			}else{
 				Class<?> myClass = Class.forName(myResources.getString(methodName));
 				Object arg2 = myClass.cast(myList.get(1));
 				model.getClass().getDeclaredMethod(methodName, myClass).invoke(model, arg2);
