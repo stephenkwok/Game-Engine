@@ -38,8 +38,9 @@ public class KeyBehavior extends ComboBoxBehavior {
 	}
 	@Override
 	protected void createTriggerOrAction() {
-//		KeyCode shift = KeyCode.SHIFT;
-//		System.out.println(shift.toString());
+		if(myTrigger!=null){
+			//remove this trigger from ActorRule
+		}
 		KeyCode keyCode = KeyCode.getKeyCode(getValue());
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(keyCode);
