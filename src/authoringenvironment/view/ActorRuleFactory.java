@@ -11,7 +11,6 @@ import java.util.ResourceBundle;
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.behaviors.IAuthoringBehavior;
-//import gameengine.controller.Level;
 /**
  * Factory to create visual representations of triggers and actions that go into an ActorRule object
  * @author AnnieTang
@@ -22,8 +21,6 @@ public class ActorRuleFactory {
 	private static final String CLASS = "Class";
 	private ResourceBundle myResources;
 	private IAuthoringActor myActor;
-//	private Map<IAuthoringActor, List<IAuthoringActor>> myActorsMap;
-//	private List<Level> myLevels;
 	private static final String CREATE = "create";
 	private static final String ELEMENT = "Element";
 	private Controller myController;
@@ -34,8 +31,6 @@ public class ActorRuleFactory {
 		this.myActor = myActor;
 		this.myController = myController;
 		this.myActorRule = myActorRule;
-//		this.myActorsMap = myActorsMap;
-//		this.myLevels = myLevels;
 	}
 	
 	/**
@@ -119,5 +114,10 @@ public class ActorRuleFactory {
 	
 	private IAuthoringBehavior createTickBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		return createComboBoxBehavior(behaviorType, className);
+	}
+	
+	private IAuthoringBehavior createAttributeReachedBehavior(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		System.out.println(createLabelBehavior(behaviorType,className));
+		return createLabelBehavior(behaviorType, className);
 	}
 }

@@ -388,7 +388,7 @@ public class Controller extends BranchScreenController implements Observer {
 	
 	
 	private void copyRules(IAuthoringActor toUpdate, Map<String, List<Rule>> rulesToCopy) {
-		toUpdate.getActorRules().clear();
+		toUpdate.getRules().clear();
 		for (String trigger : rulesToCopy.keySet()) {
 			List<Rule> toAdd = rulesToCopy.get(trigger);
 			for (int i = 0; i < toAdd.size(); i++) {

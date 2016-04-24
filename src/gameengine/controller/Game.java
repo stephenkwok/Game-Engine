@@ -3,13 +3,14 @@ package gameengine.controller;
 import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
+import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
+import javafx.collections.MapChangeListener.Change;
 import javafx.collections.ObservableMap;
 import javafx.util.Duration;
 
@@ -30,6 +31,7 @@ public class Game extends Observable implements Observer {
 	private GameInfo info;
 	private PhysicsEngine myPhysicsEngine;
 	private CollisionDetection myCollisionDetector;
+	private Map<String,Set<IGameElement>> activeTriggers;
 	@XStreamOmitField
 	private Timeline animation;
 	private List<IPlayActor> currentActors;
@@ -52,7 +54,7 @@ public class Game extends Observable implements Observer {
 		levels = gameLevels;
 		info = gameInfo;
 		currentActors = new ArrayList<IPlayActor>();
-		setDeadActors(new ArrayList<IPlayActor>());
+		deadActors = new ArrayList<IPlayActor>();
         myPhysicsEngine = new PhysicsEngine();
         myCollisionDetector = new CollisionDetection(myPhysicsEngine);
         count = 1;
@@ -86,14 +88,17 @@ public class Game extends Observable implements Observer {
      */
 
 	public void startGame(){
+		initCurrentLevel();
 		initCurrentActors();
-		//This is here because it needs to know who the main actor is
 		initHUDData();
 
 		animation.play();
 	}
 
-
+	private void initCurrentLevel(){
+		getCurrentLevel().addObserver(this);
+	}
+	
     /**
      * Initializes the current actors
      */
@@ -106,6 +111,7 @@ public class Game extends Observable implements Observer {
 	}
 
     private void step(){
+        refreshTriggerMap();
         myCollisionDetector.detection(getCurrentActors());
         signalTick();
         updateCamera();
@@ -200,9 +206,27 @@ public class Game extends Observable implements Observer {
 	 * @param myTrigger the trigger received from the game player 
 	 */
 	public void handleTrigger(ITrigger myTrigger) {
-		getCurrentLevel().handleTrigger(myTrigger);
+		if(activeTriggers.get(myTrigger.getMyKey())!=null){
+			for(IGameElement gameElement: activeTriggers.get(myTrigger.getMyKey())){
+				gameElement.handleTrigger(myTrigger);
+			}
+		}
 	}
-
+	
+	private void refreshTriggerMap(){
+		activeTriggers = new HashMap<String,Set<IGameElement>>();
+		List<IGameElement> activeGameElements = new ArrayList<IGameElement>(Arrays.asList(new IGameElement[] {getCurrentLevel()}));
+		activeGameElements.addAll(getActors());
+		for(IGameElement gameElement: activeGameElements){
+			for(String trigger: gameElement.getRules().keySet()){
+				if(!activeTriggers.containsKey(trigger)){
+					activeTriggers.put(trigger, new HashSet<IGameElement>());
+				}
+				activeTriggers.get(trigger).add(gameElement);
+			}
+		}
+	}
+	
     /**
      * Carries out the appropriate procedure when notified by an observed object
      * @param o The Observable object that is being observed
@@ -285,11 +309,6 @@ public class Game extends Observable implements Observer {
 
 	public List<IPlayActor> getDeadActors() {
 		return deadActors;
-	}
-
-
-	public void setDeadActors(List<IPlayActor> deadActors) {
-		this.deadActors = deadActors;
 	}
 
 	public void addActor(Actor newActor) {
@@ -403,8 +422,6 @@ public class Game extends Observable implements Observer {
 	public void updateAttribute() {
 		updateHUDFields(HUDData.keySet(), HUDData);
 	}
-
-
 	
 	public int getScore() {
 		//return getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();

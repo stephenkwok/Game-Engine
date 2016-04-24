@@ -1,9 +1,9 @@
 package authoringenvironment.model;
 
+
 import java.util.List;
 import java.util.Map;
 
-import authoringenvironment.view.ActorRule;
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.PhysicsEngine;
@@ -24,6 +24,19 @@ public interface IAuthoringActor extends IEditableGameElement{
      * @param newRule The Rule to be added to the Actor
      */
 	void addRule(Rule newRule);
+	
+	/**
+	 * Gets Map<String, List<Rule>> 
+	 * @return
+	 */
+	public Map<String, List<Rule>> getRules();
+	
+	/**
+	 * Removes given Rule from Actor
+	 * @return
+	 */
+	public void removeRule(Rule rule);
+	
     /**
      * Sets the Actor's X coordinate
      * @param updateXPosition   The new X coordinate
@@ -80,12 +93,6 @@ public interface IAuthoringActor extends IEditableGameElement{
      */
     void setSize(double size);
 
-    /**
-     * Provides the List of the Actor's Rules
-     * @return  The Actor's ActorRules
-     */
-    List<ActorRule> getActorRules();
-
 	void setFriction(double parseDouble);
 	
 	/**
@@ -106,8 +113,6 @@ public interface IAuthoringActor extends IEditableGameElement{
     void addAttribute(Attribute newAttribute);
 
     void addSpriteImage(String newImage);
-
-    public Map<String, List<Rule>> getRules();
     
     public PhysicsEngine getPhysicsEngine();
     

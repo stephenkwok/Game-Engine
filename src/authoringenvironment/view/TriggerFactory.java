@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import gameengine.model.Actor;
+import gameengine.model.AttributeType;
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 import javafx.scene.input.KeyCode;
 /**
  * Factory to create ITrigger objects
@@ -19,6 +21,7 @@ import javafx.scene.input.KeyCode;
 public class TriggerFactory {
 	private static final int ZERO = 0;
 	private static final int ONE = 1;
+	private static final int TWO = 2;
 	private static final String TRIGGER_RESOURCE = "triggerfactory";
 	private static final String DELIMITER = ",";
 	private static final String TRIGGER_TYPES= "TriggerTypes";
@@ -104,7 +107,6 @@ public class TriggerFactory {
 	}
 	
 	private ITrigger createTickTrigger(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-//		//this is actually right, based on master: 
 		Class<?> collisionClass = Class.forName(className);
 		Constructor<?> constructor = collisionClass.getConstructor(int.class);
 		return (ITrigger) constructor.newInstance(arguments.get(ZERO));
@@ -112,9 +114,14 @@ public class TriggerFactory {
 	}
 	
 	private ITrigger createClickTrigger(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		//This is actually right, based on master: 
 		Class<?> collisionClass = Class.forName(className);
 		Constructor<?> constructor = collisionClass.getConstructor(Actor.class);
 		return (ITrigger) constructor.newInstance((Actor) arguments.get(ZERO));
+	}
+	
+	private ITrigger createAttributeReached(String behaviorType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Class<?> collisionClass = Class.forName(className);
+		Constructor<?> constructor = collisionClass.getConstructor(AttributeType.class,int.class, IGameElement.class);
+		return (ITrigger) constructor.newInstance(arguments.get(ZERO), arguments.get(ONE), arguments.get(TWO));
 	}
 }

@@ -6,7 +6,7 @@ import authoringenvironment.view.ActionFactory;
 import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.TriggerFactory;
 import gameengine.model.IAction;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 import gui.view.IGUIElement;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
