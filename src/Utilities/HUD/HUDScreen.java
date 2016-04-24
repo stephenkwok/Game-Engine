@@ -37,6 +37,9 @@ public class HUDScreen extends AbstractHUDScreen {
 		}
 	}
 	
+	public HUDScreen(Map<String, Property> status, Map<Integer, String> rowToValueMap) {
+		this(DEFAULT_HEIGHT, DEFAULT_WIDTH, status, rowToValueMap);
+	}
 	
 	public HUDScreen(double width, double height, Map<String, Property> status) {
 		this(width, height, status, new HashMap<Integer, String>());

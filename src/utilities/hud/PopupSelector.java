@@ -28,6 +28,7 @@ public class PopupSelector {
 	private Scene scene;
 	private Stage stage;
 	private TextArea input;
+	private IAuthoringHUDController controller;
 	
 	private double width;
 	private double height;
@@ -37,7 +38,8 @@ public class PopupSelector {
 	private static final String HELP_TEXT = "Enter your desired HUD fields in order below. \nWhen finished, click 'save'.";
 	
 	
-	public PopupSelector(double width, double height) {
+	public PopupSelector(double width, double height, IAuthoringHUDController controller) {
+		this.controller = controller;
 		this.width = width;
 		this.height = height;
 		this.root = new Group();
@@ -50,8 +52,8 @@ public class PopupSelector {
 		stage.show();
 	}
 	
-	public PopupSelector() {
-		this(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	public PopupSelector(IAuthoringHUDController controller) {
+		this(DEFAULT_WIDTH, DEFAULT_HEIGHT, controller);
 	}
 	
 	public void init() {
@@ -73,10 +75,12 @@ public class PopupSelector {
 		File file = new FileChooser().showSaveDialog(stage);
 		if (file != null) {
 			try {
-				file = new File(file.getPath() + ".hud");
+				String path = file.getPath() + ".hud";
+				file = new File(path);
 				BufferedWriter b = new BufferedWriter(new FileWriter(file));
 				b.write(s);
 				b.close();
+				controller.setHUDInfoFile(path);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

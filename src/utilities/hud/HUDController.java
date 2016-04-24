@@ -1,29 +1,78 @@
 package utilities.hud;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
 public class HUDController implements Observer{
 	
-	HUDModel model;
-	HUDScreen view;
+	private HUDModel model;
+	private AbstractHUDScreen view;
+	private IDataSource data;
 	
-	public void grabData(Collection<String> fieldsToObserve) {
-		setModel(new HUDModel());
-		IValueFinder valueFinder = new ValueFinder(this);
-		for (String field : fieldsToObserve) {
-			model.getData().put(field, valueFinder.find(field));
-		}
-		setView(new HUDScreen(model.getData()));
+	
+	public void setDataSource(IDataSource data) {
+		this.data = data;
 	}
+	
+	public void init(String filename, IDataSource data) {
+		setModel(new HUDModel());
+		this.data = data;
+		
+		IValueFinder valueFinder = new ValueFinder();
+		valueFinder.setController(this);
+		
+		
+		List<String> fieldsToObserve = getData(filename);
+		Map<Integer, String> rowToValueMap = new HashMap<>();
+		for (int i = 0; i<fieldsToObserve.size(); i++) {
+			String field = fieldsToObserve.get(i);
+			model.getData().put(field, valueFinder.find(field));
+			rowToValueMap.put(i, field);
+		}
+		setView(new HUDScreen(model.getData(), rowToValueMap));
+	}
+	
+	private List<String> getData(String filename) {
+		List<String> params = new ArrayList<>();
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
+			String currentLine = bufferedReader.readLine();
+
+			while(currentLine != null) {
+				String trimmedWord = currentLine.trim();
+				if (trimmedWord.length() != 0) {
+					params.add(trimmedWord);
+				}
+				currentLine = bufferedReader.readLine();
+			}
+			bufferedReader.close();
+		} 
+		catch (IOException e) {
+			System.err.println("A error occured reading file: " + e);
+			e.printStackTrace();
+		}
+		return params;
+	}
+	
+	
+	
+	
+	
 	
 	public void setModel(HUDModel model) {
 		this.model = model;
 		this.model.addObserver(this);
 	}
 	
-	public void setView(HUDScreen view) {
+	public void setView(AbstractHUDScreen view) {
 		this.view = view;
 		this.view.addObserver(this);
 	}

@@ -1,14 +1,11 @@
 package utilities.hud;
 
+import gameengine.controller.Game;
+
 public class ValueFinder implements IValueFinder {
 
 	private HUDController controller;
-	
-	public ValueFinder(HUDController controller) {
-		this.controller = controller;
-	}
-	
-	
+	private Game data; //for other projects, your data will be different
 	
 	@Override
 	public Property find(String key) {
@@ -28,6 +25,18 @@ public class ValueFinder implements IValueFinder {
 		
 		ret.addObserver(controller);
 		return ret;
+	}
+
+
+
+	@Override
+	public void setController(HUDController controller) {
+		this.controller = controller;
+	}
+
+	@Override
+	public void setDataSource(Object dataSource) {
+		this.data = (Game) data;
 	}
 	
 }

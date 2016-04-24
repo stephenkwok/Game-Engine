@@ -6,8 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class Main extends Application{
-	
+public class Main extends Application implements IAuthoringHUDController{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -16,7 +15,7 @@ public class Main extends Application{
 		Group root = new Group();
 		Scene s = new Scene(root, 50, 50);
 		Button b = new Button("OPEN");
-		b.setOnAction(e->new PopupSelector());
+		b.setOnAction(e->new PopupSelector(this));
 		root.getChildren().add(b);
 		
 		myStage.setScene(s);
@@ -26,6 +25,11 @@ public class Main extends Application{
 	
 	public static void main(String[] args){
 		launch(args);
+	}
+
+	@Override
+	public void setHUDInfoFile(String location) {
+		System.out.println(location);
 	}
 
 }
