@@ -24,7 +24,7 @@ public class SplashScreen extends Screen implements Observer {
 	
 	private static final String SPLASH_RESOURCE = "splashGUI";
 	private static final String BUTTONS_ID = "buttonID";
-	private static final int PADDING = 200;
+	private static final int PADDING = 190;
 	
 	/**
 	 * initializes a hbox with buttons to facilitate transitions to the various parts of the program
