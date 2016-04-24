@@ -1,11 +1,9 @@
-package Utilities.HUD;
+package utilities.hud;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
 
 import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.SubScene;
@@ -13,7 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 
 
-public class HUDScreen extends Observable {
+public class HUDScreen extends AbstractHUDScreen {
 
 	
 	private static final int DEFAULT_HEIGHT = 100;
@@ -39,6 +37,9 @@ public class HUDScreen extends Observable {
 		}
 	}
 	
+	public HUDScreen(Map<String, Property> status, Map<Integer, String> rowToValueMap) {
+		this(DEFAULT_HEIGHT, DEFAULT_WIDTH, status, rowToValueMap);
+	}
 	
 	public HUDScreen(double width, double height, Map<String, Property> status) {
 		this(width, height, status, new HashMap<Integer, String>());

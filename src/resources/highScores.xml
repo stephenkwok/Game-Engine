@@ -3,6 +3,15 @@
   <obs/>
   <myScores>
     <entry>
+      <string>gamefiles\loaders\test2_loader.xml</string>
+      <tree-map>
+        <entry>
+          <string>booby</string>
+          <int>0</int>
+        </entry>
+      </tree-map>
+    </entry>
+    <entry>
       <string>hudtest_loader.xml</string>
       <tree-map>
         <entry>
@@ -36,15 +45,15 @@
           <int>0</int>
         </entry>
         <entry>
+          <string>asdfdsf</string>
+          <int>0</int>
+        </entry>
+        <entry>
           <string>luigi</string>
           <int>0</int>
         </entry>
         <entry>
           <string>mario</string>
-          <int>0</int>
-        </entry>
-        <entry>
-          <string>asdfdsf</string>
           <int>0</int>
         </entry>
       </tree-map>
