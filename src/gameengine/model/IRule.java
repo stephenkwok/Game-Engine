@@ -1,6 +1,7 @@
 package gameengine.model;
 
 import gameengine.model.Actions.Action;
+import gameengine.model.Triggers.ITrigger;
 
 /**
  * This interface defines the public methods for Rule objects. For our purposes, Rules will be ways of packaging

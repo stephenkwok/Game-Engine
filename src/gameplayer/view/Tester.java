@@ -5,9 +5,12 @@ import gameengine.model.Actor;
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
+import gameengine.model.IGameElement;
 import gameengine.model.Rule;
 import gameengine.model.Actions.*;
+import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.BottomCollision;
+import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.SideCollision;
 import gameengine.model.Triggers.TickTrigger;
@@ -16,7 +19,6 @@ import gameplayer.controller.GameController;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.ParallelCamera;
-import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.input.KeyCode;
@@ -158,8 +160,13 @@ public class Tester extends Application {
         actor1.addRule(new Rule(intTick, animate));
 
         actor1.addState(ActorState.MAIN);
-//		Attribute points = new Attribute(AttributeType.POINTS,0,10,action6);
-//		actor1.addAttribute(points);
+		Attribute points = new Attribute(AttributeType.POINTS,0,(IGameElement)actor1);
+		actor1.addAttribute(points);
+		
+		ITrigger attreached = new AttributeReached(AttributeType.POINTS,(IGameElement)actor1,5);
+		Action wingame = new WinGame((IPlayActor) actor1);
+		
+		actor1.addRule(new Rule(attreached,wingame));
 
         List<Level> levels = new ArrayList<Level>();
         Level level1 = new Level();
@@ -221,7 +228,8 @@ public class Tester extends Application {
         stage.setScene(scene);
         stage.show();
         controller.initialize(0);
-
+        
+        
     }
 
 }
