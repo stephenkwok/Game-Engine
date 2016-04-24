@@ -15,22 +15,21 @@ public class HUDController implements Observer{
 	
 	private HUDModel model;
 	private AbstractHUDScreen view;
-	private IDataSource data;
+	private Object dataSource;
 	
 	
-	public void setDataSource(IDataSource data) {
-		this.data = data;
+	public void setDataSource(Object dataSource) {
+		this.dataSource = dataSource;
 	}
 	
-	public void init(String filename, IDataSource data) {
+	public void init(String filename, Object dataSource) {
 		setModel(new HUDModel());
-		this.data = data;
-		
-		IValueFinder valueFinder = new ValueFinder();
+		setDataSource(dataSource);
+		IValueFinder valueFinder = new TLGCSValueFinder();
 		valueFinder.setController(this);
+		valueFinder.setDataSource(dataSource);
 		
-		
-		List<String> fieldsToObserve = getData(filename);
+		List<String> fieldsToObserve = getFieldsToFollow(filename);
 		Map<Integer, String> rowToValueMap = new HashMap<>();
 		for (int i = 0; i<fieldsToObserve.size(); i++) {
 			String field = fieldsToObserve.get(i);
@@ -40,7 +39,7 @@ public class HUDController implements Observer{
 		setView(new HUDScreen(model.getData(), rowToValueMap));
 	}
 	
-	private List<String> getData(String filename) {
+	private List<String> getFieldsToFollow(String filename) {
 		List<String> params = new ArrayList<>();
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
