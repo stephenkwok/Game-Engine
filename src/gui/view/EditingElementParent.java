@@ -1,6 +1,5 @@
 package gui.view;
 
-import java.util.Observable;
 import java.util.Observer;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingElement;
@@ -17,7 +16,8 @@ import javafx.scene.control.Button;
  * @author Stephen
  *
  */
-public abstract class EditingElementParent extends Observable implements IGUIElement, IEditingElement {
+public abstract class EditingElementParent extends ObjectObservable implements IGUIElement, IEditingElement {
+	
 	private IEditableGameElement myEditableElement;
 	private Button myButton;
 
@@ -72,9 +72,4 @@ public abstract class EditingElementParent extends Observable implements IGUIEle
 		return myButton;
 	}
 
-
-	protected void notifyController(Object objToPassToObserver) {
-		setChanged();
-		notifyObservers(objToPassToObserver);
-	}
 }

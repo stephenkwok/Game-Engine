@@ -10,22 +10,20 @@ import authoringenvironment.view.ActorRule;
 import gameengine.model.IPlayActor;
 import gameengine.model.ITrigger;
 
-public class CollisionBehavior extends IEditableGameElementBehavior {
+public class CollisionBehavior extends SelectEditableBehavior {
 	private List<IAuthoringActor> myActors;
 	private IAuthoringActor otherActor;
 	private ITrigger myTrigger;
+	private IAuthoringActor myActor;
 	
 	public CollisionBehavior(ActorRule myActorRule, String behaviorType, IAuthoringActor myActor, ResourceBundle myResources, List<IAuthoringActor> myActors) {
 		super(myActorRule, behaviorType, myResources);
 		this.myActors = myActors;
+		this.myActor = myActor;
 		setButtonAction(e -> {
 			this.otherActor = (IAuthoringActor) getComboBox().getValue();
-			List<Object> arguments = new ArrayList<>();
-			arguments.add((IPlayActor) myActor);
-			arguments.add((IPlayActor) otherActor);
-			myTrigger = getTriggerFactory().createNewTrigger(behaviorType, arguments);
-			addTrigger(this, myTrigger);
-			System.out.println(myTrigger);
+			createTriggerOrAction();
+			setTriggerOrAction();
 		});
 	}
 
@@ -41,5 +39,23 @@ public class CollisionBehavior extends IEditableGameElementBehavior {
 	@Override
 	protected void updateValueBasedOnEditable() {
 		getComboBox().setValue(otherActor);
+	}
+
+	@Override
+	public void setTriggerOrAction() {
+		setTrigger(this, myTrigger);
+	}
+
+	@Override
+	protected void createTriggerOrAction() {
+		List<Object> arguments = new ArrayList<>();
+		arguments.add((IPlayActor) myActor);
+		arguments.add((IPlayActor) otherActor);
+		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
+	}
+
+	@Override
+	public boolean isTrigger() {
+		return true;
 	}
 }
