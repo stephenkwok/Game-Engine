@@ -155,7 +155,7 @@ public class Tester extends Application {
 
 
 
-        TickTrigger intTick = new TickTrigger(10);
+        TickTrigger intTick = new TickTrigger(5);
         Action animate = new NextImage((IPlayActor) actor1);
         actor1.addRule(new Rule(intTick, animate));
 
