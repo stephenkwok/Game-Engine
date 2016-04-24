@@ -180,7 +180,7 @@ public class ActorRule {
 		myTrigger = null;
 		printAll("AFTER REMOVING TRIGGER");
 	}
-	
+
 	private void removeAction(IAuthoringBehavior toRemove){
 		myActions.remove(authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex"))));
 		Rule ruleToRemove = (Rule) authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")));

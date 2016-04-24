@@ -99,6 +99,17 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	@Override
 	public void addActor(IAuthoringActor actor) {
 		getActors().add((IPlayActor)actor);
+		Set<String> actorTriggers = ((IPlayActor)actor).getRules().keySet();
+		List<IPlayActor> levelActors;
+		for (String myTrigger : actorTriggers) {
+			if (getMyTriggerMap().containsKey(myTrigger)) {
+				levelActors = getMyTriggerMap().get(myTrigger);
+			} else {
+				levelActors = new ArrayList<>();
+			}
+			levelActors.add((IPlayActor)actor);
+			getMyTriggerMap().put(myTrigger, levelActors);
+		}
 	}
 
 	/**
