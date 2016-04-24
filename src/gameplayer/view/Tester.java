@@ -115,10 +115,10 @@ public class Tester extends Application {
 
 
 
-        KeyTrigger triggerDown = new KeyTrigger(KeyCode.DOWN);
-        Action moveForwards = new MoveBackward((IPlayActor) actor1);
-        Rule movingForwards = new Rule(triggerDown, moveForwards);
-        actor1.addRule(movingForwards);
+//        KeyTrigger triggerDown = new KeyTrigger(KeyCode.DOWN);
+//        Action moveForwards = new MoveBackward((IPlayActor) actor1);
+//        Rule movingForwards = new Rule(triggerDown, moveForwards);
+//        actor1.addRule(movingForwards);
 
         KeyTrigger trigger1 = new KeyTrigger(KeyCode.RIGHT);
         KeyTrigger trigger2 = new KeyTrigger(KeyCode.LEFT);
