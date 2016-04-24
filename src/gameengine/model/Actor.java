@@ -42,6 +42,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private double myHeight;
     private Sprite mySprite;
     private boolean isMainPlayer;
+    private boolean isVisible;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -57,6 +58,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
         myHeight = myImageView.getFitHeight();
         isMainPlayer = false;
+        isVisible = true;
     }
 
     public List<ActorRule> getMyActorRules() {
@@ -442,4 +444,12 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     public boolean isMainPlayer() {
     	return isMainPlayer;
     }
+
+	public boolean isVisible() {
+		return isVisible;
+	}
+
+	public void setVisible(boolean isVisible) {
+		this.isVisible = isVisible;
+	}
 }
