@@ -61,22 +61,6 @@ public class Container implements Observer{
 		p3.setValue(0.3354);
 		System.out.println(c.toString());
 		
-//		XMLCreator x = new XMLCreator();
-//		try {
-//			x.saveGame(c, new File("test.xml"));
-//		} catch (Exception e) {
-//			System.out.println("Failed1");
-//		}
-		
-		
-		XMLParser xp = new XMLParser();
-		Container c2 = null;
-		try {
-			c2 = xp.extractGame(new File("test.xml"));
-		} catch (Exception e) {
-			System.out.println("Failed2");
-		}
-		System.out.println(c2);
 	}
 
 }

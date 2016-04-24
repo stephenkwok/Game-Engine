@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Observable;
 import java.util.Set;
 
-public class Property extends Observable{
+public class Property extends Observable {
 	
 	private Class<?> type;
 	private Object value;

@@ -35,19 +35,6 @@
                 </list>
               </entry>
               <entry>
-                <string>Down</string>
-                <list>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
-                      <myKey>Down</myKey>
-                    </myTrigger>
-                    <myAction class="gameengine.model.Actions.MoveBackward">
-                      <myActor class="gameengine.model.Actor" reference="../../../../../../.."/>
-                    </myAction>
-                  </gameengine.model.Rule>
-                </list>
-              </entry>
-              <entry>
                 <string>Left</string>
                 <list>
                   <gameengine.model.Rule>
@@ -55,6 +42,19 @@
                       <myKey>Left</myKey>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.MoveLeft">
+                      <myActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+              <entry>
+                <string>S</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
+                      <myKey>S</myKey>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.Spawn">
                       <myActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
                   </gameengine.model.Rule>
@@ -131,6 +131,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -159,6 +165,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -187,6 +199,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -215,6 +233,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -243,6 +267,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -271,6 +301,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -299,6 +335,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -327,6 +369,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -355,6 +403,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -383,6 +437,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -411,6 +471,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -439,6 +505,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -467,6 +539,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -495,6 +573,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -523,6 +607,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -551,6 +641,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -579,6 +675,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -607,6 +709,12 @@
                                         <attributeMap/>
                                       </myAttributeManager>
                                       <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -621,6 +729,12 @@
                           <attributeMap/>
                         </myAttributeManager>
                         <myStates/>
+                        <mySprite>
+                          <myImages>
+                            <string>block.png</string>
+                          </myImages>
+                          <spriteIndex>0</spriteIndex>
+                        </mySprite>
                       </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.HorizontalStaticCollision">
@@ -817,6 +931,12 @@
                           <attributeMap/>
                         </myAttributeManager>
                         <myStates/>
+                        <mySprite>
+                          <myImages>
+                            <string>flagpole.png</string>
+                          </myImages>
+                          <spriteIndex>0</spriteIndex>
+                        </mySprite>
                       </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.WinGame">
@@ -849,7 +969,7 @@
                   </gameengine.model.Rule>
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.TickTrigger">
-                      <myInterval>10</myInterval>
+                      <myInterval>5</myInterval>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.NextImage">
                       <myActor class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1077,6 +1197,14 @@
           <myStates>
             <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
           </myStates>
+          <mySprite>
+            <myImages>
+              <string>runningmario1.png</string>
+              <string>runningmario2.png</string>
+              <string>runningmario3.png</string>
+            </myImages>
+            <spriteIndex>0</spriteIndex>
+          </mySprite>
         </gameengine.model.Actor>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[5]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[5]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
@@ -1162,6 +1290,12 @@
             <attributeMap/>
           </myAttributeManager>
           <myStates/>
+          <mySprite>
+            <myImages>
+              <string>goomba.png</string>
+            </myImages>
+            <spriteIndex>0</spriteIndex>
+          </mySprite>
         </gameengine.model.Actor>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[5]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[5]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
@@ -1190,13 +1324,13 @@
           </list>
         </entry>
         <entry>
-          <string>Down</string>
+          <string>Left</string>
           <list>
             <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
           </list>
         </entry>
         <entry>
-          <string>Left</string>
+          <string>S</string>
           <list>
             <gameengine.model.Actor reference="../../../../myActors/gameengine.model.Actor"/>
           </list>
@@ -1604,14 +1738,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
     <isDestinationGame>true</isDestinationGame>
   </info>
   <myPhysicsEngine>
-    <timeStep>1</timeStep>
-    <friction>-0.05</friction>
-    <gravity>0.11</gravity>
-    <maxHorizVelocity>50.0</maxHorizVelocity>
-    <maxVertVelocity>-50.0</maxVertVelocity>
+    <nextXVelo>0.0</nextXVelo>
+    <nextXPos>0.0</nextXPos>
+    <nextYVelo>0.0</nextYVelo>
+    <nextYPos>0.0</nextYPos>
     <horizontalForce>5.0</horizontalForce>
-    <jumpForce>-5.0</jumpForce>
-    <floorHeight>500.0</floorHeight>
+    <verticalForce>-5.0</verticalForce>
+    <gravity>0.11</gravity>
+    <friction>-0.05</friction>
+    <maxVelo>7.0</maxVelo>
+    <bounce>2.5</bounce>
   </myPhysicsEngine>
   <myCollisionDetector>
     <SideCollision>SideCollision</SideCollision>
