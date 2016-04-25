@@ -1,9 +1,7 @@
 package gui.view;
 
-
 public class ButtonRestart extends ButtonParent {
 
-	
 	public ButtonRestart(String buttonText, String imageName) {
 		super(buttonText, imageName);
 	}
@@ -14,7 +12,7 @@ public class ButtonRestart extends ButtonParent {
 			setChanged();
 			notifyObservers();
 		});
-		
+
 	}
 
 }

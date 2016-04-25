@@ -12,10 +12,11 @@ import javafx.scene.layout.*;
 
 /**
  * 
- * This class creates a Label containing text (the name of an actor or level) and an image (a picture
- * of an actor or level). When clicked, the label sets the screen to either the Level Editing Environment,
- * if the Label's IEditableGameElement is a Level, or the Actor Editing Environment, if the Label's
- * IEditableGameElement is an Actor
+ * This class creates a Label containing text (the name of an actor or level)
+ * and an image (a picture of an actor or level). When clicked, the label sets
+ * the screen to either the Level Editing Environment, if the Label's
+ * IEditableGameElement is a Level, or the Actor Editing Environment, if the
+ * Label's IEditableGameElement is an Actor
  * 
  * @author Stephen
  *
@@ -42,14 +43,14 @@ public class PreviewUnitWithEditable extends ObjectObservable implements IEditin
 		myLabel.setPadding(new Insets(LABEL_PADDING));
 		myLabel.setOnMouseClicked(e -> setButtonAction());
 	}
-	
-	//testing
+
+	// testing
 	private void setButtonAction() {
 		notifyObservers(Arrays.asList(myEditable, myEnvironment));
 	}
-	
+
 	/**
-	 * Updates the Label's text and image to account for any changes in the 
+	 * Updates the Label's text and image to account for any changes in the
 	 * Actor or Level's name and image
 	 */
 	public void update() {
@@ -59,7 +60,7 @@ public class PreviewUnitWithEditable extends ObjectObservable implements IEditin
 		imageView.setPreserveRatio(true);
 		myLabel.setGraphic(imageView);
 	}
-	
+
 	/**
 	 * 
 	 * @return the preview unit's instance of IEditableGameElement
@@ -67,7 +68,7 @@ public class PreviewUnitWithEditable extends ObjectObservable implements IEditin
 	public IEditableGameElement getEditable() {
 		return myEditable;
 	}
-	
+
 	/**
 	 * 
 	 * @return the HBox containing all nodes in the preview unit

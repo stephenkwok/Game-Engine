@@ -23,30 +23,28 @@ import org.xml.sax.SAXException;
 
 public class HighScoresCreator {
 	private XStream myXStream;
-	
-	public HighScoresCreator () {
+
+	public HighScoresCreator() {
 		myXStream = new XStream();
 		myXStream.autodetectAnnotations(true);
 	}
-	
-	public void saveScore (HighScoresKeeper scoresKeeper, File file) throws ParserConfigurationException, SAXException, IOException, TransformerException {
+
+	public void saveScore(HighScoresKeeper scoresKeeper, File file)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-		
+
 		String xml = this.myXStream.toXML(scoresKeeper);
 		Document document = documentBuilder.parse(new InputSource(new StringReader(xml)));
 		convertDocumentToFile(document, file);
 	}
-	
-	public void convertDocumentToFile (Document document, File file) throws TransformerException {
 
-		TransformerFactory transformerFactory =
-				TransformerFactory.newInstance();
-		Transformer transformer =
-				transformerFactory.newTransformer();
+	public void convertDocumentToFile(Document document, File file) throws TransformerException {
+
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		Transformer transformer = transformerFactory.newTransformer();
 		DOMSource source = new DOMSource(document);
-		StreamResult result =
-				new StreamResult(file);
+		StreamResult result = new StreamResult(file);
 		transformer.transform(source, result);
 	}
 

@@ -24,13 +24,15 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import authoringenvironment.model.IEditableGameElement;
 
 /**
- * A Level is essentially a package of Actor objects. It is able to relay a Trigger to Actors when it receives one.
+ * A Level is essentially a package of Actor objects. It is able to relay a
+ * Trigger to Actors when it receives one.
  *
  * @author blakekaplan
  */
 public class Level extends Observable implements ILevel, IEditableGameElement, Comparable<Level>, IGameElement {
 
-	// TODO: should probably set these default things via properties file but idk sry guyz
+	// TODO: should probably set these default things via properties file but
+	// idk sry guyz
 	private static final String DEFAULT_NAME = "Default";
 	private static final String DEFAULT_IMAGE_NAME = "default_landscape.png";
 	private static final double DEFAULT_HEIGHT = 800;
@@ -51,7 +53,6 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	private DoubleProperty myBackgroundX = new SimpleDoubleProperty();
 	private RuleManager myRuleManager;
 	private AttributeManager myAttributeManager;
-
 
 	/**
 	 * Instantiates the triggerMap and Actor list
@@ -74,7 +75,8 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	/**
 	 * Calls for the appropriate response upon receiving a particular Trigger
 	 *
-	 * @param myTrigger A particular Trigger object sent from the game player
+	 * @param myTrigger
+	 *            A particular Trigger object sent from the game player
 	 */
 	@Override
 	public void handleTrigger(ITrigger myTrigger) {
@@ -84,7 +86,8 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	/**
 	 * Sets the Level's name
 	 *
-	 * @param name A name for the Level
+	 * @param name
+	 *            A name for the Level
 	 */
 	@Override
 	public void setName(String name) {
@@ -94,12 +97,13 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	/**
 	 * Adds a new Actor to the Level and updates the triggerMap accordingly
 	 *
-	 * @param actor The Actor to be added to the Level
+	 * @param actor
+	 *            The Actor to be added to the Level
 	 */
 	@Override
 	public void addActor(IAuthoringActor actor) {
-		getActors().add((IPlayActor)actor);
-		Set<String> actorTriggers = ((IPlayActor)actor).getRules().keySet();
+		getActors().add((IPlayActor) actor);
+		Set<String> actorTriggers = ((IPlayActor) actor).getRules().keySet();
 		List<IPlayActor> levelActors = null;
 		for (String myTrigger : actorTriggers) {
 			if (getMyTriggerMap().containsKey(myTrigger)) {
@@ -107,7 +111,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 			} else {
 				levelActors = new ArrayList<>();
 			}
-			levelActors.add((IPlayActor)actor);
+			levelActors.add((IPlayActor) actor);
 			getMyTriggerMap().put(myTrigger, levelActors);
 		}
 	}
@@ -125,7 +129,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	/**
 	 * Provides the Level's ImageView
 	 *
-	 * @return  The Level's ImageView
+	 * @return The Level's ImageView
 	 */
 	@Override
 	public ImageView getImageView() {
@@ -135,18 +139,19 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	/**
 	 * Sets the Level's ImageView
 	 *
-	 * @param imageView to be set as IEditableGameElement's ImageView
+	 * @param imageView
+	 *            to be set as IEditableGameElement's ImageView
 	 */
 	@Override
 	public void setImageView(ImageView imageView) {
 		myBackground = imageView;
-		myBackgroundX  = new SimpleDoubleProperty(myBackground.getX());
+		myBackgroundX = new SimpleDoubleProperty(myBackground.getX());
 	}
 
 	/**
 	 * Provides the name of the Level's background image
 	 *
-	 * @return  The name of the Level's background image
+	 * @return The name of the Level's background image
 	 */
 	public String getMyBackgroundImgName() {
 		return myBackgroundImgName;
@@ -155,7 +160,8 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	/**
 	 * Sets the Level's background image
 	 *
-	 * @param myBackgroundImgName   The desired image filepath
+	 * @param myBackgroundImgName
+	 *            The desired image filepath
 	 */
 	public void setMyBackgroundImgName(String myBackgroundImgName) {
 		this.myBackgroundImgName = myBackgroundImgName;
@@ -164,7 +170,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	/**
 	 * Provides a string representation of the Level object
 	 *
-	 * @return  A string representation of the Level object
+	 * @return A string representation of the Level object
 	 */
 	public String toString() {
 
@@ -186,7 +192,6 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		return stringBuilder.toString();
 	}
 
-
 	public Map<String, List<IPlayActor>> getMyTriggerMap() {
 		return myTriggerMap;
 	}
@@ -205,7 +210,8 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 
 	/**
 	 * Provides the Level's Height
-	 * @return  The Level's Height
+	 * 
+	 * @return The Level's Height
 	 */
 	public double getMyHeight() {
 		return myHeight;
@@ -214,7 +220,8 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	/**
 	 * Sets the Level's Height
 	 *
-	 * @param myHeight  The desired Level height
+	 * @param myHeight
+	 *            The desired Level height
 	 */
 	public void setMyHeight(double myHeight) {
 		this.myHeight = myHeight;
@@ -232,7 +239,8 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	/**
 	 * Sets the Level's width
 	 *
-	 * @param myWidth   The desired Level width
+	 * @param myWidth
+	 *            The desired Level width
 	 */
 	public void setMyWidth(double myWidth) {
 		this.myWidth = myWidth;
@@ -241,7 +249,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	/**
 	 * Provides the HUD options
 	 *
-	 * @return  The Level's HUD options
+	 * @return The Level's HUD options
 	 */
 	public List<String> getMyHUDOptions() {
 		return myHUDOptions;
@@ -259,14 +267,17 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	/**
 	 * Provides the Level's scrolling direction
 	 *
-	 * @return  The Level's scrolling direction
+	 * @return The Level's scrolling direction
 	 */
-	public String getMyScrollingDirection() { return myScrollingDirection; }
+	public String getMyScrollingDirection() {
+		return myScrollingDirection;
+	}
 
 	/**
 	 * Sets the Level's scrolling direction
 	 *
-	 * @param myScrollingDirection  The desired scrolling direction
+	 * @param myScrollingDirection
+	 *            The desired scrolling direction
 	 */
 	public void setMyScrollingDirection(String myScrollingDirection) {
 		this.myScrollingDirection = myScrollingDirection;
@@ -290,9 +301,9 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	}
 
 	/**
-	 * Returns a negative number if this Level's play position is lower than
-	 * the other Level's play position or a positive number if this Level's 
-	 * play position is higher than the other Level's play position
+	 * Returns a negative number if this Level's play position is lower than the
+	 * other Level's play position or a positive number if this Level's play
+	 * position is higher than the other Level's play position
 	 */
 	@Override
 	public int compareTo(Level otherLevel) {
@@ -312,7 +323,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	}
 
 	public void scrollBackground(int change) {
-		this.myBackground.setX((this.myBackground.getX()+change)%this.myBackground.getImage().getWidth());
+		this.myBackground.setX((this.myBackground.getX() + change) % this.myBackground.getImage().getWidth());
 		this.myBackgroundX.set(myBackground.getX());
 	}
 
@@ -321,9 +332,9 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		myBackgroundX = new SimpleDoubleProperty(myBackground.getX());
 	}
 
-	public IPlayActor getMainCharacter(){
-		for(IPlayActor a: myActors){
-			if(a.checkState(ActorState.MAIN)){
+	public IPlayActor getMainCharacter() {
+		for (IPlayActor a : myActors) {
+			if (a.checkState(ActorState.MAIN)) {
 				return a;
 			}
 		}
@@ -333,19 +344,19 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	@Override
 	public void addAttribute(Attribute attribute) {
 		myAttributeManager.addAttribute(attribute);
-		
+
 	}
 
 	@Override
 	public void removeAttribute(Attribute attribute) {
 		myAttributeManager.removeAttribute(attribute);
-		
+
 	}
 
 	@Override
 	public void handleReachedAttribute(AttributeReached trigger) {
 		setChanged();
-		notifyObservers(Arrays.asList(new Object[]{"handleTrigger",trigger}));		
+		notifyObservers(Arrays.asList(new Object[] { "handleTrigger", trigger }));
 	}
 
 	@Override
@@ -356,24 +367,24 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	@Override
 	public void changeAttribute(AttributeType type, int change) {
 		myAttributeManager.changeAttribute(type, change);
-		
+
 	}
 
 	@Override
 	public void addRule(Rule rule) {
 		myRuleManager.addRule(rule);
-		
+
 	}
 
 	@Override
 	public void removeRule(Rule rule) {
 		myRuleManager.removeRule(rule);
-		
+
 	}
 
 	@Override
 	public Map<String, List<Rule>> getRules() {
 		return myRuleManager.getRules();
 	}
-	
+
 }

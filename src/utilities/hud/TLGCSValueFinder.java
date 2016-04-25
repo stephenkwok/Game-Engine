@@ -5,28 +5,28 @@ import gameengine.controller.Game;
 public class TLGCSValueFinder implements IValueFinder {
 
 	private HUDController controller;
-	private Game data; //for other projects, your data will be a different class
-	
+	private Game data; // for other projects, your data will be a different
+						// class
+
 	@Override
 	public Property find(String key) {
 		Property ret = null;
 		switch (key.toLowerCase()) {
-			case "points": case "health":
-				//reflection here to save LOC?
-				break;
-			case "ammo":
-				//
-				break;
-			default:
-				ret = new Property("Value Not Found", key);
-				break;
-		
+		case "points":
+		case "health":
+			// reflection here to save LOC?
+			break;
+		case "ammo":
+			//
+			break;
+		default:
+			ret = new Property("Value Not Found", key);
+			break;
+
 		}
 		ret.addObserver(controller);
 		return ret;
 	}
-
-
 
 	@Override
 	public void setController(HUDController controller) {
@@ -41,5 +41,5 @@ public class TLGCSValueFinder implements IValueFinder {
 			throw new IllegalArgumentException();
 		}
 	}
-	
+
 }

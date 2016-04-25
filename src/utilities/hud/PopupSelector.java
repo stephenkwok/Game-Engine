@@ -23,21 +23,20 @@ import javafx.stage.Stage;
  *
  */
 public class PopupSelector {
-	
+
 	private Group root;
 	private Scene scene;
 	private Stage stage;
 	private TextArea input;
 	private IAuthoringHUDController controller;
-	
+
 	private double width;
 	private double height;
-	
+
 	private static final double DEFAULT_WIDTH = 200;
 	private static final double DEFAULT_HEIGHT = 200;
 	private static final String HELP_TEXT = "Enter your desired HUD fields in order below. \nWhen finished, click 'save'.";
-	
-	
+
 	public PopupSelector(double width, double height, IAuthoringHUDController controller) {
 		this.controller = controller;
 		this.width = width;
@@ -51,11 +50,11 @@ public class PopupSelector {
 		init();
 		stage.show();
 	}
-	
+
 	public PopupSelector(IAuthoringHUDController controller) {
 		this(DEFAULT_WIDTH, DEFAULT_HEIGHT, controller);
 	}
-	
+
 	public void init() {
 		BorderPane top = new BorderPane();
 		Button save = new Button("Save");
@@ -66,10 +65,10 @@ public class PopupSelector {
 		all.setBottom(input);
 		this.root.getChildren().add(all);
 		System.out.println(scene.getWidth());
-		save.setLayoutX(this.width-50);
-		save.setOnAction(e->saveInputs(input.getText()));	
+		save.setLayoutX(this.width - 50);
+		save.setOnAction(e -> saveInputs(input.getText()));
 	}
-	
+
 	public void saveInputs(String s) {
 		String[] inputs = s.split("\n++");
 		File file = new FileChooser().showSaveDialog(stage);
@@ -87,7 +86,7 @@ public class PopupSelector {
 		}
 		System.out.println(Arrays.toString(inputs));
 	}
-	
+
 	public Scene getScene() {
 		return scene;
 	}

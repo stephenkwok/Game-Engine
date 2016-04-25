@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  *
  */
 public abstract class PopUpParent {
-	
+
 	private static final double DEFAULT_CONTAINER_PADDING = 25.0;
 	private static final double DEFAULT_CONTAINER_SPACING = 10.0;
 	private VBox myContainer;
@@ -23,7 +23,7 @@ public abstract class PopUpParent {
 	private Stage myStage;
 	private Group myRoot;
 	private Scene myScene;
-	
+
 	public PopUpParent(int popUpWidth, int popUpHeight) {
 		myWidth = popUpWidth;
 		myHeight = popUpHeight;
@@ -31,7 +31,7 @@ public abstract class PopUpParent {
 		initializeContainer();
 		showPopUp();
 	}
-	
+
 	/**
 	 * Initializes the pop up's stage, group, and scene
 	 */
@@ -52,14 +52,14 @@ public abstract class PopUpParent {
 		myContainer.setAlignment(Pos.CENTER);
 		myRoot.getChildren().add(myContainer);
 	}
-	
+
 	/**
 	 * Closes the pop up
 	 */
 	protected void closePopUp() {
 		myStage.close();
 	}
-	
+
 	/**
 	 * Opens the pop up
 	 */
@@ -67,7 +67,7 @@ public abstract class PopUpParent {
 		myStage.setScene(myScene);
 		myStage.show();
 	}
-	
+
 	/**
 	 * 
 	 * @return myContainer, the VBox holding all nodes in the pop up

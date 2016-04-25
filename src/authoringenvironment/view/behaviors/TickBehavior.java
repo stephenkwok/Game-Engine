@@ -8,7 +8,7 @@ import gameengine.model.Triggers.ITrigger;
 
 public class TickBehavior extends DoubleBehavior {
 	private ITrigger myTrigger;
-	
+
 	public TickBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
 		super(myActorRule, behaviorType, myResources);
 	}

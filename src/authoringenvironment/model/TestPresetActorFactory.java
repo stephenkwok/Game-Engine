@@ -7,7 +7,8 @@ import gameengine.model.Actor;
 
 public class TestPresetActorFactory {
 
-	public static void main(String[] args) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public static void main(String[] args) throws NoSuchMethodException, SecurityException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
 		PresetActorFactory PAF = new PresetActorFactory();
 		List<Actor> actors = PAF.getPresetActors();
 		System.out.println(actors);

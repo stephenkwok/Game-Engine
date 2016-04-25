@@ -12,7 +12,7 @@ import gameengine.model.Actions.Action;
  *
  */
 
-public class HorizontalBounceCollision extends Action{
+public class HorizontalBounceCollision extends Action {
 
 	public HorizontalBounceCollision(IPlayActor assignedActor) {
 		super(assignedActor);

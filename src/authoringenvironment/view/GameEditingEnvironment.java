@@ -159,7 +159,7 @@ public class GameEditingEnvironment implements IEditingElement {
 	public Node getNode() {
 		return myScrollPane;
 	}
-	
+
 	/**
 	 * 
 	 * @return the Game Editing Environment's instance of GameInfo
@@ -175,5 +175,5 @@ public class GameEditingEnvironment implements IEditingElement {
 	public void setEditableElement(IEditableGameElement element) {
 		myGameInfo = element;
 	}
-	
+
 }

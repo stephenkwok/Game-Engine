@@ -15,10 +15,10 @@ public class WinGame extends Action {
 
 	@Override
 	public void perform() {
-        getMyActor().changed();
-        ArrayList<String> myList = new ArrayList<String>();
-        myList.add("endGame");
-        ((Observable) getMyActor()).notifyObservers(myList);		
+		getMyActor().changed();
+		ArrayList<String> myList = new ArrayList<String>();
+		myList.add("endGame");
+		((Observable) getMyActor()).notifyObservers(myList);
 	}
 
 }

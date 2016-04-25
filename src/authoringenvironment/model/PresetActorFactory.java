@@ -95,7 +95,8 @@ public class PresetActorFactory {
 
 	/**
 	 * 
-	 * @param methodName: the name of the Actor method to be created and invoked
+	 * @param methodName:
+	 *            the name of the Actor method to be created and invoked
 	 * @return a Method within the PresetActorFactory class that creates and
 	 *         invokes the Actor method to be created
 	 * @throws NoSuchMethodException
@@ -119,9 +120,12 @@ public class PresetActorFactory {
 	/**
 	 * Executes an Actor's method that takes in a String as a parameter
 	 * 
-	 * @param actor: the Actor on which a method to be created is invoked
-	 * @param method: the method to be invoked on an Actor
-	 * @param parameter: the argument to be passed into the method created
+	 * @param actor:
+	 *            the Actor on which a method to be created is invoked
+	 * @param method:
+	 *            the method to be invoked on an Actor
+	 * @param parameter:
+	 *            the argument to be passed into the method created
 	 * @throws NoSuchMethodException
 	 * @throws SecurityException
 	 * @throws IllegalAccessException
@@ -138,9 +142,12 @@ public class PresetActorFactory {
 	/**
 	 * Executes an Actor's method that takes in an int as a parameter
 	 * 
-	 * @param actor: the Actor on which a method to be created is invoked
-	 * @param method: the method to be invoked on an Actor
-	 * @param parameter: the argument to be passed into the method created (as String)
+	 * @param actor:
+	 *            the Actor on which a method to be created is invoked
+	 * @param method:
+	 *            the method to be invoked on an Actor
+	 * @param parameter:
+	 *            the argument to be passed into the method created (as String)
 	 * @throws NoSuchMethodException
 	 * @throws SecurityException
 	 * @throws IllegalAccessException

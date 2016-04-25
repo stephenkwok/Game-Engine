@@ -90,7 +90,11 @@ public class Controller extends BranchScreenController implements Observer {
 		getStage().setScene(myScene);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		factory = new GUIFactory(myResources);
-		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this); // need to initialize myActorMap first
+		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this); // need
+																						// to
+																						// initialize
+																						// myActorMap
+																						// first
 		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
 		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);
@@ -104,12 +108,12 @@ public class Controller extends BranchScreenController implements Observer {
 		getStage().setScene(myScene);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		factory = new GUIFactory(myResources);
-		myLevels = new ArrayList<>(); 
-		myLevelNames = new ArrayList<>(); 
+		myLevels = new ArrayList<>();
+		myLevelNames = new ArrayList<>();
 		myActorMap = new HashMap<>(); //
-		myActorNames = new ArrayList<>(); 
-		gameInfo = new GameInfo(); 
-		game = new Game(gameInfo, myLevels); 
+		myActorNames = new ArrayList<>();
+		gameInfo = new GameInfo();
+		game = new Game(gameInfo, myLevels);
 		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
 		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
 		myLevels = new ArrayList<>();
@@ -359,16 +363,16 @@ public class Controller extends BranchScreenController implements Observer {
 			toUpdate.setName(actor.getName());
 		}
 	}
-	
+
 	public void updateRefActorSize(IAuthoringActor actor) {
-		for (IAuthoringActor refActor: myActorMap.keySet()) {
+		for (IAuthoringActor refActor : myActorMap.keySet()) {
 			if (myActorMap.get(refActor).contains(actor)) {
 				refActor.setSize(actor.getSize());
 				updateActors(refActor);
 			}
 		}
 	}
-	
+
 	// copy IDs
 	private void copyActor(IAuthoringActor toUpdate, IAuthoringActor toCopy) {
 		toUpdate.setName(toCopy.getName());
@@ -377,29 +381,28 @@ public class Controller extends BranchScreenController implements Observer {
 		toUpdate.setSize(toCopy.getSize());
 		toUpdate.setImageViewName(toCopy.getImageViewName());
 		toUpdate.setID(toCopy.getMyID());
-	//	copyRules(toUpdate, toCopy.getActorRules());		copy actor rules or normal rules?? what?? annie halp
-		//copyAttributes(toUpdate,)
+		// copyRules(toUpdate, toCopy.getActorRules()); copy actor rules or
+		// normal rules?? what?? annie halp
+		// copyAttributes(toUpdate,)
 	}
-	
+
 	/*
-	private void copyRules(IAuthoringActor toUpdate, List<ActorRule> rulesToCopy) {
-		toUpdate.getActorRules().clear();
-		for (int i = 0; i < rulesToCopy.size(); i++) {
-			toUpdate.addRule(rulesToCopy.get(i));
-		}
-	}*/
-	
+	 * private void copyRules(IAuthoringActor toUpdate, List<ActorRule>
+	 * rulesToCopy) { toUpdate.getActorRules().clear(); for (int i = 0; i <
+	 * rulesToCopy.size(); i++) { toUpdate.addRule(rulesToCopy.get(i)); } }
+	 */
+
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
 		List<Object> arguments = (List<Object>) notifyObserversArgument;
 		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
 		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
 		goToEditingEnvironment(editable, environment);
 	}
-	
+
 	public ActorEditingEnvironment getActorEditingEnvironment() {
 		return actorEnvironment;
 	}
-	
+
 	public LevelEditingEnvironment getLevelEditingEnvironment() {
 		return levelEnvironment;
 	}

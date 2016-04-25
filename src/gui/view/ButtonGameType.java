@@ -18,7 +18,7 @@ public class ButtonGameType extends ButtonParent {
 	private static final String BUTTON_TEXT_INFINITE = "Infinite-Scrolling Game" + TOGGLE_PROMPT;
 	private static final String BUTTON_IMAGE_INFINITE = "infinite_scrolling_game.jpg";
 	private static final int BUTTON_ICON_SIZE = 45;
-	
+
 	public ButtonGameType(GameInfo gameInfo) {
 		super(BUTTON_TEXT_DESTINATION, BUTTON_IMAGE_DESTINATION);
 		myGameInfo = gameInfo;
@@ -30,16 +30,16 @@ public class ButtonGameType extends ButtonParent {
 	protected void setButtonAction() {
 		getButton().setOnAction(e -> makeUpdates());
 	}
-	
+
 	private void makeUpdates() {
 		updateGameInfo();
 		updateButton();
 	}
-	
+
 	private void updateGameInfo() {
 		myGameInfo.setIsDestinationGame(!myGameInfo.isDestinationGame());
 	}
-	
+
 	private void updateButton() {
 		boolean isDestinationGame = myGameInfo.isDestinationGame();
 		String updatedButtonText = isDestinationGame ? BUTTON_TEXT_DESTINATION : BUTTON_TEXT_INFINITE;

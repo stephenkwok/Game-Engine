@@ -5,6 +5,6 @@ package gameengine.model;
  */
 public enum AttributeType {
 
-    HEALTH, POINTS;
-	
+	HEALTH, POINTS;
+
 }

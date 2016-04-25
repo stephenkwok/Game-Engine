@@ -8,42 +8,43 @@ import javafx.geometry.Bounds;
  */
 public class ClickTrigger extends ITrigger {
 
-    private double myX;
-    private double myY;
-    private Actor myActor;
+	private double myX;
+	private double myY;
+	private Actor myActor;
 
-    public ClickTrigger(Actor actor) {
-        myActor = actor;
-    }
+	public ClickTrigger(Actor actor) {
+		myActor = actor;
+	}
 
-    public ClickTrigger(double x, double y) {
-        myX = x;
-        myY = y;
-    }
+	public ClickTrigger(double x, double y) {
+		myX = x;
+		myY = y;
+	}
 
-    @Override
-    public String getMyKey() {
-        return "Click";
-    }
+	@Override
+	public String getMyKey() {
+		return "Click";
+	}
 
-    public double getMyX() {
-        return myX;
-    }
+	public double getMyX() {
+		return myX;
+	}
 
-    public double getMyY() {
-        return myY;
-    }
+	public double getMyY() {
+		return myY;
+	}
 
-    /**
-     * Checks a boolean condition against the state of an actor
-     *
-     * @param otherTrigger A trigger to check information against
-     * @return A boolean that says if the condition is true or false
-     */
-    @Override
-    public boolean evaluate(ITrigger otherTrigger) {
-        ClickTrigger otherClick = (ClickTrigger) otherTrigger;
-        return (myActor.getBounds().contains(otherClick.getMyX(), otherClick.getMyY()));
-    }
+	/**
+	 * Checks a boolean condition against the state of an actor
+	 *
+	 * @param otherTrigger
+	 *            A trigger to check information against
+	 * @return A boolean that says if the condition is true or false
+	 */
+	@Override
+	public boolean evaluate(ITrigger otherTrigger) {
+		ClickTrigger otherClick = (ClickTrigger) otherTrigger;
+		return (myActor.getBounds().contains(otherClick.getMyX(), otherClick.getMyY()));
+	}
 
 }
