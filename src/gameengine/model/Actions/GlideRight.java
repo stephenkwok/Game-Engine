@@ -1,8 +1,10 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
+
 /**
- * An example of an Action to glide an Actor right by a given distance (no gravity, no friction).
+ * An example of an Action to glide an Actor right by a given distance (no
+ * gravity, no friction).
  *
  * @author michelle
  */
@@ -16,13 +18,14 @@ public class GlideRight extends GlidingAction {
 	public GlideRight(Actor assignedActor, double offset) {
 		super(assignedActor, offset);
 	}
-	
+
 	/**
-     * Moves the Actor to the right through gliding
-     */
+	 * Moves the Actor to the right through gliding
+	 */
 	@Override
 	public void perform() {
     	getMyActor().getPhysicsEngine().glideRight(getMyActor(),this.getGlideOffset());		
+
 	}
 
 }

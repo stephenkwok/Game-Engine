@@ -1,16 +1,20 @@
 package gameengine.model;
 
 import gameengine.model.Triggers.AttributeReached;
+import utilities.hud.Property;
 import java.util.*;
 import utilities.hud.Property;
 
 /**
- * This class is purposed to store properties belonging to an actor that are updated throughout the game 
- * that may signal some action to be performed once they meet a specified criteria
+ * This class is purposed to store properties belonging to an actor that are
+ * updated throughout the game that may signal some action to be performed once
+ * they meet a specified criteria
+ * 
  * @author colettetorres
  *
  */
 public class Attribute extends Observable {
+
 
     private Property myValue;
     private Set<Integer> myTriggerValues;
@@ -38,12 +42,12 @@ public class Attribute extends Observable {
 	
 	/**
 	 * Determines the criteria the attribute needs to meet to signal some action
+	 * 
 	 * @param myTriggerValue
 	 */
 	public void addTriggerValue(int myTriggerValue) {
 		myTriggerValues.add(myTriggerValue);
 	}
-	
 
     /**
      * Provides the Attribute's current value
@@ -66,6 +70,5 @@ public class Attribute extends Observable {
     public Property getProperty() {
     	return myValue;
     }
-    
-    
+        
 }

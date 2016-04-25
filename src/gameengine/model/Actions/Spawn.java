@@ -34,7 +34,8 @@ public class Spawn extends ActorAction{
 		List<Object> myList = new ArrayList<>();
 		myList.add("addActor");
 		myList.add(clone);
+
 		System.out.println("In Spawn Action");
-        ((Observable) getMyActor()).notifyObservers(myList);				
+		((Observable) getMyActor()).notifyObservers(myList);
 	}
 }

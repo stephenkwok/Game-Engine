@@ -13,6 +13,7 @@ public class GlideForward extends GlidingAction {
 	public void perform() {
 		
     	getMyActor().getPhysicsEngine().glideForward(getMyActor(),this.getGlideOffset());			
+
 	}
 
 }

@@ -2,6 +2,7 @@ package gui.view;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,17 +23,24 @@ public class ComboBoxGame extends ComboBoxImageCell {
 	
 	public ComboBoxGame(String promptText, String imageResource) {
 		super(promptText, imageResource, STANDARD_IMAGE_HEIGHT);
+		if ((new File("gamefiles")).listFiles().length == 1) {
+			setChanged();
+			notifyObservers("NoFiles");
+		}
 		this.myGames = new HashMap<>();
 		getGames();
-		fillImageNames();
-		fillImageMap();
+		if (myGames.keySet().size() != 0) {
+			fillImageNames();
+			fillImageMap();
+		}
 	}
 
 	@Override
 	public void setButtonAction() {
 		getComboButton().setOnAction(event -> {
 			this.setChanged();
-			this.notifyObservers(myGames.get(getComboBox().getValue()));
+			Object[] methodArg = {"go", myGames.get(getComboBox().getValue())};
+			this.notifyObservers(Arrays.asList(methodArg));
 		});
 		
 	}
@@ -44,11 +52,9 @@ public class ComboBoxGame extends ComboBoxImageCell {
 			if(!gameFile.isDirectory()) {
 				ParserController parserController = new ParserController();
 				Game game = parserController.loadforPlaying(gameFile);
-				myGames.put(gameFile.getPath(),game);
+				if (game != null)
+					myGames.put(gameFile.getPath(),game);
 			}
-		}
-		if(myGames.keySet().isEmpty()) {
-			
 		}
 	}
 	

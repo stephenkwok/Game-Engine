@@ -1,4 +1,5 @@
 package authoringenvironment.view.behaviors;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
@@ -12,8 +13,9 @@ import gameengine.model.Triggers.ITrigger;
 public class SelfTriggerBehavior extends LabelBehavior {
 	private ITrigger myTrigger;
 	private IAuthoringActor myActor;
-	
-	public SelfTriggerBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
+
+	public SelfTriggerBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
+			ResourceBundle myResources) {
 		super(myActorRule, behaviorType, myResources);
 		this.myActor = myActor;
 	}

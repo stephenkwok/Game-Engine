@@ -200,7 +200,22 @@ public class Tester extends Application {
         level1.addActor(actor2);
         level1.addActor((IAuthoringActor)actor3);
         level1.addActor((IAuthoringActor) actor4);
-
+        
+        /**
+         * testing create actors
+         */
+        IAuthoringActor a = (IAuthoringActor) new Actor();
+        a.setID(10);
+        a.setImageViewName("pipes.png");
+        TickTrigger translatetick = new TickTrigger(45);
+        Action translateaction = new MoveRight((IPlayActor)a);
+        a.addRule(new Rule(translatetick,translateaction));
+        TickTrigger newtick = new TickTrigger(220);
+        Action newaction = new CreateActor((IPlayActor)actor1,(Actor)a,0,0);
+        actor1.addRule(new Rule(newtick,newaction));
+        
+        
+        
         for(int i=0; i<=17; i++){
             Actor floor = new Actor();
             floor.setName("floor");
