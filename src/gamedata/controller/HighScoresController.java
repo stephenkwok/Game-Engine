@@ -9,9 +9,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
-
-import gamedata.HighScoresCreator;
 import gamedata.HighScoresParser;
+import gamedata.XMLCreator;
 import gameengine.controller.HighScoresKeeper;
 import gameplayer.view.HighScoreScreen;
 import gui.view.Screen;
@@ -60,9 +59,10 @@ public class HighScoresController implements IHighScoresController {
 	public void clearHighScores() {
 		HighScoresKeeper newKeeper = new HighScoresKeeper(getAllGameScores());
 		newKeeper.clearGameScores(myGameFile);
-		HighScoresCreator scoresCreator = new HighScoresCreator();
+		//HighScoresCreator scoresCreator = new HighScoresCreator();
+		XMLCreator scoresCreator = new XMLCreator();
 		try {
-			scoresCreator.saveScore(newKeeper, myFile);
+			scoresCreator.saveGame(newKeeper, myFile);
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,9 +73,10 @@ public class HighScoresController implements IHighScoresController {
 	public void saveHighScore(int score, String player) {
 		HighScoresKeeper updatedKeeper = new HighScoresKeeper(getAllGameScores());
 		updatedKeeper.addScore(myGameFile, player, score);
-		HighScoresCreator scoresCreator = new HighScoresCreator();
+		//HighScoresCreator scoresCreator = new HighScoresCreator();
+		XMLCreator scoresCreator = new XMLCreator();
 		try {
-			scoresCreator.saveScore(updatedKeeper, myFile);
+			scoresCreator.saveGame(updatedKeeper, myFile);
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

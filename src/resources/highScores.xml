@@ -26,12 +26,7 @@
     </entry>
     <entry>
       <string>gamefiles/loaders/test2_loader.xml</string>
-      <tree-map>
-        <entry>
-          <string>Name</string>
-          <int>0</int>
-        </entry>
-      </tree-map>
+      <tree-map/>
     </entry>
     <entry>
       <string>testGame</string>
