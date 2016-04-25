@@ -3,29 +3,64 @@ package authoringenvironment.controller;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import authoringenvironment.model.*;
-import authoringenvironment.view.*;
-import gamedata.controller.*;
-import gameengine.controller.*;
+import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.model.PresetActorFactory;
+import authoringenvironment.view.ActorEditingEnvironment;
+import authoringenvironment.view.GUIMain;
+import authoringenvironment.view.GUIMainScreen;
+import authoringenvironment.view.GameEditingEnvironment;
+import authoringenvironment.view.LevelEditingEnvironment;
+import authoringenvironment.view.PreviewUnitWithEditable;
+import gamedata.controller.ChooserType;
+import gamedata.controller.CreatorController;
+import gamedata.controller.FileChooserController;
+import gameengine.controller.Game;
+import gameengine.controller.GameInfo;
+import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gameplayer.controller.*;
 import gameengine.model.IPlayActor;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.ITrigger;
 import gameplayer.controller.BranchScreenController;
-import gui.view.*;
+import gui.view.ButtonFinish;
+import gui.view.ButtonHUDOptions;
+import gui.view.ButtonHelpPage;
+import gui.view.ButtonHome;
+import gui.view.ButtonLoad;
+import gui.view.ButtonNewActor;
+import gui.view.ButtonNewLevel;
+import gui.view.ButtonSave;
+import gui.view.ButtonSplash;
+import gui.view.GUIFactory;
+import gui.view.IGUIElement;
+import gui.view.PopUpAuthoringHelpPage;
+import gui.view.TextFieldActorNameEditor;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import utilities.hud.IAuthoringHUDController;
+import utilities.hud.PopupSelector;
 
 /**
  * This class serves as the main controller for the authoring environment
@@ -387,6 +422,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		else if (arg0 instanceof ButtonHelpPage) {
 			helpPage = new PopUpAuthoringHelpPage();
 		}
+		else if (arg0 instanceof ButtonHUDOptions) {
+			PopupSelector selector = new PopupSelector(this);
+		}
 	}
 
 	// checking to see if this works with name
@@ -492,6 +530,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	@Override
 	public void setHUDInfoFile(String location) {
 		game.setHUDInfoFile(location);
-		
 	}
+
 }
