@@ -1,7 +1,5 @@
 package gui.view;
 
-import gameplayer.controller.BaseScreenController;
-
 public class ButtonSound extends ButtonParent{
 
 

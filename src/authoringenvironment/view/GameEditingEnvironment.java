@@ -31,8 +31,7 @@ public class GameEditingEnvironment implements IEditingElement {
 	private final Stage myStage;
 	private final ResourceBundle myResources;
 	private IEditableGameElement myGameInfo;
-	private Label welcomeMessage;
-	private HBox nameEditorContainer, gameTypeButtonContainer, previewImageContainer;
+	private HBox nameEditorContainer, gameTypeButtonContainer, previewImageContainer, welcomeMessage;
 	private VBox editingEnvironmentContainer, gameDescriptionEditor, HUDOptionsDisplay;
 	private ScrollPane myScrollPane;
 
@@ -55,8 +54,25 @@ public class GameEditingEnvironment implements IEditingElement {
 		initializePreviewImageDisplay();
 		initializeHUDOptionsDisplay();
 		initializeScrollPane();
+		initializeEditingEnvironmentContainer();
+	}
+	
+	/**
+	 * Initializes the Game Editing Environment's parent container by adding all created
+	 * nodes to it and binding each child node's width to the parent container's width
+	 */
+	private void initializeEditingEnvironmentContainer() {
 		editingEnvironmentContainer.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor,
 				gameTypeButtonContainer, previewImageContainer, HUDOptionsDisplay);
+		editingEnvironmentContainer.getChildren().stream().forEach(node -> bindChildWidthToParentWidth(node));
+	}
+	
+	/**
+	 * Binds an HBox or VBox's width to the Game Editing Environment's parent container
+	 * @param child
+	 */
+	private void bindChildWidthToParentWidth(Node child) {
+		((Region) child).prefWidthProperty().bind(editingEnvironmentContainer.widthProperty());;
 	}
 
 	/**
@@ -75,7 +91,7 @@ public class GameEditingEnvironment implements IEditingElement {
 	 * Authoring Environment
 	 */
 	private void initializeWelcomeMessage() {
-		welcomeMessage = new LabelMainScreenWelcome(myResources.getString("mainScreenWelcome"));
+		welcomeMessage = new HBox(new LabelMainScreenWelcome(myResources.getString("mainScreenWelcome")));
 	}
 
 	/**
@@ -89,7 +105,6 @@ public class GameEditingEnvironment implements IEditingElement {
 		TextFieldWithButton nameEditor = new TextFieldGameNameEditor(mainPrompt, textFieldPrompt, TEXT_FIELD_WIDTH);
 		nameEditor.setEditableElement(myGameInfo);
 		nameEditorContainer = (HBox) nameEditor.createNode();
-		nameEditorContainer.prefWidthProperty().bind(editingEnvironmentContainer.widthProperty());
 		nameEditorContainer.setSpacing(TEXT_FIELD_CONTAINER_SPACING);
 		nameEditorContainer.setPadding(new Insets(DEFAULT_PADDING));
 	}
@@ -106,14 +121,12 @@ public class GameEditingEnvironment implements IEditingElement {
 		TextAreaParent descriptionEditor = new TextAreaGameDescriptionEditor(prompt, buttonText, TEXT_AREA_ROWS);
 		descriptionEditor.setEditableElement(myGameInfo);
 		gameDescriptionEditor = (VBox) descriptionEditor.createNode();
-		gameDescriptionEditor.prefWidthProperty().bind(editingEnvironmentContainer.widthProperty());
 	}
 
 	private void initializeGameTypeButton() {
 		ButtonGameType buttonGameType = new ButtonGameType(getGameInfo());
 		Button button = (Button) buttonGameType.createNode();
 		gameTypeButtonContainer = new HBox(button);
-		gameTypeButtonContainer.prefWidthProperty().bind(editingEnvironmentContainer.widthProperty());
 		button.prefWidthProperty().bind(gameTypeButtonContainer.widthProperty());
 		gameTypeButtonContainer.setPadding(new Insets(DEFAULT_PADDING));
 	}
@@ -129,7 +142,6 @@ public class GameEditingEnvironment implements IEditingElement {
 		button.prefWidthProperty().bind(previewImageContainer.widthProperty());
 		previewImageContainer.getChildren().add(button);
 		previewImageContainer.setPadding(new Insets(DEFAULT_PADDING));
-		previewImageContainer.prefWidthProperty().bind(editingEnvironmentContainer.widthProperty());
 	}
 
 	/**

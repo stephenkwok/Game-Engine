@@ -22,6 +22,7 @@ public class PopUpSimpleErrorMessage extends PopUpParent {
 		myButtonText = buttonText;
 		myErrorMessage = errorMessage;
 		initializePopUp();
+		bindChildrenWidthsToContainerWidth();
 	}
 	
 	/**
@@ -39,7 +40,6 @@ public class PopUpSimpleErrorMessage extends PopUpParent {
 	private void initializeLabel() {
 		myLabel = new Label(myErrorMessage);
 		myLabel.setAlignment(Pos.CENTER);
-		myLabel.prefWidthProperty().bind(getContainer().widthProperty());
 	}
 	
 	/**
@@ -47,7 +47,6 @@ public class PopUpSimpleErrorMessage extends PopUpParent {
 	 */
 	private void initializeCloseButton() {
 		myCloseButton = new Button(myButtonText);
-		myCloseButton.prefWidthProperty().bind(getContainer().widthProperty());
 		myCloseButton.setOnAction(e -> closePopUp());
 	}
 	

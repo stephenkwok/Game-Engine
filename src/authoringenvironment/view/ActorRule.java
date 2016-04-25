@@ -231,6 +231,7 @@ public class ActorRule {
 		if(!isITrigger(authoringBehavior)){
 			Action myAction = (Action) authoringBehaviorMap.get(authoringBehavior).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex")));
 			Rule newRule = new Rule(myTrigger, myAction);
+			newRule.setID(0);	// testing - amy
 			//add this rule to the actor for the current trigger value
 			Map<String, List<Rule>> ruleMap = ((IAuthoringActor) myActorRuleCreator.getActor()).getRules(); 
 			if(!(ruleMap.containsKey(myTrigger.getMyKey()))){

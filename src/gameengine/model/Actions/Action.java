@@ -40,6 +40,9 @@ public abstract class Action implements IAction {
         return myGameElement;
     }
 
+    public void setMyActor(IPlayActor actor) {
+    	myActor = actor;
+    }
 
     
 }
