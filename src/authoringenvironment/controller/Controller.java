@@ -1,6 +1,7 @@
 package authoringenvironment.controller;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
@@ -14,6 +15,8 @@ import gameengine.model.Actor;
 import gameplayer.controller.*;
 import gameengine.model.IPlayActor;
 import gameengine.model.Rule;
+import gameengine.model.Actions.Action;
+import gameengine.model.Triggers.ITrigger;
 import gameplayer.controller.BranchScreenController;
 import gui.view.*;
 import javafx.geometry.Insets;
@@ -258,6 +261,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	public void saveGame() {
 		System.out.println(myLevels.get(0).getActors().get(0).getRules().size());
 		IPlayActor actor = myLevels.get(0).getActors().get(0); 
+		List<IAuthoringActor> refActor = new ArrayList(myActorMap.keySet());
+		IAuthoringActor realRefActor = refActor.get(0);
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showSaveDialog(new Stage());
 		CreatorController controller;
@@ -422,11 +427,52 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		for (String trigger : rulesToCopy.keySet()) {
 			List<Rule> toAdd = rulesToCopy.get(trigger);
 			for (int i = 0; i < toAdd.size(); i++) {
-				Rule rule = new Rule(toAdd.get(i).getMyTrigger(), toAdd.get(i).getMyAction());
-				toUpdate.addRule(rule);
+				String triggerName = toAdd.get(i).getMyTrigger().getClass().getName();
+				Class<?> className;
+				try {
+					className = Class.forName(triggerName);
+					ITrigger triggerToAdd = (ITrigger) className.newInstance();
+					
+					String actionName = toAdd.get(i).getMyAction().getClass().getName();
+					Class<?> actionClassName = Class.forName(actionName);
+					Constructor<?> actionConstructor = actionClassName.getConstructor(Actor.class);
+					Action actionToAdd = (Action) actionConstructor.newInstance((Actor) toUpdate);
+					
+					//ITrigger triggerToAdd = toAdd.get(i).getMyTrigger();
+					//Action action = toAdd.get(i).getMyAction();
+					//action.setMyActor((IPlayActor) (toUpdate));
+					Rule rule = new Rule(triggerToAdd, actionToAdd);
+					rule.setID(toAdd.get(i).getID() + 1);
+					toUpdate.addRule(rule);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
 			}
 		}
 	}
+
+
 	
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
 		List<Object> arguments = (List<Object>) notifyObserversArgument;
