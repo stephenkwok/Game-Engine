@@ -108,6 +108,7 @@ public class Game extends Observable implements Observer {
 			((Observable)actor).addObserver(this);
 			actor.setPhysicsEngine(myPhysicsEngine);
 		}
+		System.out.println("break");
 	}
 
     private void step(){

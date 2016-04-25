@@ -392,7 +392,8 @@ public class Controller extends BranchScreenController implements Observer {
 		for (String trigger : rulesToCopy.keySet()) {
 			List<Rule> toAdd = rulesToCopy.get(trigger);
 			for (int i = 0; i < toAdd.size(); i++) {
-				toUpdate.addRule(toAdd.get(i));
+				Rule rule = new Rule(toAdd.get(i).getMyTrigger(), toAdd.get(i).getMyAction());
+				toUpdate.addRule(rule);
 			}
 		}
 	}
