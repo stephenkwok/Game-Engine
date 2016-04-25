@@ -352,5 +352,9 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	public Map<String, List<Rule>> getRules() {
 		return myRuleManager.getRules();
 	}
+
+    public void changed(){
+        setChanged();
+    }
 	
 }

@@ -16,8 +16,8 @@ public class LoseGame extends Action {
 
 	@Override
 	public void perform() {
-		getMyActor().changed();
-        ((Observable) getMyActor()).notifyObservers("endGame");		
+		getGameElement().changed();
+        ((Observable) getGameElement()).notifyObservers("endGame");
 	}
 
 	public Actor getAssignedActor() {
