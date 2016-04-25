@@ -117,7 +117,8 @@ public class Tester extends Application {
 
         KeyTrigger triggerDown = new KeyTrigger(KeyCode.DOWN);
         Action moveForwards = new MoveForward((IPlayActor)actor1);
-        Rule movingForwards = new Rule(triggerDown, moveForwards);
+        Action glideForwards = new GlideForward((IPlayActor) actor1);
+        Rule movingForwards = new Rule(triggerDown, glideForwards);
         actor1.addRule(movingForwards);
 
         KeyTrigger trigger1 = new KeyTrigger(KeyCode.RIGHT);
@@ -138,7 +139,7 @@ public class Tester extends Application {
         Action action3 = new HorizontalStaticCollision((IPlayActor)actor1);
         Action action4 = new MoveUp((IPlayActor)actor1);
         Action action5 = new VerticalBounceCollision((IPlayActor)actor1);
-        Action action6 = new WinGame((IPlayActor)actor1);
+        Action action6 = new LoseGame((Actor)actor1);
         Action actionSpawn = new Spawn((IPlayActor) actor1);
 
         Rule rule = new Rule(trigger1,action1);

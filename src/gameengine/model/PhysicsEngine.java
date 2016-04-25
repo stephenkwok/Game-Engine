@@ -98,6 +98,7 @@ public class PhysicsEngine {
 	}
 	
 	public void glideForward(IPlayActor a1) {
+		horizontalForce = 200;
 		a1.setX(applyForce(a1.getX(),horizontalForce*(Math.cos(Math.toRadians(a1.getHeading())))));
 		a1.setY(applyForce(a1.getY(),  verticalForce*(Math.sin(Math.toRadians(a1.getHeading()))))-gravity);
 	}
