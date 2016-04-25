@@ -1,7 +1,6 @@
 package gui.view;
 
-public class ButtonMusic extends ButtonParent{
-	
+public class ButtonMusic extends ButtonParent {
 
 	public ButtonMusic(String buttonText, String imageName) {
 		super(buttonText, imageName);
@@ -13,7 +12,7 @@ public class ButtonMusic extends ButtonParent{
 			setChanged();
 			notifyObservers();
 		});
-		
+
 	}
 
 }

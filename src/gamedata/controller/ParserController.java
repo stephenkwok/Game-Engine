@@ -16,17 +16,17 @@ public class ParserController implements IParserController {
 
 	private XMLParser myXMLParser;
 	private Screen myScreen;
-	
-	
-	public ParserController () {
+
+	public ParserController() {
 		this.myXMLParser = new XMLParser();
-		
+
 	}
-	public ParserController (Screen screen) {
+
+	public ParserController(Screen screen) {
 		this.myXMLParser = new XMLParser();
 		this.myScreen = screen;
 	}
-	
+
 	@Override
 	public Game loadForEditing(File file) {
 		Game playingGame = loadforPlaying(file);
@@ -51,6 +51,5 @@ public class ParserController implements IParserController {
 		}
 		return game;
 	}
-	
 
 }

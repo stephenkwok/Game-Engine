@@ -9,6 +9,7 @@ import gameengine.model.Actions.Action;
  * @author justinbergkamp
  *
  */
+
 public class VerticalBounceCollision extends ActorAction{
 
 	public VerticalBounceCollision(IPlayActor actor) {
@@ -21,4 +22,3 @@ public class VerticalBounceCollision extends ActorAction{
 	}
 
 }
-

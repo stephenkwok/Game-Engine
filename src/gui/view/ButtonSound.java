@@ -2,7 +2,6 @@ package gui.view;
 
 public class ButtonSound extends ButtonParent{
 
-
 	public ButtonSound(String buttonText, String imageName) {
 		super(buttonText, imageName);
 	}
@@ -13,7 +12,7 @@ public class ButtonSound extends ButtonParent{
 			setChanged();
 			notifyObservers();
 		});
-		
+
 	}
 
 }

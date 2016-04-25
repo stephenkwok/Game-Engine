@@ -20,18 +20,17 @@ import com.thoughtworks.xstream.XStream;
 
 import gameengine.controller.Game;
 
-
-
 public class XMLParser {
-	
+
 	private XStream myXStream;
 
-	public XMLParser ()  {
+	public XMLParser() {
 		myXStream = new XStream();
 		myXStream.autodetectAnnotations(true);
 	}
-	
-	public Game extractGame (File file) throws ParserConfigurationException, SAXException, IOException, TransformerException {
+
+	public Game extractGame(File file)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		String xml = convertFileToString(file);
 		try {
 			return (Game) myXStream.fromXML(xml);
@@ -40,10 +39,9 @@ public class XMLParser {
 		}
 
 	}
-	
-	
-	
-	private String convertFileToString(File file) throws ParserConfigurationException, SAXException, IOException, TransformerException {
+
+	private String convertFileToString(File file)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		Document document = convertFileToDocument(file);
 		TransformerFactory factory = TransformerFactory.newInstance();
 		Transformer transformer = factory.newTransformer();
@@ -52,7 +50,7 @@ public class XMLParser {
 		transformer.transform(new DOMSource(document), new StreamResult(writer));
 		String xml = writer.getBuffer().toString();
 		return xml;
-		
+
 	}
 
 	private Document convertFileToDocument(File file) throws ParserConfigurationException, SAXException, IOException {
@@ -62,5 +60,5 @@ public class XMLParser {
 		document.getDocumentElement().normalize();
 		return document;
 	}
-	
+
 }
