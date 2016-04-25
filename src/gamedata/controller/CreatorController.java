@@ -40,9 +40,6 @@ public class CreatorController implements ICreatorController {
 
 	@Override
 	public void saveForEditing(File file) {
-		if (file == null) {
-			return;
-		}
 		File loaderFile = createLoaderFileFromFile(file);
 		try {
 			myGame.setInitialGameFile(loaderFile.getPath());
@@ -59,9 +56,6 @@ public class CreatorController implements ICreatorController {
 
 	@Override
 	public void saveForPlaying(File file) throws ParserConfigurationException {
-		if (file == null) {
-			return;
-		}
 		try {
 			myGame.getInfo().setMyFile(file.getName());
 			this.myXMLCreator.saveGame(myGame, file);

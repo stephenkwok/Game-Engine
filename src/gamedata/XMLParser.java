@@ -32,8 +32,12 @@ public class XMLParser {
 	public Game extractGame(File file)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		String xml = convertFileToString(file);
-		Game game = (Game) myXStream.fromXML(xml);
-		return game;
+		try {
+			return (Game) myXStream.fromXML(xml);
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 
 	private String convertFileToString(File file)

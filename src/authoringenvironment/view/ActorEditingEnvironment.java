@@ -188,6 +188,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	public void setActorImage(ImageView newImageView, String imageViewName) {
 		myActor.setImageView(newImageView);
 		myActor.setImageViewName(imageViewName);
+		System.out.println("here: " + myActor.getPhysicsEngine());
 		myActorIV = new ImageviewActorIcon(myActor, ICON_HEIGHT);
 		setLeftPane();
 	}

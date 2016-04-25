@@ -52,6 +52,7 @@ public class SplashScreenController implements Observer {
 			this.getClass().getDeclaredMethod(method).invoke(this);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 				| SecurityException e) {
+			e.printStackTrace();
 			this.myScreen.showError(e.getMessage());
 		}
 	}

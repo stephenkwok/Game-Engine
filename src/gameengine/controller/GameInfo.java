@@ -2,6 +2,7 @@ package gameengine.controller;
 
 import java.util.*;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import javafx.scene.image.ImageView;
@@ -23,6 +24,7 @@ public class GameInfo implements IEditableGameElement {
 	private String myImageName;
 	private String myDescription;
 	private int myCurrentLevelNum;
+	@XStreamOmitField
 	private ImageView myPreviewImage;
 	private List<String> myHUDElementsToDisplay;
 	private String myFile;

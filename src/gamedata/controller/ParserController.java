@@ -29,29 +29,25 @@ public class ParserController implements IParserController {
 
 	@Override
 	public Game loadForEditing(File file) {
-		Game editingGame;
-		try {
-			Game playingGame = loadforPlaying(file);
-			editingGame = this.myXMLParser.extractGame(new File(playingGame.getInitialGameFile()));
-			editingGame.initCurrentActors();
-		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-			myScreen.showError(e.getMessage());
-			editingGame = null;
+		Game playingGame = loadforPlaying(file);
+		if (playingGame == null) {
+			return null;
 		}
-		return editingGame;
+		else {
+			File editingFile = new File(playingGame.getInitialGameFile());
+			return loadforPlaying(editingFile);
+		}
 	}
 
 	@Override
 	public Game loadforPlaying(File file) {
-		Game game;
+		Game game = null;
 		try {
 			game = this.myXMLParser.extractGame(file);
-			game.initCurrentActors();
-			game.initTimeline();
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-			System.out.println(myScreen);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			myScreen.showError(e.getMessage());
-			game = null;
 		}
 		return game;
 	}
