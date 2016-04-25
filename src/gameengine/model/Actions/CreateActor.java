@@ -7,7 +7,7 @@ import authoringenvironment.view.ActorCopier;
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
 
-public class CreateActor extends Action {
+public class CreateActor extends ActorAction {
 	Actor cloneActor;
 	ActorCopier copier;
 	double myX;

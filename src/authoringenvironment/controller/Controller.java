@@ -294,8 +294,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 *            file to write to.
 	 */
 	public void saveGame() {
+		//TODO implement incomplete game error checking
 		System.out.println(myLevels.get(0).getActors().get(0).getRules().size());
-		IPlayActor actor = myLevels.get(0).getActors().get(0); 
+		IPlayActor actor = myLevels.get(0).getActors().get(0);
 		List<IAuthoringActor> refActor = new ArrayList(myActorMap.keySet());
 		IAuthoringActor realRefActor = refActor.get(0);
 		FileChooser fileChooser = new FileChooser();
@@ -384,23 +385,22 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		// TODO Auto-generated method stub
 	}
 
-	/*
-	 * @Override public void update(Observable o, Object arg) { String button =
-	 * (String) arg; String method = myButtonResource.getString(button);
-	 * System.out.println(method); try {
-	 * this.getClass().getDeclaredMethod(method).invoke(this); } catch
-	 * (NoSuchMethodException e) { try {
-	 * this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this); }
-	 * catch (IllegalAccessException | IllegalArgumentException |
-	 * InvocationTargetException | NoSuchMethodException | SecurityException e1)
-	 * { // TODO Auto-generated catch block e1.printStackTrace(); } } catch
-	 * (IllegalAccessException | IllegalArgumentException |
-	 * InvocationTargetException | SecurityException e) { // TODO Auto-generated
-	 * catch block e.printStackTrace(); }
-	 * 
-	 * }
-	 */
-	// Use reflection - properties file linking button name to a method name
+//	@Override public void update(Observable o, Object arg) { String button =
+//	  (String) arg; String method = myButtonResource.getString(button);
+//	  System.out.println(method); try {
+//	  this.getClass().getDeclaredMethod(method).invoke(this); } catch
+//	  (NoSuchMethodException e) { try {
+//	  this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this); }
+//	  catch (IllegalAccessException | IllegalArgumentException |
+//	  InvocationTargetException | NoSuchMethodException | SecurityException e1)
+//	  { // TODO Auto-generated catch block e1.printStackTrace(); } } catch
+//	  (IllegalAccessException | IllegalArgumentException |
+//	  InvocationTargetException | SecurityException e) { // TODO Auto-generated
+//	  catch block e.printStackTrace(); }
+//	  
+//	  }
+
+//	 Use reflection - properties file linking button name to a method name
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg0 instanceof PreviewUnitWithEditable)
@@ -421,8 +421,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 			updateActors((IAuthoringActor) arg1);
 		else if (arg0 instanceof ButtonHelpPage) {
 			helpPage = new PopUpAuthoringHelpPage();
-		}
-		else if (arg0 instanceof ButtonHUDOptions) {
+		} else if (arg0 instanceof ButtonHUDOptions) {
 			PopupSelector selector = new PopupSelector(this);
 		}
 	}
@@ -456,10 +455,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		toUpdate.setID(toCopy.getMyID());
 		copyRules(toUpdate, toCopy.getRules());
 		toUpdate.setPhysicsEngine(toCopy.getPhysicsEngine());
-		//copyAttributes(toUpdate,)
+		// copyAttributes(toUpdate,)
 	}
-	
-	
+
 	private void copyRules(IAuthoringActor toUpdate, Map<String, List<Rule>> rulesToCopy) {
 		toUpdate.getRules().clear();
 		for (String trigger : rulesToCopy.keySet()) {
@@ -470,15 +468,15 @@ public class Controller extends BranchScreenController implements Observer, IAut
 				try {
 					className = Class.forName(triggerName);
 					ITrigger triggerToAdd = (ITrigger) className.newInstance();
-					
+
 					String actionName = toAdd.get(i).getMyAction().getClass().getName();
 					Class<?> actionClassName = Class.forName(actionName);
 					Constructor<?> actionConstructor = actionClassName.getConstructor(Actor.class);
 					Action actionToAdd = (Action) actionConstructor.newInstance((Actor) toUpdate);
-					
-					//ITrigger triggerToAdd = toAdd.get(i).getMyTrigger();
-					//Action action = toAdd.get(i).getMyAction();
-					//action.setMyActor((IPlayActor) (toUpdate));
+
+					// ITrigger triggerToAdd = toAdd.get(i).getMyTrigger();
+					// Action action = toAdd.get(i).getMyAction();
+					// action.setMyActor((IPlayActor) (toUpdate));
 					Rule rule = new Rule(triggerToAdd, actionToAdd);
 					rule.setID(toAdd.get(i).getID() + 1);
 					toUpdate.addRule(rule);
@@ -504,14 +502,11 @@ public class Controller extends BranchScreenController implements Observer, IAut
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				
+
 			}
 		}
 	}
 
-
-	
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
 		List<Object> arguments = (List<Object>) notifyObserversArgument;
 		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);

@@ -10,7 +10,7 @@ public class GlideUp extends GlidingAction {
 
 	@Override
 	public void perform() {
-    	getMyActor().getPhysicsEngine().glideUp(getMyActor());					
+		getMyActor().getPhysicsEngine().glideUp(getMyActor());
 	}
 
 }

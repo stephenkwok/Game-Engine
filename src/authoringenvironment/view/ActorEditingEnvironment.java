@@ -30,6 +30,7 @@ import javafx.stage.Stage;
 
 /**
  * Returns BorderPane to represent Actor Editing Environment.
+ * 
  * @author AnnieTang
  *
  */
@@ -47,14 +48,14 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	private GUILibrary library;
 	private TabAttributes attributes;
 	private ResourceBundle myResources;
-	
+
 	private IAuthoringActor myActor;
 	private ImageView myActorIV;
-	
+
 	private GUIActorImageViewer actorImageViewer;
 	private ActorRuleCreator myActorRuleCreator;
 	private GridPane myActorRuleCreatorPane;
-	
+
 	private Stage myStage;
 	private Controller myController;
 
@@ -64,6 +65,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		this.myController = myController;
 		initializeEnvironment();
 	}
+
 	/**
 	 * Return Pane representation of actor editing environment
 	 */
@@ -71,9 +73,10 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	public Pane getPane() {
 		return myRoot;
 	}
-	
+
 	/**
-	 * Initialize resources and create actor editing environment by populating sections of the screen and setting default new Actor
+	 * Initialize resources and create actor editing environment by populating
+	 * sections of the screen and setting default new Actor
 	 */
 	private void initializeEnvironment() {
 		myRoot = new BorderPane();
@@ -83,6 +86,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		setCenterPane();
 		setBottomPane();
 	}
+
 	/**
 	 * Set Actor of actor editing environment to a default new Actor
 	 */
@@ -91,6 +95,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		this.myActor = defaultActor;
 		this.myActorIV = new ImageviewActorIcon(defaultActor, ICON_HEIGHT);
 	}
+
 	/**
 	 * Populate left section of the actor editing environment
 	 */
@@ -117,6 +122,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		myScrollPane.setContent(myActorRuleCreatorPane);
 		myRoot.setCenter(myScrollPane);
 	}
+
 	/**
 	 * Populate bottom section of the actor editing environment
 	 */
@@ -127,8 +133,10 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		hbox.setAlignment(Pos.CENTER_RIGHT);
 		myRoot.setBottom(hbox);
 	}
+
 	/**
 	 * Returns button to allow users to create a new rule
+	 * 
 	 * @return
 	 */
 	private Button newRuleButton() {
@@ -141,8 +149,8 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		});
 		return toReturn;
 	}
-	
-	private Button setRuleButton(){
+
+	private Button setRuleButton() {
 		Button toReturn = new Button(SET_RULE_LABEL);
 		toReturn.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		toReturn.setOnAction(event -> {
@@ -157,37 +165,43 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	@Override
 	public void setEditableElement(IEditableGameElement editable) {
 		myActor = (IAuthoringActor) editable;
-		myActorIV = new ImageviewActorIcon(myActor,ICON_HEIGHT);
+		myActorIV = new ImageviewActorIcon(myActor, ICON_HEIGHT);
 		setLeftPane();
 		myActorRuleCreator.updateActorRules();
 		library.updateDragEvents();
 	}
+
 	/**
 	 * Return Actor currently in actor editing environment
+	 * 
 	 * @return
 	 */
-	public IEditableGameElement getEditable(){
+	public IEditableGameElement getEditable() {
 		return myActor;
 	}
-	
+
 	/**
-	 * Set image used for Actor currently in actor editing environment 
+	 * Set image used for Actor currently in actor editing environment
+	 * 
 	 * @param newImageView
 	 */
 	public void setActorImage(ImageView newImageView, String imageViewName) {
 		myActor.setImageView(newImageView);
 		myActor.setImageViewName(imageViewName);
+		System.out.println("here: " + myActor.getPhysicsEngine());
 		myActorIV = new ImageviewActorIcon(myActor, ICON_HEIGHT);
 		setLeftPane();
 	}
-	
+
 	@Override
 	public Stage getStage() {
 		return myStage;
 	}
+
 	public Controller getController() {
 		return this.myController;
 	}
+
 	@Override
 	public void update(Observable o, Object arg) {
 		myController.updateActors((IAuthoringActor) arg);

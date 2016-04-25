@@ -37,7 +37,9 @@ public class LevelPreview implements IGUI {
 	private static final int POP_UP_WIDTH = 300;
 	private static final int POP_UP_HEIGHT = 100;
 	private Pane myLevelPane;
-	private StackPane myStackPane;	// try setting stackpane to scrollpane's content, then adding imageview for background to stackpane and level on top
+	private StackPane myStackPane; // try setting stackpane to scrollpane's
+									// content, then adding imageview for
+									// background to stackpane and level on top
 	private ScrollPane myScrollPane;
 	private Pane myPane;
 	private Rectangle myBoundary;
@@ -71,7 +73,7 @@ public class LevelPreview implements IGUI {
 		myStackPane.getChildren().addAll(myLevelPane, myBoundary);
 		myPane.getChildren().add(myScrollPane);
 	}
-	
+
 	private void initStackPane() {
 		myStackPane = new StackPane();
 		myStackPane.setAlignment(Pos.CENTER);
@@ -86,7 +88,7 @@ public class LevelPreview implements IGUI {
 		myScrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		myScrollPane.setHbarPolicy(ScrollBarPolicy.ALWAYS);
 		myScrollPane.setFitToHeight(true);
-		myScrollPane.setFitToWidth(true);	
+		myScrollPane.setFitToWidth(true);
 		myScrollPane.setStyle("-fx-background-color: lightgray");
 	}
 
@@ -95,6 +97,7 @@ public class LevelPreview implements IGUI {
 		myBoundary.setFill(Color.TRANSPARENT);
 		myBoundary.setStroke(Color.BLACK);
 	}
+
 	@Override
 	public Pane getPane() {
 		return myPane;
@@ -107,7 +110,7 @@ public class LevelPreview implements IGUI {
 		myLevelPane.getChildren().add(myBoundary);
 		updateLevelBackground();
 		addLevelActorsToScene();
-		//updateIcons();
+		// updateIcons();
 	}
 
 	/**
@@ -125,12 +128,13 @@ public class LevelPreview implements IGUI {
 		myLevel.setMyBackgroundImgName(imageFile.getPath());
 		updateLevelBackground();
 	}
-	
+
 	public void resizeBackgroundBasedOnScrolling() {
-		//myLevelBackground.setImage(new Image(myLevel.getMyBackgroundImgName()));
+		// myLevelBackground.setImage(new
+		// Image(myLevel.getMyBackgroundImgName()));
 		if (myLevel.getMyScrollingDirection().equals(VERTICAL)) {
 			myLevelBackground.setFitWidth(SUBSCENE_WIDTH);
-			//need to get background and set size
+			// need to get background and set size
 		} else {
 			myLevelBackground.setFitHeight(SUBSCENE_HEIGHT);
 			// need to get background and set size
@@ -144,7 +148,7 @@ public class LevelPreview implements IGUI {
 	public void addLevelActorsToScene() {
 		myLevelPane.getChildren().removeAll(myActorPreviews);
 		myActorPreviews.clear();
-		for (IPlayActor actor: myLevel.getActors()) {
+		for (IPlayActor actor : myLevel.getActors()) {
 			ImageviewActorIcon icon = addActorToScene((IAuthoringActor) actor);
 			icon.setX(actor.getX());
 			icon.setY(actor.getY());
@@ -162,11 +166,12 @@ public class LevelPreview implements IGUI {
 
 	private void setIconBehavior(ImageviewActorIcon icon) {
 		icon.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent event) {
+			@Override
+			public void handle(MouseEvent event) {
 				moveActor(icon, event);
 				event.consume();
 			}
-		}); 
+		});
 
 		ContextMenuActorInLevel contextMenu = new ContextMenuActorInLevel(this);
 		icon.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
@@ -181,41 +186,46 @@ public class LevelPreview implements IGUI {
 		icon.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
-				if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-					if(mouseEvent.getClickCount() == 2){
+				if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+					if (mouseEvent.getClickCount() == 2) {
 						System.out.println("Double clicked");
-						PopUpActorResize popUp = new PopUpActorResize(POP_UP_WIDTH, POP_UP_HEIGHT, icon.getRefActor(), myLevelEditingEnvironment.getController());
+						PopUpActorResize popUp = new PopUpActorResize(POP_UP_WIDTH, POP_UP_HEIGHT, icon.getRefActor(),
+								myLevelEditingEnvironment.getController());
 					}
 				}
 			}
 		});
 	}
 
-
 	public void removeActorFromLevel(ImageviewActorIcon icon) {
 		myActorPreviews.remove(icon);
 		myLevelPane.getChildren().remove(icon);
-		myLevel.removeActor((Actor) icon.getRefActor()); 
+		myLevel.removeActor((Actor) icon.getRefActor());
 	}
-	
+
 	/**
-	 * Move an actor by changing its (x, y)-coordinates and visualize by moving its imageview.
-	 * @param actor: actor to move.
-	 * @param actorIV: Imageview of actor to move.
-	 * @param event: drag.
+	 * Move an actor by changing its (x, y)-coordinates and visualize by moving
+	 * its imageview.
+	 * 
+	 * @param actor:
+	 *            actor to move.
+	 * @param actorIV:
+	 *            Imageview of actor to move.
+	 * @param event:
+	 *            drag.
 	 */
 	private void moveActor(ImageviewActorIcon icon, MouseEvent event) {
 		icon.updateIconActorPosition(event.getX(), event.getY());
 		icon.setX(event.getX());
 		icon.setY(event.getY());
 	}
-	
+
 	public void updateIcons() {
-		for (ImageviewActorIcon icon: myActorPreviews) {
+		for (ImageviewActorIcon icon : myActorPreviews) {
 			icon.updateImageView();
 		}
 	}
-	
+
 	public Pane getLevelPane() {
 		return myLevelPane;
 	}

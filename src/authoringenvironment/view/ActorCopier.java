@@ -45,13 +45,10 @@ public class ActorCopier {
 	private void copyActor(Actor toUpdate, Actor toCopy) {
 		toUpdate.setName(toCopy.getName());
 		toUpdate.setFriction(toCopy.getFriction());
-		toUpdate.setImageView(toCopy.getImageView());
-		toUpdate.setSize(toCopy.getSize());
 		toUpdate.setImageViewName(toCopy.getImageViewName());
+		toUpdate.setSize(toCopy.getSize());
 		toUpdate.setID(toCopy.getMyID());
 		copyRules(toUpdate, toCopy.getRules());
-		toUpdate.setPhysicsEngine(toCopy.getPhysicsEngine());
-		//copyAttributes(toUpdate,)
 	}
 	
 	// work in progress.. currently only works for KeyTriggers and Move actions

@@ -2,6 +2,7 @@ package gui.view;
 
 /**
  * Button for adding a new actor.
+ * 
  * @author amyzhao
  *
  */
@@ -9,9 +10,13 @@ public class ButtonNewActor extends ButtonParent {
 
 	/**
 	 * Constructs a button for adding a new actor.
-	 * @param myController: environment controller.
-	 * @param buttonText: text for the button.
-	 * @param imageName: image for the button.
+	 * 
+	 * @param myController:
+	 *            environment controller.
+	 * @param buttonText:
+	 *            text for the button.
+	 * @param imageName:
+	 *            image for the button.
 	 */
 	public ButtonNewActor(String buttonText, String imageName) {
 		super(buttonText, imageName);
