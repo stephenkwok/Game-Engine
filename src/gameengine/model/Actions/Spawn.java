@@ -10,10 +10,10 @@ import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
 import javafx.scene.image.ImageView;
 
-public class Spawn extends Action{
-	
-	IPlayActor mySpawnedActor ;
-	Integer cloneNum = 900;
+
+public class Spawn extends ActorAction{
+
+	IPlayActor mySpawnedActor;
 	
 	public Spawn(IPlayActor actor1, IPlayActor spawnedActor) {
 		super(actor1);
@@ -25,12 +25,10 @@ public class Spawn extends Action{
 		ActorCopier myActorCopier = new ActorCopier((Actor)mySpawnedActor);
 		Actor clone = myActorCopier.makeCopy();
 		
-		
 		System.out.println(mySpawnedActor.getName());
 		clone.setHeading(getMyActor().getHeading());
 		clone.setX(getMyActor().getBounds().getMaxX());
 		clone.setY(getMyActor().getY());
-		
 		
 		getMyActor().changed();
 		List<Object> myList = new ArrayList<>();

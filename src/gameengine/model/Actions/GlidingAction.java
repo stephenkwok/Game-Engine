@@ -3,7 +3,7 @@ package gameengine.model.Actions;
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
 
-public abstract class GlidingAction extends Action {
+public abstract class GlidingAction extends ActorAction {
 
 	Double glideOffset;
 	
