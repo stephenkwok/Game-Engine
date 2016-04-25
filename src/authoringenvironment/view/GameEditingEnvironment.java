@@ -32,7 +32,7 @@ public class GameEditingEnvironment implements IEditingElement {
 	private final ResourceBundle myResources;
 	private IEditableGameElement myGameInfo;
 	private HBox nameEditorContainer, gameTypeButtonContainer, previewImageContainer, welcomeMessage;
-	private VBox editingEnvironmentContainer, gameDescriptionEditor, HUDOptionsDisplay;
+	private VBox editingEnvironmentContainer, gameDescriptionEditor;
 	private ScrollPane myScrollPane;
 
 	public GameEditingEnvironment(GameInfo gameInfo, Stage stage) {
@@ -52,7 +52,6 @@ public class GameEditingEnvironment implements IEditingElement {
 		initializeGameDescriptionEditor();
 		initializeGameTypeButton();
 		initializePreviewImageDisplay();
-		initializeHUDOptionsDisplay();
 		initializeScrollPane();
 		initializeEditingEnvironmentContainer();
 	}
@@ -63,7 +62,7 @@ public class GameEditingEnvironment implements IEditingElement {
 	 */
 	private void initializeEditingEnvironmentContainer() {
 		editingEnvironmentContainer.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor,
-				gameTypeButtonContainer, previewImageContainer, HUDOptionsDisplay);
+				gameTypeButtonContainer, previewImageContainer);
 		editingEnvironmentContainer.getChildren().stream().forEach(node -> bindChildWidthToParentWidth(node));
 	}
 	
@@ -142,14 +141,6 @@ public class GameEditingEnvironment implements IEditingElement {
 		button.prefWidthProperty().bind(previewImageContainer.widthProperty());
 		previewImageContainer.getChildren().add(button);
 		previewImageContainer.setPadding(new Insets(DEFAULT_PADDING));
-	}
-
-	/**
-	 * Initializes the GUI element that displays checkboxes for each HUD Option
-	 */
-	private void initializeHUDOptionsDisplay() {
-		CheckBoxesHUDOptions HUDOptions = new CheckBoxesHUDOptions(myGameInfo);
-		HUDOptionsDisplay = (VBox) HUDOptions.createNode();
 	}
 
 	/**
