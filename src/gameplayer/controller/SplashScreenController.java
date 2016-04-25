@@ -13,13 +13,12 @@ import javafx.stage.Stage;
 import authoringenvironment.controller.Controller;
 
 public class SplashScreenController implements Observer {
-	
+
 	private static final String SPLASH_CONTROLLER_RESOURCE = "splashActions";
-	
+
 	private ResourceBundle myResources;
 	private SplashScreen myScreen;
 	private Stage myStage;
-	
 
 	public SplashScreenController(Stage stage) {
 		this.myStage = stage;
@@ -27,25 +26,25 @@ public class SplashScreenController implements Observer {
 		this.myStage.setScene(myScreen.getScene());
 		this.myResources = ResourceBundle.getBundle(SPLASH_CONTROLLER_RESOURCE);
 	}
-	
+
 	private void setUpScreen() {
 		this.myScreen = new SplashScreen();
 		this.myScreen.addObserver(this);
 	}
-	
+
 	private void play() {
 		FileChooserController fileChooserController = new FileChooserController(myStage, ChooserType.PLAY);
 	}
-	
-	
+
 	private void openHighScores() {
 		FileChooserController fileChooserController = new FileChooserController(myStage, ChooserType.SCORES);
 	}
-	
-	private void edit() {
+
+
+	private void edit() throws NoSuchMethodException, SecurityException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
 		Controller GUIMainController = new Controller(myStage);
 	}
-
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -61,11 +60,14 @@ public class SplashScreenController implements Observer {
 				this.getClass().getDeclaredMethod(methodName).invoke(this, arg2);
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+<<<<<<< HEAD
 				| SecurityException | ClassNotFoundException e) {
+=======
+				| SecurityException e) {
+			e.printStackTrace();
+>>>>>>> df41d2e68f2a766d861be1866ef016c9241d4bea
 			this.myScreen.showError(e.getMessage());
 		}
 	}
-
-
 
 }

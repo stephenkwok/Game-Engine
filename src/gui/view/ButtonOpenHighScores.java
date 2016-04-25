@@ -12,7 +12,7 @@ public class ButtonOpenHighScores extends ButtonParent{
 
 	@Override
 	protected void setButtonAction() {
-		
+
 	}
 	
 

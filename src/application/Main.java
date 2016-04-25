@@ -2,11 +2,9 @@ package application;
 
 import gameplayer.controller.SplashScreenController;
 import javafx.application.Application;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
-public class Main extends Application{
-	
+public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -15,8 +13,8 @@ public class Main extends Application{
 		SplashScreenController splashScreenController = new SplashScreenController(myStage);
 		myStage.show();
 	}
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		launch(args);
 	}
 

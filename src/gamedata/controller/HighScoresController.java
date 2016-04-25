@@ -20,32 +20,32 @@ import javafx.stage.Stage;
 public class HighScoresController implements IHighScoresController {
 
 	private static final String HIGH_SCORES_FILE = "src/resources/highScores.xml";
-	
+
 	private String myGameFile;
 	private File myFile;
 	private Screen myScreen;
-	
+
 	public HighScoresController(String gameFile, Screen screen) {
 		this.myGameFile = gameFile;
 		myFile = new File(HIGH_SCORES_FILE);
 		this.myScreen = screen;
 	}
-	
+
 	public HighScoresController(String gameFile) {
 		this.myGameFile = gameFile;
 		myFile = new File(HIGH_SCORES_FILE);
 	}
-	
+
 	@Override
 	public Map<String, Integer> getGameHighScores() {
 		if (getAllGameScores().get(myGameFile) == null) {
-			return new HashMap<String,Integer>();
+			return new HashMap<String, Integer>();
 		}
 		return getAllGameScores().get(myGameFile);
 	}
-	
+
 	@Override
-	public Map<String, Map<String, Integer>> getAllGameScores()  {
+	public Map<String, Map<String, Integer>> getAllGameScores() {
 		HighScoresParser scoresParser = new HighScoresParser();
 		try {
 			return scoresParser.getHighScoreInfo(myFile);
@@ -81,8 +81,8 @@ public class HighScoresController implements IHighScoresController {
 			e.printStackTrace();
 		}
 	}
-	
-	public String getGameFile(){
+
+	public String getGameFile() {
 		return this.myGameFile;
 	}
 

@@ -1,30 +1,30 @@
 package gui.view;
 
 import java.util.Observer;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingElement;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import authoringenvironment.model.*;
+import javafx.event.*;
 import javafx.scene.control.Button;
 
 /**
- * This class serves as the abstract class for all classes that have an instance of
- * IEditableGameElement and consists of a set of GUI Elements (one of which must be 
- * a button) that enable the game author to set certain attributes for that 
- * IEditableGameElement
+ * This class serves as the abstract class for all classes that have an instance
+ * of IEditableGameElement and consists of a set of GUI Elements (one of which
+ * must be a button) that enable the game author to set certain attributes for
+ * that IEditableGameElement
  * 
  * @author Stephen
  *
  */
-public abstract class EditingElementParent extends ObjectObservable implements IGUIElement, IEditingElement {
-	
+public abstract class EditingElementParent extends ObjectObservable implements IGUIElement, IEditingElement {	
+	private static final double BUTTON_WIDTH = 40.0;
+	private static final double BUTTON_HEIGHT = 15.0;
 	private IEditableGameElement myEditableElement;
 	private Button myButton;
 
 	public EditingElementParent(String buttonText) {
 		myButton = new Button(buttonText);
+		myButton.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 	}
-	
+
 	@Override
 	public void addNodeObserver(Observer observer) {
 		this.addObserver(observer);
@@ -32,7 +32,7 @@ public abstract class EditingElementParent extends ObjectObservable implements I
 
 	/**
 	 * Updates the class' GUI Elements to display the IEditableGameElement's
-	 * current value for the attribute the class is editing 
+	 * current value for the attribute the class is editing
 	 */
 	protected abstract void updateValueBasedOnEditable();
 
@@ -44,7 +44,7 @@ public abstract class EditingElementParent extends ObjectObservable implements I
 		myEditableElement = element;
 		if (myEditableElement != null) {
 			updateValueBasedOnEditable();
-		}		
+		}
 	}
 
 	/**
@@ -52,13 +52,14 @@ public abstract class EditingElementParent extends ObjectObservable implements I
 	 * @return the EditingElement's IEditableGameElement
 	 */
 	public IEditableGameElement getEditableElement() {
-		return myEditableElement; 
+		return myEditableElement;
 	}
 
 	/**
 	 * Sets the EditingElement's button's action on click
 	 * 
-	 * @param buttonAction - method to call when button clicked 
+	 * @param buttonAction
+	 *            - method to call when button clicked
 	 */
 	protected void setButtonAction(EventHandler<ActionEvent> buttonAction) {
 		myButton.setOnAction(buttonAction);

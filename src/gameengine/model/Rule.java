@@ -5,15 +5,19 @@ import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.ITrigger;
 
 /**
- * Contains a trigger and linked action to be performed when the trigger is signaled
+ * Contains a trigger and linked action to be performed when the trigger is
+ * signaled
+ * 
  * @author blakekaplan
  *
  */
+
 public class Rule implements IRule{
 
     private ITrigger myTrigger;
     private Action myAction;
-
+    private int ID;
+    
     public Rule(ITrigger trigger, Action action){
         setMyTrigger(trigger);
         setMyAction(action);
@@ -42,12 +46,26 @@ public class Rule implements IRule{
 	public void setMyTrigger(ITrigger myTrigger) {
 		this.myTrigger = myTrigger;
 	}
-	
+
 	/**
-	 * Sets the action for the rule 
+	 * Sets the action for the rule
+	 * 
 	 * @param myAction
 	 */
 	public void setMyAction(Action myAction) {
 		this.myAction = myAction;
+	}
+	
+	public void setID(int ID) {
+		this.ID = ID;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public String toString() {
+		String id = Integer.toString(ID);
+		return ("id: " + id);
 	}
 }

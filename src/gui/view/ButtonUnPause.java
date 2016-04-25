@@ -2,8 +2,8 @@ package gui.view;
 
 import gameplayer.controller.BaseScreenController;
 
-public class ButtonUnPause extends ButtonParent{
-	
+public class ButtonUnPause extends ButtonParent {
+
 	private BaseScreenController myControl;
 
 	public ButtonUnPause(String buttonText, String imageName) {
@@ -14,7 +14,6 @@ public class ButtonUnPause extends ButtonParent{
 
 	@Override
 	protected void setButtonAction() {
-		
 	}
 
 }

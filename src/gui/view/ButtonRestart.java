@@ -1,9 +1,7 @@
 package gui.view;
 
-
 public class ButtonRestart extends ButtonParent {
 
-	
 	public ButtonRestart(String buttonText, String imageName) {
 		super(buttonText, imageName);
 		setName(this.getClass().getSimpleName());
@@ -12,7 +10,6 @@ public class ButtonRestart extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		
 	}
 
 }

@@ -1,8 +1,6 @@
 package gui.view;
 
-
 public class ButtonSaveGame extends ButtonParent {
-
 
 	public ButtonSaveGame(String buttonText, String imageName) {
 		super(buttonText, imageName);
@@ -13,7 +11,6 @@ public class ButtonSaveGame extends ButtonParent {
 
 	@Override
 	protected void setButtonAction() {
-		
 	}
 
 }

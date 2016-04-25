@@ -6,10 +6,10 @@ import java.util.Observer;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
-public class PaneParent extends Observable implements IGUIElement{
+public class PaneParent extends Observable implements IGUIElement {
 
 	private Pane myPane;
-	
+
 	public PaneParent() {
 		myPane = new Pane();
 	}
@@ -21,7 +21,7 @@ public class PaneParent extends Observable implements IGUIElement{
 
 	@Override
 	public void addNodeObserver(Observer observer) {
-		this.addObserver(observer);		
+		this.addObserver(observer);
 	}
 
 }

@@ -1,6 +1,5 @@
 package gui.view;
 
-
 public class ButtonSplash extends ButtonParent {
 
 	public ButtonSplash(String buttonText, String imageName) {

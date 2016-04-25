@@ -4,6 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Observable;
 import java.util.ResourceBundle;
+
+import authoringenvironment.controller.Controller;
 import gamedata.view.FileChooserScreen;
 import gameengine.controller.Game;
 import gameplayer.controller.BaseScreenController;
@@ -38,7 +40,7 @@ public class FileChooserController extends BranchScreenController {
 	}
 
 	private void goPlay(Game game) {
-		BaseScreenController baseScreenController = new BaseScreenController(getStage(), new GameController(game));
+		BaseScreenController baseScreenController = new BaseScreenController(getStage(), new GameController(new Game(game.getInfo(), game.getLevels())));
 	}
 
 	private void goScores(Game game) {
@@ -47,7 +49,7 @@ public class FileChooserController extends BranchScreenController {
 	}
 
 	private void goEdit(Game game) {
-		// Controller GUIMainController = new Controller(getStage(), game);
+		Controller GUIMainController = new Controller(game, getStage());
 	}
 
 	private void go(Game game) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException,
