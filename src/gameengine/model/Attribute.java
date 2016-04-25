@@ -1,8 +1,9 @@
 package gameengine.model;
 
 import gameengine.model.Triggers.AttributeReached;
-import java.util.*;
 import utilities.hud.Property;
+
+import java.util.*;
 
 /**
  * This class is purposed to store properties belonging to an actor that are updated throughout the game 
