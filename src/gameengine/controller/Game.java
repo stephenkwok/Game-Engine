@@ -432,6 +432,7 @@ public class Game extends Observable implements Observer {
 
 	public void setHUDInfoFile(String location) {
 		hudInfoFile = location;
+		System.out.println(getHUDInfoFile());
 	}
 	
 	public String getHUDInfoFile() {
