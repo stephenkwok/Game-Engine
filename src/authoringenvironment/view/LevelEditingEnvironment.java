@@ -62,6 +62,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 * the left and center pane.
 	 */
 	private void initializeEnvironment() {
+		myRoot.setStyle("-fx-background-color: darkgray");
 		initializeCenter();
 		initializeLeftPane();
 		updateDrag();
@@ -153,8 +154,10 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 					IAuthoringActor actor = icon.getActor();
 					val.add(actor);
 					availableActors.put(icon.getRefActor(), val);
-					myLevel.addActor(actor);
-					myLevelPreview.addActorToScene(actor);
+					//myLevel.addActor(actor);
+					myLevel.addActor(icon.getRefActor());
+					//myLevelPreview.addActorToScene(actor);
+					myLevelPreview.addActorToScene(icon.getRefActor());
 					success = true;
 				}
 				event.setDropCompleted(success);
