@@ -1,6 +1,5 @@
 package gui.view;
 
-
 import java.util.Observable;
 import java.util.Observer;
 
@@ -12,6 +11,7 @@ import javafx.scene.control.CheckBox;
 
 /**
  * Checkbox object for option selection.
+ * 
  * @author amyzhao
  *
  */
@@ -19,18 +19,21 @@ public class CheckBoxObject extends Observable implements IGUIElement, IEditingE
 	private String myPromptText;
 	private int myWidth;
 	private IEditableGameElement myEditableElement;
-	
+
 	/**
 	 * Constructs a CheckBoxObject to edit a given element.
-	 * @param promptText: option to check or un-check.
-	 * @param width: width of the checkbox.
+	 * 
+	 * @param promptText:
+	 *            option to check or un-check.
+	 * @param width:
+	 *            width of the checkbox.
 	 */
 	public CheckBoxObject(String promptText, int width) {
 		myPromptText = promptText;
 		myWidth = width;
 		myEditableElement = null;
 	}
-	
+
 	/**
 	 * Creates the checkbox.
 	 */
@@ -42,7 +45,7 @@ public class CheckBoxObject extends Observable implements IGUIElement, IEditingE
 		checkbox.setId(myPromptText);
 		return checkbox;
 	}
-	
+
 	/**
 	 * Sets the element that this checkbox is editing.
 	 */
@@ -53,6 +56,7 @@ public class CheckBoxObject extends Observable implements IGUIElement, IEditingE
 
 	/**
 	 * Gets the element that this checkbox is editing.
+	 * 
 	 * @return game/level/actor that this checkbox is editing.
 	 */
 	protected IEditableGameElement getEditableElement() {
@@ -61,7 +65,7 @@ public class CheckBoxObject extends Observable implements IGUIElement, IEditingE
 
 	@Override
 	public void addNodeObserver(Observer observer) {
-		this.addObserver(observer);	
+		this.addObserver(observer);
 	}
-	
+
 }

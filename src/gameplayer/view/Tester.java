@@ -180,10 +180,22 @@ public class Tester extends Application {
         level1.addActor(actor2);
         level1.addActor((IAuthoringActor)actor3);
         level1.addActor((IAuthoringActor) actor4);
-        level1.addAttribute(new Attribute(AttributeType.TIME, 1, level1));
-        level1.addRule(new Rule(new AttributeReached(AttributeType.TIME, level1, 100), new WinGame(level1)));
-        level1.addRule(new Rule(new TickTrigger(1), new ChangeAttribute(level1, AttributeType.TIME, 1)));
-
+        
+        /**
+         * testing create actors
+         */
+        IAuthoringActor a = (IAuthoringActor) new Actor();
+        a.setID(10);
+        a.setImageViewName("pipes.png");
+        TickTrigger translatetick = new TickTrigger(45);
+        Action translateaction = new MoveRight((IPlayActor)a);
+        a.addRule(new Rule(translatetick,translateaction));
+        TickTrigger newtick = new TickTrigger(220);
+        Action newaction = new CreateActor((IPlayActor)actor1,(Actor)a,0,0);
+        actor1.addRule(new Rule(newtick,newaction));
+        
+        
+        
         for(int i=0; i<=17; i++){
             Actor floor = new Actor();
             floor.setName("floor");

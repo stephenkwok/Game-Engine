@@ -12,14 +12,14 @@ public class AttributeReached extends ITrigger {
 		}
 		myKey = target.getName()+type.toString()+triggerValue;
 	}
-	
+
 	@Override
-    public String getMyKey() {
-        return myKey;
-    }
-    
-    @Override
-    public boolean evaluate(ITrigger otherTrigger) {
+	public String getMyKey() {
+		return myKey;
+	}
+
+	@Override
+	public boolean evaluate(ITrigger otherTrigger) {
 		return true;
 	}
 }

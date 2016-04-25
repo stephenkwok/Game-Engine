@@ -7,10 +7,11 @@ import gameengine.model.IPlayActor;
 /**
  * @author blakekaplan
  */
-public class ChangeAttribute extends Action{
+public class ChangeAttribute extends Action {
 
-    private AttributeType myType;
-    private int myChange;
+	private AttributeType myType;
+	private int myChange;
+
 
     public ChangeAttribute(IGameElement actor1, AttributeType type, int change){
         super(actor1);

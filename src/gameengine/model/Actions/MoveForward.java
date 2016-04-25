@@ -1,6 +1,5 @@
 package gameengine.model.Actions;
 
-
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
 
@@ -11,25 +10,26 @@ import gameengine.model.IPlayActor;
  */
 public class MoveForward extends MovingAction {
 
-
-    /**
-     * Takes in reference to the Actor it will change along with the argument it will require to do so
-     *
-     * @param actor1 The Actor that will be changed
-     * @param args          The arguments required to perform the change
-     */
-    public MoveForward(IPlayActor actor1) {
-        super(actor1);
-    }
+	/**
+	 * Takes in reference to the Actor it will change along with the argument it
+	 * will require to do so
+	 *
+	 * @param actor1
+	 *            The Actor that will be changed
+	 * @param args
+	 *            The arguments required to perform the change
+	 */
+	public MoveForward(IPlayActor actor1) {
+		super(actor1);
+	}
 
 	/**
-     * Moves the Actor forwards
-     */
-    @Override
-    public void perform() {
-    	getMyActor().getPhysicsEngine().moveForward(getMyActor());
+	 * Moves the Actor forwards
+	 */
+	@Override
+	public void perform() {
+		getMyActor().getPhysicsEngine().moveForward(getMyActor());
 
-    	
-    }
+	}
 
 }

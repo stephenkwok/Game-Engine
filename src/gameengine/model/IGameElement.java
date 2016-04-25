@@ -5,11 +5,15 @@ import java.util.Map;
 
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
+import javafx.geometry.Bounds;
 
 public interface IGameElement {
 	public void addAttribute(Attribute attribuet);
+
 	public void removeAttribute(Attribute attribute);
+
 	public void handleReachedAttribute(AttributeReached trigger);
+
     public Attribute getAttribute(AttributeType type);
     public String getName();
     public void changeAttribute(AttributeType type, int change);
@@ -18,4 +22,5 @@ public interface IGameElement {
     public void handleTrigger(ITrigger trigger);
     public Map<String, List<Rule>> getRules();
     public void changed();
+    public Bounds getBounds();
 }
