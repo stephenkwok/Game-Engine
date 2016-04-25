@@ -1,6 +1,7 @@
 package gameengine.model;
 
 import gameengine.model.Triggers.AttributeReached;
+import utilities.hud.Property;
 import java.util.*;
 import utilities.hud.Property;
 
