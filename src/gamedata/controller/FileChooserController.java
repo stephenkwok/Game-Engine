@@ -66,6 +66,7 @@ public class FileChooserController extends BranchScreenController {
 	public void update(Observable o, Object arg) {
 		List<Object> myList = (List<Object>) arg;
 		String methodName = (String) myList.get(0);
+		System.out.println(methodName);
 		try {
 			if (myResources.getString(methodName).equals("null")) {
 				this.getClass().getDeclaredMethod(methodName).invoke(this);
@@ -78,13 +79,14 @@ public class FileChooserController extends BranchScreenController {
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 				| SecurityException | ClassNotFoundException e) {
-			/*try {
+			try {
 				this.getClass().getSuperclass().getDeclaredMethod(methodName).invoke(this);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 					| NoSuchMethodException | SecurityException e1) {
-				// TODO Auto-generated catch block*/
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 				this.myScreen.showError(e.getMessage());
 			}
 		}
 	}
+}
