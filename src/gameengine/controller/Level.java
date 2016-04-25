@@ -14,6 +14,7 @@ import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -355,6 +356,10 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 
     public void changed(){
         setChanged();
+    }
+
+    public Bounds getBounds(){
+        return myBackground.getBoundsInLocal();
     }
 	
 }
