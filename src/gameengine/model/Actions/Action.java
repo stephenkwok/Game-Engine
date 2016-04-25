@@ -42,6 +42,9 @@ public abstract class Action implements IAction {
         return myActor;
     }
 
+    public void setMyActor(IPlayActor actor) {
+    	myActor = actor;
+    }
 
     
 }
