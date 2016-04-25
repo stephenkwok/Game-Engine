@@ -1,12 +1,6 @@
 package gamedata.controller;
 
 import java.io.File;
-import java.io.IOException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-
-import org.xml.sax.SAXException;
 
 import gamedata.XMLParser;
 import gameengine.controller.Game;
@@ -41,16 +35,13 @@ public class ParserController implements IParserController {
 
 	@Override
 	public Game loadforPlaying(File file) {
-		Game game = null;
-		try {
-			Game XMLgame = this.myXMLParser.extractGame(file);
-			game = new Game(XMLgame.getInitialGameFile(), XMLgame.getInfo(), XMLgame.getLevels());
-		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			//myScreen.showError(e.getMessage());
+		Game XMLgame = (Game) this.myXMLParser.load(file);
+		if (XMLgame == null) {
+			return null;
 		}
-		return game;
+		else {
+			return new Game(XMLgame.getInitialGameFile(), XMLgame.getInfo(), XMLgame.getLevels());
+		}
 	}
 
 }
