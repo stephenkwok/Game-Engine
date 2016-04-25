@@ -193,7 +193,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     	myImageView.setY(this.getY());
 		myImageView.setFitHeight(imageView.getFitHeight());
     }
-
+    
     /**
      * Provides the Actor's X coordinate
      * @return  The Actor's X coordinate

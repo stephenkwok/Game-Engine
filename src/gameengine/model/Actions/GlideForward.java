@@ -11,6 +11,7 @@ public class GlideForward extends GlidingAction {
 
 	@Override
 	public void perform() {
+		
     	getMyActor().getPhysicsEngine().glideForward(getMyActor());			
 	}
 

@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.*;
 import gameengine.model.IPlayActor;
+import gameengine.model.PhysicsEngine;
 import authoringenvironment.model.IAuthoringActor;
 import gamedata.controller.CreatorController;
 
@@ -69,6 +70,12 @@ public class Tester extends Application {
         actor2.setY(300);
         actor2.setName("A2");
         actor2.setID(2);
+        
+        IAuthoringActor spawnedActor = (IAuthoringActor) new Actor();
+        spawnedActor.setImageViewName("redball.png");
+        spawnedActor.setName("bullet");
+        spawnedActor.setID(90);
+        spawnedActor.getImageView().resize(10, 10);
 
         IPlayActor actor4 = new Actor();
         ((Actor) actor4).setName("enemy");
@@ -95,6 +102,11 @@ public class Tester extends Application {
         Action killAction3 = new Destroy((Actor) actor4);
         Rule killRule3 = new Rule(kill3, killAction3);
         ((Actor) actor4).addRule(killRule3);
+        
+        SideCollision bulletKill = new SideCollision(actor4,(IPlayActor)spawnedActor);
+        Rule bulletKillRule  = new Rule(bulletKill, killAction3);
+        actor4.addRule(bulletKillRule);
+        
 
         TickTrigger tick = new TickTrigger();
         Action tick1 = new ApplyPhysics((IPlayActor)actor1);
@@ -132,6 +144,14 @@ public class Tester extends Application {
         actor1.addRule(rule9);
 
         KeyTrigger triggerSpawn = new KeyTrigger(KeyCode.S);
+        TickTrigger bulletTick = new TickTrigger();
+        Action bulletAction = new GlideForward((IPlayActor)spawnedActor);
+        Rule bulletRule = new Rule(bulletTick,bulletAction);
+        spawnedActor.addRule(bulletRule);
+        PhysicsEngine newPhysicsEngine = new PhysicsEngine();
+        ((Actor) spawnedActor).setPhysicsEngine(newPhysicsEngine);
+        
+        
         
         Action action1 = new MoveRight((IPlayActor)actor1);
         Action action2 = new MoveLeft((IPlayActor)actor1);
@@ -139,7 +159,8 @@ public class Tester extends Application {
         Action action4 = new MoveUp((IPlayActor)actor1);
         Action action5 = new VerticalBounceCollision((IPlayActor)actor1);
         Action action6 = new WinGame((IPlayActor)actor1);
-        Action actionSpawn = new Spawn((IPlayActor) actor1);
+        IPlayActor clone = (IPlayActor) spawnedActor;
+        Action actionSpawn = new Spawn((IPlayActor) actor1, (IPlayActor) clone);
 
         Rule rule = new Rule(trigger1,action1);
         Rule rule2 = new Rule(trigger2, action2);
