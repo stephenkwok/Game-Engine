@@ -1,4 +1,4 @@
-package utilities.hud;
+package Utilities.HUD;
 
 public interface IValueFinder {
 	

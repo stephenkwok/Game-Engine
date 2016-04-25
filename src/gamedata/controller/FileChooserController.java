@@ -4,6 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Observable;
 import java.util.ResourceBundle;
+
+import authoringenvironment.controller.Controller;
 import gamedata.view.FileChooserScreen;
 import gameengine.controller.Game;
 import gameplayer.controller.BaseScreenController;
@@ -47,7 +49,7 @@ public class FileChooserController extends BranchScreenController {
 	}
 
 	private void goEdit(Game game) {
-		// Controller GUIMainController = new Controller(getStage(), game);
+		Controller GUIMainController = new Controller(game, getStage());
 	}
 
 	private void handleButton(String buttonName) throws IllegalAccessException, IllegalArgumentException,
