@@ -43,7 +43,8 @@ public class ParserController implements IParserController {
 	public Game loadforPlaying(File file) {
 		Game game = null;
 		try {
-			game = this.myXMLParser.extractGame(file);
+			Game XMLgame = this.myXMLParser.extractGame(file);
+			game = new Game(XMLgame.getInitialGameFile(), XMLgame.getInfo(), XMLgame.getLevels());
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
