@@ -32,7 +32,7 @@ public class GameEditingEnvironment implements IEditingElement {
 	private final ResourceBundle myResources;
 	private IEditableGameElement myGameInfo;
 	private HBox nameEditorContainer, gameTypeButtonContainer, previewImageContainer, welcomeMessage;
-	private VBox editingEnvironmentContainer, gameDescriptionEditor, HUDOptionsDisplay;
+	private VBox editingEnvironmentContainer, gameDescriptionEditor;
 	private ScrollPane myScrollPane;
 
 	public GameEditingEnvironment(GameInfo gameInfo, Stage stage) {
@@ -52,7 +52,6 @@ public class GameEditingEnvironment implements IEditingElement {
 		initializeGameDescriptionEditor();
 		initializeGameTypeButton();
 		initializePreviewImageDisplay();
-		initializeHUDOptionsDisplay();
 		initializeScrollPane();
 		initializeEditingEnvironmentContainer();
 	}
@@ -63,7 +62,7 @@ public class GameEditingEnvironment implements IEditingElement {
 	 */
 	private void initializeEditingEnvironmentContainer() {
 		editingEnvironmentContainer.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor,
-				gameTypeButtonContainer, previewImageContainer, HUDOptionsDisplay);
+				gameTypeButtonContainer, previewImageContainer);
 		editingEnvironmentContainer.getChildren().stream().forEach(node -> bindChildWidthToParentWidth(node));
 	}
 	
@@ -145,14 +144,6 @@ public class GameEditingEnvironment implements IEditingElement {
 	}
 
 	/**
-	 * Initializes the GUI element that displays checkboxes for each HUD Option
-	 */
-	private void initializeHUDOptionsDisplay() {
-		CheckBoxesHUDOptions HUDOptions = new CheckBoxesHUDOptions(myGameInfo);
-		HUDOptionsDisplay = (VBox) HUDOptions.createNode();
-	}
-
-	/**
 	 * Initializes the scroll pane that contains the Game Editing Environment's
 	 * GUI elements and allows for additional elements to be added should the
 	 * height of the combined elements exceed the height of the stage
@@ -171,7 +162,7 @@ public class GameEditingEnvironment implements IEditingElement {
 	public Node getNode() {
 		return myScrollPane;
 	}
-	
+
 	/**
 	 * 
 	 * @return the Game Editing Environment's instance of GameInfo
@@ -187,5 +178,5 @@ public class GameEditingEnvironment implements IEditingElement {
 	public void setEditableElement(IEditableGameElement element) {
 		myGameInfo = element;
 	}
-	
+
 }

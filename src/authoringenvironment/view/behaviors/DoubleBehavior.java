@@ -8,12 +8,14 @@ import authoringenvironment.view.TriggerFactory;
 import gameengine.model.IAction;
 import gameengine.model.Triggers.ITrigger;
 import gui.view.TextFieldWithButton;
+
 /**
  * GUI representation of behaviors that take in a single Double as a parameter
+ * 
  * @author AnnieTang
  */
 
-public abstract class DoubleBehavior extends TextFieldWithButton implements IAuthoringBehavior{
+public abstract class DoubleBehavior extends TextFieldWithButton implements IAuthoringBehavior {
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
 	private static final String WIDTH = "Width";
@@ -22,10 +24,10 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	private ActionFactory actionFactory;
 	private String behaviorType;
 	private ActorRule myActorRule;
-	
+
 	public DoubleBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
-		super(myResources.getString(behaviorType+LABEL), 
-				myResources.getString(behaviorType+PROMPT), Double.parseDouble(myResources.getString(behaviorType+WIDTH)));
+		super(myResources.getString(behaviorType + LABEL), myResources.getString(behaviorType + PROMPT),
+				Double.parseDouble(myResources.getString(behaviorType + WIDTH)));
 		this.behaviorType = behaviorType;
 		this.triggerFactory = new TriggerFactory();
 		this.actionFactory = new ActionFactory();
@@ -37,32 +39,33 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	}
 
 	@Override
-	protected void updateValueBasedOnEditable(){	
+	protected void updateValueBasedOnEditable() {
 		setTextFieldValue(String.valueOf(value));
 	}
-	
+
 	/**
 	 * Create ITrigger or IAction depending on type of behavior
 	 */
 	protected abstract void createTriggerOrAction();
+
 	/**
 	 * Add ITrigger or IAction to actor IRule
 	 */
 	public abstract void setTriggerOrAction();
+
 	/**
 	 * Return if this behavior is a trigger
 	 */
 	public abstract boolean isTrigger();
 
-
-	public double getValue(){
+	public double getValue() {
 		return value;
 	}
-	
-	protected String getBehaviorType(){
+
+	protected String getBehaviorType() {
 		return this.behaviorType;
 	}
-	
+
 	protected TriggerFactory getTriggerFactory() {
 		return this.triggerFactory;
 	}
@@ -70,12 +73,12 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	protected ActionFactory getActionFactory() {
 		return this.actionFactory;
 	}
-	
-	public void setTrigger(IAuthoringBehavior key, ITrigger value){
+
+	public void setTrigger(IAuthoringBehavior key, ITrigger value) {
 		myActorRule.setTrigger(key, value);
 	}
-	
-	public void setAction(IAuthoringBehavior key, IAction value){
+
+	public void setAction(IAuthoringBehavior key, IAction value) {
 		myActorRule.setAction(key, value);
 	}
 }

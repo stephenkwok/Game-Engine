@@ -10,10 +10,10 @@ public class ClickTrigger extends ITrigger {
 
     private double myX;
     private double myY;
-    private Actor myActor;
+    private IGameElement myGameElement;
 
-    public ClickTrigger(Actor actor) {
-        myActor = actor;
+    public ClickTrigger(IGameElement gameElement) {
+        myGameElement = gameElement;
     }
 
     public ClickTrigger(double x, double y) {
@@ -43,7 +43,7 @@ public class ClickTrigger extends ITrigger {
     @Override
     public boolean evaluate(ITrigger otherTrigger) {
         ClickTrigger otherClick = (ClickTrigger) otherTrigger;
-        return (myActor.getBounds().contains(otherClick.getMyX(), otherClick.getMyY()));
+        return (myGameElement.getBounds().contains(otherClick.getMyX(), otherClick.getMyY()));
     }
 
 }

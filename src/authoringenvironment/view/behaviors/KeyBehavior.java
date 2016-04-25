@@ -8,18 +8,23 @@ import java.util.ResourceBundle;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.Triggers.ITrigger;
 import javafx.scene.input.KeyCode;
+
 /**
- * GUI representation of PressKey behavior, which requires single input in ComboBox form
+ * GUI representation of PressKey behavior, which requires single input in
+ * ComboBox form
+ * 
  * @author AnnieTang
  */
 public class KeyBehavior extends ComboBoxBehavior {
 	private ITrigger myTrigger;
-	
+
 	public KeyBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
 		super(myActorRule, behaviorType, myResources);
 	}
+
 	/**
 	 * Return possible KeyInputs as options for ComboBox
+	 * 
 	 * @return
 	 */
 	@Override
@@ -34,12 +39,13 @@ public class KeyBehavior extends ComboBoxBehavior {
 
 	@Override
 	public void setTriggerOrAction() {
-		setTrigger(this,myTrigger);
+		setTrigger(this, myTrigger);
 	}
+
 	@Override
 	protected void createTriggerOrAction() {
-		if(myTrigger!=null){
-			//remove this trigger from ActorRule
+		if (myTrigger != null) {
+			// remove this trigger from ActorRule
 		}
 		KeyCode keyCode = KeyCode.getKeyCode(getValue());
 		List<Object> arguments = new ArrayList<>();
@@ -47,6 +53,7 @@ public class KeyBehavior extends ComboBoxBehavior {
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
 		setTriggerOrAction();
 	}
+
 	@Override
 	public boolean isTrigger() {
 		return true;

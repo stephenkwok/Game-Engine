@@ -7,22 +7,22 @@ import java.util.Observable;
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
 
-public class Spawn extends Action{
+public class Spawn extends ActorAction{
 
 	public Spawn(IPlayActor actor1) {
 		super(actor1);
 	}
 
 	public void perform() {
-//		spawnedActor.setHeading(getMyActor().getHeading());
-//		spawnedActor.setX(getMyActor().getX());
-//		spawnedActor.setY(getMyActor().getY());
+		// spawnedActor.setHeading(getMyActor().getHeading());
+		// spawnedActor.setX(getMyActor().getX());
+		// spawnedActor.setY(getMyActor().getY());
 		getMyActor().changed();
 		List<Object> myList = new ArrayList<>();
 		myList.add("addActor");
-		//args.add(spawnedActor);
+		// args.add(spawnedActor);
 		System.out.println("In Spawn Action");
-        ((Observable) getMyActor()).notifyObservers(myList);				
+		((Observable) getMyActor()).notifyObservers(myList);
 	}
 
 }

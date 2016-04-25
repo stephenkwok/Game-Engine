@@ -10,12 +10,14 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+
 /**
- * Returns library of available game behaviors, images, and sounds  
+ * Returns library of available game behaviors, images, and sounds
+ * 
  * @author AnnieTang
  *
  */
-public class GUILibrary implements IGUI{
+public class GUILibrary implements IGUI {
 	private static final String LIBRARY_RESOURCE = "library";
 	private static final String IMAGES = "Images";
 	private static final String SOUNDS = "Sounds";
@@ -26,16 +28,17 @@ public class GUILibrary implements IGUI{
 	private TabLibrarySounds soundLib;
 	private TabLibraryBehaviors behaviorLib;
 	private TabPane tp;
-	
-	public GUILibrary(){
+
+	public GUILibrary() {
 		initializeEnvironment();
 	}
+
 	public GUILibrary(ActorRuleCreator myRuleMaker) {
 		this.myActorRuleCreator = myRuleMaker;
 		initializeEnvironment();
 	}
-	
-	private void initializeEnvironment(){
+
+	private void initializeEnvironment() {
 		myResources = ResourceBundle.getBundle(LIBRARY_RESOURCE);
 		myPane = new StackPane();
 		tp = new TabPane();
@@ -51,8 +54,8 @@ public class GUILibrary implements IGUI{
 	public Pane getPane() {
 		return myPane;
 	}
-	
-	public void updateDragEvents(){
+
+	public void updateDragEvents() {
 		imageLib.updateDragEvents(myActorRuleCreator);
 		soundLib.updateDragEvents(myActorRuleCreator);
 		behaviorLib.updateDragEvents(myActorRuleCreator);

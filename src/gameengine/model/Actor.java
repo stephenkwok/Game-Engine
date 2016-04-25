@@ -10,28 +10,29 @@ import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-
 /**
- * This class defines the logic for an Actor object.
- * within the myRules map. When provided with a Trigger object, all actions associated with a particular Trigger
- * are executed. The Actor also extends the ImageView class so they will also be visual elements.
+ * This class defines the logic for an Actor object. within the myRules map.
+ * When provided with a Trigger object, all actions associated with a particular
+ * Trigger are executed. The Actor also extends the ImageView class so they will
+ * also be visual elements.
  *
  * @author blakekaplan
  */
 
 public class Actor extends Observable implements Observer, IPlayActor, IDisplayActor, IAuthoringActor {
 
-    private static final String DEFAULT_NAME = "Default Name";
-    private static final String DEFAULT_IMAGE_NAME = "hellokitty.gif";
-    private double x;
-    private double y;
-    private double veloX;
-    private double veloY;
-    private double myFriction;
-    private String myName;
-    private int myID;
+	private static final String DEFAULT_NAME = "Default Name";
+	private static final String DEFAULT_IMAGE_NAME = "hellokitty.gif";
+	private double x;
+	private double y;
+	private double veloX;
+	private double veloY;
+	private double myFriction;
+	private String myName;
+	private int myID;
 	private String myImageViewName;
 	private double myHeading;
+
     @XStreamOmitField
     private ImageView myImageView;
     private RuleManager myRuleManager;
@@ -190,90 +191,99 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     	myImageView.setX(this.getX());
     	myImageView.setY(this.getY());
 		myImageView.setFitHeight(imageView.getFitHeight());
-    }
+	}
 
-    /**
-     * Provides the Actor's X coordinate
-     * @return  The Actor's X coordinate
-     */
-    @Override
-    public double getX() {
-        return x;
-    }
+	/**
+	 * Provides the Actor's X coordinate
+	 * 
+	 * @return The Actor's X coordinate
+	 */
+	@Override
+	public double getX() {
+		return x;
+	}
 
-    /**
-     * Provides the Actor's Y coordinate
-     * @return  The Actor's Y coordinate
-     */
-    @Override
-    public double getY() {
-    	return y;
-    }
+	/**
+	 * Provides the Actor's Y coordinate
+	 * 
+	 * @return The Actor's Y coordinate
+	 */
+	@Override
+	public double getY() {
+		return y;
+	}
 
-    /**
-     * Provides the Actor's physics engine
-     * @return  The Actor's physics engine
-     */
-    public PhysicsEngine getPhysicsEngine(){
+	/**
+	 * Provides the Actor's physics engine
+	 * 
+	 * @return The Actor's physics engine
+	 */
+	public PhysicsEngine getPhysicsEngine() {
 		return myPhysicsEngine;
 	}
 
-    /**
-     * Provides a string representation of the Actor
-     * @return  A string representation of the Actor
-     */
+	/**
+	 * Provides a string representation of the Actor
+	 * 
+	 * @return A string representation of the Actor
+	 */
 	@Override
-    public String toString() {
+	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 
-	      stringBuilder.append("Actor[ ");
-	      stringBuilder.append("\nname: ");
-	      stringBuilder.append(myName);
-	      stringBuilder.append("\nmyImgName: ");
-	      stringBuilder.append(myImageViewName);
-	      stringBuilder.append("\nmyImg: ");
-	      stringBuilder.append(myImageView);
-	      stringBuilder.append("\nmyRules: ");
-	      stringBuilder.append(getRules().toString());
-	      stringBuilder.append(" ]");
+		stringBuilder.append("Actor[ ");
+		stringBuilder.append("\nname: ");
+		stringBuilder.append(myName);
+		stringBuilder.append("\nmyImgName: ");
+		stringBuilder.append(myImageViewName);
+		stringBuilder.append("\nmyImg: ");
+		stringBuilder.append(myImageView);
+		stringBuilder.append("\nmyRules: ");
+		stringBuilder.append(getRules().toString());
+		stringBuilder.append(" ]");
 
-	      return stringBuilder.toString();
+		return stringBuilder.toString();
 	}
 
-    /**
-     * Provides the Actor's ImageView
-     * @return  The Actor's ImageView
-     */
+	/**
+	 * Provides the Actor's ImageView
+	 * 
+	 * @return The Actor's ImageView
+	 */
 	@Override
-    public String getImageViewName() {
+	public String getImageViewName() {
 		return myImageViewName;
 	}
 
-    /**
-     * Sets the name of the Actor's ImageView
-     * @param myImageViewName   The Actor's ImageView
-     */
+	/**
+	 * Sets the name of the Actor's ImageView
+	 * 
+	 * @param myImageViewName
+	 *            The Actor's ImageView
+	 */
 	public void setImageViewName(String myImageViewName) {
 		this.myImageViewName = myImageViewName;
-        mySprite.setImage(myImageViewName);
-        this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
+		mySprite.setImage(myImageViewName);
+		this.setImageView(
+				new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
 	}
 
-    /**
-     * Sets the Actor as changed
-     */
-    public void changed(){
-        setChanged();
-    }
-    
-    public ImageView getImageView(){
-    	return myImageView;
-    }
-    
-    /**
-     * Provides the Actor's ImageView Bounds
-     * @return  The Actor's ImageView Bounds
-     */
+	/**
+	 * Sets the Actor as changed
+	 */
+	public void changed() {
+		setChanged();
+	}
+
+	public ImageView getImageView() {
+		return myImageView;
+	}
+
+	/**
+	 * Provides the Actor's ImageView Bounds
+	 * 
+	 * @return The Actor's ImageView Bounds
+	 */
 	public Bounds getBounds() {
 		return myImageView.getLayoutBounds();
 	}
@@ -286,51 +296,56 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	}
 
 	/**
-	 * @param myFriction the myFriction to set
+	 * @param myFriction
+	 *            the myFriction to set
 	 */
 	public void setFriction(double myFriction) {
 		this.myFriction = myFriction;
 	}
 
-    /**
-     * Provides the Actor's Rules
-     * @return  The Actor's Rules
-     */
-    public Map<String, List<Rule>> getRules() {
+	/**
+	 * Provides the Actor's Rules
+	 * 
+	 * @return The Actor's Rules
+	 */
+	public Map<String, List<Rule>> getRules() {
 		return myRuleManager.getRules();
 	}
 
-    /**
-     * Sets a new physics engine
-     * @param myPhysicsEngine   The new physics engine
-     */
-    public void setPhysicsEngine(PhysicsEngine myPhysicsEngine) {
+	/**
+	 * Sets a new physics engine
+	 * 
+	 * @param myPhysicsEngine
+	 *            The new physics engine
+	 */
+	public void setPhysicsEngine(PhysicsEngine myPhysicsEngine) {
 		this.myPhysicsEngine = myPhysicsEngine;
 	}
 
-    /**
-     * Sets the Actor's ImageView's size
-     * @param size  The ImageView's size
-     */
+	/**
+	 * Sets the Actor's ImageView's size
+	 * 
+	 * @param size
+	 *            The ImageView's size
+	 */
 	@Override
-    public void setSize(double size){
+	public void setSize(double size) {
 		myImageView.setFitHeight(size);
 		myImageView.setPreserveRatio(true);
 	}
-	
+
 	@Override
-	public boolean checkState(ActorState state){
+	public boolean checkState(ActorState state) {
 		return myStates.contains(state);
 	}
-	
+
 	@Override
-	public void addState(ActorState state){
+	public void addState(ActorState state) {
 		myStates.add(state);
 	}
 
-	
 	@Override
-	public void removeState(ActorState state){
+	public void removeState(ActorState state) {
 		myStates.remove(state);
 	}
 
@@ -340,13 +355,13 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 			setChanged();
 			notifyObservers(arg);
 		}
-//		if(checkState(ActorState.MAIN)){
-//			setChanged();
-//			notifyObservers("updateAttribute");
-//		}
+		// if(checkState(ActorState.MAIN)){
+		// setChanged();
+		// notifyObservers("updateAttribute");
+		// }
 	}
-	
-		public double getSize() {
+
+	public double getSize() {
 		return myImageView.getFitHeight();
 	}
 
@@ -365,37 +380,40 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		return myHeading;
 	}
 
-    @Override
-    public int getID() {
-        return myID;
-    }
+	@Override
+	public int getID() {
+		return myID;
+	}
 
 	@Override
 	public void handleReachedAttribute(AttributeReached trigger) {
 		setChanged();
-		notifyObservers(Arrays.asList(new Object[]{"handleTrigger",trigger}));
+		notifyObservers(Arrays.asList(new Object[] { "handleTrigger", trigger }));
 	}
 
 	@Override
 	public void removeAttribute(Attribute attribute) {
 		myAttributeManager.removeAttribute(attribute);
-		
+
 	}
 
 	@Override
 	public void removeRule(Rule rule) {
 		myRuleManager.removeRule(rule);
-		
+
 	}
 
-    public void setDirection(){
-        if (getHeading() == 0) myImageView.setScaleX(1);
-        else if (getHeading() == 180){ myImageView.setScaleX(-1); }
-    }
+	public void setDirection() {
+		if (getHeading() == 0)
+			myImageView.setScaleX(1);
+		else if (getHeading() == 180) {
+			myImageView.setScaleX(-1);
+		}
+	}
 
-    public void addSpriteImage(String newImage){
-        mySprite.addImage(newImage);
-    }
+	public void addSpriteImage(String newImage) {
+		mySprite.addImage(newImage);
+	}
 
     public void nextImage(){
         myImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getNextImage())));
@@ -417,4 +435,3 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		this.isVisible = isVisible;
 	}
 }
-

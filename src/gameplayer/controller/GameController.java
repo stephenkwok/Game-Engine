@@ -34,8 +34,9 @@ public class GameController implements Observer, IGameController {
 	private GameScreen view;
 	@XStreamOmitField
 	private HUDScreen hud;
-
+	@XStreamOmitField
 	private ResourceBundle myResources;
+	@XStreamOmitField
 	private static final String GAME_CONTROLLER_RESOURCE = "gameActions";
 
 	public GameController(Game game) {
@@ -211,22 +212,22 @@ public class GameController implements Observer, IGameController {
 	public void update(Observable o, Object arg) {
 		List<Object> myList = (List<Object>) arg;
 		String methodName = (String) myList.get(0);
-//		System.out.println(methodName);
-//		System.out.println(methodName.equals("addActor"));
+
 		try {
 			if(methodName.equals("addActor")){ //TODO: Change to reflection, pass in Actor object from arg.get(1)
-				this.addActor(new Actor());
+				this.addActor((Actor)myList.get(1));
 			}else
 			if (myResources.getString(methodName).equals("null")) {
 				this.getClass().getDeclaredMethod(methodName).invoke(this);
 			} else if (myResources.getString(methodName).equals("String")) {
 				this.getClass().getDeclaredMethod(methodName, String.class).invoke(this, (String) myList.get(1));
-			}else{
+			} else {
 				Class<?> myClass = Class.forName(myResources.getString(methodName));
 				Object arg2 = myClass.cast(myList.get(1));
 				model.getClass().getDeclaredMethod(methodName, myClass).invoke(model, arg2);
 			}
-		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e1) {
+		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException
+				| InvocationTargetException | NoSuchMethodException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
@@ -260,12 +261,12 @@ public class GameController implements Observer, IGameController {
 		System.out.println(model.getInfo().getMyCurrentLevelNum() + " game level");
 		initialize(model.getInfo().getMyCurrentLevelNum());
 	}
-	
-	public void updateCamera(){
-		if(model.getCurrentLevel().getMainCharacter()!=null){
-			if(model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))){
+
+	public void updateCamera() {
+		if (model.getCurrentLevel().getMainCharacter() != null) {
+			if (model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))) {
 				view.changeCamera(model.getCurrentLevel().getMainCharacter().getX(), 0);
-			}else{
+			} else {
 				view.changeCamera(0, model.getCurrentLevel().getMainCharacter().getY());
 			}
 		}

@@ -16,7 +16,7 @@ public class PopUpSimpleErrorMessage extends PopUpParent {
 	private String myErrorMessage;
 	private Button myCloseButton;
 	private Label myLabel;
-	
+
 	public PopUpSimpleErrorMessage(int popUpWidth, int popUpHeight, String buttonText, String errorMessage) {
 		super(popUpWidth, popUpHeight);
 		myButtonText = buttonText;
@@ -24,7 +24,7 @@ public class PopUpSimpleErrorMessage extends PopUpParent {
 		initializePopUp();
 		bindChildrenWidthsToContainerWidth();
 	}
-	
+
 	/**
 	 * Initializes the pop up
 	 */
@@ -33,7 +33,7 @@ public class PopUpSimpleErrorMessage extends PopUpParent {
 		initializeCloseButton();
 		addNodesToPopUp();
 	}
-	
+
 	/**
 	 * Initializes the Label that will display the error message
 	 */
@@ -41,7 +41,7 @@ public class PopUpSimpleErrorMessage extends PopUpParent {
 		myLabel = new Label(myErrorMessage);
 		myLabel.setAlignment(Pos.CENTER);
 	}
-	
+
 	/**
 	 * Initializes the Button that will close the pop up on click
 	 */
@@ -49,7 +49,7 @@ public class PopUpSimpleErrorMessage extends PopUpParent {
 		myCloseButton = new Button(myButtonText);
 		myCloseButton.setOnAction(e -> closePopUp());
 	}
-	
+
 	/**
 	 * Adds nodes created to parent container
 	 */

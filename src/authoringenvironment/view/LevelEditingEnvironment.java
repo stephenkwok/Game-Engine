@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 
 /**
  * Level editing environment
+ * 
  * @author amyzhao
  *
  */
@@ -42,13 +43,17 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private Stage myStage;
 	private Controller myController;
 	private LevelPreview myLevelPreview;
- 
+
 	/**
 	 * Constructor for a level editing environment.
-	 * @param controller: authoring environment controller.
-	 * @param actors: list of currently available actors.
+	 * 
+	 * @param controller:
+	 *            authoring environment controller.
+	 * @param actors:
+	 *            list of currently available actors.
 	 */
-	public LevelEditingEnvironment(Map<IAuthoringActor, List<IAuthoringActor>> actors, Stage stage, Controller controller) {
+	public LevelEditingEnvironment(Map<IAuthoringActor, List<IAuthoringActor>> actors, Stage stage,
+			Controller controller) {
 		myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		availableActors = actors;
 		myRoot = new BorderPane();
@@ -58,8 +63,8 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	}
 
 	/**
-	 * Initializes the level editing environment's center pane and left pane, as well as the ability to drag actors between
-	 * the left and center pane.
+	 * Initializes the level editing environment's center pane and left pane, as
+	 * well as the ability to drag actors between the left and center pane.
 	 */
 	private void initializeEnvironment() {
 		myRoot.setStyle("-fx-background-color: darkgray");
@@ -69,7 +74,8 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	}
 
 	/**
-	 * Initializes the left pane with a level inspector and an image/sound library.
+	 * Initializes the left pane with a level inspector and an image/sound
+	 * library.
 	 */
 	private void initializeLeftPane() {
 		myLeftPane = new VBox();
@@ -83,9 +89,10 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		myLeftPane.getChildren().add(myInspector.getPane());
 		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
 	}
-	
+
 	/**
-	 * Updates the drag behavior of the level editing environment to accommodate updates to currently available actors.
+	 * Updates the drag behavior of the level editing environment to accommodate
+	 * updates to currently available actors.
 	 */
 	private void updateDrag() {
 		List<ImageviewActorIcon> icons = myInspector.getActorsTab().getIcons();
@@ -95,25 +102,28 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 			ImageviewActorIcon source = icons.get(i);
 			setDragDetected(source);
 			source.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			    @Override
-			    public void handle(MouseEvent mouseEvent) {
-			        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-			            if(mouseEvent.getClickCount() == 2){
-			                System.out.println("Double clicked");
-			                myController.goToEditingEnvironment(source.getRefActor(), myController.getActorEditingEnvironment());
-			            }
-			        }
-			    }
+				@Override
+				public void handle(MouseEvent mouseEvent) {
+					if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+						if (mouseEvent.getClickCount() == 2) {
+							System.out.println("Double clicked");
+							myController.goToEditingEnvironment(source.getRefActor(),
+									myController.getActorEditingEnvironment());
+						}
+					}
+				}
 			});
 		}
 	}
 
 	/**
 	 * Start drag and drop when drag is detected.
-	 * @param source: node to be dragged.
+	 * 
+	 * @param source:
+	 *            node to be dragged.
 	 */
 	private void setDragDetected(ImageviewActorIcon source) {
-		source.setOnDragDetected(new EventHandler <MouseEvent>() {
+		source.setOnDragDetected(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				Dragboard db = source.startDragAndDrop(TransferMode.ANY);
 				ClipboardContent content = new ClipboardContent();
@@ -128,10 +138,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 * When dragged over the center pane, copy the gesture source.
 	 */
 	private void setCenterPaneDragOver() {
-		myLevelPreview.getLevelPane().setOnDragOver(new EventHandler <DragEvent>() {
+		myLevelPreview.getLevelPane().setOnDragOver(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
-			if (event.getGestureSource() != myLevelPreview.getLevelPane() &&
-						event.getDragboard().hasString()) {
+				if (event.getGestureSource() != myLevelPreview.getLevelPane() && event.getDragboard().hasString()) {
 					event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
 				}
 				event.consume();
@@ -140,11 +149,12 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	}
 
 	/**
-	 * When an actor icon is dropped on the center pane, add its actor to the center pane and set the actor so that it moves
-	 * in response to mouse drags.
+	 * When an actor icon is dropped on the center pane, add its actor to the
+	 * center pane and set the actor so that it moves in response to mouse
+	 * drags.
 	 */
 	private void setCenterPaneDragDropped() {
-		myLevelPreview.getLevelPane().setOnDragDropped(new EventHandler <DragEvent>() {
+		myLevelPreview.getLevelPane().setOnDragDropped(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
 				boolean success = false;
@@ -165,10 +175,12 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 			}
 		});
 	}
-	
+
 	/**
 	 * Gets an actor by its ID.
-	 * @param id: ID of actor of interest.
+	 * 
+	 * @param id:
+	 *            ID of actor of interest.
 	 * @return actor with given ID.
 	 */
 	private ImageviewActorIcon getIconById(int id) {
@@ -199,7 +211,8 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	}
 
 	/**
-	 * Update the level that is being edited and update the level inspector to reflect the current level.
+	 * Update the level that is being edited and update the level inspector to
+	 * reflect the current level.
 	 */
 	@Override
 	public void setEditableElement(IEditableGameElement editable) {
@@ -208,14 +221,17 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		updateActorsList();
 		myInspector.getAttributesTab().updateEditable(myLevel);
 	}
-	
+
 	public void changeBackgroundImage(Image image, File imageFile) {
 		myLevelPreview.changeBackgroundImage(image, imageFile);
 	}
 
 	/**
-	 * Update the list of available actors and update the level inspector to reflect the currently available actors.
-	 * @param updatedActorsList: up-to-date list of available actors.
+	 * Update the list of available actors and update the level inspector to
+	 * reflect the currently available actors.
+	 * 
+	 * @param updatedActorsList:
+	 *            up-to-date list of available actors.
 	 */
 	public void updateActorsList() {
 		myInspector.getActorsTab().setAvailableActors(availableActors.keySet());
@@ -225,7 +241,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	public Level getLevel() {
 		return myLevel;
 	}
-	
+
 	@Override
 	public Stage getStage() {
 		return myStage;
@@ -240,7 +256,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 			myLevelPreview.addLevelActorsToScene();
 		}
 	}
-	
+
 	public Controller getController() {
 		return myController;
 	}
