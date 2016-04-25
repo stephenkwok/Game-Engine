@@ -1,7 +1,6 @@
 package gui.view;
 
-
-public class ButtonOpenHighScores extends ButtonParent{
+public class ButtonOpenHighScores extends ButtonParent {
 
 	public ButtonOpenHighScores(String buttonText, String imageName) {
 		super(buttonText, imageName);
@@ -13,7 +12,7 @@ public class ButtonOpenHighScores extends ButtonParent{
 			setChanged();
 			notifyObservers("ButtonOpenHighScores");
 		});
-		
+
 	}
 
 }

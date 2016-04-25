@@ -7,12 +7,11 @@ import gui.view.ComboBoxGame;
 import gui.view.Screen;
 import javafx.scene.layout.HBox;
 
-
 public class FileChooserScreen extends Screen implements Observer {
 
 	private static final String CHOOSER_RESOURCE = "fcGUI";
 	private static final String FC_BUTTONS = "FCButtons";
-	
+
 	public FileChooserScreen() {
 		super();
 		setUpResourceBundle(CHOOSER_RESOURCE);
@@ -29,17 +28,16 @@ public class FileChooserScreen extends Screen implements Observer {
 		ComboBoxGame fileSelector = new ComboBoxGame("Choose Game", "gamefiles");
 		fileSelector.addNodeObserver(this);
 		HBox myBox = (HBox) fileSelector.createNode();
-		myBox.setLayoutX(SCREEN_WIDTH/2 - 100);
-		myBox.setLayoutY(SCREEN_HEIGHT/2);
+		myBox.setLayoutX(SCREEN_WIDTH / 2 - 100);
+		myBox.setLayoutY(SCREEN_HEIGHT / 2);
 		getRoot().getChildren().add(myBox);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		setChanged();
-		Object[] methodArgPair = {o, arg};
+		Object[] methodArgPair = { o, arg };
 		notifyObservers(Arrays.asList(methodArgPair));
 	}
-
 
 }

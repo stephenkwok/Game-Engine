@@ -21,18 +21,20 @@ import javafx.scene.paint.Color;
  */
 
 public class SplashScreen extends Screen implements Observer {
-	
+
 	private static final String SPLASH_RESOURCE = "splashGUI";
 	private static final String BUTTONS_ID = "buttonID";
 	private static final int PADDING = 200;
-	
+
 	/**
-	 * initializes a hbox with buttons to facilitate transitions to the various parts of the program
+	 * initializes a hbox with buttons to facilitate transitions to the various
+	 * parts of the program
+	 * 
 	 * @param stage
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
+	 * @throws InvocationTargetException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
 	 */
 	public SplashScreen() {
 		super();
@@ -50,14 +52,16 @@ public class SplashScreen extends Screen implements Observer {
 				| InvocationTargetException e) {
 			showError(e.getMessage());
 		}
-		//TODO Magic constant
+		// TODO Magic constant
 		hbox.setLayoutY(getScene().getHeight() / 6);
 		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		addToScene(hbox);
 	}
 
 	/**
-	 * creates three buttons to change the scene to the user's choice of environment
+	 * creates three buttons to change the scene to the user's choice of
+	 * environment
+	 * 
 	 * @param hbox
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
@@ -79,7 +83,5 @@ public class SplashScreen extends Screen implements Observer {
 		setChanged();
 		notifyObservers(arg);
 	}
-
-
 
 }

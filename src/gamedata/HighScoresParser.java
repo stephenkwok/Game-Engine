@@ -25,43 +25,55 @@ import com.thoughtworks.xstream.XStream;
 import gameengine.controller.HighScoresKeeper;
 
 /**
- * The purpose of this class is to serve as the public interface for the HighScoresController, which will take information from an XML file to display high scores.
+ * The purpose of this class is to serve as the public interface for the
+ * HighScoresController, which will take information from an XML file to display
+ * high scores.
+ * 
  * @author cmt57
  *
  */
 
-
 public class HighScoresParser {
-	
+
 	private XStream myXStream;
-	
-	public HighScoresParser () { 
+
+	public HighScoresParser() {
 		myXStream = new XStream();
 		myXStream.autodetectAnnotations(true);
 	}
-	
+
 	/**
-	 * Will read through an XML file of the form highScores.XML and produce a map linking a game type to a map of that game's users linked to their high scores.
-	 * @param filename a string name representing the file of high scores to read from
+	 * Will read through an XML file of the form highScores.XML and produce a
+	 * map linking a game type to a map of that game's users linked to their
+	 * high scores.
+	 * 
+	 * @param filename
+	 *            a string name representing the file of high scores to read
+	 *            from
 	 * @return a map of games to their high scores maps (linking user to score)
-	 * @throws TransformerException 
-	 * @throws IOException 
-	 * @throws SAXException 
-	 * @throws ParserConfigurationException 
+	 * @throws TransformerException
+	 * @throws IOException
+	 * @throws SAXException
+	 * @throws ParserConfigurationException
 	 */
-	public Map<String, Map<String, Integer>> getHighScoreInfo (File file) throws ParserConfigurationException, SAXException, IOException, TransformerException {
+	public Map<String, Map<String, Integer>> getHighScoreInfo(File file)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		HighScoresKeeper highScoresKeeper;
-		if (checkIfFileEmpty(file)) {
+		if (file == null) {
+			System.out.println("NULLY NULL");
 			highScoresKeeper = new HighScoresKeeper();
-		}
-		else {
+		} else if (checkIfFileEmpty(file)) {
+			System.out.println("EMPTY EMPT");
+			highScoresKeeper = new HighScoresKeeper();
+		} else {
 			String xml = convertFileToString(file);
 			highScoresKeeper = (HighScoresKeeper) myXStream.fromXML(xml);
 		}
 		return highScoresKeeper.getMyScores();
 	}
-	
-	private String convertFileToString(File file) throws ParserConfigurationException, SAXException, IOException, TransformerException {
+
+	private String convertFileToString(File file)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		Document document = convertFileToDocument(file);
 		TransformerFactory factory = TransformerFactory.newInstance();
 		Transformer transformer = factory.newTransformer();
@@ -71,7 +83,7 @@ public class HighScoresParser {
 		String xml = writer.getBuffer().toString();
 		return xml;
 	}
-	
+
 	private Document convertFileToDocument(File file) throws ParserConfigurationException, SAXException, IOException {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -79,13 +91,13 @@ public class HighScoresParser {
 		document.getDocumentElement().normalize();
 		return document;
 	}
-	
-	private boolean checkIfFileEmpty(File file) throws ParserConfigurationException, SAXException, IOException, TransformerException{
+
+	private boolean checkIfFileEmpty(File file)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		String xml = convertFileToString(file);
 		if (xml.length() == 0) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}

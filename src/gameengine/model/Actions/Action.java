@@ -1,14 +1,16 @@
 package gameengine.model.Actions;
 
-
+import gameengine.model.Actor;
+import gameengine.model.IAction;
+import gameengine.model.IPlayActor;
+import gameengine.model.PhysicsEngine;
 import gameengine.controller.IGame;
 import gameengine.model.*;
 
-
 /**
- * This class defines the generalized behavior of an Action object.
- * Since the Action class is abstract, the perform function will have to be implemented in a manner specific to the
- * type of action.
+ * This class defines the generalized behavior of an Action object. Since the
+ * Action class is abstract, the perform function will have to be implemented in
+ * a manner specific to the type of action.
  *
  * @author blakekaplan
  */
@@ -44,5 +46,4 @@ public abstract class Action implements IAction {
     	myGameElement = actor;
     }
 
-    
 }

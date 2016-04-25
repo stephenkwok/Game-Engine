@@ -2,6 +2,7 @@ package gui.view;
 
 /**
  * On click, saves the game and returns user to the game player splash screen.
+ * 
  * @author AnnieTang
  *
  */

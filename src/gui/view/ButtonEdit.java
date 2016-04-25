@@ -1,7 +1,6 @@
 package gui.view;
 
-
-public class ButtonEdit extends ButtonParent{
+public class ButtonEdit extends ButtonParent {
 
 	public ButtonEdit(String buttonText, String imageName) {
 		super(buttonText, imageName);

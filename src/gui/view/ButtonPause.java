@@ -3,7 +3,7 @@ package gui.view;
 import gameplayer.controller.BaseScreenController;
 
 public class ButtonPause extends ButtonParent {
-	
+
 	private BaseScreenController myControl;
 
 	public ButtonPause(String buttonText, String imageName) {
@@ -16,7 +16,7 @@ public class ButtonPause extends ButtonParent {
 			setChanged();
 			notifyObservers();
 		});
-		
+
 	}
 
 }

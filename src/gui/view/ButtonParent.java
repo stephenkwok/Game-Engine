@@ -6,8 +6,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 /**
  * Abstract class to implement JavaFX Buttons
+ * 
  * @author AnnieTang
  *
  */
@@ -18,41 +20,43 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
 	private Button button;
 	private String imageName;
 	private int iconSize;
-	
+
 	public ButtonParent(String buttonText, String imageName) {
 		this.buttonText = buttonText;
 		this.imageName = imageName;
 		this.iconSize = ICON_SIZE;
 		initializeButton();
 	}
-	
+
 	private void initializeButton() {
 		button = new Button(buttonText);
-		button.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
+		button.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
 		setButtonIcon();
 		setButtonAction();
 	}
+
 	/**
 	 *
 	 * Creates and returns button
 	 */
 	@Override
-	public Node createNode()  {
+	public Node createNode() {
 		return button;
 	}
-	
+
 	public void addNodeObserver(Observer observer) {
 		addObserver(observer);
 	}
+
 	/**
-	 * Sets action when button is pressed. 
+	 * Sets action when button is pressed.
 	 */
 	protected abstract void setButtonAction();
-	
+
 	/**
 	 * Optional, sets image for button.
 	 */
-	protected void setButtonIcon(){
+	protected void setButtonIcon() {
 		if (imageName != null) {
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 			ImageView iv = new ImageView(image);
@@ -61,30 +65,34 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
 			button.setGraphic(iv);
 		}
 	}
-	
-    
-    /**
-     * Gets the button.
-     * @return button.
-     */
-    protected Button getButton() {
-    	return button;
-    }
-    
-    /**
-     * Sets the button's image's name
-     * @param newImageName: name of button's new image
-     */
-    protected void setImageName(String newImageName) {
-    	imageName = newImageName;
-    }
-    
-    /**
-     * Sets the button's icon size
-     * @param size: size to set button's icon to
-     */
-    protected void setIconSize(int size) {
-    	iconSize = size;
-    }
+
+	/**
+	 * Gets the button.
+	 * 
+	 * @return button.
+	 */
+	protected Button getButton() {
+		return button;
+	}
+
+	/**
+	 * Sets the button's image's name
+	 * 
+	 * @param newImageName:
+	 *            name of button's new image
+	 */
+	protected void setImageName(String newImageName) {
+		imageName = newImageName;
+	}
+
+	/**
+	 * Sets the button's icon size
+	 * 
+	 * @param size:
+	 *            size to set button's icon to
+	 */
+	protected void setIconSize(int size) {
+		iconSize = size;
+	}
 
 }

@@ -15,8 +15,9 @@ public class CollisionBehavior extends SelectEditableBehavior {
 	private IAuthoringActor otherActor;
 	private ITrigger myTrigger;
 	private IAuthoringActor myActor;
-	
-	public CollisionBehavior(ActorRule myActorRule, String behaviorType, IAuthoringActor myActor, ResourceBundle myResources, List<IAuthoringActor> myActors) {
+
+	public CollisionBehavior(ActorRule myActorRule, String behaviorType, IAuthoringActor myActor,
+			ResourceBundle myResources, List<IAuthoringActor> myActors) {
 		super(myActorRule, behaviorType, myResources);
 		this.myActors = myActors;
 		this.myActor = myActor;
@@ -30,7 +31,7 @@ public class CollisionBehavior extends SelectEditableBehavior {
 	@Override
 	List<IEditableGameElement> getOptionsList() {
 		List<IEditableGameElement> toReturn = new ArrayList<>();
-		for(IAuthoringActor actor: myActors){
+		for (IAuthoringActor actor : myActors) {
 			toReturn.add(actor);
 		}
 		return toReturn;

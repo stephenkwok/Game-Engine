@@ -10,7 +10,7 @@ public class GlideBackward extends GlidingAction {
 
 	@Override
 	public void perform() {
-    	getMyActor().getPhysicsEngine().glideBackward(getMyActor());			
+		getMyActor().getPhysicsEngine().glideBackward(getMyActor());
 	}
 
 }

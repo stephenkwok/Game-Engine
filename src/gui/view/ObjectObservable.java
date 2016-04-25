@@ -3,8 +3,8 @@ package gui.view;
 import java.util.Observable;
 
 /**
- * This abstract class overrides Observable's notifyObservers() method so
- * that setChanged() is implicitly called when subclasses call notifyObservers()
+ * This abstract class overrides Observable's notifyObservers() method so that
+ * setChanged() is implicitly called when subclasses call notifyObservers()
  * 
  * @author Stephen
  *
@@ -20,5 +20,5 @@ public abstract class ObjectObservable extends Observable {
 		setChanged();
 		super.notifyObservers(objectToPassToObserver);
 	}
-	
+
 }

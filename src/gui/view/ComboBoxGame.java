@@ -19,7 +19,7 @@ public class ComboBoxGame extends ComboBoxImageCell {
 
 	private static final int STANDARD_IMAGE_HEIGHT = 50;
 	private Map<String, Game> myGames;
-	
+
 	public ComboBoxGame(String promptText, String imageResource) {
 		super(promptText, imageResource, STANDARD_IMAGE_HEIGHT);
 		this.myGames = new HashMap<>();
@@ -34,30 +34,30 @@ public class ComboBoxGame extends ComboBoxImageCell {
 			this.setChanged();
 			this.notifyObservers(myGames.get(getComboBox().getValue()));
 		});
-		
+
 	}
 
 	private void getGames() {
-		//TODO implement error checking
+		// TODO implement error checking
 		File gameFileDir = new File(selectionResource);
-		for(File gameFile: gameFileDir.listFiles()) {
-			if(!gameFile.isDirectory()) {
+		for (File gameFile : gameFileDir.listFiles()) {
+			if (!gameFile.isDirectory()) {
 				ParserController parserController = new ParserController();
 				Game game = parserController.loadforPlaying(gameFile);
-				myGames.put(gameFile.getPath(),game);
+				myGames.put(gameFile.getPath(), game);
 			}
 		}
-		if(myGames.keySet().isEmpty()) {
-			
+		if (myGames.keySet().isEmpty()) {
+
 		}
 	}
-	
+
 	@Override
 	public void fillImageNames() {
-		for (Game game: myGames.values()) {
+		for (Game game : myGames.values()) {
 			imageNames.add(game.getInfo().getMyImageName());
 		}
-		
+
 	}
 
 	@Override
@@ -69,11 +69,11 @@ public class ComboBoxGame extends ComboBoxImageCell {
 		hbox.getChildren().addAll(imageMap.get(game.getInfo().getMyImageName()), vbox);
 		return hbox;
 	}
-	
-	@Override 
+
+	@Override
 	public List<String> getOptionsList() {
 		List<String> myGamePaths = new ArrayList<>();
-		for (String path: myGames.keySet()) {
+		for (String path : myGames.keySet()) {
 			myGamePaths.add(path);
 		}
 		return myGamePaths;
@@ -82,7 +82,7 @@ public class ComboBoxGame extends ComboBoxImageCell {
 	@Override
 	protected void updateValueBasedOnEditable() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

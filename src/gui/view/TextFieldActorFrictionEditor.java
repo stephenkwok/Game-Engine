@@ -8,9 +8,11 @@ public class TextFieldActorFrictionEditor extends TextFieldWithButton {
 		super(labelText, promptText, textFieldWidth);
 		setButtonAction(e -> {
 			((IAuthoringActor) getEditableElement()).setFriction(Double.parseDouble(getTextFieldInput()));
-			setChanged(); notifyObservers((IAuthoringActor) getEditableElement());
+			setChanged();
+			notifyObservers((IAuthoringActor) getEditableElement());
 		});
 	}
+
 	/**
 	 * Sets the textfield's value to reflect the current actor's friction.
 	 */

@@ -1,5 +1,4 @@
-	package gameengine.model.Actions;
-
+package gameengine.model.Actions;
 
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
@@ -13,17 +12,17 @@ import java.util.List;
  */
 public class MoveLeft extends MovingAction {
 
-    private static final double LEFT_DIRECTION = 180;
+	private static final double LEFT_DIRECTION = 180;
 
-    public MoveLeft(IPlayActor actor) {
-        super(actor);
-    }
+	public MoveLeft(IPlayActor actor) {
+		super(actor);
+	}
 
-    @Override
+	@Override
 
-    public void perform() {
-        getMyActor().getPhysicsEngine().moveLeft(getMyActor());
-        getMyActor().setHeading(180);
-        getMyActor().setDirection();
-    }
+	public void perform() {
+		getMyActor().getPhysicsEngine().moveLeft(getMyActor());
+		getMyActor().setHeading(180);
+		getMyActor().setDirection();
+	}
 }

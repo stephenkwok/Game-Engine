@@ -32,8 +32,10 @@ public class CheckBoxesHUDOptions extends Observable implements IGUIElement, IEd
 	/**
 	 * Constructs a CheckBoxesHUDOptions object for the given GameInfo object.
 	 * 
-	 * @param gameInfo: GameInfo object.
-	 * @param controller: controller for the authoring environment.
+	 * @param gameInfo:
+	 *            GameInfo object.
+	 * @param controller:
+	 *            controller for the authoring environment.
 	 */
 	public CheckBoxesHUDOptions(IEditableGameElement gameInfo) {
 		this.myGameInfo = gameInfo;
@@ -47,8 +49,10 @@ public class CheckBoxesHUDOptions extends Observable implements IGUIElement, IEd
 	/**
 	 * Initializes the VBox containing the HUD checkboxes.
 	 * 
-	 * @param key: key in resource file for the checkboxes to add.
-	 * @param vbox: vbox to add checkboxes into.
+	 * @param key:
+	 *            key in resource file for the checkboxes to add.
+	 * @param vbox:
+	 *            vbox to add checkboxes into.
 	 */
 	private void initializeHUD(String key, VBox vbox) {
 		vbox.getChildren().add(new Label(HUD_PROMPT));
@@ -68,8 +72,10 @@ public class CheckBoxesHUDOptions extends Observable implements IGUIElement, IEd
 	/**
 	 * Add checkbox elements to the vbox.
 	 * 
-	 * @param key: key in resource file for elements to add.
-	 * @param vbox: container to add checkboxes to.
+	 * @param key:
+	 *            key in resource file for elements to add.
+	 * @param vbox:
+	 *            container to add checkboxes to.
 	 * @return list of elements added.
 	 */
 	private List<Node> addElements(String key, VBox vbox) {

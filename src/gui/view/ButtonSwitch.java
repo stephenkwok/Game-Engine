@@ -2,7 +2,6 @@ package gui.view;
 
 public class ButtonSwitch extends ButtonParent {
 
-
 	public ButtonSwitch(String buttonText, String imageName) {
 		super(buttonText, imageName);
 	}
@@ -13,7 +12,7 @@ public class ButtonSwitch extends ButtonParent {
 			setChanged();
 			notifyObservers();
 		});
-		
+
 	}
 
 }

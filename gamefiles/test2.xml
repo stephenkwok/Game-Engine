@@ -44,7 +44,7 @@
                       <myKey>Down</myKey>
                       <myKeyCode>DOWN</myKeyCode>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.MoveForward">
+                    <myAction class="gameengine.model.Actions.GlideForward">
                       <myActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
                     <ID>0</ID>
@@ -1039,7 +1039,7 @@
                         <isVisible>true</isVisible>
                       </myCollisionActor>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.WinGame">
+                    <myAction class="gameengine.model.Actions.LoseGame">
                       <myActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
                     <ID>0</ID>
@@ -1456,7 +1456,7 @@
       <myWidth>1024.0</myWidth>
       <myPlayPosition>0</myPlayPosition>
       <myScrollingDirection>Horizontally</myScrollingDirection>
-      <myBackgroundImgName>mariobackground.png</myBackgroundImgName>
+      <myBackgroundImgName>vgnwpGb.png</myBackgroundImgName>
       <myRuleManager>
         <myRules/>
       </myRuleManager>
@@ -1554,7 +1554,11 @@
       </accessibleRole>
       <image class="javafx.scene.image.ImageView$1">
         <value class="javafx.scene.image.Image">
+<<<<<<< HEAD
+          <url>file:/Users/Michelle/Documents/workspace/voogasalad_LoopsGoatCheeseSalad/bin/default_game.jpg</url>
+=======
           <url>file:/C:/Users/Stephen/workspace/voogasalad_LoopsGoatCheeseSalad/bin/default_game.jpg</url>
+>>>>>>> 6a9fd24da98957a3cee5514258d62e5045e10e8d
           <progress>
             <value>1.0</value>
             <valid>true</valid>
@@ -1777,7 +1781,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
                 <int>0</int>
               </serial>
             </value>
-            <valid>true</valid>
             <outer-class reference="../.."/>
           </platformImage>
         </value>
