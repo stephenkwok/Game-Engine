@@ -52,6 +52,12 @@ public class FileChooserController extends BranchScreenController {
 		Controller GUIMainController = new Controller(game, getStage());
 	}
 
+	private void go(Game game) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException,
+			NoSuchMethodException, SecurityException {
+		Class[] parameterTypes = { Game.class };
+		this.getClass().getDeclaredMethod("go" + myType.toString(), parameterTypes).invoke(this, game);
+	}
+
 	private void handleButton(String buttonName) throws IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException, SecurityException, NoSuchMethodException {
 		String method = myResources.getString(buttonName);
@@ -83,17 +89,27 @@ public class FileChooserController extends BranchScreenController {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		List<Object> nodeArg = (List<Object>) arg;
+		List<Object> myList = (List<Object>) arg;
+		String methodName = (String) myList.get(0);
 		try {
-			if (nodeArg.get(NODE) instanceof ButtonParent) {
-				handleButton(nodeArg.get(NODE).getClass().getSimpleName());
+			if (myResources.getString(methodName).equals("null")) {
+				this.getClass().getDeclaredMethod(methodName).invoke(this);
 			} else {
-				handleComboBox(nodeArg);
+				Class<?> myClass = Class.forName(myResources.getString(methodName));
+				Object arg2 = myClass.cast(myList.get(1));
+				Class[] parameterTypes = { myClass };
+				this.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(this, arg2);
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
-				| SecurityException e) {
-			e.printStackTrace();
-			this.myScreen.showError(e.getMessage());
+				| SecurityException | ClassNotFoundException e) {
+			try {
+				this.getClass().getSuperclass().getDeclaredMethod(methodName).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
 		}
 	}
 }

@@ -36,6 +36,7 @@ public class GameController implements Observer, IGameController {
 	private HUDScreen hud;
 	@XStreamOmitField
 	private ResourceBundle myResources;
+	@XStreamOmitField
 	private static final String GAME_CONTROLLER_RESOURCE = "gameActions";
 
 	public GameController(Game game) {
