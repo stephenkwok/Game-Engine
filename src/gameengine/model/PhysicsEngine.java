@@ -79,7 +79,8 @@ public class PhysicsEngine {
 	}
 	
 	private double bound(double pos){
-		if(pos<0){ return 0; } return pos; }
+		if(pos<0){ gravity = 0;
+			return 0; } return pos; }
 	
 	private double limitVelo(double velo){
 		if(Math.abs(velo)>maxVelo){return maxVelo;} return velo;}

@@ -1,4 +1,4 @@
-package utilities.hud;
+package Utilities.HUD;
 
 import javafx.application.Application;
 import javafx.scene.Group;

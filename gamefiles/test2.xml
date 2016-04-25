@@ -1478,11 +1478,7 @@
       </accessibleRole>
       <image class="javafx.scene.image.ImageView$1">
         <value class="javafx.scene.image.Image">
-<<<<<<< HEAD
           <url>file:/Users/Michelle/Documents/workspace/voogasalad_LoopsGoatCheeseSalad/bin/default_game.jpg</url>
-=======
-          <url>file:/Users/bobby_mac/Documents/workspace/voogasalad_LoopsGoatCheeseSalad/bin/default_game.jpg</url>
->>>>>>> 862a054e538d27f74f63e89924a319118c2f0057
           <progress>
             <value>1.0</value>
             <valid>true</valid>
