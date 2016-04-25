@@ -1080,6 +1080,62 @@
                     </myAction>
                     <ID>0</ID>
                   </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.TickTrigger">
+                      <myInterval>220</myInterval>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.CreateActor">
+                      <myActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <copier>
+                        <myReferenceActor>
+                          <changed>false</changed>
+                          <obs/>
+                          <x>0.0</x>
+                          <y>0.0</y>
+                          <veloX>0.0</veloX>
+                          <veloY>0.0</veloY>
+                          <myFriction>0.0</myFriction>
+                          <myName>Default Name</myName>
+                          <myID>10</myID>
+                          <myImageViewName>pipes.png</myImageViewName>
+                          <myHeading>0.0</myHeading>
+                          <myRuleManager>
+                            <myRules>
+                              <entry>
+                                <string>Tick</string>
+                                <list>
+                                  <gameengine.model.Rule>
+                                    <myTrigger class="gameengine.model.Triggers.TickTrigger">
+                                      <myInterval>45</myInterval>
+                                    </myTrigger>
+                                    <myAction class="gameengine.model.Actions.MoveRight">
+                                      <myActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    </myAction>
+                                    <ID>0</ID>
+                                  </gameengine.model.Rule>
+                                </list>
+                              </entry>
+                            </myRules>
+                          </myRuleManager>
+                          <myAttributeManager>
+                            <attributeMap/>
+                          </myAttributeManager>
+                          <myStates/>
+                          <mySprite>
+                            <myImages>
+                              <string>pipes.png</string>
+                            </myImages>
+                            <spriteIndex>0</spriteIndex>
+                          </mySprite>
+                          <isMainPlayer>false</isMainPlayer>
+                          <isVisible>true</isVisible>
+                        </myReferenceActor>
+                      </copier>
+                      <myX>0.0</myX>
+                      <myY>0.0</myY>
+                    </myAction>
+                    <ID>0</ID>
+                  </gameengine.model.Rule>
                 </list>
               </entry>
               <entry>
