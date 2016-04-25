@@ -2,7 +2,7 @@ package gameengine.model;
 
 import gameengine.model.Triggers.AttributeReached;
 import java.util.*;
-import Utilities.HUD.Property;
+import utilities.hud.Property;
 
 /**
  * This class is purposed to store properties belonging to an actor that are updated throughout the game 
@@ -61,4 +61,11 @@ public class Attribute extends Observable {
     public AttributeType getMyType() {
         return myType;
     }
+    
+    
+    public Property getProperty() {
+    	return myValue;
+    }
+    
+    
 }

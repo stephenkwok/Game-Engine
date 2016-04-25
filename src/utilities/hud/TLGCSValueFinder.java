@@ -13,7 +13,7 @@ public class TLGCSValueFinder implements IValueFinder {
 		Property ret = null;
 		switch (key.toLowerCase()) {
 			case "points":
-				//ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS);
+				ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getProperty();
 				break;
 			case "health":
 				//reflection here to save LOC?

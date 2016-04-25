@@ -443,12 +443,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		return levelEnvironment;
 	}
 
-<<<<<<< HEAD
 	@Override
 	public void setHUDInfoFile(String location) {
 		game.setHUDInfoFile(location);
 		
 	}
-=======
->>>>>>> master
 }
