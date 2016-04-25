@@ -25,7 +25,6 @@ public class ActorCopier {
 	
 	public ActorCopier(Actor actor) {
 		myReferenceActor = actor;
-		myReferenceActor.setImageViewName(actor.getImageViewName());
 	}
 	
 	public void setReferenceActor(Actor newReference) {
@@ -44,6 +43,7 @@ public class ActorCopier {
 
 	// not sure how to make this nicer yet
 	private void copyActor(Actor toUpdate, Actor toCopy) {
+		toCopy.setImageViewName(toCopy.getImageViewName());
 		toUpdate.setName(toCopy.getName());
 		toUpdate.setFriction(toCopy.getFriction());
 		toUpdate.setImageViewName(toCopy.getImageViewName());

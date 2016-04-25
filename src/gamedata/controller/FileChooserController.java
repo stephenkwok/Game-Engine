@@ -40,7 +40,7 @@ public class FileChooserController extends BranchScreenController {
 	}
 
 	private void goPlay(Game game) {
-		BaseScreenController baseScreenController = new BaseScreenController(getStage(), new GameController(new Game(game.getInitialGameFile(), game.getInfo(), game.getLevels())));
+		BaseScreenController baseScreenController = new BaseScreenController(getStage(), new GameController(game));
 	}
 
 	private void goScores(Game game) {
