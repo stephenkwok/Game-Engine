@@ -34,14 +34,12 @@ public class XMLCreator {
 		myXStream.autodetectAnnotations(true);
 	}
 
-	public void saveGame (Game game, File file) throws SAXException, IOException, TransformerException, ParserConfigurationException {
+	public void saveGame (Object game, File file) throws SAXException, IOException, TransformerException, ParserConfigurationException {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		
 		String xml = this.myXStream.toXML(game);
-		//System.out.println(xml);
 		Document document = documentBuilder.parse(new InputSource(new StringReader(xml)));
-		//document.getDocumentElement().normalize();
 		convertDocumentToFile(document, file);
 	}
 

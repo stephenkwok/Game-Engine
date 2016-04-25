@@ -53,9 +53,12 @@ public class BaseScreenController extends BranchScreenController{
 		try {
 			CreatorController c = new CreatorController(myGameController.getGame(), this.myScreen);
 			FileChooser fileChooser = new FileChooser();
+			File initialDirectory = new File("gamefiles");
+			fileChooser.setInitialDirectory(initialDirectory);
 			File file = fileChooser.showSaveDialog(new Stage());
 			c.saveForPlaying(file);
 		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
 			myScreen.showError(e.getMessage());
 		}
 		

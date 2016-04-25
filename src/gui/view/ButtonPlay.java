@@ -16,20 +16,8 @@ public class ButtonPlay extends ButtonParent{
 			//TODO Add a checker for null directory
 			//strings should come from a resource bundle
 			//why two checks??
-			if((new File("gamefiles")).listFiles() == null){
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-				alert.setContentText("No games in your file directory!");
-				alert.showAndWait();
-			}
-			else if ((new File("gamefiles")).listFiles().length == 1) {
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-				alert.setContentText("You have to create a game to play first! Press edit!");
-				alert.showAndWait();
-			}
-			else {
 				setChanged();
 				notifyObservers("ButtonPlay");
-			}
 		});
 
 	}

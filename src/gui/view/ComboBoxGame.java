@@ -24,8 +24,10 @@ public class ComboBoxGame extends ComboBoxImageCell {
 		super(promptText, imageResource, STANDARD_IMAGE_HEIGHT);
 		this.myGames = new HashMap<>();
 		getGames();
-		fillImageNames();
-		fillImageMap();
+		if (myGames.keySet().size() != 0) {
+			fillImageNames();
+			fillImageMap();
+		}
 	}
 
 	@Override
@@ -44,11 +46,9 @@ public class ComboBoxGame extends ComboBoxImageCell {
 			if(!gameFile.isDirectory()) {
 				ParserController parserController = new ParserController();
 				Game game = parserController.loadforPlaying(gameFile);
-				myGames.put(gameFile.getPath(),game);
+				if (game != null)
+					myGames.put(gameFile.getPath(),game);
 			}
-		}
-		if(myGames.keySet().isEmpty()) {
-			
 		}
 	}
 	

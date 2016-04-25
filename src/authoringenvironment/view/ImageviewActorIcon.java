@@ -89,7 +89,9 @@ public class ImageviewActorIcon extends ImageView {
 		toUpdate.setImageViewName(toCopy.getImageViewName());
 		toUpdate.setID(toCopy.getMyID());
 		copyRules(toUpdate, toCopy.getRules());
+		System.out.println("p: " + toCopy.getPhysicsEngine());
 		toUpdate.setPhysicsEngine(toCopy.getPhysicsEngine());
+		System.out.println("p: " + toUpdate.getPhysicsEngine());
 		//copyAttributes(toUpdate,)
 	}
 	
