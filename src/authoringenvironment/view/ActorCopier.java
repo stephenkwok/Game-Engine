@@ -55,9 +55,8 @@ public class ActorCopier {
 		toUpdate.setImageView(toCopy.getImageView());
 		toUpdate.setSize(toCopy.getSize());
 		toUpdate.setImageViewName(toCopy.getImageViewName());
-		toUpdate.setID(toCopy.getMyID());
+		toUpdate.setID(toCopy.getID());
 		copyRules(toUpdate, toCopy.getRules());
-		toUpdate.setPhysicsEngine(toCopy.getPhysicsEngine());
 		//copyAttributes(toUpdate,)
 	}
 
