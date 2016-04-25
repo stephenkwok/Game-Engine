@@ -76,6 +76,62 @@
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.Spawn">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <mySpawnedActor class="gameengine.model.Actor">
+                        <changed>false</changed>
+                        <obs/>
+                        <x>0.0</x>
+                        <y>0.0</y>
+                        <veloX>0.0</veloX>
+                        <veloY>0.0</veloY>
+                        <myFriction>0.0</myFriction>
+                        <myName>bullet</myName>
+                        <myID>90</myID>
+                        <myImageViewName>redball.png</myImageViewName>
+                        <myHeading>0.0</myHeading>
+                        <myRuleManager>
+                          <myRules>
+                            <entry>
+                              <string>P</string>
+                              <list>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.KeyTrigger">
+                                    <myKey>P</myKey>
+                                    <myKeyCode>P</myKeyCode>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.MoveRight">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                              </list>
+                            </entry>
+                          </myRules>
+                        </myRuleManager>
+                        <myAttributeManager>
+                          <attributeMap/>
+                        </myAttributeManager>
+                        <myPhysicsEngine>
+                          <nextXVelo>0.0</nextXVelo>
+                          <nextXPos>0.0</nextXPos>
+                          <nextYVelo>0.0</nextYVelo>
+                          <nextYPos>0.0</nextYPos>
+                          <horizontalForce>5.0</horizontalForce>
+                          <verticalForce>-5.0</verticalForce>
+                          <gravity>0.11</gravity>
+                          <friction>-0.05</friction>
+                          <maxVelo>7.0</maxVelo>
+                          <bounce>2.5</bounce>
+                        </myPhysicsEngine>
+                        <myStates/>
+                        <mySprite>
+                          <myImages>
+                            <string>redball.png</string>
+                          </myImages>
+                          <spriteIndex>0</spriteIndex>
+                        </mySprite>
+                        <isMainPlayer>false</isMainPlayer>
+                        <isVisible>true</isVisible>
+                      </mySpawnedActor>
                     </myAction>
                     <ID>0</ID>
                   </gameengine.model.Rule>
@@ -1419,6 +1475,16 @@
                     </myAction>
                     <ID>0</ID>
                   </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.SideCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor/myRuleManager/myRules/entry[4]/list/gameengine.model.Rule/myAction/mySpawnedActor"/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.Destroy">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                    <ID>0</ID>
+                  </gameengine.model.Rule>
                 </list>
               </entry>
               <entry>
@@ -1429,9 +1495,7 @@
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor"/>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.Destroy">
-                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                    </myAction>
+                    <myAction class="gameengine.model.Actions.Destroy" reference="../../../../entry/list/gameengine.model.Rule[2]/myAction"/>
                     <ID>0</ID>
                   </gameengine.model.Rule>
                 </list>
