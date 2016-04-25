@@ -316,7 +316,8 @@ public class Game extends Observable implements Observer {
 	}
 
 	public void addActor(Actor newActor) {
-		currentActors.add(newActor);
+		newActor.setPhysicsEngine(myPhysicsEngine);
+		getCurrentLevel().addActor(newActor);
 	}
 
 	/**
