@@ -1,10 +1,8 @@
 package gameengine.model.Actions;
 
 
-import gameengine.model.Actor;
-import gameengine.model.IAction;
-import gameengine.model.IPlayActor;
-import gameengine.model.PhysicsEngine;
+import gameengine.controller.IGame;
+import gameengine.model.*;
 
 
 /**
@@ -16,15 +14,15 @@ import gameengine.model.PhysicsEngine;
  */
 public abstract class Action implements IAction {
 
-    private IPlayActor myActor;
+    private IGameElement myGameElement;
 
     /**
      * Creates a reference to the Actor that will be changed
      *
-     * @param actor The Actor that will be changed
+     * @param myElement The Actor that will be changed
      */
-    public Action(IPlayActor actor) {
-        myActor = actor;
+    public Action(IGameElement myElement) {
+        myGameElement = myElement;
     }
 
     /**
@@ -38,8 +36,8 @@ public abstract class Action implements IAction {
      *
      * @return The Actor that the Action references
      */
-    public IPlayActor getMyActor() {
-        return myActor;
+    public IGameElement getGameElement() {
+        return myGameElement;
     }
 
 

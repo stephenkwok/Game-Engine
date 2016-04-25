@@ -7,7 +7,7 @@ import gameengine.model.Actions.Action;
 /**
  * @author blakekaplan
  */
-public abstract class MovingAction extends Action {
+public abstract class MovingAction extends ActorAction {
 
     public MovingAction(IPlayActor actor){
         super(actor);
