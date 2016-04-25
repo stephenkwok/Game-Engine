@@ -18,6 +18,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import utilities.hud.IAuthoringHUDController;
 
 /**
  * This class serves as the main controller for the authoring environment
@@ -25,7 +26,7 @@ import javafx.stage.Stage;
  * @author Stephen, AnnieTang
  */
 
-public class Controller extends BranchScreenController implements Observer {
+public class Controller extends BranchScreenController implements Observer, IAuthoringHUDController {
 	private static final String GUI_RESOURCE = "authoringGUI";
 	private static final String TOP_PANE_ELEMENTS = "TopPaneElements";
 	private static final int WINDOW_HEIGHT = 700;
@@ -411,5 +412,11 @@ public class Controller extends BranchScreenController implements Observer {
 	
 	public LevelEditingEnvironment getLevelEditingEnvironment() {
 		return levelEnvironment;
+	}
+
+	@Override
+	public void setHUDInfoFile(String location) {
+		game.setHUDInfoFile(location);
+		
 	}
 }

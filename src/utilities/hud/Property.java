@@ -1,4 +1,4 @@
-package Utilities.HUD;
+package utilities.hud;
 
 import java.util.HashSet;
 import java.util.Observable;

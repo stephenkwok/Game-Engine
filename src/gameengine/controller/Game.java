@@ -38,6 +38,7 @@ public class Game extends Observable implements Observer {
 	private List<IPlayActor> deadActors;
 	private ObservableMap<String, Object> HUDData;
     private int count;
+    private String hudInfoFile;
 
 
     /**
@@ -427,6 +428,15 @@ public class Game extends Observable implements Observer {
 	public int getScore() {
 		//return getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();
 		return 0;
+	}
+
+
+	public void setHUDInfoFile(String location) {
+		hudInfoFile = location;
+	}
+	
+	public String getHUDInfoFile() {
+		return hudInfoFile;
 	}
 	
 }
