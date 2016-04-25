@@ -10,7 +10,8 @@ import gameengine.model.Actions.Action;
  * @author justinbergkamp
  *
  */
-public class HorizontalStaticCollision extends Action {
+
+public class HorizontalStaticCollision extends ActorAction{
 
 	public HorizontalStaticCollision(IPlayActor actor) {
 		super(actor);

@@ -109,6 +109,11 @@ public class TabAttributes extends TabParent {
 		}
 	}
 
+	
+	public void addElement(IGUIElement element) {
+		myContent.getChildren().add(element.createNode());
+	}
+	
 	/**
 	 * Returns the content of this attributes tab.
 	 */

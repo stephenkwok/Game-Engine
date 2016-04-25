@@ -211,8 +211,7 @@ public class GameController implements Observer, IGameController {
 	public void update(Observable o, Object arg) {
 		List<Object> myList = (List<Object>) arg;
 		String methodName = (String) myList.get(0);
-		// System.out.println(methodName);
-		// System.out.println(methodName.equals("addActor"));
+
 		try {
 			if (methodName.equals("addActor")) { // TODO: Change to reflection,
 													// pass in Actor object from

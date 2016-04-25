@@ -1,7 +1,5 @@
 package gui.view;
 
-import authoringenvironment.controller.Controller;
-
 /**
  * Button for adding a new actor.
  * 

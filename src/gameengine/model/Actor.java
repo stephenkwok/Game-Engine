@@ -1,12 +1,6 @@
 package gameengine.model;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Set;
+import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import authoringenvironment.model.*;
@@ -38,180 +32,164 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	private int myID;
 	private String myImageViewName;
 	private double myHeading;
-	@XStreamOmitField
-	private ImageView myImageView;
-	private RuleManager myRuleManager;
-	private AttributeManager myAttributeManager;
-	private PhysicsEngine myPhysicsEngine;
-	private Set<ActorState> myStates;
-	private Sprite mySprite;
 
-	/**
-	 * Converts a list of Rules to a map of trigger to list of Actions
-	 */
-	public Actor() {
-		myRuleManager = new RuleManager();
-		myAttributeManager = new AttributeManager();
-		myStates = new HashSet<>();
-		myName = DEFAULT_NAME;
-		myImageViewName = DEFAULT_IMAGE_NAME;
-		mySprite = new Sprite();
-		setImageView(
-				new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
-	}
+    @XStreamOmitField
+    private ImageView myImageView;
+    private RuleManager myRuleManager;
+    private AttributeManager myAttributeManager;
+    private PhysicsEngine myPhysicsEngine;
+    private Set<ActorState> myStates;
+    private Sprite mySprite;
+    private boolean isMainPlayer;
+    private boolean isVisible;
 
-	/**
-	 * Calls the appropriate sequence of Actions based on a provided Trigger
-	 *
-	 * @param myTrigger
-	 *            The trigger to be used
-	 */
-	@Override
-	public void handleTrigger(ITrigger myTrigger) {
-		myRuleManager.handleTrigger(myTrigger);
-	}
+    /**
+     * Converts a list of Rules to a map of trigger to list of Actions
+     */
+    public Actor() {
+    	myRuleManager = new RuleManager();
+    	myAttributeManager = new AttributeManager();
+        myStates = new HashSet<>();
+        myName = DEFAULT_NAME;
+        myImageViewName = DEFAULT_IMAGE_NAME;
+        mySprite = new Sprite();
+        setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
+        isMainPlayer = false;
+        isVisible = true;
+    }
+    
+    /**
+     * Calls the appropriate sequence of Actions based on a provided Trigger
+     *
+     * @param myTrigger The trigger to be used
+     */
+    @Override
+    public void handleTrigger(ITrigger myTrigger) {
+    	myRuleManager.handleTrigger(myTrigger);
+    }
 
-	/**
-	 * Adds a new Attribute to an Actors
-	 *
-	 * @param attribute
-	 *            The new Actor Attribute
-	 */
-	@Override
-	public void addAttribute(Attribute attribute) {
-		myAttributeManager.addAttribute(attribute);
-	}
+    /**
+     * Adds a new Attribute to an Actors
+     *
+     * @param attribute The new Actor Attribute
+     */
+    @Override
+    public void addAttribute(Attribute attribute) {
+        myAttributeManager.addAttribute(attribute);
+    }
 
-	/**
-	 * Returns the Actor attribute based on attribute type
-	 *
-	 * @param type
-	 *            The new Actor Attribute Type
-	 */
-	@Override
-	public Attribute getAttribute(AttributeType type) {
-		return myAttributeManager.getAttribute(type);
-	}
+    /**
+     * Returns the Actor attribute based on attribute type
+     *
+     * @param type The new Actor Attribute Type
+     */
+    @Override
+    public Attribute getAttribute(AttributeType type){
+    	return myAttributeManager.getAttribute(type);
+    }
 
-	/**
-	 * Modifies the current value of an Attribute
-	 *
-	 * @param type
-	 *            The type of the Attribute to be changed
-	 * @param change
-	 *            The amount to change the Attribute by
-	 */
-	public void changeAttribute(AttributeType type, int change) {
-		myAttributeManager.changeAttribute(type, change);
-	}
+    /**
+     * Modifies the current value of an Attribute
+     *
+     * @param type   The type of the Attribute to be changed
+     * @param change The amount to change the Attribute by
+     */
+    public void changeAttribute(AttributeType type, int change) {
+    	myAttributeManager.changeAttribute(type, change);
+    }
 
-	/**
-	 * Adds a new Rule to the Actor
-	 *
-	 * @param newRule
-	 *            The Rule to be added to the Actor
-	 */
-	@Override
-	public void addRule(Rule newRule) {
-		myRuleManager.addRule(newRule);
-	}
+    /**
+     * Adds a new Rule to the Actor
+     *
+     * @param newRule The Rule to be added to the Actor
+     */
+    @Override
+    public void addRule(Rule newRule) {
+        myRuleManager.addRule(newRule);
+    }
 
-	/**
-	 * Provides the Actor's X Velocity
-	 * 
-	 * @return The Actors X Velocity
-	 */
-	@Override
-	public double getVeloX() {
-		return veloX;
-	}
+    /**
+     * Provides the Actor's X Velocity
+     * @return  The Actors X Velocity
+     */
+    @Override
+    public double getVeloX() {
+        return veloX;
+    }
 
-	/**
-	 * Provides the Actor's Y Velocity
-	 * 
-	 * @return The Actor's Y Velocity
-	 */
-	@Override
-	public double getVeloY() {
-		return veloY;
-	}
+    /**
+     * Provides the Actor's Y Velocity
+     * @return  The Actor's Y Velocity
+     */
+    @Override
+    public double getVeloY() {
+        return veloY;
+    }
 
-	/**
-	 * Sets the Actor's X coordinate
-	 * 
-	 * @param updateXPosition
-	 *            The new X coordinate
-	 */
-	@Override
-	public void setX(double updateXPosition) {
-		x = updateXPosition;
-		myImageView.setX(x);
-	}
+    /**
+     * Sets the Actor's X coordinate
+     * @param updateXPosition   The new X coordinate
+     */
+    @Override
+    public void setX(double updateXPosition) {
+       x = updateXPosition;
+       myImageView.setX(x);
+    }
 
-	/**
-	 * Sets the Actor's Y position
-	 * 
-	 * @param updateYPosition
-	 *            The new Y position
-	 */
-	@Override
-	public void setY(double updateYPosition) {
-		y = updateYPosition;
-		myImageView.setY(updateYPosition);
+    /**
+     * Sets the Actor's Y position
+     * @param updateYPosition   The new Y position
+     */
+    @Override
+    public void setY(double updateYPosition) {
+    	y = updateYPosition;
+    	myImageView.setY(updateYPosition);
 
-	}
+    }
 
-	/**
-	 * Sets a new X velocity
-	 * 
-	 * @param updateXVelo
-	 *            The new X velocity
-	 */
-	public void setVeloX(double updateXVelo) {
-		veloX = updateXVelo;
-	}
+    /**
+     * Sets a new X velocity
+     * @param updateXVelo   The new X velocity
+     */
+    public void setVeloX(double updateXVelo) {
+        veloX = updateXVelo;
+    }
 
-	/**
-	 * Sets a new Y velocity
-	 * 
-	 * @param updateYVelo
-	 *            The new Y velocity
-	 */
-	public void setVeloY(double updateYVelo) {
-		veloY = updateYVelo;
-	}
+    /**
+     * Sets a new Y velocity
+     * @param updateYVelo   The new Y velocity
+     */
+    public void setVeloY(double updateYVelo) {
+        veloY = updateYVelo;
+    }
 
-	/**
-	 * Provides the Actor's name
-	 * 
-	 * @return The Actor's name
-	 */
-	@Override
-	public String getName() {
-		return myName;
-	}
+    /**
+     * Provides the Actor's name
+     * @return  The Actor's name
+     */
+    @Override
+    public String getName() {
+        return myName;
+    }
 
-	/**
-	 * Sets a new Actor name
-	 * 
-	 * @param name
-	 *            The new Actor name
-	 */
-	@Override
-	public void setName(String name) {
-		myName = name;
-	}
+    /**
+     * Sets a new Actor name
+     * @param name  The new Actor name
+     */
+    @Override
+    public void setName(String name) {
+        myName = name;
+    }
 
-	/**
-	 * Sets a new Actor ImageView
-	 * 
-	 * @param imageView
-	 *            The new ImageView
-	 */
-	public void setImageView(ImageView imageView) {
-		myImageView = imageView;
-		myImageView.setX(this.getX());
-		myImageView.setY(this.getY());
+
+    /**
+     * Sets a new Actor ImageView
+     * @param imageView The new ImageView
+     */
+    public void setImageView(ImageView imageView) {
+    	myImageView = imageView;
+    	myImageView.setX(this.getX());
+    	myImageView.setY(this.getY());
 		myImageView.setFitHeight(imageView.getFitHeight());
 	}
 
@@ -442,7 +420,23 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		mySprite.addImage(newImage);
 	}
 
-	public void nextImage() {
-		myImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getNextImage())));
+    public void nextImage(){
+        myImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getNextImage())));
+    }
+    
+    public void setIsMainPlayer(boolean isMainPlayer) {
+    	this.isMainPlayer = isMainPlayer;
+    }
+    
+    public boolean isMainPlayer() {
+    	return isMainPlayer;
+    }
+
+	public boolean isVisible() {
+		return isVisible;
+	}
+
+	public void setVisible(boolean isVisible) {
+		this.isVisible = isVisible;
 	}
 }

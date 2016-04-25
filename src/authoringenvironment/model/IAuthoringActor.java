@@ -142,9 +142,10 @@ public interface IAuthoringActor extends IEditableGameElement {
 
 	void addAttribute(Attribute newAttribute);
 
-	void addSpriteImage(String newImage);
-
-	PhysicsEngine getPhysicsEngine();
-
-	void setPhysicsEngine(PhysicsEngine engine);
+    void addSpriteImage(String newImage);
+    
+    public PhysicsEngine getPhysicsEngine();
+    
+    public void setPhysicsEngine(PhysicsEngine myPhysicsEngine);
+    //public void setRuleMap(Map<String, List<Rule>> updatedRules);
 }

@@ -3,7 +3,9 @@ package gui.view;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -74,6 +76,22 @@ public abstract class PopUpParent {
 	 */
 	public VBox getContainer() {
 		return myContainer;
+	}
+	
+	/**
+	 * Binds width of all child nodes in container to the pop up container's width
+	 */
+	protected void bindChildrenWidthsToContainerWidth() {
+		myContainer.getChildren().stream().forEach(node -> bindChildWidthToParentWidth(node));
+	}
+	
+	/**
+	 * Binds the width of a single node to the width of the pop up container
+	 * 
+	 * @param node: node whose width is to be bound to the pop up container's width
+	 */
+	private void bindChildWidthToParentWidth(Node node) {
+		((Region) node).prefWidthProperty().bind(myContainer.widthProperty());
 	}
 
 }

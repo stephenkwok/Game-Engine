@@ -1,4 +1,4 @@
-package Utilities.HUD;
+package utilities.hud;
 
 import java.io.BufferedWriter;
 import java.io.File;

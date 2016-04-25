@@ -10,7 +10,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
-import javafx.collections.MapChangeListener.Change;
 import javafx.collections.ObservableMap;
 import javafx.util.Duration;
 
@@ -23,7 +22,7 @@ import javafx.util.Duration;
 
 public class Game extends Observable implements Observer {
 	public static final int SIZE = 400;
-	public static final int FRAMES_PER_SECOND = 60;
+	public static final int FRAMES_PER_SECOND = 50;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	private static final int BACKGROUND_SCROLL_SPEED = -1;
 
@@ -38,22 +37,19 @@ public class Game extends Observable implements Observer {
 	private List<IPlayActor> currentActors;
 	private List<IPlayActor> deadActors;
 	private ObservableMap<String, Object> HUDData;
-	private int count;
+    private int count;
+    private String hudInfoFile;
 
-	/**
-	 * A game is instantiated with a list of all levels in the game and a level
-	 * to start on. Upon instantiation, the actors from all levels are collected
-	 * into a list and added to a map containing references from ID to actor. In
-	 * addition, a map is created mapping all the actors contained in a level to
-	 * the level ID
-	 *
-	 * @param gameFilePath
-	 *            The game's filepath
-	 * @param gameInfo
-	 *            The game info associated with the game
-	 * @param gameLevels
-	 *            All the levels in the game
-	 */
+
+    /**
+     * A game is instantiated with a list of all levels in the game and a level to start on.
+     * Upon instantiation, the actors from all levels are collected into a list and added to a map containing references from ID to actor.
+     * In addition, a map is created mapping all the actors contained in a level to the level ID
+     *
+     * @param gameFilePath  The game's filepath
+     * @param gameInfo      The game info associated with the game
+     * @param gameLevels    All the levels in the game
+     */
 	public Game(String gameFilePath, GameInfo gameInfo, List<Level> gameLevels) {
 		initialGameFile = gameFilePath;
 		levels = gameLevels;
@@ -75,7 +71,7 @@ public class Game extends Observable implements Observer {
 		getAnimation().setCycleCount(Timeline.INDEFINITE);
 		getAnimation().getKeyFrames().add(frame);
 
-	}
+    }
 
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
 		this(null, gameInfo, gameLevels);
@@ -444,4 +440,11 @@ public class Game extends Observable implements Observer {
 		return 0;
 	}
 
+	public void setHUDInfoFile(String location) {
+		hudInfoFile = location;
+	}
+	
+	public String getHUDInfoFile() {
+		return hudInfoFile;
+	}	
 }

@@ -67,6 +67,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 * well as the ability to drag actors between the left and center pane.
 	 */
 	private void initializeEnvironment() {
+		myRoot.setStyle("-fx-background-color: darkgray");
 		initializeCenter();
 		initializeLeftPane();
 		updateDrag();
@@ -164,7 +165,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 					val.add(actor);
 					availableActors.put(icon.getRefActor(), val);
 					myLevel.addActor(actor);
+					//myLevel.addActor(icon.getRefActor());
 					myLevelPreview.addActorToScene(actor);
+					//myLevelPreview.addActorToScene(icon.getRefActor());
 					success = true;
 				}
 				event.setDropCompleted(success);

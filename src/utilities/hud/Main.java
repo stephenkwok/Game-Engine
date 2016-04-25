@@ -1,4 +1,4 @@
-package Utilities.HUD;
+package utilities.hud;
 
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -15,7 +15,7 @@ public class Main extends Application implements IAuthoringHUDController {
 		Group root = new Group();
 		Scene s = new Scene(root, 50, 50);
 		Button b = new Button("OPEN");
-		b.setOnAction(e -> new PopupSelector(this));
+		b.setOnAction(e->new PopupSelector(this)); //this implements IAuthoringHUDController
 		root.getChildren().add(b);
 
 		myStage.setScene(s);

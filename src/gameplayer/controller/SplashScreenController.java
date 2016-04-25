@@ -39,7 +39,9 @@ public class SplashScreenController implements Observer {
 		FileChooserController fileChooserController = new FileChooserController(myStage, ChooserType.SCORES);
 	}
 
-	private void edit() {
+
+	private void edit() throws NoSuchMethodException, SecurityException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
 		Controller GUIMainController = new Controller(myStage);
 	}
 

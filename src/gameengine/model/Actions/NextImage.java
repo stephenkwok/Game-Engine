@@ -5,7 +5,7 @@ import gameengine.model.IPlayActor;
 /**
  * @author blakekaplan
  */
-public class NextImage extends Action {
+public class NextImage extends ActorAction {
 
 	public NextImage(IPlayActor assignedActor) {
 		super(assignedActor);

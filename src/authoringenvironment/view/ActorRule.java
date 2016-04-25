@@ -270,9 +270,10 @@ public class ActorRule {
 			Action myAction = (Action) authoringBehaviorMap.get(authoringBehavior)
 					.get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex")));
 			Rule newRule = new Rule(myTrigger, myAction);
-			// add this rule to the actor for the current trigger value
-			Map<String, List<Rule>> ruleMap = ((IAuthoringActor) myActorRuleCreator.getActor()).getRules();
-			if (!(ruleMap.containsKey(myTrigger.getMyKey()))) {
+			newRule.setID(0);	// testing - amy
+			//add this rule to the actor for the current trigger value
+			Map<String, List<Rule>> ruleMap = ((IAuthoringActor) myActorRuleCreator.getActor()).getRules(); 
+			if(!(ruleMap.containsKey(myTrigger.getMyKey()))){
 				((IAuthoringActor) myActorRuleCreator.getActor()).addRule(newRule);
 				authoringBehaviorMap.get(authoringBehavior).add(newRule);
 			} else if (actionNotYetAdded(ruleMap, myAction)) {

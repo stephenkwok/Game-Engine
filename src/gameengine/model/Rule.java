@@ -11,37 +11,38 @@ import gameengine.model.Triggers.ITrigger;
  * @author blakekaplan
  *
  */
-public class Rule implements IRule {
 
-	private ITrigger myTrigger;
-	private Action myAction;
+public class Rule implements IRule{
 
-	public Rule(ITrigger trigger, Action action) {
-		setMyTrigger(trigger);
-		setMyAction(action);
-	}
-
-	/**
-	 * Returns the trigger of the rule
-	 */
-	@Override
-	public ITrigger getMyTrigger() {
-		return myTrigger;
-	}
-
-	/**
-	 * Returns the action of the rule
-	 */
-	@Override
-	public Action getMyAction() {
-		return myAction;
-	}
-
-	/**
-	 * Sets the trigger for the rule
-	 * 
-	 * @param myTrigger
-	 */
+    private ITrigger myTrigger;
+    private Action myAction;
+    private int ID;
+    
+    public Rule(ITrigger trigger, Action action){
+        setMyTrigger(trigger);
+        setMyAction(action);
+    }
+    
+    /**
+     * Returns the trigger of the rule 
+     */
+    @Override
+    public ITrigger getMyTrigger() {
+        return myTrigger;
+    }
+    
+    /**
+     * Returns the action of the rule 
+     */
+    @Override
+    public Action getMyAction() {
+        return myAction;
+    }
+    
+    /**
+     * Sets the trigger for the rule 
+     * @param myTrigger
+     */
 	public void setMyTrigger(ITrigger myTrigger) {
 		this.myTrigger = myTrigger;
 	}
@@ -53,5 +54,18 @@ public class Rule implements IRule {
 	 */
 	public void setMyAction(Action myAction) {
 		this.myAction = myAction;
+	}
+	
+	public void setID(int ID) {
+		this.ID = ID;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public String toString() {
+		String id = Integer.toString(ID);
+		return ("id: " + id);
 	}
 }

@@ -5,10 +5,12 @@ import gameengine.model.IGameElement;
 
 public class AttributeReached extends ITrigger {
 	String myKey;
-
-	public AttributeReached(AttributeType type, IGameElement target, int triggerValue) {
-		target.getAttribute(type).addTriggerValue(triggerValue);
-		myKey = target.getName() + type.toString() + triggerValue;
+	
+	public AttributeReached(AttributeType type,IGameElement target, int triggerValue){
+		if(target.getAttribute(type)!=null){
+			target.getAttribute(type).addTriggerValue(triggerValue);
+		}
+		myKey = target.getName()+type.toString()+triggerValue;
 	}
 
 	@Override

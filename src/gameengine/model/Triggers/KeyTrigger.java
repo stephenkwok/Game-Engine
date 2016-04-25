@@ -5,19 +5,25 @@ import javafx.scene.input.KeyCode;
 
 public class KeyTrigger extends ITrigger {
 
-	private String myKey;
-
-	public KeyTrigger(KeyCode key) {
-		setMyKey(key.getName());
-	}
+    private String myKey;
+    private KeyCode myKeyCode;
+    
+    public KeyTrigger(KeyCode key) {
+    	myKeyCode = key;
+        setMyKey(key.getName());
+    }
 
 	public String getMyKey() {
 		return myKey;
 	}
 
-	public void setMyKey(String myKey) {
-		this.myKey = myKey;
-	}
+    public void setMyKey(String myKey) {
+        this.myKey = myKey;
+    }
+    
+    public KeyCode getMyKeyCode() {
+    	return myKeyCode;
+    }
 
 	/**
 	 * Checks a boolean condition against the state of an actor

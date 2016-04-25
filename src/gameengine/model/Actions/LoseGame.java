@@ -17,10 +17,11 @@ public class LoseGame extends Action {
 
 	@Override
 	public void perform() {
-		getMyActor().changed();
+		getGameElement().changed();
 		ArrayList<String> myList = new ArrayList<String>();
 		myList.add("endGame");
-		((Observable) getMyActor()).notifyObservers(myList);
+		getGameElement().changed();
+        ((Observable) getGameElement()).notifyObservers(myList);
 	}
 
 	public Actor getAssignedActor() {

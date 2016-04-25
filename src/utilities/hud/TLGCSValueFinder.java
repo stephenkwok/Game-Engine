@@ -1,6 +1,7 @@
-package Utilities.HUD;
+package utilities.hud;
 
 import gameengine.controller.Game;
+import gameengine.model.AttributeType;
 
 public class TLGCSValueFinder implements IValueFinder {
 
@@ -12,17 +13,18 @@ public class TLGCSValueFinder implements IValueFinder {
 	public Property find(String key) {
 		Property ret = null;
 		switch (key.toLowerCase()) {
-		case "points":
-		case "health":
-			// reflection here to save LOC?
-			break;
-		case "ammo":
-			//
-			break;
-		default:
-			ret = new Property("Value Not Found", key);
-			break;
-
+			case "points":
+				ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getProperty();
+				break;
+			case "health":
+				//reflection here to save LOC?
+				break;
+			case "ammo":
+				//
+				break;
+			default:
+				ret = new Property("Value Not Found", key);
+				break;
 		}
 		ret.addObserver(controller);
 		return ret;
