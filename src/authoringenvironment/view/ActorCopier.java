@@ -25,6 +25,7 @@ public class ActorCopier {
 	
 	public ActorCopier(Actor actor) {
 		myReferenceActor = actor;
+		myReferenceActor.setImageViewName(actor.getImageViewName());
 	}
 	
 	public void setReferenceActor(Actor newReference) {
