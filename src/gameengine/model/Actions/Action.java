@@ -41,7 +41,7 @@ public abstract class Action implements IAction {
     }
 
     public void setMyActor(IPlayActor actor) {
-    	myActor = actor;
+    	myGameElement = actor;
     }
 
     
