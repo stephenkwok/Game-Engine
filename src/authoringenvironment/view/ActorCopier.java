@@ -21,27 +21,35 @@ import javafx.scene.input.KeyCode;
  */
 public class ActorCopier {
 	private Actor myReferenceActor;
-	
+
+	public ActorCopier() {
+		myReferenceActor = null;
+	}
+
 	public ActorCopier(Actor actor) {
 		myReferenceActor = actor;
 	}
-	
+
 	public void setReferenceActor(Actor newReference) {
 		myReferenceActor = newReference;
 	}
-	
+
 	public IAuthoringActor getReferenceActor() {
 		return myReferenceActor;
 	}
-	
+
 	public Actor makeCopy() {
 		Actor actor = new Actor();
-		copyActor(actor, myReferenceActor);
-		return actor;
+		if (myReferenceActor != null) {
+			copyActor(actor, myReferenceActor);
+			return actor;
+		} else {
+			return null;
+		}
 	}
 
 	// not sure how to make this nicer yet
-	private void copyActor(Actor toUpdate, Actor toCopy) {
+	public void copyActor(Actor toUpdate, Actor toCopy) {
 		toUpdate.setName(toCopy.getName());
 		toUpdate.setFriction(toCopy.getFriction());
 		toUpdate.setImageView(toCopy.getImageView());
@@ -52,7 +60,7 @@ public class ActorCopier {
 		toUpdate.setPhysicsEngine(toCopy.getPhysicsEngine());
 		//copyAttributes(toUpdate,)
 	}
-	
+
 	// work in progress.. currently only works for KeyTriggers and Move actions
 	private void copyRules(Actor toUpdate, Map<String, List<Rule>> rulesToCopy) {
 		toUpdate.getRules().clear();
@@ -66,14 +74,14 @@ public class ActorCopier {
 					Constructor<?> triggerConstructor = className.getConstructor(KeyCode.class);
 					KeyCode key = ((KeyTrigger) toAdd.get(i).getMyTrigger()).getMyKeyCode();
 					ITrigger triggerToAdd = (KeyTrigger) triggerConstructor.newInstance(key);
-					
-					
+
+
 					String actionName = toAdd.get(i).getMyAction().getClass().getName();
 					Class<?> actionClassName = Class.forName(actionName);
 					Constructor<?> actionConstructor = actionClassName.getConstructor(IPlayActor.class);
 					Action actionToAdd = (Action) actionConstructor.newInstance((IPlayActor) toUpdate);
-					
-					
+
+
 					//ITrigger triggerToAdd = toAdd.get(i).getMyTrigger();
 					//Action action = toAdd.get(i).getMyAction();
 					//action.setMyActor((IPlayActor) (toUpdate));
@@ -102,8 +110,8 @@ public class ActorCopier {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				
+
+
 			}
 		}
 	}
