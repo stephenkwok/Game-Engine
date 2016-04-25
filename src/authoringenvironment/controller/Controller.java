@@ -47,7 +47,6 @@ import gui.view.PopUpAuthoringHelpPage;
 import gui.view.TextFieldActorNameEditor;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -484,8 +483,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 
 	@Override
 	public void setHUDInfoFile(String location) {
-		// TODO Auto-generated method stub
-		
+		game.setHUDInfoFile(location);
 	}
 
 }
