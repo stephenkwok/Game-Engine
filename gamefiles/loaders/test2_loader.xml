@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <initialGameFile>gamefiles/loaders/test2_loader.xml</initialGameFile>
+  <initialGameFile>gamefiles\loaders\test2_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -150,6 +150,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -184,6 +186,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -218,6 +222,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -252,6 +258,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -286,6 +294,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -320,6 +330,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -354,6 +366,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -388,6 +402,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -422,6 +438,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -456,6 +474,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -490,6 +510,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -524,6 +546,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -558,6 +582,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -592,6 +618,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -626,6 +654,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -660,6 +690,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -694,6 +726,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -728,6 +762,8 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -748,6 +784,8 @@
                           </myImages>
                           <spriteIndex>0</spriteIndex>
                         </mySprite>
+                        <isMainPlayer>false</isMainPlayer>
+                        <isVisible>true</isVisible>
                       </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.HorizontalStaticCollision">
@@ -950,6 +988,8 @@
                           </myImages>
                           <spriteIndex>0</spriteIndex>
                         </mySprite>
+                        <isMainPlayer>false</isMainPlayer>
+                        <isVisible>true</isVisible>
                       </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.WinGame">
@@ -1211,6 +1251,8 @@
             </myImages>
             <spriteIndex>0</spriteIndex>
           </mySprite>
+          <isMainPlayer>false</isMainPlayer>
+          <isVisible>true</isVisible>
         </gameengine.model.Actor>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
@@ -1302,6 +1344,8 @@
             </myImages>
             <spriteIndex>0</spriteIndex>
           </mySprite>
+          <isMainPlayer>false</isMainPlayer>
+          <isVisible>true</isVisible>
         </gameengine.model.Actor>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
@@ -1497,7 +1541,7 @@
       </accessibleRole>
       <image class="javafx.scene.image.ImageView$1">
         <value class="javafx.scene.image.Image">
-          <url>file:/Users/justinbergkamp/Documents/workspace/voogasalad_LoopsGoatCheeseSalad/bin/default_game.jpg</url>
+          <url>file:/C:/Users/Stephen/workspace/voogasalad_LoopsGoatCheeseSalad/bin/default_game.jpg</url>
           <progress>
             <value>1.0</value>
             <valid>true</valid>
