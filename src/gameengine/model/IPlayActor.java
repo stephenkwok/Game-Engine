@@ -3,9 +3,10 @@ package gameengine.model;
 import java.util.List;
 import java.util.Map;
 import gameengine.model.Actions.Action;
+import gameengine.model.Triggers.ITrigger;
 import javafx.geometry.Bounds;
 
-public interface IPlayActor {
+public interface IPlayActor extends IGameElement {
 	
 	
 	/**
@@ -13,7 +14,7 @@ public interface IPlayActor {
      *
      * @param myTrigger The string representation of the trigger to be executed
      */
-    public void performActionsFor(ITrigger myTrigger);
+    public void handleTrigger(ITrigger myTrigger);
     
     /**
      * Assigns a phyiscs engine to an Actor

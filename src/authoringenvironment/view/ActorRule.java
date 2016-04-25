@@ -8,11 +8,10 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.behaviors.IAuthoringBehavior;
-import gameengine.model.Actor;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
-import gameengine.model.ITrigger;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
 import gui.view.IGUIElement;
@@ -29,6 +28,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import gameengine.model.Triggers.ITrigger;
+
 /**
  * Rule container for an actor containing behavior, images, and/or sounds.
  * @author AnnieTang
@@ -38,8 +39,6 @@ public class ActorRule {
 	private GridPane myRule;	
 	private VBox myTriggerNodes;
 	private VBox myActionNodes;
-	private ScrollPane trigNodesScroll;
-	private ScrollPane actNodesScroll;
 	private ActorRuleCreator myActorRuleCreator;
 	private ResourceBundle myFactoryResources;
 	private static final String LIBRARY_BUNDLE = "library";
@@ -103,8 +102,8 @@ public class ActorRule {
 		myTriggerNodes.setPrefSize(myRule.getPrefWidth()*Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")), myRule.getPrefHeight()*Double.parseDouble(myActorRuleResources.getString("ContainerHeightPercent")));
 		myActionNodes = new VBox(Integer.parseInt(myActorRuleResources.getString("Padding")));
 		myActionNodes.setPrefSize(myRule.getPrefWidth()*Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")), myRule.getPrefHeight()*Double.parseDouble(myActorRuleResources.getString("ContainerHeightPercent")));
-		trigNodesScroll = new ScrollPane(myTriggerNodes);
-		actNodesScroll = new ScrollPane(myActionNodes);
+		ScrollPane trigNodesScroll = new ScrollPane(myTriggerNodes);
+		ScrollPane actNodesScroll = new ScrollPane(myActionNodes);
 		myRule.add(trigNodesScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")), Integer.parseInt(myActorRuleResources.getString("TriggerRow")));
 		myRule.add(actNodesScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")), Integer.parseInt(myActorRuleResources.getString("ActionRow")));
 	}
@@ -114,11 +113,13 @@ public class ActorRule {
 	private void addCloseButton(){
 		Button close = new Button(myActorRuleResources.getString("Close"));
 		close.setOnAction(event -> {
+			int index = 0;
 			//remove actions first, then trigger
 			while(authoringBehaviorMap.size()!=1){ //no loop to avoid concurrent modification
-				if(!isITrigger(new ArrayList<IAuthoringBehavior>(authoringBehaviorMap.keySet()).get(FIRST_INDEX))){
-					remove(new ArrayList<IAuthoringBehavior>(authoringBehaviorMap.keySet()).get(FIRST_INDEX));
-				}
+				if(!isITrigger(new ArrayList<IAuthoringBehavior>(authoringBehaviorMap.keySet()).get(index))){
+					remove(new ArrayList<IAuthoringBehavior>(authoringBehaviorMap.keySet()).get(index));
+				}else index++;
+				System.out.println("stuck");
 			}
 			remove(new ArrayList<IAuthoringBehavior>(authoringBehaviorMap.keySet()).get(FIRST_INDEX)); 
 			myActorRuleCreator.removeActorRule(this);
@@ -144,17 +145,7 @@ public class ActorRule {
 			}
 			authoringBehaviorMap.get(element).add(Integer.parseInt(myActorRuleResources.getString("NodeIndex")), node);
 		}
-		System.out.println("AFTER ADDING BEHAVIOR");
-		System.out.println("Authoring Behavior Map: " + authoringBehaviorMap.size() + authoringBehaviorMap);
-	}
-	/**
-	 * Return if given behavior is a trigger type behavior
-	 * @param behavior
-	 * @return
-	 */
-	private boolean isTriggerType(String behavior){
-		List<String> triggers = Arrays.asList(myFactoryResources.getString("TriggerBehaviors").split(" "));
-		return triggers.contains(behavior);
+		printAll("AFTER ADDING BEHAVIOR");
 	}
 	
 	/**
@@ -171,16 +162,14 @@ public class ActorRule {
 			try{ removeAction(toRemove);}
 			catch(Exception e){authoringBehaviorMap.remove(toRemove);}
 		}
-		System.out.println("AFTER REMOVING SOMETHING");
-		System.out.println("Rule Map: " + ((Actor) myActorRuleCreator.getActor()).getRules().size() + ((Actor) myActorRuleCreator.getActor()).getRules());
-		System.out.println("Authoring Behavior Map: " + authoringBehaviorMap.size() + authoringBehaviorMap);
+		printAll("AFTER REMOVING SOMETHING");
 	}
 	
 	private void removeTrigger(IAuthoringBehavior toRemove){
 		//remove trigger from authoring behavior
 		authoringBehaviorMap.remove(toRemove);
 		//remove rules corresponding to this trigger key from actor
-		((Actor) myActorRuleCreator.getActor()).getRules().remove(myTrigger.getMyKey());
+		((IAuthoringActor) myActorRuleCreator.getActor()).getRules().remove(myTrigger.getMyKey());
 		//remove rules from authoring behaviors in actorRuleMap that have the current trigger as their trigger
 		for(IAuthoringBehavior authoringBehavior: authoringBehaviorMap.keySet()){
 			String otherTriggerKey = ((Rule) authoringBehaviorMap.get(authoringBehavior).get(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")))).getMyTrigger().getMyKey();
@@ -189,9 +178,7 @@ public class ActorRule {
 			}
 		}
 		myTrigger = null;
-		System.out.println("AFTER REMOVING TRIGGER");
-		System.out.println("Rule Map: " + ((Actor) myActorRuleCreator.getActor()).getRules().size() + ((Actor) myActorRuleCreator.getActor()).getRules());
-		System.out.println("Authoring Behavior Map: " + authoringBehaviorMap.size() + authoringBehaviorMap);
+		printAll("AFTER REMOVING TRIGGER");
 	}
 
 	private void removeAction(IAuthoringBehavior toRemove){
@@ -199,13 +186,11 @@ public class ActorRule {
 		Rule ruleToRemove = (Rule) authoringBehaviorMap.get(toRemove).get(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")));
 		removeIRuleFromActor(ruleToRemove);
 		authoringBehaviorMap.remove(toRemove);
-		System.out.println("AFTER REMOVING ACTION");
-		System.out.println("Rule Map: " + ((Actor) myActorRuleCreator.getActor()).getRules().size() + ((Actor) myActorRuleCreator.getActor()).getRules());
-		System.out.println("Authoring Behavior Map: " + authoringBehaviorMap.size() + authoringBehaviorMap);
+		printAll("AFTER REMOVING ACTION");
 	}
 	
 	private void removeIRuleFromActor(IRule toRemove){
-		List<Rule> rulesForCurrentTrigger = ((Actor) myActorRuleCreator.getActor()).getRules().get(myTrigger.getMyKey());
+		List<Rule> rulesForCurrentTrigger = ((IAuthoringActor) myActorRuleCreator.getActor()).getRules().get(myTrigger.getMyKey());
 		rulesForCurrentTrigger.remove(toRemove);
 	}
 	
@@ -229,37 +214,33 @@ public class ActorRule {
 	public void setRules(){
 		if(newlyReturned){
 			newlyReturned = false;
-			((Actor) myActorRuleCreator.getActor()).getRules().clear();
+			((IAuthoringActor) myActorRuleCreator.getActor()).getRules().clear();
 		}
 		if(myTrigger==null || myActions.size()==0){
 			showAlert(myActorRuleResources.getString("SomethingNotSet"),myActorRuleResources.getString("SetBoth"));
 		}
 		else{
 			for(IAuthoringBehavior authoringBehavior: authoringBehaviorMap.keySet()){
-				//for each authoringbehavior that is an action, create a new rule
-				if(!isITrigger(authoringBehavior)){
-					Action myAction = (Action) authoringBehaviorMap.get(authoringBehavior).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex")));
-					Rule newRule = new Rule(myTrigger, myAction);
-					//add this rule to the actor for the current trigger value
-					Map<String, List<Rule>> ruleMap = ((Actor) myActorRuleCreator.getActor()).getRules(); 
-					if(!(ruleMap.containsKey(myTrigger.getMyKey()))){
-						List<Rule> newList = new ArrayList<>();
-						newList.add(newRule);
-						ruleMap.put(myTrigger.getMyKey(), newList);
-						((Actor) myActorRuleCreator.getActor()).setMyRules(ruleMap);
-						authoringBehaviorMap.get(authoringBehavior).add(newRule);
-					} else if(actionNotYetAdded(ruleMap, myAction)){
-						ruleMap.get(myTrigger.getMyKey()).add(newRule);
-						((Actor) myActorRuleCreator.getActor()).setMyRules(ruleMap);
-						//add this new rule to map as third thing for this authoring behavior
-						authoringBehaviorMap.get(authoringBehavior).add(newRule);
-					}
-				}
+				addRuleFromActionBehavior(authoringBehavior);
 			}
 		}
-		System.out.println("AFTER SETTING RULES");
-		System.out.println("Authoring Behavior Map: " + authoringBehaviorMap.size() + authoringBehaviorMap);
-		System.out.println("Rule Map: " + ((Actor) myActorRuleCreator.getActor()).getRules().size() + ((Actor) myActorRuleCreator.getActor()).getRules());
+		printAll("AFTER SETTING RULES");
+	}
+	
+	private void addRuleFromActionBehavior(IAuthoringBehavior authoringBehavior){
+		if(!isITrigger(authoringBehavior)){
+			Action myAction = (Action) authoringBehaviorMap.get(authoringBehavior).get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex")));
+			Rule newRule = new Rule(myTrigger, myAction);
+			//add this rule to the actor for the current trigger value
+			Map<String, List<Rule>> ruleMap = ((IAuthoringActor) myActorRuleCreator.getActor()).getRules(); 
+			if(!(ruleMap.containsKey(myTrigger.getMyKey()))){
+				((IAuthoringActor) myActorRuleCreator.getActor()).addRule(newRule);
+				authoringBehaviorMap.get(authoringBehavior).add(newRule);
+			} else if(actionNotYetAdded(ruleMap, myAction)){
+				((IAuthoringActor) myActorRuleCreator.getActor()).addRule(newRule);
+				authoringBehaviorMap.get(authoringBehavior).add(newRule);
+			}
+		}
 	}
 	
 	private boolean actionNotYetAdded(Map<String, List<Rule>> ruleMap, IAction value){
@@ -267,6 +248,16 @@ public class ActorRule {
 			if(rule.getMyAction()==value) return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * Return if given behavior is a trigger type behavior
+	 * @param behavior
+	 * @return
+	 */
+	private boolean isTriggerType(String behavior){
+		List<String> triggers = Arrays.asList(myFactoryResources.getString("TriggerBehaviors").split(" "));
+		return triggers.contains(behavior);
 	}
 	
 	private boolean isITrigger(IAuthoringBehavior authoringBehavior){
@@ -279,5 +270,11 @@ public class ActorRule {
 				remove(element);
 			}
 		});
+	}
+	
+	private void printAll(String afterWhat){
+		System.out.println(afterWhat);
+		System.out.println("Authoring Behavior Map: " + authoringBehaviorMap.size() + authoringBehaviorMap);
+		System.out.println("Rule Map: " + ((IAuthoringActor) myActorRuleCreator.getActor()).getRules().size() + ((IAuthoringActor) myActorRuleCreator.getActor()).getRules());
 	}
 }

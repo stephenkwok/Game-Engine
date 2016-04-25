@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.view.ActorRule;
-//import gameengine.model.IAction;
 /**
  * GUI representation of behaviors: ChangeMusic, PlaySound, PlayMusic
  * @author AnnieTang

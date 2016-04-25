@@ -1,7 +1,7 @@
 package gameengine.controller;
 
 import gameengine.model.IActor;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 
 import java.util.List;
 

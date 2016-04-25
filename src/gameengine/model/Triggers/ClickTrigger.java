@@ -1,7 +1,6 @@
 package gameengine.model.Triggers;
 
-import gameengine.model.*; 
-import gameengine.model.ITrigger;
+import gameengine.model.*;
 import javafx.geometry.Bounds;
 
 /**

@@ -10,9 +10,7 @@ import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
 import gameengine.model.IRule;
 import gameengine.model.Actions.ChangeAttribute;
-//import gameengine.model.IRule;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 /**
  * Space in actor editing environment where rules are created.

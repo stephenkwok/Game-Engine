@@ -106,7 +106,7 @@ public class CollisionDetection {
             Class<?> className = Class.forName(TRIGGER_PREFIX + collisionType);
             Constructor[] myConstructors = className.getConstructors();
             CollisionTrigger myTrigger = (CollisionTrigger) myConstructors[0].newInstance(a1, a2);
-            a1.performActionsFor(myTrigger);
+            a1.handleTrigger(myTrigger);
         }
         catch (Exception e){
             e.printStackTrace();

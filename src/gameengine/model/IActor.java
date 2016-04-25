@@ -5,6 +5,8 @@ import javafx.scene.image.ImageView;
 
 import java.util.Set;
 
+import gameengine.model.Triggers.ITrigger;
+
 /**
  * This interface defines a limited subset of Actor functionality.
  * We have decided to use this interface to limit outside access to data that an Actor contains.
