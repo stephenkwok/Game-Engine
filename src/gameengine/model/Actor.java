@@ -368,7 +368,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 
 	public double getSize() {
 		//TO DO need to look into image view
-		setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
+		//setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myImageViewName))));
 		return myImageView.getFitHeight();
 	}
 
