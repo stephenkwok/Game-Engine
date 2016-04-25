@@ -57,7 +57,9 @@ public class BaseScreenController extends BranchScreenController {
 			File initialDirectory = new File("gamefiles");
 			fileChooser.setInitialDirectory(initialDirectory);
 			File file = fileChooser.showSaveDialog(new Stage());
-			c.saveForPlaying(file);
+			if (file != null) {
+				c.saveForPlaying(file);
+			}
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 			myScreen.showError(e.getMessage());

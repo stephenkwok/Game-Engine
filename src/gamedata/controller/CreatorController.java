@@ -27,7 +27,7 @@ public class CreatorController implements ICreatorController {
 	private XMLCreator myXMLCreator;
 	private Screen myScreen;
 
-	public CreatorController(Game game, Screen screen) throws ParserConfigurationException {
+	public CreatorController(Game game, Screen screen) {
 		this.myGame = game;
 		this.myScreen = screen;
 		this.myXMLCreator = new XMLCreator();
