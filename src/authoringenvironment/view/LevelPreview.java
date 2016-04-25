@@ -3,6 +3,7 @@ package authoringenvironment.view;
 import gui.view.IGUI;
 import gui.view.PopUpActorResize;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
@@ -11,6 +12,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -26,6 +30,7 @@ import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
 
 public class LevelPreview implements IGUI {
+	private static final Color DEFAULT_COLOR = Color.CORNFLOWERBLUE;
 	private static final String VERTICAL = "Vertically";
 	private static final double SUBSCENE_HEIGHT = 500; // 700 * 3/4
 	private static final double SUBSCENE_WIDTH = 1000;
@@ -49,6 +54,11 @@ public class LevelPreview implements IGUI {
 
 	private void init() {
 		myPane = new Pane();
+		myPane.setBackground(new Background(new BackgroundFill(DEFAULT_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
+		myPane.setMinWidth(SUBSCENE_WIDTH);
+		myPane.setMinHeight(SUBSCENE_HEIGHT);
+		myPane.setMaxWidth(SUBSCENE_WIDTH);
+		myPane.setMaxHeight(SUBSCENE_HEIGHT);
 		myLevelPane = new Pane();
 		initStackPane();
 		initScrollPane();
@@ -69,8 +79,8 @@ public class LevelPreview implements IGUI {
 
 	private void initScrollPane() {
 		myScrollPane = new ScrollPane();
-		myScrollPane.setMinViewportWidth(SUBSCENE_WIDTH);
-		myScrollPane.setMinViewportHeight(SUBSCENE_HEIGHT);
+		//myScrollPane.setMinViewportWidth(SUBSCENE_WIDTH);
+		//myScrollPane.setMinViewportHeight(SUBSCENE_HEIGHT);
 		myScrollPane.setPrefViewportWidth(SUBSCENE_WIDTH);
 		myScrollPane.setPrefViewportHeight(SUBSCENE_HEIGHT);
 		myScrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);

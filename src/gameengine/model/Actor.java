@@ -1,12 +1,6 @@
 package gameengine.model;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Set;
+import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import authoringenvironment.model.*;
@@ -45,6 +39,8 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private PhysicsEngine myPhysicsEngine;
     private Set<ActorState> myStates;
     private Sprite mySprite;
+    private boolean isMainPlayer;
+    private boolean isVisible;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -57,6 +53,8 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
         myImageViewName = DEFAULT_IMAGE_NAME;
         mySprite = new Sprite();
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
+        isMainPlayer = false;
+        isVisible = true;
     }
     
     /**
@@ -407,4 +405,21 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     public void nextImage(){
         myImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getNextImage())));
     }
+    
+    public void setIsMainPlayer(boolean isMainPlayer) {
+    	this.isMainPlayer = isMainPlayer;
+    }
+    
+    public boolean isMainPlayer() {
+    	return isMainPlayer;
+    }
+
+	public boolean isVisible() {
+		return isVisible;
+	}
+
+	public void setVisible(boolean isVisible) {
+		this.isVisible = isVisible;
+	}
 }
+

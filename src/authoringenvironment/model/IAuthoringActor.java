@@ -6,6 +6,7 @@ import java.util.Map;
 
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;
+import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
 import javafx.scene.image.ImageView;
 
@@ -112,5 +113,9 @@ public interface IAuthoringActor extends IEditableGameElement{
     void addAttribute(Attribute newAttribute);
 
     void addSpriteImage(String newImage);
-
+    
+    public PhysicsEngine getPhysicsEngine();
+    
+    public void setPhysicsEngine(PhysicsEngine myPhysicsEngine);
+    //public void setRuleMap(Map<String, List<Rule>> updatedRules);
 }
