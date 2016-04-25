@@ -85,27 +85,27 @@ public class PhysicsEngine {
 		a1.setY((applyForce(a1.getY(),nextYVelo))-gravity);
 	}
 		
-	public void glideRight(IPlayActor a1){
-		a1.setX(applyForce(a1.getX(),horizontalForce));
+	public void glideRight(IPlayActor a1, double offset){
+		a1.setX(applyForce(a1.getX(),offset));
 	}
-	public void glideLeft(IPlayActor a1){
-		a1.setX(applyForce(a1.getX(),-horizontalForce));
+	public void glideLeft(IPlayActor a1, double offset){
+		a1.setX(applyForce(a1.getX(),-offset));
 	}
-	public void glideUp(IPlayActor a1){
-		a1.setY(applyForce(a1.getY(),verticalForce));
+	public void glideUp(IPlayActor a1, double offset){
+		a1.setY(applyForce(a1.getY(),offset));
 	}
-	public void glideDown(IPlayActor a1){
-		a1.setY(applyForce(a1.getY(),-verticalForce));
+	public void glideDown(IPlayActor a1, double offset){
+		a1.setY(applyForce(a1.getY(),-offset));
 	}
 	
-	public void glideForward(IPlayActor a1) {
-		a1.setX(applyForce(a1.getX(),horizontalForce*(Math.cos(Math.toRadians(a1.getHeading())))));
-		a1.setY(applyForce(a1.getY(),  verticalForce*(Math.sin(Math.toRadians(a1.getHeading()))))-gravity);
+	public void glideForward(IPlayActor a1, double offset) {
+		a1.setX(applyForce(a1.getX(),offset*(Math.cos(Math.toRadians(a1.getHeading())))));
+		a1.setY(applyForce(a1.getY(),  offset*(Math.sin(Math.toRadians(a1.getHeading()))))-gravity);
 	}
 
-	public void glideBackward(IPlayActor a1) {
-		a1.setX(applyForce(a1.getX(),-horizontalForce*(Math.cos(Math.toRadians(a1.getHeading())))));
-		a1.setY(applyForce(a1.getY(),-verticalForce*(Math.sin(Math.toRadians(a1.getHeading()))))-gravity);
+	public void glideBackward(IPlayActor a1, double offset) {
+		a1.setX(applyForce(a1.getX(),-offset*(Math.cos(Math.toRadians(a1.getHeading())))));
+		a1.setY(applyForce(a1.getY(),-offset*(Math.sin(Math.toRadians(a1.getHeading()))))-gravity);
 	}
 	private double bound(double pos){
 		if(pos<0){ return 0; } return pos; }
