@@ -11,11 +11,10 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.model.ImageEditingEnvironment;
 import authoringenvironment.model.PresetActorFactory;
 import authoringenvironment.view.ActorEditingEnvironment;
 import authoringenvironment.view.GUIMain;
@@ -356,6 +355,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		mainScreen.createActorPreviewUnit(newActor, actorEnvironment);
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
+		System.out.println(newActor.getMyID());
 	}
 
 	public double getSceneWidth() {
