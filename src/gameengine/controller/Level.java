@@ -37,7 +37,6 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	private static final double DEFAULT_WIDTH = 1024;
 	private static final String DEFAULT_SCROLLING = "Horizontally";
 	private List<IPlayActor> myActors;
-	private Map<String, List<IPlayActor>> myTriggerMap;
 	private String myName;
 	private double myHeight;
 	private double myWidth;
@@ -60,7 +59,6 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		myRuleManager = new RuleManager();
 		myAttributeManager = new AttributeManager();
 		setMyActors(new ArrayList<>());
-		setMyTriggerMap(new HashMap<>());
 		setName(DEFAULT_NAME);
 		myBackgroundImgName = DEFAULT_IMAGE_NAME;
 		setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
@@ -99,17 +97,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	@Override
 	public void addActor(IAuthoringActor actor) {
 		getActors().add((IPlayActor)actor);
-		Set<String> actorTriggers = ((IPlayActor)actor).getRules().keySet();
-		List<IPlayActor> levelActors;
-		for (String myTrigger : actorTriggers) {
-			if (getMyTriggerMap().containsKey(myTrigger)) {
-				levelActors = getMyTriggerMap().get(myTrigger);
-			} else {
-				levelActors = new ArrayList<>();
-			}
-			levelActors.add((IPlayActor)actor);
-			getMyTriggerMap().put(myTrigger, levelActors);
-		}
+
 	}
 
 	/**
@@ -177,22 +165,11 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		stringBuilder.append(myBackgroundImgName);
 		stringBuilder.append("\nmyActors: ");
 		stringBuilder.append(getActors().toString());
-		stringBuilder.append("\nTriggerMap: ");
-		stringBuilder.append(getMyTriggerMap().toString());
 		stringBuilder.append("\nimg: ");
 		stringBuilder.append(myBackground);
 		stringBuilder.append(" ]");
 
 		return stringBuilder.toString();
-	}
-
-
-	public Map<String, List<IPlayActor>> getMyTriggerMap() {
-		return myTriggerMap;
-	}
-
-	public void setMyTriggerMap(Map<String, List<IPlayActor>> myTriggerMap) {
-		this.myTriggerMap = myTriggerMap;
 	}
 
 	public List<IPlayActor> getActors() {
