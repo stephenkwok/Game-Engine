@@ -47,7 +47,7 @@ public class ParserController implements IParserController {
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			myScreen.showError(e.getMessage());
+			//myScreen.showError(e.getMessage());
 		}
 		return game;
 	}
