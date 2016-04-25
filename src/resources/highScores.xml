@@ -3,6 +3,19 @@
   <obs/>
   <myScores>
     <entry>
+      <null/>
+      <tree-map>
+        <entry>
+          <string>BLOOP</string>
+          <int>0</int>
+        </entry>
+        <entry>
+          <string>Carine</string>
+          <int>0</int>
+        </entry>
+      </tree-map>
+    </entry>
+    <entry>
       <string>gamefiles\loaders\test2_loader.xml</string>
       <tree-map>
         <entry>
@@ -35,32 +48,7 @@
     </entry>
     <entry>
       <string>gamefiles/loaders/test2_loader.xml</string>
-      <tree-map>
-        <entry>
-          <string>Carine</string>
-          <int>0</int>
-        </entry>
-        <entry>
-          <string>Michael</string>
-          <int>0</int>
-        </entry>
-        <entry>
-          <string>Name</string>
-          <int>0</int>
-        </entry>
-        <entry>
-          <string>asdfdsf</string>
-          <int>0</int>
-        </entry>
-        <entry>
-          <string>luigi</string>
-          <int>0</int>
-        </entry>
-        <entry>
-          <string>mario</string>
-          <int>0</int>
-        </entry>
-      </tree-map>
+      <tree-map/>
     </entry>
     <entry>
       <string>testGame</string>
