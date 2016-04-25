@@ -1,6 +1,7 @@
 package gameplayer.controller;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -48,11 +49,19 @@ public class SplashScreenController implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		String method = myResources.getString((String) arg);
+		List<Object> myList = (List<Object>) arg;
+		String methodName = (String) myList.get(0);
 		try {
-			this.getClass().getDeclaredMethod(method).invoke(this);
+			if(myResources.getString(methodName).equals("null")){
+				this.getClass().getDeclaredMethod(methodName).invoke(this);
+			}
+			else{
+				Class<?> myClass = Class.forName(myResources.getString(methodName));
+				Object arg2 = myClass.cast(myList.get(1));
+				this.getClass().getDeclaredMethod(methodName).invoke(this, arg2);
+			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
-				| SecurityException e) {
+				| SecurityException | ClassNotFoundException e) {
 			this.myScreen.showError(e.getMessage());
 		}
 	}

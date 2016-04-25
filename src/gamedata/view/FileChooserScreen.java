@@ -26,7 +26,7 @@ public class FileChooserScreen extends Screen implements Observer {
 	}
 
 	private void addButton() {
-		ComboBoxGame fileSelector = new ComboBoxGame("Choose Game", "gamefiles");
+		ComboBoxGame fileSelector = new ComboBoxGame(getResources().getString("Prompt"), getResources().getString("Directory"));
 		fileSelector.addNodeObserver(this);
 		HBox myBox = (HBox) fileSelector.createNode();
 		myBox.setLayoutX(SCREEN_WIDTH/2 - 100);
@@ -37,8 +37,9 @@ public class FileChooserScreen extends Screen implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		setChanged();
-		Object[] methodArgPair = {o, arg};
-		notifyObservers(Arrays.asList(methodArgPair));
+//		Object[] methodArgPair = {o, arg};
+//		notifyObservers(Arrays.asList(methodArgPair));
+		notifyObservers(arg);
 	}
 
 

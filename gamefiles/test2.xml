@@ -1478,7 +1478,7 @@
       </accessibleRole>
       <image class="javafx.scene.image.ImageView$1">
         <value class="javafx.scene.image.Image">
-          <url>file:/Users/bobby_mac/Documents/workspace/voogasalad_LoopsGoatCheeseSalad/bin/default_game.jpg</url>
+          <url>file:/Users/michaelfigueiras/Documents/workspace/voogasalad_LoopsGoatCheeseSalad/bin/default_game.jpg</url>
           <progress>
             <value>1.0</value>
             <valid>true</valid>
@@ -1701,7 +1701,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
                 <int>0</int>
               </serial>
             </value>
-            <valid>true</valid>
             <outer-class reference="../.."/>
           </platformImage>
         </value>

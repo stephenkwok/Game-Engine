@@ -24,7 +24,6 @@ public abstract class BranchScreenController implements Observer {
 	 * Creates a splash screen and swaps the stage scene for the splash screen stage
 	 */
 	protected void goToSplash(){
-		//TODO create a splash screen controller
 		SplashScreenController splashScreenController = new SplashScreenController(myStage);
 	}
 	
