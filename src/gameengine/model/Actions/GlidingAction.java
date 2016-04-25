@@ -9,6 +9,7 @@ public abstract class GlidingAction extends Action {
 	
 	public GlidingAction(IPlayActor actor1,double offset) {
 		super(actor1);
+		glideOffset = offset;
 	}
 
 	public double getGlideOffset() {

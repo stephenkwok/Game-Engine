@@ -144,8 +144,8 @@ public class Tester extends Application {
         actor1.addRule(rule9);
 
         KeyTrigger triggerSpawn = new KeyTrigger(KeyCode.S);
-        TickTrigger bulletTick = new TickTrigger();
-        Action bulletAction = new GlideForward((IPlayActor)spawnedActor);
+        KeyTrigger bulletTick = new KeyTrigger(KeyCode.P);
+        Action bulletAction = new MoveRight((IPlayActor)spawnedActor);
         Rule bulletRule = new Rule(bulletTick,bulletAction);
         spawnedActor.addRule(bulletRule);
         PhysicsEngine newPhysicsEngine = new PhysicsEngine();
@@ -159,8 +159,7 @@ public class Tester extends Application {
         Action action4 = new MoveUp((IPlayActor)actor1);
         Action action5 = new VerticalBounceCollision((IPlayActor)actor1);
         Action action6 = new WinGame((IPlayActor)actor1);
-        IPlayActor clone = (IPlayActor) spawnedActor;
-        Action actionSpawn = new Spawn((IPlayActor) actor1, (IPlayActor) clone);
+        Action actionSpawn = new Spawn((IPlayActor) actor1, (IPlayActor) spawnedActor);
 
         Rule rule = new Rule(trigger1,action1);
         Rule rule2 = new Rule(trigger2, action2);

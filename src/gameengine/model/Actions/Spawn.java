@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Observable;
 
 import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.view.ActorCopier;
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
 import javafx.scene.image.ImageView;
@@ -20,26 +21,22 @@ public class Spawn extends Action{
 	}
 
 	public void perform() {
+		
+		ActorCopier myActorCopier = new ActorCopier((Actor)mySpawnedActor);
+		Actor clone = myActorCopier.makeCopy();
+		
+		
 		System.out.println(mySpawnedActor.getName());
-		mySpawnedActor.setHeading(getMyActor().getHeading());
-		mySpawnedActor.setX(getMyActor().getBounds().getMaxX());
-		mySpawnedActor.setY(getMyActor().getY());
+		clone.setHeading(getMyActor().getHeading());
+		clone.setX(getMyActor().getBounds().getMaxX());
+		clone.setY(getMyActor().getY());
+		
+		
 		getMyActor().changed();
 		List<Object> myList = new ArrayList<>();
 		myList.add("addActor");
-		myList.add(mySpawnedActor);
+		myList.add(clone);
 		System.out.println("In Spawn Action");
         ((Observable) getMyActor()).notifyObservers(myList);				
 	}
-	
-	private IAuthoringActor cloneActor(IAuthoringActor spawnedActor){
-		 IAuthoringActor clone = (IAuthoringActor) new Actor();	
-		 ImageView imageView = spawnedActor.getImageView();
-		 clone.setImageView(imageView);
-		 clone.setName("bullet"+cloneNum);
-	     clone.setID(cloneNum);
-	     cloneNum = cloneNum+1;
-		return clone;	
-	}
-
 }
