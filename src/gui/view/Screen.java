@@ -31,6 +31,8 @@ public abstract class Screen extends Observable implements IScreen {
 	private GUIFactory myFactory;
 	public static final int SCREEN_WIDTH = 1000;
 	public static final int SCREEN_HEIGHT = 700;
+	public static final String NULL_ERROR= "Hmm, something went wrong! ¯\\_(ツ)_/¯";
+
 
 	public Screen() {
 		this.myRoot = new Group();
@@ -72,11 +74,10 @@ public abstract class Screen extends Observable implements IScreen {
 	}
 
 	public void showError(String message) {
-		Alert alert = new Alert(Alert.AlertType.ERROR);
-		if (message == null)
-			message = "Hmm, something went wrong! ¯\\_(ツ)_/¯";
-		alert.setContentText(message);
-		alert.showAndWait();
+		  Alert alert = new Alert(Alert.AlertType.ERROR);
+		  if(message == null) message = NULL_ERROR;
+	      alert.setContentText(message);
+	      alert.showAndWait();
 	}
 
 	protected abstract void initialize()

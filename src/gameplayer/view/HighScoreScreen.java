@@ -104,8 +104,7 @@ public class HighScoreScreen extends Screen implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		setChanged();
-		notifyObservers(o.getClass().getSimpleName());
-
+		notifyObservers(arg);
 	}
 
 }
