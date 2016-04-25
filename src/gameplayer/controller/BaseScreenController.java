@@ -57,7 +57,9 @@ public class BaseScreenController extends BranchScreenController {
 			File initialDirectory = new File("gamefiles");
 			fileChooser.setInitialDirectory(initialDirectory);
 			File file = fileChooser.showSaveDialog(new Stage());
-			c.saveForPlaying(file);
+			if (file != null) {
+				c.saveForPlaying(file);
+			}
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 			myScreen.showError(e.getMessage());
@@ -114,7 +116,8 @@ public class BaseScreenController extends BranchScreenController {
 				Class<?> myClass = Class.forName(myResources.getString(methodName));
 				Object arg2 = myClass.cast(myList.get(1));
 				Class[] parameterTypes = { myClass };
-				this.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(this, arg2);
+				Object[] parameters = { arg2 };
+				this.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(this, parameters);
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 				| SecurityException | ClassNotFoundException e) {

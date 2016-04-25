@@ -301,12 +301,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		IAuthoringActor realRefActor = refActor.get(0);
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showSaveDialog(new Stage());
-		CreatorController controller;
-		try {
-			controller = new CreatorController(game, guiMain);
+		CreatorController controller = new CreatorController(game, guiMain);
+		if (file != null) {
 			controller.saveForEditing(file);
-		} catch (ParserConfigurationException e) {
-			guiMain.showError(e.getMessage());
 		}
 
 	}
@@ -353,8 +350,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 
 	public void addActor() {
 		IAuthoringActor newActor = (IAuthoringActor) new Actor();
-		newActor.setID(myActorMap.size());
 		myActorMap.put(newActor, new ArrayList<>());
+		newActor.setID(myActorMap.size());
 		myActorNames.add(newActor.getName());
 		mainScreen.createActorPreviewUnit(newActor, actorEnvironment);
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());

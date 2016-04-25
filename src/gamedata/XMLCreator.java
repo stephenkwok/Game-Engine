@@ -3,9 +3,6 @@ package gamedata;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Observable;
-import java.util.Observer;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -21,7 +18,6 @@ import org.xml.sax.SAXException;
 
 import com.thoughtworks.xstream.XStream;
 
-import gameengine.controller.Game;
 
 
 
@@ -34,11 +30,11 @@ public class XMLCreator {
 		myXStream.autodetectAnnotations(true);
 	}
 
-	public void saveGame (Object game, File file) throws SAXException, IOException, TransformerException, ParserConfigurationException {
+	public void save (Object object, File file) throws SAXException, IOException, TransformerException, ParserConfigurationException {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		
-		String xml = this.myXStream.toXML(game);
+		String xml = this.myXStream.toXML(object);
 		Document document = documentBuilder.parse(new InputSource(new StringReader(xml)));
 		convertDocumentToFile(document, file);
 	}
