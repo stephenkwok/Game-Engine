@@ -13,6 +13,7 @@ public class TestPresetActorFactory {
 		System.out.println(actors);
 		for (Actor actor : actors) {
 			System.out.println(actor.getID());
+			System.out.println(actor.isMainPlayer());
 		}
 	}
 

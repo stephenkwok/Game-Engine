@@ -23,10 +23,9 @@ import javafx.scene.layout.*;
 
 public class PreviewUnitWithEditable extends ObjectObservable implements IEditingElement {
 
-	private static final String IMAGE_TEXT_PADDING = "    ";
 	private static final Double IMAGE_FIT_SIZE = 75.0;
 	private static final Double LABEL_PADDING = 10.0;
-	private static final Double HBOX_SPACING = 10.0;
+	private static final Double HBOX_SPACING = 5.0;
 	private HBox myHBox;
 	private Label myLabel;
 	private IEditableGameElement myEditable;
@@ -36,11 +35,12 @@ public class PreviewUnitWithEditable extends ObjectObservable implements IEditin
 		myEditable = editable;
 		myEnvironment = environment;
 		myLabel = new Label();
+		myLabel.setPadding(new Insets(LABEL_PADDING));
+		myLabel.setOnMouseClicked(e -> setButtonAction());
+		myLabel.wrapTextProperty().setValue(true);
 		myHBox = new HBox(myLabel);
 		myHBox.setAlignment(Pos.CENTER_LEFT);
 		myHBox.setSpacing(HBOX_SPACING);
-		myLabel.setPadding(new Insets(LABEL_PADDING));
-		myLabel.setOnMouseClicked(e -> setButtonAction());
 	}
 	
 	//testing
@@ -53,7 +53,7 @@ public class PreviewUnitWithEditable extends ObjectObservable implements IEditin
 	 * Actor or Level's name and image
 	 */
 	public void update() {
-		myLabel.setText(IMAGE_TEXT_PADDING + myEditable.getName());
+		myLabel.setText(myEditable.getName());
 		ImageView imageView = new ImageView(myEditable.getImageView().getImage());
 		imageView.setFitHeight(IMAGE_FIT_SIZE);
 		imageView.setPreserveRatio(true);

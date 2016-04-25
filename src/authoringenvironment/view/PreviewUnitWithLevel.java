@@ -9,7 +9,7 @@ import javafx.scene.layout.Priority;
 
 public class PreviewUnitWithLevel extends PreviewUnitWithEditable {
 
-	private static final String TEXT_FIELD_PROMPT_TEXT = "Enter Play Position";
+	private static final String TEXT_FIELD_PROMPT_TEXT = "Enter Play Pos.";
 	private static final Double TEXT_FIELD_WIDTH = 125.0;
 	private TextField myTextField;
 	

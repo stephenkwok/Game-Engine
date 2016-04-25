@@ -1,10 +1,8 @@
 package gui.view;
 
 import java.util.Observer;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingElement;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import authoringenvironment.model.*;
+import javafx.event.*;
 import javafx.scene.control.Button;
 
 /**
@@ -18,11 +16,14 @@ import javafx.scene.control.Button;
  */
 public abstract class EditingElementParent extends ObjectObservable implements IGUIElement, IEditingElement {
 	
+	private static final double BUTTON_WIDTH = 40.0;
+	private static final double BUTTON_HEIGHT = 15.0;
 	private IEditableGameElement myEditableElement;
 	private Button myButton;
 
 	public EditingElementParent(String buttonText) {
 		myButton = new Button(buttonText);
+		myButton.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 	}
 	
 	@Override
