@@ -38,6 +38,9 @@ public class PhysicsEngine {
 		a1.setVeloX(nextXVelo);
 		a1.setX(bound(nextXPos));
 		a1.setVeloY(nextYVelo);
+		if(bound(nextYPos)==0){
+			a1.setVeloY(0);
+		}
 		a1.setY(bound(nextYPos));
 	}
 	
