@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import gui.view.IGUIElement;
 import gui.view.Screen;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableMap;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -61,20 +63,19 @@ public class BaseScreen extends Screen implements Observer {
 	private void addHUD() {
 		
 		notifyObservers("addHUD");
-		/*
-		ObservableMap<String, Object> status = FXCollections.observableHashMap();
-		status.put("health", 20);
-		status.put("level", 2);
-		HUDScreen myHud = new HUDScreen(SCREEN_WIDTH,SCREEN_WIDTH,status);
-		*/
-		/*
-		HUDScreen myHud = new HUDScreen(SCREEN_WIDTH, SCREEN_WIDTH, 
-				myBaseScreenController.getMyGameController().getGame().getHUDData());
-		myBaseScreenController.getMyGameController().setHUD(myHud);
-		myHud.init();
-		myP.getChildren().add(myHud.getScene());
-		myMasterPane.setBottom(myP);
-		//myMasterPane.setBottom(new Text("HELLO!!!!")); */
+//		
+//		ObservableMap<String, Object> status = FXCollections.observableHashMap();
+//		status.put("health", 20);
+//		status.put("level", 2);
+//		HUDScreen myHud = new HUDScreen(SCREEN_WIDTH,SCREEN_WIDTH,status);
+//		
+//		
+//		//HUDScreen myHud = new HUDScreen(SCREEN_WIDTH, SCREEN_WIDTH, 
+//		//		myBaseScreenController.getMyGameController().getGame().getHUDData());
+//		myHud.init();
+//		myP.getChildren().add(myHud.getScene());
+//		myMasterPane.setBottom(myP);
+//		//myMasterPane.setBottom(new Text("HELLO!!!!")); */
 	}
 
 	

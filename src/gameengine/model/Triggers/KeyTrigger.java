@@ -6,8 +6,10 @@ import javafx.scene.input.KeyCode;
 public class KeyTrigger extends ITrigger {
 
     private String myKey;
-
+    private KeyCode myKeyCode;
+    
     public KeyTrigger(KeyCode key) {
+    	myKeyCode = key;
         setMyKey(key.getName());
     }
 
@@ -17,6 +19,10 @@ public class KeyTrigger extends ITrigger {
 
     public void setMyKey(String myKey) {
         this.myKey = myKey;
+    }
+    
+    public KeyCode getMyKeyCode() {
+    	return myKeyCode;
     }
 
     /**

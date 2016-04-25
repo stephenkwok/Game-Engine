@@ -7,7 +7,7 @@ import java.util.Observable;
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
 
-public class Spawn extends Action{
+public class Spawn extends ActorAction{
 
 	public Spawn(IPlayActor actor1) {
 		super(actor1);

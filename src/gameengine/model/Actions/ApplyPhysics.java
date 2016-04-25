@@ -2,7 +2,7 @@ package gameengine.model.Actions;
 
 import gameengine.model.IPlayActor;
 
-public class ApplyPhysics extends Action {
+public class ApplyPhysics extends ActorAction {
 
 	public ApplyPhysics(IPlayActor actor) {
 		super(actor);
