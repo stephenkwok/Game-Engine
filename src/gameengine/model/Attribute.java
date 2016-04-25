@@ -2,6 +2,7 @@ package gameengine.model;
 
 import gameengine.model.Triggers.AttributeReached;
 import java.util.*;
+import Utilities.HUD.Property;
 
 /**
  * This class is purposed to store properties belonging to an actor that are updated throughout the game 
@@ -11,14 +12,14 @@ import java.util.*;
  */
 public class Attribute extends Observable {
 
-    private int myValue;
+    private Property myValue;
     private Set<Integer> myTriggerValues;
     private AttributeType myType;
     private IGameElement myOwner;
 
     public Attribute(AttributeType type, int initialValue, IGameElement owner) {
         myType = type;
-        myValue = initialValue;
+        myValue = new Property(initialValue,owner.getName()+type.toString());
         myTriggerValues = new HashSet<Integer>();
         myOwner = owner;
     }
@@ -29,12 +30,9 @@ public class Attribute extends Observable {
      * @param change The amount to change the value by
      */
     public void changeAttribute(int change) {
-        myValue += change;
-        //for bobby
-//        setChanged();
-//        notifyObservers();
-        if(myTriggerValues.size()>0 && myTriggerValues.contains(myValue)){
-        	myOwner.handleReachedAttribute(new AttributeReached(myType,myOwner,myValue));
+        myValue.setValue((int)myValue.getValue()+change);
+        if(myTriggerValues.size()>0 && myTriggerValues.contains((int)myValue.getValue())){
+        	myOwner.handleReachedAttribute(new AttributeReached(myType,myOwner,(int)myValue.getValue()));
         }
     }
 	
@@ -53,7 +51,7 @@ public class Attribute extends Observable {
      * @return  The Attribute's current value
      */
     public int getMyValue() {
-        return myValue;
+        return (int)myValue.getValue();
     }
 
     /**

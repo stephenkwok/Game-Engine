@@ -1,19 +1,23 @@
 package authoringenvironment.controller;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+
 import javax.xml.parsers.ParserConfigurationException;
+
 import authoringenvironment.model.*;
 import authoringenvironment.view.*;
 import gamedata.controller.*;
 import gameengine.controller.*;
 import gameengine.model.Actor;
+import gameplayer.controller.*;
 import gameengine.model.IPlayActor;
 import gameengine.model.Rule;
 import gameplayer.controller.BranchScreenController;
 import gui.view.*;
 import javafx.geometry.Insets;
-import javafx.scene.*;
+import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -51,8 +55,10 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private BorderPane myRoot;
 	private GUIFactory factory;
 	private Scene splashScene;
+	private PopUpAuthoringHelpPage helpPage;
 
-	public Controller(Stage myStage) {
+	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
 		super(myStage);
 		this.myButtonResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
 		initNewGame();
@@ -68,7 +74,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	public Controller(Stage myStage, GUIMain guiMain) {
 		super(myStage);
 		this.guiMain = guiMain;
-		initNewGame();
+		// initNewGame();
 	}
 
 	// TODO Need a constructor that takes in a game passed by data and sets up
@@ -76,56 +82,76 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	public Controller(Game game, Stage myStage) {
 		super(myStage);
 		this.game = game;
+		initExistingGame();
 	}
 
-	public void initExistingGame() {
-		myLevels = game.getLevels();
-		gameInfo = game.getInfo();
-		init();
-		myLevels.stream().forEach(level -> mainScreen.createLevelPreviewUnit(level, levelEnvironment));
-		// for each actor, create preview unit
-		mainScreen.updatePreviewUnits();
-	}
-
-	public void init() {
-		myRoot = new BorderPane();
-		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
-		getStage().setScene(myScene);
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		factory = new GUIFactory(myResources);
-		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this); // need to initialize myActorMap first
-		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
-		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
-		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);
-		setTopPane();
-		setCenterPane();
-	}
-
-	public void initNewGame() {
-		myRoot = new BorderPane();
-		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
-		getStage().setScene(myScene);
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		factory = new GUIFactory(myResources);
-		myLevels = new ArrayList<>(); 
-		myLevelNames = new ArrayList<>(); 
-		myActorMap = new HashMap<>(); //
-		myActorNames = new ArrayList<>(); 
-		gameInfo = new GameInfo(); 
-		game = new Game(gameInfo, myLevels); 
-		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
-		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
+	/**
+	 * Initializes Controller for newly created game
+	 * 
+	 * @throws InvocationTargetException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 * @throws SecurityException
+	 * @throws NoSuchMethodException
+	 */
+	public void initNewGame() throws NoSuchMethodException, SecurityException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
 		myLevels = new ArrayList<>();
 		myLevelNames = new ArrayList<>();
 		myActorMap = new HashMap<>();
 		myActorNames = new ArrayList<>();
-		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
 		gameInfo = new GameInfo();
+		gameInfo.setActorMap(myActorMap);
 		game = new Game(gameInfo, myLevels);
+		initializeGeneralComponents();
+		initializePresetActors();
+	}
+
+	/**
+	 * Initializes controller for previously created game
+	 */
+	public void initExistingGame() {
+		myLevels = game.getLevels();
+		gameInfo = game.getInfo();
+		myActorMap = gameInfo.getActorMap();
+		myLevels.stream().forEach(level -> mainScreen.createLevelPreviewUnit(level, levelEnvironment));
+		myActorMap.keySet().stream().forEach(actor -> mainScreen.createActorPreviewUnit(actor, actorEnvironment));
+		initializeGeneralComponents();
+	}
+
+	/**
+	 * Initializes controller components that remain the same regardless of
+	 * whether the Game to be edited is new or previously created
+	 */
+	public void initializeGeneralComponents() {
+		myRoot = new BorderPane();
+		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
+		getStage().setScene(myScene);
+		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
+		factory = new GUIFactory(myResources);
+		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
+		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
 		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);
 		setTopPane();
 		setCenterPane();
+	}
+
+	/**
+	 * Creates and displays preset actors
+	 * 
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
+	private void initializePresetActors() throws NoSuchMethodException, SecurityException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
+		PresetActorFactory presetActorFactory = new PresetActorFactory();
+		List<Actor> presetActors = presetActorFactory.getPresetActors();
+		presetActors.stream().forEach(actor -> myActorMap.put(actor, new ArrayList<>()));
+		presetActors.stream().forEach(actor -> mainScreen.createActorPreviewUnit(actor, actorEnvironment));
 	}
 
 	/**
@@ -353,6 +379,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 			saveGame();
 		else if (arg0 instanceof TextFieldActorNameEditor)
 			updateActors((IAuthoringActor) arg1);
+		else if (arg0 instanceof ButtonHelpPage) {
+			helpPage = new PopUpAuthoringHelpPage();
+		}
 	}
 
 	// checking to see if this works with name
@@ -364,16 +393,16 @@ public class Controller extends BranchScreenController implements Observer, IAut
 			toUpdate.setName(actor.getName());
 		}
 	}
-	
+
 	public void updateRefActorSize(IAuthoringActor actor) {
-		for (IAuthoringActor refActor: myActorMap.keySet()) {
+		for (IAuthoringActor refActor : myActorMap.keySet()) {
 			if (myActorMap.get(refActor).contains(actor)) {
 				refActor.setSize(actor.getSize());
 				updateActors(refActor);
 			}
 		}
 	}
-	
+
 	// copy IDs
 	private void copyActor(IAuthoringActor toUpdate, IAuthoringActor toCopy) {
 		toUpdate.setName(toCopy.getName());
@@ -405,18 +434,21 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
 		goToEditingEnvironment(editable, environment);
 	}
-	
+
 	public ActorEditingEnvironment getActorEditingEnvironment() {
 		return actorEnvironment;
 	}
-	
+
 	public LevelEditingEnvironment getLevelEditingEnvironment() {
 		return levelEnvironment;
 	}
 
+<<<<<<< HEAD
 	@Override
 	public void setHUDInfoFile(String location) {
 		game.setHUDInfoFile(location);
 		
 	}
+=======
+>>>>>>> master
 }

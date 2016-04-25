@@ -1,6 +1,5 @@
 package utilities.hud;
 
-
 import gameengine.controller.Game;
 import gameengine.model.AttributeType;
 
