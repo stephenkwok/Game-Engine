@@ -16,8 +16,8 @@ import gameengine.model.Actor;
 import gameengine.model.IDisplayActor;
 import gameengine.model.IPlayActor;
 import gameplayer.view.GameScreen;
-import gameplayer.view.HUDScreen;
 import javafx.scene.ParallelCamera;
+import utilities.hud.AbstractHUDScreen;
 
 /**
  * This class serves as the private interface that any game controller must
@@ -33,7 +33,7 @@ public class GameController implements Observer, IGameController {
 	@XStreamOmitField
 	private GameScreen view;
 	@XStreamOmitField
-	private HUDScreen hud;
+	private AbstractHUDScreen hud;
 
 	private ResourceBundle myResources;
 	private static final String GAME_CONTROLLER_RESOURCE = "gameActions";
@@ -69,7 +69,7 @@ public class GameController implements Observer, IGameController {
 		view.addObserver(this);
 	}
 
-	public void setHUD(HUDScreen hud) {
+	public void setHUD(AbstractHUDScreen hud) {
 		this.hud = hud;
 	}
 

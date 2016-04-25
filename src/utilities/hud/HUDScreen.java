@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.SubScene;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 
 
@@ -15,7 +16,7 @@ public class HUDScreen extends AbstractHUDScreen {
 
 	
 	private static final int DEFAULT_HEIGHT = 100;
-	private static final int DEFAULT_WIDTH = 200;
+	private static final int DEFAULT_WIDTH = 1000;
 	
 	private Map<String, Property> status;
 	Map<String, Integer> valueToRowMap;
@@ -35,10 +36,11 @@ public class HUDScreen extends AbstractHUDScreen {
 		for (int i = 0; i<rowToValueMap.size(); i++) {
 			valueToRowMap.put(rowToValueMap.get(i), i);
 		}
+		init();
 	}
 	
 	public HUDScreen(Map<String, Property> status, Map<Integer, String> rowToValueMap) {
-		this(DEFAULT_HEIGHT, DEFAULT_WIDTH, status, rowToValueMap);
+		this(DEFAULT_WIDTH, DEFAULT_HEIGHT, status, rowToValueMap);
 	}
 	
 	public HUDScreen(double width, double height, Map<String, Property> status) {
@@ -57,7 +59,6 @@ public class HUDScreen extends AbstractHUDScreen {
 	
 	
 	public void init() {
-		
 		keys = FXCollections.observableArrayList();
 		values = FXCollections.observableArrayList();
         ListView<String> keyView = new ListView<>(keys);
@@ -75,7 +76,11 @@ public class HUDScreen extends AbstractHUDScreen {
         	values.add(status.get(rowToValueMap.get(i)).toString());
         }
         
-        mySubGroup.getChildren().add(container);
+        ScrollPane superContainer = new ScrollPane();
+        superContainer.setContent(container);
+        superContainer.setPrefSize(myScene.getWidth(), myScene.getHeight());
+        
+        mySubGroup.getChildren().add(superContainer);
         
 	}
 	

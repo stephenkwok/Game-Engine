@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 
-public class HUDModel extends Observable {
+public class HUDModel {
 	
 	private Map<String, Property> data;
 	
@@ -23,7 +23,12 @@ public class HUDModel extends Observable {
 	}
 	
 	public void handleChange(ValueChange change) {
-		data.get(change.getFieldName()).setValue(change.getNewValue());
+		
+		if (data.containsKey(change.getFieldName()) &&
+			!data.get(change.getFieldName()).getValue().equals(change.getNewValue())) {
+				data.get(change.getFieldName()).setValue(change.getNewValue());
+		}
+		
 	}
 	
 }
