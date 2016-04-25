@@ -30,6 +30,7 @@ public class BaseScreenController extends BranchScreenController {
 		super(myStage);
 		// DEPENDENCY!!
 		this.myGameController = gameController;
+		myGameController.addObserver(this);
 		setUpScreen();
 		this.myResources = ResourceBundle.getBundle(BASE_CONTROLLER_RESOURCE);
 		changeScreen(myScreen);
@@ -50,7 +51,7 @@ public class BaseScreenController extends BranchScreenController {
 	}
 
 	private void saveGame() {
-		this.myGameController.togglePause();
+		togglePause();
 		try {
 			CreatorController c = new CreatorController(myGameController.getGame(), this.myScreen);
 			FileChooser fileChooser = new FileChooser();
@@ -60,11 +61,12 @@ public class BaseScreenController extends BranchScreenController {
 			if (file != null) {
 				c.saveForPlaying(file);
 			}
+			
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 			myScreen.showError(e.getMessage());
 		}
-
+		toggleUnPause();
 	}
 
 	private void switchGame() {
@@ -88,9 +90,7 @@ public class BaseScreenController extends BranchScreenController {
 		// TODO fix this ish
 		myGameController.getView().clearGame();
 		ParserController parserController = new ParserController(myScreen);
-		System.out.println("Before");
 		Game initialGame = parserController.loadforPlaying(new File(myGameController.getGame().getInitialGameFile()));
-		System.out.print("after");
 		myGameController.setGame(initialGame);
 		myGameController.initialize(0);
 	}
