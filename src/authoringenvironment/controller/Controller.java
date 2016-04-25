@@ -511,7 +511,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	}
 
 
-	
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
 		List<Object> arguments = (List<Object>) notifyObserversArgument;
 		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
