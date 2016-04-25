@@ -6,7 +6,7 @@ import authoringenvironment.view.ActionFactory;
 import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.TriggerFactory;
 import gameengine.model.IAction;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 import gui.view.TextFieldWithButton;
 /**
  * GUI representation of behaviors that take in a single Double as a parameter

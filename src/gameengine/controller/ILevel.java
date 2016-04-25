@@ -2,7 +2,7 @@ package gameengine.controller;
 
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.IPlayActor;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 
 import java.util.List;
 

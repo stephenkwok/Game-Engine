@@ -4,7 +4,8 @@ import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import authoringenvironment.model.*;
-import authoringenvironment.view.ActorRule;
+import gameengine.model.Triggers.AttributeReached;
+import gameengine.model.Triggers.ITrigger;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,7 +13,6 @@ import javafx.scene.image.ImageView;
 
 /**
  * This class defines the logic for an Actor object.
- * Each interactive element in the Game is an Actor. Actors contains a set of rules that are contained
  * within the myRules map. When provided with a Trigger object, all actions associated with a particular Trigger
  * are executed. The Actor also extends the ImageView class so they will also be visual elements.
  *
@@ -34,12 +34,10 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	private double myHeading;
     @XStreamOmitField
     private ImageView myImageView;
-    private Map<String, List<Rule>> myRules;
-    private Map<AttributeType, Attribute> attributeMap;
+    private RuleManager myRuleManager;
+    private AttributeManager myAttributeManager;
     private PhysicsEngine myPhysicsEngine;
-    private List<ActorRule> myActorRules;
     private Set<ActorState> myStates;
-    private double myHeight;
     private Sprite mySprite;
     private boolean isMainPlayer;
     private boolean isVisible;
@@ -48,45 +46,35 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      * Converts a list of Rules to a map of trigger to list of Actions
      */
     public Actor() {
-    	myRules =  new HashMap<>();
-        attributeMap = new HashMap<>();
-        myActorRules = new ArrayList<>();
+    	myRuleManager = new RuleManager();
+    	myAttributeManager = new AttributeManager();
         myStates = new HashSet<>();
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
         mySprite = new Sprite();
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
-        myHeight = myImageView.getFitHeight();
         isMainPlayer = false;
         isVisible = true;
     }
-
-    public List<ActorRule> getMyActorRules() {
-		return myActorRules;
-	}
     
     /**
      * Calls the appropriate sequence of Actions based on a provided Trigger
      *
      * @param myTrigger The trigger to be used
      */
-    public void performActionsFor(ITrigger myTrigger) {
-    	if(getRules().containsKey(myTrigger.getMyKey())){
-            List<Rule> myBehaviors = myRules.get(myTrigger.getMyKey());
-            for (Rule myRule : myBehaviors) {
-                if (myRule.getMyTrigger().evaluate(myTrigger)) myRule.getMyAction().perform();
-            }
-    	}
+    @Override
+    public void handleTrigger(ITrigger myTrigger) {
+    	myRuleManager.handleTrigger(myTrigger);
     }
 
     /**
      * Adds a new Attribute to an Actors
      *
-     * @param newAttribute The new Actor Attribute
+     * @param attribute The new Actor Attribute
      */
-    public void addAttribute(Attribute newAttribute) {
-    	newAttribute.addObserver(this);
-        getAttributeMap().put(newAttribute.getMyType(), newAttribute);
+    @Override
+    public void addAttribute(Attribute attribute) {
+        myAttributeManager.addAttribute(attribute);
     }
 
     /**
@@ -94,9 +82,9 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      *
      * @param type The new Actor Attribute Type
      */
-
+    @Override
     public Attribute getAttribute(AttributeType type){
-    	return getAttributeMap().get(type);
+    	return myAttributeManager.getAttribute(type);
     }
 
     /**
@@ -106,11 +94,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      * @param change The amount to change the Attribute by
      */
     public void changeAttribute(AttributeType type, int change) {
-
-        Attribute myAttribute = getAttributeMap().get(type);
-        if(myAttribute!=null){
-            myAttribute.changeAttribute(change);
-        }
+    	myAttributeManager.changeAttribute(type, change);
     }
 
     /**
@@ -120,14 +104,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      */
     @Override
     public void addRule(Rule newRule) {
-    	List<Rule> myBehaviors;
-        if (myRules.containsKey(newRule.getMyTrigger().getMyKey())) {
-            myBehaviors = myRules.get(newRule.getMyTrigger().getMyKey());
-        } else {
-            myBehaviors = new ArrayList<>();
-        }
-        myBehaviors.add(newRule);
-        myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
+        myRuleManager.addRule(newRule);
     }
 
     /**
@@ -279,7 +256,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	public void setImageViewName(String myImageViewName) {
 		this.myImageViewName = myImageViewName;
         mySprite.setImage(myImageViewName);
-		this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
+        this.setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
 	}
 
     /**
@@ -320,23 +297,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
      * @return  The Actor's Rules
      */
     public Map<String, List<Rule>> getRules() {
-		return myRules;
-	}
-
-    /**
-     * Sets the Actor's Rules
-     * @param myRules   A new set of Actor rules
-     */
-    public void setMyRules(Map<String, List<Rule>> myRules) {
-		this.myRules = myRules;
-	}
-
-    /**
-     * Provides the Attribute map
-     * @return  The Actor's Attribute Map
-     */
-    public Map<AttributeType, Attribute> getAttributeMap() {
-		return attributeMap;
+		return myRuleManager.getRules();
 	}
 
     /**
@@ -355,16 +316,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     public void setSize(double size){
 		myImageView.setFitHeight(size);
 		myImageView.setPreserveRatio(true);
-		myHeight = size;
-	}
-
-    /**
-     * Provides the List of the Actor's Rules
-     * @return  The Actor's ActorRules
-     */
-	@Override
-    public List<ActorRule> getActorRules(){
-		return myActorRules;
 	}
 	
 	@Override
@@ -394,14 +345,14 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 			setChanged();
 			notifyObservers(arg);
 		}
-		if(checkState(ActorState.MAIN)){
-			setChanged();
-			notifyObservers("updateAttribute");
-		}
+//		if(checkState(ActorState.MAIN)){
+//			setChanged();
+//			notifyObservers("updateAttribute");
+//		}
 	}
 	
-	public double getSize() {
-		return myHeight;
+		public double getSize() {
+		return myImageView.getFitHeight();
 	}
 
 	@Override
@@ -423,6 +374,24 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     public int getID() {
         return myID;
     }
+
+	@Override
+	public void handleReachedAttribute(AttributeReached trigger) {
+		setChanged();
+		notifyObservers(Arrays.asList(new Object[]{"handleTrigger",trigger}));
+	}
+
+	@Override
+	public void removeAttribute(Attribute attribute) {
+		myAttributeManager.removeAttribute(attribute);
+		
+	}
+
+	@Override
+	public void removeRule(Rule rule) {
+		myRuleManager.removeRule(rule);
+		
+	}
 
     public void setDirection(){
         if (getHeading() == 0) myImageView.setScaleX(1);
@@ -453,3 +422,4 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		this.isVisible = isVisible;
 	}
 }
+
