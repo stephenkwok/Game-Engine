@@ -17,4 +17,5 @@ public interface IGameElement {
     public void removeRule(Rule rule);
     public void handleTrigger(ITrigger trigger);
     public Map<String, List<Rule>> getRules();
+    public void changed();
 }

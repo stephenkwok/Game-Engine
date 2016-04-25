@@ -21,7 +21,7 @@ import javafx.util.Duration;
 
 public class Game extends Observable implements Observer {
 	public static final int SIZE = 400;
-	public static final int FRAMES_PER_SECOND = 60;
+	public static final int FRAMES_PER_SECOND = 50;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	private static final int BACKGROUND_SCROLL_SPEED = -1;
 
@@ -71,9 +71,8 @@ public class Game extends Observable implements Observer {
 		setAnimation(new Timeline());
 		getAnimation().setCycleCount(Timeline.INDEFINITE);
 		getAnimation().getKeyFrames().add(frame);
-		
 
-	}
+    }
 
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
 		this(null, gameInfo, gameLevels);

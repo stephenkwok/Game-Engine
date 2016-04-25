@@ -5,20 +5,21 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import gameengine.model.Actor;
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 
 public class WinGame extends Action {
 
-	public WinGame(IPlayActor actor) {
-		super(actor);
-	}
+    public WinGame(IGameElement myGameElement) {
+        super(myGameElement);
+    }
 
-	@Override
-	public void perform() {
-        getMyActor().changed();
+    @Override
+    public void perform() {
+        getGameElement().changed();
         ArrayList<String> myList = new ArrayList<String>();
         myList.add("endGame");
-        ((Observable) getMyActor()).notifyObservers(myList);		
-	}
+        ((Observable) getGameElement()).notifyObservers(myList);
+    }
 
 }
