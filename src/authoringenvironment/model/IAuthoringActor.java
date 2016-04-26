@@ -148,4 +148,12 @@ public interface IAuthoringActor extends IEditableGameElement {
     
     public void setPhysicsEngine(PhysicsEngine myPhysicsEngine);
     //public void setRuleMap(Map<String, List<Rule>> updatedRules);
+    
+    public void setRotate(double rotate);
+    
+    public double getRotate();
+    
+    public void setOpacity(double opacity);
+    
+    public double getOpacity();
 }
