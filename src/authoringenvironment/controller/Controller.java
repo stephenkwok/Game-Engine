@@ -357,7 +357,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		mainScreen.createActorPreviewUnit(newActor, actorEnvironment);
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
-		System.out.println(newActor.getMyID());
+		System.out.println(newActor.getID());
 	}
 
 	public double getSceneWidth() {
