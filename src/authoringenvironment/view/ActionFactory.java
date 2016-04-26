@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import gameengine.model.IAction;
@@ -30,6 +32,7 @@ public class ActionFactory {
 	private static final String ACTIONS = "Actions.";
 	private static final String CLASS = "Class";
 	private static final String CREATE = "create";
+	@XStreamOmitField
 	private ResourceBundle myResources;
 	private List<Object> arguments;
 
