@@ -30,11 +30,11 @@ public class CreateActor extends ActorAction {
 		((Observable) getMyActor()).notifyObservers(Arrays.asList(new Object[]{"addActor",cloneActor}));
 	}
 
-	public Double getMyX() {
+	public double getMyX() {
 		return myX;
 	}
 	
-	public Double getMyY() {
+	public double getMyY() {
 		return myY;
 	}
 	

@@ -31,7 +31,7 @@ public class ChangeAttribute extends Action {
 		return myType;
 	}
 	
-	public Integer getMyValue() {
+	public int getMyValue() {
 		return myChange;
 	}
 }

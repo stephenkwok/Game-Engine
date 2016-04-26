@@ -42,17 +42,24 @@ public class ActorCopier {
 	private static final String WIN_LOSE = "WinLose";
 	private Actor myReferenceActor;
 	private ResourceBundle myResources;
-
+	private ActionFactory myActionFactory;
+	private TriggerFactory myTriggerFactory;
+	
 	public ActorCopier() {
 		myReferenceActor = null;
-		myResources = ResourceBundle.getBundle(RESOURCE);
+		init();
 	}
 
 	public ActorCopier(Actor actor) {
 		myReferenceActor = actor;
-		myResources = ResourceBundle.getBundle(RESOURCE);
+		init();
 	}
 
+	public void init() {
+		myResources = ResourceBundle.getBundle(RESOURCE);
+		myActionFactory = new ActionFactory();
+		myTriggerFactory = new TriggerFactory();
+	}
 	public void setReferenceActor(Actor newReference) {
 		myReferenceActor = newReference;
 	}
@@ -155,17 +162,17 @@ public class ActorCopier {
 			KeyCode key = ((KeyTrigger) rule.getMyTrigger()).getMyKeyCode();
 			triggerToAdd = (KeyTrigger) triggerConstructor.newInstance(key);
 		} else if (checkType(triggerClassName, TICK)) {
-			Constructor<?> triggerConstructor = triggerClass.getConstructor(Integer.class);
-			Integer interval = ((TickTrigger) rule.getMyTrigger()).getMyInterval();
+			Constructor<?> triggerConstructor = triggerClass.getConstructor(int.class);
+			int interval = ((TickTrigger) rule.getMyTrigger()).getMyInterval();
 			triggerToAdd = (TickTrigger) triggerConstructor.newInstance(interval);
 		} else if (checkType(triggerClassName, COLLISION)) {
 			Constructor<?> triggerConstructor = triggerClass.getConstructor(IPlayActor.class, IPlayActor.class);
 			IPlayActor collisionActor = ((CollisionTrigger) rule.getMyTrigger()).getMyCollisionActor();
 			triggerToAdd = (CollisionTrigger) triggerConstructor.newInstance(toUpdate, collisionActor);
 		} else if (checkType(triggerClassName, ATTRIBUTE)) {
-			Constructor<?> triggerConstructor = triggerClass.getConstructor(IGameElement.class, AttributeType.class, Integer.class);
+			Constructor<?> triggerConstructor = triggerClass.getConstructor(AttributeType.class, IGameElement.class, int.class);
 			AttributeReached trigger = (AttributeReached) rule.getMyTrigger();
-			triggerToAdd = (AttributeReached) triggerConstructor.newInstance(toUpdate, trigger.getMyType(), trigger.getMyValue());
+			triggerToAdd = (AttributeReached) triggerConstructor.newInstance(trigger.getMyType(), toUpdate, trigger.getMyValue());
 		} else if (checkType(triggerClassName, CLICK)) {
 			Constructor<?> triggerConstructor = triggerClass.getConstructor(IGameElement.class);
 //			IGameElement gameElement = ((ClickTrigger) rule.getMyTrigger()).getMyGameElement();
@@ -180,11 +187,11 @@ public class ActorCopier {
 		Class<?> actionClass = Class.forName(actionClassName);
 		//String actionClassName = getClassName(fullActionName);
 		if (checkType(actionClassName, ATTRIBUTE)) {
-			Constructor<?> actionConstructor = actionClass.getConstructor(IGameElement.class, AttributeType.class, Integer.class);
+			Constructor<?> actionConstructor = actionClass.getConstructor(IGameElement.class, AttributeType.class, int.class);
 			ChangeAttribute action = (ChangeAttribute) rule.getMyAction();
 			actionToAdd = (ChangeAttribute) actionConstructor.newInstance(toUpdate, action.getMyType(), action.getMyValue());
 		} else if (checkType(actionClassName, CREATE_ACTOR)) {
-			Constructor<?> actionConstructor = actionClass.getConstructor(IPlayActor.class, Actor.class, Double.class, Double.class);
+			Constructor<?> actionConstructor = actionClass.getConstructor(IPlayActor.class, Actor.class, double.class, double.class);
 			CreateActor action = (CreateActor) rule.getMyAction();
 			actionToAdd = (CreateActor) actionConstructor.newInstance(toUpdate, action.getMyActorToCopy(), action.getMyX(), action.getMyY());
 		} else if (checkType(actionClassName, WIN_LOSE)) {
@@ -206,9 +213,5 @@ public class ActorCopier {
 		}
 		return false;
 	}
-
-	private String getClassName(String name) {
-		String[] fullName = name.split(".");
-		return fullName[fullName.length - 1];
-	}
+	
 }

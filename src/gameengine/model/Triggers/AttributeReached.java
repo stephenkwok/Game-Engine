@@ -9,7 +9,7 @@ public class AttributeReached extends ITrigger {
 	//private IGameElement myTarget;
 	private int myTriggerValue;
 	
-	public AttributeReached(IGameElement target, AttributeType type, int triggerValue){
+	public AttributeReached(AttributeType type, IGameElement target, int triggerValue){
 		if(target.getAttribute(type)!=null){
 			target.getAttribute(type).addTriggerValue(triggerValue);
 		}
@@ -37,7 +37,7 @@ public class AttributeReached extends ITrigger {
 		return myTarget;
 	}*/
 	
-	public Integer getMyValue() {
+	public int getMyValue() {
 		return myTriggerValue;
 	}
 }
