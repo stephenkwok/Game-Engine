@@ -17,9 +17,9 @@ import gameengine.model.Actor;
 import gameengine.model.IDisplayActor;
 import gameengine.model.IPlayActor;
 import gameplayer.view.GameScreen;
-import gameplayer.view.HUDScreen;
 import javafx.animation.Timeline;
 import javafx.scene.ParallelCamera;
+import voogasalad.util.hud.source.AbstractHUDScreen;
 
 /**
  * This class serves as the private interface that any game controller must
@@ -35,7 +35,8 @@ public class GameController extends Observable implements Observer, IGameControl
 	@XStreamOmitField
 	private GameScreen view;
 	@XStreamOmitField
-	private HUDScreen hud;
+	private AbstractHUDScreen hud;
+
 	@XStreamOmitField
 	private ResourceBundle myResources;
 	@XStreamOmitField
@@ -72,7 +73,7 @@ public class GameController extends Observable implements Observer, IGameControl
 		view.addObserver(this);
 	}
 
-	public void setHUD(HUDScreen hud) {
+	public void setHUD(AbstractHUDScreen hud) {
 		this.hud = hud;
 	}
 
@@ -122,6 +123,7 @@ public class GameController extends Observable implements Observer, IGameControl
 		model.terminateGame();
 	}
 	
+
 	private void saveGameScore(String name) {
 		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
 		c.saveHighScore(getGame().getScore(), name);
@@ -240,10 +242,10 @@ public class GameController extends Observable implements Observer, IGameControl
 	}
 
 	/**
-	 * Updates attributes
+	 * Updates attributes - depracated
 	 */
 	public void updateAttribute() {
-		model.updateAttribute();
+		//model.getCurrentLevel().updateAttribute();
 	}
-
+	
 }

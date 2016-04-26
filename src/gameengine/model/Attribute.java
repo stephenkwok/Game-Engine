@@ -1,9 +1,10 @@
 package gameengine.model;
 
 import gameengine.model.Triggers.AttributeReached;
-import utilities.hud.Property;
 import java.util.*;
-import utilities.hud.Property;
+
+import voogasalad.util.hud.source.Property;
+
 
 /**
  * This class is purposed to store properties belonging to an actor that are
@@ -36,7 +37,7 @@ public class Attribute extends Observable {
     public void changeAttribute(int change) {
         myValue.setValue((int)myValue.getValue()+change);
         if(myTriggerValues.size()>0 && myTriggerValues.contains((int)myValue.getValue())){
-        	myOwner.handleReachedAttribute(new AttributeReached(myType,myOwner,(int)myValue.getValue()));
+        	myOwner.handleReachedAttribute(new AttributeReached(myType, myOwner, (int)myValue.getValue()));
         }
     }
 	

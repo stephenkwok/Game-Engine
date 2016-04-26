@@ -9,6 +9,7 @@ import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 
 public class WinGame extends Action {
+	private Actor assignedActor;
 
     public WinGame(IGameElement myGameElement) {
         super(myGameElement);
@@ -22,4 +23,11 @@ public class WinGame extends Action {
         ((Observable) getGameElement()).notifyObservers(myList);
     }
 
+	public Actor getAssignedActor() {
+		return assignedActor;
+	}
+
+	public void setAssignedActor(Actor assignedActor) {
+		this.assignedActor = assignedActor;
+	}
 }

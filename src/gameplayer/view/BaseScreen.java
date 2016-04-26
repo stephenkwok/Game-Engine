@@ -8,15 +8,11 @@ import java.util.Optional;
 
 import gui.view.IGUIElement;
 import gui.view.Screen;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableMap;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ToolBar;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import voogasalad.util.hud.source.*;
 
 /**
  * This class provides for a private interface to create a base screen view that
@@ -31,9 +27,9 @@ public class BaseScreen extends Screen implements Observer {
 	private static final String SIDE_BUTTONS = "SideButtons";
 
 	private BorderPane myPane;
-	private HUDScreen myHUD;
 	private GameScreen myGameScreen;
-
+	private AbstractHUDScreen hud;
+	
 	/**
 	 * Adds the auxiliary views, like the HUD display, ToolBar, and GameScreen,
 	 * to the BaseScreen
@@ -51,45 +47,20 @@ public class BaseScreen extends Screen implements Observer {
 		super();
 		this.myPane = new BorderPane();
 		setUpResourceBundle(BASE_RESOURCE);
-		initialize(); // HUD is actually added here
+		initialize();
 	}
 
-	@Override
-	protected void initialize() {
-		myPane.setTop(addToolbar(SIDE_BUTTONS));
-		addHUD();
-		getRoot().getChildren().add(myPane);
-	}
-
-	// depracated
-	private void addHUD() {
-
-		notifyObservers("addHUD");
-//		
-//		ObservableMap<String, Object> status = FXCollections.observableHashMap();
-//		status.put("health", 20);
-//		status.put("level", 2);
-//		HUDScreen myHud = new HUDScreen(SCREEN_WIDTH,SCREEN_WIDTH,status);
-//		
-//		
-//		//HUDScreen myHud = new HUDScreen(SCREEN_WIDTH, SCREEN_WIDTH, 
-//		//		myBaseScreenController.getMyGameController().getGame().getHUDData());
-//		myHud.init();
-//		myP.getChildren().add(myHud.getScene());
-//		myMasterPane.setBottom(myP);
-//		//myMasterPane.setBottom(new Text("HELLO!!!!")); */
-	}
 
 	public void setGameScreen(GameScreen screen) {
 		this.myGameScreen = screen;
 		this.myPane.setCenter(myGameScreen.getScene());
 	}
-
-	public void setHUDScreen(HUDScreen screen) {
-		this.myHUD = screen;
+	
+	public void setHUDScreen(AbstractHUDScreen screen) {
+		this.hud = screen;
 		IGUIElement hudPane = getFactory().createNewGUIObject("hudPane");
 		Pane myP = (Pane) hudPane.createNode();
-		myP.getChildren().add(myHUD.getScene());
+		myP.getChildren().add(hud.getScene());
 		this.myPane.setBottom(myP);
 	}
 
@@ -125,4 +96,11 @@ public class BaseScreen extends Screen implements Observer {
 	}
 
 
+	@Override
+	protected void initialize() {
+
+		myPane.setTop(addToolbar(SIDE_BUTTONS));
+		getRoot().getChildren().add(myPane);
+		
+	}
 }

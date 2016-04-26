@@ -1,21 +1,34 @@
 package gameengine.model.Actions;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
+
+import gameengine.model.IGameElement;
 
 public class NextLevel extends Action {
-
-	public NextLevel(Actor assignedActor) {
-		super(assignedActor);
-		// TODO Auto-generated constructor stub
+	private Actor assignedActor;
+	public NextLevel(IGameElement assignedElement) {
+		super(assignedElement);
 	}
 
 	@Override
 	public void perform() {
-
+		//System.out.println("OOOOH YEA NEXT LEVEL HAAHAHA YEA");
 		getGameElement().changed();
-        ((Observable) getGameElement()).notifyObservers("nextLevel");
+        ArrayList<String> myList = new ArrayList<String>();
+        myList.add("nextLevel");
+        ((Observable) getGameElement()).notifyObservers(myList);
+	}
+	
+	public Actor getAssignedActor() {
+		return assignedActor;
+	}
+
+	public void setAssignedActor(Actor assignedActor) {
+		this.assignedActor = assignedActor;
 	}
 
 }

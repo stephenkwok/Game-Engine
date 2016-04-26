@@ -1,6 +1,7 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
 
 public class GlideLeft extends GlidingAction {
 
