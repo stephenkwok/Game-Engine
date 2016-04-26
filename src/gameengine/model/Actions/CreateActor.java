@@ -2,31 +2,54 @@ package gameengine.model.Actions;
 
 import java.util.Arrays;
 import java.util.Observable;
+import java.util.Random;
 
 import authoringenvironment.view.ActorCopier;
+import gameengine.controller.IGame;
 import gameengine.model.Actor;
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 
-public class CreateActor extends ActorAction {
+public class CreateActor extends Action {
 	Actor cloneActor;
 	ActorCopier copier;
 	double myX;
 	double myY;
+    double myMinX;
+    double myMaxX;
+    double myMinY;
+    double myMaxY;
+    boolean isRandom;
 	
-	public CreateActor(IPlayActor actor, Actor toCopy, double x, double y) {
-		super(actor);
+	public CreateActor(IGameElement element, Actor toCopy, double x, double y) {
+		super(element);
 		copier = new ActorCopier(toCopy);
 		myX = x;
 		myY = y;
 	}
 
+    public CreateActor(IGameElement element, Actor toCopy, double minX, double maxX, double minY, double maxY){
+        super(element);
+        copier = new ActorCopier(toCopy);
+        isRandom = true;
+        myMaxX = maxX;
+        myMaxY = maxY;
+        myMinX = minX;
+        myMinY = minY;
+    }
+
 	@Override
 	public void perform() {
 		cloneActor = copier.makeCopy();
-		cloneActor.setX(myX);
+        if (isRandom){
+            myX = myMinX + (myMaxX - myMinX) * Math.random();
+            myY = myMinY + (myMaxY - myMinY) * Math.random();
+        }
+        System.out.println(myX + " " + myY);
+        cloneActor.setX(myX);
 		cloneActor.setY(myY);
-		getMyActor().changed();
-		((Observable) getMyActor()).notifyObservers(Arrays.asList(new Object[]{"addActor",cloneActor}));
+		getGameElement().changed();
+		((Observable) getGameElement()).notifyObservers(Arrays.asList(new Object[]{"addActor",cloneActor}));
 	}
 
 }
