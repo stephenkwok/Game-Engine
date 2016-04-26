@@ -32,15 +32,19 @@ public class Game extends Observable implements Observer {
 	private PhysicsEngine myPhysicsEngine;
 	private CollisionDetection myCollisionDetector;
 	private Map<String, Set<IGameElement>> activeTriggers;
-	@XStreamOmitField
-	private Timeline animation;
+
 	private List<IPlayActor> currentActors;
 	private List<IPlayActor> deadActors;
-	private ObservableMap<String, Object> HUDData;
     private int count;
-    private String hudInfoFile;
-
-
+    
+    private String hudInfoFileLocation = "HELLO";
+    public String myDefault = "AYY";
+    
+	@XStreamOmitField
+	private Timeline animation;
+    
+    
+    
     /**
      * A game is instantiated with a list of all levels in the game and a level to start on.
      * Upon instantiation, the actors from all levels are collected into a list and added to a map containing references from ID to actor.
@@ -93,8 +97,6 @@ public class Game extends Observable implements Observer {
 	public void startGame() {
 		initCurrentLevel();
 		initCurrentActors();
-		initHUDData();
-
 		animation.play();
 	}
 
@@ -353,73 +355,6 @@ public class Game extends Observable implements Observer {
 		this.animation = animation;
 	}
 
-	/**
-	 * Initializes the HUDData
-	 */
-
-	public void initHUDData() {
-		HUDData = FXCollections.observableHashMap();
-		updateHUDFields(info.getMyHUDOptions(), HUDData);
-		HUDData.addListener(new MapChangeListener<String, Object>() {
-			@Override
-			public void onChanged(Change<? extends String, ? extends Object> change) {
-				setChanged();
-				notifyObservers(change);// IDK if casting to observable causes
-										// issues with equality
-			}
-		});
-	}
-
-	/**
-	 * Provides the Game's HUDData
-	 * 
-	 * @return The Game's HUDData
-	 */
-
-	public Map<String, Object> getHUDData() {
-		return HUDData;
-	}
-
-	/**
-	 * Updates the HUD fields to be accounted for
-	 * 
-	 * @param keys
-	 *            The names of the fields to be represented
-	 * @param destinationMap
-	 *            The map to put the data into
-	 */
-
-	public void updateHUDFields(Collection<String> keys, Map<String, Object> destinationMap) {
-		for (String key : keys) {
-			Object value = null;
-			if (key.equals("Health")) {
-				// value = ((Attribute)
-				// mainCharacter.getAttribute(AttributeType.HEALTH)).getMyValue();
-			} else if (key.equals("Level")) {
-				value = info.getMyCurrentLevelNum();
-			} else if (key.equals("Ammo")) {
-				// todo
-			} else if (key.equals("Coins")) {
-				// todo
-			} else if (key.equals("Time")) {
-				// todo
-			} else if (key.equals("Points")) {
-				// value = ((Attribute)
-				// mainCharacter.getAttribute(AttributeType.POINTS)).getMyValue();
-			} else {
-				value = "Error";
-			}
-			destinationMap.put(key, value);
-		}
-	}
-
-	/**
-	 * Updates the HUD values
-	 */
-	public void updateAttribute() {
-		updateHUDFields(HUDData.keySet(), HUDData);
-	}
-
 	public int getScore() {
 		// return
 		// getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();
@@ -427,11 +362,12 @@ public class Game extends Observable implements Observer {
 	}
 
 	public void setHUDInfoFile(String location) {
-		hudInfoFile = location;
+		this.hudInfoFileLocation = location;
+		myDefault = location;
 		System.out.println(getHUDInfoFile());
 	}
 	
 	public String getHUDInfoFile() {
-		return hudInfoFile;
+		return this.hudInfoFileLocation;
 	}	
 }
