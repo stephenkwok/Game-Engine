@@ -167,7 +167,7 @@ public class Tester extends Application {
 		Attribute points = new Attribute(AttributeType.POINTS,0,(IGameElement)actor1);
 		actor1.addAttribute(points);
 		
-		ITrigger attreached = new AttributeReached(AttributeType.POINTS,(IGameElement)actor1,5);
+		ITrigger attreached = new AttributeReached((IGameElement)actor1, AttributeType.POINTS, 5);
 		Action wingame = new WinGame((IPlayActor) actor1);
 		
 		actor1.addRule(new Rule(attreached,wingame));

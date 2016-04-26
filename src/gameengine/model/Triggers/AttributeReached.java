@@ -6,7 +6,7 @@ import gameengine.model.IGameElement;
 public class AttributeReached extends ITrigger {
 	String myKey;
 	
-	public AttributeReached(AttributeType type,IGameElement target, int triggerValue){
+	public AttributeReached(IGameElement target, AttributeType type, int triggerValue){
 		if(target.getAttribute(type)!=null){
 			target.getAttribute(type).addTriggerValue(triggerValue);
 		}

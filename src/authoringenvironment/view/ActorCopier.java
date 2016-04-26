@@ -68,17 +68,19 @@ public class ActorCopier {
 				String triggerName = toAdd.get(i).getMyTrigger().getClass().getName();
 				Class<?> className;
 				try {
+					ITrigger triggerToAdd = createTrigger(toAdd.get(i), (IPlayActor) toUpdate);
+					Action actionToAdd = createAction(toAdd.get(i), (IPlayActor) toUpdate);
 					//for colettes test with tick
-					if (toAdd.get(i).getMyTrigger().getClass().equals(TickTrigger.class)){
+					/*if (toAdd.get(i).getMyTrigger().getClass().equals(TickTrigger.class)){
 						ITrigger trigger1 = toAdd.get(i).getMyTrigger();
-						
+
 						String actionName = toAdd.get(i).getMyAction().getClass().getName();
 						Class<?> actionClassName = Class.forName(actionName);
 						Constructor<?> actionConstructor = actionClassName.getConstructor(IPlayActor.class);
 						Action actionToAdd = (Action) actionConstructor.newInstance((IPlayActor) toUpdate);
-						
+
 						toUpdate.addRule(new Rule(trigger1,actionToAdd));
-						
+
 					}else{
 					className = Class.forName(triggerName);
 					Constructor<?> triggerConstructor = className.getConstructor(KeyCode.class);
@@ -90,14 +92,10 @@ public class ActorCopier {
 					Class<?> actionClassName = Class.forName(actionName);
 					Constructor<?> actionConstructor = actionClassName.getConstructor(IPlayActor.class);
 					Action actionToAdd = (Action) actionConstructor.newInstance((IPlayActor) toUpdate);
-
-
-					//ITrigger triggerToAdd = toAdd.get(i).getMyTrigger();
-					//Action action = toAdd.get(i).getMyAction();
-					//action.setMyActor((IPlayActor) (toUpdate));
+					 */
 					Rule rule = new Rule(triggerToAdd, actionToAdd);
 					rule.setID(toAdd.get(i).getID() + 1);
-					toUpdate.addRule(rule);}
+					toUpdate.addRule(rule);
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -123,5 +121,24 @@ public class ActorCopier {
 
 			}
 		}
+
+
+	}
+
+	private ITrigger createTrigger(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		String triggerName = rule.getMyTrigger().getClass().getName();
+		Class<?> className = Class.forName(triggerName);
+		Constructor<?> triggerConstructor = className.getConstructor(KeyCode.class);
+		KeyCode key = ((KeyTrigger) rule.getMyTrigger()).getMyKeyCode();
+		ITrigger triggerToAdd = (KeyTrigger) triggerConstructor.newInstance(key);
+		return triggerToAdd;
+	}
+
+	private Action createAction(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		String actionName = rule.getMyAction().getClass().getName();
+		Class<?> actionClassName = Class.forName(actionName);
+		Constructor<?> actionConstructor = actionClassName.getConstructor(IPlayActor.class);
+		Action actionToAdd = (Action) actionConstructor.newInstance(toUpdate);
+		return actionToAdd;
 	}
 }

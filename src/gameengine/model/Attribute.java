@@ -36,7 +36,7 @@ public class Attribute extends Observable {
     public void changeAttribute(int change) {
         myValue.setValue((int)myValue.getValue()+change);
         if(myTriggerValues.size()>0 && myTriggerValues.contains((int)myValue.getValue())){
-        	myOwner.handleReachedAttribute(new AttributeReached(myType,myOwner,(int)myValue.getValue()));
+        	myOwner.handleReachedAttribute(new AttributeReached(myOwner, myType, (int)myValue.getValue()));
         }
     }
 	
