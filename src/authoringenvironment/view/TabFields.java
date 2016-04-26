@@ -21,7 +21,7 @@ import javafx.scene.layout.VBox;
  * @author amyzhao
  *
  */
-public class TabAttributes extends TabParent {
+public class TabFields extends TabParent {
 	private static final int PADDING = 10;
 	private static final String EDITOR_ELEMENTS = "EditorElements";
 	private static final String DELIMITER = ",";
@@ -39,7 +39,7 @@ public class TabAttributes extends TabParent {
 	 * @param optionsResource: resource bundle containing info about the GUI elements for this attributes tab.
 	 * @param element: element that is being edited by this attributes tab (i.e. a level or an actor).
 	 */
-	public TabAttributes(ResourceBundle myResources, String tabText, String optionsResource, IEditableGameElement element) {
+	public TabFields(ResourceBundle myResources, String tabText, String optionsResource, IEditableGameElement element) {
 		super(myResources, tabText);
 		this.myAttributesResources = ResourceBundle.getBundle(optionsResource);
 		myFactory = new GUIFactory(myAttributesResources);

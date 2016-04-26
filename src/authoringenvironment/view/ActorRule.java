@@ -50,7 +50,6 @@ public class ActorRule {
 	private Map<IAuthoringBehavior, List<Object>> authoringBehaviorMap;
 	private ITrigger myTrigger;
 	private List<IAction> myActions;
-	private boolean newlyReturned;
 	
 	public ActorRule(ActorRuleCreator myActorRuleCreator) {
 		this.myActorRuleCreator = myActorRuleCreator;
@@ -75,7 +74,6 @@ public class ActorRule {
 		this.actorRuleFactory = new ActorRuleFactory(myFactoryResources, myActorRuleCreator.getActor(), myController, this);
 		this.authoringBehaviorMap = new HashMap<>();
 		this.myActions = new ArrayList<>();
-		this.newlyReturned = true;
 		myRule = new GridPane(); 
 		myRule.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(Integer.parseInt(myActorRuleResources.getString("CornerRadius"))), Insets.EMPTY)));
 		myRule.setPadding(new Insets(Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding")),Integer.parseInt(myActorRuleResources.getString("Padding"))));
@@ -212,9 +210,10 @@ public class ActorRule {
 	}
 	
 	public void setRules(){
-		if(newlyReturned){
-			newlyReturned = false;
+		if(myActorRuleCreator.isNewlyReturned()){
+			myActorRuleCreator.setNewlyReturned(false);
 			((IAuthoringActor) myActorRuleCreator.getActor()).getRules().clear();
+			System.out.println("cleared oops");
 		}
 		if(myTrigger==null || myActions.size()==0){
 			showAlert(myActorRuleResources.getString("SomethingNotSet"),myActorRuleResources.getString("SetBoth"));

@@ -9,11 +9,7 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.model.Actor;
-import gui.view.ButtonFileChooserActorImage;
 import gui.view.GUILibrary;
-import gui.view.TextFieldActorFrictionEditor;
-import gui.view.TextFieldActorNameEditor;
-import gui.view.TextFieldActorSizeEditor;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -49,7 +45,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final String SET_RULE_LABEL = "Set Rules";
 	private BorderPane myRoot;
 	private GUILibrary library;
-	private TabAttributes attributes;
+	private TabFields fields;
 	private ResourceBundle myResources;
 	
 	private IAuthoringActor myActor;
@@ -100,10 +96,11 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	 */
 	private void setLeftPane() {
 		VBox vbox = new VBox();
-		attributes = new TabAttributes(myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
-		attributes.setObserver(this);
+		fields = new TabFields(myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
+		fields.setObserver(this);
+		fields.updateEditable(myActor);
 		TabPane attributeTP = new TabPane();
-		attributeTP.getTabs().add(attributes.getTab());
+		attributeTP.getTabs().add(fields.getTab());
 		attributeTP.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		library = new GUILibrary(myActorRuleCreator);
 		actorImageViewer = new GUIActorImageViewer(this, myActorIV);

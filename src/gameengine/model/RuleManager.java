@@ -37,6 +37,5 @@ public class RuleManager {
     
     public Map<String, List<Rule>> getRules(){
     	return myRules;
-    }
-    
+    }    
 }

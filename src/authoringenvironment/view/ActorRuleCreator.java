@@ -31,6 +31,7 @@ public class ActorRuleCreator {
 	private List<ActorRule> myActorRules;
 	private ActorEditingEnvironment aEE;
 	private ResourceBundle myActionResources;
+	private boolean newlyReturned;
 	
 	public ActorRuleCreator(ActorEditingEnvironment aEE) {
 		this.aEE = aEE;
@@ -44,6 +45,7 @@ public class ActorRuleCreator {
 		this.ruleRow = RULE_ROW_START;
 		this.myActorRules = new ArrayList<>();
 		this.myActionResources = ResourceBundle.getBundle(RESOURCE_BASE);
+		this.newlyReturned = true;
 		myActorRuleCreatorPane = new GridPane();
 		myActorRuleCreatorPane.setPrefWidth(aEE.getStage().getWidth()*CONTAINERS_PERCENT_WIDTH);
 		myActorRuleCreatorPane.setVgap(VGAP);
@@ -114,6 +116,7 @@ public class ActorRuleCreator {
 	 * fields based on the Actor 
 	 */
 	public void updateActorRules() {
+		this.newlyReturned = true;
 		for(ActorRule toRemove: myActorRules) myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
 		myActorRules.clear();
 		ruleRow = RULE_ROW_START;
@@ -158,5 +161,13 @@ public class ActorRuleCreator {
 			return KEY_TRIGGER;
 		}
 		return triggerType;
+	}
+
+	public boolean isNewlyReturned() {
+		return this.newlyReturned;
+	}
+
+	public void setNewlyReturned(boolean bool) {
+		this.newlyReturned = bool;
 	}
 }
