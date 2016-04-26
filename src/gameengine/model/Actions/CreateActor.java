@@ -12,6 +12,7 @@ public class CreateActor extends ActorAction {
 	ActorCopier copier;
 	double myX;
 	double myY;
+	private Actor myActorToCopy;
 	
 	public CreateActor(IPlayActor actor, Actor toCopy, double x, double y) {
 		super(actor);
@@ -29,4 +30,15 @@ public class CreateActor extends ActorAction {
 		((Observable) getMyActor()).notifyObservers(Arrays.asList(new Object[]{"addActor",cloneActor}));
 	}
 
+	public Double getMyX() {
+		return myX;
+	}
+	
+	public Double getMyY() {
+		return myY;
+	}
+	
+	public Actor getMyActorToCopy() {
+		return myActorToCopy;
+	}
 }

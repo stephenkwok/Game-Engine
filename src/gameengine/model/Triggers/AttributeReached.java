@@ -6,7 +6,7 @@ import gameengine.model.IGameElement;
 public class AttributeReached extends ITrigger {
 	private String myKey;
 	private AttributeType myType;
-	private IGameElement myTarget;
+	//private IGameElement myTarget;
 	private int myTriggerValue;
 	
 	public AttributeReached(IGameElement target, AttributeType type, int triggerValue){
@@ -14,7 +14,7 @@ public class AttributeReached extends ITrigger {
 			target.getAttribute(type).addTriggerValue(triggerValue);
 		}
 		myType = type;
-		myTarget = target;
+		//myTarget = target;
 		myTriggerValue = triggerValue;
 		myKey = target.getName()+type.toString()+triggerValue;
 	}
@@ -33,11 +33,11 @@ public class AttributeReached extends ITrigger {
 		return myType;
 	}
 	
-	public IGameElement getMyTarget() {
+	/*public IGameElement getMyTarget() {
 		return myTarget;
-	}
+	}*/
 	
-	public Integer getMyTriggerValue() {
+	public Integer getMyValue() {
 		return myTriggerValue;
 	}
 }

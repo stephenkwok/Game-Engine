@@ -14,7 +14,10 @@ import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
+import gameengine.model.Actions.ChangeAttribute;
+import gameengine.model.Actions.CreateActor;
 import gameengine.model.Triggers.AttributeReached;
+import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.CollisionTrigger;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.KeyTrigger;
@@ -37,7 +40,7 @@ public class ActorCopier {
 	private static final String WIN_LOSE = "WinLose";
 	private Actor myReferenceActor;
 	private ResourceBundle myResources;
-	
+
 	public ActorCopier() {
 		myReferenceActor = null;
 		myResources = ResourceBundle.getBundle(RESOURCE);
@@ -162,19 +165,38 @@ public class ActorCopier {
 		} else if (checkType(triggerClassName, ATTRIBUTE)) {
 			Constructor<?> triggerConstructor = triggerClass.getConstructor(IGameElement.class, AttributeType.class, Integer.class);
 			AttributeReached trigger = (AttributeReached) rule.getMyTrigger();
-			triggerToAdd = (AttributeReached) triggerConstructor.newInstance(trigger.getMyTarget(), trigger.getMyType(), trigger.getMyTriggerValue());
-		}		
+			triggerToAdd = (AttributeReached) triggerConstructor.newInstance(toUpdate, trigger.getMyType(), trigger.getMyValue());
+		} else if (checkType(triggerClassName, CLICK)) {
+			Constructor<?> triggerConstructor = triggerClass.getConstructor(IGameElement.class);
+//			IGameElement gameElement = ((ClickTrigger) rule.getMyTrigger()).getMyGameElement();
+			triggerToAdd = (ClickTrigger) triggerConstructor.newInstance((IGameElement) toUpdate);
+		}
 		return triggerToAdd;
 	}
 
 	private Action createAction(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		String actionName = rule.getMyAction().getClass().getName();
-		Class<?> actionClassName = Class.forName(actionName);
-		Constructor<?> actionConstructor = actionClassName.getConstructor(IPlayActor.class);
-		Action actionToAdd = (Action) actionConstructor.newInstance(toUpdate);
+		Action actionToAdd = null;
+		String fullActionName = rule.getMyAction().getClass().getName();
+		Class<?> actionClass = Class.forName(fullActionName);
+		String actionClassName = getClassName(fullActionName);
+		if (checkType(actionClassName, ATTRIBUTE)) {
+			Constructor<?> actionConstructor = actionClass.getConstructor(IGameElement.class, AttributeType.class, Integer.class);
+			ChangeAttribute action = (ChangeAttribute) rule.getMyAction();
+			actionToAdd = (ChangeAttribute) actionConstructor.newInstance(toUpdate, action.getMyType(), action.getMyValue());
+		} else if (checkType(actionClassName, CREATE_ACTOR)) {
+			Constructor<?> actionConstructor = actionClass.getConstructor(IPlayActor.class, Actor.class, Double.class, Double.class);
+			CreateActor action = (CreateActor) rule.getMyAction();
+			actionToAdd = (CreateActor) actionConstructor.newInstance(toUpdate, action.getMyActorToCopy(), action.getMyX(), action.getMyY());
+		} else if (checkType(actionClassName, WIN_LOSE)) {
+			Constructor<?> actionConstructor = actionClass.getConstructor(IGameElement.class);
+			actionToAdd = (Action) actionConstructor.newInstance((IGameElement) toUpdate);
+		} else {
+			Constructor<?> actionConstructor = actionClass.getConstructor(IPlayActor.class);
+			actionToAdd = (Action) actionConstructor.newInstance(toUpdate);
+		}
 		return actionToAdd;
 	}
-	
+
 	private boolean checkType(String name, String key) {
 		String[] fullName = name.split(".");
 		String className = fullName[fullName.length - 1];
@@ -183,7 +205,7 @@ public class ActorCopier {
 		}
 		return false;
 	}
-	
+
 	private String getClassName(String name) {
 		String[] fullName = name.split(".");
 		return fullName[fullName.length - 1];
