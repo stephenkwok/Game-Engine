@@ -41,6 +41,7 @@ public class ImageviewActorIcon extends ImageView {
 		setImage(actor.getImageView().getImage());
 		this.setFitHeight(height);
 		this.setPreserveRatio(true);
+		this.setRotate(actor.getRotate());
 		myID = actor.getMyID();
 		onLevel = false;
 		updateImageView();
@@ -93,6 +94,7 @@ public class ImageviewActorIcon extends ImageView {
 		setPreserveRatio(true);
 		if (onLevel) {
 			setFitHeight(myActor.getImageView().getFitHeight());
+			setRotate(myActor.getRotate());
 		}
 	}
 

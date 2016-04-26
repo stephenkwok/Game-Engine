@@ -284,6 +284,11 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	public void goToMainScreen() {
 		mainScreen.updatePreviewUnits();
 		setCenterPane(mainScreen.getPane());
+		System.out.println("Keys: ");
+		myActorMap.keySet().forEach(actor -> System.out.println(actor.getRotate()));
+		System.out.println("Values: ");
+		myActorMap.values().forEach(list -> list.stream().forEach(actor -> System.out.println(actor.getRotate())));
+		System.out.println();
 	}
 
 	/**
@@ -436,6 +441,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		for (IAuthoringActor refActor : myActorMap.keySet()) {
 			if (myActorMap.get(refActor).contains(actor)) {
 				refActor.setSize(actor.getSize());
+				refActor.setRotate(actor.getRotate());
 				updateActors(refActor);
 			}
 		}
@@ -443,11 +449,16 @@ public class Controller extends BranchScreenController implements Observer, IAut
 
 	// copy IDs
 	private void copyActor(IAuthoringActor toUpdate, IAuthoringActor toCopy) {
+		toUpdate.setRotate(toCopy.getRotate());
 		toUpdate.setName(toCopy.getName());
 		toUpdate.setFriction(toCopy.getFriction());
+		System.out.println(toUpdate.getSize());
+		System.out.println(toCopy.getSize());
 		toUpdate.setImageView(toCopy.getImageView());
 		toUpdate.setSize(toCopy.getSize());
 		toUpdate.setImageViewName(toCopy.getImageViewName());
+		System.out.println(toUpdate.getSize());
+		System.out.println(toCopy.getSize());
 		toUpdate.setID(toCopy.getMyID());
 		copyRules(toUpdate, toCopy.getRules());
 		toUpdate.setPhysicsEngine(toCopy.getPhysicsEngine());

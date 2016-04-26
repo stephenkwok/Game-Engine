@@ -42,6 +42,8 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private Sprite mySprite;
     private boolean isMainPlayer;
     private boolean isVisible;
+    private double myImageRotate;
+    private double myImageOpacity;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -442,14 +444,13 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 
 	@Override
 	public void setRotate(double rotate) {
-		// TODO Auto-generated method stub
-		
+		myImageView.setRotate(rotate);
+		myImageRotate = rotate;
 	}
 
 	@Override
 	public double getRotate() {
-		// TODO Auto-generated method stub
-		return 0;
+		return myImageRotate;
 	}
 
 	@Override

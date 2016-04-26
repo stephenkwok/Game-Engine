@@ -8,7 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-public class ImageEditingEnvironment extends PopUpParent implements Observer {
+public abstract class ImageEditingEnvironment extends PopUpParent implements Observer {
 
 	private static final String BORDER_COLOR = "-fx-border-color: black;";
 	private static final int POPUP_WIDTH = 700;
@@ -47,11 +47,7 @@ public class ImageEditingEnvironment extends PopUpParent implements Observer {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		setChanged();
-		notifyObservers();	
-		closePopUp();
-	}
+	public abstract void update(Observable o, Object arg);
 
 
 }

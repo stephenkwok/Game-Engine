@@ -69,7 +69,8 @@ public class TabActors extends TabParent {
 	private List<ImageviewActorIcon> actorSetToIconList(Set<IAuthoringActor> actors) {
 		List<ImageviewActorIcon> iconList = new ArrayList<>();
 		for (IAuthoringActor actor : actors) {
-			iconList.add(new ImageviewActorIcon(actor, ICON_HEIGHT));
+			ImageviewActorIcon icon = new ImageviewActorIcon(actor, ICON_HEIGHT);
+			iconList.add(icon);
 		}
 		return iconList;
 	}
