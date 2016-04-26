@@ -2,9 +2,7 @@ package gameplayer.view;
 
 import gameengine.controller.Game;
 import gameengine.model.AttributeType;
-import utilities.hud.HUDController;
-import utilities.hud.IValueFinder;
-import utilities.hud.Property;
+import voogasalad.util.hud.source.*;
 
 public class TLGCSValueFinder implements IValueFinder {
 

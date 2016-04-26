@@ -58,8 +58,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import utilities.hud.IAuthoringHUDController;
-import utilities.hud.PopupSelector;
+import voogasalad.util.hud.source.*;
 
 /**
  * This class serves as the main controller for the authoring environment
