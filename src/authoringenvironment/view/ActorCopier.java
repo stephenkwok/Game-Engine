@@ -2,6 +2,7 @@ package authoringenvironment.view;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -154,8 +155,59 @@ public class ActorCopier {
 
 	private ITrigger createTrigger(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		ITrigger triggerToAdd = null;
+		String triggerClassName = rule.getMyTrigger().getClass().getSimpleName();
+		List<Object> arguments = new ArrayList<>();
+		//String triggerClassName = getClassName(fullTriggerName);
+		if (checkType(triggerClassName, KEY)) {
+			arguments.add(((KeyTrigger) rule.getMyTrigger()).getMyKeyCode());
+			triggerClassName = KEY; // ideally won't need this...
+		} else if (checkType(triggerClassName, TICK)) {
+			arguments.add(((TickTrigger) rule.getMyTrigger()).getMyInterval());
+			triggerClassName = TICK;
+		} else if (checkType(triggerClassName, COLLISION)) {
+			arguments.add(toUpdate);
+			arguments.add(((CollisionTrigger) rule.getMyTrigger()).getMyCollisionActor());
+		} else if (checkType(triggerClassName, ATTRIBUTE)) {
+			AttributeReached trigger = (AttributeReached) rule.getMyTrigger();
+			arguments.add(trigger.getMyType());
+			arguments.add((IGameElement) toUpdate);
+			arguments.add(trigger.getMyValue());
+		} else if (checkType(triggerClassName, CLICK)) {
+			arguments.add((IGameElement) toUpdate);
+			triggerClassName = CLICK;
+		}
+		triggerToAdd = myTriggerFactory.createNewTrigger(triggerClassName, arguments);
+		return triggerToAdd;
+	}
+	
+	private Action createAction(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Action actionToAdd = null;
+		String actionClassName = rule.getMyAction().getClass().getName();
+		Class<?> actionClass = Class.forName(actionClassName);
+		//String actionClassName = getClassName(fullActionName);
+		if (checkType(actionClassName, ATTRIBUTE)) {
+			Constructor<?> actionConstructor = actionClass.getConstructor(IGameElement.class, AttributeType.class, int.class);
+			ChangeAttribute action = (ChangeAttribute) rule.getMyAction();
+			actionToAdd = (ChangeAttribute) actionConstructor.newInstance(toUpdate, action.getMyType(), action.getMyValue());
+		} else if (checkType(actionClassName, CREATE_ACTOR)) {
+			Constructor<?> actionConstructor = actionClass.getConstructor(IPlayActor.class, Actor.class, double.class, double.class);
+			CreateActor action = (CreateActor) rule.getMyAction();
+			actionToAdd = (CreateActor) actionConstructor.newInstance(toUpdate, action.getMyActorToCopy(), action.getMyX(), action.getMyY());
+		} else if (checkType(actionClassName, WIN_LOSE)) {
+			Constructor<?> actionConstructor = actionClass.getConstructor(IGameElement.class);
+			actionToAdd = (Action) actionConstructor.newInstance((IGameElement) toUpdate);
+		} else {
+			Constructor<?> actionConstructor = actionClass.getConstructor(IPlayActor.class);
+			actionToAdd = (Action) actionConstructor.newInstance(toUpdate);
+		}
+		return actionToAdd;
+	}
+	
+/*	private ITrigger createTrigger(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		ITrigger triggerToAdd = null;
 		String triggerClassName = rule.getMyTrigger().getClass().getName();
 		Class<?> triggerClass = Class.forName(triggerClassName);
+		String simple = rule.getMyTrigger().getClass().getSimpleName();
 		//String triggerClassName = getClassName(fullTriggerName);
 		if (checkType(triggerClassName, KEY)) {
 			Constructor<?> triggerConstructor = triggerClass.getConstructor(KeyCode.class);
@@ -179,9 +231,9 @@ public class ActorCopier {
 			triggerToAdd = (ClickTrigger) triggerConstructor.newInstance((IGameElement) toUpdate);
 		}
 		return triggerToAdd;
-	}
+	}*/
 
-	private Action createAction(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	/*private Action createAction(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Action actionToAdd = null;
 		String actionClassName = rule.getMyAction().getClass().getName();
 		Class<?> actionClass = Class.forName(actionClassName);
@@ -202,14 +254,11 @@ public class ActorCopier {
 			actionToAdd = (Action) actionConstructor.newInstance(toUpdate);
 		}
 		return actionToAdd;
-	}
+	}*/
 
 	private boolean checkType(String name, String key) {
-		String[] classes = myResources.getString(key).split(",");
-		for (int i = 0; i < classes.length; i++) {
-			if ((ACTION_DIRECTORY + classes[i]).equals(name) || (TRIGGER_DIRECTORY + classes[i]).equals(name)) {
-				return true;
-			}
+		if (Arrays.asList(myResources.getString(key).split(",")).contains(name)) {
+			return true;
 		}
 		return false;
 	}
