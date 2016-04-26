@@ -130,7 +130,7 @@ public interface IAuthoringActor extends IEditableGameElement {
 	 */
 	double getFriction();
 
-	int getMyID();
+	int getID();
 
 	void addState(ActorState state);
 

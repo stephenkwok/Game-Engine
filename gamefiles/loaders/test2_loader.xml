@@ -129,6 +129,12 @@
                           </myImages>
                           <spriteIndex>0</spriteIndex>
                         </mySprite>
+                        <myNextValues>
+                          <nextXVelo>0.0</nextXVelo>
+                          <nextXPos>0.0</nextXPos>
+                          <nextYVelo>0.0</nextYVelo>
+                          <nextYPos>0.0</nextYPos>
+                        </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
                       </mySpawnedActor>
@@ -143,6 +149,8 @@
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.AttributeReached">
                       <myKey>A1POINTS5</myKey>
+                      <myType>POINTS</myType>
+                      <myTriggerValue>5</myTriggerValue>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.WinGame">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -216,6 +224,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -253,6 +267,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -290,6 +310,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -327,6 +353,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -364,6 +396,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -401,6 +439,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -438,6 +482,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -475,6 +525,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -512,6 +568,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -549,6 +611,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -586,6 +654,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -623,6 +697,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -660,6 +740,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -697,6 +783,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -734,6 +826,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -771,6 +869,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -808,6 +912,12 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -845,6 +955,356 @@
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
+                                    </myCollisionActor>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor">
+                                      <changed>false</changed>
+                                      <obs/>
+                                      <x>918.0</x>
+                                      <y>450.0</y>
+                                      <veloX>0.0</veloX>
+                                      <veloY>0.0</veloY>
+                                      <myFriction>0.0</myFriction>
+                                      <myName>floor</myName>
+                                      <myID>5</myID>
+                                      <myImageViewName>square.png</myImageViewName>
+                                      <myHeading>0.0</myHeading>
+                                      <myRuleManager>
+                                        <myRules/>
+                                      </myRuleManager>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
+                                      <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
+                                    </myCollisionActor>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor">
+                                      <changed>false</changed>
+                                      <obs/>
+                                      <x>969.0</x>
+                                      <y>450.0</y>
+                                      <veloX>0.0</veloX>
+                                      <veloY>0.0</veloY>
+                                      <myFriction>0.0</myFriction>
+                                      <myName>floor</myName>
+                                      <myID>5</myID>
+                                      <myImageViewName>square.png</myImageViewName>
+                                      <myHeading>0.0</myHeading>
+                                      <myRuleManager>
+                                        <myRules/>
+                                      </myRuleManager>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
+                                      <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
+                                    </myCollisionActor>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor">
+                                      <changed>false</changed>
+                                      <obs/>
+                                      <x>1020.0</x>
+                                      <y>450.0</y>
+                                      <veloX>0.0</veloX>
+                                      <veloY>0.0</veloY>
+                                      <myFriction>0.0</myFriction>
+                                      <myName>floor</myName>
+                                      <myID>5</myID>
+                                      <myImageViewName>square.png</myImageViewName>
+                                      <myHeading>0.0</myHeading>
+                                      <myRuleManager>
+                                        <myRules/>
+                                      </myRuleManager>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
+                                      <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
+                                    </myCollisionActor>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor">
+                                      <changed>false</changed>
+                                      <obs/>
+                                      <x>1071.0</x>
+                                      <y>450.0</y>
+                                      <veloX>0.0</veloX>
+                                      <veloY>0.0</veloY>
+                                      <myFriction>0.0</myFriction>
+                                      <myName>floor</myName>
+                                      <myID>5</myID>
+                                      <myImageViewName>square.png</myImageViewName>
+                                      <myHeading>0.0</myHeading>
+                                      <myRuleManager>
+                                        <myRules/>
+                                      </myRuleManager>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
+                                      <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
+                                    </myCollisionActor>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor">
+                                      <changed>false</changed>
+                                      <obs/>
+                                      <x>1122.0</x>
+                                      <y>450.0</y>
+                                      <veloX>0.0</veloX>
+                                      <veloY>0.0</veloY>
+                                      <myFriction>0.0</myFriction>
+                                      <myName>floor</myName>
+                                      <myID>5</myID>
+                                      <myImageViewName>square.png</myImageViewName>
+                                      <myHeading>0.0</myHeading>
+                                      <myRuleManager>
+                                        <myRules/>
+                                      </myRuleManager>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
+                                      <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
+                                    </myCollisionActor>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor">
+                                      <changed>false</changed>
+                                      <obs/>
+                                      <x>1173.0</x>
+                                      <y>450.0</y>
+                                      <veloX>0.0</veloX>
+                                      <veloY>0.0</veloY>
+                                      <myFriction>0.0</myFriction>
+                                      <myName>floor</myName>
+                                      <myID>5</myID>
+                                      <myImageViewName>square.png</myImageViewName>
+                                      <myHeading>0.0</myHeading>
+                                      <myRuleManager>
+                                        <myRules/>
+                                      </myRuleManager>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
+                                      <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
+                                    </myCollisionActor>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor">
+                                      <changed>false</changed>
+                                      <obs/>
+                                      <x>1224.0</x>
+                                      <y>450.0</y>
+                                      <veloX>0.0</veloX>
+                                      <veloY>0.0</veloY>
+                                      <myFriction>0.0</myFriction>
+                                      <myName>floor</myName>
+                                      <myID>5</myID>
+                                      <myImageViewName>square.png</myImageViewName>
+                                      <myHeading>0.0</myHeading>
+                                      <myRuleManager>
+                                        <myRules/>
+                                      </myRuleManager>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
+                                      <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
+                                      <isMainPlayer>false</isMainPlayer>
+                                      <isVisible>true</isVisible>
+                                    </myCollisionActor>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor">
+                                      <changed>false</changed>
+                                      <obs/>
+                                      <x>1275.0</x>
+                                      <y>450.0</y>
+                                      <veloX>0.0</veloX>
+                                      <veloY>0.0</veloY>
+                                      <myFriction>0.0</myFriction>
+                                      <myName>floor</myName>
+                                      <myID>5</myID>
+                                      <myImageViewName>square.png</myImageViewName>
+                                      <myHeading>0.0</myHeading>
+                                      <myRuleManager>
+                                        <myRules/>
+                                      </myRuleManager>
+                                      <myAttributeManager>
+                                        <attributeMap/>
+                                      </myAttributeManager>
+                                      <myStates/>
+                                      <mySprite>
+                                        <myImages>
+                                          <string>square.png</string>
+                                        </myImages>
+                                        <spriteIndex>0</spriteIndex>
+                                      </mySprite>
+                                      <myNextValues>
+                                        <nextXVelo>0.0</nextXVelo>
+                                        <nextXPos>0.0</nextXPos>
+                                        <nextYVelo>0.0</nextYVelo>
+                                        <nextYPos>0.0</nextYPos>
+                                      </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
                                     </myCollisionActor>
@@ -868,6 +1328,12 @@
                           </myImages>
                           <spriteIndex>0</spriteIndex>
                         </mySprite>
+                        <myNextValues>
+                          <nextXVelo>0.0</nextXVelo>
+                          <nextXPos>0.0</nextXPos>
+                          <nextYVelo>0.0</nextYVelo>
+                          <nextYPos>0.0</nextYPos>
+                        </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
                       </myCollisionActor>
@@ -1077,6 +1543,86 @@
                                   </myAction>
                                   <ID>0</ID>
                                 </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[19]/myTrigger/myCollisionActor"/>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[20]/myTrigger/myCollisionActor"/>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[21]/myTrigger/myCollisionActor"/>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[22]/myTrigger/myCollisionActor"/>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[23]/myTrigger/myCollisionActor"/>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[24]/myTrigger/myCollisionActor"/>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[25]/myTrigger/myCollisionActor"/>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[26]/myTrigger/myCollisionActor"/>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
                               </list>
                             </entry>
                           </myRules>
@@ -1091,11 +1637,17 @@
                           </myImages>
                           <spriteIndex>0</spriteIndex>
                         </mySprite>
+                        <myNextValues>
+                          <nextXVelo>0.0</nextXVelo>
+                          <nextXPos>0.0</nextXPos>
+                          <nextYVelo>0.0</nextYVelo>
+                          <nextYPos>0.0</nextYPos>
+                        </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
                       </myCollisionActor>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.WinGame">
+                    <myAction class="gameengine.model.Actions.NextLevel">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
                     <ID>0</ID>
@@ -1133,62 +1685,6 @@
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.NextImage">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                    </myAction>
-                    <ID>0</ID>
-                  </gameengine.model.Rule>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.TickTrigger">
-                      <myInterval>220</myInterval>
-                    </myTrigger>
-                    <myAction class="gameengine.model.Actions.CreateActor">
-                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <copier>
-                        <myReferenceActor>
-                          <changed>false</changed>
-                          <obs/>
-                          <x>0.0</x>
-                          <y>0.0</y>
-                          <veloX>0.0</veloX>
-                          <veloY>0.0</veloY>
-                          <myFriction>0.0</myFriction>
-                          <myName>Default Name</myName>
-                          <myID>10</myID>
-                          <myImageViewName>pipes.png</myImageViewName>
-                          <myHeading>0.0</myHeading>
-                          <myRuleManager>
-                            <myRules>
-                              <entry>
-                                <string>Tick</string>
-                                <list>
-                                  <gameengine.model.Rule>
-                                    <myTrigger class="gameengine.model.Triggers.TickTrigger">
-                                      <myInterval>45</myInterval>
-                                    </myTrigger>
-                                    <myAction class="gameengine.model.Actions.MoveRight">
-                                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                                    </myAction>
-                                    <ID>0</ID>
-                                  </gameengine.model.Rule>
-                                </list>
-                              </entry>
-                            </myRules>
-                          </myRuleManager>
-                          <myAttributeManager>
-                            <attributeMap/>
-                          </myAttributeManager>
-                          <myStates/>
-                          <mySprite>
-                            <myImages>
-                              <string>pipes.png</string>
-                            </myImages>
-                            <spriteIndex>0</spriteIndex>
-                          </mySprite>
-                          <isMainPlayer>false</isMainPlayer>
-                          <isVisible>true</isVisible>
-                        </myReferenceActor>
-                      </copier>
-                      <myX>0.0</myX>
-                      <myY>0.0</myY>
                     </myAction>
                     <ID>0</ID>
                   </gameengine.model.Rule>
@@ -1404,6 +1900,86 @@
                     </myAction>
                     <ID>0</ID>
                   </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[19]/myTrigger/myCollisionActor"/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                    <ID>0</ID>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[20]/myTrigger/myCollisionActor"/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                    <ID>0</ID>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[21]/myTrigger/myCollisionActor"/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                    <ID>0</ID>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[22]/myTrigger/myCollisionActor"/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                    <ID>0</ID>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[23]/myTrigger/myCollisionActor"/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                    <ID>0</ID>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[24]/myTrigger/myCollisionActor"/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                    <ID>0</ID>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[25]/myTrigger/myCollisionActor"/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                    <ID>0</ID>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[26]/myTrigger/myCollisionActor"/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                    <ID>0</ID>
+                  </gameengine.model.Rule>
                 </list>
               </entry>
             </myRules>
@@ -1443,6 +2019,12 @@
             </myImages>
             <spriteIndex>0</spriteIndex>
           </mySprite>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+          </myNextValues>
           <isMainPlayer>false</isMainPlayer>
           <isVisible>true</isVisible>
         </gameengine.model.Actor>
@@ -1549,6 +2131,12 @@
             </myImages>
             <spriteIndex>0</spriteIndex>
           </mySprite>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+          </myNextValues>
           <isMainPlayer>false</isMainPlayer>
           <isVisible>true</isVisible>
         </gameengine.model.Actor>
@@ -1570,6 +2158,14 @@
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[16]/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[17]/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[18]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[19]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[20]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[21]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[22]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[23]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[24]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[25]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[26]/myTrigger/myCollisionActor"/>
       </myActors>
       <myName>Default</myName>
       <myHeight>800.0</myHeight>
@@ -1577,6 +2173,51 @@
       <myPlayPosition>0</myPlayPosition>
       <myScrollingDirection>Horizontally</myScrollingDirection>
       <myBackgroundImgName>mariobackground.png</myBackgroundImgName>
+      <myRuleManager>
+        <myRules/>
+      </myRuleManager>
+      <myAttributeManager>
+        <attributeMap/>
+      </myAttributeManager>
+    </gameengine.controller.Level>
+    <gameengine.controller.Level>
+      <changed>false</changed>
+      <obs/>
+      <myActors>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[3]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[4]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[5]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[6]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[7]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[8]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[9]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[10]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[11]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[12]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[13]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[14]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[15]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[16]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[17]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[18]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[19]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[20]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[21]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[22]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[23]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[24]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[25]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[26]/myTrigger/myCollisionActor"/>
+      </myActors>
+      <myName>Default</myName>
+      <myHeight>800.0</myHeight>
+      <myWidth>1024.0</myWidth>
+      <myPlayPosition>0</myPlayPosition>
+      <myScrollingDirection>Horizontally</myScrollingDirection>
+      <myBackgroundImgName>vgnwpGb.png</myBackgroundImgName>
       <myRuleManager>
         <myRules/>
       </myRuleManager>
@@ -1593,6 +2234,7 @@
     <myHUDElementsToDisplay/>
     <myFile>test2_loader.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
+    <myHUDFileLocation>/Users/bobby_mac/Documents/workspace/voogasalad_LoopsGoatCheeseSalad/a.txt</myHUDFileLocation>
   </info>
   <myPhysicsEngine>
     <nextXVelo>0.0</nextXVelo>

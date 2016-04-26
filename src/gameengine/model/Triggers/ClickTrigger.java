@@ -33,6 +33,10 @@ public class ClickTrigger extends ITrigger {
     public double getMyY() {
         return myY;
     }
+    /*
+    public IGameElement getMyGameElement() {
+    	return myGameElement;
+    }*/
 
     /**
      * Checks a boolean condition against the state of an actor

@@ -15,8 +15,10 @@ import gamedata.controller.FileChooserController;
 import gamedata.controller.ParserController;
 import gameengine.controller.Game;
 import gameplayer.view.BaseScreen;
+import gameplayer.view.TLGCSValueFinder;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import voogasalad.util.hud.source.*;
 
 public class BaseScreenController extends BranchScreenController {
 
@@ -25,7 +27,8 @@ public class BaseScreenController extends BranchScreenController {
 	private ResourceBundle myResources;
 	private BaseScreen myScreen;
 	private GameController myGameController;
-
+	private HUDController myHUDController;
+	
 	public BaseScreenController(Stage myStage, GameController gameController) {
 		super(myStage);
 		// DEPENDENCY!!
@@ -40,6 +43,7 @@ public class BaseScreenController extends BranchScreenController {
 		this.myScreen = new BaseScreen();
 		this.myScreen.addObserver(this);
 		setUpGameScreen();
+		setUpHUDScreen();
 	}
 
 	private void toggleSound() {
@@ -93,6 +97,7 @@ public class BaseScreenController extends BranchScreenController {
 		Game initialGame = parserController.loadforPlaying(new File(myGameController.getGame().getInitialGameFile()));
 		myGameController.setGame(initialGame);
 		myGameController.initialize(0);
+		setUpHUDScreen();
 	}
 
 	private void setUpGameScreen() {
@@ -100,9 +105,9 @@ public class BaseScreenController extends BranchScreenController {
 	}
 
 	private void setUpHUDScreen() {
-		// TODO FIX THIS BOBBY
-		// this.myScreen.setHUDScreen(new HUDScreen(Screen.SCREEN_WIDTH,
-		// Screen.SCREEN_WIDTH, this.myGameController.getGame().getHUDData()));
+		myHUDController = new HUDController();
+		myHUDController.init(myGameController.getGame().getHUDInfoFile(), myGameController.getGame(), new TLGCSValueFinder());
+		myScreen.setHUDScreen(myHUDController.getView());
 	}
 
 	@Override

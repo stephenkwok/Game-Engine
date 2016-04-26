@@ -133,8 +133,8 @@ public class TriggerFactory {
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> collisionClass = Class.forName(className);
-		Constructor<?> constructor = collisionClass.getConstructor(Actor.class);
-		return (ITrigger) constructor.newInstance((Actor) arguments.get(ZERO));
+		Constructor<?> constructor = collisionClass.getConstructor(IGameElement.class);
+		return (ITrigger) constructor.newInstance((IGameElement) arguments.get(ZERO));
 	}
 
 	private ITrigger createAttributeReached(String behaviorType, String className)

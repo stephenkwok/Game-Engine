@@ -12,7 +12,6 @@ public class ChangeAttribute extends Action {
 	private AttributeType myType;
 	private int myChange;
 
-
     public ChangeAttribute(IGameElement actor1, AttributeType type, int change){
         super(actor1);
         myType = type;
@@ -26,5 +25,13 @@ public class ChangeAttribute extends Action {
 
 	public String getMyAttributeType() {
 		return myType.toString();
+	}
+	
+	public AttributeType getMyType() {
+		return myType;
+	}
+	
+	public int getMyValue() {
+		return myChange;
 	}
 }

@@ -40,6 +40,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private PhysicsEngine myPhysicsEngine;
     private Set<ActorState> myStates;
     private Sprite mySprite;
+    private NextValues myNextValues;
     private boolean isMainPlayer;
     private boolean isVisible;
 
@@ -53,6 +54,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
         mySprite = new Sprite();
+        myNextValues = new NextValues();
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
         isMainPlayer = false;
         isVisible = true;
@@ -86,6 +88,10 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     @Override
     public Attribute getAttribute(AttributeType type){
     	return myAttributeManager.getAttribute(type);
+    }
+    
+    public Map<AttributeType, Attribute> getAttributeMap() {
+    	return myAttributeManager.getAttributeMap();
     }
 
     /**
@@ -347,11 +353,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	@Override
 	public void removeState(ActorState state) {
 		myStates.remove(state);
-	}
-
-	@Override
-	public int getMyID() {
-		return myID;
 	}
 
 	@Override

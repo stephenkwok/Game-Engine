@@ -33,6 +33,8 @@ import javafx.stage.Stage;
  */
 public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final String GUI_RESOURCE = "authoringGUI";
+	private static final double SUBSCENE_WIDTH = 1000;
+	private static final double SUBSCENE_HEIGHT = 575;
 	private BorderPane myRoot;
 	private GUILevelInspector myInspector;
 	private ResourceBundle myResources;
@@ -81,6 +83,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		myLeftPane = new VBox();
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
 		myRoot.setLeft(myLeftPane);
+		myLeftPane.setMaxWidth(myStage.getWidth() - SUBSCENE_WIDTH);
 		addChildrenToLeftPane();
 	}
 
