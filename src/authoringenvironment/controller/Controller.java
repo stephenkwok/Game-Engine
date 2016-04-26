@@ -341,7 +341,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		mainScreen.createActorPreviewUnit(newActor, actorEnvironment);
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
-		System.out.println(newActor.getID());
 	}
 
 	public double getSceneWidth() {
@@ -403,7 +402,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private void displayHelp(Object arg) {
 		helpPage = new PopUpAuthoringHelpPage((String) arg);
 	}
-	
+
 	public void updateActors(Actor actor) {
 		myActorCopier.setReferenceActor(actor);
 		List<IAuthoringActor> listToUpdate = myActorMap.get(actor);
