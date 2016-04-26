@@ -29,6 +29,7 @@ public class TabActors extends TabParent {
 	private static final int NUM_ROWS = 2;
 	private static final int PADDING = 10;
 	private List<ImageviewActorIcon> actorIcons;
+	private List<IAuthoringActor> curActors;
 	private TilePane myPane;
 
 	/**
@@ -43,7 +44,8 @@ public class TabActors extends TabParent {
 	 */
 	public TabActors(ResourceBundle myResources, String tabText, Set<IAuthoringActor> availActors) {
 		super(myResources, tabText);
-		actorIcons = new ArrayList<ImageviewActorIcon>();
+		actorIcons = new ArrayList<>();
+		curActors = new ArrayList<>();
 		myPane = new TilePane(HGAP, VGAP);
 		formatTab();
 		setAvailableActors(availActors);
@@ -66,12 +68,20 @@ public class TabActors extends TabParent {
 	 * @param actors
 	 * @return
 	 */
-	private List<ImageviewActorIcon> actorSetToIconList(Set<IAuthoringActor> actors) {
+	private List<ImageviewActorIcon> actorListToIconList(List<IAuthoringActor> actors) {
 		List<ImageviewActorIcon> iconList = new ArrayList<>();
-		for (IAuthoringActor actor : actors) {
-			iconList.add(new ImageviewActorIcon(actor, ICON_HEIGHT));
+		for (int i = 0; i < actors.size(); i++) {
+			iconList.add(new ImageviewActorIcon(actors.get(i), ICON_HEIGHT));
 		}
 		return iconList;
+	}
+	
+	private void updateActorList(Set<IAuthoringActor> actors) {
+		for (IAuthoringActor actor : actors) {
+			if (!curActors.contains(actor)) {
+				curActors.add(actor);
+			}			
+		}
 	}
 
 	/**
@@ -104,8 +114,9 @@ public class TabActors extends TabParent {
 	 */
 	public void setAvailableActors(Set<IAuthoringActor> updatedActors) {
 		myPane.getChildren().removeAll(actorIcons);
-		actorIcons.clear();
-		actorIcons = actorSetToIconList(updatedActors);
+//		actorIcons.clear();
+		updateActorList(updatedActors);
+		actorIcons = actorListToIconList(curActors);
 		myPane.getChildren().addAll(actorIcons);
 	}
 

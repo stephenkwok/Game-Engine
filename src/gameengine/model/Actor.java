@@ -89,6 +89,10 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     public Attribute getAttribute(AttributeType type){
     	return myAttributeManager.getAttribute(type);
     }
+    
+    public Map<AttributeType, Attribute> getAttributeMap() {
+    	return myAttributeManager.getAttributeMap();
+    }
 
     /**
      * Modifies the current value of an Attribute

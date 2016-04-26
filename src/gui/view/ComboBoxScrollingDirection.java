@@ -31,6 +31,8 @@ public class ComboBoxScrollingDirection extends ComboBoxTextCell {
 	public ComboBoxScrollingDirection(ResourceBundle myResources, String promptText, String labelText) {
 		super(promptText, labelText);
 		myOptions = Arrays.asList(myResources.getString(SCROLLING_DIRECTION_OPTIONS).split(DELIMITER));
+		this.getComboButton().setWrapText(true);
+		
 	}
 
 	/**
