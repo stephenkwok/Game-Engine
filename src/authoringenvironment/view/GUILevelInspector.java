@@ -28,7 +28,7 @@ public class GUILevelInspector implements IGUI {
 	private static final int SPACING = 5;
 	private Pane myPane;
 	private TabActors myActorsTab;
-	private TabAttributes myAttributesTab;
+	private TabFields myAttributesTab;
 	private VBox myContainer;
 	private LevelEditingEnvironment myLevelEditor;
 
@@ -60,8 +60,7 @@ public class GUILevelInspector implements IGUI {
 
 	private void addChildrenToLevelInspector(ResourceBundle myResources, Set<IAuthoringActor> availActors) {
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
-		myAttributesTab = new TabAttributes(myResources, LEVEL_ATTRIBUTES, LEVEL_OPTIONS_RESOURCE,
-				myLevelEditor.getLevel());
+		myAttributesTab = new TabFields(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, myLevelEditor.getLevel());
 		myAttributesTab.setObserver(myLevelEditor);
 
 		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(BUTTON_LABEL, null, myLevelEditor, myLevelEditor.getStage());
@@ -116,7 +115,7 @@ public class GUILevelInspector implements IGUI {
 	 * 
 	 * @return tab of level attributes.
 	 */
-	public TabAttributes getAttributesTab() {
+	public TabFields getAttributesTab() {
 		return myAttributesTab;
 	}
 }

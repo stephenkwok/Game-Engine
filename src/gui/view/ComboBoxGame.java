@@ -2,6 +2,7 @@ package gui.view;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,45 +20,50 @@ public class ComboBoxGame extends ComboBoxImageCell {
 
 	private static final int STANDARD_IMAGE_HEIGHT = 50;
 	private Map<String, Game> myGames;
-
+	
 	public ComboBoxGame(String promptText, String imageResource) {
 		super(promptText, imageResource, STANDARD_IMAGE_HEIGHT);
+		if ((new File("gamefiles")).listFiles().length == 1) {
+			setChanged();
+			notifyObservers("NoFiles");
+		}
 		this.myGames = new HashMap<>();
 		getGames();
-		fillImageNames();
-		fillImageMap();
+		if (myGames.keySet().size() != 0) {
+			fillImageNames();
+			fillImageMap();
+		}
 	}
 
 	@Override
 	public void setButtonAction() {
 		getComboButton().setOnAction(event -> {
 			this.setChanged();
-			this.notifyObservers(myGames.get(getComboBox().getValue()));
+			Object[] methodArg = {"go", myGames.get(getComboBox().getValue())};
+			this.notifyObservers(Arrays.asList(methodArg));
 		});
-
+		
 	}
 
 	private void getGames() {
-		// TODO implement error checking
+		//TODO implement error checking
 		File gameFileDir = new File(selectionResource);
-		for (File gameFile : gameFileDir.listFiles()) {
-			if (!gameFile.isDirectory()) {
+		for(File gameFile: gameFileDir.listFiles()) {
+			if(!gameFile.isDirectory()) {
 				ParserController parserController = new ParserController();
 				Game game = parserController.loadforPlaying(gameFile);
-				myGames.put(gameFile.getPath(), game);
+				if (game != null)
+					myGames.put(gameFile.getPath(),game);
 			}
 		}
-		if (myGames.keySet().isEmpty()) {
-
-		}
 	}
-
+	
 	@Override
 	public void fillImageNames() {
-		for (Game game : myGames.values()) {
+		for (Game game: myGames.values()) {
 			imageNames.add(game.getInfo().getMyImageName());
 		}
-
+		
 	}
 
 	@Override
@@ -69,11 +75,11 @@ public class ComboBoxGame extends ComboBoxImageCell {
 		hbox.getChildren().addAll(imageMap.get(game.getInfo().getMyImageName()), vbox);
 		return hbox;
 	}
-
-	@Override
+	
+	@Override 
 	public List<String> getOptionsList() {
 		List<String> myGamePaths = new ArrayList<>();
-		for (String path : myGames.keySet()) {
+		for (String path: myGames.keySet()) {
 			myGamePaths.add(path);
 		}
 		return myGamePaths;
@@ -82,7 +88,7 @@ public class ComboBoxGame extends ComboBoxImageCell {
 	@Override
 	protected void updateValueBasedOnEditable() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

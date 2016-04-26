@@ -1,5 +1,6 @@
 package gameengine.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -20,7 +21,8 @@ public class HighScoresKeeper extends Observable {
 	public void clearGameScores(String gameIdentifier) {
 		myScores.put(gameIdentifier, new TreeMap<>());
 		setChanged();
-		notifyObservers("update");
+		Object[] methodArg = {"updateScores", null};
+		notifyObservers(Arrays.asList(methodArg));
 	}
 
 	public void addScore(String gameIdentifier, String player, int score) {

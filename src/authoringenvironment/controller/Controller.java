@@ -11,11 +11,10 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.model.ImageEditingEnvironment;
 import authoringenvironment.model.PresetActorFactory;
 import authoringenvironment.view.ActorEditingEnvironment;
 import authoringenvironment.view.GUIMain;
@@ -294,18 +293,16 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 *            file to write to.
 	 */
 	public void saveGame() {
+		//TODO implement incomplete game error checking
 		System.out.println(myLevels.get(0).getActors().get(0).getRules().size());
 		IPlayActor actor = myLevels.get(0).getActors().get(0);
 		List<IAuthoringActor> refActor = new ArrayList(myActorMap.keySet());
 		IAuthoringActor realRefActor = refActor.get(0);
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showSaveDialog(new Stage());
-		CreatorController controller;
-		try {
-			controller = new CreatorController(game, guiMain);
+		CreatorController controller = new CreatorController(game, guiMain);
+		if (file != null) {
 			controller.saveForEditing(file);
-		} catch (ParserConfigurationException e) {
-			guiMain.showError(e.getMessage());
 		}
 
 	}
@@ -352,12 +349,13 @@ public class Controller extends BranchScreenController implements Observer, IAut
 
 	public void addActor() {
 		IAuthoringActor newActor = (IAuthoringActor) new Actor();
-		newActor.setID(myActorMap.size());
 		myActorMap.put(newActor, new ArrayList<>());
+		newActor.setID(myActorMap.size());
 		myActorNames.add(newActor.getName());
 		mainScreen.createActorPreviewUnit(newActor, actorEnvironment);
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
+		System.out.println(newActor.getMyID());
 	}
 
 	public double getSceneWidth() {

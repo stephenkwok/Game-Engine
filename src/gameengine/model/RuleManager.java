@@ -21,23 +21,21 @@ public class RuleManager {
 			myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
 		}
 	}
-
-	public void removeRule(Rule rule) {
-		myRules.get(rule.getMyTrigger()).remove(rule);
-	}
-
-	public void handleTrigger(ITrigger myTrigger) {
-		if (myRules.containsKey(myTrigger.getMyKey())) {
-			List<Rule> myBehaviors = myRules.get(myTrigger.getMyKey());
-			for (Rule myRule : myBehaviors) {
-				if (myRule.getMyTrigger().evaluate(myTrigger))
-					myRule.getMyAction().perform();
-			}
-		}
-	}
-
-	public Map<String, List<Rule>> getRules() {
-		return myRules;
-	}
-
+	
+    public void removeRule(Rule rule){
+    	myRules.get(rule.getMyTrigger()).remove(rule);
+    }
+	
+    public void handleTrigger(ITrigger myTrigger) {
+    	if(myRules.containsKey(myTrigger.getMyKey())){
+            List<Rule> myBehaviors = myRules.get(myTrigger.getMyKey());
+            for (Rule myRule : myBehaviors) {
+                if (myRule.getMyTrigger().evaluate(myTrigger)) myRule.getMyAction().perform();
+            }
+    	}
+    }
+    
+    public Map<String, List<Rule>> getRules(){
+    	return myRules;
+    }    
 }

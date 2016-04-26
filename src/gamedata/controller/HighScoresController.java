@@ -9,13 +9,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
-
-import gamedata.HighScoresCreator;
-import gamedata.HighScoresParser;
+import gamedata.XMLParser;
+import gamedata.XMLCreator;
 import gameengine.controller.HighScoresKeeper;
-import gameplayer.view.HighScoreScreen;
 import gui.view.Screen;
-import javafx.stage.Stage;
 
 public class HighScoresController implements IHighScoresController {
 
@@ -43,26 +40,25 @@ public class HighScoresController implements IHighScoresController {
 		}
 		return getAllGameScores().get(myGameFile);
 	}
-
+	
 	@Override
 	public Map<String, Map<String, Integer>> getAllGameScores() {
-		HighScoresParser scoresParser = new HighScoresParser();
-		try {
-			return scoresParser.getHighScoreInfo(myFile);
-		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-			e.printStackTrace();
-			this.myScreen.showError(e.getMessage());
-			return null;
+		XMLParser scoresParser = new XMLParser();
+		HighScoresKeeper myKeeper = (HighScoresKeeper) scoresParser.load(myFile);
+		if (myKeeper == null) {
+			myKeeper = new HighScoresKeeper();
 		}
+		return myKeeper.getMyScores();
 	}
 
 	@Override
 	public void clearHighScores() {
 		HighScoresKeeper newKeeper = new HighScoresKeeper(getAllGameScores());
 		newKeeper.clearGameScores(myGameFile);
-		HighScoresCreator scoresCreator = new HighScoresCreator();
+		//HighScoresCreator scoresCreator = new HighScoresCreator();
+		XMLCreator scoresCreator = new XMLCreator();
 		try {
-			scoresCreator.saveScore(newKeeper, myFile);
+			scoresCreator.save(newKeeper, myFile);
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,9 +69,10 @@ public class HighScoresController implements IHighScoresController {
 	public void saveHighScore(int score, String player) {
 		HighScoresKeeper updatedKeeper = new HighScoresKeeper(getAllGameScores());
 		updatedKeeper.addScore(myGameFile, player, score);
-		HighScoresCreator scoresCreator = new HighScoresCreator();
+		//HighScoresCreator scoresCreator = new HighScoresCreator();
+		XMLCreator scoresCreator = new XMLCreator();
 		try {
-			scoresCreator.saveScore(updatedKeeper, myFile);
+			scoresCreator.save(updatedKeeper, myFile);
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

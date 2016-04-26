@@ -3,9 +3,6 @@ package gamedata;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Observable;
-import java.util.Observer;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -21,36 +18,40 @@ import org.xml.sax.SAXException;
 
 import com.thoughtworks.xstream.XStream;
 
-import gameengine.controller.Game;
+
+
 
 public class XMLCreator {
 
 	private XStream myXStream;
 
-	public XMLCreator() {
+	public XMLCreator () {
 		myXStream = new XStream();
 		myXStream.autodetectAnnotations(true);
 	}
 
-	public void saveGame(Game game, File file)
-			throws SAXException, IOException, TransformerException, ParserConfigurationException {
+	public void save (Object object, File file) throws SAXException, IOException, TransformerException, ParserConfigurationException {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-
-		String xml = this.myXStream.toXML(game);
-		// System.out.println(xml);
+		
+		String xml = this.myXStream.toXML(object);
 		Document document = documentBuilder.parse(new InputSource(new StringReader(xml)));
-		// document.getDocumentElement().normalize();
 		convertDocumentToFile(document, file);
 	}
 
-	private void convertDocumentToFile(Document document, File file) throws TransformerException {
+	private void convertDocumentToFile (Document document, File file) throws TransformerException {
 
-		TransformerFactory transformerFactory = TransformerFactory.newInstance();
-		Transformer transformer = transformerFactory.newTransformer();
+		TransformerFactory transformerFactory =
+				TransformerFactory.newInstance();
+		Transformer transformer =
+				transformerFactory.newTransformer();
 		DOMSource source = new DOMSource(document);
-		StreamResult result = new StreamResult(file);
+		StreamResult result =
+				new StreamResult(file);
 		transformer.transform(source, result);
 	}
+
+
+
 
 }

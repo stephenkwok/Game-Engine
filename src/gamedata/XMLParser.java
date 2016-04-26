@@ -3,6 +3,7 @@ package gamedata;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -18,43 +19,68 @@ import org.xml.sax.SAXException;
 
 import com.thoughtworks.xstream.XStream;
 
-import gameengine.controller.Game;
-
 public class XMLParser {
-
+	
 	private XStream myXStream;
 
 	public XMLParser() {
 		myXStream = new XStream();
 		myXStream.autodetectAnnotations(true);
 	}
-
-	public Game extractGame(File file)
-			throws ParserConfigurationException, SAXException, IOException, TransformerException {
-		String xml = convertFileToString(file);
-		Game game = (Game) myXStream.fromXML(xml);
-		return game;
+	
+	public Object load(File file) {
+		if (file == null || empty(file)) {
+			return null;
+		}
+		else {
+			String xml = convertFileToString(file);
+			try {
+				return myXStream.fromXML(xml);
+			} catch (Exception e) {
+				return null;
+			}
+		}
 	}
-
-	private String convertFileToString(File file)
-			throws ParserConfigurationException, SAXException, IOException, TransformerException {
+	
+	private String convertFileToString(File file) {
 		Document document = convertFileToDocument(file);
-		TransformerFactory factory = TransformerFactory.newInstance();
-		Transformer transformer = factory.newTransformer();
-		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-		StringWriter writer = new StringWriter();
-		transformer.transform(new DOMSource(document), new StreamResult(writer));
-		String xml = writer.getBuffer().toString();
-		return xml;
-
+		if (document == null) {
+			return "";
+		}
+		try {
+			TransformerFactory factory = TransformerFactory.newInstance();
+			Transformer transformer;
+			transformer = factory.newTransformer();
+			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+			StringWriter writer = new StringWriter();
+			transformer.transform(new DOMSource(document), new StreamResult(writer));
+			return writer.getBuffer().toString();
+		} catch (TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "";
+		}
 	}
 
-	private Document convertFileToDocument(File file) throws ParserConfigurationException, SAXException, IOException {
-		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-		Document document = documentBuilder.parse(file);
-		document.getDocumentElement().normalize();
-		return document;
+	private Document convertFileToDocument(File file) {
+		try {
+			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+			Document document = documentBuilder.parse(file);
+			document.getDocumentElement().normalize();
+			return document;
+		} catch (IOException | SAXException | ParserConfigurationException e) {
+			return null;
+		}
+	}
+
+	private boolean empty(File file) {
+		String xml = convertFileToString(file);
+		if (xml.length() == 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

@@ -72,6 +72,11 @@ public class Game extends Observable implements Observer {
 		getAnimation().getKeyFrames().add(frame);
 
     }
+	
+	public void terminateGame() {
+		getAnimation().pause();
+		//getAnimation().setCycleCount(0);
+	}
 
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
 		this(null, gameInfo, gameLevels);
@@ -248,26 +253,6 @@ public class Game extends Observable implements Observer {
 	}
 
 	/**
-	 * Provides a String representation of the Game object
-	 *
-	 * @return The String representation of the Game object
-	 */
-	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-
-		stringBuilder.append("Game [ ");
-		stringBuilder.append("\ninitialFile: ");
-		stringBuilder.append(initialGameFile);
-		stringBuilder.append("\ngameLevels: ");
-		stringBuilder.append(levels.toString());
-		stringBuilder.append("\nmyInfo: ");
-		stringBuilder.append(info.toString());
-		stringBuilder.append(" ]");
-
-		return stringBuilder.toString();
-	}
-
-	/**
 	 * Provides the Level that is currently being used
 	 *
 	 * @return The Level that is currently being used
@@ -316,7 +301,8 @@ public class Game extends Observable implements Observer {
 	}
 
 	public void addActor(Actor newActor) {
-		currentActors.add(newActor);
+		newActor.setPhysicsEngine(myPhysicsEngine);
+		getCurrentLevel().addActor(newActor);
 	}
 
 	/**

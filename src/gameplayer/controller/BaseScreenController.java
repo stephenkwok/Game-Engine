@@ -3,6 +3,7 @@ package gameplayer.controller;
 import java.lang.reflect.InvocationTargetException;
 import java.io.File;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
@@ -29,6 +30,7 @@ public class BaseScreenController extends BranchScreenController {
 		super(myStage);
 		// DEPENDENCY!!
 		this.myGameController = gameController;
+		myGameController.addObserver(this);
 		setUpScreen();
 		this.myResources = ResourceBundle.getBundle(BASE_CONTROLLER_RESOURCE);
 		changeScreen(myScreen);
@@ -49,16 +51,22 @@ public class BaseScreenController extends BranchScreenController {
 	}
 
 	private void saveGame() {
-		this.myGameController.togglePause();
+		togglePause();
 		try {
 			CreatorController c = new CreatorController(myGameController.getGame(), this.myScreen);
 			FileChooser fileChooser = new FileChooser();
+			File initialDirectory = new File("gamefiles");
+			fileChooser.setInitialDirectory(initialDirectory);
 			File file = fileChooser.showSaveDialog(new Stage());
-			c.saveForPlaying(file);
+			if (file != null) {
+				c.saveForPlaying(file);
+			}
+			
 		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
 			myScreen.showError(e.getMessage());
 		}
-
+		toggleUnPause();
 	}
 
 	private void switchGame() {
@@ -99,19 +107,29 @@ public class BaseScreenController extends BranchScreenController {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		String method = myResources.getString((String) arg);
+		List<Object> myList = (List<Object>) arg;
+		String methodName = (String) myList.get(0);
 		try {
-			if (Arrays.asList(myResources.getString("SuperMethods").split(",")).contains(method)) {
-				this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
+			if (myResources.getString(methodName).equals("null")) {
+				this.getClass().getDeclaredMethod(methodName).invoke(this);
 			} else {
-				this.getClass().getDeclaredMethod(method).invoke(this);
+				Class<?> myClass = Class.forName(myResources.getString(methodName));
+				Object arg2 = myClass.cast(myList.get(1));
+				Class[] parameterTypes = { myClass };
+				Object[] parameters = { arg2 };
+				this.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(this, parameters);
 			}
-		} catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-				| SecurityException e) {
-			e.printStackTrace();
-			this.myScreen.showError(e.getMessage());
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+				| SecurityException | ClassNotFoundException e) {
+			try {
+				this.getClass().getSuperclass().getDeclaredMethod(methodName).invoke(this);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				this.myScreen.showError(e.getMessage());
+			}
 		}
-
 	}
 
 }

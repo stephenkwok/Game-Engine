@@ -1,6 +1,9 @@
 package gui.view;
 
+import java.util.Arrays;
 import java.util.Observer;
+import java.util.ResourceBundle;
+
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -20,12 +23,15 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
 	private Button button;
 	private String imageName;
 	private int iconSize;
-
+	private String myInstanceName;
+	private ResourceBundle myResources;
+	
 	public ButtonParent(String buttonText, String imageName) {
 		this.buttonText = buttonText;
 		this.imageName = imageName;
 		this.iconSize = ICON_SIZE;
 		initializeButton();
+		myResources =  ResourceBundle.getBundle("buttonInfo");
 	}
 
 	private void initializeButton() {
@@ -53,6 +59,26 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
 	 */
 	protected abstract void setButtonAction();
 
+	/**
+	 * Sets the button to notify a controller when clicked
+	 */
+	public void setClick(){
+		button.setOnMouseClicked(e -> {
+			setChanged();
+			Object[] methodArg = {myResources.getString(myInstanceName), null};
+			notifyObservers(Arrays.asList(methodArg));
+		});
+	}
+	
+	
+	/**
+	 * Records the current inherited instance class's name for update purposes 
+	 */
+	public void setName(String myName){
+		myInstanceName = myName;
+	}
+	
+	
 	/**
 	 * Optional, sets image for button.
 	 */

@@ -76,6 +76,65 @@
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.Spawn">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+<<<<<<< HEAD
+=======
+                      <mySpawnedActor class="gameengine.model.Actor">
+                        <changed>false</changed>
+                        <obs/>
+                        <x>0.0</x>
+                        <y>0.0</y>
+                        <veloX>0.0</veloX>
+                        <veloY>0.0</veloY>
+                        <myFriction>0.0</myFriction>
+                        <myName>bullet</myName>
+                        <myID>90</myID>
+                        <myImageViewName>redball.png</myImageViewName>
+                        <myHeading>0.0</myHeading>
+                        <myRuleManager>
+                          <myRules>
+                            <entry>
+                              <string>P</string>
+                              <list>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.KeyTrigger">
+                                    <myKey>P</myKey>
+                                    <myKeyCode>P</myKeyCode>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.MoveRight">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                              </list>
+                            </entry>
+                          </myRules>
+                        </myRuleManager>
+                        <myAttributeManager>
+                          <attributeMap/>
+                        </myAttributeManager>
+                        <myPhysicsEngine>
+                          <nextXVelo>0.0</nextXVelo>
+                          <nextXPos>0.0</nextXPos>
+                          <nextYVelo>0.0</nextYVelo>
+                          <nextYPos>0.0</nextYPos>
+                          <horizontalForce>5.0</horizontalForce>
+                          <verticalForce>-5.0</verticalForce>
+                          <gravity>0.11</gravity>
+                          <friction>-0.05</friction>
+                          <maxVelo>7.0</maxVelo>
+                          <bounce>2.5</bounce>
+                        </myPhysicsEngine>
+                        <myStates/>
+                        <mySprite>
+                          <myImages>
+                            <string>redball.png</string>
+                          </myImages>
+                          <spriteIndex>0</spriteIndex>
+                        </mySprite>
+                        <isMainPlayer>false</isMainPlayer>
+                        <isVisible>true</isVisible>
+                      </mySpawnedActor>
+>>>>>>> 6a51960af269d0c2c6cd3c96b501e86bf078b8ba
                     </myAction>
                     <ID>0</ID>
                   </gameengine.model.Rule>
@@ -1077,6 +1136,65 @@
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.NextImage">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+<<<<<<< HEAD
+=======
+                    </myAction>
+                    <ID>0</ID>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.TickTrigger">
+                      <myInterval>220</myInterval>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.CreateActor">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <copier>
+                        <myReferenceActor>
+                          <changed>false</changed>
+                          <obs/>
+                          <x>0.0</x>
+                          <y>0.0</y>
+                          <veloX>0.0</veloX>
+                          <veloY>0.0</veloY>
+                          <myFriction>0.0</myFriction>
+                          <myName>Default Name</myName>
+                          <myID>10</myID>
+                          <myImageViewName>pipes.png</myImageViewName>
+                          <myHeading>0.0</myHeading>
+                          <myRuleManager>
+                            <myRules>
+                              <entry>
+                                <string>Tick</string>
+                                <list>
+                                  <gameengine.model.Rule>
+                                    <myTrigger class="gameengine.model.Triggers.TickTrigger">
+                                      <myInterval>45</myInterval>
+                                    </myTrigger>
+                                    <myAction class="gameengine.model.Actions.MoveRight">
+                                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    </myAction>
+                                    <ID>0</ID>
+                                  </gameengine.model.Rule>
+                                </list>
+                              </entry>
+                            </myRules>
+                          </myRuleManager>
+                          <myAttributeManager>
+                            <attributeMap/>
+                          </myAttributeManager>
+                          <myStates/>
+                          <mySprite>
+                            <myImages>
+                              <string>pipes.png</string>
+                            </myImages>
+                            <spriteIndex>0</spriteIndex>
+                          </mySprite>
+                          <isMainPlayer>false</isMainPlayer>
+                          <isVisible>true</isVisible>
+                        </myReferenceActor>
+                      </copier>
+                      <myX>0.0</myX>
+                      <myY>0.0</myY>
+>>>>>>> 6a51960af269d0c2c6cd3c96b501e86bf078b8ba
                     </myAction>
                     <ID>0</ID>
                   </gameengine.model.Rule>
@@ -1360,6 +1478,19 @@
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.Destroy">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor"/>
+<<<<<<< HEAD
+=======
+                    </myAction>
+                    <ID>0</ID>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.SideCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor/myRuleManager/myRules/entry[4]/list/gameengine.model.Rule/myAction/mySpawnedActor"/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.Destroy">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+>>>>>>> 6a51960af269d0c2c6cd3c96b501e86bf078b8ba
                     </myAction>
                     <ID>0</ID>
                   </gameengine.model.Rule>
@@ -1373,9 +1504,13 @@
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor"/>
                     </myTrigger>
+<<<<<<< HEAD
                     <myAction class="gameengine.model.Actions.Destroy">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
+=======
+                    <myAction class="gameengine.model.Actions.Destroy" reference="../../../../entry/list/gameengine.model.Rule[2]/myAction"/>
+>>>>>>> 6a51960af269d0c2c6cd3c96b501e86bf078b8ba
                     <ID>0</ID>
                   </gameengine.model.Rule>
                 </list>
@@ -1470,6 +1605,7 @@
     <myImageName>default_game.jpg</myImageName>
     <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
+<<<<<<< HEAD
     <myPreviewImage>
       <dirtyBits>-1</dirtyBits>
       <__geomBounds class="com.sun.javafx.geom.RectBounds">
@@ -1801,6 +1937,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
       <destHeight>0.0</destHeight>
       <validWH>false</validWH>
     </myPreviewImage>
+=======
+>>>>>>> 6a51960af269d0c2c6cd3c96b501e86bf078b8ba
     <myHUDElementsToDisplay/>
     <myFile>test2.xml</myFile>
     <isDestinationGame>true</isDestinationGame>

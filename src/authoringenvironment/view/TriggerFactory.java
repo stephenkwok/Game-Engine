@@ -141,7 +141,7 @@ public class TriggerFactory {
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> collisionClass = Class.forName(className);
-		Constructor<?> constructor = collisionClass.getConstructor(AttributeType.class, int.class, IGameElement.class);
+		Constructor<?> constructor = collisionClass.getConstructor(AttributeType.class,IGameElement.class,int.class);
 		return (ITrigger) constructor.newInstance(arguments.get(ZERO), arguments.get(ONE), arguments.get(TWO));
 	}
 }
