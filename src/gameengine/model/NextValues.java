@@ -24,7 +24,6 @@ public class NextValues {
 		nextXVelo = x;
 	}
 	
-	
 	public double getNextYPos(){
 		return nextYPos;
 	}
