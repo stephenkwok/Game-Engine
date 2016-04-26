@@ -30,12 +30,10 @@ public class AttributeReachedBehavior extends DoubleBehavior {
 	@Override
 	protected void createTriggerOrAction() {
 		List<Object> arguments = new ArrayList<>();
-		if (getBehaviorType().equals(CHANGE_HEALTH))
-			arguments.add(AttributeType.HEALTH);
-		else
-			arguments.add(AttributeType.POINTS);
-		arguments.add((int) getValue());
+		if(getBehaviorType().equals(CHANGE_HEALTH)) arguments.add(AttributeType.HEALTH);
+		else arguments.add(AttributeType.POINTS);
 		arguments.add((IGameElement) myActor);
+		arguments.add((int) getValue());
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
 		setTriggerOrAction();
 	}
