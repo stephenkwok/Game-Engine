@@ -2,14 +2,20 @@ package authoringenvironment.view;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
+import gameengine.model.AttributeType;
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
+import gameengine.model.Triggers.AttributeReached;
+import gameengine.model.Triggers.CollisionTrigger;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.TickTrigger;
@@ -21,14 +27,25 @@ import javafx.scene.input.KeyCode;
  *
  */
 public class ActorCopier {
+	private static final String RESOURCE = "ruleCreator";
+	private static final String KEY = "Key";
+	private static final String TICK = "Tick";
+	private static final String COLLISION = "Collision";
+	private static final String CLICK = "Click";
+	private static final String ATTRIBUTE = "Attribute";
+	private static final String CREATE_ACTOR = "CreateActor";
+	private static final String WIN_LOSE = "WinLose";
 	private Actor myReferenceActor;
-
+	private ResourceBundle myResources;
+	
 	public ActorCopier() {
 		myReferenceActor = null;
+		myResources = ResourceBundle.getBundle(RESOURCE);
 	}
 
 	public ActorCopier(Actor actor) {
 		myReferenceActor = actor;
+		myResources = ResourceBundle.getBundle(RESOURCE);
 	}
 
 	public void setReferenceActor(Actor newReference) {
@@ -126,11 +143,27 @@ public class ActorCopier {
 	}
 
 	private ITrigger createTrigger(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		String triggerName = rule.getMyTrigger().getClass().getName();
-		Class<?> className = Class.forName(triggerName);
-		Constructor<?> triggerConstructor = className.getConstructor(KeyCode.class);
-		KeyCode key = ((KeyTrigger) rule.getMyTrigger()).getMyKeyCode();
-		ITrigger triggerToAdd = (KeyTrigger) triggerConstructor.newInstance(key);
+		ITrigger triggerToAdd = null;
+		String fullTriggerName = rule.getMyTrigger().getClass().getName();
+		Class<?> triggerClass = Class.forName(fullTriggerName);
+		String triggerClassName = getClassName(fullTriggerName);
+		if (checkType(triggerClassName, KEY)) {
+			Constructor<?> triggerConstructor = triggerClass.getConstructor(KeyCode.class);
+			KeyCode key = ((KeyTrigger) rule.getMyTrigger()).getMyKeyCode();
+			triggerToAdd = (KeyTrigger) triggerConstructor.newInstance(key);
+		} else if (checkType(triggerClassName, TICK)) {
+			Constructor<?> triggerConstructor = triggerClass.getConstructor(Integer.class);
+			Integer interval = ((TickTrigger) rule.getMyTrigger()).getMyInterval();
+			triggerToAdd = (TickTrigger) triggerConstructor.newInstance(interval);
+		} else if (checkType(triggerClassName, COLLISION)) {
+			Constructor<?> triggerConstructor = triggerClass.getConstructor(IPlayActor.class, IPlayActor.class);
+			IPlayActor collisionActor = ((CollisionTrigger) rule.getMyTrigger()).getMyCollisionActor();
+			triggerToAdd = (CollisionTrigger) triggerConstructor.newInstance(toUpdate, collisionActor);
+		} else if (checkType(triggerClassName, ATTRIBUTE)) {
+			Constructor<?> triggerConstructor = triggerClass.getConstructor(IGameElement.class, AttributeType.class, Integer.class);
+			AttributeReached trigger = (AttributeReached) rule.getMyTrigger();
+			triggerToAdd = (AttributeReached) triggerConstructor.newInstance(trigger.getMyTarget(), trigger.getMyType(), trigger.getMyTriggerValue());
+		}		
 		return triggerToAdd;
 	}
 
@@ -140,5 +173,19 @@ public class ActorCopier {
 		Constructor<?> actionConstructor = actionClassName.getConstructor(IPlayActor.class);
 		Action actionToAdd = (Action) actionConstructor.newInstance(toUpdate);
 		return actionToAdd;
+	}
+	
+	private boolean checkType(String name, String key) {
+		String[] fullName = name.split(".");
+		String className = fullName[fullName.length - 1];
+		if (Arrays.asList(myResources.getString(key).split(",")).contains(className)) {
+			return true;
+		}
+		return false;
+	}
+	
+	private String getClassName(String name) {
+		String[] fullName = name.split(".");
+		return fullName[fullName.length - 1];
 	}
 }
