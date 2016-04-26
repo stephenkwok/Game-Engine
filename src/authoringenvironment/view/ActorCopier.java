@@ -30,6 +30,8 @@ import javafx.scene.input.KeyCode;
  *
  */
 public class ActorCopier {
+	private static final String ACTION_DIRECTORY = "gameengine.model.Actions.";
+	private static final String TRIGGER_DIRECTORY = "gameengine.model.Triggers.";
 	private static final String RESOURCE = "ruleCreator";
 	private static final String KEY = "Key";
 	private static final String TICK = "Tick";
@@ -85,8 +87,6 @@ public class ActorCopier {
 		for (String trigger : rulesToCopy.keySet()) {
 			List<Rule> toAdd = rulesToCopy.get(trigger);
 			for (int i = 0; i < toAdd.size(); i++) {
-				String triggerName = toAdd.get(i).getMyTrigger().getClass().getName();
-				Class<?> className;
 				try {
 					ITrigger triggerToAdd = createTrigger(toAdd.get(i), (IPlayActor) toUpdate);
 					Action actionToAdd = createAction(toAdd.get(i), (IPlayActor) toUpdate);
@@ -147,9 +147,9 @@ public class ActorCopier {
 
 	private ITrigger createTrigger(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		ITrigger triggerToAdd = null;
-		String fullTriggerName = rule.getMyTrigger().getClass().getName();
-		Class<?> triggerClass = Class.forName(fullTriggerName);
-		String triggerClassName = getClassName(fullTriggerName);
+		String triggerClassName = rule.getMyTrigger().getClass().getName();
+		Class<?> triggerClass = Class.forName(triggerClassName);
+		//String triggerClassName = getClassName(fullTriggerName);
 		if (checkType(triggerClassName, KEY)) {
 			Constructor<?> triggerConstructor = triggerClass.getConstructor(KeyCode.class);
 			KeyCode key = ((KeyTrigger) rule.getMyTrigger()).getMyKeyCode();
@@ -176,9 +176,9 @@ public class ActorCopier {
 
 	private Action createAction(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Action actionToAdd = null;
-		String fullActionName = rule.getMyAction().getClass().getName();
-		Class<?> actionClass = Class.forName(fullActionName);
-		String actionClassName = getClassName(fullActionName);
+		String actionClassName = rule.getMyAction().getClass().getName();
+		Class<?> actionClass = Class.forName(actionClassName);
+		//String actionClassName = getClassName(fullActionName);
 		if (checkType(actionClassName, ATTRIBUTE)) {
 			Constructor<?> actionConstructor = actionClass.getConstructor(IGameElement.class, AttributeType.class, Integer.class);
 			ChangeAttribute action = (ChangeAttribute) rule.getMyAction();
@@ -198,10 +198,11 @@ public class ActorCopier {
 	}
 
 	private boolean checkType(String name, String key) {
-		String[] fullName = name.split(".");
-		String className = fullName[fullName.length - 1];
-		if (Arrays.asList(myResources.getString(key).split(",")).contains(className)) {
-			return true;
+		String[] classes = myResources.getString(key).split(",");
+		for (int i = 0; i < classes.length; i++) {
+			if ((ACTION_DIRECTORY + classes[i]).equals(name) || (TRIGGER_DIRECTORY + classes[i]).equals(name)) {
+				return true;
+			}
 		}
 		return false;
 	}
