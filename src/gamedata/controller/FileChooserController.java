@@ -66,7 +66,6 @@ public class FileChooserController extends BranchScreenController {
 	public void update(Observable o, Object arg) {
 		List<Object> myList = (List<Object>) arg;
 		String methodName = (String) myList.get(0);
-		System.out.println(methodName);
 		try {
 			if (myResources.getString(methodName).equals("null")) {
 				this.getClass().getDeclaredMethod(methodName).invoke(this);

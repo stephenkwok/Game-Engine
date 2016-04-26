@@ -88,9 +88,7 @@ public class BaseScreenController extends BranchScreenController {
 		// TODO fix this ish
 		myGameController.getView().clearGame();
 		ParserController parserController = new ParserController(myScreen);
-		System.out.println("Before");
 		Game initialGame = parserController.loadforPlaying(new File(myGameController.getGame().getInitialGameFile()));
-		System.out.print("after");
 		myGameController.setGame(initialGame);
 		myGameController.initialize(0);
 	}
