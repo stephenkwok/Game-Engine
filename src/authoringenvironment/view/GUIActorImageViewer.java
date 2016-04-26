@@ -14,15 +14,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 public class GUIActorImageViewer implements IGUI {
 	private static final String AVAILABLE_ACTOR_IMAGES = "Available Images";
 	private static final String IMAGE_RESOURCE = "authoringimages";
 	private static final int PADDING = 10;
 	private static final String BUTTON_LABEL = "Load Image...";
-	private static final int BUTTON_HEIGHT = 30;
-	private static final int BUTTON_WIDTH = 150;
 	private ImageView myActorIV;
 	private StackPane myPane;
 	private ActorEditingEnvironment aEE;

@@ -72,6 +72,11 @@ public class Game extends Observable implements Observer {
 		getAnimation().getKeyFrames().add(frame);
 
     }
+	
+	public void terminateGame() {
+		getAnimation().pause();
+		//getAnimation().setCycleCount(0);
+	}
 
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
 		this(null, gameInfo, gameLevels);

@@ -13,6 +13,7 @@ import gameplayer.controller.BranchScreenController;
 import gameplayer.controller.GameController;
 import gameplayer.controller.HighScoreScreenController;
 import gui.view.ButtonParent;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 public class FileChooserController extends BranchScreenController {
@@ -54,8 +55,14 @@ public class FileChooserController extends BranchScreenController {
 
 	private void go(Game game) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException,
 			NoSuchMethodException, SecurityException {
-		Class[] parameterTypes = { Game.class };
-		this.getClass().getDeclaredMethod("go" + myType.toString(), parameterTypes).invoke(this, game);
+		
+		if (game == null) {
+			myScreen.chooseAlert();
+		}
+		else {
+			Class[] parameterTypes = { Game.class };
+			this.getClass().getDeclaredMethod("go" + myType.toString(), parameterTypes).invoke(this, game);
+		}
 	}
 
 	private boolean checkNullGame(Game game) {
@@ -78,13 +85,14 @@ public class FileChooserController extends BranchScreenController {
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 				| SecurityException | ClassNotFoundException e) {
-			/*try {
+			try {
 				this.getClass().getSuperclass().getDeclaredMethod(methodName).invoke(this);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 					| NoSuchMethodException | SecurityException e1) {
-				// TODO Auto-generated catch block*/
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 				this.myScreen.showError(e.getMessage());
 			}
 		}
 	}
+}
