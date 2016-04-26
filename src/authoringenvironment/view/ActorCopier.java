@@ -98,29 +98,6 @@ public class ActorCopier {
 				try {
 					ITrigger triggerToAdd = createTrigger(toAdd.get(i), (IPlayActor) toUpdate);
 					Action actionToAdd = createAction(toAdd.get(i), (IPlayActor) toUpdate);
-					//for colettes test with tick
-					/*if (toAdd.get(i).getMyTrigger().getClass().equals(TickTrigger.class)){
-						ITrigger trigger1 = toAdd.get(i).getMyTrigger();
-
-						String actionName = toAdd.get(i).getMyAction().getClass().getName();
-						Class<?> actionClassName = Class.forName(actionName);
-						Constructor<?> actionConstructor = actionClassName.getConstructor(IPlayActor.class);
-						Action actionToAdd = (Action) actionConstructor.newInstance((IPlayActor) toUpdate);
-
-						toUpdate.addRule(new Rule(trigger1,actionToAdd));
-
-					}else{
-					className = Class.forName(triggerName);
-					Constructor<?> triggerConstructor = className.getConstructor(KeyCode.class);
-					KeyCode key = ((KeyTrigger) toAdd.get(i).getMyTrigger()).getMyKeyCode();
-					ITrigger triggerToAdd = (KeyTrigger) triggerConstructor.newInstance(key);
-
-
-					String actionName = toAdd.get(i).getMyAction().getClass().getName();
-					Class<?> actionClassName = Class.forName(actionName);
-					Constructor<?> actionConstructor = actionClassName.getConstructor(IPlayActor.class);
-					Action actionToAdd = (Action) actionConstructor.newInstance((IPlayActor) toUpdate);
-					 */
 					Rule rule = new Rule(triggerToAdd, actionToAdd);
 					rule.setID(toAdd.get(i).getID() + 1);
 					toUpdate.addRule(rule);
@@ -202,29 +179,6 @@ public class ActorCopier {
 		actionToAdd = (Action) myActionFactory.createNewAction(actionClassName, arguments);
 		return actionToAdd;
 	}
-
-	/*private Action createAction(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Action actionToAdd = null;
-		String actionClassName = rule.getMyAction().getClass().getName();
-		Class<?> actionClass = Class.forName(actionClassName);
-		//String actionClassName = getClassName(fullActionName);
-		if (checkType(actionClassName, ATTRIBUTE)) {
-			Constructor<?> actionConstructor = actionClass.getConstructor(IGameElement.class, AttributeType.class, int.class);
-			ChangeAttribute action = (ChangeAttribute) rule.getMyAction();
-			actionToAdd = (ChangeAttribute) actionConstructor.newInstance(toUpdate, action.getMyType(), action.getMyValue());
-		} else if (checkType(actionClassName, CREATE_ACTOR)) {
-			Constructor<?> actionConstructor = actionClass.getConstructor(IPlayActor.class, Actor.class, double.class, double.class);
-			CreateActor action = (CreateActor) rule.getMyAction();
-			actionToAdd = (CreateActor) actionConstructor.newInstance(toUpdate, action.getMyActorToCopy(), action.getMyX(), action.getMyY());
-		} else if (checkType(actionClassName, WIN_LOSE)) {
-			Constructor<?> actionConstructor = actionClass.getConstructor(IGameElement.class);
-			actionToAdd = (Action) actionConstructor.newInstance((IGameElement) toUpdate);
-		} else {
-			Constructor<?> actionConstructor = actionClass.getConstructor(IPlayActor.class);
-			actionToAdd = (Action) actionConstructor.newInstance(toUpdate);
-		}
-		return actionToAdd;
-	}*/
 
 	private boolean checkType(String name, String key) {
 		if (Arrays.asList(myResources.getString(key).split(",")).contains(name)) {
