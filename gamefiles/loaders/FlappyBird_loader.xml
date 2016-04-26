@@ -82,6 +82,12 @@
                           </myImages>
                           <spriteIndex>0</spriteIndex>
                         </mySprite>
+                        <myNextValues>
+                          <nextXVelo>0.0</nextXVelo>
+                          <nextXPos>0.0</nextXPos>
+                          <nextYVelo>0.0</nextYVelo>
+                          <nextYPos>0.0</nextYPos>
+                        </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
                       </myCollisionActor>
@@ -144,6 +150,12 @@
                           </myImages>
                           <spriteIndex>0</spriteIndex>
                         </mySprite>
+                        <myNextValues>
+                          <nextXVelo>0.0</nextXVelo>
+                          <nextXPos>0.0</nextXPos>
+                          <nextYVelo>0.0</nextYVelo>
+                          <nextYPos>0.0</nextYPos>
+                        </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
                       </myCollisionActor>
@@ -196,6 +208,12 @@
                           </myImages>
                           <spriteIndex>0</spriteIndex>
                         </mySprite>
+                        <myNextValues>
+                          <nextXVelo>0.0</nextXVelo>
+                          <nextXPos>0.0</nextXPos>
+                          <nextYVelo>0.0</nextYVelo>
+                          <nextYPos>0.0</nextYPos>
+                        </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
                       </myCollisionActor>
@@ -240,6 +258,12 @@
                           </myImages>
                           <spriteIndex>0</spriteIndex>
                         </mySprite>
+                        <myNextValues>
+                          <nextXVelo>0.0</nextXVelo>
+                          <nextXPos>0.0</nextXPos>
+                          <nextYVelo>0.0</nextYVelo>
+                          <nextYPos>0.0</nextYPos>
+                        </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
                       </myCollisionActor>
@@ -303,6 +327,12 @@
             </myImages>
             <spriteIndex>0</spriteIndex>
           </mySprite>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+          </myNextValues>
           <isMainPlayer>false</isMainPlayer>
           <isVisible>true</isVisible>
         </gameengine.model.Actor>
@@ -358,6 +388,12 @@
             </myImages>
             <spriteIndex>0</spriteIndex>
           </mySprite>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+          </myNextValues>
           <isMainPlayer>false</isMainPlayer>
           <isVisible>true</isVisible>
         </gameengine.model.Actor>
