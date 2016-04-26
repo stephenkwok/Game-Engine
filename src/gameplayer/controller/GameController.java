@@ -242,10 +242,10 @@ public class GameController extends Observable implements Observer, IGameControl
 	}
 
 	/**
-	 * Updates attributes
+	 * Updates attributes - depracated
 	 */
 	public void updateAttribute() {
-		model.updateAttribute();
+		//model.getCurrentLevel().updateAttribute();
 	}
-
+	
 }

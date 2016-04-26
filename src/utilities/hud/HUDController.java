@@ -43,7 +43,6 @@ public class HUDController implements Observer {
 	private List<String> getFieldsToFollow(String filename) {
 		List<String> params = new ArrayList<>();
 		try {
-			System.out.println(((Game) dataSource).getHUDInfoFile());
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
 			String currentLine = bufferedReader.readLine();
 

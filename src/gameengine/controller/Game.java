@@ -2,6 +2,8 @@ package gameengine.controller;
 
 import java.util.*;
 
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamInclude;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.TickTrigger;
@@ -21,6 +23,8 @@ import javafx.util.Duration;
  */
 
 public class Game extends Observable implements Observer {
+	
+	
 	public static final int SIZE = 400;
 	public static final int FRAMES_PER_SECOND = 50;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
@@ -32,16 +36,15 @@ public class Game extends Observable implements Observer {
 	private PhysicsEngine myPhysicsEngine;
 	private CollisionDetection myCollisionDetector;
 	private Map<String, Set<IGameElement>> activeTriggers;
-
+	@XStreamOmitField
+	private Timeline animation;
 	private List<IPlayActor> currentActors;
 	private List<IPlayActor> deadActors;
     private int count;
     
-    private String hudInfoFileLocation = "HELLO";
-    public String myDefault = "AYY";
     
-	@XStreamOmitField
-	private Timeline animation;
+    
+	
     
     
     
@@ -65,6 +68,7 @@ public class Game extends Observable implements Observer {
 		count = 1;
 		initTimeline();
 	}
+	
 
 	/**
 	 * Initializes a timeline that will be used for the game loop
@@ -362,12 +366,11 @@ public class Game extends Observable implements Observer {
 	}
 
 	public void setHUDInfoFile(String location) {
-		this.hudInfoFileLocation = location;
-		myDefault = location;
-		System.out.println(getHUDInfoFile());
+		info.setHUDFileLocation(location);
 	}
 	
 	public String getHUDInfoFile() {
-		return this.hudInfoFileLocation;
-	}	
+		return info.getHUDFileLocation();
+	}
+	
 }
