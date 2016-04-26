@@ -23,20 +23,31 @@ public class ComboBoxGame extends ComboBoxImageCell {
 	
 	public ComboBoxGame(String promptText, String imageResource) {
 		super(promptText, imageResource, STANDARD_IMAGE_HEIGHT);
-		if ((new File("gamefiles")).listFiles().length == 1) {
-			setChanged();
-			notifyObservers("NoFiles");
-		}
 		this.myGames = new HashMap<>();
-		getGames();
-		if (myGames.keySet().size() != 0) {
-			fillImageNames();
-			fillImageMap();
+		File directory = new File("gamefiles");
+		if (directory.listFiles() == null || directory.listFiles().length < 1) {
+			setChanged();
+			Object[] args = {"alert", "empty"};
+			notifyObservers(Arrays.asList(args));
+		}
+		else {
+			getGames();
+			if (myGames.keySet().size() != 0) {
+				fillImageNames();
+				fillImageMap();
+			}
 		}
 	}
 
 	@Override
 	public void setButtonAction() {
+		this.getComboBox().setOnMouseClicked(event -> {
+			if (getComboBox().getItems().size() < 1) {
+				setChanged();
+				Object[] args = {"alert", "empty"};
+				notifyObservers(Arrays.asList(args));
+			}
+		});
 		getComboButton().setOnAction(event -> {
 			this.setChanged();
 			Object[] methodArg = {"go", myGames.get(getComboBox().getValue())};
