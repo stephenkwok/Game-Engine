@@ -30,6 +30,7 @@ public class GameInfo implements IEditableGameElement {
 	private String myFile;
 	private boolean isDestinationGame;
 	private Map<IAuthoringActor, List<IAuthoringActor>> myActorMap;
+	private String myHUDFileLocation;
 
 	public GameInfo(String name, String imageName, String description, int currentLevelNum, String file) {
 		this.setName(name);
@@ -193,6 +194,16 @@ public class GameInfo implements IEditableGameElement {
 	public void setMyFile(String name) {
 		this.myFile = name;
 	}
+	
+	public void setHUDFileLocation(String name) {
+		this.myHUDFileLocation = name;
+	}
+	
+	public String getHUDFileLocation() {
+		return myHUDFileLocation;
+	}
+	
+	
 
 	/** {
 	 * 
