@@ -11,10 +11,11 @@ public class MoveUp extends MovingAction {
 		super(actor);
 	}
 
-	@Override
-	public void perform() {
-		getMyActor().getPhysicsEngine().moveUp(getMyActor());
-		getMyActor().setHeading(90);
-	}
+    @Override
+    public void perform() {
+    	getMyActor().getPhysicsEngine().moveUp(getMyActor());
+    	//getMyActor().setHeading(90);
+    }
+
 
 }

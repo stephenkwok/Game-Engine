@@ -81,49 +81,37 @@ public class PhysicsEngine {
 		a1.setVeloY(nextYVelo);
 		a1.setY((applyForce(a1.getY(), nextYVelo)) - gravity);
 	}
-
-	public void glideRight(IPlayActor a1) {
-		a1.setX(applyForce(a1.getX(), horizontalForce));
+		
+	public void glideRight(IPlayActor a1, double offset){
+		a1.setX(applyForce(a1.getX(),offset));
+	}
+	public void glideLeft(IPlayActor a1, double offset){
+		a1.setX(applyForce(a1.getX(),-offset));
+	}
+	public void glideUp(IPlayActor a1, double offset){
+		a1.setY(applyForce(a1.getY(),offset));
+	}
+	public void glideDown(IPlayActor a1, double offset){
+		a1.setY(applyForce(a1.getY(),-offset));
+	}
+	
+	public void glideForward(IPlayActor a1, double offset) {
+		a1.setX(applyForce(a1.getX(),offset*(Math.cos(Math.toRadians(a1.getHeading())))));
+		a1.setY(applyForce(a1.getY(),  offset*(Math.sin(Math.toRadians(a1.getHeading()))))-gravity);
 	}
 
-	public void glideLeft(IPlayActor a1) {
-		a1.setX(applyForce(a1.getX(), -horizontalForce));
+	public void glideBackward(IPlayActor a1, double offset) {
+		a1.setX(applyForce(a1.getX(),-offset*(Math.cos(Math.toRadians(a1.getHeading())))));
+		a1.setY(applyForce(a1.getY(),-offset*(Math.sin(Math.toRadians(a1.getHeading()))))-gravity);
 	}
-
-	public void glideUp(IPlayActor a1) {
-		a1.setY(applyForce(a1.getY(), verticalForce));
-	}
-
-	public void glideDown(IPlayActor a1) {
-		a1.setY(applyForce(a1.getY(), -verticalForce));
-	}
-
-	public void glideForward(IPlayActor a1) {
-		a1.setX(applyForce(a1.getX(), 10 * (Math.cos(Math.toRadians(a1.getHeading())))));
-		a1.setY(applyForce(a1.getY(), verticalForce * (Math.sin(Math.toRadians(a1.getHeading())))) - gravity);
-	}
-
-	public void glideBackward(IPlayActor a1) {
-		a1.setX(applyForce(a1.getX(), -horizontalForce * (Math.cos(Math.toRadians(a1.getHeading())))));
-		a1.setY(applyForce(a1.getY(), -verticalForce * (Math.sin(Math.toRadians(a1.getHeading())))) - gravity);
-	}
-
-	private double bound(double pos) {
-		if (pos < 0) {
-			return 0;
-		}
-		return pos;
-	}
-
-	private double limitVelo(double velo) {
-		if (Math.abs(velo) > maxVelo) {
-			return maxVelo;
-		}
-		return velo;
-	}
-
-	public void staticVerticalCollision(IPlayActor a1) {
-		a1.setY(a1.getY() - a1.getVeloY());
+	private double bound(double pos){
+		if(pos<0){ return 0; } return pos; }
+	
+	private double limitVelo(double velo){
+		if(Math.abs(velo)>maxVelo){return maxVelo;} return velo;}
+	
+	public void staticVerticalCollision(IPlayActor a1){
+		a1.setY(a1.getY()-a1.getVeloY());
 		a1.setVeloY(0);
 	}
 

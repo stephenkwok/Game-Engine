@@ -198,34 +198,66 @@ public class GameScreen extends Observable implements IGameScreen {
 	public void terminateGame() {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, myResources.getString("EndMessage"), ButtonType.YES,
 				ButtonType.NO);
+		alert.setOnCloseRequest( e -> {
+			if (alert.getResult() == ButtonType.YES) {
+				saveScorePrompt();
+			} 
+			else {
+				restartGamePrompt();
+			}
+		});
 		alert.show();
-		alert.showingProperty().addListener((observable, oldValue, newValue) -> {
+		/* alert.showingProperty().addListener((observable, oldValue, newValue) -> {
 			if (!newValue) {
 				if (alert.getResult() == ButtonType.YES) {
 					saveScorePrompt();
 				}
+				else {
+					//restartGamePrompt();
+				}
 			}
-		});
+		});*/
 
 	}
 
-	public void saveScorePrompt() {
+	private void restartGamePrompt() {
+		Alert endAlert = new Alert(Alert.AlertType.CONFIRMATION, myResources.getString("RestartMessage"), ButtonType.YES,
+				ButtonType.NO);
+		endAlert.show();
+		endAlert.showingProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue) {
+				Object[] args = {"leave", null};
+				if (endAlert.getResult() == ButtonType.YES) {
+					Object[] yesArgs = { "restartGame", null };
+					args = yesArgs;
+				}
+				setChanged();
+				notifyObservers(Arrays.asList(args));
+			}
+		});
+		
+	}
+
+	private void saveScorePrompt() {
 		TextInputDialog dialog = new TextInputDialog(myResources.getString("Name"));
 		dialog.setContentText(myResources.getString("SaveMessage"));
 		dialog.show();
+		dialog.setOnCloseRequest(e -> restartGamePrompt());
 		dialog.setResultConverter(new Callback<ButtonType, String>() {
 			@Override
 			public String call(ButtonType b) {
+				String answer = null;
 				if (b == ButtonType.OK) {
 					setChanged();
 					Object[] args = { myResources.getString("SaveScore"), dialog.getEditor().getText() };
 					notifyObservers(Arrays.asList(args));
-					return dialog.getEditor().getText();
-				} else {
-					return null;
+					answer = dialog.getEditor().getText();
 				}
+				return answer;
+				
 			}
 		});
+		
 	}
 
 }
