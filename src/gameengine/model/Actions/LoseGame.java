@@ -13,8 +13,8 @@ import gameengine.model.PhysicsEngine;
 public class LoseGame extends Action {
 	private Actor assignedActor;
 
-	public LoseGame(IGameElement assignedActor) {
-		super(assignedActor);
+	public LoseGame(IGameElement assignedElement) {
+		super(assignedElement);
 	}
 
 	@Override

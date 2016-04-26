@@ -11,14 +11,13 @@ import gameengine.model.IPlayActor;
  */
 public class GlideRight extends GlidingAction {
 
-	/**
-	 * Takes in reference to the Actor it will change
-	 * 
-	 * @param assignedActor
-	 *            The Actor that will be changed
-	 */
-	public GlideRight(IPlayActor assignedActor) {
-		super(assignedActor);
+    /**
+     * Takes in reference to the Actor it will change 
+     * 
+     * @param assignedActor The Actor that will be changed
+     */
+	public GlideRight(Actor assignedActor, double offset) {
+		super(assignedActor, offset);
 	}
 
 	/**
@@ -26,7 +25,8 @@ public class GlideRight extends GlidingAction {
 	 */
 	@Override
 	public void perform() {
-		getMyActor().getPhysicsEngine().glideRight(getMyActor());
+    	getMyActor().getPhysicsEngine().glideRight(getMyActor(),this.getGlideOffset());		
+
 	}
 
 }

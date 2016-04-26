@@ -44,4 +44,11 @@ public class FileChooserScreen extends Screen implements Observer {
 		notifyObservers(arg);
 	}
 
+	public void chooseAlert() {
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+		alert.setContentText(getResources().getString("alert"));
+		alert.showAndWait();
+		
+	}
+
 }

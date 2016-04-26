@@ -1,9 +1,10 @@
 package gameengine.model;
 
 import gameengine.model.Triggers.AttributeReached;
-import utilities.hud.Property;
 import java.util.*;
-import utilities.hud.Property;
+
+import voogasalad.util.hud.source.Property;
+
 
 /**
  * This class is purposed to store properties belonging to an actor that are

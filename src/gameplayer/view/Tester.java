@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.*;
 import gameengine.model.IPlayActor;
+import gameengine.model.PhysicsEngine;
 import authoringenvironment.model.IAuthoringActor;
 import gamedata.controller.CreatorController;
 
@@ -69,6 +70,12 @@ public class Tester extends Application {
         actor2.setY(300);
         actor2.setName("A2");
         actor2.setID(2);
+        
+        IAuthoringActor spawnedActor = (IAuthoringActor) new Actor();
+        spawnedActor.setImageViewName("redball.png");
+        spawnedActor.setName("bullet");
+        spawnedActor.setID(90);
+        spawnedActor.getImageView().resize(10, 10);
 
         IPlayActor actor4 = new Actor();
         ((Actor) actor4).setName("enemy");
@@ -95,6 +102,11 @@ public class Tester extends Application {
         Action killAction3 = new Destroy((Actor) actor4);
         Rule killRule3 = new Rule(kill3, killAction3);
         ((Actor) actor4).addRule(killRule3);
+        
+        SideCollision bulletKill = new SideCollision(actor4,(IPlayActor)spawnedActor);
+        Rule bulletKillRule  = new Rule(bulletKill, killAction3);
+        actor4.addRule(bulletKillRule);
+        
 
         TickTrigger tick = new TickTrigger();
         Action tick1 = new ApplyPhysics((IPlayActor)actor1);
@@ -132,6 +144,14 @@ public class Tester extends Application {
         actor1.addRule(rule9);
 
         KeyTrigger triggerSpawn = new KeyTrigger(KeyCode.S);
+        KeyTrigger bulletTick = new KeyTrigger(KeyCode.P);
+        Action bulletAction = new MoveRight((IPlayActor)spawnedActor);
+        Rule bulletRule = new Rule(bulletTick,bulletAction);
+        spawnedActor.addRule(bulletRule);
+        PhysicsEngine newPhysicsEngine = new PhysicsEngine();
+        ((Actor) spawnedActor).setPhysicsEngine(newPhysicsEngine);
+        
+        
         
         Action action1 = new MoveRight((IPlayActor)actor1);
         Action action2 = new MoveLeft((IPlayActor)actor1);
@@ -139,8 +159,9 @@ public class Tester extends Application {
         Action action4 = new MoveUp((IPlayActor)actor1);
         Action action5 = new VerticalBounceCollision((IPlayActor)actor1);
         Action action6 = new WinGame((IPlayActor)actor1);
-        Action actionSpawn = new Spawn((IPlayActor) actor1);
-
+        Action actionSpawn = new Spawn((IPlayActor) actor1, (IPlayActor) spawnedActor);
+        Action actionNextLevel = new NextLevel((IPlayActor) actor1);
+        
         Rule rule = new Rule(trigger1,action1);
         Rule rule2 = new Rule(trigger2, action2);
         Rule rule3 = new Rule(trigger3,action3);
@@ -148,15 +169,16 @@ public class Tester extends Application {
         Rule rule5 = new Rule(trigger5,action5);
         Rule rule6 = new Rule(trigger6,action6);
         Rule ruleSpawn = new Rule(triggerSpawn, actionSpawn);
+        Rule ruleNextLevel = new Rule(trigger6, actionNextLevel);
 
         actor1.addRule(rule);
         actor1.addRule(rule2);
         actor1.addRule(rule3);
         actor1.addRule(rule4);
         actor1.addRule(rule5);
-        actor1.addRule(rule6);
+        //actor1.addRule(rule6);
         actor1.addRule(ruleSpawn);
-
+        actor1.addRule(ruleNextLevel);
 
 
         TickTrigger intTick = new TickTrigger(5);
@@ -181,6 +203,11 @@ public class Tester extends Application {
         level1.addActor((IAuthoringActor)actor3);
         level1.addActor((IAuthoringActor) actor4);
         
+        Level level2 = new Level();
+        level2.setMyBackgroundImgName("vgnwpGb.png");
+        levels.add(level2);
+        level2.addActor(actor1);
+        actor1.setX(0);
         /**
          * testing create actors
          */
@@ -192,11 +219,11 @@ public class Tester extends Application {
         a.addRule(new Rule(translatetick,translateaction));
         TickTrigger newtick = new TickTrigger(220);
         Action newaction = new CreateActor((IPlayActor)actor1,(Actor)a,0,0);
-        actor1.addRule(new Rule(newtick,newaction));
+        //actor1.addRule(new Rule(newtick,newaction));
         
         
         
-        for(int i=0; i<=17; i++){
+        for(int i=0; i<=25; i++){
             Actor floor = new Actor();
             floor.setName("floor");
             floor.setID(5);
@@ -220,12 +247,15 @@ public class Tester extends Application {
             ((IAuthoringActor)actor3).addRule(brule3);
 
             level1.addActor((IAuthoringActor)floor);
+            level2.addActor((IAuthoringActor) floor);
         }
 
         Group group = new Group();
         Scene scene = new Scene(group);
 
         Game model = new Game(info,levels);
+        model.setHUDInfoFile("/Users/bobby_mac/Documents/workspace/voogasalad_LoopsGoatCheeseSalad/a.txt");
+        
         CreatorController c = new CreatorController(model);
         c.saveForEditing(new File("gamefiles/test2.xml"));
         ParallelCamera camera = new ParallelCamera();

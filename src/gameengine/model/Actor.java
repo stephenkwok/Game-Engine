@@ -40,6 +40,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private PhysicsEngine myPhysicsEngine;
     private Set<ActorState> myStates;
     private Sprite mySprite;
+    private NextValues myNextValues;
     private boolean isMainPlayer;
     private boolean isVisible;
 
@@ -53,6 +54,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
         mySprite = new Sprite();
+        myNextValues = new NextValues();
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
         isMainPlayer = false;
         isVisible = true;
@@ -191,17 +193,17 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     	myImageView.setX(this.getX());
     	myImageView.setY(this.getY());
 		myImageView.setFitHeight(imageView.getFitHeight());
-	}
+    }
+    
+    /**
+     * Provides the Actor's X coordinate
+     * @return  The Actor's X coordinate
+     */
+    @Override
+    public double getX() {
+        return x;
+    }
 
-	/**
-	 * Provides the Actor's X coordinate
-	 * 
-	 * @return The Actor's X coordinate
-	 */
-	@Override
-	public double getX() {
-		return x;
-	}
 
 	/**
 	 * Provides the Actor's Y coordinate
