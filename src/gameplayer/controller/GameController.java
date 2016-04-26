@@ -124,6 +124,7 @@ public class GameController extends Observable implements Observer, IGameControl
 		model.terminateGame();
 	}
 	
+
 	private void saveGameScore(String name) {
 		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
 		c.saveHighScore(getGame().getScore(), name);
