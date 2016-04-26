@@ -3,8 +3,6 @@ package authoringenvironment.model;
 import java.util.Observable;
 import java.util.Observer;
 
-import com.sun.media.jfxmediaimpl.platform.Platform;
-
 import gui.view.PopUpParent;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;

@@ -439,4 +439,28 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	public void setVisible(boolean isVisible) {
 		this.isVisible = isVisible;
 	}
+
+	@Override
+	public void setRotate(double rotate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double getRotate() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setOpacity(double opacity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double getOpacity() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
