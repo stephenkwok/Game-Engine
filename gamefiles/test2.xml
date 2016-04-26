@@ -2232,6 +2232,7 @@
     <myHUDElementsToDisplay/>
     <myFile>test2.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
+    <myHUDFileLocation>/Users/bobby_mac/Documents/workspace/voogasalad_LoopsGoatCheeseSalad/a.txt</myHUDFileLocation>
   </info>
   <myPhysicsEngine>
     <nextXVelo>0.0</nextXVelo>
