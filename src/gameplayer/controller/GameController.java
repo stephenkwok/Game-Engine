@@ -17,10 +17,9 @@ import gameengine.model.Actor;
 import gameengine.model.IDisplayActor;
 import gameengine.model.IPlayActor;
 import gameplayer.view.GameScreen;
-import gameplayer.view.HUDScreen;
 import javafx.animation.Timeline;
 import javafx.scene.ParallelCamera;
-import utilities.hud.AbstractHUDScreen;
+import voogasalad.util.hud.source.AbstractHUDScreen;
 
 /**
  * This class serves as the private interface that any game controller must

@@ -15,12 +15,10 @@ import gamedata.controller.FileChooserController;
 import gamedata.controller.ParserController;
 import gameengine.controller.Game;
 import gameplayer.view.BaseScreen;
+import gameplayer.view.TLGCSValueFinder;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import utilities.hud.HUDController;
-import utilities.hud.HUDModel;
-import utilities.hud.IValueFinder;
-import utilities.hud.TLGCSValueFinder;
+import voogasalad.util.hud.source.*;
 
 public class BaseScreenController extends BranchScreenController {
 
