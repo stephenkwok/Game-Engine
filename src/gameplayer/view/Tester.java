@@ -160,7 +160,8 @@ public class Tester extends Application {
         Action action5 = new VerticalBounceCollision((IPlayActor)actor1);
         Action action6 = new WinGame((IPlayActor)actor1);
         Action actionSpawn = new Spawn((IPlayActor) actor1, (IPlayActor) spawnedActor);
-
+        Action actionNextLevel = new NextLevel((IPlayActor) actor1);
+        
         Rule rule = new Rule(trigger1,action1);
         Rule rule2 = new Rule(trigger2, action2);
         Rule rule3 = new Rule(trigger3,action3);
@@ -168,15 +169,16 @@ public class Tester extends Application {
         Rule rule5 = new Rule(trigger5,action5);
         Rule rule6 = new Rule(trigger6,action6);
         Rule ruleSpawn = new Rule(triggerSpawn, actionSpawn);
+        Rule ruleNextLevel = new Rule(trigger6, actionNextLevel);
 
         actor1.addRule(rule);
         actor1.addRule(rule2);
         actor1.addRule(rule3);
         actor1.addRule(rule4);
         actor1.addRule(rule5);
-        actor1.addRule(rule6);
+        //actor1.addRule(rule6);
         actor1.addRule(ruleSpawn);
-
+        actor1.addRule(ruleNextLevel);
 
 
         TickTrigger intTick = new TickTrigger(5);
@@ -201,6 +203,11 @@ public class Tester extends Application {
         level1.addActor((IAuthoringActor)actor3);
         level1.addActor((IAuthoringActor) actor4);
         
+        Level level2 = new Level();
+        level2.setMyBackgroundImgName("vgnwpGb.png");
+        levels.add(level2);
+        level2.addActor(actor1);
+        actor1.setX(0);
         /**
          * testing create actors
          */
@@ -212,11 +219,11 @@ public class Tester extends Application {
         a.addRule(new Rule(translatetick,translateaction));
         TickTrigger newtick = new TickTrigger(220);
         Action newaction = new CreateActor((IPlayActor)actor1,(Actor)a,0,0);
-        actor1.addRule(new Rule(newtick,newaction));
+        //actor1.addRule(new Rule(newtick,newaction));
         
         
         
-        for(int i=0; i<=17; i++){
+        for(int i=0; i<=25; i++){
             Actor floor = new Actor();
             floor.setName("floor");
             floor.setID(5);
@@ -240,6 +247,7 @@ public class Tester extends Application {
             ((IAuthoringActor)actor3).addRule(brule3);
 
             level1.addActor((IAuthoringActor)floor);
+            level2.addActor((IAuthoringActor) floor);
         }
 
         Group group = new Group();
