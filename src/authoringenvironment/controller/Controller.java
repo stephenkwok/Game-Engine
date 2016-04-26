@@ -1,7 +1,6 @@
 package authoringenvironment.controller;
 
 import java.io.File;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import java.util.ResourceBundle;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.model.ImageEditingEnvironment;
 import authoringenvironment.model.PresetActorFactory;
 import authoringenvironment.view.ActorCopier;
 import authoringenvironment.view.ActorEditingEnvironment;
@@ -24,7 +22,6 @@ import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
 import authoringenvironment.view.GameEditingEnvironment;
 import authoringenvironment.view.LevelEditingEnvironment;
-import authoringenvironment.view.PreviewUnitWithEditable;
 import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
 import gamedata.controller.FileChooserController;
@@ -32,24 +29,10 @@ import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gameengine.model.IPlayActor;
-import gameengine.model.Rule;
-import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.ITrigger;
 import gameplayer.controller.BranchScreenController;
-import gui.view.ButtonFinish;
-import gui.view.ButtonHUDOptions;
-import gui.view.ButtonHelpPage;
-import gui.view.ButtonHome;
-import gui.view.ButtonLoad;
-import gui.view.ButtonNewActor;
-import gui.view.ButtonNewLevel;
-import gui.view.ButtonSave;
-import gui.view.ButtonSplash;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import gui.view.PopUpAuthoringHelpPage;
-import gui.view.TextFieldActorNameEditor;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
@@ -72,6 +55,7 @@ import voogasalad.util.hud.source.*;
 public class Controller extends BranchScreenController implements Observer, IAuthoringHUDController {
 	private static final String GUI_RESOURCE = "authoringGUI";
 	private static final String TOP_PANE_ELEMENTS = "TopPaneElements";
+	private static final String DELIMITER = ",";
 	private static final int WINDOW_HEIGHT = 700;
 	private static final int WINDOW_WIDTH = 1300;
 	private static final int PADDING = 10;
@@ -389,7 +373,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		String className = o.getClass().getSimpleName();
 		Method method;
 		try {
-			if (Arrays.asList(myObservableResource.getString(REQUIRES_ARG).split(",")).contains(className)) {
+			if (Arrays.asList(myObservableResource.getString(REQUIRES_ARG).split(DELIMITER)).contains(className)) {
 				method = this.getClass().getDeclaredMethod(myObservableResource.getString(className), Object.class);
 				method.invoke(this, arg);
 			} else {
@@ -410,8 +394,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
 	}
 
 	private void displayHUDOptions() {
@@ -419,8 +401,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	}
 
 	private void displayHelp(Object arg) {
-		helpPage = new PopUpAuthoringHelpPage();
+		helpPage = new PopUpAuthoringHelpPage((String) arg);
 	}
+	
 	public void updateActors(Actor actor) {
 		myActorCopier.setReferenceActor(actor);
 		List<IAuthoringActor> listToUpdate = myActorMap.get(actor);
