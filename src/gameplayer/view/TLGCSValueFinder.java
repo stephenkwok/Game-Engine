@@ -1,7 +1,10 @@
-package utilities.hud;
+package gameplayer.view;
 
 import gameengine.controller.Game;
 import gameengine.model.AttributeType;
+import utilities.hud.HUDController;
+import utilities.hud.IValueFinder;
+import utilities.hud.Property;
 
 public class TLGCSValueFinder implements IValueFinder {
 
