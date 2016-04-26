@@ -1,6 +1,5 @@
 package authoringenvironment.view;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +9,6 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
-import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 import gameengine.model.Rule;
@@ -18,12 +16,10 @@ import gameengine.model.Actions.Action;
 import gameengine.model.Actions.ChangeAttribute;
 import gameengine.model.Actions.CreateActor;
 import gameengine.model.Triggers.AttributeReached;
-import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.CollisionTrigger;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.TickTrigger;
-import javafx.scene.input.KeyCode;
 
 /**
  * 
@@ -31,8 +27,6 @@ import javafx.scene.input.KeyCode;
  *
  */
 public class ActorCopier {
-	private static final String ACTION_DIRECTORY = "gameengine.model.Actions.";
-	private static final String TRIGGER_DIRECTORY = "gameengine.model.Triggers.";
 	private static final String RESOURCE = "ruleCreator";
 	private static final String KEY = "Key";
 	private static final String TICK = "Tick";
@@ -45,7 +39,7 @@ public class ActorCopier {
 	private ResourceBundle myResources;
 	private ActionFactory myActionFactory;
 	private TriggerFactory myTriggerFactory;
-	
+
 	public ActorCopier() {
 		myReferenceActor = null;
 		init();
@@ -95,42 +89,16 @@ public class ActorCopier {
 		for (String trigger : rulesToCopy.keySet()) {
 			List<Rule> toAdd = rulesToCopy.get(trigger);
 			for (int i = 0; i < toAdd.size(); i++) {
-				try {
-					ITrigger triggerToAdd = createTrigger(toAdd.get(i), (IPlayActor) toUpdate);
-					Action actionToAdd = createAction(toAdd.get(i), (IPlayActor) toUpdate);
-					Rule rule = new Rule(triggerToAdd, actionToAdd);
-					rule.setID(toAdd.get(i).getID() + 1);
-					toUpdate.addRule(rule);
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					e.printStackTrace();
-				} catch (SecurityException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-
+				ITrigger triggerToAdd = createTrigger(toAdd.get(i), (IPlayActor) toUpdate);
+				Action actionToAdd = createAction(toAdd.get(i), (IPlayActor) toUpdate);
+				Rule rule = new Rule(triggerToAdd, actionToAdd);
+				rule.setID(toAdd.get(i).getID() + 1);
+				toUpdate.addRule(rule);
 			}
 		}
-
-
 	}
 
-	private ITrigger createTrigger(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private ITrigger createTrigger(Rule rule, IPlayActor toUpdate) {
 		ITrigger triggerToAdd = null;
 		String triggerClassName = rule.getMyTrigger().getClass().getSimpleName();
 		List<Object> arguments = new ArrayList<>();
@@ -155,8 +123,8 @@ public class ActorCopier {
 		triggerToAdd = myTriggerFactory.createNewTrigger(triggerClassName, arguments);
 		return triggerToAdd;
 	}
-	
-	private Action createAction(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+
+	private Action createAction(Rule rule, IPlayActor toUpdate) {
 		Action actionToAdd = null;
 		String actionClassName = rule.getMyAction().getClass().getSimpleName();
 		List<Object> arguments = new ArrayList<>();
@@ -186,5 +154,5 @@ public class ActorCopier {
 		}
 		return false;
 	}
-	
+
 }
