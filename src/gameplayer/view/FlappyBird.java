@@ -6,6 +6,7 @@ import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actions.*;
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.Rule;
@@ -99,14 +100,15 @@ public class FlappyBird extends Application {
         player.addRule(new Rule(new BottomCollision(player, pipeBottom), new LoseGame(level1)));
         player.addRule(new Rule(new SideCollision(player,pipeBottom), new LoseGame(player)));
         player.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player)));
-        player.addRule(new Rule(new SideCollision(player, invisibleLine), new ChangeAttribute(level1,AttributeType.POINTS,10)));
+        player.addRule(new Rule(new SideCollision(player, invisibleLine), new ChangeAttribute(player,AttributeType.POINTS,10)));
         player.addRule(new Rule(new BottomCollision(player, floor), new LoseGame(level1)));
         player.addRule(new Rule(new TickTrigger(5), new NextImage(player)));
 
         pipeTop.addRule(new Rule(new SideCollision(pipeTop, gameSide), new Destroy(pipeTop)));
         pipeBottom.addRule(new Rule(new SideCollision(pipeBottom, gameSide), new Destroy(pipeBottom)));
         
-        level1.addAttribute(new Attribute(AttributeType.POINTS,15,level1));
+        player.addAttribute(new Attribute(AttributeType.POINTS,15,player));
+        player.addState(ActorState.MAIN);
 
 
         level1.addActor(player);

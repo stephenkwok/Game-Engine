@@ -44,6 +44,23 @@ public class Game extends Observable implements Observer {
     
     
     
+    public Game(String initialGameFile, 
+    		List<Level> levels, 
+    		GameInfo info, 
+    		PhysicsEngine myPhysicsEngine,
+    		CollisionDetection myCollisionDetector, 
+    		Map<String, Set<IGameElement>> activeTriggers,
+    		Timeline animation, 
+    		List<IPlayActor> currentActors, 
+    		List<IPlayActor> deadActors,
+    		int count) {
+    	this(initialGameFile, info, levels);
+    	currentActors = new ArrayList<IPlayActor>();
+		deadActors = new ArrayList<IPlayActor>();
+		myPhysicsEngine = new PhysicsEngine();
+		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
+		count = 1;
+    }
 	
     
     
@@ -373,4 +390,35 @@ public class Game extends Observable implements Observer {
 		return info.getHUDFileLocation();
 	}
 	
+	public CollisionDetection getMyCollisonDetector() {
+		return myCollisionDetector;
+	}
+
+
+
+
+	public Map<String, Set<IGameElement>> getActiveTriggers() {
+		return activeTriggers;
+	}
+
+
+
+
+	public void setActiveTriggers(Map<String, Set<IGameElement>> activeTriggers) {
+		this.activeTriggers = activeTriggers;
+	}
+
+
+
+
+	public int getCount() {
+		return count;
+	}
+
+
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 }
