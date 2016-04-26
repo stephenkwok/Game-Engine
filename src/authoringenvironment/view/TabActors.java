@@ -11,7 +11,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 
 /**
  * Actors tab to go in the Inspector Pane in the Level Editing Environment GUI.
@@ -21,15 +23,16 @@ import javafx.scene.layout.TilePane;
  */
 public class TabActors extends TabParent {
 	private static final int ICON_HEIGHT = 75;
-	private static final int HGAP = 10;
-	private static final int VGAP = 10;
-	private static final int TILE_HEIGHT = 75;
+	private static final int HGAP = 15;
+	private static final int VGAP = 15;
+	private static final int TILE_HEIGHT = 125;
 	private static final int TILE_WIDTH = 75;
 	private static final int NUM_COLS = 4;
 	private static final int NUM_ROWS = 2;
 	private static final int PADDING = 10;
 	private List<ImageviewActorIcon> actorIcons;
 	private List<IAuthoringActor> curActors;
+	private List<VBox> icons;
 	private TilePane myPane;
 
 	/**
@@ -47,6 +50,7 @@ public class TabActors extends TabParent {
 		actorIcons = new ArrayList<>();
 		curActors = new ArrayList<>();
 		myPane = new TilePane(HGAP, VGAP);
+		icons = new ArrayList<>();
 		formatTab();
 		setAvailableActors(availActors);
 	}
@@ -113,13 +117,26 @@ public class TabActors extends TabParent {
 	 *            updated list of actors.
 	 */
 	public void setAvailableActors(Set<IAuthoringActor> updatedActors) {
-		myPane.getChildren().removeAll(actorIcons);
 //		actorIcons.clear();
 		updateActorList(updatedActors);
 		actorIcons = actorListToIconList(curActors);
-		myPane.getChildren().addAll(actorIcons);
+		addIconsToPane();
+		
 	}
 
+	private void addIconsToPane() {
+		myPane.getChildren().removeAll(icons);
+		icons.clear();
+		for (int i = 0; i < actorIcons.size(); i++) {
+			VBox box = new VBox();
+			Label name = new Label(actorIcons.get(i).getRefActor().getName());
+			name.setWrapText(true);
+			box.setAlignment(Pos.CENTER);
+			box.getChildren().addAll(actorIcons.get(i), name);
+			icons.add(box);
+		}
+		myPane.getChildren().addAll(icons);
+	}
 	/**
 	 * Return the contents of this tab.
 	 */

@@ -107,10 +107,10 @@ public class ActorCopier {
 		List<Object> arguments = new ArrayList<>();
 		if (checkType(triggerClassName, KEY)) {
 			arguments.add(((KeyTrigger) rule.getMyTrigger()).getMyKeyCode());
-			triggerClassName = KEY; // ideally won't need this...
+			//triggerClassName = KEY; // ideally won't need this...
 		} else if (checkType(triggerClassName, TICK)) {
 			arguments.add(((TickTrigger) rule.getMyTrigger()).getMyInterval());
-			triggerClassName = TICK;
+			//triggerClassName = TICK;
 		} else if (checkType(triggerClassName, COLLISION)) {
 			arguments.add(toUpdate);
 			arguments.add(((CollisionTrigger) rule.getMyTrigger()).getMyCollisionActor());
@@ -121,7 +121,7 @@ public class ActorCopier {
 			arguments.add(trigger.getMyValue());
 		} else if (checkType(triggerClassName, CLICK)) {
 			arguments.add((IGameElement) toUpdate);
-			triggerClassName = CLICK;
+			//triggerClassName = CLICK;
 		}
 		triggerToAdd = myTriggerFactory.createNewTrigger(triggerClassName, arguments);
 		return triggerToAdd;
