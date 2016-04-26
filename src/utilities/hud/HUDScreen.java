@@ -1,5 +1,4 @@
 package utilities.hud;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,21 +10,20 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 
-
 public class HUDScreen extends AbstractHUDScreen {
 
-	
 	private static final int DEFAULT_HEIGHT = 100;
 	private static final int DEFAULT_WIDTH = 1000;
 	
+
 	private Map<String, Property> status;
 	Map<String, Integer> valueToRowMap;
 	Map<Integer, String> rowToValueMap;
 	private SubScene myScene;
-    ObservableList<String> keys;
-    ObservableList<String> values;
-    private Group mySubGroup;
-    
+	ObservableList<String> keys;
+	ObservableList<String> values;
+	private Group mySubGroup;
+
 	public HUDScreen(double width, double height, Map<String, Property> status, Map<Integer, String> rowToValueMap) {
 		mySubGroup = new Group();
 		myScene = new SubScene(mySubGroup, width, height);
@@ -33,16 +31,16 @@ public class HUDScreen extends AbstractHUDScreen {
 		this.status = status;
 		this.rowToValueMap = rowToValueMap;
 		this.valueToRowMap = new HashMap<String, Integer>();
-		for (int i = 0; i<rowToValueMap.size(); i++) {
+		for (int i = 0; i < rowToValueMap.size(); i++) {
 			valueToRowMap.put(rowToValueMap.get(i), i);
 		}
 		init();
 	}
-	
+
 	public HUDScreen(Map<String, Property> status, Map<Integer, String> rowToValueMap) {
 		this(DEFAULT_WIDTH, DEFAULT_HEIGHT, status, rowToValueMap);
 	}
-	
+
 	public HUDScreen(double width, double height, Map<String, Property> status) {
 		this(width, height, status, new HashMap<Integer, String>());
 		int i = 0;
@@ -52,12 +50,11 @@ public class HUDScreen extends AbstractHUDScreen {
 			i++;
 		}
 	}
-	
+
 	public HUDScreen(Map<String, Property> status) {
 		this(DEFAULT_WIDTH, DEFAULT_HEIGHT, status);
 	}
-	
-	
+
 	public void init() {
 		keys = FXCollections.observableArrayList();
 		values = FXCollections.observableArrayList();
@@ -83,11 +80,11 @@ public class HUDScreen extends AbstractHUDScreen {
         mySubGroup.getChildren().add(superContainer);
         
 	}
-	
+
 	public SubScene getScene() {
 		return myScene;
 	}
-	
+
 	public void handleChange(ValueChange change) {
 		int rownum = valueToRowMap.get(change.getFieldName());
 		values.set(rownum, change.getNewValue().toString());

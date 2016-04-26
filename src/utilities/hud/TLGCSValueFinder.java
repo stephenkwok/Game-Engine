@@ -8,11 +8,6 @@ public class TLGCSValueFinder implements IValueFinder {
 	private HUDController controller;
 	private Game data; //for other projects, your data will be a different class
 	
-	
-	
-	
-	
-	
 	@Override
 	public Property find(String key) {
 		Property ret = null;
@@ -29,13 +24,10 @@ public class TLGCSValueFinder implements IValueFinder {
 			default:
 				ret = new Property("Value Not Found", key);
 				break;
-		
 		}
 		ret.addObserver(controller);
 		return ret;
 	}
-
-
 
 	@Override
 	public void setController(HUDController controller) {
@@ -50,5 +42,5 @@ public class TLGCSValueFinder implements IValueFinder {
 			throw new IllegalArgumentException();
 		}
 	}
-	
+
 }

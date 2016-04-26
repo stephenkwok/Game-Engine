@@ -14,8 +14,9 @@ public class ChangeAttributeBehavior extends DoubleBehavior {
 	private static final String CHANGE_HEALTH = "ChangeHealth";
 	private IAuthoringActor myActor;
 	private IAction myAction;
-	
-	public ChangeAttributeBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
+
+	public ChangeAttributeBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
+			ResourceBundle myResources) {
 		super(myActorRule, behaviorType, myResources);
 		this.myActor = myActor;
 	}
@@ -29,8 +30,10 @@ public class ChangeAttributeBehavior extends DoubleBehavior {
 	protected void createTriggerOrAction() {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add((IPlayActor) myActor);
-		if(getBehaviorType().equals(CHANGE_HEALTH)) arguments.add(AttributeType.HEALTH);
-		else arguments.add(AttributeType.POINTS);
+		if (getBehaviorType().equals(CHANGE_HEALTH))
+			arguments.add(AttributeType.HEALTH);
+		else
+			arguments.add(AttributeType.POINTS);
 		arguments.add((int) getValue());
 		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
 		setTriggerOrAction();

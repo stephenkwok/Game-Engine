@@ -5,21 +5,21 @@ import gameengine.model.Triggers.ITrigger;
 
 public class RuleManager {
 	private Map<String, List<Rule>> myRules;
-	
-	public RuleManager(){
-		myRules = new HashMap<String,List<Rule>>();
+
+	public RuleManager() {
+		myRules = new HashMap<String, List<Rule>>();
 	}
-	
-	public void addRule(Rule newRule){
-		 if (myRules.containsKey(newRule.getMyTrigger().getMyKey())) {
-	            List<Rule> myBehaviors = myRules.get(newRule.getMyTrigger().getMyKey());
-	            myBehaviors.add(newRule);
-	            myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
-	        } else {
-	            List<Rule> myBehaviors = new ArrayList<>();
-	            myBehaviors.add(newRule);
-	            myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
-	        }
+
+	public void addRule(Rule newRule) {
+		if (myRules.containsKey(newRule.getMyTrigger().getMyKey())) {
+			List<Rule> myBehaviors = myRules.get(newRule.getMyTrigger().getMyKey());
+			myBehaviors.add(newRule);
+			myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
+		} else {
+			List<Rule> myBehaviors = new ArrayList<>();
+			myBehaviors.add(newRule);
+			myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
+		}
 	}
 	
     public void removeRule(Rule rule){
@@ -37,6 +37,5 @@ public class RuleManager {
     
     public Map<String, List<Rule>> getRules(){
     	return myRules;
-    }
-    
+    }    
 }

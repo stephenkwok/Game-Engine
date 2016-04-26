@@ -15,6 +15,7 @@ import javafx.scene.layout.TilePane;
 
 /**
  * Actors tab to go in the Inspector Pane in the Level Editing Environment GUI.
+ * 
  * @author amyzhao
  *
  */
@@ -29,21 +30,25 @@ public class TabActors extends TabParent {
 	private static final int PADDING = 10;
 	private List<ImageviewActorIcon> actorIcons;
 	private TilePane myPane;
-	
+
 	/**
 	 * Constructs a tab to display icons of currently available actors.
-	 * @param myResources: authoring environment resource.
-	 * @param tabText: name of this tab.
-	 * @param availActors: list of currently available actors.
+	 * 
+	 * @param myResources:
+	 *            authoring environment resource.
+	 * @param tabText:
+	 *            name of this tab.
+	 * @param availActors:
+	 *            list of currently available actors.
 	 */
 	public TabActors(ResourceBundle myResources, String tabText, Set<IAuthoringActor> availActors) {
 		super(myResources, tabText);
-		actorIcons = new ArrayList<ImageviewActorIcon>();	
+		actorIcons = new ArrayList<ImageviewActorIcon>();
 		myPane = new TilePane(HGAP, VGAP);
 		formatTab();
 		setAvailableActors(availActors);
 	}
-	
+
 	private void formatTab() {
 		myPane.setPrefTileHeight(TILE_HEIGHT);
 		myPane.setPrefTileWidth(TILE_WIDTH);
@@ -54,22 +59,24 @@ public class TabActors extends TabParent {
 		myPane.setPadding(new Insets(PADDING));
 		myPane.setPrefHeight(200);
 	}
-	
+
 	/**
 	 * Converts a list of actors to a list of icons for the actors.
+	 * 
 	 * @param actors
 	 * @return
 	 */
 	private List<ImageviewActorIcon> actorSetToIconList(Set<IAuthoringActor> actors) {
 		List<ImageviewActorIcon> iconList = new ArrayList<>();
-		for (IAuthoringActor actor: actors) {
+		for (IAuthoringActor actor : actors) {
 			iconList.add(new ImageviewActorIcon(actor, ICON_HEIGHT));
 		}
 		return iconList;
 	}
-	
+
 	/**
 	 * Converts the current list of icons to a list of actors.
+	 * 
 	 * @return list of currently available actors
 	 */
 	public List<IAuthoringActor> getActors() {
@@ -79,26 +86,29 @@ public class TabActors extends TabParent {
 		}
 		return actorList;
 	}
-	
+
 	/**
 	 * Get the current list of icons.
+	 * 
 	 * @return list of icons of available actors.
 	 */
 	public List<ImageviewActorIcon> getIcons() {
 		return actorIcons;
 	}
-	
+
 	/**
 	 * Set the list of available actor icons based on an updated list of actors.
-	 * @param updatedActors: updated list of actors.
+	 * 
+	 * @param updatedActors:
+	 *            updated list of actors.
 	 */
 	public void setAvailableActors(Set<IAuthoringActor> updatedActors) {
 		myPane.getChildren().removeAll(actorIcons);
 		actorIcons.clear();
 		actorIcons = actorSetToIconList(updatedActors);
-		myPane.getChildren().addAll(actorIcons);	
+		myPane.getChildren().addAll(actorIcons);
 	}
-	
+
 	/**
 	 * Return the contents of this tab.
 	 */

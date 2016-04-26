@@ -14,8 +14,8 @@ import javafx.scene.layout.VBox;
 
 /**
  * 
- * This class reorders the levels created as specified by the author. If invalid data
- * is entered, an error message is generated notifying the author.
+ * This class reorders the levels created as specified by the author. If invalid
+ * data is entered, an error message is generated notifying the author.
  * 
  * @author Stephen
  *

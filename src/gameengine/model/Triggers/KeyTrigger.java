@@ -13,9 +13,9 @@ public class KeyTrigger extends ITrigger {
         setMyKey(key.getName());
     }
 
-    public String getMyKey() {
-        return myKey;
-    }
+	public String getMyKey() {
+		return myKey;
+	}
 
     public void setMyKey(String myKey) {
         this.myKey = myKey;
@@ -25,14 +25,15 @@ public class KeyTrigger extends ITrigger {
     	return myKeyCode;
     }
 
-    /**
-     * Checks a boolean condition against the state of an actor
-     *
-     * @param otherTrigger A trigger to check information against
-     * @return A boolean that says if the condition is true or false
-     */
-    @Override
-    public boolean evaluate(ITrigger otherTrigger) {
-        return true;
-    }
+	/**
+	 * Checks a boolean condition against the state of an actor
+	 *
+	 * @param otherTrigger
+	 *            A trigger to check information against
+	 * @return A boolean that says if the condition is true or false
+	 */
+	@Override
+	public boolean evaluate(ITrigger otherTrigger) {
+		return true;
+	}
 }

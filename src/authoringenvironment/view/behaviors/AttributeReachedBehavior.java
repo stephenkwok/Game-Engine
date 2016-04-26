@@ -15,8 +15,9 @@ public class AttributeReachedBehavior extends DoubleBehavior {
 	private static final String CHANGE_HEALTH = "ChangeHealth";
 	private IAuthoringActor myActor;
 	private ITrigger myTrigger;
-	
-	public AttributeReachedBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
+
+	public AttributeReachedBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
+			ResourceBundle myResources) {
 		super(myActorRule, behaviorType, myResources);
 		this.myActor = myActor;
 	}
@@ -31,8 +32,8 @@ public class AttributeReachedBehavior extends DoubleBehavior {
 		List<Object> arguments = new ArrayList<>();
 		if(getBehaviorType().equals(CHANGE_HEALTH)) arguments.add(AttributeType.HEALTH);
 		else arguments.add(AttributeType.POINTS);
-		arguments.add((int) getValue());
 		arguments.add((IGameElement) myActor);
+		arguments.add((int) getValue());
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
 		setTriggerOrAction();
 	}

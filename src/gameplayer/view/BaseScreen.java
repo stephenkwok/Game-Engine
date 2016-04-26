@@ -1,6 +1,7 @@
 package gameplayer.view;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Optional;
@@ -21,7 +22,7 @@ import utilities.hud.*;
  *
  */
 public class BaseScreen extends Screen implements Observer {
-	
+
 	private static final String BASE_RESOURCE = "gameGUI";
 	private static final String SIDE_BUTTONS = "SideButtons";
 
@@ -32,12 +33,15 @@ public class BaseScreen extends Screen implements Observer {
 	/**
 	 * Adds the auxiliary views, like the HUD display, ToolBar, and GameScreen,
 	 * to the BaseScreen
-	 * @param stage to change the scene
-	 * @param game to initialize the gamescreen with
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
+	 * 
+	 * @param stage
+	 *            to change the scene
+	 * @param game
+	 *            to initialize the gamescreen with
+	 * @throws InvocationTargetException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
 	 */
 	public BaseScreen() {
 		super();
@@ -46,7 +50,7 @@ public class BaseScreen extends Screen implements Observer {
 		initialize();
 	}
 
-	
+
 	public void setGameScreen(GameScreen screen) {
 		this.myGameScreen = screen;
 		this.myPane.setCenter(myGameScreen.getScene());
@@ -63,26 +67,30 @@ public class BaseScreen extends Screen implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		setChanged();
-		notifyObservers(o.getClass().getSimpleName());
+		notifyObservers(arg);
 	}
 
-
 	public void switchAlert() {
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, getResources().getString("SwitchConfirmation"), ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, getResources().getString("SwitchConfirmation"),
+				ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
 		Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.YES) {
+        	setChanged();
+			Object[] methodArg = {"saveGame", null};
+			notifyObservers(Arrays.asList(methodArg));
             setChanged();
-            notifyObservers("ButtonSaveGame");
-            setChanged();
-            notifyObservers("choose");
+			Object[] methodArg2 = {"chooseGame", null};
+			notifyObservers(Arrays.asList(methodArg2));
         }
         else if (result.get() == ButtonType.NO) {
         	setChanged();
-        	notifyObservers("choose");
+			Object[] methodArg = {"chooseGame", null};
+			notifyObservers(Arrays.asList(methodArg));
         }
         else {
         	setChanged();
-        	notifyObservers("ButtonUnPause");
+			Object[] methodArg = {"toggleUnPause", null};
+			notifyObservers(Arrays.asList(methodArg));
         }
 		
 	}
@@ -95,5 +103,4 @@ public class BaseScreen extends Screen implements Observer {
 		getRoot().getChildren().add(myPane);
 		
 	}
-
 }

@@ -12,7 +12,7 @@ public class PreviewUnitWithLevel extends PreviewUnitWithEditable {
 	private static final String TEXT_FIELD_PROMPT_TEXT = "Enter Play Pos.";
 	private static final Double TEXT_FIELD_WIDTH = 125.0;
 	private TextField myTextField;
-	
+
 	public PreviewUnitWithLevel(IEditableGameElement editable, IEditingEnvironment environment) {
 		super(editable, environment);
 		myTextField = new TextField();
@@ -21,19 +21,19 @@ public class PreviewUnitWithLevel extends PreviewUnitWithEditable {
 		HBox.setHgrow(myTextField, Priority.ALWAYS);
 		getHBox().getChildren().add(myTextField);
 	}
-	
+
 	public void updateLevelPlayPosition() {
 		((Level) getEditable()).setPlayPosition(getLevelPlayPosition());
 	}
-	
+
 	public int getLevelPlayPosition() {
 		String textFieldInput = myTextField.getText().trim();
-		return inputIsValid(textFieldInput) ? Integer.parseInt(textFieldInput) : -1; 
+		return inputIsValid(textFieldInput) ? Integer.parseInt(textFieldInput) : -1;
 	}
-	
+
 	public boolean inputIsValid(String input) {
 		for (Character character : input.toCharArray()) {
-			if (!Character.isDigit(character)) 
+			if (!Character.isDigit(character))
 				return false;
 		}
 		return !input.isEmpty();

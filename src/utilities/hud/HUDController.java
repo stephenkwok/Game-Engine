@@ -12,12 +12,11 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-public class HUDController implements Observer{
-	
+public class HUDController implements Observer {
+
 	private HUDModel model;
 	private AbstractHUDScreen view;
 	private Object dataSource;
-	
 	
 	private void setDataSource(Object dataSource) {
 		this.dataSource = dataSource;
@@ -28,7 +27,7 @@ public class HUDController implements Observer{
 		setDataSource(dataSource);
 		valueFinder.setController(this);
 		valueFinder.setDataSource(dataSource);
-		
+
 		List<String> fieldsToObserve = getFieldsToFollow(filename);
 		Map<Integer, String> rowToValueMap = new HashMap<>();
 		for (int i = 0; i<fieldsToObserve.size(); i++) {
@@ -38,14 +37,14 @@ public class HUDController implements Observer{
 		}
 		setView(new HUDScreen(model.getData(), rowToValueMap));
 	}
-	
+
 	private List<String> getFieldsToFollow(String filename) {
 		List<String> params = new ArrayList<>();
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
 			String currentLine = bufferedReader.readLine();
 
-			while(currentLine != null) {
+			while (currentLine != null) {
 				String trimmedWord = currentLine.trim();
 				if (trimmedWord.length() != 0) {
 					params.add(trimmedWord);
@@ -53,8 +52,7 @@ public class HUDController implements Observer{
 				currentLine = bufferedReader.readLine();
 			}
 			bufferedReader.close();
-		} 
-		catch (IOException e) {
+		} catch (IOException e) {
 			System.err.println("A error occured reading file: " + e);
 			e.printStackTrace();
 		}
@@ -69,10 +67,9 @@ public class HUDController implements Observer{
 	private void setModel(HUDModel model) {
 		this.model = model;
 	}
-	
+
 	private void setView(AbstractHUDScreen view) {
 		this.view = view;
-		this.view.addObserver(this);
 	}
 
 	@Override

@@ -27,14 +27,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
 
-/** 
- * This class serves as the private interface that a Game screen must implement in order to be able to add visual elements of the game to the screen.
- * It is the container for all the game contents that will be displayed on the screen.
+/**
+ * This class serves as the private interface that a Game screen must implement
+ * in order to be able to add visual elements of the game to the screen. It is
+ * the container for all the game contents that will be displayed on the screen.
+ * 
  * @author cmt57
  */
 
 public class GameScreen extends Observable implements IGameScreen {
-	
+
 	private SubScene mySubscene;
 	private Group mySubgroup;
 	private Camera myCamera;
@@ -43,10 +45,10 @@ public class GameScreen extends Observable implements IGameScreen {
 
 	private ResourceBundle myResources;
 	private static final String GAME_RESOURCE = "gameActions";
-	
-	public GameScreen(Camera camera){
+
+	public GameScreen(Camera camera) {
 		setMySubgroup(new Group());
-		setMySubscene(new SubScene(getMySubgroup(),Screen.SCREEN_WIDTH, 500));
+		setMySubscene(new SubScene(getMySubgroup(), Screen.SCREEN_WIDTH, 500));
 		getMySubscene().setFill(Color.ALICEBLUE);
 		getMySubscene().setFocusTraversable(true);
 		getMySubscene().setOnKeyPressed(e -> handleScreenEvent(e));
@@ -55,25 +57,26 @@ public class GameScreen extends Observable implements IGameScreen {
 		mySubscene.setCamera(camera);
 		this.myResources = ResourceBundle.getBundle(GAME_RESOURCE);
 	}
-	
-	
-	public SubScene getScene(){
+
+	public SubScene getScene() {
 		return getMySubscene();
 	}
-	
+
 	/**
-	 * Will add a node to the screen's scene representing the given actor's view.
-	 * @param actor an instance of IActor
+	 * Will add a node to the screen's scene representing the given actor's
+	 * view.
+	 * 
+	 * @param actor
+	 *            an instance of IActor
 	 */
-	public void addActor (IDisplayActor actor){
+	public void addActor(IDisplayActor actor) {
 		actor.setImageViewName(actor.getImageViewName());
 		getMySubgroup().getChildren().add(actor.getImageView());
 	}
-	
-	public void removeActor(IDisplayActor a){
+
+	public void removeActor(IDisplayActor a) {
 		mySubgroup.getChildren().remove(a.getImageView());
 	}
-	
 
 	public void addBackground(Level level) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(level.getMyBackgroundImgName()));
@@ -81,159 +84,180 @@ public class GameScreen extends Observable implements IGameScreen {
 		this.myEndVertical = image.getHeight();
 		ImageView imageView = new ImageView(image);
 		level.setMyImageView(imageView);
-		
-				
+
 		ImageView imageView2 = new ImageView(image);
 		imageView2.setX(imageView.getImage().getWidth());
-		
+
 		level.getMyBackgroundX().addListener(new ChangeListener() {
 			@Override
 			public void changed(ObservableValue o, Object oldVal, Object newVal) {
-				//TODO Watch that magic constant!
+				// TODO Watch that magic constant!
 				imageView2.setX((Double) newVal + imageView.getImage().getWidth() - 10);
 			}
 		});
-		
-		getMySubgroup().getChildren().addAll(imageView, imageView2); 
-		//getMySubgroup().getChildren().add(imageView);
-		
+
+		getMySubgroup().getChildren().addAll(imageView, imageView2);
+		// getMySubgroup().getChildren().add(imageView);
+
 	}
-	
+
 	/**
-	 * Will receive events on screen and then pass to the game engine's handler to determine what action to take
-	 * @param e event 
+	 * Will receive events on screen and then pass to the game engine's handler
+	 * to determine what action to take
+	 * 
+	 * @param e
+	 *            event
 	 */
-	public void handleScreenEvent (Event e){
+	public void handleScreenEvent(Event e) {
 		ITrigger trigger = null;
-		if(e.getEventType()==MouseEvent.MOUSE_CLICKED){
-			trigger = handleClick(((MouseEvent)e).getSceneX(),((MouseEvent)e).getSceneY());
-		}
-		else if(e.getEventType()==KeyEvent.KEY_PRESSED){
-			trigger = handleKeyPress(((KeyEvent)e).getCode());
+		if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
+			trigger = handleClick(((MouseEvent) e).getSceneX(), ((MouseEvent) e).getSceneY());
+		} else if (e.getEventType() == KeyEvent.KEY_PRESSED) {
+			trigger = handleKeyPress(((KeyEvent) e).getCode());
 		}
 		setChanged();
-		Object[] methodArg = {"handleTrigger", trigger};
+		Object[] methodArg = { "handleTrigger", trigger };
 		notifyObservers(Arrays.asList(methodArg));
 	}
 
-	
-	private ClickTrigger handleClick(double x, double y){
-		ClickTrigger clickTrigger = new ClickTrigger(x,y);
+	private ClickTrigger handleClick(double x, double y) {
+		ClickTrigger clickTrigger = new ClickTrigger(x, y);
 		return clickTrigger;
 	}
-	
-	private KeyTrigger handleKeyPress(KeyCode key){
+
+	private KeyTrigger handleKeyPress(KeyCode key) {
 		return new KeyTrigger(key);
 	}
-	
-	public void clearGame(){
+
+	public void clearGame() {
 		myCamera.setTranslateX(0);
 		getMySubgroup().getChildren().clear();
-		
-//		for(Node n: getMySubgroup().getChildren()){
-//			System.out.println("removing");
-//			getMySubgroup().getChildren().remove(n);
-//		}
-	}
 
+		// for(Node n: getMySubgroup().getChildren()){
+		// System.out.println("removing");
+		// getMySubgroup().getChildren().remove(n);
+		// }
+	}
 
 	public Group getMySubgroup() {
 		return mySubgroup;
 	}
 
-
 	public void setMySubgroup(Group mySubgroup) {
 		this.mySubgroup = mySubgroup;
 	}
-
 
 	public SubScene getMySubscene() {
 		return mySubscene;
 	}
 
-
 	public void setMySubscene(SubScene mySubscene) {
 		this.mySubscene = mySubscene;
 	}
 
-
 	@Override
 	public void addActor(IActor actor) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	@Override
 	public void reset() {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	@Override
 	public void changeCamera(double x, double y) {
 		if (x < myEndHorizontal - getScene().getWidth() && x > 0) {
 			myCamera.setTranslateX(x);
 		}
-		if (y > 0 && y < myEndVertical - getScene().getHeight()) {		
+		if (y > 0 && y < myEndVertical - getScene().getHeight()) {
 			myCamera.setTranslateY(y);
 		}
 	}
 
-
 	@Override
 	public void disableMusic(boolean disable) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	@Override
 	public void disableSoundFX(boolean disable) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	public void terminateGame(){
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, myResources.getString("EndMessage"), ButtonType.YES, ButtonType.NO);
+
+	public void terminateGame() {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, myResources.getString("EndMessage"), ButtonType.YES,
+				ButtonType.NO);
+		alert.setOnCloseRequest( e -> {
+			if (alert.getResult() == ButtonType.YES) {
+				saveScorePrompt();
+			} 
+			else {
+				restartGamePrompt();
+			}
+		});
 		alert.show();
-		alert.showingProperty().addListener((observable, oldValue, newValue) -> {
+		/* alert.showingProperty().addListener((observable, oldValue, newValue) -> {
 			if (!newValue) {
 				if (alert.getResult() == ButtonType.YES) {
 					saveScorePrompt();
 				}
+				else {
+					//restartGamePrompt();
+				}
 			}
-		});
-
+		});*/
 
 	}
-	
-	public void saveScorePrompt() {
+
+	private void restartGamePrompt() {
+		Alert endAlert = new Alert(Alert.AlertType.CONFIRMATION, myResources.getString("RestartMessage"), ButtonType.YES,
+				ButtonType.NO);
+		endAlert.show();
+		endAlert.showingProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue) {
+				Object[] args = {"leave", null};
+				if (endAlert.getResult() == ButtonType.YES) {
+					Object[] yesArgs = { "restartGame", null };
+					args = yesArgs;
+				}
+				setChanged();
+				notifyObservers(Arrays.asList(args));
+			}
+		});
+		
+	}
+
+	private void saveScorePrompt() {
 		TextInputDialog dialog = new TextInputDialog(myResources.getString("Name"));
 		dialog.setContentText(myResources.getString("SaveMessage"));
 		dialog.show();
+		dialog.setOnCloseRequest(e -> restartGamePrompt());
 		dialog.setResultConverter(new Callback<ButtonType, String>() {
 			@Override
 			public String call(ButtonType b) {
+				String answer = null;
 				if (b == ButtonType.OK) {
 					setChanged();
-					Object[] args = {myResources.getString("SaveScore"), dialog.getEditor().getText()};
+					Object[] args = { myResources.getString("SaveScore"), dialog.getEditor().getText() };
 					notifyObservers(Arrays.asList(args));
-					return dialog.getEditor().getText();
+					answer = dialog.getEditor().getText();
 				}
-				else {
-					return null;
-				}
+				return answer;
+				
 			}
 		});
+		
 	}
 
 }
