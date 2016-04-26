@@ -4,17 +4,19 @@ import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
-import gameengine.model.Actions.CreateActor;
-import gameengine.model.Actions.MoveLeft;
+import gameengine.model.Actions.*;
 import gameengine.model.Actor;
+import gameengine.model.Attribute;
+import gameengine.model.AttributeType;
 import gameengine.model.Rule;
-import gameengine.model.Triggers.TickTrigger;
+import gameengine.model.Triggers.*;
 import gameplayer.controller.GameController;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.ParallelCamera;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -54,23 +56,63 @@ public class FlappyBird extends Application {
         levels.add(level1);
 
         Actor pipeTop = new Actor();
+        pipeTop.setID(10);
         pipeTop.setImageViewName("toppipe.png");
-        pipeTop.addRule(new Rule(new TickTrigger(10), new MoveLeft(pipeTop)));
+        pipeTop.addRule(new Rule(new TickTrigger(20), new MoveLeft(pipeTop)));
 
         Actor pipeBottom = new Actor();
+        pipeBottom.setID(11);
         pipeBottom.setImageViewName("bottompipe.png");
-        pipeBottom.addRule(new Rule(new TickTrigger(10), new MoveLeft(pipeBottom)));
+        pipeBottom.addRule(new Rule(new TickTrigger(20), new MoveLeft(pipeBottom)));
 
         Actor invisibleLine = new Actor();
+        invisibleLine.setID(12);
         invisibleLine.setImageViewName("redball.png");
-        invisibleLine.addRule(new Rule(new TickTrigger(10), new MoveLeft(invisibleLine)));
+        invisibleLine.addRule(new Rule(new TickTrigger(20), new MoveLeft(invisibleLine)));
+
+        Actor gameSide = new Actor();
+        gameSide.setID(13);
+        gameSide.setImageViewName("gameside.png");
+
+        Actor floor = new Actor();
+        floor.setID(2);
+        floor.setImageViewName("floor.png");
+        floor.setY(275);
 
 //        level1.addActor(pipeTop);
 //        level1.addActor(pipeBottom);
 //        level1.addActor(invisibleLine);
 
-        level1.addRule(new Rule(new TickTrigger(100), new CreateActor(level1, pipeTop, 1024, 1024, -100, 0)));
-        level1.addRule(new Rule(new TickTrigger(100), new CreateActor(level1, pipeBottom, 1024, 1024, 300, 400)));
+        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeTop, 1024, 1024, -100, 0)));
+        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeBottom, 1024, 1024, 350, 400)));
+        //level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, invisibleLine, 1024, 1024, 200, 200)));
+
+        Actor player = new Actor();
+        player.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new MoveUp(player)));
+        player.isMainPlayer();
+        player.setID(1);
+        player.setImageViewName("flappybird1.png");
+        player.addSpriteImage("flappybird2.png");
+        player.addSpriteImage("flappybird3.png");
+
+        player.addRule(new Rule(new SideCollision(player,pipeTop), new LoseGame(player)));
+        player.addRule(new Rule(new SideCollision(player,pipeTop), new LoseGame(player)));
+        player.addRule(new Rule(new BottomCollision(player, pipeBottom), new LoseGame(level1)));
+        player.addRule(new Rule(new SideCollision(player,pipeBottom), new LoseGame(player)));
+        player.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player)));
+        player.addRule(new Rule(new SideCollision(player, invisibleLine), new ChangeAttribute(level1,AttributeType.POINTS,10)));
+        player.addRule(new Rule(new TopCollision(player, floor), new MoveUp(player)));
+        player.addRule(new Rule(new TickTrigger(5), new NextImage(player)));
+
+        gameSide.addRule(new Rule(new SideCollision(gameSide, pipeTop), new Destroy(pipeTop)));
+        gameSide.addRule(new Rule(new SideCollision(gameSide, pipeBottom), new Destroy(pipeBottom)));
+
+        level1.addAttribute(new Attribute(AttributeType.POINTS,0,level1));
+
+
+        level1.addActor(player);
+        level1.addActor(floor);
+        level1.addActor(gameSide);
 
         Group group = new Group();
         Scene scene = new Scene(group);

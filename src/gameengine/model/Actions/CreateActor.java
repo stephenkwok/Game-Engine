@@ -45,7 +45,6 @@ public class CreateActor extends Action {
             myX = myMinX + (myMaxX - myMinX) * Math.random();
             myY = myMinY + (myMaxY - myMinY) * Math.random();
         }
-        System.out.println(myX + " " + myY);
         cloneActor.setX(myX);
 		cloneActor.setY(myY);
 		getGameElement().changed();
