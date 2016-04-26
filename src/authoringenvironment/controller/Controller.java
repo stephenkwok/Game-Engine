@@ -3,7 +3,9 @@ package authoringenvironment.controller;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,6 +77,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private static final int PADDING = 10;
 	private static final String SPLASH_IMAGE_NAME = "salad.png";
 	private static final String EDITING_CONTROLLER_RESOURCE = "editingActions";
+	private static final String REQUIRES_ARG = "RequiresArg";
 	private List<Level> myLevels;
 	private List<String> myLevelNames;
 	private Map<IAuthoringActor, List<IAuthoringActor>> myActorMap;
@@ -85,7 +88,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private GUIMainScreen mainScreen;
 	private GUIMain guiMain;
 	private ResourceBundle myResources;
-	private ResourceBundle myButtonResource;
+	private ResourceBundle myObservableResource;
 	private Game game;
 	private GameInfo gameInfo;
 	private Scene myScene;
@@ -96,9 +99,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private ActorCopier myActorCopier;
 
 	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
+	IllegalArgumentException, InvocationTargetException {
 		super(myStage);
-		this.myButtonResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
+		this.myObservableResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
 		initNewGame();
 	}
 
@@ -133,7 +136,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * @throws NoSuchMethodException
 	 */
 	public void initNewGame() throws NoSuchMethodException, SecurityException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
+	IllegalArgumentException, InvocationTargetException {
 		myLevels = new ArrayList<>();
 		myLevelNames = new ArrayList<>();
 		myActorMap = new HashMap<>();
@@ -186,7 +189,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * @throws InvocationTargetException
 	 */
 	private void initializePresetActors() throws NoSuchMethodException, SecurityException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
+	IllegalArgumentException, InvocationTargetException {
 		PresetActorFactory presetActorFactory = new PresetActorFactory();
 		List<Actor> presetActors = presetActorFactory.getPresetActors();
 		presetActors.stream().forEach(actor -> myActorMap.put(actor, new ArrayList<>()));
@@ -235,8 +238,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 
 			}
 			// temp
-			ButtonSplash splash = new ButtonSplash(null, SPLASH_IMAGE_NAME);
-			hbox.getChildren().add(splash.createNode());
+			//ButtonSplash splash = new ButtonSplash(null, SPLASH_IMAGE_NAME);
+			//hbox.getChildren().add(splash.createNode());
 		} catch (Exception e) {
 
 		}
@@ -295,9 +298,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 *            file to write to.
 	 */
 	public void saveGame() {
-		//TODO implement incomplete game error checking
-		System.out.println(myLevels.get(0).getActors().get(0).getRules().size());
-		IPlayActor actor = myLevels.get(0).getActors().get(0);
 		List<IAuthoringActor> refActor = new ArrayList(myActorMap.keySet());
 		IAuthoringActor realRefActor = refActor.get(0);
 		FileChooser fileChooser = new FileChooser();
@@ -384,48 +384,43 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		// TODO Auto-generated method stub
 	}
 
-//	@Override public void update(Observable o, Object arg) { String button =
-//	  (String) arg; String method = myButtonResource.getString(button);
-//	  System.out.println(method); try {
-//	  this.getClass().getDeclaredMethod(method).invoke(this); } catch
-//	  (NoSuchMethodException e) { try {
-//	  this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this); }
-//	  catch (IllegalAccessException | IllegalArgumentException |
-//	  InvocationTargetException | NoSuchMethodException | SecurityException e1)
-//	  { // TODO Auto-generated catch block e1.printStackTrace(); } } catch
-//	  (IllegalAccessException | IllegalArgumentException |
-//	  InvocationTargetException | SecurityException e) { // TODO Auto-generated
-//	  catch block e.printStackTrace(); }
-//	  
-//	  }
-
-//	 Use reflection - properties file linking button name to a method name
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		if (arg0 instanceof PreviewUnitWithEditable)
-			handleObservableGoToEditingEnvironmentCall(arg1);
-		else if (arg0 instanceof ButtonFinish)
-			goToSplash();
-		else if (arg0 instanceof ButtonHome)
-			goToMainScreen();
-		else if (arg0 instanceof ButtonNewActor)
-			addActor();
-		else if (arg0 instanceof ButtonNewLevel)
-			addLevel();
-		else if (arg0 instanceof ButtonLoad)
-			loadGame();
-		else if (arg0 instanceof ButtonSave)
-			saveGame();
-		else if (arg0 instanceof TextFieldActorNameEditor)
-			updateActors((Actor) arg1);
-		else if (arg0 instanceof ButtonHelpPage) {
-			helpPage = new PopUpAuthoringHelpPage();
-		} else if (arg0 instanceof ButtonHUDOptions) {
-			PopupSelector selector = new PopupSelector(this);
+	@Override 
+	public void update(Observable o, Object arg) { 
+		String className = o.getClass().getSimpleName();
+		Method method;
+		try {
+			if (Arrays.asList(myObservableResource.getString(REQUIRES_ARG).split(",")).contains(className)) {
+				method = this.getClass().getDeclaredMethod(myObservableResource.getString(className), Object.class);
+				method.invoke(this, arg);
+			} else {
+				Class noparams[] = {};
+				method = this.getClass().getDeclaredMethod(myObservableResource.getString(className), noparams);
+				method.invoke(this, null);
+			}
+		} catch (NoSuchMethodException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
+
 	}
 
-	// checking to see if this works with name
+	private void displayHUDOptions() {
+		PopupSelector selector = new PopupSelector(this);
+	}
+
+	private void displayHelp(Object arg) {
+		helpPage = new PopUpAuthoringHelpPage();
+	}
 	public void updateActors(Actor actor) {
 		myActorCopier.setReferenceActor(actor);
 		List<IAuthoringActor> listToUpdate = myActorMap.get(actor);
