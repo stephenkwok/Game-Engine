@@ -15,9 +15,10 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 
-
 /**
- * Tab for setting attributes to go in the Inspector Pane in either the Level or Actor Editing Environment GUI.
+ * Tab for setting attributes to go in the Inspector Pane in either the Level or
+ * Actor Editing Environment GUI.
+ * 
  * @author amyzhao
  *
  */
@@ -30,14 +31,22 @@ public class TabFields extends TabParent {
 	private VBox myContent;
 	private IEditableGameElement myEditableElement;
 	private List<IEditingElement> myEditingElements;
-	
+
 	/**
 	 * Constructor for an attributes tab.
-	 * @param controller: controller for this authoring environment.
-	 * @param myResources: resource bundle for the authoring environment.
-	 * @param tabText: name of this tab.
-	 * @param optionsResource: resource bundle containing info about the GUI elements for this attributes tab.
-	 * @param element: element that is being edited by this attributes tab (i.e. a level or an actor).
+	 * 
+	 * @param controller:
+	 *            controller for this authoring environment.
+	 * @param myResources:
+	 *            resource bundle for the authoring environment.
+	 * @param tabText:
+	 *            name of this tab.
+	 * @param optionsResource:
+	 *            resource bundle containing info about the GUI elements for
+	 *            this attributes tab.
+	 * @param element:
+	 *            element that is being edited by this attributes tab (i.e. a
+	 *            level or an actor).
 	 */
 	public TabFields(ResourceBundle myResources, String tabText, String optionsResource, IEditableGameElement element) {
 		super(myResources, tabText);
@@ -47,7 +56,7 @@ public class TabFields extends TabParent {
 		myEditingElements = new ArrayList<>();
 		addElements();
 	}
-	
+
 	public void setObserver(IEditingEnvironment observer) {
 		for (int i = 0; i < myEditingElements.size(); i++) {
 			((EditingElementParent) myEditingElements.get(i)).addObserver(observer);
@@ -55,7 +64,8 @@ public class TabFields extends TabParent {
 	}
 
 	/**
-	 * Adds the elements specified by the resource file to the vbox for this tab.
+	 * Adds the elements specified by the resource file to the vbox for this
+	 * tab.
 	 */
 	private void addElements() {
 		VBox vbox = new VBox(PADDING);
@@ -64,10 +74,13 @@ public class TabFields extends TabParent {
 		updateEditable(myEditableElement);
 		myContent = vbox;
 	}
-	
+
 	/**
-	 * Creates the elements to be added to this tab. 
-	 * @param key: key in resource file for the value that lists all the elements to create
+	 * Creates the elements to be added to this tab.
+	 * 
+	 * @param key:
+	 *            key in resource file for the value that lists all the elements
+	 *            to create
 	 * @return list of IGUIElements to be added to the tab.
 	 */
 	private List<Node> createElements(String key) {
@@ -80,16 +93,24 @@ public class TabFields extends TabParent {
 		}
 		return createdElements;
 	}
-	
+
 	/**
-	 * Updates the editable element that each attribute tab element is modifying.
-	 * @param element: the level or actor that you now want to modify.
+	 * Updates the editable element that each attribute tab element is
+	 * modifying.
+	 * 
+	 * @param element:
+	 *            the level or actor that you now want to modify.
 	 */
 	public void updateEditable(IEditableGameElement element) {
 		myEditableElement = element;
 		for (int i = 0; i < myEditingElements.size(); i++) {
 			myEditingElements.get(i).setEditableElement(element);
 		}
+	}
+
+	
+	public void addElement(IGUIElement element) {
+		myContent.getChildren().add(element.createNode());
 	}
 	
 	/**

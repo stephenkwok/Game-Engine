@@ -15,8 +15,9 @@ public class AttributeReachedBehavior extends DoubleBehavior {
 	private static final String CHANGE_HEALTH = "ChangeHealth";
 	private IAuthoringActor myActor;
 	private ITrigger myTrigger;
-	
-	public AttributeReachedBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
+
+	public AttributeReachedBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
+			ResourceBundle myResources) {
 		super(myActorRule, behaviorType, myResources);
 		this.myActor = myActor;
 	}

@@ -8,6 +8,7 @@ import gameengine.controller.Level;
 
 /**
  * ComboBox for level's termination conditions.
+ * 
  * @author amyzhao
  *
  */
@@ -18,10 +19,15 @@ public class ComboBoxTermination extends ComboBoxTextCell {
 	private List<String> myOptions;
 
 	/**
-	 * Constructs a combobox using the resource file's available choices for termination conditions with a label and a "GO" button.
-	 * @param myResources: resource bundle containing possible winning conditions.
-	 * @param promptText: text for selection prompt.
-	 * @param labelText: text for label.
+	 * Constructs a combobox using the resource file's available choices for
+	 * termination conditions with a label and a "GO" button.
+	 * 
+	 * @param myResources:
+	 *            resource bundle containing possible winning conditions.
+	 * @param promptText:
+	 *            text for selection prompt.
+	 * @param labelText:
+	 *            text for label.
 	 */
 	public ComboBoxTermination(ResourceBundle myResources, String promptText, String labelText) {
 		super(promptText, labelText);
@@ -29,13 +35,15 @@ public class ComboBoxTermination extends ComboBoxTextCell {
 	}
 
 	/**
-	 * Sets the action of the "GO" button to update the level's termination condition.
+	 * Sets the action of the "GO" button to update the level's termination
+	 * condition.
 	 */
 	@Override
 	public void setButtonAction() {
-		/*getComboButton().setOnAction(event->{
-			((Level) getEditableElement()).setMyTermination(getComboBox().getValue());
-		});*/
+		/*
+		 * getComboButton().setOnAction(event->{ ((Level)
+		 * getEditableElement()).setMyTermination(getComboBox().getValue()); });
+		 */
 	}
 
 	/**
@@ -51,9 +59,11 @@ public class ComboBoxTermination extends ComboBoxTextCell {
 	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
-	/*	if (((Level) getEditableElement()).getMyLosingCondition() != null) {
-			getComboBox().setValue(((Level) getEditableElement()).getMyLosingCondition());
-		}*/
+		/*
+		 * if (((Level) getEditableElement()).getMyLosingCondition() != null) {
+		 * getComboBox().setValue(((Level)
+		 * getEditableElement()).getMyLosingCondition()); }
+		 */
 	}
 
 }

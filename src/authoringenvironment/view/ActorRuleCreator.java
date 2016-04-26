@@ -12,8 +12,10 @@ import gameengine.model.IRule;
 import gameengine.model.Actions.ChangeAttribute;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+
 /**
  * Space in actor editing environment where rules are created.
+ * 
  * @author AnnieTang
  *
  */
@@ -32,28 +34,30 @@ public class ActorRuleCreator {
 	private ActorEditingEnvironment aEE;
 	private ResourceBundle myActionResources;
 	private boolean newlyReturned;
-	
+
 	public ActorRuleCreator(ActorEditingEnvironment aEE) {
 		this.aEE = aEE;
 		initializeEnvironment();
 	}
-	
+
 	/**
-	 * Initialize and create actor rule creator, the rightmost section of the actor editing environment
+	 * Initialize and create actor rule creator, the rightmost section of the
+	 * actor editing environment
 	 */
-	private void initializeEnvironment(){
+	private void initializeEnvironment() {
 		this.ruleRow = RULE_ROW_START;
 		this.myActorRules = new ArrayList<>();
 		this.myActionResources = ResourceBundle.getBundle(RESOURCE_BASE);
 		this.newlyReturned = true;
 		myActorRuleCreatorPane = new GridPane();
-		myActorRuleCreatorPane.setPrefWidth(aEE.getStage().getWidth()*CONTAINERS_PERCENT_WIDTH);
+		myActorRuleCreatorPane.setPrefWidth(aEE.getStage().getWidth() * CONTAINERS_PERCENT_WIDTH);
 		myActorRuleCreatorPane.setVgap(VGAP);
 		myActorRuleCreatorPane.setHgap(HGAP);
 	}
-	
+
 	/**
 	 * Get GridPane representation of actor rule creator
+	 * 
 	 * @return
 	 */
 	public GridPane getGridPane() {
@@ -61,59 +65,69 @@ public class ActorRuleCreator {
 	}
 
 	/**
-	 * Add given behavior to given ActorRule   
+	 * Add given behavior to given ActorRule
+	 * 
 	 * @param rule
 	 * @param behavior
 	 */
-	public void addBehavior(ActorRule rule, Label behavior){
+	public void addBehavior(ActorRule rule, Label behavior) {
 		rule.addBehavior(behavior.getText());
 	}
+
 	/**
 	 * Add given sound to given ActorRule
+	 * 
 	 * @param rule
 	 * @param sound
 	 */
-	public void addSound(ActorRule rule, Label sound){
-//		rule.addSound(sound.getText());
+	public void addSound(ActorRule rule, Label sound) {
+		// rule.addSound(sound.getText());
 	}
+
 	/**
 	 * Add given image to given ActorRule
+	 * 
 	 * @param rule
 	 * @param image
 	 */
-	public void addImage(ActorRule rule, Label image){
-//		rule.addImage(image.getText());
+	public void addImage(ActorRule rule, Label image) {
+		// rule.addImage(image.getText());
 	}
-	
+
 	/**
-	 * Create new rule for Actor currently in the actor editing environment and add to gridpane
+	 * Create new rule for Actor currently in the actor editing environment and
+	 * add to gridpane
 	 */
-	public void addNewActorRule() {  
+	public void addNewActorRule() {
 		ActorRule newRule = new ActorRule(this);
-		myActorRuleCreatorPane.add(newRule.getGridPane(), RULE_COL,ruleRow);
+		myActorRuleCreatorPane.add(newRule.getGridPane(), RULE_COL, ruleRow);
 		myActorRules.add(newRule);
 		ruleRow++;
 	}
-	
+
 	/**
-	 * Remove given rule from environment and from Actor currently in the environment 
+	 * Remove given rule from environment and from Actor currently in the
+	 * environment
+	 * 
 	 * @param actorRule
 	 */
-	public void removeActorRule(ActorRule actorRule){
+	public void removeActorRule(ActorRule actorRule) {
 		myActorRules.remove(actorRule);
 		myActorRuleCreatorPane.getChildren().remove(actorRule.getGridPane());
 	}
-	
+
 	/**
 	 * Get ActorRules for Actor currently in the actor editing environment
+	 * 
 	 * @return
 	 */
-	public List<ActorRule> getActorRules(){
+	public List<ActorRule> getActorRules() {
 		return myActorRules;
 	}
+
 	/**
-	 * Each time actor editing environment is opened and set to a specific Actor, populates editing environment rules and
-	 * fields based on the Actor 
+	 * Each time actor editing environment is opened and set to a specific
+	 * Actor, populates editing environment rules and fields based on the Actor
 	 */
 	public void updateActorRules() {
 		this.newlyReturned = true;
@@ -121,28 +135,29 @@ public class ActorRuleCreator {
 		myActorRules.clear();
 		ruleRow = RULE_ROW_START;
 		System.out.println(((Actor) aEE.getEditable()).getRules());
-		for(String triggerType: ((Actor) aEE.getEditable()).getRules().keySet()){
+		for (String triggerType : ((Actor) aEE.getEditable()).getRules().keySet()) {
 			ActorRule toAdd = new ActorRule(this);
 			toAdd.addBehavior(checkForKeyTrigger(triggerType));
-			for(IRule rule: ((Actor) aEE.getEditable()).getRules().get(triggerType)){
+			for (IRule rule : ((Actor) aEE.getEditable()).getRules().get(triggerType)) {
 				String simpleName = rule.getMyAction().getClass().getSimpleName();
-				if(simpleName.equals(CHANGE_ATTRIBUTE)){
+				if (simpleName.equals(CHANGE_ATTRIBUTE)) {
 					String attributeType = ((ChangeAttribute) rule.getMyAction()).getMyAttributeType();
 					toAdd.addBehavior(myActionResources.getString(attributeType));
-				}
-				else toAdd.addBehavior(simpleName); // name of Action
+				} else
+					toAdd.addBehavior(simpleName); // name of Action
 			}
 			myActorRuleCreatorPane.add(toAdd.getGridPane(), RULE_COL, ruleRow);
 			myActorRules.add(toAdd);
 			ruleRow++;
 		}
 	}
-	
+
 	/**
 	 * Get the current IAuthoringActor
+	 * 
 	 * @return IAuthoringActor
 	 */
-	public IAuthoringActor getActor(){
+	public IAuthoringActor getActor() {
 		return (IAuthoringActor) aEE.getEditable();
 	}
 
@@ -151,13 +166,13 @@ public class ActorRuleCreator {
 	}
 
 	public void setRules() {
-		for(ActorRule actorRule: myActorRules){
+		for (ActorRule actorRule : myActorRules) {
 			actorRule.setRules();
 		}
 	}
-	
-	private String checkForKeyTrigger(String triggerType){
-		if(Arrays.asList(myActionResources.getString("KeyInputs").split(" ")).contains(triggerType)){
+
+	private String checkForKeyTrigger(String triggerType) {
+		if (Arrays.asList(myActionResources.getString("KeyInputs").split(" ")).contains(triggerType)) {
 			return KEY_TRIGGER;
 		}
 		return triggerType;

@@ -6,15 +6,15 @@ import gameengine.model.IPlayActor;
 /**
  * @author blakekaplan
  */
-public class Destroy extends Action {
+public class Destroy extends ActorAction {
 
-    public Destroy(IPlayActor assignedActor){
-        super(assignedActor);
-    }
+	public Destroy(IPlayActor assignedActor) {
+		super(assignedActor);
+	}
 
-    @Override
-    public void perform() {
-        getMyActor().addState(ActorState.DEAD);
-    }
+	@Override
+	public void perform() {
+		getMyActor().addState(ActorState.DEAD);
+	}
 
 }

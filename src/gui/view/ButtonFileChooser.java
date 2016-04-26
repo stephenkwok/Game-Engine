@@ -20,18 +20,20 @@ public abstract class ButtonFileChooser extends ButtonParent {
 	private static final String EXTENSIONS = "*.jpg *.png *.gif";
 	private IEditingElement myEditor;
 	private Stage myStage;
+
 	/**
 	 * Creates an image setting button.
+	 * 
 	 * @return a button whose action sets the image.
 	 */
-	public ButtonFileChooser(String buttonText, String imageName, IEditingElement editor, Stage stage){
+	public ButtonFileChooser(String buttonText, String imageName, IEditingElement editor, Stage stage) {
 		super(buttonText, imageName);
 		myEditor = editor;
 		myStage = stage;
 	}
-	
+
 	protected void setButtonAction() {
-		getButton().setOnAction(event->{
+		getButton().setOnAction(event -> {
 			try {
 				loadSelectedImage();
 			} catch (Exception e) {
@@ -39,8 +41,10 @@ public abstract class ButtonFileChooser extends ButtonParent {
 			}
 		});
 	}
+
 	/**
 	 * Loads the selected image from the file selected by the user.
+	 * 
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 * @throws IllegalArgumentException
@@ -48,23 +52,25 @@ public abstract class ButtonFileChooser extends ButtonParent {
 	 */
 	private void loadSelectedImage() {
 		File imageFile = promptForFileName();
-		if(imageFile!=null){
+		if (imageFile != null) {
 			Image image = new Image(imageFile.toURI().toString());
 			updateImage(myEditor, image, imageFile);
 		}
 	}
-	
+
 	protected abstract void updateImage(IEditingElement editor, Image image, File imageFile);
-	
+
 	/**
-     * Creates a file picker to get a file name
-     * @return returns the file
-     */
-    private File promptForFileName(){
-        FileChooser myFileChooser = new FileChooser();
-        List<String> extensions = Arrays.asList(EXTENSIONS.split(" "));
-        FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter(EXTENSION_FILTER_DESCRIPTION, extensions);
-        myFileChooser.getExtensionFilters().add(myFilter);
-        return myFileChooser.showOpenDialog(myStage);
-    }
+	 * Creates a file picker to get a file name
+	 * 
+	 * @return returns the file
+	 */
+	private File promptForFileName() {
+		FileChooser myFileChooser = new FileChooser();
+		List<String> extensions = Arrays.asList(EXTENSIONS.split(" "));
+		FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter(EXTENSION_FILTER_DESCRIPTION,
+				extensions);
+		myFileChooser.getExtensionFilters().add(myFilter);
+		return myFileChooser.showOpenDialog(myStage);
+	}
 }

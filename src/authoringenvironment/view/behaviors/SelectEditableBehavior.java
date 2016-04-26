@@ -23,10 +23,11 @@ import javafx.scene.layout.Priority;
 
 /**
  * Abstract class to implement ComboBox<IAuthoringActor> or ComboBox<Level>.
+ * 
  * @author AnnieTang
  */
 
-public abstract class SelectEditableBehavior extends EditingElementParent implements IAuthoringBehavior{
+public abstract class SelectEditableBehavior extends EditingElementParent implements IAuthoringBehavior {
 	private static final double IMAGE_HEIGHT = 20;
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
@@ -42,14 +43,14 @@ public abstract class SelectEditableBehavior extends EditingElementParent implem
 	private String labelText;
 	private TriggerFactory triggerFactory;
 	private ActionFactory actionFactory;
-	private ActorRule myActorRule; 
+	private ActorRule myActorRule;
 	private String behaviorType;
-	
+
 	public SelectEditableBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
 		super(GO);
 		this.behaviorType = behaviorType;
-		this.promptText =  myResources.getString(behaviorType+PROMPT);
-		this.labelText = myResources.getString(behaviorType+LABEL);
+		this.promptText = myResources.getString(behaviorType + PROMPT);
+		this.labelText = myResources.getString(behaviorType + LABEL);
 		this.triggerFactory = new TriggerFactory();
 		this.actionFactory = new ActionFactory();
 		this.myActorRule = myActorRule;
@@ -58,11 +59,9 @@ public abstract class SelectEditableBehavior extends EditingElementParent implem
 	/**
 	 * Creates ComboBox Node.
 	 */
-	public Node createNode(){
+	public Node createNode() {
 		HBox hbox = new HBox(HBOX_SPACING);
-		options = FXCollections.observableArrayList(
-			        getOptionsList()
-			    );
+		options = FXCollections.observableArrayList(getOptionsList());
 		Label label = new Label(labelText);
 		label.setWrapText(true);
 		initComboBox();
@@ -76,101 +75,104 @@ public abstract class SelectEditableBehavior extends EditingElementParent implem
 	/**
 	 * Initialize ComboBox with size, row count, text, cell factory
 	 */
-	private void initComboBox(){
+	private void initComboBox() {
 		comboBox = new ComboBox<>(options);
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
 		comboBox.setPrefWidth(COMBOBOX_WIDTH);
 		comboBox.setPromptText(promptText);
 		comboBox.setCellFactory(factory -> new MyCustomCell());
 	}
-	
+
 	/**
 	 * Creates custom cell factory for ComboBox
+	 * 
 	 * @author AnnieTang
 	 */
 	private class MyCustomCell extends ListCell<IEditableGameElement> {
-        @Override 
-    	protected void updateItem(IEditableGameElement item, boolean empty) {
-        super.updateItem(item, empty);
-        if (item == null || empty) {
-            setGraphic(null);
-        } else {
-        	HBox graphic = new HBox();
-        	ImageView imageView = item.getImageView();
-        	imageView.setFitHeight(IMAGE_HEIGHT);
-        	imageView.setPreserveRatio(true);
-        	graphic.getChildren().addAll(imageView, new Label(item.getName()));
-            setGraphic(graphic);
-        }
-       }
-    }
-	
+		@Override
+		protected void updateItem(IEditableGameElement item, boolean empty) {
+			super.updateItem(item, empty);
+			if (item == null || empty) {
+				setGraphic(null);
+			} else {
+				HBox graphic = new HBox();
+				ImageView imageView = item.getImageView();
+				imageView.setFitHeight(IMAGE_HEIGHT);
+				imageView.setPreserveRatio(true);
+				graphic.getChildren().addAll(imageView, new Label(item.getName()));
+				setGraphic(graphic);
+			}
+		}
+	}
+
 	/**
 	 * Updates Node whenever new information or data is available.
 	 */
 	public void updateNode() {
-		options = FXCollections.observableArrayList(
-		        getOptionsList()
-		    );
+		options = FXCollections.observableArrayList(getOptionsList());
 		comboBox.setItems(options);
-	}	
-	
+	}
+
 	/**
 	 * Returns list of items in the ComboBox.
+	 * 
 	 * @return
 	 */
 	abstract List<IEditableGameElement> getOptionsList();
-	
+
 	/**
 	 * Create ITrigger or IAction depending on type of behavior
 	 */
 	protected abstract void createTriggerOrAction();
+
 	/**
 	 * Add ITrigger or IAction to actor IRule
 	 */
 	public abstract void setTriggerOrAction();
-	
+
 	/**
 	 * Return if this behavior is a trigger
 	 */
 	public abstract boolean isTrigger();
-	
-	
+
 	protected abstract void updateValueBasedOnEditable();
-	
+
 	/**
 	 * Gets the combobox.
+	 * 
 	 * @return combobox.
 	 */
 	protected ComboBox<IEditableGameElement> getComboBox() {
 		return comboBox;
 	}
-	
+
 	/**
-	 * Gets the trigger factory. 
+	 * Gets the trigger factory.
+	 * 
 	 * @return factory
 	 */
-	protected TriggerFactory getTriggerFactory(){
+	protected TriggerFactory getTriggerFactory() {
 		return this.triggerFactory;
 	}
-	
+
 	/**
-	 * Gets the action factory. 
+	 * Gets the action factory.
+	 * 
 	 * @return factory
 	 */
-	protected ActionFactory getActionFactory(){
+	protected ActionFactory getActionFactory() {
 		return this.actionFactory;
 	}
-	
-	public void setTrigger(IAuthoringBehavior key, ITrigger value){
+
+	public void setTrigger(IAuthoringBehavior key, ITrigger value) {
 		myActorRule.setTrigger(key, value);
 	}
-	
-	public void setAction(IAuthoringBehavior key, IAction value){
+
+	public void setAction(IAuthoringBehavior key, IAction value) {
 		myActorRule.setAction(key, value);
 	}
-	
-	protected String getBehaviorType(){
+
+	protected String getBehaviorType() {
 		return this.behaviorType;
 	}
 }

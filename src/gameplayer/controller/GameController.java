@@ -3,6 +3,7 @@ package gameplayer.controller;
 import java.util.List;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -17,6 +18,7 @@ import gameengine.model.IDisplayActor;
 import gameengine.model.IPlayActor;
 import gameplayer.view.GameScreen;
 import gameplayer.view.HUDScreen;
+import javafx.animation.Timeline;
 import javafx.scene.ParallelCamera;
 
 /**
@@ -27,15 +29,16 @@ import javafx.scene.ParallelCamera;
  * @author cmt57
  */
 
-public class GameController implements Observer, IGameController {
+public class GameController extends Observable implements Observer, IGameController {
 	@XStreamOmitField
 	private Game model;
 	@XStreamOmitField
 	private GameScreen view;
 	@XStreamOmitField
 	private HUDScreen hud;
-
+	@XStreamOmitField
 	private ResourceBundle myResources;
+	@XStreamOmitField
 	private static final String GAME_CONTROLLER_RESOURCE = "gameActions";
 
 	public GameController(Game game) {
@@ -111,69 +114,14 @@ public class GameController implements Observer, IGameController {
 	}
 
 	/**
-	 * Will reflect changes in actors' positions or values in a new "step" to
-	 * simulate one round of animation.
-	 */
-	public void update() {
-
-	}
-
-	/**
-	 * Will ask game engine to check interactions that need to be resolved.
-	 */
-	public void checkInteractions() {
-
-	}
-
-	/**
-	 * Will resolve any front end outcomes determined by logic in backend
-	 * checking interactions.
-	 */
-	public void cleanUp() {
-
-	}
-
-	/**
 	 * Will stop the animation timeline.
 	 */
 	public void endGame() {
 		// TODO fix resource also implement saving functionality
-
-		togglePause();
 		view.terminateGame();
+		model.terminateGame();
 	}
-	// Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Game over! Do you
-	// want to save your score?", ButtonType.YES, ButtonType.NO);
-	// alert.show();
-	// alert.showingProperty().addListener((observable, oldValue, newValue) -> {
-	// if (!newValue) {
-	// if (alert.getResult() == ButtonType.YES) {
-	// saveScorePrompt();
-	// }
-	// }
-	// });
-
-	// }
-
-	// private void saveScorePrompt() {
-	// TextInputDialog dialog = new TextInputDialog("Name");
-	// dialog.setContentText("Please enter your name if you want to save your
-	// score");
-	// dialog.show();
-	// dialog.setResultConverter(new Callback<ButtonType, String>() {
-	// @Override
-	// public String call(ButtonType b) {
-	// if (b == ButtonType.OK) {
-	// saveGameScore(dialog.getEditor().getText());
-	// return dialog.getEditor().getText();
-	// }
-	// else {
-	// return null;
-	// }
-	// }
-	// });
-	// }
-	//
+	
 	private void saveGameScore(String name) {
 		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
 		c.saveHighScore(getGame().getScore(), name);
@@ -211,7 +159,11 @@ public class GameController implements Observer, IGameController {
 	public void update(Observable o, Object arg) {
 		List<Object> myList = (List<Object>) arg;
 		String methodName = (String) myList.get(0);
+
 		try {
+			if(methodName.equals("addActor")){ //TODO: Change to reflection, pass in Actor object from arg.get(1)
+				this.addActor((Actor)myList.get(1));
+			}else
 			if (myResources.getString(methodName).equals("null")) {
 				this.getClass().getDeclaredMethod(methodName).invoke(this);
 			} else if (myResources.getString(methodName).equals("String")) {
@@ -221,7 +173,8 @@ public class GameController implements Observer, IGameController {
 				Object arg2 = myClass.cast(myList.get(1));
 				model.getClass().getDeclaredMethod(methodName, myClass).invoke(model, arg2);
 			}
-		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e1) {
+		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException
+				| InvocationTargetException | NoSuchMethodException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
@@ -251,19 +204,27 @@ public class GameController implements Observer, IGameController {
 	}
 
 	public void restartGame() {
-		System.out.println("restart game");
-		System.out.println(model.getInfo().getMyCurrentLevelNum() + " game level");
-		initialize(model.getInfo().getMyCurrentLevelNum());
+		System.out.println("restarting game");
+		Object[] args = {"restartGame", null};
+		setChanged();
+		notifyObservers(Arrays.asList(args));
 	}
-	
-	public void updateCamera(){
-		if(model.getCurrentLevel().getMainCharacter()!=null){
-			if(model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))){
+
+	public void updateCamera() {
+		if (model.getCurrentLevel().getMainCharacter() != null) {
+			if (model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))) {
 				view.changeCamera(model.getCurrentLevel().getMainCharacter().getX(), 0);
-			}else{
+			} else {
 				view.changeCamera(0, model.getCurrentLevel().getMainCharacter().getY());
 			}
 		}
+	}
+	
+	public void leave() {
+		Object[] args = {"goToSplash", null};
+		setChanged();
+		notifyObservers(Arrays.asList(args));
+		
 	}
 
 	@Override

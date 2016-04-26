@@ -7,15 +7,15 @@ import gameengine.model.IPlayActor;
  */
 public class MoveUp extends MovingAction {
 
-    public MoveUp(IPlayActor actor) {
-        super(actor);
-    }
+	public MoveUp(IPlayActor actor) {
+		super(actor);
+	}
 
     @Override
     public void perform() {
-    	getMyActor().getPhysicsEngine().jump(getMyActor());
-    	getMyActor().setHeading(90);
+    	getMyActor().getPhysicsEngine().moveUp(getMyActor());
+    	//getMyActor().setHeading(90);
     }
 
-    
+
 }

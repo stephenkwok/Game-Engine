@@ -31,9 +31,10 @@ public abstract class TextFieldWithButton extends EditingElementParent {
 		this.textFieldWidth = textFieldWidth;
 		myTextField = new TextField();
 	}
-	
+
 	/**
-	 * Creates and returns the container containing this class' Label, TextField, and Button
+	 * Creates and returns the container containing this class' Label,
+	 * TextField, and Button
 	 */
 	@Override
 	public Node createNode() {
@@ -44,23 +45,24 @@ public abstract class TextFieldWithButton extends EditingElementParent {
 		myContainer.getChildren().addAll(myTextFieldPrompt, myTextField, getButton());
 		return myContainer;
 	}
-	
+
 	/**
-	 * Updates the text that will be displayed by the text field depending 
-	 * on the the IEditableGameElement's current value for the attribute
-	 * that is being edited
+	 * Updates the text that will be displayed by the text field depending on
+	 * the the IEditableGameElement's current value for the attribute that is
+	 * being edited
 	 */
 	protected abstract void updateValueBasedOnEditable();
-	
+
 	/**
 	 * Sets the text that is displayed by the text field to the given value
 	 * 
-	 * @param value that text field's text will be set to
+	 * @param value
+	 *            that text field's text will be set to
 	 */
 	protected void setTextFieldValue(String value) {
 		myTextField.setText(value);
 	}
-	
+
 	/**
 	 * 
 	 * @return the input in the text field
@@ -68,7 +70,7 @@ public abstract class TextFieldWithButton extends EditingElementParent {
 	protected String getTextFieldInput() {
 		return myTextField.getText();
 	}
-	
+
 	/**
 	 * Enables the TextField to expand to fill the width of the HBox container
 	 */

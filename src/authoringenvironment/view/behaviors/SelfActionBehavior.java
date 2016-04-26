@@ -1,4 +1,5 @@
 package authoringenvironment.view.behaviors;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
@@ -11,8 +12,9 @@ import gameengine.model.IAction;
 public class SelfActionBehavior extends LabelBehavior {
 	private IAction myAction;
 	private IAuthoringActor myActor;
-	
-	public SelfActionBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
+
+	public SelfActionBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
+			ResourceBundle myResources) {
 		super(myActorRule, behaviorType, myResources);
 		this.myActor = myActor;
 	}
