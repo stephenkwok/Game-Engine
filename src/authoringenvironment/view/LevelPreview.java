@@ -37,12 +37,9 @@ public class LevelPreview implements IGUI {
 	private static final int POP_UP_WIDTH = 300;
 	private static final int POP_UP_HEIGHT = 100;
 	private Pane myLevelPane;
-	private StackPane myStackPane; // try setting stackpane to scrollpane's
-									// content, then adding imageview for
-									// background to stackpane and level on top
+	private StackPane myStackPane;
 	private ScrollPane myScrollPane;
 	private Pane myPane;
-	private Rectangle myBoundary;
 	private Level myLevel;
 	private ImageView myLevelBackground;
 	private List<ImageviewActorIcon> myActorPreviews;
@@ -64,13 +61,12 @@ public class LevelPreview implements IGUI {
 		myLevelPane = new Pane();
 		initStackPane();
 		initScrollPane();
-		initBoundary();
 		addChildrenToPanes();
 	}
 
 	private void addChildrenToPanes() {
 		myScrollPane.setContent(myStackPane);
-		myStackPane.getChildren().addAll(myLevelPane, myBoundary);
+		myStackPane.getChildren().add(myLevelPane);
 		myPane.getChildren().add(myScrollPane);
 	}
 
@@ -91,13 +87,7 @@ public class LevelPreview implements IGUI {
 		myScrollPane.setFitToWidth(true);
 		myScrollPane.setStyle("-fx-background-color: lightgray");
 	}
-
-	private void initBoundary() {
-		myBoundary = new Rectangle(SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
-		myBoundary.setFill(Color.TRANSPARENT);
-		myBoundary.setStroke(Color.BLACK);
-	}
-
+	
 	@Override
 	public Pane getPane() {
 		return myPane;
@@ -107,7 +97,6 @@ public class LevelPreview implements IGUI {
 		myLevel = level;
 		myLevelPane.getChildren().clear();
 		myStackPane.getChildren().clear();
-		myLevelPane.getChildren().add(myBoundary);
 		updateLevelBackground();
 		addLevelActorsToScene();
 		// updateIcons();

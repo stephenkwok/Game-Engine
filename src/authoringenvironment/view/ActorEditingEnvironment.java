@@ -205,6 +205,6 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		myController.updateActors((IAuthoringActor) arg);
+		myController.updateActors((Actor) arg);
 	}
 }

@@ -15,6 +15,7 @@ public class CreateActor extends Action {
 	ActorCopier copier;
 	double myX;
 	double myY;
+	private Actor myActorToCopy;
     double myMinX;
     double myMaxX;
     double myMinY;
@@ -51,4 +52,15 @@ public class CreateActor extends Action {
 		((Observable) getGameElement()).notifyObservers(Arrays.asList(new Object[]{"addActor",cloneActor}));
 	}
 
+	public double getMyX() {
+		return myX;
+	}
+	
+	public double getMyY() {
+		return myY;
+	}
+	
+	public Actor getMyActorToCopy() {
+		return myActorToCopy;
+	}
 }

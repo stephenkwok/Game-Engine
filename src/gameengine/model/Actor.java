@@ -352,11 +352,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	}
 
 	@Override
-	public int getMyID() {
-		return myID;
-	}
-
-	@Override
 	public void update(Observable o, Object arg) {
 		if (o.getClass().equals(this.getClass())) {
 			setChanged();

@@ -7,6 +7,7 @@ import java.util.Observable;
 
 import gameengine.model.Actor;
 import gameengine.model.IGameElement;
+import gameengine.model.IPlayActor;
 import gameengine.model.PhysicsEngine;
 
 public class LoseGame extends Action {

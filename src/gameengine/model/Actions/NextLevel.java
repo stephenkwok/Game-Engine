@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
+
 import gameengine.model.IGameElement;
 
 public class NextLevel extends Action {

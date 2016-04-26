@@ -16,6 +16,7 @@ import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.model.ImageEditingEnvironment;
 import authoringenvironment.model.PresetActorFactory;
+import authoringenvironment.view.ActorCopier;
 import authoringenvironment.view.ActorEditingEnvironment;
 import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
@@ -92,6 +93,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private GUIFactory factory;
 	private Scene splashScene;
 	private PopUpAuthoringHelpPage helpPage;
+	private ActorCopier myActorCopier;
 
 	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException {
@@ -161,6 +163,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 */
 	public void initializeGeneralComponents() {
 		myRoot = new BorderPane();
+		myActorCopier = new ActorCopier();
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
 		getStage().setScene(myScene);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
@@ -414,7 +417,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		else if (arg0 instanceof ButtonSave)
 			saveGame();
 		else if (arg0 instanceof TextFieldActorNameEditor)
-			updateActors((IAuthoringActor) arg1);
+			updateActors((Actor) arg1);
 		else if (arg0 instanceof ButtonHelpPage) {
 			helpPage = new PopUpAuthoringHelpPage();
 		} else if (arg0 instanceof ButtonHUDOptions) {
@@ -423,12 +426,12 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	}
 
 	// checking to see if this works with name
-	public void updateActors(IAuthoringActor actor) {
+	public void updateActors(Actor actor) {
+		myActorCopier.setReferenceActor(actor);
 		List<IAuthoringActor> listToUpdate = myActorMap.get(actor);
 		for (int i = 0; i < listToUpdate.size(); i++) {
-			IAuthoringActor toUpdate = listToUpdate.get(i);
-			copyActor(toUpdate, actor);
-			toUpdate.setName(actor.getName());
+			Actor toUpdate = (Actor) listToUpdate.get(i);
+			myActorCopier.copyActor(toUpdate, actor);
 		}
 	}
 
@@ -436,69 +439,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		for (IAuthoringActor refActor : myActorMap.keySet()) {
 			if (myActorMap.get(refActor).contains(actor)) {
 				refActor.setSize(actor.getSize());
-				updateActors(refActor);
-			}
-		}
-	}
-
-	// copy IDs
-	private void copyActor(IAuthoringActor toUpdate, IAuthoringActor toCopy) {
-		toUpdate.setName(toCopy.getName());
-		toUpdate.setFriction(toCopy.getFriction());
-		toUpdate.setImageView(toCopy.getImageView());
-		toUpdate.setSize(toCopy.getSize());
-		toUpdate.setImageViewName(toCopy.getImageViewName());
-		toUpdate.setID(toCopy.getMyID());
-		copyRules(toUpdate, toCopy.getRules());
-		toUpdate.setPhysicsEngine(toCopy.getPhysicsEngine());
-		// copyAttributes(toUpdate,)
-	}
-
-	private void copyRules(IAuthoringActor toUpdate, Map<String, List<Rule>> rulesToCopy) {
-		toUpdate.getRules().clear();
-		for (String trigger : rulesToCopy.keySet()) {
-			List<Rule> toAdd = rulesToCopy.get(trigger);
-			for (int i = 0; i < toAdd.size(); i++) {
-				String triggerName = toAdd.get(i).getMyTrigger().getClass().getName();
-				Class<?> className;
-				try {
-					className = Class.forName(triggerName);
-					ITrigger triggerToAdd = (ITrigger) className.newInstance();
-
-					String actionName = toAdd.get(i).getMyAction().getClass().getName();
-					Class<?> actionClassName = Class.forName(actionName);
-					Constructor<?> actionConstructor = actionClassName.getConstructor(Actor.class);
-					Action actionToAdd = (Action) actionConstructor.newInstance((Actor) toUpdate);
-
-					// ITrigger triggerToAdd = toAdd.get(i).getMyTrigger();
-					// Action action = toAdd.get(i).getMyAction();
-					// action.setMyActor((IPlayActor) (toUpdate));
-					Rule rule = new Rule(triggerToAdd, actionToAdd);
-					rule.setID(toAdd.get(i).getID() + 1);
-					toUpdate.addRule(rule);
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SecurityException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
+				updateActors((Actor) refActor);
 			}
 		}
 	}
