@@ -1,6 +1,7 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
 
 /**
  * Updates the position and velocity of an actor Usually tied to TickTrigger
@@ -9,7 +10,7 @@ import gameengine.model.Actor;
  */
 public class UpdateActor extends MovingAction {
 
-	public UpdateActor(Actor assignedActor) {
+	public UpdateActor(IPlayActor assignedActor) {
 		super(assignedActor);
 	}
 

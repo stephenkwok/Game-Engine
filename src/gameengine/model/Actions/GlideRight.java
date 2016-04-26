@@ -1,6 +1,7 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
 
 /**
  * An example of an Action to glide an Actor right by a given distance (no
@@ -16,7 +17,7 @@ public class GlideRight extends GlidingAction {
 	 * @param assignedActor
 	 *            The Actor that will be changed
 	 */
-	public GlideRight(Actor assignedActor) {
+	public GlideRight(IPlayActor assignedActor) {
 		super(assignedActor);
 	}
 

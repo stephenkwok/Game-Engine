@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import gameengine.model.Actor;
+import gameengine.model.IGameElement;
+import gameengine.model.IPlayActor;
 import gameengine.model.PhysicsEngine;
 
 public class LoseGame extends Action {
 	private Actor assignedActor;
 
-	public LoseGame(Actor assignedActor) {
+	public LoseGame(IGameElement assignedActor) {
 		super(assignedActor);
 	}
 
