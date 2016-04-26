@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
+import gameengine.model.Attribute;
+import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 import gameengine.model.Rule;
@@ -81,6 +83,7 @@ public class ActorCopier {
 		toUpdate.setSize(toCopy.getSize());
 		toUpdate.setID(toCopy.getID());
 		copyRules(toUpdate, toCopy.getRules());
+		copyAttributes((IGameElement) toUpdate, toCopy.getAttributeMap());
 	}
 
 	// work in progress.. currently only works for KeyTriggers and Move actions
@@ -155,4 +158,10 @@ public class ActorCopier {
 		return false;
 	}
 
+	private void copyAttributes(IGameElement toUpdate, Map<AttributeType, Attribute> attributeMap) {
+		for (AttributeType type: attributeMap.keySet()) {
+			Attribute toCopy = new Attribute(type, attributeMap.get(type).getMyValue(), toUpdate);
+			toUpdate.addAttribute(toCopy);
+		}
+	}
 }
