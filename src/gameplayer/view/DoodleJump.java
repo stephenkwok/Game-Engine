@@ -91,6 +91,7 @@ public class DoodleJump extends Application {
         Scene scene = new Scene(group);
 
         Game model = new Game(info, levels);
+        model.setHUDInfoFile("a.txt");
         CreatorController c = new CreatorController(model);
         c.saveForEditing(new File("gamefiles/DoodleJump.xml"));
         ParallelCamera camera = new ParallelCamera();

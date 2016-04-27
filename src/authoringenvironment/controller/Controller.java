@@ -1,6 +1,7 @@
 package authoringenvironment.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -11,6 +12,11 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
@@ -85,11 +91,11 @@ public class Controller extends BranchScreenController implements Observer, IAut
 
 	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
 	IllegalArgumentException, InvocationTargetException {
-		super(myStage);
+		super(myStage, EDITING_CONTROLLER_RESOURCE);
 		this.myObservableResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
 		initNewGame();
 	}
-
+/*
 	// TODO This constructor is not parallel with other BranchScreenController
 	// subclasses
 	// Create a resource bundle for the Controller's actions associated to
@@ -101,12 +107,12 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		super(myStage);
 		this.guiMain = guiMain;
 		// initNewGame();
-	}
+	}*/
 
 	// TODO Need a constructor that takes in a game passed by data and sets up
 	// Authoring Environment accordingly
 	public Controller(Game game, Stage myStage) {
-		super(myStage);
+		super(myStage, EDITING_CONTROLLER_RESOURCE);
 		this.game = game;
 		initExistingGame();
 	}
@@ -288,9 +294,15 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		File initialDirectory = new File("gamefiles");
 		fileChooser.setInitialDirectory(initialDirectory);
 		File file = fileChooser.showSaveDialog(new Stage());
-		CreatorController controller = new CreatorController(new Game(gameInfo, myLevels), guiMain);
+		CreatorController controller = new CreatorController(new Game(gameInfo, myLevels));
 		if (file != null) {
-			controller.saveForEditing(file);
+			try {
+				controller.saveForEditing(file);
+			} catch (SAXException | IOException | TransformerException | ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			}
 		}
 
 	}
@@ -453,6 +465,12 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	
 	public Game getGame(){
 		return game;
+	}
+
+	@Override
+	public void invoke(String method, Class[] parameterTypes, Object[] parameters) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
