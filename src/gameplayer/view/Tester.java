@@ -99,6 +99,9 @@ public class Tester extends Application {
 
         //main character kills enemy if it hits it from above
         TopCollision kill3 = new TopCollision(actor4, (IPlayActor)actor1);
+        
+        
+        
         Action killAction3 = new Destroy((Actor) actor4);
         Rule killRule3 = new Rule(kill3, killAction3);
         ((Actor) actor4).addRule(killRule3);
@@ -186,13 +189,20 @@ public class Tester extends Application {
         actor1.addRule(new Rule(intTick, animate));
 
         actor1.addState(ActorState.MAIN);
-		Attribute points = new Attribute(AttributeType.POINTS,0,(IGameElement)actor1);
-		actor1.addAttribute(points);
+		//Attribute points = new Attribute(AttributeType.POINTS,0,(IGameElement)actor1);
+		//actor1.addAttribute(points);
 		
 		ITrigger attreached = new AttributeReached(AttributeType.POINTS, (IGameElement)actor1, 5);
 		Action wingame = new WinGame((IPlayActor) actor1);
 		
 		actor1.addRule(new Rule(attreached,wingame));
+		
+		BottomCollision pls = new BottomCollision((IPlayActor)actor1, actor4); 
+		Action hello = new VerticalBounceCollision((Actor)actor1);
+		Rule lesads = new Rule(pls ,hello);
+		actor1.addRule(lesads);
+		
+		
 
         List<Level> levels = new ArrayList<Level>();
         Level level1 = new Level();
