@@ -114,7 +114,7 @@ public class LevelPreview implements IGUI {
 	public void changeBackgroundImage(Image image, File imageFile) {
 		myStackPane.getChildren().clear();
 		myLevel.setImageView(new ImageView(image));
-		myLevel.setMyBackgroundImgName(imageFile.getPath());
+		myLevel.setMyBackgroundImgName(imageFile.getName());
 		updateLevelBackground();
 	}
 
