@@ -99,6 +99,9 @@ public class Tester extends Application {
 
         //main character kills enemy if it hits it from above
         TopCollision kill3 = new TopCollision(actor4, (IPlayActor)actor1);
+        
+        
+        
         Action killAction3 = new Destroy((Actor) actor4);
         Rule killRule3 = new Rule(kill3, killAction3);
         ((Actor) actor4).addRule(killRule3);
@@ -193,6 +196,13 @@ public class Tester extends Application {
 		Action wingame = new WinGame((IPlayActor) actor1);
 		
 		actor1.addRule(new Rule(attreached,wingame));
+		
+		BottomCollision pls = new BottomCollision((IPlayActor)actor1, actor4); 
+		Action hello = new VerticalBounceCollision((Actor)actor1);
+		Rule lesads = new Rule(pls ,hello);
+		actor1.addRule(lesads);
+		
+		
 
         List<Level> levels = new ArrayList<Level>();
         Level level1 = new Level();

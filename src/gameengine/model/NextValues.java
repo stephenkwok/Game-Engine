@@ -6,6 +6,7 @@ public class NextValues {
 	double nextXPos;
 	double nextYVelo;
 	double nextYPos;
+	boolean collision;
 	
 	public double getNextXPos(){
 		return nextXPos;
@@ -38,6 +39,14 @@ public class NextValues {
 	
 	public void setNextYVelo(double x){
 		nextYVelo = x;
+	}
+
+	public boolean hadCollision() {
+		return collision;
+	}
+	
+	public void setCollisoin(boolean c){
+		collision = c;
 	}
 	
 	
