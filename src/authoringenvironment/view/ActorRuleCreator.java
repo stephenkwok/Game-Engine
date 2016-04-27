@@ -176,6 +176,8 @@ public class ActorRuleCreator {
 			return KEY_TRIGGER;
 		} else if (triggerType.equals("Tick")) {
 			return "TickTrigger";
+		} else if (triggerType.equals("Click")) {
+			return "ClickTrigger";
 		}
 		return triggerType;
 	}

@@ -33,6 +33,7 @@ import gameplayer.controller.BranchScreenController;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import gui.view.PopUpAuthoringHelpPage;
+import gui.view.PopUpRuleAdder;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
@@ -404,7 +405,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	}
 
 	private void displayHelp(Object arg) {
-		helpPage = new PopUpAuthoringHelpPage((String) arg);
+		//helpPage = new PopUpAuthoringHelpPage((String) arg);
+		PopUpRuleAdder adder = new PopUpRuleAdder(300,300);
 	}
 
 	public void updateActors(Actor actor) {
