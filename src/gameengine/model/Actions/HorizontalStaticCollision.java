@@ -1,7 +1,7 @@
 package gameengine.model.Actions;
 
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
-import gameengine.model.Actions.Action;
 
 /**
  * This Action represents an static sideways collision between Actors Actor will
@@ -13,8 +13,8 @@ import gameengine.model.Actions.Action;
 
 public class HorizontalStaticCollision extends ActorAction{
 
-	public HorizontalStaticCollision(IPlayActor actor) {
-		super(actor);
+	public HorizontalStaticCollision(IGameElement actor) {
+		super((IPlayActor) actor);
 	}
 
 	@Override

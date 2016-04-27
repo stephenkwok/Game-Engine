@@ -1,6 +1,7 @@
 package gameengine.model.Actions;
 
 import gameengine.model.ActorState;
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 
 /**
@@ -8,8 +9,8 @@ import gameengine.model.IPlayActor;
  */
 public class Destroy extends ActorAction {
 
-	public Destroy(IPlayActor assignedActor) {
-		super(assignedActor);
+	public Destroy(IGameElement assignedActor) {
+		super((IPlayActor) assignedActor);
 	}
 
 	@Override

@@ -19,6 +19,7 @@
           <myID>1</myID>
           <myImageViewName>runningmario1.png</myImageViewName>
           <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
           <myRuleManager>
             <myRules>
               <entry>
@@ -88,6 +89,7 @@
                         <myID>90</myID>
                         <myImageViewName>redball.png</myImageViewName>
                         <myHeading>0.0</myHeading>
+                        <myImageViewSize>0.0</myImageViewSize>
                         <myRuleManager>
                           <myRules>
                             <entry>
@@ -149,6 +151,8 @@
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.AttributeReached">
                       <myKey>A1POINTS5</myKey>
+                      <myType>POINTS</myType>
+                      <myTriggerValue>5</myTriggerValue>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.WinGame">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -175,6 +179,7 @@
                         <myID>2</myID>
                         <myImageViewName>block.png</myImageViewName>
                         <myHeading>0.0</myHeading>
+                        <myImageViewSize>0.0</myImageViewSize>
                         <myRuleManager>
                           <myRules>
                             <entry>
@@ -209,6 +214,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -252,6 +258,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -295,6 +302,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -338,6 +346,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -381,6 +390,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -424,6 +434,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -467,6 +478,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -510,6 +522,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -553,6 +566,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -596,6 +610,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -639,6 +654,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -682,6 +698,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -725,6 +742,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -768,6 +786,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -811,6 +830,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -854,6 +874,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -897,6 +918,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -940,6 +962,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -983,6 +1006,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1026,6 +1050,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1069,6 +1094,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1112,6 +1138,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1155,6 +1182,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1198,6 +1226,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1241,6 +1270,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1284,6 +1314,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1356,6 +1387,7 @@
                         <myID>0</myID>
                         <myImageViewName>flagpole.png</myImageViewName>
                         <myHeading>0.0</myHeading>
+                        <myImageViewSize>0.0</myImageViewSize>
                         <myRuleManager>
                           <myRules>
                             <entry>
@@ -2040,6 +2072,7 @@
           <myID>3</myID>
           <myImageViewName>goomba.png</myImageViewName>
           <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
           <myRuleManager>
             <myRules>
               <entry>
@@ -2232,7 +2265,11 @@
     <myHUDElementsToDisplay/>
     <myFile>test2_loader.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
+<<<<<<< HEAD
     <myHUDFileLocation>hudfiles/test</myHUDFileLocation>
+=======
+    <myHUDFileLocation>a.txt</myHUDFileLocation>
+>>>>>>> master
   </info>
   <myPhysicsEngine>
     <nextXVelo>0.0</nextXVelo>

@@ -1,10 +1,10 @@
 package gameengine.model.Actions;
 
-import gameengine.model.Actor;
+import gameengine.model.IGameElement;
 
 public class GlideUp extends GlidingAction {
 
-	public GlideUp(Actor assignedActor, double offset) {
+	public GlideUp(IGameElement assignedActor, double offset) {
 		super(assignedActor, offset);
 	}
 

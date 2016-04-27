@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
@@ -32,6 +34,7 @@ public class TriggerFactory {
 	private static final String TRIGGERS = "Triggers.";
 	private static final String CLASS = "Class";
 	private static final String CREATE = "create";
+	@XStreamOmitField
 	private ResourceBundle myResources;
 	private List<Object> arguments;
 
@@ -133,8 +136,8 @@ public class TriggerFactory {
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> collisionClass = Class.forName(className);
-		Constructor<?> constructor = collisionClass.getConstructor(Actor.class);
-		return (ITrigger) constructor.newInstance((Actor) arguments.get(ZERO));
+		Constructor<?> constructor = collisionClass.getConstructor(IGameElement.class);
+		return (ITrigger) constructor.newInstance((IGameElement) arguments.get(ZERO));
 	}
 
 	private ITrigger createAttributeReached(String behaviorType, String className)
