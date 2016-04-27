@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import authoringenvironment.model.ITriggerCreator;
 import authoringenvironment.view.ActionFactory;
 import authoringenvironment.view.KeyTriggerCreator;
+import authoringenvironment.view.LevelEditingEnvironment;
 import authoringenvironment.view.TickTriggerCreator;
 import authoringenvironment.view.TriggerFactory;
 import gameengine.controller.Level;
@@ -54,11 +55,13 @@ public class PopUpRuleAdder extends PopUpParent implements Observer {
 	private VBox myActionCreator;
 	private Button myButton;
 	private Level myLevel;
+	private LevelEditingEnvironment myLevelEditor;
 
-	public PopUpRuleAdder(int popUpWidth, int popUpHeight, Level level) {
+	public PopUpRuleAdder(int popUpWidth, int popUpHeight, LevelEditingEnvironment environment) {
 		super(popUpWidth, popUpHeight);
 		myResources = ResourceBundle.getBundle(RESOURCE);
-		myLevel = level;
+		myLevel = environment.getLevel();
+		myLevelEditor = environment;
 		myActionFactory = new ActionFactory();
 		myTriggerFactory = new TriggerFactory();
 		myButton = new Button(CREATE_RULE);

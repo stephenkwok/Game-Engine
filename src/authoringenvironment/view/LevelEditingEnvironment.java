@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -344,5 +345,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 
 	public Controller getController() {
 		return myController;
+	}
+	
+	public Set<IAuthoringActor> getAvailableActors() {
+		return availableActors.keySet();
 	}
 }
