@@ -15,6 +15,7 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.model.ImageEditingEnvironment;
+import authoringenvironment.model.ImageEditingEnvironmentWithActor;
 import authoringenvironment.model.PresetActorFactory;
 import authoringenvironment.view.ActorCopier;
 import authoringenvironment.view.ActorEditingEnvironment;
@@ -286,6 +287,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	public void goToMainScreen() {
 		mainScreen.updatePreviewUnits();
 		setCenterPane(mainScreen.getPane());
+		myActorMap.keySet().stream().forEach(actor -> System.out.println(actor.getSize()));
+		myActorMap.values().stream().forEach(list -> list.stream().forEach(actor -> System.out.println(actor.getSize())));
 	}
 
 	/**
@@ -438,6 +441,10 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		for (IAuthoringActor refActor : myActorMap.keySet()) {
 			if (myActorMap.get(refActor).contains(actor)) {
 				refActor.setSize(actor.getSize());
+				refActor.setRotate(actor.getRotate());
+				refActor.setOpacity(actor.getOpacity());
+				refActor.setScaleX(actor.getScaleX());
+				refActor.setScaleY(actor.getScaleY());
 				updateActors((Actor) refActor);
 			}
 		}

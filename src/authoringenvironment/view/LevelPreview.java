@@ -1,7 +1,17 @@
 package authoringenvironment.view;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
+import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.ImageEditingEnvironmentWithActor;
+import gameengine.controller.Level;
+import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
 import gui.view.IGUI;
-import gui.view.PopUpActorResize;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,18 +28,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import authoringenvironment.model.IAuthoringActor;
-import gameengine.controller.Level;
-import gameengine.model.Actor;
-import gameengine.model.IPlayActor;
-
-public class LevelPreview implements IGUI {
+public class LevelPreview implements IGUI, Observer {
 	private static final Color DEFAULT_COLOR = Color.CORNFLOWERBLUE;
 	private static final String VERTICAL = "Vertically";
 	private static final double SUBSCENE_HEIGHT = 500; // 700 * 3/4
@@ -178,8 +178,10 @@ public class LevelPreview implements IGUI {
 				if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 					if (mouseEvent.getClickCount() == 2) {
 						System.out.println("Double clicked");
-						PopUpActorResize popUp = new PopUpActorResize(POP_UP_WIDTH, POP_UP_HEIGHT, icon.getRefActor(),
-								myLevelEditingEnvironment.getController());
+//						PopUpActorResize popUp = new PopUpActorResize(POP_UP_WIDTH, POP_UP_HEIGHT, icon.getRefActor(),
+//								myLevelEditingEnvironment.getController());
+						ImageEditingEnvironmentWithActor iEE = new ImageEditingEnvironmentWithActor(icon.getRefActor());
+						iEE.addObserver(LevelPreview.this);
 					}
 				}
 			}
@@ -217,5 +219,11 @@ public class LevelPreview implements IGUI {
 
 	public Pane getLevelPane() {
 		return myLevelPane;
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		myLevelEditingEnvironment.getController().updateRefActorSize((IAuthoringActor) arg1);
+		addLevelActorsToScene();
 	}
 }

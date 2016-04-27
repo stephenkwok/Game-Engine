@@ -58,6 +58,10 @@ public class PreviewUnitWithEditable extends ObjectObservable implements IEditin
 		ImageView imageView = new ImageView(myEditable.getImageView().getImage());
 		imageView.setFitHeight(IMAGE_FIT_SIZE);
 		imageView.setPreserveRatio(true);
+		imageView.setRotate(myEditable.getImageView().getRotate());
+		imageView.setOpacity(myEditable.getImageView().getOpacity());
+		imageView.setScaleX(myEditable.getImageView().getScaleX());
+		imageView.setScaleY(myEditable.getImageView().getScaleY());
 		myLabel.setGraphic(imageView);
 	}
 
