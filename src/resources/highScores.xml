@@ -19,5 +19,14 @@
         </entry>
       </tree-map>
     </entry>
+    <entry>
+      <string>gamefiles/loaders/FlappyBird_loader.xml</string>
+      <tree-map>
+        <entry>
+          <string>Test</string>
+          <int>15</int>
+        </entry>
+      </tree-map>
+    </entry>
   </myScores>
 </gameengine.controller.HighScoresKeeper>
