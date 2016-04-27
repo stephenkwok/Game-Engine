@@ -40,7 +40,7 @@ public class LevelRuleEditor implements IEditingElement {
 		myTriggers = new TableColumn(TRIGGERS);
 		myParams = new TableColumn(PARAMETERS);
 		myActions = new TableColumn(ACTIONS);
-		myRuleAdder = new PopUpRuleAdder(POP_UP_WIDTH, POP_UP_HEIGHT);
+		myRuleAdder = new PopUpRuleAdder(POP_UP_WIDTH, POP_UP_HEIGHT, myLevel);
 	}
 	
 	public void addRule() {

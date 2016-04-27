@@ -1,4 +1,4 @@
-package gui.view;
+package authoringenvironment.model;
 
 import gameengine.model.IAction;
 

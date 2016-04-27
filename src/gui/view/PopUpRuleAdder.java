@@ -107,7 +107,8 @@ public class PopUpRuleAdder extends PopUpParent implements Observer {
 	private void displayActionParameters() {
 		myActionCreator = null;
 		switch (myActionName) {
-
+		case "WinGame":
+			myActorCreator 
 		}
 		myActionContainer.getChildren().add(myActionCreator);
 	}
