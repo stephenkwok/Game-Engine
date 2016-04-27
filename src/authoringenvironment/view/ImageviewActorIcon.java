@@ -1,22 +1,8 @@
 package authoringenvironment.view;
 
-import java.lang.reflect.Constructor;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-import java.util.Map;
-
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
-
-import gameengine.model.IPlayActor;
-import gameengine.model.Rule;
-import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.ITrigger;
-import gameengine.model.Triggers.KeyTrigger;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 
 /**
  * ImageView that serves as an icon for an actor.
@@ -41,6 +27,8 @@ public class ImageviewActorIcon extends ImageView {
 		setImage(actor.getImageView().getImage());
 		this.setFitHeight(height);
 		this.setPreserveRatio(true);
+		this.setRotate(actor.getRotate());
+		this.setOpacity(actor.getOpacity());
 		myID = actor.getID();
 		onLevel = false;
 		updateImageView();
@@ -91,6 +79,10 @@ public class ImageviewActorIcon extends ImageView {
 	public void updateImageView() {
 		setImage(myActor.getImageView().getImage());
 		setPreserveRatio(true);
+		setRotate(myActor.getRotate());
+		setOpacity(myActor.getOpacity());
+		setScaleX(myActor.getScaleX());
+		setScaleY(myActor.getScaleY());
 		if (onLevel) {
 			setFitHeight(myActor.getImageView().getFitHeight());
 		}

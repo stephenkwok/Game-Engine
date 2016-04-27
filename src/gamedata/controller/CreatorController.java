@@ -54,6 +54,10 @@ public class CreatorController implements ICreatorController {
 		}
 
 	}
+	
+	public void saveForPreviewing(File file) throws SAXException, IOException, TransformerException, ParserConfigurationException {
+		this.myXMLCreator.save(myGame, file);
+	}
 
 	@Override
 	public void saveForPlaying(File file) throws ParserConfigurationException {
@@ -61,6 +65,7 @@ public class CreatorController implements ICreatorController {
 			myGame.getInfo().setMyFile(file.getName());
 			this.myXMLCreator.save(myGame, file);
 		} catch (SAXException | IOException | TransformerException e) {
+			e.printStackTrace();
 			myScreen.showError(e.getMessage());
 		}
 	}

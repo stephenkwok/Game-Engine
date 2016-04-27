@@ -35,8 +35,14 @@ public class XMLCreator {
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		
 		String xml = this.myXStream.toXML(object);
-		Document document = documentBuilder.parse(new InputSource(new StringReader(xml)));
-		convertDocumentToFile(document, file);
+		//System.out.println(xml);
+		try {
+			Document document = documentBuilder.parse(new InputSource(new StringReader(xml)));
+			convertDocumentToFile(document, file);
+		} catch (SAXException e) {
+			//System.out.println(xml);
+		}
+		
 	}
 
 	private void convertDocumentToFile (Document document, File file) throws TransformerException {

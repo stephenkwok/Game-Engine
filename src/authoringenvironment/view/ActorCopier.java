@@ -7,26 +7,22 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.lang.reflect.Method;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
+import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
-import gameengine.model.Actions.ChangeAttribute;
-import gameengine.model.Actions.CreateActor;
 import gameengine.model.Triggers.AttributeReached;
-import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.CollisionTrigger;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.TickTrigger;
-import javafx.scene.input.KeyCode;
 
 /**
  * 
@@ -34,8 +30,6 @@ import javafx.scene.input.KeyCode;
  *
  */
 public class ActorCopier {
-	private static final String ACTION_DIRECTORY = "gameengine.model.Actions.";
-	private static final String TRIGGER_DIRECTORY = "gameengine.model.Triggers.";
 	private static final String RESOURCE = "ruleCreator";
 	private static final String KEY = "Key";
 	private static final String TICK = "Tick";
@@ -49,7 +43,7 @@ public class ActorCopier {
 	private ResourceBundle myResources;
 	private ActionFactory myActionFactory;
 	private TriggerFactory myTriggerFactory;
-	
+
 	public ActorCopier() {
 		myReferenceActor = null;
 		init();
@@ -90,7 +84,12 @@ public class ActorCopier {
 		toUpdate.setImageViewName(toCopy.getImageViewName());
 		toUpdate.setSize(toCopy.getSize());
 		toUpdate.setID(toCopy.getID());
+		toUpdate.setRotate(toCopy.getRotate());
+		toUpdate.setOpacity(toCopy.getOpacity());
+		toUpdate.setScaleX(toCopy.getScaleX());
+		toUpdate.setScaleY(toCopy.getScaleY());
 		copyRules(toUpdate, toCopy.getRules());
+		copyAttributes((IGameElement) toUpdate, toCopy.getAttributeMap());
 	}
 
 	// work in progress.. currently only works for KeyTriggers and Move actions
@@ -128,24 +127,20 @@ public class ActorCopier {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
-
 			}
 		}
-
-
 	}
 
-	private ITrigger createTrigger(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private ITrigger createTrigger(Rule rule, IPlayActor toUpdate) {
 		ITrigger triggerToAdd = null;
-		String triggerClassName = rule.getMyTrigger().getClass().getSimpleName();
+ 		String triggerClassName = rule.getMyTrigger().getClass().getSimpleName();
 		List<Object> arguments = new ArrayList<>();
 		if (checkType(triggerClassName, KEY)) {
 			arguments.add(((KeyTrigger) rule.getMyTrigger()).getMyKeyCode());
-			triggerClassName = KEY; // ideally won't need this...
+			//triggerClassName = KEY; // ideally won't need this...
 		} else if (checkType(triggerClassName, TICK)) {
 			arguments.add(((TickTrigger) rule.getMyTrigger()).getMyInterval());
-			triggerClassName = TICK;
+			//triggerClassName = TICK;
 		} else if (checkType(triggerClassName, COLLISION)) {
 			arguments.add(toUpdate);
 			arguments.add(((CollisionTrigger) rule.getMyTrigger()).getMyCollisionActor());
@@ -156,7 +151,7 @@ public class ActorCopier {
 			arguments.add(trigger.getMyValue());
 		} else if (checkType(triggerClassName, CLICK)) {
 			arguments.add((IGameElement) toUpdate);
-			triggerClassName = CLICK;
+			//triggerClassName = CLICK;
 		}
 		triggerToAdd = myTriggerFactory.createNewTrigger(triggerClassName, arguments);
 		return triggerToAdd;
@@ -180,5 +175,11 @@ public class ActorCopier {
 		}
 		return false;
 	}
-	
+
+	private void copyAttributes(IGameElement toUpdate, Map<AttributeType, Attribute> attributeMap) {
+		for (AttributeType type: attributeMap.keySet()) {
+			Attribute toCopy = new Attribute(type, attributeMap.get(type).getMyValue(), toUpdate);
+			toUpdate.addAttribute(toCopy);
+		}
+	}
 }
