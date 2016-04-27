@@ -24,8 +24,6 @@ public class ImageviewActorIcon extends ImageView {
 	 */
 	public ImageviewActorIcon(IAuthoringActor actor, double height) {
 		myActor = actor;
-		System.out.println(actor);
-		System.out.println(actor.getImageView());
 		setImage(actor.getImageView().getImage());
 		this.setFitHeight(height);
 		this.setPreserveRatio(true);

@@ -297,7 +297,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 
 	public void loadGame() {
 		FileChooserController fileChooserController = new FileChooserController(getStage(), ChooserType.EDIT);
-		System.out.println("LOADING GAME");
 	}
 
 	/**
