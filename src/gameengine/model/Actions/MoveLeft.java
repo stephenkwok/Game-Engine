@@ -15,7 +15,7 @@ public class MoveLeft extends MovingAction {
 
 	private static final double LEFT_DIRECTION = 180;
 
-	public MoveLeft(IGameElement actor) {
+	public MoveLeft(Actor actor) {
 		super(actor);
 	}
 

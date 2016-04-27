@@ -1,7 +1,6 @@
 package gameengine.model.Actions;
 
-import gameengine.model.IGameElement;
-import gameengine.model.IPlayActor;
+import gameengine.model.Actor;
 
 /**
  * Moves Actor in the direction of its heading
@@ -19,8 +18,8 @@ public class MoveBackward extends MovingAction {
 	 * @param args
 	 *            The arguments required to perform the change
 	 */
-	public MoveBackward(IGameElement actor1) {
-		super(actor1);
+	public MoveBackward(Actor actor) {
+		super(actor);
 	}
 
 	/**
