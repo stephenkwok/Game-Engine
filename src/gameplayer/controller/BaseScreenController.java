@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
 import gamedata.controller.FileChooserController;
@@ -23,10 +25,12 @@ import voogasalad.util.hud.source.*;
 public class BaseScreenController extends BranchScreenController {
 
 	private static final String BASE_CONTROLLER_RESOURCE = "baseActions";
-
+	@XStreamOmitField
 	private ResourceBundle myResources;
+	@XStreamOmitField
 	private BaseScreen myScreen;
 	private GameController myGameController;
+	@XStreamOmitField
 	private HUDController myHUDController;
 	
 	public BaseScreenController(Stage myStage, GameController gameController) {
@@ -57,6 +61,7 @@ public class BaseScreenController extends BranchScreenController {
 	private void saveGame() {
 		togglePause();
 		try {
+			myGameController.getGame().deleteObservers();
 			CreatorController c = new CreatorController(myGameController.getGame(), this.myScreen);
 			FileChooser fileChooser = new FileChooser();
 			File initialDirectory = new File("gamefiles");

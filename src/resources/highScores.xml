@@ -25,6 +25,12 @@
         <entry>
           <string>michael f</string>
           <int>0</int>
+          <string>Carine</string>
+          <int>15</int>
+        </entry>
+        <entry>
+          <string>Test</string>
+          <int>15</int>
         </entry>
       </tree-map>
     </entry>
