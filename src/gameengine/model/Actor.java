@@ -63,6 +63,10 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
         myRotate = myImageView.getRotate();
         isMainPlayer = false;
         isVisible = true;
+        myRotate = myImageView.getRotate();
+        myOpacity = myImageView.getOpacity();
+        myScaleX = myImageView.getScaleX();
+        myScaleY = myImageView.getScaleY();
     }
     
     /**
@@ -454,7 +458,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	}
 
 	@Override
-	public double getRotate(){
+	public double getRotate() {
 		return myRotate;
 	}
 
