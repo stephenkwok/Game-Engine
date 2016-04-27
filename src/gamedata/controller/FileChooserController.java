@@ -57,7 +57,7 @@ public class FileChooserController extends BranchScreenController {
 			NoSuchMethodException, SecurityException {
 		
 		if (game == null) {
-			myScreen.chooseAlert();
+			alert("choose");
 		}
 		else {
 			Class[] parameterTypes = { Game.class };
@@ -65,6 +65,18 @@ public class FileChooserController extends BranchScreenController {
 		}
 	}
 
+	private void alert(String type) {
+		try {
+			Class[] parameterTypes = { String.class };
+			Object[] parameters = { type };
+			myScreen.getClass().getDeclaredMethod("alert", parameterTypes).invoke(myScreen, parameters);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+				| SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	private boolean checkNullGame(Game game) {
 		return game == null;
 	}
@@ -76,7 +88,13 @@ public class FileChooserController extends BranchScreenController {
 		try {
 			if (myResources.getString(methodName).equals("null")) {
 				this.getClass().getDeclaredMethod(methodName).invoke(this);
-			} else {
+			} 
+			else if (myResources.getString(methodName).equals("String")) {
+				Class[] parameterTypes = {String.class};
+				Object[] parameters = {(String) myList.get(1)};
+				this.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(this, parameters);
+			} 
+			else {
 				Class<?> myClass = Class.forName(myResources.getString(methodName));
 				Object arg2 = myClass.cast(myList.get(1));
 				Class[] parameterTypes = { myClass };

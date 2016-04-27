@@ -36,6 +36,7 @@ public abstract class ComboBoxParent extends EditingElementParent {
 	private String paletteSource;
 	private String labelText;
 	private IEditableGameElement myEditableElement;
+	private Label myLabel;
 
 	public ComboBoxParent(String promptText) {
 		super(GO);

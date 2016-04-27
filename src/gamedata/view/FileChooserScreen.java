@@ -4,9 +4,12 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Optional;
+
 import gui.view.ComboBoxGame;
 import gui.view.Screen;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.HBox;
 
 public class FileChooserScreen extends Screen implements Observer {
@@ -44,10 +47,18 @@ public class FileChooserScreen extends Screen implements Observer {
 		notifyObservers(arg);
 	}
 
-	public void chooseAlert() {
+	//TODO should this alert happen here?? -michael wondering things
+	public void alert(String type) {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
-		alert.setContentText(getResources().getString("alert"));
-		alert.showAndWait();
+		alert.setContentText(getResources().getString(type));
+		Optional<ButtonType> result = alert.showAndWait();
+		if (type.equals("empty")) {
+			if (result.get() == ButtonType.OK) {
+				setChanged();
+				Object[] methodArgPair = {"goToSplash", null};
+				notifyObservers(Arrays.asList(methodArgPair));
+			}
+		}
 		
 	}
 

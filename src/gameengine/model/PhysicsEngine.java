@@ -34,7 +34,7 @@ public class PhysicsEngine {
 		a1.setVeloX(nextXVelo);
 		a1.setX(bound(nextXPos));
 		a1.setVeloY(nextYVelo);
-		if (bound(nextYPos) == 0) {
+		if (nextYPos <= 0) {
 			a1.setVeloY(0);
 		}
 		a1.setY(bound(nextYPos));
@@ -49,7 +49,7 @@ public class PhysicsEngine {
 	public void moveLeft(IPlayActor a1) {
 		nextXVelo = applyForce(a1.getVeloX(), -horizontalForce);
 		a1.setVeloX(nextXVelo);
-		a1.setX(bound(applyForce(a1.getX(), nextXVelo)));
+		a1.setX(applyForce(a1.getX(), nextXVelo));
 	}
 
 	public void moveUp(IPlayActor a1) {
