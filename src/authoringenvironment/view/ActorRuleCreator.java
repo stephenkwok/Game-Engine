@@ -134,7 +134,6 @@ public class ActorRuleCreator {
 		for(ActorRule toRemove: myActorRules) myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
 		myActorRules.clear();
 		ruleRow = RULE_ROW_START;
-		System.out.println(((Actor) aEE.getEditable()).getRules());
 		for (String triggerType : ((Actor) aEE.getEditable()).getRules().keySet()) {
 			ActorRule toAdd = new ActorRule(this);
 			toAdd.addBehavior(checkForKeyTrigger(triggerType));
@@ -172,6 +171,7 @@ public class ActorRuleCreator {
 	}
 
 	private String checkForKeyTrigger(String triggerType) {
+		System.out.println(triggerType);
 		if (Arrays.asList(myActionResources.getString("KeyInputs").split(" ")).contains(triggerType)) {
 			return KEY_TRIGGER;
 		}
