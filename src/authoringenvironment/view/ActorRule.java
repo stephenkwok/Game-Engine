@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.behaviors.IAuthoringBehavior;
+import gameengine.model.Actor;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
 import gameengine.model.Rule;
@@ -133,7 +134,6 @@ public class ActorRule {
 					remove(new ArrayList<IAuthoringBehavior>(authoringBehaviorMap.keySet()).get(index));
 				} else
 					index++;
-				System.out.println("stuck");
 			}
 			remove(new ArrayList<IAuthoringBehavior>(authoringBehaviorMap.keySet()).get(FIRST_INDEX));
 			myActorRuleCreator.removeActorRule(this);
@@ -254,6 +254,7 @@ public class ActorRule {
 				addRuleFromActionBehavior(authoringBehavior);
 			}
 		}
+		((IAuthoringActor) myActorRuleCreator.getActor()).getRules().get(myTrigger.getMyKey());
 		printAll("AFTER SETTING RULES");
 	}
 
@@ -262,7 +263,6 @@ public class ActorRule {
 			Action myAction = (Action) authoringBehaviorMap.get(authoringBehavior)
 					.get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex")));
 			Rule newRule = new Rule(myTrigger, myAction);
-			newRule.setID(0);	// testing - amy
 			//add this rule to the actor for the current trigger value
 			Map<String, List<Rule>> ruleMap = ((IAuthoringActor) myActorRuleCreator.getActor()).getRules(); 
 			if(!(ruleMap.containsKey(myTrigger.getMyKey()))){

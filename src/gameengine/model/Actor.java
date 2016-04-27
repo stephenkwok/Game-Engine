@@ -43,6 +43,10 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private NextValues myNextValues;
     private boolean isMainPlayer;
     private boolean isVisible;
+    private double myRotate;
+    private double myOpacity;
+    private double myScaleX;
+    private double myScaleY;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -56,8 +60,13 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
         mySprite = new Sprite();
         myNextValues = new NextValues();
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
+        myRotate = myImageView.getRotate();
         isMainPlayer = false;
         isVisible = true;
+        myRotate = myImageView.getRotate();
+        myOpacity = myImageView.getOpacity();
+        myScaleX = myImageView.getScaleX();
+        myScaleY = myImageView.getScaleY();
     }
     
     /**
@@ -88,6 +97,10 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     @Override
     public Attribute getAttribute(AttributeType type){
     	return myAttributeManager.getAttribute(type);
+    }
+    
+    public Map<AttributeType, Attribute> getAttributeMap() {
+    	return myAttributeManager.getAttributeMap();
     }
 
     /**
@@ -437,4 +450,49 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	public void setVisible(boolean isVisible) {
 		this.isVisible = isVisible;
 	}
+
+	@Override
+	public void setRotate(double rotate) {
+		myImageView.setRotate(rotate);
+		myRotate = rotate;
+	}
+
+	@Override
+	public double getRotate() {
+		return myRotate;
+	}
+
+	@Override
+	public void setOpacity(double opacity) {
+		myImageView.setOpacity(opacity);
+		myOpacity = opacity;
+	}
+
+	@Override
+	public double getOpacity() {
+		return myOpacity;
+	}
+
+	@Override
+	public void setScaleX(double scaleX) {
+		myScaleX = scaleX;
+		myImageView.setScaleX(scaleX);
+	}
+
+	@Override
+	public double getScaleX() {
+		return myScaleX;
+	}
+
+	@Override
+	public void setScaleY(double scaleY) {
+		myScaleY = scaleY;
+		myImageView.setScaleY(scaleY);
+	}
+
+	@Override
+	public double getScaleY() {
+		return myScaleY;
+	}
+
 }

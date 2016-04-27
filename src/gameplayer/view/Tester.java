@@ -197,7 +197,7 @@ public class Tester extends Application {
         List<Level> levels = new ArrayList<Level>();
         Level level1 = new Level();
         level1.setMyBackgroundImgName("mariobackground.png");
-        levels.add(level1);
+       // levels.add(level1);
         level1.addActor(actor1);
         level1.addActor(actor2);
         level1.addActor((IAuthoringActor)actor3);
@@ -207,7 +207,77 @@ public class Tester extends Application {
         level2.setMyBackgroundImgName("vgnwpGb.png");
         levels.add(level2);
         level2.addActor(actor1);
-        actor1.setX(0);
+
+        int yposition = 200;
+        int xposition = 150;
+        for(int i=1; i<=7; i++){
+            Actor block = new Actor();
+            block.setName("salad");
+            block.setID(101);
+            block.setImageViewName("salad2.png");
+            block.setX(i*50+xposition);
+            block.setY(i*50+yposition);
+            BottomCollision b = new BottomCollision((IPlayActor)actor1, block);
+            Action baction = new VerticalBounceCollision((IPlayActor)actor1);
+            Rule brule = new Rule(b, baction);
+
+            TopCollision b2 = new TopCollision((IPlayActor)actor1, block);
+            Action baction2 = new VerticalBounceCollision((IPlayActor)actor1);
+            Rule brule2 = new Rule(b2, baction2);
+
+            actor1.addRule(brule);
+            actor1.addRule(brule2);
+            level2.addActor((IAuthoringActor) block);
+            yposition-=50;
+        }
+        
+        int yposition2 = 100;
+        int xposition2 = 600;
+        for(int j=1; j<=5; j++){
+            Actor block2 = new Actor();
+            block2.setName("salad");
+            block2.setID(102);
+            block2.setImageViewName("salad2.png");
+            block2.setX(j*50+xposition2);
+            block2.setY(j*50+yposition2);
+            BottomCollision b3 = new BottomCollision((IPlayActor)actor1, block2);
+            Action baction3 = new VerticalBounceCollision((IPlayActor)actor1);
+            Rule brule3 = new Rule(b3, baction3);
+
+            TopCollision b4 = new TopCollision((IPlayActor)actor1, block2);
+            Action baction4 = new VerticalBounceCollision((IPlayActor)actor1);
+            Rule brule4 = new Rule(b4, baction4);
+
+            actor1.addRule(brule3);
+            actor1.addRule(brule4);
+            level2.addActor((IAuthoringActor) block2);
+            yposition2-=50;
+        }
+        
+//        IAuthoringActor block1 = (IAuthoringActor) new Actor();
+//        block1.setImageViewName("block.png");
+//        block1.setX(200);
+//        block1.setY(200);
+//        block1.setName("block1");
+//        block1.setID(101);
+//        level2.addActor(block1); 
+//        
+//        IAuthoringActor block2 = (IAuthoringActor) new Actor();
+//        block2.setImageViewName("block.png");
+//        block2.setX(300);
+//        block2.setY(300);
+//        block2.setName("block2");
+//        block2.setID(102);
+//        level2.addActor(block2); 
+//        
+//        IAuthoringActor block3 = (IAuthoringActor) new Actor();
+//        block3.setImageViewName("block.png");
+//        block3.setX(400);
+//        block3.setY(200);
+//        block3.setName("block3");
+//        block3.setID(103);
+//        level2.addActor(block3); 
+        
         /**
          * testing create actors
          */

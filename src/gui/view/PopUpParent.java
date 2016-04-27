@@ -1,5 +1,7 @@
 package gui.view;
 
+import java.util.Observable;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -15,7 +17,7 @@ import javafx.stage.Stage;
  * @author Stephen
  *
  */
-public abstract class PopUpParent {
+public abstract class PopUpParent extends Observable {
 
 	private static final double DEFAULT_CONTAINER_PADDING = 25.0;
 	private static final double DEFAULT_CONTAINER_SPACING = 10.0;

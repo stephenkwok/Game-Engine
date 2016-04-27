@@ -1,6 +1,7 @@
 package authoringenvironment.view;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,6 +9,11 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
@@ -60,13 +66,10 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private Stage myStage;
 	private Controller myController;
 	private LevelPreview myLevelPreview;
+	private File myPreviewFile;
 	
 	//MICHAEL ADDED THESE BUT THEY PROB NEED TO BE CHANGED
 	private Button myB;
-	private GameInfo info;
-	private Game model;
-	private GameController controller;
-	private GameScreen view;
 
 	/**
 	 * Constructor for a level editing environment.
@@ -88,19 +91,27 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	
 	
 	private void previewGame(){
-		info = new GameInfo();
-        info.setMyCurrentLevelNum(0);
-        info.setName("Colette");
+		myPreviewFile = new File("preview.xml");
+		Game model;
+		GameController controller;
+		GameScreen view;
         
 		Group group = new Group();
         Scene scene = new Scene(group);
-        System.out.println(Integer.toString(myController.getLevels().size()) + "WTF IS THIS");
-        //List<Level> copyLevels = new ArrayList<>(myController.getLevels().size());
-//        for (Level level: myController.getLevels()) {
-//        	copyLevels.add(level);
-//        }
-        //Collections.copy(copyLevels, myController.getLevels());
-        model = new Game(info, myController.getLevels());
+
+        model = new Game(new GameInfo(), myController.getLevels());
+        CreatorController creatorController = new CreatorController(model);
+        try {
+			creatorController.saveForPreviewing(myPreviewFile);
+		} catch (SAXException | IOException | TransformerException | ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        ParserController parserController = new ParserController();
+        model = parserController.loadforPlaying(myPreviewFile);
+
+        
+        
         ParallelCamera camera = new ParallelCamera();
         view = new GameScreen(camera);
 
@@ -123,16 +134,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
         
         //controller.getView().clearGame();
         
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            public void handle(WindowEvent we) {
-                System.out.println("Stage is closing");
-                model.getActors();
-                model.terminateGame();
-                stage.close();
-                //controller.endGame();
-                we.consume();
-            }
-        }); 
+        myPreviewFile.delete();
         
         
 	}
