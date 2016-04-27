@@ -16,7 +16,7 @@ import javafx.scene.image.ImageView;
  * Trigger are executed. The Actor also extends the ImageView class so they will
  * also be visual elements.
  *
- * @author blakekaplan
+ * @author blakekaplan  
  */
 
 public class Actor extends Observable implements Observer, IPlayActor, IDisplayActor, IAuthoringActor {

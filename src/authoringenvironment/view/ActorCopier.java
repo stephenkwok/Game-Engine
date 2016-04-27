@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.lang.reflect.Method;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -100,7 +101,9 @@ public class ActorCopier {
 			for (int i = 0; i < toAdd.size(); i++) {
 				try {
 					ITrigger triggerToAdd = createTrigger(toAdd.get(i), (IPlayActor) toUpdate);
-					Action actionToAdd = createAction(toAdd.get(i), (IPlayActor) toUpdate);
+					Object[] params = toAdd.get(i).getMyAction().getParameters();
+					params[0] = toUpdate;
+					Action actionToAdd = createAction(toAdd.get(i),params);
 					Rule rule = new Rule(triggerToAdd, actionToAdd);
 					rule.setID(toAdd.get(i).getID() + 1);
 					toUpdate.addRule(rule);
@@ -159,27 +162,15 @@ public class ActorCopier {
 		return triggerToAdd;
 	}
 	
-	private Action createAction(Rule rule, IPlayActor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private Action createAction(Rule rule, Object[] arguments) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Action actionToAdd = null;
-		String actionClassName = rule.getMyAction().getClass().getSimpleName();
-		List<Object> arguments = new ArrayList<>();
-		if (checkType(actionClassName, ATTRIBUTE)) {
-			ChangeAttribute action = (ChangeAttribute) rule.getMyAction();
-			arguments.add((IGameElement) toUpdate);
-			arguments.add(action.getMyType());
-			arguments.add(action.getMyValue());
-		} else if (checkType(actionClassName, CREATE_ACTOR)) {
-			CreateActor action = (CreateActor) rule.getMyAction();
-			arguments.add(toUpdate);
-			arguments.add(action.getMyActorToCopy());
-			arguments.add(action.getMyX());
-			arguments.add(action.getMyY());
-		} else if (checkType(actionClassName, WIN_LOSE)) {
-			arguments.add((IGameElement) toUpdate);
-		} else {
-			arguments.add(toUpdate);
+		Class myclass = rule.getMyAction().getClass();
+		Class[] argumentTypes = new Class[arguments.length];
+		for(int i=0; i<argumentTypes.length;i++){
+			argumentTypes[i] = arguments[i].getClass();
 		}
-		actionToAdd = (Action) myActionFactory.createNewAction(actionClassName, arguments);
+		Constructor constructor = myclass.getConstructor(argumentTypes);
+		actionToAdd = (Action) constructor.newInstance(arguments);
 		return actionToAdd;
 	}
 
