@@ -95,6 +95,7 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
@@ -142,6 +143,7 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
@@ -220,6 +222,7 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
@@ -283,6 +286,7 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
@@ -348,6 +352,7 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
@@ -399,7 +404,6 @@
                   <myValue>
                     <changed>false</changed>
                     <obs/>
-                    <type>java.lang.Integer</type>
                     <value class="int">15</value>
                     <bindings/>
                     <name>Default NamePOINTS</name>
@@ -427,6 +431,7 @@
             <nextXPos>0.0</nextXPos>
             <nextYVelo>0.0</nextYVelo>
             <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
           </myNextValues>
           <isMainPlayer>false</isMainPlayer>
           <isVisible>true</isVisible>
@@ -455,11 +460,6 @@
                 </myTrigger>
                 <myAction class="gameengine.model.Actions.CreateActor">
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
-<<<<<<< HEAD
-                  <myX>0.0</myX>
-                  <myY>0.0</myY>
-=======
->>>>>>> feb660d0afbb676954efa6de57678be20320477d
                   <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>
@@ -475,11 +475,6 @@
                 </myTrigger>
                 <myAction class="gameengine.model.Actions.CreateActor">
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
-<<<<<<< HEAD
-                  <myX>0.0</myX>
-                  <myY>0.0</myY>
-=======
->>>>>>> feb660d0afbb676954efa6de57678be20320477d
                   <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>
@@ -495,11 +490,6 @@
                 </myTrigger>
                 <myAction class="gameengine.model.Actions.CreateActor">
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
-<<<<<<< HEAD
-                  <myX>0.0</myX>
-                  <myY>0.0</myY>
-=======
->>>>>>> feb660d0afbb676954efa6de57678be20320477d
                   <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[3]/myTrigger/myCollisionActor"/>
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>
