@@ -16,8 +16,6 @@ import javafx.stage.Stage;
  *
  */
 public abstract class BranchScreenController implements Observer {
-
-	@XStreamOmitField
 	private Stage myStage;
 
 	public BranchScreenController(Stage stage) {
