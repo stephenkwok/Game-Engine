@@ -16,7 +16,6 @@ public class NextLevel extends Action {
 
 	@Override
 	public void perform() {
-		//System.out.println("OOOOH YEA NEXT LEVEL HAAHAHA YEA");
 		getGameElement().changed();
         ArrayList<String> myList = new ArrayList<String>();
         myList.add("nextLevel");
