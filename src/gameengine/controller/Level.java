@@ -68,7 +68,6 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		myName = DEFAULT_NAME;
 		myHeight = DEFAULT_HEIGHT;
 		myWidth = DEFAULT_WIDTH;
-		myRuleManager = new RuleManager();
 	}
 
 	/**
