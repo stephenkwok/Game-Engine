@@ -23,4 +23,8 @@ public class AttributeManager {
 	public Attribute getAttribute(AttributeType type) {
 		return attributeMap.get(type);
 	}
+	
+	public Map<AttributeType, Attribute> getAttributeMap() {
+		return attributeMap;
+	}
 }
