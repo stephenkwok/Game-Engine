@@ -417,8 +417,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	}
 
 	private void displayHelp(Object arg) {
-		//helpPage = new PopUpAuthoringHelpPage((String) arg);
-		PopUpRuleAdder adder = new PopUpRuleAdder(300,300);
+		helpPage = new PopUpAuthoringHelpPage((String) arg);
 	}
 
 	public void updateActors(Actor actor) {
