@@ -1,15 +1,15 @@
 package gameengine.model.Actions;
 
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
-import gameengine.model.Actions.Action;
 
 /**
  * @author blakekaplan
  */
 public abstract class MovingAction extends ActorAction {
 
-	public MovingAction(IPlayActor actor) {
-		super(actor);
+	public MovingAction(IGameElement actor) {
+		super((IPlayActor) actor);
 	}
 
 	@Override

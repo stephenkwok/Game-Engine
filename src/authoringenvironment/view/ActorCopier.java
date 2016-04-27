@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
 import gameengine.model.Attribute;
@@ -30,14 +32,15 @@ import gameengine.model.Triggers.TickTrigger;
  */
 public class ActorCopier {
 	private static final String RESOURCE = "ruleCreator";
-	private static final String KEY = "KeyTrigger";
-	private static final String TICK = "TickTrigger";
+	private static final String KEY = "Key";
+	private static final String TICK = "Tick";
 	private static final String COLLISION = "Collision";
-	private static final String CLICK = "ClickTrigger";
+	private static final String CLICK = "Click";
 	private static final String ATTRIBUTE = "Attribute";
 	private static final String CREATE_ACTOR = "CreateActor";
 	private static final String WIN_LOSE = "WinLose";
 	private Actor myReferenceActor;
+	@XStreamOmitField
 	private ResourceBundle myResources;
 	private ActionFactory myActionFactory;
 	private TriggerFactory myTriggerFactory;

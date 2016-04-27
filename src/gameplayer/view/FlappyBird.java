@@ -6,6 +6,7 @@ import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actions.*;
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.Rule;
@@ -67,25 +68,24 @@ public class FlappyBird extends Application {
 
         Actor invisibleLine = new Actor();
         invisibleLine.setID(12);
-        invisibleLine.setImageViewName("redball.png");
+        invisibleLine.setImageViewName("gameside.png");
         invisibleLine.addRule(new Rule(new TickTrigger(20), new MoveLeft(invisibleLine)));
 
         Actor gameSide = new Actor();
+        gameSide.setX(-100);
         gameSide.setID(13);
         gameSide.setImageViewName("gameside.png");
 
         Actor floor = new Actor();
         floor.setID(2);
         floor.setImageViewName("floor.png");
-        floor.setY(275);
+        floor.setY(500);
 
-//        level1.addActor(pipeTop);
-//        level1.addActor(pipeBottom);
-//        level1.addActor(invisibleLine);
+
 
         level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeTop, 1024, 1024, -100, 0)));
         level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeBottom, 1024, 1024, 350, 400)));
-        //level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, invisibleLine, 1024, 1024, 200, 200)));
+        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, invisibleLine, 1024, 1024, 200, 200)));
 
         Actor player = new Actor();
         player.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new MoveUp(player)));
@@ -96,18 +96,18 @@ public class FlappyBird extends Application {
         player.addSpriteImage("flappybird3.png");
 
         player.addRule(new Rule(new SideCollision(player,pipeTop), new LoseGame(player)));
-        player.addRule(new Rule(new SideCollision(player,pipeTop), new LoseGame(player)));
         player.addRule(new Rule(new BottomCollision(player, pipeBottom), new LoseGame(level1)));
         player.addRule(new Rule(new SideCollision(player,pipeBottom), new LoseGame(player)));
         player.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player)));
-        player.addRule(new Rule(new SideCollision(player, invisibleLine), new ChangeAttribute(level1,AttributeType.POINTS,10)));
-        player.addRule(new Rule(new TopCollision(player, floor), new MoveUp(player)));
+        player.addRule(new Rule(new SideCollision(player, invisibleLine), new ChangeAttribute(player,AttributeType.POINTS,10)));
+        player.addRule(new Rule(new BottomCollision(player, floor), new LoseGame(level1)));
         player.addRule(new Rule(new TickTrigger(5), new NextImage(player)));
 
-        gameSide.addRule(new Rule(new SideCollision(gameSide, pipeTop), new Destroy(pipeTop)));
-        gameSide.addRule(new Rule(new SideCollision(gameSide, pipeBottom), new Destroy(pipeBottom)));
-
-        level1.addAttribute(new Attribute(AttributeType.POINTS,0,level1));
+        pipeTop.addRule(new Rule(new SideCollision(pipeTop, gameSide), new Destroy(pipeTop)));
+        pipeBottom.addRule(new Rule(new SideCollision(pipeBottom, gameSide), new Destroy(pipeBottom)));
+        
+        player.addAttribute(new Attribute(AttributeType.POINTS,15,player));
+        player.addState(ActorState.MAIN);
 
 
         level1.addActor(player);
@@ -118,6 +118,7 @@ public class FlappyBird extends Application {
         Scene scene = new Scene(group);
 
         Game model = new Game(info, levels);
+        model.setHUDInfoFile("a.txt");
         CreatorController c = new CreatorController(model);
         c.saveForEditing(new File("gamefiles/FlappyBird.xml"));
         ParallelCamera camera = new ParallelCamera();

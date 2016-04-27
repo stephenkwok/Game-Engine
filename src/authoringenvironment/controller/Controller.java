@@ -219,11 +219,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 				IGUIElement elementToCreate = factory.createNewGUIObject(topPaneElements[i]);
 				((Observable) elementToCreate).addObserver(this);
 				hbox.getChildren().add(elementToCreate.createNode());
-
 			}
-			// temp
-			//ButtonSplash splash = new ButtonSplash(null, SPLASH_IMAGE_NAME);
-			//hbox.getChildren().add(splash.createNode());
 		} catch (Exception e) {
 
 		}
@@ -341,6 +337,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		mainScreen.createActorPreviewUnit(newActor, actorEnvironment);
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
+		System.out.println(newActor.getID());
 	}
 
 	public double getSceneWidth() {
@@ -439,6 +436,10 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	@Override
 	public void setHUDInfoFile(String location) {
 		game.setHUDInfoFile(location);
+	}
+	
+	public Game getGame(){
+		return game;
 	}
 
 }
