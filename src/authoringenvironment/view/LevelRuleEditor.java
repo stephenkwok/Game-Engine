@@ -27,7 +27,7 @@ public class LevelRuleEditor implements IEditingElement {
 	private TableColumn myParams;
 	private TableColumn myActions;
 	private PopUpRuleAdder myRuleAdder;
-	private Level myLevel;
+	private LevelEditingEnvironment myLevel;
 	//private ResourceBundle myResources;
 	
 	public LevelRuleEditor(Level level) {
