@@ -14,11 +14,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
+import authoringenvironment.model.ITriggerCreator;
 import authoringenvironment.view.ActionFactory;
 import authoringenvironment.view.KeyTriggerCreator;
 import authoringenvironment.view.TickTriggerCreator;
 import authoringenvironment.view.TriggerFactory;
+import gameengine.controller.Level;
+import gameengine.model.IGameElement;
+import gameengine.model.Rule;
+import gameengine.model.Triggers.ITrigger;
 
 /**
  * 
@@ -36,6 +40,7 @@ public class PopUpRuleAdder extends PopUpParent implements Observer {
 	private static final String PROMPT = "Prompt";
 	private static final String TRIGGER_DIRECTORY = "gameengine.model.Triggerss";
 	private static final String ACTION_DIRECTORY = "gameengine.model.Actions";
+	private static final String CREATE_RULE = "Create rule";
 	private VBox myTriggerContainer;
 	private ComboBoxLevelTriggerAndAction myTriggerComboBox;
 	private ComboBoxLevelTriggerAndAction myActionComboBox;
@@ -45,20 +50,19 @@ public class PopUpRuleAdder extends PopUpParent implements Observer {
 	private String myActionName;
 	private ActionFactory myActionFactory;
 	private TriggerFactory myTriggerFactory;
-	private List<Object> myActionParams;
-	private List<Object> myTriggerParams;
-	private List<Button> myActionParamButtons;
-	private List<Button> myTriggerParamButtons;
+	private VBox myTriggerCreator;
+	private VBox myActionCreator;
+	private Button myButton;
+	private Level myLevel;
 
-	public PopUpRuleAdder(int popUpWidth, int popUpHeight) {
+	public PopUpRuleAdder(int popUpWidth, int popUpHeight, Level level) {
 		super(popUpWidth, popUpHeight);
 		myResources = ResourceBundle.getBundle(RESOURCE);
+		myLevel = level;
 		myActionFactory = new ActionFactory();
 		myTriggerFactory = new TriggerFactory();
-		myActionParams = new ArrayList<>();
-		myTriggerParams = new ArrayList<>();
-		myActionParamButtons = new ArrayList<>();
-		myTriggerParamButtons = new ArrayList<>();
+		myButton = new Button(CREATE_RULE);
+		myButton.setOnAction(e -> createAndAddRule());
 		init();
 	}
 
@@ -83,28 +87,37 @@ public class PopUpRuleAdder extends PopUpParent implements Observer {
 	}
 
 	private void displayTriggerParameters() {
-		VBox toAdd = null;
+		myTriggerCreator = null;
 		switch (myTriggerName) {
 		case "Key":
-			toAdd = new KeyTriggerCreator(myResources);
+			myTriggerCreator = new KeyTriggerCreator(myResources, myLevel);
 			break;
 		case "Tick":
-			toAdd = new TickTriggerCreator(myResources);
+			myTriggerCreator = new TickTriggerCreator(myResources, myLevel);
 			break;
 		case "Click":
-			toAdd = new ClickTriggerCreator(myResources);
+			myTriggerCreator = new ClickTriggerCreator(myResources, myLevel);
+			break;
+		case "AttributeReached": // HAVEN'T DONE THIS YET
 			break;
 		}
-		myTriggerContainer.getChildren().add(toAdd);
+		myTriggerContainer.getChildren().add(myTriggerCreator);
 	}
 
 	private void displayActionParameters() {
+		myActionCreator = null;
 		switch (myActionName) {
 
 		}
-		//myActionContainer.getChildren().add(e);
+		myActionContainer.getChildren().add(myActionCreator);
 	}
 
+	private void createAndAddRule() {
+		ITrigger trigger = ((ITriggerCreator) myTriggerCreator).createTrigger();
+		//IAction action = ((IActionCreator) myActionCreator).createAction();
+		//myLevel.addRule(new Rule(trigger, action));
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		if (Arrays.asList(myResources.getString(TRIGGERS).split(DELIMITER)).contains((String) arg)) {

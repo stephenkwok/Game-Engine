@@ -2,6 +2,7 @@ package authoringenvironment.view;
 
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.ITriggerCreator;
 import gameengine.model.IGameElement;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.KeyTrigger;
@@ -14,7 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class KeyTriggerCreator extends VBox {
+public class KeyTriggerCreator extends VBox implements ITriggerCreator {
 	private static final String KEY_INPUT = "KeyInputs";
 	private static final String DELIMITER = " ";
 	private static final double SPACING = 20;
@@ -38,6 +39,7 @@ public class KeyTriggerCreator extends VBox {
 		
 	}
 	
+	@Override
 	public ITrigger createTrigger() {
 		if (myKeyCodeComboBox.getValue() != null) {
 			return new KeyTrigger(KeyCode.getKeyCode((String) myKeyCodeComboBox.getValue()));
