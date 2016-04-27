@@ -10,7 +10,6 @@ import gameengine.model.Rule;
 import gameengine.model.Actions.*;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.BottomCollision;
-import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.SideCollision;
@@ -126,7 +125,7 @@ public class Tester extends Application {
         Rule movingForwards = new Rule(triggerDown, moveForwards);
         actor1.addRule(movingForwards);
 
-        ClickTrigger trigger1 = new ClickTrigger((Actor)actor1);
+        KeyTrigger trigger1 = new KeyTrigger(KeyCode.RIGHT);
         KeyTrigger trigger2 = new KeyTrigger(KeyCode.LEFT);
         SideCollision trigger3 = new SideCollision((Actor)actor1,(Actor)actor2);
         KeyTrigger trigger4 = new KeyTrigger(KeyCode.SPACE);
