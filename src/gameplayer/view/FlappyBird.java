@@ -96,7 +96,6 @@ public class FlappyBird extends Application {
         player.addSpriteImage("flappybird3.png");
 
         player.addRule(new Rule(new SideCollision(player,pipeTop), new LoseGame(player)));
-        player.addRule(new Rule(new SideCollision(player,pipeTop), new LoseGame(player)));
         player.addRule(new Rule(new BottomCollision(player, pipeBottom), new LoseGame(level1)));
         player.addRule(new Rule(new SideCollision(player,pipeBottom), new LoseGame(player)));
         player.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player)));
