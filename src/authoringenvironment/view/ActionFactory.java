@@ -86,27 +86,12 @@ public class ActionFactory {
 		return null;
 	}
 
-	// private IAction createSelectActorAction(String actionType, String
-	// className) throws ClassNotFoundException, NoSuchMethodException,
-	// SecurityException, InstantiationException, IllegalAccessException,
-	// IllegalArgumentException, InvocationTargetException {
-	// return createSelfActionAction(actionType, className);
-	// }
-
-	private IAction createSelfActionActionIPlayActor(String actionType, String className)
+	private IAction createSelfActionActionIGameElement(String actionType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> clazz = Class.forName(className);
 		Constructor<?> constructor = clazz.getConstructor(IGameElement.class);
 		return (IAction) constructor.newInstance((IGameElement) arguments.get(ZERO));
-	}
-
-	private IAction createSelfActionActionActor(String actionType, String className)
-			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
-			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Class<?> clazz = Class.forName(className);
-		Constructor<?> constructor = clazz.getConstructor(Actor.class);
-		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO));
 	}
 
 	private IAction createChangeAttributeBehavior(String actionType, String className)
@@ -115,6 +100,14 @@ public class ActionFactory {
 		Class<?> clazz = Class.forName(className);
 		Constructor<?> constructor = clazz.getConstructor(IGameElement.class, AttributeType.class, int.class);
 		return (IAction) constructor.newInstance(arguments.get(ZERO), arguments.get(ONE), arguments.get(TWO));
+	}
+	
+	private IAction createOffsetBehavior(String actionType, String className)
+			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Class<?> clazz = Class.forName(className);
+		Constructor<?> constructor = clazz.getConstructor(IGameElement.class, double.class);
+		return (IAction) constructor.newInstance(arguments.get(ZERO), arguments.get(ONE));
 	}
 
 }

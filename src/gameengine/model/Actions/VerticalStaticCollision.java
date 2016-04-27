@@ -1,8 +1,7 @@
 package gameengine.model.Actions;
 
-import gameengine.model.Actor;
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
-import gameengine.model.Actions.Action;
 
 /**
  * This Action represents an static vertical collision between Actors Actor will
@@ -14,8 +13,8 @@ import gameengine.model.Actions.Action;
 
 public class VerticalStaticCollision extends ActorAction{
 
-	public VerticalStaticCollision(IPlayActor actor) {
-		super(actor);
+	public VerticalStaticCollision(IGameElement actor) {
+		super((IPlayActor) actor);
 	}
 
 	@Override
