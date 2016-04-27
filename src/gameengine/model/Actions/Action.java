@@ -26,7 +26,11 @@ public abstract class Action implements IAction {
     public Action(IGameElement myElement) {
         myGameElement = myElement;
     }
-
+    
+    public Object[] getParameters(){
+    	return new Object[]{myGameElement};
+    }
+    
     /**
      * The perform command that will implement the functionality unique to each Action type
      */

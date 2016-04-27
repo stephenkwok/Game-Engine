@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,8 +18,6 @@ import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
-import gameengine.model.Actions.ChangeAttribute;
-import gameengine.model.Actions.CreateActor;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.CollisionTrigger;
 import gameengine.model.Triggers.ITrigger;
@@ -99,11 +98,35 @@ public class ActorCopier {
 		for (String trigger : rulesToCopy.keySet()) {
 			List<Rule> toAdd = rulesToCopy.get(trigger);
 			for (int i = 0; i < toAdd.size(); i++) {
-				ITrigger triggerToAdd = createTrigger(toAdd.get(i), (IPlayActor) toUpdate);
-				Action actionToAdd = createAction(toAdd.get(i), (IPlayActor) toUpdate);
-				Rule rule = new Rule(triggerToAdd, actionToAdd);
-				rule.setID(toAdd.get(i).getID() + 1);
-				toUpdate.addRule(rule);
+				try {
+					ITrigger triggerToAdd = createTrigger(toAdd.get(i), (IPlayActor) toUpdate);
+					Object[] params = toAdd.get(i).getMyAction().getParameters();
+					params[0] = toUpdate;
+					Action actionToAdd = createAction(toAdd.get(i),params);
+					Rule rule = new Rule(triggerToAdd, actionToAdd);
+					rule.setID(toAdd.get(i).getID() + 1);
+					toUpdate.addRule(rule);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -133,28 +156,16 @@ public class ActorCopier {
 		triggerToAdd = myTriggerFactory.createNewTrigger(triggerClassName, arguments);
 		return triggerToAdd;
 	}
-
-	private Action createAction(Rule rule, IPlayActor toUpdate) {
+	
+	private Action createAction(Rule rule, Object[] arguments) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Action actionToAdd = null;
-		String actionClassName = rule.getMyAction().getClass().getSimpleName();
-		List<Object> arguments = new ArrayList<>();
-		if (checkType(actionClassName, ATTRIBUTE)) {
-			ChangeAttribute action = (ChangeAttribute) rule.getMyAction();
-			arguments.add((IGameElement) toUpdate);
-			arguments.add(action.getMyType());
-			arguments.add(action.getMyValue());
-		} else if (checkType(actionClassName, CREATE_ACTOR)) {
-			CreateActor action = (CreateActor) rule.getMyAction();
-			arguments.add(toUpdate);
-			arguments.add(action.getMyActorToCopy());
-			arguments.add(action.getMyX());
-			arguments.add(action.getMyY());
-		} else if (checkType(actionClassName, WIN_LOSE)) {
-			arguments.add((IGameElement) toUpdate);
-		} else {
-			arguments.add(toUpdate);
+		Class myclass = rule.getMyAction().getClass();
+		Class[] argumentTypes = new Class[arguments.length];
+		for(int i=0; i<argumentTypes.length;i++){
+			argumentTypes[i] = arguments[i].getClass();
 		}
-		actionToAdd = (Action) myActionFactory.createNewAction(actionClassName, arguments);
+		Constructor constructor = myclass.getConstructor(argumentTypes);
+		actionToAdd = (Action) constructor.newInstance(arguments);
 		return actionToAdd;
 	}
 
