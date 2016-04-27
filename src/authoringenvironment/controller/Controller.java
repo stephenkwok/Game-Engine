@@ -125,8 +125,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		myLevelNames = new ArrayList<>();
 		myActorMap = new HashMap<>();
 		myActorNames = new ArrayList<>();
-		gameInfo = new GameInfo();
-		gameInfo.setActorMap(myActorMap);
+		gameInfo = new GameInfo(myActorMap);
 		game = new Game(gameInfo, myLevels);
 		initializeGeneralComponents();
 		initializePresetActors();
