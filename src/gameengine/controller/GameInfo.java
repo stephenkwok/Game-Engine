@@ -46,6 +46,10 @@ public class GameInfo implements IEditableGameElement {
 		this(name, imageName, description, DEFAULT_LEVEL_NUM, null);
 	}
 
+	public GameInfo(String backgroundImage) {
+		this();
+		myImageName = backgroundImage;
+	}
 	public GameInfo() {
 		this(DEFAULT_GAME_NAME, DEFAULT_IMAGE_NAME, DEFAULT_DESCRIPTION);
 
