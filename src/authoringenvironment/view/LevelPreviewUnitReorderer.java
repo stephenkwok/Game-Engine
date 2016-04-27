@@ -27,7 +27,7 @@ public class LevelPreviewUnitReorderer {
 	private static final String POPUP_BUTTON_TEXT = "Close Window";
 	private static final int POPUP_WIDTH = 250;
 	private static final int POPUP_HEIGHT = 100;
-	private static final int MINIMUM_PLAY_POSITION = 1;
+	private static final int MINIMUM_PLAY_POSITION = 0;
 	private static final int MINIMUM_LIST_INDEX = 0;
 	private List<PreviewUnitWithLevel> myLevelPreviewUnits;
 	private VBox myPreviewUnitsContainer;
@@ -117,7 +117,7 @@ public class LevelPreviewUnitReorderer {
 	 *         levels created; false otherwise
 	 */
 	private boolean highestPlayPositionEqualsMaxPlayPosition() {
-		int highestPossiblePlayPosition = playPositions.size();
+		int highestPossiblePlayPosition = playPositions.size() - 1;
 		int indexOfHighestEnteredPlayPosition = playPositions.size() - 1;
 		return playPositions.get(indexOfHighestEnteredPlayPosition) == highestPossiblePlayPosition;
 	}

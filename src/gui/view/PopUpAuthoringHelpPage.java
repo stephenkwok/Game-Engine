@@ -21,6 +21,7 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 	private static final String RESOURCE_BUNDLE_KEY = "helpPage";
 	private static final String ACTOR_ENVIRONMENT_QUESTIONS_KEY = "ActorQuestions";
 	private static final String LEVEL_ENVIRONMENT_QUESTIONS_KEY = "LevelQuestions";
+	private static final String TEXT = "Text";
 	private static final String WELCOME_MESSAGE = "Frequently Asked Questions";
 	private static final String BOLD_FONT = "-fx-font-weight: bold;";
 	private static final String DELIMITER = ",";
@@ -32,11 +33,11 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 	private List<String> actorEnvironmentQuestions;
 	private List<String> levelEnvironmentQuestions;
 
-	public PopUpAuthoringHelpPage() {
+	public PopUpAuthoringHelpPage(String elementName) {
 		super(POPUP_WIDTH, POPUP_HEIGHT);
 		myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
 		initializeContainerSettings();
-		initializePageContents();
+		initializePageContents(elementName);
 		setLabelsToWrapText();
 		bindChildrenWidthsToContainerWidth();
 	}
@@ -51,14 +52,12 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 	/**
 	 * Initializes the contents of the pop up
 	 */
-	private void initializePageContents() {
+	private void initializePageContents(String elementName) {
 		initializeHeader();
-		actorEnvironmentQuestions = Arrays
+		addQuestionAndAnswerToPage(elementName + TEXT);
+		/*actorEnvironmentQuestions = Arrays
 				.asList(myResources.getString(ACTOR_ENVIRONMENT_QUESTIONS_KEY).split(DELIMITER));
-		levelEnvironmentQuestions = Arrays
-				.asList(myResources.getString(LEVEL_ENVIRONMENT_QUESTIONS_KEY).split(DELIMITER));
-		actorEnvironmentQuestions.stream().forEach(questionKey -> addQuestionAndAnswerToPage(questionKey));
-		levelEnvironmentQuestions.stream().forEach(questionKey -> addQuestionAndAnswerToPage(questionKey));
+		actorEnvironmentQuestions.stream().forEach(questionKey -> addQuestionAndAnswerToPage(questionKey));*/
 	}
 	
 	/**
@@ -84,13 +83,15 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 	 * in the pop up
 	 * @param questionKey: the key to retrieve a question from the property file
 	 */
-	private void addQuestionAndAnswerToPage(String questionKey) {
-		String question = myResources.getString(questionKey);
+	private void addQuestionAndAnswerToPage(String key) {
+		/*String question = myResources.getString(questionKey);
 		String answer = myResources.getString(questionKey + ANSWER);
 		Label questionLabel = new Label(question);
 		questionLabel.setStyle(BOLD_FONT);
 		Label answerLabel = new Label(answer);
-		getContainer().getChildren().addAll(questionLabel, answerLabel);	
+		getContainer().getChildren().addAll(questionLabel, answerLabel);*/
+		Label textLabel = new Label(myResources.getString(key));
+		getContainer().getChildren().add(textLabel);
 	}
 
 }
