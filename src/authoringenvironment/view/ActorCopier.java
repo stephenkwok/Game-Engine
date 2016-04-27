@@ -85,6 +85,10 @@ public class ActorCopier {
 		toUpdate.setImageViewName(toCopy.getImageViewName());
 		toUpdate.setSize(toCopy.getSize());
 		toUpdate.setID(toCopy.getID());
+		toUpdate.setRotate(toCopy.getRotate());
+		toUpdate.setOpacity(toCopy.getOpacity());
+		toUpdate.setScaleX(toCopy.getScaleX());
+		toUpdate.setScaleY(toCopy.getScaleY());
 		copyRules(toUpdate, toCopy.getRules());
 		copyAttributes((IGameElement) toUpdate, toCopy.getAttributeMap());
 	}

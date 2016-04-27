@@ -43,6 +43,10 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private NextValues myNextValues;
     private boolean isMainPlayer;
     private boolean isVisible;
+    private double myRotate;
+    private double myOpacity;
+    private double myScaleX;
+    private double myScaleY;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -440,5 +444,49 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 
 	public void setVisible(boolean isVisible) {
 		this.isVisible = isVisible;
+	}
+
+	@Override
+	public void setRotate(double rotate) {
+		myImageView.setRotate(rotate);
+		myRotate = rotate;
+	}
+
+	@Override
+	public double getRotate() {
+		return myImageView.getRotate();
+	}
+
+	@Override
+	public void setOpacity(double opacity) {
+		myImageView.setOpacity(opacity);
+		myOpacity = opacity;
+	}
+
+	@Override
+	public double getOpacity() {
+		return myImageView.getOpacity();
+	}
+
+	@Override
+	public void setScaleX(double scaleX) {
+		myScaleX = scaleX;
+		myImageView.setScaleX(scaleX);
+	}
+
+	@Override
+	public double getScaleX() {
+		return myImageView.getScaleX();
+	}
+
+	@Override
+	public void setScaleY(double scaleY) {
+		myScaleY = scaleY;
+		myImageView.setScaleY(scaleY);
+	}
+
+	@Override
+	public double getScaleY() {
+		return myImageView.getScaleY();
 	}
 }
