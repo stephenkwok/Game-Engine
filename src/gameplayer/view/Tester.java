@@ -208,6 +208,7 @@ public class Tester extends Application {
         levels.add(level2);
         level2.addActor(actor1);
         actor1.setX(0);
+        
         /**
          * testing create actors
          */
