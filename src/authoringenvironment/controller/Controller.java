@@ -281,7 +281,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		//TODO implement incomplete game error checking
 		//System.out.println(myLevels.get(0).getActors().get(0).getRules().size());
 		//IPlayActor actor = myLevels.get(0).getActors().get(0);
-		GameInfo gameInfo = new GameInfo(myLevels.get(0).getMyBackgroundImgName());
+		gameInfo.setMyImageName(myLevels.get(0).getMyBackgroundImgName());
 		List<IAuthoringActor> refActor = new ArrayList(myActorMap.keySet());
 		IAuthoringActor realRefActor = refActor.get(0);
 		FileChooser fileChooser = new FileChooser();
