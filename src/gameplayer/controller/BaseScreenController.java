@@ -114,6 +114,7 @@ public class BaseScreenController extends BranchScreenController {
 		myHUDController = new HUDController();
 		myHUDController.init(myGameController.getGame().getHUDInfoFile(), myGameController.getGame(), new TLGCSValueFinder());
 		myScreen.setHUDScreen(myHUDController.getView());
+		
 	}
 
 	@Override
