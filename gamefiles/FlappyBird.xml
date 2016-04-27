@@ -95,6 +95,7 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
@@ -116,10 +117,11 @@
                               <list>
                                 <gameengine.model.Rule>
                                   <myTrigger class="gameengine.model.Triggers.TickTrigger">
-                                    <myInterval>20</myInterval>
+                                    <myInterval>1</myInterval>
                                   </myTrigger>
-                                  <myAction class="gameengine.model.Actions.MoveLeft">
+                                  <myAction class="gameengine.model.Actions.GlideLeft">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <glideOffset>7.0</glideOffset>
                                   </myAction>
                                   <ID>0</ID>
                                 </gameengine.model.Rule>
@@ -142,6 +144,7 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
@@ -194,10 +197,11 @@
                               <list>
                                 <gameengine.model.Rule>
                                   <myTrigger class="gameengine.model.Triggers.TickTrigger">
-                                    <myInterval>20</myInterval>
+                                    <myInterval>1</myInterval>
                                   </myTrigger>
-                                  <myAction class="gameengine.model.Actions.MoveLeft">
+                                  <myAction class="gameengine.model.Actions.GlideLeft">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <glideOffset>7.0</glideOffset>
                                   </myAction>
                                   <ID>0</ID>
                                 </gameengine.model.Rule>
@@ -220,6 +224,7 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
@@ -257,10 +262,11 @@
                               <list>
                                 <gameengine.model.Rule>
                                   <myTrigger class="gameengine.model.Triggers.TickTrigger">
-                                    <myInterval>20</myInterval>
+                                    <myInterval>1</myInterval>
                                   </myTrigger>
-                                  <myAction class="gameengine.model.Actions.MoveLeft">
+                                  <myAction class="gameengine.model.Actions.GlideLeft">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <glideOffset>7.0</glideOffset>
                                   </myAction>
                                   <ID>0</ID>
                                 </gameengine.model.Rule>
@@ -283,6 +289,7 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
@@ -348,6 +355,7 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
@@ -390,26 +398,7 @@
             </myRules>
           </myRuleManager>
           <myAttributeManager>
-            <attributeMap>
-              <entry>
-                <gameengine.model.AttributeType>POINTS</gameengine.model.AttributeType>
-                <gameengine.model.Attribute>
-                  <changed>false</changed>
-                  <obs/>
-                  <myValue>
-                    <changed>false</changed>
-                    <obs/>
-                    <type>java.lang.Integer</type>
-                    <value class="int">15</value>
-                    <bindings/>
-                    <name>Default NamePOINTS</name>
-                  </myValue>
-                  <myTriggerValues/>
-                  <myType>POINTS</myType>
-                  <myOwner class="gameengine.model.Actor" reference="../../../../.."/>
-                </gameengine.model.Attribute>
-              </entry>
-            </attributeMap>
+            <attributeMap/>
           </myAttributeManager>
           <myStates>
             <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
@@ -427,6 +416,7 @@
             <nextXPos>0.0</nextXPos>
             <nextYVelo>0.0</nextYVelo>
             <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
           </myNextValues>
           <isMainPlayer>false</isMainPlayer>
           <isVisible>true</isVisible>

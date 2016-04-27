@@ -59,17 +59,17 @@ public class FlappyBird extends Application {
         Actor pipeTop = new Actor();
         pipeTop.setID(10);
         pipeTop.setImageViewName("toppipe.png");
-        pipeTop.addRule(new Rule(new TickTrigger(20), new MoveLeft(pipeTop)));
+        pipeTop.addRule(new Rule(new TickTrigger(), new GlideLeft(pipeTop,7.0)));
 
         Actor pipeBottom = new Actor();
         pipeBottom.setID(11);
         pipeBottom.setImageViewName("bottompipe.png");
-        pipeBottom.addRule(new Rule(new TickTrigger(20), new MoveLeft(pipeBottom)));
+        pipeBottom.addRule(new Rule(new TickTrigger(), new GlideLeft(pipeBottom,7.0)));
 
         Actor invisibleLine = new Actor();
         invisibleLine.setID(12);
         invisibleLine.setImageViewName("gameside.png");
-        invisibleLine.addRule(new Rule(new TickTrigger(20), new MoveLeft(invisibleLine)));
+        invisibleLine.addRule(new Rule(new TickTrigger(), new GlideLeft(invisibleLine,7.0)));
 
         Actor gameSide = new Actor();
         gameSide.setX(-100);
@@ -106,7 +106,7 @@ public class FlappyBird extends Application {
         pipeTop.addRule(new Rule(new SideCollision(pipeTop, gameSide), new Destroy(pipeTop)));
         pipeBottom.addRule(new Rule(new SideCollision(pipeBottom, gameSide), new Destroy(pipeBottom)));
         
-        player.addAttribute(new Attribute(AttributeType.POINTS,15,player));
+        //player.addAttribute(new Attribute(AttributeType.POINTS,15,player));
         player.addState(ActorState.MAIN);
 
 
