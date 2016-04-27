@@ -1,6 +1,7 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 import gameengine.model.PhysicsEngine;
 
@@ -25,7 +26,7 @@ public class MoveRight extends MovingAction {
 	 * @param args
 	 *            The arguments required to perform the change
 	 */
-	public MoveRight(IPlayActor actor) {
+	public MoveRight(IGameElement actor) {
 		super(actor);
 	}
 

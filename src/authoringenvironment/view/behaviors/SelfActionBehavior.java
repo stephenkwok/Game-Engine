@@ -8,10 +8,12 @@ import java.util.ResourceBundle;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.IAction;
+import gameengine.model.IGameElement;
 
 public class SelfActionBehavior extends LabelBehavior {
 	private IAction myAction;
 	private IAuthoringActor myActor;
+	private IGameElement myfa;
 
 	public SelfActionBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
 			ResourceBundle myResources) {
@@ -33,6 +35,7 @@ public class SelfActionBehavior extends LabelBehavior {
 	protected void createTriggerOrAction() {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(myActor);
+		
 		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
 	}
 

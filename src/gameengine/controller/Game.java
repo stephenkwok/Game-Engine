@@ -2,6 +2,8 @@ package gameengine.controller;
 
 import java.util.*;
 
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamInclude;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.TickTrigger;
@@ -21,6 +23,8 @@ import javafx.util.Duration;
  */
 
 public class Game extends Observable implements Observer {
+	
+	
 	public static final int SIZE = 400;
 	public static final int FRAMES_PER_SECOND = 50;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
@@ -36,11 +40,31 @@ public class Game extends Observable implements Observer {
 	private Timeline animation;
 	private List<IPlayActor> currentActors;
 	private List<IPlayActor> deadActors;
-	private ObservableMap<String, Object> HUDData;
     private int count;
-    private String hudInfoFile;
-
-
+    
+    
+    
+    public Game(String initialGameFile, 
+    		List<Level> levels, 
+    		GameInfo info, 
+    		PhysicsEngine myPhysicsEngine,
+    		CollisionDetection myCollisionDetector, 
+    		Map<String, Set<IGameElement>> activeTriggers,
+    		Timeline animation, 
+    		List<IPlayActor> currentActors, 
+    		List<IPlayActor> deadActors,
+    		int count) {
+    	this(initialGameFile, info, levels);
+    	currentActors = new ArrayList<IPlayActor>();
+		deadActors = new ArrayList<IPlayActor>();
+		myPhysicsEngine = new PhysicsEngine();
+		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
+		count = 1;
+    }
+	
+    
+    
+    
     /**
      * A game is instantiated with a list of all levels in the game and a level to start on.
      * Upon instantiation, the actors from all levels are collected into a list and added to a map containing references from ID to actor.
@@ -61,6 +85,7 @@ public class Game extends Observable implements Observer {
 		count = 1;
 		initTimeline();
 	}
+	
 
 	/**
 	 * Initializes a timeline that will be used for the game loop
@@ -93,8 +118,6 @@ public class Game extends Observable implements Observer {
 	public void startGame() {
 		initCurrentLevel();
 		initCurrentActors();
-		initHUDData();
-
 		animation.play();
 	}
 
@@ -355,73 +378,6 @@ public class Game extends Observable implements Observer {
 		this.animation = animation;
 	}
 
-	/**
-	 * Initializes the HUDData
-	 */
-
-	public void initHUDData() {
-		HUDData = FXCollections.observableHashMap();
-		updateHUDFields(info.getMyHUDOptions(), HUDData);
-		HUDData.addListener(new MapChangeListener<String, Object>() {
-			@Override
-			public void onChanged(Change<? extends String, ? extends Object> change) {
-				setChanged();
-				notifyObservers(change);// IDK if casting to observable causes
-										// issues with equality
-			}
-		});
-	}
-
-	/**
-	 * Provides the Game's HUDData
-	 * 
-	 * @return The Game's HUDData
-	 */
-
-	public Map<String, Object> getHUDData() {
-		return HUDData;
-	}
-
-	/**
-	 * Updates the HUD fields to be accounted for
-	 * 
-	 * @param keys
-	 *            The names of the fields to be represented
-	 * @param destinationMap
-	 *            The map to put the data into
-	 */
-
-	public void updateHUDFields(Collection<String> keys, Map<String, Object> destinationMap) {
-		for (String key : keys) {
-			Object value = null;
-			if (key.equals("Health")) {
-				// value = ((Attribute)
-				// mainCharacter.getAttribute(AttributeType.HEALTH)).getMyValue();
-			} else if (key.equals("Level")) {
-				value = info.getMyCurrentLevelNum();
-			} else if (key.equals("Ammo")) {
-				// todo
-			} else if (key.equals("Coins")) {
-				// todo
-			} else if (key.equals("Time")) {
-				// todo
-			} else if (key.equals("Points")) {
-				// value = ((Attribute)
-				// mainCharacter.getAttribute(AttributeType.POINTS)).getMyValue();
-			} else {
-				value = "Error";
-			}
-			destinationMap.put(key, value);
-		}
-	}
-
-	/**
-	 * Updates the HUD values
-	 */
-	public void updateAttribute() {
-		updateHUDFields(HUDData.keySet(), HUDData);
-	}
-
 	public int getScore() {
 		// return
 		// getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();
@@ -429,10 +385,42 @@ public class Game extends Observable implements Observer {
 	}
 
 	public void setHUDInfoFile(String location) {
-		hudInfoFile = location;
+		info.setHUDFileLocation(location);
 	}
 	
 	public String getHUDInfoFile() {
-		return hudInfoFile;
-	}	
+		return info.getHUDFileLocation();
+	}
+	
+	public CollisionDetection getMyCollisonDetector() {
+		return myCollisionDetector;
+	}
+
+
+
+
+	public Map<String, Set<IGameElement>> getActiveTriggers() {
+		return activeTriggers;
+	}
+
+
+
+
+	public void setActiveTriggers(Map<String, Set<IGameElement>> activeTriggers) {
+		this.activeTriggers = activeTriggers;
+	}
+
+
+
+
+	public int getCount() {
+		return count;
+	}
+
+
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 }

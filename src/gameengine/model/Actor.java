@@ -32,7 +32,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	private int myID;
 	private String myImageViewName;
 	private double myHeading;
-
+	private double myImageViewSize;
     @XStreamOmitField
     private ImageView myImageView;
     private RuleManager myRuleManager;
@@ -40,6 +40,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private PhysicsEngine myPhysicsEngine;
     private Set<ActorState> myStates;
     private Sprite mySprite;
+    private NextValues myNextValues;
     private boolean isMainPlayer;
     private boolean isVisible;
 
@@ -53,6 +54,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
         myName = DEFAULT_NAME;
         myImageViewName = DEFAULT_IMAGE_NAME;
         mySprite = new Sprite();
+        myNextValues = new NextValues();
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
         isMainPlayer = false;
         isVisible = true;
@@ -191,6 +193,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     	myImageView.setX(this.getX());
     	myImageView.setY(this.getY());
 		myImageView.setFitHeight(imageView.getFitHeight());
+		myImageViewSize = myImageView.getFitHeight();
     }
     
     /**
@@ -350,11 +353,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	}
 
 	@Override
-	public int getMyID() {
-		return myID;
-	}
-
-	@Override
 	public void update(Observable o, Object arg) {
 		if (o.getClass().equals(this.getClass())) {
 			setChanged();
@@ -367,7 +365,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	}
 
 	public double getSize() {
-		return myImageView.getFitHeight();
+		return myImageViewSize;
 	}
 
 	@Override

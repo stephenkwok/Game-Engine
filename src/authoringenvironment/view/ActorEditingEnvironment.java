@@ -46,7 +46,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final String SET_RULE_LABEL = "Set Rules";
 	private BorderPane myRoot;
 	private GUILibrary library;
-	private TabAttributes attributes;
+	private TabFields fields;
 	private ResourceBundle myResources;
 
 	private IAuthoringActor myActor;
@@ -101,10 +101,11 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	 */
 	private void setLeftPane() {
 		VBox vbox = new VBox();
-		attributes = new TabAttributes(myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
-		attributes.setObserver(this);
+		fields = new TabFields(myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
+		fields.setObserver(this);
+		fields.updateEditable(myActor);
 		TabPane attributeTP = new TabPane();
-		attributeTP.getTabs().add(attributes.getTab());
+		attributeTP.getTabs().add(fields.getTab());
 		attributeTP.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		library = new GUILibrary(myActorRuleCreator);
 		actorImageViewer = new GUIActorImageViewer(this, myActorIV);
@@ -204,6 +205,6 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		myController.updateActors((IAuthoringActor) arg);
+		myController.updateActors((Actor) arg);
 	}
 }
