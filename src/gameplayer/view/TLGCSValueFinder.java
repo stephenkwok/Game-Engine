@@ -17,7 +17,7 @@ public class TLGCSValueFinder implements IValueFinder {
 				ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getProperty();
 				break;
 			case "health":
-				//reflection here to save LOC?
+				//
 				break;
 			case "ammo":
 				//
