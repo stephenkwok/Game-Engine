@@ -59,6 +59,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	@Override
 	public void setGame(Game myGame) {
 		model = myGame;
+		System.out.println(model);
 		model.addObserver(this);
 	}
 
@@ -205,6 +206,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	}
 
 	public void restartGame() {
+		togglePause();
 		System.out.println("restarting game");
 		Object[] args = {"restartGame", null};
 		setChanged();
