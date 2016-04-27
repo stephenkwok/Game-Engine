@@ -279,6 +279,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	public void setImageViewName(String myImageViewName) {
 		this.myImageViewName = myImageViewName;
 		mySprite.setImage(myImageViewName);
+		System.out.println("Sprite Image: " + mySprite.getCurrentImage());
 		this.setImageView(
 				new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
 	}
