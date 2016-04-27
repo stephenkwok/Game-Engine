@@ -14,7 +14,6 @@ public class OffsetBehavior extends DoubleBehavior {
 	
 	public OffsetBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
 		super(myActorRule, behaviorType, myResources);
-		System.out.println("past constructor");
 		this.myActor = myActor;
 	}
 
