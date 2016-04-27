@@ -4,6 +4,7 @@ import java.lang.reflect.*;
 import java.util.*;
 
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 
 /**
  * This class creates a list of Actors with attributes pre-defined in a resource

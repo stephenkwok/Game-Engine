@@ -1,5 +1,5 @@
 package gameengine.model;
 
 public enum ActorState {
-	DEAD, MAIN, AIR
+	DEAD, MAIN, AIR, INVISIBLE
 }

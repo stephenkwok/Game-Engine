@@ -1,9 +1,16 @@
 package gameengine.model;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Set;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import authoringenvironment.model.*;
+
+import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
 import javafx.geometry.Bounds;
@@ -60,7 +67,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
         mySprite = new Sprite();
         myNextValues = new NextValues();
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
-        myRotate = myImageView.getRotate();
         isMainPlayer = false;
         isVisible = true;
         myRotate = myImageView.getRotate();
@@ -524,6 +530,16 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	@Override
 	public double getScaleY() {
 		return myScaleY;
+	}
+
+	@Override
+	public void restoreImageView() {
+		myImageView = new ImageView(myImageViewName);
+		setSize(myImageViewSize);
+		setOpacity(myOpacity);
+		setRotate(myRotate);
+		setScaleX(myScaleX);
+		setScaleY(myScaleY);
 	}
 
 }

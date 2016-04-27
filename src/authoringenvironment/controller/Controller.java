@@ -3,25 +3,10 @@ package authoringenvironment.controller;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.ResourceBundle;
+import java.util.*;
 
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.model.PresetActorFactory;
-import authoringenvironment.view.ActorCopier;
-import authoringenvironment.view.ActorEditingEnvironment;
-import authoringenvironment.view.GUIMain;
-import authoringenvironment.view.GUIMainScreen;
-import authoringenvironment.view.GameEditingEnvironment;
-import authoringenvironment.view.LevelEditingEnvironment;
+import authoringenvironment.model.*;
+import authoringenvironment.view.*;
 import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
 import gamedata.controller.FileChooserController;
@@ -35,7 +20,6 @@ import gui.view.IGUIElement;
 import gui.view.PopUpAuthoringHelpPage;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -141,10 +125,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		myLevels = game.getLevels();
 		gameInfo = game.getInfo();
 		myActorMap = gameInfo.getActorMap();
-		myActorMap.keySet().stream().forEach(actor -> actor.setImageView(new ImageView(actor.getImageViewName())));
-		myActorMap.values().stream().forEach(
-				list -> list.stream().forEach(actor -> actor.setImageView(new ImageView(actor.getImageViewName()))));
-		myLevels.stream().forEach(level -> level.setImageView(new ImageView(level.getMyBackgroundImgName())));
+		AuthoringEnvironmentRestorer restorer = new AuthoringEnvironmentRestorer(myActorMap, myLevels);
+		restorer.restoreActorsAndLevels();
 		initializeGeneralComponents();
 		myLevels.stream().forEach(level -> mainScreen.createLevelPreviewUnit(level, levelEnvironment));
 		myActorMap.keySet().stream().forEach(actor -> mainScreen.createActorPreviewUnit(actor, actorEnvironment));
@@ -276,8 +258,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	public void goToMainScreen() {
 		mainScreen.updatePreviewUnits();
 		setCenterPane(mainScreen.getPane());
-		myActorMap.keySet().stream().forEach(actor -> System.out.println(actor.getSize()));
-		myActorMap.values().stream().forEach(list -> list.stream().forEach(actor -> System.out.println(actor.getSize())));
 	}
 
 	/**

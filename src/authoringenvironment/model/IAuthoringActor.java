@@ -164,4 +164,6 @@ public interface IAuthoringActor extends IEditableGameElement {
     public void setScaleY(double scaleY);
     
     public double getScaleY();
+    
+    public void restoreImageView();
 }
