@@ -326,7 +326,7 @@ public class Tester extends Application {
         Scene scene = new Scene(group);
 
         Game model = new Game(info,levels);
-        model.setHUDInfoFile("hudfiles/test");
+        model.setHUDInfoFile("a.txt");
         
         CreatorController c = new CreatorController(model);
         c.saveForEditing(new File("gamefiles/test2.xml"));

@@ -95,6 +95,7 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
@@ -142,6 +143,7 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
@@ -220,6 +222,7 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
@@ -283,6 +286,7 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
@@ -348,6 +352,7 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
@@ -399,7 +404,6 @@
                   <myValue>
                     <changed>false</changed>
                     <obs/>
-                    <type>java.lang.Integer</type>
                     <value class="int">15</value>
                     <bindings/>
                     <name>Default NamePOINTS</name>
@@ -427,6 +431,7 @@
             <nextXPos>0.0</nextXPos>
             <nextYVelo>0.0</nextYVelo>
             <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
           </myNextValues>
           <isMainPlayer>false</isMainPlayer>
           <isVisible>true</isVisible>
