@@ -10,6 +10,8 @@ public class GlideUp extends GlidingAction {
 
 	@Override
 	public void perform() {
+		
+		//getMyActor().setY(getMyActor().getY()-this.getGlideOffset());
     	getMyActor().getPhysicsEngine().glideUp(getMyActor(),this.getGlideOffset());					
 	}
 
