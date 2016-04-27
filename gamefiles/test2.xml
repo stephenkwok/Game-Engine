@@ -2024,7 +2024,6 @@
                   <myValue>
                     <changed>false</changed>
                     <obs/>
-                    <type>java.lang.Integer</type>
                     <value class="int">0</value>
                     <bindings/>
                     <name>A1POINTS</name>
