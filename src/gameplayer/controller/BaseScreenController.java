@@ -89,6 +89,12 @@ public class BaseScreenController extends BranchScreenController {
 	private void toggleUnPause() {
 		this.myGameController.toggleUnPause();
 	}
+	
+	@Override
+	protected void goToSplash() {
+		togglePause();
+		super.goToSplash();
+	}
 
 	private void restartGame() {
 		// TODO fix this ish
