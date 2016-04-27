@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import authoringenvironment.controller.Controller;
 import gamedata.view.FileChooserScreen;
 import gameengine.controller.Game;
@@ -24,10 +22,9 @@ public class FileChooserController extends BranchScreenController {
 	private static final int METHOD_ARG = 1;
 	private static final String CHOOSER_CONTROLLER_RESOURCE = "chooserActions";
 	private static final String PROMPT = "GamePrompt";
-	@XStreamOmitField
+
 	private ResourceBundle myResources;
 	private FileChooserScreen myScreen;
-	@XStreamOmitField
 	private ChooserType myType;
 
 	public FileChooserController(Stage stage, ChooserType type) {
@@ -102,7 +99,6 @@ public class FileChooserController extends BranchScreenController {
 				Object arg2 = myClass.cast(myList.get(1));
 				Class[] parameterTypes = { myClass };
 				Object[] parameters = { arg2 };
-				System.out.println(methodName);
 				this.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(this, parameters);
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException

@@ -9,9 +9,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
-
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import gamedata.XMLParser;
 import gamedata.XMLCreator;
 import gameengine.controller.HighScoresKeeper;
@@ -23,7 +20,6 @@ public class HighScoresController implements IHighScoresController {
 
 	private String myGameFile;
 	private File myFile;
-	@XStreamOmitField
 	private Screen myScreen;
 
 	public HighScoresController(String gameFile, Screen screen) {

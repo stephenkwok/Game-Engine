@@ -11,8 +11,6 @@ import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import gamedata.XMLCreator;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
@@ -27,7 +25,6 @@ public class CreatorController implements ICreatorController {
 
 	private Game myGame;
 	private XMLCreator myXMLCreator;
-	@XStreamOmitField
 	private Screen myScreen;
 
 	public CreatorController(Game game, Screen screen) {

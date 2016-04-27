@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import gamedata.controller.ChooserType;
 import gamedata.controller.FileChooserController;
 import gamedata.controller.HighScoresController;
@@ -25,7 +23,7 @@ import javafx.stage.Stage;
 public class HighScoreScreenController extends BranchScreenController {
 
 	private static final String SCORE_CONTROLLER_RESOURCE = "scoresActions";
-	@XStreamOmitField
+
 	private ResourceBundle myResources;
 	private HighScoreScreen myScreen;
 	private String myGameName;

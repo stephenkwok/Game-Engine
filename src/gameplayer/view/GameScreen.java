@@ -2,9 +2,6 @@ package gameplayer.view;
 
 import java.util.Observable;
 import java.util.ResourceBundle;
-
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import java.util.Arrays;
 import gameengine.controller.Level;
 import gameengine.model.IActor;
@@ -39,11 +36,9 @@ import javafx.util.Callback;
  */
 
 public class GameScreen extends Observable implements IGameScreen {
-	@XStreamOmitField
+
 	private SubScene mySubscene;
-	@XStreamOmitField
 	private Group mySubgroup;
-	@XStreamOmitField
 	private Camera myCamera;
 	private double myEndHorizontal;
 	private double myEndVertical;

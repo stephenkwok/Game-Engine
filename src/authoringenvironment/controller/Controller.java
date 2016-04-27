@@ -12,8 +12,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
@@ -73,9 +71,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private GameEditingEnvironment gameEnvironment;
 	private GUIMainScreen mainScreen;
 	private GUIMain guiMain;
-	@XStreamOmitField
 	private ResourceBundle myResources;
-	@XStreamOmitField
 	private ResourceBundle myObservableResource;
 	private Game game;
 	private GameInfo gameInfo;
