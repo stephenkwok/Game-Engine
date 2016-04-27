@@ -3,6 +3,8 @@ package gameplayer.controller;
 import gui.view.Screen;
 import java.util.Observer;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gameplayer.controller.SplashScreenController;
 import javafx.stage.Stage;
 
@@ -15,6 +17,7 @@ import javafx.stage.Stage;
  */
 public abstract class BranchScreenController implements Observer {
 
+	@XStreamOmitField
 	private Stage myStage;
 
 	public BranchScreenController(Stage stage) {
