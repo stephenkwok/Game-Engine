@@ -16,11 +16,16 @@ public class Spawn extends ActorAction{
 
 	IPlayActor mySpawnedActor;
 	
-	public Spawn(IGameElement actor1, IGameElement spawnedActor) {
-		super((IPlayActor) actor1);
+	public Spawn(Actor actor1, Actor spawnedActor) {
+		super(actor1);
 		mySpawnedActor  = (IPlayActor) spawnedActor;
 	}
-
+	
+	@Override
+	public Object[] getParameters(){
+		return new Object[]{getMyActor(),mySpawnedActor};
+	}
+	
 	public void perform() {
 		
 		ActorCopier myActorCopier = new ActorCopier((Actor)mySpawnedActor);

@@ -225,6 +225,7 @@ public class Game extends Observable implements Observer {
 		animation.stop();
 		if (levels.size() >= info.getMyCurrentLevelNum() + 1) {
 			setCurrentLevel(info.getMyCurrentLevelNum() + 1);
+			levels.get(info.getMyCurrentLevelNum()).getMainCharacter().setX(0);
 		}
 	}
 
@@ -281,8 +282,6 @@ public class Game extends Observable implements Observer {
 	 * @return The Level that is currently being used
 	 */
 	public Level getCurrentLevel() {
-		System.out.println(info.getMyCurrentLevelNum() + " INFO CURR LEVEL");
-		System.out.println(levels.size() + " LEVELS LENGTH");
 		return levels.get(info.getMyCurrentLevelNum());
 	}
 
@@ -379,9 +378,7 @@ public class Game extends Observable implements Observer {
 	}
 
 	public int getScore() {
-		// return
-		// getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();
-		return 0;
+		return getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();
 	}
 
 	public void setHUDInfoFile(String location) {

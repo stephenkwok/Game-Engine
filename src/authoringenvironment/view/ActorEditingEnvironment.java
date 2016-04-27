@@ -103,7 +103,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		VBox vbox = new VBox();
 		fields = new TabFields(myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
 		fields.setObserver(this);
-		fields.updateEditable(myActor);
+//		fields.updateEditable(myActor);
 		TabPane attributeTP = new TabPane();
 		attributeTP.getTabs().add(fields.getTab());
 		attributeTP.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);

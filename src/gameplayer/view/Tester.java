@@ -83,7 +83,7 @@ public class Tester extends Application {
         ((Actor) actor4).setID(3);
         actor4.setX(315);
         BottomCollision enemyTrigger = new BottomCollision((IPlayActor)actor4, (IPlayActor)actor2);
-        Action enemyAction = new VerticalBounceCollision((IPlayActor) actor4);
+        Action enemyAction = new VerticalBounceCollision((Actor) actor4);
         Rule enemyRule = new Rule(enemyTrigger, enemyAction);
         ((Actor) actor4).addRule(enemyRule);
 
@@ -109,9 +109,9 @@ public class Tester extends Application {
         
 
         TickTrigger tick = new TickTrigger();
-        Action tick1 = new ApplyPhysics((IPlayActor)actor1);
-        Action tick2 = new ApplyPhysics((IPlayActor)actor2);
-        Action tick4 = new ApplyPhysics((IPlayActor) actor4);
+        Action tick1 = new ApplyPhysics((Actor)actor1);
+        Action tick2 = new ApplyPhysics((Actor)actor2);
+        Action tick4 = new ApplyPhysics((Actor) actor4);
         Rule rule7 = new Rule(tick,tick1);
         Rule rule8 = new Rule(tick,tick2);
         Rule ruleEnemy = new Rule(tick, tick4);
@@ -128,7 +128,7 @@ public class Tester extends Application {
 
 
         KeyTrigger triggerDown = new KeyTrigger(KeyCode.DOWN);
-        Action moveForwards = new MoveForward((IPlayActor)actor1);
+        Action moveForwards = new MoveForward((Actor)actor1);
         Rule movingForwards = new Rule(triggerDown, moveForwards);
         actor1.addRule(movingForwards);
 
@@ -144,8 +144,8 @@ public class Tester extends Application {
         actor1.addRule(rule9);
 
         KeyTrigger triggerSpawn = new KeyTrigger(KeyCode.S);
-        KeyTrigger bulletTick = new KeyTrigger(KeyCode.P);
-        Action bulletAction = new MoveRight((IPlayActor)spawnedActor);
+        TickTrigger bulletTick = new TickTrigger();
+        Action bulletAction = new GlideRight((Actor)spawnedActor,5.0);
         Rule bulletRule = new Rule(bulletTick,bulletAction);
         spawnedActor.addRule(bulletRule);
         PhysicsEngine newPhysicsEngine = new PhysicsEngine();
@@ -153,13 +153,13 @@ public class Tester extends Application {
         
         
         
-        Action action1 = new MoveRight((IPlayActor)actor1);
-        Action action2 = new MoveLeft((IPlayActor)actor1);
-        Action action3 = new HorizontalStaticCollision((IPlayActor)actor1);
-        Action action4 = new MoveUp((IPlayActor)actor1);
-        Action action5 = new VerticalBounceCollision((IPlayActor)actor1);
-        Action action6 = new WinGame((IPlayActor)actor1);
-        Action actionSpawn = new Spawn((IPlayActor) actor1, (IPlayActor) spawnedActor);
+        Action action1 = new MoveRight((Actor)actor1);
+        Action action2 = new MoveLeft((Actor)actor1);
+        Action action3 = new HorizontalStaticCollision((Actor)actor1);
+        Action action4 = new MoveUp((Actor)actor1);
+        Action action5 = new VerticalBounceCollision((Actor)actor1);
+        Action action6 = new WinGame((Actor)actor1);
+        Action actionSpawn = new Spawn((Actor) actor1, (Actor) spawnedActor);
         Action actionNextLevel = new NextLevel((IPlayActor) actor1);
         
         Rule rule = new Rule(trigger1,action1);
@@ -182,7 +182,7 @@ public class Tester extends Application {
 
 
         TickTrigger intTick = new TickTrigger(5);
-        Action animate = new NextImage((IPlayActor) actor1);
+        Action animate = new NextImage((Actor)actor1);
         actor1.addRule(new Rule(intTick, animate));
 
         actor1.addState(ActorState.MAIN);
@@ -207,7 +207,79 @@ public class Tester extends Application {
         level2.setMyBackgroundImgName("vgnwpGb.png");
         levels.add(level2);
         level2.addActor(actor1);
-        actor1.setX(0);
+
+        int yposition = 200;
+        int xposition = 150;
+        for(int i=1; i<=7; i++){
+            Actor block = new Actor();
+            block.setName("salad");
+            block.setID(101);
+            block.setImageViewName("salad2.png");
+            block.setX(i*50+xposition);
+            block.setY(i*50+yposition);
+            BottomCollision b = new BottomCollision((IPlayActor)actor1, block);
+            Action baction = new VerticalBounceCollision((Actor)actor1);
+            Rule brule = new Rule(b, baction);
+
+            TopCollision b2 = new TopCollision((IPlayActor)actor1, block);
+            Action baction2 = new VerticalBounceCollision((Actor)actor1);
+            Rule brule2 = new Rule(b2, baction2);
+
+            actor1.addRule(brule);
+            actor1.addRule(brule2);
+            level2.addActor((IAuthoringActor) block);
+            yposition-=50;
+        }
+        
+        int yposition2 = 100;
+        int xposition2 = 600;
+        for(int j=1; j<=5; j++){
+            Actor block2 = new Actor();
+            block2.setName("salad");
+            block2.setID(102);
+            block2.setImageViewName("salad2.png");
+            block2.setX(j*50+xposition2);
+            block2.setY(j*50+yposition2);
+            BottomCollision b3 = new BottomCollision((IPlayActor)actor1, block2);
+            Action baction3 = new VerticalBounceCollision((Actor)actor1);
+            Rule brule3 = new Rule(b3, baction3);
+
+            TopCollision b4 = new TopCollision((IPlayActor)actor1, block2);
+            Action baction4 = new VerticalBounceCollision((Actor)actor1);
+            Rule brule4 = new Rule(b4, baction4);
+
+            Rule ruleNextLevel2 = new Rule(b4, actionNextLevel);
+            actor1.addRule(ruleNextLevel2);
+            actor1.addRule(brule3);
+            actor1.addRule(brule4);
+            level2.addActor((IAuthoringActor) block2);
+            yposition2-=50;
+        }
+        
+//        IAuthoringActor block1 = (IAuthoringActor) new Actor();
+//        block1.setImageViewName("block.png");
+//        block1.setX(200);
+//        block1.setY(200);
+//        block1.setName("block1");
+//        block1.setID(101);
+//        level2.addActor(block1); 
+//        
+//        IAuthoringActor block2 = (IAuthoringActor) new Actor();
+//        block2.setImageViewName("block.png");
+//        block2.setX(300);
+//        block2.setY(300);
+//        block2.setName("block2");
+//        block2.setID(102);
+//        level2.addActor(block2); 
+//        
+//        IAuthoringActor block3 = (IAuthoringActor) new Actor();
+//        block3.setImageViewName("block.png");
+//        block3.setX(400);
+//        block3.setY(200);
+//        block3.setName("block3");
+//        block3.setID(103);
+//        level2.addActor(block3); 
+        
         /**
          * testing create actors
          */
@@ -215,7 +287,7 @@ public class Tester extends Application {
         a.setID(10);
         a.setImageViewName("pipes.png");
         TickTrigger translatetick = new TickTrigger(45);
-        Action translateaction = new MoveRight((IPlayActor)a);
+        Action translateaction = new MoveRight((Actor)a);
         a.addRule(new Rule(translatetick,translateaction));
         TickTrigger newtick = new TickTrigger(220);
         Action newaction = new CreateActor((IPlayActor)actor1,(Actor)a,0,0);
@@ -234,9 +306,9 @@ public class Tester extends Application {
             BottomCollision b2 = new BottomCollision((IPlayActor)actor2, floor);
             BottomCollision b3 = new BottomCollision(actor3, floor);
 
-            Action baction = new VerticalStaticCollision((IPlayActor)actor1);
-            Action baction2 = new VerticalStaticCollision((IPlayActor)actor2);
-            Action baction3 = new VerticalStaticCollision(actor3);
+            Action baction = new VerticalStaticCollision((Actor)actor1);
+            Action baction2 = new VerticalStaticCollision((Actor)actor2);
+            Action baction3 = new VerticalStaticCollision((Actor)actor3);
 
             Rule brule = new Rule(b, baction);
             Rule brule2 = new Rule(b2, baction2);
@@ -254,7 +326,7 @@ public class Tester extends Application {
         Scene scene = new Scene(group);
 
         Game model = new Game(info,levels);
-        model.setHUDInfoFile("a.txt");
+        model.setHUDInfoFile("hudfiles/test");
         
         CreatorController c = new CreatorController(model);
         c.saveForEditing(new File("gamefiles/test2.xml"));
