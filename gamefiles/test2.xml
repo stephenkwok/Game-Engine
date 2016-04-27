@@ -2265,11 +2265,7 @@
     <myHUDElementsToDisplay/>
     <myFile>test2.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
-<<<<<<< HEAD
     <myHUDFileLocation>hudfiles/test</myHUDFileLocation>
-=======
-    <myHUDFileLocation>a.txt</myHUDFileLocation>
->>>>>>> master
   </info>
   <myPhysicsEngine>
     <nextXVelo>0.0</nextXVelo>
