@@ -340,8 +340,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 */
 	public void addLevel() {
 		Level newLevel = new Level();
-		myLevels.add(newLevel);
 		newLevel.setPlayPosition(myLevels.size());
+		myLevels.add(newLevel);
 		myLevelNames.add(newLevel.getName());
 		mainScreen.createLevelPreviewUnit(newLevel, levelEnvironment);
 		goToEditingEnvironment(newLevel, levelEnvironment);
@@ -522,6 +522,10 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	@Override
 	public void setHUDInfoFile(String location) {
 		game.setHUDInfoFile(location);
+	}
+	
+	public Game getGame(){
+		return game;
 	}
 
 }

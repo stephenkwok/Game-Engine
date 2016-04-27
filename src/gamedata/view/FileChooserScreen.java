@@ -44,6 +44,7 @@ public class FileChooserScreen extends Screen implements Observer {
 		notifyObservers(arg);
 	}
 
+	//TODO should this alert happen here?? -michael wondering things
 	public void chooseAlert() {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
 		alert.setContentText(getResources().getString("alert"));

@@ -258,6 +258,8 @@ public class Game extends Observable implements Observer {
 	 * @return The Level that is currently being used
 	 */
 	public Level getCurrentLevel() {
+		System.out.println(info.getMyCurrentLevelNum() + " INFO CURR LEVEL");
+		System.out.println(levels.size() + " LEVELS LENGTH");
 		return levels.get(info.getMyCurrentLevelNum());
 	}
 
