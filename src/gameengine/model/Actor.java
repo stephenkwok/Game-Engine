@@ -348,6 +348,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	public void setSize(double size) {
 		myImageView.setFitHeight(size);
 		myImageView.setPreserveRatio(true);
+		myImageViewSize = size;
 	}
 
 	@Override
@@ -381,6 +382,9 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		return myImageViewSize;
 	}
 
+	/**
+	 * Sets the Actor's unique ID number
+	 */
 	@Override
 	public void setID(int ID) {
 		myID = ID;
@@ -396,6 +400,9 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		return myHeading;
 	}
 
+	/**
+	 * Returns the Actor's unique ID number
+	 */
 	@Override
 	public int getID() {
 		return myID;
@@ -451,45 +458,69 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		this.isVisible = isVisible;
 	}
 
+	/**
+	 * Sets the Actor's rotate property
+	 */
 	@Override
 	public void setRotate(double rotate) {
 		myImageView.setRotate(rotate);
 		myRotate = rotate;
 	}
 
+	/**
+	 * Returns the Actor's rotate property
+	 */
 	@Override
 	public double getRotate() {
 		return myRotate;
 	}
 
+	/**
+	 * Sets the Actor's opacity property
+	 */
 	@Override
 	public void setOpacity(double opacity) {
 		myImageView.setOpacity(opacity);
 		myOpacity = opacity;
 	}
 
+	/**
+	 * Returns the Actor's opacity property
+	 */
 	@Override
 	public double getOpacity() {
 		return myOpacity;
 	}
 
+	/**
+	 * Sets the Actor's scaleX property
+	 */
 	@Override
 	public void setScaleX(double scaleX) {
 		myScaleX = scaleX;
 		myImageView.setScaleX(scaleX);
 	}
 
+	/**
+	 * Returns the Actor's scaleX property
+	 */
 	@Override
 	public double getScaleX() {
 		return myScaleX;
 	}
 
+	/**
+	 * Returns the Actor's scaleY property
+	 */
 	@Override
 	public void setScaleY(double scaleY) {
 		myScaleY = scaleY;
 		myImageView.setScaleY(scaleY);
 	}
 
+	/**
+	 * Returns the Actor's scaleY property
+	 */
 	@Override
 	public double getScaleY() {
 		return myScaleY;

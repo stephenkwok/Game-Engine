@@ -5,6 +5,13 @@ import java.util.List;
 
 import gameengine.model.Actor;
 
+/**
+ * This classes tests the Preset Actor Factory
+ * 
+ * @author Stephen
+ *
+ */
+
 public class TestPresetActorFactory {
 
 	public static void main(String[] args) throws NoSuchMethodException, SecurityException, IllegalAccessException,

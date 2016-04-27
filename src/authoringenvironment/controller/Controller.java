@@ -276,6 +276,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	public void goToMainScreen() {
 		mainScreen.updatePreviewUnits();
 		setCenterPane(mainScreen.getPane());
+		myActorMap.keySet().stream().forEach(actor -> System.out.println(actor.getSize()));
+		myActorMap.values().stream().forEach(list -> list.stream().forEach(actor -> System.out.println(actor.getSize())));
 	}
 
 	/**
@@ -342,6 +344,13 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		goToEditingEnvironment(newLevel, levelEnvironment);
 	}
 
+	/**
+	 * Creates a new Actor and places it in the map
+	 * of all created actors, sets the Actor's ID, creates a preview unit
+	 * for that Actor on the Main Screen, and redirects the author to
+	 * the Actor Editing Environment to edit that Actor
+	 * 
+	 */
 	public void addActor() {
 		IAuthoringActor newActor = (IAuthoringActor) new Actor();
 		myActorMap.put(newActor, new ArrayList<>());
@@ -442,10 +451,18 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		goToEditingEnvironment(editable, environment);
 	}
 
+	/**
+	 * 
+	 * @return the Authoring Environment's ActorEditingEnvironment
+	 */
 	public ActorEditingEnvironment getActorEditingEnvironment() {
 		return actorEnvironment;
 	}
 
+	/**
+	 * 
+	 * @return @return the Authoring Environment's LevelEditingEnvironment
+	 */
 	public LevelEditingEnvironment getLevelEditingEnvironment() {
 		return levelEnvironment;
 	}
@@ -455,6 +472,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		game.setHUDInfoFile(location);
 	}
 
+	/**
+	 * @return the Game
+	 */
 	public Game getGame() {
 		return game;
 	}
