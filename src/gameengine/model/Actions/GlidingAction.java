@@ -1,14 +1,14 @@
 package gameengine.model.Actions;
 
-import gameengine.model.Actor;
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 
 public abstract class GlidingAction extends ActorAction {
 
 	Double glideOffset;
 	
-	public GlidingAction(IPlayActor actor1,double offset) {
-		super(actor1);
+	public GlidingAction(IGameElement actor1,double offset) {
+		super((IPlayActor) actor1);
 		glideOffset = offset;
 	}
 

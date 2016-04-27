@@ -37,6 +37,7 @@ public class XMLParser {
 			try {
 				return myXStream.fromXML(xml);
 			} catch (Exception e) {
+				e.printStackTrace();
 				return null;
 			}
 		}
