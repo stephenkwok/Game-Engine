@@ -1,9 +1,7 @@
 package gameengine.model.Actions;
 
-import gameengine.model.Actor;
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
-import gameengine.model.PhysicsEngine;
-import gameengine.model.Actions.Action;
 
 /**
  * This Action represents an elastic sideways collision between Actors
@@ -14,8 +12,8 @@ import gameengine.model.Actions.Action;
 
 public class HorizontalBounceCollision extends ActorAction{
 
-	public HorizontalBounceCollision(IPlayActor assignedActor) {
-		super(assignedActor);
+	public HorizontalBounceCollision(IGameElement assignedActor) {
+		super((IPlayActor) assignedActor);
 		// TODO Auto-generated constructor stub
 	}
 

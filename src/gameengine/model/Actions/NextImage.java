@@ -1,5 +1,6 @@
 package gameengine.model.Actions;
 
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 
 /**
@@ -7,8 +8,8 @@ import gameengine.model.IPlayActor;
  */
 public class NextImage extends ActorAction {
 
-	public NextImage(IPlayActor assignedActor) {
-		super(assignedActor);
+	public NextImage(IGameElement assignedActor) {
+		super((IPlayActor) assignedActor);
 	}
 
 	/**

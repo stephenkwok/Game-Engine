@@ -1,5 +1,6 @@
 package gameengine.model.Actions;
 
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 
 /**
@@ -18,7 +19,7 @@ public class MoveBackward extends MovingAction {
 	 * @param args
 	 *            The arguments required to perform the change
 	 */
-	public MoveBackward(IPlayActor actor1) {
+	public MoveBackward(IGameElement actor1) {
 		super(actor1);
 	}
 
