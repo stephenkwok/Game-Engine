@@ -62,6 +62,10 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
         isMainPlayer = false;
         isVisible = true;
+        myRotate = myImageView.getRotate();
+        myOpacity = myImageView.getOpacity();
+        myScaleX = myImageView.getScaleX();
+        myScaleY = myImageView.getScaleY();
     }
     
     /**
@@ -454,7 +458,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 
 	@Override
 	public double getRotate() {
-		return myImageView.getRotate();
+		return myRotate;
 	}
 
 	@Override
@@ -465,7 +469,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 
 	@Override
 	public double getOpacity() {
-		return myImageView.getOpacity();
+		return myOpacity;
 	}
 
 	@Override
@@ -476,7 +480,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 
 	@Override
 	public double getScaleX() {
-		return myImageView.getScaleX();
+		return myScaleX;
 	}
 
 	@Override
@@ -487,6 +491,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 
 	@Override
 	public double getScaleY() {
-		return myImageView.getScaleY();
+		return myScaleY;
 	}
 }
