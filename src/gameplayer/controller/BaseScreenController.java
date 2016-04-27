@@ -74,7 +74,7 @@ public class BaseScreenController extends BranchScreenController {
 	}
 
 	private void switchGame() {
-		this.myGameController.togglePause();
+		togglePause();
 		this.myScreen.switchAlert();
 	}
 
