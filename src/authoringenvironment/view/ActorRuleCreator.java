@@ -23,7 +23,7 @@ public class ActorRuleCreator {
 	private static final int RULE_COL = 1;
 	private static final int RULE_ROW_START = 1;
 	private static final String RESOURCE_BASE = "actionfactory";
-	private static final String KEY_TRIGGER = "Key";
+	private static final String KEY_TRIGGER = "KeyTrigger";	//amy test
 	private static final int VGAP = 10;
 	private static final int HGAP = 10;
 	private static final double CONTAINERS_PERCENT_WIDTH = 0.75;
@@ -174,6 +174,8 @@ public class ActorRuleCreator {
 		System.out.println(triggerType);
 		if (Arrays.asList(myActionResources.getString("KeyInputs").split(" ")).contains(triggerType)) {
 			return KEY_TRIGGER;
+		} else if (triggerType.equals("Tick")) {
+			return "TickTrigger";
 		}
 		return triggerType;
 	}
