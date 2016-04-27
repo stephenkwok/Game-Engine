@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-<<<<<<< HEAD
   <initialGameFile>gamefiles\loaders\test2_loader.xml</initialGameFile>
-=======
-  <initialGameFile>gamefiles/loaders/test2_loader.xml</initialGameFile>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
   <levels>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -23,10 +19,7 @@
           <myID>1</myID>
           <myImageViewName>runningmario1.png</myImageViewName>
           <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
           <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
           <myRuleManager>
             <myRules>
               <entry>
@@ -96,10 +89,7 @@
                         <myID>90</myID>
                         <myImageViewName>redball.png</myImageViewName>
                         <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                         <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                         <myRuleManager>
                           <myRules>
                             <entry>
@@ -149,13 +139,10 @@
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
-<<<<<<< HEAD
                         <myRotate>0.0</myRotate>
                         <myOpacity>0.0</myOpacity>
                         <myScaleX>0.0</myScaleX>
                         <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                       </mySpawnedActor>
                     </myAction>
                     <ID>0</ID>
@@ -196,10 +183,7 @@
                         <myID>2</myID>
                         <myImageViewName>block.png</myImageViewName>
                         <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                         <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                         <myRuleManager>
                           <myRules>
                             <entry>
@@ -234,10 +218,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -259,13 +240,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -288,10 +266,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -313,13 +288,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -342,10 +314,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -367,13 +336,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -396,10 +362,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -421,13 +384,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -450,10 +410,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -475,13 +432,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -504,10 +458,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -529,13 +480,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -558,10 +506,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -583,13 +528,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -612,10 +554,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -637,13 +576,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -666,10 +602,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -691,13 +624,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -720,10 +650,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -745,13 +672,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -774,10 +698,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -799,13 +720,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -828,10 +746,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -853,13 +768,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -882,10 +794,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -907,13 +816,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -936,10 +842,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -961,13 +864,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -990,10 +890,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1015,13 +912,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1044,10 +938,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1069,13 +960,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1098,10 +986,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1123,13 +1008,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1152,10 +1034,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1177,13 +1056,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1206,10 +1082,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1231,13 +1104,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1260,10 +1130,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1285,13 +1152,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1314,10 +1178,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1339,13 +1200,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1368,10 +1226,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1393,13 +1248,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1422,10 +1274,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1447,13 +1296,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1476,10 +1322,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1501,13 +1344,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1530,10 +1370,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1555,13 +1392,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1584,10 +1418,7 @@
                                       <myID>5</myID>
                                       <myImageViewName>square.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                                       <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -1609,13 +1440,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
-<<<<<<< HEAD
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>0.0</myOpacity>
                                       <myScaleX>0.0</myScaleX>
                                       <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1645,13 +1473,10 @@
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
-<<<<<<< HEAD
                         <myRotate>0.0</myRotate>
                         <myOpacity>0.0</myOpacity>
                         <myScaleX>0.0</myScaleX>
                         <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                       </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.HorizontalStaticCollision">
@@ -1674,10 +1499,7 @@
                         <myID>0</myID>
                         <myImageViewName>flagpole.png</myImageViewName>
                         <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
                         <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                         <myRuleManager>
                           <myRules>
                             <entry>
@@ -1965,13 +1787,10 @@
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
-<<<<<<< HEAD
                         <myRotate>0.0</myRotate>
                         <myOpacity>0.0</myOpacity>
                         <myScaleX>0.0</myScaleX>
                         <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
                       </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.NextLevel">
@@ -2354,13 +2173,10 @@
           </myNextValues>
           <isMainPlayer>false</isMainPlayer>
           <isVisible>true</isVisible>
-<<<<<<< HEAD
           <myRotate>0.0</myRotate>
           <myOpacity>0.0</myOpacity>
           <myScaleX>0.0</myScaleX>
           <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
         </gameengine.model.Actor>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
@@ -2376,10 +2192,7 @@
           <myID>3</myID>
           <myImageViewName>goomba.png</myImageViewName>
           <myHeading>0.0</myHeading>
-<<<<<<< HEAD
-=======
           <myImageViewSize>0.0</myImageViewSize>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
           <myRuleManager>
             <myRules>
               <entry>
@@ -2477,13 +2290,10 @@
           </myNextValues>
           <isMainPlayer>false</isMainPlayer>
           <isVisible>true</isVisible>
-<<<<<<< HEAD
           <myRotate>0.0</myRotate>
           <myOpacity>0.0</myOpacity>
           <myScaleX>0.0</myScaleX>
           <myScaleY>0.0</myScaleY>
-=======
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
         </gameengine.model.Actor>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
@@ -2579,11 +2389,7 @@
     <myHUDElementsToDisplay/>
     <myFile>test2.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
-<<<<<<< HEAD
-    <myHUDFileLocation>/Users/bobby_mac/Documents/workspace/voogasalad_LoopsGoatCheeseSalad/a.txt</myHUDFileLocation>
-=======
     <myHUDFileLocation>hudfiles/test</myHUDFileLocation>
->>>>>>> 13092affb882af7bb39bf4882db97026068731f0
   </info>
   <myPhysicsEngine>
     <nextXVelo>0.0</nextXVelo>
