@@ -98,6 +98,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>1.0</myOpacity>
+                                      <myScaleX>1.0</myScaleX>
+                                      <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.Destroy">
@@ -141,6 +145,10 @@
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
+                        <myRotate>0.0</myRotate>
+                        <myOpacity>1.0</myOpacity>
+                        <myScaleX>1.0</myScaleX>
+                        <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.LoseGame">
@@ -215,6 +223,10 @@
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
+                        <myRotate>0.0</myRotate>
+                        <myOpacity>1.0</myOpacity>
+                        <myScaleX>1.0</myScaleX>
+                        <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.LoseGame">
@@ -274,6 +286,10 @@
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
+                        <myRotate>0.0</myRotate>
+                        <myOpacity>1.0</myOpacity>
+                        <myScaleX>1.0</myScaleX>
+                        <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.ChangeAttribute">
@@ -335,6 +351,10 @@
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
+                        <myRotate>0.0</myRotate>
+                        <myOpacity>1.0</myOpacity>
+                        <myScaleX>1.0</myScaleX>
+                        <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.LoseGame">
@@ -410,6 +430,10 @@
           </myNextValues>
           <isMainPlayer>false</isMainPlayer>
           <isVisible>true</isVisible>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
         </gameengine.model.Actor>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[3]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
@@ -431,8 +455,6 @@
                 </myTrigger>
                 <myAction class="gameengine.model.Actions.CreateActor">
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
-                  <myX>0.0</myX>
-                  <myY>0.0</myY>
                   <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>
@@ -448,8 +470,6 @@
                 </myTrigger>
                 <myAction class="gameengine.model.Actions.CreateActor">
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
-                  <myX>0.0</myX>
-                  <myY>0.0</myY>
                   <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>
@@ -465,8 +485,6 @@
                 </myTrigger>
                 <myAction class="gameengine.model.Actions.CreateActor">
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
-                  <myX>0.0</myX>
-                  <myY>0.0</myY>
                   <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[3]/myTrigger/myCollisionActor"/>
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>
