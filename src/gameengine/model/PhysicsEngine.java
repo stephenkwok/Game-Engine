@@ -17,11 +17,12 @@ public class PhysicsEngine {
 	double nextYPos;
 	private double horizontalForce = 5;
 	private double verticalForce = -5;
-	private double gravity = .11;
+	private double jumpForce = -1;
+	private double gravity = .01;
 	private double friction = -.05;
 	private double maxVelo = 7;
 	private double bounce = 2.5; // purely aesthetic
-
+	
 	public double applyForce(double vector, double force) {
 		return (vector + force);
 	}
@@ -33,10 +34,14 @@ public class PhysicsEngine {
 		nextYPos = applyForce(a1.getY(), nextYVelo);
 		a1.setVeloX(nextXVelo);
 		a1.setX(bound(nextXPos));
+//		if (Math.abs(nextYVelo) > a1.getBounds().getHeight()/10) {
+//			nextYVelo = -a1.getBounds().getHeight()/10;
+//		}
 		a1.setVeloY(nextYVelo);
-		if (nextYPos == 0) {
+		if (bound(nextYPos) == 0) {
 			a1.setVeloY(0);
 		}
+
 		a1.setY(bound(nextYPos));
 	}
 
@@ -127,7 +132,24 @@ public class PhysicsEngine {
 
 	public void elasticVerticalCollision(IPlayActor a1) {
 		a1.setY(a1.getY() - (a1.getVeloY() * bounce));
-		a1.setVeloY(-horizontalForce * (a1.getVeloY() / Math.abs(a1.getVeloY())));
+		a1.setVeloY(verticalForce * (a1.getVeloY() / Math.abs(a1.getVeloY()))); 
+	}
+	
+
+	public void jump(IPlayActor a1){
+//		nextYVelo = applyForce(a1.getVeloY(), jumpForce);
+//		a1.setVeloY(nextYVelo);
+//		a1.setY((applyForce(a1.getY(), nextYVelo)));
+		
+		a1.setY(a1.getY()-a1.getVeloY()*2);
+		a1.setVeloY(0);
+		
+		this.moveUp(a1);
+		//a1.setVeloY(10);
+//		
+//		nextYVelo = applyForce(a1.getVeloY(), verticalForce);
+//		a1.setVeloY(nextYVelo);
+//		a1.setY((applyForce(a1.getY(), nextYVelo)));
 	}
 
 	public void setHorizontalForce(double horizontalForce) {

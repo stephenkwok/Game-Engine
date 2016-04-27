@@ -198,7 +198,7 @@ public class Tester extends Application {
         Level level1 = new Level();
         level1.setMyBackgroundImgName("mariobackground.png");
         levels.add(level1);
-        //level1.addActor(actor1);
+        level1.addActor(actor1);
         level1.addActor(actor2);
         level1.addActor((IAuthoringActor)actor3);
         level1.addActor((IAuthoringActor) actor4);

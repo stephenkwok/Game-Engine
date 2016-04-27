@@ -6,6 +6,7 @@ import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actions.*;
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.Rule;
@@ -24,6 +25,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class DoodleJump extends Application {
     /**
@@ -45,14 +47,39 @@ public class DoodleJump extends Application {
     public void start(Stage primaryStage) throws Exception {
         GameInfo info = new GameInfo();
         info.setMyCurrentLevelNum(0);
-        info.setName("Flappy Bird");
+        info.setName("Doodle Jump");
 
         List<Level> levels = new ArrayList<>();
 
         Level level1 = new Level();
+        level1.setMyScrollingDirection("Vertically");
         level1.setMyBackgroundImgName("doodlebackground.png");
         levels.add(level1);
-
+        
+        Actor player = new Actor();
+        player.addState(ActorState.MAIN);
+        player.setID(1);
+        player.setImageViewName("doodle_right.png");
+        player.addSpriteImage("doodle_left.png");
+        level1.addActor(player);
+       
+        Random r = new Random();
+        for(int i=0; i<6; i++){
+            Actor greenplatform = new Actor();
+            greenplatform.setImageViewName("green_platform.png");
+            greenplatform.setID(2);
+            greenplatform.setX(0 + (900) * r.nextDouble());
+            greenplatform.setY(i*90);
+            level1.addActor(greenplatform);
+            
+            player.addRule(new Rule(new BottomCollision(player,greenplatform),new Jump(player)));
+            
+        }
+        
+        player.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new MoveUp(player)));
+        player.addRule(new Rule(new KeyTrigger(KeyCode.RIGHT), new MoveRight(player)));
+        player.addRule(new Rule(new KeyTrigger(KeyCode.LEFT), new MoveLeft(player)));
+        player.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player)));
         
 
         Group group = new Group();
