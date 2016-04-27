@@ -14,6 +14,7 @@ import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IAction;
 import gameengine.model.IGameElement;
+import gameengine.model.Actions.Action;
 import gameengine.model.Actions.CreateActor;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -155,7 +156,7 @@ public class CreateActorActionCreator extends VBox implements IActionCreator {
 		return FXCollections.observableArrayList(names);
 	}
 	@Override
-	public IAction createAction() {
+	public Action createAction() {
 		switch (randomOrFixed) {
 		case RANDOM:
 			return new CreateActor(myElement, getActorByName(),

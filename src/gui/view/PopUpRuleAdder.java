@@ -14,15 +14,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import authoringenvironment.model.IActionCreator;
 import authoringenvironment.model.ITriggerCreator;
 import authoringenvironment.view.ActionFactory;
+import authoringenvironment.view.CreateActorActionCreator;
 import authoringenvironment.view.KeyTriggerCreator;
 import authoringenvironment.view.LevelEditingEnvironment;
+import authoringenvironment.view.LoseGameActionCreator;
 import authoringenvironment.view.TickTriggerCreator;
 import authoringenvironment.view.TriggerFactory;
+import authoringenvironment.view.WinGameActionCreator;
 import gameengine.controller.Level;
+import gameengine.model.IAction;
 import gameengine.model.IGameElement;
 import gameengine.model.Rule;
+import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.ITrigger;
 
 /**
@@ -67,6 +73,7 @@ public class PopUpRuleAdder extends PopUpParent implements Observer {
 		myButton = new Button(CREATE_RULE);
 		myButton.setOnAction(e -> createAndAddRule());
 		init();
+		getContainer().getChildren().add(myButton);
 	}
 
 	private void init() {
@@ -111,15 +118,22 @@ public class PopUpRuleAdder extends PopUpParent implements Observer {
 		myActionCreator = null;
 		switch (myActionName) {
 		case "WinGame":
-			myActorCreator 
+			myActionCreator = new WinGameActionCreator(myLevel);
+			break;
+		case "LoseGame":
+			myActionCreator = new LoseGameActionCreator(myLevel);
+			break;
+		case "CreateActor":
+			myActionCreator = new CreateActorActionCreator(myResources, myLevel, myLevelEditor);
 		}
 		myActionContainer.getChildren().add(myActionCreator);
 	}
 
 	private void createAndAddRule() {
 		ITrigger trigger = ((ITriggerCreator) myTriggerCreator).createTrigger();
-		//IAction action = ((IActionCreator) myActionCreator).createAction();
-		//myLevel.addRule(new Rule(trigger, action));
+		Action action = ((IActionCreator) myActionCreator).createAction();
+		myLevel.addRule(new Rule(trigger, action));
+		this.closePopUp();
 	}
 	
 	@Override

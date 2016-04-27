@@ -65,7 +65,7 @@ public class GUILevelInspector implements IGUI {
 		myAttributesTab = new TabFields(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, myLevelEditor.getLevel());
 		myAttributesTab.setObserver(myLevelEditor);
 		Button addRuleButton = new Button("Add Rule");
-		addRuleButton.setOnAction(e -> new PopUpRuleAdder(300,300, myLevelEditor.getLevel()));
+		addRuleButton.setOnAction(e -> new PopUpRuleAdder(300,300, myLevelEditor));
 		//PopUpRuleAdder adder = new PopUpRuleAdder(300,300);
 		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(BUTTON_LABEL, null, myLevelEditor, myLevelEditor.getStage());
 		myAttributesTab.addElement(button);
