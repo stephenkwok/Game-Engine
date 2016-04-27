@@ -98,75 +98,47 @@ public class ActorCopier {
 		for (String trigger : rulesToCopy.keySet()) {
 			List<Rule> toAdd = rulesToCopy.get(trigger);
 			for (int i = 0; i < toAdd.size(); i++) {
-				try {
-					ITrigger triggerToAdd = createTrigger(toAdd.get(i), (IPlayActor) toUpdate);
-					Object[] params = toAdd.get(i).getMyAction().getParameters();
-					params[0] = toUpdate;
-					Action actionToAdd = createAction(toAdd.get(i),params);
-					Rule rule = new Rule(triggerToAdd, actionToAdd);
-					rule.setID(toAdd.get(i).getID() + 1);
-					toUpdate.addRule(rule);
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					e.printStackTrace();
-				} catch (SecurityException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					try {
+						Rule oldRule = toAdd.get(i);
+						ITrigger oldTrigger = oldRule.getMyTrigger();
+						Action oldAction = oldRule.getMyAction();
+						
+						ITrigger triggerToAdd = createTrigger(oldTrigger, toUpdate);
+						Action actionToAdd = createAction(oldAction,toUpdate);
+						Rule rule = new Rule(triggerToAdd, actionToAdd);
+						rule.setID(oldRule.getID() + 1);
+						toUpdate.addRule(rule);
+						
+					} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+							| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+						e.printStackTrace();
+					}
 			}
 		}
 	}
-
-	private ITrigger createTrigger(Rule rule, IPlayActor toUpdate) {
-		ITrigger triggerToAdd = null;
- 		String triggerClassName = rule.getMyTrigger().getClass().getSimpleName();
-		List<Object> arguments = new ArrayList<>();
-		if (checkType(triggerClassName, KEY)) {
-			arguments.add(((KeyTrigger) rule.getMyTrigger()).getMyKeyCode());
-			//triggerClassName = KEY; // ideally won't need this...
-		} else if (checkType(triggerClassName, TICK)) {
-			arguments.add(((TickTrigger) rule.getMyTrigger()).getMyInterval());
-			//triggerClassName = TICK;
-		} else if (checkType(triggerClassName, COLLISION)) {
-			arguments.add(toUpdate);
-			arguments.add(((CollisionTrigger) rule.getMyTrigger()).getMyCollisionActor());
-		} else if (checkType(triggerClassName, ATTRIBUTE)) {
-			AttributeReached trigger = (AttributeReached) rule.getMyTrigger();
-			arguments.add(trigger.getMyType());
-			arguments.add((IGameElement) toUpdate);
-			arguments.add(trigger.getMyValue());
-		} else if (checkType(triggerClassName, CLICK)) {
-			arguments.add((IGameElement) toUpdate);
-			//triggerClassName = CLICK;
-		}
-		triggerToAdd = myTriggerFactory.createNewTrigger(triggerClassName, arguments);
-		return triggerToAdd;
-	}
 	
-	private Action createAction(Rule rule, Object[] arguments) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Action actionToAdd = null;
-		Class myclass = rule.getMyAction().getClass();
+	private Object createObject(Object action, Object[] arguments) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		Class myclass = action.getClass();
 		Class[] argumentTypes = new Class[arguments.length];
 		for(int i=0; i<argumentTypes.length;i++){
 			argumentTypes[i] = arguments[i].getClass();
 		}
 		Constructor constructor = myclass.getConstructor(argumentTypes);
-		actionToAdd = (Action) constructor.newInstance(arguments);
-		return actionToAdd;
+		return constructor.newInstance(arguments);
+	}
+	
+	private ITrigger createTrigger(ITrigger trigger, Actor toUpdate) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Object[] params = trigger.getParameters();
+		if(params[0].getClass().equals(Actor.class)&&((Actor)params[0]).getID()==toUpdate.getID()){
+			params[0] = toUpdate;
+		}
+		return (ITrigger) createObject(trigger,params);
+	}
+	
+	private Action createAction(Action action, Actor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Object[] params = action.getParameters();
+		params[0] = toUpdate;
+		return (Action) createObject(action,params);
 	}
 
 	private boolean checkType(String name, String key) {

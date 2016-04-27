@@ -8,7 +8,7 @@ public class SideCollision extends CollisionTrigger {
 
 	private static final String COLLISION_NAME = "SideCollision";
 
-	public SideCollision(IPlayActor actor1, IPlayActor actor2) {
+	public SideCollision(Actor actor1, Actor actor2) {
 		super(actor1, actor2);
 	}
 

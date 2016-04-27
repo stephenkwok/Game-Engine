@@ -8,7 +8,7 @@ public class TopCollision extends CollisionTrigger {
 
 	private static final String COLLISION_TYPE = "TopTrigger";
 
-	public TopCollision(IPlayActor actor1, IPlayActor actor2) {
+	public TopCollision(Actor actor1, Actor actor2) {
 		super(actor1, actor2);
 	}
 
