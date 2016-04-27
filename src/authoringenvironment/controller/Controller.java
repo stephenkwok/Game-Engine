@@ -139,9 +139,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		myLevels = game.getLevels();
 		gameInfo = game.getInfo();
 		myActorMap = gameInfo.getActorMap();
+		initializeGeneralComponents();
 		myLevels.stream().forEach(level -> mainScreen.createLevelPreviewUnit(level, levelEnvironment));
 		myActorMap.keySet().stream().forEach(actor -> mainScreen.createActorPreviewUnit(actor, actorEnvironment));
-		initializeGeneralComponents();
 	}
 
 	/**
@@ -269,8 +269,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	public void goToMainScreen() {
 		mainScreen.updatePreviewUnits();
 		setCenterPane(mainScreen.getPane());
-		myActorMap.keySet().stream().forEach(actor -> System.out.println(actor.getSize()));
-		myActorMap.values().stream().forEach(list -> list.stream().forEach(actor -> System.out.println(actor.getSize())));
 	}
 
 	/**

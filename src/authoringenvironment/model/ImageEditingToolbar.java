@@ -61,6 +61,10 @@ public class ImageEditingToolbar extends Observable {
 		initializeFinishButton();
 	}
 
+	/**
+	 * Initializes the size, rotate, and opacity sliders that update an image's
+	 * size, rotate, and opacity attributes
+	 */
 	private void initializeSliders() {
 		initializeSizeSlider();
 		initializeRotateSlider();
@@ -68,6 +72,9 @@ public class ImageEditingToolbar extends Observable {
 		mySliders.stream().forEach(slider -> configureSlider(slider));
 	}
 
+	/**
+	 * Initializes the containers that hold the sliders
+	 */
 	private void initializeSliderContainers() {
 		mySliderContainers.stream().forEach(container -> configureContainer(container));
 	}
