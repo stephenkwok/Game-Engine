@@ -137,6 +137,10 @@
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
+                        <myRotate>0.0</myRotate>
+                        <myOpacity>0.0</myOpacity>
+                        <myScaleX>0.0</myScaleX>
+                        <myScaleY>0.0</myScaleY>
                       </mySpawnedActor>
                     </myAction>
                     <ID>0</ID>
@@ -232,6 +236,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -275,6 +283,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -318,6 +330,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -361,6 +377,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -404,6 +424,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -447,6 +471,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -490,6 +518,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -533,6 +565,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -576,6 +612,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -619,6 +659,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -662,6 +706,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -705,6 +753,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -748,6 +800,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -791,6 +847,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -834,6 +894,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -877,6 +941,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -920,6 +988,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -963,6 +1035,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1006,6 +1082,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1049,6 +1129,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1092,6 +1176,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1135,6 +1223,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1178,6 +1270,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1221,6 +1317,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1264,6 +1364,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1307,6 +1411,10 @@
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>0.0</myOpacity>
+                                      <myScaleX>0.0</myScaleX>
+                                      <myScaleY>0.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
@@ -1336,6 +1444,10 @@
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
+                        <myRotate>0.0</myRotate>
+                        <myOpacity>0.0</myOpacity>
+                        <myScaleX>0.0</myScaleX>
+                        <myScaleY>0.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.HorizontalStaticCollision">
@@ -1645,6 +1757,10 @@
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
+                        <myRotate>0.0</myRotate>
+                        <myOpacity>0.0</myOpacity>
+                        <myScaleX>0.0</myScaleX>
+                        <myScaleY>0.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.NextLevel">
@@ -2027,6 +2143,10 @@
           </myNextValues>
           <isMainPlayer>false</isMainPlayer>
           <isVisible>true</isVisible>
+          <myRotate>0.0</myRotate>
+          <myOpacity>0.0</myOpacity>
+          <myScaleX>0.0</myScaleX>
+          <myScaleY>0.0</myScaleY>
         </gameengine.model.Actor>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
@@ -2139,6 +2259,10 @@
           </myNextValues>
           <isMainPlayer>false</isMainPlayer>
           <isVisible>true</isVisible>
+          <myRotate>0.0</myRotate>
+          <myOpacity>0.0</myOpacity>
+          <myScaleX>0.0</myScaleX>
+          <myScaleY>0.0</myScaleY>
         </gameengine.model.Actor>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
