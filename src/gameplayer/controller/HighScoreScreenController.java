@@ -24,7 +24,6 @@ public class HighScoreScreenController extends BranchScreenController {
 
 	private static final String SCORE_CONTROLLER_RESOURCE = "scoresActions";
 
-	private ResourceBundle myResources;
 	private HighScoreScreen myScreen;
 	private String myGameName;
 
@@ -32,13 +31,12 @@ public class HighScoreScreenController extends BranchScreenController {
 	private HighScoresController myDataController;
 
 	public HighScoreScreenController(Stage myStage, HighScoresController dataController) {
-		super(myStage);
+		super(myStage,SCORE_CONTROLLER_RESOURCE);
 		this.myDataController = dataController;
 		this.myGameName = dataController.getGameFile();
 		this.myScores = new HighScoresKeeper(this.myDataController.getAllGameScores());
 		this.myScores.addObserver(this);
 		setUpScreen();
-		this.myResources = ResourceBundle.getBundle(SCORE_CONTROLLER_RESOURCE);
 		changeScreen(myScreen);
 	}
 
@@ -60,6 +58,7 @@ public class HighScoreScreenController extends BranchScreenController {
 		this.myScreen = new HighScoreScreen();
 		this.myScreen.displayScores(myGameName, myDataController.getGameHighScores());
 		this.myScreen.addObserver(this);
+		setMyScreen(this.myScreen);
 	}
 
 	private void updateScores() {
@@ -74,31 +73,16 @@ public class HighScoreScreenController extends BranchScreenController {
 		myScores.clearGameScores(myDataController.getGameFile());
 		myDataController.clearHighScores();
 	}
-
+	
 	@Override
-	public void update(Observable o, Object arg) {
-		List<Object> myList = (List<Object>) arg;
-		String methodName = (String) myList.get(0);
+	public void invoke(String method, Class[] parameterTypes, Object[] parameters) {
 		try {
-			if (myResources.getString(methodName).equals("null")) {
-				this.getClass().getDeclaredMethod(methodName).invoke(this);
-			} else {
-				Class<?> myClass = Class.forName(myResources.getString(methodName));
-				Object arg2 = myClass.cast(myList.get(1));
-				Class[] parameterTypes = { myClass };
-				Object[] parameters = { arg2 };
-				this.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(this, parameters);
-			}
+			this.getClass().getDeclaredMethod(method, parameterTypes).invoke(this, parameters);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
-				| SecurityException | ClassNotFoundException e) {
-			try {
-				this.getClass().getSuperclass().getDeclaredMethod(methodName).invoke(this);
-			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
-					| NoSuchMethodException | SecurityException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-				this.myScreen.showError(e.getMessage());
-			}
-		}
+				| SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
+
 }

@@ -28,6 +28,8 @@ public class XMLParser {
 		myXStream.autodetectAnnotations(true);
 	}
 	
+	//TODO throw exceptions?
+	
 	public Object load(File file) {
 		if (file == null || empty(file)) {
 			return null;
@@ -37,7 +39,6 @@ public class XMLParser {
 			try {
 				return myXStream.fromXML(xml);
 			} catch (Exception e) {
-				e.printStackTrace();
 				return null;
 			}
 		}

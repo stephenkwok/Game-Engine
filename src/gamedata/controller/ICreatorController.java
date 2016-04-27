@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
@@ -27,8 +28,9 @@ public interface ICreatorController {
 	 * @throws ParserConfigurationException
 	 * @throws IOException
 	 * @throws SAXException
+	 * @throws TransformerException 
 	 */
-	public void saveForEditing(File file) throws ParserConfigurationException, SAXException, IOException;
+	public void saveForEditing(File file) throws ParserConfigurationException, SAXException, IOException, TransformerException;
 
 	/**
 	 * Uses the GameXMLCreator to write to an initial file the details for a
@@ -40,7 +42,8 @@ public interface ICreatorController {
 	 * @throws ParserConfigurationException
 	 * @throws IOException
 	 * @throws SAXException
+	 * @throws TransformerException 
 	 */
-	public void saveForPlaying(File file) throws ParserConfigurationException, SAXException, IOException;
+	public void saveForPlaying(File file) throws ParserConfigurationException, SAXException, IOException, TransformerException;
 
 }

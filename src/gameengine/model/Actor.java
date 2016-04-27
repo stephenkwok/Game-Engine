@@ -41,7 +41,9 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private Set<ActorState> myStates;
     private Sprite mySprite;
     private NextValues myNextValues;
-    private boolean isMainPlayer;
+
+
+	private boolean isMainPlayer;
     private boolean isVisible;
     private double myRotate;
     private double myOpacity;
@@ -493,6 +495,16 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	@Override
 	public double getScaleY() {
 		return myScaleY;
+	}
+	
+	@Override
+    public NextValues getNextValues() {
+		return myNextValues;
+	}
+
+	@Override
+	public void setNextValues(NextValues myNextValues) {
+		this.myNextValues = myNextValues;
 	}
 
 }

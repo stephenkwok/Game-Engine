@@ -10,14 +10,22 @@ import gameengine.model.IPlayActor;
 public class TickTrigger extends ITrigger {
 
 	private static final String TICK = "Tick";
-	private int myInterval;
+	private Integer myInterval;
 
 	public TickTrigger() {
 		myInterval = 1;
 	}
 
-	public TickTrigger(int interval) {
+	public TickTrigger(Integer interval) {
 		myInterval = interval;
+	}
+	
+	@Override
+	public Object[] getParameters(){
+		if(myInterval!=null){
+			return new Object[]{myInterval};
+		}
+		return new Object[]{};
 	}
 
 	public int getMyInterval() {

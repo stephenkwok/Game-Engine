@@ -15,7 +15,6 @@ public class HorizontalBounceCollision extends ActorAction{
 
 	public HorizontalBounceCollision(Actor assignedActor) {
 		super(assignedActor);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

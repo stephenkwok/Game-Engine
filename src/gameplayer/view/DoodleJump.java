@@ -1,5 +1,6 @@
 package gameplayer.view;
 
+
 import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
@@ -12,6 +13,7 @@ import gameengine.model.AttributeType;
 import gameengine.model.Rule;
 import gameengine.model.Triggers.*;
 import gameplayer.controller.GameController;
+import gameplayer.view.GameScreen;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.ParallelCamera;
@@ -24,11 +26,9 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-/**
- * @author blakekaplan
- */
-public class FlappyBird extends Application {
+public class DoodleJump extends Application {
     /**
      * The main entry point for all JavaFX applications.
      * The start method is called after the init method has returned,
@@ -48,71 +48,44 @@ public class FlappyBird extends Application {
     public void start(Stage primaryStage) throws Exception {
         GameInfo info = new GameInfo();
         info.setMyCurrentLevelNum(0);
-        info.setName("Flappy Bird");
+        info.setName("Doodle Jump");
 
         List<Level> levels = new ArrayList<>();
 
         Level level1 = new Level();
-        level1.setMyBackgroundImgName("flappybackground.png");
+        level1.setMyScrollingDirection("Vertically");
+        level1.setMyBackgroundImgName("verticalbackground.png");
         levels.add(level1);
-
-        Actor pipeTop = new Actor();
-        pipeTop.setID(10);
-        pipeTop.setImageViewName("toppipe.png");
-        pipeTop.addRule(new Rule(new TickTrigger(20), new MoveLeft(pipeTop)));
-
-        Actor pipeBottom = new Actor();
-        pipeBottom.setID(11);
-        pipeBottom.setImageViewName("bottompipe.png");
-        pipeBottom.addRule(new Rule(new TickTrigger(20), new MoveLeft(pipeBottom)));
-
-        Actor invisibleLine = new Actor();
-        invisibleLine.setID(12);
-        invisibleLine.setImageViewName("gameside.png");
-        invisibleLine.addRule(new Rule(new TickTrigger(20), new MoveLeft(invisibleLine)));
-
-        Actor gameSide = new Actor();
-        gameSide.setX(-100);
-        gameSide.setID(13);
-        gameSide.setImageViewName("gameside.png");
-
-        Actor floor = new Actor();
-        floor.setID(2);
-        floor.setImageViewName("floor.png");
-        floor.setY(500);
-
-
-
-        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeTop, 1024.0, 1024.0, -100.0, 0.0)));
-        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeBottom, 1024.0, 1024.0, 350.0, 400.0)));
-        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, invisibleLine, 1024.0, 1024.0, 200.0, 200.0)));
-
-        Actor player = new Actor();
-        player.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new MoveUp(player)));
-        player.isMainPlayer();
-        player.setID(1);
-        player.setImageViewName("flappybird1.png");
-        player.addSpriteImage("flappybird2.png");
-        player.addSpriteImage("flappybird3.png");
-
-        player.addRule(new Rule(new SideCollision(player,pipeTop), new LoseGame(player)));
-        player.addRule(new Rule(new BottomCollision(player, pipeBottom), new LoseGame(level1)));
-        player.addRule(new Rule(new SideCollision(player,pipeBottom), new LoseGame(player)));
-        player.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player)));
-        player.addRule(new Rule(new SideCollision(player, invisibleLine), new ChangeAttribute(player,AttributeType.POINTS,10)));
-        player.addRule(new Rule(new BottomCollision(player, floor), new LoseGame(level1)));
-        player.addRule(new Rule(new TickTrigger(5), new NextImage(player)));
-
-        pipeTop.addRule(new Rule(new SideCollision(pipeTop, gameSide), new Destroy(pipeTop)));
-        pipeBottom.addRule(new Rule(new SideCollision(pipeBottom, gameSide), new Destroy(pipeBottom)));
         
-        player.addAttribute(new Attribute(AttributeType.POINTS,15,player));
+        Actor player = new Actor();
         player.addState(ActorState.MAIN);
-
-
+        player.setID(1);
+        player.setImageViewName("runningmario1.png");
+        player.addSpriteImage("runningmario2.png");
         level1.addActor(player);
-        level1.addActor(floor);
-        level1.addActor(gameSide);
+       
+        Random r = new Random();
+        for(int i=0; i<6; i++){
+            Actor greenplatform = new Actor();
+            greenplatform.setImageViewName("goomba.png");
+            greenplatform.setID(2);
+            greenplatform.setX(0 + (900) * r.nextDouble());
+            greenplatform.setY(i*90);
+            level1.addActor(greenplatform);
+            
+            player.addRule(new Rule(new SideCollision(player,greenplatform),new HorizontalBounceCollision(player)));
+            
+            player.addRule(new Rule(new TopCollision(player,greenplatform),new GlideUp(player, greenplatform.getBounds().getHeight()*-.4)));
+
+            player.addRule(new Rule(new BottomCollision(player,greenplatform),new VerticalBounceCollision(player)));
+            
+        }
+        
+        player.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new MoveUp(player)));
+        player.addRule(new Rule(new KeyTrigger(KeyCode.RIGHT), new MoveRight(player)));
+        player.addRule(new Rule(new KeyTrigger(KeyCode.LEFT), new MoveLeft(player)));
+        player.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player)));
+        
 
         Group group = new Group();
         Scene scene = new Scene(group);
@@ -120,7 +93,7 @@ public class FlappyBird extends Application {
         Game model = new Game(info, levels);
         model.setHUDInfoFile("a.txt");
         CreatorController c = new CreatorController(model);
-        c.saveForEditing(new File("gamefiles/FlappyBird.xml"));
+        c.saveForEditing(new File("gamefiles/DoodleJump.xml"));
         ParallelCamera camera = new ParallelCamera();
         GameScreen view = new GameScreen(camera);
 
