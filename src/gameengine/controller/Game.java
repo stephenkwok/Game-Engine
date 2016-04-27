@@ -378,7 +378,7 @@ public class Game extends Observable implements Observer {
 	}
 
 	public int getScore() {
-		return getCurrentLevel().getAttribute(AttributeType.POINTS).getMyValue();
+		return getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();
 	}
 
 	public void setHUDInfoFile(String location) {

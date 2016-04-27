@@ -1,14 +1,13 @@
 package gameengine.model.Actions;
 
-import gameengine.model.IGameElement;
-import gameengine.model.IPlayActor;
+import gameengine.model.Actor;
 
 /**
  * @author blakekaplan
  */
 public class MoveUp extends MovingAction {
 
-	public MoveUp(IGameElement actor) {
+	public MoveUp(Actor actor) {
 		super(actor);
 	}
 

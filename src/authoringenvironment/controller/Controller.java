@@ -125,8 +125,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		myLevelNames = new ArrayList<>();
 		myActorMap = new HashMap<>();
 		myActorNames = new ArrayList<>();
-		gameInfo = new GameInfo();
-		gameInfo.setActorMap(myActorMap);
+		gameInfo = new GameInfo(myActorMap);
 		game = new Game(gameInfo, myLevels);
 		initializeGeneralComponents();
 		initializePresetActors();
@@ -281,7 +280,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		//TODO implement incomplete game error checking
 		//System.out.println(myLevels.get(0).getActors().get(0).getRules().size());
 		//IPlayActor actor = myLevels.get(0).getActors().get(0);
-		GameInfo gameInfo = new GameInfo(myLevels.get(0).getMyBackgroundImgName());
+		gameInfo.setMyImageName(myLevels.get(0).getMyBackgroundImgName());
 		List<IAuthoringActor> refActor = new ArrayList(myActorMap.keySet());
 		IAuthoringActor realRefActor = refActor.get(0);
 		FileChooser fileChooser = new FileChooser();
@@ -362,9 +361,11 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	/**
 	 * Saves game and returns to splash screen of game player.
 	 */
-	/*
-	 * public void goToSplash() { guiMain.goBackToSplash(); }
-	 */
+	
+	  public void goToSplash() {
+		  super.goToSplash();
+	  }
+	 
 
 	public void switchGame() {
 		// TODO Auto-generated method stub

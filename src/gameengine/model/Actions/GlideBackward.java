@@ -1,10 +1,10 @@
 package gameengine.model.Actions;
 
-import gameengine.model.IGameElement;
+import gameengine.model.Actor;
 
 public class GlideBackward extends GlidingAction {
 
-	public GlideBackward(IGameElement assignedActor, double offset) {
+	public GlideBackward(Actor assignedActor, double offset) {
 		super(assignedActor, offset);
 	}
 

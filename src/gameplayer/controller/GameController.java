@@ -30,7 +30,6 @@ import voogasalad.util.hud.source.AbstractHUDScreen;
  */
 
 public class GameController extends Observable implements Observer, IGameController {
-	@XStreamOmitField
 	private Game model;
 	@XStreamOmitField
 	private GameScreen view;
@@ -178,6 +177,7 @@ public class GameController extends Observable implements Observer, IGameControl
 		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException
 				| InvocationTargetException | NoSuchMethodException e1) {
 			// TODO Auto-generated catch block
+			System.out.println("FUUUUUUCK UGH");
 			e1.printStackTrace();
 		}
 	}
