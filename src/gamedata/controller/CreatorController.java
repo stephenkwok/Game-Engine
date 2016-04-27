@@ -65,6 +65,7 @@ public class CreatorController implements ICreatorController {
 			myGame.getInfo().setMyFile(file.getName());
 			this.myXMLCreator.save(myGame, file);
 		} catch (SAXException | IOException | TransformerException e) {
+			e.printStackTrace();
 			myScreen.showError(e.getMessage());
 		}
 	}
