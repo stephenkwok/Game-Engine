@@ -111,7 +111,7 @@ public class ActorRuleFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private IAuthoringBehavior createLabelBehavior(String behaviorType, String className)
+	private IAuthoringBehavior createStandardActorBehavior(String behaviorType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> clazz = Class.forName(className);
@@ -120,30 +120,11 @@ public class ActorRuleFactory {
 		return (IAuthoringBehavior) constructor.newInstance(myActorRule, myActor, behaviorType, myResources);
 	}
 
-	private IAuthoringBehavior createComboBoxBehavior(String behaviorType, String className)
+	private IAuthoringBehavior createStandardBehavior(String behaviorType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> clazz = Class.forName(className);
 		Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, ResourceBundle.class);
 		return (IAuthoringBehavior) constructor.newInstance(myActorRule, behaviorType, myResources);
-	}
-
-	private IAuthoringBehavior createChangeAttributeBehavior(String behaviorType, String className)
-			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
-			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		return createLabelBehavior(behaviorType, className);
-	}
-
-	private IAuthoringBehavior createTickBehavior(String behaviorType, String className)
-			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
-			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		return createComboBoxBehavior(behaviorType, className);
-	}
-
-	private IAuthoringBehavior createAttributeReachedBehavior(String behaviorType, String className)
-			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
-			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		System.out.println(createLabelBehavior(behaviorType, className));
-		return createLabelBehavior(behaviorType, className);
 	}
 }

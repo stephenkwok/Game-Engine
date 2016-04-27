@@ -235,8 +235,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 
 			}
 			// temp
-			ButtonSplash splash = new ButtonSplash(null, SPLASH_IMAGE_NAME);
-			hbox.getChildren().add(splash.createNode());
+			/*ButtonSplash splash = new ButtonSplash(null, SPLASH_IMAGE_NAME);
+			hbox.getChildren().add(splash.createNode());*/
 		} catch (Exception e) {
 
 		}
@@ -342,8 +342,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 */
 	public void addLevel() {
 		Level newLevel = new Level();
-		myLevels.add(newLevel);
 		newLevel.setPlayPosition(myLevels.size());
+		myLevels.add(newLevel);
 		myLevelNames.add(newLevel.getName());
 		mainScreen.createLevelPreviewUnit(newLevel, levelEnvironment);
 		goToEditingEnvironment(newLevel, levelEnvironment);
@@ -416,6 +416,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 			loadGame();
 		else if (arg0 instanceof ButtonSave)
 			saveGame();
+		else if (arg0 instanceof ButtonSplash)
+			goToSplash();
 		else if (arg0 instanceof TextFieldActorNameEditor)
 			updateActors((Actor) arg1);
 		else if (arg0 instanceof ButtonHelpPage) {
@@ -462,6 +464,10 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	@Override
 	public void setHUDInfoFile(String location) {
 		game.setHUDInfoFile(location);
+	}
+	
+	public Game getGame(){
+		return game;
 	}
 
 }

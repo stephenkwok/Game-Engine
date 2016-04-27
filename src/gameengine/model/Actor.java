@@ -32,7 +32,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	private int myID;
 	private String myImageViewName;
 	private double myHeading;
-
+	private double myImageViewSize;
     @XStreamOmitField
     private ImageView myImageView;
     private RuleManager myRuleManager;
@@ -193,6 +193,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     	myImageView.setX(this.getX());
     	myImageView.setY(this.getY());
 		myImageView.setFitHeight(imageView.getFitHeight());
+		myImageViewSize = myImageView.getFitHeight();
     }
     
     /**
@@ -364,7 +365,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	}
 
 	public double getSize() {
-		return myImageView.getFitHeight();
+		return myImageViewSize;
 	}
 
 	@Override

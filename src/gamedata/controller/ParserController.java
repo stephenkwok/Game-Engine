@@ -40,7 +40,16 @@ public class ParserController implements IParserController {
 			return null;
 		}
 		else {
-			return new Game(XMLgame.getInitialGameFile(), XMLgame.getInfo(), XMLgame.getLevels());
+			return new Game(XMLgame.getInitialGameFile(), 
+					XMLgame.getLevels(), 
+					XMLgame.getInfo(),
+					XMLgame.getMyPhysicsEngine(),
+					XMLgame.getMyCollisonDetector(),
+					XMLgame.getActiveTriggers(),
+					XMLgame.getAnimation(),
+					XMLgame.getCurrentActors(),
+					XMLgame.getDeadActors(),
+					XMLgame.getCount());
 		}
 	}
 
