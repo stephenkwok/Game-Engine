@@ -1,5 +1,6 @@
 package gameengine.model.Actions;
 
+import gameengine.model.Actor;
 import gameengine.model.IGameElement;
 
 /**
@@ -9,13 +10,13 @@ import gameengine.model.IGameElement;
  * @author michelle
  */
 public class GlideRight extends GlidingAction {
-
+	
     /**
      * Takes in reference to the Actor it will change 
      * 
      * @param assignedActor The Actor that will be changed
      */
-	public GlideRight(IGameElement assignedActor, double offset) {
+	public GlideRight(Actor assignedActor, Double offset) {
 		super(assignedActor, offset);
 	}
 

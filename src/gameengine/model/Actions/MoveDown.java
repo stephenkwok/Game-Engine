@@ -14,7 +14,7 @@ public class MoveDown extends MovingAction {
 
 	private static final int DOWN_ANGLE = 270;
 
-	public MoveDown(IGameElement assignedActor) {
+	public MoveDown(Actor assignedActor) {
 		super(assignedActor);
 	}
 

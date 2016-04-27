@@ -4,6 +4,12 @@ import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import javafx.scene.control.Label;
 
+/**
+ * 
+ * @author amyzhao
+ *
+ */
+
 public class PopUpActorResize extends PopUpParent {
 	private static final String LABEL = "Height:";
 	private static final String PROMPT = "Enter height (preserves height vs. width ratio)";

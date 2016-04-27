@@ -12,24 +12,22 @@ import gameengine.model.IPlayActor;
 
 public class CreateActor extends Action {
 	Actor cloneActor;
-	//ActorCopier copier;
-	double myX;
-	double myY;
+	Double myX;
+	Double myY;
 	private Actor myActorToCopy;
-    double myMinX;
-    double myMaxX;
-    double myMinY;
-    double myMaxY;
+    Double myMinX;
+    Double myMaxX;
+    Double myMinY;
+    Double myMaxY;
     boolean isRandom;
 	
-	public CreateActor(IGameElement element, Actor toCopy, double x, double y) {
+	public CreateActor(IGameElement element, Actor toCopy, Double x, Double y) {
 		super(element);
-		//copier = new ActorCopier(toCopy);
 		myX = x;
 		myY = y;
 	}
 
-    public CreateActor(IGameElement element, Actor toCopy, double minX, double maxX, double minY, double maxY){
+    public CreateActor(IGameElement element, Actor toCopy, Double minX, Double maxX, Double minY, Double maxY){
         super(element);
         myActorToCopy = toCopy;
         isRandom = true;
@@ -39,6 +37,14 @@ public class CreateActor extends Action {
         myMinY = minY;
     }
 
+    @Override
+    public Object[] getParameters(){
+    	if(isRandom){
+    		return new Object[]{getGameElement(),myActorToCopy,myMinY,myMaxX,myMinY,myMaxY};
+    	}
+    	return new Object[]{getGameElement(),myActorToCopy,myX,myY};
+    }
+    
 	@Override
 	public void perform() {
 		ActorCopier copier = new ActorCopier(myActorToCopy);
@@ -53,11 +59,11 @@ public class CreateActor extends Action {
 		((Observable) getGameElement()).notifyObservers(Arrays.asList(new Object[]{"addActor",cloneActor}));
 	}
 
-	public double getMyX() {
+	public Double getMyX() {
 		return myX;
 	}
 	
-	public double getMyY() {
+	public Double getMyY() {
 		return myY;
 	}
 	

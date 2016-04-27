@@ -1,15 +1,14 @@
 package gameengine.model.Actions;
 
-import gameengine.model.IGameElement;
-import gameengine.model.IPlayActor;
+import gameengine.model.Actor;
 
 /**
  * @author blakekaplan
  */
 public class NextImage extends ActorAction {
 
-	public NextImage(IGameElement assignedActor) {
-		super((IPlayActor) assignedActor);
+	public NextImage(Actor assignedActor) {
+		super(assignedActor);
 	}
 
 	/**
