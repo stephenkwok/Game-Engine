@@ -31,12 +31,14 @@ public class PhysicsEngine {
 		nextXPos = applyForce(a1.getX(), nextXVelo);
 		nextYVelo = applyForce(a1.getVeloY(), gravity);
 		nextYPos = applyForce(a1.getY(), nextYVelo);
+		System.out.println(nextYPos);
 		a1.setVeloX(nextXVelo);
 		a1.setX(bound(nextXPos));
 		a1.setVeloY(nextYVelo);
-		if (nextYPos == 0) {
+		if (nextYPos <= 0) {
 			a1.setVeloY(0);
 		}
+		System.out.println("SKY");
 		a1.setY(bound(nextYPos));
 	}
 
