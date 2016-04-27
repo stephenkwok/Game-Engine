@@ -51,7 +51,7 @@ public class ImageEditingToolbar extends Observable {
 	public ImageEditingToolbar(ImageView imageView) {
 		myImageView = imageView;
 		mySliders = new ArrayList<>();
-		myContainer = new VBox(10.0);
+		myContainer = new VBox(CONTAINER_SPACING);
 		mySliderContainers = new ArrayList<>();
 		initializeSliders();
 		initializeSliderContainers();

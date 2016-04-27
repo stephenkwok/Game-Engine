@@ -35,6 +35,7 @@ import gui.view.IGUIElement;
 import gui.view.PopUpAuthoringHelpPage;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -44,7 +45,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import voogasalad.util.hud.source.*;
+import voogasalad.util.hud.source.IAuthoringHUDController;
+import voogasalad.util.hud.source.PopupSelector;
 
 /**
  * This class serves as the main controller for the authoring environment
@@ -83,9 +85,10 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private ActorCopier myActorCopier;
 
 	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
-	IllegalArgumentException, InvocationTargetException {
+			IllegalArgumentException, InvocationTargetException {
 		super(myStage);
-		this.myObservableResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
+		// this.myObservableResource =
+		// ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
 		initNewGame();
 	}
 
@@ -120,7 +123,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * @throws NoSuchMethodException
 	 */
 	public void initNewGame() throws NoSuchMethodException, SecurityException, IllegalAccessException,
-	IllegalArgumentException, InvocationTargetException {
+			IllegalArgumentException, InvocationTargetException {
 		myLevels = new ArrayList<>();
 		myLevelNames = new ArrayList<>();
 		myActorMap = new HashMap<>();
@@ -138,6 +141,10 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		myLevels = game.getLevels();
 		gameInfo = game.getInfo();
 		myActorMap = gameInfo.getActorMap();
+		myActorMap.keySet().stream().forEach(actor -> actor.setImageView(new ImageView(actor.getImageViewName())));
+		myActorMap.values().stream().forEach(
+				list -> list.stream().forEach(actor -> actor.setImageView(new ImageView(actor.getImageViewName()))));
+		myLevels.stream().forEach(level -> level.setImageView(new ImageView(level.getMyBackgroundImgName())));
 		initializeGeneralComponents();
 		myLevels.stream().forEach(level -> mainScreen.createLevelPreviewUnit(level, levelEnvironment));
 		myActorMap.keySet().stream().forEach(actor -> mainScreen.createActorPreviewUnit(actor, actorEnvironment));
@@ -153,6 +160,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
 		getStage().setScene(myScene);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
+		this.myObservableResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
 		factory = new GUIFactory(myResources);
 		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
 		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
@@ -172,7 +180,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * @throws InvocationTargetException
 	 */
 	private void initializePresetActors() throws NoSuchMethodException, SecurityException, IllegalAccessException,
-	IllegalArgumentException, InvocationTargetException {
+			IllegalArgumentException, InvocationTargetException {
 		PresetActorFactory presetActorFactory = new PresetActorFactory();
 		List<Actor> presetActors = presetActorFactory.getPresetActors();
 		presetActors.stream().forEach(actor -> myActorMap.put(actor, new ArrayList<>()));
@@ -277,9 +285,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 *            file to write to.
 	 */
 	public void saveGame() {
-		//TODO implement incomplete game error checking
-		//System.out.println(myLevels.get(0).getActors().get(0).getRules().size());
-		//IPlayActor actor = myLevels.get(0).getActors().get(0);
+		// TODO implement incomplete game error checking
+		// System.out.println(myLevels.get(0).getActors().get(0).getRules().size());
+		// IPlayActor actor = myLevels.get(0).getActors().get(0);
 		gameInfo.setMyImageName(myLevels.get(0).getMyBackgroundImgName());
 		List<IAuthoringActor> refActor = new ArrayList(myActorMap.keySet());
 		IAuthoringActor realRefActor = refActor.get(0);
@@ -369,8 +377,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		// TODO Auto-generated method stub
 	}
 
-	@Override 
-	public void update(Observable o, Object arg) { 
+	@Override
+	public void update(Observable o, Object arg) {
 		String className = o.getClass().getSimpleName();
 		Method method;
 		try {
@@ -446,8 +454,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	public void setHUDInfoFile(String location) {
 		game.setHUDInfoFile(location);
 	}
-	
-	public Game getGame(){
+
+	public Game getGame() {
 		return game;
 	}
 
