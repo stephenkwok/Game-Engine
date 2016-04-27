@@ -2,41 +2,34 @@ package authoringenvironment.view.behaviors;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.IAction;
-import gameengine.model.IGameElement;
 
-public class SelfActionBehavior extends LabelBehavior {
-	private IAction myAction;
+public class OffsetBehavior extends DoubleBehavior {
 	private IAuthoringActor myActor;
-	private IGameElement myfa;
-
-	public SelfActionBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
-			ResourceBundle myResources) {
+	private IAction myAction;
+	
+	public OffsetBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
 		super(myActorRule, behaviorType, myResources);
+		System.out.println("past constructor");
 		this.myActor = myActor;
-	}
-
-	@Override
-	public void setTriggerOrAction() {
-		setAction(this, myAction);
-	}
-
-	@Override
-	public void addNodeObserver(Observer observer) {
-
 	}
 
 	@Override
 	protected void createTriggerOrAction() {
 		List<Object> arguments = new ArrayList<>();
-		arguments.add(myActor);
-		
+		arguments.add((myActor));
+		arguments.add(getValue());
 		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
+		setTriggerOrAction();
+	}
+
+	@Override
+	public void setTriggerOrAction() {
+		setAction(this, myAction);
 	}
 
 	@Override

@@ -235,8 +235,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 
 			}
 			// temp
-			ButtonSplash splash = new ButtonSplash(null, SPLASH_IMAGE_NAME);
-			hbox.getChildren().add(splash.createNode());
+			/*ButtonSplash splash = new ButtonSplash(null, SPLASH_IMAGE_NAME);
+			hbox.getChildren().add(splash.createNode());*/
 		} catch (Exception e) {
 
 		}
@@ -357,6 +357,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		mainScreen.createActorPreviewUnit(newActor, actorEnvironment);
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
+		System.out.println(newActor.getID());
 	}
 
 	public double getSceneWidth() {
@@ -415,6 +416,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 			loadGame();
 		else if (arg0 instanceof ButtonSave)
 			saveGame();
+		else if (arg0 instanceof ButtonSplash)
+			goToSplash();
 		else if (arg0 instanceof TextFieldActorNameEditor)
 			updateActors((Actor) arg1);
 		else if (arg0 instanceof ButtonHelpPage) {
