@@ -10,7 +10,6 @@ import gameengine.model.IGameElement;
  * @author michelle
  */
 public class GlideRight extends GlidingAction {
-	private Double offset;
 	
     /**
      * Takes in reference to the Actor it will change 
@@ -19,11 +18,6 @@ public class GlideRight extends GlidingAction {
      */
 	public GlideRight(Actor assignedActor, Double offset) {
 		super(assignedActor, offset);
-		this.offset = offset;
-	}
-	
-	public Object[] getParameters(){
-		return new Object[]{getMyActor(),offset};
 	}
 
 	/**

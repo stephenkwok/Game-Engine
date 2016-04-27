@@ -50,7 +50,6 @@ public class TriggerFactory {
 	public ITrigger createNewTrigger(String behaviorType, List<Object> arguments) {
 		this.arguments = arguments;
 		String triggerType = determineTriggerType(behaviorType);
-		System.out.println(triggerType);
 		return createTrigger(triggerType, behaviorType);
 	}
 
