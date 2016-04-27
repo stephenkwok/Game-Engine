@@ -1,6 +1,8 @@
 package authoringenvironment.view;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -11,8 +13,19 @@ import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
+import gamedata.controller.CreatorController;
+import gamedata.controller.ParserController;
+import gameengine.controller.Game;
+import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
+import gameplayer.controller.GameController;
+import gameplayer.view.GameScreen;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.ParallelCamera;
+import javafx.scene.Scene;
+import javafx.scene.SubScene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -23,7 +36,9 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * Level editing environment
@@ -45,6 +60,13 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private Stage myStage;
 	private Controller myController;
 	private LevelPreview myLevelPreview;
+	
+	//MICHAEL ADDED THESE BUT THEY PROB NEED TO BE CHANGED
+	private Button myB;
+	private GameInfo info;
+	private Game model;
+	private GameController controller;
+	private GameScreen view;
 
 	/**
 	 * Constructor for a level editing environment.
@@ -63,7 +85,58 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		myController = controller;
 		initializeEnvironment();
 	}
+	
+	
+	private void previewGame(){
+		info = new GameInfo();
+        info.setMyCurrentLevelNum(0);
+        info.setName("Colette");
+        
+		Group group = new Group();
+        Scene scene = new Scene(group);
+        System.out.println(Integer.toString(myController.getLevels().size()) + "WTF IS THIS");
+        //List<Level> copyLevels = new ArrayList<>(myController.getLevels().size());
+//        for (Level level: myController.getLevels()) {
+//        	copyLevels.add(level);
+//        }
+        //Collections.copy(copyLevels, myController.getLevels());
+        model = new Game(info, myController.getLevels());
+        ParallelCamera camera = new ParallelCamera();
+        view = new GameScreen(camera);
 
+        controller = new GameController(model);
+        controller.setGame(model);
+        controller.setGameView(view);
+
+        SubScene sub = view.getScene();
+        sub.fillProperty().set(Color.BLUE);
+        group.getChildren().add(sub);
+
+        Stage stage = new Stage();
+        stage.setWidth(800);
+        stage.setHeight(600);
+
+        sub.setCamera(camera);
+        stage.setScene(scene);
+        stage.show();
+        controller.initialize(0);
+        
+        //controller.getView().clearGame();
+        
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                System.out.println("Stage is closing");
+                model.getActors();
+                model.terminateGame();
+                stage.close();
+                //controller.endGame();
+                we.consume();
+            }
+        }); 
+        
+        
+	}
+	
 	/**
 	 * Initializes the level editing environment's center pane and left pane, as
 	 * well as the ability to drag actors between the left and center pane.
@@ -90,6 +163,13 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private void addChildrenToLeftPane() {
 		myInspector = new GUILevelInspector(myResources, availableActors.keySet(), this);
 		myLeftPane.getChildren().add(myInspector.getPane());
+		//AND HERE
+		myB = new Button("Preview");
+		myB.setOnMouseClicked(e -> previewGame());
+		myB.setLayoutX(100);
+		myB.setLayoutY(300);
+		//TODO I ADDED THIS LINE HERE
+		myLeftPane.getChildren().add(myB);
 		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
 	}
 

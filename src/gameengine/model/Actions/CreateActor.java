@@ -12,7 +12,7 @@ import gameengine.model.IPlayActor;
 
 public class CreateActor extends Action {
 	Actor cloneActor;
-	ActorCopier copier;
+	//ActorCopier copier;
 	double myX;
 	double myY;
 	private Actor myActorToCopy;
@@ -24,14 +24,14 @@ public class CreateActor extends Action {
 	
 	public CreateActor(IGameElement element, Actor toCopy, double x, double y) {
 		super(element);
-		copier = new ActorCopier(toCopy);
+		//copier = new ActorCopier(toCopy);
 		myX = x;
 		myY = y;
 	}
 
     public CreateActor(IGameElement element, Actor toCopy, double minX, double maxX, double minY, double maxY){
         super(element);
-        copier = new ActorCopier(toCopy);
+        myActorToCopy = toCopy;
         isRandom = true;
         myMaxX = maxX;
         myMaxY = maxY;
@@ -41,6 +41,7 @@ public class CreateActor extends Action {
 
 	@Override
 	public void perform() {
+		ActorCopier copier = new ActorCopier(myActorToCopy);
 		cloneActor = copier.makeCopy();
         if (isRandom){
             myX = myMinX + (myMaxX - myMinX) * Math.random();
