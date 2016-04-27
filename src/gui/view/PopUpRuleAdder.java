@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
 import authoringenvironment.model.IActionCreator;
 import authoringenvironment.model.ITriggerCreator;
 import authoringenvironment.view.ActionFactory;
-import authoringenvironment.view.AttributeReachedTriggerCreator;
+import authoringenvironment.view.AttributeTriggerAndActionCreator;
 import authoringenvironment.view.CreateActorActionCreator;
 import authoringenvironment.view.KeyTriggerCreator;
 import authoringenvironment.view.LevelEditingEnvironment;
@@ -110,7 +110,7 @@ public class PopUpRuleAdder extends PopUpParent implements Observer {
 			myTriggerCreator = new ClickTriggerCreator(myResources, myLevel);
 			break;
 		case "AttributeReached": 
-			myTriggerCreator = new AttributeReachedTriggerCreator(myResources, myLevel, myLevelEditor);
+			myTriggerCreator = new AttributeTriggerAndActionCreator(myResources, myLevel, myLevelEditor, "AttributeReachedLabelText");
 			break;
 		}
 		myTriggerContainer.getChildren().add(myTriggerCreator);
@@ -127,6 +127,9 @@ public class PopUpRuleAdder extends PopUpParent implements Observer {
 			break;
 		case "CreateActor":
 			myActionCreator = new CreateActorActionCreator(myResources, myLevel, myLevelEditor);
+			break;
+		case "ChangeAttribute":
+			myActionCreator = new AttributeTriggerAndActionCreator(myResources, myLevel, myLevelEditor, "ChangeAttributeLabelText");
 		}
 		myActionContainer.getChildren().add(myActionCreator);
 	}

@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import authoringenvironment.model.IActionCreator;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.model.ITriggerCreator;
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
+import gameengine.model.Actions.Action;
+import gameengine.model.Actions.ChangeAttribute;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
 import javafx.collections.FXCollections;
@@ -21,7 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class AttributeReachedTriggerCreator extends VBox implements ITriggerCreator {
+public class AttributeTriggerAndActionCreator extends VBox implements ITriggerCreator, IActionCreator {
 	private static final String LEVEL = "Level";
 	private static final String HEALTH = "Health";
 	private static final String POINTS = "Points";
@@ -35,15 +38,15 @@ public class AttributeReachedTriggerCreator extends VBox implements ITriggerCrea
 	private Set<IAuthoringActor> myActors;
 	
 	
-	public AttributeReachedTriggerCreator(ResourceBundle resources, IGameElement element, IEditingEnvironment editor) {
+	public AttributeTriggerAndActionCreator(ResourceBundle resources, IGameElement element, IEditingEnvironment editor, String labelKey) {
 		myElement = element;
 		myResources = resources;
 		myEditingEnvironment = editor;
-		init();
+		init(labelKey);
 	}
 
-	private void init() {
-		String[] labelText = myResources.getString("AttributeReachedLabelText").split(",");
+	private void init(String labelKey) {
+		String[] labelText = myResources.getString(labelKey).split(",");
 		Label[] labels = new Label[labelText.length];
 		for (int i = 0; i < labelText.length; i++) {
 			labels[i] = new Label(labelText[i]);
@@ -101,8 +104,7 @@ public class AttributeReachedTriggerCreator extends VBox implements ITriggerCrea
 		return FXCollections.observableArrayList(names);
 	}
 	
-	@Override
-	public ITrigger createTrigger() {
+	private AttributeType getAttributeType() {
 		AttributeType type = null;
 		switch ((String) myTypeComboBox.getValue()) {
 		case HEALTH:
@@ -115,7 +117,18 @@ public class AttributeReachedTriggerCreator extends VBox implements ITriggerCrea
 			type = AttributeType.TIME;
 			break;
 		}
+		return type;
+	}
+	@Override
+	public ITrigger createTrigger() {
+		AttributeType type = getAttributeType();
 		return new AttributeReached(getElementByName(), type, Integer.parseInt(myValue.getText()));
+	}
+
+	@Override
+	public Action createAction() {
+		AttributeType type = getAttributeType();
+		return new ChangeAttribute(getElementByName(), type, Integer.parseInt(myValue.getText()));
 	}
 
 }
