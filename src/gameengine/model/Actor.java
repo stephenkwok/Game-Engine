@@ -60,6 +60,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
         mySprite = new Sprite();
         myNextValues = new NextValues();
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
+        myRotate = myImageView.getRotate();
         isMainPlayer = false;
         isVisible = true;
         myRotate = myImageView.getRotate();
@@ -494,4 +495,5 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	public double getScaleY() {
 		return myScaleY;
 	}
+
 }

@@ -110,7 +110,7 @@ public class ActorCopier {
 
 	private ITrigger createTrigger(Rule rule, IPlayActor toUpdate) {
 		ITrigger triggerToAdd = null;
-		String triggerClassName = rule.getMyTrigger().getClass().getSimpleName();
+ 		String triggerClassName = rule.getMyTrigger().getClass().getSimpleName();
 		List<Object> arguments = new ArrayList<>();
 		if (checkType(triggerClassName, KEY)) {
 			arguments.add(((KeyTrigger) rule.getMyTrigger()).getMyKeyCode());
