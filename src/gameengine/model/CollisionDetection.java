@@ -41,9 +41,23 @@ public class CollisionDetection {
 				}
 			}
 		}
+		for (IPlayActor a1 : list) {
+			if(a1.getNextValues().hadCollision()){
+				changeValues(a1);
+			}
+			a1.getNextValues().setCollisoin(false);
+		}
 		return list;
 	}
 
+	private void changeValues(IPlayActor a1){
+		    a1.setX(a1.getNextValues().getNextXPos());
+		    a1.setY(a1.getNextValues().getNextYPos());
+		a1.setVeloX(a1.getNextValues().getNextXVelo());
+		a1.setVeloY(a1.getNextValues().getNextYVelo());
+		
+	}
+	
 	/**
 	 * Determines if a collision is occurring by checking for intersecting
 	 * Bounds.

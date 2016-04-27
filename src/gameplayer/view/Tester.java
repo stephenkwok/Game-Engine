@@ -179,13 +179,20 @@ public class Tester extends Application {
         actor1.addRule(new Rule(intTick, animate));
 
         actor1.addState(ActorState.MAIN);
-		Attribute points = new Attribute(AttributeType.POINTS,0,(IGameElement)actor1);
-		actor1.addAttribute(points);
+		//Attribute points = new Attribute(AttributeType.POINTS,0,(IGameElement)actor1);
+		//actor1.addAttribute(points);
 		
 		ITrigger attreached = new AttributeReached((IGameElement)actor1, AttributeType.POINTS,5);
 		Action wingame = new WinGame((IPlayActor) actor1);
 		
 		actor1.addRule(new Rule(attreached,wingame));
+		
+		BottomCollision pls = new BottomCollision((Actor)actor1, (Actor)actor4); 
+		Action hello = new VerticalBounceCollision((Actor)actor1);
+		Rule lesads = new Rule(pls ,hello);
+		actor1.addRule(lesads);
+		
+		
 
         List<Level> levels = new ArrayList<Level>();
         Level level1 = new Level();

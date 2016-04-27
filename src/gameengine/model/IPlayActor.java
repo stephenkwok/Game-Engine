@@ -131,4 +131,8 @@ public interface IPlayActor extends IGameElement {
 	public void setDirection();
 
 	public void nextImage();
+	
+	public NextValues getNextValues();
+	
+	public void setNextValues(NextValues myNextValues);
 }

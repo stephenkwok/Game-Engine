@@ -52,7 +52,10 @@ public class GameScreen extends Observable implements IGameScreen {
 		getMySubscene().setFill(Color.ALICEBLUE);
 		getMySubscene().setFocusTraversable(true);
 		getMySubscene().setOnKeyPressed(e -> handleScreenEvent(e));
-		getMySubscene().setOnMouseClicked(e -> handleScreenEvent(e));
+		getMySubscene().setOnMouseClicked(e -> {
+			handleScreenEvent(e);
+			getMySubscene().requestFocus();
+		});
 		this.myCamera = camera; ///
 		mySubscene.setCamera(camera);
 		this.myResources = ResourceBundle.getBundle(GAME_RESOURCE);

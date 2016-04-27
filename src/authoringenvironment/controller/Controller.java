@@ -125,8 +125,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		myLevelNames = new ArrayList<>();
 		myActorMap = new HashMap<>();
 		myActorNames = new ArrayList<>();
-		gameInfo = new GameInfo();
-		gameInfo.setActorMap(myActorMap);
+		gameInfo = new GameInfo(myActorMap);
 		game = new Game(gameInfo, myLevels);
 		initializeGeneralComponents();
 		initializePresetActors();
@@ -362,9 +361,11 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	/**
 	 * Saves game and returns to splash screen of game player.
 	 */
-	/*
-	 * public void goToSplash() { guiMain.goBackToSplash(); }
-	 */
+	
+	  public void goToSplash() {
+		  super.goToSplash();
+	  }
+	 
 
 	public void switchGame() {
 		// TODO Auto-generated method stub
