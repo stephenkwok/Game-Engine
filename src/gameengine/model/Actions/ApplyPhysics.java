@@ -1,11 +1,12 @@
 package gameengine.model.Actions;
 
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 
 public class ApplyPhysics extends ActorAction {
 
-	public ApplyPhysics(IPlayActor actor) {
-		super(actor);
+	public ApplyPhysics(IGameElement actor) {
+		super((IPlayActor) actor);
 	}
 
 	@Override
