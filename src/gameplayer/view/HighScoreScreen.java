@@ -8,6 +8,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.TreeMap;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gui.view.IGUIElement;
 import gui.view.Screen;
 import javafx.geometry.Orientation;
@@ -31,8 +33,9 @@ public class HighScoreScreen extends Screen implements Observer {
 
 	private static final String SCORES_RESOURCE = "hsGUI";
 	private static final String TOP_BUTTONS = "TopButtons";
-
+	@XStreamOmitField
 	private BorderPane myPane;
+	@XStreamOmitField
 	private VBox myScoreBox;
 
 	/**

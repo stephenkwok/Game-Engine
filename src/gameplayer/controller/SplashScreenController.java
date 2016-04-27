@@ -6,6 +6,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gamedata.controller.ChooserType;
 import gamedata.controller.FileChooserController;
 import gameplayer.view.SplashScreen;
@@ -15,7 +17,7 @@ import authoringenvironment.controller.Controller;
 public class SplashScreenController implements Observer {
 
 	private static final String SPLASH_CONTROLLER_RESOURCE = "splashActions";
-
+	@XStreamOmitField
 	private ResourceBundle myResources;
 	private SplashScreen myScreen;
 	private Stage myStage;

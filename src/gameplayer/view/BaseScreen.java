@@ -6,6 +6,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Optional;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gui.view.IGUIElement;
 import gui.view.Screen;
 import javafx.scene.control.Alert;
@@ -25,7 +27,7 @@ public class BaseScreen extends Screen implements Observer {
 
 	private static final String BASE_RESOURCE = "gameGUI";
 	private static final String SIDE_BUTTONS = "SideButtons";
-
+	@XStreamOmitField
 	private BorderPane myPane;
 	private GameScreen myGameScreen;
 	private AbstractHUDScreen hud;

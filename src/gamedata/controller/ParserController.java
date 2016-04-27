@@ -2,6 +2,8 @@ package gamedata.controller;
 
 import java.io.File;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gamedata.XMLParser;
 import gameengine.controller.Game;
 import gui.view.Screen;
@@ -9,6 +11,7 @@ import gui.view.Screen;
 public class ParserController implements IParserController {
 
 	private XMLParser myXMLParser;
+	@XStreamOmitField
 	private Screen myScreen;
 
 	public ParserController() {

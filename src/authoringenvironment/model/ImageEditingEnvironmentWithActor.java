@@ -2,6 +2,8 @@ package authoringenvironment.model;
 
 import java.util.Observable;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import javafx.scene.image.ImageView;
 
 /**
@@ -14,6 +16,7 @@ import javafx.scene.image.ImageView;
 public class ImageEditingEnvironmentWithActor extends ImageEditingEnvironment{
 
 	private IAuthoringActor myActor;
+	@XStreamOmitField
 	private ImageView myImageView;
 	
 	public ImageEditingEnvironmentWithActor(IAuthoringActor actor) {

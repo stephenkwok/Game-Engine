@@ -3,6 +3,8 @@ package authoringenvironment.model;
 import java.lang.reflect.*;
 import java.util.*;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gameengine.model.Actor;
 
 /**
@@ -21,6 +23,7 @@ public class PresetActorFactory {
 	private static final String METHODS = "Methods";
 	private static final String METHOD = "Method";
 	private static final String EXECUTE = "execute";
+	@XStreamOmitField
 	private ResourceBundle myResources;
 	private List<Actor> myActors;
 	private Map<String, List<String>> myMethodsMap;

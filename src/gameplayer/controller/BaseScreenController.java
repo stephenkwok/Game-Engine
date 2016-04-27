@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
 import gamedata.controller.FileChooserController;
@@ -23,7 +25,7 @@ import voogasalad.util.hud.source.*;
 public class BaseScreenController extends BranchScreenController {
 
 	private static final String BASE_CONTROLLER_RESOURCE = "baseActions";
-
+	@XStreamOmitField
 	private ResourceBundle myResources;
 	private BaseScreen myScreen;
 	private GameController myGameController;

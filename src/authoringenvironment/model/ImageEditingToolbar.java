@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -44,6 +46,7 @@ public class ImageEditingToolbar extends Observable {
 	private HBox myOpacityContainer, mySizeContainer, myRotateContainer, myFlipButtonsContainer;
 	private List<Slider> mySliders;
 	private List<HBox> mySliderContainers;
+	@XStreamOmitField
 	private ImageView myImageView;
 	private Slider myOpacitySlider, mySizeSlider, myRotateSlider;
 	private Button myFlipHorizontalButton, myFlipVerticalButton, myFinishButton;

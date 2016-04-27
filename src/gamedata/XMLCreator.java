@@ -33,10 +33,12 @@ public class XMLCreator {
 	public void save (Object object, File file) throws SAXException, IOException, TransformerException, ParserConfigurationException {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-		
 		String xml = this.myXStream.toXML(object);
+		System.out.println(xml);
 		Document document = documentBuilder.parse(new InputSource(new StringReader(xml)));
+		System.out.println("I WAS WONDERING");
 		convertDocumentToFile(document, file);
+		System.out.println("WHAT THE ERROR IS");
 	}
 
 	private void convertDocumentToFile (Document document, File file) throws TransformerException {
