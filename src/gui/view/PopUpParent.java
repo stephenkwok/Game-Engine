@@ -60,14 +60,14 @@ public abstract class PopUpParent extends Observable {
 	/**
 	 * Closes the pop up
 	 */
-	protected void closePopUp() {
+	public void closePopUp() {
 		myStage.close();
 	}
 
 	/**
 	 * Opens the pop up
 	 */
-	protected void showPopUp() {
+	public void showPopUp() {
 		myStage.setScene(myScene);
 		myStage.show();
 	}

@@ -236,9 +236,9 @@ public class GUIMainScreen implements IGUI, Observer {
 	 * Level Labels
 	 */
 	private void reorderLevels() {
-		@SuppressWarnings("unused")
 		LevelPreviewUnitReorderer levelReorderer = new LevelPreviewUnitReorderer(levelPreviewUnits,
 				levelPreviewContainer, levels, levelEditor, allPreviewUnits, this);
+		levelReorderer.reorderLevels();
 	}
 
 	/**
