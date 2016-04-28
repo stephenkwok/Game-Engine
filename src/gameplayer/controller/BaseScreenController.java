@@ -46,7 +46,7 @@ public class BaseScreenController extends BranchScreenController {
 		this.myScreen = new BaseScreen();
 		this.myScreen.addObserver(this);
 		setUpGameScreen();
-		setUpHUDScreen();
+		//setUpHUDScreen();
 		setMyScreen(this.myScreen);
 	}
 
@@ -109,7 +109,7 @@ public class BaseScreenController extends BranchScreenController {
 		Game initialGame = parserController.loadforPlaying(new File(myGameController.getGame().getInitialGameFile()));
 		myGameController.setGame(initialGame);
 		myGameController.initialize(0);
-		setUpHUDScreen();
+		//setUpHUDScreen();
 	}
 
 	private void setUpGameScreen() {

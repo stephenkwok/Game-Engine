@@ -40,6 +40,7 @@ public class FileChooserController extends BranchScreenController {
 	}
 
 	private void goPlay(Game game) {
+		System.out.println("do i get here????");
 		BaseScreenController baseScreenController = new BaseScreenController(getStage(), new GameController(game));
 	}
 
@@ -60,7 +61,10 @@ public class FileChooserController extends BranchScreenController {
 		else {
 			Class[] parameterTypes = { Game.class };
 			Object[] parameters = {game};
+			System.out.println(game.toString());
+			System.out.println(getType());
 			this.getClass().getDeclaredMethod("go" + getType(), parameterTypes).invoke(this, parameters);
+			System.out.println("do i get here?");
 		}
 	}
 
@@ -87,6 +91,7 @@ public class FileChooserController extends BranchScreenController {
 
 	@Override
 	public void invoke(String method, Class[] parameterTypes, Object[] parameters) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		System.out.println(method);
 		this.getClass().getDeclaredMethod(method, parameterTypes).invoke(this, parameters);	
 	}
 	
