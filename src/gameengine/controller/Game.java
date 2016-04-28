@@ -35,7 +35,8 @@ public class Game extends Observable implements Observer {
 	private Timeline animation;
 	private List<IPlayActor> currentActors;
 	private List<IPlayActor> deadActors;
-    private int count;
+    private int levelTime;
+    private int globalTime;
     
     
     
@@ -48,13 +49,14 @@ public class Game extends Observable implements Observer {
     		Timeline animation, 
     		List<IPlayActor> currentActors, 
     		List<IPlayActor> deadActors,
-    		int count) {
+    		int levelStep, int globalTime) {
     	this(initialGameFile, info, levels);
     	currentActors = new ArrayList<IPlayActor>();
 		deadActors = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
-		count = 1;
+		levelTime = 1;
+		globalTime = 1;
     }
 	
     
@@ -77,7 +79,8 @@ public class Game extends Observable implements Observer {
 		deadActors = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
-		count = 1;
+		levelTime = 1;
+		globalTime = 1;
 		initTimeline();
 	}
 	
@@ -138,7 +141,8 @@ public class Game extends Observable implements Observer {
 		signalTick();
 		updateCamera();
 		updateActors();
-		count++;
+		levelTime++;
+		globalTime++;
 	}
 
 	private void updateCamera() {
@@ -148,7 +152,7 @@ public class Game extends Observable implements Observer {
 	}
 
 	private void signalTick() {
-		handleTrigger(new TickTrigger(count));
+		handleTrigger(new TickTrigger(levelTime));
 	}
 
 	private void updateBackground() {
@@ -389,32 +393,32 @@ public class Game extends Observable implements Observer {
 		return myCollisionDetector;
 	}
 
-
-
-
 	public Map<String, Set<IGameElement>> getActiveTriggers() {
 		return activeTriggers;
 	}
-
-
-
 
 	public void setActiveTriggers(Map<String, Set<IGameElement>> activeTriggers) {
 		this.activeTriggers = activeTriggers;
 	}
 
-
-
-
-	public int getCount() {
-		return count;
+	public int getLevelTime() {
+		return levelTime;
 	}
 
+	public void setLevelTime(int step) {
+		this.levelTime = step;
+	}
 
+	public int getGlobalTime() {
+		return globalTime;
+	}
 
-
-	public void setCount(int count) {
-		this.count = count;
+	public void setGlobalTime(int globalTime) {
+		this.globalTime = globalTime;
+	}
+	
+	public void resetLevelTime(){
+		levelTime = 1;
 	}
 
 }
