@@ -135,4 +135,6 @@ public interface IPlayActor extends IGameElement {
 	public NextValues getNextValues();
 	
 	public void setNextValues(NextValues myNextValues);
+	
+	public void setVisibility();
 }
