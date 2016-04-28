@@ -19,15 +19,17 @@ import javafx.scene.layout.*;
 public class CheckBoxesGarbageCollection extends Observable implements IGUIElement, IEditingElement {
 
 	private static final String DELIMITER = ",";
-	private static final String HUD_OPTIONS = "HUDOptions";
-	private static final String HUD_PROMPT = "Choose items to display on the level scene:";
+	private static final String RESOURCE = "garbageCollectionOptions";
+	private static final String OPTIONS = "Options";
+	private static final String START_PROMPT = "StartPrompt";
+	private static final String END_PROMPT = "EndPrompt";
 	private static final String GO = "Go";
 	private static final Double CONTAINER_SPACING = 10.0;
 	private static final Double CONTAINER_PADDING = 10.0;
 	private Level myLevel;
 	private VBox myContainer;
 	private ResourceBundle myAttributesResources;
-	private List<CheckBox> myHUDElements;
+	private List<CheckBox> mySides;
 	private GUIFactory myFactory;
 
 	/**
@@ -38,13 +40,13 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	 * @param controller:
 	 *            controller for the authoring environment.
 	 */
-	public CheckBoxesGarbageCollection(Level level) {
-		myLevel = level;
-		this.myAttributesResources = ResourceBundle.getBundle("HUDOptions");
+	public CheckBoxesGarbageCollection() {
+		this.myAttributesResources = ResourceBundle.getBundle(RESOURCE);
 		this.myContainer = new VBox(CONTAINER_SPACING);
 		myContainer.setPadding(new Insets(CONTAINER_PADDING));
 		myFactory = new GUIFactory(myAttributesResources);
-		myHUDElements = new ArrayList<>();
+		mySides = new ArrayList<>();
+		init();
 	}
 
 	/**
@@ -55,19 +57,26 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	 * @param vbox:
 	 *            vbox to add checkboxes into.
 	 */
-	private void initializeHUD(String key, VBox vbox) {
-		vbox.getChildren().add(new Label(HUD_PROMPT));
-		List<Node> checkboxes = addElements(HUD_OPTIONS, vbox);
-		for (int i = 0; i < checkboxes.size(); i++) {
-			CheckBox cb = (CheckBox) checkboxes.get(i);
-			cb.prefWidthProperty().bind(myContainer.widthProperty());
-			myHUDElements.add(cb);
+	private void init() {
+		myContainer.getChildren().add(new Label(myAttributesResources.getString(START_PROMPT)));
+		List<Node> checkboxes = addElements(OPTIONS, myContainer);
+		int i = 0;
+		while (i < checkboxes.size()) {
+			HBox container = new HBox();
+			for (int j = 0; j < 2; j++) {
+				CheckBox cb = (CheckBox) checkboxes.get(i);
+				cb.prefWidthProperty().bind(myContainer.widthProperty());
+				mySides.add(cb);
+				container.getChildren().add(cb);
+				i++;
+			}
+			myContainer.getChildren().add(container);
 		}
-		vbox.getChildren().addAll(checkboxes);
 		Button checkHUDButton = new Button(GO);
 		checkHUDButton.prefWidthProperty().bind(myContainer.widthProperty());
 		//checkHUDButton.setOnAction(e -> ((GameInfo) myGameInfo).setMyHUDOptions(getHUDElementsToDisplay()));
-		vbox.getChildren().add(checkHUDButton);
+		myContainer.getChildren().add(new Label(myAttributesResources.getString(END_PROMPT)));
+		myContainer.getChildren().add(checkHUDButton);
 	}
 
 	/**
@@ -95,7 +104,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	 */
 	public List<String> getHUDElementsToDisplay() {
 		List<String> toDisplay = new ArrayList<String>();
-		myHUDElements.stream().filter(checkbox -> checkbox.isSelected())
+		mySides.stream().filter(checkbox -> checkbox.isSelected())
 				.forEach(checkbox -> toDisplay.add(checkbox.getId()));
 		return toDisplay;
 	}
@@ -105,8 +114,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	 */
 	@Override
 	public void setEditableElement(IEditableGameElement element) {
-		//	myGameInfo = element;
-
+		myLevel = (Level) element;
 	}
 
 	/**
@@ -114,7 +122,6 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	 */
 	@Override
 	public Node createNode() {
-		initializeHUD(HUD_OPTIONS, myContainer);
 		return myContainer;
 	}
 

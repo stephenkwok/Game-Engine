@@ -7,6 +7,7 @@ import java.util.Set;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.LevelEditingEnvironment;
 import gui.view.ButtonFileChooserBackgroundImage;
+import gui.view.CheckBoxesGarbageCollection;
 import gui.view.IGUI;
 import gui.view.PopUpAddLevelTimer;
 import gui.view.PopUpRuleAdder;
@@ -69,6 +70,7 @@ public class LevelInspector implements IGUI {
 		HBox buttonBox = addEditingButtons();
 		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(BUTTON_LABEL, null, myLevelEditor, myLevelEditor.getStage());
 		myAttributesTab.addElement(button);
+		myAttributesTab.addElement(new CheckBoxesGarbageCollection());
 		addTabToContainer(myAttributesTab, false);
 		myContainer.getChildren().add(buttonBox);
 		addTabToContainer(myActorsTab, true);
