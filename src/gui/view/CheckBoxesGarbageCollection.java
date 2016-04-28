@@ -5,6 +5,7 @@ import java.util.*;
 import authoringenvironment.model.*;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
+import gameengine.model.Actor;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -26,11 +27,16 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	private static final String GO = "Go";
 	private static final Double CONTAINER_SPACING = 10.0;
 	private static final Double CONTAINER_PADDING = 10.0;
+	private static final String LEFT = "Left";
+	private static final String RIGHT = "Right";
+	private static final String TOP = "Top";
+	private static final String BOTTOM = "Bottom";
 	private Level myLevel;
 	private VBox myContainer;
 	private ResourceBundle myAttributesResources;
 	private List<CheckBox> mySides;
 	private GUIFactory myFactory;
+	private Map<String, IAuthoringActor> garbageCollectors;
 
 	/**
 	 * Constructs a CheckBoxesHUDOptions object for the given GameInfo object.
@@ -46,6 +52,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 		myContainer.setPadding(new Insets(CONTAINER_PADDING));
 		myFactory = new GUIFactory(myAttributesResources);
 		mySides = new ArrayList<>();
+		garbageCollectors = new HashMap<>();
 		init();
 	}
 
@@ -74,9 +81,23 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 		}
 		Button checkHUDButton = new Button(GO);
 		checkHUDButton.prefWidthProperty().bind(myContainer.widthProperty());
-		//checkHUDButton.setOnAction(e -> ((GameInfo) myGameInfo).setMyHUDOptions(getHUDElementsToDisplay()));
+		checkHUDButton.setOnAction(e -> updateGarbageCollectingActors(getSides()));
 		myContainer.getChildren().add(new Label(myAttributesResources.getString(END_PROMPT)));
 		myContainer.getChildren().add(checkHUDButton);
+	}
+
+	private void updateGarbageCollectingActors(List<String> sides) {
+		for (int i = 0; i < sides.size(); i++) {
+			IAuthoringActor garbageCollector;
+			if (garbageCollectors.containsKey(sides.get(i))) {
+				garbageCollector = garbageCollectors.get(sides.get(i));
+				myLevel.removeActor((Actor) garbageCollector);
+				
+				garbageCollector = new Actor();
+
+				garbageCollectors.put(sides.get(i), garbageCollector);
+			}
+		}
 	}
 
 	/**
@@ -102,11 +123,11 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	 * 
 	 * @return list of HUD elements that the user selected.
 	 */
-	public List<String> getHUDElementsToDisplay() {
-		List<String> toDisplay = new ArrayList<String>();
+	public List<String> getSides() {
+		List<String> sides = new ArrayList<String>();
 		mySides.stream().filter(checkbox -> checkbox.isSelected())
-				.forEach(checkbox -> toDisplay.add(checkbox.getId()));
-		return toDisplay;
+		.forEach(checkbox -> sides.add(checkbox.getId()));
+		return sides;
 	}
 
 	/**
