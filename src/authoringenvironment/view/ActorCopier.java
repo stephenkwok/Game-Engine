@@ -123,6 +123,8 @@ public class ActorCopier {
 		for(int i=0; i<argumentTypes.length;i++){
 			argumentTypes[i] = arguments[i].getClass();
 		}
+		
+		
 		Constructor constructor = myclass.getConstructor(argumentTypes);
 		return constructor.newInstance(arguments);
 	}

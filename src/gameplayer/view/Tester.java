@@ -138,14 +138,18 @@ public class Tester extends Application {
 
         KeyTrigger triggerSpawn = new KeyTrigger(KeyCode.S);
         TickTrigger bulletTick = new TickTrigger();
-        Action bulletAction = new GlideForward((Actor)spawnedActor,2.5);
+        
+        Action bulletAction = new GlideTarget((Actor)spawnedActor,2.5, (Actor) actor4);
+        //Action bulletAction = new GlideForward((Actor)spawnedActor,2.5);
+
         Rule bulletRule = new Rule(bulletTick,bulletAction);
         spawnedActor.addRule(bulletRule);
         PhysicsEngine newPhysicsEngine = new PhysicsEngine();
         ((Actor) spawnedActor).setPhysicsEngine(newPhysicsEngine);
         
+        spawnedActor.addRule(new Rule(new SideCollision((Actor)spawnedActor, (Actor)actor4), new Destroy((Actor)spawnedActor)));
         
-        
+               
         Action action1 = new MoveRight((Actor)actor1);
         Action action2 = new MoveLeft((Actor)actor1);
         Action action3 = new HorizontalStaticCollision((Actor)actor1);

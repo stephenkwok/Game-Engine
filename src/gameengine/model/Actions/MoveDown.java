@@ -20,7 +20,7 @@ public class MoveDown extends MovingAction {
 
 	@Override
 	public void perform() {
-		// getActor().getPhysicsEngine().moveDown(getActor());
+		getMyActor().getPhysicsEngine().moveDown(getMyActor());
 	}
 
 }

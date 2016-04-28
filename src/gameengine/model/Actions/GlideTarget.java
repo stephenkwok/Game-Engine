@@ -1,14 +1,8 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
-import gameengine.model.IGameElement;
+import gameengine.model.ActorState;
 
-/**
- * An example of an Action to glide an Actor right by a given distance (no
- * gravity, no friction).
- *
- * @author michelle
- */
 public class GlideTarget extends GlidingAction {
 	
     /**
@@ -27,15 +21,27 @@ public class GlideTarget extends GlidingAction {
 	 */
 	@Override
 	public void perform() {
-		calcHeading((Actor)getMyActor(),targetActor);
-    	getMyActor().getPhysicsEngine().glideRight(getMyActor(),this.getGlideOffset());		
+		
+		if(!targetActor.checkState(ActorState.DEAD)){
+			calcHeading((Actor)getMyActor(),targetActor);
+		}		
+    	getMyActor().getPhysicsEngine().glideForward(getMyActor(),this.getGlideOffset());		
 
 	}
 	
-	public void calcHeading(Actor assignedActor, Actor target){
+	@Override
+	public Object[] getParameters(){
+		return new Object[]{getMyActor(),this.getGlideOffset(), targetActor};
+	}
+	
+	private void calcHeading(Actor assignedActor, Actor target){
 		double verticalDiff   = assignedActor.getY()  - target.getY();
+		//System.out.println("Y1 - Y2  "+ verticalDiff);
 		double horizontalDiff  = target.getX()  - assignedActor.getX();
-		double angle  = Math.toDegrees(Math.sin(Math.toRadians(verticalDiff/horizontalDiff)));
+		//System.out.println("X2 - X1  "+ horizontalDiff);
+		//System.out.println(Math.sin((verticalDiff/horizontalDiff)));
+		double angle  = Math.toDegrees(Math.sin((verticalDiff/horizontalDiff)));
+		//System.out.println("First Angle " + angle);
 		//double newX  = Math.toDegrees(Math.cos(Math.toRadians(verticalDiff/horizontalDiff)));
 
 		if(verticalDiff > 0 && horizontalDiff > 0){
@@ -45,12 +51,12 @@ public class GlideTarget extends GlidingAction {
 			assignedActor.setHeading(180+angle);
 			
 		}
-		else if(verticalDiff <= 0){
-			assignedActor.setHeading(360-angle);
+		else if(verticalDiff <= 0 && horizontalDiff > 0){
+			assignedActor.setHeading(360+angle);
 			
 		}
-		else if( horizontalDiff <= 0){
-			assignedActor.setHeading(180-angle);
+		else if( horizontalDiff <= 0 && verticalDiff > 0){
+			assignedActor.setHeading(180+angle);
 			
 		}
 	}
