@@ -1,11 +1,8 @@
-package gui.view;
+package authoringenvironment.view;
 
 import java.util.ResourceBundle;
 
-import authoringenvironment.view.ActorRuleCreator;
-import authoringenvironment.view.TabLibraryBehaviors;
-import authoringenvironment.view.TabLibraryImages;
-import authoringenvironment.view.TabLibrarySounds;
+import gui.view.IGUI;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.Pane;
