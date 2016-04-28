@@ -40,7 +40,6 @@ public class FileChooserController extends BranchScreenController {
 	}
 
 	private void goPlay(Game game) {
-		System.out.println("do i get here????");
 		BaseScreenController baseScreenController = new BaseScreenController(getStage(), new GameController(game));
 	}
 
@@ -61,10 +60,7 @@ public class FileChooserController extends BranchScreenController {
 		else {
 			Class[] parameterTypes = { Game.class };
 			Object[] parameters = {game};
-			System.out.println(game.toString());
-			System.out.println(getType());
 			this.getClass().getDeclaredMethod("go" + getType(), parameterTypes).invoke(this, parameters);
-			System.out.println("do i get here?");
 		}
 	}
 
