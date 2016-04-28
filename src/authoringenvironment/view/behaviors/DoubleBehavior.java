@@ -19,7 +19,7 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
 	private static final String WIDTH = "Width";
-	private double value;
+	private Double value;
 	private TriggerFactory triggerFactory;
 	private ActionFactory actionFactory;
 	private String behaviorType;
