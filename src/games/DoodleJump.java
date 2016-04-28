@@ -72,7 +72,7 @@ public class DoodleJump extends Application {
             greenplatform.setY(i*90);
             level1.addActor(greenplatform);
             
-            player.addRule(new Rule(new BottomCollision(player,greenplatform),new Jump(player)));
+            player.addRule(new Rule(new BottomCollision(player,greenplatform),new VerticalBounceCollision(player)));
             
         }
         

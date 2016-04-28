@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <initialGameFile>gamefiles/loaders/FlappyBird_loader.xml</initialGameFile>
+  <initialGameFile>gamefiles\loaders\FlappyBird_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -20,12 +20,16 @@
           <myImageViewName>flappybird1.png</myImageViewName>
           <myHeading>0.0</myHeading>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
           <myImageViewSize>0.0</myImageViewSize>
 >>>>>>> a2d6c1ff488fd99d6bdc2d1bca16970415f6fd86
 >>>>>>> 86ba6bec4f6dce429c193e21c344fe2f1550835a
+=======
+          <myImageViewSize>0.0</myImageViewSize>
+>>>>>>> f167bfccd576d510142c9c0d843951ccaa034625
           <myRuleManager>
             <myRules>
               <entry>
@@ -62,6 +66,7 @@
                         <myImageViewName>toppipe.png</myImageViewName>
                         <myHeading>0.0</myHeading>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
                         <myRuleManager>
@@ -70,6 +75,9 @@
 =======
                         <myImageViewSize>0.0</myImageViewSize>
 >>>>>>> 86ba6bec4f6dce429c193e21c344fe2f1550835a
+=======
+                        <myImageViewSize>0.0</myImageViewSize>
+>>>>>>> f167bfccd576d510142c9c0d843951ccaa034625
                         <myRuleManager>
                           <myRules>
                             <entry>
@@ -90,6 +98,7 @@
                                       <myID>13</myID>
                                       <myImageViewName>gameside.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
+                                      <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
                                         <myRules/>
                                       </myRuleManager>
@@ -108,9 +117,14 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
                                       <isMainPlayer>false</isMainPlayer>
                                       <isVisible>true</isVisible>
+                                      <myRotate>0.0</myRotate>
+                                      <myOpacity>1.0</myOpacity>
+                                      <myScaleX>1.0</myScaleX>
+                                      <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.Destroy">
@@ -152,9 +166,14 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
+                        <myRotate>0.0</myRotate>
+                        <myOpacity>1.0</myOpacity>
+                        <myScaleX>1.0</myScaleX>
+                        <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.LoseGame">
@@ -165,6 +184,7 @@
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.SideCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -184,6 +204,8 @@
 =======
 >>>>>>> a2d6c1ff488fd99d6bdc2d1bca16970415f6fd86
 >>>>>>> 86ba6bec4f6dce429c193e21c344fe2f1550835a
+=======
+>>>>>>> f167bfccd576d510142c9c0d843951ccaa034625
                       <myCollisionActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
@@ -197,6 +219,7 @@
                         <myImageViewName>bottompipe.png</myImageViewName>
                         <myHeading>0.0</myHeading>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
                         <myRuleManager>
@@ -205,6 +228,9 @@
 =======
                         <myImageViewSize>0.0</myImageViewSize>
 >>>>>>> 86ba6bec4f6dce429c193e21c344fe2f1550835a
+=======
+                        <myImageViewSize>0.0</myImageViewSize>
+>>>>>>> f167bfccd576d510142c9c0d843951ccaa034625
                         <myRuleManager>
                           <myRules>
                             <entry>
@@ -254,9 +280,14 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
+                        <myRotate>0.0</myRotate>
+                        <myOpacity>1.0</myOpacity>
+                        <myScaleX>1.0</myScaleX>
+                        <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.LoseGame">
@@ -284,10 +315,14 @@
                         <myImageViewName>gameside.png</myImageViewName>
                         <myHeading>0.0</myHeading>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                         <myImageViewSize>0.0</myImageViewSize>
 >>>>>>> a2d6c1ff488fd99d6bdc2d1bca16970415f6fd86
 >>>>>>> 86ba6bec4f6dce429c193e21c344fe2f1550835a
+=======
+                        <myImageViewSize>0.0</myImageViewSize>
+>>>>>>> f167bfccd576d510142c9c0d843951ccaa034625
                         <myRuleManager>
                           <myRules>
                             <entry>
@@ -325,12 +360,18 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
+                        <myRotate>0.0</myRotate>
+                        <myOpacity>1.0</myOpacity>
+                        <myScaleX>1.0</myScaleX>
+                        <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.ChangeAttribute">
+<<<<<<< HEAD
 <<<<<<< HEAD
                       <myGameElement class="gameengine.controller.Level" reference="../../../../../../../../.."/>
 =======
@@ -340,6 +381,9 @@
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
 >>>>>>> a2d6c1ff488fd99d6bdc2d1bca16970415f6fd86
 >>>>>>> 86ba6bec4f6dce429c193e21c344fe2f1550835a
+=======
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+>>>>>>> f167bfccd576d510142c9c0d843951ccaa034625
                       <myType>POINTS</myType>
                       <myChange>10</myChange>
                     </myAction>
@@ -359,7 +403,7 @@
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[2]/list/gameengine.model.Rule[3]/myTrigger/myCollisionActor"/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.LoseGame">
                       <myGameElement class="gameengine.controller.Level" reference="../../../../../../../../.."/>
@@ -387,12 +431,16 @@
                         <myImageViewName>floor.png</myImageViewName>
                         <myHeading>0.0</myHeading>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
                         <myImageViewSize>0.0</myImageViewSize>
 >>>>>>> a2d6c1ff488fd99d6bdc2d1bca16970415f6fd86
 >>>>>>> 86ba6bec4f6dce429c193e21c344fe2f1550835a
+=======
+                        <myImageViewSize>0.0</myImageViewSize>
+>>>>>>> f167bfccd576d510142c9c0d843951ccaa034625
                         <myRuleManager>
                           <myRules/>
                         </myRuleManager>
@@ -411,9 +459,14 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
                         <isMainPlayer>false</isMainPlayer>
                         <isVisible>true</isVisible>
+                        <myRotate>0.0</myRotate>
+                        <myOpacity>1.0</myOpacity>
+                        <myScaleX>1.0</myScaleX>
+                        <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
 <<<<<<< HEAD
@@ -468,6 +521,7 @@
           </myRuleManager>
           <myAttributeManager>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <attributeMap/>
           </myAttributeManager>
           <myStates/>
@@ -503,6 +557,35 @@
           </myStates>
 >>>>>>> a2d6c1ff488fd99d6bdc2d1bca16970415f6fd86
 >>>>>>> 86ba6bec4f6dce429c193e21c344fe2f1550835a
+=======
+            <attributeMap>
+              <entry>
+                <gameengine.model.AttributeType>POINTS</gameengine.model.AttributeType>
+                <gameengine.model.Attribute>
+                  <changed>false</changed>
+                  <obs/>
+                  <myValue>
+                    <changed>false</changed>
+                    <obs/>
+<<<<<<< HEAD
+                    <type>java.lang.Integer</type>
+=======
+>>>>>>> 3e68c3cff449ee579e3a17c0ff834f54b1b93518
+                    <value class="int">15</value>
+                    <bindings/>
+                    <name>Default NamePOINTS</name>
+                  </myValue>
+                  <myTriggerValues/>
+                  <myType>POINTS</myType>
+                  <myOwner class="gameengine.model.Actor" reference="../../../../.."/>
+                </gameengine.model.Attribute>
+              </entry>
+            </attributeMap>
+          </myAttributeManager>
+          <myStates>
+            <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
+          </myStates>
+>>>>>>> f167bfccd576d510142c9c0d843951ccaa034625
           <mySprite>
             <myImages>
               <string>flappybird1.png</string>
@@ -516,9 +599,14 @@
             <nextXPos>0.0</nextXPos>
             <nextYVelo>0.0</nextYVelo>
             <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
           </myNextValues>
           <isMainPlayer>false</isMainPlayer>
           <isVisible>true</isVisible>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
         </gameengine.model.Actor>
 <<<<<<< HEAD
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[3]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
@@ -604,6 +692,7 @@
                 </myTrigger>
                 <myAction class="gameengine.model.Actions.CreateActor">
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
+<<<<<<< HEAD
 <<<<<<< HEAD
                   <copier>
                     <myReferenceActor reference="../../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
@@ -17628,6 +17717,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</buf>
                   <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
 >>>>>>> a2d6c1ff488fd99d6bdc2d1bca16970415f6fd86
 >>>>>>> 86ba6bec4f6dce429c193e21c344fe2f1550835a
+=======
+                  <myX>0.0</myX>
+                  <myY>0.0</myY>
+=======
+>>>>>>> 3e68c3cff449ee579e3a17c0ff834f54b1b93518
+                  <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+>>>>>>> f167bfccd576d510142c9c0d843951ccaa034625
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>
                   <myMinY>-100.0</myMinY>
@@ -17642,6 +17738,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</buf>
                 </myTrigger>
                 <myAction class="gameengine.model.Actions.CreateActor">
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
+<<<<<<< HEAD
 <<<<<<< HEAD
                   <copier>
                     <myReferenceActor reference="../../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[3]/myTrigger/myCollisionActor"/>
@@ -17670,6 +17767,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</buf>
                   <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
 >>>>>>> a2d6c1ff488fd99d6bdc2d1bca16970415f6fd86
 >>>>>>> 86ba6bec4f6dce429c193e21c344fe2f1550835a
+=======
+                  <myX>0.0</myX>
+                  <myY>0.0</myY>
+=======
+>>>>>>> 3e68c3cff449ee579e3a17c0ff834f54b1b93518
+                  <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
+>>>>>>> f167bfccd576d510142c9c0d843951ccaa034625
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>
                   <myMinY>350.0</myMinY>
@@ -17686,13 +17790,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</buf>
                 </myTrigger>
                 <myAction class="gameengine.model.Actions.CreateActor">
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
-                  <copier>
-                    <myReferenceActor reference="../../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[4]/myTrigger/myCollisionActor"/>
-                    <myActionFactory/>
-                    <myTriggerFactory/>
-                  </copier>
+<<<<<<< HEAD
                   <myX>0.0</myX>
                   <myY>0.0</myY>
+=======
+>>>>>>> 3e68c3cff449ee579e3a17c0ff834f54b1b93518
+                  <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[3]/myTrigger/myCollisionActor"/>
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>
                   <myMinY>200.0</myMinY>
@@ -17707,6 +17810,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</buf>
         </myRules>
       </myRuleManager>
       <myAttributeManager>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -17741,6 +17845,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</buf>
         <attributeMap/>
 >>>>>>> a2d6c1ff488fd99d6bdc2d1bca16970415f6fd86
 >>>>>>> 86ba6bec4f6dce429c193e21c344fe2f1550835a
+=======
+        <attributeMap/>
+>>>>>>> f167bfccd576d510142c9c0d843951ccaa034625
       </myAttributeManager>
     </gameengine.controller.Level>
   </levels>
@@ -17777,5 +17884,5 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</buf>
   </myCollisionDetector>
   <currentActors/>
   <deadActors/>
-  <numFrames>1</numFrames>
+  <count>1</count>
 </gameengine.controller.Game>

@@ -102,7 +102,6 @@
                                   <myAction class="gameengine.model.Actions.GlideRight">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <glideOffset>5.0</glideOffset>
-                                    <offset>5.0</offset>
                                   </myAction>
                                   <ID>0</ID>
                                 </gameengine.model.Rule>
@@ -120,6 +119,7 @@
                           <nextYPos>0.0</nextYPos>
                           <horizontalForce>5.0</horizontalForce>
                           <verticalForce>-5.0</verticalForce>
+                          <jumpForce>-1.0</jumpForce>
                           <gravity>0.11</gravity>
                           <friction>-0.05</friction>
                           <maxVelo>7.0</maxVelo>
@@ -137,9 +137,8 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -155,6 +154,7 @@
                 <list>
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.AttributeReached">
+                      <myTarget class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myKey>A1POINTS5</myKey>
                       <myType>POINTS</myType>
                       <myTriggerValue>5</myTriggerValue>
@@ -238,9 +238,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -286,9 +285,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -334,9 +332,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -382,9 +379,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -430,9 +426,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -478,9 +473,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -526,9 +520,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -574,9 +567,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -622,9 +614,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -670,9 +661,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -718,9 +708,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -766,9 +755,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -814,9 +802,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -862,9 +849,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -910,9 +896,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -958,9 +943,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1006,9 +990,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1054,9 +1037,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1102,9 +1084,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1150,9 +1131,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1198,9 +1178,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1246,9 +1225,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1294,9 +1272,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1342,9 +1319,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1390,9 +1366,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1438,9 +1413,8 @@
                                         <nextXPos>0.0</nextXPos>
                                         <nextYVelo>0.0</nextYVelo>
                                         <nextYPos>0.0</nextYPos>
+                                        <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1471,9 +1445,8 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -1785,9 +1758,8 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -1802,7 +1774,7 @@
                 </list>
               </entry>
               <entry>
-                <string>TopTrigger</string>
+                <string>TopCollision</string>
                 <list>
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.TopCollision">
@@ -1838,9 +1810,8 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -1886,9 +1857,8 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -1934,9 +1904,8 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -1982,9 +1951,8 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -2030,9 +1998,8 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -2078,9 +2045,8 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -2126,9 +2092,8 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -2174,20 +2139,14 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.NextLevel" reference="../../../../entry[6]/list/gameengine.model.Rule[2]/myAction"/>
-                    <ID>0</ID>
-                  </gameengine.model.Rule>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.TopCollision" reference="../../gameengine.model.Rule[8]/myTrigger"/>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
@@ -2227,20 +2186,14 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.NextLevel" reference="../../../../entry[6]/list/gameengine.model.Rule[2]/myAction"/>
-                    <ID>0</ID>
-                  </gameengine.model.Rule>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.TopCollision" reference="../../gameengine.model.Rule[10]/myTrigger"/>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
@@ -2280,20 +2233,14 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.NextLevel" reference="../../../../entry[6]/list/gameengine.model.Rule[2]/myAction"/>
-                    <ID>0</ID>
-                  </gameengine.model.Rule>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.TopCollision" reference="../../gameengine.model.Rule[12]/myTrigger"/>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
@@ -2333,20 +2280,14 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.NextLevel" reference="../../../../entry[6]/list/gameengine.model.Rule[2]/myAction"/>
-                    <ID>0</ID>
-                  </gameengine.model.Rule>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.TopCollision" reference="../../gameengine.model.Rule[14]/myTrigger"/>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
@@ -2386,20 +2327,14 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.NextLevel" reference="../../../../entry[6]/list/gameengine.model.Rule[2]/myAction"/>
-                    <ID>0</ID>
-                  </gameengine.model.Rule>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.TopCollision" reference="../../gameengine.model.Rule[16]/myTrigger"/>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
@@ -2467,6 +2402,129 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.VerticalBounceCollision">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                    <ID>0</ID>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor">
+                        <changed>false</changed>
+                        <obs/>
+                        <x>315.0</x>
+                        <y>0.0</y>
+                        <veloX>0.0</veloX>
+                        <veloY>0.0</veloY>
+                        <myFriction>0.0</myFriction>
+                        <myName>enemy</myName>
+                        <myID>3</myID>
+                        <myImageViewName>goomba.png</myImageViewName>
+                        <myHeading>0.0</myHeading>
+                        <myImageViewSize>0.0</myImageViewSize>
+                        <myRuleManager>
+                          <myRules>
+                            <entry>
+                              <string>SideCollision</string>
+                              <list>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.SideCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../../../.."/>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.Destroy">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../../../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.SideCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../../entry[4]/list/gameengine.model.Rule/myAction/mySpawnedActor"/>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.Destroy">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                              </list>
+                            </entry>
+                            <entry>
+                              <string>TopCollision</string>
+                              <list>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.TopCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../../../.."/>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.Destroy" reference="../../../../entry/list/gameengine.model.Rule[2]/myAction"/>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                              </list>
+                            </entry>
+                            <entry>
+                              <string>BottomCollision</string>
+                              <list>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.VerticalBounceCollision">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                                    <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../../../.."/>
+                                  </myTrigger>
+                                  <myAction class="gameengine.model.Actions.Destroy">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../../../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                              </list>
+                            </entry>
+                            <entry>
+                              <string>Tick</string>
+                              <list>
+                                <gameengine.model.Rule>
+                                  <myTrigger class="gameengine.model.Triggers.TickTrigger" reference="../../../../../../../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry/list/gameengine.model.Rule/myTrigger"/>
+                                  <myAction class="gameengine.model.Actions.ApplyPhysics">
+                                    <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                  </myAction>
+                                  <ID>0</ID>
+                                </gameengine.model.Rule>
+                              </list>
+                            </entry>
+                          </myRules>
+                        </myRuleManager>
+                        <myAttributeManager>
+                          <attributeMap/>
+                        </myAttributeManager>
+                        <myStates/>
+                        <mySprite>
+                          <myImages>
+                            <string>goomba.png</string>
+                          </myImages>
+                          <spriteIndex>0</spriteIndex>
+                        </mySprite>
+                        <myNextValues>
+                          <nextXVelo>0.0</nextXVelo>
+                          <nextXPos>0.0</nextXPos>
+                          <nextYVelo>0.0</nextYVelo>
+                          <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
+                        </myNextValues>
+                        <myRotate>0.0</myRotate>
+                        <myOpacity>1.0</myOpacity>
+                        <myScaleX>1.0</myScaleX>
+                        <myScaleY>1.0</myScaleY>
+                      </myCollisionActor>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2556,6 +2614,16 @@
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[9]/myTrigger/myCollisionActor"/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.VerticalBounceCollision">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                    <ID>0</ID>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[10]/myTrigger/myCollisionActor"/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
@@ -2566,27 +2634,17 @@
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[11]/myTrigger/myCollisionActor"/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.VerticalBounceCollision">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                    <ID>0</ID>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[12]/myTrigger/myCollisionActor"/>
-                    </myTrigger>
-                    <myAction class="gameengine.model.Actions.VerticalBounceCollision">
-                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                    </myAction>
-                    <ID>0</ID>
-                  </gameengine.model.Rule>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
-                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[14]/myTrigger/myCollisionActor"/>
-                    </myTrigger>
-                    <myAction class="gameengine.model.Actions.VerticalBounceCollision">
-                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                    </myAction>
-                    <ID>0</ID>
-                  </gameengine.model.Rule>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
-                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[16]/myTrigger/myCollisionActor"/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2858,28 +2916,7 @@
             </myRules>
           </myRuleManager>
           <myAttributeManager>
-            <attributeMap>
-              <entry>
-                <gameengine.model.AttributeType>POINTS</gameengine.model.AttributeType>
-                <gameengine.model.Attribute>
-                  <changed>false</changed>
-                  <obs/>
-                  <myValue>
-                    <changed>false</changed>
-                    <obs/>
-                    <type>java.lang.Integer</type>
-                    <value class="int">0</value>
-                    <bindings/>
-                    <name>A1POINTS</name>
-                  </myValue>
-                  <myTriggerValues>
-                    <int>5</int>
-                  </myTriggerValues>
-                  <myType>POINTS</myType>
-                  <myOwner class="gameengine.model.Actor" reference="../../../../.."/>
-                </gameengine.model.Attribute>
-              </entry>
-            </attributeMap>
+            <attributeMap/>
           </myAttributeManager>
           <myStates>
             <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
@@ -2897,9 +2934,8 @@
             <nextXPos>0.0</nextXPos>
             <nextYVelo>0.0</nextYVelo>
             <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
           </myNextValues>
-          <isMainPlayer>false</isMainPlayer>
-          <isVisible>true</isVisible>
           <myRotate>0.0</myRotate>
           <myOpacity>1.0</myOpacity>
           <myScaleX>1.0</myScaleX>
@@ -2907,121 +2943,7 @@
         </gameengine.model.Actor>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs/>
-          <x>315.0</x>
-          <y>0.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myFriction>0.0</myFriction>
-          <myName>enemy</myName>
-          <myID>3</myID>
-          <myImageViewName>goomba.png</myImageViewName>
-          <myHeading>0.0</myHeading>
-          <myImageViewSize>0.0</myImageViewSize>
-          <myRuleManager>
-            <myRules>
-              <entry>
-                <string>SideCollision</string>
-                <list>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.SideCollision">
-                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor"/>
-                    </myTrigger>
-                    <myAction class="gameengine.model.Actions.Destroy">
-                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor"/>
-                    </myAction>
-                    <ID>0</ID>
-                  </gameengine.model.Rule>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.SideCollision">
-                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor/myRuleManager/myRules/entry[4]/list/gameengine.model.Rule/myAction/mySpawnedActor"/>
-                    </myTrigger>
-                    <myAction class="gameengine.model.Actions.Destroy">
-                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                    </myAction>
-                    <ID>0</ID>
-                  </gameengine.model.Rule>
-                </list>
-              </entry>
-              <entry>
-                <string>TopTrigger</string>
-                <list>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.TopCollision">
-                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor"/>
-                    </myTrigger>
-                    <myAction class="gameengine.model.Actions.Destroy" reference="../../../../entry/list/gameengine.model.Rule[2]/myAction"/>
-                    <ID>0</ID>
-                  </gameengine.model.Rule>
-                </list>
-              </entry>
-              <entry>
-                <string>BottomCollision</string>
-                <list>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
-                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
-                    </myTrigger>
-                    <myAction class="gameengine.model.Actions.VerticalBounceCollision">
-                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                    </myAction>
-                    <ID>0</ID>
-                  </gameengine.model.Rule>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
-                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor"/>
-                    </myTrigger>
-                    <myAction class="gameengine.model.Actions.Destroy">
-                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor"/>
-                    </myAction>
-                    <ID>0</ID>
-                  </gameengine.model.Rule>
-                </list>
-              </entry>
-              <entry>
-                <string>Tick</string>
-                <list>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.TickTrigger" reference="../../../../../../../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry/list/gameengine.model.Rule/myTrigger"/>
-                    <myAction class="gameengine.model.Actions.ApplyPhysics">
-                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                    </myAction>
-                    <ID>0</ID>
-                  </gameengine.model.Rule>
-                </list>
-              </entry>
-            </myRules>
-          </myRuleManager>
-          <myAttributeManager>
-            <attributeMap/>
-          </myAttributeManager>
-          <myStates/>
-          <mySprite>
-            <myImages>
-              <string>goomba.png</string>
-            </myImages>
-            <spriteIndex>0</spriteIndex>
-          </mySprite>
-          <myNextValues>
-            <nextXVelo>0.0</nextXVelo>
-            <nextXPos>0.0</nextXPos>
-            <nextYVelo>0.0</nextYVelo>
-            <nextYPos>0.0</nextYPos>
-          </myNextValues>
-          <isMainPlayer>false</isMainPlayer>
-          <isVisible>true</isVisible>
-          <myRotate>0.0</myRotate>
-          <myOpacity>1.0</myOpacity>
-          <myScaleX>1.0</myScaleX>
-          <myScaleY>1.0</myScaleY>
-        </gameengine.model.Actor>
+        <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[11]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[3]/myTrigger/myCollisionActor"/>
@@ -3075,10 +2997,10 @@
         <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[7]/list/gameengine.model.Rule[6]/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[7]/list/gameengine.model.Rule[7]/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[7]/list/gameengine.model.Rule[8]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[7]/list/gameengine.model.Rule[9]/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[7]/list/gameengine.model.Rule[10]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[7]/list/gameengine.model.Rule[11]/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[7]/list/gameengine.model.Rule[12]/myTrigger/myCollisionActor"/>
-        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[7]/list/gameengine.model.Rule[14]/myTrigger/myCollisionActor"/>
-        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[7]/list/gameengine.model.Rule[16]/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
         <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[3]/myTrigger/myCollisionActor"/>
@@ -3128,7 +3050,7 @@
     <myHUDElementsToDisplay/>
     <myFile>test2.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
-    <myHUDFileLocation>hudfiles/test</myHUDFileLocation>
+    <myHUDFileLocation>a.txt</myHUDFileLocation>
   </info>
   <myPhysicsEngine>
     <nextXVelo>0.0</nextXVelo>
@@ -3137,6 +3059,7 @@
     <nextYPos>0.0</nextYPos>
     <horizontalForce>5.0</horizontalForce>
     <verticalForce>-5.0</verticalForce>
+    <jumpForce>-1.0</jumpForce>
     <gravity>0.11</gravity>
     <friction>-0.05</friction>
     <maxVelo>7.0</maxVelo>

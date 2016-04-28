@@ -76,7 +76,7 @@
                       <myCollisionActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
-                        <x>558.4407555546298</x>
+                        <x>402.41170770042316</x>
                         <y>0.0</y>
                         <veloX>0.0</veloX>
                         <veloY>0.0</veloY>
@@ -104,16 +104,15 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.Jump">
+                    <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
                     <ID>0</ID>
@@ -124,7 +123,7 @@
                       <myCollisionActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
-                        <x>644.925641692763</x>
+                        <x>575.8800196559113</x>
                         <y>90.0</y>
                         <veloX>0.0</veloX>
                         <veloY>0.0</veloY>
@@ -152,16 +151,15 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.Jump">
+                    <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
                     <ID>0</ID>
@@ -172,7 +170,7 @@
                       <myCollisionActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
-                        <x>327.0205523608771</x>
+                        <x>156.18157277172315</x>
                         <y>180.0</y>
                         <veloX>0.0</veloX>
                         <veloY>0.0</veloY>
@@ -200,16 +198,15 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.Jump">
+                    <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
                     <ID>0</ID>
@@ -220,7 +217,7 @@
                       <myCollisionActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
-                        <x>380.6543019114683</x>
+                        <x>490.7969249055865</x>
                         <y>270.0</y>
                         <veloX>0.0</veloX>
                         <veloY>0.0</veloY>
@@ -248,16 +245,15 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.Jump">
+                    <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
                     <ID>0</ID>
@@ -268,7 +264,7 @@
                       <myCollisionActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
-                        <x>488.554482826944</x>
+                        <x>363.53924651185923</x>
                         <y>360.0</y>
                         <veloX>0.0</veloX>
                         <veloY>0.0</veloY>
@@ -296,16 +292,15 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.Jump">
+                    <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
                     <ID>0</ID>
@@ -316,7 +311,7 @@
                       <myCollisionActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
-                        <x>33.65037653320194</x>
+                        <x>670.5575245307582</x>
                         <y>450.0</y>
                         <veloX>0.0</veloX>
                         <veloY>0.0</veloY>
@@ -344,16 +339,15 @@
                           <nextXPos>0.0</nextXPos>
                           <nextYVelo>0.0</nextYVelo>
                           <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.Jump">
+                    <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
                     <ID>0</ID>
@@ -394,9 +388,8 @@
             <nextXPos>0.0</nextXPos>
             <nextYVelo>0.0</nextYVelo>
             <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
           </myNextValues>
-          <isMainPlayer>false</isMainPlayer>
-          <isVisible>true</isVisible>
           <myRotate>0.0</myRotate>
           <myOpacity>1.0</myOpacity>
           <myScaleX>1.0</myScaleX>
@@ -440,7 +433,7 @@
     <horizontalForce>5.0</horizontalForce>
     <verticalForce>-5.0</verticalForce>
     <jumpForce>-1.0</jumpForce>
-    <gravity>0.01</gravity>
+    <gravity>0.11</gravity>
     <friction>-0.05</friction>
     <maxVelo>7.0</maxVelo>
     <bounce>2.5</bounce>

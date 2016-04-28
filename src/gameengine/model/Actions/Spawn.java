@@ -3,13 +3,9 @@ package gameengine.model.Actions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-
-import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorCopier;
 import gameengine.model.Actor;
-import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
-import javafx.scene.image.ImageView;
 
 
 public class Spawn extends ActorAction{
