@@ -1,5 +1,6 @@
 package gameengine.model.Actions;
 
+import gameengine.model.Actor;
 import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 
@@ -12,9 +13,8 @@ import gameengine.model.IPlayActor;
 
 public class HorizontalBounceCollision extends ActorAction{
 
-	public HorizontalBounceCollision(IGameElement assignedActor) {
-		super((IPlayActor) assignedActor);
-		// TODO Auto-generated constructor stub
+	public HorizontalBounceCollision(Actor assignedActor) {
+		super(assignedActor);
 	}
 
 	@Override

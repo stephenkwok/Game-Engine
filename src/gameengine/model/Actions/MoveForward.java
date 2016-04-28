@@ -20,8 +20,8 @@ public class MoveForward extends MovingAction {
 	 * @param args
 	 *            The arguments required to perform the change
 	 */
-	public MoveForward(IGameElement actor1) {
-		super(actor1);
+	public MoveForward(Actor actor) {
+		super(actor);
 	}
 
 	/**

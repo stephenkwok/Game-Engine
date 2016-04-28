@@ -1,12 +1,26 @@
 package authoringenvironment.controller;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.io.IOException;
+import java.lang.reflect.*;
 import java.util.*;
 
-import authoringenvironment.model.*;
-import authoringenvironment.view.*;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
+
+import authoringenvironment.model.AuthoringEnvironmentRestorer;
+import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.model.PresetActorFactory;
+import authoringenvironment.view.ActorCopier;
+import authoringenvironment.view.ActorEditingEnvironment;
+import authoringenvironment.view.GUIMain;
+import authoringenvironment.view.GUIMainScreen;
+import authoringenvironment.view.GameEditingEnvironment;
+import authoringenvironment.view.LevelEditingEnvironment;
 import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
 import gamedata.controller.FileChooserController;
@@ -71,13 +85,12 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private ActorCopier myActorCopier;
 
 	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
-		super(myStage);
-		// this.myObservableResource =
-		// ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
+	IllegalArgumentException, InvocationTargetException {
+		super(myStage, EDITING_CONTROLLER_RESOURCE);
+		this.myObservableResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
 		initNewGame();
 	}
-
+/*
 	// TODO This constructor is not parallel with other BranchScreenController
 	// subclasses
 	// Create a resource bundle for the Controller's actions associated to
@@ -89,12 +102,12 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		super(myStage);
 		this.guiMain = guiMain;
 		// initNewGame();
-	}
+	}*/
 
 	// TODO Need a constructor that takes in a game passed by data and sets up
 	// Authoring Environment accordingly
 	public Controller(Game game, Stage myStage) {
-		super(myStage);
+		super(myStage, EDITING_CONTROLLER_RESOURCE);
 		this.game = game;
 		initExistingGame();
 	}
@@ -280,9 +293,15 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		File initialDirectory = new File("gamefiles");
 		fileChooser.setInitialDirectory(initialDirectory);
 		File file = fileChooser.showSaveDialog(new Stage());
-		CreatorController controller = new CreatorController(new Game(gameInfo, myLevels), guiMain);
+		CreatorController controller = new CreatorController(new Game(gameInfo, myLevels));
 		if (file != null) {
-			controller.saveForEditing(file);
+			try {
+				controller.saveForEditing(file);
+			} catch (SAXException | IOException | TransformerException | ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			}
 		}
 
 	}
@@ -361,9 +380,11 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	/**
 	 * Saves game and returns to splash screen of game player.
 	 */
-	/*
-	 * public void goToSplash() { guiMain.goBackToSplash(); }
-	 */
+	
+	  public void goToSplash() {
+		  super.goToSplash();
+	  }
+	 
 
 	public void switchGame() {
 		// TODO Auto-generated method stub
@@ -460,6 +481,12 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 */
 	public Game getGame() {
 		return game;
+	}
+
+	@Override
+	public void invoke(String method, Class[] parameterTypes, Object[] parameters) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
