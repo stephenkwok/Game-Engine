@@ -23,6 +23,7 @@ import javafx.stage.Stage;
  *
  */
 public abstract class BranchScreenController implements Observer {
+	@XStreamOmitField
 	private Stage myStage;
 	private ResourceBundle myResources;
 	private Screen myScreen;

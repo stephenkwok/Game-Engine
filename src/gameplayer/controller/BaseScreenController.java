@@ -13,6 +13,7 @@ import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
@@ -28,9 +29,13 @@ import voogasalad.util.hud.source.*;
 public class BaseScreenController extends BranchScreenController {
 
 	private static final String BASE_CONTROLLER_RESOURCE = "baseActions";
+	@XStreamOmitField
 	private ResourceBundle myResources;
+	@XStreamOmitField
 	private BaseScreen myScreen;
+	@XStreamOmitField
 	private GameController myGameController;
+	@XStreamOmitField
 	private HUDController myHUDController;
 	
 	public BaseScreenController(Stage myStage, GameController gameController) {
