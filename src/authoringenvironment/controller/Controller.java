@@ -48,6 +48,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private static final String SPLASH_IMAGE_NAME = "salad.png";
 	private static final String EDITING_CONTROLLER_RESOURCE = "editingActions";
 	private static final String REQUIRES_ARG = "RequiresArg";
+	private static final String PRESET_ACTORS_RESOURCE = "presetActorsFactory";
 	private List<Level> myLevels;
 	private List<String> myLevelNames;
 	private Map<IAuthoringActor, List<IAuthoringActor>> myActorMap;
@@ -59,6 +60,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private GUIMain guiMain;
 	private ResourceBundle myResources;
 	private ResourceBundle myObservableResource;
+	private ResourceBundle myPresetActorsResource;
 	private Game game;
 	private GameInfo gameInfo;
 	private Scene myScene;
@@ -143,6 +145,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		getStage().setScene(myScene);
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		this.myObservableResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
+		this.myPresetActorsResource = ResourceBundle.getBundle(PRESET_ACTORS_RESOURCE);
 		factory = new GUIFactory(myResources);
 		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
 		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
@@ -163,7 +166,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 */
 	private void initializePresetActors() throws NoSuchMethodException, SecurityException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException {
-		PresetActorFactory presetActorFactory = new PresetActorFactory();
+		PresetActorFactory presetActorFactory = new PresetActorFactory(myPresetActorsResource);
 		List<Actor> presetActors = presetActorFactory.getPresetActors();
 		presetActors.stream().forEach(actor -> myActorMap.put(actor, new ArrayList<>()));
 		presetActors.stream().forEach(actor -> mainScreen.createActorPreviewUnit(actor, actorEnvironment));

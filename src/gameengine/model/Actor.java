@@ -48,8 +48,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private Set<ActorState> myStates;
     private Sprite mySprite;
     private NextValues myNextValues;
-    private boolean isMainPlayer;
-    private boolean isVisible;
     private double myRotate;
     private double myOpacity;
     private double myScaleX;
@@ -67,8 +65,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
         mySprite = new Sprite();
         myNextValues = new NextValues();
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
-        isMainPlayer = false;
-        isVisible = true;
         myRotate = myImageView.getRotate();
         myOpacity = myImageView.getOpacity();
         myScaleX = myImageView.getScaleX();
@@ -447,22 +443,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     public void nextImage(){
         myImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getNextImage())));
     }
-    
-    public void setIsMainPlayer(boolean isMainPlayer) {
-    	this.isMainPlayer = isMainPlayer;
-    }
-    
-    public boolean isMainPlayer() {
-    	return isMainPlayer;
-    }
-
-	public boolean isVisible() {
-		return isVisible;
-	}
-
-	public void setVisible(boolean isVisible) {
-		this.isVisible = isVisible;
-	}
 
 	/**
 	 * Sets the Actor's rotate property
