@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.ImageEditingEnvironmentWithActor;
 import gameengine.controller.Level;

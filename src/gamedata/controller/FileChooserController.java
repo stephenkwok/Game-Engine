@@ -87,6 +87,7 @@ public class FileChooserController extends BranchScreenController {
 
 	@Override
 	public void invoke(String method, Class[] parameterTypes, Object[] parameters) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		System.out.println(method);
 		this.getClass().getDeclaredMethod(method, parameterTypes).invoke(this, parameters);	
 	}
 	

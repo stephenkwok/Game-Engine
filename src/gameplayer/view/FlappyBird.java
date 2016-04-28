@@ -118,7 +118,7 @@ public class FlappyBird extends Application {
         Scene scene = new Scene(group);
 
         Game model = new Game(info, levels);
-        model.setHUDInfoFile("a.txt");
+        model.setHUDInfoFile("hudfiles/a.txt");
         CreatorController c = new CreatorController(model);
         c.saveForEditing(new File("gamefiles/FlappyBird.xml"));
         ParallelCamera camera = new ParallelCamera();

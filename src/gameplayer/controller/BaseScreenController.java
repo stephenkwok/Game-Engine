@@ -33,6 +33,7 @@ public class BaseScreenController extends BranchScreenController {
 	private ResourceBundle myResources;
 	@XStreamOmitField
 	private BaseScreen myScreen;
+	@XStreamOmitField
 	private GameController myGameController;
 	@XStreamOmitField
 	private HUDController myHUDController;
@@ -50,7 +51,10 @@ public class BaseScreenController extends BranchScreenController {
 		this.myScreen = new BaseScreen();
 		this.myScreen.addObserver(this);
 		setUpGameScreen();
-//		setUpHUDScreen();
+		try {setUpHUDScreen();}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		setMyScreen(this.myScreen);
 	}
 
@@ -113,7 +117,7 @@ public class BaseScreenController extends BranchScreenController {
 		Game initialGame = parserController.loadforPlaying(new File(myGameController.getGame().getInitialGameFile()));
 		myGameController.setGame(initialGame);
 		myGameController.initialize(0);
-		setUpHUDScreen();
+		//setUpHUDScreen();
 	}
 
 	private void setUpGameScreen() {
@@ -124,6 +128,7 @@ public class BaseScreenController extends BranchScreenController {
 		myHUDController = new HUDController();
 		myHUDController.init(myGameController.getGame().getHUDInfoFile(), myGameController.getGame(), new TLGCSValueFinder());
 		myScreen.setHUDScreen(myHUDController.getView());
+		
 	}
 	
 	@Override
