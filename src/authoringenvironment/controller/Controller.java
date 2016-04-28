@@ -32,6 +32,7 @@ import gameplayer.controller.BranchScreenController;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import gui.view.PopUpAuthoringHelpPage;
+import gui.view.PopUpRuleAdder;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
