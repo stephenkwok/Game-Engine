@@ -208,6 +208,7 @@ public class GameController extends Observable implements Observer, IGameControl
 
 	public void restartGame() {
 		togglePause();
+		view.restartGame();
 		System.out.println("restarting game");
 		Object[] args = {"restartGame", null};
 		setChanged();
