@@ -8,11 +8,11 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.Triggers.ITrigger;
 
-public class CollisionBehavior extends SelectEditableBehavior {
+public class CollisionBehavior extends SelectActorBehavior {
 	private ITrigger myTrigger;
 
-	public CollisionBehavior(ActorRule myActorRule, String behaviorType, IAuthoringActor myActor,
-			ResourceBundle myResources, List<IAuthoringActor> myActors) {
+	public CollisionBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
+			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
 		super(myActorRule, behaviorType, myResources, myActor, myActors);
 	}
 

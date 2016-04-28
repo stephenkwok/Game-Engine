@@ -1,34 +1,36 @@
 package authoringenvironment.view.behaviors;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
+import gameengine.model.IAction;
 
-public class SpawnBehavior extends SelectEditableBehavior {
-
-	public SpawnBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources,
+public class SpawnBehavior extends SelectActorBehavior {
+	private IAction myAction;
+	
+	public SpawnBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
 			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
 		super(myActorRule, behaviorType, myResources, myActor, myActors);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	protected void createTriggerOrAction() {
-		// TODO Auto-generated method stub
-
+		List<Object> arguments = new ArrayList<>();
+		arguments.add(getMyActor());
+		arguments.add(getOtherActor());
+		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
 	}
 
 	@Override
 	public void setTriggerOrAction() {
-		// TODO Auto-generated method stub
-
+		setAction(this, myAction);
 	}
 
 	@Override
 	public boolean isTrigger() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

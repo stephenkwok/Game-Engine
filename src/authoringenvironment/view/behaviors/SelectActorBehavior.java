@@ -29,15 +29,14 @@ import javafx.scene.layout.Priority;
  * @author AnnieTang
  */
 
-public abstract class SelectEditableBehavior extends EditingElementParent implements IAuthoringBehavior {
+public abstract class SelectActorBehavior extends EditingElementParent implements IAuthoringBehavior {
 	private static final double IMAGE_HEIGHT = 20;
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
-	private static final int COMBOBOX_WIDTH = 150;
+	private static final int COMBOBOX_WIDTH = 300;
 	private static final int HBOX_SPACING = 5;
 	private static final String GO = "Go";
-	private static final int BUTTON_HEIGHT = 30;
-	private static final int BUTTON_WIDTH = 40;
+	private static final int BUTTON_SIZE = 40;
 	private String promptText;
 	private ObservableList<IEditableGameElement> options;
 	private ComboBox<IEditableGameElement> comboBox;
@@ -50,7 +49,7 @@ public abstract class SelectEditableBehavior extends EditingElementParent implem
 	private IAuthoringActor otherActor;
 	private IAuthoringActor myActor;
 
-	public SelectEditableBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
+	public SelectActorBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
 			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
 		super(GO);
 		this.behaviorType = behaviorType;
@@ -90,7 +89,7 @@ public abstract class SelectEditableBehavior extends EditingElementParent implem
 	}
 	
 	private void initButton(){
-		getButton().setPrefSize(BUTTON_HEIGHT, BUTTON_HEIGHT);
+		getButton().setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
 		setButtonAction(e -> {
 			this.otherActor = (IAuthoringActor) comboBox.getValue();
 			createTriggerOrAction();
