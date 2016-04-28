@@ -38,7 +38,7 @@ public class BaseScreenController extends BranchScreenController {
 		// DEPENDENCY!!
 		this.myGameController = gameController;
 		myGameController.addObserver(this);
-		setUpScreen();
+		//setUpScreen();
 		changeScreen(myScreen);
 	}
 
@@ -46,7 +46,10 @@ public class BaseScreenController extends BranchScreenController {
 		this.myScreen = new BaseScreen();
 		this.myScreen.addObserver(this);
 		setUpGameScreen();
-		//setUpHUDScreen();
+		try {setUpHUDScreen();}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		setMyScreen(this.myScreen);
 	}
 
