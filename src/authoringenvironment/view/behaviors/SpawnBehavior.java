@@ -6,19 +6,14 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.IAction;
 
-public class CollisionBehavior extends SelectActorBehavior {
-	private ITrigger myTrigger;
-
-	public CollisionBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
+public class SpawnBehavior extends SelectActorBehavior {
+	private IAction myAction;
+	
+	public SpawnBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
 			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
 		super(myActorRule, behaviorType, myResources, myActor, myActors);
-	}
-
-	@Override
-	public void setTriggerOrAction() {
-		setTrigger(this, myTrigger);
 	}
 
 	@Override
@@ -26,11 +21,17 @@ public class CollisionBehavior extends SelectActorBehavior {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(getMyActor());
 		arguments.add(getOtherActor());
-		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
+		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
+	}
+
+	@Override
+	public void setTriggerOrAction() {
+		setAction(this, myAction);
 	}
 
 	@Override
 	public boolean isTrigger() {
-		return true;
+		return false;
 	}
+
 }
