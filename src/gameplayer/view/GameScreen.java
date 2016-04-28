@@ -266,10 +266,8 @@ public class GameScreen extends Observable implements IGameScreen {
 		
 	}
 
-	/*public void restartGame() {
-		clearGame();
-		
-		
-	}*/
+	public void restartGame() {
+		clearGame();	
+	}
 
 }

@@ -221,11 +221,14 @@ public class Game extends Observable implements Observer {
 	 * Changes the Game to the next Level
 	 */
 
-	public void nextLevel() {
+	public boolean nextLevel() {
 		animation.stop();
-		if (levels.size() >= info.getMyCurrentLevelNum() + 1) {
+		if (info.getMyCurrentLevelNum() + 1 < levels.size()) {
 			setCurrentLevel(info.getMyCurrentLevelNum() + 1);
 			levels.get(info.getMyCurrentLevelNum()).getMainCharacter().setX(0);
+			return true;
+		} else {
+			return false;
 		}
 	}
 

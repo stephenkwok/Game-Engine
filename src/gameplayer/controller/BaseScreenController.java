@@ -110,13 +110,7 @@ public class BaseScreenController extends BranchScreenController {
 	}
 
 	private void restartGame() {
-		// TODO fix this ish
-		togglePause();
-		myGameController.getView().clearGame();
-		ParserController parserController = new ParserController();
-		Game initialGame = parserController.loadforPlaying(new File(myGameController.getGame().getInitialGameFile()));
-		myGameController.setGame(initialGame);
-		myGameController.initialize(0);
+		myGameController.restartGame();
 		//setUpHUDScreen();
 	}
 

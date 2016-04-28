@@ -1,6 +1,7 @@
 package gameplayer.controller;
 
 import java.util.List;
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +12,7 @@ import java.util.ResourceBundle;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gamedata.controller.HighScoresController;
+import gamedata.controller.ParserController;
 import gameengine.controller.Game;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
@@ -112,9 +114,8 @@ public class GameController extends Observable implements Observer, IGameControl
 	 * Will stop the animation timeline.
 	 */
 	public void endGame() {
-		// TODO fix resource also implement saving functionality
-		view.terminateGame();
 		model.terminateGame();
+		view.terminateGame();
 	}
 	
 
@@ -132,9 +133,13 @@ public class GameController extends Observable implements Observer, IGameControl
 	}
 
 	public void nextLevel() {
-		view.clearGame();
-		model.nextLevel();
-		begin();
+		if (model.nextLevel()) {
+			view.clearGame();
+			begin();
+		}
+		else {
+			endGame();
+		}
 	}
 
 	public GameScreen getView() {
@@ -202,10 +207,12 @@ public class GameController extends Observable implements Observer, IGameControl
 
 	public void restartGame() {
 		togglePause();
-		System.out.println("restarting game");
-		Object[] args = {"restartGame", null};
-		setChanged();
-		notifyObservers(Arrays.asList(args));
+		view.restartGame();
+		
+		ParserController parserController = new ParserController();
+		Game initialGame = parserController.loadforPlaying(new File(getGame().getInitialGameFile()));
+		setGame(initialGame);
+		initialize(0);
 	}
 
 	public void updateCamera() {
