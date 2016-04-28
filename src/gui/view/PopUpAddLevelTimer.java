@@ -63,10 +63,14 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	}
 	
 	private void addInitialTimeBox() {
+		myInitialMinutes = new TextField();
+		myInitialSeconds = new TextField();
 		addTimeBox(INITIAL + PROMPT, myInitialMinutes, myInitialSeconds);
 	}
 	
 	private void addTriggerTimeBox() {
+		myTriggerMinutes = new TextField();
+		myTriggerSeconds = new TextField();
 		addTimeBox(TRIGGER + PROMPT, myTriggerMinutes, myTriggerSeconds);
 	}
 	
@@ -76,12 +80,10 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		
 		HBox minutesContainer = new HBox();
 		Label minutesLabel = new Label(MINUTES);
-		minutesTextField = new TextField();
 		minutesContainer.getChildren().addAll(minutesLabel, minutesTextField);
 		
 		HBox secondsContainer = new HBox();
 		Label secondsLabel = new Label(SECONDS);
-		secondsTextField = new TextField();
 		secondsContainer.getChildren().addAll(secondsLabel, secondsTextField);
 		
 		container.getChildren().addAll(label, minutesContainer, secondsContainer);
@@ -116,8 +118,8 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	}
 	
 	private int convertToTicks(TextField minutesBox, TextField secondsBox) {
-		int minutes = Integer.parseInt(minutesBox.getText());
-		int seconds = Integer.parseInt(secondsBox.getText());
+		Integer minutes = Integer.parseInt(minutesBox.getText());
+		Integer seconds = Integer.parseInt(secondsBox.getText());
 		return minutes * 60 + seconds;
 	}
 	
