@@ -119,8 +119,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -168,8 +166,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -282,8 +278,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -362,8 +356,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -461,8 +453,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -567,10 +557,6 @@
                   <myValue>
                     <changed>false</changed>
                     <obs/>
-<<<<<<< HEAD
-                    <type>java.lang.Integer</type>
-=======
->>>>>>> 3e68c3cff449ee579e3a17c0ff834f54b1b93518
                     <value class="int">15</value>
                     <bindings/>
                     <name>Default NamePOINTS</name>
@@ -601,8 +587,6 @@
             <nextYPos>0.0</nextYPos>
             <collision>false</collision>
           </myNextValues>
-          <isMainPlayer>false</isMainPlayer>
-          <isVisible>true</isVisible>
           <myRotate>0.0</myRotate>
           <myOpacity>1.0</myOpacity>
           <myScaleX>1.0</myScaleX>
@@ -692,6 +676,7 @@
                 </myTrigger>
                 <myAction class="gameengine.model.Actions.CreateActor">
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
                   <copier>
@@ -17722,6 +17707,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</buf>
                   <myY>0.0</myY>
 =======
 >>>>>>> 3e68c3cff449ee579e3a17c0ff834f54b1b93518
+=======
+>>>>>>> 9cd4e59cec14750fdc1e2001420882770ae5fc6a
                   <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
 >>>>>>> f167bfccd576d510142c9c0d843951ccaa034625
                   <myMinX>1024.0</myMinX>
@@ -17738,6 +17725,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</buf>
                 </myTrigger>
                 <myAction class="gameengine.model.Actions.CreateActor">
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
                   <copier>
@@ -17772,6 +17760,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</buf>
                   <myY>0.0</myY>
 =======
 >>>>>>> 3e68c3cff449ee579e3a17c0ff834f54b1b93518
+=======
+>>>>>>> 9cd4e59cec14750fdc1e2001420882770ae5fc6a
                   <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
 >>>>>>> f167bfccd576d510142c9c0d843951ccaa034625
                   <myMinX>1024.0</myMinX>
@@ -17790,11 +17780,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</buf>
                 </myTrigger>
                 <myAction class="gameengine.model.Actions.CreateActor">
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
-<<<<<<< HEAD
-                  <myX>0.0</myX>
-                  <myY>0.0</myY>
-=======
->>>>>>> 3e68c3cff449ee579e3a17c0ff834f54b1b93518
                   <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[3]/myTrigger/myCollisionActor"/>
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>
