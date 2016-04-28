@@ -55,7 +55,7 @@ public abstract class BranchScreenController implements Observer {
 		this.myScreen = screen;
 	}
 	
-	public abstract void invoke(String method, Class[] parameterTypes, Object[] parameters);
+	public abstract void invoke(String method, Class[] parameterTypes, Object[] parameters) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException;
 	
 	public void update(Observable o, Object arg) {
 		
@@ -79,7 +79,7 @@ public abstract class BranchScreenController implements Observer {
 				invoke(methodName, parameterTypes, parameters);
 			
 			}
-		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException e) {
+		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 			try {
 				this.getClass().getSuperclass().getDeclaredMethod(methodName).invoke(this);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
