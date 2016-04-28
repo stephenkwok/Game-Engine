@@ -59,8 +59,8 @@ public abstract class TextAreaParent extends EditingElementParent {
 	 * @param prompt
 	 *            that informs the author what to do
 	 */
-	protected void setTextAreaPromptText(String prompt) {
-		myTextArea.setPromptText(prompt);
+	protected void setTextAreaText(String prompt) {
+		myTextArea.setText(prompt);
 	}
 
 	/**
