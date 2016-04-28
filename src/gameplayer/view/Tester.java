@@ -249,7 +249,7 @@ public class Tester extends Application {
             Rule brule4 = new Rule(b4, baction4);
 
             Rule ruleNextLevel2 = new Rule(b4, actionNextLevel);
-           // actor1.addRule(ruleNextLevel2);
+            actor1.addRule(ruleNextLevel2);
             actor1.addRule(brule3);
             actor1.addRule(brule4);
             level2.addActor((IAuthoringActor) block2);
@@ -291,7 +291,7 @@ public class Tester extends Application {
         a.addRule(new Rule(translatetick,translateaction));
         TickTrigger newtick = new TickTrigger(220);
         Action newaction = new CreateActor((Actor)actor1,(Actor)a,0.0,0.0);
-        //actor1.addRule(new Rule(newtick,newaction));
+       // actor1.addRule(new Rule(newtick,newaction));
         
         
         

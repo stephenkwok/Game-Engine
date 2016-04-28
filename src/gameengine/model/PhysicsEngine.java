@@ -110,7 +110,11 @@ public class PhysicsEngine {
 		a1.setY(applyForce(a1.getY(),-offset*(Math.sin(Math.toRadians(a1.getHeading()))))-gravity);
 	}
 	private double bound(double pos){
-		if(pos<0){ return 0; } return pos; }
+		if(pos<0){ 
+			System.out.println("out");
+			return 0; } 
+		return pos; 
+	}
 	
 	private double limitVelo(double velo){
 		if(Math.abs(velo)>maxVelo){return maxVelo;} return velo;}

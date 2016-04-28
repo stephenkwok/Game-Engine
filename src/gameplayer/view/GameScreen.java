@@ -138,7 +138,6 @@ public class GameScreen extends Observable implements IGameScreen {
 	public void clearGame() {
 		myCamera.setTranslateX(0.0);
 		getMySubgroup().getChildren().clear();
-
 		// for(Node n: getMySubgroup().getChildren()){
 		// System.out.println("removing");
 		// getMySubgroup().getChildren().remove(n);

@@ -226,6 +226,14 @@ public class Game extends Observable implements Observer {
 		if (levels.size() >= info.getMyCurrentLevelNum() + 1) {
 			setCurrentLevel(info.getMyCurrentLevelNum() + 1);
 			levels.get(info.getMyCurrentLevelNum()).getMainCharacter().setX(0);
+		} else {
+			this.setChanged();
+	        ArrayList<String> myList = new ArrayList<String>();
+	        System.out.println("1");
+	        myList.add("endGame");
+	        System.out.println("2");
+	        this.notifyObservers(myList);
+	        System.out.println("3");
 		}
 	}
 
