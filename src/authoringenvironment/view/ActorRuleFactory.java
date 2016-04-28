@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.behaviors.IAuthoringBehavior;
+import gameengine.model.Actor;
 
 /**
  * Factory to create visual representations of triggers and actions that go into
