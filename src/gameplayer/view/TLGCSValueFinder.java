@@ -11,21 +11,24 @@ public class TLGCSValueFinder implements IValueFinder {
 	@Override
 	public Property<?> find(String key) {
 		Property<?> ret = null;
-		switch (key.toLowerCase()) {
-			case "points":
-				ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getProperty();
-				break;
-			case "health":
-				//
-				break;
-			case "ammo":
-				//
-				break;
-			default:
-				ret = new Property<String>("Value Not Found", key);
-				break;
+		try {
+			switch (key.toLowerCase()) {
+				case "points":
+						ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getProperty();
+					break;
+				case "health":
+					//
+					break;
+				case "ammo":
+					//
+					break;
+				default:
+					break;
+			}
+		} catch (Exception e) {
+			//do nothing
 		}
-		return ret;
+		return ret != null ? ret : new Property<String>("Value Not Found", key);
 	}
 
 	@Override
