@@ -1,9 +1,16 @@
 package gameengine.model;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Set;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import authoringenvironment.model.*;
+
+import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
 import javafx.geometry.Bounds;
@@ -41,10 +48,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private Set<ActorState> myStates;
     private Sprite mySprite;
     private NextValues myNextValues;
-
-
-	private boolean isMainPlayer;
-    private boolean isVisible;
     private double myRotate;
     private double myOpacity;
     private double myScaleX;
@@ -62,9 +65,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
         mySprite = new Sprite();
         myNextValues = new NextValues();
         setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
-        myRotate = myImageView.getRotate();
-        isMainPlayer = false;
-        isVisible = true;
         myRotate = myImageView.getRotate();
         myOpacity = myImageView.getOpacity();
         myScaleX = myImageView.getScaleX();
@@ -350,6 +350,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	public void setSize(double size) {
 		myImageView.setFitHeight(size);
 		myImageView.setPreserveRatio(true);
+		myImageViewSize = size;
 	}
 
 	@Override
@@ -383,6 +384,9 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		return myImageViewSize;
 	}
 
+	/**
+	 * Sets the Actor's unique ID number
+	 */
 	@Override
 	public void setID(int ID) {
 		myID = ID;
@@ -398,6 +402,9 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		return myHeading;
 	}
 
+	/**
+	 * Returns the Actor's unique ID number
+	 */
 	@Override
 	public int getID() {
 		return myID;
@@ -436,62 +443,70 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     public void nextImage(){
         myImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getNextImage())));
     }
-    
-    public void setIsMainPlayer(boolean isMainPlayer) {
-    	this.isMainPlayer = isMainPlayer;
-    }
-    
-    public boolean isMainPlayer() {
-    	return isMainPlayer;
-    }
 
-	public boolean isVisible() {
-		return isVisible;
-	}
-
-	public void setVisible(boolean isVisible) {
-		this.isVisible = isVisible;
-	}
-
+	/**
+	 * Sets the Actor's rotate property
+	 */
 	@Override
 	public void setRotate(double rotate) {
 		myImageView.setRotate(rotate);
 		myRotate = rotate;
 	}
 
+	/**
+	 * Returns the Actor's rotate property
+	 */
 	@Override
 	public double getRotate() {
 		return myRotate;
 	}
 
+	/**
+	 * Sets the Actor's opacity property
+	 */
 	@Override
 	public void setOpacity(double opacity) {
 		myImageView.setOpacity(opacity);
 		myOpacity = opacity;
 	}
 
+	/**
+	 * Returns the Actor's opacity property
+	 */
 	@Override
 	public double getOpacity() {
 		return myOpacity;
 	}
 
+	/**
+	 * Sets the Actor's scaleX property
+	 */
 	@Override
 	public void setScaleX(double scaleX) {
 		myScaleX = scaleX;
 		myImageView.setScaleX(scaleX);
 	}
 
+	/**
+	 * Returns the Actor's scaleX property
+	 */
 	@Override
 	public double getScaleX() {
 		return myScaleX;
 	}
 
+	/**
+	 * Returns the Actor's scaleY property
+	 */
 	@Override
 	public void setScaleY(double scaleY) {
 		myScaleY = scaleY;
 		myImageView.setScaleY(scaleY);
 	}
 
+	/**
+	 * Returns the Actor's scaleY property
+	 */
 	@Override
 	public double getScaleY() {
 		return myScaleY;
@@ -505,6 +520,16 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	@Override
 	public void setNextValues(NextValues myNextValues) {
 		this.myNextValues = myNextValues;
+	}
+
+	@Override
+	public void restoreImageView() {
+		myImageView = new ImageView(myImageViewName);
+		setSize(myImageViewSize);
+		setOpacity(myOpacity);
+		setRotate(myRotate);
+		setScaleX(myScaleX);
+		setScaleY(myScaleY);
 	}
 
 }

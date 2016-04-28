@@ -124,14 +124,7 @@ public class BaseScreenController extends BranchScreenController {
 	}
 	
 	@Override
-	public void invoke(String method, Class[] parameterTypes, Object[] parameters) {
-		try {
-			this.getClass().getDeclaredMethod(method, parameterTypes).invoke(this, parameters);
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
-				| SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+	public void invoke(String method, Class[] parameterTypes, Object[] parameters) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		this.getClass().getDeclaredMethod(method, parameterTypes).invoke(this, parameters);
 	}
-
 }
