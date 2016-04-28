@@ -29,7 +29,7 @@ public class TextAreaGameDescriptionEditor extends TextAreaParent {
 	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
-		setTextAreaPromptText(((GameInfo) getEditableElement()).getMyDescription());
+		setTextAreaText(((GameInfo) getEditableElement()).getMyDescription());
 	}
 
 }

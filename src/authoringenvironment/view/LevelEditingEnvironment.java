@@ -338,7 +338,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		if (arg == null) {
 			myLevelPreview.resizeBackgroundBasedOnScrolling();
 		} else {
-			myController.updateRefActorSize((IAuthoringActor) arg);
+			myController.updateRefActor((IAuthoringActor) arg);
 			myLevelPreview.addLevelActorsToScene();
 		}
 	}

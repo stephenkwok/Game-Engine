@@ -21,7 +21,7 @@ public class TickBehavior extends DoubleBehavior {
 	@Override
 	protected void createTriggerOrAction() {
 		List<Object> arguments = new ArrayList<>();
-		arguments.add((int) getValue());
+		arguments.add(getValue());
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
 		setTriggerOrAction();
 	}
