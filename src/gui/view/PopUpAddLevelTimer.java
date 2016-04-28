@@ -12,6 +12,14 @@ import authoringenvironment.view.LoseGameActionCreator;
 import authoringenvironment.view.NextLevelActionCreator;
 import authoringenvironment.view.WinGameActionCreator;
 import gameengine.controller.Level;
+import gameengine.model.Attribute;
+import gameengine.model.AttributeType;
+import gameengine.model.Rule;
+import gameengine.model.Actions.Action;
+import gameengine.model.Actions.ChangeAttribute;
+import gameengine.model.Triggers.AttributeReached;
+import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.TickTrigger;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -30,7 +38,7 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	private static final String SECONDS = "Seconds:";
 	private static final String ACTION_PROMPT = "Select";
 	private static final String DELIMITER = ",";
-	private static final String DONE = "Done";
+	private static final int ONE = 1;
 	private ResourceBundle myResources;
 	private TextField myInitialMinutes;
 	private TextField myInitialSeconds;
@@ -107,7 +115,44 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		}
 	}
 	
+	private int convertToTicks(TextField minutesBox, TextField secondsBox) {
+		int minutes = Integer.parseInt(minutesBox.getText());
+		int seconds = Integer.parseInt(secondsBox.getText());
+		return minutes * 60 + seconds;
+	}
+	
+	private void initializeAttribute(int initialValue) {
+		Attribute attribute = new Attribute(AttributeType.TIME, initialValue, myLevel);
+		myLevel.addAttribute(attribute);
+	}
+	
+	private void createAttributeReachedRule(int triggerValue) {
+		ITrigger trigger = new AttributeReached(myLevel, AttributeType.TIME, triggerValue);
+		Action action = ((IActionCreator) myActionCreator).createAction();
+		myLevel.addRule(new Rule(trigger, action));
+		this.closePopUp();
+	}
+	
+	private void createChangeAttributeRule(int initialValue, int triggerValue) {
+		int change = determineChange(initialValue, triggerValue);
+		ITrigger trigger = new TickTrigger(ONE);
+		Action action = new ChangeAttribute(myLevel, AttributeType.TIME, change);
+		myLevel.addRule(new Rule(trigger, action));
+	}
+	
 	private void createLevelTimer() {
-		
+		int initialTicks = convertToTicks(myInitialMinutes, myInitialSeconds);
+		int triggerTicks = convertToTicks(myTriggerMinutes, myTriggerSeconds);
+		initializeAttribute(initialTicks);
+		createAttributeReachedRule(triggerTicks);
+		createChangeAttributeRule(initialTicks, triggerTicks);
+	}
+	
+	private int determineChange(int initialValue, int triggerValue) {
+		if (initialValue > triggerValue) {
+			return -1;
+		} else {
+			return 1;
+		}
 	}
 }
