@@ -10,6 +10,7 @@ import gameengine.model.IGameElement;
 
 public class NextLevel extends Action {
 	private Actor assignedActor;
+	
 	public NextLevel(IGameElement assignedElement) {
 		super(assignedElement);
 	}

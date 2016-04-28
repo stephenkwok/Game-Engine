@@ -3,13 +3,9 @@ package gameengine.model.Actions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-
-import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorCopier;
 import gameengine.model.Actor;
-import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
-import javafx.scene.image.ImageView;
 
 
 public class Spawn extends ActorAction{
@@ -30,18 +26,25 @@ public class Spawn extends ActorAction{
 		
 		ActorCopier myActorCopier = new ActorCopier((Actor)mySpawnedActor);
 		Actor clone = myActorCopier.makeCopy();
-		
-		System.out.println(mySpawnedActor.getName());
 		clone.setHeading(getMyActor().getHeading());
-		clone.setX(getMyActor().getBounds().getMaxX());
-		clone.setY(getMyActor().getY());
 		
+		System.out.println(clone.getHeading());
+		
+		if(clone.getHeading() == 0){
+			clone.setX(getMyActor().getBounds().getMaxX());
+			clone.setY(getMyActor().getBounds().getMinY() + getMyActor().getBounds().getHeight()/2 - clone.getBounds().getHeight()/2);
+		}else if(clone.getHeading() == 180){
+			clone.setX(getMyActor().getBounds().getMinX()-clone.getBounds().getWidth());
+			clone.setY(getMyActor().getBounds().getMinY() + getMyActor().getBounds().getHeight()/2 - clone.getBounds().getHeight()/2);
+		}else{
+			clone.setX(getMyActor().getBounds().getMinX() +getMyActor().getBounds().getWidth()/2 - clone.getBounds().getWidth()/2);
+			clone.setY(getMyActor().getY()-clone.getBounds().getHeight());
+		}
 		getMyActor().changed();
 		List<Object> myList = new ArrayList<>();
 		myList.add("addActor");
 		myList.add(clone);
 
-		System.out.println("In Spawn Action");
 		((Observable) getMyActor()).notifyObservers(myList);
 	}
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.ImageEditingEnvironmentWithActor;
 import gameengine.controller.Level;
@@ -223,7 +225,7 @@ public class LevelPreview implements IGUI, Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		myLevelEditingEnvironment.getController().updateRefActorSize((IAuthoringActor) arg1);
+		myLevelEditingEnvironment.getController().updateRefActor((IAuthoringActor) arg1);
 		addLevelActorsToScene();
 	}
 }

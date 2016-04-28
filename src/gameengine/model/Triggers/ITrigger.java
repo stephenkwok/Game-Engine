@@ -7,7 +7,11 @@ package gameengine.model.Triggers;
  * @author blakekaplan
  */
 public class ITrigger {
-
+	
+	public Object[] getParameters(){
+		return new Object[]{};
+	}
+	
 	/**
 	 * Provides the name of the Trigger
 	 *

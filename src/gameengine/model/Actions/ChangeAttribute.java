@@ -17,6 +17,11 @@ public class ChangeAttribute extends Action {
         myType = type;
         myChange = change;
     }
+    
+    @Override
+    public Object[] getParameters(){
+    	return new Object[]{getGameElement(),myType,myChange};
+    }
 
     @Override
     public void perform() {

@@ -1,10 +1,15 @@
 package authoringenvironment.view;
 
+import java.util.List;
+
+import authoringenvironment.model.IAuthoringActor;
 import gui.view.ButtonFileChooserActorImage;
 import gui.view.ComboBoxActorImages;
+import gui.view.ComboBoxSpriteImages;
 import gui.view.IGUI;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -15,9 +20,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class GUIActorImageViewer implements IGUI {
+public class ActorImageViewer implements IGUI {
 	private static final String AVAILABLE_ACTOR_IMAGES = "Available Images";
+	private static final String AVAILABLE_SPRITE_IMAGES = "Available Sprites";
 	private static final String IMAGE_RESOURCE = "authoringimages";
+	private static final double DEFAULT_HEIGHT = 20;
 	private static final int PADDING = 10;
 	private static final String BUTTON_LABEL = "Load Image...";
 	private ImageView myActorIV;
@@ -32,7 +39,7 @@ public class GUIActorImageViewer implements IGUI {
 	 * @param myController
 	 * @param myActorIV
 	 */
-	public GUIActorImageViewer(ActorEditingEnvironment aEE, ImageView myActorIV) {
+	public ActorImageViewer(ActorEditingEnvironment aEE, ImageView myActorIV) {
 		this.aEE = aEE;
 		this.myActorIV = myActorIV;
 		initializeEnvironment();
@@ -47,13 +54,12 @@ public class GUIActorImageViewer implements IGUI {
 		VBox vbox = new VBox(PADDING);
 		HBox hbox = new HBox(PADDING);
 		hbox.setAlignment(Pos.CENTER);
-		// TODO: take out the null where the controller is later
 		ButtonFileChooserActorImage imageChooser = new ButtonFileChooserActorImage(BUTTON_LABEL, null, aEE,
 				aEE.getStage());
 		hbox.getChildren().addAll(myActorIV, imageChooser.createNode());
-		vbox.getChildren().addAll(hbox, getImagesComboBox());
+		vbox.getChildren().addAll(hbox, getImagesComboBox(), getSpritesComboBox());
 		myPane.getChildren().add(vbox);
-		myPane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		myPane.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 	}
 
 	/**
@@ -66,7 +72,30 @@ public class GUIActorImageViewer implements IGUI {
 		ComboBoxActorImages availableImages = new ComboBoxActorImages(AVAILABLE_ACTOR_IMAGES, IMAGE_RESOURCE, aEE);
 		return (HBox) availableImages.createNode();
 	}
+	
+	private VBox getSpritesComboBox(){
+		HBox sprites = new HBox(PADDING);
+		sprites.setPrefSize(100, 200);
+		populateSprites(sprites);
+		ComboBoxSpriteImages spriteImages = new ComboBoxSpriteImages(AVAILABLE_SPRITE_IMAGES, IMAGE_RESOURCE, aEE, sprites);
+		HBox spriteCombo = (HBox) spriteImages.createNode();
+		VBox toReturn = new VBox(PADDING);
+		toReturn.getChildren().addAll(spriteCombo, sprites);
+		toReturn.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		return toReturn;
+	}
 
+	private void populateSprites(HBox sprites){
+		List<String> spriteNames = ((IAuthoringActor) aEE.getEditable()).getSprite().getMyImages();
+		for(String imageName: spriteNames){
+			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+			ImageView imageView = new ImageView(image);
+			imageView.setFitHeight(DEFAULT_HEIGHT);
+			imageView.setPreserveRatio(true);
+			sprites.getChildren().add(imageView);
+		}
+	}
+			
 	/**
 	 * Return Pane representation of actor image viewer
 	 */

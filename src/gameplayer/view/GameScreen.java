@@ -1,9 +1,11 @@
 package gameplayer.view;
 
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.ResourceBundle;
-import java.util.Arrays;
+
 import gameengine.controller.Level;
+import gameengine.model.Actor;
 import gameengine.model.IActor;
 import gameengine.model.IDisplayActor;
 import gameengine.model.Triggers.ClickTrigger;
@@ -73,7 +75,8 @@ public class GameScreen extends Observable implements IGameScreen {
 	 *            an instance of IActor
 	 */
 	public void addActor(IDisplayActor actor) {
-		actor.setImageViewName(actor.getImageViewName());
+//		actor.setImageViewName(actor.getImageViewName());
+		((Actor) actor).restoreImageView();
 		getMySubgroup().getChildren().add(actor.getImageView());
 	}
 
@@ -262,5 +265,11 @@ public class GameScreen extends Observable implements IGameScreen {
 		});
 		
 	}
+
+	/*public void restartGame() {
+		clearGame();
+		
+		
+	}*/
 
 }

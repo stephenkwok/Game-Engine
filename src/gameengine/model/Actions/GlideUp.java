@@ -4,13 +4,13 @@ import gameengine.model.Actor;
 
 public class GlideUp extends GlidingAction {
 
-	public GlideUp(Actor assignedActor, double offset) {
+	public GlideUp(Actor assignedActor, Double offset) {
 		super(assignedActor, offset);
 	}
 
 	@Override
 	public void perform() {
-    	getMyActor().getPhysicsEngine().glideUp(getMyActor(),this.getGlideOffset());					
+		    getMyActor().getPhysicsEngine().glideDown(getMyActor(),this.getGlideOffset());					
 	}
 
 }

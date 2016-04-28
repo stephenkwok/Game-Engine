@@ -28,7 +28,6 @@ public class TLGCSValueFinder implements IValueFinder {
 		return ret;
 	}
 
-
 	@Override
 	public void setDataSource(Object dataSource) throws IllegalArgumentException {
 		if (dataSource instanceof Game) {
@@ -37,5 +36,6 @@ public class TLGCSValueFinder implements IValueFinder {
 			throw new IllegalArgumentException();
 		}
 	}
+
 
 }

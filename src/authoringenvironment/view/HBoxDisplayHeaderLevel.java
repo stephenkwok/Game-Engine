@@ -25,6 +25,9 @@ public class HBoxDisplayHeaderLevel extends HBoxDisplayHeader {
 		initializeReorderLevelsButton();
 	}
 
+	/**
+	 * Initializes the button that allows the author to reorder levels
+	 */
 	private void initializeReorderLevelsButton() {
 		ImageView myButtonImage = new ImageView(IMAGE_URL);
 		myButtonImage.setFitHeight(BUTTON_IMAGE_HEIGHT);

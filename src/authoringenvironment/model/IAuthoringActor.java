@@ -7,6 +7,7 @@ import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
+import gameengine.model.Sprite;
 import javafx.scene.image.ImageView;
 
 /**
@@ -144,6 +145,8 @@ public interface IAuthoringActor extends IEditableGameElement {
 
     void addSpriteImage(String newImage);
     
+    public Sprite getSprite();
+    
     public PhysicsEngine getPhysicsEngine();
     
     public void setPhysicsEngine(PhysicsEngine myPhysicsEngine);
@@ -164,4 +167,6 @@ public interface IAuthoringActor extends IEditableGameElement {
     public void setScaleY(double scaleY);
     
     public double getScaleY();
+    
+    public void restoreImageView();
 }

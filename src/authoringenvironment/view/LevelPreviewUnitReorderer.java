@@ -47,21 +47,17 @@ public class LevelPreviewUnitReorderer {
 		myLevelEditor = levelEditor;
 		myPreviewUnits = allPreviewUnits;
 		myMainScreen = mainScreen;
-		performErrorChecking();
+		initializeErrorChecking();
 	}
 
-	private void performErrorChecking() {
+	/**
+	 * Initializes error checking
+	 */
+	private void initializeErrorChecking() {
 		playPositions = new ArrayList<Integer>();
 		myLevelPreviewUnits.stream().forEach(display -> playPositions.add(display.getLevelPlayPosition()));
 		uniquePlayPositions = new HashSet<Integer>(playPositions);
 		Collections.sort(playPositions);
-		if (validDataEntered())
-			reorderLevels();
-		else {
-			@SuppressWarnings("unused")
-			PopUpParent errorNotification = new PopUpSimpleErrorMessage(POPUP_WIDTH, POPUP_HEIGHT, POPUP_BUTTON_TEXT,
-					POPUP_ERROR_MESSAGE);
-		}
 	}
 
 	/**
@@ -70,7 +66,8 @@ public class LevelPreviewUnitReorderer {
 	 * container so that preview units with earlier levels appear at the top of
 	 * the container
 	 */
-	private void reorderLevels() {
+	public void reorderLevels() {
+		if (!validDataEntered()) notifyAuthorOfError();
 		myLevelPreviewUnits.stream().forEach(unit -> unit.updateLevelPlayPosition());
 		myLevelPreviewUnits.clear();
 		myPreviewUnitsContainer.getChildren().clear();
@@ -78,6 +75,15 @@ public class LevelPreviewUnitReorderer {
 		myLevels.stream().forEach(level -> myMainScreen.createLevelPreviewUnit(level, myLevelEditor));
 		myPreviewUnits.stream().filter(unit -> myPreviewUnitsContainer.getChildren().contains(unit));
 		myMainScreen.updatePreviewUnits();
+	}
+	
+	/**
+	 * Notifies the author that invalid input was entered
+	 */
+	private void notifyAuthorOfError() {
+		@SuppressWarnings("unused")
+		PopUpParent errorNotification = new PopUpSimpleErrorMessage(POPUP_WIDTH, POPUP_HEIGHT, POPUP_BUTTON_TEXT,
+				POPUP_ERROR_MESSAGE);
 	}
 
 	/**

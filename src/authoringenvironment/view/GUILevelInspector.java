@@ -8,7 +8,10 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.LevelEditingEnvironment;
 import gui.view.ButtonFileChooserBackgroundImage;
 import gui.view.IGUI;
+import gui.view.PopUpAddLevelTimer;
+import gui.view.PopUpRuleAdder;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.Pane;
@@ -62,10 +65,15 @@ public class GUILevelInspector implements IGUI {
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
 		myAttributesTab = new TabFields(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, myLevelEditor.getLevel());
 		myAttributesTab.setObserver(myLevelEditor);
-
+		Button addRuleButton = new Button("Edit level rules");
+		addRuleButton.setOnAction(e -> new PopUpRuleAdder(300,300, myLevelEditor));
+		Button addTimerButton = new Button("Add a level timer");
+		addTimerButton.setOnAction(e -> new PopUpAddLevelTimer(300,300, myLevelEditor.getLevel()));
+		//PopUpRuleAdder adder = new PopUpRuleAdder(300,300);
 		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(BUTTON_LABEL, null, myLevelEditor, myLevelEditor.getStage());
 		myAttributesTab.addElement(button);
 		addTabToContainer(myAttributesTab, false);
+		myContainer.getChildren().addAll(addRuleButton, addTimerButton);
 		addTabToContainer(myActorsTab, true);
 	}
 

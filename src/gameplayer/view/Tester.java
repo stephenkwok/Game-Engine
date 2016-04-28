@@ -48,13 +48,6 @@ public class Tester extends Application {
         info.setMyCurrentLevelNum(0);
         info.setName("Colette");
 
-//		Map<String, Integer> options = new HashMap<>();
-//		options.put("Points", 0);
-
-
-        //info.setMyHUDOptions(options);
-
-
         IAuthoringActor actor1 = (IAuthoringActor) new Actor();
         actor1.setImageViewName("runningmario1.png");
         actor1.setName("A1");
@@ -82,14 +75,14 @@ public class Tester extends Application {
         ((IAuthoringActor)actor4).setImageViewName("goomba.png");
         ((Actor) actor4).setID(3);
         actor4.setX(315);
-        BottomCollision enemyTrigger = new BottomCollision((IPlayActor)actor4, (IPlayActor)actor2);
+        BottomCollision enemyTrigger = new BottomCollision((Actor)actor4, (Actor)actor2);
         Action enemyAction = new VerticalBounceCollision((Actor) actor4);
         Rule enemyRule = new Rule(enemyTrigger, enemyAction);
         ((Actor) actor4).addRule(enemyRule);
 
         //main character killed if it hits enemy from side or is bounced on by enemy
-        SideCollision kill = new SideCollision(actor4, (IPlayActor) actor1);
-        BottomCollision kill2 = new BottomCollision(actor4, (IPlayActor) actor1);
+        SideCollision kill = new SideCollision((Actor)actor4, (Actor) actor1);
+        BottomCollision kill2 = new BottomCollision((Actor)actor4, (Actor) actor1);
         Action killAction = new Destroy((Actor) actor1);
         Action killAction2 = new Destroy((Actor) actor1);
         Rule killRule = new Rule(kill, killAction);
@@ -98,12 +91,12 @@ public class Tester extends Application {
         ((Actor) actor4).addRule(killRule2);
 
         //main character kills enemy if it hits it from above
-        TopCollision kill3 = new TopCollision(actor4, (IPlayActor)actor1);
+        TopCollision kill3 = new TopCollision((Actor)actor4, (Actor)actor1);
         Action killAction3 = new Destroy((Actor) actor4);
         Rule killRule3 = new Rule(kill3, killAction3);
         ((Actor) actor4).addRule(killRule3);
         
-        SideCollision bulletKill = new SideCollision(actor4,(IPlayActor)spawnedActor);
+        SideCollision bulletKill = new SideCollision((Actor)actor4,(Actor)spawnedActor);
         Rule bulletKillRule  = new Rule(bulletKill, killAction3);
         actor4.addRule(bulletKillRule);
         
@@ -134,10 +127,10 @@ public class Tester extends Application {
 
         KeyTrigger trigger1 = new KeyTrigger(KeyCode.RIGHT);
         KeyTrigger trigger2 = new KeyTrigger(KeyCode.LEFT);
-        SideCollision trigger3 = new SideCollision((IPlayActor)actor1,(IPlayActor)actor2);
+        SideCollision trigger3 = new SideCollision((Actor)actor1,(Actor)actor2);
         KeyTrigger trigger4 = new KeyTrigger(KeyCode.SPACE);
-        BottomCollision trigger5 = new BottomCollision((IPlayActor)actor1,(IPlayActor)actor2);
-        SideCollision trigger6 = new SideCollision((IPlayActor)actor1,actor3);
+        BottomCollision trigger5 = new BottomCollision((Actor)actor1,(Actor)actor2);
+        SideCollision trigger6 = new SideCollision((Actor)actor1,(Actor)actor3);
         KeyTrigger trigger9 = new KeyTrigger(KeyCode.Z);
         Action action9 = new ChangeAttribute((IPlayActor)actor1,AttributeType.POINTS,1);
         Rule rule9 = new Rule(trigger9,action9);
@@ -145,7 +138,7 @@ public class Tester extends Application {
 
         KeyTrigger triggerSpawn = new KeyTrigger(KeyCode.S);
         TickTrigger bulletTick = new TickTrigger();
-        Action bulletAction = new GlideRight((Actor)spawnedActor,5.0);
+        Action bulletAction = new GlideForward((Actor)spawnedActor,2.5);
         Rule bulletRule = new Rule(bulletTick,bulletAction);
         spawnedActor.addRule(bulletRule);
         PhysicsEngine newPhysicsEngine = new PhysicsEngine();
@@ -186,13 +179,19 @@ public class Tester extends Application {
         actor1.addRule(new Rule(intTick, animate));
 
         actor1.addState(ActorState.MAIN);
-		Attribute points = new Attribute(AttributeType.POINTS,0,(IGameElement)actor1);
-		actor1.addAttribute(points);
-		
-		ITrigger attreached = new AttributeReached(AttributeType.POINTS, (IGameElement)actor1, 5);
+        actor1.addAttribute(new Attribute(AttributeType.POINTS, 0, (IPlayActor) actor1));
+        
+		ITrigger attreached = new AttributeReached((IGameElement)actor1, AttributeType.POINTS,5);
 		Action wingame = new WinGame((IPlayActor) actor1);
 		
 		actor1.addRule(new Rule(attreached,wingame));
+		
+		BottomCollision pls = new BottomCollision((Actor)actor1, (Actor)actor4); 
+		Action hello = new VerticalBounceCollision((Actor)actor1);
+		Rule lesads = new Rule(pls ,hello);
+		actor1.addRule(lesads);
+		
+		
 
         List<Level> levels = new ArrayList<Level>();
         Level level1 = new Level();
@@ -217,11 +216,11 @@ public class Tester extends Application {
             block.setImageViewName("salad2.png");
             block.setX(i*50+xposition);
             block.setY(i*50+yposition);
-            BottomCollision b = new BottomCollision((IPlayActor)actor1, block);
+            BottomCollision b = new BottomCollision((Actor)actor1, block);
             Action baction = new VerticalBounceCollision((Actor)actor1);
             Rule brule = new Rule(b, baction);
 
-            TopCollision b2 = new TopCollision((IPlayActor)actor1, block);
+            TopCollision b2 = new TopCollision((Actor)actor1, block);
             Action baction2 = new VerticalBounceCollision((Actor)actor1);
             Rule brule2 = new Rule(b2, baction2);
 
@@ -240,11 +239,11 @@ public class Tester extends Application {
             block2.setImageViewName("salad2.png");
             block2.setX(j*50+xposition2);
             block2.setY(j*50+yposition2);
-            BottomCollision b3 = new BottomCollision((IPlayActor)actor1, block2);
+            BottomCollision b3 = new BottomCollision((Actor)actor1, block2);
             Action baction3 = new VerticalBounceCollision((Actor)actor1);
             Rule brule3 = new Rule(b3, baction3);
 
-            TopCollision b4 = new TopCollision((IPlayActor)actor1, block2);
+            TopCollision b4 = new TopCollision((Actor)actor1, block2);
             Action baction4 = new VerticalBounceCollision((Actor)actor1);
             Rule brule4 = new Rule(b4, baction4);
 
@@ -290,7 +289,7 @@ public class Tester extends Application {
         Action translateaction = new MoveRight((Actor)a);
         a.addRule(new Rule(translatetick,translateaction));
         TickTrigger newtick = new TickTrigger(220);
-        Action newaction = new CreateActor((IPlayActor)actor1,(Actor)a,0,0);
+        Action newaction = new CreateActor((Actor)actor1,(Actor)a,0.0,0.0);
         //actor1.addRule(new Rule(newtick,newaction));
         
         
@@ -302,9 +301,9 @@ public class Tester extends Application {
             floor.setImageViewName("square.png");
             floor.setX(i*50+i);
             floor.setY(500-floor.getBounds().getHeight());
-            BottomCollision b = new BottomCollision((IPlayActor)actor1, floor);
-            BottomCollision b2 = new BottomCollision((IPlayActor)actor2, floor);
-            BottomCollision b3 = new BottomCollision(actor3, floor);
+            BottomCollision b = new BottomCollision((Actor)actor1, floor);
+            BottomCollision b2 = new BottomCollision((Actor)actor2, floor);
+            BottomCollision b3 = new BottomCollision((Actor)actor3, floor);
 
             Action baction = new VerticalStaticCollision((Actor)actor1);
             Action baction2 = new VerticalStaticCollision((Actor)actor2);
@@ -326,7 +325,7 @@ public class Tester extends Application {
         Scene scene = new Scene(group);
 
         Game model = new Game(info,levels);
-        model.setHUDInfoFile("hudfiles/test");
+        model.setHUDInfoFile("a.txt");
         
         CreatorController c = new CreatorController(model);
         c.saveForEditing(new File("gamefiles/test2.xml"));

@@ -59,17 +59,17 @@ public class FlappyBird extends Application {
         Actor pipeTop = new Actor();
         pipeTop.setID(10);
         pipeTop.setImageViewName("toppipe.png");
-        pipeTop.addRule(new Rule(new TickTrigger(20), new MoveLeft(pipeTop)));
+        pipeTop.addRule(new Rule(new TickTrigger(), new GlideLeft(pipeTop,7.0)));
 
         Actor pipeBottom = new Actor();
         pipeBottom.setID(11);
         pipeBottom.setImageViewName("bottompipe.png");
-        pipeBottom.addRule(new Rule(new TickTrigger(20), new MoveLeft(pipeBottom)));
+        pipeBottom.addRule(new Rule(new TickTrigger(), new GlideLeft(pipeBottom,7.0)));
 
         Actor invisibleLine = new Actor();
         invisibleLine.setID(12);
         invisibleLine.setImageViewName("gameside.png");
-        invisibleLine.addRule(new Rule(new TickTrigger(20), new MoveLeft(invisibleLine)));
+        invisibleLine.addRule(new Rule(new TickTrigger(), new GlideLeft(invisibleLine,7.0)));
 
         Actor gameSide = new Actor();
         gameSide.setX(-100);
@@ -83,13 +83,13 @@ public class FlappyBird extends Application {
 
 
 
-        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeTop, 1024, 1024, -100, 0)));
-        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeBottom, 1024, 1024, 350, 400)));
-        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, invisibleLine, 1024, 1024, 200, 200)));
+        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeTop, 1024.0, 1024.0, -100.0, 0.0)));
+        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeBottom, 1024.0, 1024.0, 350.0, 400.0)));
+        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, invisibleLine, 1024.0, 1024.0, 200.0, 200.0)));
 
         Actor player = new Actor();
         player.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new MoveUp(player)));
-        player.isMainPlayer();
+//        player.isMainPlayer();
         player.setID(1);
         player.setImageViewName("flappybird1.png");
         player.addSpriteImage("flappybird2.png");
@@ -106,7 +106,7 @@ public class FlappyBird extends Application {
         pipeTop.addRule(new Rule(new SideCollision(pipeTop, gameSide), new Destroy(pipeTop)));
         pipeBottom.addRule(new Rule(new SideCollision(pipeBottom, gameSide), new Destroy(pipeBottom)));
         
-        player.addAttribute(new Attribute(AttributeType.POINTS,15,player));
+        //player.addAttribute(new Attribute(AttributeType.POINTS,15,player));
         player.addState(ActorState.MAIN);
 
 
@@ -118,7 +118,7 @@ public class FlappyBird extends Application {
         Scene scene = new Scene(group);
 
         Game model = new Game(info, levels);
-        model.setHUDInfoFile("a.txt");
+        model.setHUDInfoFile("hudfiles/a.txt");
         CreatorController c = new CreatorController(model);
         c.saveForEditing(new File("gamefiles/FlappyBird.xml"));
         ParallelCamera camera = new ParallelCamera();

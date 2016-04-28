@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.behaviors.IAuthoringBehavior;
-import gameengine.model.Actor;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
 import gameengine.model.Rule;
@@ -104,19 +103,15 @@ public class ActorRule {
 	 */
 	private void addTriggerActionContainers() {
 		myTriggerNodes = new VBox(Integer.parseInt(myActorRuleResources.getString("Padding")));
-		myTriggerNodes.setPrefSize(
-				myRule.getPrefWidth() * Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")),
+		myTriggerNodes.setPrefSize(myRule.getPrefWidth() * Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")),
 				myRule.getPrefHeight() * Double.parseDouble(myActorRuleResources.getString("ContainerHeightPercent")));
 		myActionNodes = new VBox(Integer.parseInt(myActorRuleResources.getString("Padding")));
-		myActionNodes.setPrefSize(
-				myRule.getPrefWidth() * Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")),
+		myActionNodes.setPrefSize(myRule.getPrefWidth() * Double.parseDouble(myActorRuleResources.getString("ContainerWidthPercent")),
 				myRule.getPrefHeight() * Double.parseDouble(myActorRuleResources.getString("ContainerHeightPercent")));
 		ScrollPane trigNodesScroll = new ScrollPane(myTriggerNodes);
 		ScrollPane actNodesScroll = new ScrollPane(myActionNodes);
-		myRule.add(trigNodesScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")),
-				Integer.parseInt(myActorRuleResources.getString("TriggerRow")));
-		myRule.add(actNodesScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")),
-				Integer.parseInt(myActorRuleResources.getString("ActionRow")));
+		myRule.add(trigNodesScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")),Integer.parseInt(myActorRuleResources.getString("TriggerRow")));
+		myRule.add(actNodesScroll, Integer.parseInt(myActorRuleResources.getString("DefaultCol")),Integer.parseInt(myActorRuleResources.getString("ActionRow")));
 	}
 
 	/**
@@ -126,16 +121,13 @@ public class ActorRule {
 		Button close = new Button(myActorRuleResources.getString("Close"));
 		close.setOnAction(event -> {
 			int index = 0;
-			// remove actions first, then trigger
-			while (authoringBehaviorMap.size() != 1) { // no loop to avoid
-														// concurrent
-														// modification
+			while (authoringBehaviorMap.size() > 1) { // remove actions first, then trigger, no loop to avoid concurrent modification
 				if (!isITrigger(new ArrayList<IAuthoringBehavior>(authoringBehaviorMap.keySet()).get(index))) {
 					remove(new ArrayList<IAuthoringBehavior>(authoringBehaviorMap.keySet()).get(index));
 				} else
 					index++;
 			}
-			remove(new ArrayList<IAuthoringBehavior>(authoringBehaviorMap.keySet()).get(FIRST_INDEX));
+			if(authoringBehaviorMap.size() != 0) remove(new ArrayList<IAuthoringBehavior>(authoringBehaviorMap.keySet()).get(FIRST_INDEX));
 			myActorRuleCreator.removeActorRule(this);
 		});
 		myRule.add(close, Integer.parseInt(myActorRuleResources.getString("CloseCol")),
@@ -245,7 +237,6 @@ public class ActorRule {
 		if(myActorRuleCreator.isNewlyReturned()){
 			myActorRuleCreator.setNewlyReturned(false);
 			((IAuthoringActor) myActorRuleCreator.getActor()).getRules().clear();
-			System.out.println("cleared oops");
 		}
 		if (myTrigger == null || myActions.size() == 0) {
 			showAlert(myActorRuleResources.getString("SomethingNotSet"), myActorRuleResources.getString("SetBoth"));

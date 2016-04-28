@@ -89,20 +89,20 @@ public class PhysicsEngine {
 		a1.setX(applyForce(a1.getX(),-offset));
 	}
 	public void glideUp(IPlayActor a1, double offset){
-		a1.setY(applyForce(a1.getY(),offset));
+		a1.setY(applyForce(a1.getY(),-offset));
 	}
 	public void glideDown(IPlayActor a1, double offset){
-		a1.setY(applyForce(a1.getY(),-offset));
+		a1.setY(applyForce(a1.getY(),offset));
 	}
 	
 	public void glideForward(IPlayActor a1, double offset) {
 		a1.setX(applyForce(a1.getX(),offset*(Math.cos(Math.toRadians(a1.getHeading())))));
-		a1.setY(applyForce(a1.getY(),  offset*(Math.sin(Math.toRadians(a1.getHeading()))))-gravity);
+		a1.setY(applyForce(a1.getY(),  -offset*(Math.sin(Math.toRadians(a1.getHeading())))));
 	}
 
 	public void glideBackward(IPlayActor a1, double offset) {
 		a1.setX(applyForce(a1.getX(),-offset*(Math.cos(Math.toRadians(a1.getHeading())))));
-		a1.setY(applyForce(a1.getY(),-offset*(Math.sin(Math.toRadians(a1.getHeading()))))-gravity);
+		a1.setY(applyForce(a1.getY(),-offset*(Math.sin(Math.toRadians(a1.getHeading())))));
 	}
 	private double bound(double pos){
 		if(pos<0){ return 0; } return pos; }
@@ -111,23 +111,31 @@ public class PhysicsEngine {
 		if(Math.abs(velo)>maxVelo){return maxVelo;} return velo;}
 	
 	public void staticVerticalCollision(IPlayActor a1){
-		a1.setY(a1.getY()-a1.getVeloY());
-		a1.setVeloY(0);
+//		a1.setY(a1.getY()-a1.getVeloY());
+//		a1.setVeloY(0);
+		setNextVals(a1,a1.getX(),a1.getY()-a1.getVeloY(),a1.getVeloX(), 0 );
 	}
 
 	public void staticHorizontalCollision(IPlayActor a1) {
-		a1.setX(a1.getX() - (a1.getVeloX() * bounce));
-		a1.setVeloX(0);
+//		a1.setX(a1.getX() - (a1.getVeloX() * bounce));
+//		a1.setVeloX(0);
+		setNextVals(a1, a1.getX()-(a1.getVeloX() * bounce) , a1.getY() , 0 , a1.getVeloY()-gravity );
 	}
 
 	public void elasticHorizontalCollision(IPlayActor a1) {
-		a1.setX(a1.getX() - (a1.getVeloX() * bounce));
-		a1.setVeloX(-horizontalForce * (a1.getVeloX() / Math.abs(a1.getVeloX())));
+//		a1.setX(a1.getX() - (a1.getVeloX() * bounce));
+//		a1.setVeloX(-horizontalForce * (a1.getVeloX() / Math.abs(a1.getVeloX())));
+		
+		setNextVals(a1, a1.getX()-(a1.getVeloX() * bounce) , a1.getY() , -horizontalForce * (a1.getVeloX() / Math.abs(a1.getVeloX())) , a1.getVeloY() );
+
 	}
 
 	public void elasticVerticalCollision(IPlayActor a1) {
-		a1.setY(a1.getY() - (a1.getVeloY() * bounce));
-		a1.setVeloY(-horizontalForce * (a1.getVeloY() / Math.abs(a1.getVeloY())));
+//		a1.setY(a1.getY() - (a1.getVeloY() * bounce));
+//		a1.setVeloY(-horizontalForce * (a1.getVeloY() / Math.abs(a1.getVeloY())));
+		
+		setNextVals(a1,a1.getX(),a1.getY() - (a1.getVeloY() * bounce),a1.getVeloX(), -horizontalForce * (a1.getVeloY() / Math.abs(a1.getVeloY())) );
+
 	}
 
 	public void setHorizontalForce(double horizontalForce) {
@@ -152,6 +160,17 @@ public class PhysicsEngine {
 
 	public void setBounce(double bounce) {
 		this.bounce = bounce;
+	}
+	
+	public void setNextVals(IPlayActor a1, double x, double y, double xVelo, double yVelo){
+		if(!a1.getNextValues().hadCollision()){
+			a1.getNextValues().setNextXPos(x);
+			a1.getNextValues().setNextYPos(y);
+			a1.getNextValues().setNextXVelo(xVelo);
+			a1.getNextValues().setNextYVelo(yVelo);
+			a1.getNextValues().setCollisoin(true);
+		}
+		
 	}
 
 }

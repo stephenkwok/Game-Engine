@@ -8,17 +8,24 @@ import javafx.geometry.Bounds;
  */
 public class ClickTrigger extends ITrigger {
 
-    private double myX;
-    private double myY;
+    private Double myX;
+    private Double myY;
     private IGameElement myGameElement;
 
     public ClickTrigger(IGameElement gameElement) {
         myGameElement = gameElement;
     }
 
-    public ClickTrigger(double x, double y) {
+    public ClickTrigger(Double x, Double y) {
         myX = x;
         myY = y;
+    }
+    
+    public Object[] getParameters(){
+    	if(myGameElement!=null){
+    		return new Object[]{myGameElement};
+    	}
+		return new Object[]{myX,myY};
     }
 
     @Override
@@ -33,10 +40,6 @@ public class ClickTrigger extends ITrigger {
     public double getMyY() {
         return myY;
     }
-    /*
-    public IGameElement getMyGameElement() {
-    	return myGameElement;
-    }*/
 
     /**
      * Checks a boolean condition against the state of an actor

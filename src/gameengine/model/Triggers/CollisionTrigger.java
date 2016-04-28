@@ -9,13 +9,18 @@ public abstract class CollisionTrigger extends ITrigger {
 	private IPlayActor myMainActor;
 	private IPlayActor myCollisionActor;
 
-	@Override
-	public abstract boolean evaluate(ITrigger otherTrigger);
-
-	public CollisionTrigger(IPlayActor actor1, IPlayActor actor2) {
+	public CollisionTrigger(Actor actor1, Actor actor2) {
 		myMainActor = actor1;
 		myCollisionActor = actor2;
 	}
+	
+	@Override
+	public Object[] getParameters(){
+		return new Object[]{myMainActor,myCollisionActor};
+	}
+	
+	@Override
+	public abstract boolean evaluate(ITrigger otherTrigger);
 
 	@Override
 	public abstract String getMyKey();
