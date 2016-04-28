@@ -29,7 +29,7 @@ public class ChangeAttributeBehavior extends DoubleBehavior {
 	@Override
 	protected void createTriggerOrAction() {
 		List<Object> arguments = new ArrayList<>();
-		arguments.add((IPlayActor) myActor);
+		arguments.add(myActor);
 		if (getBehaviorType().equals(CHANGE_HEALTH))
 			arguments.add(AttributeType.HEALTH);
 		else
