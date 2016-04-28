@@ -525,6 +525,8 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	@Override
 	public void restoreImageView() {
 		myImageView = new ImageView(myImageViewName);
+		setX(x);
+		setY(y);
 		setSize(myImageViewSize);
 		setOpacity(myOpacity);
 		setRotate(myRotate);

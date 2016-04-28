@@ -179,9 +179,8 @@ public class Tester extends Application {
         actor1.addRule(new Rule(intTick, animate));
 
         actor1.addState(ActorState.MAIN);
-		//Attribute points = new Attribute(AttributeType.POINTS,0,(IGameElement)actor1);
-		//actor1.addAttribute(points);
-		
+        actor1.addAttribute(new Attribute(AttributeType.POINTS, 0, (IPlayActor) actor1));
+        
 		ITrigger attreached = new AttributeReached((IGameElement)actor1, AttributeType.POINTS,5);
 		Action wingame = new WinGame((IPlayActor) actor1);
 		
