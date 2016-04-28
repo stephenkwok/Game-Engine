@@ -23,18 +23,21 @@
       <string>gamefiles/loaders/FlappyBird_loader.xml</string>
       <tree-map>
         <entry>
-          <string>Carine</string>
-          <int>15</int>
+          <string>Colete</string>
+          <int>65</int>
         </entry>
         <entry>
-          <string>Test</string>
-          <int>15</int>
+          <string>Colette</string>
+          <int>135</int>
         </entry>
-      </tree-map>
-    </entry>
-    <entry>
-      <string>gamefiles/loaders/FlappyBird_loader.xml</string>
-      <tree-map>
+        <entry>
+          <string>Colette1</string>
+          <int>0</int>
+        </entry>
+        <entry>
+          <string>Colette2</string>
+          <int>25</int>
+        </entry>
         <entry>
           <string>m</string>
           <int>0</int>

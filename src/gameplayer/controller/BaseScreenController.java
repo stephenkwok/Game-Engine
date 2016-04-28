@@ -47,7 +47,7 @@ public class BaseScreenController extends BranchScreenController {
 		this.myScreen = new BaseScreen();
 		this.myScreen.addObserver(this);
 		setUpGameScreen();
-		setUpHUDScreen();
+		//setUpHUDScreen();
 		setMyScreen(this.myScreen);
 	}
 

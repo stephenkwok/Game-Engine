@@ -6,12 +6,12 @@ import gameengine.model.IPlayActor;
 
 public class ApplyPhysics extends ActorAction {
 
-	public ApplyPhysics(Actor actor) {
-		super(actor);
+	public ApplyPhysics(Actor actor, Boolean oneTime) {
+		super(actor, oneTime);
 	}
 
 	@Override
-	public void perform() {
+	public void execute() {
 		getMyActor().getPhysicsEngine().tick(getMyActor());
 
 	}

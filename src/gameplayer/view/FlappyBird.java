@@ -59,17 +59,17 @@ public class FlappyBird extends Application {
         Actor pipeTop = new Actor();
         pipeTop.setID(10);
         pipeTop.setImageViewName("toppipe.png");
-        pipeTop.addRule(new Rule(new TickTrigger(), new GlideLeft(pipeTop,7.0)));
+        pipeTop.addRule(new Rule(new TickTrigger(), new GlideLeft(pipeTop,7.0,false)));
 
         Actor pipeBottom = new Actor();
         pipeBottom.setID(11);
         pipeBottom.setImageViewName("bottompipe.png");
-        pipeBottom.addRule(new Rule(new TickTrigger(), new GlideLeft(pipeBottom,7.0)));
+        pipeBottom.addRule(new Rule(new TickTrigger(), new GlideLeft(pipeBottom,7.0,false)));
 
         Actor invisibleLine = new Actor();
         invisibleLine.setID(12);
         invisibleLine.setImageViewName("gameside.png");
-        invisibleLine.addRule(new Rule(new TickTrigger(), new GlideLeft(invisibleLine,7.0)));
+        invisibleLine.addRule(new Rule(new TickTrigger(), new GlideLeft(invisibleLine,7.0,false)));
 
         Actor gameSide = new Actor();
         gameSide.setX(-100);
@@ -83,30 +83,29 @@ public class FlappyBird extends Application {
 
 
 
-        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeTop, 1024.0, 1024.0, -100.0, 0.0)));
-        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeBottom, 1024.0, 1024.0, 350.0, 400.0)));
-        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, invisibleLine, 1024.0, 1024.0, 200.0, 200.0)));
+        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeTop, 1024.0, 1024.0, -100.0, 0.0,false)));
+        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeBottom, 1024.0, 1024.0, 350.0, 400.0,false)));
+        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, invisibleLine, 1024.0, 1024.0, 200.0, 200.0,false)));
 
         Actor player = new Actor();
-        player.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new MoveUp(player)));
-//        player.isMainPlayer();
+        player.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new MoveUp(player,false)));
         player.setID(1);
         player.setImageViewName("flappybird1.png");
         player.addSpriteImage("flappybird2.png");
         player.addSpriteImage("flappybird3.png");
 
-        player.addRule(new Rule(new SideCollision(player,pipeTop), new LoseGame(player)));
-        player.addRule(new Rule(new BottomCollision(player, pipeBottom), new LoseGame(level1)));
-        player.addRule(new Rule(new SideCollision(player,pipeBottom), new LoseGame(player)));
-        player.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player)));
-        player.addRule(new Rule(new SideCollision(player, invisibleLine), new ChangeAttribute(player,AttributeType.POINTS,10)));
-        player.addRule(new Rule(new BottomCollision(player, floor), new LoseGame(level1)));
-        player.addRule(new Rule(new TickTrigger(5), new NextImage(player)));
+        player.addRule(new Rule(new SideCollision(player,pipeTop), new LoseGame(player,false)));
+        player.addRule(new Rule(new BottomCollision(player, pipeBottom), new LoseGame(level1,false)));
+        player.addRule(new Rule(new SideCollision(player,pipeBottom), new LoseGame(player,false)));
+        player.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player,false)));
+        player.addRule(new Rule(new SideCollision(player, invisibleLine), new ChangeAttribute(player,AttributeType.POINTS,1,true)));
+        player.addRule(new Rule(new BottomCollision(player, floor), new LoseGame(level1,true)));
+        player.addRule(new Rule(new TickTrigger(5), new NextImage(player,false)));
 
-        pipeTop.addRule(new Rule(new SideCollision(pipeTop, gameSide), new Destroy(pipeTop)));
-        pipeBottom.addRule(new Rule(new SideCollision(pipeBottom, gameSide), new Destroy(pipeBottom)));
+        pipeTop.addRule(new Rule(new SideCollision(pipeTop, gameSide), new Destroy(pipeTop,true)));
+        pipeBottom.addRule(new Rule(new SideCollision(pipeBottom, gameSide), new Destroy(pipeBottom,true)));
         
-        //player.addAttribute(new Attribute(AttributeType.POINTS,15,player));
+        player.addAttribute(new Attribute(AttributeType.POINTS,0,player));
         player.addState(ActorState.MAIN);
 
 

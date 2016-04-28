@@ -10,12 +10,12 @@ import gameengine.model.IPlayActor;
  */
 public class Destroy extends ActorAction {
 
-	public Destroy(Actor assignedActor) {
-		super(assignedActor);
+	public Destroy(Actor assignedActor, Boolean oneTime) {
+		super(assignedActor, oneTime);
 	}
 
 	@Override
-	public void perform() {
+	public void execute() {
 		getMyActor().addState(ActorState.DEAD);
 	}
 

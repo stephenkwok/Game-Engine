@@ -59,7 +59,6 @@ public class GameController extends Observable implements Observer, IGameControl
 	@Override
 	public void setGame(Game myGame) {
 		model = myGame;
-		System.out.println(model);
 		model.addObserver(this);
 	}
 
@@ -178,7 +177,7 @@ public class GameController extends Observable implements Observer, IGameControl
 		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException
 				| InvocationTargetException | NoSuchMethodException e1) {
 			// TODO Auto-generated catch block
-			System.out.println("FUUUUUUCK UGH");
+			System.out.println("in gamecontroller class update UGH");
 			e1.printStackTrace();
 		}
 	}

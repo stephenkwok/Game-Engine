@@ -12,17 +12,17 @@ public class Spawn extends ActorAction{
 
 	IPlayActor mySpawnedActor;
 	
-	public Spawn(Actor actor1, Actor spawnedActor) {
-		super(actor1);
+	public Spawn(Actor actor1, Actor spawnedActor, Boolean oneTime) {
+		super(actor1, oneTime);
 		mySpawnedActor  = (IPlayActor) spawnedActor;
 	}
 	
 	@Override
 	public Object[] getParameters(){
-		return new Object[]{getMyActor(),mySpawnedActor};
+		return new Object[]{getMyActor(),mySpawnedActor,isOneTime()};
 	}
 	
-	public void perform() {
+	public void execute() {
 		
 		ActorCopier myActorCopier = new ActorCopier((Actor)mySpawnedActor);
 		Actor clone = myActorCopier.makeCopy();

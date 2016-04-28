@@ -7,10 +7,10 @@ import gameengine.model.Actor;
  */
 public abstract class MovingAction extends ActorAction {
 
-	public MovingAction(Actor actor) {
-		super(actor);
+	public MovingAction(Actor actor, Boolean oneTime) {
+		super(actor, oneTime);
 	}
 
 	@Override
-	public abstract void perform();
+	public abstract void execute();
 }

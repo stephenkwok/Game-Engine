@@ -9,8 +9,8 @@ import gameengine.model.IGameElement;
  */
 public abstract class ActorAction extends Action {
 
-    public ActorAction(Actor assignedActor){
-        super((IGameElement)assignedActor);
+    public ActorAction(Actor assignedActor, Boolean oneTime){
+        super((IGameElement)assignedActor, oneTime);
     }
 
     public IPlayActor getMyActor(){
@@ -21,5 +21,5 @@ public abstract class ActorAction extends Action {
      * The perform command that will implement the functionality unique to each Action type
      */
     @Override
-    public abstract void perform();
+    public abstract void execute();
 }

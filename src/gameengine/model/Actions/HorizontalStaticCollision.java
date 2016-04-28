@@ -12,12 +12,12 @@ import gameengine.model.Actor;
 
 public class HorizontalStaticCollision extends ActorAction{
 
-	public HorizontalStaticCollision(Actor actor) {
-		super(actor);
+	public HorizontalStaticCollision(Actor actor, Boolean oneTime) {
+		super(actor, oneTime);
 	}
 
 	@Override
-	public void perform() {
+	public void execute() {
 		getMyActor().getPhysicsEngine().staticHorizontalCollision(getMyActor());
 	}
 

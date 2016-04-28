@@ -26,15 +26,15 @@ public class MoveRight extends MovingAction {
 	 * @param args
 	 *            The arguments required to perform the change
 	 */
-	public MoveRight(Actor actor) {
-		super(actor);
+	public MoveRight(Actor actor, Boolean oneTime) {
+		super(actor, oneTime);
 	}
 	
 	/**
 	 * Moves the Actor to the right by the distance provided in the arguments
 	 */
 	@Override
-	public void perform() {
+	public void execute() {
 		getMyActor().getPhysicsEngine().moveRight(getMyActor());
 		getMyActor().setHeading(0);
 		getMyActor().setDirection();

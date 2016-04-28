@@ -7,8 +7,8 @@ import gameengine.model.Actor;
  */
 public class NextImage extends ActorAction {
 
-	public NextImage(Actor assignedActor) {
-		super(assignedActor);
+	public NextImage(Actor assignedActor, Boolean oneTime) {
+		super(assignedActor, oneTime);
 	}
 
 	/**
@@ -16,7 +16,7 @@ public class NextImage extends ActorAction {
 	 * Action type
 	 */
 	@Override
-	public void perform() {
+	public void execute() {
 		getMyActor().nextImage();
 		getMyActor().changed();
 	}

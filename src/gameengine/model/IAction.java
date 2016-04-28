@@ -16,6 +16,6 @@ public interface IAction {
 	 * subclass
 	 */
 
-	public void perform();
+	public void execute();
 
 }

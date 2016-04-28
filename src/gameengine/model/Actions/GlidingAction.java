@@ -8,14 +8,14 @@ public abstract class GlidingAction extends ActorAction {
 
 	Double glideOffset;
 	
-	public GlidingAction(Actor actor,Double offset) {
-		super(actor);
+	public GlidingAction(Actor actor,Double offset, Boolean oneTime) {
+		super(actor, oneTime);
 		glideOffset = offset;
 	}
 	
 	@Override
 	public Object[] getParameters(){
-		return new Object[]{getMyActor(),glideOffset};
+		return new Object[]{getMyActor(),glideOffset, isOneTime()};
 	}
 
 	public Double getGlideOffset() {
@@ -23,6 +23,6 @@ public abstract class GlidingAction extends ActorAction {
 	}
 	
 	@Override
-	public abstract void perform();
+	public abstract void execute();
 
 }

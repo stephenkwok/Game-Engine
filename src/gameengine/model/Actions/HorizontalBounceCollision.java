@@ -13,12 +13,12 @@ import gameengine.model.IPlayActor;
 
 public class HorizontalBounceCollision extends ActorAction{
 
-	public HorizontalBounceCollision(Actor assignedActor) {
-		super(assignedActor);
+	public HorizontalBounceCollision(Actor assignedActor, Boolean oneTime) {
+		super(assignedActor, oneTime);
 	}
 
 	@Override
-	public void perform() {
+	public void execute() {
 		getMyActor().getPhysicsEngine().elasticHorizontalCollision(getMyActor());
 	}
 

@@ -20,15 +20,15 @@ public class MoveForward extends MovingAction {
 	 * @param args
 	 *            The arguments required to perform the change
 	 */
-	public MoveForward(Actor actor) {
-		super(actor);
+	public MoveForward(Actor actor, Boolean oneTime) {
+		super(actor, oneTime);
 	}
 
 	/**
 	 * Moves the Actor forwards
 	 */
 	@Override
-	public void perform() {
+	public void execute() {
 		getMyActor().getPhysicsEngine().moveForward(getMyActor());
 
 	}

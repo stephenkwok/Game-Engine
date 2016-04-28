@@ -11,12 +11,12 @@ import gameengine.model.Actor;
 
 public class VerticalBounceCollision extends ActorAction{
 
-	public VerticalBounceCollision(Actor actor) {
-		super(actor);
+	public VerticalBounceCollision(Actor actor, Boolean oneTime) {
+		super(actor, oneTime);
 	}
 
 	@Override
-	public void perform() {
+	public void execute() {
 		getMyActor().getPhysicsEngine().elasticVerticalCollision(getMyActor());
 	}
 

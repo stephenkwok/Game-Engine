@@ -21,14 +21,14 @@ public class CreateActor extends Action {
     Double myMaxY;
     boolean isRandom;
 	
-	public CreateActor(IGameElement element, Actor toCopy, Double x, Double y) {
-		super(element);
+	public CreateActor(IGameElement element, Actor toCopy, Double x, Double y, Boolean oneTime) {
+		super(element, oneTime);
 		myX = x;
 		myY = y;
 	}
 
-    public CreateActor(IGameElement element, Actor toCopy, Double minX, Double maxX, Double minY, Double maxY){
-        super(element);
+    public CreateActor(IGameElement element, Actor toCopy, Double minX, Double maxX, Double minY, Double maxY, Boolean oneTime){
+        super(element, oneTime);
         myActorToCopy = toCopy;
         isRandom = true;
         myMaxX = maxX;
@@ -40,13 +40,13 @@ public class CreateActor extends Action {
     @Override
     public Object[] getParameters(){
     	if(isRandom){
-    		return new Object[]{getGameElement(),myActorToCopy,myMinY,myMaxX,myMinY,myMaxY};
+    		return new Object[]{getGameElement(),myActorToCopy,myMinY,myMaxX,myMinY,myMaxY, isOneTime()};
     	}
-    	return new Object[]{getGameElement(),myActorToCopy,myX,myY};
+    	return new Object[]{getGameElement(),myActorToCopy,myX,myY, isOneTime()};
     }
     
 	@Override
-	public void perform() {
+	public void execute() {
 		ActorCopier copier = new ActorCopier(myActorToCopy);
 		cloneActor = copier.makeCopy();
         if (isRandom){

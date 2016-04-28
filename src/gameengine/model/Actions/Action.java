@@ -17,25 +17,46 @@ import gameengine.model.*;
 public abstract class Action implements IAction {
 
     private IGameElement myGameElement;
+    private boolean oneTime; 
+    private boolean performed;
 
     /**
      * Creates a reference to the Actor that will be changed
      *
      * @param myElement The Actor that will be changed
      */
-    public Action(IGameElement myElement) {
+    public Action(IGameElement myElement, Boolean oneTime) {
         myGameElement = myElement;
+        this.oneTime = oneTime;
+        this.performed = false;
+    }
+    
+    public Action(IGameElement myElement) {
+    	this(myElement,false);
     }
     
     public Object[] getParameters(){
-    	return new Object[]{myGameElement};
+    	return new Object[]{myGameElement,oneTime};
+    }
+    
+    public boolean isOneTime(){
+    	return oneTime;
+    }
+    
+    public void perform(){
+    	if(!performed){
+        	execute();
+    	}
+    	if(oneTime){
+    		performed = true;
+    	}
     }
     
     /**
      * The perform command that will implement the functionality unique to each Action type
      */
     @Override
-    public abstract void perform();
+    public abstract void execute();
 
     /**
      * Provides the Actor linked to the Action

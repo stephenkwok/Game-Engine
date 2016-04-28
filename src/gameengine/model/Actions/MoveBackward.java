@@ -18,15 +18,15 @@ public class MoveBackward extends MovingAction {
 	 * @param args
 	 *            The arguments required to perform the change
 	 */
-	public MoveBackward(Actor actor) {
-		super(actor);
+	public MoveBackward(Actor actor, Boolean oneTime) {
+		super(actor, oneTime);
 	}
 
 	/**
 	 * Moves the Actor forwards
 	 */
 	@Override
-	public void perform() {
+	public void execute() {
 		getMyActor().getPhysicsEngine().moveBackward(getMyActor());
 	}
 

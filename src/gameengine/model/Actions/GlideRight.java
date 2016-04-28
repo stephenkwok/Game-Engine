@@ -16,15 +16,15 @@ public class GlideRight extends GlidingAction {
      * 
      * @param assignedActor The Actor that will be changed
      */
-	public GlideRight(Actor assignedActor, Double offset) {
-		super(assignedActor, offset);
+	public GlideRight(Actor assignedActor, Double offset, Boolean oneTime) {
+		super(assignedActor, offset, oneTime);
 	}
 
 	/**
 	 * Moves the Actor to the right through gliding
 	 */
 	@Override
-	public void perform() {
+	public void execute() {
     	getMyActor().getPhysicsEngine().glideRight(getMyActor(),this.getGlideOffset());		
 
 	}

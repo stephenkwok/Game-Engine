@@ -15,13 +15,13 @@ public class MoveLeft extends MovingAction {
 
 	private static final double LEFT_DIRECTION = 180;
 
-	public MoveLeft(Actor actor) {
-		super(actor);
+	public MoveLeft(Actor actor, Boolean oneTime) {
+		super(actor, oneTime);
 	}
 
 	@Override
 
-	public void perform() {
+	public void execute() {
 		getMyActor().getPhysicsEngine().moveLeft(getMyActor());
 		getMyActor().setHeading(180);
 		getMyActor().setDirection();

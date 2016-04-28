@@ -9,12 +9,12 @@ import gameengine.model.Actor;
  */
 public class UpdateActor extends MovingAction {
 
-	public UpdateActor(Actor assignedActor) {
-		super(assignedActor);
+	public UpdateActor(Actor assignedActor, Boolean oneTime) {
+		super(assignedActor, oneTime);
 	}
 
 	@Override
-	public void perform() {
+	public void execute() {
 		getMyActor().getPhysicsEngine().tick(getMyActor());
 	}
 
