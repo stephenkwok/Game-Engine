@@ -6,7 +6,6 @@ import voogasalad.util.hud.source.*;
 
 public class TLGCSValueFinder implements IValueFinder {
 
-	private HUDController controller;
 	private Game data; //for other projects, your data will be a different class
 	
 	@Override
@@ -26,15 +25,9 @@ public class TLGCSValueFinder implements IValueFinder {
 				ret = new Property("Value Not Found", key);
 				break;
 		}
-		ret.addObserver(controller);
 		return ret;
 	}
-
-	@Override
-	public void setController(HUDController controller) {
-		this.controller = controller;
-	}
-
+	
 	@Override
 	public void setDataSource(Object dataSource) throws IllegalArgumentException {
 		if (dataSource instanceof Game) {

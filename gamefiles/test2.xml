@@ -99,9 +99,9 @@
                                   <myTrigger class="gameengine.model.Triggers.TickTrigger">
                                     <myInterval>1</myInterval>
                                   </myTrigger>
-                                  <myAction class="gameengine.model.Actions.GlideRight">
+                                  <myAction class="gameengine.model.Actions.GlideForward">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                                    <glideOffset>5.0</glideOffset>
+                                    <glideOffset>2.5</glideOffset>
                                   </myAction>
                                   <ID>0</ID>
                                 </gameengine.model.Rule>
@@ -2941,7 +2941,27 @@
             </myRules>
           </myRuleManager>
           <myAttributeManager>
-            <attributeMap/>
+            <attributeMap>
+              <entry>
+                <gameengine.model.AttributeType>POINTS</gameengine.model.AttributeType>
+                <gameengine.model.Attribute>
+                  <changed>false</changed>
+                  <obs/>
+                  <myValue>
+                    <changed>false</changed>
+                    <obs/>
+                    <value class="int">0</value>
+                    <bindings/>
+                    <name>A1POINTS</name>
+                  </myValue>
+                  <myTriggerValues>
+                    <int>5</int>
+                  </myTriggerValues>
+                  <myType>POINTS</myType>
+                  <myOwner class="gameengine.model.Actor" reference="../../../../.."/>
+                </gameengine.model.Attribute>
+              </entry>
+            </attributeMap>
           </myAttributeManager>
           <myStates>
             <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>

@@ -10,9 +10,9 @@ public class TextFieldActorHealthEditor extends TextFieldWithButton {
 
 	public TextFieldActorHealthEditor(String labelText, String promptText, Double textFieldWidth) {
 		super(labelText, promptText, textFieldWidth);
-		Actor a = (Actor) getEditableElement();
-		setButtonAction(e -> a.addAttribute(
-				new Attribute(AttributeType.HEALTH, Integer.parseInt(getTextFieldInput()), (IGameElement) a)));
+		setButtonAction(e -> {
+			((Actor) getEditableElement()).addAttribute(new Attribute(AttributeType.HEALTH, (int) Double.parseDouble((getTextFieldInput())), (IGameElement) getEditableElement()));
+		});
 	}
 
 	/**

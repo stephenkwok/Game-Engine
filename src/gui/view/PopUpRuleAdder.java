@@ -22,6 +22,7 @@ import authoringenvironment.view.CreateActorActionCreator;
 import authoringenvironment.view.KeyTriggerCreator;
 import authoringenvironment.view.LevelEditingEnvironment;
 import authoringenvironment.view.LoseGameActionCreator;
+import authoringenvironment.view.NextLevelActionCreator;
 import authoringenvironment.view.TickTriggerCreator;
 import authoringenvironment.view.TriggerFactory;
 import authoringenvironment.view.WinGameActionCreator;
@@ -39,15 +40,11 @@ import gameengine.model.Triggers.ITrigger;
  */
 public class PopUpRuleAdder extends PopUpParent implements Observer {
 	private static final String RESOURCE = "ruleAdder";
-	private static final String CLASS = "Class";
-	private static final String PARAMS = "Params";
 	private static final String TRIGGERS = "Triggers";
 	private static final String ACTIONS = "Actions";
 	private static final String DELIMITER = ",";
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
-	private static final String TRIGGER_DIRECTORY = "gameengine.model.Triggerss";
-	private static final String ACTION_DIRECTORY = "gameengine.model.Actions";
 	private static final String CREATE_RULE = "Create rule";
 	private VBox myTriggerContainer;
 	private ComboBoxLevelTriggerAndAction myTriggerComboBox;
@@ -56,8 +53,6 @@ public class PopUpRuleAdder extends PopUpParent implements Observer {
 	private ResourceBundle myResources;
 	private String myTriggerName;
 	private String myActionName;
-	private ActionFactory myActionFactory;
-	private TriggerFactory myTriggerFactory;
 	private VBox myTriggerCreator;
 	private VBox myActionCreator;
 	private Button myButton;
@@ -69,8 +64,6 @@ public class PopUpRuleAdder extends PopUpParent implements Observer {
 		myResources = ResourceBundle.getBundle(RESOURCE);
 		myLevel = environment.getLevel();
 		myLevelEditor = environment;
-		myActionFactory = new ActionFactory();
-		myTriggerFactory = new TriggerFactory();
 		myButton = new Button(CREATE_RULE);
 		myButton.setOnAction(e -> createAndAddRule());
 		init();
@@ -130,6 +123,10 @@ public class PopUpRuleAdder extends PopUpParent implements Observer {
 			break;
 		case "ChangeAttribute":
 			myActionCreator = new AttributeTriggerAndActionCreator(myResources, myLevel, myLevelEditor, "ChangeAttributeLabelText");
+			break;
+		case "NextLevel":
+			myActionCreator = new NextLevelActionCreator(myLevel);
+			break;
 		}
 		myActionContainer.getChildren().add(myActionCreator);
 	}

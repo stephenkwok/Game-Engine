@@ -94,20 +94,20 @@ public class PhysicsEngine {
 		a1.setX(applyForce(a1.getX(),-offset));
 	}
 	public void glideUp(IPlayActor a1, double offset){
-		a1.setY(applyForce(a1.getY(),offset));
+		a1.setY(applyForce(a1.getY(),-offset));
 	}
 	public void glideDown(IPlayActor a1, double offset){
-		a1.setY(applyForce(a1.getY(),-offset));
+		a1.setY(applyForce(a1.getY(),offset));
 	}
 	
 	public void glideForward(IPlayActor a1, double offset) {
 		a1.setX(applyForce(a1.getX(),offset*(Math.cos(Math.toRadians(a1.getHeading())))));
-		a1.setY(applyForce(a1.getY(),  offset*(Math.sin(Math.toRadians(a1.getHeading()))))-gravity);
+		a1.setY(applyForce(a1.getY(),  -offset*(Math.sin(Math.toRadians(a1.getHeading())))));
 	}
 
 	public void glideBackward(IPlayActor a1, double offset) {
 		a1.setX(applyForce(a1.getX(),-offset*(Math.cos(Math.toRadians(a1.getHeading())))));
-		a1.setY(applyForce(a1.getY(),-offset*(Math.sin(Math.toRadians(a1.getHeading()))))-gravity);
+		a1.setY(applyForce(a1.getY(),-offset*(Math.sin(Math.toRadians(a1.getHeading())))));
 	}
 	private double bound(double pos){
 		if(pos<0){ 

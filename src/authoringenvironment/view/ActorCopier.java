@@ -88,6 +88,7 @@ public class ActorCopier {
 		toUpdate.setOpacity(toCopy.getOpacity());
 		toUpdate.setScaleX(toCopy.getScaleX());
 		toUpdate.setScaleY(toCopy.getScaleY());
+		toUpdate.setStates(toCopy.getStates());
 		copyRules(toUpdate, toCopy.getRules());
 		copyAttributes((IGameElement) toUpdate, toCopy.getAttributeMap());
 	}
@@ -128,6 +129,7 @@ public class ActorCopier {
 	}
 	
 	private ITrigger createTrigger(ITrigger trigger, Actor toUpdate) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		System.out.println("triggerkey " + trigger.getMyKey());
 		Object[] params = trigger.getParameters();
 		if(params[0].getClass().equals(Actor.class)&&((Actor)params[0]).getID()==toUpdate.getID()){
 			params[0] = toUpdate;

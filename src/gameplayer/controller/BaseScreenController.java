@@ -33,6 +33,7 @@ public class BaseScreenController extends BranchScreenController {
 	private ResourceBundle myResources;
 	@XStreamOmitField
 	private BaseScreen myScreen;
+	@XStreamOmitField
 	private GameController myGameController;
 	@XStreamOmitField
 	private HUDController myHUDController;
@@ -50,7 +51,7 @@ public class BaseScreenController extends BranchScreenController {
 		this.myScreen = new BaseScreen();
 		this.myScreen.addObserver(this);
 		setUpGameScreen();
-//		setUpHUDScreen();
+		setUpHUDScreen();
 		setMyScreen(this.myScreen);
 	}
 
@@ -66,6 +67,7 @@ public class BaseScreenController extends BranchScreenController {
 		togglePause();
 		try {
 			myGameController.getGame().deleteObservers();
+			myHUDController.linkHandleController(false); //same as .uninit()
 			CreatorController c = new CreatorController(myGameController.getGame());
 			FileChooser fileChooser = new FileChooser();
 			File initialDirectory = new File("gamefiles");
@@ -74,6 +76,8 @@ public class BaseScreenController extends BranchScreenController {
 			if (file != null) {
 				c.saveForPlaying(file);
 			}
+			myGameController.getGame().addObserver(myGameController);
+			setUpHUDScreen();
 			
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
 			e.printStackTrace();
@@ -124,6 +128,7 @@ public class BaseScreenController extends BranchScreenController {
 		myHUDController = new HUDController();
 		myHUDController.init(myGameController.getGame().getHUDInfoFile(), myGameController.getGame(), new TLGCSValueFinder());
 		myScreen.setHUDScreen(myHUDController.getView());
+		
 	}
 	
 	@Override

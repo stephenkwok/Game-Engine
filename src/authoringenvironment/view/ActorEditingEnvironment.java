@@ -9,7 +9,6 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.model.Actor;
-import gui.view.GUILibrary;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -39,7 +38,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final int ICON_HEIGHT = 75;
 	private static final String NEW_RULE_LABEL = "New Rule";
 	private static final String ACTOR_OPTIONS_RESOURCE = "actorEditorOptions";
-	private static final String ACTOR_ATTRIBUTES = "Actor Attributes";
+	private static final String ACTOR_CHARACTERISTICS = "Actor Characteristics";
 	private static final int BUTTON_HEIGHT = 30;
 	private static final int BUTTON_WIDTH = 100;
 	private static final int LEFT_PANE_WIDTH = 350;
@@ -101,17 +100,21 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	 */
 	private void setLeftPane() {
 		VBox vbox = new VBox();
-		fields = new TabFields(myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
-		fields.setObserver(this);
-		fields.updateEditable(myActor);
-		TabPane attributeTP = new TabPane();
-		attributeTP.getTabs().add(fields.getTab());
-		attributeTP.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		library = new GUILibrary(myActorRuleCreator);
 		actorImageViewer = new ActorImageViewer(this, myActorIV);
-		vbox.getChildren().addAll(actorImageViewer.getPane(), attributeTP, library.getPane());
+		vbox.getChildren().addAll(actorImageViewer.getPane(), actorCharacteristics(), library.getPane());
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
 		myRoot.setLeft(vbox);
+	}
+	
+	private TabPane actorCharacteristics(){
+		fields = new TabFields(myResources, ACTOR_CHARACTERISTICS, ACTOR_OPTIONS_RESOURCE, myActor);
+		fields.setObserver(this);
+		fields.updateEditable(myActor);
+		TabPane actorCharacteristics = new TabPane();
+		actorCharacteristics.getTabs().add(fields.getTab());
+		actorCharacteristics.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+		return actorCharacteristics;
 	}
 
 	/**
@@ -189,7 +192,6 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	public void setActorImage(ImageView newImageView, String imageViewName) {
 		myActor.setImageView(newImageView);
 		myActor.setImageViewName(imageViewName);
-		System.out.println("here: " + myActor.getPhysicsEngine());
 		myActorIV = new ImageviewActorIcon(myActor, ICON_HEIGHT);
 		setLeftPane();
 	}

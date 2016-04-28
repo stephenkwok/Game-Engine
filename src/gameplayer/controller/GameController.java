@@ -35,9 +35,6 @@ public class GameController extends Observable implements Observer, IGameControl
 	@XStreamOmitField
 	private GameScreen view;
 	@XStreamOmitField
-	private AbstractHUDScreen hud;
-
-	@XStreamOmitField
 	private ResourceBundle myResources;
 	@XStreamOmitField
 	private static final String GAME_CONTROLLER_RESOURCE = "gameActions";
@@ -74,9 +71,6 @@ public class GameController extends Observable implements Observer, IGameControl
 		view.addObserver(this);
 	}
 
-	public void setHUD(AbstractHUDScreen hud) {
-		this.hud = hud;
-	}
 
 	/**
 	 * Will initialize the backend (game engine) with the current level's
@@ -141,6 +135,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void nextLevel() {
 		view.clearGame();
 		model.nextLevel();
+		model.resetLevelTime();
 		begin();
 	}
 
@@ -164,7 +159,7 @@ public class GameController extends Observable implements Observer, IGameControl
 		String methodName = (String) myList.get(0);
 
 		try {
-			if(methodName.equals("addActor")){ //TODO: Change to reflection, pass in Actor object from arg.get(1)
+			if(methodName.equals("addActor")){ 
 				this.addActor((Actor)myList.get(1));
 			}else
 			if (myResources.getString(methodName).equals("null")) {

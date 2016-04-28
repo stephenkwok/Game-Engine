@@ -21,11 +21,32 @@
     </entry>
     <entry>
       <string>gamefiles/loaders/FlappyBird_loader.xml</string>
+<<<<<<< HEAD
       <tree-map/>
     </entry>
     <entry>
       <string>C:\Users\Stephen\workspace\voogasalad_LoopsGoatCheeseSalad\gamefiles\loaders\StephenFlappyBird</string>
       <tree-map/>
+=======
+      <tree-map>
+        <entry>
+          <string>Carine</string>
+          <int>625</int>
+        </entry>
+        <entry>
+          <string>Michael</string>
+          <int>455</int>
+        </entry>
+        <entry>
+          <string>m</string>
+          <int>0</int>
+        </entry>
+        <entry>
+          <string>michael f</string>
+          <int>1035</int>
+        </entry>
+      </tree-map>
+>>>>>>> 0c493b5379356187b7c4cd5524a93705cf95234f
     </entry>
   </myScores>
 </gameengine.controller.HighScoresKeeper>

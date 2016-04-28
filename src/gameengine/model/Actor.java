@@ -439,6 +439,10 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	public void addSpriteImage(String newImage) {
 		mySprite.addImage(newImage);
 	}
+	
+	public Sprite getSprite(){
+		return this.mySprite;
+	}
 
     public void nextImage(){
         myImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getNextImage())));
@@ -533,5 +537,19 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		setScaleX(myScaleX);
 		setScaleY(myScaleY);
 	}
+
+	@Override
+	public void setVisibility() {
+		myImageView.setVisible(!checkState(ActorState.INVISIBLE));
+	}
+	
+	public Set<ActorState> getStates() {
+		return myStates;
+	}
+	
+	public void setStates(Set<ActorState> states) {
+		myStates = states;
+	}
+	
 
 }

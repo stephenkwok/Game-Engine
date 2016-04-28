@@ -1,9 +1,6 @@
 package gui.view;
 
 import java.util.List;
-
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingElement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -30,20 +27,17 @@ public abstract class ComboBoxParent extends EditingElementParent {
 	private static final int BUTTON_WIDTH = 40;
 	private String promptText;
 	private ObservableList<String> options;
-	private List<String> optionsList;
 	private ComboBox<String> comboBox;
 	private Button comboButton;
-	private String paletteSource;
 	private String labelText;
-	private IEditableGameElement myEditableElement;
-	private Label myLabel;
+	private HBox hbox;
 
 	public ComboBoxParent(String promptText) {
 		super(GO);
 		this.promptText = promptText;
 		this.labelText = null;
-		this.myEditableElement = null;
 		this.comboButton = getButton();
+		hbox = new HBox(HBOX_SPACING);
 	}
 
 	/**
@@ -51,7 +45,6 @@ public abstract class ComboBoxParent extends EditingElementParent {
 	 */
 	@Override
 	public Node createNode() {
-		HBox hbox = new HBox(HBOX_SPACING);
 		options = FXCollections.observableArrayList(getOptionsList());
 		addLabel(hbox);
 		comboBox = new ComboBox<>(options);
@@ -156,7 +149,11 @@ public abstract class ComboBoxParent extends EditingElementParent {
 	 * 
 	 * @return combobox.
 	 */
-	public ComboBox<String> getComboBox() {
+	protected ComboBox<String> getComboBox() {
 		return comboBox;
+	}
+	
+	protected HBox getHBox(){
+		return this.hbox;
 	}
 }

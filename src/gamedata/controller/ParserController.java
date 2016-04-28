@@ -2,6 +2,8 @@ package gamedata.controller;
 
 import java.io.File;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gamedata.XMLParser;
 import gameengine.controller.Game;
 
@@ -42,7 +44,8 @@ public class ParserController implements IParserController {
 					XMLgame.getAnimation(),
 					XMLgame.getCurrentActors(),
 					XMLgame.getDeadActors(),
-					XMLgame.getCount());
+					XMLgame.getLevelTime(),
+					XMLgame.getGlobalTime());
 		}
 	}
 
