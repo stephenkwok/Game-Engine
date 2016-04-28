@@ -63,7 +63,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private static final String SPLASH_IMAGE_NAME = "salad.png";
 	private static final String EDITING_CONTROLLER_RESOURCE = "editingActions";
 	private static final String REQUIRES_ARG = "RequiresArg";
-	private static final String PRESET_ACTORS_RESOURCE = "presetActorsFactoryFlappyBird";
+	private static final String PRESET_ACTORS_RESOURCE = "presetActorsFactory";
 	private List<Level> myLevels;
 	private List<String> myLevelNames;
 	private Map<IAuthoringActor, List<IAuthoringActor>> myActorMap;
@@ -436,7 +436,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		}
 	}
 
-	public void updateRefActorSize(IAuthoringActor actor) {
+	public void updateRefActor(IAuthoringActor actor) {
 		for (IAuthoringActor refActor : myActorMap.keySet()) {
 			if (myActorMap.get(refActor).contains(actor)) {
 				refActor.setSize(actor.getSize());
@@ -449,7 +449,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
+		@SuppressWarnings("unchecked")
 		List<Object> arguments = (List<Object>) notifyObserversArgument;
 		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
 		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);

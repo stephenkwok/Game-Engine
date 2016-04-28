@@ -87,7 +87,7 @@
           <changed>false</changed>
           <obs/>
           <x>21.0</x>
-          <y>247.0</y>
+          <y>262.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>
@@ -95,7 +95,7 @@
           <myID>1</myID>
           <myImageViewName>flappybird1.png</myImageViewName>
           <myHeading>0.0</myHeading>
-          <myImageViewSize>0.0</myImageViewSize>
+          <myImageViewSize>36.230769230769226</myImageViewSize>
           <myRuleManager>
             <myRules/>
           </myRuleManager>
@@ -610,98 +610,6 @@
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>
-          <myName>Flappy Bird</myName>
-          <myID>1</myID>
-          <myImageViewName>flappybird1.png</myImageViewName>
-          <myHeading>0.0</myHeading>
-          <myImageViewSize>0.0</myImageViewSize>
-          <myRuleManager>
-            <myRules/>
-          </myRuleManager>
-          <myAttributeManager>
-            <attributeMap/>
-          </myAttributeManager>
-          <myStates>
-            <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
-          </myStates>
-          <mySprite>
-            <myImages>
-              <string>flappybird1.png</string>
-            </myImages>
-            <spriteIndex>0</spriteIndex>
-          </mySprite>
-          <myNextValues>
-            <nextXVelo>0.0</nextXVelo>
-            <nextXPos>0.0</nextXPos>
-            <nextYVelo>0.0</nextYVelo>
-            <nextYPos>0.0</nextYPos>
-            <collision>false</collision>
-          </myNextValues>
-          <myRotate>0.0</myRotate>
-          <myOpacity>1.0</myOpacity>
-          <myScaleX>1.0</myScaleX>
-          <myScaleY>1.0</myScaleY>
-        </gameengine.model.Actor>
-        <list>
-          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]"/>
-        </list>
-      </entry>
-      <entry>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs/>
-          <x>0.0</x>
-          <y>0.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myFriction>0.0</myFriction>
-          <myName>Bottom Pipe</myName>
-          <myID>6</myID>
-          <myImageViewName>bottompipelong.png</myImageViewName>
-          <myHeading>0.0</myHeading>
-          <myImageViewSize>214.53125</myImageViewSize>
-          <myRuleManager>
-            <myRules/>
-          </myRuleManager>
-          <myAttributeManager>
-            <attributeMap/>
-          </myAttributeManager>
-          <myStates/>
-          <mySprite>
-            <myImages>
-              <string>bottompipelong.png</string>
-            </myImages>
-            <spriteIndex>0</spriteIndex>
-          </mySprite>
-          <myNextValues>
-            <nextXVelo>0.0</nextXVelo>
-            <nextXPos>0.0</nextXPos>
-            <nextYVelo>0.0</nextYVelo>
-            <nextYPos>0.0</nextYPos>
-            <collision>false</collision>
-          </myNextValues>
-          <myRotate>0.0</myRotate>
-          <myOpacity>1.0</myOpacity>
-          <myScaleX>1.0</myScaleX>
-          <myScaleY>1.0</myScaleY>
-        </gameengine.model.Actor>
-        <list>
-          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[2]"/>
-          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[5]"/>
-          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[7]"/>
-          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[9]"/>
-          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[11]"/>
-        </list>
-      </entry>
-      <entry>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs/>
-          <x>0.0</x>
-          <y>0.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myFriction>0.0</myFriction>
           <myName>Top Pipe</myName>
           <myID>3</myID>
           <myImageViewName>toppipelong.png</myImageViewName>
@@ -787,6 +695,98 @@
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>
+          <myName>Bottom Pipe</myName>
+          <myID>6</myID>
+          <myImageViewName>bottompipelong.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>214.53125</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite>
+            <myImages>
+              <string>bottompipelong.png</string>
+            </myImages>
+            <spriteIndex>0</spriteIndex>
+          </mySprite>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <list>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[2]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[5]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[7]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[9]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[11]"/>
+        </list>
+      </entry>
+      <entry>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>0.0</x>
+          <y>0.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Flappy Bird</myName>
+          <myID>1</myID>
+          <myImageViewName>flappybird1.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>36.230769230769226</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates>
+            <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
+          </myStates>
+          <mySprite>
+            <myImages>
+              <string>flappybird1.png</string>
+            </myImages>
+            <spriteIndex>0</spriteIndex>
+          </mySprite>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <list>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]"/>
+        </list>
+      </entry>
+      <entry>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>0.0</x>
+          <y>0.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
           <myName>Floor</myName>
           <myID>8</myID>
           <myImageViewName>solid_floor.png</myImageViewName>
@@ -822,6 +822,44 @@
           <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[13]"/>
           <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[14]"/>
           <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[15]"/>
+          <gameengine.model.Actor>
+            <changed>false</changed>
+            <obs/>
+            <x>0.0</x>
+            <y>0.0</y>
+            <veloX>0.0</veloX>
+            <veloY>0.0</veloY>
+            <myFriction>0.0</myFriction>
+            <myName>Floor</myName>
+            <myID>8</myID>
+            <myImageViewName>solid_floor.png</myImageViewName>
+            <myHeading>0.0</myHeading>
+            <myImageViewSize>450.0</myImageViewSize>
+            <myRuleManager>
+              <myRules/>
+            </myRuleManager>
+            <myAttributeManager>
+              <attributeMap/>
+            </myAttributeManager>
+            <myStates/>
+            <mySprite>
+              <myImages>
+                <string>solid_floor.png</string>
+              </myImages>
+              <spriteIndex>0</spriteIndex>
+            </mySprite>
+            <myNextValues>
+              <nextXVelo>0.0</nextXVelo>
+              <nextXPos>0.0</nextXPos>
+              <nextYVelo>0.0</nextYVelo>
+              <nextYPos>0.0</nextYPos>
+              <collision>false</collision>
+            </myNextValues>
+            <myRotate>0.0</myRotate>
+            <myOpacity>1.0</myOpacity>
+            <myScaleX>1.0</myScaleX>
+            <myScaleY>1.0</myScaleY>
+          </gameengine.model.Actor>
         </list>
       </entry>
     </myActorMap>
