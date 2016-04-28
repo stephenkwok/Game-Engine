@@ -4,7 +4,7 @@ import gameengine.model.Actor;
 
 public class GlideUp extends GlidingAction {
 
-	public GlideUp(Actor assignedActor, double offset) {
+	public GlideUp(Actor assignedActor, Double offset) {
 		super(assignedActor, offset);
 	}
 
