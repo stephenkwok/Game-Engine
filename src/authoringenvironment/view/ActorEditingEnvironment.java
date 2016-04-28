@@ -52,7 +52,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	private IAuthoringActor myActor;
 	private ImageView myActorIV;
 
-	private GUIActorImageViewer actorImageViewer;
+	private ActorImageViewer actorImageViewer;
 	private ActorRuleCreator myActorRuleCreator;
 	private GridPane myActorRuleCreatorPane;
 
@@ -103,12 +103,12 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		VBox vbox = new VBox();
 		fields = new TabFields(myResources, ACTOR_ATTRIBUTES, ACTOR_OPTIONS_RESOURCE, myActor);
 		fields.setObserver(this);
-//		fields.updateEditable(myActor);
+		fields.updateEditable(myActor);
 		TabPane attributeTP = new TabPane();
 		attributeTP.getTabs().add(fields.getTab());
 		attributeTP.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		library = new GUILibrary(myActorRuleCreator);
-		actorImageViewer = new GUIActorImageViewer(this, myActorIV);
+		actorImageViewer = new ActorImageViewer(this, myActorIV);
 		vbox.getChildren().addAll(actorImageViewer.getPane(), attributeTP, library.getPane());
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
 		myRoot.setLeft(vbox);

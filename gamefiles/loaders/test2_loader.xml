@@ -138,8 +138,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -241,8 +239,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -290,8 +286,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -339,8 +333,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -388,8 +380,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -437,8 +427,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -486,8 +474,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -535,8 +521,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -584,8 +568,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -633,8 +615,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -682,8 +662,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -731,8 +709,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -780,8 +756,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -829,8 +803,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -878,8 +850,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -927,8 +897,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -976,8 +944,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1025,8 +991,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1074,8 +1038,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1123,8 +1085,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1172,8 +1132,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1221,8 +1179,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1270,8 +1226,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1319,8 +1273,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1368,8 +1320,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1417,8 +1367,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1466,8 +1414,6 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
@@ -1500,8 +1446,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -1815,8 +1759,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -1869,8 +1811,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -1918,8 +1858,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -1967,8 +1905,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -2016,8 +1952,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -2065,8 +1999,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -2114,8 +2046,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -2163,8 +2093,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -2212,8 +2140,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -2266,8 +2192,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -2320,8 +2244,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -2374,8 +2296,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -2428,8 +2348,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -2626,8 +2544,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -3044,8 +2960,6 @@
             <nextYPos>0.0</nextYPos>
             <collision>false</collision>
           </myNextValues>
-          <isMainPlayer>false</isMainPlayer>
-          <isVisible>true</isVisible>
           <myRotate>0.0</myRotate>
           <myOpacity>1.0</myOpacity>
           <myScaleX>1.0</myScaleX>

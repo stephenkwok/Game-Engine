@@ -15,7 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class GUIActorImageViewer implements IGUI {
+public class ActorImageViewer implements IGUI {
 	private static final String AVAILABLE_ACTOR_IMAGES = "Available Images";
 	private static final String IMAGE_RESOURCE = "authoringimages";
 	private static final int PADDING = 10;
@@ -32,7 +32,7 @@ public class GUIActorImageViewer implements IGUI {
 	 * @param myController
 	 * @param myActorIV
 	 */
-	public GUIActorImageViewer(ActorEditingEnvironment aEE, ImageView myActorIV) {
+	public ActorImageViewer(ActorEditingEnvironment aEE, ImageView myActorIV) {
 		this.aEE = aEE;
 		this.myActorIV = myActorIV;
 		initializeEnvironment();
