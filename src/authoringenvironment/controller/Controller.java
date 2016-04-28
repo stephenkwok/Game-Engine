@@ -28,6 +28,7 @@ import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 import gameplayer.controller.BranchScreenController;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;

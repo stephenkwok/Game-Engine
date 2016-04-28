@@ -2,17 +2,12 @@ package gameengine.controller;
 
 import java.util.*;
 
-import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamInclude;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
-import javafx.collections.ObservableMap;
 import javafx.util.Duration;
 
 /**
@@ -133,6 +128,7 @@ public class Game extends Observable implements Observer {
 		for (IPlayActor actor : currentActors) {
 			((Observable) actor).addObserver(this);
 			actor.setPhysicsEngine(myPhysicsEngine);
+			actor.setVisibility();
 		}
 	}
 

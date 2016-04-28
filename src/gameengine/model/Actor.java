@@ -534,4 +534,18 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		setScaleY(myScaleY);
 	}
 
+	@Override
+	public void setVisibility() {
+		myImageView.setVisible(!checkState(ActorState.INVISIBLE));
+	}
+	
+	public Set<ActorState> getStates() {
+		return myStates;
+	}
+	
+	public void setStates(Set<ActorState> states) {
+		myStates = states;
+	}
+	
+
 }
