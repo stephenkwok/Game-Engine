@@ -57,4 +57,8 @@ public class Sprite {
 	public void clear() {
 		myImages.clear();
 	}
+	
+	public List<String> getMyImages(){
+		return this.myImages;
+	}
 }
