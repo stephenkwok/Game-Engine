@@ -393,43 +393,25 @@ public class Game extends Observable implements Observer {
 		return myCollisionDetector;
 	}
 
-
-
-
 	public Map<String, Set<IGameElement>> getActiveTriggers() {
 		return activeTriggers;
 	}
-
-
-
 
 	public void setActiveTriggers(Map<String, Set<IGameElement>> activeTriggers) {
 		this.activeTriggers = activeTriggers;
 	}
 
-
-
-
 	public int getLevelTime() {
 		return levelTime;
 	}
-
-
-
 
 	public void setLevelTime(int step) {
 		this.levelTime = step;
 	}
 
-
-
-
 	public int getGlobalTime() {
 		return globalTime;
 	}
-
-
-
 
 	public void setGlobalTime(int globalTime) {
 		this.globalTime = globalTime;
