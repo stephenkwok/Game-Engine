@@ -432,7 +432,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		}
 	}
 
-	public void updateRefActorSize(IAuthoringActor actor) {
+	public void updateRefActor(IAuthoringActor actor) {
 		for (IAuthoringActor refActor : myActorMap.keySet()) {
 			if (myActorMap.get(refActor).contains(actor)) {
 				refActor.setSize(actor.getSize());
@@ -445,7 +445,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
+		@SuppressWarnings("unchecked")
 		List<Object> arguments = (List<Object>) notifyObserversArgument;
 		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
 		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
