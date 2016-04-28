@@ -13,7 +13,7 @@ public class TLGCSValueFinder implements IValueFinder {
 		try {
 			switch (key.toLowerCase()) {
 				case "points":
-						ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getProperty();
+					ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getProperty();
 					break;
 				case "health":
 					//
@@ -25,7 +25,7 @@ public class TLGCSValueFinder implements IValueFinder {
 					break;
 			}
 		} catch (Exception e) {
-			//do nothing, keep as null
+			e.printStackTrace();
 		}
 		return ret != null ? ret : new Property<String>("Value Not Found", key);
 	}
