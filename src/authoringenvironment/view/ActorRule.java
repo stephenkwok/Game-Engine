@@ -245,7 +245,6 @@ public class ActorRule {
 		if(myActorRuleCreator.isNewlyReturned()){
 			myActorRuleCreator.setNewlyReturned(false);
 			((IAuthoringActor) myActorRuleCreator.getActor()).getRules().clear();
-			System.out.println("cleared oops");
 		}
 		if (myTrigger == null || myActions.size() == 0) {
 			showAlert(myActorRuleResources.getString("SomethingNotSet"), myActorRuleResources.getString("SetBoth"));
