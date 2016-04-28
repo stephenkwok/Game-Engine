@@ -67,7 +67,7 @@ public class BaseScreenController extends BranchScreenController {
 		togglePause();
 		try {
 			myGameController.getGame().deleteObservers();
-			myHUDController.unInit();
+			myHUDController.linkHandleController(false); //same as .uninit()
 			CreatorController c = new CreatorController(myGameController.getGame());
 			FileChooser fileChooser = new FileChooser();
 			File initialDirectory = new File("gamefiles");
@@ -111,7 +111,7 @@ public class BaseScreenController extends BranchScreenController {
 
 	private void restartGame() {
 		myGameController.restartGame();
-		//setUpHUDScreen();
+		setUpHUDScreen();
 	}
 
 	private void setUpGameScreen() {
