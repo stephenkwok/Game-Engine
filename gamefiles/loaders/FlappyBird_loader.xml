@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <initialGameFile>gamefiles/loaders/FlappyBird_loader.xml</initialGameFile>
+  <initialGameFile>gamefiles\loaders\FlappyBird_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -404,6 +404,10 @@
                   <myValue>
                     <changed>false</changed>
                     <obs/>
+<<<<<<< HEAD
+                    <type>java.lang.Integer</type>
+=======
+>>>>>>> 3e68c3cff449ee579e3a17c0ff834f54b1b93518
                     <value class="int">15</value>
                     <bindings/>
                     <name>Default NamePOINTS</name>
@@ -460,6 +464,11 @@
                 </myTrigger>
                 <myAction class="gameengine.model.Actions.CreateActor">
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
+<<<<<<< HEAD
+                  <myX>0.0</myX>
+                  <myY>0.0</myY>
+=======
+>>>>>>> 3e68c3cff449ee579e3a17c0ff834f54b1b93518
                   <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>
@@ -475,6 +484,11 @@
                 </myTrigger>
                 <myAction class="gameengine.model.Actions.CreateActor">
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
+<<<<<<< HEAD
+                  <myX>0.0</myX>
+                  <myY>0.0</myY>
+=======
+>>>>>>> 3e68c3cff449ee579e3a17c0ff834f54b1b93518
                   <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>
@@ -490,6 +504,11 @@
                 </myTrigger>
                 <myAction class="gameengine.model.Actions.CreateActor">
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
+<<<<<<< HEAD
+                  <myX>0.0</myX>
+                  <myY>0.0</myY>
+=======
+>>>>>>> 3e68c3cff449ee579e3a17c0ff834f54b1b93518
                   <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[3]/myTrigger/myCollisionActor"/>
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>

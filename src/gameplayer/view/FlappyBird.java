@@ -89,7 +89,7 @@ public class FlappyBird extends Application {
 
         Actor player = new Actor();
         player.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new MoveUp(player)));
-        player.isMainPlayer();
+//        player.isMainPlayer();
         player.setID(1);
         player.setImageViewName("flappybird1.png");
         player.addSpriteImage("flappybird2.png");
