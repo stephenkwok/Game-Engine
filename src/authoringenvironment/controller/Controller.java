@@ -52,7 +52,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private ActorEditingEnvironment actorEnvironment;
 	private GameEditingEnvironment gameEnvironment;
 	private GUIMainScreen mainScreen;
-	private GUIMain guiMain;
 	private ResourceBundle myResources;
 	private ResourceBundle myObservableResource;
 	private ResourceBundle myPresetActorsResource;
@@ -351,15 +350,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		mainScreen.createActorPreviewUnit(newActor, actorEnvironment);
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
-		System.out.println(newActor.getID());
-	}
-
-	public double getSceneWidth() {
-		return guiMain.getWidth();
-	}
-
-	public double getSceneHeight() {
-		return guiMain.getHeight();
+//		System.out.println(newActor.getID());
 	}
 
 	public void useGame() {
