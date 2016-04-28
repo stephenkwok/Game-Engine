@@ -1,8 +1,10 @@
 package authoringenvironment.view.behaviors;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.view.ActionFactory;
 import authoringenvironment.view.ActorRule;
@@ -32,7 +34,6 @@ public abstract class SelectEditableBehavior extends EditingElementParent implem
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
 	private static final int COMBOBOX_WIDTH = 150;
-	private static final int VISIBLE_ROW_COUNT = 5;
 	private static final int HBOX_SPACING = 5;
 	private static final String GO = "Go";
 	private static final int BUTTON_HEIGHT = 30;
@@ -45,8 +46,12 @@ public abstract class SelectEditableBehavior extends EditingElementParent implem
 	private ActionFactory actionFactory;
 	private ActorRule myActorRule;
 	private String behaviorType;
+	private List<IAuthoringActor> myActors;
+	private IAuthoringActor otherActor;
+	private IAuthoringActor myActor;
 
-	public SelectEditableBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
+	public SelectEditableBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
+			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
 		super(GO);
 		this.behaviorType = behaviorType;
 		this.promptText = myResources.getString(behaviorType + PROMPT);
@@ -54,6 +59,8 @@ public abstract class SelectEditableBehavior extends EditingElementParent implem
 		this.triggerFactory = new TriggerFactory();
 		this.actionFactory = new ActionFactory();
 		this.myActorRule = myActorRule;
+		this.myActors = myActors;
+		this.myActor = myActor;
 	}
 
 	/**
@@ -61,12 +68,10 @@ public abstract class SelectEditableBehavior extends EditingElementParent implem
 	 */
 	public Node createNode() {
 		HBox hbox = new HBox(HBOX_SPACING);
-		options = FXCollections.observableArrayList(getOptionsList());
 		Label label = new Label(labelText);
 		label.setWrapText(true);
 		initComboBox();
-		getButton().setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		HBox.setHgrow(comboBox, Priority.ALWAYS);
+		initButton();
 		hbox.getChildren().addAll(label, comboBox, getButton());
 		hbox.setAlignment(Pos.CENTER_LEFT);
 		return hbox;
@@ -76,11 +81,21 @@ public abstract class SelectEditableBehavior extends EditingElementParent implem
 	 * Initialize ComboBox with size, row count, text, cell factory
 	 */
 	private void initComboBox() {
+		options = FXCollections.observableArrayList(getOptionsList());
 		comboBox = new ComboBox<>(options);
-		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
 		comboBox.setPrefWidth(COMBOBOX_WIDTH);
 		comboBox.setPromptText(promptText);
 		comboBox.setCellFactory(factory -> new MyCustomCell());
+		HBox.setHgrow(comboBox, Priority.ALWAYS);
+	}
+	
+	private void initButton(){
+		getButton().setPrefSize(BUTTON_HEIGHT, BUTTON_HEIGHT);
+		setButtonAction(e -> {
+			this.otherActor = (IAuthoringActor) comboBox.getValue();
+			createTriggerOrAction();
+			setTriggerOrAction();
+		});
 	}
 
 	/**
@@ -114,11 +129,17 @@ public abstract class SelectEditableBehavior extends EditingElementParent implem
 	}
 
 	/**
-	 * Returns list of items in the ComboBox.
+	 * Returns list of items (IAuthoringActors) in the ComboBox.
 	 * 
 	 * @return
 	 */
-	abstract List<IEditableGameElement> getOptionsList();
+	List<IEditableGameElement> getOptionsList() {
+		List<IEditableGameElement> toReturn = new ArrayList<>();
+		for (IAuthoringActor actor : myActors) {
+			toReturn.add(actor);
+		}
+		return toReturn;
+	}
 
 	/**
 	 * Create ITrigger or IAction depending on type of behavior
@@ -135,15 +156,8 @@ public abstract class SelectEditableBehavior extends EditingElementParent implem
 	 */
 	public abstract boolean isTrigger();
 
-	protected abstract void updateValueBasedOnEditable();
-
-	/**
-	 * Gets the combobox.
-	 * 
-	 * @return combobox.
-	 */
-	protected ComboBox<IEditableGameElement> getComboBox() {
-		return comboBox;
+	protected void updateValueBasedOnEditable() {
+		comboBox.setValue(otherActor);
 	}
 
 	/**
@@ -174,5 +188,13 @@ public abstract class SelectEditableBehavior extends EditingElementParent implem
 
 	protected String getBehaviorType() {
 		return this.behaviorType;
+	}
+	
+	protected IAuthoringActor getMyActor(){
+		return this.myActor;
+	}
+	
+	protected IAuthoringActor getOtherActor(){
+		return this.otherActor;
 	}
 }
