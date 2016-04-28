@@ -32,8 +32,6 @@ import authoringenvironment.model.IEditableGameElement;
  */
 public class Level extends Observable implements ILevel, IEditableGameElement, Comparable<Level>, IGameElement {
 
-	// TODO: should probably set these default things via properties file but
-	// idk sry guyz
 	private static final String DEFAULT_NAME = "Default";
 	private static final String DEFAULT_IMAGE_NAME = "default_landscape.png";
 	private static final double DEFAULT_HEIGHT = 800;

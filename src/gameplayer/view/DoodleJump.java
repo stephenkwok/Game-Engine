@@ -54,23 +54,23 @@ public class DoodleJump extends Application {
 
         Level level1 = new Level();
         level1.setMyScrollingDirection("Vertically");
-        level1.setMyBackgroundImgName("verticalbackground.png");
+        level1.setMyBackgroundImgName("doodle_background.png");
         levels.add(level1);
         
         Actor player = new Actor();
         player.addState(ActorState.MAIN);
         player.setID(1);
-        player.setImageViewName("runningmario1.png");
-        player.addSpriteImage("runningmario2.png");
+        player.setImageViewName("doodle_right.png");
+        player.addSpriteImage("doodle_left.png");
         level1.addActor(player);
        
         Random r = new Random();
         for(int i=0; i<6; i++){
             Actor greenplatform = new Actor();
-            greenplatform.setImageViewName("goomba.png");
+            greenplatform.setImageViewName("green_platform.png");
             greenplatform.setID(2);
-            greenplatform.setX(0 + (900) * r.nextDouble());
-            greenplatform.setY(i*90);
+            greenplatform.setX(200 + (400) * r.nextDouble());
+            greenplatform.setY(i*70);
             level1.addActor(greenplatform);
             
             player.addRule(new Rule(new SideCollision(player,greenplatform),new HorizontalBounceCollision(player)));

@@ -5,7 +5,8 @@ import java.util.Observable;
 import javafx.scene.image.ImageView;
 
 /**
- * 
+ * This class extends the ImageEditingEnvironment and allows the author to not only
+ * edit an Actor's ImageView but also the Actor itself 
  * 
  * @author Stephen
  *
@@ -13,8 +14,8 @@ import javafx.scene.image.ImageView;
 
 public class ImageEditingEnvironmentWithActor extends ImageEditingEnvironment{
 
-	private IAuthoringActor myActor;
-	private ImageView myImageView;
+	private final IAuthoringActor myActor;
+	private final ImageView myImageView;
 	
 	public ImageEditingEnvironmentWithActor(IAuthoringActor actor) {
 		super(actor.getImageView());
@@ -22,6 +23,11 @@ public class ImageEditingEnvironmentWithActor extends ImageEditingEnvironment{
 		myImageView = actor.getImageView();
 	}
 
+	/**
+	 * Sets an Actor's size, opacity, rotation, scaleX, and scaleY according
+	 * to the changes made to its ImageView. Also notifies its observers 
+	 * and closes the ImageEditingEnvironment
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		myActor.setSize(myImageView.getFitHeight());

@@ -8,7 +8,9 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.LevelEditingEnvironment;
 import gui.view.ButtonFileChooserBackgroundImage;
 import gui.view.IGUI;
+import gui.view.PopUpRuleAdder;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.Pane;
@@ -62,10 +64,13 @@ public class GUILevelInspector implements IGUI {
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
 		myAttributesTab = new TabFields(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, myLevelEditor.getLevel());
 		myAttributesTab.setObserver(myLevelEditor);
-
+		Button addRuleButton = new Button("Add Rule");
+		addRuleButton.setOnAction(e -> new PopUpRuleAdder(300,300, myLevelEditor));
+		//PopUpRuleAdder adder = new PopUpRuleAdder(300,300);
 		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(BUTTON_LABEL, null, myLevelEditor, myLevelEditor.getStage());
 		myAttributesTab.addElement(button);
 		addTabToContainer(myAttributesTab, false);
+		myContainer.getChildren().add(addRuleButton);
 		addTabToContainer(myActorsTab, true);
 	}
 

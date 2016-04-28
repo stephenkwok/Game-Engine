@@ -3,9 +3,6 @@ package gameplayer.controller;
 import java.lang.reflect.InvocationTargetException;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Observable;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -127,14 +124,7 @@ public class BaseScreenController extends BranchScreenController {
 	}
 	
 	@Override
-	public void invoke(String method, Class[] parameterTypes, Object[] parameters) {
-		try {
-			this.getClass().getDeclaredMethod(method, parameterTypes).invoke(this, parameters);
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
-				| SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+	public void invoke(String method, Class[] parameterTypes, Object[] parameters) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		this.getClass().getDeclaredMethod(method, parameterTypes).invoke(this, parameters);
 	}
-
 }
