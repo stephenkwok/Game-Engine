@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <initialGameFile>gamefiles\loaders\test2_loader.xml</initialGameFile>
+  <initialGameFile>gamefiles/loaders/test2_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -1773,7 +1773,7 @@
                 </list>
               </entry>
               <entry>
-                <string>TopTrigger</string>
+                <string>TopCollision</string>
                 <list>
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.TopCollision">
@@ -2476,7 +2476,7 @@
                               </list>
                             </entry>
                             <entry>
-                              <string>TopTrigger</string>
+                              <string>TopCollision</string>
                               <list>
                                 <gameengine.model.Rule>
                                   <myTrigger class="gameengine.model.Triggers.TopCollision">
@@ -2940,7 +2940,27 @@
             </myRules>
           </myRuleManager>
           <myAttributeManager>
-            <attributeMap/>
+            <attributeMap>
+              <entry>
+                <gameengine.model.AttributeType>POINTS</gameengine.model.AttributeType>
+                <gameengine.model.Attribute>
+                  <changed>false</changed>
+                  <obs/>
+                  <myValue>
+                    <changed>false</changed>
+                    <obs/>
+                    <value class="int">0</value>
+                    <bindings/>
+                    <name>A1POINTS</name>
+                  </myValue>
+                  <myTriggerValues>
+                    <int>5</int>
+                  </myTriggerValues>
+                  <myType>POINTS</myType>
+                  <myOwner class="gameengine.model.Actor" reference="../../../../.."/>
+                </gameengine.model.Attribute>
+              </entry>
+            </attributeMap>
           </myAttributeManager>
           <myStates>
             <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>

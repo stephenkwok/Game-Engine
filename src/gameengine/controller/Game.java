@@ -420,4 +420,5 @@ public class Game extends Observable implements Observer {
 	public void setCount(int count) {
 		this.count = count;
 	}
+
 }
