@@ -163,7 +163,7 @@ public class GameController extends Observable implements Observer, IGameControl
 		String methodName = (String) myList.get(0);
 
 		try {
-			if(methodName.equals("addActor")){ //TODO: Change to reflection, pass in Actor object from arg.get(1)
+			if(methodName.equals("addActor")){ 
 				this.addActor((Actor)myList.get(1));
 			}else
 			if (myResources.getString(methodName).equals("null")) {

@@ -99,9 +99,9 @@
                                   <myTrigger class="gameengine.model.Triggers.TickTrigger">
                                     <myInterval>1</myInterval>
                                   </myTrigger>
-                                  <myAction class="gameengine.model.Actions.GlideRight">
+                                  <myAction class="gameengine.model.Actions.GlideUp">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                                    <glideOffset>5.0</glideOffset>
+                                    <glideOffset>2.5</glideOffset>
                                   </myAction>
                                   <ID>0</ID>
                                 </gameengine.model.Rule>
