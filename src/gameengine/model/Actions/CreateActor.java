@@ -12,22 +12,23 @@ import gameengine.model.IPlayActor;
 
 public class CreateActor extends Action {
 	Actor cloneActor;
-	Double myX;
-	Double myY;
+	double myX;
+	double myY;
 	private Actor myActorToCopy;
-    Double myMinX;
-    Double myMaxX;
-    Double myMinY;
-    Double myMaxY;
+    double myMinX;
+    double myMaxX;
+    double myMinY;
+    double myMaxY;
     boolean isRandom;
 	
-	public CreateActor(IGameElement element, Actor toCopy, Double x, Double y) {
+	public CreateActor(IGameElement element, Actor toCopy, double x, double y) {
 		super(element);
+		myActorToCopy = toCopy;
 		myX = x;
 		myY = y;
 	}
 
-    public CreateActor(IGameElement element, Actor toCopy, Double minX, Double maxX, Double minY, Double maxY){
+    public CreateActor(IGameElement element, Actor toCopy, double minX, double maxX, double minY, double maxY){
         super(element);
         myActorToCopy = toCopy;
         isRandom = true;
