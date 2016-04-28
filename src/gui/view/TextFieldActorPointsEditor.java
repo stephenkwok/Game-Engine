@@ -11,7 +11,7 @@ public class TextFieldActorPointsEditor extends TextFieldWithButton {
 	public TextFieldActorPointsEditor(String labelText, String promptText, Double textFieldWidth) {
 		super(labelText, promptText, textFieldWidth);
 		setButtonAction(e -> {
-			((Actor) getEditableElement()).addAttribute(new Attribute(AttributeType.POINTS, Integer.parseInt(getTextFieldInput()), (IGameElement) getEditableElement()));	
+			((Actor) getEditableElement()).addAttribute(new Attribute(AttributeType.POINTS, (int) Double.parseDouble((getTextFieldInput())), (IGameElement) getEditableElement()));	
 		});
 	}
 
