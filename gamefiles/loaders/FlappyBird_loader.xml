@@ -495,7 +495,7 @@
     <myHUDElementsToDisplay/>
     <myFile>FlappyBird_loader.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
-    <myHUDFileLocation>a.txt</myHUDFileLocation>
+    <myHUDFileLocation>hudfiles/a.txt</myHUDFileLocation>
   </info>
   <myPhysicsEngine>
     <nextXVelo>0.0</nextXVelo>

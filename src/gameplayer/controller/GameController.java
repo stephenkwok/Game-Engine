@@ -34,9 +34,6 @@ public class GameController extends Observable implements Observer, IGameControl
 	@XStreamOmitField
 	private GameScreen view;
 	@XStreamOmitField
-	private AbstractHUDScreen hud;
-
-	@XStreamOmitField
 	private ResourceBundle myResources;
 	@XStreamOmitField
 	private static final String GAME_CONTROLLER_RESOURCE = "gameActions";
@@ -73,9 +70,6 @@ public class GameController extends Observable implements Observer, IGameControl
 		view.addObserver(this);
 	}
 
-	public void setHUD(AbstractHUDScreen hud) {
-		this.hud = hud;
-	}
 
 	/**
 	 * Will initialize the backend (game engine) with the current level's

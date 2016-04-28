@@ -2,6 +2,8 @@ package gamedata.controller;
 
 import java.io.File;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gamedata.XMLParser;
 import gameengine.controller.Game;
 
