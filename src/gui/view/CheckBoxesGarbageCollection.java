@@ -1,14 +1,23 @@
 package gui.view;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 import authoringenvironment.model.*;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
+import gameengine.model.Rule;
+import gameengine.model.Actions.Destroy;
+import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.SideCollision;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 /**
@@ -31,6 +40,14 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	private static final String RIGHT = "Right";
 	private static final String TOP = "Top";
 	private static final String BOTTOM = "Bottom";
+	private static final String COLLISION = "Collision";
+	private static final String IMAGE = "Image";
+	private static final String STRETCH_VERTICAL = "StretchVertical";
+	private static final String STRETCH_HORIZONTAL = "StretchHorizontal";
+	private static final String ADD_TO_IMAGE_DIMENSIONS = "AddToImageDimensions";
+	private static final String X = "X";
+	private static final String Y = "Y";
+	private List<String> allSides;
 	private Level myLevel;
 	private VBox myContainer;
 	private ResourceBundle myAttributesResources;
@@ -65,6 +82,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	 *            vbox to add checkboxes into.
 	 */
 	private void init() {
+		initAllSidesList();
 		myContainer.getChildren().add(new Label(myAttributesResources.getString(START_PROMPT)));
 		List<Node> checkboxes = addElements(OPTIONS, myContainer);
 		int i = 0;
@@ -81,23 +99,93 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 		}
 		Button checkHUDButton = new Button(GO);
 		checkHUDButton.prefWidthProperty().bind(myContainer.widthProperty());
-		checkHUDButton.setOnAction(e -> updateGarbageCollectingActors(getSides()));
+		checkHUDButton.setOnAction(e -> updateGarbageCollectingActors(getSides(), myLevel.getActors()));
 		myContainer.getChildren().add(new Label(myAttributesResources.getString(END_PROMPT)));
 		myContainer.getChildren().add(checkHUDButton);
 	}
 
-	private void updateGarbageCollectingActors(List<String> sides) {
-		for (int i = 0; i < sides.size(); i++) {
-			IAuthoringActor garbageCollector;
-			if (garbageCollectors.containsKey(sides.get(i))) {
-				garbageCollector = garbageCollectors.get(sides.get(i));
-				myLevel.removeActor((Actor) garbageCollector);
-				
-				garbageCollector = new Actor();
+	private void initAllSidesList() {
+		allSides = new ArrayList<>(Arrays.asList(LEFT, RIGHT, TOP, BOTTOM));
+	}
 
-				garbageCollectors.put(sides.get(i), garbageCollector);
+	// if they add an already existing one --> Just update the actors
+	// if they add a new one --> update the actors
+	// if they remove one --> remove from level
+	private void updateGarbageCollectingActors(List<String> sides, List<IPlayActor> actors) {
+		for (int i = 0; i < allSides.size(); i++) {
+			IAuthoringActor garbageCollector;
+			if (garbageCollectors.containsKey(allSides.get(i))) {
+				garbageCollector = garbageCollectors.get(allSides.get(i));
+			} else {
+				garbageCollector = new Actor();
+			}
+			String sideToCheck = allSides.get(i);
+			if (sides.contains(sideToCheck)) {
+				garbageCollector.setImageView(new ImageView(new Image(myAttributesResources.getString(sides.get(i) + IMAGE))));
+				garbageCollector.setImageViewName(myAttributesResources.getString(sides.get(i) + IMAGE));
+				if (Arrays.asList(myAttributesResources.getString(STRETCH_VERTICAL).split(DELIMITER)).contains(sides.get(i))) {
+					garbageCollector.setSize(myLevel.getMyHeight());
+					if (Arrays.asList(myAttributesResources.getString(ADD_TO_IMAGE_DIMENSIONS).split(DELIMITER)).contains(sides.get(i))) {
+						garbageCollector.setX(myLevel.getImageView().getFitWidth() + Double.parseDouble(myAttributesResources.getString(sides.get(i) + X)));
+					} else {
+						garbageCollector.setX(Double.parseDouble(myAttributesResources.getString(sides.get(i) + X)));
+					}
+					garbageCollector.setY(Double.parseDouble(myAttributesResources.getString(sides.get(i) + Y)));
+				} else {
+					//garbageCollector.setWidth(myLevel.getImageView().getFitWidth());
+					if (Arrays.asList(myAttributesResources.getString(ADD_TO_IMAGE_DIMENSIONS).split(DELIMITER)).contains(sides.get(i))) {
+						garbageCollector.setY(myLevel.getImageView().getFitHeight() + Double.parseDouble(myAttributesResources.getString(sides.get(i) + Y)));
+					} else {
+						garbageCollector.setY(Double.parseDouble(myAttributesResources.getString(sides.get(i) + Y)));
+					}
+					garbageCollector.setX(Double.parseDouble(myAttributesResources.getString(sides.get(i) + X)));
+				}
+
+				garbageCollector.getRules().clear();
+				for (int j = 0; j < actors.size(); j++) {
+					if (!garbageCollectors.keySet().contains(actors.get(j))) {
+						ITrigger trigger = createCollisionTrigger(sides.get(i), (Actor) garbageCollector, (Actor) actors.get(j)); // use reflection from properties file
+						garbageCollector.addRule(new Rule(trigger, new Destroy((Actor) actors.get(j))));
+					}
+				}
+				garbageCollectors.put(allSides.get(i), garbageCollector);
+			} else {
+				if (myLevel.getActors().contains(garbageCollector)) {
+					myLevel.removeActor((Actor) garbageCollector);
+				}
 			}
 		}
+	}
+
+	private ITrigger createCollisionTrigger(String side, Actor garbageCollector, Actor actor) {
+		Class<?> collision;
+		try {
+			collision = Class.forName(side + COLLISION);
+			Constructor<?> constructor = collision.getConstructor(Actor.class, Actor.class);
+			return (ITrigger) constructor.newInstance(garbageCollector, actor);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
