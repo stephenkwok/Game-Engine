@@ -3,6 +3,7 @@ package authoringenvironment.view;
 import java.util.Arrays;
 
 import authoringenvironment.model.*;
+import gameengine.controller.ILevel;
 import gui.view.ObjectObservable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -32,8 +33,8 @@ public class PreviewUnitWithEditable extends ObjectObservable implements IEditin
 	private IEditableGameElement myEditable;
 	private IEditingEnvironment myEnvironment;
 
-	public PreviewUnitWithEditable(IEditableGameElement editable, IEditingEnvironment environment) {
-		myEditable = editable;
+	public PreviewUnitWithEditable(Level level, IEditingEnvironment environment) {
+		myEditable = (IEditableGameElement) level;
 		myEnvironment = environment;
 		myLabel = new Label();
 		myLabel.setPadding(new Insets(LABEL_PADDING));

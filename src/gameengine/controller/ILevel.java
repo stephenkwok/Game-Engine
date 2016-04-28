@@ -1,8 +1,11 @@
 package gameengine.controller;
 
 import authoringenvironment.model.IAuthoringActor;
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 import gameengine.model.Triggers.ITrigger;
+import javafx.beans.property.DoubleProperty;
+import javafx.scene.image.ImageView;
 
 import java.util.List;
 
@@ -13,30 +16,7 @@ import java.util.List;
  *
  * @author blakekaplan
  */
-public interface ILevel {
-
-	/**
-	 * Provided with a Trigger object, sets off the appropriate response
-	 *
-	 * @param myTrigger
-	 *            A particular Trigger object sent from the game player
-	 */
-	public void handleTrigger(ITrigger myTrigger);
-
-	/**
-	 * Sets the Level's name
-	 *
-	 * @param name
-	 *            A name for the Level
-	 */
-	public void setName(String name);
-
-	/**
-	 * Provides the Level's name
-	 *
-	 * @return The name of the Level object
-	 */
-	public String getName();
+public interface ILevel extends IGameElement {
 
 	/**
 	 * Provides all of the Actors to be visualized by the player
@@ -52,4 +32,24 @@ public interface ILevel {
 	 *            The Actor to be added to the Level
 	 */
 	public void addActor(IAuthoringActor newActor);
+	
+	/**
+	 * Returns main character from game
+	 * 
+	 * @return Main character
+	 */
+	public IPlayActor getMainCharacter();
+	
+	public void scrollBackground(int change);
+	
+	public void removeActors(List<IPlayActor> deadActors);
+
+	public String getMyScrollingDirection();
+
+	public void setMyImageView(ImageView imageView);
+	
+	public DoubleProperty getMyBackgroundX();
+	
+	public String getMyBackgroundImgName();
+	
 }

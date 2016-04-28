@@ -12,6 +12,7 @@ import gameengine.model.Rule;
 import gameengine.model.RuleManager;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Bounds;
@@ -378,5 +379,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
     public Bounds getBounds(){
         return myBackground.getBoundsInLocal();
     }
+
+
 	
 }

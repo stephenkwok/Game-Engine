@@ -207,7 +207,7 @@ public class GUIMainScreen implements IGUI, Observer {
 	 *            IEditingEnvironment in which Level is to be edited
 	 * @return a LabelClickable associated with a Level
 	 */
-	public void createLevelPreviewUnit(IEditableGameElement level, IEditingEnvironment levelEditor) {
+	public void createLevelPreviewUnit(Level level, IEditingEnvironment levelEditor) {
 		PreviewUnitWithLevel levelPreviewUnit = new PreviewUnitWithLevel(level, levelEditor);
 		initializePreviewUnit(levelPreviewUnit, levelPreviewContainer);
 		levelPreviewUnits.add(levelPreviewUnit);

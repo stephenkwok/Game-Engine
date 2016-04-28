@@ -31,7 +31,7 @@ public class Game extends Observable implements Observer {
 	private static final int BACKGROUND_SCROLL_SPEED = -1;
 
 	private String initialGameFile;
-	private List<Level> levels;
+	private List<ILevel> levels;
 	private GameInfo info;
 	private PhysicsEngine myPhysicsEngine;
 	private CollisionDetection myCollisionDetector;
@@ -45,7 +45,7 @@ public class Game extends Observable implements Observer {
     
     
     public Game(String initialGameFile, 
-    		List<Level> levels, 
+    		List<ILevel> levels, 
     		GameInfo info, 
     		PhysicsEngine myPhysicsEngine,
     		CollisionDetection myCollisionDetector, 
@@ -74,7 +74,7 @@ public class Game extends Observable implements Observer {
      * @param gameInfo      The game info associated with the game
      * @param gameLevels    All the levels in the game
      */
-	public Game(String gameFilePath, GameInfo gameInfo, List<Level> gameLevels) {
+	public Game(String gameFilePath, GameInfo gameInfo, List<ILevel> gameLevels) {
 		initialGameFile = gameFilePath;
 		levels = gameLevels;
 		info = gameInfo;
@@ -103,11 +103,11 @@ public class Game extends Observable implements Observer {
 		//getAnimation().setCycleCount(0);
 	}
 
-	public Game(GameInfo gameInfo, List<Level> gameLevels) {
+	public Game(GameInfo gameInfo, List<ILevel> gameLevels) {
 		this(null, gameInfo, gameLevels);
 	}
 
-	public Game(List<Level> gameLevels) {
+	public Game(List<ILevel> gameLevels) {
 		this(new GameInfo(), gameLevels);
 	}
 
@@ -122,7 +122,7 @@ public class Game extends Observable implements Observer {
 	}
 
 	private void initCurrentLevel() {
-		getCurrentLevel().addObserver(this);
+		((Observable) getCurrentLevel()).addObserver(this);
 	}
 
 	/**
@@ -204,7 +204,7 @@ public class Game extends Observable implements Observer {
 	 * @param levels
 	 *            The desired game Levels
 	 */
-	public void setLevels(List<Level> levels) {
+	public void setLevels(List<ILevel> levels) {
 		this.levels = levels;
 	}
 
@@ -213,7 +213,7 @@ public class Game extends Observable implements Observer {
 	 *
 	 * @return a list of all levels in the game
 	 */
-	public List<Level> getLevels() {
+	public List<ILevel> getLevels() {
 		return levels;
 	}
 
@@ -289,7 +289,7 @@ public class Game extends Observable implements Observer {
 	 *
 	 * @return The Level that is currently being used
 	 */
-	public Level getCurrentLevel() {
+	public ILevel getCurrentLevel() {
 		return levels.get(info.getMyCurrentLevelNum());
 	}
 

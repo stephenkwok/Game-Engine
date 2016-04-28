@@ -76,7 +76,7 @@
                       <myCollisionActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
-                        <x>422.83348669251035</x>
+                        <x>241.19169054715653</x>
                         <y>0.0</y>
                         <veloX>0.0</veloX>
                         <veloY>0.0</veloY>
@@ -123,7 +123,7 @@
                       <myCollisionActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
-                        <x>312.4173986531803</x>
+                        <x>714.871247951417</x>
                         <y>90.0</y>
                         <veloX>0.0</veloX>
                         <veloY>0.0</veloY>
@@ -170,7 +170,7 @@
                       <myCollisionActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
-                        <x>126.18097817702657</x>
+                        <x>873.0055581885357</x>
                         <y>180.0</y>
                         <veloX>0.0</veloX>
                         <veloY>0.0</veloY>
@@ -217,7 +217,7 @@
                       <myCollisionActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
-                        <x>283.509900553867</x>
+                        <x>200.89749228934306</x>
                         <y>270.0</y>
                         <veloX>0.0</veloX>
                         <veloY>0.0</veloY>
@@ -264,7 +264,7 @@
                       <myCollisionActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
-                        <x>73.54337574802418</x>
+                        <x>228.6344077141242</x>
                         <y>360.0</y>
                         <veloX>0.0</veloX>
                         <veloY>0.0</veloY>
@@ -311,7 +311,7 @@
                       <myCollisionActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
-                        <x>531.7506067609584</x>
+                        <x>613.8043527970352</x>
                         <y>450.0</y>
                         <veloX>0.0</veloX>
                         <veloY>0.0</veloY>

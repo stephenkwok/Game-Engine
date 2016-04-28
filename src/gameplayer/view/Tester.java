@@ -194,7 +194,7 @@ public class Tester extends Application {
 		
 		
 
-        List<Level> levels = new ArrayList<Level>();
+        List<ILevel> levels = new ArrayList<ILevel>();
         Level level1 = new Level();
         level1.setMyBackgroundImgName("mariobackground.png");
         levels.add(level1);

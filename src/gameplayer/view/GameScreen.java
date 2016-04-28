@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
+import gameengine.controller.ILevel;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IActor;
@@ -84,17 +85,17 @@ public class GameScreen extends Observable implements IGameScreen {
 		mySubgroup.getChildren().remove(a.getImageView());
 	}
 
-	public void addBackground(Level level) {
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(level.getMyBackgroundImgName()));
+	public void addBackground(ILevel current) {
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(current.getMyBackgroundImgName()));
 		this.myEndHorizontal = image.getWidth();
 		this.myEndVertical = image.getHeight();
 		ImageView imageView = new ImageView(image);
-		level.setMyImageView(imageView);
+		current.setMyImageView(imageView);
 
 		ImageView imageView2 = new ImageView(image);
 		imageView2.setX(imageView.getImage().getWidth());
 
-		level.getMyBackgroundX().addListener(new ChangeListener() {
+		current.getMyBackgroundX().addListener(new ChangeListener() {
 			@Override
 			public void changed(ObservableValue o, Object oldVal, Object newVal) {
 				// TODO Watch that magic constant!
