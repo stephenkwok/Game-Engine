@@ -6,22 +6,14 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gamedata.XMLParser;
 import gameengine.controller.Game;
-import gui.view.Screen;
 
 public class ParserController implements IParserController {
 
 	private XMLParser myXMLParser;
-	@XStreamOmitField
-	private Screen myScreen;
 
 	public ParserController() {
 		this.myXMLParser = new XMLParser();
 
-	}
-
-	public ParserController(Screen screen) {
-		this.myXMLParser = new XMLParser();
-		this.myScreen = screen;
 	}
 
 	@Override

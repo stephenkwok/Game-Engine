@@ -1,11 +1,11 @@
 package gameengine.model.Actions;
 
-import gameengine.model.IGameElement;
+import gameengine.model.Actor;
 
 public class GlideForward extends GlidingAction {
 
-	public GlideForward(IGameElement actor1, double offset) {
-		super(actor1, offset);
+	public GlideForward(Actor actor, Double offset) {
+		super(actor, offset);
 	}
 
 	@Override

@@ -83,9 +83,9 @@ public class FlappyBird extends Application {
 
 
 
-        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeTop, 1024, 1024, -100, 0)));
-        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeBottom, 1024, 1024, 350, 400)));
-        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, invisibleLine, 1024, 1024, 200, 200)));
+        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeTop, 1024.0, 1024.0, -100.0, 0.0)));
+        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, pipeBottom, 1024.0, 1024.0, 350.0, 400.0)));
+        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, invisibleLine, 1024.0, 1024.0, 200.0, 200.0)));
 
         Actor player = new Actor();
         player.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new MoveUp(player)));

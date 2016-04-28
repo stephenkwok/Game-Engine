@@ -2,12 +2,16 @@ package gameplayer.controller;
 
 import java.lang.reflect.InvocationTargetException;
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
 
 
 import gamedata.controller.ChooserType;
@@ -30,11 +34,11 @@ public class BaseScreenController extends BranchScreenController {
 	private HUDController myHUDController;
 	
 	public BaseScreenController(Stage myStage, GameController gameController) {
-		super(myStage);
+		super(myStage, BASE_CONTROLLER_RESOURCE);
+		// DEPENDENCY!!
 		this.myGameController = gameController;
 		myGameController.addObserver(this);
 		setUpScreen();
-		this.myResources = ResourceBundle.getBundle(BASE_CONTROLLER_RESOURCE);
 		changeScreen(myScreen);
 	}
 
@@ -43,6 +47,7 @@ public class BaseScreenController extends BranchScreenController {
 		this.myScreen.addObserver(this);
 		setUpGameScreen();
 		setUpHUDScreen();
+		setMyScreen(this.myScreen);
 	}
 
 	private void toggleSound() {
@@ -57,7 +62,7 @@ public class BaseScreenController extends BranchScreenController {
 		togglePause();
 		try {
 			myGameController.getGame().deleteObservers();
-			CreatorController c = new CreatorController(myGameController.getGame(), this.myScreen);
+			CreatorController c = new CreatorController(myGameController.getGame());
 			FileChooser fileChooser = new FileChooser();
 			File initialDirectory = new File("gamefiles");
 			fileChooser.setInitialDirectory(initialDirectory);
@@ -66,7 +71,7 @@ public class BaseScreenController extends BranchScreenController {
 				c.saveForPlaying(file);
 			}
 			
-		} catch (ParserConfigurationException e) {
+		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
 			e.printStackTrace();
 			myScreen.showError(e.getMessage());
 		}
@@ -98,8 +103,9 @@ public class BaseScreenController extends BranchScreenController {
 
 	private void restartGame() {
 		// TODO fix this ish
+		togglePause();
 		myGameController.getView().clearGame();
-		ParserController parserController = new ParserController(myScreen);
+		ParserController parserController = new ParserController();
 		Game initialGame = parserController.loadforPlaying(new File(myGameController.getGame().getInitialGameFile()));
 		myGameController.setGame(initialGame);
 		myGameController.initialize(0);
@@ -116,32 +122,16 @@ public class BaseScreenController extends BranchScreenController {
 		myScreen.setHUDScreen(myHUDController.getView());
 		
 	}
-
+	
 	@Override
-	public void update(Observable o, Object arg) {
-		List<Object> myList = (List<Object>) arg;
-		String methodName = (String) myList.get(0);
+	public void invoke(String method, Class[] parameterTypes, Object[] parameters) {
 		try {
-			if (myResources.getString(methodName).equals("null")) {
-				this.getClass().getDeclaredMethod(methodName).invoke(this);
-			} else {
-				Class<?> myClass = Class.forName(myResources.getString(methodName));
-				Object arg2 = myClass.cast(myList.get(1));
-				Class[] parameterTypes = { myClass };
-				Object[] parameters = { arg2 };
-				this.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(this, parameters);
-			}
+			this.getClass().getDeclaredMethod(method, parameterTypes).invoke(this, parameters);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
-				| SecurityException | ClassNotFoundException e) {
-			try {
-				this.getClass().getSuperclass().getDeclaredMethod(methodName).invoke(this);
-			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
-					| NoSuchMethodException | SecurityException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-				this.myScreen.showError(e.getMessage());
-			}
-		}
+				| SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 
 }

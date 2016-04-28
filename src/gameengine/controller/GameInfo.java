@@ -54,6 +54,11 @@ public class GameInfo implements IEditableGameElement {
 		this(DEFAULT_GAME_NAME, DEFAULT_IMAGE_NAME, DEFAULT_DESCRIPTION);
 
 	}
+	
+	public GameInfo(Map<IAuthoringActor, List<IAuthoringActor>> actorMap) {
+		this();
+		myActorMap = actorMap;
+	}
 
 	/**
 	 * Returns the name of the game

@@ -52,7 +52,10 @@ public class GameScreen extends Observable implements IGameScreen {
 		getMySubscene().setFill(Color.ALICEBLUE);
 		getMySubscene().setFocusTraversable(true);
 		getMySubscene().setOnKeyPressed(e -> handleScreenEvent(e));
-		getMySubscene().setOnMouseClicked(e -> handleScreenEvent(e));
+		getMySubscene().setOnMouseClicked(e -> {
+			handleScreenEvent(e);
+			getMySubscene().requestFocus();
+		});
 		this.myCamera = camera; ///
 		mySubscene.setCamera(camera);
 		this.myResources = ResourceBundle.getBundle(GAME_RESOURCE);
@@ -130,9 +133,7 @@ public class GameScreen extends Observable implements IGameScreen {
 	}
 
 	public void clearGame() {
-		System.out.println("made it to clear game");
 		myCamera.setTranslateX(0.0);
-		System.out.println("2");
 		getMySubgroup().getChildren().clear();
 
 		// for(Node n: getMySubgroup().getChildren()){

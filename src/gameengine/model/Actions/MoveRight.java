@@ -26,10 +26,10 @@ public class MoveRight extends MovingAction {
 	 * @param args
 	 *            The arguments required to perform the change
 	 */
-	public MoveRight(IGameElement actor) {
+	public MoveRight(Actor actor) {
 		super(actor);
 	}
-
+	
 	/**
 	 * Moves the Actor to the right by the distance provided in the arguments
 	 */

@@ -1,12 +1,12 @@
 package gameengine.model.Triggers;
 
-import gameengine.model.IPlayActor;
+import gameengine.model.Actor;
 
 public class BottomCollision extends CollisionTrigger {
 
 	private static final String COLLISION_TYPE = "BottomCollision";
 
-	public BottomCollision(IPlayActor actor1, IPlayActor actor2) {
+	public BottomCollision(Actor actor1, Actor actor2) {
 		super(actor1, actor2);
 	}
 

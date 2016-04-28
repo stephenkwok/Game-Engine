@@ -1,12 +1,10 @@
 package gameengine.model.Actions;
 
-import java.awt.List;
 import java.util.ArrayList;
 import java.util.Observable;
 
 import gameengine.model.Actor;
 import gameengine.model.IGameElement;
-import gameengine.model.IPlayActor;
 
 public class WinGame extends Action {
 	private Actor assignedActor;

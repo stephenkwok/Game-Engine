@@ -3,24 +3,25 @@ package gameengine.model.Actions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-
-import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorCopier;
 import gameengine.model.Actor;
-import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
-import javafx.scene.image.ImageView;
 
 
 public class Spawn extends ActorAction{
 
 	IPlayActor mySpawnedActor;
 	
-	public Spawn(IGameElement actor1, IGameElement spawnedActor) {
-		super((IPlayActor) actor1);
+	public Spawn(Actor actor1, Actor spawnedActor) {
+		super(actor1);
 		mySpawnedActor  = (IPlayActor) spawnedActor;
 	}
-
+	
+	@Override
+	public Object[] getParameters(){
+		return new Object[]{getMyActor(),mySpawnedActor};
+	}
+	
 	public void perform() {
 		
 		ActorCopier myActorCopier = new ActorCopier((Actor)mySpawnedActor);
