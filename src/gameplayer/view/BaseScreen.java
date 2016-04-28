@@ -29,7 +29,7 @@ public class BaseScreen extends Screen implements Observer {
 	private BorderPane myPane;
 	private GameScreen myGameScreen;
 	private AbstractHUDScreen hud;
-	
+
 	/**
 	 * Adds the auxiliary views, like the HUD display, ToolBar, and GameScreen,
 	 * to the BaseScreen
@@ -50,12 +50,11 @@ public class BaseScreen extends Screen implements Observer {
 		initialize();
 	}
 
-
 	public void setGameScreen(GameScreen screen) {
 		this.myGameScreen = screen;
 		this.myPane.setCenter(myGameScreen.getScene());
 	}
-	
+
 	public void setHUDScreen(AbstractHUDScreen screen) {
 		this.hud = screen;
 		IGUIElement hudPane = getFactory().createNewGUIObject("hudPane");
@@ -70,37 +69,36 @@ public class BaseScreen extends Screen implements Observer {
 		notifyObservers(arg);
 	}
 
+	/**
+	 * Displays the proper alert sequences for ending and saving games
+	 */
 	public void switchAlert() {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, getResources().getString("SwitchConfirmation"),
 				ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
 		Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.YES) {
-        	setChanged();
-			Object[] methodArg = {"saveGame", null};
+		if (result.get() == ButtonType.YES) {
+			setChanged();
+			Object[] methodArg = { "saveGame", null };
 			notifyObservers(Arrays.asList(methodArg));
-            setChanged();
-			Object[] methodArg2 = {"chooseGame", null};
+			setChanged();
+			Object[] methodArg2 = { "chooseGame", null };
 			notifyObservers(Arrays.asList(methodArg2));
-        }
-        else if (result.get() == ButtonType.NO) {
-        	setChanged();
-			Object[] methodArg = {"chooseGame", null};
+		} else if (result.get() == ButtonType.NO) {
+			setChanged();
+			Object[] methodArg = { "chooseGame", null };
 			notifyObservers(Arrays.asList(methodArg));
-        }
-        else {
-        	setChanged();
-			Object[] methodArg = {"toggleUnPause", null};
+		} else {
+			setChanged();
+			Object[] methodArg = { "toggleUnPause", null };
 			notifyObservers(Arrays.asList(methodArg));
-        }
-		
-	}
+		}
 
+	}
 
 	@Override
 	protected void initialize() {
-
 		myPane.setTop(addToolbar(SIDE_BUTTONS));
 		getRoot().getChildren().add(myPane);
-		
+
 	}
 }

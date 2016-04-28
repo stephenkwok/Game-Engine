@@ -115,10 +115,11 @@
                               <list>
                                 <gameengine.model.Rule>
                                   <myTrigger class="gameengine.model.Triggers.TickTrigger">
-                                    <myInterval>20</myInterval>
+                                    <myInterval>1</myInterval>
                                   </myTrigger>
-                                  <myAction class="gameengine.model.Actions.MoveLeft">
+                                  <myAction class="gameengine.model.Actions.GlideLeft">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <glideOffset>7.0</glideOffset>
                                   </myAction>
                                   <ID>0</ID>
                                 </gameengine.model.Rule>
@@ -192,10 +193,11 @@
                               <list>
                                 <gameengine.model.Rule>
                                   <myTrigger class="gameengine.model.Triggers.TickTrigger">
-                                    <myInterval>20</myInterval>
+                                    <myInterval>1</myInterval>
                                   </myTrigger>
-                                  <myAction class="gameengine.model.Actions.MoveLeft">
+                                  <myAction class="gameengine.model.Actions.GlideLeft">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <glideOffset>7.0</glideOffset>
                                   </myAction>
                                   <ID>0</ID>
                                 </gameengine.model.Rule>
@@ -254,10 +256,11 @@
                               <list>
                                 <gameengine.model.Rule>
                                   <myTrigger class="gameengine.model.Triggers.TickTrigger">
-                                    <myInterval>20</myInterval>
+                                    <myInterval>1</myInterval>
                                   </myTrigger>
-                                  <myAction class="gameengine.model.Actions.MoveLeft">
+                                  <myAction class="gameengine.model.Actions.GlideLeft">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                                    <glideOffset>7.0</glideOffset>
                                   </myAction>
                                   <ID>0</ID>
                                 </gameengine.model.Rule>
@@ -385,25 +388,7 @@
             </myRules>
           </myRuleManager>
           <myAttributeManager>
-            <attributeMap>
-              <entry>
-                <gameengine.model.AttributeType>POINTS</gameengine.model.AttributeType>
-                <gameengine.model.Attribute>
-                  <changed>false</changed>
-                  <obs/>
-                  <myValue>
-                    <changed>false</changed>
-                    <obs/>
-                    <value class="int">15</value>
-                    <bindings/>
-                    <name>Default NamePOINTS</name>
-                  </myValue>
-                  <myTriggerValues/>
-                  <myType>POINTS</myType>
-                  <myOwner class="gameengine.model.Actor" reference="../../../../.."/>
-                </gameengine.model.Attribute>
-              </entry>
-            </attributeMap>
+            <attributeMap/>
           </myAttributeManager>
           <myStates>
             <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
@@ -510,7 +495,7 @@
     <myHUDElementsToDisplay/>
     <myFile>FlappyBird.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
-    <myHUDFileLocation>a.txt</myHUDFileLocation>
+    <myHUDFileLocation>hudfiles/a.txt</myHUDFileLocation>
   </info>
   <myPhysicsEngine>
     <nextXVelo>0.0</nextXVelo>
