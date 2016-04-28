@@ -142,7 +142,6 @@ public class Game extends Observable implements Observer {
 		updateCamera();
 		updateActors();
 		levelTime++;
-		System.out.println(levelTime);
 		globalTime++;
 	}
 
