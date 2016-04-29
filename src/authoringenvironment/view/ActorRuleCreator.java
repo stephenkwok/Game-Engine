@@ -143,7 +143,10 @@ public class ActorRuleCreator {
 	
 	private void resetEnvironment(){
 		this.newlyReturned = true;
-		for(ActorRule toRemove: myActorRules) myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
+		for(ActorRule toRemove: myActorRules) { 
+			removeActorRule(toRemove);
+		}
+			//myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
 		myActorRules.clear();
 		ruleRow = RULE_ROW_START;
 	}
