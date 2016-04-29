@@ -2,17 +2,12 @@ package gameengine.controller;
 
 import java.util.*;
 
-import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamInclude;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
-import javafx.collections.ObservableMap;
 import javafx.util.Duration;
 
 /**
@@ -22,7 +17,7 @@ import javafx.util.Duration;
  *
  */
 
-public class Game extends Observable implements Observer {
+public class Game extends Observable implements Observer, IGame {
 	
 	
 	public static final int SIZE = 400;
@@ -101,9 +96,12 @@ public class Game extends Observable implements Observer {
 
     }
 	
-	public void terminateGame() {
-		getAnimation().pause();
-		//getAnimation().setCycleCount(0);
+	public void stopGame() {
+		togglePause();
+	}
+	
+	private void togglePause() {
+		animation.pause();
 	}
 
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
@@ -121,6 +119,10 @@ public class Game extends Observable implements Observer {
 	public void startGame() {
 		initCurrentLevel();
 		initCurrentActors();
+		toggleUnPause();
+	}
+	
+	public void toggleUnPause() {
 		animation.play();
 	}
 
@@ -136,6 +138,7 @@ public class Game extends Observable implements Observer {
 		for (IPlayActor actor : currentActors) {
 			((Observable) actor).addObserver(this);
 			actor.setPhysicsEngine(myPhysicsEngine);
+			actor.setVisibility();
 		}
 	}
 
@@ -146,9 +149,7 @@ public class Game extends Observable implements Observer {
 		updateCamera();
 		updateActors();
 		levelTime++;
-		System.out.println(levelTime);
 		globalTime++;
-		System.out.println(globalTime);
 	}
 
 	private void updateCamera() {
@@ -227,11 +228,14 @@ public class Game extends Observable implements Observer {
 	 * Changes the Game to the next Level
 	 */
 
-	public void nextLevel() {
+	public boolean nextLevel() {
 		animation.stop();
-		if (levels.size() >= info.getMyCurrentLevelNum() + 1) {
+		if (info.getMyCurrentLevelNum() + 1 < levels.size()) {
 			setCurrentLevel(info.getMyCurrentLevelNum() + 1);
 			levels.get(info.getMyCurrentLevelNum()).getMainCharacter().setX(0);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -399,15 +403,9 @@ public class Game extends Observable implements Observer {
 		return myCollisionDetector;
 	}
 
-
-
-
 	public Map<String, Set<IGameElement>> getActiveTriggers() {
 		return activeTriggers;
 	}
-
-
-
 
 	public void setActiveTriggers(Map<String, Set<IGameElement>> activeTriggers) {
 		this.activeTriggers = activeTriggers;

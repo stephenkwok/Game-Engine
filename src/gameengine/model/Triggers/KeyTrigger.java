@@ -12,7 +12,11 @@ public class KeyTrigger extends ITrigger {
     	myKeyCode = key;
         setMyKey(key.getName());
     }
-
+    
+    public Object[] getParameters(){
+    	return new Object[]{myKeyCode};
+    }
+    
 	public String getMyKey() {
 		return myKey;
 	}

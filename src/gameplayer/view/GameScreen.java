@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 
 import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gameengine.model.IActor;
 import gameengine.model.IDisplayActor;
 import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.ITrigger;
@@ -50,13 +49,13 @@ public class GameScreen extends Observable implements IGameScreen {
 
 	public GameScreen(Camera camera) {
 		setMySubgroup(new Group());
-		setMySubscene(new SubScene(getMySubgroup(), Screen.SCREEN_WIDTH, 500));
-		getMySubscene().setFill(Color.ALICEBLUE);
-		getMySubscene().setFocusTraversable(true);
-		getMySubscene().setOnKeyPressed(e -> handleScreenEvent(e));
-		getMySubscene().setOnMouseClicked(e -> {
+		mySubscene = new SubScene(getMySubgroup(), Screen.SCREEN_WIDTH, 500);
+		mySubscene.setFill(Color.ALICEBLUE);
+		mySubscene.setFocusTraversable(true);
+		mySubscene.setOnKeyPressed(e -> handleScreenEvent(e));
+		mySubscene.setOnMouseClicked(e -> {
 			handleScreenEvent(e);
-			getMySubscene().requestFocus();
+			mySubscene.requestFocus();
 		});
 		this.myCamera = camera; ///
 		mySubscene.setCamera(camera);
@@ -64,7 +63,7 @@ public class GameScreen extends Observable implements IGameScreen {
 	}
 
 	public SubScene getScene() {
-		return getMySubscene();
+		return mySubscene;
 	}
 
 	/**
@@ -75,7 +74,6 @@ public class GameScreen extends Observable implements IGameScreen {
 	 *            an instance of IActor
 	 */
 	public void addActor(IDisplayActor actor) {
-//		actor.setImageViewName(actor.getImageViewName());
 		((Actor) actor).restoreImageView();
 		getMySubgroup().getChildren().add(actor.getImageView());
 	}
@@ -103,7 +101,6 @@ public class GameScreen extends Observable implements IGameScreen {
 		});
 
 		getMySubgroup().getChildren().addAll(imageView, imageView2);
-		// getMySubgroup().getChildren().add(imageView);
 
 	}
 
@@ -138,11 +135,6 @@ public class GameScreen extends Observable implements IGameScreen {
 	public void clearGame() {
 		myCamera.setTranslateX(0.0);
 		getMySubgroup().getChildren().clear();
-
-		// for(Node n: getMySubgroup().getChildren()){
-		// System.out.println("removing");
-		// getMySubgroup().getChildren().remove(n);
-		// }
 	}
 
 	public Group getMySubgroup() {
@@ -151,32 +143,6 @@ public class GameScreen extends Observable implements IGameScreen {
 
 	public void setMySubgroup(Group mySubgroup) {
 		this.mySubgroup = mySubgroup;
-	}
-
-	public SubScene getMySubscene() {
-		return mySubscene;
-	}
-
-	public void setMySubscene(SubScene mySubscene) {
-		this.mySubscene = mySubscene;
-	}
-
-	@Override
-	public void addActor(IActor actor) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void reset() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setUp() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -213,16 +179,6 @@ public class GameScreen extends Observable implements IGameScreen {
 			}
 		});
 		alert.show();
-		/* alert.showingProperty().addListener((observable, oldValue, newValue) -> {
-			if (!newValue) {
-				if (alert.getResult() == ButtonType.YES) {
-					saveScorePrompt();
-				}
-				else {
-					//restartGamePrompt();
-				}
-			}
-		});*/
 
 	}
 
@@ -266,10 +222,20 @@ public class GameScreen extends Observable implements IGameScreen {
 		
 	}
 
-	/*public void restartGame() {
-		clearGame();
+	public void restartGame() {
+		clearGame();	
+	}
+
+	@Override
+	public void pauseGame() {
+		getScene().setDisable(true);
 		
+	}
+
+	@Override
+	public void toggleUnPause() {
+		getScene().setDisable(false);
 		
-	}*/
+	}
 
 }
