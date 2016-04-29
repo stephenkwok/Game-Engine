@@ -10,12 +10,17 @@ import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.view.ActorGroup;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.IRule;
-import gameengine.model.Actions.ChangeAttribute;
 import gameengine.model.Triggers.CollisionTrigger;
 import gameengine.model.Triggers.ITrigger;
+import gui.view.CheckBoxObject;
+import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
+import javafx.scene.layout.HBox;
 
 public class CollisionBehavior extends SelectActorBehavior {
+	private int CHECK_WIDTH = 90;
 	private ITrigger myTrigger;
+	private boolean oneTime;
 
 	public CollisionBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
 			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
@@ -26,12 +31,24 @@ public class CollisionBehavior extends SelectActorBehavior {
 	public void setTriggerOrAction() {
 		setTrigger(this, myTrigger);
 	}
+	
+	@Override
+	public Node createNode() {
+		HBox hbox = (HBox) super.createNode();
+		CheckBox checkBox = (CheckBox) new CheckBoxObject("Apply 1x",CHECK_WIDTH).createNode();
+		checkBox.setOnAction(e->{
+			oneTime = checkBox.isSelected();
+		});
+		hbox.getChildren().add(2,checkBox);
+		return hbox;
+	}
 
 	@Override
 	protected void createTriggerOrAction() {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(getMyActor());
 		arguments.add(getOtherActor());
+		arguments.add(oneTime);
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
 	}
 
@@ -44,6 +61,7 @@ public class CollisionBehavior extends SelectActorBehavior {
 	public void updateValueBasedOnEditable() {
 		try{
 			getComboBox().setValue((IEditableGameElement) (((CollisionTrigger) getMyRule().getMyTrigger()).getMyCollisionActor()));
+			
 		}catch(Exception e){
 		}
 	}
