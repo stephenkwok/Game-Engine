@@ -12,6 +12,7 @@ import gameengine.model.AttributeType;
 import gameengine.model.Rule;
 import gameengine.model.Triggers.*;
 import gameplayer.controller.GameController;
+import gameplayer.controller.PlayType;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.ParallelCamera;
@@ -125,7 +126,7 @@ public class FlappyBird extends Application {
         ParallelCamera camera = new ParallelCamera();
         GameScreen view = new GameScreen(camera);
 
-        GameController controller = new GameController(model);
+        GameController controller = new GameController(model,PlayType.PREVIEW);
         controller.setGame(model);
         controller.setGameView(view);
 

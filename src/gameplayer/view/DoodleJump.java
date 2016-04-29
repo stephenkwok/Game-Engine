@@ -15,6 +15,7 @@ import gameengine.model.Actions.ShiftScene;
 import gameengine.model.Rule;
 import gameengine.model.Triggers.*;
 import gameplayer.controller.GameController;
+import gameplayer.controller.PlayType;
 import gameplayer.view.GameScreen;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -111,7 +112,7 @@ public class DoodleJump extends Application {
         ParallelCamera camera = new ParallelCamera();
         GameScreen view = new GameScreen(camera);
 
-        GameController controller = new GameController(model);
+        GameController controller = new GameController(model, PlayType.PREVIEW);
         controller.setGame(model);
         controller.setGameView(view);
 
