@@ -3,6 +3,7 @@ package authoringenvironment.view;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -66,12 +67,16 @@ public class TabLevelRuleEditor extends TabParent {
 	}
 	
 	private void deleteSelectedRules() {
+		List<CheckBoxObject> toRemove = new ArrayList<>();
 		for (CheckBoxObject checkBox: myRuleMap.keySet()) {
 			if (((CheckBox) checkBox.createNode()).isSelected()) {
 				myLevel.removeRule(myRuleMap.get(checkBox));
-				myRuleMap.remove(checkBox);
+				toRemove.add(checkBox);
 				myCheckBoxes.getChildren().remove(checkBox);
 			}
+		}
+		for (int i = 0; i < toRemove.size(); i++) {
+			myRuleMap.remove(toRemove.get(i));
 		}
 	}
 	

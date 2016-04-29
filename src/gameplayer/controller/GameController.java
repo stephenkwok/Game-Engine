@@ -127,6 +127,7 @@ public class GameController extends Observable implements Observer, IGameControl
 		getGame().setAllSound(true);
 	}
 	
+	
 
 	private void saveGameScore(String name) {
 		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
@@ -172,10 +173,6 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void update(Observable o, Object arg) {
 		List<Object> myList = (List<Object>) arg;
 		String methodName = (String) myList.get(0);
-		if(myResources == null){
-			//System.out.println("wtf im dead");
-			return;
-		}
 		try {
 			if(methodName.equals("addActor")){ 
 				this.addActor((Actor)myList.get(1));
@@ -241,7 +238,8 @@ public class GameController extends Observable implements Observer, IGameControl
 	}
 
 	public void updateCamera() {
-		if (model.getCurrentLevel().getMainCharacters() != null) {
+		System.out.println("hello");
+		if (model.getCurrentLevel().getMainCharacter() != null) {
 			if (model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))) {
 				try {
 //					System.out.println(model.getCurrentLevel().getMainCharacters().size());
