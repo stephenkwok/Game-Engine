@@ -22,7 +22,7 @@ import javafx.scene.layout.VBox;
  *
  */
 public class TabActors extends TabParent {
-	private static final int ICON_HEIGHT = 75;
+	private static final int ICON_WIDTH = 60;
 	private static final int HGAP = 15;
 	private static final int VGAP = 15;
 	private static final int TILE_HEIGHT = 125;
@@ -75,7 +75,7 @@ public class TabActors extends TabParent {
 	private List<ImageviewActorIcon> actorListToIconList(List<IAuthoringActor> actors) {
 		List<ImageviewActorIcon> iconList = new ArrayList<>();
 		for (int i = 0; i < actors.size(); i++) {
-			iconList.add(new ImageviewActorIcon(actors.get(i), ICON_HEIGHT));
+			iconList.add(new ImageviewActorIcon(actors.get(i), ICON_WIDTH));
 		}
 		return iconList;
 	}

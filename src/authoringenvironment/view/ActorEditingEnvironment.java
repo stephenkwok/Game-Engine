@@ -13,6 +13,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.ImageView;
@@ -35,17 +36,21 @@ import javafx.stage.Stage;
  */
 public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final Color DEFAULT_COLOR = Color.CORNFLOWERBLUE;
-	private static final int ICON_HEIGHT = 75;
+	private static final int ICON_WIDTH = 60;
 	private static final String NEW_RULE_LABEL = "New Rule";
-	private static final String ACTOR_OPTIONS_RESOURCE = "actorEditorOptions";
+	private static final String ACTOR_CHARACTERISTICS_RESOURCE = "actorCharacteristicOptions";
 	private static final String ACTOR_CHARACTERISTICS = "Actor Characteristics";
+	private static final String ACTOR_ATTRIBUTES_RESOURCE = "actorAttributesOptions";
+	private static final String ACTOR_ATTRIBUTES = "Actor Attributes";
 	private static final int BUTTON_HEIGHT = 30;
 	private static final int BUTTON_WIDTH = 100;
 	private static final int LEFT_PANE_WIDTH = 350;
+	private static final int FIELD_HEIGHT = 400;
 	private static final String SET_RULE_LABEL = "Set Rules";
 	private BorderPane myRoot;
 	private GUILibrary library;
-	private TabFields fields;
+	private TabFields characteristics;
+	private TabFields attributes;
 	private ResourceBundle myResources;
 
 	private IAuthoringActor myActor;
@@ -92,7 +97,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	private void setDefaultActor() {
 		IAuthoringActor defaultActor = (IAuthoringActor) new Actor();
 		this.myActor = defaultActor;
-		this.myActorIV = new ImageviewActorIcon(defaultActor, ICON_HEIGHT);
+		this.myActorIV = new ImageviewActorIcon(defaultActor, ICON_WIDTH);
 	}
 
 	/**
@@ -102,19 +107,27 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		VBox vbox = new VBox();
 		library = new GUILibrary(myActorRuleCreator);
 		actorImageViewer = new ActorImageViewer(this, myActorIV);
-		vbox.getChildren().addAll(actorImageViewer.getPane(), actorCharacteristics(), library.getPane());
+		TabPane actorFields = new TabPane();
+		actorFields.getTabs().addAll(actorCharacteristics(), actorAttributes());
+		actorFields.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+		actorFields.setPrefHeight(FIELD_HEIGHT);
+		vbox.getChildren().addAll(actorImageViewer.getPane(), actorFields, library.getPane());
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
 		myRoot.setLeft(vbox);
 	}
 	
-	private TabPane actorCharacteristics(){
-		fields = new TabFields(myResources, ACTOR_CHARACTERISTICS, ACTOR_OPTIONS_RESOURCE, myActor);
-		fields.setObserver(this);
-		fields.updateEditable(myActor);
-		TabPane actorCharacteristics = new TabPane();
-		actorCharacteristics.getTabs().add(fields.getTab());
-		actorCharacteristics.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-		return actorCharacteristics;
+	private Tab actorCharacteristics(){
+		characteristics = new TabFields(myResources, ACTOR_CHARACTERISTICS, ACTOR_CHARACTERISTICS_RESOURCE, myActor);
+		characteristics.setObserver(this);
+		characteristics.updateEditable(myActor);
+		return characteristics.getTab();
+	}
+	
+	private Tab actorAttributes(){
+		attributes = new TabFields(myResources, ACTOR_ATTRIBUTES, ACTOR_ATTRIBUTES_RESOURCE, myActor);
+		attributes.setObserver(this);
+		attributes.updateEditable(myActor);
+		return attributes.getTab();
 	}
 
 	/**
@@ -169,7 +182,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	@Override
 	public void setEditableElement(IEditableGameElement editable) {
 		myActor = (IAuthoringActor) editable;
-		myActorIV = new ImageviewActorIcon(myActor, ICON_HEIGHT);
+		myActorIV = new ImageviewActorIcon(myActor, ICON_WIDTH);
 		setLeftPane();
 		myActorRuleCreator.updateActorRules();
 		library.updateDragEvents();
@@ -192,7 +205,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	public void setActorImage(ImageView newImageView, String imageViewName) {
 		myActor.setImageView(newImageView);
 		myActor.setImageViewName(imageViewName);
-		myActorIV = new ImageviewActorIcon(myActor, ICON_HEIGHT);
+		myActorIV = new ImageviewActorIcon(myActor, ICON_WIDTH);
 		setLeftPane();
 	}
 

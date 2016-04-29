@@ -152,8 +152,4 @@ public abstract class ComboBoxParent extends EditingElementParent {
 	protected ComboBox<String> getComboBox() {
 		return comboBox;
 	}
-	
-	protected HBox getHBox(){
-		return this.hbox;
-	}
 }
