@@ -17,7 +17,7 @@ public class WinGame extends Action {
     public void perform() {
         getGameElement().changed();
         ArrayList<String> myList = new ArrayList<String>();
-        myList.add("endGame");
+        myList.add("winGame");
         ((Observable) getGameElement()).notifyObservers(myList);
     }
 

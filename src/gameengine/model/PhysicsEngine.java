@@ -122,7 +122,9 @@ public class PhysicsEngine {
 	public void staticHorizontalCollision(IPlayActor a1) {
 //		a1.setX(a1.getX() - (a1.getVeloX() * bounce));
 //		a1.setVeloX(0);
-		setNextVals(a1, a1.getX()-(a1.getVeloX() * bounce) , a1.getY() , 0 , a1.getVeloY()-gravity );
+		setNextVals(a1, a1.getX()-(a1.getVeloX()) , a1.getY() , 0 , a1.getVeloY());
+
+//		setNextVals(a1, a1.getX()-(a1.getVeloX() * bounce) , a1.getY() , 0 , a1.getVeloY()-gravity );
 	}
 
 	public void elasticHorizontalCollision(IPlayActor a1) {

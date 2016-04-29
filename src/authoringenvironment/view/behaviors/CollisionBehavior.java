@@ -18,8 +18,8 @@ public class CollisionBehavior extends SelectActorBehavior {
 	private ITrigger myTrigger;
 
 	public CollisionBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
-			IAuthoringActor myActor, List<IAuthoringActor> myActors, Map<Integer, ActorGroup> myActorGroups) {
-		super(myRule, myActorRule, behaviorType, myResources, myActor, myActors, myActorGroups);
+			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
+		super(myRule, myActorRule, behaviorType, myResources, myActor, myActors);
 	}
 
 	@Override

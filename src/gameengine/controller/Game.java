@@ -114,6 +114,7 @@ public class Game extends Observable implements Observer, IGame {
 	
 	public void stopGame() {
 		togglePause();
+		setAllSound(true);
 	}
 	
 	private void togglePause() {

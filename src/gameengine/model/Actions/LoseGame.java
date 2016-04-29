@@ -22,7 +22,7 @@ public class LoseGame extends Action {
 		System.out.println("am i here");
 		getGameElement().changed();
 		ArrayList<String> myList = new ArrayList<String>();
-		myList.add("endGame");
+		myList.add("loseGame");
 		getGameElement().changed();
         ((Observable) getGameElement()).notifyObservers(myList);
 	}
