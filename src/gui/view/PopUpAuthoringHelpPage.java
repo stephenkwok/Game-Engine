@@ -29,15 +29,16 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 	private static final String TEXT = "Text";
 //	private static final String ACTOR_ENVIRONMENT_QUESTIONS_KEY = "ActorQuestions";
 //	private static final String LEVEL_ENVIRONMENT_QUESTIONS_KEY = "LevelQuestions";
-	private static final String WELCOME_MESSAGE = "Frequently Asked Questions";
+	private static final String WELCOME_MESSAGE = "Welcome to the Help Page";
 	private static final String BOLD_FONT = "-fx-font-weight: bold;";
 	private static final String DELIMITER = ",";
-	private static final String ANSWER = "Answer";
+//	private static final String ANSWER = "Answer";
 	private static final int POPUP_WIDTH = 800;
 	private static final int POPUP_HEIGHT = 800;
 	private static final double HEADER_FONT_SIZE = 30.0;
 	private static final double TOPIC_HEADER_FONT_SIZE = 20.0;
 	private static final double SUBTOPIC_HEADER_FONT_SIZE = 15.0;
+	private static final double SCROLLPANE_BAR_WIDTH = 30.0;
 	
 	private final ResourceBundle myResources;
 	private final ScrollPane myScrollPane;
@@ -58,6 +59,8 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 		setLabelsToWrapText();
 		myContainer.getChildren().forEach(node -> ((VBox) node).setPadding(new Insets(10.0)));
 		myScrollPane.setMaxWidth(POPUP_WIDTH);
+		myScrollPane.setMinHeight(POPUP_HEIGHT);
+		myContainer.prefWidthProperty().bind(myScrollPane.widthProperty().subtract(SCROLLPANE_BAR_WIDTH));
 		myScrollPane.setContent(myContainer);
 		getContainer().getChildren().add(myScrollPane);
 //		bindChildrenWidthsToContainerWidth();
@@ -119,11 +122,8 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 	 */
 	private void initializeHeader() {
 		VBox headerContainer = new VBox();
-		Label header = new Label(WELCOME_MESSAGE);
-		header.setAlignment(Pos.CENTER);
-		header.setStyle(BOLD_FONT);
-		header.setFont(new Font(HEADER_FONT_SIZE));
-		headerContainer.getChildren().add(header);
+		headerContainer.setAlignment(Pos.CENTER);
+		headerContainer.getChildren().add(createHeader(WELCOME_MESSAGE,HEADER_FONT_SIZE));
 		myContainer.getChildren().add(headerContainer);
 	}
 	
