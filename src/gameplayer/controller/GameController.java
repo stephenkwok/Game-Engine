@@ -120,6 +120,7 @@ public class GameController extends Observable implements Observer, IGameControl
 		getGame().setAllSound(true);
 	}
 	
+	
 
 	private void saveGameScore(String name) {
 		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
@@ -135,13 +136,25 @@ public class GameController extends Observable implements Observer, IGameControl
 	}
 
 	public void nextLevel() {
+		System.out.println("hi?");
 		if (model.nextLevel()) {
+
+			System.out.println("WTF A");
 			view.clearGame();
+
+			System.out.println("WTF B");
 			model.nextLevel();
+
+			System.out.println("WTF C");
 			model.resetLevelTime();
+
+			System.out.println("WTF D");
 			begin();
+			System.out.println("WTF E");
 		}
 		else {
+
+			System.out.println("WTF YO 2");
 			endGame();
 		}
 	}
@@ -165,7 +178,6 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void update(Observable o, Object arg) {
 		List<Object> myList = (List<Object>) arg;
 		String methodName = (String) myList.get(0);
-
 		try {
 			if(methodName.equals("addActor")){ 
 				this.addActor((Actor)myList.get(1));
