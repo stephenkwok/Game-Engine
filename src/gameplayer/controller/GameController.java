@@ -165,7 +165,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void update(Observable o, Object arg) {
 		List<Object> myList = (List<Object>) arg;
 		String methodName = (String) myList.get(0);
-
+		System.out.println(methodName);
 		try {
 			if(methodName.equals("addActor")){ 
 				this.addActor((Actor)myList.get(1));
@@ -231,6 +231,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	}
 
 	public void updateCamera() {
+		System.out.println("hello");
 		if (model.getCurrentLevel().getMainCharacter() != null) {
 			if (model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))) {
 				view.changeCamera(model.getCurrentLevel().getMainCharacter().getX(), 0);

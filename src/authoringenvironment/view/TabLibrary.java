@@ -29,7 +29,6 @@ import javafx.scene.paint.Color;
  */
 abstract class TabLibrary extends TabParent {
 	private static final int FILE_EXT_LENGTH = 4;
-//	private static final String IMAGE_FILE_EXTS = ".jpg .png .gif";
 	private static final String SOUND_FILE_EXTS = ".mp3";
 	private static final double CORNER_RADIUS = 20;
 	private ObservableList<Label> labels;
@@ -172,10 +171,8 @@ abstract class TabLibrary extends TabParent {
 	 * @param myActorRule
 	 */
 	private void addNodeToTarget(Label toAdd, ActorRule myActorRule) {
-//		if (matchesExtensions(toAdd.getText(), IMAGE_FILE_EXTS))
-//			myActorRuleCreator.addImage(myActorRule, toAdd);
 		if (matchesExtensions(toAdd.getText(), SOUND_FILE_EXTS))
-			myActorRuleCreator.addSound(myActorRule, toAdd);
+			myActorRuleCreator.addBehavior(myActorRule, toAdd);
 		else
 			myActorRuleCreator.addBehavior(myActorRule, toAdd);
 	}
