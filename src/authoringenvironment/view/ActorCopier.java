@@ -107,7 +107,6 @@ public class ActorCopier {
 						ITrigger triggerToAdd = createTrigger(oldTrigger, toUpdate);
 						Action actionToAdd = createAction(oldAction,toUpdate);
 						Rule rule = new Rule(triggerToAdd, actionToAdd);
-						rule.setID(oldRule.getID() + 1);
 						toUpdate.addRule(rule);
 						
 					} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
