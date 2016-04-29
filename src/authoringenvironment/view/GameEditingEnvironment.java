@@ -24,20 +24,18 @@ public class GameEditingEnvironment implements IEditingElement {
 	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
 	private static final double DEFAULT_PADDING = 10;
 	private static final double CONTAINER_PREFERRED_WIDTH = 350.0;
-	private static final int TEXT_AREA_ROWS = 3;
+	private static final int TEXT_AREA_ROWS = 5;
 	private static final double TEXT_FIELD_WIDTH = 100.0;
 	private static final double TEXT_FIELD_CONTAINER_SPACING = 10.0;
 	private static final double SCROLLBAR_WIDTH = 30.0;
-	private final Stage myStage;
 	private final ResourceBundle myResources;
 	private IEditableGameElement myGameInfo;
-	private HBox nameEditorContainer, gameTypeButtonContainer, previewImageContainer, welcomeMessage;
+	private HBox nameEditorContainer, gameTypeButtonContainer, welcomeMessage;
 	private VBox editingEnvironmentContainer, gameDescriptionEditor;
 	private ScrollPane myScrollPane;
 
-	public GameEditingEnvironment(GameInfo gameInfo, Stage stage) {
+	public GameEditingEnvironment(GameInfo gameInfo) {
 		this.myGameInfo = gameInfo;
-		this.myStage = stage;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
 		initializeEditingEnvironment();
 	}
@@ -51,7 +49,6 @@ public class GameEditingEnvironment implements IEditingElement {
 		initializeGameNameEditor();
 		initializeGameDescriptionEditor();
 		initializeGameTypeButton();
-		initializePreviewImageDisplay();
 		initializeScrollPane();
 		initializeEditingEnvironmentContainer();
 	}
@@ -62,7 +59,7 @@ public class GameEditingEnvironment implements IEditingElement {
 	 */
 	private void initializeEditingEnvironmentContainer() {
 		editingEnvironmentContainer.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor,
-				gameTypeButtonContainer, previewImageContainer);
+				gameTypeButtonContainer);
 		editingEnvironmentContainer.getChildren().stream().forEach(node -> bindChildWidthToParentWidth(node));
 	}
 	
@@ -128,19 +125,6 @@ public class GameEditingEnvironment implements IEditingElement {
 		gameTypeButtonContainer = new HBox(button);
 		button.prefWidthProperty().bind(gameTypeButtonContainer.widthProperty());
 		gameTypeButtonContainer.setPadding(new Insets(DEFAULT_PADDING));
-	}
-
-	/**
-	 * Initializes the GUI Elements displaying the game's current preview image
-	 */
-	private void initializePreviewImageDisplay() {
-		previewImageContainer = new HBox();
-		String gameImageName = ((GameInfo) myGameInfo).getMyImageName();
-		ButtonFileChooserGameImage buttonGameImage = new ButtonFileChooserGameImage(gameImageName, this, myStage);
-		Button button = (Button) buttonGameImage.createNode();
-		button.prefWidthProperty().bind(previewImageContainer.widthProperty());
-		previewImageContainer.getChildren().add(button);
-		previewImageContainer.setPadding(new Insets(DEFAULT_PADDING));
 	}
 
 	/**

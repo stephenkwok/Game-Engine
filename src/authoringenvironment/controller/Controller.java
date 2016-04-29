@@ -2,18 +2,22 @@ package authoringenvironment.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.*;
-import java.util.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
-import authoringenvironment.model.*;
-import authoringenvironment.view.*;
-import gamedata.controller.*;
-import gameengine.controller.*;
 import authoringenvironment.model.AuthoringEnvironmentRestorer;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
@@ -21,6 +25,7 @@ import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.model.PresetActorFactory;
 import authoringenvironment.view.ActorCopier;
 import authoringenvironment.view.ActorEditingEnvironment;
+import authoringenvironment.view.ActorGroup;
 import authoringenvironment.view.GUIMainScreen;
 import authoringenvironment.view.GameEditingEnvironment;
 import authoringenvironment.view.LevelEditingEnvironment;
@@ -32,15 +37,20 @@ import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.ActorState;
-import gameengine.model.Attribute;
-import gameengine.model.AttributeType;
 import gameengine.model.IPlayActor;
 import gameplayer.controller.BranchScreenController;
-import gui.view.*;
+import gui.view.GUIFactory;
+import gui.view.IGUIElement;
 import gui.view.PopUpAuthoringHelpPage;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -169,7 +179,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		this.myPresetActorsResource = ResourceBundle.getBundle(PRESET_ACTORS_RESOURCE);
 		factory = new GUIFactory(myResources);
 		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
-		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
+		gameEnvironment = new GameEditingEnvironment(gameInfo);
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
 		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);
 		setTopPane();
@@ -299,6 +309,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 				}
 			}
 			if (level.getMainCharacters().size() == 0) {
+				// problem if no actors
 				level.getActors().get(0).addState(ActorState.MAIN);
 			}
 		}
