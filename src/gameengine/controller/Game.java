@@ -27,6 +27,7 @@ import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import voogasalad.util.hud.source.Property;
 
 /**
  * This class is intended to represent a game containing levels with actors.
@@ -52,8 +53,8 @@ public class Game extends Observable implements Observer, IGame {
 	private Timeline animation;
 	private List<IPlayActor> currentActors;
 	private List<IPlayActor> deadActors;
-	private int levelTime;
-	private int globalTime;
+	private Property<Integer> levelTime = new Property<>(1, "levelTime");
+	private Property<Integer> globalTime = new Property<>(1, "globalTime");
 
 	private SoundPlayer soundEngine;
 	private boolean sfxOff = false;
@@ -67,8 +68,8 @@ public class Game extends Observable implements Observer, IGame {
 		deadActors = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
-		this.levelTime = levelTime;
-		this.globalTime = globalTime;
+		this.levelTime.setValue(levelTime);
+		this.globalTime.setValue(globalTime);
 		initSoundEngine();
 	}
 
@@ -94,8 +95,8 @@ public class Game extends Observable implements Observer, IGame {
 		deadActors = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
-		levelTime = 1;
-		globalTime = 1;
+		levelTime = new Property<>(1, "levelTime");
+		globalTime = new Property<>(1, "globalTime");
 		initTimeline();
 		// initSoundEngine();
 	}
@@ -172,9 +173,8 @@ public class Game extends Observable implements Observer, IGame {
 		signalTick();
 		updateCamera();
 		updateActors();
-		levelTime++;
-		globalTime++;
-		// garbageCollect();
+		levelTime.setValue(levelTime.getValue() + 1);
+		globalTime.setValue(globalTime.getValue() + 1);
 	}
 
 	private void updateCamera() {
@@ -184,7 +184,7 @@ public class Game extends Observable implements Observer, IGame {
 	}
 
 	private void signalTick() {
-		handleTrigger(new TickTrigger(levelTime));
+		handleTrigger(new TickTrigger(levelTime.getValue()));
 	}
 
 	private void updateBackground() {
@@ -439,23 +439,23 @@ public class Game extends Observable implements Observer, IGame {
 	}
 
 	public int getLevelTime() {
-		return levelTime;
+		return levelTime.getValue();
 	}
 
 	public void setLevelTime(int step) {
-		this.levelTime = step;
+		this.levelTime.setValue(step);
 	}
 
 	public int getGlobalTime() {
-		return globalTime;
+		return globalTime.getValue();
 	}
 
 	public void setGlobalTime(int time) {
-		this.globalTime = time;
+		this.globalTime.setValue(time);;
 	}
 
 	public void resetLevelTime() {
-		levelTime = 1;
+		levelTime.setValue(1);;
 	}
 
 	public void toggleSound() {
@@ -493,6 +493,15 @@ public class Game extends Observable implements Observer, IGame {
 	public boolean isPaused() {
 		return animation.getStatus() == Status.PAUSED;
 	}
+	
+	public Property<Integer> getGlobalTimeProperty() {
+		return this.globalTime;
+	}
+	
+	public Property<Integer> getLevelTimeProperty() {
+		return this.levelTime;
+	}
+	
 	//
 	// private void garbageCollect() {
 	// if (globalTime % 50 == 0) {

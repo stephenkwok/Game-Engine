@@ -19,14 +19,14 @@ public class TLGCSValueFinder implements IValueFinder {
 		try {
 			Property<?> ret = null;
 			switch (key.toLowerCase()) {
-				case "time":
+				case "points":
 					//ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getProperty();
 					break;
 				case "health":
 					//ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.HEALTH).getProperty();
 					break;
-				case "points":
-					 ret = new Property<Integer>(data.getGlobalTime(), "myTime");
+				case "time":
+					 ret = data.getGlobalTimeProperty();
 					break;
 				default:
 					properties.addAll(findMany(key));
@@ -66,6 +66,7 @@ public class TLGCSValueFinder implements IValueFinder {
 			}
 		}
 		*/
+		properties.add(new Property<String>("Value Not Found", key));
 		return properties;
 	}
 	
