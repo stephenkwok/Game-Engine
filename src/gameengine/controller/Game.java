@@ -43,6 +43,7 @@ public class Game extends Observable implements Observer, IGame {
     private SoundPlayer soundEngine;
     private boolean sfxOff = true;
     private boolean musicOff = true;
+	private List<IPlayActor> actorsToAdd;
 
     
     public Game(String initialGameFile, 
@@ -58,6 +59,7 @@ public class Game extends Observable implements Observer, IGame {
     	this(initialGameFile, info, levels);
     	currentActors = new ArrayList<IPlayActor>();
 		deadActors = new ArrayList<IPlayActor>();
+		actorsToAdd = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
 		this.levelTime = levelTime;
@@ -83,6 +85,7 @@ public class Game extends Observable implements Observer, IGame {
 		info = gameInfo;
 		currentActors = new ArrayList<IPlayActor>();
 		deadActors = new ArrayList<IPlayActor>();
+		actorsToAdd = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
 		levelTime = 1;
@@ -323,6 +326,7 @@ public class Game extends Observable implements Observer, IGame {
 		info.setMyCurrentLevelNum(levelNum);
 	}
 
+
 	public void updateActors() {
 		deadActors = new ArrayList<IPlayActor>();
 		for (IPlayActor a : getCurrentActors()) {
@@ -333,8 +337,11 @@ public class Game extends Observable implements Observer, IGame {
 		if (deadActors.size() != 0) {
 			removeDeadActors();
 		}
+		getCurrentLevel().getActors().addAll(actorsToAdd);
+		actorsToAdd.clear();
 		currentActors = getCurrentLevel().getActors();
 	}
+
 
 	/**
 	 * Calls for the removal of dead Actors
@@ -353,7 +360,7 @@ public class Game extends Observable implements Observer, IGame {
 
 	public void addActor(Actor newActor) {
 		newActor.setPhysicsEngine(myPhysicsEngine);
-		getCurrentLevel().addActor(newActor);
+		actorsToAdd.add(newActor);
 	}
 
 	/**
