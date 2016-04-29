@@ -1,4 +1,4 @@
-package authoringenvironment.view;
+package authoringenvironment.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IAuthoringBehavior;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
 import gameengine.model.Rule;
@@ -245,10 +243,6 @@ public class ActorRule {
 			myActorRuleCreator.setNewlyReturned(false);
 			myActor.getRules().clear();
 		}
-		System.out.println("**TRIGGER**");
-		System.out.println(myTrigger);
-		System.out.println("***MYACTIONS***");
-		System.out.println(myActions.size());
 		if (myTrigger == null || myActions.size() == 0) {
 			showAlert(myActorRuleResources.getString("SomethingNotSet"), myActorRuleResources.getString("SetBoth"));
 		} else {

@@ -1,4 +1,4 @@
-package authoringenvironment.view;
+package authoringenvironment.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,7 @@ import java.util.Set;
 
 import com.sun.xml.internal.bind.v2.runtime.output.NamespaceContextImpl.Element;
 
-import authoringenvironment.model.IActionCreator;
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.controller.LevelEditingEnvironment;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IAction;

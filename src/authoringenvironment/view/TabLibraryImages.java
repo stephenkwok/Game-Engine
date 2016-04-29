@@ -1,6 +1,8 @@
 package authoringenvironment.view;
 
 import java.util.ResourceBundle;
+
+import authoringenvironment.model.ActorRuleCreator;
 import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.control.Label;

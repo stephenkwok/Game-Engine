@@ -2,8 +2,8 @@ package gui.view;
 
 import java.io.File;
 
+import authoringenvironment.controller.ActorEditingEnvironment;
 import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.view.ActorEditingEnvironment;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;

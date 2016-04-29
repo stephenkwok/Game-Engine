@@ -23,12 +23,11 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.model.PresetActorFactory;
-import authoringenvironment.view.ActorCopier;
-import authoringenvironment.view.ActorEditingEnvironment;
-import authoringenvironment.view.ActorGroup;
-import authoringenvironment.view.GUIMainScreen;
-import authoringenvironment.view.GameEditingEnvironment;
-import authoringenvironment.view.LevelEditingEnvironment;
+import authoringenvironment.model.ActorCopier;
+import authoringenvironment.controller.ActorEditingEnvironment;
+import authoringenvironment.controller.GUIMainScreen;
+import authoringenvironment.controller.GameEditingEnvironment;
+import authoringenvironment.controller.LevelEditingEnvironment;
 import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
 import gamedata.controller.FileChooserController;
@@ -90,7 +89,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private Scene splashScene;
 	private PopUpAuthoringHelpPage helpPage;
 	private ActorCopier myActorCopier;
-	private Map<Integer, ActorGroup> myActorGroups;
 
 	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
 	IllegalArgumentException, InvocationTargetException {
@@ -169,7 +167,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * whether the Game to be edited is new or previously created
 	 */
 	public void initializeGeneralComponents() {
-		myActorGroups = new HashMap<>();
 		myRoot = new BorderPane();
 		myActorCopier = new ActorCopier();
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
@@ -179,7 +176,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		this.myPresetActorsResource = ResourceBundle.getBundle(PRESET_ACTORS_RESOURCE);
 		factory = new GUIFactory(myResources);
 		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
-		gameEnvironment = new GameEditingEnvironment(gameInfo);
+		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
 		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);
 		setTopPane();
@@ -503,10 +500,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	public void invoke(String method, Class[] parameterTypes, Object[] parameters) {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	public Map<Integer, ActorGroup> getActorGroups() {
-		return myActorGroups;
 	}
 
 }

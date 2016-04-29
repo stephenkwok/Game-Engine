@@ -1,14 +1,11 @@
-package authoringenvironment.view;
+package authoringenvironment.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import authoringenvironment.model.IActionCreator;
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.model.ITriggerCreator;
+import authoringenvironment.controller.LevelEditingEnvironment;
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
