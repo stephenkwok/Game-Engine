@@ -123,10 +123,10 @@ public class GameController extends Observable implements Observer, IGameControl
 
 	private void saveGameScore(String name) {
 		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
-		c.saveHighScore(getGame().getScore(), name);
-
+		c.saveHighScore(getGame().getScores(), Arrays.asList(name.split(",")));
 	}
 
+	
 	/**
 	 * Will stop the animation timeline.
 	 */
@@ -234,11 +234,11 @@ public class GameController extends Observable implements Observer, IGameControl
 	}
 
 	public void updateCamera() {
-		if (model.getCurrentLevel().getMainCharacter() != null) {
+		if (model.getCurrentLevel().getMainCharacters() != null) {
 			if (model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))) {
-				view.changeCamera(model.getCurrentLevel().getMainCharacter().getX(), 0);
+				view.changeCamera(model.getCurrentLevel().getMainCharacters().get(0).getX(), 0);
 			} else {
-				view.changeCamera(0, model.getCurrentLevel().getMainCharacter().getY());
+				view.changeCamera(0, model.getCurrentLevel().getMainCharacters().get(0).getY());
 			}
 		}
 	}

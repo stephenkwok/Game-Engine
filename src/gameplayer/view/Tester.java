@@ -55,7 +55,18 @@ public class Tester extends Application {
 
         actor1.addSpriteImage("runningmario2.png");
         actor1.addSpriteImage("runningmario3.png");
+        
+        IAuthoringActor actor12 = (IAuthoringActor) new Actor();
+        actor12.setImageViewName("runningmario1.png");
+        actor12.setName("A1");
+        actor12.setID(4);
+        actor12.addState(ActorState.MAIN);
+        actor12.addAttribute(new Attribute(AttributeType.POINTS, 0, (IPlayActor) actor12));
 
+        actor1.addSpriteImage("runningmario2.png");
+        actor1.addSpriteImage("runningmario3.png");
+        
+        
 
         IAuthoringActor actor2 = (IAuthoringActor) new Actor();
         actor2.setImageViewName("block.png");
@@ -236,6 +247,9 @@ public class Tester extends Application {
         //level1.setMyBackgroundImgName("mariobackground.png");
         levels.add(level1);
         level1.addActor(actor1);
+        level1.addActor(actor12);
+
+        level1.getMainCharacters().add((IPlayActor) actor1);
         level1.addActor(actor2);
         level1.addActor(blocky);
         level1.addActor((IAuthoringActor) enemy2);
@@ -245,8 +259,15 @@ public class Tester extends Application {
         
         Level level2 = new Level();
         level2.setMyBackgroundImgName("vgnwpGb.png");
+        level2.getMainCharacters().add((IPlayActor) actor1);
         levels.add(level2);
         level2.addActor(actor1);
+        level2.addActor(actor12);
+
+        
+        
+        level1.setSoundtrack("Jordan.mp3");
+        level2.setSoundtrack("Robot.mp3");
 
         Level level3 = new Level();
         level3.setMyBackgroundImgName("vgnwpGb.png");

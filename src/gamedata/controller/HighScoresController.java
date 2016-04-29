@@ -2,7 +2,10 @@ package gamedata.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -66,10 +69,16 @@ public class HighScoresController implements IHighScoresController {
 	}
 
 	@Override
-	public void saveHighScore(int score, String player) {
+	public void saveHighScore(List<Integer> scores, List<String> players) {
+		ArrayList<String> completePlayers = new ArrayList<>();
+		players.forEach(player -> completePlayers.add(player));
+		while (completePlayers.size() < scores.size()) {
+			completePlayers.add("");
+		}
 		HighScoresKeeper updatedKeeper = new HighScoresKeeper(getAllGameScores());
-		updatedKeeper.addScore(myGameFile, player, score);
-		//HighScoresCreator scoresCreator = new HighScoresCreator();
+		for (int i=0; i<scores.size(); i++) {
+			updatedKeeper.addScore(myGameFile, completePlayers.get(i).trim(), scores.get(i));
+		}
 		XMLCreator scoresCreator = new XMLCreator();
 		try {
 			scoresCreator.save(updatedKeeper, myFile);
