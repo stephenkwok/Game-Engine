@@ -39,6 +39,7 @@ public class Game extends Observable implements Observer, IGame {
     private int levelTime;
     private int globalTime;
     
+    @XStreamOmitField
     private SoundPlayer soundEngine;
     private boolean sfxOff = true;
     private boolean musicOff = true;
