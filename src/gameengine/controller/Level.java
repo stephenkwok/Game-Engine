@@ -51,6 +51,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	private DoubleProperty myBackgroundX = new SimpleDoubleProperty();
 	private RuleManager myRuleManager;
 	private AttributeManager myAttributeManager;
+	private List<IPlayActor> myMainCharacters;
 
 	/**
 	 * Instantiates the triggerMap and Actor list
@@ -326,13 +327,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	}
 
 	public List<IPlayActor> getMainCharacters() {
-		List<IPlayActor> mainCharacters = new ArrayList<>();
-		for (IPlayActor a : myActors) {
-			if (a.checkState(ActorState.MAIN)) {
-				mainCharacters.add(a);
-			}
-		}
-		return mainCharacters;
+		return myMainCharacters;
 	}
 
 	@Override
