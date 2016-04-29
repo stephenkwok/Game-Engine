@@ -1,5 +1,7 @@
 package gameengine.model.Triggers;
 
+import java.util.*;
+
 import gameengine.model.Actor;
 import gameengine.model.IActor;
 import gameengine.model.IPlayActor;
@@ -8,10 +10,14 @@ public abstract class CollisionTrigger extends ITrigger {
 
 	private IPlayActor myMainActor;
 	private IPlayActor myCollisionActor;
+	private Boolean oneTime;
+	private List<IPlayActor> resolvedCollisions;
 
-	public CollisionTrigger(Actor actor1, Actor actor2) {
+	public CollisionTrigger(Actor actor1, Actor actor2, Boolean oneTime) {
 		myMainActor = actor1;
 		myCollisionActor = actor2;
+		resolvedCollisions = new ArrayList<IPlayActor>();
+		this.oneTime = oneTime;
 	}
 	
 	@Override
@@ -20,15 +26,25 @@ public abstract class CollisionTrigger extends ITrigger {
 	}
 	
 	@Override
-	public abstract boolean evaluate(ITrigger otherTrigger);
-
+	public boolean evaluate(ITrigger otherTrigger){
+		if(!resolvedCollisions.contains(((CollisionTrigger)otherTrigger).getMyCollisionActor())){
+			if(oneTime){
+				resolvedCollisions.add(((CollisionTrigger)otherTrigger).getMyCollisionActor());
+			}
+			return evaluateCollision(otherTrigger);
+		}
+		return false;
+	}
+	
+	public abstract boolean evaluateCollision(ITrigger otherTrigger);
+	
 	@Override
 	public abstract String getMyKey();
 
 	public IPlayActor getMyMainActor() {
 		return myMainActor;
 	}
-
+	
 	public void setMyMainActor(IPlayActor myMainActor) {
 		this.myMainActor = myMainActor;
 	}

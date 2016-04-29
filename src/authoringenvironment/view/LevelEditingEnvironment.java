@@ -25,7 +25,10 @@ import gamedata.controller.ParserController;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
+import gameengine.model.ActorState;
+import gameengine.model.IPlayActor;
 import gameplayer.controller.GameController;
+import gameplayer.controller.PlayType;
 import gameplayer.view.GameScreen;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -68,9 +71,6 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private Controller myController;
 	private LevelPreview myLevelPreview;
 	private File myPreviewFile;
-	
-	//MICHAEL ADDED THESE BUT THEY PROB NEED TO BE CHANGED
-	private Button myB;
 
 	/**
 	 * Constructor for a level editing environment.
@@ -101,6 +101,19 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
         Scene scene = new Scene(group);
 
         model = new Game(new GameInfo(), myController.getLevels());
+        //TODO this is duplicated from controller save game.... also no check for if actors is empty
+        for(Level level: model.getLevels()) {
+			for (IPlayActor actor: level.getActors()) {
+				if (actor.checkState(ActorState.MAIN)) {
+					level.getMainCharacters().add(actor);
+				}
+			}
+			if (level.getMainCharacters().size() == 0) {
+				System.out.println("size" + level.getActors().size());
+				level.getActors().get(0).addState(ActorState.MAIN);
+			}
+		}
+        
         CreatorController creatorController = new CreatorController(model);
         try {
 			creatorController.saveForPreviewing(myPreviewFile);
@@ -110,13 +123,11 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		}
         ParserController parserController = new ParserController();
         model = parserController.loadforPlaying(myPreviewFile);
-
-        
         
         ParallelCamera camera = new ParallelCamera();
         view = new GameScreen(camera);
 
-        controller = new GameController(model);
+        controller = new GameController(model, PlayType.PREVIEW);
         controller.setGame(model);
         controller.setGameView(view);
 
@@ -136,6 +147,10 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
         //controller.getView().clearGame();
         
         myPreviewFile.delete();
+        
+        stage.setOnCloseRequest(e -> {
+        	controller.winGame();
+        });
         
         
 	}
@@ -166,12 +181,10 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private void addChildrenToLeftPane() {
 		myInspector = new LevelInspector(myResources, availableActors.keySet(), this);
 		myLeftPane.getChildren().add(myInspector.getPane());
-		//AND HERE
-		myB = new Button("Preview");
+		Button myB = new Button("Preview");
 		myB.setOnMouseClicked(e -> previewGame());
 		myB.setLayoutX(100);
 		myB.setLayoutY(300);
-		//TODO I ADDED THIS LINE HERE
 		myLeftPane.getChildren().add(myB);
 		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
 	}
@@ -251,6 +264,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 					val.add(actor);
 					availableActors.put(icon.getRefActor(), val);
 					myLevel.addActor(actor);
+					if (myController.getActorGroups().containsKey(actor.getID())) {
+						groupActors(actor);
+					}
 					myInspector.getGarbageCollector().updateGarbageCollectingActors(myLevel.getActors());
 					//myLevel.addActor(icon.getRefActor());
 					myLevelPreview.addActorToScene(actor);
@@ -351,5 +367,26 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	
 	public Set<IAuthoringActor> getAvailableActors() {
 		return availableActors.keySet();
+	}
+	
+	public void groupActors(IAuthoringActor actor) {
+		System.out.println("Grouping");
+		ActorGroup actorList;
+		if (myController.getActorGroups().containsKey(actor.getID())) {
+			actorList = myController.getActorGroups().get(actor.getID());
+		} else {
+			actorList = new ActorGroup(actor.getName(), actor.getImageView(), new ArrayList<>());
+		}
+		for (IAuthoringActor key: myController.getActorMap().keySet()) {
+			List<IAuthoringActor> actorsForKey = myController.getActorMap().get(key);
+			for (int i = 0; i < actorsForKey.size(); i++) {
+				if (!actorList.getGroup().contains(actorsForKey.get(i))) {
+					actorList.addActorToGroup(actorsForKey.get(i));
+				}
+			}
+		}
+		myController.getActorGroups().put(actor.getID(), actorList);
+		System.out.println(myController.getActorGroups().get(actor.getID()).getGroup().size());
+		//System.out.println(myController.getActorGroups().get(actor.getID()));
 	}
 }

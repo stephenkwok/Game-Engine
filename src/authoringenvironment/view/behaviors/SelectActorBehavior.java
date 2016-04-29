@@ -2,12 +2,14 @@ package authoringenvironment.view.behaviors;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IAuthoringBehavior;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.view.ActionFactory;
+import authoringenvironment.view.ActorGroup;
 import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.TriggerFactory;
 import gameengine.model.IAction;

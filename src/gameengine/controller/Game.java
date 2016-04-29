@@ -12,17 +12,8 @@ import java.util.Observer;
 import java.util.Set;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
-import authoringenvironment.model.IAuthoringActor;
-import gameengine.model.Actor;
-import gameengine.model.ActorState;
-import gameengine.model.AttributeType;
-import gameengine.model.CollisionDetection;
-import gameengine.model.IGameElement;
-import gameengine.model.IPlayActor;
-import gameengine.model.PhysicsEngine;
-import gameengine.model.Triggers.ITrigger;
-import gameengine.model.Triggers.TickTrigger;
+import gameengine.model.Triggers.*;
+import gameengine.model.*;
 import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -55,17 +46,27 @@ public class Game extends Observable implements Observer, IGame {
 	private List<IPlayActor> deadActors;
 	private Property<Integer> levelTime = new Property<>(1, "levelTime");
 	private Property<Integer> globalTime = new Property<>(1, "globalTime");
+    
+    private SoundPlayer soundEngine;
+    private boolean sfxOff = true;
+    private boolean musicOff = true;
+	private List<IPlayActor> actorsToAdd;
 
-	private SoundPlayer soundEngine;
-	private boolean sfxOff = false;
-	private boolean musicOff = false;
-
-	public Game(String initialGameFile, List<Level> levels, GameInfo info, PhysicsEngine myPhysicsEngine,
-			CollisionDetection myCollisionDetector, Map<String, Set<IGameElement>> activeTriggers, Timeline animation,
-			List<IPlayActor> currentActors, List<IPlayActor> deadActors, int levelTime, int globalTime) {
-		this(initialGameFile, info, levels);
-		currentActors = new ArrayList<IPlayActor>();
+    
+    public Game(String initialGameFile, 
+    		List<Level> levels, 
+    		GameInfo info, 
+    		PhysicsEngine myPhysicsEngine,
+    		CollisionDetection myCollisionDetector, 
+    		Map<String, Set<IGameElement>> activeTriggers,
+    		Timeline animation, 
+    		List<IPlayActor> currentActors, 
+    		List<IPlayActor> deadActors,
+    		int levelTime, int globalTime) {
+    	this(initialGameFile, info, levels);
+    	currentActors = new ArrayList<IPlayActor>();
 		deadActors = new ArrayList<IPlayActor>();
+		actorsToAdd = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
 		this.levelTime.setValue(levelTime);
@@ -93,6 +94,7 @@ public class Game extends Observable implements Observer, IGame {
 		info = gameInfo;
 		currentActors = new ArrayList<IPlayActor>();
 		deadActors = new ArrayList<IPlayActor>();
+		actorsToAdd = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
 		initTimeline();
@@ -118,6 +120,7 @@ public class Game extends Observable implements Observer, IGame {
 
 	public void stopGame() {
 		togglePause();
+		setAllSound(true);
 	}
 
 	private void togglePause() {
@@ -140,9 +143,9 @@ public class Game extends Observable implements Observer, IGame {
 		initCurrentLevel();
 		initCurrentActors();
 		toggleUnPause();
-		if (soundEngine != null) {
-			soundEngine.setSoundtrack(levels.get(info.getMyCurrentLevelNum()).getSoundtrack());
-		}
+//		if (soundEngine != null) {
+//			soundEngine.setSoundtrack(levels.get(info.getMyCurrentLevelNum()).getSoundtrack());
+//		}
 	}
 
 	public void toggleUnPause() {
@@ -255,18 +258,14 @@ public class Game extends Observable implements Observer, IGame {
 		animation.stop();
 		if (info.getMyCurrentLevelNum() + 1 < levels.size()) {
 			setCurrentLevel(info.getMyCurrentLevelNum() + 1);
-			
-			levels.get(info.getMyCurrentLevelNum()).getActors().stream()
-					.forEach(actor -> ((Actor) actor).restoreImageView()); // Stephen added this
-			levels.get(info.getMyCurrentLevelNum()).getMainCharacter().setX(0);
-
-			//levels.get(info.getMyCurrentLevelNum()).getMainCharacters().forEach(actor -> actor.setX(0));
-
+			levels.get(info.getMyCurrentLevelNum()).getActors().forEach(actor -> ((Actor) actor).restoreImageView());
+			levels.get(info.getMyCurrentLevelNum()).getMainCharacters().forEach(actor -> actor.setX(0));
 			return true;
 		} else {
 			return false;
 		}
 	}
+
 
 	/**
 	 * Lets current level handle a trigger
@@ -335,6 +334,7 @@ public class Game extends Observable implements Observer, IGame {
 		info.setMyCurrentLevelNum(levelNum);
 	}
 
+
 	public void updateActors() {
 		deadActors = new ArrayList<IPlayActor>();
 		for (IPlayActor a : getCurrentActors()) {
@@ -345,8 +345,11 @@ public class Game extends Observable implements Observer, IGame {
 		if (deadActors.size() != 0) {
 			removeDeadActors();
 		}
+		getCurrentLevel().getActors().addAll(actorsToAdd);
+		actorsToAdd.clear();
 		currentActors = getCurrentLevel().getActors();
 	}
+
 
 	/**
 	 * Calls for the removal of dead Actors
@@ -365,7 +368,7 @@ public class Game extends Observable implements Observer, IGame {
 
 	public void addActor(Actor newActor) {
 		newActor.setPhysicsEngine(myPhysicsEngine);
-		getCurrentLevel().addActor(newActor);
+		actorsToAdd.add(newActor);
 	}
 
 	/**

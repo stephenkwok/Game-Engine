@@ -6,10 +6,12 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Map;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IAuthoringBehavior;
+import authoringenvironment.view.behaviors.CollisionBehavior;
 import gameengine.model.IRule;
 
 /**
@@ -130,4 +132,8 @@ public class ActorRuleFactory {
 			return (IAuthoringBehavior) constructor.newInstance(rule, myActorRule, behaviorType, myResources);
 		}
 	}
+	
+//	private IAuthoringBehavior createSoundActionBehavior(){
+//		
+//	}
 }

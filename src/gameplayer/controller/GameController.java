@@ -41,8 +41,12 @@ public class GameController extends Observable implements Observer, IGameControl
 	private ResourceBundle myResources;
 	@XStreamOmitField
 	private static final String GAME_CONTROLLER_RESOURCE = "gameActions";
+	private PlayType myMode;
 
 	public GameController(Game game) {
+		this(game, PlayType.PLAY);
+	}
+	public GameController(Game game, PlayType mode) {
 		this.setGame(game);
 		this.setGameView(new GameScreen(new ParallelCamera()));
 		this.initialize(game.getInfo().getMyCurrentLevelNum()); // note: main
@@ -50,6 +54,7 @@ public class GameController extends Observable implements Observer, IGameControl
 																// define at
 																// this line
 		this.myResources = ResourceBundle.getBundle(GAME_CONTROLLER_RESOURCE);
+		this.myMode = mode;
 	}
 
 	/**
@@ -114,10 +119,20 @@ public class GameController extends Observable implements Observer, IGameControl
 	/**
 	 * Will stop the animation timeline.
 	 */
-	public void endGame() {
+	private void endGame(boolean win) {
 		model.stopGame();
-		view.terminateGame();
-		getGame().setAllSound(true);
+		view.togglePause();
+		if (myMode == PlayType.PLAY) {
+			view.terminateGame(win);
+		}
+	}
+	
+	public void winGame() {
+		endGame(true);
+	}
+	
+	public void loseGame() {
+		endGame(false);
 	}
 	
 
@@ -127,13 +142,6 @@ public class GameController extends Observable implements Observer, IGameControl
 	}
 
 	
-	/**
-	 * Will stop the animation timeline.
-	 */
-	public void winGame() {
-		System.out.println("game won");
-	}
-
 	public void nextLevel() {
 		if (model.nextLevel()) {
 			view.clearGame();
@@ -142,7 +150,7 @@ public class GameController extends Observable implements Observer, IGameControl
 			begin();
 		}
 		else {
-			endGame();
+			winGame();
 		}
 	}
 
@@ -165,10 +173,6 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void update(Observable o, Object arg) {
 		List<Object> myList = (List<Object>) arg;
 		String methodName = (String) myList.get(0);
-		if(myResources == null){
-			//System.out.println("wtf im dead");
-			return;
-		}
 		try {
 			if(methodName.equals("addActor")){ 
 				this.addActor((Actor)myList.get(1));
@@ -207,7 +211,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	@Override
 	public void togglePause() {
 		model.stopGame();
-		view.pauseGame();
+		view.togglePause();
 		getGame().setAllSound(true);
 	}
 
@@ -234,9 +238,14 @@ public class GameController extends Observable implements Observer, IGameControl
 	}
 
 	public void updateCamera() {
-		if (model.getCurrentLevel().getMainCharacters() != null) {
+		if (model.getCurrentLevel().getMainCharacter() != null) {
 			if (model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))) {
-				view.changeCamera(model.getCurrentLevel().getMainCharacters().get(0).getX(), 0);
+				try {
+					view.changeCamera(model.getCurrentLevel().getMainCharacters().get(0).getX(), 0);
+				} catch (Exception e) {
+					model.stopGame();
+					e.printStackTrace();
+				}
 			} else {
 				view.changeCamera(0, model.getCurrentLevel().getMainCharacters().get(0).getY());
 			}
