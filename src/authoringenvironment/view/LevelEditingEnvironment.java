@@ -147,6 +147,10 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
         
         myPreviewFile.delete();
         
+        stage.setOnCloseRequest(e -> {
+        	controller.endGame();
+        });
+        
         
 	}
 	
