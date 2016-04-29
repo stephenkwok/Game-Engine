@@ -1,22 +1,11 @@
 package authoringenvironment.view;
 
-import java.util.Observable;
-import java.util.Observer;
-import java.util.ResourceBundle;
+import java.util.*;
 import authoringenvironment.controller.Controller;
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingEnvironment;
-import gameengine.model.Actor;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TabPane;
 import authoringenvironment.model.*;
-import gameengine.model.*;
-import gui.view.CheckBoxApplyPhysics;
+import gameengine.model.Actor;
 import javafx.geometry.*;
+import gui.view.CheckBoxApplyPhysics;
 import javafx.scene.control.*;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.ImageView;

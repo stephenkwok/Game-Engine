@@ -135,6 +135,8 @@ public class Tester extends Application {
         Action action9 = new ChangeAttribute((IPlayActor)actor1,AttributeType.POINTS,1);
         Rule rule9 = new Rule(trigger9,action9);
         actor1.addRule(rule9);
+        
+        actor1.addRule(new Rule(new KeyTrigger(KeyCode.C), new SoundAction((Actor)actor1, "strongpunch.mp3")));
 
         KeyTrigger triggerSpawn = new KeyTrigger(KeyCode.S);
         TickTrigger bulletTick = new TickTrigger();
@@ -206,6 +208,10 @@ public class Tester extends Application {
         level2.setMyBackgroundImgName("vgnwpGb.png");
         levels.add(level2);
         level2.addActor(actor1);
+        
+        
+        level1.setSoundtrack("Jordan.mp3");
+        level2.setSoundtrack("Robot.mp3");
 
         int yposition = 200;
         int xposition = 150;
@@ -326,6 +332,8 @@ public class Tester extends Application {
 
         Game model = new Game(info,levels);
         model.setHUDInfoFile("a.txt");
+        
+        
         
         CreatorController c = new CreatorController(model);
         c.saveForEditing(new File("gamefiles/test2.xml"));

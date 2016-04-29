@@ -55,6 +55,7 @@ public class FlappyBird extends Application {
         Level level1 = new Level();
         level1.setMyBackgroundImgName("flappybackground.png");
         levels.add(level1);
+        level1.setSoundtrack("Photograph.mp3");
 
         Actor pipeTop = new Actor();
         pipeTop.setID(10);
