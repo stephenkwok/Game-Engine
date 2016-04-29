@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.view.ActorRule;
+import gameengine.model.IRule;
+import gameengine.model.Actions.ChangeAttribute;
 import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.KeyTrigger;
 import javafx.scene.input.KeyCode;
 
 /**
@@ -18,8 +21,8 @@ import javafx.scene.input.KeyCode;
 public class KeyBehavior extends ComboBoxBehavior {
 	private ITrigger myTrigger;
 
-	public KeyBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
-		super(myActorRule, behaviorType, myResources);
+	public KeyBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
+		super(myRule, myActorRule, behaviorType, myResources);
 	}
 
 	/**
@@ -34,7 +37,10 @@ public class KeyBehavior extends ComboBoxBehavior {
 
 	@Override
 	public void updateValueBasedOnEditable() {
-//		getComboBox().setValue(getValue());
+		try{
+			getComboBox().setValue(((KeyTrigger) getMyRule().getMyTrigger()).getMyKey());
+		}catch(Exception e){
+		}
 	}
 
 	@Override
@@ -44,9 +50,6 @@ public class KeyBehavior extends ComboBoxBehavior {
 
 	@Override
 	protected void createTriggerOrAction() {
-		if (myTrigger != null) {
-			// remove this trigger from ActorRule
-		}
 		KeyCode keyCode = KeyCode.getKeyCode(getValue());
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(keyCode);
