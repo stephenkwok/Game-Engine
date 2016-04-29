@@ -97,6 +97,9 @@ public class SoundPlayer {
         if (soundtrackPlayer != null) {
         	soundtrackPlayer.dispose();
         }
+        if (soundtrack == null) {
+        	return;
+        }
         soundtrackPlayer = new MediaPlayer(soundtrack);
         soundtrackPlayer.setOnEndOfMedia(new Runnable() {
             public void run() {

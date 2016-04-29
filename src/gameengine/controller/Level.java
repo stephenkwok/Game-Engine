@@ -37,6 +37,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	private static final double DEFAULT_HEIGHT = 800;
 	private static final double DEFAULT_WIDTH = 1024;
 	private static final String DEFAULT_SCROLLING = "Horizontally";
+	private static final String DEFAULT_MUSIC = "Ink.mp3";
 	private List<IPlayActor> myActors;
 	private String myName;
 	private double myHeight;
@@ -63,6 +64,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		setMyActors(new ArrayList<>());
 		setName(DEFAULT_NAME);
 		myBackgroundImgName = DEFAULT_IMAGE_NAME;
+		myBackgroundMusicName = DEFAULT_MUSIC;
 		setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
 		myScrollingDirection = DEFAULT_SCROLLING;
 		myName = DEFAULT_NAME;
