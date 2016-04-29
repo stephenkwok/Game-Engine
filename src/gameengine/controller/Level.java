@@ -8,6 +8,7 @@ import gameengine.model.AttributeManager;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
+import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
 import gameengine.model.RuleManager;
 import gameengine.model.Triggers.AttributeReached;
@@ -18,6 +19,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -400,4 +402,16 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
     	return soundtrack;
     }
     
+    public void shiftScene(String direction, double amount){
+    	for(IPlayActor a: myActors){
+    		try {
+    			Class[] paramTypes = {IPlayActor.class, double.class};
+    			Object[] params = {a, amount};
+				PhysicsEngine.class.getDeclaredMethod("glide"+direction,paramTypes).invoke(a.getPhysicsEngine(),params);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e) {
+				e.printStackTrace();
+			}
+    	}
+    } 
 }

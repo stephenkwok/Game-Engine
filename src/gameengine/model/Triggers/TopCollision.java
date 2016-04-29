@@ -8,12 +8,16 @@ public class TopCollision extends CollisionTrigger {
 
 	private static final String COLLISION_TYPE = "TopCollision";
 
+	public TopCollision(Actor actor1, Actor actor2, Boolean oneTime) {
+		super(actor1, actor2, oneTime);
+	}
+	
 	public TopCollision(Actor actor1, Actor actor2) {
-		super(actor1, actor2);
+		super(actor1, actor2, false);
 	}
 
 	@Override
-	public boolean evaluate(ITrigger otherTrigger) {
+	public boolean evaluateCollision(ITrigger otherTrigger) {
 		TopCollision otherCollision = (TopCollision) otherTrigger;
 		return this.equals(otherCollision);
 	}
