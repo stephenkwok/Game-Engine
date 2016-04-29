@@ -362,8 +362,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		newActor.setID(myActorMap.size());
 //		myActorNames.add(newActor.getName());
 		mainScreen.createActorPreviewUnit(newActor, actorEnvironment);
-		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
+		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
+		System.out.println(newActor.getID());
 	}
 
 	public void useGame() {

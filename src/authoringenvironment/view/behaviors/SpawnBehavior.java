@@ -5,15 +5,18 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.IAction;
+import gameengine.model.IRule;
+import gameengine.model.Actions.Spawn;
 
 public class SpawnBehavior extends SelectActorBehavior {
 	private IAction myAction;
 	
-	public SpawnBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
+	public SpawnBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
 			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
-		super(myActorRule, behaviorType, myResources, myActor, myActors);
+		super(myRule, myActorRule, behaviorType, myResources, myActor, myActors);
 	}
 
 	@Override
@@ -32,6 +35,14 @@ public class SpawnBehavior extends SelectActorBehavior {
 	@Override
 	public boolean isTrigger() {
 		return false;
+	}
+
+	@Override
+	public void updateValueBasedOnEditable() {
+		try{
+			getComboBox().setValue((IEditableGameElement) (((Spawn) getMyRule().getMyAction()).getMySpawnedActor()));
+		}catch(Exception e){
+		}
 	}
 
 }

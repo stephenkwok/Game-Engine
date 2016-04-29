@@ -6,9 +6,8 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
-import gameengine.model.AttributeType;
-import gameengine.model.IAction;
-import gameengine.model.IPlayActor;
+import gameengine.model.*;
+import gameengine.model.Actions.ChangeAttribute;
 
 public class ChangeAttributeBehavior extends DoubleBehavior {
 	private static final String CHANGE_HEALTH = "ChangeHealth";
@@ -16,9 +15,8 @@ public class ChangeAttributeBehavior extends DoubleBehavior {
 	private IAction myAction;
 	private AttributeType attributeType;
 
-	public ChangeAttributeBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
-			ResourceBundle myResources) {
-		super(myActorRule, behaviorType, myResources);
+	public ChangeAttributeBehavior(IRule myRule, ActorRule myActorRule, IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
+		super(myRule, myActorRule, behaviorType, myResources);
 		this.myActor = myActor;
 		this.attributeType = AttributeType.POINTS;
 	}
@@ -48,9 +46,8 @@ public class ChangeAttributeBehavior extends DoubleBehavior {
 	@Override
 	public void updateValueBasedOnEditable() {
 		try{
-			setTextFieldValue(Integer.toString(getActorRule().getActor().getAttribute(attributeType).getMyValue()));
+			setTextFieldValue(Integer.toString(((ChangeAttribute) getMyRule().getMyAction()).getMyValue()));
 		}catch(Exception e){
-			System.out.println("here");
 		}
 	}
 }

@@ -3,14 +3,20 @@ package authoringenvironment.view.behaviors;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
+import gameengine.model.IRule;
+import gameengine.model.Actions.ChangeAttribute;
 import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.TickTrigger;
 
 public class TickBehavior extends DoubleBehavior {
 	private ITrigger myTrigger;
 
-	public TickBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
-		super(myActorRule, behaviorType, myResources);
+	public TickBehavior(IRule myRule, ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
+			ResourceBundle myResources) {
+		super(myRule, myActorRule, behaviorType, myResources);
 	}
 
 	@Override
@@ -33,7 +39,10 @@ public class TickBehavior extends DoubleBehavior {
 
 	@Override
 	public void updateValueBasedOnEditable() {
-		// TODO Auto-generated method stub
-		
+		try{
+			setTextFieldValue(Integer.toString(((TickTrigger) getMyRule().getMyTrigger()).getMyInterval()));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 }
