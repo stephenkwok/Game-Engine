@@ -555,5 +555,4 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		myStates = states;
 	}
 	
-
 }
