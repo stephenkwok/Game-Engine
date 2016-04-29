@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.IAuthoringBehavior;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.view.ActionFactory;
 import authoringenvironment.view.ActorRule;
@@ -155,7 +156,7 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	 */
 	public abstract boolean isTrigger();
 
-	protected void updateValueBasedOnEditable() {
+	public void updateValueBasedOnEditable() {
 		comboBox.setValue(otherActor);
 	}
 

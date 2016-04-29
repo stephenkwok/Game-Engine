@@ -42,4 +42,10 @@ public class AttributeReachedBehavior extends DoubleBehavior {
 		return true;
 	}
 
+	@Override
+	public void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
