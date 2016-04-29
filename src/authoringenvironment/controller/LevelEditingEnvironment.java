@@ -22,6 +22,7 @@ import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.view.ImageviewActorIcon;
 import authoringenvironment.view.LevelInspector;
 import authoringenvironment.view.LevelPreview;
+import authoringenvironment.view.LevelPreviewEditing;
 import gamedata.controller.CreatorController;
 import gamedata.controller.ParserController;
 import gameengine.controller.Game;
@@ -71,8 +72,8 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private Pane myCenterPane;
 	private Stage myStage;
 	private Controller myController;
-	private LevelPreview myLevelPreview;
-	private File myPreviewFile;
+	private LevelPreviewEditing myLevelEditingPreview;
+	private LevelPreview myLevelPreviewer;
 
 	/**
 	 * Constructor for a level editing environment.
@@ -89,71 +90,8 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		myRoot = new BorderPane();
 		myStage = stage;
 		myController = controller;
+		myLevelPreviewer = new LevelPreview(myController);
 		initializeEnvironment();
-	}
-	
-	
-	private void previewGame(){
-		myPreviewFile = new File("preview.xml");
-		Game model;
-		GameController controller;
-		GameScreen view;
-        
-		Group group = new Group();
-        Scene scene = new Scene(group);
-
-        model = new Game(new GameInfo(), myController.getLevels());
-        //TODO this is duplicated from controller save game.... also no check for if actors is empty
-        for(Level level: model.getLevels()) {
-			for (IPlayActor actor: level.getActors()) {
-				if (actor.checkState(ActorState.MAIN)) {
-					level.getMainCharacters().add(actor);
-				}
-			}
-			if (level.getMainCharacters().size() == 0) {
-				level.getActors().get(0).addState(ActorState.MAIN);
-			}
-		}
-        
-        CreatorController creatorController = new CreatorController(model);
-        try {
-			creatorController.saveForPreviewing(myPreviewFile);
-		} catch (SAXException | IOException | TransformerException | ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        ParserController parserController = new ParserController();
-        model = parserController.loadforPlaying(myPreviewFile);
-        
-        ParallelCamera camera = new ParallelCamera();
-        view = new GameScreen(camera);
-
-        controller = new GameController(model, PlayType.PREVIEW);
-        controller.setGame(model);
-        controller.setGameView(view);
-
-        SubScene sub = view.getScene();
-        sub.fillProperty().set(Color.BLUE);
-        group.getChildren().add(sub);
-
-        Stage stage = new Stage();
-        stage.setWidth(800);
-        stage.setHeight(600);
-
-        sub.setCamera(camera);
-        stage.setScene(scene);
-        stage.show();
-        controller.initialize(0);
-        
-        //controller.getView().clearGame();
-        
-        myPreviewFile.delete();
-        
-        stage.setOnCloseRequest(e -> {
-        	controller.endGame(false);
-        });
-        
-        
 	}
 	
 	/**
@@ -183,7 +121,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		myInspector = new LevelInspector(myResources, availableActors.keySet(), this);
 		myLeftPane.getChildren().add(myInspector.getPane());
 		Button myB = new Button("Preview");
-		myB.setOnMouseClicked(e -> previewGame());
+		myB.setOnMouseClicked(e -> myLevelPreviewer.previewGame());
 		myB.setLayoutX(100);
 		myB.setLayoutY(300);
 		myLeftPane.getChildren().add(myB);
@@ -238,9 +176,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 * When dragged over the center pane, copy the gesture source.
 	 */
 	private void setCenterPaneDragOver() {
-		myLevelPreview.getLevelPane().setOnDragOver(new EventHandler<DragEvent>() {
+		myLevelEditingPreview.getLevelPane().setOnDragOver(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
-				if (event.getGestureSource() != myLevelPreview.getLevelPane() && event.getDragboard().hasString()) {
+				if (event.getGestureSource() != myLevelEditingPreview.getLevelPane() && event.getDragboard().hasString()) {
 					event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
 				}
 				event.consume();
@@ -254,7 +192,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 * drags.
 	 */
 	private void setCenterPaneDragDropped() {
-		myLevelPreview.getLevelPane().setOnDragDropped(new EventHandler<DragEvent>() {
+		myLevelEditingPreview.getLevelPane().setOnDragDropped(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
 				boolean success = false;
@@ -268,7 +206,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 
 					myInspector.getGarbageCollector().updateGarbageCollectingActors(myLevel.getActors());
 					//myLevel.addActor(icon.getRefActor());
-					myLevelPreview.addActorToScene(actor);
+					myLevelEditingPreview.addActorToScene(actor);
 					//myLevelPreview.addActorToScene(icon.getRefActor());
 					success = true;
 				}
@@ -299,8 +237,8 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 * Initialize the center pane.
 	 */
 	private void initializeCenter() {
-		myLevelPreview = new LevelPreview(this);
-		myCenterPane = myLevelPreview.getPane();
+		myLevelEditingPreview = new LevelPreviewEditing(this);
+		myCenterPane = myLevelEditingPreview.getPane();
 		myRoot.setCenter(myCenterPane);
 	}
 
@@ -319,14 +257,14 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	@Override
 	public void setEditableElement(IEditableGameElement editable) {
 		myLevel = (Level) editable;
-		myLevelPreview.updateLevelPreview(myLevel);
+		myLevelEditingPreview.updateLevelPreview(myLevel);
 		myInspector.getGarbageCollector().setEditableElement(myLevel);
 		updateActorsList();
 		myInspector.getAttributesTab().updateEditable(myLevel);
 	}
 
 	public void changeBackgroundImage(Image image, File imageFile) {
-		myLevelPreview.changeBackgroundImage(image, imageFile);
+		myLevelEditingPreview.changeBackgroundImage(image, imageFile);
 	}
 
 	/**
@@ -353,10 +291,10 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (arg == null) {
-			myLevelPreview.resizeBackgroundBasedOnScrolling();
+			myLevelEditingPreview.resizeBackgroundBasedOnScrolling();
 		} else {
 			myController.updateRefActor((IAuthoringActor) arg);
-			myLevelPreview.addLevelActorsToScene();
+			myLevelEditingPreview.addLevelActorsToScene();
 		}
 	}
 
