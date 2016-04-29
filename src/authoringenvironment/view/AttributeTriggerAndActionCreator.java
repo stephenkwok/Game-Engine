@@ -1,4 +1,4 @@
-package authoringenvironment.model;
+package authoringenvironment.view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,10 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 import authoringenvironment.controller.LevelEditingEnvironment;
+import authoringenvironment.model.IActionCreator;
+import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.model.ITriggerCreator;
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
@@ -116,6 +120,7 @@ public class AttributeTriggerAndActionCreator extends VBox implements ITriggerCr
 		}
 		return type;
 	}
+	
 	@Override
 	public ITrigger createTrigger() {
 		AttributeType type = getAttributeType();

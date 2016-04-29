@@ -1,4 +1,4 @@
-package gui.view;
+package authoringenvironment.view;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.*;

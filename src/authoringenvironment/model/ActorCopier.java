@@ -33,13 +33,6 @@ import javafx.scene.image.ImageView;
  */
 public class ActorCopier {
 	private static final String RESOURCE = "ruleCreator";
-	private static final String KEY = "Key";
-	private static final String TICK = "Tick";
-	private static final String COLLISION = "Collision";
-	private static final String CLICK = "Click";
-	private static final String ATTRIBUTE = "Attribute";
-	private static final String CREATE_ACTOR = "CreateActor";
-	private static final String WIN_LOSE = "WinLose";
 	private Actor myReferenceActor;
 	@XStreamOmitField
 	private ResourceBundle myResources;
@@ -97,7 +90,6 @@ public class ActorCopier {
 		copyAttributes((IGameElement) toUpdate, toCopy.getAttributeMap());
 	}
 
-	// work in progress.. currently only works for KeyTriggers and Move actions
 	private void copyRules(Actor toUpdate, Map<String, List<Rule>> rulesToCopy) {
 		toUpdate.getRules().clear();
 		for (String trigger : rulesToCopy.keySet()) {

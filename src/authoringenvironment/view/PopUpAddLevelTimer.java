@@ -1,25 +1,24 @@
-package gui.view;
+package authoringenvironment.view;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-import authoringenvironment.model.AttributeTriggerAndActionCreator;
-import authoringenvironment.model.CreateActorActionCreator;
 import authoringenvironment.model.IActionCreator;
-import authoringenvironment.model.LoseGameActionCreator;
-import authoringenvironment.model.NextLevelActionCreator;
-import authoringenvironment.model.WinGameActionCreator;
 import gameengine.controller.Level;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
+import gameengine.model.IGameElement;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Actions.ChangeAttribute;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.TickTrigger;
+import gui.view.ComboBoxLevelTriggerAndAction;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -38,7 +37,9 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	private static final String SECONDS = "Seconds:";
 	private static final String ACTION_PROMPT = "Select";
 	private static final String DELIMITER = ",";
+	private static final String DIRECTORY = "Directory";
 	private static final int ONE = 1;
+	private static final int TICKS_PER_SECOND = 50;
 	private ResourceBundle myResources;
 	private TextField myInitialMinutes;
 	private TextField myInitialSeconds;
@@ -104,16 +105,32 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 
 	private void displayActionParameters(String name) {
 		myActionCreator = null;
-		switch (name) {
-		case "WinGame":
-			myActionCreator = new WinGameActionCreator(myLevel);
-			break;
-		case "LoseGame":
-			myActionCreator = new LoseGameActionCreator(myLevel);
-			break;
-		case "NextLevel":
-			myActionCreator = new NextLevelActionCreator(myLevel);
-			break;
+		Class<?> creator;
+		try {
+			creator = Class.forName(myResources.getString(DIRECTORY) + myResources.getString(name));
+			Constructor<?> constructor = creator.getConstructor(IGameElement.class);
+			myActionCreator = (VBox) constructor.newInstance(myLevel);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -152,9 +169,9 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	
 	private int determineChange(int initialValue, int triggerValue) {
 		if (initialValue > triggerValue) {
-			return -1;
+			return -TICKS_PER_SECOND;
 		} else {
-			return 1;
+			return TICKS_PER_SECOND;
 		}
 	}
 }

@@ -1,7 +1,8 @@
-package authoringenvironment.model;
+package authoringenvironment.view;
 
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.ITriggerCreator;
 import gameengine.model.IGameElement;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.KeyTrigger;

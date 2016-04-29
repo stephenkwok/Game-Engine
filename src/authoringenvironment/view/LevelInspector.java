@@ -9,8 +9,6 @@ import authoringenvironment.model.IAuthoringActor;
 import gui.view.ButtonFileChooserBackgroundImage;
 import gui.view.CheckBoxesGarbageCollection;
 import gui.view.IGUI;
-import gui.view.PopUpAddLevelTimer;
-import gui.view.PopUpRuleAdder;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;

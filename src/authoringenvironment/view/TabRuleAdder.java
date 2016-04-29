@@ -7,20 +7,12 @@ import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.LevelEditingEnvironment;
-import authoringenvironment.model.AttributeTriggerAndActionCreator;
-import authoringenvironment.model.CreateActorActionCreator;
 import authoringenvironment.model.IActionCreator;
 import authoringenvironment.model.ITriggerCreator;
-import authoringenvironment.model.KeyTriggerCreator;
-import authoringenvironment.model.LoseGameActionCreator;
-import authoringenvironment.model.NextLevelActionCreator;
-import authoringenvironment.model.TickTriggerCreator;
-import authoringenvironment.model.WinGameActionCreator;
 import gameengine.controller.Level;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.ITrigger;
-import gui.view.ClickTriggerCreator;
 import gui.view.ComboBoxLevelTriggerAndAction;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -126,6 +118,8 @@ public class TabRuleAdder extends TabParent implements Observer{
 	}
 
 	private void createAndAddRule() {
+		myTriggerContainer.getChildren().remove(myTriggerCreator);
+		myActionContainer.getChildren().remove(myActionCreator);
 		ITrigger trigger = ((ITriggerCreator) myTriggerCreator).createTrigger();
 		Action action = ((IActionCreator) myActionCreator).createAction();
 		myLevel.addRule(new Rule(trigger, action));
@@ -146,7 +140,6 @@ public class TabRuleAdder extends TabParent implements Observer{
 	@Override
 	Node getContent()
 			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		// TODO Auto-generated method stub
 		return myContainer;
 	}
 

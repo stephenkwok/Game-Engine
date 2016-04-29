@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Set;
 
 import authoringenvironment.controller.GUIMainScreen;
+import authoringenvironment.view.PopUpParent;
+import authoringenvironment.view.PopUpSimpleErrorMessage;
 import authoringenvironment.view.PreviewUnitWithEditable;
 import authoringenvironment.view.PreviewUnitWithLevel;
 import gameengine.controller.Level;
-import gui.view.PopUpParent;
-import gui.view.PopUpSimpleErrorMessage;
 import javafx.scene.layout.VBox;
 
 /**
