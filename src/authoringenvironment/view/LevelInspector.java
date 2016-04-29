@@ -37,6 +37,7 @@ public class LevelInspector implements IGUI {
 	private VBox myContainer;
 	private LevelEditingEnvironment myLevelEditor;
 	private CheckBoxesGarbageCollection myGarbageCollector;
+	private LevelPreview myLevelPreviewer;
 
 	/**
 	 * Constructor for Level Inspector.
@@ -76,6 +77,7 @@ public class LevelInspector implements IGUI {
 		addTabToContainer(myAttributesTab, false);
 		myContainer.getChildren().add(buttonBox);
 		addTabToContainer(myActorsTab, true);
+		addPreviewButton();
 	}
 	
 	public CheckBoxesGarbageCollection getGarbageCollector() {
@@ -90,6 +92,14 @@ public class LevelInspector implements IGUI {
 		HBox box = new HBox();
 		box.getChildren().addAll(addRuleButton, addTimerButton);
 		return box;
+	}
+	
+	private void addPreviewButton() {
+		Button myB = new Button("Preview");
+		myB.setOnMouseClicked(e -> myLevelEditor.previewGame());
+		myB.setLayoutX(100);
+		myB.setLayoutY(300);
+		myContainer.getChildren().add(myB);
 	}
 
 	/**

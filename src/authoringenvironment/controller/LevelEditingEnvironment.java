@@ -1,20 +1,12 @@
 package authoringenvironment.controller;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 import java.util.Set;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-
-import org.xml.sax.SAXException;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
@@ -23,22 +15,8 @@ import authoringenvironment.view.ImageviewActorIcon;
 import authoringenvironment.view.LevelInspector;
 import authoringenvironment.view.LevelPreview;
 import authoringenvironment.view.LevelPreviewEditing;
-import gamedata.controller.CreatorController;
-import gamedata.controller.ParserController;
-import gameengine.controller.Game;
-import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
-import gameengine.model.ActorState;
-import gameengine.model.IPlayActor;
-import gameplayer.controller.GameController;
-import gameplayer.controller.PlayType;
-import gameplayer.view.GameScreen;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.ParallelCamera;
-import javafx.scene.Scene;
-import javafx.scene.SubScene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -49,9 +27,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 /**
  * Level editing environment
@@ -61,8 +37,9 @@ import javafx.stage.WindowEvent;
  */
 public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final String GUI_RESOURCE = "authoringGUI";
+	private static final String BACKGROUND_COLOR = "-fx-background-color: darkgray";
 	private static final double SUBSCENE_WIDTH = 1000;
-	private static final double SUBSCENE_HEIGHT = 575;
+	private static final int DOUBLE_CLICK = 2;
 	private BorderPane myRoot;
 	private LevelInspector myInspector;
 	private ResourceBundle myResources;
@@ -99,7 +76,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 * well as the ability to drag actors between the left and center pane.
 	 */
 	private void initializeEnvironment() {
-		myRoot.setStyle("-fx-background-color: darkgray");
+		myRoot.setStyle(BACKGROUND_COLOR);
 		initializeCenter();
 		initializeLeftPane();
 		updateDrag();
@@ -120,11 +97,6 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private void addChildrenToLeftPane() {
 		myInspector = new LevelInspector(myResources, availableActors.keySet(), this);
 		myLeftPane.getChildren().add(myInspector.getPane());
-		Button myB = new Button("Preview");
-		myB.setOnMouseClicked(e -> myLevelPreviewer.previewGame());
-		myB.setLayoutX(100);
-		myB.setLayoutY(300);
-		myLeftPane.getChildren().add(myB);
 		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
 	}
 
@@ -139,19 +111,22 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		for (int i = 0; i < icons.size(); i++) {
 			ImageviewActorIcon source = icons.get(i);
 			setDragDetected(source);
-			source.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent mouseEvent) {
-					if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-						if (mouseEvent.getClickCount() == 2) {
-							System.out.println("Double clicked");
-							myController.goToEditingEnvironment(source.getRefActor(),
-									myController.getActorEditingEnvironment());
-						}
+			setMouseClickBehavior(source);	
+		}
+	}
+	
+	private void setMouseClickBehavior(ImageviewActorIcon icon) {
+		icon.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+					if (mouseEvent.getClickCount() == DOUBLE_CLICK) {
+						myController.goToEditingEnvironment(icon.getRefActor(),
+								myController.getActorEditingEnvironment());
 					}
 				}
-			});
-		}
+			}
+		});
 	}
 
 	/**
@@ -198,22 +173,27 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 				boolean success = false;
 				if (db.hasString()) {
 					ImageviewActorIcon icon = getIconById(Integer.parseInt(db.getString()));
-					List<IAuthoringActor> val = availableActors.get(icon.getRefActor());
 					IAuthoringActor actor = icon.getActor();
-					val.add(actor);
-					availableActors.put(icon.getRefActor(), val);
-					myLevel.addActor(actor);
-
-					myInspector.getGarbageCollector().updateGarbageCollectingActors(myLevel.getActors());
-					//myLevel.addActor(icon.getRefActor());
-					myLevelEditingPreview.addActorToScene(actor);
-					//myLevelPreview.addActorToScene(icon.getRefActor());
+					updateAvailableActors(actor, icon.getRefActor());
+					addActorToLevel(actor);
 					success = true;
 				}
 				event.setDropCompleted(success);
 				event.consume();
 			}
 		});
+	}
+	
+	private void updateAvailableActors(IAuthoringActor actor, IAuthoringActor refActor) {
+		List<IAuthoringActor> val = availableActors.get(refActor);
+		val.add(actor);
+		availableActors.put(refActor, val);
+	}
+	
+	private void addActorToLevel(IAuthoringActor actor) {
+		myLevel.addActor(actor);
+		myInspector.getGarbageCollector().updateGarbageCollectingActors(myLevel.getActors());
+		myLevelEditingPreview.addActorToScene(actor);
 	}
 
 	/**
@@ -304,5 +284,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	
 	public Set<IAuthoringActor> getAvailableActors() {
 		return availableActors.keySet();
+	}
+	
+	public void previewGame() {
+		myLevelPreviewer.previewGame();
 	}
 }
