@@ -172,9 +172,5 @@ public class SoundPlayer {
         mediaPlayers.get(mediaMap.get(soundFileName)).setMute(mute);
     }
     
-    public void garbageCollect() {
-    	System.gc();
-    	System.runFinalization();
-    }
 
 }

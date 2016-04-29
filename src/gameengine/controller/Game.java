@@ -481,8 +481,5 @@ public class Game extends Observable implements Observer, IGame {
 		return animation.getStatus() == Status.PAUSED;
 	}
 	
-	public void garbageCollect() {
-		soundEngine.garbageCollect();
-	}
 
 }
