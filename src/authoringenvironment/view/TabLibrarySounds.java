@@ -78,6 +78,7 @@ public class TabLibrarySounds extends TabLibrary {
 		iv.setPreserveRatio(true);
 		Button button = new Button("", iv);
 		URL resource = getClass().getClassLoader().getResource(soundName);
+		System.out.println("" + resource == null + " " + soundName);
 		AudioClip sound = new AudioClip(resource.toString());
 		button.setOnAction(event -> {
 			if (sound.isPlaying()) {

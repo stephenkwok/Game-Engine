@@ -489,6 +489,7 @@
       </myAttributeManager>
       <myMainCharacters/>
       <soundtrack>Photograph.mp3</soundtrack>
+      <myBackgroundMusicName>Ink.mp3</myBackgroundMusicName>
     </gameengine.controller.Level>
   </levels>
   <info>
