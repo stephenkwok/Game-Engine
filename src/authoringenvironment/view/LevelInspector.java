@@ -36,6 +36,7 @@ public class LevelInspector implements IGUI {
 	private TabFields myAttributesTab;
 	private VBox myContainer;
 	private LevelEditingEnvironment myLevelEditor;
+	private CheckBoxesGarbageCollection myGarbageCollector;
 
 	/**
 	 * Constructor for Level Inspector.
@@ -70,10 +71,15 @@ public class LevelInspector implements IGUI {
 		HBox buttonBox = addEditingButtons();
 		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(BUTTON_LABEL, null, myLevelEditor, myLevelEditor.getStage());
 		myAttributesTab.addElement(button);
-		myAttributesTab.addElement(new CheckBoxesGarbageCollection());
+		myGarbageCollector = new CheckBoxesGarbageCollection();
+		myAttributesTab.addElement(myGarbageCollector);
 		addTabToContainer(myAttributesTab, false);
 		myContainer.getChildren().add(buttonBox);
 		addTabToContainer(myActorsTab, true);
+	}
+	
+	public CheckBoxesGarbageCollection getGarbageCollector() {
+		return myGarbageCollector;
 	}
 	
 	private HBox addEditingButtons() {

@@ -33,7 +33,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	private static final String OPTIONS = "Options";
 	private static final String START_PROMPT = "StartPrompt";
 	private static final String END_PROMPT = "EndPrompt";
-	private static final String GO = "Go";
+	private static final String SELECT = "Select";
 	private static final Double CONTAINER_SPACING = 10.0;
 	private static final Double CONTAINER_PADDING = 10.0;
 	private static final String LEFT = "Left";
@@ -45,6 +45,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	private static final String STRETCH_VERTICAL = "StretchVertical";
 	private static final String STRETCH_HORIZONTAL = "StretchHorizontal";
 	private static final String ADD_TO_IMAGE_DIMENSIONS = "AddToImageDimensions";
+	private static final String TRIGGER_DIRECTORY = "gameengine.model.Triggers.";
 	private static final String X = "X";
 	private static final String Y = "Y";
 	private List<String> allSides;
@@ -54,6 +55,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	private List<CheckBox> mySides;
 	private GUIFactory myFactory;
 	private Map<String, IAuthoringActor> garbageCollectors;
+	private Button checkGarbageCollectorsButton;
 
 	/**
 	 * Constructs a CheckBoxesHUDOptions object for the given GameInfo object.
@@ -97,11 +99,11 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 			}
 			myContainer.getChildren().add(container);
 		}
-		Button checkHUDButton = new Button(GO);
-		checkHUDButton.prefWidthProperty().bind(myContainer.widthProperty());
-		checkHUDButton.setOnAction(e -> updateGarbageCollectingActors(getSides(), myLevel.getActors()));
+		checkGarbageCollectorsButton = new Button(SELECT);
+		checkGarbageCollectorsButton.prefWidthProperty().bind(myContainer.widthProperty());
+		checkGarbageCollectorsButton.setOnAction(e -> updateGarbageCollectingActors(myLevel.getActors()));
 		myContainer.getChildren().add(new Label(myAttributesResources.getString(END_PROMPT)));
-		myContainer.getChildren().add(checkHUDButton);
+		myContainer.getChildren().add(checkGarbageCollectorsButton);
 	}
 
 	private void initAllSidesList() {
@@ -111,7 +113,8 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	// if they add an already existing one --> Just update the actors
 	// if they add a new one --> update the actors
 	// if they remove one --> remove from level
-	private void updateGarbageCollectingActors(List<String> sides, List<IPlayActor> actors) {
+	public void updateGarbageCollectingActors(List<IPlayActor> actors) {
+		List<String> sides = getSides();
 		for (int i = 0; i < allSides.size(); i++) {
 			IAuthoringActor garbageCollector;
 			if (garbageCollectors.containsKey(allSides.get(i))) {
@@ -149,18 +152,25 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 					}
 				}
 				garbageCollectors.put(allSides.get(i), garbageCollector);
+				myLevel.addActor(garbageCollector);
 			} else {
 				if (myLevel.getActors().contains(garbageCollector)) {
 					myLevel.removeActor((Actor) garbageCollector);
 				}
 			}
 		}
+		System.out.println("Cur actors:");
+		
+		for (int k = 0; k < myLevel.getActors().size(); k++) {
+			System.out.println(myLevel.getActors().toString());
+		}
 	}
 
 	private ITrigger createCollisionTrigger(String side, Actor garbageCollector, Actor actor) {
 		Class<?> collision;
 		try {
-			collision = Class.forName(side + COLLISION);
+			String name = myAttributesResources.getString(side + COLLISION);
+			collision = Class.forName(TRIGGER_DIRECTORY + name);
 			Constructor<?> constructor = collision.getConstructor(Actor.class, Actor.class);
 			return (ITrigger) constructor.newInstance(garbageCollector, actor);
 		} catch (ClassNotFoundException e) {

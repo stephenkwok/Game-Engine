@@ -251,6 +251,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 					val.add(actor);
 					availableActors.put(icon.getRefActor(), val);
 					myLevel.addActor(actor);
+					myInspector.getGarbageCollector().updateGarbageCollectingActors(myLevel.getActors());
 					//myLevel.addActor(icon.getRefActor());
 					myLevelPreview.addActorToScene(actor);
 					//myLevelPreview.addActorToScene(icon.getRefActor());
@@ -304,6 +305,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	public void setEditableElement(IEditableGameElement editable) {
 		myLevel = (Level) editable;
 		myLevelPreview.updateLevelPreview(myLevel);
+		myInspector.getGarbageCollector().setEditableElement(myLevel);
 		updateActorsList();
 		myInspector.getAttributesTab().updateEditable(myLevel);
 	}
