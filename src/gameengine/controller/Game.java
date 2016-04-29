@@ -237,6 +237,8 @@ public class Game extends Observable implements Observer, IGame {
 		animation.stop();
 		if (info.getMyCurrentLevelNum() + 1 < levels.size()) {
 			setCurrentLevel(info.getMyCurrentLevelNum() + 1);
+			System.out.println("NEXTLVL");
+			System.out.println(info.getMyCurrentLevelNum());
 			levels.get(info.getMyCurrentLevelNum()).getMainCharacter().setX(0);
 			return true;
 		} else {

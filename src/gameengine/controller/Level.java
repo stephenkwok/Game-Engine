@@ -152,6 +152,7 @@ public class Level extends Observable implements IPlayLevel, IAuthoringLevel, Co
 	 *            The desired image filepath
 	 */
 	public void setMyBackgroundImgName(String myBackgroundImgName) {
+		System.out.println("BACKOUNGR");
 		this.myBackgroundImgName = myBackgroundImgName;
 	}
 

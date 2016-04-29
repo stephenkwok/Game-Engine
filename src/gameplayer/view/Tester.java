@@ -233,7 +233,7 @@ public class Tester extends Application {
 
         List<Level> levels = new ArrayList<Level>();
         Level level1 = new Level();
-        //level1.setMyBackgroundImgName("mariobackground.png");
+        level1.setMyBackgroundImgName("mariobackground.png");
         levels.add(level1);
         level1.addActor(actor1);
         level1.addActor(actor2);
@@ -249,7 +249,8 @@ public class Tester extends Application {
         level2.addActor(actor1);
 
         Level level3 = new Level();
-        level3.setMyBackgroundImgName("vgnwpGb.png");
+        level2.setMyBackgroundImgName("vgnwpGb.png");
+
         levels.add(level3);
         level3.addActor(actor1);
         
@@ -294,7 +295,7 @@ public class Tester extends Application {
             Rule brule4 = new Rule(b4, baction4);
 
             Rule ruleNextLevel2 = new Rule(b4, actionNextLevel);
-            actor1.addRule(ruleNextLevel2);
+            //actor1.addRule(ruleNextLevel2);
             actor1.addRule(brule3);
             actor1.addRule(brule4);
             level2.addActor((IAuthoringActor) block2);

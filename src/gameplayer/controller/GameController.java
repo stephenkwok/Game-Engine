@@ -105,7 +105,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void begin() {
 		IPlayLevel current = model.getCurrentLevel();
 		view.clearGame();
-		view.addBackground((Level) current);
+		view.addBackground(current);
 		for (IPlayActor actor : model.getActors()) {
 			view.addActor((IDisplayActor) actor);
 		}

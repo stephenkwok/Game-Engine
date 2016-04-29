@@ -1,5 +1,6 @@
 package gameplayer.view;
 
+import gameengine.controller.IPlayLevel;
 import gameengine.controller.Level;
 import gameengine.model.IDisplayActor;
 import javafx.event.Event;
@@ -59,7 +60,7 @@ public interface IGameScreen {
 
 	public void clearGame();
 
-	public void addBackground(Level current);
+	public void addBackground(IPlayLevel current);
 
 	public void terminateGame();
 
@@ -70,5 +71,7 @@ public interface IGameScreen {
 	public void restartGame();
 
 	public Node getScene();
+
+	void addBackground(Level current);
 
 }
