@@ -3892,6 +3892,7 @@
       <myMainCharacters/>
       <soundtrack>Jordan.mp3</soundtrack>
       <myBackgroundMusicName>Ink.mp3</myBackgroundMusicName>
+      <myGarbageCollectors/>
     </gameengine.controller.Level>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -3953,6 +3954,7 @@
       <myMainCharacters/>
       <soundtrack>Robot.mp3</soundtrack>
       <myBackgroundMusicName>Ink.mp3</myBackgroundMusicName>
+      <myGarbageCollectors/>
     </gameengine.controller.Level>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -4000,6 +4002,7 @@
       </myAttributeManager>
       <myMainCharacters/>
       <myBackgroundMusicName>Ink.mp3</myBackgroundMusicName>
+      <myGarbageCollectors/>
     </gameengine.controller.Level>
   </levels>
   <info>

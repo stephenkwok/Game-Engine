@@ -75,7 +75,7 @@ public abstract class BranchScreenController implements Observer {
 				Object arg2 = myClass.cast(myList.get(1));
 				Class[] parameterTypes = { myClass };
 				Object[] parameters = { arg2 };
-				invoke(methodName, parameterTypes, parameters);
+				try {invoke(methodName, parameterTypes, parameters);} catch (Exception e) {e.printStackTrace();}
 			
 			}
 		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
