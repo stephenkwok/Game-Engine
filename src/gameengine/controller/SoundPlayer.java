@@ -19,12 +19,7 @@ import java.util.List;
  */
 public class SoundPlayer {
 	
-    private static final String folderName = "soundfiles";
     private MediaPlayer soundtrackPlayer;
-    private File soundFileLocation;
-    private Stage popupStage;
-    private FileChooser soundFileChooser;
-    private DirectoryChooser soundFolderChooser;
     private HashMap<String, Media> mediaMap;
     private List<MediaPlayer> mediaPlayers;
 
@@ -32,25 +27,10 @@ public class SoundPlayer {
      * Creates the stage to be used and a sound file location (in src/soundfiles)
      */
     public SoundPlayer(){
-        String resourceLocation = this.getClass().getResource("").getPath().toString();
         mediaMap = new HashMap<>();
         mediaPlayers = new ArrayList<>();
-        soundFileLocation = new File(resourceLocation + File.separator + folderName);
-        soundFileLocation.mkdir();
-        popupStage = new Stage();
-        soundFileChooser = new FileChooser();
-        soundFolderChooser = new DirectoryChooser();
-//        FileChooser.ExtensionFilter fileExtensions = new FileChooser.ExtensionFilter("*.mp3", "*.wav", "*.wma", "*.ogg", "*.aac", "*.flac");
-//        soundFileChooser.getExtensionFilters().add(fileExtensions);
     }
 
-    /**
-     * Loads multiple sound files from a directory given from a DirectoryChooser
-     */
-    public void loadMultipleSoundFiles(){
-        File folder = soundFolderChooser.showDialog(popupStage);
-        loadMultipleSoundFilesFromDir(folder);
-    }
 
     /**
      * Loads multiple sound files from a given directory with sound files
@@ -63,13 +43,6 @@ public class SoundPlayer {
         }
     }
 
-    /**
-     * Pops up a file chooser to upload a single sound file
-     */
-    public void loadSingleSoundFile(){
-        File soundFile = soundFileChooser.showOpenDialog(popupStage);
-        loadSingleSoundFileFromFile(soundFile.getName(), soundFile);
-    }
 
     /**
      * Loads a sound file from the given file, and puts it into our Media
@@ -79,12 +52,6 @@ public class SoundPlayer {
 
     public void loadSingleSoundFileFromFile(String key, File mediaFile){
         Media sound = new Media(mediaFile.toURI().toString());
-        try {
-            File dest = new File(soundFileLocation.getPath().toString() + File.separator + mediaFile.getName());
-            copy(mediaFile, dest);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         mediaMap.put(key, sound);
     }
 
@@ -96,6 +63,9 @@ public class SoundPlayer {
         Media soundtrack = mediaMap.get(soundFileName);
         if (soundtrackPlayer != null) {
         	soundtrackPlayer.dispose();
+        }
+        if (soundtrack == null) {
+        	return;
         }
         soundtrackPlayer = new MediaPlayer(soundtrack);
         soundtrackPlayer.setOnEndOfMedia(new Runnable() {
@@ -115,34 +85,14 @@ public class SoundPlayer {
 //        MediaPlayer curMediaPlayer = new MediaPlayer(sound);
 //        mediaPlayers.put(sound, curMediaPlayer);
 //        curMediaPlayer.play();
+    	if (mediaMap.get(soundFileName) == null) {
+    		return;
+    	}
     	MediaPlayer mp = new MediaPlayer(mediaMap.get(soundFileName));
     	mp.play();
     	mediaPlayers.add(mp);
     }
 
-    /**
-     * Utility method to copy a file to another file
-     * @param source
-     * @param target
-     * @throws IOException
-     * @throws FileNotFoundException
-     */
-    private void copy(File source, File target) throws IOException, FileNotFoundException {
-
-        InputStream in = new FileInputStream(source);
-        OutputStream out = new FileOutputStream(target);
-
-        // Copy the bits from instream to outstream
-        byte[] buf = new byte[1024];
-        int len;
-
-        while ((len = in.read(buf)) > 0) {
-            out.write(buf, 0, len);
-        }
-
-        in.close();
-        out.close();
-    }
 
     /**
      * Sets all sounds, including the soundtrack, as muted or unmuted, depending on the given boolean
@@ -170,17 +120,5 @@ public class SoundPlayer {
     public void soundtrackSetMute(boolean mute){
         soundtrackPlayer.setMute(mute);
     }
-//    
-//    
-//    public void garbageCollect() {
-//    	Iterator<MediaPlayer> iter = mediaPlayers.iterator();
-//    	while (iter.hasNext()){
-//    		MediaPlayer mediaPlayer = iter.next();
-//            if (mediaPlayer.getStatus() != Status.PLAYING) {
-//            	mediaPlayer.dispose();
-//            }
-//        }
-//    }
-//    
 
 }
