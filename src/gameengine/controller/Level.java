@@ -52,9 +52,9 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	private DoubleProperty myBackgroundX = new SimpleDoubleProperty();
 	private RuleManager myRuleManager;
 	private AttributeManager myAttributeManager;
+	private List<IPlayActor> myMainCharacters;
 	private String soundtrack;
 	private String myBackgroundMusicName;
-	
 	/**
 	 * Instantiates the triggerMap and Actor list
 	 */
@@ -71,6 +71,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		myHeight = DEFAULT_HEIGHT;
 		myWidth = DEFAULT_WIDTH;
 		myRuleManager = new RuleManager();
+		myMainCharacters = new ArrayList<>();
 	}
 
 	/**
@@ -319,7 +320,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		myBackground = imageView;
 		myBackgroundX = new SimpleDoubleProperty(myBackground.getX());
 	}
-
+	
 	public IPlayActor getMainCharacter() {
 		for (IPlayActor a : myActors) {
 			if (a.checkState(ActorState.MAIN)) {
@@ -327,6 +328,10 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 			}
 		}
 		return null;
+	}
+
+	public List<IPlayActor> getMainCharacters() {
+		return myMainCharacters;
 	}
 
 	@Override
