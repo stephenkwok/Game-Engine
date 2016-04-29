@@ -51,7 +51,8 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	private DoubleProperty myBackgroundX = new SimpleDoubleProperty();
 	private RuleManager myRuleManager;
 	private AttributeManager myAttributeManager;
-
+	private String soundtrack;
+	
 	/**
 	 * Instantiates the triggerMap and Actor list
 	 */
@@ -380,4 +381,12 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
         return myBackground.getBoundsInLocal();
     }
 	
+    public void setSoundtrack(String soundtrack) {
+    	this.soundtrack = soundtrack;
+    }
+    
+    public String getSoundtrack() {
+    	return soundtrack;
+    }
+    
 }

@@ -487,6 +487,7 @@
       <myAttributeManager>
         <attributeMap/>
       </myAttributeManager>
+      <soundtrack>Photograph.mp3</soundtrack>
     </gameengine.controller.Level>
   </levels>
   <info>
@@ -521,4 +522,6 @@
   <deadActors/>
   <levelTime>1</levelTime>
   <globalTime>1</globalTime>
+  <sfxOff>true</sfxOff>
+  <musicOff>true</musicOff>
 </gameengine.controller.Game>

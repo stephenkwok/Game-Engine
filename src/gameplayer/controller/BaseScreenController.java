@@ -55,13 +55,13 @@ public class BaseScreenController extends BranchScreenController {
 	}
 
 	private void toggleSound() {
-		System.out.println("toggle sound");
+		this.myGameController.getGame().toggleSound();
 	}
 
 	private void toggleMusic() {
-		System.out.println("toggle music");
+		this.myGameController.getGame().toggleMusic();
 	}
-
+	
 	private void saveGame() {
 		togglePause();
 		try {
@@ -128,4 +128,8 @@ public class BaseScreenController extends BranchScreenController {
 	public void invoke(String method, Class[] parameterTypes, Object[] parameters) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		this.getClass().getDeclaredMethod(method, parameterTypes).invoke(this, parameters);
 	}
+	
+	
+	
+	
 }
