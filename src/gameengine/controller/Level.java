@@ -405,7 +405,9 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
     public void shiftScene(String direction, double amount){
     	for(IPlayActor a: myActors){
     		try {
-				PhysicsEngine.class.getDeclaredMethod("glide"+direction,Double.class).invoke(a,amount);
+    			Class[] paramTypes = {IPlayActor.class, double.class};
+    			Object[] params = {a, amount};
+				PhysicsEngine.class.getDeclaredMethod("glide"+direction,paramTypes).invoke(a.getPhysicsEngine(),params);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 					| NoSuchMethodException | SecurityException e) {
 				e.printStackTrace();
