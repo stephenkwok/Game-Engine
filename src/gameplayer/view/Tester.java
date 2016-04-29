@@ -140,7 +140,7 @@ public class Tester extends Application {
 
         KeyTrigger triggerSpawn = new KeyTrigger(KeyCode.S);
         TickTrigger bulletTick = new TickTrigger();
-        Action bulletAction = new GlideForward((Actor)spawnedActor,2.5);
+        Action bulletAction = new GlideTarget((Actor)spawnedActor,2.5, (Actor) actor4);
         Rule bulletRule = new Rule(bulletTick,bulletAction);
         spawnedActor.addRule(bulletRule);
         PhysicsEngine newPhysicsEngine = new PhysicsEngine();

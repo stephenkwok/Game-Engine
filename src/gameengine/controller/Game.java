@@ -43,6 +43,7 @@ public class Game extends Observable implements Observer, IGame {
     private SoundPlayer soundEngine;
     private boolean sfxOff = true;
     private boolean musicOff = true;
+
     
     public Game(String initialGameFile, 
     		List<Level> levels, 

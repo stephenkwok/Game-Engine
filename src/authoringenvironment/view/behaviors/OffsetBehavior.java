@@ -7,13 +7,17 @@ import java.util.ResourceBundle;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.IAction;
-
+import gameengine.model.IRule;
+import gameengine.model.Actions.ChangeAttribute;
+import gameengine.model.Actions.GlidingAction;
+//gliding
 public class OffsetBehavior extends DoubleBehavior {
 	private IAuthoringActor myActor;
 	private IAction myAction;
 	
-	public OffsetBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
-		super(myActorRule, behaviorType, myResources);
+	public OffsetBehavior(IRule myRule, ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
+			ResourceBundle myResources) {
+		super(myRule, myActorRule, behaviorType, myResources);
 		this.myActor = myActor;
 	}
 
@@ -38,8 +42,10 @@ public class OffsetBehavior extends DoubleBehavior {
 
 	@Override
 	public void updateValueBasedOnEditable() {
-		// TODO Auto-generated method stub
-		
+		try{
+			setTextFieldValue(Double.toString((((GlidingAction) getMyRule().getMyAction()).getGlideOffset())));
+		}catch(Exception e){
+		}
 	}
 
 }

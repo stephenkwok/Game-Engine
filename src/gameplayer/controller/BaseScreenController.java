@@ -111,7 +111,6 @@ public class BaseScreenController extends BranchScreenController {
 	private void restartGame() {
 		myGameController.restartGame();
 		setUpHUDScreen();
-		
 	}
 
 	private void setUpGameScreen() {
