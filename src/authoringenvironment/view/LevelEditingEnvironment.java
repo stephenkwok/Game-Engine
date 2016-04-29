@@ -112,6 +112,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 				}
 			}
 			if (level.getMainCharacters().size() == 0) {
+				System.out.println("size" + level.getActors().size());
 				level.getActors().get(0).addState(ActorState.MAIN);
 			}
 		}

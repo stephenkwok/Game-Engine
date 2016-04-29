@@ -101,6 +101,8 @@
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.Destroy">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -146,6 +148,8 @@
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.LoseGame">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -176,6 +180,8 @@
                                   <myTrigger class="gameengine.model.Triggers.SideCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.Destroy">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -221,6 +227,8 @@
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.LoseGame">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -282,6 +290,8 @@
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>true</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.ChangeAttribute">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -298,6 +308,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.LoseGame">
                       <myGameElement class="gameengine.controller.Level" reference="../../../../../../../../.."/>
@@ -344,6 +356,8 @@
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.LoseGame">
                       <myGameElement class="gameengine.controller.Level" reference="../../../../../../../../.."/>
@@ -525,4 +539,5 @@
   <globalTime>1</globalTime>
   <sfxOff>true</sfxOff>
   <musicOff>true</musicOff>
+  <actorsToAdd/>
 </gameengine.controller.Game>
