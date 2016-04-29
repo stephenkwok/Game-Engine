@@ -53,8 +53,8 @@ public class Game extends Observable implements Observer, IGame {
 		deadActors = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
-		levelTime = 1;
-		globalTime = 1;
+		this.levelTime = levelTime;
+		this.globalTime = globalTime;
     }
 	
     

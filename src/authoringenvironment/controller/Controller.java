@@ -10,6 +10,10 @@ import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
+import authoringenvironment.model.*;
+import authoringenvironment.view.*;
+import gamedata.controller.*;
+import gameengine.controller.*;
 import authoringenvironment.model.AuthoringEnvironmentRestorer;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
