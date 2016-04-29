@@ -24,6 +24,8 @@ import gameengine.model.Triggers.CollisionTrigger;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.TickTrigger;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * 
@@ -83,6 +85,7 @@ public class ActorCopier {
 		toUpdate.setName(toCopy.getName());
 		toUpdate.setFriction(toCopy.getFriction());
 		toUpdate.setImageViewName(toCopy.getImageViewName());
+		toUpdate.setImageView(new ImageView(new Image(toCopy.getImageViewName())));
 		toUpdate.setSize(toCopy.getSize());
 		toUpdate.setID(toCopy.getID());
 		toUpdate.setRotate(toCopy.getRotate());
