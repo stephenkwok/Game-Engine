@@ -119,14 +119,21 @@ public class GameController extends Observable implements Observer, IGameControl
 	/**
 	 * Will stop the animation timeline.
 	 */
-	public void endGame() {
+	private void endGame(boolean win) {
 		model.stopGame();
+		view.togglePause();
 		if (myMode == PlayType.PLAY) {
-			view.terminateGame();
+			view.terminateGame(win);
 		}
-		getGame().setAllSound(true);
 	}
 	
+	public void winGame() {
+		endGame(true);
+	}
+	
+	public void loseGame() {
+		endGame(false);
+	}
 	
 
 	private void saveGameScore(String name) {
@@ -135,13 +142,6 @@ public class GameController extends Observable implements Observer, IGameControl
 	}
 
 	
-	/**
-	 * Will stop the animation timeline.
-	 */
-	public void winGame() {
-		System.out.println("game won");
-	}
-
 	public void nextLevel() {
 		if (model.nextLevel()) {
 			view.clearGame();
@@ -150,7 +150,7 @@ public class GameController extends Observable implements Observer, IGameControl
 			begin();
 		}
 		else {
-			endGame();
+			winGame();
 		}
 	}
 
@@ -211,7 +211,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	@Override
 	public void togglePause() {
 		model.stopGame();
-		view.pauseGame();
+		view.togglePause();
 		getGame().setAllSound(true);
 	}
 
@@ -241,8 +241,6 @@ public class GameController extends Observable implements Observer, IGameControl
 		if (model.getCurrentLevel().getMainCharacter() != null) {
 			if (model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))) {
 				try {
-//					System.out.println(model.getCurrentLevel().getMainCharacters().size());
-
 					view.changeCamera(model.getCurrentLevel().getMainCharacters().get(0).getX(), 0);
 				} catch (Exception e) {
 					model.stopGame();
