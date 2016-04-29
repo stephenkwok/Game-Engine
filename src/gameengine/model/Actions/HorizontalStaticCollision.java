@@ -14,11 +14,13 @@ public class HorizontalStaticCollision extends ActorAction{
 
 	public HorizontalStaticCollision(Actor actor) {
 		super(actor);
+
 	}
 
 	@Override
 	public void perform() {
 		getMyActor().getPhysicsEngine().staticHorizontalCollision(getMyActor());
+		System.out.println(getMyActor().getName());
 	}
 
 }

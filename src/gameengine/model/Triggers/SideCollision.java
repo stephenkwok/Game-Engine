@@ -10,6 +10,9 @@ public class SideCollision extends CollisionTrigger {
 
 	public SideCollision(Actor actor1, Actor actor2) {
 		super(actor1, actor2);
+//		System.out.println(actor1.getName());
+//		System.out.println(actor2.getName());
+
 	}
 
 	@Override
