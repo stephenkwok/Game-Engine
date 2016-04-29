@@ -9,7 +9,10 @@ import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
 import gameengine.model.IRule;
+import gameengine.model.Rule;
+import gameengine.model.Actions.ApplyPhysics;
 import gameengine.model.Actions.ChangeAttribute;
+import gameengine.model.Triggers.TickTrigger;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
@@ -73,8 +76,8 @@ public class ActorRuleCreator {
 	 * @param rule
 	 * @param behavior
 	 */
-	public void addBehavior(ActorRule rule, Label behavior) {
-		rule.addBehavior(behavior.getText(), null);
+	public void addBehavior(ActorRule rule, String behavior) {
+		rule.addBehavior(behavior, null);
 	}
 
 	/**
@@ -124,11 +127,11 @@ public class ActorRuleCreator {
 	 */
 	public void updateActorRules() {
 		resetEnvironment();
-		for (String triggerType : ((Actor) aEE.getEditable()).getRules().keySet()) {
+		for (String triggerType : ((IAuthoringActor) aEE.getEditable()).getRules().keySet()) {
 			ActorRule toAdd = new ActorRule(this);
 			toAdd.addBehavior(checkForKeyOrAttributeTrigger(triggerType), 
-					((Actor) aEE.getEditable()).getRules().get(triggerType).get(ZERO));
-			for (IRule rule : ((Actor) aEE.getEditable()).getRules().get(triggerType)) {
+					((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType).get(ZERO));
+			for (IRule rule : ((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType)) {
 				String simpleName = rule.getMyAction().getClass().getSimpleName();
 				if (simpleName.equals(CHANGE_ATTRIBUTE)) {
 					String attributeType = ((ChangeAttribute) rule.getMyAction()).getMyAttributeType();
@@ -139,6 +142,13 @@ public class ActorRuleCreator {
 			myActorRuleCreatorPane.add(toAdd.getGridPane(), RULE_COL, ruleRow);
 			myActorRules.add(toAdd);
 			ruleRow++;
+		}
+	}
+	
+	protected void applyPhysics(){
+		if(aEE.shouldApplyPhysics()){
+			Rule toAdd = new Rule(new TickTrigger(), new ApplyPhysics((Actor) aEE.getEditable()));
+			((IAuthoringActor) aEE.getEditable()).addRule(toAdd);
 		}
 	}
 	

@@ -49,6 +49,8 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 
 	private Stage myStage;
 	private Controller myController;
+	
+	private CheckBoxApplyPhysics checkPhysics;
 
 	public ActorEditingEnvironment(ResourceBundle myResources, Stage stage, Controller myController) {
 		this.myResources = myResources;
@@ -98,7 +100,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		actorFields.getTabs().addAll(actorCharacteristics(), actorAttributes());
 		actorFields.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		actorFields.setPrefHeight(FIELD_HEIGHT);
-		CheckBoxApplyPhysics checkPhysics = new CheckBoxApplyPhysics(APPLY_PHYSICS, APPLY_PHYSICS_WIDTH, this);
+		checkPhysics = new CheckBoxApplyPhysics(APPLY_PHYSICS, APPLY_PHYSICS_WIDTH, this);
 		checkPhysics.addObserver(this);
 		vbox.getChildren().addAll(actorImageViewer.getPane(), checkPhysics.createNode(), actorFields, library.getPane());
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
@@ -211,5 +213,9 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		myController.updateActors((Actor) arg);
+	}
+	
+	protected boolean shouldApplyPhysics(){
+		return this.checkPhysics.isSelected();
 	}
 }
