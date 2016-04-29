@@ -79,7 +79,6 @@ public abstract class BranchScreenController implements Observer {
 			}
 		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 			try {
-				System.out.println(this.toString());
 				this.getClass().getSuperclass().getDeclaredMethod(methodName).invoke(this);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 					| NoSuchMethodException | SecurityException e1) {
