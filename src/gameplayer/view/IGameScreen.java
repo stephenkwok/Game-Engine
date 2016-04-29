@@ -61,14 +61,15 @@ public interface IGameScreen {
 
 	public void addBackground(Level current);
 
-	public void terminateGame();
-
-	public void pauseGame();
+	public void togglePause();
 
 	public void toggleUnPause();
 
 	public void restartGame();
 
 	public Node getScene();
+
+	public void terminateGame(boolean win);
+
 
 }
