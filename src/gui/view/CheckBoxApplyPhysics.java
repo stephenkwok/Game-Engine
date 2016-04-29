@@ -1,6 +1,5 @@
 package gui.view;
 
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -8,7 +7,6 @@ import authoringenvironment.model.*;
 import authoringenvironment.view.*;
 import gameengine.model.*;
 import gameengine.model.Actions.ApplyPhysics;
-import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.TickTrigger;
 import javafx.geometry.*;
 import javafx.scene.Node;
@@ -17,13 +15,11 @@ import javafx.scene.control.CheckBox;
 /**
  * Checkbox object for ApplyPhysics option selection.
  * 
- * @author AnnieTang, amyzhao
+ * @author AnnieTang
  *
  */
 public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEditingElement {
 	private static final int PADDING = 10;
-	private static final Object APPLY_PHYSICS = "ApplyPhysics";
-	private static final int ZERO = 0;
 	private String myPromptText;
 	private int myWidth;
 	private IEditableGameElement myEditableElement;
@@ -63,6 +59,7 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 				removeApplyPhysics((IAuthoringActor) aEE.getEditable());
 				System.out.println(((IAuthoringActor) aEE.getEditable()).getRules());
 			}
+			notifyObservers((IAuthoringActor) aEE.getEditable());
 		});
 	}
 	

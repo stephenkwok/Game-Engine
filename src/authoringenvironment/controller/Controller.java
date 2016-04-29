@@ -31,6 +31,10 @@ import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
+import gameengine.model.Attribute;
+import gameengine.model.AttributeType;
+import gameengine.model.IPlayActor;
 import gameplayer.controller.BranchScreenController;
 import gui.view.*;
 import gui.view.PopUpAuthoringHelpPage;
@@ -56,14 +60,11 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private static final int WINDOW_HEIGHT = 700;
 	private static final int WINDOW_WIDTH = 1300;
 	private static final int PADDING = 10;
-	private static final String SPLASH_IMAGE_NAME = "salad.png";
 	private static final String EDITING_CONTROLLER_RESOURCE = "editingActions";
 	private static final String REQUIRES_ARG = "RequiresArg";
 	private static final String PRESET_ACTORS_RESOURCE = "presetActorsFactory";
 	private List<Level> myLevels;
-//	private List<String> myLevelNames;
 	private Map<IAuthoringActor, List<IAuthoringActor>> myActorMap;
-//	private List<String> myActorNames;
 	private LevelEditingEnvironment levelEnvironment;
 	private ActorEditingEnvironment actorEnvironment;
 	private GameEditingEnvironment gameEnvironment;
@@ -289,6 +290,18 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 */
 	public void saveGame() {
 		// TODO implement incomplete game error checking
+		// System.out.println(myLevels.get(0).getActors().get(0).getRules().size());
+		// IPlayActor actor = myLevels.get(0).getActors().get(0);
+		for(Level level: myLevels) {
+			for (IPlayActor actor: level.getActors()) {
+				if (actor.checkState(ActorState.MAIN)) {
+					level.getMainCharacters().add(actor);
+				}
+			}
+			if (level.getMainCharacters().size() == 0) {
+				level.getActors().get(0).addState(ActorState.MAIN);
+			}
+		}
 		gameInfo.setMyImageName(myLevels.get(0).getMyBackgroundImgName());
 		List<IAuthoringActor> refActor = new ArrayList(myActorMap.keySet());
 		IAuthoringActor realRefActor = refActor.get(0);

@@ -1,11 +1,13 @@
 package gameengine.controller;
 
+import java.io.File;
 import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.*;
+import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
@@ -35,8 +37,14 @@ public class Game extends Observable implements Observer, IGame {
 	private Timeline animation;
 	private List<IPlayActor> currentActors;
 	private List<IPlayActor> deadActors;
-	private int levelTime;
-	private int globalTime;   
+    private int levelTime;
+    private int globalTime;
+    
+    private SoundPlayer soundEngine;
+    private boolean sfxOff = true;
+    private boolean musicOff = true;
+	private List<IPlayActor> actorsToAdd;
+
     
     public Game(String initialGameFile, 
     		List<Level> levels, 
@@ -51,10 +59,12 @@ public class Game extends Observable implements Observer, IGame {
     	this(initialGameFile, info, levels);
     	currentActors = new ArrayList<IPlayActor>();
 		deadActors = new ArrayList<IPlayActor>();
+		actorsToAdd = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
 		this.levelTime = levelTime;
 		this.globalTime = globalTime;
+		initSoundEngine();
     }
 	
     
@@ -75,11 +85,13 @@ public class Game extends Observable implements Observer, IGame {
 		info = gameInfo;
 		currentActors = new ArrayList<IPlayActor>();
 		deadActors = new ArrayList<IPlayActor>();
+		actorsToAdd = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
 		levelTime = 1;
 		globalTime = 1;
 		initTimeline();
+		//initSoundEngine();
 	}
 	
 
@@ -91,8 +103,14 @@ public class Game extends Observable implements Observer, IGame {
 		setAnimation(new Timeline());
 		getAnimation().setCycleCount(Timeline.INDEFINITE);
 		getAnimation().getKeyFrames().add(frame);
-
+		
     }
+	
+	public void initSoundEngine() {
+		soundEngine = new SoundPlayer();
+		soundEngine.loadMultipleSoundFilesFromDir(new File("./authoringsounds"));
+		soundEngine.loadMultipleSoundFilesFromDir(new File("./authoringmusic"));
+	}
 	
 	public void stopGame() {
 		togglePause();
@@ -118,6 +136,9 @@ public class Game extends Observable implements Observer, IGame {
 		initCurrentLevel();
 		initCurrentActors();
 		toggleUnPause();
+		if (soundEngine != null) {
+			soundEngine.setSoundtrack(levels.get(info.getMyCurrentLevelNum()).getSoundtrack());
+		}
 	}
 	
 	public void toggleUnPause() {
@@ -148,6 +169,7 @@ public class Game extends Observable implements Observer, IGame {
 		updateActors();
 		levelTime++;
 		globalTime++;
+//		garbageCollect();
 	}
 
 	private void updateCamera() {
@@ -230,7 +252,7 @@ public class Game extends Observable implements Observer, IGame {
 		animation.stop();
 		if (info.getMyCurrentLevelNum() + 1 < levels.size()) {
 			setCurrentLevel(info.getMyCurrentLevelNum() + 1);
-			levels.get(info.getMyCurrentLevelNum()).getMainCharacter().setX(0);
+			levels.get(info.getMyCurrentLevelNum()).getMainCharacters().forEach(actor -> actor.setX(0));
 			return true;
 		} else {
 			return false;
@@ -304,6 +326,7 @@ public class Game extends Observable implements Observer, IGame {
 		info.setMyCurrentLevelNum(levelNum);
 	}
 
+
 	public void updateActors() {
 		deadActors = new ArrayList<IPlayActor>();
 		for (IPlayActor a : getCurrentActors()) {
@@ -314,8 +337,11 @@ public class Game extends Observable implements Observer, IGame {
 		if (deadActors.size() != 0) {
 			removeDeadActors();
 		}
+		getCurrentLevel().getActors().addAll(actorsToAdd);
+		actorsToAdd.clear();
 		currentActors = getCurrentLevel().getActors();
 	}
+
 
 	/**
 	 * Calls for the removal of dead Actors
@@ -334,7 +360,7 @@ public class Game extends Observable implements Observer, IGame {
 
 	public void addActor(Actor newActor) {
 		newActor.setPhysicsEngine(myPhysicsEngine);
-		getCurrentLevel().addActor(newActor);
+		actorsToAdd.add(newActor);
 	}
 
 	/**
@@ -385,8 +411,12 @@ public class Game extends Observable implements Observer, IGame {
 		this.animation = animation;
 	}
 
-	public int getScore() {
-		return getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();
+	public List<Integer> getScores() {
+		List<Integer> scores = new ArrayList<>();
+		for (IPlayActor actor: getCurrentLevel().getMainCharacters()) {
+			scores.add(actor.getAttribute(AttributeType.POINTS).getMyValue());
+		}
+		return scores;
 	}
 
 	public void setHUDInfoFile(String location) {
@@ -428,5 +458,47 @@ public class Game extends Observable implements Observer, IGame {
 	public void resetLevelTime(){
 		levelTime = 1;
 	}
-
+	
+	public void toggleSound() {
+		if (!isPaused()) {
+			sfxOff = !sfxOff;
+			//soundEngine.allSoundsSetMute(sfxOff);
+		}
+	}
+	
+	public void toggleMusic() {
+		if (!isPaused()) {
+			musicOff = !musicOff;
+			soundEngine.soundtrackSetMute(musicOff);
+		}
+	}
+	
+	public void setAllSound(boolean mute) {
+		sfxOff = mute;
+		musicOff = mute;
+		try {
+			soundEngine.allSetMute(mute);
+		} catch (Exception e) {
+			//some parts of sound engine are not initialized yet
+		}
+	}
+	
+	public void playSound(String key) {
+		if (!sfxOff) {
+			soundEngine.playSound(key);
+		}
+	}
+	
+	public boolean isPaused() {
+		return animation.getStatus() == Status.PAUSED;
+	}
+//	
+//	private void garbageCollect() {
+//		if (globalTime % 50 == 0) {
+//			soundEngine.garbageCollect();
+//			System.runFinalization();
+//			System.gc();
+//		}
+//	}
+	
 }

@@ -55,12 +55,20 @@ public interface IGame {
 
 	public String getInitialGameFile();
 
-	public int getScore();
+	public List<Integer> getScores();
 
 	public String getHUDInfoFile();
 
 	public void setInitialGameFile(String path);
 
 	public GameInfo getInfo();
+	
+	public void toggleSound();
+	
+	public void toggleMusic();
+
+	public void setAllSound(boolean mute);
+
+	public void playSound(String key);
 
 }

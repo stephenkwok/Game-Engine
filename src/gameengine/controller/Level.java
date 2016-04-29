@@ -8,6 +8,7 @@ import gameengine.model.AttributeManager;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
+import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
 import gameengine.model.RuleManager;
 import gameengine.model.Triggers.AttributeReached;
@@ -18,6 +19,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -51,7 +53,8 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	private DoubleProperty myBackgroundX = new SimpleDoubleProperty();
 	private RuleManager myRuleManager;
 	private AttributeManager myAttributeManager;
-
+	private List<IPlayActor> myMainCharacters;
+	private String soundtrack;
 	/**
 	 * Instantiates the triggerMap and Actor list
 	 */
@@ -67,6 +70,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		myHeight = DEFAULT_HEIGHT;
 		myWidth = DEFAULT_WIDTH;
 		myRuleManager = new RuleManager();
+		myMainCharacters = new ArrayList<>();
 	}
 
 	/**
@@ -315,7 +319,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		myBackground = imageView;
 		myBackgroundX = new SimpleDoubleProperty(myBackground.getX());
 	}
-
+	
 	public IPlayActor getMainCharacter() {
 		for (IPlayActor a : myActors) {
 			if (a.checkState(ActorState.MAIN)) {
@@ -323,6 +327,16 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 			}
 		}
 		return null;
+	}
+
+	public List<IPlayActor> getMainCharacters() {
+		for (IPlayActor a : myActors) {
+			if (a.checkState(ActorState.MAIN) && !myMainCharacters.contains(a)) {
+				myMainCharacters.add(a);
+			}
+		}
+
+		return myMainCharacters;
 	}
 
 	@Override
@@ -380,4 +394,24 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
         return myBackground.getBoundsInLocal();
     }
 	
+    public void setSoundtrack(String soundtrack) {
+    	this.soundtrack = soundtrack;
+    }
+    
+    public String getSoundtrack() {
+    	return soundtrack;
+    }
+    
+    public void shiftScene(String direction, double amount){
+    	for(IPlayActor a: myActors){
+    		try {
+    			Class[] paramTypes = {IPlayActor.class, double.class};
+    			Object[] params = {a, amount};
+				PhysicsEngine.class.getDeclaredMethod("glide"+direction,paramTypes).invoke(a.getPhysicsEngine(),params);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e) {
+				e.printStackTrace();
+			}
+    	}
+    } 
 }

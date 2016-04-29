@@ -54,4 +54,10 @@ public class Rule implements IRule{
 	public void setMyAction(Action myAction) {
 		this.myAction = myAction;
 	}
+	
+	@Override
+	public String toString() {
+		return "Trigger: " + myTrigger.getClass().getSimpleName() + "\t causes \t Action:" + myAction.getClass().getSimpleName();
+		
+	}
 }

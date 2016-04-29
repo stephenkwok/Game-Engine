@@ -2,7 +2,6 @@ package authoringenvironment.view;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -18,7 +17,6 @@ import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
-import gameengine.model.IPlayActor;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.AttributeReached;
@@ -26,6 +24,8 @@ import gameengine.model.Triggers.CollisionTrigger;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.TickTrigger;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * 
@@ -85,6 +85,7 @@ public class ActorCopier {
 		toUpdate.setName(toCopy.getName());
 		toUpdate.setFriction(toCopy.getFriction());
 		toUpdate.setImageViewName(toCopy.getImageViewName());
+		toUpdate.setImageView(new ImageView(new Image(toCopy.getImageViewName())));
 		toUpdate.setSize(toCopy.getSize());
 		toUpdate.setID(toCopy.getID());
 		toUpdate.setRotate(toCopy.getRotate());
@@ -121,11 +122,15 @@ public class ActorCopier {
 		}
 	}
 	
-	private Object createObject(Object action, Object[] arguments) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		Class myclass = action.getClass();
+	private Object createObject(Object object, Object[] arguments) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		Class myclass = object.getClass();
 		Class[] argumentTypes = new Class[arguments.length];
 		for(int i=0; i<argumentTypes.length;i++){
-			argumentTypes[i] = arguments[i].getClass();
+			if((myclass.getSuperclass() == ITrigger.class || myclass.getSuperclass() == Action.class) && arguments[i].getClass() == Actor.class){
+				argumentTypes[i] = IGameElement.class;
+			}else{
+				argumentTypes[i] = arguments[i].getClass();
+			}
 		}
 		Constructor constructor = myclass.getConstructor(argumentTypes);
 		return constructor.newInstance(arguments);
