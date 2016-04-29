@@ -4,7 +4,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 import authoringenvironment.controller.Controller;
-<<<<<<< HEAD
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
@@ -14,13 +13,11 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
-=======
 import authoringenvironment.model.*;
 import gameengine.model.*;
 import gui.view.CheckBoxApplyPhysics;
 import javafx.geometry.*;
 import javafx.scene.control.*;
->>>>>>> 096e8254b91b217d8f7b6a83f13cba993a49f1c1
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
