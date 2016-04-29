@@ -8,6 +8,7 @@ import authoringenvironment.view.ActionFactory;
 import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.TriggerFactory;
 import gameengine.model.IAction;
+import gameengine.model.IRule;
 import gameengine.model.Triggers.ITrigger;
 import gui.view.ComboBoxTextCell;
 
@@ -23,14 +24,16 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 	private ActionFactory actionFactory;
 	private ResourceBundle myResources;
 	private ActorRule myActorRule;
+	private IRule myRule;
 
-	public ComboBoxBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
+	public ComboBoxBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
 		super(myResources.getString(behaviorType + PROMPT), myResources.getString(behaviorType + LABEL));
 		this.behaviorType = behaviorType;
 		this.triggerFactory = new TriggerFactory();
 		this.actionFactory = new ActionFactory();
 		this.myResources = myResources;
 		this.myActorRule = myActorRule;
+		this.myRule = myRule;
 	}
 
 	/**
@@ -119,5 +122,9 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 
 	protected void setAction(IAuthoringBehavior key, IAction value) {
 		myActorRule.setAction(key, value);
+	}
+	
+	protected IRule getMyRule(){
+		return this.myRule;
 	}
 }

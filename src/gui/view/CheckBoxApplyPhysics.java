@@ -9,6 +9,7 @@ import authoringenvironment.view.*;
 import gameengine.model.*;
 import gameengine.model.Actions.ApplyPhysics;
 import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.TickTrigger;
 import javafx.geometry.*;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
@@ -67,23 +68,13 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 	}
 	
 	private void addApplyPhysics(IAuthoringActor myActor){
-		for(String triggerKey: myActor.getRules().keySet()){
-			List<Rule> rulesForKey = myActor.getRules().get(triggerKey);
-			ITrigger trigger = rulesForKey.get(ZERO).getMyTrigger();
-			Rule toAdd = new Rule(trigger, new ApplyPhysics((Actor) aEE.getEditable()));
-			myActor.addRule(toAdd);
-		}
+		Rule toAdd = new Rule(new TickTrigger(), new ApplyPhysics((Actor) myActor));
+		myActor.addRule(toAdd);
 	}
 	
 	private void removeApplyPhysics(IAuthoringActor myActor){
-		for(String triggerKey: myActor.getRules().keySet()){
-			List<Rule> rules = myActor.getRules().get(triggerKey);
-			for(int i=0; i<rules.size(); i++){
-				if(rules.get(i).getMyAction().getClass().getSimpleName().equals(APPLY_PHYSICS)){
-					myActor.removeRule(rules.get(i));
-				}
-			}
-		}
+		TickTrigger tick = new TickTrigger();
+		myActor.getRules().remove(tick.getMyKey());
 	}
 	
 	/**

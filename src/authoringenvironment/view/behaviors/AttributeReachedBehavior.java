@@ -7,6 +7,9 @@ import java.util.ResourceBundle;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.AttributeType;
+import gameengine.model.IRule;
+import gameengine.model.Actions.ChangeAttribute;
+import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
 
 public class AttributeReachedBehavior extends DoubleBehavior {
@@ -15,9 +18,9 @@ public class AttributeReachedBehavior extends DoubleBehavior {
 	private IAuthoringActor myActor;
 	private ITrigger myTrigger;
 
-	public AttributeReachedBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
+	public AttributeReachedBehavior(IRule myRule, ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
 			ResourceBundle myResources) {
-		super(myActorRule, behaviorType, myResources);
+		super(myRule, myActorRule, behaviorType, myResources);
 		this.myActor = myActor;
 	}
 
@@ -44,8 +47,10 @@ public class AttributeReachedBehavior extends DoubleBehavior {
 
 	@Override
 	public void updateValueBasedOnEditable() {
-		// TODO Auto-generated method stub
-		
+		try{
+			setTextFieldValue(Integer.toString(((AttributeReached) getMyRule().getMyTrigger()).getMyValue()));
+		}catch(Exception e){
+		}
 	}
 
 }

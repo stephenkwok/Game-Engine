@@ -7,6 +7,7 @@ import authoringenvironment.view.ActionFactory;
 import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.TriggerFactory;
 import gameengine.model.IAction;
+import gameengine.model.IRule;
 import gameengine.model.Triggers.ITrigger;
 import gui.view.TextFieldWithButton;
 
@@ -25,14 +26,16 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	private ActionFactory actionFactory;
 	private String behaviorType;
 	private ActorRule myActorRule;
+	private IRule myRule;
 
-	public DoubleBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
+	public DoubleBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
 		super(myResources.getString(behaviorType + LABEL), myResources.getString(behaviorType + PROMPT),
 				Double.parseDouble(myResources.getString(behaviorType + WIDTH)));
 		this.behaviorType = behaviorType;
 		this.triggerFactory = new TriggerFactory();
 		this.actionFactory = new ActionFactory();
 		this.myActorRule = myActorRule;
+		this.myRule = myRule;
 		setButtonAction(event -> {
 			this.value = Double.parseDouble(getTextFieldInput());
 			createTriggerOrAction();
@@ -83,5 +86,9 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	
 	protected ActorRule getActorRule(){
 		return this.myActorRule;
+	}
+	
+	protected IRule getMyRule(){
+		return this.myRule;
 	}
 }

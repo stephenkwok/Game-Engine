@@ -3,6 +3,7 @@ package gameengine.model.Actions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+
 import authoringenvironment.view.ActorCopier;
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
@@ -46,5 +47,9 @@ public class Spawn extends ActorAction{
 		myList.add(clone);
 
 		((Observable) getMyActor()).notifyObservers(myList);
+	}
+
+	public IPlayActor getMySpawnedActor() {
+		return this.mySpawnedActor;
 	}
 }
