@@ -133,8 +133,7 @@ public class Game extends Observable implements Observer, IGame {
 		initCurrentActors();
 		toggleUnPause();
 		if (soundEngine != null) {
-			soundEngine.setSoundtrack("Jordan.mp3");
-			System.out.println(soundEngine);
+			soundEngine.setSoundtrack(levels.get(info.getMyCurrentLevelNum()).getSoundtrack());
 		}
 	}
 	
@@ -166,6 +165,7 @@ public class Game extends Observable implements Observer, IGame {
 		updateActors();
 		levelTime++;
 		globalTime++;
+//		garbageCollect();
 	}
 
 	private void updateCamera() {
@@ -480,6 +480,13 @@ public class Game extends Observable implements Observer, IGame {
 	public boolean isPaused() {
 		return animation.getStatus() == Status.PAUSED;
 	}
+//	
+//	private void garbageCollect() {
+//		if (globalTime % 50 == 0) {
+//			soundEngine.garbageCollect();
+//			System.runFinalization();
+//			System.gc();
+//		}
+//	}
 	
-
 }

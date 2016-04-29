@@ -208,6 +208,10 @@ public class Tester extends Application {
         level2.setMyBackgroundImgName("vgnwpGb.png");
         levels.add(level2);
         level2.addActor(actor1);
+        
+        
+        level1.setSoundtrack("Jordan.mp3");
+        level2.setSoundtrack("Robot.mp3");
 
         int yposition = 200;
         int xposition = 150;
@@ -333,7 +337,6 @@ public class Tester extends Application {
         
         CreatorController c = new CreatorController(model);
         c.saveForEditing(new File("gamefiles/test2.xml"));
-        System.out.println("WE GUCCI");
         ParallelCamera camera = new ParallelCamera();
         GameScreen view = new GameScreen(camera);
 

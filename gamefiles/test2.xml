@@ -3043,6 +3043,7 @@
       <myAttributeManager>
         <attributeMap/>
       </myAttributeManager>
+      <soundtrack>Jordan.mp3</soundtrack>
     </gameengine.controller.Level>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -3100,6 +3101,7 @@
       <myAttributeManager>
         <attributeMap/>
       </myAttributeManager>
+      <soundtrack>Robot.mp3</soundtrack>
     </gameengine.controller.Level>
   </levels>
   <info>
