@@ -6,4 +6,9 @@ public class ButtonHelpLevelPreview extends ButtonHelpParent {
 		super(buttonText, imageName);
 	}
 
+	
+	@Override
+	protected void setButtonAction() {
+		getButton().setOnAction(e -> notifyObservers(this.getClass().getSimpleName()));
+	}
 }

@@ -12,4 +12,11 @@ public class ButtonHelpGameEditingEnvironment extends ButtonHelpParent {
 	public ButtonHelpGameEditingEnvironment(String buttonText, String imageName) {
 		super(buttonText, imageName);
 	}
+	
+	@Override
+	protected void setButtonAction() {
+		getButton().setOnAction(e -> notifyObservers(this.getClass().getSimpleName()));
+	}
+	
 }
+
