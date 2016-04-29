@@ -4,14 +4,17 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
@@ -88,7 +91,7 @@ public class ActorCopier {
 		toUpdate.setOpacity(toCopy.getOpacity());
 		toUpdate.setScaleX(toCopy.getScaleX());
 		toUpdate.setScaleY(toCopy.getScaleY());
-		toUpdate.setStates(toCopy.getStates());
+		copyStates(toUpdate, toCopy);
 		copyRules(toUpdate, toCopy.getRules());
 		copyAttributes((IGameElement) toUpdate, toCopy.getAttributeMap());
 	}
@@ -117,6 +120,13 @@ public class ActorCopier {
 		}
 	}
 	
+	private void copyStates(Actor toUpdate, Actor toCopy) {
+		Set<ActorState> updatedStates = new HashSet<ActorState>();
+		for (ActorState state: toCopy.getStates()) {
+			updatedStates.add(state);
+		}
+		toUpdate.setStates(updatedStates);
+	}
 	private Object createObject(Object action, Object[] arguments) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		Class myclass = action.getClass();
 		Class[] argumentTypes = new Class[arguments.length];

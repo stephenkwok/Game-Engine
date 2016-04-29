@@ -15,6 +15,7 @@ import authoringenvironment.view.*;
 import gamedata.controller.*;
 import gameengine.controller.*;
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 import gameplayer.controller.BranchScreenController;
 import gui.view.*;
 import gui.view.PopUpAuthoringHelpPage;
@@ -111,6 +112,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		game = new Game(gameInfo, myLevels);
 		initializeGeneralComponents();
 		initializePresetActors();
+		//myActorMap.keySet().stream().forEach(actor -> System.out.println(actor.getName() + actor.checkState(ActorState.MAIN)));
 		addDefaultLevel();
 	}
 	
@@ -289,6 +291,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 				e.printStackTrace();
 				
 			}
+		}
+		for (int i = 0; i < myLevels.size(); i++) {
+			System.out.println(myLevels.get(i).getMainCharacter());
 		}
 
 	}
