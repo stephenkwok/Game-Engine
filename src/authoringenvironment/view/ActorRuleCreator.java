@@ -79,17 +79,6 @@ public class ActorRuleCreator {
 	public void addBehavior(ActorRule rule, String behavior) {
 		rule.addBehavior(behavior, null);
 	}
-//
-//	/**
-//	 * Add given sound to given ActorRule
-//	 * 
-//	 * @param rule
-//	 * @param sound
-//	 */
-//	public void addSound(ActorRule rule, Label sound) {
-//		 rule.addSound(sound.getText());
-//	}
-
 	/**
 	 * Create new rule for Actor currently in the actor editing environment and
 	 * add to gridpane
