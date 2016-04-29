@@ -1,4 +1,5 @@
 package authoringenvironment.view.behaviors;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
@@ -6,13 +7,14 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
-import gameengine.model.ITrigger;
+import gameengine.model.Triggers.ITrigger;
 
 public class SelfTriggerBehavior extends LabelBehavior {
 	private ITrigger myTrigger;
 	private IAuthoringActor myActor;
-	
-	public SelfTriggerBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType, ResourceBundle myResources) {
+
+	public SelfTriggerBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
+			ResourceBundle myResources) {
 		super(myActorRule, behaviorType, myResources);
 		this.myActor = myActor;
 	}
@@ -36,6 +38,12 @@ public class SelfTriggerBehavior extends LabelBehavior {
 	@Override
 	public boolean isTrigger() {
 		return true;
+	}
+
+	@Override
+	public void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

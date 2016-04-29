@@ -4,12 +4,12 @@ import java.util.*;
 
 import authoringenvironment.controller.*;
 import authoringenvironment.model.*;
-import gameengine.controller.Level;
+import gameengine.controller.*;
 import gui.view.IGUI;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.layout.*;
 import javafx.scene.Node;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 /**
@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 public class GUIMainScreen implements IGUI, Observer {
 
 	private static final int NUM_SCROLLPANES = 2;
+	private static final int SCROLLPANE_BAR_WIDTH = 30;
 	private VBox actorPreviewContainer, levelPreviewContainer, createdLevelsDisplay, createdActorsDisplay;
 	private ScrollPane actorScrollPane, levelScrollPane;
 	private HBoxDisplayHeader actorsDisplayHeader, levelsDisplayHeader;
@@ -112,9 +113,9 @@ public class GUIMainScreen implements IGUI, Observer {
 	 */
 	private void initializeScrollPanes() {
 		initScrollPane(actorScrollPane, createdActorsDisplay.widthProperty(), createdActorsDisplay.heightProperty(),
-				actorPreviewContainer);
+				actorPreviewContainer, actorsDisplayHeader.getHBox().heightProperty());
 		initScrollPane(levelScrollPane, createdLevelsDisplay.widthProperty(), createdLevelsDisplay.heightProperty(),
-				levelPreviewContainer);
+				levelPreviewContainer, levelsDisplayHeader.getHBox().heightProperty());
 	}
 
 	/**
@@ -122,18 +123,17 @@ public class GUIMainScreen implements IGUI, Observer {
 	 * pane's width and sets its contents to the container holding the elements
 	 * to be placed within the ScrollPane
 	 * 
-	 * @param scrollPane
-	 *            whose size is to be bound and whose content is to be set
-	 * @param container
+	 * @param scrollPane:
+	 *            scrollPane whose size is to be bound and whose content is to
+	 *            be set
+	 * @param container:
 	 *            the container holding the elements to be placed within the
 	 *            ScrollPane
 	 */
 	private void initScrollPane(ScrollPane scrollPane, DoubleExpression bindWidth, DoubleExpression bindHeight,
-			Node initialContent) {
-		bindNodeSizeToGivenSize(scrollPane, bindWidth,
-				bindHeight.subtract(levelsDisplayHeader.getHBox().heightProperty()));
-		scrollPane.setContent(initialContent); // can't just subtract by
-												// levelsDisplayHeader
+			Node initialContent, DoubleExpression bindHeightOffset) {
+		bindNodeSizeToGivenSize(scrollPane, bindWidth, bindHeight.subtract(bindHeightOffset));
+		scrollPane.setContent(initialContent);
 	}
 
 	/**
@@ -156,7 +156,8 @@ public class GUIMainScreen implements IGUI, Observer {
 	 */
 	private VBox createEditableGameElementPreviewContainer(ScrollPane parentScrollPane) {
 		VBox container = new VBox();
-		bindNodeSizeToGivenSize(container, parentScrollPane.widthProperty(), parentScrollPane.heightProperty());
+		bindNodeSizeToGivenSize(container, parentScrollPane.widthProperty().subtract(SCROLLPANE_BAR_WIDTH),
+				parentScrollPane.heightProperty());
 		return container;
 	}
 
@@ -218,10 +219,11 @@ public class GUIMainScreen implements IGUI, Observer {
 		bindNodeSizeToGivenSize(previewUnitHBox, parent.widthProperty(), null);
 		parent.getChildren().add(previewUnitHBox);
 		allPreviewUnits.add(previewUnit);
+		updatePreviewUnits();
 	}
 
 	/**
-	 * Updates all LabelClickables to account for any changes in the name or
+	 * Updates all preview units to account for any changes in the name or
 	 * image of Actors and Levels
 	 */
 	public void updatePreviewUnits() {
@@ -233,15 +235,18 @@ public class GUIMainScreen implements IGUI, Observer {
 	 * the game are displayed toward the top of the ScrollPane containing all
 	 * Level Labels
 	 */
-	private void reorderLevelLabels() {
-		@SuppressWarnings("unused")
+	private void reorderLevels() {
 		LevelPreviewUnitReorderer levelReorderer = new LevelPreviewUnitReorderer(levelPreviewUnits,
 				levelPreviewContainer, levels, levelEditor, allPreviewUnits, this);
+		levelReorderer.reorderLevels();
 	}
 
+	/**
+	 * Reorders levels when observable Reorder Levels button is clicked
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		reorderLevelLabels();
+		reorderLevels();
 	}
 
 }

@@ -1,16 +1,18 @@
 package gamedata.controller;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Observable;
 import java.util.ResourceBundle;
+
+import authoringenvironment.controller.Controller;
 import gamedata.view.FileChooserScreen;
 import gameengine.controller.Game;
 import gameplayer.controller.BaseScreenController;
 import gameplayer.controller.BranchScreenController;
 import gameplayer.controller.GameController;
 import gameplayer.controller.HighScoreScreenController;
-import gui.view.ButtonParent;
 import javafx.stage.Stage;
 
 public class FileChooserController extends BranchScreenController {
@@ -25,16 +27,16 @@ public class FileChooserController extends BranchScreenController {
 	private ChooserType myType;
 
 	public FileChooserController(Stage stage, ChooserType type) {
-		super(stage);
+		super(stage, CHOOSER_CONTROLLER_RESOURCE);
 		this.myType = type;
 		setUpScreen();
-		this.myResources = ResourceBundle.getBundle(CHOOSER_CONTROLLER_RESOURCE);
 		changeScreen(myScreen);
 	}
 
 	private void setUpScreen() {
 		this.myScreen = new FileChooserScreen();
 		this.myScreen.addObserver(this);
+		setMyScreen(this.myScreen);
 	}
 
 	private void goPlay(Game game) {
@@ -47,51 +49,45 @@ public class FileChooserController extends BranchScreenController {
 	}
 
 	private void goEdit(Game game) {
-		// Controller GUIMainController = new Controller(getStage(), game);
+		Controller GUIMainController = new Controller(game, getStage());
 	}
 
-	private void handleButton(String buttonName) throws IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException, SecurityException, NoSuchMethodException {
-		String method = myResources.getString(buttonName);
-		try {
-			this.getClass().getDeclaredMethod(method).invoke(this);
-		} catch (NoSuchMethodException e) {
-			this.getClass().getSuperclass().getDeclaredMethod(method).invoke(this);
+	private void go(Game game) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException,
+			NoSuchMethodException, SecurityException {
+		if (game == null) {
+			alert("choose");
 		}
-	}
-
-	private void handleComboBox(List<Object> methodArgPair) throws IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException, NoSuchMethodException, SecurityException {
-		String methodName = myResources.getString((String) methodArgPair.get(NODE).getClass().getSimpleName())
-				+ this.myType.toString();
-		Game game = (Game) methodArgPair.get(METHOD_ARG);
-		if (checkNullGame(game)) {
-			// TODO implement resource bundle message
-			this.myScreen.showError(myResources.getString(PROMPT));
-		} else {
+		else {
 			Class[] parameterTypes = { Game.class };
-			Object[] parameters = { game };
-			this.getClass().getDeclaredMethod(methodName, parameterTypes).invoke(this, parameters);
+			Object[] parameters = {game};
+			this.getClass().getDeclaredMethod("go" + getType(), parameterTypes).invoke(this, parameters);
 		}
 	}
 
+
+	private void alert(String type) {
+		try {
+			Class[] parameterTypes = { String.class };
+			Object[] parameters = { type };
+			myScreen.getClass().getDeclaredMethod("alert", parameterTypes).invoke(myScreen, parameters);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+				| SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	private boolean checkNullGame(Game game) {
 		return game == null;
 	}
+	
+	private String getType() {
+		return myType.toString();
+	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		List<Object> nodeArg = (List<Object>) arg;
-		try {
-			if (nodeArg.get(NODE) instanceof ButtonParent) {
-				handleButton(nodeArg.get(NODE).getClass().getSimpleName());
-			} else {
-				handleComboBox(nodeArg);
-			}
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
-				| SecurityException e) {
-			e.printStackTrace();
-			this.myScreen.showError(e.getMessage());
-		}
+	public void invoke(String method, Class[] parameterTypes, Object[] parameters) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		this.getClass().getDeclaredMethod(method, parameterTypes).invoke(this, parameters);	
 	}
+	
 }

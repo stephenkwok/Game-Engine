@@ -6,10 +6,12 @@ public class TextFieldActorNameEditor extends TextFieldWithButton {
 
 	public TextFieldActorNameEditor(String labelText, String promptText, Double textFieldWidth) {
 		super(labelText, promptText, textFieldWidth);
-		setButtonAction(e -> {((IAuthoringActor) getEditableElement()).setName(getTextFieldInput());
+		setButtonAction(e -> {
+			((IAuthoringActor) getEditableElement()).setName(getTextFieldInput());
 			notifyObservers((IAuthoringActor) getEditableElement());
-			});
+		});
 	}
+
 	/**
 	 * Sets the textfield's value to reflect the current actor's name.
 	 */

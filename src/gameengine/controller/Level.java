@@ -3,13 +3,24 @@ package gameengine.controller;
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
 import gameengine.model.ActorState;
+import gameengine.model.Attribute;
+import gameengine.model.AttributeManager;
+import gameengine.model.AttributeType;
+import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
-import gameengine.model.ITrigger;
+import gameengine.model.PhysicsEngine;
+import gameengine.model.Rule;
+import gameengine.model.RuleManager;
+import gameengine.model.Triggers.AttributeReached;
+import gameengine.model.Triggers.ITrigger;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -17,18 +28,22 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import authoringenvironment.model.IEditableGameElement;
 
 /**
- * A Level is essentially a package of Actor objects. It is able to relay a Trigger to Actors when it receives one.
+ * A Level is essentially a package of Actor objects. It is able to relay a
+ * Trigger to Actors when it receives one.
  *
  * @author blakekaplan
  */
-public class Level implements Observer, ILevel, IEditableGameElement, Comparable<Level> {
+public class Level extends Observable implements ILevel, IEditableGameElement, Comparable<Level>, IGameElement {
 
 	private static final String DEFAULT_NAME = "Default";
-	private static final String DEFAULT_IMAGE_NAME = "mariobackground.png";
+	private static final String DEFAULT_IMAGE_NAME = "default_landscape.png";
+	private static final double DEFAULT_HEIGHT = 800;
+	private static final double DEFAULT_WIDTH = 1024;
 	private static final String DEFAULT_SCROLLING = "Horizontally";
 	private List<IPlayActor> myActors;
-	private Map<String, List<IPlayActor>> myTriggerMap;
 	private String myName;
+	private double myHeight;
+	private double myWidth;
 	private int myPlayPosition;
 	private List<String> myHUDOptions;
 	private String myScrollingDirection;
@@ -37,39 +52,42 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 	private ImageView myBackground;
 	@XStreamOmitField
 	private DoubleProperty myBackgroundX = new SimpleDoubleProperty();
-
+	private RuleManager myRuleManager;
+	private AttributeManager myAttributeManager;
 
 	/**
 	 * Instantiates the triggerMap and Actor list
 	 */
 	public Level() {
+		myRuleManager = new RuleManager();
+		myAttributeManager = new AttributeManager();
 		setMyActors(new ArrayList<>());
-		setMyTriggerMap(new HashMap<>());
 		setName(DEFAULT_NAME);
 		myBackgroundImgName = DEFAULT_IMAGE_NAME;
 		setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
 		myScrollingDirection = DEFAULT_SCROLLING;
 		myName = DEFAULT_NAME;
+		myHeight = DEFAULT_HEIGHT;
+		myWidth = DEFAULT_WIDTH;
+		myRuleManager = new RuleManager();
 	}
 
 	/**
 	 * Calls for the appropriate response upon receiving a particular Trigger
 	 *
-	 * @param myTrigger A particular Trigger object sent from the game player
+	 * @param myTrigger
+	 *            A particular Trigger object sent from the game player
 	 */
 	@Override
 	public void handleTrigger(ITrigger myTrigger) {
-		if (!getMyTriggerMap().containsKey(myTrigger.getMyKey())) return;
-		List<IPlayActor> relevantActors = getMyTriggerMap().get(myTrigger.getMyKey());
-		for (IPlayActor myActor : relevantActors) {
-			myActor.performActionsFor(myTrigger);
-		}
+		myRuleManager.handleTrigger(myTrigger);
 	}
 
 	/**
 	 * Sets the Level's name
 	 *
-	 * @param name A name for the Level
+	 * @param name
+	 *            A name for the Level
 	 */
 	@Override
 	public void setName(String name) {
@@ -79,23 +97,12 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 	/**
 	 * Adds a new Actor to the Level and updates the triggerMap accordingly
 	 *
-	 * @param actor The Actor to be added to the Level
+	 * @param actor
+	 *            The Actor to be added to the Level
 	 */
 	@Override
 	public void addActor(IAuthoringActor actor) {
 		getActors().add((IPlayActor)actor);
-		Set<String> actorTriggers = ((IPlayActor)actor).getRules().keySet();
-		List<IPlayActor> levelActors;
-		for (String myTrigger : actorTriggers) {
-			if (getMyTriggerMap().containsKey(myTrigger)) {
-				levelActors = getMyTriggerMap().get(myTrigger);
-			} else {
-				levelActors = new ArrayList<>();
-			}
-			levelActors.add((IPlayActor)actor);
-			getMyTriggerMap().put(myTrigger, levelActors);
-		}
-
 	}
 
 	/**
@@ -111,7 +118,7 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 	/**
 	 * Provides the Level's ImageView
 	 *
-	 * @return  The Level's ImageView
+	 * @return The Level's ImageView
 	 */
 	@Override
 	public ImageView getImageView() {
@@ -121,18 +128,19 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 	/**
 	 * Sets the Level's ImageView
 	 *
-	 * @param imageView to be set as IEditableGameElement's ImageView
+	 * @param imageView
+	 *            to be set as IEditableGameElement's ImageView
 	 */
 	@Override
 	public void setImageView(ImageView imageView) {
 		myBackground = imageView;
-		myBackgroundX  = new SimpleDoubleProperty(myBackground.getX());
+		myBackgroundX = new SimpleDoubleProperty(myBackground.getX());
 	}
 
 	/**
 	 * Provides the name of the Level's background image
 	 *
-	 * @return  The name of the Level's background image
+	 * @return The name of the Level's background image
 	 */
 	public String getMyBackgroundImgName() {
 		return myBackgroundImgName;
@@ -141,7 +149,8 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 	/**
 	 * Sets the Level's background image
 	 *
-	 * @param myBackgroundImgName   The desired image filepath
+	 * @param myBackgroundImgName
+	 *            The desired image filepath
 	 */
 	public void setMyBackgroundImgName(String myBackgroundImgName) {
 		this.myBackgroundImgName = myBackgroundImgName;
@@ -151,7 +160,7 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 	/**
 	 * Provides a string representation of the Level object
 	 *
-	 * @return  A string representation of the Level object
+	 * @return A string representation of the Level object
 	 */
 	public String toString() {
 
@@ -164,8 +173,6 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 		stringBuilder.append(myBackgroundImgName);
 		stringBuilder.append("\nmyActors: ");
 		stringBuilder.append(getActors().toString());
-		stringBuilder.append("\nTriggerMap: ");
-		stringBuilder.append(getMyTriggerMap().toString());
 		stringBuilder.append("\nimg: ");
 		stringBuilder.append(myBackground);
 		stringBuilder.append(" ]");
@@ -173,14 +180,13 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 		return stringBuilder.toString();
 	}
 
-
-	public Map<String, List<IPlayActor>> getMyTriggerMap() {
-		return myTriggerMap;
-	}
-
-	public void setMyTriggerMap(Map<String, List<IPlayActor>> myTriggerMap) {
-		this.myTriggerMap = myTriggerMap;
-	}
+//	public Map<String, List<IPlayActor>> getMyTriggerMap() {
+//		return myTriggerMap;
+//	}
+//
+//	public void setMyTriggerMap(Map<String, List<IPlayActor>> myTriggerMap) {
+//		this.myTriggerMap = myTriggerMap;
+//	}
 
 	public List<IPlayActor> getActors() {
 		return myActors;
@@ -191,9 +197,47 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 	}
 
 	/**
+	 * Provides the Level's Height
+	 * 
+	 * @return The Level's Height
+	 */
+	public double getMyHeight() {
+		return myHeight;
+	}
+
+	/**
+	 * Sets the Level's Height
+	 *
+	 * @param myHeight
+	 *            The desired Level height
+	 */
+	public void setMyHeight(double myHeight) {
+		this.myHeight = myHeight;
+	}
+
+	/**
+	 * Provides the Level's width
+	 *
+	 * @return The Level's width
+	 */
+	public double getMyWidth() {
+		return myWidth;
+	}
+
+	/**
+	 * Sets the Level's width
+	 *
+	 * @param myWidth
+	 *            The desired Level width
+	 */
+	public void setMyWidth(double myWidth) {
+		this.myWidth = myWidth;
+	}
+
+	/**
 	 * Provides the HUD options
 	 *
-	 * @return  The Level's HUD options
+	 * @return The Level's HUD options
 	 */
 	public List<String> getMyHUDOptions() {
 		return myHUDOptions;
@@ -211,14 +255,17 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 	/**
 	 * Provides the Level's scrolling direction
 	 *
-	 * @return  The Level's scrolling direction
+	 * @return The Level's scrolling direction
 	 */
-	public String getMyScrollingDirection() { return myScrollingDirection; }
+	public String getMyScrollingDirection() {
+		return myScrollingDirection;
+	}
 
 	/**
 	 * Sets the Level's scrolling direction
 	 *
-	 * @param myScrollingDirection  The desired scrolling direction
+	 * @param myScrollingDirection
+	 *            The desired scrolling direction
 	 */
 	public void setMyScrollingDirection(String myScrollingDirection) {
 		this.myScrollingDirection = myScrollingDirection;
@@ -242,9 +289,9 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 	}
 
 	/**
-	 * Returns a negative number if this Level's play position is lower than
-	 * the other Level's play position or a positive number if this Level's 
-	 * play position is higher than the other Level's play position
+	 * Returns a negative number if this Level's play position is lower than the
+	 * other Level's play position or a positive number if this Level's play
+	 * position is higher than the other Level's play position
 	 */
 	@Override
 	public int compareTo(Level otherLevel) {
@@ -264,22 +311,88 @@ public class Level implements Observer, ILevel, IEditableGameElement, Comparable
 	}
 
 	public void scrollBackground(int change) {
-		this.myBackground.setX((this.myBackground.getX()+change)%this.myBackground.getImage().getWidth());
+		this.myBackground.setX((this.myBackground.getX() + change) % this.myBackground.getImage().getWidth());
 		this.myBackgroundX.set(myBackground.getX());
 	}
 
-	public IPlayActor getMainCharacter(){
-		for(IPlayActor a: myActors){
-			if(a.checkState(ActorState.MAIN)){
+	public void setMyImageView(ImageView imageView) {
+		myBackground = imageView;
+		myBackgroundX = new SimpleDoubleProperty(myBackground.getX());
+	}
+
+	public IPlayActor getMainCharacter() {
+		for (IPlayActor a : myActors) {
+			if (a.checkState(ActorState.MAIN)) {
 				return a;
 			}
 		}
 		return null;
 	}
-	
+
 	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+	public void addAttribute(Attribute attribute) {
+		myAttributeManager.addAttribute(attribute);
+
 	}
+
+	@Override
+	public void removeAttribute(Attribute attribute) {
+		myAttributeManager.removeAttribute(attribute);
+
+	}
+
+	@Override
+	public void handleReachedAttribute(AttributeReached trigger) {
+		setChanged();
+		notifyObservers(Arrays.asList(new Object[] { "handleTrigger", trigger }));
+	}
+
+	@Override
+	public Attribute getAttribute(AttributeType type) {
+		return myAttributeManager.getAttribute(type);
+	}
+
+	@Override
+	public void changeAttribute(AttributeType type, int change) {
+		myAttributeManager.changeAttribute(type, change);
+
+	}
+
+	@Override
+	public void addRule(Rule rule) {
+		myRuleManager.addRule(rule);
+
+	}
+
+	@Override
+	public void removeRule(Rule rule) {
+		myRuleManager.removeRule(rule);
+
+	}
+
+	@Override
+	public Map<String, List<Rule>> getRules() {
+		return myRuleManager.getRules();
+	}
+
+
+    public void changed(){
+        setChanged();
+    }
+
+    public Bounds getBounds(){
+        return myBackground.getBoundsInLocal();
+    }
+    
+    public void shiftScene(String direction, double amount){
+    	for(IPlayActor a: myActors){
+    		try {
+				PhysicsEngine.class.getDeclaredMethod("glide"+direction,Double.class).invoke(a,amount);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e) {
+				e.printStackTrace();
+			}
+    	}
+    }
+	
 }

@@ -1,7 +1,6 @@
 package gameengine.model.Actions;
 
-import gameengine.model.IPlayActor;
-import gameengine.model.Actions.Action;
+import gameengine.model.Actor;
 
 /**
  * This Action represents an elastic vertical collision between Actors
@@ -9,9 +8,10 @@ import gameengine.model.Actions.Action;
  * @author justinbergkamp
  *
  */
-public class VerticalBounceCollision extends Action{
 
-	public VerticalBounceCollision(IPlayActor actor) {
+public class VerticalBounceCollision extends ActorAction{
+
+	public VerticalBounceCollision(Actor actor) {
 		super(actor);
 	}
 
@@ -21,4 +21,3 @@ public class VerticalBounceCollision extends Action{
 	}
 
 }
-

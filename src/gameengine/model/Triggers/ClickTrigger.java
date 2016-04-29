@@ -1,7 +1,6 @@
 package gameengine.model.Triggers;
 
-import gameengine.model.*; 
-import gameengine.model.ITrigger;
+import gameengine.model.*;
 import javafx.geometry.Bounds;
 
 /**
@@ -9,17 +8,24 @@ import javafx.geometry.Bounds;
  */
 public class ClickTrigger extends ITrigger {
 
-    private double myX;
-    private double myY;
-    private Actor myActor;
+    private Double myX;
+    private Double myY;
+    private IGameElement myGameElement;
 
-    public ClickTrigger(Actor actor) {
-        myActor = actor;
+    public ClickTrigger(IGameElement gameElement) {
+        myGameElement = gameElement;
     }
 
-    public ClickTrigger(double x, double y) {
+    public ClickTrigger(Double x, Double y) {
         myX = x;
         myY = y;
+    }
+    
+    public Object[] getParameters(){
+    	if(myGameElement!=null){
+    		return new Object[]{myGameElement};
+    	}
+		return new Object[]{myX,myY};
     }
 
     @Override
@@ -44,7 +50,7 @@ public class ClickTrigger extends ITrigger {
     @Override
     public boolean evaluate(ITrigger otherTrigger) {
         ClickTrigger otherClick = (ClickTrigger) otherTrigger;
-        return (myActor.getBounds().contains(otherClick.getMyX(), otherClick.getMyY()));
+        return (myGameElement.getBounds().contains(otherClick.getMyX(), otherClick.getMyY()));
     }
 
 }

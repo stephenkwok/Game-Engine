@@ -1,36 +1,32 @@
 package gameengine.model;
 
-import gameengine.model.Actions.Action;
+import gameengine.model.Triggers.AttributeReached;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
+import voogasalad.util.hud.source.Property;
+
 
 /**
- * This class is purposed to store properties belonging to an actor that are updated throughout the game
- * that may signal some action to be performed once they meet a specified criteria
- *
+ * This class is purposed to store properties belonging to an actor that are
+ * updated throughout the game that may signal some action to be performed once
+ * they meet a specified criteria
+ * 
  * @author colettetorres
+ *
  */
 public class Attribute extends Observable {
 
-    private int myValue;
-    private int myTriggerValue;
+
+    private Property<Integer> myValue;
+    private Set<Integer> myTriggerValues;
     private AttributeType myType;
-    private List<Action> myActions;
+    private IGameElement myOwner;
 
-    public Attribute(AttributeType type, int initialValue, int triggerValue, List<Action> actions) {
-        myValue = initialValue;
-        myTriggerValue = triggerValue;
-        setMyType(type);
-        setActions(actions);
-    }
-
-    public Attribute(AttributeType type, int initialValue) {
+    public Attribute(AttributeType type, int initialValue, IGameElement owner) {
         myType = type;
-        myValue = initialValue;
-        myTriggerValue = Integer.MAX_VALUE;
-        myActions = new ArrayList<>();
+        myValue = new Property<Integer>(initialValue,owner.getName()+type.toString());
+        myTriggerValues = new HashSet<Integer>();
+        myOwner = owner;
     }
 
     /**
@@ -39,90 +35,41 @@ public class Attribute extends Observable {
      * @param change The amount to change the value by
      */
     public void changeAttribute(int change) {
-        myValue += change;
-        System.out.println(myValue);
-        if (myValue == myTriggerValue) {
-            for (Action myAction : myActions) {
-                myAction.perform();
-            }
+        myValue.setValue(myValue.getValue()+change);
+        if(myTriggerValues.size()>0 && myTriggerValues.contains(myValue.getValue())){
+        	myOwner.handleReachedAttribute(new AttributeReached(myOwner, myType, myValue.getValue()));
         }
     }
-
-
-    /**
-     * Sets the attribute's current value
-     *
-     * @param myValue
-     */
-    public void setMyValue(int myValue) {
-        this.myValue = myValue;
-    }
-
-    /**
-     * Determines the criteria the attribute needs to meet to signal some action
-     *
-     * @param myTriggerValue
-     */
-    public void setMyTriggerValue(int myTriggerValue) {
-        this.myTriggerValue = myTriggerValue;
-    }
-
-    /**
-     * Gets the action to be triggered once the attribute meets its specified criteria
-     *
-     * @return the action to be performed once the attribute reaches a certain value
-     */
-    public List<Action> getMyActions() {
-        return myActions;
-    }
+	
+	/**
+	 * Determines the criteria the attribute needs to meet to signal some action
+	 * 
+	 * @param myTriggerValue
+	 */
+	public void addTriggerValue(int myTriggerValue) {
+		myTriggerValues.add(myTriggerValue);
+	}
 
     /**
      * Provides the Attribute's current value
      *
-     * @return The Attribute's current value
+     * @return  The Attribute's current value
      */
     public int getMyValue() {
-        return myValue;
-    }
-
-    /**
-     * Provides the Attribute's trigger value
-     *
-     * @return The Attribute's trigger value
-     */
-    public int getMyTriggerValue() {
-        return myTriggerValue;
+        return myValue.getValue();
     }
 
     /**
      * Provides the AttributeType for the Attribute
-     *
-     * @return The Attribute's AttributeType
+     * @return  The Attribute's AttributeType
      */
     public AttributeType getMyType() {
         return myType;
     }
-
-    /**
-     * Sets the Attribute's AttributeTypes
-     *
-     * @param myType The Attribute's AttributeType
-     */
-    private void setMyType(AttributeType myType) {
-        this.myType = myType;
+    
+    
+    public Property<Integer> getProperty() {
+    	return myValue;
     }
-
-    /**
-     * Sets the Attribute's Action
-     *
-     * @param myAction The desired Attribute Action
-     */
-    public void addAction(Action myAction) {
-        this.myActions.add(myAction);
-    }
-
-    private void setActions(List<Action> actions) {
-        myActions = actions;
-    }
+        
 }
-

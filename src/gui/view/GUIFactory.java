@@ -7,7 +7,8 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 /**
- * Instantiates IGUIElements based on a ResourceBundle String key passed into createNewGUIObject(String nodeTypeKey).
+ * Instantiates IGUIElements based on a ResourceBundle String key passed into
+ * createNewGUIObject(String nodeTypeKey).
  *
  * @author AnnieTang, amyzhao
  */
@@ -27,17 +28,25 @@ public class GUIFactory {
 	private ResourceBundle myResources;
 
 	/**
-	 * Constructs a GUIFactory with elements specified in a given ResourceBundle.
-	 * @param myResources: ResourceBundle containing the elements to be made.
-	 * @param myController: environment's controller.
+	 * Constructs a GUIFactory with elements specified in a given
+	 * ResourceBundle.
+	 * 
+	 * @param myResources:
+	 *            ResourceBundle containing the elements to be made.
+	 * @param myController:
+	 *            environment's controller.
 	 */
 	public GUIFactory(ResourceBundle myResources) {
 		this.myResources = myResources;
 	}
+
 	/**
-	 * Creates new IGUIElement based on nodeTypeKey passed in. 
-	 * @param nodeTypeKey: Name of object you want to create.
-	 * @return IGUIElement: element corresponding to nodeTypeKey in ResourceBundle.
+	 * Creates new IGUIElement based on nodeTypeKey passed in.
+	 * 
+	 * @param nodeTypeKey:
+	 *            Name of object you want to create.
+	 * @return IGUIElement: element corresponding to nodeTypeKey in
+	 *         ResourceBundle.
 	 */
 	public IGUIElement createNewGUIObject(String nodeTypeKey) {
 		String nodeType = myResources.getString(nodeTypeKey);
@@ -46,8 +55,12 @@ public class GUIFactory {
 	}
 
 	/**
-	 * Determines the element type based on the list of possible GUI Element Types given by the resource file.
-	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
+	 * Determines the element type based on the list of possible GUI Element
+	 * Types given by the resource file.
+	 * 
+	 * @param nodeType:
+	 *            nodeType corresponding to the nodeTypeKey originally
+	 *            specified.
 	 * @return element type (e.g. ComboBox, TextField, CheckBoxObject, etc.)
 	 */
 	private String determineElementType(String nodeType) {
@@ -59,17 +72,30 @@ public class GUIFactory {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Create the desired element.
-	 * @param elementType: ComboBox, TextFieldWithButton, Button, Menu, Pane, MenuBar, or CheckBoxObject.
-	 * @param nodeType: name of the elementType as specified in the properties file.
+	 * 
+	 * @param elementType:
+	 *            ComboBox, TextFieldWithButton, Button, Menu, Pane, MenuBar, or
+	 *            CheckBoxObject.
+	 * @param nodeType:
+	 *            name of the elementType as specified in the properties file.
 	 * @return IGUIElement for the desired element.
 	 */
 	private IGUIElement createElement(String elementType, String nodeType) {
 		String className = GUI + VIEW + myResources.getString(nodeType + CLASS);
+		
 		try {
 			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class);
+			if (elementType.equals("CheckBoxObject")) {
+				try {
+					createCheckBoxObject(nodeType, className);
+				} catch (ClassNotFoundException | InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			return (IGUIElement) createMethod.invoke(this, nodeType, className);
 		} catch (NoSuchMethodException | SecurityException e) {
 			// TODO Auto-generated catch block
@@ -89,8 +115,12 @@ public class GUIFactory {
 
 	/**
 	 * Creates a ComboBox.
-	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
-	 * @param className: specific subclass of ComboBoxParent.
+	 * 
+	 * @param nodeType:
+	 *            nodeType corresponding to the nodeTypeKey originally
+	 *            specified.
+	 * @param className:
+	 *            specific subclass of ComboBoxParent.
 	 * @return IGUIElement for the ComboBox.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
@@ -100,18 +130,24 @@ public class GUIFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private IGUIElement createComboBox(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-			String prompt = myResources.getString(nodeType + PROMPT);
-			String label = myResources.getString(nodeType + LABEL);
-			Class<?> comboBox = Class.forName(className);
-			Constructor<?> constructor = comboBox.getConstructor(ResourceBundle.class, String.class, String.class);
-			return (IGUIElement) constructor.newInstance(myResources, prompt, label);
+	private IGUIElement createComboBox(String nodeType, String className)
+			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		String prompt = myResources.getString(nodeType + PROMPT);
+		String label = myResources.getString(nodeType + LABEL);
+		Class<?> comboBox = Class.forName(className);
+		Constructor<?> constructor = comboBox.getConstructor(ResourceBundle.class, String.class, String.class);
+		return (IGUIElement) constructor.newInstance(myResources, prompt, label);
 	}
 
 	/**
 	 * Creates a Button.
-	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
-	 * @param className: specific subclass of ButtonParent.
+	 * 
+	 * @param nodeType:
+	 *            nodeType corresponding to the nodeTypeKey originally
+	 *            specified.
+	 * @param className:
+	 *            specific subclass of ButtonParent.
 	 * @return IGUIElement for the Button.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
@@ -121,18 +157,24 @@ public class GUIFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private IGUIElement createButton(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException {
-			String text = myResources.getString(nodeType + TEXT);
-			String icon = myResources.getString(nodeType + ICON);
-			Class<?> button = Class.forName(className);
-			Constructor<?> constructor = button.getConstructor(String.class, String.class);
-			return (IGUIElement) constructor.newInstance(text, icon);
+	private IGUIElement createButton(String nodeType, String className)
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
+			ClassNotFoundException, NoSuchMethodException, SecurityException {
+		String text = myResources.getString(nodeType + TEXT);
+		String icon = myResources.getString(nodeType + ICON);
+		Class<?> button = Class.forName(className);
+		Constructor<?> constructor = button.getConstructor(String.class, String.class);
+		return (IGUIElement) constructor.newInstance(text, icon);
 	}
-	
+
 	/**
 	 * Creates a Pane.
-	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
-	 * @param className: specific subclass of PaneParent.
+	 * 
+	 * @param nodeType:
+	 *            nodeType corresponding to the nodeTypeKey originally
+	 *            specified.
+	 * @param className:
+	 *            specific subclass of PaneParent.
 	 * @return IGUIElement for the Pane.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
@@ -142,16 +184,22 @@ public class GUIFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private IGUIElement createPane(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException{
-			Class<?> pane = Class.forName(className);
-			Constructor<?> constructor = pane.getConstructor();
-			return (IGUIElement) constructor.newInstance();
+	private IGUIElement createPane(String nodeType, String className)
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
+			ClassNotFoundException, NoSuchMethodException, SecurityException {
+		Class<?> pane = Class.forName(className);
+		Constructor<?> constructor = pane.getConstructor();
+		return (IGUIElement) constructor.newInstance();
 	}
 
 	/**
 	 * Creates a Menu.
-	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
-	 * @param className: specific subclass of MenuParent.
+	 * 
+	 * @param nodeType:
+	 *            nodeType corresponding to the nodeTypeKey originally
+	 *            specified.
+	 * @param className:
+	 *            specific subclass of MenuParent.
 	 * @return IGUIElement for the Menu.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
@@ -161,17 +209,23 @@ public class GUIFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private IGUIElement createMenu(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException{
-			String text = myResources.getString(nodeType + TEXT);
-			Class<?> menu = Class.forName(className);
-			Constructor<?> constructor = menu.getConstructor(String.class);
-			return (IGUIElement) constructor.newInstance(text);
+	private IGUIElement createMenu(String nodeType, String className)
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
+			ClassNotFoundException, NoSuchMethodException, SecurityException {
+		String text = myResources.getString(nodeType + TEXT);
+		Class<?> menu = Class.forName(className);
+		Constructor<?> constructor = menu.getConstructor(String.class);
+		return (IGUIElement) constructor.newInstance(text);
 	}
 
 	/**
 	 * Creates a MenuBar.
-	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
-	 * @param className: specific subclass of MenuBarParent.
+	 * 
+	 * @param nodeType:
+	 *            nodeType corresponding to the nodeTypeKey originally
+	 *            specified.
+	 * @param className:
+	 *            specific subclass of MenuBarParent.
 	 * @return IGUIElement for the MenuBar.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
@@ -181,16 +235,22 @@ public class GUIFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private IGUIElement createMenuBar(String nodeType, String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException{
-			Class<?> menu = Class.forName(className);
-			Constructor<?> constructor = menu.getConstructor();
-			return (IGUIElement) constructor.newInstance();
+	private IGUIElement createMenuBar(String nodeType, String className)
+			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
+			ClassNotFoundException, NoSuchMethodException, SecurityException {
+		Class<?> menu = Class.forName(className);
+		Constructor<?> constructor = menu.getConstructor();
+		return (IGUIElement) constructor.newInstance();
 	}
 
 	/**
 	 * Creates a TextFieldWithButton.
-	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
-	 * @param className: specific subclass of TextFieldWithButton.
+	 * 
+	 * @param nodeType:
+	 *            nodeType corresponding to the nodeTypeKey originally
+	 *            specified.
+	 * @param className:
+	 *            specific subclass of TextFieldWithButton.
 	 * @return IGUIElement for the TextFieldWithButton.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
@@ -200,7 +260,9 @@ public class GUIFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private IGUIElement createTextFieldWithButton(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private IGUIElement createTextFieldWithButton(String nodeType, String className)
+			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> textfield = Class.forName(className);
 		String labelText = myResources.getString(nodeType + LABEL);
 		String promptText = myResources.getString(nodeType + PROMPT);
@@ -209,11 +271,15 @@ public class GUIFactory {
 		return (IGUIElement) constructor.newInstance(labelText, promptText, width);
 
 	}
-	
+
 	/**
 	 * Creates a CheckBoxObject.
-	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
-	 * @param className: CheckBoxObject.
+	 * 
+	 * @param nodeType:
+	 *            nodeType corresponding to the nodeTypeKey originally
+	 *            specified.
+	 * @param className:
+	 *            CheckBoxObject.
 	 * @return IGUIElement for the CheckBoxObject.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
@@ -223,7 +289,9 @@ public class GUIFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private IGUIElement createCheckBoxObject(String nodeType, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	private IGUIElement createCheckBoxObject(String nodeType, String className)
+			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> checkbox = Class.forName(className);
 		String promptText = myResources.getString(nodeType + PROMPT);
 		int width = Integer.parseInt(myResources.getString(nodeType + WIDTH));

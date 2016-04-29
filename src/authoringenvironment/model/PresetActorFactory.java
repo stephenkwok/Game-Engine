@@ -3,7 +3,10 @@ package authoringenvironment.model;
 import java.lang.reflect.*;
 import java.util.*;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 
 /**
  * This class creates a list of Actors with attributes pre-defined in a resource
@@ -14,21 +17,21 @@ import gameengine.model.Actor;
  */
 public class PresetActorFactory {
 
-	private static final String RESOURCE_BUNDLE_KEY = "presetActorsFactory";
 	private static final String ACTORS_KEY = "Actors";
 	private static final String METHOD_TYPES_KEY = "MethodTypes";
 	private static final String DELIMITER = ",";
 	private static final String METHODS = "Methods";
 	private static final String METHOD = "Method";
 	private static final String EXECUTE = "execute";
+	@XStreamOmitField
 	private ResourceBundle myResources;
 	private List<Actor> myActors;
 	private Map<String, List<String>> myMethodsMap;
 	private List<String> actorNames;
 
-	public PresetActorFactory() throws NoSuchMethodException, SecurityException, IllegalAccessException,
+	public PresetActorFactory(ResourceBundle resources) throws NoSuchMethodException, SecurityException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException {
-		myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
+		myResources = resources;
 		myActors = new ArrayList<>();
 		initializeMethodsMap();
 		initializeActorNameList();
@@ -95,7 +98,8 @@ public class PresetActorFactory {
 
 	/**
 	 * 
-	 * @param methodName: the name of the Actor method to be created and invoked
+	 * @param methodName:
+	 *            the name of the Actor method to be created and invoked
 	 * @return a Method within the PresetActorFactory class that creates and
 	 *         invokes the Actor method to be created
 	 * @throws NoSuchMethodException
@@ -119,9 +123,12 @@ public class PresetActorFactory {
 	/**
 	 * Executes an Actor's method that takes in a String as a parameter
 	 * 
-	 * @param actor: the Actor on which a method to be created is invoked
-	 * @param method: the method to be invoked on an Actor
-	 * @param parameter: the argument to be passed into the method created
+	 * @param actor:
+	 *            the Actor on which a method to be created is invoked
+	 * @param method:
+	 *            the method to be invoked on an Actor
+	 * @param parameter:
+	 *            the argument to be passed into the method created
 	 * @throws NoSuchMethodException
 	 * @throws SecurityException
 	 * @throws IllegalAccessException
@@ -138,9 +145,12 @@ public class PresetActorFactory {
 	/**
 	 * Executes an Actor's method that takes in an int as a parameter
 	 * 
-	 * @param actor: the Actor on which a method to be created is invoked
-	 * @param method: the method to be invoked on an Actor
-	 * @param parameter: the argument to be passed into the method created (as String)
+	 * @param actor:
+	 *            the Actor on which a method to be created is invoked
+	 * @param method:
+	 *            the method to be invoked on an Actor
+	 * @param parameter:
+	 *            the argument to be passed into the method created (as String)
 	 * @throws NoSuchMethodException
 	 * @throws SecurityException
 	 * @throws IllegalAccessException
@@ -152,6 +162,47 @@ public class PresetActorFactory {
 			SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Method methodToCall = actor.getClass().getDeclaredMethod(method, int.class);
 		methodToCall.invoke(actor, Integer.parseInt(parameter.trim()));
+	}
+
+	/**
+	 * Executes an Actor's method that takes in a boolean as a parameter
+	 * 
+	 * @param actor:
+	 *            the Actor on which a method to be created is invoked
+	 * @param method:
+	 *            the method to be invoked on an Actor
+	 * @param parameter:
+	 *            the argument to be passed into the method created (as String)
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
+	@SuppressWarnings("unused")
+	private void executeBooleanMethod(Actor actor, String method, String parameter) throws NoSuchMethodException,
+			SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Method methodToCall = actor.getClass().getDeclaredMethod(method, boolean.class);
+		methodToCall.invoke(actor, Boolean.parseBoolean(parameter.trim()));
+	}
+
+	/**
+	 * Executes an Actor's method that takes in an Enum as a parameter
+	 * 
+	 * @param actor: the Actor on which a method to be created is invoked
+	 * @param method: the method to be invoked on an Actor
+	 * @param parameter: the argument to be passed into the method created (as String)
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
+	@SuppressWarnings("unused")
+	private void executeEnumMethod(Actor actor, String method, String parameter) throws NoSuchMethodException,
+			SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Method methodToCall = actor.getClass().getDeclaredMethod(method, ActorState.class);
+		methodToCall.invoke(actor, ActorState.valueOf(parameter.trim()));
 	}
 
 	/**

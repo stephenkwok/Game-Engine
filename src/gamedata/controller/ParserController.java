@@ -1,60 +1,52 @@
 package gamedata.controller;
 
 import java.io.File;
-import java.io.IOException;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-
-import org.xml.sax.SAXException;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gamedata.XMLParser;
 import gameengine.controller.Game;
-import gui.view.Screen;
 
 public class ParserController implements IParserController {
 
 	private XMLParser myXMLParser;
-	private Screen myScreen;
-	
-	
-	public ParserController () {
+
+	public ParserController() {
 		this.myXMLParser = new XMLParser();
-		
+
 	}
-	public ParserController (Screen screen) {
-		this.myXMLParser = new XMLParser();
-		this.myScreen = screen;
-	}
-	
+
 	@Override
 	public Game loadForEditing(File file) {
-		Game editingGame;
-		try {
-			Game playingGame = loadforPlaying(file);
-			editingGame = this.myXMLParser.extractGame(new File(playingGame.getInitialGameFile()));
-			editingGame.initCurrentActors();
-		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-			myScreen.showError(e.getMessage());
-			editingGame = null;
+		Game playingGame = loadforPlaying(file);
+		if (playingGame == null) {
+			return null;
 		}
-		return editingGame;
+		else {
+			File editingFile = new File(playingGame.getInitialGameFile());
+			return loadforPlaying(editingFile);
+		}
 	}
 
 	@Override
 	public Game loadforPlaying(File file) {
-		Game game;
-		try {
-			game = this.myXMLParser.extractGame(file);
-			game.initCurrentActors();
-			game.initTimeline();
-		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-			System.out.println(myScreen);
-			myScreen.showError(e.getMessage());
-			game = null;
+		Game XMLgame = (Game) this.myXMLParser.load(file);
+		if (XMLgame == null) {
+			return null;
 		}
-		return game;
+		else {
+			return new Game(XMLgame.getInitialGameFile(), 
+					XMLgame.getLevels(), 
+					XMLgame.getInfo(),
+					XMLgame.getMyPhysicsEngine(),
+					XMLgame.getMyCollisonDetector(),
+					XMLgame.getActiveTriggers(),
+					XMLgame.getAnimation(),
+					XMLgame.getCurrentActors(),
+					XMLgame.getDeadActors(),
+					XMLgame.getLevelTime(),
+					XMLgame.getGlobalTime());
+		}
 	}
-	
 
 }

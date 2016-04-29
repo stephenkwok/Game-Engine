@@ -1,8 +1,10 @@
 package gameplayer.controller;
 
 import java.util.List;
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -10,14 +12,18 @@ import java.util.ResourceBundle;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gamedata.controller.HighScoresController;
+import gamedata.controller.ParserController;
 import gameengine.controller.Game;
+import gameengine.controller.IGame;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IDisplayActor;
 import gameengine.model.IPlayActor;
 import gameplayer.view.GameScreen;
-import gameplayer.view.HUDScreen;
+import gameplayer.view.IGameScreen;
+import javafx.animation.Timeline;
 import javafx.scene.ParallelCamera;
+import voogasalad.util.hud.source.AbstractHUDScreen;
 
 /**
  * This class serves as the private interface that any game controller must
@@ -27,15 +33,13 @@ import javafx.scene.ParallelCamera;
  * @author cmt57
  */
 
-public class GameController implements Observer, IGameController {
+public class GameController extends Observable implements Observer, IGameController {
+	private IGame model;
 	@XStreamOmitField
-	private Game model;
+	private IGameScreen view;
 	@XStreamOmitField
-	private GameScreen view;
-	@XStreamOmitField
-	private HUDScreen hud;
-
 	private ResourceBundle myResources;
+	@XStreamOmitField
 	private static final String GAME_CONTROLLER_RESOURCE = "gameActions";
 
 	public GameController(Game game) {
@@ -56,7 +60,7 @@ public class GameController implements Observer, IGameController {
 	@Override
 	public void setGame(Game myGame) {
 		model = myGame;
-		model.addObserver(this);
+		((Observable) model).addObserver(this);
 	}
 
 	/**
@@ -66,12 +70,9 @@ public class GameController implements Observer, IGameController {
 	 */
 	public void setGameView(GameScreen myGameView) {
 		view = myGameView;
-		view.addObserver(this);
+		((Observable) view).addObserver(this);
 	}
 
-	public void setHUD(HUDScreen hud) {
-		this.hud = hud;
-	}
 
 	/**
 	 * Will initialize the backend (game engine) with the current level's
@@ -111,69 +112,14 @@ public class GameController implements Observer, IGameController {
 	}
 
 	/**
-	 * Will reflect changes in actors' positions or values in a new "step" to
-	 * simulate one round of animation.
-	 */
-	public void update() {
-
-	}
-
-	/**
-	 * Will ask game engine to check interactions that need to be resolved.
-	 */
-	public void checkInteractions() {
-
-	}
-
-	/**
-	 * Will resolve any front end outcomes determined by logic in backend
-	 * checking interactions.
-	 */
-	public void cleanUp() {
-
-	}
-
-	/**
 	 * Will stop the animation timeline.
 	 */
 	public void endGame() {
-		// TODO fix resource also implement saving functionality
-
-		togglePause();
+		model.stopGame();
 		view.terminateGame();
 	}
-	// Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Game over! Do you
-	// want to save your score?", ButtonType.YES, ButtonType.NO);
-	// alert.show();
-	// alert.showingProperty().addListener((observable, oldValue, newValue) -> {
-	// if (!newValue) {
-	// if (alert.getResult() == ButtonType.YES) {
-	// saveScorePrompt();
-	// }
-	// }
-	// });
+	
 
-	// }
-
-	// private void saveScorePrompt() {
-	// TextInputDialog dialog = new TextInputDialog("Name");
-	// dialog.setContentText("Please enter your name if you want to save your
-	// score");
-	// dialog.show();
-	// dialog.setResultConverter(new Callback<ButtonType, String>() {
-	// @Override
-	// public String call(ButtonType b) {
-	// if (b == ButtonType.OK) {
-	// saveGameScore(dialog.getEditor().getText());
-	// return dialog.getEditor().getText();
-	// }
-	// else {
-	// return null;
-	// }
-	// }
-	// });
-	// }
-	//
 	private void saveGameScore(String name) {
 		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
 		c.saveHighScore(getGame().getScore(), name);
@@ -188,16 +134,23 @@ public class GameController implements Observer, IGameController {
 	}
 
 	public void nextLevel() {
-		view.clearGame();
-		model.nextLevel();
-		begin();
+		if (model.nextLevel()) {
+			view.clearGame();
+			model.nextLevel();
+			model.resetLevelTime();
+			begin();
+		}
+		else {
+			endGame();
+		}
 	}
 
-	public GameScreen getView() {
+	@Override
+	public IGameScreen getView() {
 		return view;
 	}
 
-	public Game getGame() {
+	public IGame getGame() {
 		return model;
 	}
 
@@ -211,7 +164,11 @@ public class GameController implements Observer, IGameController {
 	public void update(Observable o, Object arg) {
 		List<Object> myList = (List<Object>) arg;
 		String methodName = (String) myList.get(0);
+
 		try {
+			if(methodName.equals("addActor")){ 
+				this.addActor((Actor)myList.get(1));
+			}else
 			if (myResources.getString(methodName).equals("null")) {
 				this.getClass().getDeclaredMethod(methodName).invoke(this);
 			} else if (myResources.getString(methodName).equals("String")) {
@@ -221,7 +178,8 @@ public class GameController implements Observer, IGameController {
 				Object arg2 = myClass.cast(myList.get(1));
 				model.getClass().getDeclaredMethod(methodName, myClass).invoke(model, arg2);
 			}
-		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e1) {
+		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException
+				| InvocationTargetException | NoSuchMethodException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
@@ -232,57 +190,59 @@ public class GameController implements Observer, IGameController {
 		view.addActor(a);
 	}
 
+	@Override
 	public void toggleSound() {
 		System.out.println("toggle sound unimplemented");
 	}
-
+	
+	@Override
 	public void toggleMusic() {
 		System.out.println("toggle music unimplemented");
 	}
-
-	public void togglePause() {
-		getGame().getAnimation().pause();
-		view.getMySubscene().setDisable(true);
-	}
-
-	public void toggleUnPause() {
-		getGame().getAnimation().play();
-		view.getMySubscene().setDisable(false);
-	}
-
-	public void restartGame() {
-		System.out.println("restart game");
-		System.out.println(model.getInfo().getMyCurrentLevelNum() + " game level");
-		initialize(model.getInfo().getMyCurrentLevelNum());
-	}
 	
-	public void updateCamera(){
-		if(model.getCurrentLevel().getMainCharacter()!=null){
-			if(model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))){
+	@Override
+	public void togglePause() {
+		model.stopGame();
+		view.pauseGame();
+	}
+
+	@Override
+	public void toggleUnPause() {
+		model.toggleUnPause();
+		view.toggleUnPause();
+	}
+
+	@Override
+	public void restartGame() {
+		togglePause();
+		view.restartGame();
+		
+		ParserController parserController = new ParserController();
+		Game initialGame = parserController.loadforPlaying(new File(getGame().getInitialGameFile()));
+		setGame(initialGame);
+		initialize(0);
+		
+		Object[] args = {"setUpHUDScreen", null};
+		setChanged();
+		notifyObservers(Arrays.asList(args));
+	}
+
+	public void updateCamera() {
+		if (model.getCurrentLevel().getMainCharacter() != null) {
+			if (model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))) {
 				view.changeCamera(model.getCurrentLevel().getMainCharacter().getX(), 0);
-			}else{
+			} else {
 				view.changeCamera(0, model.getCurrentLevel().getMainCharacter().getY());
 			}
 		}
 	}
-
-	@Override
-	public void preview() {
-		// TODO Auto-generated method stub
-
+	
+	public void leave() {
+		Object[] args = {"goToSplash", null};
+		setChanged();
+		notifyObservers(Arrays.asList(args));
+		
 	}
 
-	@Override
-	public void play() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * Updates attributes
-	 */
-	public void updateAttribute() {
-		model.updateAttribute();
-	}
-
+	
 }

@@ -1,9 +1,6 @@
 package gui.view;
 
 import java.util.List;
-
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingElement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -17,6 +14,7 @@ import javafx.scene.layout.Priority;
 
 /**
  * Abstract class to implement different types of ComboBoxes.
+ * 
  * @author AnnieTang
  */
 
@@ -29,30 +27,25 @@ public abstract class ComboBoxParent extends EditingElementParent {
 	private static final int BUTTON_WIDTH = 40;
 	private String promptText;
 	private ObservableList<String> options;
-	private List<String> optionsList;
 	private ComboBox<String> comboBox;
 	private Button comboButton;
-	private String paletteSource;
 	private String labelText;
-	private IEditableGameElement myEditableElement;
-	
+	private HBox hbox;
+
 	public ComboBoxParent(String promptText) {
 		super(GO);
 		this.promptText = promptText;
 		this.labelText = null;
-		this.myEditableElement = null;
 		this.comboButton = getButton();
+		hbox = new HBox(HBOX_SPACING);
 	}
-	
+
 	/**
 	 * Creates ComboBox Node.
 	 */
 	@Override
-	public Node createNode(){
-		HBox hbox = new HBox(HBOX_SPACING);
-		options = FXCollections.observableArrayList(
-			        getOptionsList()
-			    );
+	public Node createNode() {
+		options = FXCollections.observableArrayList(getOptionsList());
 		addLabel(hbox);
 		comboBox = new ComboBox<>(options);
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
@@ -66,7 +59,7 @@ public abstract class ComboBoxParent extends EditingElementParent {
 		hbox.setAlignment(Pos.CENTER_LEFT);
 		return hbox;
 	}
-	
+
 	private void addLabel(HBox container) {
 		if (labelText != null) {
 			Label label = new Label(labelText);
@@ -74,83 +67,88 @@ public abstract class ComboBoxParent extends EditingElementParent {
 			container.getChildren().add(label);
 		}
 	}
-	
+
 	/**
 	 * Sets action when button is pressed.
 	 */
 	public abstract void setButtonAction();
-	
+
 	/**
 	 * Creates custom cell factory for ComboBox
+	 * 
 	 * @author AnnieTang
 	 */
 	private class MyCustomCell extends ListCell<String> {
-        @Override 
-    	protected void updateItem(String item, boolean empty) {
-        super.updateItem(item, empty);
-        if (item == null || empty) {
-            setGraphic(null);
-        } else {
-       	 	HBox hbox = new HBox();
-       	 	//Label lbl = new Label(item);
-       	 	hbox.getChildren().addAll(getNodeForBox(item));//,lbl);
-            setGraphic(hbox);
-        }
-       }
-    }
-	
+		@Override
+		protected void updateItem(String item, boolean empty) {
+			super.updateItem(item, empty);
+			if (item == null || empty) {
+				setGraphic(null);
+			} else {
+				HBox hbox = new HBox();
+				hbox.getChildren().addAll(getNodeForBox(item));
+				setGraphic(hbox);
+			}
+		}
+	}
+
 	/**
 	 * Sets icon for ComboBox
+	 * 
 	 * @param item
 	 * @return
 	 */
 	protected abstract Node getNodeForBox(String item);
-	
+
 	/**
 	 * Updates Node whenever new information or data is available.
 	 */
 	public void updateNode() {
-		ObservableList<String> newOptions = FXCollections.observableArrayList(
-		        getOptionsList()
-		    );
+		ObservableList<String> newOptions = FXCollections.observableArrayList(getOptionsList());
 		comboBox.setItems(newOptions);
-	}	
-	
+	}
+
 	/**
 	 * Returns list of items in the ComboBox.
+	 * 
 	 * @return
 	 */
 	protected abstract List<String> getOptionsList();
-	
+
 	/**
 	 * Gets the label text for this combobox.
+	 * 
 	 * @return label text.
 	 */
 	protected String getLabelText() {
 		return labelText;
 	}
-	
+
 	/**
 	 * Sets the label text for this combobox.
-	 * @param label: label to use.
+	 * 
+	 * @param label:
+	 *            label to use.
 	 */
 	protected void setLabelText(String label) {
 		labelText = label;
 	}
-	
+
 	/**
 	 * Gets the GO button for this combobox.
+	 * 
 	 * @return GO button.
 	 */
 	protected Button getComboButton() {
 		return comboButton;
 	}
-	
+
 	/**
 	 * Gets the combobox.
+	 * 
 	 * @return combobox.
 	 */
-	public ComboBox<String> getComboBox() {
+	protected ComboBox<String> getComboBox() {
 		return comboBox;
 	}
 }

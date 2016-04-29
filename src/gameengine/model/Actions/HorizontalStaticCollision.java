@@ -1,27 +1,24 @@
 package gameengine.model.Actions;
 
-
-import gameengine.model.IPlayActor;
-import gameengine.model.Actions.Action;
+import gameengine.model.Actor;
 
 /**
- * This Action represents an static sideways collision between Actors
- * Actor will not bounce off, merely lose its velocity
+ * This Action represents an static sideways collision between Actors Actor will
+ * not bounce off, merely lose its velocity
  * 
  * @author justinbergkamp
  *
  */
-public class HorizontalStaticCollision extends Action{
 
-	public HorizontalStaticCollision(IPlayActor actor) {
+public class HorizontalStaticCollision extends ActorAction{
+
+	public HorizontalStaticCollision(Actor actor) {
 		super(actor);
 	}
 
-	
 	@Override
 	public void perform() {
 		getMyActor().getPhysicsEngine().staticHorizontalCollision(getMyActor());
 	}
 
 }
-

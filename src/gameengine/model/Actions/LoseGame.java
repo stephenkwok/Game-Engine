@@ -2,22 +2,28 @@ package gameengine.model.Actions;
 
 import gameengine.model.Actions.Action;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 import gameengine.model.Actor;
+import gameengine.model.IGameElement;
+import gameengine.model.IPlayActor;
 import gameengine.model.PhysicsEngine;
 
 public class LoseGame extends Action {
 	private Actor assignedActor;
-	
-	public LoseGame(Actor assignedActor) {
-		super(assignedActor);
+
+	public LoseGame(IGameElement assignedElement) {
+		super(assignedElement);
 	}
 
 	@Override
 	public void perform() {
-		getMyActor().changed();
-        ((Observable) getMyActor()).notifyObservers("endGame");		
+		getGameElement().changed();
+		ArrayList<String> myList = new ArrayList<String>();
+		myList.add("endGame");
+		getGameElement().changed();
+        ((Observable) getGameElement()).notifyObservers(myList);
 	}
 
 	public Actor getAssignedActor() {

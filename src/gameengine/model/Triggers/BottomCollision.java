@@ -1,24 +1,27 @@
 package gameengine.model.Triggers;
 
-import gameengine.model.IPlayActor;
-import gameengine.model.ITrigger;
+import gameengine.model.Actor;
 
 public class BottomCollision extends CollisionTrigger {
 
-    private static final String COLLISION_TYPE = "BottomCollision";
+	private static final String COLLISION_TYPE = "BottomCollision";
 
-    public BottomCollision(IPlayActor actor1, IPlayActor actor2) {
-        super(actor1, actor2);
-    }
+	public BottomCollision(Actor actor1, Actor actor2, Boolean oneTime) {
+		super(actor1, actor2, oneTime);
+	}
+	
+	public BottomCollision(Actor actor1, Actor actor2) {
+		super(actor1, actor2, false);
+	}
 
-    @Override
-    public boolean evaluate(ITrigger otherTrigger) {
-        BottomCollision otherCollision = (BottomCollision) otherTrigger;
-        return this.equals(otherCollision);
-    }
+	@Override
+	public boolean evaluateCollision(ITrigger otherTrigger) {
+		BottomCollision otherCollision = (BottomCollision) otherTrigger;
+		return this.equals(otherCollision);
+	}
 
-    @Override
-    public String getMyKey() {
-        return COLLISION_TYPE;
-    }
+	@Override
+	public String getMyKey() {
+		return COLLISION_TYPE;
+	}
 }

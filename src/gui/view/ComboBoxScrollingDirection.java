@@ -8,6 +8,7 @@ import gameengine.controller.Level;
 
 /**
  * ComboBox for level's scrolling direction.
+ * 
  * @author amyzhao
  *
  */
@@ -17,22 +18,30 @@ public class ComboBoxScrollingDirection extends ComboBoxTextCell {
 	private List<String> myOptions;
 
 	/**
-	 * Constructs a combobox using the resource file's available choices for scrolling directions with a label and a "GO" button.
-	 * @param myResources: resource bundle containing possible scrolling directions.
-	 * @param promptText: text for selection prompt.
-	 * @param labelText: text for label.
+	 * Constructs a combobox using the resource file's available choices for
+	 * scrolling directions with a label and a "GO" button.
+	 * 
+	 * @param myResources:
+	 *            resource bundle containing possible scrolling directions.
+	 * @param promptText:
+	 *            text for selection prompt.
+	 * @param labelText:
+	 *            text for label.
 	 */
 	public ComboBoxScrollingDirection(ResourceBundle myResources, String promptText, String labelText) {
 		super(promptText, labelText);
 		myOptions = Arrays.asList(myResources.getString(SCROLLING_DIRECTION_OPTIONS).split(DELIMITER));
+		this.getComboButton().setWrapText(true);
+		
 	}
 
 	/**
-	 * Sets the action of the "GO" button to update the level's scrolling direction.
+	 * Sets the action of the "GO" button to update the level's scrolling
+	 * direction.
 	 */
 	@Override
 	public void setButtonAction() {
-		getComboButton().setOnAction(event->{
+		getComboButton().setOnAction(event -> {
 			((Level) getEditableElement()).setMyScrollingDirection(getComboBox().getValue());
 			setChanged();
 			notifyObservers();

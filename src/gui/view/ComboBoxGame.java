@@ -2,6 +2,7 @@ package gui.view;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,16 +24,34 @@ public class ComboBoxGame extends ComboBoxImageCell {
 	public ComboBoxGame(String promptText, String imageResource) {
 		super(promptText, imageResource, STANDARD_IMAGE_HEIGHT);
 		this.myGames = new HashMap<>();
-		getGames();
-		fillImageNames();
-		fillImageMap();
+		File directory = new File("gamefiles");
+		if (directory.listFiles() == null || directory.listFiles().length < 1) {
+			setChanged();
+			Object[] args = {"alert", "empty"};
+			notifyObservers(Arrays.asList(args));
+		}
+		else {
+			getGames();
+			if (myGames.keySet().size() != 0) {
+				fillImageNames();
+				fillImageMap();
+			}
+		}
 	}
 
 	@Override
 	public void setButtonAction() {
+		this.getComboBox().setOnMouseClicked(event -> {
+			if (getComboBox().getItems().size() < 1) {
+				setChanged();
+				Object[] args = {"alert", "empty"};
+				notifyObservers(Arrays.asList(args));
+			}
+		});
 		getComboButton().setOnAction(event -> {
 			this.setChanged();
-			this.notifyObservers(myGames.get(getComboBox().getValue()));
+			Object[] methodArg = {"go", myGames.get(getComboBox().getValue())};
+			this.notifyObservers(Arrays.asList(methodArg));
 		});
 		
 	}
@@ -44,11 +63,9 @@ public class ComboBoxGame extends ComboBoxImageCell {
 			if(!gameFile.isDirectory()) {
 				ParserController parserController = new ParserController();
 				Game game = parserController.loadforPlaying(gameFile);
-				myGames.put(gameFile.getPath(),game);
+				if (game != null)
+					myGames.put(gameFile.getPath(),game);
 			}
-		}
-		if(myGames.keySet().isEmpty()) {
-			
 		}
 	}
 	

@@ -1,13 +1,27 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
+import gameengine.model.IGameElement;
+import gameengine.model.IPlayActor;
 
-public abstract class GlidingAction extends Action {
+public abstract class GlidingAction extends ActorAction {
 
-	public GlidingAction(Actor assignedActor) {
-		super(assignedActor);
+	Double glideOffset;
+	
+	public GlidingAction(Actor actor,Double offset) {
+		super(actor);
+		glideOffset = offset;
+	}
+	
+	@Override
+	public Object[] getParameters(){
+		return new Object[]{getMyActor(),glideOffset};
 	}
 
+	public Double getGlideOffset() {
+		return glideOffset;
+	}
+	
 	@Override
 	public abstract void perform();
 

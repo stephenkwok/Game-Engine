@@ -1,18 +1,18 @@
 package gui.view;
 
+import java.util.Arrays;
 
 public class ButtonEdit extends ButtonParent{
 
 	public ButtonEdit(String buttonText, String imageName) {
 		super(buttonText, imageName);
+		setName(this.getClass().getSimpleName());
+		setClick();
 	}
 
 	@Override
-	protected void setButtonAction() {
-		getButton().setOnAction(e -> {
-			setChanged();
-			notifyObservers("ButtonEdit");
-		});
+	protected  void setButtonAction(){
+		
 	}
 
 }

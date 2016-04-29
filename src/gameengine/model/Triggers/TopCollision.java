@@ -3,25 +3,28 @@ package gameengine.model.Triggers;
 import gameengine.model.Actor;
 import gameengine.model.IActor;
 import gameengine.model.IPlayActor;
-import gameengine.model.ITrigger;
 
-public class TopCollision extends CollisionTrigger{
+public class TopCollision extends CollisionTrigger {
 
-    private static final String COLLISION_TYPE = "TopTrigger";
+	private static final String COLLISION_TYPE = "TopCollision";
 
-    public TopCollision(IPlayActor actor1, IPlayActor actor2) {
-        super(actor1, actor2);
-    }
+	public TopCollision(Actor actor1, Actor actor2, Boolean oneTime) {
+		super(actor1, actor2, oneTime);
+	}
+	
+	public TopCollision(Actor actor1, Actor actor2) {
+		super(actor1, actor2, false);
+	}
 
-    @Override
-    public boolean evaluate(ITrigger otherTrigger) {
-        TopCollision otherCollision = (TopCollision) otherTrigger;
-        return this.equals(otherCollision);
-    }
+	@Override
+	public boolean evaluateCollision(ITrigger otherTrigger) {
+		TopCollision otherCollision = (TopCollision) otherTrigger;
+		return this.equals(otherCollision);
+	}
 
-    @Override
-    public String getMyKey() {
-        return COLLISION_TYPE;
-    }
+	@Override
+	public String getMyKey() {
+		return COLLISION_TYPE;
+	}
 
 }

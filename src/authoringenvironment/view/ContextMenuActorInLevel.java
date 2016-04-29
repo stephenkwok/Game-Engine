@@ -15,13 +15,13 @@ public class ContextMenuActorInLevel extends ContextMenu {
 	private static final String EDIT_SIZE = "Edit actor size";
 	private ImageviewActorIcon curIcon;
 	private LevelPreview myLevelPreview;
-	
+
 	public ContextMenuActorInLevel(LevelPreview levelPreview) {
 		myLevelPreview = levelPreview;
 		curIcon = null;
 		initMenuItems();
 	}
-	
+
 	private void initMenuItems() {
 		MenuItem delete = new MenuItem(DELETE);
 		delete.setOnAction(new EventHandler<ActionEvent>() {
@@ -33,12 +33,12 @@ public class ContextMenuActorInLevel extends ContextMenu {
 					myLevelPreview.removeActorFromLevel(curIcon);
 				}
 			}
-			
+
 		});
-		
+
 		getItems().add(delete);
 	}
-	
+
 	public void setIcon(ImageviewActorIcon icon) {
 		curIcon = icon;
 	}

@@ -4,13 +4,14 @@ import gameengine.model.Actor;
 
 public class GlideForward extends GlidingAction {
 
-	public GlideForward(Actor assignedActor) {
-		super(assignedActor);
+	public GlideForward(Actor actor, Double offset) {
+		super(actor, offset);
 	}
 
 	@Override
 	public void perform() {
-    	getMyActor().getPhysicsEngine().glideForward(getMyActor());			
+    	getMyActor().getPhysicsEngine().glideForward(getMyActor(),this.getGlideOffset());			
+
 	}
 
 }
