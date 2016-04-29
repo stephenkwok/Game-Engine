@@ -95,16 +95,23 @@ public class Tester extends Application {
         enemy2.setX(400);
         System.out.println(enemy2.getHeading());
         TickTrigger trigger = new TickTrigger();
-        Action moveForward = new GlideForward((Actor)enemy2, 1.0);
+        Action moveForward = new GlideForward((Actor)enemy2, 2.0);
         Rule movingForward = new Rule(trigger, moveForward);
         enemy2.addRule(movingForward);
         
-
+        //movng back and forth
         SideCollision triggerenemy = new SideCollision((Actor)enemy2,(Actor)blocky);
         Action actionenemy2 = new ReverseHeading((Actor)enemy2);
         Rule ruleenemy = new Rule(triggerenemy,actionenemy2);
         enemy2.addRule(ruleenemy);
 
+        //killing
+        TopCollision kill4 = new TopCollision((Actor)enemy2, (Actor)actor1);
+        Action killAction4 = new Destroy((Actor) enemy2);
+        Rule killRule4 = new Rule(kill4, killAction4);
+        ((Actor) enemy2).addRule(killRule4);
+        
+        
         //moves it left
 //        Action actionCollide = new MoveLeft((Actor)enemy2);
 //        Rule ruleCollide = new Rule(triggerenemy,actionCollide);
@@ -243,17 +250,12 @@ public class Tester extends Application {
         level1.addActor((IAuthoringActor) actor4);
         
         
+
         Level level2 = new Level();
         level2.setMyBackgroundImgName("vgnwpGb.png");
         levels.add(level2);
         level2.addActor(actor1);
 
-        Level level3 = new Level();
-        level2.setMyBackgroundImgName("vgnwpGb.png");
-
-        levels.add(level3);
-        level3.addActor(actor1);
-        
         int yposition = 200;
         int xposition = 150;
         for(int i=1; i<=7; i++){
@@ -279,23 +281,32 @@ public class Tester extends Application {
         
         int yposition2 = 100;
         int xposition2 = 600;
-        for(int j=1; j<=5; j++){
+        for(int j=1; j<=1; j++){
             Actor block2 = new Actor();
             block2.setName("salad");
             block2.setID(102);
-            block2.setImageViewName("salad2.png");
+            block2.setImageViewName("Next_Level_Jan2.png");
             block2.setX(j*50+xposition2);
             block2.setY(j*50+yposition2);
             BottomCollision b3 = new BottomCollision((Actor)actor1, block2);
             Action baction3 = new VerticalBounceCollision((Actor)actor1);
             Rule brule3 = new Rule(b3, baction3);
 
+
             TopCollision b4 = new TopCollision((Actor)actor1, block2);
             Action baction4 = new VerticalBounceCollision((Actor)actor1);
             Rule brule4 = new Rule(b4, baction4);
-
-            Rule ruleNextLevel2 = new Rule(b4, actionNextLevel);
-            //actor1.addRule(ruleNextLevel2);
+//
+//
+////          Level level3 = new Level();
+////          level3.setMyBackgroundImgName("default_background.png");
+////          levels.add(level3);
+////          level3.addActor(actor1);
+          
+            Action actionNextLevel2 = new NextLevel((IPlayActor) actor1);
+            Rule ruleNextLevel2 = new Rule(b4, actionNextLevel2);
+            //ruleNextLevel2.setID(1);
+            actor1.addRule(ruleNextLevel2);
             actor1.addRule(brule3);
             actor1.addRule(brule4);
             level2.addActor((IAuthoringActor) block2);
@@ -348,7 +359,7 @@ public class Tester extends Application {
             floor.setName("floor");
             floor.setID(5);
             floor.setImageViewName("square.png");
-            //floor.addState(ActorState.INVISIBLE);
+//            floor.addState(ActorState.INVISIBLE);
             floor.setX(i*50+i);
             floor.setY(500-floor.getBounds().getHeight());
             BottomCollision b = new BottomCollision((Actor)actor1, floor);
@@ -377,13 +388,12 @@ public class Tester extends Application {
 
             level1.addActor((IAuthoringActor)floor);
             level2.addActor((IAuthoringActor) floor);
-            level3.addActor((IAuthoringActor)floor);
+            //level3.addActor((IAuthoringActor)floor);
         }
 
         Group group = new Group();
         Scene scene = new Scene(group);
-
-        Game model = new Game(info,levels);
+        Game model = new Game(info, levels);
         model.setHUDInfoFile("a.txt");
         
         CreatorController c = new CreatorController(model);
