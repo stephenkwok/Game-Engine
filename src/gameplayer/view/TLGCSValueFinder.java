@@ -1,9 +1,9 @@
 package gameplayer.view;
- 
+
 import gameengine.controller.Game;
 import gameengine.model.AttributeType;
 import voogasalad.util.hud.source.*;
- 
+
 public class TLGCSValueFinder implements IValueFinder {
 	private Game data; //for other projects, your data will be a different class
 	
@@ -42,4 +42,3 @@ public class TLGCSValueFinder implements IValueFinder {
 		
 	}
 }
-
