@@ -46,6 +46,10 @@
           <string>michael jr</string>
           <int>75</int>
         </entry>
+        <entry>
+          <string>miguel</string>
+          <int>1235</int>
+        </entry>
       </tree-map>
     </entry>
   </myScores>
