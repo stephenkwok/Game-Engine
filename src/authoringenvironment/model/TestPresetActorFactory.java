@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 
 /**
  * This classes tests the Preset Actor Factory
@@ -15,7 +16,7 @@ import gameengine.model.Actor;
 
 public class TestPresetActorFactory {
 
-	private static final String RESOURCE_BUNDLE_KEY = "presetActorsFactoryFlappyBird";
+	private static final String RESOURCE_BUNDLE_KEY = "presetActorsFactory";
 	
 	public static void main(String[] args) throws NoSuchMethodException, SecurityException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException {		
@@ -23,6 +24,7 @@ public class TestPresetActorFactory {
 		List<Actor> actors = PAF.getPresetActors();
 		System.out.println(actors);
 		for (Actor actor : actors) {
+			System.out.println(actor.checkState(ActorState.INVISIBLE));
 		}
 	}
 
