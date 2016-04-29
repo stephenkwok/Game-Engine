@@ -220,6 +220,10 @@ public class GameController extends Observable implements Observer, IGameControl
 		Game initialGame = parserController.loadforPlaying(new File(getGame().getInitialGameFile()));
 		setGame(initialGame);
 		initialize(0);
+		
+		Object[] args = {"setUpHUDScreen", null};
+		setChanged();
+		notifyObservers(Arrays.asList(args));
 	}
 
 	public void updateCamera() {
