@@ -1,12 +1,12 @@
-package authoringenvironment.view;
+package authoringenvironment.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.ActorEditingEnvironment;
 import authoringenvironment.controller.Controller;
-import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
 import gameengine.model.IRule;
 import gameengine.model.Rule;

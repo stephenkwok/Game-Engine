@@ -1,4 +1,4 @@
-package authoringenvironment.view;
+package authoringenvironment.model;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -9,8 +9,6 @@ import java.util.ResourceBundle;
 import java.util.Map;
 
 import authoringenvironment.controller.Controller;
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IAuthoringBehavior;
 import authoringenvironment.view.behaviors.CollisionBehavior;
 import gameengine.model.IRule;
 

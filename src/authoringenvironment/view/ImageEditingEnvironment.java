@@ -1,4 +1,4 @@
-package authoringenvironment.model;
+package authoringenvironment.view;
 
 import java.util.Observable;
 import java.util.Observer;

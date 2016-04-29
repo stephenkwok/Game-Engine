@@ -3,10 +3,10 @@ package authoringenvironment.view.behaviors;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.ActionFactory;
+import authoringenvironment.model.ActorRule;
 import authoringenvironment.model.IAuthoringBehavior;
-import authoringenvironment.view.ActionFactory;
-import authoringenvironment.view.ActorRule;
-import authoringenvironment.view.TriggerFactory;
+import authoringenvironment.model.TriggerFactory;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
 import gameengine.model.Triggers.ITrigger;

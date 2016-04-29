@@ -119,7 +119,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	/**
 	 * Will stop the animation timeline.
 	 */
-	private void endGame(boolean win) {
+	public void endGame(boolean win) {
 		model.stopGame();
 		view.togglePause();
 		if (myMode == PlayType.PLAY) {

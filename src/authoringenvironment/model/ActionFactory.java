@@ -1,4 +1,4 @@
-package authoringenvironment.view;
+package authoringenvironment.model;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -109,7 +109,7 @@ public class ActionFactory {
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> clazz = Class.forName(className);
-		Constructor<?> constructor = clazz.getConstructor(IGameElement.class, AttributeType.class, Integer.class);
+		Constructor<?> constructor = clazz.getConstructor(IGameElement.class, AttributeType.class, int.class);
 		return (IAction) constructor.newInstance((IGameElement) arguments.get(ZERO), arguments.get(ONE), arguments.get(TWO));
 	}
 	

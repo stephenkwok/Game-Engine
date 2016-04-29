@@ -1,4 +1,4 @@
-package authoringenvironment.view;
+package authoringenvironment.model;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -11,7 +11,6 @@ import java.util.Set;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;

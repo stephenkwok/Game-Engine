@@ -22,7 +22,7 @@ public abstract class CollisionTrigger extends ITrigger {
 	
 	@Override
 	public Object[] getParameters(){
-		return new Object[]{myMainActor,myCollisionActor};
+		return new Object[]{myMainActor,myCollisionActor, oneTime};
 	}
 	
 	@Override

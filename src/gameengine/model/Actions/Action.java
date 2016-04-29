@@ -49,5 +49,13 @@ public abstract class Action implements IAction {
     public void setMyActor(IPlayActor actor) {
     	myGameElement = actor;
     }
+    
+    @Override
+    public boolean equals(Object other){
+    	System.out.println("this "+this.getClass());
+    	System.out.print("other: ");
+    	System.out.println(other.getClass());
+    	return this.getClass().equals(other.getClass());
+    }
 
 }

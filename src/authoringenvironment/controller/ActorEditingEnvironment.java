@@ -1,8 +1,12 @@
-package authoringenvironment.view;
+package authoringenvironment.controller;
 
 import java.util.*;
-import authoringenvironment.controller.Controller;
+
 import authoringenvironment.model.*;
+import authoringenvironment.view.ActorImageViewer;
+import authoringenvironment.view.GUILibrary;
+import authoringenvironment.view.ImageviewActorIcon;
+import authoringenvironment.view.TabFields;
 import gameengine.model.Actor;
 import gameengine.model.IRule;
 import javafx.geometry.*;
@@ -217,7 +221,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		myController.updateActors((Actor) arg);
 	}
 	
-	protected boolean shouldApplyPhysics(){
+	public boolean shouldApplyPhysics(){
 		if(myActor.getRules().get(TICK_KEY)!=null){
 			for(IRule rule: myActor.getRules().get(TICK_KEY)){
 				if(rule.getMyAction().getClass().getSimpleName().equals(APPLY_PHYSICS)){

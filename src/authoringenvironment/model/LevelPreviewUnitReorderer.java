@@ -1,4 +1,4 @@
-package authoringenvironment.view;
+package authoringenvironment.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.controller.GUIMainScreen;
+import authoringenvironment.view.PreviewUnitWithEditable;
+import authoringenvironment.view.PreviewUnitWithLevel;
 import gameengine.controller.Level;
 import gui.view.PopUpParent;
 import gui.view.PopUpSimpleErrorMessage;

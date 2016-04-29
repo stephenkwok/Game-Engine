@@ -1,4 +1,4 @@
-package authoringenvironment.view;
+package authoringenvironment.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,10 +16,12 @@ import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
-import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.view.ImageviewActorIcon;
+import authoringenvironment.view.LevelInspector;
+import authoringenvironment.view.LevelPreview;
 import gamedata.controller.CreatorController;
 import gamedata.controller.ParserController;
 import gameengine.controller.Game;
@@ -109,7 +111,6 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 				}
 			}
 			if (level.getMainCharacters().size() == 0) {
-				System.out.println("size" + level.getActors().size());
 				level.getActors().get(0).addState(ActorState.MAIN);
 			}
 		}
@@ -149,7 +150,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
         myPreviewFile.delete();
         
         stage.setOnCloseRequest(e -> {
-        	controller.winGame();
+        	controller.endGame(false);
         });
         
         
@@ -264,9 +265,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 					val.add(actor);
 					availableActors.put(icon.getRefActor(), val);
 					myLevel.addActor(actor);
-					if (myController.getActorGroups().containsKey(actor.getID())) {
-						groupActors(actor);
-					}
+
 					myInspector.getGarbageCollector().updateGarbageCollectingActors(myLevel.getActors());
 					//myLevel.addActor(icon.getRefActor());
 					myLevelPreview.addActorToScene(actor);
@@ -367,26 +366,5 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	
 	public Set<IAuthoringActor> getAvailableActors() {
 		return availableActors.keySet();
-	}
-	
-	public void groupActors(IAuthoringActor actor) {
-		System.out.println("Grouping");
-		ActorGroup actorList;
-		if (myController.getActorGroups().containsKey(actor.getID())) {
-			actorList = myController.getActorGroups().get(actor.getID());
-		} else {
-			actorList = new ActorGroup(actor.getName(), actor.getImageView(), new ArrayList<>());
-		}
-		for (IAuthoringActor key: myController.getActorMap().keySet()) {
-			List<IAuthoringActor> actorsForKey = myController.getActorMap().get(key);
-			for (int i = 0; i < actorsForKey.size(); i++) {
-				if (!actorList.getGroup().contains(actorsForKey.get(i))) {
-					actorList.addActorToGroup(actorsForKey.get(i));
-				}
-			}
-		}
-		myController.getActorGroups().put(actor.getID(), actorList);
-		System.out.println(myController.getActorGroups().get(actor.getID()).getGroup().size());
-		//System.out.println(myController.getActorGroups().get(actor.getID()));
 	}
 }

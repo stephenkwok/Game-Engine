@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import authoringenvironment.controller.LevelEditingEnvironment;
 import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.view.LevelEditingEnvironment;
 import gui.view.ButtonFileChooserBackgroundImage;
 import gui.view.CheckBoxesGarbageCollection;
 import gui.view.IGUI;
