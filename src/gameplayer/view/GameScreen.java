@@ -45,7 +45,7 @@ public class GameScreen extends Observable implements IGameScreen {
 	private double myEndVertical;
 
 	private ResourceBundle myResources;
-	private static final String GAME_RESOURCE = "gameActions";
+	private static final String GAME_RESOURCE = "gameGUI";
 
 	public GameScreen(Camera camera) {
 		setMySubgroup(new Group());
@@ -114,7 +114,7 @@ public class GameScreen extends Observable implements IGameScreen {
 	public void handleScreenEvent(Event e) {
 		ITrigger trigger = null;
 		if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
-			trigger = handleClick(((MouseEvent) e).getSceneX(), ((MouseEvent) e).getSceneY());
+			trigger = handleClick(((MouseEvent) e).getSceneX() + myCamera.getTranslateX(), ((MouseEvent) e).getSceneY() + myCamera.getTranslateY());
 		} else if (e.getEventType() == KeyEvent.KEY_PRESSED) {
 			trigger = handleKeyPress(((KeyEvent) e).getCode());
 		}
@@ -167,8 +167,16 @@ public class GameScreen extends Observable implements IGameScreen {
 
 	}
 
-	public void terminateGame() {
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, myResources.getString("EndMessage"), ButtonType.YES,
+	public void terminateGame(boolean win) {
+		String gameStatus = "";
+		if (win) {
+			gameStatus = "win";
+		}
+		else {
+			gameStatus = "lose";
+		}
+		
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, myResources.getString(gameStatus + "EndMessage"), ButtonType.YES,
 				ButtonType.NO);
 		alert.setOnCloseRequest( e -> {
 			if (alert.getResult() == ButtonType.YES) {
@@ -228,7 +236,7 @@ public class GameScreen extends Observable implements IGameScreen {
 	}
 
 	@Override
-	public void pauseGame() {
+	public void togglePause() {
 		getScene().setDisable(true);
 		
 	}
