@@ -12,6 +12,7 @@ import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IAuthoringBehavior;
 import gameengine.model.Actor;
+import gameengine.model.IRule;
 
 /**
  * Factory to create visual representations of triggers and actions that go into
@@ -45,12 +46,12 @@ public class ActorRuleFactory {
 	 * @param value
 	 * @return
 	 */
-	public IAuthoringBehavior getAuthoringRule(String behaviorType) {
+	public IAuthoringBehavior getAuthoringRule(String behaviorType, IRule rule) {
 		String className = PACKAGE + myResources.getString(behaviorType + CLASS);
 		String elementType = myResources.getString(behaviorType + ELEMENT);
 		try {
-			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class);
-			return (IAuthoringBehavior) createMethod.invoke(this, behaviorType, className);
+			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class, IRule.class);
+			return (IAuthoringBehavior) createMethod.invoke(this, behaviorType, className, rule);
 		} catch (NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -78,14 +79,14 @@ public class ActorRuleFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private IAuthoringBehavior createSelectActorBehavior(String behaviorType, String className)
+	private IAuthoringBehavior createSelectActorBehavior(String behaviorType, String className, IRule rule)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 			Class<?> clazz = Class.forName(className);
-			Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, ResourceBundle.class, 
+			Constructor<?> constructor = clazz.getConstructor(IRule.class, ActorRule.class, String.class, ResourceBundle.class, 
 					IAuthoringActor.class, List.class);
 			List<IAuthoringActor> myActors = new ArrayList<>(myController.getActorMap().keySet());
-			return (IAuthoringBehavior) constructor.newInstance(myActorRule, behaviorType, myResources,myActor, 
+			return (IAuthoringBehavior) constructor.newInstance(rule, myActorRule, behaviorType, myResources,myActor, 
 					myActors);
 	}
 
@@ -103,20 +104,32 @@ public class ActorRuleFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private IAuthoringBehavior createStandardActorBehavior(String behaviorType, String className)
+	private IAuthoringBehavior createStandardActorBehavior(String behaviorType, String className, IRule rule)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Class<?> clazz = Class.forName(className);
-		Constructor<?> constructor = clazz.getConstructor(ActorRule.class, IAuthoringActor.class, String.class,
-				ResourceBundle.class);
-		return (IAuthoringBehavior) constructor.newInstance(myActorRule, myActor, behaviorType, myResources);
+		try{
+			Class<?> clazz = Class.forName(className);
+			Constructor<?> constructor = clazz.getConstructor(ActorRule.class, IAuthoringActor.class, String.class,
+					ResourceBundle.class);
+			return (IAuthoringBehavior) constructor.newInstance(myActorRule, myActor, behaviorType, myResources);
+		}catch(Exception e){
+			Class<?> clazz = Class.forName(className);
+			Constructor<?> constructor = clazz.getConstructor(IRule.class, ActorRule.class, IAuthoringActor.class, String.class, ResourceBundle.class);
+			return (IAuthoringBehavior) constructor.newInstance(rule, myActorRule, myActor, behaviorType, myResources);
+		}
 	}
 
-	private IAuthoringBehavior createStandardBehavior(String behaviorType, String className)
+	private IAuthoringBehavior createStandardBehavior(String behaviorType, String className, IRule rule)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Class<?> clazz = Class.forName(className);
-		Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, ResourceBundle.class);
-		return (IAuthoringBehavior) constructor.newInstance(myActorRule, behaviorType, myResources);
+		try{
+			Class<?> clazz = Class.forName(className);
+			Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, ResourceBundle.class);
+			return (IAuthoringBehavior) constructor.newInstance(myActorRule, behaviorType, myResources);
+		}catch(Exception e){
+			Class<?> clazz = Class.forName(className);
+			Constructor<?> constructor = clazz.getConstructor(IRule.class, ActorRule.class, String.class, ResourceBundle.class);
+			return (IAuthoringBehavior) constructor.newInstance(rule, myActorRule, behaviorType, myResources);
+		}
 	}
 }

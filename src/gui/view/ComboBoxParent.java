@@ -39,7 +39,7 @@ public abstract class ComboBoxParent extends EditingElementParent {
 		this.comboButton = getButton();
 		hbox = new HBox(HBOX_SPACING);
 	}
-
+	
 	/**
 	 * Creates ComboBox Node.
 	 */
