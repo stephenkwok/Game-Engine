@@ -133,9 +133,9 @@ public class Game extends Observable implements Observer, IGame {
 		initCurrentLevel();
 		initCurrentActors();
 		toggleUnPause();
-		if (soundEngine != null) {
-			soundEngine.setSoundtrack(levels.get(info.getMyCurrentLevelNum()).getSoundtrack());
-		}
+//		if (soundEngine != null) {
+//			soundEngine.setSoundtrack(levels.get(info.getMyCurrentLevelNum()).getSoundtrack());
+//		}
 	}
 	
 	public void toggleUnPause() {
