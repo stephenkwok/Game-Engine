@@ -13,6 +13,7 @@ import javafx.scene.control.MenuItem;
 public class ContextMenuActorInLevel extends ContextMenu {
 	private static final String DELETE = "Remove actor";
 	private static final String EDIT_SIZE = "Edit actor size";
+	private static final String GROUP = "Group all actors of this type";
 	private ImageviewActorIcon curIcon;
 	private LevelPreview myLevelPreview;
 
@@ -34,8 +35,15 @@ public class ContextMenuActorInLevel extends ContextMenu {
 			}
 
 		});
-
-		getItems().add(delete);
+		
+		MenuItem groupAll = new MenuItem(GROUP);
+		groupAll.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				myLevelPreview.groupActors(curIcon);
+			}
+		});
+		getItems().addAll(delete, groupAll);
 	}
 
 	public void setIcon(ImageviewActorIcon icon) {

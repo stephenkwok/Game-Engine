@@ -80,6 +80,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private Scene splashScene;
 	private PopUpAuthoringHelpPage helpPage;
 	private ActorCopier myActorCopier;
+	private Map<Integer, List<IAuthoringActor>> myActorGroups;
 
 	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
 	IllegalArgumentException, InvocationTargetException {
@@ -158,6 +159,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * whether the Game to be edited is new or previously created
 	 */
 	public void initializeGeneralComponents() {
+		myActorGroups = new HashMap<>();
 		myRoot = new BorderPane();
 		myActorCopier = new ActorCopier();
 		myScene = new Scene(myRoot, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
@@ -493,6 +495,10 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	public void invoke(String method, Class[] parameterTypes, Object[] parameters) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public Map<Integer, List<IAuthoringActor>> getActorGroups() {
+		return myActorGroups;
 	}
 
 }
