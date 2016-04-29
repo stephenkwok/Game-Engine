@@ -6,21 +6,21 @@ import java.util.Observer;
 
 import authoringenvironment.model.*;
 import authoringenvironment.view.*;
-import gameengine.model.Actor;
-import gameengine.model.Rule;
+import gameengine.model.*;
 import gameengine.model.Actions.ApplyPhysics;
 import gameengine.model.Triggers.ITrigger;
-import javafx.geometry.Pos;
+import javafx.geometry.*;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 
 /**
  * Checkbox object for ApplyPhysics option selection.
  * 
- * @author amyzhao, AnnieTang
+ * @author AnnieTang, amyzhao
  *
  */
 public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEditingElement {
+	private static final int PADDING = 10;
 	private static final Object APPLY_PHYSICS = "ApplyPhysics";
 	private static final int ZERO = 0;
 	private String myPromptText;
@@ -45,6 +45,7 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 	@Override
 	public Node createNode() {
 		CheckBox checkbox = new CheckBox(myPromptText);
+		checkbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
 		checkbox.setPrefWidth(myWidth);
 		checkbox.setAlignment(Pos.CENTER_LEFT);
 		checkbox.setId(myPromptText);

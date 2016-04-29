@@ -3,29 +3,15 @@ package authoringenvironment.view;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
-
 import authoringenvironment.controller.Controller;
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingEnvironment;
-import gameengine.model.Actor;
+import authoringenvironment.model.*;
+import gameengine.model.*;
 import gui.view.CheckBoxApplyPhysics;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.geometry.*;
+import javafx.scene.control.*;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -48,6 +34,8 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final int LEFT_PANE_WIDTH = 350;
 	private static final int FIELD_HEIGHT = 400;
 	private static final String SET_RULE_LABEL = "Set Rules";
+	private static final String APPLY_PHYSICS = "Apply Physics";
+	private static final int APPLY_PHYSICS_WIDTH = 150;
 	private BorderPane myRoot;
 	private GUILibrary library;
 	private TabFields characteristics;
@@ -112,9 +100,8 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		actorFields.getTabs().addAll(actorCharacteristics(), actorAttributes());
 		actorFields.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		actorFields.setPrefHeight(FIELD_HEIGHT);
-		//
-		CheckBoxApplyPhysics checkPhysics = new CheckBoxApplyPhysics("Apply Physics", 100, this);
-		vbox.getChildren().addAll(actorImageViewer.getPane(), actorFields, library.getPane(), checkPhysics.createNode());
+		CheckBoxApplyPhysics checkPhysics = new CheckBoxApplyPhysics(APPLY_PHYSICS, APPLY_PHYSICS_WIDTH, this);
+		vbox.getChildren().addAll(actorImageViewer.getPane(), checkPhysics.createNode(), actorFields, library.getPane());
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
 		myRoot.setLeft(vbox);
 	}
@@ -125,7 +112,6 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		characteristics.updateEditable(myActor);
 		return characteristics.getTab();
 	}
-	//CheckBoxApplyPhysics checkPhysics = new CheckBoxApplyPhysics("Apply Physics", 100, this);
 	
 	private Tab actorAttributes(){
 		attributes = new TabFields(myResources, ACTOR_ATTRIBUTES, ACTOR_ATTRIBUTES_RESOURCE, myActor);
