@@ -362,33 +362,44 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		myImageViewSize = size;
 	}
 
+	/**
+	 * States if the Actor contains a particular state
+	 */
 	@Override
 	public boolean checkState(ActorState state) {
 		return myStates.contains(state);
 	}
 
+	/**
+	 * Adds a state to the Actor
+	 */
 	@Override
 	public void addState(ActorState state) {
 		myStates.add(state);
 	}
 
+	/**
+	 * Removes a state from an Actor
+	 */
 	@Override
 	public void removeState(ActorState state) {
 		myStates.remove(state);
 	}
 
+	/**
+	 * Responds to a notification from an observed Object
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o.getClass().equals(this.getClass())) {
 			setChanged();
 			notifyObservers(arg);
 		}
-		// if(checkState(ActorState.MAIN)){
-		// setChanged();
-		// notifyObservers("updateAttribute");
-		// }
 	}
 
+	/**
+	 * Provides the Actor's ImageView size
+	 */
 	public double getSize() {
 		return myImageViewSize;
 	}
@@ -401,11 +412,17 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		myID = ID;
 	}
 
+	/**
+	 * Sets the Actor's heading
+	 */
 	@Override
 	public void setHeading(double h) {
 		myHeading = h;
 	}
 
+	/**
+	 * Provides the Actor's heading 
+	 */
 	@Override
 	public double getHeading() {
 		return myHeading;
@@ -419,24 +436,36 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		return myID;
 	}
 
+	/**
+	 * Acts accordingly after it receives an AttributeReached Trigger
+	 */
 	@Override
 	public void handleReachedAttribute(AttributeReached trigger) {
 		setChanged();
 		notifyObservers(Arrays.asList(new Object[] { "handleTrigger", trigger }));
 	}
 
+	/**
+	 * Removes an Attribute from an Actor
+	 */
 	@Override
 	public void removeAttribute(Attribute attribute) {
 		myAttributeManager.removeAttribute(attribute);
 
 	}
 
+	/**
+	 * Removes a Rule from an Actor
+	 */
 	@Override
 	public void removeRule(Rule rule) {
 		myRuleManager.removeRule(rule);
 
 	}
 
+	/**
+	 * Sets an Actor's direction
+	 */
 	public void setDirection() {
 		if (getHeading() == 0)
 			myImageView.setScaleX(1);
@@ -445,18 +474,31 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		}
 	}
 
+	/**
+	 * Adds an Image to the Actor's Sprite
+	 */
 	public void addSpriteImage(String newImage) {
 		mySprite.addImage(newImage);
 	}
 	
+	/**
+	 * Provides the Actor's Sprite
+	 */
 	public Sprite getSprite(){
 		return this.mySprite;
 	}
 	
+	/**
+	 * Sets the Actor's Sprite
+	 * @param sprite	The desired Actor Sprite
+	 */
 	public void setSprite(Sprite sprite){
 		this.mySprite = sprite;
 	}
 
+	/**
+	 * Moves the Actor's Sprite to its next image
+	 */
     public void nextImage(){
         myImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getNextImage())));
     }
@@ -529,16 +571,25 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		return myScaleY;
 	}
 	
+	/**
+	 * Provides the Actor's next values
+	 */
 	@Override
     public NextValues getNextValues() {
 		return myNextValues;
 	}
 
+	/**
+	 * Sets the Actor's next values
+	 */
 	@Override
 	public void setNextValues(NextValues myNextValues) {
 		this.myNextValues = myNextValues;
 	}
 
+	/**
+	 * Restores the Actor's ImageView
+	 */
 	@Override
 	public void restoreImageView() {
 		myImageView = new ImageView(myImageViewName);
@@ -551,15 +602,26 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		setScaleY(myScaleY);
 	}
 
+	/**
+	 * Sets the Actor's visibility
+	 */
 	@Override
 	public void setVisibility() {
 		myImageView.setVisible(!checkState(ActorState.INVISIBLE));
 	}
 	
+	/**
+	 * Provides the Actor's states
+	 * @return	The Actor's states
+	 */
 	public Set<ActorState> getStates() {
 		return myStates;
 	}
 	
+	/**
+	 * Sets the Actor's states
+	 * @param states	The desired Actor states
+	 */
 	public void setStates(Set<ActorState> states) {
 		myStates = states;
 	}

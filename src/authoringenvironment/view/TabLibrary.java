@@ -172,9 +172,9 @@ abstract class TabLibrary extends TabParent {
 	 */
 	private void addNodeToTarget(Label toAdd, ActorRule myActorRule) {
 		if (matchesExtensions(toAdd.getText(), SOUND_FILE_EXTS))
-			myActorRuleCreator.addBehavior(myActorRule, toAdd);
+			myActorRuleCreator.addBehavior(myActorRule, toAdd.getText());
 		else
-			myActorRuleCreator.addBehavior(myActorRule, toAdd);
+			myActorRuleCreator.addBehavior(myActorRule, toAdd.getText());
 	}
 
 	/**
