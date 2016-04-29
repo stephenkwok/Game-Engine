@@ -241,7 +241,8 @@ public class GameController extends Observable implements Observer, IGameControl
 	}
 
 	public void updateCamera() {
-		if (model.getCurrentLevel().getMainCharacters() != null) {
+		System.out.println("hello");
+		if (model.getCurrentLevel().getMainCharacter() != null) {
 			if (model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))) {
 				try {
 //					System.out.println(model.getCurrentLevel().getMainCharacters().size());

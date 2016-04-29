@@ -51,4 +51,8 @@ public class TickTrigger extends ITrigger {
 			return true;
 		return false;
 	}
+	
+	public boolean equals(TickTrigger other){
+		return myInterval == other.getMyInterval();
+	}
 }

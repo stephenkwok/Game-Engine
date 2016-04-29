@@ -252,7 +252,7 @@ public class ActorRule {
 				addRuleFromActionBehavior(authoringBehavior);
 			}
 		}
-		myActor.getRules().get(myTrigger.getMyKey());
+		myActorRuleCreator.applyPhysics();
 		printAll("AFTER SETTING RULES");
 	}
 
