@@ -1,6 +1,8 @@
 package gameplayer.controller;
 
 import gameengine.controller.Game;
+import gameengine.controller.IGame;
+import gameplayer.view.IGameScreen;
 
 /**
  * This class serves as the public interface that any game controller must
@@ -26,21 +28,40 @@ public interface IGameController {
 	 * Enables Game Data to obtain a game loaded into the Game Player for
 	 * serialization in order to save game progress into an XML file
 	 * 
-	 * @return an instance of Game for XML serialization
+	 * @return Game an instance of Game for XML serialization
 	 */
-	public Game getGame();
+	public IGame getGame();
+	
+	/**
+	 * Allows the GameController to access the view of the Game to perform visual functionalities.
+	 * @return GameScreen a view of the Game
+	 */
+	public IGameScreen getView();
 
 	/**
-	 * Enables Game Authoring Environment to temporarily start the Game Engine
-	 * to run a created game that it will have loaded into the Game Player for
-	 * previewing purposes
+	 * Restarts the game.
 	 */
-	public void preview();
+	public void restartGame();
 
 	/**
-	 * Enables Game Authoring Environment and Game Data to start the Game Engine
-	 * to run a game that either will have loaded into the Game Player
+	 * Unpauses the game timeline.
 	 */
-	public void play();
+	public void toggleUnPause();
+
+	/**
+	 * Pauses the game timeline.
+	 */
+	public void togglePause();
+
+	/**
+	 * Turns the background music on or off.
+	 */
+	public void toggleMusic();
+
+	/**
+	 * Turns the sound effects on or off.
+	 */
+	public void toggleSound();
+
 
 }

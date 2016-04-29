@@ -1,7 +1,9 @@
 package gameplayer.view;
 
-import gameengine.model.IActor;
+import gameengine.controller.Level;
+import gameengine.model.IDisplayActor;
 import javafx.event.Event;
+import javafx.scene.Node;
 
 /**
  * This class serves as the private interface that a Game screen must implement
@@ -20,7 +22,7 @@ public interface IGameScreen {
 	 * @param actor
 	 *            an instance of IActor
 	 */
-	public void addActor(IActor actor);
+	public void addActor(IDisplayActor actor);
 
 	/**
 	 * Will receive events on screen and then pass to the game engine's handler
@@ -30,17 +32,6 @@ public interface IGameScreen {
 	 *            event
 	 */
 	public void handleScreenEvent(Event e);
-
-	/**
-	 * Clears and reinitializes the visual elements (JavaFX nodes) of the
-	 * GameScreen
-	 */
-	public void reset();
-
-	/**
-	 * Initializes the visual elements (JavaFX nodes) of the GameScreen
-	 */
-	public void setUp();
 
 	/**
 	 * Translates the Camera set on the subscene by the given x,y values
@@ -63,5 +54,21 @@ public interface IGameScreen {
 	 * @param disable
 	 */
 	public void disableSoundFX(boolean disable);
+
+	public void removeActor(IDisplayActor a);
+
+	public void clearGame();
+
+	public void addBackground(Level current);
+
+	public void terminateGame();
+
+	public void pauseGame();
+
+	public void toggleUnPause();
+
+	public void restartGame();
+
+	public Node getScene();
 
 }

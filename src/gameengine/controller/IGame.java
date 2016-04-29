@@ -1,6 +1,8 @@
 package gameengine.controller;
 
+import gameengine.model.Actor;
 import gameengine.model.IActor;
+import gameengine.model.IPlayActor;
 import gameengine.model.Triggers.ITrigger;
 
 import java.util.List;
@@ -30,5 +32,35 @@ public interface IGame {
 	 *            A Trigger object provided by the game player
 	 */
 	public void handleTrigger(ITrigger myTrigger);
+
+	public void setCurrentLevel(int level);
+
+	public Level getCurrentLevel();
+
+	public List<IPlayActor> getActors();
+
+	public void startGame();
+
+	public void stopGame();
+
+	public boolean nextLevel();
+
+	public void resetLevelTime();
+
+	public List<IPlayActor> getDeadActors();
+
+	public void addActor(Actor a);
+
+	public void toggleUnPause();
+
+	public String getInitialGameFile();
+
+	public int getScore();
+
+	public String getHUDInfoFile();
+
+	public void setInitialGameFile(String path);
+
+	public GameInfo getInfo();
 
 }

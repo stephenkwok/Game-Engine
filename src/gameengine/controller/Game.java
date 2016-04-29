@@ -17,7 +17,7 @@ import javafx.util.Duration;
  *
  */
 
-public class Game extends Observable implements Observer {
+public class Game extends Observable implements Observer, IGame {
 	
 	
 	public static final int SIZE = 400;
@@ -96,9 +96,12 @@ public class Game extends Observable implements Observer {
 
     }
 	
-	public void terminateGame() {
-		getAnimation().pause();
-		//getAnimation().setCycleCount(0);
+	public void stopGame() {
+		togglePause();
+	}
+	
+	private void togglePause() {
+		animation.pause();
 	}
 
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
@@ -116,6 +119,10 @@ public class Game extends Observable implements Observer {
 	public void startGame() {
 		initCurrentLevel();
 		initCurrentActors();
+		toggleUnPause();
+	}
+	
+	public void toggleUnPause() {
 		animation.play();
 	}
 

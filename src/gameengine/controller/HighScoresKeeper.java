@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.TreeMap;
 
-public class HighScoresKeeper extends Observable {
+public class HighScoresKeeper extends Observable implements IHighScoresKeeper {
 
 	private Map<String, Map<String, Integer>> myScores;
 
@@ -47,11 +47,6 @@ public class HighScoresKeeper extends Observable {
 	public Map<String, Integer> getGameScores(String gameIdentifier) {
 		return myScores.get(gameIdentifier);
 	}
-
-	/*
-	 * public int getPlayerScores(Game gameIdentifier, String player) { return
-	 * getGameScores(gameIdentifier).get(player); }
-	 */
 
 	public Map<String, Map<String, Integer>> getMyScores() {
 		return myScores;
