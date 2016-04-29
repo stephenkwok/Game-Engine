@@ -1,6 +1,5 @@
 package authoringenvironment.controller;
 
-import authoringenvironment.view.GUIMain;
 //import gameengine.model.Test;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -15,7 +14,6 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	private static final String SPLASH_MESSAGE = "TEMPORARY. Will go back to splash screen.";
 	private Stage s;
-	GUIMain myGUI;
 
 	Controller myMainScreen;
 

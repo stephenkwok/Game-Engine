@@ -17,7 +17,6 @@ import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.model.PresetActorFactory;
 import authoringenvironment.view.ActorCopier;
 import authoringenvironment.view.ActorEditingEnvironment;
-import authoringenvironment.view.GUIMain;
 import authoringenvironment.view.GUIMainScreen;
 import authoringenvironment.view.GameEditingEnvironment;
 import authoringenvironment.view.LevelEditingEnvironment;
@@ -72,7 +71,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private ActorEditingEnvironment actorEnvironment;
 	private GameEditingEnvironment gameEnvironment;
 	private GUIMainScreen mainScreen;
-	private GUIMain guiMain;
 	private ResourceBundle myResources;
 	private ResourceBundle myObservableResource;
 	private ResourceBundle myPresetActorsResource;
@@ -363,14 +361,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
 		goToEditingEnvironment(newActor, actorEnvironment);
 		System.out.println(newActor.getID());
-	}
-
-	public double getSceneWidth() {
-		return guiMain.getWidth();
-	}
-
-	public double getSceneHeight() {
-		return guiMain.getHeight();
 	}
 
 	public void useGame() {
