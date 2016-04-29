@@ -3,20 +3,21 @@ package gameengine.controller;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by aamir on 4/24/2016.
  */
 public class SoundPlayer {
-	
-	
-	
 	
     private static final String folderName = "soundfiles";
     private MediaPlayer soundtrackPlayer;
@@ -25,7 +26,7 @@ public class SoundPlayer {
     private FileChooser soundFileChooser;
     private DirectoryChooser soundFolderChooser;
     private HashMap<String, Media> mediaMap;
-    private HashMap<Media, MediaPlayer> mediaPlayers;
+    private List<MediaPlayer> mediaPlayers;
 
     /**
      * Creates the stage to be used and a sound file location (in src/soundfiles)
@@ -33,7 +34,7 @@ public class SoundPlayer {
     public SoundPlayer(){
         String resourceLocation = this.getClass().getResource("").getPath().toString();
         mediaMap = new HashMap<>();
-        mediaPlayers = new HashMap<>();
+        mediaPlayers = new ArrayList<>();
         soundFileLocation = new File(resourceLocation + File.separator + folderName);
         soundFileLocation.mkdir();
         popupStage = new Stage();
@@ -93,6 +94,9 @@ public class SoundPlayer {
      */
     public void setSoundtrack(String soundFileName){
         Media soundtrack = mediaMap.get(soundFileName);
+        if (soundtrackPlayer != null) {
+        	soundtrackPlayer.dispose();
+        }
         soundtrackPlayer = new MediaPlayer(soundtrack);
         soundtrackPlayer.setOnEndOfMedia(new Runnable() {
             public void run() {
@@ -107,10 +111,13 @@ public class SoundPlayer {
      * @param soundFileName
      */
     public void playSound(String soundFileName){
-        Media sound = mediaMap.get(soundFileName);
-        MediaPlayer curMediaPlayer = new MediaPlayer(sound);
-        mediaPlayers.put(sound, curMediaPlayer);
-        curMediaPlayer.play();
+//        Media sound = mediaMap.get(soundFileName);
+//        MediaPlayer curMediaPlayer = new MediaPlayer(sound);
+//        mediaPlayers.put(sound, curMediaPlayer);
+//        curMediaPlayer.play();
+    	MediaPlayer mp = new MediaPlayer(mediaMap.get(soundFileName));
+    	mp.play();
+    	mediaPlayers.add(mp);
     }
 
     /**
@@ -151,7 +158,7 @@ public class SoundPlayer {
      * @param mute -> true = mute, false = unmute
      */
     public void allSoundsSetMute(boolean mute){
-        for (MediaPlayer mediaPlayer: mediaPlayers.values()){
+        for (MediaPlayer mediaPlayer: mediaPlayers){
             mediaPlayer.setMute(mute);
         }
     }
@@ -163,14 +170,17 @@ public class SoundPlayer {
     public void soundtrackSetMute(boolean mute){
         soundtrackPlayer.setMute(mute);
     }
-
-    /**
-     * Sets a specific sound as muted or unmuted, depending on the given boolean
-     * @param soundFileName
-     * @param mute -> true = mute, false = unmute
-     */
-    public void soundSetMute(String soundFileName, boolean mute){
-        mediaPlayers.get(mediaMap.get(soundFileName)).setMute(mute);
-    }
+//    
+//    
+//    public void garbageCollect() {
+//    	Iterator<MediaPlayer> iter = mediaPlayers.iterator();
+//    	while (iter.hasNext()){
+//    		MediaPlayer mediaPlayer = iter.next();
+//            if (mediaPlayer.getStatus() != Status.PLAYING) {
+//            	mediaPlayer.dispose();
+//            }
+//        }
+//    }
+//    
 
 }
