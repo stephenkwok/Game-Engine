@@ -1,6 +1,7 @@
 package gameplayer.controller;
 
 import java.util.List;
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,12 +12,15 @@ import java.util.ResourceBundle;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gamedata.controller.HighScoresController;
+import gamedata.controller.ParserController;
 import gameengine.controller.Game;
+import gameengine.controller.IGame;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IDisplayActor;
 import gameengine.model.IPlayActor;
 import gameplayer.view.GameScreen;
+import gameplayer.view.IGameScreen;
 import javafx.animation.Timeline;
 import javafx.scene.ParallelCamera;
 import voogasalad.util.hud.source.AbstractHUDScreen;
@@ -30,9 +34,9 @@ import voogasalad.util.hud.source.AbstractHUDScreen;
  */
 
 public class GameController extends Observable implements Observer, IGameController {
-	private Game model;
+	private IGame model;
 	@XStreamOmitField
-	private GameScreen view;
+	private IGameScreen view;
 	@XStreamOmitField
 	private ResourceBundle myResources;
 	@XStreamOmitField
@@ -56,8 +60,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	@Override
 	public void setGame(Game myGame) {
 		model = myGame;
-		System.out.println(model);
-		model.addObserver(this);
+		((Observable) model).addObserver(this);
 	}
 
 	/**
@@ -67,7 +70,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	 */
 	public void setGameView(GameScreen myGameView) {
 		view = myGameView;
-		view.addObserver(this);
+		((Observable) view).addObserver(this);
 	}
 
 
@@ -112,9 +115,8 @@ public class GameController extends Observable implements Observer, IGameControl
 	 * Will stop the animation timeline.
 	 */
 	public void endGame() {
-		// TODO fix resource also implement saving functionality
+		model.stopGame();
 		view.terminateGame();
-		model.terminateGame();
 	}
 	
 
@@ -132,17 +134,23 @@ public class GameController extends Observable implements Observer, IGameControl
 	}
 
 	public void nextLevel() {
-		view.clearGame();
-		model.nextLevel();
-		model.resetLevelTime();
-		begin();
+		if (model.nextLevel()) {
+			view.clearGame();
+			model.nextLevel();
+			model.resetLevelTime();
+			begin();
+		}
+		else {
+			endGame();
+		}
 	}
 
-	public GameScreen getView() {
+	@Override
+	public IGameScreen getView() {
 		return view;
 	}
 
-	public Game getGame() {
+	public IGame getGame() {
 		return model;
 	}
 
@@ -173,7 +181,6 @@ public class GameController extends Observable implements Observer, IGameControl
 		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException
 				| InvocationTargetException | NoSuchMethodException e1) {
 			// TODO Auto-generated catch block
-			System.out.println("FUUUUUUCK UGH");
 			e1.printStackTrace();
 		}
 	}
@@ -183,28 +190,39 @@ public class GameController extends Observable implements Observer, IGameControl
 		view.addActor(a);
 	}
 
+	@Override
 	public void toggleSound() {
 		System.out.println("toggle sound unimplemented");
 	}
-
+	
+	@Override
 	public void toggleMusic() {
 		System.out.println("toggle music unimplemented");
 	}
-
+	
+	@Override
 	public void togglePause() {
-		getGame().getAnimation().pause();
-		view.getMySubscene().setDisable(true);
+		model.stopGame();
+		view.pauseGame();
 	}
 
+	@Override
 	public void toggleUnPause() {
-		getGame().getAnimation().play();
-		view.getMySubscene().setDisable(false);
+		model.toggleUnPause();
+		view.toggleUnPause();
 	}
 
+	@Override
 	public void restartGame() {
 		togglePause();
-		System.out.println("restarting game");
-		Object[] args = {"restartGame", null};
+		view.restartGame();
+		
+		ParserController parserController = new ParserController();
+		Game initialGame = parserController.loadforPlaying(new File(getGame().getInitialGameFile()));
+		setGame(initialGame);
+		initialize(0);
+		
+		Object[] args = {"setUpHUDScreen", null};
 		setChanged();
 		notifyObservers(Arrays.asList(args));
 	}
@@ -226,23 +244,5 @@ public class GameController extends Observable implements Observer, IGameControl
 		
 	}
 
-	@Override
-	public void preview() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void play() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * Updates attributes - depracated
-	 */
-	public void updateAttribute() {
-		//model.getCurrentLevel().updateAttribute();
-	}
 	
 }

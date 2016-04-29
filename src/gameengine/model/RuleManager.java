@@ -23,7 +23,7 @@ public class RuleManager {
 	}
 	
     public void removeRule(Rule rule){
-    	myRules.get(rule.getMyTrigger()).remove(rule);
+    	myRules.get(rule.getMyTrigger().getMyKey()).remove(rule);
     }
 	
     public void handleTrigger(ITrigger myTrigger) {

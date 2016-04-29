@@ -1,5 +1,6 @@
 package gameplayer.controller;
 
+import gui.view.IScreen;
 import gui.view.Screen;
 
 import java.lang.reflect.InvocationTargetException;
@@ -26,7 +27,7 @@ public abstract class BranchScreenController implements Observer {
 	@XStreamOmitField
 	private Stage myStage;
 	private ResourceBundle myResources;
-	private Screen myScreen;
+	private IScreen myScreen;
 
 	public BranchScreenController(Stage stage, String resource) {
 		this.myStage = stage;
@@ -42,7 +43,7 @@ public abstract class BranchScreenController implements Observer {
 		SplashScreenController splashScreenController = new SplashScreenController(myStage);
 	}
 
-	protected void changeScreen(Screen newScreen) {
+	protected void changeScreen(IScreen newScreen) {
 		this.myStage.setScene(newScreen.getScene());
 	}
 
@@ -50,7 +51,7 @@ public abstract class BranchScreenController implements Observer {
 		return this.myStage;
 	}
 	
-	protected void setMyScreen(Screen screen) {
+	protected void setMyScreen(IScreen screen) {
 		this.myScreen = screen;
 	}
 	

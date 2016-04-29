@@ -30,6 +30,7 @@ public abstract class TextFieldWithButton extends EditingElementParent {
 		this.promptText = promptText;
 		this.textFieldWidth = textFieldWidth;
 		myTextField = new TextField();
+		myContainer = new HBox(PADDING);
 	}
 
 	/**
@@ -38,7 +39,6 @@ public abstract class TextFieldWithButton extends EditingElementParent {
 	 */
 	@Override
 	public Node createNode() {
-		myContainer = new HBox(PADDING);
 		myTextFieldPrompt = new Label(labelText);
 		myTextField.setPrefWidth(textFieldWidth);
 		myTextField.setPromptText(promptText);
@@ -76,5 +76,9 @@ public abstract class TextFieldWithButton extends EditingElementParent {
 	 */
 	protected void setTextFieldHGrow() {
 		HBox.setHgrow(myTextField, Priority.ALWAYS);
+	}
+	
+	protected HBox getMyHBox(){
+		return this.myContainer;
 	}
 }

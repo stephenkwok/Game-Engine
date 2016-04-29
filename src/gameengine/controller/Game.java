@@ -17,7 +17,7 @@ import javafx.util.Duration;
  *
  */
 
-public class Game extends Observable implements Observer {
+public class Game extends Observable implements Observer, IGame {
 	
 	
 	public static final int SIZE = 400;
@@ -35,10 +35,8 @@ public class Game extends Observable implements Observer {
 	private Timeline animation;
 	private List<IPlayActor> currentActors;
 	private List<IPlayActor> deadActors;
-    private int levelTime;
-    private int globalTime;
-    
-    
+	private int levelTime;
+	private int globalTime;   
     
     public Game(String initialGameFile, 
     		List<Level> levels, 
@@ -49,7 +47,7 @@ public class Game extends Observable implements Observer {
     		Timeline animation, 
     		List<IPlayActor> currentActors, 
     		List<IPlayActor> deadActors,
-    		int levelStep, int globalTime) {
+    		int levelTime, int globalTime) {
     	this(initialGameFile, info, levels);
     	currentActors = new ArrayList<IPlayActor>();
 		deadActors = new ArrayList<IPlayActor>();
@@ -96,9 +94,12 @@ public class Game extends Observable implements Observer {
 
     }
 	
-	public void terminateGame() {
-		getAnimation().pause();
-		//getAnimation().setCycleCount(0);
+	public void stopGame() {
+		togglePause();
+	}
+	
+	private void togglePause() {
+		animation.pause();
 	}
 
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
@@ -116,6 +117,10 @@ public class Game extends Observable implements Observer {
 	public void startGame() {
 		initCurrentLevel();
 		initCurrentActors();
+		toggleUnPause();
+	}
+	
+	public void toggleUnPause() {
 		animation.play();
 	}
 
@@ -221,11 +226,14 @@ public class Game extends Observable implements Observer {
 	 * Changes the Game to the next Level
 	 */
 
-	public void nextLevel() {
+	public boolean nextLevel() {
 		animation.stop();
-		if (levels.size() >= info.getMyCurrentLevelNum() + 1) {
+		if (info.getMyCurrentLevelNum() + 1 < levels.size()) {
 			setCurrentLevel(info.getMyCurrentLevelNum() + 1);
 			levels.get(info.getMyCurrentLevelNum()).getMainCharacter().setX(0);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -408,13 +416,13 @@ public class Game extends Observable implements Observer {
 	public void setLevelTime(int step) {
 		this.levelTime = step;
 	}
-
-	public int getGlobalTime() {
+	
+	public int getGlobalTime(){
 		return globalTime;
 	}
-
-	public void setGlobalTime(int globalTime) {
-		this.globalTime = globalTime;
+	
+	public void setGlobalTime(int time){
+		this.globalTime = time;
 	}
 	
 	public void resetLevelTime(){

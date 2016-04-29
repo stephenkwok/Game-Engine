@@ -3116,5 +3116,6 @@
   </myCollisionDetector>
   <currentActors/>
   <deadActors/>
-  <count>1</count>
+  <levelTime>1</levelTime>
+  <globalTime>1</globalTime>
 </gameengine.controller.Game>

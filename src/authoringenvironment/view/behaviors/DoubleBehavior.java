@@ -2,6 +2,7 @@ package authoringenvironment.view.behaviors;
 
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.IAuthoringBehavior;
 import authoringenvironment.view.ActionFactory;
 import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.TriggerFactory;
@@ -39,9 +40,7 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	}
 
 	@Override
-	protected void updateValueBasedOnEditable() {
-		setTextFieldValue(String.valueOf(value));
-	}
+	public abstract void updateValueBasedOnEditable();
 
 	/**
 	 * Create ITrigger or IAction depending on type of behavior
@@ -80,5 +79,9 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 
 	public void setAction(IAuthoringBehavior key, IAction value) {
 		myActorRule.setAction(key, value);
+	}
+	
+	protected ActorRule getActorRule(){
+		return this.myActorRule;
 	}
 }

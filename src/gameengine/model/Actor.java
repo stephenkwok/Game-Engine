@@ -443,6 +443,10 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	public Sprite getSprite(){
 		return this.mySprite;
 	}
+	
+	public void setSprite(Sprite sprite){
+		this.mySprite = sprite;
+	}
 
     public void nextImage(){
         myImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getNextImage())));
@@ -551,5 +555,4 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		myStates = states;
 	}
 	
-
 }
