@@ -13,7 +13,6 @@ public class KeyTrigger extends ITrigger {
         setMyKey(key.getName());
     }
     
-
     @Override
     public Object[] getParameters(){
     	return new Object[]{myKeyCode};

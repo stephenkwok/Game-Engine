@@ -77,6 +77,7 @@ public class ActorImageViewer implements IGUI {
 		HBox sprites = new HBox(PADDING);
 		populateSprites(sprites);
 		ComboBoxSpriteImages spriteImages = new ComboBoxSpriteImages(AVAILABLE_SPRITE_IMAGES, IMAGE_RESOURCE, aEE, sprites);
+
 		HBox spriteCombo = (HBox) spriteImages.createNode();
 		VBox toReturn = new VBox(PADDING);
 		toReturn.getChildren().addAll(spriteCombo, sprites);

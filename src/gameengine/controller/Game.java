@@ -35,10 +35,8 @@ public class Game extends Observable implements Observer, IGame {
 	private Timeline animation;
 	private List<IPlayActor> currentActors;
 	private List<IPlayActor> deadActors;
-    private int levelTime;
-    private int globalTime;
-    
-    
+	private int levelTime;
+	private int globalTime;   
     
     public Game(String initialGameFile, 
     		List<Level> levels, 

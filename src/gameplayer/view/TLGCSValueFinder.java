@@ -1,11 +1,10 @@
 package gameplayer.view;
- 
+
 import gameengine.controller.Game;
 import gameengine.model.AttributeType;
 import voogasalad.util.hud.source.*;
- 
-public class TLGCSValueFinder implements IValueFinder {
 
+public class TLGCSValueFinder implements IValueFinder {
 	private Game data; //for other projects, your data will be a different class
 	
 	@Override
@@ -35,5 +34,10 @@ public class TLGCSValueFinder implements IValueFinder {
 			throw new IllegalArgumentException();
 		}
 	}
-}
 
+	@Override
+	public void setController(HUDController controller) {
+		// TODO Auto-generated method stub
+		
+	}
+}
