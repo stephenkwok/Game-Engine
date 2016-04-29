@@ -67,7 +67,6 @@ public class Attribute extends Observable {
         return myType;
     }
     
-    
     public Property<Integer> getProperty() {
     	return myValue;
     }

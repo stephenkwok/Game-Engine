@@ -23,9 +23,9 @@ public class TestPresetActorFactory {
 		PresetActorFactory PAF = new PresetActorFactory(ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY));
 		List<Actor> actors = PAF.getPresetActors();
 		System.out.println(actors);
-		for (Actor actor : actors) {
-			System.out.println(actor.checkState(ActorState.INVISIBLE));
-		}
+		// for (Actor actor : actors) {
+		// 	System.out.println(actor.checkState(ActorState.INVISIBLE));
+		// }
 	}
 
 }

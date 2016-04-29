@@ -39,7 +39,7 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	private static final String PROMPT = "Prompt";
 	private static final int COMBOBOX_WIDTH = 300;
 	private static final int HBOX_SPACING = 5;
-	private static final String GO = "Go";
+	private static final String GO = "a"; //bottom collision
 	private static final int BUTTON_SIZE = 40;
 	private String promptText;
 	private ObservableList<IEditableGameElement> options;

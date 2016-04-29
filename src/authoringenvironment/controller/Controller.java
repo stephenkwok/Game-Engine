@@ -302,8 +302,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 */
 	public void saveGame() {
 		// TODO implement incomplete game error checking
-		// System.out.println(myLevels.get(0).getActors().get(0).getRules().size());
-		// IPlayActor actor = myLevels.get(0).getActors().get(0);
 		for(Level level: myLevels) {
 			for (IPlayActor actor: level.getActors()) {
 				if (actor.checkState(ActorState.MAIN)) {
@@ -390,7 +388,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		mainScreen.createActorPreviewUnit(newActor, actorEnvironment);
 		goToEditingEnvironment(newActor, actorEnvironment);
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
-		System.out.println(newActor.getID());
 	}
 
 	public void useGame() {

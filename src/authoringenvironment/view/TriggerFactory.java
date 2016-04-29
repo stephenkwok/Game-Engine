@@ -13,6 +13,7 @@ import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
+import gameengine.model.Triggers.CollisionTrigger;
 import gameengine.model.Triggers.ITrigger;
 import javafx.scene.input.KeyCode;
 
@@ -111,6 +112,10 @@ public class TriggerFactory {
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> collisionClass = Class.forName(className);
+		if(arguments.size()==3){
+			Constructor<?> constructor = collisionClass.getConstructor(Actor.class, Actor.class,Boolean.class);
+			return (ITrigger) constructor.newInstance((Actor) arguments.get(ZERO), (Actor) arguments.get(ONE),(Boolean) arguments.get(TWO));
+		}
 		Constructor<?> constructor = collisionClass.getConstructor(Actor.class, Actor.class);
 		return (ITrigger) constructor.newInstance((Actor) arguments.get(ZERO), (Actor) arguments.get(ONE));
 	}

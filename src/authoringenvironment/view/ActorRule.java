@@ -245,6 +245,10 @@ public class ActorRule {
 			myActorRuleCreator.setNewlyReturned(false);
 			myActor.getRules().clear();
 		}
+		System.out.println("**TRIGGER**");
+		System.out.println(myTrigger);
+		System.out.println("***MYACTIONS***");
+		System.out.println(myActions.size());
 		if (myTrigger == null || myActions.size() == 0) {
 			showAlert(myActorRuleResources.getString("SomethingNotSet"), myActorRuleResources.getString("SetBoth"));
 		} else {

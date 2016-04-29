@@ -1,5 +1,7 @@
 package gui.view;
 
+import java.util.ResourceBundle;
+
 import gameengine.model.Actor;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
@@ -26,8 +28,7 @@ public class TextFieldAttributeEditor extends TextFieldWithButton {
 	}
 	
 	private void determineAttributeType(String labelText){
-		if(labelText==HEALTH_LABEL) attributeType = AttributeType.HEALTH;
-		attributeType = AttributeType.POINTS;
+		attributeType = AttributeType.valueOf(labelText.toUpperCase());
 	}
 	
 	private void createRemoveButton(){
