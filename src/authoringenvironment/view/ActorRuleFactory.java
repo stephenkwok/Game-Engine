@@ -77,24 +77,25 @@ public class ActorRuleFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private IAuthoringBehavior createCollisionBehavior(String behaviorType, String className)
+	private IAuthoringBehavior createSelectActorBehavior(String behaviorType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		try {
+	//	try {
 			Class<?> clazz = Class.forName(className);
-			Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, IAuthoringActor.class,
-					ResourceBundle.class, List.class);
+			Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, ResourceBundle.class,
+					IAuthoringActor.class, List.class);
 			List<IAuthoringActor> myActors = new ArrayList<>(myController.getActorMap().keySet());
-			return (IAuthoringBehavior) constructor.newInstance(myActorRule, behaviorType, myActor, myResources,
+			return (IAuthoringBehavior) constructor.newInstance(myActorRule, behaviorType, myResources, myActor,
 					myActors);
-		} catch (Exception e) {
+		//} 
+			/* catch (Exception e) {
 			e.printStackTrace();
 			Class<?> clazz = Class.forName(className);
 			Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, ResourceBundle.class,
 					List.class);
 			return (IAuthoringBehavior) constructor.newInstance(myActorRule, behaviorType, myResources,
 					myController.getLevels());
-		}
+		}*/
 	}
 
 	/**

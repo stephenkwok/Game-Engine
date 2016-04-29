@@ -138,8 +138,6 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
@@ -241,13 +239,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -290,13 +288,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -339,13 +337,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -388,13 +386,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -437,13 +435,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -486,13 +484,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -535,13 +533,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -584,13 +582,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -633,13 +631,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -682,13 +680,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -731,13 +729,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -780,13 +778,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -829,13 +827,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -878,13 +876,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -927,13 +925,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -976,13 +974,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1025,13 +1023,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1074,13 +1072,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1123,13 +1121,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1172,13 +1170,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1221,13 +1219,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1270,13 +1268,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1319,13 +1317,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1368,13 +1366,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1417,13 +1415,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1466,13 +1464,13 @@
                                         <nextYPos>0.0</nextYPos>
                                         <collision>false</collision>
                                       </myNextValues>
-                                      <isMainPlayer>false</isMainPlayer>
-                                      <isVisible>true</isVisible>
                                       <myRotate>0.0</myRotate>
                                       <myOpacity>1.0</myOpacity>
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1500,13 +1498,13 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.HorizontalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1538,6 +1536,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1548,6 +1548,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1558,6 +1560,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[3]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1568,6 +1572,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[4]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1578,6 +1584,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[5]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1588,6 +1596,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[6]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1598,6 +1608,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[7]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1608,6 +1620,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[8]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1618,6 +1632,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[9]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1628,6 +1644,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[10]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1638,6 +1656,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[11]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1648,6 +1668,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[12]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1658,6 +1680,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[13]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1668,6 +1692,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[14]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1678,6 +1704,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[15]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1688,6 +1716,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[16]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1698,6 +1728,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[17]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1708,6 +1740,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[18]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1718,6 +1752,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[19]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1728,6 +1764,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[20]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1738,6 +1776,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[21]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1748,6 +1788,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[22]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1758,6 +1800,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[23]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1768,6 +1812,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[24]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1778,6 +1824,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[25]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1788,6 +1836,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[26]/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1815,13 +1865,13 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.NextLevel">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1869,13 +1919,13 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1918,13 +1968,13 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -1967,13 +2017,13 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2016,13 +2066,13 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2065,13 +2115,13 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2114,13 +2164,13 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2163,13 +2213,13 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2212,13 +2262,13 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.NextLevel" reference="../../../../entry[6]/list/gameengine.model.Rule[2]/myAction"/>
                     <ID>0</ID>
@@ -2266,13 +2316,13 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.NextLevel" reference="../../../../entry[6]/list/gameengine.model.Rule[2]/myAction"/>
                     <ID>0</ID>
@@ -2320,13 +2370,13 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.NextLevel" reference="../../../../entry[6]/list/gameengine.model.Rule[2]/myAction"/>
                     <ID>0</ID>
@@ -2374,13 +2424,13 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.NextLevel" reference="../../../../entry[6]/list/gameengine.model.Rule[2]/myAction"/>
                     <ID>0</ID>
@@ -2428,13 +2478,13 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.NextLevel" reference="../../../../entry[6]/list/gameengine.model.Rule[2]/myAction"/>
                     <ID>0</ID>
@@ -2508,6 +2558,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2539,6 +2591,8 @@
                                   <myTrigger class="gameengine.model.Triggers.SideCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../../../.."/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.Destroy">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../../../../../../../../.."/>
@@ -2549,6 +2603,8 @@
                                   <myTrigger class="gameengine.model.Triggers.SideCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../../entry[4]/list/gameengine.model.Rule/myAction/mySpawnedActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.Destroy">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2564,6 +2620,8 @@
                                   <myTrigger class="gameengine.model.Triggers.TopCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../../../.."/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.Destroy" reference="../../../../entry/list/gameengine.model.Rule[2]/myAction"/>
                                   <ID>0</ID>
@@ -2577,6 +2635,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2587,6 +2647,8 @@
                                   <myTrigger class="gameengine.model.Triggers.BottomCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../../../.."/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.Destroy">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../../../../../../../../.."/>
@@ -2626,13 +2688,13 @@
                           <nextYPos>0.0</nextYPos>
                           <collision>false</collision>
                         </myNextValues>
-                        <isMainPlayer>false</isMainPlayer>
-                        <isVisible>true</isVisible>
                         <myRotate>0.0</myRotate>
                         <myOpacity>1.0</myOpacity>
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2643,6 +2705,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2653,6 +2717,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2663,6 +2729,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[3]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2673,6 +2741,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[4]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2683,6 +2753,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[5]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2693,6 +2765,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[6]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2703,6 +2777,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[7]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2713,6 +2789,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[8]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2723,6 +2801,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[10]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2733,6 +2813,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[12]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2743,6 +2825,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[14]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2753,6 +2837,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[7]/list/gameengine.model.Rule[16]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalBounceCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2763,6 +2849,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2773,6 +2861,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2783,6 +2873,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[3]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2793,6 +2885,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[4]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2803,6 +2897,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[5]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2813,6 +2909,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[6]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2823,6 +2921,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[7]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2833,6 +2933,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[8]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2843,6 +2945,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[9]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2853,6 +2957,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[10]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2863,6 +2969,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[11]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2873,6 +2981,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[12]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2883,6 +2993,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[13]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2893,6 +3005,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[14]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2903,6 +3017,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[15]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2913,6 +3029,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[16]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2923,6 +3041,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[17]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2933,6 +3053,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[18]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2943,6 +3065,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[19]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2953,6 +3077,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[20]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2963,6 +3089,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[21]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2973,6 +3101,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[22]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2983,6 +3113,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[23]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -2993,6 +3125,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[24]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -3003,6 +3137,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[25]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -3013,6 +3149,8 @@
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[26]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.VerticalStaticCollision">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -3044,8 +3182,6 @@
             <nextYPos>0.0</nextYPos>
             <collision>false</collision>
           </myNextValues>
-          <isMainPlayer>false</isMainPlayer>
-          <isVisible>true</isVisible>
           <myRotate>0.0</myRotate>
           <myOpacity>1.0</myOpacity>
           <myScaleX>1.0</myScaleX>

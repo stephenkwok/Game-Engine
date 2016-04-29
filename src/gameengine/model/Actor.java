@@ -532,4 +532,10 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		setScaleY(myScaleY);
 	}
 
+	@Override
+	public Sprite getSprite() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

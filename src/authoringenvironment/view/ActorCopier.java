@@ -137,6 +137,9 @@ public class ActorCopier {
 	
 	private Action createAction(Action action, Actor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Object[] params = action.getParameters();
+		if(((Actor)params[0]).getID()==toUpdate.getID()){
+			params[0] = toUpdate;
+		}
 		params[0] = toUpdate;
 		return (Action) createObject(action,params);
 	}

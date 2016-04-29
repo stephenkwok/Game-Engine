@@ -12,7 +12,7 @@ public class GlideUp extends GlidingAction {
 	public void perform() {
 		
 		//getMyActor().setY(getMyActor().getY()-this.getGlideOffset());
-    	getMyActor().getPhysicsEngine().glideUp(getMyActor(),this.getGlideOffset());					
+    	getMyActor().getPhysicsEngine().glideDown(getMyActor(),this.getGlideOffset());					
 	}
 
 }

@@ -29,8 +29,31 @@ public class Spawn extends ActorAction{
 		
 		System.out.println(mySpawnedActor.getName());
 		clone.setHeading(getMyActor().getHeading());
+		
+		System.out.println(clone.getHeading());
+
+
+
+		if(clone.getHeading() == 0){
+
 		clone.setX(getMyActor().getBounds().getMaxX());
-		clone.setY(getMyActor().getY());
+
+		clone.setY(getMyActor().getBounds().getMinY() + getMyActor().getBounds().getHeight()/2 - clone.getBounds().getHeight()/2);
+
+		}else if(clone.getHeading() == 180){
+
+		clone.setX(getMyActor().getBounds().getMinX()-clone.getBounds().getWidth());
+
+		clone.setY(getMyActor().getBounds().getMinY() + getMyActor().getBounds().getHeight()/2 - clone.getBounds().getHeight()/2);
+
+		}else{
+
+		clone.setX(getMyActor().getBounds().getMinX() +getMyActor().getBounds().getWidth()/2 - clone.getBounds().getWidth()/2);
+
+		clone.setY(getMyActor().getY()-clone.getBounds().getHeight());
+
+		}
+		
 		
 		getMyActor().changed();
 		List<Object> myList = new ArrayList<>();

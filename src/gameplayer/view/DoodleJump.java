@@ -10,6 +10,7 @@ import gameengine.model.Actor;
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
+import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
 import gameengine.model.Triggers.*;
 import gameplayer.controller.GameController;
@@ -27,6 +28,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import authoringenvironment.view.ActorCopier;
 
 public class DoodleJump extends Application {
     /**
@@ -64,25 +67,32 @@ public class DoodleJump extends Application {
         player.addSpriteImage("doodle_left.png");
         level1.addActor(player);
        
+       
+        Actor greenplatform = new Actor();
+        greenplatform.setImageViewName("green_platform.png");
+        greenplatform.setID(2);
+        
+        player.addRule(new Rule(new TopCollision(player,greenplatform),new GlideUp(player, greenplatform.getBounds().getHeight()*-.4)));
+        player.addRule(new Rule(new BottomCollision(player,greenplatform),new VerticalBounceCollision(player)));
+        player.addRule(new Rule(new BottomCollision(player,greenplatform,true),new GlideDown(greenplatform,40.0)));
+        player.addRule(new Rule(new BottomCollision(player,greenplatform,true),new CreateActor(player,greenplatform,100.0,800.0,0.0,0.0)));
+        
+        ActorCopier copier = new ActorCopier(greenplatform);
+        
         Random r = new Random();
-        for(int i=1; i<6; i++){
-            Actor greenplatform = new Actor();
-            greenplatform.setImageViewName("green_platform.png");
-            greenplatform.setID(2);
-            greenplatform.setX(200 + (400) * r.nextDouble());
-            greenplatform.setY(i*70);
-            greenplatform.addRule(new Rule(new TopCollision(greenplatform,player,true),new GlideLeft(greenplatform,5.0)));
-            
-            
-            level1.addActor(greenplatform);
-            
-            player.addRule(new Rule(new SideCollision(player,greenplatform),new HorizontalBounceCollision(player)));
-            
-            player.addRule(new Rule(new TopCollision(player,greenplatform),new GlideUp(player, greenplatform.getBounds().getHeight()*-.4)));
+        for(int i=1; i<14; i++){
+            Actor greenplatform1 = copier.makeCopy();
+            greenplatform1.setPhysicsEngine(new PhysicsEngine());
+            greenplatform1.setX(100 + (700) * r.nextDouble());
+            greenplatform1.setY(i*40);
 
-            player.addRule(new Rule(new BottomCollision(player,greenplatform),new VerticalBounceCollision(player)));
+            
+            level1.addActor(greenplatform1);
+            
+           
             
         }
+        
         
         player.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new MoveUp(player)));
         player.addRule(new Rule(new KeyTrigger(KeyCode.RIGHT), new MoveRight(player)));

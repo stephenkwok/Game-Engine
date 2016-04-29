@@ -1,6 +1,7 @@
 package gameengine.model;
 
 import java.lang.reflect.Constructor;
+import java.util.Iterator;
 import java.util.List;
 import gameengine.model.Actor;
 import gameengine.model.Triggers.CollisionTrigger;
@@ -33,6 +34,17 @@ public class CollisionDetection {
 	 * @return List of actors with updated position variables
 	 */
 	public List<IPlayActor> detection(List<IPlayActor> list) {
+//		for(Iterator<IPlayActor> iter = list.iterator(); iter.hasNext();){
+//			IPlayActor a1 = iter.next();
+//			for(Iterator<IPlayActor> iter2 = list.iterator(); iter2.hasNext();){
+//				IPlayActor a2 = iter2.next();
+//				if(a1!=a2){
+//					if (isCollision(a1, a2))
+//						resolveCollision(a1, a2);
+//				}
+//			}
+//		}
+		
 		for (IPlayActor a1 : list) {
 			for (IPlayActor a2 : list) {
 				if (a1 != a2) { // Checks that each actor in the pair is unique

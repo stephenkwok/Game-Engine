@@ -75,7 +75,7 @@ public class TriggerFactory {
 	 * @return IGUIElement for the desired element.
 	 */
 	private ITrigger createTrigger(String triggerType, String behaviorType) {
-		String className = GAME_ENGINE + MODEL + TRIGGERS + myResources.getString(behaviorType + CLASS);
+		String className = GAME_ENGINE + MODEL + TRIGGERS + myResources.getString(triggerType + CLASS);
 		try {
 			Method createMethod = this.getClass().getDeclaredMethod(CREATE + triggerType, String.class, String.class);
 			return (ITrigger) createMethod.invoke(this, behaviorType, className);

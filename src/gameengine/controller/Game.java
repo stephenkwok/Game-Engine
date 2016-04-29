@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import javafx.util.Duration;
+import authoringenvironment.model.IAuthoringActor;
 
 /**
  * This class is intended to represent a game containing levels with actors.
@@ -40,6 +41,7 @@ public class Game extends Observable implements Observer {
 	private Timeline animation;
 	private List<IPlayActor> currentActors;
 	private List<IPlayActor> deadActors;
+	private List<IPlayActor> actorsToAdd;
     private int count;
     
     
@@ -57,6 +59,7 @@ public class Game extends Observable implements Observer {
     	this(initialGameFile, info, levels);
     	currentActors = new ArrayList<IPlayActor>();
 		deadActors = new ArrayList<IPlayActor>();
+		actorsToAdd = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
 		count = 1;
@@ -80,6 +83,7 @@ public class Game extends Observable implements Observer {
 		info = gameInfo;
 		currentActors = new ArrayList<IPlayActor>();
 		deadActors = new ArrayList<IPlayActor>();
+		actorsToAdd = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
 		count = 1;
@@ -306,6 +310,11 @@ public class Game extends Observable implements Observer {
 		if (deadActors.size() != 0) {
 			removeDeadActors();
 		}
+//		for(IPlayActor a: actorsToAdd){
+//			getCurrentLevel().addActor((IAuthoringActor)a);
+//		}
+		getCurrentLevel().getActors().addAll(actorsToAdd);
+		actorsToAdd.clear();
 		currentActors = getCurrentLevel().getActors();
 	}
 
@@ -326,7 +335,7 @@ public class Game extends Observable implements Observer {
 
 	public void addActor(Actor newActor) {
 		newActor.setPhysicsEngine(myPhysicsEngine);
-		getCurrentLevel().addActor(newActor);
+		actorsToAdd.add(newActor);
 	}
 
 	/**
