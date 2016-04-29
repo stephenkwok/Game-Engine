@@ -122,11 +122,15 @@ public class ActorCopier {
 		}
 	}
 	
-	private Object createObject(Object action, Object[] arguments) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		Class myclass = action.getClass();
+	private Object createObject(Object object, Object[] arguments) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		Class myclass = object.getClass();
 		Class[] argumentTypes = new Class[arguments.length];
 		for(int i=0; i<argumentTypes.length;i++){
-			argumentTypes[i] = arguments[i].getClass();
+			if((myclass.getSuperclass() == ITrigger.class || myclass.getSuperclass() == Action.class) && arguments[i].getClass() == Actor.class){
+				argumentTypes[i] = IGameElement.class;
+			}else{
+				argumentTypes[i] = arguments[i].getClass();
+			}
 		}
 		Constructor constructor = myclass.getConstructor(argumentTypes);
 		return constructor.newInstance(arguments);

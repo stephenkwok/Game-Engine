@@ -228,4 +228,11 @@ public class LevelPreview implements IGUI, Observer {
 		myLevelEditingEnvironment.getController().updateRefActor((IAuthoringActor) arg1);
 		addLevelActorsToScene();
 	}
+	
+	
+	public void groupActors(ImageviewActorIcon icon) {
+		IAuthoringActor actor = icon.getRefActor(); 
+		myLevelEditingEnvironment.groupActors(actor);
+	}
+
 }
