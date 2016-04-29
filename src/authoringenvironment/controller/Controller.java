@@ -96,19 +96,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		this.myObservableResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
 		initNewGame();
 	}
-/*
-	// TODO This constructor is not parallel with other BranchScreenController
-	// subclasses
-	// Create a resource bundle for the Controller's actions associated to
-	// buttons it handles, but the resource bundle for the GUIFactory should be
-	// stored in and set up in the GUIMain
-	// Stage should not be contained in the subclass (already in
-	// BranchScreenController parent)
-	public Controller(Stage myStage, GUIMain guiMain) {
-		super(myStage);
-		this.guiMain = guiMain;
-		// initNewGame();
-	}*/
 
 	// TODO Need a constructor that takes in a game passed by data and sets up
 	// Authoring Environment accordingly
@@ -130,9 +117,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	public void initNewGame() throws NoSuchMethodException, SecurityException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException {
 		myLevels = new ArrayList<>();
-//		myLevelNames = new ArrayList<>();
 		myActorMap = new HashMap<>();
-//		myActorNames = new ArrayList<>();
 		gameInfo = new GameInfo(myActorMap);
 		game = new Game(gameInfo, myLevels);
 		initializeGeneralComponents();
@@ -343,17 +328,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		return myLevels;
 	}
 
-//	public List<String> getLevelNames() {
-//		return myLevelNames;
-//	}
-
 	public Map<IAuthoringActor, List<IAuthoringActor>> getActorMap() {
 		return myActorMap;
 	}
-
-//	public List<String> getActorNames() {
-//		return myActorNames;
-//	}
 
 	/**
 	 * For each level that is created, adds it to the running list in this
