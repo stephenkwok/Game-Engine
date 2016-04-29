@@ -225,7 +225,7 @@ public class Game extends Observable implements Observer {
 		animation.stop();
 		if (levels.size() >= info.getMyCurrentLevelNum() + 1) {
 			setCurrentLevel(info.getMyCurrentLevelNum() + 1);
-			levels.get(info.getMyCurrentLevelNum()).getMainCharacter().setX(0);
+			//levels.get(info.getMyCurrentLevelNum()).getMainCharacter().setX(0);
 		}
 	}
 
