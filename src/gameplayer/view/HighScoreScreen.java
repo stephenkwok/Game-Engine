@@ -27,7 +27,7 @@ import javafx.scene.text.Text;
  * @author michaelfigueiras
  *
  */
-public class HighScoreScreen extends Screen implements Observer {
+public class HighScoreScreen extends Screen implements Observer, IHighScoreScreen {
 
 	private static final String SCORES_RESOURCE = "hsGUI";
 	private static final String TOP_BUTTONS = "TopButtons";
@@ -53,7 +53,7 @@ public class HighScoreScreen extends Screen implements Observer {
 	}
 
 	@Override
-	protected void initialize() {
+	public void initialize() {
 		myPane.setTop(addToolbar(TOP_BUTTONS));
 		addScorePane();
 		getRoot().getChildren().add(myPane);
