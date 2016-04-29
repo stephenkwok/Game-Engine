@@ -1,6 +1,7 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
+import gameengine.model.ActorState;
 import gameengine.model.IGameElement;
 
 /**
@@ -32,7 +33,9 @@ public class GlideTarget extends GlidingAction {
 	 */
 	@Override
 	public void perform() {
-		calcHeading((Actor)getMyActor(),targetActor);
+		if(!targetActor.checkState(ActorState.DEAD)){
+			calcHeading((Actor)getMyActor(),targetActor);
+		}
     	getMyActor().getPhysicsEngine().glideForward(getMyActor(),this.getGlideOffset());		
 
 	}
@@ -51,24 +54,17 @@ public class GlideTarget extends GlidingAction {
 			}
 		}
 		else if(verticalDiff > 0 && horizontalDiff > 0){
-			System.out.println("1");
 			assignedActor.setHeading(angle);
 			
 		}else if(verticalDiff < 0 && horizontalDiff < 0){
-			System.out.println("4");
-
 			assignedActor.setHeading(180+angle);
 			
 		}
 		else if(verticalDiff < 0 && horizontalDiff > 0){
-			System.out.println("2");
-
 			assignedActor.setHeading(360+angle);
 			
 		}
 		else if(verticalDiff > 0 && horizontalDiff < 0){
-			System.out.println("3");
-
 			assignedActor.setHeading(180+angle);
 			
 		}
