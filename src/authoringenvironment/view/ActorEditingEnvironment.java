@@ -4,6 +4,7 @@ import java.util.*;
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.*;
 import gameengine.model.Actor;
+import gameengine.model.IRule;
 import javafx.geometry.*;
 import gui.view.CheckBoxApplyPhysics;
 import javafx.scene.control.*;
@@ -32,8 +33,9 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final int LEFT_PANE_WIDTH = 350;
 	private static final int FIELD_HEIGHT = 400;
 	private static final String SET_RULE_LABEL = "Set Rules";
-	private static final String APPLY_PHYSICS = "Apply Physics";
+	private static final String APPLY_PHYSICS = "ApplyPhysics";
 	private static final int APPLY_PHYSICS_WIDTH = 150;
+	private static final Object TICK_KEY = "Tick";
 	private BorderPane myRoot;
 	private GUILibrary library;
 	private TabFields characteristics;
@@ -49,6 +51,8 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 
 	private Stage myStage;
 	private Controller myController;
+	
+	private CheckBoxApplyPhysics checkPhysics;
 
 	public ActorEditingEnvironment(ResourceBundle myResources, Stage stage, Controller myController) {
 		this.myResources = myResources;
@@ -98,7 +102,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		actorFields.getTabs().addAll(actorCharacteristics(), actorAttributes());
 		actorFields.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		actorFields.setPrefHeight(FIELD_HEIGHT);
-		CheckBoxApplyPhysics checkPhysics = new CheckBoxApplyPhysics(APPLY_PHYSICS, APPLY_PHYSICS_WIDTH, this);
+		checkPhysics = new CheckBoxApplyPhysics(APPLY_PHYSICS, APPLY_PHYSICS_WIDTH, this);
 		checkPhysics.addObserver(this);
 		vbox.getChildren().addAll(actorImageViewer.getPane(), checkPhysics.createNode(), actorFields, library.getPane());
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
@@ -211,5 +215,16 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		myController.updateActors((Actor) arg);
+	}
+	
+	protected boolean shouldApplyPhysics(){
+		if(myActor.getRules().get(TICK_KEY)!=null){
+			for(IRule rule: myActor.getRules().get(TICK_KEY)){
+				if(rule.getMyAction().getClass().getSimpleName().equals(APPLY_PHYSICS)){
+					return false;
+				}
+			}
+		}
+		return this.checkPhysics.isSelected();
 	}
 }
