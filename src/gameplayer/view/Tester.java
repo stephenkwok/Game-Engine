@@ -95,23 +95,16 @@ public class Tester extends Application {
         enemy2.setX(400);
         System.out.println(enemy2.getHeading());
         TickTrigger trigger = new TickTrigger();
-        Action moveForward = new GlideForward((Actor)enemy2, 2.0);
+        Action moveForward = new GlideForward((Actor)enemy2, 1.0);
         Rule movingForward = new Rule(trigger, moveForward);
         enemy2.addRule(movingForward);
         
-        //movng back and forth
+
         SideCollision triggerenemy = new SideCollision((Actor)enemy2,(Actor)blocky);
         Action actionenemy2 = new ReverseHeading((Actor)enemy2);
         Rule ruleenemy = new Rule(triggerenemy,actionenemy2);
         enemy2.addRule(ruleenemy);
 
-        //killing
-        TopCollision kill4 = new TopCollision((Actor)enemy2, (Actor)actor1);
-        Action killAction4 = new Destroy((Actor) enemy2);
-        Rule killRule4 = new Rule(kill4, killAction4);
-        ((Actor) enemy2).addRule(killRule4);
-        
-        
         //moves it left
 //        Action actionCollide = new MoveLeft((Actor)enemy2);
 //        Rule ruleCollide = new Rule(triggerenemy,actionCollide);
@@ -240,7 +233,7 @@ public class Tester extends Application {
 
         List<Level> levels = new ArrayList<Level>();
         Level level1 = new Level();
-        level1.setMyBackgroundImgName("mariobackground.png");
+        //level1.setMyBackgroundImgName("mariobackground.png");
         levels.add(level1);
         level1.addActor(actor1);
         level1.addActor(actor2);
@@ -256,7 +249,7 @@ public class Tester extends Application {
         level2.addActor(actor1);
 
         Level level3 = new Level();
-        level3.setMyBackgroundImgName("default_background.png");
+        level3.setMyBackgroundImgName("vgnwpGb.png");
         levels.add(level3);
         level3.addActor(actor1);
         
@@ -296,14 +289,11 @@ public class Tester extends Application {
             Action baction3 = new VerticalBounceCollision((Actor)actor1);
             Rule brule3 = new Rule(b3, baction3);
 
-
             TopCollision b4 = new TopCollision((Actor)actor1, block2);
             Action baction4 = new VerticalBounceCollision((Actor)actor1);
             Rule brule4 = new Rule(b4, baction4);
 
-            Action actionNextLevel2 = new NextLevel((IPlayActor) actor1);
-            Rule ruleNextLevel2 = new Rule(b4, actionNextLevel2);
-            ruleNextLevel2.setID(1);
+            Rule ruleNextLevel2 = new Rule(b4, actionNextLevel);
             actor1.addRule(ruleNextLevel2);
             actor1.addRule(brule3);
             actor1.addRule(brule4);
@@ -357,7 +347,7 @@ public class Tester extends Application {
             floor.setName("floor");
             floor.setID(5);
             floor.setImageViewName("square.png");
-//            floor.addState(ActorState.INVISIBLE);
+            //floor.addState(ActorState.INVISIBLE);
             floor.setX(i*50+i);
             floor.setY(500-floor.getBounds().getHeight());
             BottomCollision b = new BottomCollision((Actor)actor1, floor);
@@ -391,7 +381,8 @@ public class Tester extends Application {
 
         Group group = new Group();
         Scene scene = new Scene(group);
-        Game model = new Game(info, levels);
+
+        Game model = new Game(info,levels);
         model.setHUDInfoFile("a.txt");
         
         CreatorController c = new CreatorController(model);

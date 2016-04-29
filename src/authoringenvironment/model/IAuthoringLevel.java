@@ -16,4 +16,4 @@ public interface IAuthoringLevel extends IEditableGameElement{
 	public void setImageView(ImageView imageView);
 
 	public void setPlayPosition(int size);
-}
+} 

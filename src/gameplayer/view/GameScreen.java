@@ -229,15 +229,22 @@ public class GameScreen extends Observable implements IGameScreen {
 	}
 
 	@Override
+	public void addBackground(Level current) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public void pauseGame() {
-		getScene().setDisable(true);
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void toggleUnPause() {
-		getScene().setDisable(false);
+		// TODO Auto-generated method stub
 		
 	}
+
 
 }

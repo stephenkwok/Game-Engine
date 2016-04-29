@@ -59,7 +59,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final double SUBSCENE_WIDTH = 1000;
 	private static final double SUBSCENE_HEIGHT = 575;
 	private BorderPane myRoot;
-	private GUILevelInspector myInspector;
+	private LevelInspector myInspector;
 	private ResourceBundle myResources;
 	private VBox myLeftPane;
 	private Level myLevel;
@@ -169,7 +169,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	}
 
 	private void addChildrenToLeftPane() {
-		myInspector = new GUILevelInspector(myResources, availableActors.keySet(), this);
+		myInspector = new LevelInspector(myResources, availableActors.keySet(), this);
 		myLeftPane.getChildren().add(myInspector.getPane());
 		//AND HERE
 		myB = new Button("Preview");

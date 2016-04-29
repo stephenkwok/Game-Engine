@@ -45,7 +45,7 @@ public class CollisionDetection {
 			if(a1.getNextValues().hadCollision()){
 				changeValues(a1);
 			}
-			a1.getNextValues().setCollisoin(false);
+			a1.getNextValues().setCollision(false);
 		}
 		return list;
 	}

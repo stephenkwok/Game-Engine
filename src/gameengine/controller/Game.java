@@ -128,8 +128,8 @@ public class Game extends Observable implements Observer, IGame {
 	}
 
 	private void initCurrentLevel() {
-		getCurrentLevel().addObserver(this);
-	}
+		((Observable) getCurrentLevel()).addObserver(this);
+		}
 
 	/**
 	 * Initializes the current actors
@@ -296,7 +296,7 @@ public class Game extends Observable implements Observer, IGame {
 	 *
 	 * @return The Level that is currently being used
 	 */
-	public IPlayLevel getCurrentLevel() {
+	public Level getCurrentLevel() {
 		return levels.get(info.getMyCurrentLevelNum());
 	}
 

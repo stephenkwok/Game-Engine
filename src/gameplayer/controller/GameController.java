@@ -17,6 +17,7 @@ import gamedata.controller.ParserController;
 import gameengine.controller.Game;
 import gameengine.controller.IGame;
 import gameengine.controller.IPlayLevel;
+import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IDisplayActor;
 import gameengine.model.IPlayActor;
@@ -60,7 +61,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	 */
 	@Override
 	public void setGame(Game myGame) {
-		model = myGame;
+		model = (IGame) myGame;
 		((Observable) model).addObserver(this);
 	}
 
@@ -104,7 +105,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void begin() {
 		IPlayLevel current = model.getCurrentLevel();
 		view.clearGame();
-		view.addBackground(current);
+		view.addBackground((Level) current);
 		for (IPlayActor actor : model.getActors()) {
 			view.addActor((IDisplayActor) actor);
 		}
