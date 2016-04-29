@@ -56,14 +56,11 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private static final int WINDOW_HEIGHT = 700;
 	private static final int WINDOW_WIDTH = 1300;
 	private static final int PADDING = 10;
-	private static final String SPLASH_IMAGE_NAME = "salad.png";
 	private static final String EDITING_CONTROLLER_RESOURCE = "editingActions";
 	private static final String REQUIRES_ARG = "RequiresArg";
 	private static final String PRESET_ACTORS_RESOURCE = "presetActorsFactory";
 	private List<Level> myLevels;
-//	private List<String> myLevelNames;
 	private Map<IAuthoringActor, List<IAuthoringActor>> myActorMap;
-//	private List<String> myActorNames;
 	private LevelEditingEnvironment levelEnvironment;
 	private ActorEditingEnvironment actorEnvironment;
 	private GameEditingEnvironment gameEnvironment;
