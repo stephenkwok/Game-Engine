@@ -2,6 +2,7 @@ package authoringenvironment.view.behaviors;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
@@ -53,7 +54,7 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	private IRule myRule;
 
 	public SelectActorBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
-			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
+			IAuthoringActor myActor, List<IAuthoringActor> myActors, Map<Integer, List<IAuthoringActor>> myActorGroups) {
 		super(GO);
 		this.myRule = myRule;
 		this.behaviorType = behaviorType;
@@ -141,6 +142,7 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 		for (IAuthoringActor actor : myActors) {
 			toReturn.add(actor);
 		}
+		
 		return toReturn;
 	}
 

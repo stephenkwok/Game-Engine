@@ -80,7 +80,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private Scene splashScene;
 	private PopUpAuthoringHelpPage helpPage;
 	private ActorCopier myActorCopier;
-	private Map<Integer, List<IAuthoringActor>> myActorGroups;
+	private Map<Integer, ActorGroup> myActorGroups;
 
 	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
 	IllegalArgumentException, InvocationTargetException {
@@ -497,7 +497,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		
 	}
 	
-	public Map<Integer, List<IAuthoringActor>> getActorGroups() {
+	public Map<Integer, ActorGroup> getActorGroups() {
 		return myActorGroups;
 	}
 

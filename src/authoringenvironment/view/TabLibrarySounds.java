@@ -39,11 +39,11 @@ public class TabLibrarySounds extends TabLibrary {
 		fillMusicNames(); // also add music files
 		setLabels(FXCollections.observableArrayList());
 		for (String soundName : getFileNames()) {
-			//Label soundLabel = new Label(soundName, createPlaySoundButton(soundName));
-			//if (getActorRuleCreator() != null) {
-				//setDragEvent(soundLabel, TransferMode.COPY);
-			//}
-			//getLabels().add(soundLabel);
+			Label soundLabel = new Label(soundName, createPlaySoundButton(soundName));
+			if (getActorRuleCreator() != null) {
+				setDragEvent(soundLabel, TransferMode.COPY);
+			}
+			getLabels().add(soundLabel);
 		}
 		setListView(new ListView<>(getLabels()));
 	}

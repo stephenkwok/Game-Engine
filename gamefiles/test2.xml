@@ -3561,9 +3561,7 @@
       <myAttributeManager>
         <attributeMap/>
       </myAttributeManager>
-      <myMainCharacters>
-        <gameengine.model.Actor reference="../../myActors/gameengine.model.Actor"/>
-      </myMainCharacters>
+      <myMainCharacters/>
       <soundtrack>Jordan.mp3</soundtrack>
       <myBackgroundMusicName>Ink.mp3</myBackgroundMusicName>
     </gameengine.controller.Level>
@@ -3624,9 +3622,7 @@
       <myAttributeManager>
         <attributeMap/>
       </myAttributeManager>
-      <myMainCharacters>
-        <gameengine.model.Actor reference="../../../gameengine.controller.Level/myActors/gameengine.model.Actor"/>
-      </myMainCharacters>
+      <myMainCharacters/>
       <soundtrack>Robot.mp3</soundtrack>
       <myBackgroundMusicName>Ink.mp3</myBackgroundMusicName>
     </gameengine.controller.Level>

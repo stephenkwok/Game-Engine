@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.sun.javafx.collections.MappingChange.Map;
+
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IAuthoringBehavior;
@@ -82,10 +84,11 @@ public class ActorRuleFactory {
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 			Class<?> clazz = Class.forName(className);
 			Constructor<?> constructor = clazz.getConstructor(IRule.class, ActorRule.class, String.class, ResourceBundle.class, 
-					IAuthoringActor.class, List.class);
+					IAuthoringActor.class, List.class, Map.class);
 			List<IAuthoringActor> myActors = new ArrayList<>(myController.getActorMap().keySet());
+			Map<Integer, List<IAuthoringActor>> myGroupMap = (Map<Integer, List<IAuthoringActor>>) myController.getActorGroups();
 			return (IAuthoringBehavior) constructor.newInstance(rule, myActorRule, behaviorType, myResources,myActor, 
-					myActors);
+					myActors, myGroupMap);
 	}
 
 	/**

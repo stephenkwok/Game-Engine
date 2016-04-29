@@ -13,6 +13,7 @@ import gameplayer.controller.BaseScreenController;
 import gameplayer.controller.BranchScreenController;
 import gameplayer.controller.GameController;
 import gameplayer.controller.HighScoreScreenController;
+import gameplayer.controller.PlayType;
 import javafx.stage.Stage;
 
 public class FileChooserController extends BranchScreenController {

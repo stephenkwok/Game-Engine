@@ -41,8 +41,12 @@ public class GameController extends Observable implements Observer, IGameControl
 	private ResourceBundle myResources;
 	@XStreamOmitField
 	private static final String GAME_CONTROLLER_RESOURCE = "gameActions";
+	private PlayType myMode;
 
 	public GameController(Game game) {
+		this(game, PlayType.PLAY);
+	}
+	public GameController(Game game, PlayType mode) {
 		this.setGame(game);
 		this.setGameView(new GameScreen(new ParallelCamera()));
 		this.initialize(game.getInfo().getMyCurrentLevelNum()); // note: main
@@ -50,6 +54,7 @@ public class GameController extends Observable implements Observer, IGameControl
 																// define at
 																// this line
 		this.myResources = ResourceBundle.getBundle(GAME_CONTROLLER_RESOURCE);
+		this.myMode = mode;
 	}
 
 	/**
@@ -116,7 +121,9 @@ public class GameController extends Observable implements Observer, IGameControl
 	 */
 	public void endGame() {
 		model.stopGame();
-		view.terminateGame();
+		if (myMode == PlayType.PLAY) {
+			view.terminateGame();
+		}
 		getGame().setAllSound(true);
 	}
 	
@@ -236,7 +243,14 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void updateCamera() {
 		if (model.getCurrentLevel().getMainCharacters() != null) {
 			if (model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))) {
-				view.changeCamera(model.getCurrentLevel().getMainCharacters().get(0).getX(), 0);
+				try {
+//					System.out.println(model.getCurrentLevel().getMainCharacters().size());
+
+					view.changeCamera(model.getCurrentLevel().getMainCharacters().get(0).getX(), 0);
+				} catch (Exception e) {
+					model.stopGame();
+					e.printStackTrace();
+				}
 			} else {
 				view.changeCamera(0, model.getCurrentLevel().getMainCharacters().get(0).getY());
 			}

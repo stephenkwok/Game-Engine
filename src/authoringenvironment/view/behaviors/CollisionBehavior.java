@@ -2,6 +2,7 @@ package authoringenvironment.view.behaviors;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
@@ -16,8 +17,8 @@ public class CollisionBehavior extends SelectActorBehavior {
 	private ITrigger myTrigger;
 
 	public CollisionBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
-			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
-		super(myRule, myActorRule, behaviorType, myResources, myActor, myActors);
+			IAuthoringActor myActor, List<IAuthoringActor> myActors, Map<Integer, List<IAuthoringActor>> myActorGroups) {
+		super(myRule, myActorRule, behaviorType, myResources, myActor, myActors, myActorGroups);
 	}
 
 	@Override
