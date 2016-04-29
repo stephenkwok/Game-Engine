@@ -255,6 +255,11 @@ public class Tester extends Application {
         level1.addActor((IAuthoringActor)actor3);
         level1.addActor((IAuthoringActor) actor4);
         
+        Level level3 = new Level();
+        level3.setMyBackgroundImgName("vgnwpGb.png");
+        levels.add(level3);
+        level3.addActor(actor1);
+        
         
         Level level2 = new Level();
         level2.setMyBackgroundImgName("vgnwpGb.png");
@@ -267,11 +272,7 @@ public class Tester extends Application {
         level1.setSoundtrack("Jordan.mp3");
         level2.setSoundtrack("Robot.mp3");
 
-        Level level3 = new Level();
-        level3.setMyBackgroundImgName("vgnwpGb.png");
-        levels.add(level3);
-        level3.addActor(actor1);
-        
+
         int yposition = 200;
         int xposition = 150;
         for(int i=1; i<=7; i++){

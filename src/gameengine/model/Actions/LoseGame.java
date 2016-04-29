@@ -19,6 +19,7 @@ public class LoseGame extends Action {
 
 	@Override
 	public void perform() {
+		System.out.println("am i here");
 		getGameElement().changed();
 		ArrayList<String> myList = new ArrayList<String>();
 		myList.add("endGame");

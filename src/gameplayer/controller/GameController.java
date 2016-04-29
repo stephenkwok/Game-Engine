@@ -121,6 +121,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	 */
 	public void endGame() {
 		model.stopGame();
+		view.pauseGame();
 		if (myMode == PlayType.PLAY) {
 			view.terminateGame();
 		}
