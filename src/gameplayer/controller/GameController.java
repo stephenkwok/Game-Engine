@@ -136,6 +136,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void nextLevel() {
 		if (model.nextLevel()) {
 			view.clearGame();
+			model.nextLevel();
 			model.resetLevelTime();
 			begin();
 		}
@@ -220,6 +221,10 @@ public class GameController extends Observable implements Observer, IGameControl
 		Game initialGame = parserController.loadforPlaying(new File(getGame().getInitialGameFile()));
 		setGame(initialGame);
 		initialize(0);
+		
+		Object[] args = {"setUpHUDScreen", null};
+		setChanged();
+		notifyObservers(Arrays.asList(args));
 	}
 
 	public void updateCamera() {
