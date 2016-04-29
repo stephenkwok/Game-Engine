@@ -18,6 +18,7 @@ import org.xml.sax.SAXException;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.IAuthoringLevel;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gamedata.controller.CreatorController;
@@ -100,7 +101,11 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		Group group = new Group();
         Scene scene = new Scene(group);
 
-        model = new Game(new GameInfo(), myController.getLevels());
+        List<Level> levels = new ArrayList<Level>();
+        for (IAuthoringLevel level: myController.getLevels()) {
+        	levels.add((Level) level);
+        }
+        model = new Game(new GameInfo(), levels);
         CreatorController creatorController = new CreatorController(model);
         try {
 			creatorController.saveForPreviewing(myPreviewFile);
@@ -305,7 +310,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		myLevel = (Level) editable;
 		myLevelPreview.updateLevelPreview(myLevel);
 		updateActorsList();
-		myInspector.getAttributesTab().updateEditable(myLevel);
+		myInspector.getAttributesTab().updateEditable(editable);
 	}
 
 	public void changeBackgroundImage(Image image, File imageFile) {

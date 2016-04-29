@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-import gameengine.controller.ILevel;
+import gameengine.controller.IPlayLevel;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IActor;
@@ -85,7 +85,7 @@ public class GameScreen extends Observable implements IGameScreen {
 		mySubgroup.getChildren().remove(a.getImageView());
 	}
 
-	public void addBackground(ILevel current) {
+	public void addBackground(IPlayLevel current) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(current.getMyBackgroundImgName()));
 		this.myEndHorizontal = image.getWidth();
 		this.myEndVertical = image.getHeight();

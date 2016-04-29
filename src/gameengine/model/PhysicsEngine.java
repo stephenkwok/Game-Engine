@@ -111,7 +111,6 @@ public class PhysicsEngine {
 	}
 	private double bound(double pos){
 		if(pos<0){ 
-			System.out.println("out");
 			return 0; } 
 		return pos; 
 	}

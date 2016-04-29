@@ -12,7 +12,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import gamedata.controller.HighScoresController;
 import gameengine.controller.Game;
-import gameengine.controller.ILevel;
+import gameengine.controller.IPlayLevel;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IDisplayActor;
@@ -99,7 +99,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	 * Will play the animation timeline.
 	 */
 	public void begin() {
-		ILevel current = model.getCurrentLevel();
+		IPlayLevel current = model.getCurrentLevel();
 		view.clearGame();
 		view.addBackground(current);
 		for (IPlayActor actor : model.getActors()) {

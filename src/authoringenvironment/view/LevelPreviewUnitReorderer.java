@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import authoringenvironment.model.IAuthoringLevel;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Level;
 import gui.view.PopUpParent;
@@ -39,11 +40,15 @@ public class LevelPreviewUnitReorderer {
 	private Set<Integer> uniquePlayPositions;
 
 	public LevelPreviewUnitReorderer(List<PreviewUnitWithLevel> levelPreviewUnits, VBox previewUnitsContainer,
-			List<Level> levels, IEditingEnvironment levelEditor, List<PreviewUnitWithEditable> allPreviewUnits,
+			List<IAuthoringLevel> levels, IEditingEnvironment levelEditor, List<PreviewUnitWithEditable> allPreviewUnits,
 			GUIMainScreen mainScreen) {
 		myLevelPreviewUnits = levelPreviewUnits;
 		myPreviewUnitsContainer = previewUnitsContainer;
-		myLevels = levels;
+		myLevels = new ArrayList<Level>();
+		for (IAuthoringLevel level: levels) {
+			myLevels.add((Level) level);
+		}
+		//myLevels = levels;
 		myLevelEditor = levelEditor;
 		myPreviewUnits = allPreviewUnits;
 		myMainScreen = mainScreen;
@@ -72,7 +77,7 @@ public class LevelPreviewUnitReorderer {
 		myLevelPreviewUnits.clear();
 		myPreviewUnitsContainer.getChildren().clear();
 		Collections.sort(myLevels);
-		myLevels.stream().forEach(level -> myMainScreen.createLevelPreviewUnit(level, myLevelEditor));
+		myLevels.stream().forEach(level -> myMainScreen.createLevelPreviewUnit((IAuthoringLevel) level, myLevelEditor));
 		myPreviewUnits.stream().filter(unit -> myPreviewUnitsContainer.getChildren().contains(unit));
 		myMainScreen.updatePreviewUnits();
 	}

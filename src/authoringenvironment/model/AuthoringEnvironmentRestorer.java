@@ -16,9 +16,9 @@ import javafx.scene.image.ImageView;
 public class AuthoringEnvironmentRestorer {
 
 	private final Map<IAuthoringActor, List<IAuthoringActor>> myActorMap;
-	private final List<Level> myLevels;
+	private final List<IAuthoringLevel> myLevels;
 
-	public AuthoringEnvironmentRestorer(Map<IAuthoringActor, List<IAuthoringActor>> actorMap, List<Level> levels) {
+	public AuthoringEnvironmentRestorer(Map<IAuthoringActor, List<IAuthoringActor>> actorMap, List<IAuthoringLevel> levels) {
 		myActorMap = actorMap;
 		myLevels = levels;
 	}

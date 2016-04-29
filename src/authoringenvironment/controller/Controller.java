@@ -44,7 +44,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private static final String EDITING_CONTROLLER_RESOURCE = "editingActions";
 	private static final String REQUIRES_ARG = "RequiresArg";
 	private static final String PRESET_ACTORS_RESOURCE = "presetActorsFactory";
-	private List<Level> myLevels;
+	private List<IAuthoringLevel> myLevels;
 //	private List<String> myLevelNames;
 	private Map<IAuthoringActor, List<IAuthoringActor>> myActorMap;
 //	private List<String> myActorNames;
@@ -108,7 +108,11 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		myActorMap = new HashMap<>();
 //		myActorNames = new ArrayList<>();
 		gameInfo = new GameInfo(myActorMap);
-		game = new Game(gameInfo, myLevels);
+		List<Level> levels = new ArrayList<Level>();
+		for (IAuthoringLevel level: myLevels) {
+			levels.add((Level) level);
+		}
+		game = new Game(gameInfo, levels);
 		initializeGeneralComponents();
 		initializePresetActors();
 		addDefaultLevel();
@@ -126,7 +130,11 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * Initializes controller for previously created game
 	 */
 	public void initExistingGame() {
-		myLevels = game.getLevels();
+		//myLevels = game.getLevels();
+		myLevels = new ArrayList<IAuthoringLevel>();
+		for (Level level: game.getLevels()) {
+			myLevels.add((IAuthoringLevel) level);
+		}
 		gameInfo = game.getInfo();
 		myActorMap = gameInfo.getActorMap();
 		AuthoringEnvironmentRestorer restorer = new AuthoringEnvironmentRestorer(myActorMap, myLevels);
@@ -282,7 +290,11 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		File initialDirectory = new File("gamefiles");
 		fileChooser.setInitialDirectory(initialDirectory);
 		File file = fileChooser.showSaveDialog(new Stage());
-		CreatorController controller = new CreatorController(new Game(gameInfo, myLevels));
+		List<Level> levels = new ArrayList<Level>();
+		for (IAuthoringLevel level: myLevels) {
+			levels.add((Level) level);
+		}
+		CreatorController controller = new CreatorController(new Game(gameInfo, levels));
 		if (file != null) {
 			try {
 				controller.saveForEditing(file);
@@ -304,7 +316,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * 
 	 * @return
 	 */
-	public List<Level> getLevels() {
+	public List<IAuthoringLevel> getLevels() {
 		return myLevels;
 	}
 
@@ -327,11 +339,11 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * @param newLevel
 	 */
 	public void addLevel() {
-		Level newLevel = new Level();
+		IAuthoringLevel newLevel = (IAuthoringLevel) new Level();
 		newLevel.setPlayPosition(myLevels.size());
-		myLevels.add(newLevel);
+		myLevels.add((IAuthoringLevel) newLevel);
 //		myLevelNames.add(newLevel.getName());
-		mainScreen.createLevelPreviewUnit(newLevel, levelEnvironment);
+		mainScreen.createLevelPreviewUnit((IAuthoringLevel) newLevel, levelEnvironment);
 		goToEditingEnvironment(newLevel, levelEnvironment);
 	}
 

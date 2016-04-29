@@ -2,7 +2,9 @@ package gameengine.model;
 
 import gameengine.model.IRule;
 import gameengine.model.Actions.Action;
+import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.TopCollision;
 
 /**
  * Contains a trigger and linked action to be performed when the trigger is
@@ -67,5 +69,10 @@ public class Rule implements IRule{
 	public String toString() {
 		String id = Integer.toString(ID);
 		return ("id: " + id);
+	}
+	
+	@Override
+	public boolean equals(Object other){
+		return ((Rule)other).getMyAction().equals(getMyAction()) && myTrigger.equals(((Rule)other).getMyTrigger());
 	}
 }

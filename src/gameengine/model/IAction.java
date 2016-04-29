@@ -1,5 +1,7 @@
 package gameengine.model;
 
+import gameengine.model.Actions.Action;
+
 /**
  * This interface defines the public methods that each Action subclass will
  * have. We want to keep our Actions modular so that any Action can be used in
@@ -17,5 +19,6 @@ public interface IAction {
 	 */
 
 	public void perform();
+
 
 }

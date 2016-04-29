@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author blakekaplan
  */
-public interface ILevel extends IGameElement {
+public interface IPlayLevel extends IGameElement {
 
 	/**
 	 * Provides all of the Actors to be visualized by the player

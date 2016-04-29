@@ -3,11 +3,13 @@ package gameengine.controller;
 import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+import authoringenvironment.model.IAuthoringLevel;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.*;
 import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.Timeline;import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 /**
@@ -26,7 +28,7 @@ public class Game extends Observable implements Observer {
 	private static final int BACKGROUND_SCROLL_SPEED = -1;
 
 	private String initialGameFile;
-	private List<ILevel> levels;
+	private List<Level> levels;
 	private GameInfo info;
 	private PhysicsEngine myPhysicsEngine;
 	private CollisionDetection myCollisionDetector;
@@ -40,8 +42,8 @@ public class Game extends Observable implements Observer {
     
     
     
-    public Game(String initialGameFile, 
-    		List<ILevel> levels, 
+    public Game(String initialGameFile,
+    		List<Level> levels,
     		GameInfo info, 
     		PhysicsEngine myPhysicsEngine,
     		CollisionDetection myCollisionDetector, 
@@ -69,11 +71,11 @@ public class Game extends Observable implements Observer {
      *
      * @param gameFilePath  The game's filepath
      * @param gameInfo      The game info associated with the game
-     * @param gameLevels    All the levels in the game
+     * @param myLevels    All the levels in the game
      */
-	public Game(String gameFilePath, GameInfo gameInfo, List<ILevel> gameLevels) {
+	public Game(String gameFilePath, GameInfo gameInfo, List<Level> myLevels) {
 		initialGameFile = gameFilePath;
-		levels = gameLevels;
+		levels = myLevels;
 		info = gameInfo;
 		currentActors = new ArrayList<IPlayActor>();
 		deadActors = new ArrayList<IPlayActor>();
@@ -101,11 +103,11 @@ public class Game extends Observable implements Observer {
 		//getAnimation().setCycleCount(0);
 	}
 
-	public Game(GameInfo gameInfo, List<ILevel> gameLevels) {
-		this(null, gameInfo, gameLevels);
+	public Game(GameInfo gameInfo, List<Level> myLevels) {
+		this(null, gameInfo, myLevels);
 	}
 
-	public Game(List<ILevel> gameLevels) {
+	public Game(List<Level> gameLevels) {
 		this(new GameInfo(), gameLevels);
 	}
 
@@ -204,7 +206,7 @@ public class Game extends Observable implements Observer {
 	 * @param levels
 	 *            The desired game Levels
 	 */
-	public void setLevels(List<ILevel> levels) {
+	public void setLevels(List<Level> levels) {
 		this.levels = levels;
 	}
 
@@ -213,8 +215,12 @@ public class Game extends Observable implements Observer {
 	 *
 	 * @return a list of all levels in the game
 	 */
-	public List<ILevel> getLevels() {
-		return levels;
+	public List<Level> getLevels() {
+		List<Level> levelList = new ArrayList<Level>();
+		for(IPlayLevel playLevel: levels){
+			levelList.add((Level)playLevel);
+		}
+		return levelList;
 	}
 
 	/**
@@ -223,17 +229,14 @@ public class Game extends Observable implements Observer {
 
 	public void nextLevel() {
 		animation.stop();
-		if (levels.size() >= info.getMyCurrentLevelNum() + 1) {
+		if (info.getMyCurrentLevelNum() + 1 < levels.size()) {
 			setCurrentLevel(info.getMyCurrentLevelNum() + 1);
 			levels.get(info.getMyCurrentLevelNum()).getMainCharacter().setX(0);
 		} else {
 			this.setChanged();
 	        ArrayList<String> myList = new ArrayList<String>();
-	        System.out.println("1");
 	        myList.add("endGame");
-	        System.out.println("2");
 	        this.notifyObservers(myList);
-	        System.out.println("3");
 		}
 	}
 
@@ -289,7 +292,7 @@ public class Game extends Observable implements Observer {
 	 *
 	 * @return The Level that is currently being used
 	 */
-	public ILevel getCurrentLevel() {
+	public IPlayLevel getCurrentLevel() {
 		return levels.get(info.getMyCurrentLevelNum());
 	}
 

@@ -51,4 +51,9 @@ public class TickTrigger extends ITrigger {
 			return true;
 		return false;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		return this.getClass().equals(o.getClass()) && (myInterval!=null && myInterval.equals(((TickTrigger)o).getMyInterval()));
+	}
 }

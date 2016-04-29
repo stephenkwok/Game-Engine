@@ -4,7 +4,7 @@ package gameplayer.view;
 import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
-import gameengine.controller.ILevel;
+import gameengine.controller.IPlayLevel;
 import gameengine.controller.Level;
 import gameengine.model.Actions.*;
 import gameengine.model.Actor;
@@ -51,7 +51,7 @@ public class DoodleJump extends Application {
         info.setMyCurrentLevelNum(0);
         info.setName("Doodle Jump");
 
-        List<ILevel> levels = new ArrayList<>();
+        List<Level> levels = new ArrayList<>();
 
         Level level1 = new Level();
         level1.setMyScrollingDirection("Vertically");

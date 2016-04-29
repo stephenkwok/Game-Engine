@@ -1,6 +1,7 @@
 package gameengine.controller;
 
 import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.IAuthoringLevel;
 import gameengine.model.Actor;
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;
@@ -24,6 +25,7 @@ import java.util.*;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingEnvironment;
 
 /**
  * A Level is essentially a package of Actor objects. It is able to relay a
@@ -31,7 +33,7 @@ import authoringenvironment.model.IEditableGameElement;
  *
  * @author blakekaplan
  */
-public class Level extends Observable implements ILevel, IEditableGameElement, Comparable<Level>, IGameElement {
+public class Level extends Observable implements IPlayLevel, IAuthoringLevel, Comparable<Level>, IGameElement {
 
 	private static final String DEFAULT_NAME = "Default";
 	private static final String DEFAULT_IMAGE_NAME = "default_landscape.png";
@@ -379,6 +381,18 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
     public Bounds getBounds(){
         return myBackground.getBoundsInLocal();
     }
+
+	@Override
+	public void PreviewUnitWithEditable(IAuthoringLevel level, IEditingEnvironment environment) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<IPlayLevel> getLevels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 	

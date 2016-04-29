@@ -32,13 +32,13 @@ public class GUIMainScreen implements IGUI, Observer {
 	private BorderPane borderPane;
 	private List<PreviewUnitWithEditable> allPreviewUnits;
 	private List<PreviewUnitWithLevel> levelPreviewUnits;
-	private List<Level> levels;
+	private List<IAuthoringLevel> levels;
 	private IEditingEnvironment levelEditor;
 	private GameEditingEnvironment gameEditor;
 	private Stage stage;
 	private Controller controller;
 
-	public GUIMainScreen(GameEditingEnvironment gameEditor, Controller controller, Stage stage, List<Level> levels,
+	public GUIMainScreen(GameEditingEnvironment gameEditor, Controller controller, Stage stage, List<IAuthoringLevel> levels,
 			IEditingEnvironment levelEditor) {
 		this.gameEditor = gameEditor;
 		this.levels = levels;
@@ -207,7 +207,7 @@ public class GUIMainScreen implements IGUI, Observer {
 	 *            IEditingEnvironment in which Level is to be edited
 	 * @return a LabelClickable associated with a Level
 	 */
-	public void createLevelPreviewUnit(Level level, IEditingEnvironment levelEditor) {
+	public void createLevelPreviewUnit(IAuthoringLevel level, IEditingEnvironment levelEditor) {
 		PreviewUnitWithLevel levelPreviewUnit = new PreviewUnitWithLevel(level, levelEditor);
 		initializePreviewUnit(levelPreviewUnit, levelPreviewContainer);
 		levelPreviewUnits.add(levelPreviewUnit);
