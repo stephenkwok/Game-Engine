@@ -5,11 +5,15 @@ import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class TextFieldAttributeEditor extends TextFieldWithButton {
 	private static final double DEFAULT_HEALTH = 0;
 	private static final String REMOVE = "X";
 	private static final String HEALTH_LABEL = "Health:";
+	private static final String NO_ATTRIBUTE_ALERT = "Nothing to remove.";
+	private static final String NO_ATTRIBUTE_HEADER = "Attribute not yet set.";
 	private AttributeType attributeType;
 	
 	public TextFieldAttributeEditor(String labelText, String promptText, Double textFieldWidth) {
@@ -29,7 +33,14 @@ public class TextFieldAttributeEditor extends TextFieldWithButton {
 	private void createRemoveButton(){
 		Button removeAttributeButton = new Button(REMOVE);
 		removeAttributeButton.setOnAction(event->{
-			((Actor) getEditableElement()).removeAttribute(((Actor) getEditableElement()).getAttribute(attributeType));
+			try{
+				((Actor) getEditableElement()).removeAttribute(((Actor) getEditableElement()).getAttribute(attributeType));
+			}catch(Exception e){
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText(NO_ATTRIBUTE_HEADER);
+				alert.setContentText(NO_ATTRIBUTE_ALERT);
+				alert.showAndWait();
+			}
 		});
 		getMyHBox().getChildren().add(removeAttributeButton);
 	}

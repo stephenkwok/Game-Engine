@@ -9,6 +9,7 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.model.Actor;
+import gui.view.CheckBoxApplyPhysics;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -111,7 +112,9 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		actorFields.getTabs().addAll(actorCharacteristics(), actorAttributes());
 		actorFields.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		actorFields.setPrefHeight(FIELD_HEIGHT);
-		vbox.getChildren().addAll(actorImageViewer.getPane(), actorFields, library.getPane());
+		//
+		CheckBoxApplyPhysics checkPhysics = new CheckBoxApplyPhysics("Apply Physics", 100, this);
+		vbox.getChildren().addAll(actorImageViewer.getPane(), actorFields, library.getPane(), checkPhysics.createNode());
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
 		myRoot.setLeft(vbox);
 	}
@@ -122,6 +125,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		characteristics.updateEditable(myActor);
 		return characteristics.getTab();
 	}
+	//CheckBoxApplyPhysics checkPhysics = new CheckBoxApplyPhysics("Apply Physics", 100, this);
 	
 	private Tab actorAttributes(){
 		attributes = new TabFields(myResources, ACTOR_ATTRIBUTES, ACTOR_ATTRIBUTES_RESOURCE, myActor);
