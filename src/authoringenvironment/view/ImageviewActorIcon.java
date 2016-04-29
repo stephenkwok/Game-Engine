@@ -15,7 +15,6 @@ public class ImageviewActorIcon extends ImageView {
 	private int myID;
 	private boolean onLevel;
 	private ActorCopier myActorCopier;
-	private static int THRESHOLD = 100;
 
 	/**
 	 * Construct an icon for a given actor.
@@ -37,14 +36,6 @@ public class ImageviewActorIcon extends ImageView {
 	}
 
 	public IAuthoringActor getActor() {
-		//IAuthoringActor actor = new Actor();
-		/*actor.setName(myActor.getName());
-		actor.setImageViewName(myActor.getImageViewName());
-		actor.setImageView(myActor.getImageView());
-		actor.setID(myActor.getMyID());
-		actor.setSize(myActor.getSize());*/
-		//copyActor(actor, myActor);
-		//return actor;
 		return myActorCopier.makeCopy();
 	}
 

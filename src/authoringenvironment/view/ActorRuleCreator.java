@@ -29,6 +29,8 @@ public class ActorRuleCreator {
 	private static final double CONTAINERS_PERCENT_WIDTH = 0.75;
 	private static final Object CHANGE_ATTRIBUTE = "ChangeAttribute";
 	private static final int ZERO = 0;
+	private static final String POINTS = "POINTS";
+	private static final String HEALTH = "HEALTH";
 	private int ruleRow;
 	private GridPane myActorRuleCreatorPane;
 	private List<ActorRule> myActorRules;
@@ -124,7 +126,7 @@ public class ActorRuleCreator {
 		resetEnvironment();
 		for (String triggerType : ((Actor) aEE.getEditable()).getRules().keySet()) {
 			ActorRule toAdd = new ActorRule(this);
-			toAdd.addBehavior(checkForKeyTrigger(triggerType), 
+			toAdd.addBehavior(checkForKeyOrAttributeTrigger(triggerType), 
 					((Actor) aEE.getEditable()).getRules().get(triggerType).get(ZERO));
 			for (IRule rule : ((Actor) aEE.getEditable()).getRules().get(triggerType)) {
 				String simpleName = rule.getMyAction().getClass().getSimpleName();
@@ -166,10 +168,14 @@ public class ActorRuleCreator {
 		}
 	}
 
-	private String checkForKeyTrigger(String triggerType) {
+	private String checkForKeyOrAttributeTrigger(String triggerType) {
 		if (Arrays.asList(myActionResources.getString("KeyInputs").split(" ")).contains(triggerType)) {
 			return KEY;
-		} 
+		}else if(triggerType.contains(POINTS)){
+			return myActionResources.getString(POINTS);
+		}else if(triggerType.contains(HEALTH)){
+			return myActionResources.getString(HEALTH);
+		}
 		return triggerType;
 	}
 

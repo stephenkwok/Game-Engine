@@ -42,7 +42,6 @@ public class TickBehavior extends DoubleBehavior {
 		try{
 			setTextFieldValue(Integer.toString(((TickTrigger) getMyRule().getMyTrigger()).getMyInterval()));
 		}catch(Exception e){
-			e.printStackTrace();
 		}
 	}
 }
