@@ -88,9 +88,9 @@ public class GUIFactory {
 		
 		try {
 			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class);
-			if (elementType.equals("CheckBoxObject")) {
+			if (elementType.equals("ComboBox")) {
 				try {
-					createCheckBoxObject(nodeType, className);
+					createComboBox(nodeType, className);
 				} catch (ClassNotFoundException | InstantiationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

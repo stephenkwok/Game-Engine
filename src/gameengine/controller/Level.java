@@ -52,6 +52,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	private RuleManager myRuleManager;
 	private AttributeManager myAttributeManager;
 	private String soundtrack;
+	private String myBackgroundMusicName;
 	
 	/**
 	 * Instantiates the triggerMap and Actor list
@@ -387,6 +388,14 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
     
     public String getSoundtrack() {
     	return soundtrack;
+    }
+    
+    public void setMyBackgroundMusicName(String name) {
+    	myBackgroundMusicName = name;
+    }
+    
+    public String getMyBackgroundMusicName() {
+    	return myBackgroundMusicName;
     }
     
 }

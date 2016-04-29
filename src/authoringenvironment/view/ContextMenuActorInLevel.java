@@ -29,7 +29,6 @@ public class ContextMenuActorInLevel extends ContextMenu {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				if (curIcon != null) {
-					System.out.println("blurp");
 					myLevelPreview.removeActorFromLevel(curIcon);
 				}
 			}
