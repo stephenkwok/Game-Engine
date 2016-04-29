@@ -504,6 +504,7 @@
       <myMainCharacters/>
       <soundtrack>Photograph.mp3</soundtrack>
       <myBackgroundMusicName>Ink.mp3</myBackgroundMusicName>
+      <myGarbageCollectors/>
     </gameengine.controller.Level>
   </levels>
   <info>

@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 /**
@@ -19,6 +20,9 @@ import javafx.scene.text.Font;
 public class PopUpAuthoringHelpPage extends PopUpParent {
 
 	private static final String RESOURCE_BUNDLE_KEY = "helpPage";
+	private static final String TOPICS = "Topics";
+	private static final String HEADER = "Header";
+	private static final String SUBTOPICS = "Subtopics";
 	private static final String ACTOR_ENVIRONMENT_QUESTIONS_KEY = "ActorQuestions";
 	private static final String LEVEL_ENVIRONMENT_QUESTIONS_KEY = "LevelQuestions";
 	private static final String TEXT = "Text";
@@ -29,9 +33,13 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 	private static final int POPUP_WIDTH = 400;
 	private static final int POPUP_HEIGHT = 600;
 	private static final double HEADER_FONT_SIZE = 20.0;
+	private static final double TOPIC_HEADER_FONT_SIZE = 15.0;
+	private static final double SUBTOPIC_HEADER_FONT_SIZE = 12.0;
+	
 	private final ResourceBundle myResources;
-	private List<String> actorEnvironmentQuestions;
-	private List<String> levelEnvironmentQuestions;
+//	private List<String> actorEnvironmentQuestions;
+//	private List<String> levelEnvironmentQuestions;
+	private List<String> topics;
 
 	public PopUpAuthoringHelpPage(String elementName) {
 		super(POPUP_WIDTH, POPUP_HEIGHT);
@@ -48,16 +56,40 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 	private void initializeContainerSettings() {
 		getContainer().setAlignment(Pos.TOP_LEFT);
 	}
+	
+	private Label createHeader(String headerText, double fontSize) {
+		Label header = new Label(headerText);
+		header.setStyle(BOLD_FONT);
+		header.setFont(new Font(fontSize));
+		return header;
+	}
 
 	/**
 	 * Initializes the contents of the pop up
 	 */
 	private void initializePageContents(String elementName) {
 		initializeHeader();
+		topics = Arrays.asList(myResources.getString(TOPICS).split(DELIMITER));
+		for (String topic : topics) {
+			
+		}
+		
 		addQuestionAndAnswerToPage(elementName + TEXT);
 		/*actorEnvironmentQuestions = Arrays
 				.asList(myResources.getString(ACTOR_ENVIRONMENT_QUESTIONS_KEY).split(DELIMITER));
 		actorEnvironmentQuestions.stream().forEach(questionKey -> addQuestionAndAnswerToPage(questionKey));*/
+	}
+	
+	private VBox createTopicContent(String topic) {
+		VBox topicContainer = new VBox();
+		String topicHeaderText = myResources.getString(topic + HEADER);
+		Label topicHeader = createHeader(topicHeaderText, TOPIC_HEADER_FONT_SIZE);
+		
+		List<String> subtopics = Arrays.asList(myResources.getString(topic + SUBTOPICS).split(DELIMITER));
+//		for (String subtopic : )
+//		String subtopicHeader = myResources.getString(subtopic + HEADER);
+		return topicContainer;
+		
 	}
 	
 	/**
