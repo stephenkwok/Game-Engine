@@ -2,7 +2,7 @@ package gamedata.controller;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -49,7 +49,7 @@ public interface IHighScoresController {
 	 * @throws IOException
 	 * @throws TransformerException
 	 */
-	public void saveHighScore(int score, String player)
+	public void saveHighScore(List<Integer> score, List<String> player)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException;
 
 	/**
@@ -59,5 +59,6 @@ public interface IHighScoresController {
 	 * @throws ParserConfigurationException
 	 */
 	public void clearHighScores() throws SAXException, IOException, ParserConfigurationException, TransformerException;
+
 
 }

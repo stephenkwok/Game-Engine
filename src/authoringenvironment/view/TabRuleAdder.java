@@ -41,8 +41,9 @@ public class TabRuleAdder extends TabParent implements Observer{
 	private Button myButton;
 	private Level myLevel;
 	private LevelEditingEnvironment myLevelEditor;
+	private TabLevelRuleEditor myRuleEditor;
 	
-	public TabRuleAdder(ResourceBundle myResources, String tabText, LevelEditingEnvironment environment) {
+	public TabRuleAdder(ResourceBundle myResources, String tabText, LevelEditingEnvironment environment, TabLevelRuleEditor ruleEditor) {
 		super(myResources, tabText);
 		myContainer = new VBox();
 		myContainer.setPadding(new Insets(PADDING));
@@ -52,6 +53,7 @@ public class TabRuleAdder extends TabParent implements Observer{
 		myButton.setOnAction(e -> createAndAddRule());
 		init();
 		myContainer.getChildren().add(myButton);	
+		myRuleEditor = ruleEditor;
 	}
 
 	private void init() {
@@ -119,6 +121,7 @@ public class TabRuleAdder extends TabParent implements Observer{
 		ITrigger trigger = ((ITriggerCreator) myTriggerCreator).createTrigger();
 		Action action = ((IActionCreator) myActionCreator).createAction();
 		myLevel.addRule(new Rule(trigger, action));
+		myRuleEditor.updateRules();
 	}
 	
 	@Override

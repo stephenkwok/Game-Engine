@@ -2,6 +2,7 @@ package gui.view;
 
 import java.io.File;
 
+import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorEditingEnvironment;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -26,6 +27,7 @@ public class ComboBoxActorImages extends ComboBoxImageCell {
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(getComboBox().getValue()));
 			try {
 				aEE.setActorImage(new ImageView(image), getComboBox().getValue());
+				notifyObservers((IAuthoringActor) aEE.getEditable());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

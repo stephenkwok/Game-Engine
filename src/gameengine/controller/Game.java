@@ -257,9 +257,13 @@ public class Game extends Observable implements Observer, IGame {
 		animation.stop();
 		if (info.getMyCurrentLevelNum() + 1 < levels.size()) {
 			setCurrentLevel(info.getMyCurrentLevelNum() + 1);
+			
 			levels.get(info.getMyCurrentLevelNum()).getActors().stream()
 					.forEach(actor -> ((Actor) actor).restoreImageView()); // Stephen added this
 			levels.get(info.getMyCurrentLevelNum()).getMainCharacter().setX(0);
+
+			//levels.get(info.getMyCurrentLevelNum()).getMainCharacters().forEach(actor -> actor.setX(0));
+
 			return true;
 		} else {
 			return false;
@@ -414,8 +418,12 @@ public class Game extends Observable implements Observer, IGame {
 		this.animation = animation;
 	}
 
-	public int getScore() {
-		return getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getMyValue();
+	public List<Integer> getScores() {
+		List<Integer> scores = new ArrayList<>();
+		for (IPlayActor actor: getCurrentLevel().getMainCharacters()) {
+			scores.add(actor.getAttribute(AttributeType.POINTS).getMyValue());
+		}
+		return scores;
 	}
 
 	public void setHUDInfoFile(String location) {
