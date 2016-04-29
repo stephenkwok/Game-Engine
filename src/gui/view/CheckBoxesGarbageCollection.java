@@ -46,6 +46,8 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	private static final String STRETCH_HORIZONTAL = "StretchHorizontal";
 	private static final String ADD_TO_IMAGE_DIMENSIONS = "AddToImageDimensions";
 	private static final String TRIGGER_DIRECTORY = "gameengine.model.Triggers.";
+	private static final String GAMESIDE = "gameside.png";
+	private static final String FLOOR = "floor.png";
 	private static final String X = "X";
 	private static final String Y = "Y";
 	private List<String> allSides;
@@ -127,7 +129,8 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 				garbageCollector.setImageView(new ImageView(new Image(myAttributesResources.getString(sides.get(i) + IMAGE))));
 				garbageCollector.setImageViewName(myAttributesResources.getString(sides.get(i) + IMAGE));
 				if (Arrays.asList(myAttributesResources.getString(STRETCH_VERTICAL).split(DELIMITER)).contains(sides.get(i))) {
-					garbageCollector.setSize(myLevel.getMyHeight());
+					//garbageCollector.getImageView().setPreserveRatio(false);
+					//garbageCollector.getImageView().setFitHeight((myLevel.getMyHeight()));
 					if (Arrays.asList(myAttributesResources.getString(ADD_TO_IMAGE_DIMENSIONS).split(DELIMITER)).contains(sides.get(i))) {
 						garbageCollector.setX(myLevel.getImageView().getFitWidth() + Double.parseDouble(myAttributesResources.getString(sides.get(i) + X)));
 					} else {
