@@ -36,4 +36,10 @@ public class OffsetBehavior extends DoubleBehavior {
 		return false;
 	}
 
+	@Override
+	public void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

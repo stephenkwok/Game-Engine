@@ -23,7 +23,7 @@ import javafx.scene.paint.Color;
 public class ActorImageViewer implements IGUI {
 	private static final String AVAILABLE_ACTOR_IMAGES = "Available Images";
 	private static final String AVAILABLE_SPRITE_IMAGES = "Available Sprites";
-	private static final String IMAGE_RESOURCE = "authoringimages";
+	private static final String IMAGE_RESOURCE = "images";
 	private static final double DEFAULT_HEIGHT = 20;
 	private static final int PADDING = 10;
 	private static final String BUTTON_LABEL = "Load Image...";
@@ -75,13 +75,11 @@ public class ActorImageViewer implements IGUI {
 	
 	private VBox getSpritesComboBox(){
 		HBox sprites = new HBox(PADDING);
-		sprites.setPrefSize(100, 200);
 		populateSprites(sprites);
 		ComboBoxSpriteImages spriteImages = new ComboBoxSpriteImages(AVAILABLE_SPRITE_IMAGES, IMAGE_RESOURCE, aEE, sprites);
 		HBox spriteCombo = (HBox) spriteImages.createNode();
 		VBox toReturn = new VBox(PADDING);
 		toReturn.getChildren().addAll(spriteCombo, sprites);
-		toReturn.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		return toReturn;
 	}
 

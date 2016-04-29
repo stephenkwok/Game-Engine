@@ -44,4 +44,10 @@ public class SelfActionBehavior extends LabelBehavior {
 		return false;
 	}
 
+	@Override
+	public void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

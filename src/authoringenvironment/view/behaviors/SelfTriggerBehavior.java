@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.ActorRule;
-import gameengine.model.IAction;
 import gameengine.model.Triggers.ITrigger;
 
 public class SelfTriggerBehavior extends LabelBehavior {
@@ -39,6 +38,12 @@ public class SelfTriggerBehavior extends LabelBehavior {
 	@Override
 	public boolean isTrigger() {
 		return true;
+	}
+
+	@Override
+	public void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

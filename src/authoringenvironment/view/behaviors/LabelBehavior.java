@@ -2,6 +2,7 @@ package authoringenvironment.view.behaviors;
 
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.IAuthoringBehavior;
 import authoringenvironment.view.ActionFactory;
 import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.TriggerFactory;
