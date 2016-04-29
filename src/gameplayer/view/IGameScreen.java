@@ -61,7 +61,7 @@ public interface IGameScreen {
 
 	public void addBackground(Level current);
 
-	public void terminateGame();
+	public void terminateGame(int numPlayers);
 
 	public void pauseGame();
 

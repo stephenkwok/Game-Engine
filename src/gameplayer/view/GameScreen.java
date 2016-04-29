@@ -167,7 +167,7 @@ public class GameScreen extends Observable implements IGameScreen {
 
 	}
 
-	public void terminateGame() {
+	public void terminateGame(int numPlayers) {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, myResources.getString("EndMessage"), ButtonType.YES,
 				ButtonType.NO);
 		alert.setOnCloseRequest( e -> {
@@ -181,6 +181,7 @@ public class GameScreen extends Observable implements IGameScreen {
 		alert.show();
 
 	}
+	
 
 	private void restartGamePrompt() {
 		Alert endAlert = new Alert(Alert.AlertType.CONFIRMATION, myResources.getString("RestartMessage"), ButtonType.YES,
@@ -200,7 +201,7 @@ public class GameScreen extends Observable implements IGameScreen {
 		
 	}
 
-	private void saveScorePrompt() {
+	public void saveScorePrompt() {
 		TextInputDialog dialog = new TextInputDialog(myResources.getString("Name"));
 		dialog.setContentText(myResources.getString("SaveMessage"));
 		dialog.show();

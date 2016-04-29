@@ -55,7 +55,7 @@ public interface IGame {
 
 	public String getInitialGameFile();
 
-	public int getScore();
+	public List<Integer> getScores();
 
 	public String getHUDInfoFile();
 

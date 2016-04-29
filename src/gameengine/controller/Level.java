@@ -315,7 +315,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		myBackground = imageView;
 		myBackgroundX = new SimpleDoubleProperty(myBackground.getX());
 	}
-
+	
 	public IPlayActor getMainCharacter() {
 		for (IPlayActor a : myActors) {
 			if (a.checkState(ActorState.MAIN)) {
@@ -323,6 +323,16 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 			}
 		}
 		return null;
+	}
+
+	public List<IPlayActor> getMainCharacters() {
+		List<IPlayActor> mainCharacters = new ArrayList<>();
+		for (IPlayActor a : myActors) {
+			if (a.checkState(ActorState.MAIN)) {
+				mainCharacters.add(a);
+			}
+		}
+		return mainCharacters;
 	}
 
 	@Override

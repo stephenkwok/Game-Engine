@@ -55,6 +55,16 @@ public class Tester extends Application {
 
         actor1.addSpriteImage("runningmario2.png");
         actor1.addSpriteImage("runningmario3.png");
+        
+        IAuthoringActor actor12 = (IAuthoringActor) new Actor();
+        actor12.setImageViewName("runningmario1.png");
+        actor12.setName("A1");
+        actor12.setID(4);
+        actor12.addState(ActorState.MAIN);
+        actor12.addAttribute(new Attribute(AttributeType.POINTS, 0, (IPlayActor) actor12));
+
+        actor1.addSpriteImage("runningmario2.png");
+        actor1.addSpriteImage("runningmario3.png");
 
 
         IAuthoringActor actor2 = (IAuthoringActor) new Actor();
@@ -198,6 +208,7 @@ public class Tester extends Application {
         level1.setMyBackgroundImgName("mariobackground.png");
         levels.add(level1);
         level1.addActor(actor1);
+        level1.addActor(actor12);
         level1.addActor(actor2);
         level1.addActor((IAuthoringActor)actor3);
         level1.addActor((IAuthoringActor) actor4);
@@ -206,7 +217,7 @@ public class Tester extends Application {
         level2.setMyBackgroundImgName("vgnwpGb.png");
         levels.add(level2);
         level2.addActor(actor1);
-
+        level2.addActor(actor12);
         int yposition = 200;
         int xposition = 150;
         for(int i=1; i<=7; i++){
