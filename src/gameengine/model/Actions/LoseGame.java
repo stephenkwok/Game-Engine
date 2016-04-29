@@ -21,7 +21,7 @@ public class LoseGame extends Action {
 	public void perform() {
 		getGameElement().changed();
 		ArrayList<String> myList = new ArrayList<String>();
-		myList.add("endGame");
+		myList.add("loseGame");
 		getGameElement().changed();
         ((Observable) getGameElement()).notifyObservers(myList);
 	}
