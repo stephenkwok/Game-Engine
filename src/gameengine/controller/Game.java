@@ -132,8 +132,10 @@ public class Game extends Observable implements Observer, IGame {
 		initCurrentLevel();
 		initCurrentActors();
 		toggleUnPause();
-		if (soundEngine != null)
-		soundEngine.setSoundtrack("Robot.mp3");
+		if (soundEngine != null) {
+			soundEngine.setSoundtrack("Robot.mp3");
+			System.out.println(soundEngine);
+		}
 	}
 	
 	public void toggleUnPause() {
@@ -459,7 +461,7 @@ public class Game extends Observable implements Observer, IGame {
 		}
 	}
 	
-	public void toggleAllSound(boolean mute) {
+	public void setAllSound(boolean mute) {
 		sfxOff = mute;
 		musicOff = mute;
 		try {

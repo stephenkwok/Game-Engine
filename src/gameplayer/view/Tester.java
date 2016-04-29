@@ -327,8 +327,11 @@ public class Tester extends Application {
         Game model = new Game(info,levels);
         model.setHUDInfoFile("a.txt");
         
+        
+        
         CreatorController c = new CreatorController(model);
         c.saveForEditing(new File("gamefiles/test2.xml"));
+        System.out.println("WE GUCCI");
         ParallelCamera camera = new ParallelCamera();
         GameScreen view = new GameScreen(camera);
 

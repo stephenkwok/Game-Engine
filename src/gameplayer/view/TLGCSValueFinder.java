@@ -1,5 +1,8 @@
 package gameplayer.view;
  
+import java.util.ArrayList;
+import java.util.List;
+
 import gameengine.controller.Game;
 import gameengine.model.AttributeType;
 import voogasalad.util.hud.source.*;
@@ -26,6 +29,8 @@ public class TLGCSValueFinder implements IValueFinder {
 		}
 		return ret == null ? new Property<String>("Value Not Found", key) : ret;
 	}
+	
+	
 	
 	@Override
 	public void setDataSource(Object dataSource) throws IllegalArgumentException {
