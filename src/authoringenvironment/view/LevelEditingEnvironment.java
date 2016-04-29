@@ -71,9 +71,6 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private Controller myController;
 	private LevelPreview myLevelPreview;
 	private File myPreviewFile;
-	
-	//MICHAEL ADDED THESE BUT THEY PROB NEED TO BE CHANGED
-	private Button myB;
 
 	/**
 	 * Constructor for a level editing environment.
@@ -125,8 +122,6 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		}
         ParserController parserController = new ParserController();
         model = parserController.loadforPlaying(myPreviewFile);
-
-        
         
         ParallelCamera camera = new ParallelCamera();
         view = new GameScreen(camera);
@@ -181,12 +176,10 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private void addChildrenToLeftPane() {
 		myInspector = new LevelInspector(myResources, availableActors.keySet(), this);
 		myLeftPane.getChildren().add(myInspector.getPane());
-		//AND HERE
-		myB = new Button("Preview");
+		Button myB = new Button("Preview");
 		myB.setOnMouseClicked(e -> previewGame());
 		myB.setLayoutX(100);
 		myB.setLayoutY(300);
-		//TODO I ADDED THIS LINE HERE
 		myLeftPane.getChildren().add(myB);
 		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
 	}
