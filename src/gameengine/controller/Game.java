@@ -47,9 +47,10 @@ public class Game extends Observable implements Observer, IGame {
 	private Property<Integer> levelTime = new Property<>(1, "levelTime");
 	private Property<Integer> globalTime = new Property<>(1, "globalTime");
     
+	@XStreamOmitField
     private SoundPlayer soundEngine;
-    private boolean sfxOff = true;
-    private boolean musicOff = true;
+    private boolean sfxOff = false;
+    private boolean musicOff = false;
 	private List<IPlayActor> actorsToAdd;
 
     
@@ -120,7 +121,6 @@ public class Game extends Observable implements Observer, IGame {
 
 	public void stopGame() {
 		togglePause();
-		setAllSound(true);
 	}
 
 	private void togglePause() {
@@ -143,9 +143,9 @@ public class Game extends Observable implements Observer, IGame {
 		initCurrentLevel();
 		initCurrentActors();
 		toggleUnPause();
-//		if (soundEngine != null) {
-//			soundEngine.setSoundtrack(levels.get(info.getMyCurrentLevelNum()).getSoundtrack());
-//		}
+		if (soundEngine != null) {
+			soundEngine.setSoundtrack(levels.get(info.getMyCurrentLevelNum()).getSoundtrack());
+		}
 	}
 
 	public void toggleUnPause() {
@@ -480,14 +480,14 @@ public class Game extends Observable implements Observer, IGame {
 		}
 	}
 
-	public void setAllSound(boolean mute) {
-		if (mute) {
-			sfxOff = mute;
-			musicOff = mute;
-		}
-
+	public void toggleSoundPause() {
 		try {
-			soundEngine.allSetMute(mute);
+			if (isPaused()) {
+				soundEngine.allSetMute(true);
+			} else {
+				soundEngine.soundtrackSetMute(sfxOff);
+				soundEngine.allSoundsSetMute(musicOff);
+			}
 		} catch (Exception e) {
 			// some parts of sound engine are not initialized yet
 		}
@@ -510,6 +510,8 @@ public class Game extends Observable implements Observer, IGame {
 	public Property<Integer> getLevelTimeProperty() {
 		return this.levelTime;
 	}
+
+
 	
 	//
 	// private void garbageCollect() {

@@ -37,6 +37,21 @@
                 </list>
               </entry>
               <entry>
+                <string>C</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
+                      <myKey>C</myKey>
+                      <myKeyCode>C</myKeyCode>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.SoundAction">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <soundFile>shotgun.mp3</soundFile>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+              <entry>
                 <string>SideCollision</string>
                 <list>
                   <gameengine.model.Rule>
@@ -101,6 +116,8 @@
                                       <myScaleX>1.0</myScaleX>
                                       <myScaleY>1.0</myScaleY>
                                     </myCollisionActor>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.Destroy">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -146,6 +163,8 @@
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.LoseGame">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -176,6 +195,8 @@
                                   <myTrigger class="gameengine.model.Triggers.SideCollision">
                                     <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                                    <oneTime>false</oneTime>
+                                    <resolvedCollisions/>
                                   </myTrigger>
                                   <myAction class="gameengine.model.Actions.Destroy">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -221,6 +242,8 @@
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.LoseGame">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -282,6 +305,8 @@
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>true</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.ChangeAttribute">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -297,7 +322,9 @@
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry[3]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.LoseGame">
                       <myGameElement class="gameengine.controller.Level" reference="../../../../../../../../.."/>
@@ -344,6 +371,8 @@
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </myCollisionActor>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.LoseGame">
                       <myGameElement class="gameengine.controller.Level" reference="../../../../../../../../.."/>
@@ -418,8 +447,8 @@
           <myScaleX>1.0</myScaleX>
           <myScaleY>1.0</myScaleY>
         </gameengine.model.Actor>
-        <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[3]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
-        <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[4]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[3]/list/gameengine.model.Rule/myTrigger/myCollisionActor/myRuleManager/myRules/entry/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
       </myActors>
       <myName>Default</myName>
       <myHeight>800.0</myHeight>
@@ -440,7 +469,7 @@
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
                   <myX>0.0</myX>
                   <myY>0.0</myY>
-                  <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                  <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[3]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>
                   <myMinY>-100.0</myMinY>
@@ -456,7 +485,7 @@
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
                   <myX>0.0</myX>
                   <myY>0.0</myY>
-                  <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
+                  <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[3]/list/gameengine.model.Rule[2]/myTrigger/myCollisionActor"/>
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>
                   <myMinY>350.0</myMinY>
@@ -472,7 +501,7 @@
                   <myGameElement class="gameengine.controller.Level" reference="../../../../../../.."/>
                   <myX>0.0</myX>
                   <myY>0.0</myY>
-                  <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule[3]/myTrigger/myCollisionActor"/>
+                  <myActorToCopy reference="../../../../../../../myActors/gameengine.model.Actor/myRuleManager/myRules/entry[3]/list/gameengine.model.Rule[3]/myTrigger/myCollisionActor"/>
                   <myMinX>1024.0</myMinX>
                   <myMaxX>1024.0</myMaxX>
                   <myMinY>200.0</myMinY>
@@ -487,7 +516,10 @@
       <myAttributeManager>
         <attributeMap/>
       </myAttributeManager>
+      <myMainCharacters/>
       <soundtrack>Photograph.mp3</soundtrack>
+      <myBackgroundMusicName>Ink.mp3</myBackgroundMusicName>
+      <myGarbageCollectors/>
     </gameengine.controller.Level>
   </levels>
   <info>
@@ -536,4 +568,5 @@
   </globalTime>
   <sfxOff>false</sfxOff>
   <musicOff>false</musicOff>
+  <actorsToAdd/>
 </gameengine.controller.Game>

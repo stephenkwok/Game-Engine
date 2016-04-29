@@ -212,14 +212,14 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void togglePause() {
 		model.stopGame();
 		view.togglePause();
-		getGame().setAllSound(true);
+		getGame().toggleSoundPause();
 	}
 
 	@Override
 	public void toggleUnPause() {
 		model.toggleUnPause();
 		view.toggleUnPause();
-		getGame().setAllSound(false);
+		getGame().toggleSoundPause();
 	}
 
 	@Override

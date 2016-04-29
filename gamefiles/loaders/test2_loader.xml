@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <initialGameFile>gamefiles\loaders\test2_loader.xml</initialGameFile>
+  <initialGameFile>gamefiles/loaders/test2_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -4035,7 +4035,6 @@
   </myCollisionDetector>
   <currentActors/>
   <deadActors/>
-<<<<<<< HEAD
   <levelTime>
     <changed>false</changed>
     <obs/>
@@ -4050,13 +4049,7 @@
     <bindings/>
     <name>globalTime</name>
   </globalTime>
-  <sfxOff>false</sfxOff>
-  <musicOff>false</musicOff>
-=======
-  <levelTime>1</levelTime>
-  <globalTime>1</globalTime>
   <sfxOff>true</sfxOff>
   <musicOff>true</musicOff>
   <actorsToAdd/>
->>>>>>> master
 </gameengine.controller.Game>
