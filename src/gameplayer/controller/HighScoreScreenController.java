@@ -10,7 +10,9 @@ import gamedata.controller.ChooserType;
 import gamedata.controller.FileChooserController;
 import gamedata.controller.HighScoresController;
 import gameengine.controller.HighScoresKeeper;
+import gameengine.controller.IHighScoresKeeper;
 import gameplayer.view.HighScoreScreen;
+import gameplayer.view.IHighScoreScreen;
 import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -24,10 +26,10 @@ public class HighScoreScreenController extends BranchScreenController {
 
 	private static final String SCORE_CONTROLLER_RESOURCE = "scoresActions";
 
-	private HighScoreScreen myScreen;
+	private IHighScoreScreen myScreen;
 	private String myGameName;
 
-	private HighScoresKeeper myScores;
+	private IHighScoresKeeper myScores;
 	private HighScoresController myDataController;
 
 	public HighScoreScreenController(Stage myStage, HighScoresController dataController) {
@@ -35,29 +37,15 @@ public class HighScoreScreenController extends BranchScreenController {
 		this.myDataController = dataController;
 		this.myGameName = dataController.getGameFile();
 		this.myScores = new HighScoresKeeper(this.myDataController.getAllGameScores());
-		this.myScores.addObserver(this);
+		((Observable) this.myScores).addObserver(this);
 		setUpScreen();
 		changeScreen(myScreen);
 	}
 
-	/*
-	 * public HighScoreScreenController(Stage myStage, Map<String, Integer>
-	 * scores, String game) { super(myStage); this.myModel =
-	 * FXCollections.observableMap(scores); this.myModel.addListener(new
-	 * MapChangeListener<String, Object>() {
-	 * 
-	 * @Override public void onChanged(Change<? extends String, ? extends
-	 * Object> change) { if(change!=null && myScreen != null)
-	 * myScreen.displayScores(myGameName, (Map<String, Integer>) change);; } });
-	 * this.myGameName = game; setUpScreen(); this.myResources =
-	 * ResourceBundle.getBundle(SCORE_CONTROLLER_RESOURCE);
-	 * changeScreen(myScreen); }
-	 */
-
 	private void setUpScreen() {
 		this.myScreen = new HighScoreScreen();
 		this.myScreen.displayScores(myGameName, myDataController.getGameHighScores());
-		this.myScreen.addObserver(this);
+		((Observable) this.myScreen).addObserver(this);
 		setMyScreen(this.myScreen);
 	}
 

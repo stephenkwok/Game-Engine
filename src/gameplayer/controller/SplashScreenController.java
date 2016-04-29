@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import gamedata.controller.ChooserType;
 import gamedata.controller.FileChooserController;
+import gameplayer.view.ISplashScreen;
 import gameplayer.view.SplashScreen;
 import javafx.stage.Stage;
 import authoringenvironment.controller.Controller;
@@ -17,7 +18,7 @@ public class SplashScreenController implements Observer {
 	private static final String SPLASH_CONTROLLER_RESOURCE = "splashActions";
 
 	private ResourceBundle myResources;
-	private SplashScreen myScreen;
+	private ISplashScreen myScreen;
 	private Stage myStage;
 
 	public SplashScreenController(Stage stage) {
@@ -29,7 +30,7 @@ public class SplashScreenController implements Observer {
 
 	private void setUpScreen() {
 		this.myScreen = new SplashScreen();
-		this.myScreen.addObserver(this);
+		((Observable) this.myScreen).addObserver(this);
 	}
 
 	private void play() {

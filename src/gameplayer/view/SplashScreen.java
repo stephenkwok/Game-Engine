@@ -20,7 +20,7 @@ import javafx.scene.paint.Color;
  * @author cmt57, mdf15
  */
 
-public class SplashScreen extends Screen implements Observer {
+public class SplashScreen extends Screen implements Observer, ISplashScreen {
 
 	private static final String SPLASH_RESOURCE = "splashGUI";
 	private static final String BUTTONS_ID = "buttonID";
@@ -84,5 +84,6 @@ public class SplashScreen extends Screen implements Observer {
 		setChanged();
 		notifyObservers(arg);
 	}
+
 
 }
