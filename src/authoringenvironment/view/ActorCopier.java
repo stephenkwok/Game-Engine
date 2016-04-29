@@ -89,6 +89,7 @@ public class ActorCopier {
 		toUpdate.setScaleX(toCopy.getScaleX());
 		toUpdate.setScaleY(toCopy.getScaleY());
 		toUpdate.setStates(toCopy.getStates());
+		toUpdate.setSprite(toCopy.getSprite());
 		copyRules(toUpdate, toCopy.getRules());
 		copyAttributes((IGameElement) toUpdate, toCopy.getAttributeMap());
 	}
