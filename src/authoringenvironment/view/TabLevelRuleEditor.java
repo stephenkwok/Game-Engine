@@ -46,12 +46,15 @@ public class TabLevelRuleEditor extends TabParent {
 	}
 	
 	public void updateRules() {
+		newRules.clear();
 		for (String key: myLevel.getRules().keySet()) {
 			for (int i = 0; i < myLevel.getRules().get(key).size(); i++) {
-				newRules.add(myLevel.getRules().get(key).get(i));
+				if (!currentRules.contains(myLevel.getRules().get(key).get(i))) {
+					newRules.add(myLevel.getRules().get(key).get(i));
+				}
 			}
-			currentRules.addAll(newRules);
 		}
+		currentRules.addAll(newRules);
 		updateCheckBoxes();
 	}
 	
