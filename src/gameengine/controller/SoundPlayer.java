@@ -15,9 +15,6 @@ import java.util.HashMap;
  */
 public class SoundPlayer {
 	
-	
-	
-	
     private static final String folderName = "soundfiles";
     private MediaPlayer soundtrackPlayer;
     private File soundFileLocation;
@@ -107,10 +104,12 @@ public class SoundPlayer {
      * @param soundFileName
      */
     public void playSound(String soundFileName){
-        Media sound = mediaMap.get(soundFileName);
-        MediaPlayer curMediaPlayer = new MediaPlayer(sound);
-        mediaPlayers.put(sound, curMediaPlayer);
-        curMediaPlayer.play();
+//        Media sound = mediaMap.get(soundFileName);
+//        MediaPlayer curMediaPlayer = new MediaPlayer(sound);
+//        mediaPlayers.put(sound, curMediaPlayer);
+//        curMediaPlayer.play();
+    	MediaPlayer mp = new MediaPlayer(mediaMap.get(soundFileName));
+    	mp.play();
     }
 
     /**
@@ -171,6 +170,11 @@ public class SoundPlayer {
      */
     public void soundSetMute(String soundFileName, boolean mute){
         mediaPlayers.get(mediaMap.get(soundFileName)).setMute(mute);
+    }
+    
+    public void garbageCollect() {
+    	System.gc();
+    	System.runFinalization();
     }
 
 }

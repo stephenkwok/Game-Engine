@@ -135,6 +135,8 @@ public class Tester extends Application {
         Action action9 = new ChangeAttribute((IPlayActor)actor1,AttributeType.POINTS,1);
         Rule rule9 = new Rule(trigger9,action9);
         actor1.addRule(rule9);
+        
+        actor1.addRule(new Rule(new KeyTrigger(KeyCode.C), new SoundAction((Actor)actor1, "strongpunch.mp3")));
 
         KeyTrigger triggerSpawn = new KeyTrigger(KeyCode.S);
         TickTrigger bulletTick = new TickTrigger();
