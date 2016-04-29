@@ -36,5 +36,4 @@ public class TLGCSValueFinder implements IValueFinder {
 			throw new IllegalArgumentException();
 		}
 	}
-
 }
