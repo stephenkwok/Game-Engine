@@ -58,7 +58,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final double SUBSCENE_WIDTH = 1000;
 	private static final double SUBSCENE_HEIGHT = 575;
 	private BorderPane myRoot;
-	private GUILevelInspector myInspector;
+	private LevelInspector myInspector;
 	private ResourceBundle myResources;
 	private VBox myLeftPane;
 	private Level myLevel;
@@ -164,7 +164,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	}
 
 	private void addChildrenToLeftPane() {
-		myInspector = new GUILevelInspector(myResources, availableActors.keySet(), this);
+		myInspector = new LevelInspector(myResources, availableActors.keySet(), this);
 		myLeftPane.getChildren().add(myInspector.getPane());
 		//AND HERE
 		myB = new Button("Preview");
@@ -251,6 +251,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 					val.add(actor);
 					availableActors.put(icon.getRefActor(), val);
 					myLevel.addActor(actor);
+					myInspector.getGarbageCollector().updateGarbageCollectingActors(myLevel.getActors());
 					//myLevel.addActor(icon.getRefActor());
 					myLevelPreview.addActorToScene(actor);
 					//myLevelPreview.addActorToScene(icon.getRefActor());
@@ -304,6 +305,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	public void setEditableElement(IEditableGameElement editable) {
 		myLevel = (Level) editable;
 		myLevelPreview.updateLevelPreview(myLevel);
+		myInspector.getGarbageCollector().setEditableElement(myLevel);
 		updateActorsList();
 		myInspector.getAttributesTab().updateEditable(myLevel);
 	}
