@@ -9,6 +9,7 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IAuthoringBehavior;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.view.ActionFactory;
+import authoringenvironment.view.ActorGroup;
 import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.TriggerFactory;
 import gameengine.model.IAction;
@@ -52,9 +53,10 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	private IAuthoringActor otherActor;
 	private IAuthoringActor myActor;
 	private IRule myRule;
+	private Map<Integer, ActorGroup> myActorGroups;
 
 	public SelectActorBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
-			IAuthoringActor myActor, List<IAuthoringActor> myActors, Map<Integer, List<IAuthoringActor>> myActorGroups) {
+			IAuthoringActor myActor, List<IAuthoringActor> myActors, Map<Integer, ActorGroup> myActorGroups) {
 		super(GO);
 		this.myRule = myRule;
 		this.behaviorType = behaviorType;
@@ -65,6 +67,7 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 		this.myActorRule = myActorRule;
 		this.myActors = myActors;
 		this.myActor = myActor;
+		this.myActorGroups = myActorGroups;
 	}
 
 	/**
@@ -142,7 +145,9 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 		for (IAuthoringActor actor : myActors) {
 			toReturn.add(actor);
 		}
-		
+		for (Integer id: myActorGroups.keySet()) {
+			toReturn.add(myActorGroups.get(id));
+		}
 		return toReturn;
 	}
 

@@ -6,12 +6,12 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import com.sun.javafx.collections.MappingChange.Map;
+import java.util.Map;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IAuthoringBehavior;
+import authoringenvironment.view.behaviors.CollisionBehavior;
 import gameengine.model.IRule;
 
 /**
@@ -50,6 +50,14 @@ public class ActorRuleFactory {
 		String className = PACKAGE + myResources.getString(behaviorType + CLASS);
 		String elementType = myResources.getString(behaviorType + ELEMENT);
 		try {
+			if (elementType.equals("SelectActorBehavior")) {
+				try {
+					return createSelectActorBehavior(behaviorType, className, rule);
+				} catch (ClassNotFoundException | InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class, IRule.class);
 			return (IAuthoringBehavior) createMethod.invoke(this, behaviorType, className, rule);
 		} catch (NoSuchMethodException | SecurityException e) {
@@ -86,9 +94,10 @@ public class ActorRuleFactory {
 			Constructor<?> constructor = clazz.getConstructor(IRule.class, ActorRule.class, String.class, ResourceBundle.class, 
 					IAuthoringActor.class, List.class, Map.class);
 			List<IAuthoringActor> myActors = new ArrayList<>(myController.getActorMap().keySet());
-			Map<Integer, List<IAuthoringActor>> myGroupMap = (Map<Integer, List<IAuthoringActor>>) myController.getActorGroups();
-			return (IAuthoringBehavior) constructor.newInstance(rule, myActorRule, behaviorType, myResources,myActor, 
-					myActors, myGroupMap);
+			Map<Integer, ActorGroup> myGroupMap = (Map<Integer, ActorGroup>) myController.getActorGroups();
+			return new CollisionBehavior(rule, myActorRule, behaviorType, myResources, myActor, myActors, myGroupMap);
+			//return (IAuthoringBehavior) constructor.newInstance(rule, myActorRule, behaviorType, myResources,myActor, 
+					//myActors, myGroupMap);
 	}
 
 	/**

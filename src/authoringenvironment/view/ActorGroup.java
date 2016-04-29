@@ -8,17 +8,20 @@ import java.util.List;
 import authoringenvironment.model.IAuthoringActor;
 
 public class ActorGroup implements IEditableGameElement {
+	private static final String GROUP = " Group";
 	private List<IAuthoringActor> myActors;
 	private String myName;
+	private ImageView myImageView;
 	
-	public ActorGroup(String name, List<IAuthoringActor> myStartingActors) {
+	public ActorGroup(String name, ImageView imageview, List<IAuthoringActor> myStartingActors) {
 		myActors = myStartingActors;
 		setName(name);
+		setImageView(imageview);
 	}
 	
 	@Override
 	public void setName(String name) {
-		myName = name;
+		myName = name + GROUP;
 	}
 
 	@Override
@@ -28,14 +31,12 @@ public class ActorGroup implements IEditableGameElement {
 
 	@Override
 	public ImageView getImageView() {
-		// TODO Auto-generated method stub
-		return null;
+		return myImageView;
 	}
 
 	@Override
 	public void setImageView(ImageView imageView) {
-		// TODO Auto-generated method stub
-		
+		myImageView = imageView;
 	}
 	
 	public void addActorToGroup(IAuthoringActor actors) {

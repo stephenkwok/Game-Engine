@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.view.ActorGroup;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
@@ -16,7 +17,7 @@ public class SpawnBehavior extends SelectActorBehavior {
 	private IAction myAction;
 	
 	public SpawnBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
-			IAuthoringActor myActor, List<IAuthoringActor> myActors, Map<Integer, List<IAuthoringActor>> myActorGroups) {
+			IAuthoringActor myActor, List<IAuthoringActor> myActors, Map<Integer, ActorGroup> myActorGroups) {
 		super(myRule, myActorRule, behaviorType, myResources, myActor, myActors, myActorGroups);
 	}
 

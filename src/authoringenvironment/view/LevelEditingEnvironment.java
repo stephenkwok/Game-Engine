@@ -266,7 +266,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 					val.add(actor);
 					availableActors.put(icon.getRefActor(), val);
 					myLevel.addActor(actor);
-					groupActors(actor);
+					if (myController.getActorGroups().containsKey(actor.getID())) {
+						groupActors(actor);
+					}
 					myInspector.getGarbageCollector().updateGarbageCollectingActors(myLevel.getActors());
 					//myLevel.addActor(icon.getRefActor());
 					myLevelPreview.addActorToScene(actor);
@@ -375,7 +377,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		if (myController.getActorGroups().containsKey(actor.getID())) {
 			actorList = myController.getActorGroups().get(actor.getID());
 		} else {
-			actorList = new ActorGroup(actor.getName(), new ArrayList<>());
+			actorList = new ActorGroup(actor.getName(), actor.getImageView(), new ArrayList<>());
 		}
 		for (IAuthoringActor key: myController.getActorMap().keySet()) {
 			List<IAuthoringActor> actorsForKey = myController.getActorMap().get(key);
