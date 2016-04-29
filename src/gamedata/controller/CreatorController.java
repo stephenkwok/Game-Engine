@@ -9,15 +9,16 @@ import org.xml.sax.SAXException;
 
 import gamedata.XMLCreator;
 import gameengine.controller.Game;
+import gameengine.controller.IGame;
 import gui.view.Screen;
 
 public class CreatorController implements ICreatorController {
 
-	private Game myGame;
+	private IGame myGame;
 	private XMLCreator myXMLCreator;
 
-	public CreatorController(Game game) {
-		this.myGame = game;
+	public CreatorController(IGame iGame) {
+		this.myGame = iGame;
 		this.myXMLCreator = new XMLCreator();
 	}
 

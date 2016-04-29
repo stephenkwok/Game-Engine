@@ -3,9 +3,8 @@ package gameplayer.controller;
 import java.lang.reflect.InvocationTargetException;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -18,10 +17,10 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
 import gamedata.controller.FileChooserController;
-import gamedata.controller.ParserController;
-import gameengine.controller.Game;
 import gameplayer.view.BaseScreen;
+import gameplayer.view.IBaseScreen;
 import gameplayer.view.TLGCSValueFinder;
+import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import voogasalad.util.hud.source.*;
@@ -32,24 +31,24 @@ public class BaseScreenController extends BranchScreenController {
 	@XStreamOmitField
 	private ResourceBundle myResources;
 	@XStreamOmitField
-	private BaseScreen myScreen;
+	private IBaseScreen myScreen;
 	@XStreamOmitField
-	private GameController myGameController;
+	private IGameController myGameController;
 	@XStreamOmitField
 	private HUDController myHUDController;
 	
-	public BaseScreenController(Stage myStage, GameController gameController) {
+	public BaseScreenController(Stage myStage, IGameController gameController) {
 		super(myStage, BASE_CONTROLLER_RESOURCE);
 		// DEPENDENCY!!
 		this.myGameController = gameController;
-		myGameController.addObserver(this);
+		((Observable) myGameController).addObserver(this);
 		setUpScreen();
 		changeScreen(myScreen);
 	}
 
 	private void setUpScreen() {
 		this.myScreen = new BaseScreen();
-		this.myScreen.addObserver(this);
+		((Observable) this.myScreen).addObserver(this);
 		setUpGameScreen();
 		setUpHUDScreen();
 		setMyScreen(this.myScreen);
@@ -66,8 +65,8 @@ public class BaseScreenController extends BranchScreenController {
 	private void saveGame() {
 		togglePause();
 		try {
-			myGameController.getGame().deleteObservers();
-			myHUDController.linkHandleController(false);
+			((Observable) myGameController.getGame()).deleteObservers();
+			myHUDController.linkHandleController(false); //same as .uninit()
 			CreatorController c = new CreatorController(myGameController.getGame());
 			FileChooser fileChooser = new FileChooser();
 			File initialDirectory = new File("gamefiles");
@@ -76,7 +75,7 @@ public class BaseScreenController extends BranchScreenController {
 			if (file != null) {
 				c.saveForPlaying(file);
 			}
-			myGameController.getGame().addObserver(myGameController);
+			((Observable) myGameController.getGame()).addObserver((Observer) myGameController);
 			setUpHUDScreen();
 			
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
@@ -110,13 +109,7 @@ public class BaseScreenController extends BranchScreenController {
 	}
 
 	private void restartGame() {
-		// TODO fix this ish
-		togglePause();
-		myGameController.getView().clearGame();
-		ParserController parserController = new ParserController();
-		Game initialGame = parserController.loadforPlaying(new File(myGameController.getGame().getInitialGameFile()));
-		myGameController.setGame(initialGame);
-		myGameController.initialize(0);
+		myGameController.restartGame();
 		setUpHUDScreen();
 	}
 
