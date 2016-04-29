@@ -21,6 +21,11 @@ public class GlideTarget extends GlidingAction {
 		super(assignedActor, offset);
 		targetActor = target;
 	}
+	
+	@Override
+	public Object[] getParameters(){
+		return new Object[]{getMyActor(),glideOffset, targetActor};
+	}
 
 	/**
 	 * Moves the Actor to the right through gliding
@@ -28,29 +33,43 @@ public class GlideTarget extends GlidingAction {
 	@Override
 	public void perform() {
 		calcHeading((Actor)getMyActor(),targetActor);
-    	getMyActor().getPhysicsEngine().glideRight(getMyActor(),this.getGlideOffset());		
+    	getMyActor().getPhysicsEngine().glideForward(getMyActor(),this.getGlideOffset());		
 
 	}
 	
 	public void calcHeading(Actor assignedActor, Actor target){
 		double verticalDiff   = assignedActor.getY()  - target.getY();
 		double horizontalDiff  = target.getX()  - assignedActor.getX();
-		double angle  = Math.toDegrees(Math.sin(Math.toRadians(verticalDiff/horizontalDiff)));
+		double angle  = Math.toDegrees(Math.sin((verticalDiff/horizontalDiff)));
 		//double newX  = Math.toDegrees(Math.cos(Math.toRadians(verticalDiff/horizontalDiff)));
 
-		if(verticalDiff > 0 && horizontalDiff > 0){
+		if(Math.abs(horizontalDiff) < 10){
+			if(verticalDiff > 0){
+				assignedActor.setHeading(90);
+			}else{
+				assignedActor.setHeading(270);
+			}
+		}
+		else if(verticalDiff > 0 && horizontalDiff > 0){
+			System.out.println("1");
 			assignedActor.setHeading(angle);
 			
-		}else if(verticalDiff <= 0 && horizontalDiff <= 0){
+		}else if(verticalDiff < 0 && horizontalDiff < 0){
+			System.out.println("4");
+
 			assignedActor.setHeading(180+angle);
 			
 		}
-		else if(verticalDiff <= 0){
-			assignedActor.setHeading(360-angle);
+		else if(verticalDiff < 0 && horizontalDiff > 0){
+			System.out.println("2");
+
+			assignedActor.setHeading(360+angle);
 			
 		}
-		else if( horizontalDiff <= 0){
-			assignedActor.setHeading(180-angle);
+		else if(verticalDiff > 0 && horizontalDiff < 0){
+			System.out.println("3");
+
+			assignedActor.setHeading(180+angle);
 			
 		}
 	}
