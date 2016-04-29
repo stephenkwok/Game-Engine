@@ -36,14 +36,7 @@ public class ContextMenuActorInLevel extends ContextMenu {
 
 		});
 		
-		MenuItem groupAll = new MenuItem(GROUP);
-		groupAll.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				myLevelPreview.groupActors(curIcon);
-			}
-		});
-		getItems().addAll(delete, groupAll);
+		getItems().addAll(delete);
 	}
 
 	public void setIcon(ImageviewActorIcon icon) {

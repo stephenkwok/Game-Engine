@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.view.ActorGroup;
 import authoringenvironment.view.ActorRule;
 import gameengine.model.IRule;
 import gameengine.model.Actions.ChangeAttribute;
