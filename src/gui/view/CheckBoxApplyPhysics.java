@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import authoringenvironment.controller.ActorEditingEnvironment;
 import authoringenvironment.model.*;
 import authoringenvironment.view.*;
 import gameengine.model.*;

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import authoringenvironment.view.ActorRule;
+import authoringenvironment.model.ActorRule;
 import gameengine.model.IRule;
 import gameengine.model.Actions.ChangeAttribute;
 import gameengine.model.Triggers.ITrigger;
