@@ -3,6 +3,7 @@ package authoringenvironment.model;
 import java.util.*;
 
 import gameengine.controller.Level;
+import gameengine.model.Actor;
 import javafx.scene.image.ImageView;
 
 /**
@@ -46,6 +47,7 @@ public class AuthoringEnvironmentRestorer {
 	 */
 	private void restoreLevels() {
 		myLevels.stream().forEach(level -> level.setImageView(new ImageView(level.getMyBackgroundImgName())));
+		myLevels.stream().forEach(level -> level.getGarbageCollectors().forEach(actor -> ((Actor) actor).restoreImageView()));
 	}
 
 }
