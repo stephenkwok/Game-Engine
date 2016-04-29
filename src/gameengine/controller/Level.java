@@ -57,6 +57,8 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	private List<IPlayActor> myMainCharacters;
 	private String soundtrack;
 	private String myBackgroundMusicName;
+	private List<IPlayActor> myGarbageCollectors;
+	
 	/**
 	 * Instantiates the triggerMap and Actor list
 	 */
@@ -74,6 +76,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		myWidth = DEFAULT_WIDTH;
 		myRuleManager = new RuleManager();
 		myMainCharacters = new ArrayList<>();
+		myGarbageCollectors = new ArrayList<>();
 	}
 
 	/**
@@ -425,4 +428,13 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 			}
     	}
     } 
+    
+    public void addGarbageCollector(IPlayActor actor) {
+    	myActors.add(actor);
+    	myGarbageCollectors.add(actor);
+    }
+    
+    public List<IPlayActor> getGarbageCollectors() {
+    	return myGarbageCollectors;
+    }
 }
