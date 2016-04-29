@@ -1,12 +1,12 @@
-package authoringenvironment.view;
+package authoringenvironment.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.ActorEditingEnvironment;
 import authoringenvironment.controller.Controller;
-import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
 import gameengine.model.IRule;
 import gameengine.model.Rule;
@@ -143,10 +143,7 @@ public class ActorRuleCreator {
 	
 	private void resetEnvironment(){
 		this.newlyReturned = true;
-		for(ActorRule toRemove: myActorRules) { 
-			removeActorRule(toRemove);
-		}
-			//myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
+		for(ActorRule toRemove: myActorRules) myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
 		myActorRules.clear();
 		ruleRow = RULE_ROW_START;
 	}

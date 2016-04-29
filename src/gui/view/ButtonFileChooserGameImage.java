@@ -2,8 +2,8 @@ package gui.view;
 
 import java.io.File;
 
+import authoringenvironment.controller.GameEditingEnvironment;
 import authoringenvironment.model.IEditingElement;
-import authoringenvironment.view.GameEditingEnvironment;
 import gameengine.controller.GameInfo;
 import javafx.scene.image.Image;
 import javafx.scene.image.*;

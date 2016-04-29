@@ -1,9 +1,14 @@
-package authoringenvironment.view;
+package authoringenvironment.controller;
 
 import java.util.*;
 
 import authoringenvironment.controller.*;
 import authoringenvironment.model.*;
+import authoringenvironment.view.HBoxDisplayHeader;
+import authoringenvironment.view.HBoxDisplayHeaderActor;
+import authoringenvironment.view.HBoxDisplayHeaderLevel;
+import authoringenvironment.view.PreviewUnitWithEditable;
+import authoringenvironment.view.PreviewUnitWithLevel;
 import gameengine.controller.*;
 import gui.view.IGUI;
 import javafx.beans.binding.DoubleExpression;

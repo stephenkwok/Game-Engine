@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.ActorRuleCreator;
 import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.control.Button;

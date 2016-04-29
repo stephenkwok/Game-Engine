@@ -2,8 +2,8 @@ package gui.view;
 
 import java.io.File;
 
+import authoringenvironment.controller.LevelEditingEnvironment;
 import authoringenvironment.model.IEditingElement;
-import authoringenvironment.view.LevelEditingEnvironment;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 

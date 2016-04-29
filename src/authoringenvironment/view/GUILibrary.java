@@ -2,6 +2,7 @@ package authoringenvironment.view;
 
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.ActorRuleCreator;
 import gui.view.IGUI;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;

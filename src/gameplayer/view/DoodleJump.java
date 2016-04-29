@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import authoringenvironment.view.ActorCopier;
+import authoringenvironment.model.ActorCopier;
 
 public class DoodleJump extends Application {
     /**

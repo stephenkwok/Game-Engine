@@ -1,6 +1,5 @@
-package authoringenvironment.view;
+package authoringenvironment.model;
 
-import authoringenvironment.model.IActionCreator;
 import gameengine.model.IAction;
 import gameengine.model.IGameElement;
 import gameengine.model.Actions.Action;
