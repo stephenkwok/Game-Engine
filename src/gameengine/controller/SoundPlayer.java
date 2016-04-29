@@ -60,11 +60,13 @@ public class SoundPlayer {
      * @param soundFileName
      */
     public void setSoundtrack(String soundFileName){
-        Media soundtrack = mediaMap.get(soundFileName);
+    	if (!isValid(soundFileName)) {
+    		return;
+    	}
         if (soundtrackPlayer != null) {
         	soundtrackPlayer.dispose();
         }
-        soundtrackPlayer = new MediaPlayer(soundtrack);
+        soundtrackPlayer = new MediaPlayer(mediaMap.get(soundFileName));
         soundtrackPlayer.setOnEndOfMedia(new Runnable() {
             public void run() {
                 soundtrackPlayer.seek(Duration.ZERO);
@@ -82,7 +84,7 @@ public class SoundPlayer {
 //        MediaPlayer curMediaPlayer = new MediaPlayer(sound);
 //        mediaPlayers.put(sound, curMediaPlayer);
 //        curMediaPlayer.play();
-    	if (mediaMap.get(soundFileName) == null) {
+    	if (!isValid(soundFileName)) {
     		return;
     	}
     	MediaPlayer mp = new MediaPlayer(mediaMap.get(soundFileName));
@@ -116,6 +118,11 @@ public class SoundPlayer {
      */
     public void soundtrackSetMute(boolean mute){
         soundtrackPlayer.setMute(mute);
+    }
+    
+    
+    public boolean isValid(String key) {
+    	return key != null && mediaMap.get(key) != null;
     }
 
 }
