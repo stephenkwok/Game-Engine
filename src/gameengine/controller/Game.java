@@ -418,7 +418,6 @@ public class Game extends Observable implements Observer, IGame {
 	public void setLevelTime(int step) {
 		this.levelTime = step;
 	}
-<<<<<<< HEAD
 	
 	public int getGlobalTime(){
 		return globalTime;
@@ -426,15 +425,6 @@ public class Game extends Observable implements Observer, IGame {
 	
 	public void setGlobalTime(int time){
 		this.globalTime = time;
-=======
-
-	public int getGlobalTime() {
-		return globalTime;
-	}
-
-	public void setGlobalTime(int globalTime) {
-		this.globalTime = globalTime;
->>>>>>> master
 	}
 	
 	public void resetLevelTime(){
