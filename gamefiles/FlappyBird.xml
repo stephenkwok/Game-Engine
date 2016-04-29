@@ -33,7 +33,6 @@
                     <myAction class="gameengine.model.Actions.MoveUp">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
-                    <ID>0</ID>
                   </gameengine.model.Rule>
                 </list>
               </entry>
@@ -106,7 +105,6 @@
                                   <myAction class="gameengine.model.Actions.Destroy">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                                   </myAction>
-                                  <ID>0</ID>
                                 </gameengine.model.Rule>
                               </list>
                             </entry>
@@ -121,7 +119,6 @@
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <glideOffset>7.0</glideOffset>
                                   </myAction>
-                                  <ID>0</ID>
                                 </gameengine.model.Rule>
                               </list>
                             </entry>
@@ -153,7 +150,6 @@
                     <myAction class="gameengine.model.Actions.LoseGame">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
-                    <ID>0</ID>
                   </gameengine.model.Rule>
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.SideCollision">
@@ -184,7 +180,6 @@
                                   <myAction class="gameengine.model.Actions.Destroy">
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                                   </myAction>
-                                  <ID>0</ID>
                                 </gameengine.model.Rule>
                               </list>
                             </entry>
@@ -199,7 +194,6 @@
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <glideOffset>7.0</glideOffset>
                                   </myAction>
-                                  <ID>0</ID>
                                 </gameengine.model.Rule>
                               </list>
                             </entry>
@@ -231,7 +225,6 @@
                     <myAction class="gameengine.model.Actions.LoseGame">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
-                    <ID>0</ID>
                   </gameengine.model.Rule>
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.SideCollision">
@@ -262,7 +255,6 @@
                                     <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                                     <glideOffset>7.0</glideOffset>
                                   </myAction>
-                                  <ID>0</ID>
                                 </gameengine.model.Rule>
                               </list>
                             </entry>
@@ -296,7 +288,6 @@
                       <myType>POINTS</myType>
                       <myChange>10</myChange>
                     </myAction>
-                    <ID>0</ID>
                   </gameengine.model.Rule>
                 </list>
               </entry>
@@ -311,7 +302,6 @@
                     <myAction class="gameengine.model.Actions.LoseGame">
                       <myGameElement class="gameengine.controller.Level" reference="../../../../../../../../.."/>
                     </myAction>
-                    <ID>0</ID>
                   </gameengine.model.Rule>
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
@@ -358,7 +348,6 @@
                     <myAction class="gameengine.model.Actions.LoseGame">
                       <myGameElement class="gameengine.controller.Level" reference="../../../../../../../../.."/>
                     </myAction>
-                    <ID>0</ID>
                   </gameengine.model.Rule>
                 </list>
               </entry>
@@ -372,7 +361,6 @@
                     <myAction class="gameengine.model.Actions.ApplyPhysics">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
-                    <ID>0</ID>
                   </gameengine.model.Rule>
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.TickTrigger">
@@ -381,14 +369,31 @@
                     <myAction class="gameengine.model.Actions.NextImage">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
-                    <ID>0</ID>
                   </gameengine.model.Rule>
                 </list>
               </entry>
             </myRules>
           </myRuleManager>
           <myAttributeManager>
-            <attributeMap/>
+            <attributeMap>
+              <entry>
+                <gameengine.model.AttributeType>POINTS</gameengine.model.AttributeType>
+                <gameengine.model.Attribute>
+                  <changed>false</changed>
+                  <obs/>
+                  <myValue>
+                    <changed>false</changed>
+                    <obs/>
+                    <value class="int">15</value>
+                    <bindings/>
+                    <name>Default NamePOINTS</name>
+                  </myValue>
+                  <myTriggerValues/>
+                  <myType>POINTS</myType>
+                  <myOwner class="gameengine.model.Actor" reference="../../../../.."/>
+                </gameengine.model.Attribute>
+              </entry>
+            </attributeMap>
           </myAttributeManager>
           <myStates>
             <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
@@ -442,7 +447,6 @@
                   <myMaxY>0.0</myMaxY>
                   <isRandom>true</isRandom>
                 </myAction>
-                <ID>0</ID>
               </gameengine.model.Rule>
               <gameengine.model.Rule>
                 <myTrigger class="gameengine.model.Triggers.TickTrigger">
@@ -459,7 +463,6 @@
                   <myMaxY>400.0</myMaxY>
                   <isRandom>true</isRandom>
                 </myAction>
-                <ID>0</ID>
               </gameengine.model.Rule>
               <gameengine.model.Rule>
                 <myTrigger class="gameengine.model.Triggers.TickTrigger">
@@ -476,7 +479,6 @@
                   <myMaxY>200.0</myMaxY>
                   <isRandom>true</isRandom>
                 </myAction>
-                <ID>0</ID>
               </gameengine.model.Rule>
             </list>
           </entry>
@@ -517,5 +519,6 @@
   </myCollisionDetector>
   <currentActors/>
   <deadActors/>
-  <count>1</count>
+  <levelTime>1</levelTime>
+  <globalTime>1</globalTime>
 </gameengine.controller.Game>

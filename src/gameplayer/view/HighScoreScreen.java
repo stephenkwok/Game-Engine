@@ -27,7 +27,7 @@ import javafx.scene.text.Text;
  * @author michaelfigueiras
  *
  */
-public class HighScoreScreen extends Screen implements Observer {
+public class HighScoreScreen extends Screen implements Observer, IHighScoreScreen {
 
 	private static final String SCORES_RESOURCE = "hsGUI";
 	private static final String TOP_BUTTONS = "TopButtons";
@@ -53,7 +53,7 @@ public class HighScoreScreen extends Screen implements Observer {
 	}
 
 	@Override
-	protected void initialize() {
+	public void initialize() {
 		myPane.setTop(addToolbar(TOP_BUTTONS));
 		addScorePane();
 		getRoot().getChildren().add(myPane);
@@ -88,19 +88,21 @@ public class HighScoreScreen extends Screen implements Observer {
 		for (Integer score : sortedScores.descendingKeySet()) {
 			for (String player : sortedScores.get(score)) {
 				// TODO figure out font/styling specifics
-
 				HBox myH = new HBox(10);
-				Text myPlayer = new Text(player);
-				myPlayer.setFont(Font.font("Helvetica", 30));
-				myH.getChildren().add(myPlayer);
-				Text myScore = new Text(score.toString());
-				myScore.setFont(Font.font("Times New Roman", 30));
-				myH.getChildren().add(myScore);
+				myH.getChildren().add(stringToText(score.toString() + " - "));
+				myH.getChildren().add(stringToText(player));
 				myScoreBox.getChildren().add(myH);
 			}
 		}
 	}
 
+	
+	private Text stringToText(String msg){
+		Text item = new Text(msg);
+		item.setFont(Font.font("Helvetica", 30));
+		return item;
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		setChanged();

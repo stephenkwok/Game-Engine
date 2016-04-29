@@ -1,4 +1,5 @@
 package gameengine.model;
+import gameengine.model.Actions.Action;
 
 /**
  * This interface defines the public methods that each Action subclass will

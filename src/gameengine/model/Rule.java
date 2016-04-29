@@ -1,6 +1,8 @@
 package gameengine.model;
 
 import gameengine.model.IRule;
+import gameengine.model.Triggers.BottomCollision;
+import gameengine.model.Triggers.TopCollision;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.ITrigger;
 
@@ -67,5 +69,10 @@ public class Rule implements IRule{
 	public String toString() {
 		String id = Integer.toString(ID);
 		return ("id: " + id);
+	}
+	
+	@Override
+	public boolean equals(Object other){
+		return ((Rule)other).getMyAction().equals(getMyAction()) && myTrigger.equals(((Rule)other).getMyTrigger());
 	}
 }

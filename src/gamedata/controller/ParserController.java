@@ -44,7 +44,8 @@ public class ParserController implements IParserController {
 					XMLgame.getAnimation(),
 					XMLgame.getCurrentActors(),
 					XMLgame.getDeadActors(),
-					XMLgame.getCount());
+					XMLgame.getLevelTime(),
+					XMLgame.getGlobalTime());
 		}
 	}
 

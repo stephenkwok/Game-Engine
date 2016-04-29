@@ -5,7 +5,6 @@ import gameengine.model.AttributeType;
 import voogasalad.util.hud.source.*;
 
 public class TLGCSValueFinder implements IValueFinder {
-
 	private Game data; //for other projects, your data will be a different class
 	
 	@Override
@@ -16,18 +15,17 @@ public class TLGCSValueFinder implements IValueFinder {
 				ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getProperty();
 				break;
 			case "health":
-				//
+				ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.HEALTH).getProperty();
 				break;
-			case "ammo":
+			case "time":
 				//
 				break;
 			default:
-				ret = new Property<String>("Value Not Found", key);
 				break;
 		}
-		return ret;
+		return ret == null ? new Property<String>("Value Not Found", key) : ret;
 	}
-
+	
 	@Override
 	public void setDataSource(Object dataSource) throws IllegalArgumentException {
 		if (dataSource instanceof Game) {
@@ -36,6 +34,5 @@ public class TLGCSValueFinder implements IValueFinder {
 			throw new IllegalArgumentException();
 		}
 	}
-
 
 }

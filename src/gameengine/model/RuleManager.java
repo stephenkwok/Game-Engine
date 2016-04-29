@@ -13,7 +13,8 @@ public class RuleManager {
 	public void addRule(Rule newRule) {
 		if (myRules.containsKey(newRule.getMyTrigger().getMyKey())) {
 			List<Rule> myBehaviors = myRules.get(newRule.getMyTrigger().getMyKey());
-			myBehaviors.add(newRule);
+			if(!myBehaviors.contains(newRule))
+				myBehaviors.add(newRule);
 			myRules.put(newRule.getMyTrigger().getMyKey(), myBehaviors);
 		} else {
 			List<Rule> myBehaviors = new ArrayList<>();
@@ -23,7 +24,7 @@ public class RuleManager {
 	}
 	
     public void removeRule(Rule rule){
-    	myRules.get(rule.getMyTrigger()).remove(rule);
+    	myRules.get(rule.getMyTrigger().getMyKey()).remove(rule);
     }
 	
     public void handleTrigger(ITrigger myTrigger) {

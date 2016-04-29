@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author blakekaplan
  */
-public interface ILevel {
+public interface IPlayLevel {
 
 	/**
 	 * Provided with a Trigger object, sets off the appropriate response

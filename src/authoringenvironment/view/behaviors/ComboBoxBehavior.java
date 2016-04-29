@@ -3,6 +3,7 @@ package authoringenvironment.view.behaviors;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.IAuthoringBehavior;
 import authoringenvironment.view.ActionFactory;
 import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.TriggerFactory;
@@ -110,7 +111,7 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 	}
 
 	@Override
-	protected abstract void updateValueBasedOnEditable();
+	public abstract void updateValueBasedOnEditable();
 
 	protected void setTrigger(IAuthoringBehavior key, ITrigger value) {
 		myActorRule.setTrigger(key, value);

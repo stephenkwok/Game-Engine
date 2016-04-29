@@ -14,6 +14,10 @@ import java.util.HashMap;
  * Created by aamir on 4/24/2016.
  */
 public class SoundPlayer {
+	
+	
+	
+	
     private static final String folderName = "soundfiles";
     private MediaPlayer soundtrackPlayer;
     private File soundFileLocation;

@@ -45,7 +45,7 @@ public class NextValues {
 		return collision;
 	}
 	
-	public void setCollisoin(boolean c){
+	public void setCollision(boolean c){
 		collision = c;
 	}
 	

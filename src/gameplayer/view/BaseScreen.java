@@ -21,13 +21,13 @@ import voogasalad.util.hud.source.*;
  * @author Carine, Michael
  *
  */
-public class BaseScreen extends Screen implements Observer {
+public class BaseScreen extends Screen implements Observer, IBaseScreen {
 
 	private static final String BASE_RESOURCE = "gameGUI";
 	private static final String SIDE_BUTTONS = "SideButtons";
 
 	private BorderPane myPane;
-	private GameScreen myGameScreen;
+	private IGameScreen myGameScreen;
 	private AbstractHUDScreen hud;
 
 	/**
@@ -50,8 +50,8 @@ public class BaseScreen extends Screen implements Observer {
 		initialize();
 	}
 
-	public void setGameScreen(GameScreen screen) {
-		this.myGameScreen = screen;
+	public void setGameScreen(IGameScreen iGameScreen) {
+		this.myGameScreen = iGameScreen;
 		this.myPane.setCenter(myGameScreen.getScene());
 	}
 

@@ -64,6 +64,14 @@ public class Tester extends Application {
         actor2.setName("A2");
         actor2.setID(2);
         
+        
+        IAuthoringActor blocky = (IAuthoringActor) new Actor();
+        blocky.setImageViewName("block.png");
+        blocky.setX(650);
+        blocky.setY(300);
+        blocky.setName("blocky");
+        blocky.setID(2);
+        
         IAuthoringActor spawnedActor = (IAuthoringActor) new Actor();
         spawnedActor.setImageViewName("redball.png");
         spawnedActor.setName("bullet");
@@ -80,6 +88,35 @@ public class Tester extends Application {
         Rule enemyRule = new Rule(enemyTrigger, enemyAction);
         ((Actor) actor4).addRule(enemyRule);
 
+        //
+        IPlayActor enemy2 = new Actor();
+        ((IAuthoringActor)enemy2).setImageViewName("goomba.png");
+        ((Actor) enemy2).setName("enemy2");
+        enemy2.setX(400);
+        System.out.println(enemy2.getHeading());
+        TickTrigger trigger = new TickTrigger();
+        Action moveForward = new GlideForward((Actor)enemy2, 2.0);
+        Rule movingForward = new Rule(trigger, moveForward);
+        enemy2.addRule(movingForward);
+        
+        //movng back and forth
+        SideCollision triggerenemy = new SideCollision((Actor)enemy2,(Actor)blocky);
+        Action actionenemy2 = new ReverseHeading((Actor)enemy2);
+        Rule ruleenemy = new Rule(triggerenemy,actionenemy2);
+        enemy2.addRule(ruleenemy);
+
+        //killing
+        TopCollision kill4 = new TopCollision((Actor)enemy2, (Actor)actor1);
+        Action killAction4 = new Destroy((Actor) enemy2);
+        Rule killRule4 = new Rule(kill4, killAction4);
+        ((Actor) enemy2).addRule(killRule4);
+        
+        
+        //moves it left
+//        Action actionCollide = new MoveLeft((Actor)enemy2);
+//        Rule ruleCollide = new Rule(triggerenemy,actionCollide);
+//        enemy2.addRule(ruleCollide);
+        
         //main character killed if it hits enemy from side or is bounced on by enemy
         SideCollision kill = new SideCollision((Actor)actor4, (Actor) actor1);
         BottomCollision kill2 = new BottomCollision((Actor)actor4, (Actor) actor1);
@@ -104,14 +141,20 @@ public class Tester extends Application {
         TickTrigger tick = new TickTrigger();
         Action tick1 = new ApplyPhysics((Actor)actor1);
         Action tick2 = new ApplyPhysics((Actor)actor2);
+        Action tick3 = new ApplyPhysics((Actor)blocky);
         Action tick4 = new ApplyPhysics((Actor) actor4);
+        Action tick5 = new ApplyPhysics((Actor) enemy2);
         Rule rule7 = new Rule(tick,tick1);
         Rule rule8 = new Rule(tick,tick2);
-        Rule ruleEnemy = new Rule(tick, tick4);
+        Rule blockrule = new Rule (tick, tick3);
+        Rule ruleBlock = new Rule(tick, tick4);
+        Rule ruleEnemy = new Rule(tick, tick5);
+
         actor1.addRule(rule7);
         actor2.addRule(rule8);
-        ((Actor) actor4).addRule(ruleEnemy);
-
+        blocky.addRule(blockrule);
+        ((Actor) actor4).addRule(ruleBlock);
+        enemy2.addRule(ruleEnemy);
 
         IPlayActor actor3 = new Actor();
         ((IAuthoringActor)actor3).setImageViewName("flagpole.png");
@@ -120,8 +163,10 @@ public class Tester extends Application {
 
 
 
+
         KeyTrigger triggerDown = new KeyTrigger(KeyCode.DOWN);
-        Action moveForwards = new MoveForward((Actor)actor1);
+       // TickTrigger trigger = new TickTrigger();
+        Action moveForwards = new GlideForward((Actor)actor1, 1.0);
         Rule movingForwards = new Rule(triggerDown, moveForwards);
         actor1.addRule(movingForwards);
 
@@ -199,14 +244,22 @@ public class Tester extends Application {
         levels.add(level1);
         level1.addActor(actor1);
         level1.addActor(actor2);
+        level1.addActor(blocky);
+        level1.addActor((IAuthoringActor) enemy2);
         level1.addActor((IAuthoringActor)actor3);
         level1.addActor((IAuthoringActor) actor4);
+        
         
         Level level2 = new Level();
         level2.setMyBackgroundImgName("vgnwpGb.png");
         levels.add(level2);
         level2.addActor(actor1);
 
+        Level level3 = new Level();
+        level3.setMyBackgroundImgName("default_background.png");
+        levels.add(level3);
+        level3.addActor(actor1);
+        
         int yposition = 200;
         int xposition = 150;
         for(int i=1; i<=7; i++){
@@ -243,17 +296,22 @@ public class Tester extends Application {
             Action baction3 = new VerticalBounceCollision((Actor)actor1);
             Rule brule3 = new Rule(b3, baction3);
 
+
             TopCollision b4 = new TopCollision((Actor)actor1, block2);
             Action baction4 = new VerticalBounceCollision((Actor)actor1);
             Rule brule4 = new Rule(b4, baction4);
 
-            Rule ruleNextLevel2 = new Rule(b4, actionNextLevel);
+            Action actionNextLevel2 = new NextLevel((IPlayActor) actor1);
+            Rule ruleNextLevel2 = new Rule(b4, actionNextLevel2);
+            ruleNextLevel2.setID(1);
             actor1.addRule(ruleNextLevel2);
             actor1.addRule(brule3);
             actor1.addRule(brule4);
             level2.addActor((IAuthoringActor) block2);
             yposition2-=50;
         }
+        
+
         
 //        IAuthoringActor block1 = (IAuthoringActor) new Actor();
 //        block1.setImageViewName("block.png");
@@ -290,7 +348,7 @@ public class Tester extends Application {
         a.addRule(new Rule(translatetick,translateaction));
         TickTrigger newtick = new TickTrigger(220);
         Action newaction = new CreateActor((Actor)actor1,(Actor)a,0.0,0.0);
-        //actor1.addRule(new Rule(newtick,newaction));
+       // actor1.addRule(new Rule(newtick,newaction));
         
         
         
@@ -299,32 +357,41 @@ public class Tester extends Application {
             floor.setName("floor");
             floor.setID(5);
             floor.setImageViewName("square.png");
+//            floor.addState(ActorState.INVISIBLE);
             floor.setX(i*50+i);
             floor.setY(500-floor.getBounds().getHeight());
             BottomCollision b = new BottomCollision((Actor)actor1, floor);
             BottomCollision b2 = new BottomCollision((Actor)actor2, floor);
             BottomCollision b3 = new BottomCollision((Actor)actor3, floor);
-
+            BottomCollision b4 = new BottomCollision((Actor)blocky, floor);
+            BottomCollision b5 = new BottomCollision((Actor)enemy2, floor);
+            
             Action baction = new VerticalStaticCollision((Actor)actor1);
             Action baction2 = new VerticalStaticCollision((Actor)actor2);
             Action baction3 = new VerticalStaticCollision((Actor)actor3);
+            Action baction4 = new VerticalStaticCollision((Actor)blocky);
+            Action baction5 = new VerticalStaticCollision((Actor)enemy2);
 
             Rule brule = new Rule(b, baction);
             Rule brule2 = new Rule(b2, baction2);
             Rule brule3 = new Rule(b3, baction3);
+            Rule brule4 = new Rule (b4, baction4);
+            Rule brule5 = new Rule (b5, baction5);
 
             actor1.addRule(brule);
             actor2.addRule(brule2);
             ((IAuthoringActor)actor3).addRule(brule3);
+            blocky.addRule(brule4);
+            enemy2.addRule(brule5);
 
             level1.addActor((IAuthoringActor)floor);
             level2.addActor((IAuthoringActor) floor);
+            level3.addActor((IAuthoringActor)floor);
         }
 
         Group group = new Group();
         Scene scene = new Scene(group);
-
-        Game model = new Game(info,levels);
+        Game model = new Game(info, levels);
         model.setHUDInfoFile("a.txt");
         
         CreatorController c = new CreatorController(model);

@@ -25,4 +25,5 @@ public interface IRule {
 	 * @return The specific Action from the Rule
 	 */
 	public Action getMyAction();
+	
 }

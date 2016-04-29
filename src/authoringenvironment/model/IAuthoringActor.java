@@ -5,6 +5,7 @@ import java.util.Map;
 
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;
+import gameengine.model.AttributeType;
 import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
 import gameengine.model.Sprite;
@@ -169,4 +170,6 @@ public interface IAuthoringActor extends IEditableGameElement {
     public double getScaleY();
     
     public void restoreImageView();
+
+	public Attribute getAttribute(AttributeType attributeType);
 }

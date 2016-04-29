@@ -7,6 +7,7 @@ import java.util.Set;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.view.LevelEditingEnvironment;
 import gui.view.ButtonFileChooserBackgroundImage;
+import gui.view.CheckBoxesGarbageCollection;
 import gui.view.IGUI;
 import gui.view.PopUpAddLevelTimer;
 import gui.view.PopUpRuleAdder;
@@ -14,6 +15,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -21,7 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class GUILevelInspector implements IGUI {
+public class LevelInspector implements IGUI {
 	private static final String BUTTON_LABEL = "Choose a new background image";
 	private static final int BUTTON_HEIGHT = 30;
 	private static final int BUTTON_WIDTH = 300;
@@ -34,6 +36,7 @@ public class GUILevelInspector implements IGUI {
 	private TabFields myAttributesTab;
 	private VBox myContainer;
 	private LevelEditingEnvironment myLevelEditor;
+	private CheckBoxesGarbageCollection myGarbageCollector;
 
 	/**
 	 * Constructor for Level Inspector.
@@ -47,7 +50,7 @@ public class GUILevelInspector implements IGUI {
 	 * @param level:
 	 *            level that is being edited.
 	 */
-	public GUILevelInspector(ResourceBundle myResources, Set<IAuthoringActor> availActors,
+	public LevelInspector(ResourceBundle myResources, Set<IAuthoringActor> availActors,
 			LevelEditingEnvironment editor) {
 		myLevelEditor = editor;
 		init(myResources, availActors);
@@ -65,16 +68,28 @@ public class GUILevelInspector implements IGUI {
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
 		myAttributesTab = new TabFields(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, myLevelEditor.getLevel());
 		myAttributesTab.setObserver(myLevelEditor);
+		HBox buttonBox = addEditingButtons();
+		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(BUTTON_LABEL, null, myLevelEditor, myLevelEditor.getStage());
+		myAttributesTab.addElement(button);
+		myGarbageCollector = new CheckBoxesGarbageCollection();
+		myAttributesTab.addElement(myGarbageCollector);
+		addTabToContainer(myAttributesTab, false);
+		myContainer.getChildren().add(buttonBox);
+		addTabToContainer(myActorsTab, true);
+	}
+	
+	public CheckBoxesGarbageCollection getGarbageCollector() {
+		return myGarbageCollector;
+	}
+	
+	private HBox addEditingButtons() {
 		Button addRuleButton = new Button("Edit level rules");
 		addRuleButton.setOnAction(e -> new PopUpRuleAdder(300,300, myLevelEditor));
 		Button addTimerButton = new Button("Add a level timer");
 		addTimerButton.setOnAction(e -> new PopUpAddLevelTimer(300,300, myLevelEditor.getLevel()));
-		//PopUpRuleAdder adder = new PopUpRuleAdder(300,300);
-		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(BUTTON_LABEL, null, myLevelEditor, myLevelEditor.getStage());
-		myAttributesTab.addElement(button);
-		addTabToContainer(myAttributesTab, false);
-		myContainer.getChildren().addAll(addRuleButton, addTimerButton);
-		addTabToContainer(myActorsTab, true);
+		HBox box = new HBox();
+		box.getChildren().addAll(addRuleButton, addTimerButton);
+		return box;
 	}
 
 	/**

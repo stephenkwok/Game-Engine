@@ -106,7 +106,7 @@ public class FlappyBird extends Application {
         pipeTop.addRule(new Rule(new SideCollision(pipeTop, gameSide), new Destroy(pipeTop)));
         pipeBottom.addRule(new Rule(new SideCollision(pipeBottom, gameSide), new Destroy(pipeBottom)));
         
-        //player.addAttribute(new Attribute(AttributeType.POINTS,15,player));
+        player.addAttribute(new Attribute(AttributeType.POINTS,15,player));
         player.addState(ActorState.MAIN);
 
 

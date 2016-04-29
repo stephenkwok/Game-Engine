@@ -15,6 +15,7 @@ public class ImageviewActorIcon extends ImageView {
 	private int myID;
 	private boolean onLevel;
 	private ActorCopier myActorCopier;
+	private static int THRESHOLD = 100;
 
 	/**
 	 * Construct an icon for a given actor.
@@ -22,10 +23,10 @@ public class ImageviewActorIcon extends ImageView {
 	 * @param actor:
 	 *            actor to construct an icon for.
 	 */
-	public ImageviewActorIcon(IAuthoringActor actor, double height) {
+	public ImageviewActorIcon(IAuthoringActor actor, double width) {
 		myActor = actor;
 		setImage(actor.getImageView().getImage());
-		this.setFitHeight(height);
+		this.setFitWidth(width);
 		this.setPreserveRatio(true);
 		this.setRotate(actor.getRotate());
 		this.setOpacity(actor.getOpacity());

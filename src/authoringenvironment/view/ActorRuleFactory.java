@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.view.behaviors.IAuthoringBehavior;
+import authoringenvironment.model.IAuthoringBehavior;
 import gameengine.model.Actor;
 
 /**
@@ -45,7 +45,7 @@ public class ActorRuleFactory {
 	 * @param value
 	 * @return
 	 */
-	public IAuthoringBehavior getAuthoringRule(String behaviorType, String value) {
+	public IAuthoringBehavior getAuthoringRule(String behaviorType) {
 		String className = PACKAGE + myResources.getString(behaviorType + CLASS);
 		String elementType = myResources.getString(behaviorType + ELEMENT);
 		try {

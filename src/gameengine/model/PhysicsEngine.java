@@ -168,7 +168,7 @@ public class PhysicsEngine {
 			a1.getNextValues().setNextYPos(y);
 			a1.getNextValues().setNextXVelo(xVelo);
 			a1.getNextValues().setNextYVelo(yVelo);
-			a1.getNextValues().setCollisoin(true);
+			a1.getNextValues().setCollision(true);
 		}
 		
 	}

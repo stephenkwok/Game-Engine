@@ -256,6 +256,15 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		stringBuilder.append(myImageViewName);
 		stringBuilder.append("\nmyImg: ");
 		stringBuilder.append(myImageView);
+		stringBuilder.append("\nmyPosition: ");
+		stringBuilder.append("(");
+		stringBuilder.append(x);
+		stringBuilder.append(",");
+		stringBuilder.append(y);
+		stringBuilder.append(",");
+		stringBuilder.append(")");
+		stringBuilder.append("(");
+
 		stringBuilder.append("\nmyRules: ");
 		stringBuilder.append(getRules().toString());
 		stringBuilder.append(" ]");
@@ -542,4 +551,17 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		setScaleY(myScaleY);
 	}
 
+	@Override
+	public void setVisibility() {
+		myImageView.setVisible(!checkState(ActorState.INVISIBLE));
+	}
+	
+	public Set<ActorState> getStates() {
+		return myStates;
+	}
+	
+	public void setStates(Set<ActorState> states) {
+		myStates = states;
+	}
+	
 }

@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import authoringenvironment.model.IAuthoringLevel;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Level;
@@ -13,8 +14,8 @@ public class PreviewUnitWithLevel extends PreviewUnitWithEditable {
 	private static final Double TEXT_FIELD_WIDTH = 125.0;
 	private TextField myTextField;
 
-	public PreviewUnitWithLevel(IEditableGameElement editable, IEditingEnvironment environment) {
-		super(editable, environment);
+	public PreviewUnitWithLevel(IAuthoringLevel level, IEditingEnvironment environment) {
+		super(level, environment);
 		myTextField = new TextField();
 		myTextField.setPrefWidth(TEXT_FIELD_WIDTH);
 		myTextField.setPromptText(TEXT_FIELD_PROMPT_TEXT);

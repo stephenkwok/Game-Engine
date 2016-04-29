@@ -2,17 +2,15 @@ package gameengine.controller;
 
 import java.util.*;
 
-import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamInclude;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import authoringenvironment.model.IAuthoringLevel;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
-import javafx.collections.ObservableMap;
+import javafx.animation.Timeline;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 /**
@@ -22,7 +20,7 @@ import javafx.util.Duration;
  *
  */
 
-public class Game extends Observable implements Observer {
+public class Game extends Observable implements Observer, IGame {
 	
 	
 	public static final int SIZE = 400;
@@ -40,9 +38,8 @@ public class Game extends Observable implements Observer {
 	private Timeline animation;
 	private List<IPlayActor> currentActors;
 	private List<IPlayActor> deadActors;
-    private int count;
-    
-    
+	private int levelTime;
+	private int globalTime;   
     
     public Game(String initialGameFile, 
     		List<Level> levels, 
@@ -53,13 +50,14 @@ public class Game extends Observable implements Observer {
     		Timeline animation, 
     		List<IPlayActor> currentActors, 
     		List<IPlayActor> deadActors,
-    		int count) {
+    		int levelTime, int globalTime) {
     	this(initialGameFile, info, levels);
     	currentActors = new ArrayList<IPlayActor>();
 		deadActors = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
-		count = 1;
+		this.levelTime = levelTime;
+		this.globalTime = globalTime;
     }
 	
     
@@ -74,15 +72,16 @@ public class Game extends Observable implements Observer {
      * @param gameInfo      The game info associated with the game
      * @param gameLevels    All the levels in the game
      */
-	public Game(String gameFilePath, GameInfo gameInfo, List<Level> gameLevels) {
+	public Game(String gameFilePath, GameInfo gameInfo, List<Level> myLevels) {
 		initialGameFile = gameFilePath;
-		levels = gameLevels;
+		levels = myLevels;
 		info = gameInfo;
 		currentActors = new ArrayList<IPlayActor>();
 		deadActors = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
-		count = 1;
+		levelTime = 1;
+		globalTime = 1;
 		initTimeline();
 	}
 	
@@ -98,9 +97,12 @@ public class Game extends Observable implements Observer {
 
     }
 	
-	public void terminateGame() {
-		getAnimation().pause();
-		//getAnimation().setCycleCount(0);
+	public void stopGame() {
+		togglePause();
+	}
+	
+	private void togglePause() {
+		animation.pause();
 	}
 
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
@@ -118,6 +120,10 @@ public class Game extends Observable implements Observer {
 	public void startGame() {
 		initCurrentLevel();
 		initCurrentActors();
+		toggleUnPause();
+	}
+	
+	public void toggleUnPause() {
 		animation.play();
 	}
 
@@ -133,6 +139,7 @@ public class Game extends Observable implements Observer {
 		for (IPlayActor actor : currentActors) {
 			((Observable) actor).addObserver(this);
 			actor.setPhysicsEngine(myPhysicsEngine);
+			actor.setVisibility();
 		}
 	}
 
@@ -142,7 +149,8 @@ public class Game extends Observable implements Observer {
 		signalTick();
 		updateCamera();
 		updateActors();
-		count++;
+		levelTime++;
+		globalTime++;
 	}
 
 	private void updateCamera() {
@@ -152,7 +160,7 @@ public class Game extends Observable implements Observer {
 	}
 
 	private void signalTick() {
-		handleTrigger(new TickTrigger(count));
+		handleTrigger(new TickTrigger(levelTime));
 	}
 
 	private void updateBackground() {
@@ -214,18 +222,25 @@ public class Game extends Observable implements Observer {
 	 * @return a list of all levels in the game
 	 */
 	public List<Level> getLevels() {
-		return levels;
+		List<Level> levelList = new ArrayList<Level>();
+		for(IPlayLevel playLevel: levels) {
+			levelList.add((Level) playLevel);
+		}
+		return levelList;
 	}
 
 	/**
 	 * Changes the Game to the next Level
 	 */
 
-	public void nextLevel() {
+	public boolean nextLevel() {
 		animation.stop();
-		if (levels.size() >= info.getMyCurrentLevelNum() + 1) {
+		if (info.getMyCurrentLevelNum() + 1 < levels.size()) {
 			setCurrentLevel(info.getMyCurrentLevelNum() + 1);
-			//levels.get(info.getMyCurrentLevelNum()).getMainCharacter().setX(0);
+			levels.get(info.getMyCurrentLevelNum()).getMainCharacter().setX(0);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -281,7 +296,7 @@ public class Game extends Observable implements Observer {
 	 *
 	 * @return The Level that is currently being used
 	 */
-	public Level getCurrentLevel() {
+	public IPlayLevel getCurrentLevel() {
 		return levels.get(info.getMyCurrentLevelNum());
 	}
 
@@ -393,32 +408,32 @@ public class Game extends Observable implements Observer {
 		return myCollisionDetector;
 	}
 
-
-
-
 	public Map<String, Set<IGameElement>> getActiveTriggers() {
 		return activeTriggers;
 	}
-
-
-
 
 	public void setActiveTriggers(Map<String, Set<IGameElement>> activeTriggers) {
 		this.activeTriggers = activeTriggers;
 	}
 
-
-
-
-	public int getCount() {
-		return count;
+	public int getLevelTime() {
+		return levelTime;
 	}
 
-
-
-
-	public void setCount(int count) {
-		this.count = count;
+	public void setLevelTime(int step) {
+		this.levelTime = step;
+	}
+	
+	public int getGlobalTime(){
+		return globalTime;
+	}
+	
+	public void setGlobalTime(int time){
+		this.globalTime = time;
+	}
+	
+	public void resetLevelTime(){
+		levelTime = 1;
 	}
 
 }
