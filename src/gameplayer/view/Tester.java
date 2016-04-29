@@ -249,7 +249,6 @@ public class Tester extends Application {
         level1.addActor(actor1);
         level1.addActor(actor12);
 
-        level1.getMainCharacters().add((IPlayActor) actor1);
         level1.addActor(actor2);
         level1.addActor(blocky);
         level1.addActor((IAuthoringActor) enemy2);
@@ -259,7 +258,6 @@ public class Tester extends Application {
         
         Level level2 = new Level();
         level2.setMyBackgroundImgName("vgnwpGb.png");
-        level2.getMainCharacters().add((IPlayActor) actor1);
         levels.add(level2);
         level2.addActor(actor1);
         level2.addActor(actor12);

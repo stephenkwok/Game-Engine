@@ -330,6 +330,12 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	}
 
 	public List<IPlayActor> getMainCharacters() {
+		for (IPlayActor a : myActors) {
+			if (a.checkState(ActorState.MAIN) && !myMainCharacters.contains(a)) {
+				myMainCharacters.add(a);
+			}
+		}
+
 		return myMainCharacters;
 	}
 
