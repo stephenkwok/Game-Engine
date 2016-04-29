@@ -15,9 +15,9 @@ public class TLGCSValueFinder implements IValueFinder {
 	@Override
 	public Collection<Property<?>> find(String key) {
 		Collection<Property<?>> properties = new HashSet<>();
-		
+		Property<?> ret = null;
 		try {
-			Property<?> ret = null;
+			
 			switch (key.toLowerCase()) {
 				case "points":
 					//ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getProperty();
@@ -26,20 +26,24 @@ public class TLGCSValueFinder implements IValueFinder {
 					//ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.HEALTH).getProperty();
 					break;
 				case "time":
-					 ret = data.getGlobalTimeProperty();
+					ret = data.getGlobalTimeProperty();
 					break;
 				default:
 					properties.addAll(findMany(key));
 					break;
 			}
-			if (ret != null) {
-				properties.add(ret);
-			}
-			//ret != null ? properties.add(ret) : pass;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		if (ret != null) {
+			System.out.println(ret.hashCode() + " : " + ret.getFieldName());
+			properties.add(ret);
+		} else {
+			properties.add(new Property<String>("Vaule not found", key));
+		}
+		
+		
 		return properties;
 		//return ret == null ? new Property<String>("Value Not Found", key) : ret;
 	}

@@ -95,8 +95,6 @@ public class Game extends Observable implements Observer, IGame {
 		deadActors = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
-		levelTime = new Property<>(1, "levelTime");
-		globalTime = new Property<>(1, "globalTime");
 		initTimeline();
 		// initSoundEngine();
 	}
@@ -503,7 +501,7 @@ public class Game extends Observable implements Observer, IGame {
 	}
 	
 	public Property<Integer> getGlobalTimeProperty() {
-		return this.globalTime;
+		return globalTime;
 	}
 	
 	public Property<Integer> getLevelTimeProperty() {
