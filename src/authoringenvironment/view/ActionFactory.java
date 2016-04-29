@@ -109,7 +109,7 @@ public class ActionFactory {
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> clazz = Class.forName(className);
-		Constructor<?> constructor = clazz.getConstructor(IGameElement.class, AttributeType.class, int.class);
+		Constructor<?> constructor = clazz.getConstructor(IGameElement.class, AttributeType.class, Integer.class);
 		return (IAction) constructor.newInstance((IGameElement) arguments.get(ZERO), arguments.get(ONE), arguments.get(TWO));
 	}
 	

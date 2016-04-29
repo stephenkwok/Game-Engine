@@ -4,8 +4,7 @@ import java.io.File;
 import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import gameengine.model.Triggers.ITrigger;
-import gameengine.model.Triggers.TickTrigger;
+import gameengine.model.Triggers.*;
 import gameengine.model.*;
 import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
@@ -114,6 +113,7 @@ public class Game extends Observable implements Observer, IGame {
 	
 	public void stopGame() {
 		togglePause();
+		setAllSound(true);
 	}
 	
 	private void togglePause() {
@@ -136,9 +136,9 @@ public class Game extends Observable implements Observer, IGame {
 		initCurrentLevel();
 		initCurrentActors();
 		toggleUnPause();
-		/*if (soundEngine != null) {
-			soundEngine.setSoundtrack(levels.get(info.getMyCurrentLevelNum()).getSoundtrack());
-		}*/
+//		if (soundEngine != null) {
+//			soundEngine.setSoundtrack(levels.get(info.getMyCurrentLevelNum()).getSoundtrack());
+//		}
 	}
 	
 	public void toggleUnPause() {
@@ -252,6 +252,7 @@ public class Game extends Observable implements Observer, IGame {
 		animation.stop();
 		if (info.getMyCurrentLevelNum() + 1 < levels.size()) {
 			setCurrentLevel(info.getMyCurrentLevelNum() + 1);
+			levels.get(info.getMyCurrentLevelNum()).getActors().forEach(actor -> ((Actor) actor).restoreImageView());
 			levels.get(info.getMyCurrentLevelNum()).getMainCharacters().forEach(actor -> actor.setX(0));
 			return true;
 		} else {
