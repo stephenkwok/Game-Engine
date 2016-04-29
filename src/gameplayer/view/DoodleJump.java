@@ -65,12 +65,15 @@ public class DoodleJump extends Application {
         level1.addActor(player);
        
         Random r = new Random();
-        for(int i=0; i<6; i++){
+        for(int i=1; i<6; i++){
             Actor greenplatform = new Actor();
             greenplatform.setImageViewName("green_platform.png");
             greenplatform.setID(2);
             greenplatform.setX(200 + (400) * r.nextDouble());
             greenplatform.setY(i*70);
+            greenplatform.addRule(new Rule(new TopCollision(greenplatform,player,true),new GlideLeft(greenplatform,5.0)));
+            
+            
             level1.addActor(greenplatform);
             
             player.addRule(new Rule(new SideCollision(player,greenplatform),new HorizontalBounceCollision(player)));
