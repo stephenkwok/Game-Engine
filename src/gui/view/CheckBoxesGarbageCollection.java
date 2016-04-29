@@ -155,7 +155,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 					}
 				}
 				garbageCollectors.put(allSides.get(i), garbageCollector);
-				myLevel.addActor(garbageCollector);
+				myLevel.addGarbageCollector((IPlayActor) garbageCollector);
 			} else {
 				if (myLevel.getActors().contains(garbageCollector)) {
 					myLevel.removeActor((Actor) garbageCollector);

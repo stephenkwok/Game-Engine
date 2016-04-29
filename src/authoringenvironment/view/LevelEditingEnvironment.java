@@ -266,6 +266,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 					val.add(actor);
 					availableActors.put(icon.getRefActor(), val);
 					myLevel.addActor(actor);
+					if (myController.getActorGroups().containsKey(actor.getID())) {
+						groupActors(actor);
+					}
 					myInspector.getGarbageCollector().updateGarbageCollectingActors(myLevel.getActors());
 					//myLevel.addActor(icon.getRefActor());
 					myLevelPreview.addActorToScene(actor);
@@ -366,5 +369,26 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	
 	public Set<IAuthoringActor> getAvailableActors() {
 		return availableActors.keySet();
+	}
+	
+	public void groupActors(IAuthoringActor actor) {
+		System.out.println("Grouping");
+		ActorGroup actorList;
+		if (myController.getActorGroups().containsKey(actor.getID())) {
+			actorList = myController.getActorGroups().get(actor.getID());
+		} else {
+			actorList = new ActorGroup(actor.getName(), actor.getImageView(), new ArrayList<>());
+		}
+		for (IAuthoringActor key: myController.getActorMap().keySet()) {
+			List<IAuthoringActor> actorsForKey = myController.getActorMap().get(key);
+			for (int i = 0; i < actorsForKey.size(); i++) {
+				if (!actorList.getGroup().contains(actorsForKey.get(i))) {
+					actorList.addActorToGroup(actorsForKey.get(i));
+				}
+			}
+		}
+		myController.getActorGroups().put(actor.getID(), actorList);
+		System.out.println(myController.getActorGroups().get(actor.getID()).getGroup().size());
+		//System.out.println(myController.getActorGroups().get(actor.getID()));
 	}
 }
