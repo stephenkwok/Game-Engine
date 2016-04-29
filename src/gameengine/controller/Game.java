@@ -35,8 +35,8 @@ public class Game extends Observable implements Observer, IGame {
 	private Timeline animation;
 	private List<IPlayActor> currentActors;
 	private List<IPlayActor> deadActors;
-    private int levelTime;
-    private int globalTime;
+	private int levelTime;
+	private int globalTime;
     
     
     
@@ -49,7 +49,7 @@ public class Game extends Observable implements Observer, IGame {
     		Timeline animation, 
     		List<IPlayActor> currentActors, 
     		List<IPlayActor> deadActors,
-    		int levelStep, int globalTime) {
+    		int levelTime, int globalTime) {
     	this(initialGameFile, info, levels);
     	currentActors = new ArrayList<IPlayActor>();
 		deadActors = new ArrayList<IPlayActor>();
@@ -418,13 +418,13 @@ public class Game extends Observable implements Observer, IGame {
 	public void setLevelTime(int step) {
 		this.levelTime = step;
 	}
-
-	public int getGlobalTime() {
+	
+	public int getGlobalTime(){
 		return globalTime;
 	}
-
-	public void setGlobalTime(int globalTime) {
-		this.globalTime = globalTime;
+	
+	public void setGlobalTime(int time){
+		this.globalTime = time;
 	}
 	
 	public void resetLevelTime(){

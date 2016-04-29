@@ -136,6 +136,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void nextLevel() {
 		if (model.nextLevel()) {
 			view.clearGame();
+			model.nextLevel();
 			model.resetLevelTime();
 			begin();
 		}
