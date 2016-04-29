@@ -50,7 +50,6 @@ public abstract class PopUpParent extends Observable {
 	 */
 	private void initializeContainer() {
 		myContainer = new VBox(DEFAULT_CONTAINER_SPACING);
-		myContainer.setPadding(new Insets(DEFAULT_CONTAINER_PADDING));
 		myContainer.prefWidthProperty().bind(myScene.widthProperty());
 		myContainer.prefHeightProperty().bind(myScene.heightProperty());
 		myContainer.setAlignment(Pos.CENTER);
@@ -68,6 +67,8 @@ public abstract class PopUpParent extends Observable {
 	 * Opens the pop up
 	 */
 	public void showPopUp() {
+		myContainer.prefWidthProperty().bind(myStage.widthProperty());
+		myContainer.prefHeightProperty().bind(myStage.heightProperty());
 		myStage.setScene(myScene);
 		myStage.show();
 	}

@@ -1,6 +1,5 @@
 package gameengine.model.Triggers;
 
-import gameengine.model.IPlayActor;
 import javafx.scene.input.KeyCode;
 
 public class KeyTrigger extends ITrigger {
@@ -13,7 +12,6 @@ public class KeyTrigger extends ITrigger {
         setMyKey(key.getName());
     }
     
-
     @Override
     public Object[] getParameters(){
     	return new Object[]{myKeyCode};

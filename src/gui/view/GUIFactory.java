@@ -85,8 +85,17 @@ public class GUIFactory {
 	 */
 	private IGUIElement createElement(String elementType, String nodeType) {
 		String className = GUI + VIEW + myResources.getString(nodeType + CLASS);
+		
 		try {
 			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class);
+			if (elementType.equals("CheckBoxObject")) {
+				try {
+					createCheckBoxObject(nodeType, className);
+				} catch (ClassNotFoundException | InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			return (IGUIElement) createMethod.invoke(this, nodeType, className);
 		} catch (NoSuchMethodException | SecurityException e) {
 			// TODO Auto-generated catch block

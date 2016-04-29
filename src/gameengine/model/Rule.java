@@ -16,7 +16,6 @@ public class Rule implements IRule{
 
     private ITrigger myTrigger;
     private Action myAction;
-    private int ID;
     
     public Rule(ITrigger trigger, Action action){
         setMyTrigger(trigger);
@@ -56,16 +55,9 @@ public class Rule implements IRule{
 		this.myAction = myAction;
 	}
 	
-	public void setID(int ID) {
-		this.ID = ID;
-	}
-	
-	public int getID() {
-		return ID;
-	}
-	
+	@Override
 	public String toString() {
-		String id = Integer.toString(ID);
-		return ("id: " + id);
+		return "Trigger: " + myTrigger.getClass().getSimpleName() + "\t causes \t Action:" + myAction.getClass().getSimpleName();
+		
 	}
 }

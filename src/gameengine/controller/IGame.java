@@ -62,5 +62,13 @@ public interface IGame {
 	public void setInitialGameFile(String path);
 
 	public GameInfo getInfo();
+	
+	public void toggleSound();
+	
+	public void toggleMusic();
+
+	public void setAllSound(boolean mute);
+
+	public void playSound(String key);
 
 }

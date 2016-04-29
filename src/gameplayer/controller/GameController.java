@@ -116,7 +116,8 @@ public class GameController extends Observable implements Observer, IGameControl
 	 */
 	public void endGame() {
 		model.stopGame();
-		view.terminateGame(model.getCurrentLevel().getMainCharacters().size());
+		view.terminateGame();
+		getGame().setAllSound(true);
 	}
 	
 
@@ -204,12 +205,14 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void togglePause() {
 		model.stopGame();
 		view.pauseGame();
+		getGame().setAllSound(true);
 	}
 
 	@Override
 	public void toggleUnPause() {
 		model.toggleUnPause();
 		view.toggleUnPause();
+		getGame().setAllSound(false);
 	}
 
 	@Override
@@ -242,6 +245,10 @@ public class GameController extends Observable implements Observer, IGameControl
 		setChanged();
 		notifyObservers(Arrays.asList(args));
 		
+	}
+	
+	private void playSound(String key) {
+		model.playSound(key);
 	}
 
 	

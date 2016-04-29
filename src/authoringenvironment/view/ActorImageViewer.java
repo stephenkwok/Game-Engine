@@ -1,12 +1,17 @@
 package authoringenvironment.view;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.IEditingElement;
 import gui.view.ButtonFileChooserActorImage;
 import gui.view.ComboBoxActorImages;
 import gui.view.ComboBoxSpriteImages;
 import gui.view.IGUI;
+import gui.view.IGUIElement;
+import gui.view.ObjectObservable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -30,6 +35,7 @@ public class ActorImageViewer implements IGUI {
 	private ImageView myActorIV;
 	private StackPane myPane;
 	private ActorEditingEnvironment aEE;
+	private List<IGUIElement> elementList;
 
 	/**
 	 * Module that contains actor image display and options for loading an image
@@ -50,16 +56,19 @@ public class ActorImageViewer implements IGUI {
 	 * image and allows user to set the image
 	 */
 	private void initializeEnvironment() {
+		this.elementList = new ArrayList<>();
 		myPane = new StackPane();
 		VBox vbox = new VBox(PADDING);
 		HBox hbox = new HBox(PADDING);
 		hbox.setAlignment(Pos.CENTER);
 		ButtonFileChooserActorImage imageChooser = new ButtonFileChooserActorImage(BUTTON_LABEL, null, aEE,
 				aEE.getStage());
+		imageChooser.addObserver(aEE);
 		hbox.getChildren().addAll(myActorIV, imageChooser.createNode());
 		vbox.getChildren().addAll(hbox, getImagesComboBox(), getSpritesComboBox());
 		myPane.getChildren().add(vbox);
 		myPane.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		addObserversToElements();
 	}
 
 	/**
@@ -70,6 +79,7 @@ public class ActorImageViewer implements IGUI {
 	 */
 	private HBox getImagesComboBox() {
 		ComboBoxActorImages availableImages = new ComboBoxActorImages(AVAILABLE_ACTOR_IMAGES, IMAGE_RESOURCE, aEE);
+		elementList.add((IGUIElement) availableImages);
 		return (HBox) availableImages.createNode();
 	}
 	
@@ -77,10 +87,18 @@ public class ActorImageViewer implements IGUI {
 		HBox sprites = new HBox(PADDING);
 		populateSprites(sprites);
 		ComboBoxSpriteImages spriteImages = new ComboBoxSpriteImages(AVAILABLE_SPRITE_IMAGES, IMAGE_RESOURCE, aEE, sprites);
+		elementList.add((IGUIElement) spriteImages);
+		
 		HBox spriteCombo = (HBox) spriteImages.createNode();
 		VBox toReturn = new VBox(PADDING);
 		toReturn.getChildren().addAll(spriteCombo, sprites);
 		return toReturn;
+	}
+	
+	private void addObserversToElements() {
+		for (int i = 0; i < elementList.size(); i++) {
+			((ObjectObservable) elementList.get(i)).addObserver(aEE);
+		}
 	}
 
 	private void populateSprites(HBox sprites){

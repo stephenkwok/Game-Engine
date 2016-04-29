@@ -1,13 +1,11 @@
 package authoringenvironment.view;
 
-import java.util.Observable;
-import java.util.Observer;
-import java.util.ResourceBundle;
+import java.util.*;
 import authoringenvironment.controller.Controller;
 import authoringenvironment.model.*;
-import gameengine.model.*;
-import gui.view.CheckBoxApplyPhysics;
+import gameengine.model.Actor;
 import javafx.geometry.*;
+import gui.view.CheckBoxApplyPhysics;
 import javafx.scene.control.*;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.ImageView;
@@ -101,6 +99,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		actorFields.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		actorFields.setPrefHeight(FIELD_HEIGHT);
 		CheckBoxApplyPhysics checkPhysics = new CheckBoxApplyPhysics(APPLY_PHYSICS, APPLY_PHYSICS_WIDTH, this);
+		checkPhysics.addObserver(this);
 		vbox.getChildren().addAll(actorImageViewer.getPane(), checkPhysics.createNode(), actorFields, library.getPane());
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
 		myRoot.setLeft(vbox);
@@ -162,6 +161,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		toReturn.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		toReturn.setOnAction(event -> {
 			myActorRuleCreator.setRules();
+			myController.updateActors((Actor) myActor);
 		});
 		return toReturn;
 	}

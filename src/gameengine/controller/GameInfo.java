@@ -30,6 +30,7 @@ public class GameInfo implements IEditableGameElement {
 	private boolean isDestinationGame;
 	private Map<IAuthoringActor, List<IAuthoringActor>> myActorMap;
 	private String myHUDFileLocation;
+	private String soundtrack;
 
 	public GameInfo(String name, String imageName, String description, int currentLevelNum, String file) {
 		this.setName(name);
@@ -241,5 +242,14 @@ public class GameInfo implements IEditableGameElement {
 	public Map<IAuthoringActor, List<IAuthoringActor>> getActorMap() {
 		return myActorMap;
 	}
+	
+	public void setSoundtrack(String soundtrack) {
+		this.soundtrack = soundtrack;
+	}
+	
+	public String getSoundtrack() {
+		return soundtrack;
+	}
+	
 	
 }

@@ -52,7 +52,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	private RuleManager myRuleManager;
 	private AttributeManager myAttributeManager;
 	private List<IPlayActor> myMainCharacters;
-
+	private String soundtrack;
 	/**
 	 * Instantiates the triggerMap and Actor list
 	 */
@@ -68,6 +68,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		myHeight = DEFAULT_HEIGHT;
 		myWidth = DEFAULT_WIDTH;
 		myRuleManager = new RuleManager();
+		myMainCharacters = new ArrayList<>();
 	}
 
 	/**
@@ -385,4 +386,12 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
         return myBackground.getBoundsInLocal();
     }
 	
+    public void setSoundtrack(String soundtrack) {
+    	this.soundtrack = soundtrack;
+    }
+    
+    public String getSoundtrack() {
+    	return soundtrack;
+    }
+    
 }

@@ -11,6 +11,7 @@ import authoringenvironment.view.ActionFactory;
 import authoringenvironment.view.ActorRule;
 import authoringenvironment.view.TriggerFactory;
 import gameengine.model.IAction;
+import gameengine.model.IRule;
 import gameengine.model.Triggers.ITrigger;
 import gui.view.EditingElementParent;
 import javafx.collections.FXCollections;
@@ -49,10 +50,12 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	private List<IAuthoringActor> myActors;
 	private IAuthoringActor otherActor;
 	private IAuthoringActor myActor;
+	private IRule myRule;
 
-	public SelectActorBehavior(ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
+	public SelectActorBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
 			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
 		super(GO);
+		this.myRule = myRule;
 		this.behaviorType = behaviorType;
 		this.promptText = myResources.getString(behaviorType + PROMPT);
 		this.labelText = myResources.getString(behaviorType + LABEL);
@@ -156,9 +159,7 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	 */
 	public abstract boolean isTrigger();
 
-	public void updateValueBasedOnEditable() {
-		comboBox.setValue(otherActor);
-	}
+	public abstract void updateValueBasedOnEditable();
 
 	/**
 	 * Gets the trigger factory.
@@ -196,5 +197,13 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	
 	protected IAuthoringActor getOtherActor(){
 		return this.otherActor;
+	}
+	
+	protected IRule getMyRule(){
+		return this.myRule;
+	}
+	
+	protected ComboBox<IEditableGameElement> getComboBox(){
+		return this.comboBox;
 	}
 }

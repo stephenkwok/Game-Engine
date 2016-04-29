@@ -1,11 +1,10 @@
 package gameplayer.view;
- 
+
 import gameengine.controller.Game;
 import gameengine.model.AttributeType;
 import voogasalad.util.hud.source.*;
- 
-public class TLGCSValueFinder implements IValueFinder {
 
+public class TLGCSValueFinder implements IValueFinder {
 	private Game data; //for other projects, your data will be a different class
 	
 	@Override
@@ -27,6 +26,8 @@ public class TLGCSValueFinder implements IValueFinder {
 		return ret == null ? new Property<String>("Value Not Found", key) : ret;
 	}
 	
+	
+	
 	@Override
 	public void setDataSource(Object dataSource) throws IllegalArgumentException {
 		if (dataSource instanceof Game) {
@@ -35,5 +36,5 @@ public class TLGCSValueFinder implements IValueFinder {
 			throw new IllegalArgumentException();
 		}
 	}
-}
 
+}

@@ -65,7 +65,8 @@ public class Tester extends Application {
 
         actor1.addSpriteImage("runningmario2.png");
         actor1.addSpriteImage("runningmario3.png");
-
+        
+        
 
         IAuthoringActor actor2 = (IAuthoringActor) new Actor();
         actor2.setImageViewName("block.png");
@@ -145,10 +146,12 @@ public class Tester extends Application {
         Action action9 = new ChangeAttribute((IPlayActor)actor1,AttributeType.POINTS,1);
         Rule rule9 = new Rule(trigger9,action9);
         actor1.addRule(rule9);
+        
+        actor1.addRule(new Rule(new KeyTrigger(KeyCode.C), new SoundAction((Actor)actor1, "strongpunch.mp3")));
 
         KeyTrigger triggerSpawn = new KeyTrigger(KeyCode.S);
         TickTrigger bulletTick = new TickTrigger();
-        Action bulletAction = new GlideForward((Actor)spawnedActor,2.5);
+        Action bulletAction = new GlideTarget((Actor)spawnedActor,2.5, (Actor) actor4);
         Rule bulletRule = new Rule(bulletTick,bulletAction);
         spawnedActor.addRule(bulletRule);
         PhysicsEngine newPhysicsEngine = new PhysicsEngine();
@@ -209,15 +212,24 @@ public class Tester extends Application {
         levels.add(level1);
         level1.addActor(actor1);
         level1.addActor(actor12);
+
+        level1.getMainCharacters().add((IPlayActor) actor1);
         level1.addActor(actor2);
         level1.addActor((IAuthoringActor)actor3);
         level1.addActor((IAuthoringActor) actor4);
         
         Level level2 = new Level();
         level2.setMyBackgroundImgName("vgnwpGb.png");
+        level2.getMainCharacters().add((IPlayActor) actor1);
         levels.add(level2);
         level2.addActor(actor1);
         level2.addActor(actor12);
+
+        
+        
+        level1.setSoundtrack("Jordan.mp3");
+        level2.setSoundtrack("Robot.mp3");
+
         int yposition = 200;
         int xposition = 150;
         for(int i=1; i<=7; i++){
@@ -337,6 +349,8 @@ public class Tester extends Application {
 
         Game model = new Game(info,levels);
         model.setHUDInfoFile("a.txt");
+        
+        
         
         CreatorController c = new CreatorController(model);
         c.saveForEditing(new File("gamefiles/test2.xml"));

@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	private static final String SPLASH_MESSAGE = "TEMPORARY. Will go back to splash screen.";
 	private Stage s;
-	
 	Controller myMainScreen;
 
 	@Override

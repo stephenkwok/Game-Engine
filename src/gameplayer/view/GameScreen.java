@@ -167,7 +167,7 @@ public class GameScreen extends Observable implements IGameScreen {
 
 	}
 
-	public void terminateGame(int numPlayers) {
+	public void terminateGame() {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, myResources.getString("EndMessage"), ButtonType.YES,
 				ButtonType.NO);
 		alert.setOnCloseRequest( e -> {

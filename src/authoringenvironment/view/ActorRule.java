@@ -145,12 +145,12 @@ public class ActorRule {
 	 * 
 	 * @param behavior
 	 */
-	public void addBehavior(String behaviorType) {
+	public void addBehavior(String behaviorType, IRule rule) {
 		if (!(isTriggerType(behaviorType) && myTriggerNodes.getChildren().size() != 0)) {
-			IAuthoringBehavior element = actorRuleFactory.getAuthoringRule(behaviorType);
-			element.updateValueBasedOnEditable();
+			IAuthoringBehavior element = actorRuleFactory.getAuthoringRule(behaviorType, rule);
 			authoringBehaviorMap.put(element, new ArrayList<>());
 			Node node = ((IGUIElement) element).createNode();
+			element.updateValueBasedOnEditable();
 			setRemoveEvent(node, element);
 			if (isTriggerType(behaviorType)) {
 				myTriggerNodes.getChildren().add(node);
