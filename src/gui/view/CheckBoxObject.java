@@ -19,6 +19,7 @@ public class CheckBoxObject extends Observable implements IGUIElement, IEditingE
 	private String myPromptText;
 	private int myWidth;
 	private IEditableGameElement myEditableElement;
+	private CheckBox myCheckBox;
 
 	/**
 	 * Constructs a CheckBoxObject to edit a given element.
@@ -32,6 +33,10 @@ public class CheckBoxObject extends Observable implements IGUIElement, IEditingE
 		myPromptText = promptText;
 		myWidth = width;
 		myEditableElement = null;
+		myCheckBox = new CheckBox(myPromptText);
+		myCheckBox.setPrefWidth(myWidth);
+		myCheckBox.setAlignment(Pos.CENTER_LEFT);
+		myCheckBox.setId(myPromptText);
 	}
 
 	/**
@@ -39,11 +44,8 @@ public class CheckBoxObject extends Observable implements IGUIElement, IEditingE
 	 */
 	@Override
 	public Node createNode() {
-		CheckBox checkbox = new CheckBox(myPromptText);
-		checkbox.setPrefWidth(myWidth);
-		checkbox.setAlignment(Pos.CENTER_LEFT);
-		checkbox.setId(myPromptText);
-		return checkbox;
+		
+		return myCheckBox;
 	}
 
 	/**
