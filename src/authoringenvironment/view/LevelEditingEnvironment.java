@@ -25,7 +25,10 @@ import gamedata.controller.ParserController;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
+import gameengine.model.ActorState;
+import gameengine.model.IPlayActor;
 import gameplayer.controller.GameController;
+import gameplayer.controller.PlayType;
 import gameplayer.view.GameScreen;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -101,6 +104,18 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
         Scene scene = new Scene(group);
 
         model = new Game(new GameInfo(), myController.getLevels());
+        //TODO this is duplicated from controller save game.... also no check for if actors is empty
+        for(Level level: model.getLevels()) {
+			for (IPlayActor actor: level.getActors()) {
+				if (actor.checkState(ActorState.MAIN)) {
+					level.getMainCharacters().add(actor);
+				}
+			}
+			if (level.getMainCharacters().size() == 0) {
+				level.getActors().get(0).addState(ActorState.MAIN);
+			}
+		}
+        
         CreatorController creatorController = new CreatorController(model);
         try {
 			creatorController.saveForPreviewing(myPreviewFile);
@@ -116,7 +131,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
         ParallelCamera camera = new ParallelCamera();
         view = new GameScreen(camera);
 
-        controller = new GameController(model);
+        controller = new GameController(model, PlayType.PREVIEW);
         controller.setGame(model);
         controller.setGameView(view);
 

@@ -24,6 +24,8 @@ import gameengine.model.Triggers.CollisionTrigger;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.TickTrigger;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * 
@@ -83,6 +85,7 @@ public class ActorCopier {
 		toUpdate.setName(toCopy.getName());
 		toUpdate.setFriction(toCopy.getFriction());
 		toUpdate.setImageViewName(toCopy.getImageViewName());
+		toUpdate.setImageView(new ImageView(new Image(toCopy.getImageViewName())));
 		toUpdate.setSize(toCopy.getSize());
 		toUpdate.setID(toCopy.getID());
 		toUpdate.setRotate(toCopy.getRotate());
@@ -123,9 +126,11 @@ public class ActorCopier {
 		Class myclass = object.getClass();
 		Class[] argumentTypes = new Class[arguments.length];
 		for(int i=0; i<argumentTypes.length;i++){
-			if(arguments[i].getClass() == Actor.class && object.getClass().getSuperclass()== ITrigger.class){
+			if((myclass.getSuperclass() == ITrigger.class || myclass.getSuperclass() == Action.class) && arguments[i].getClass() == Actor.class){
 				argumentTypes[i] = IGameElement.class;
-			}else argumentTypes[i] = (arguments[i].getClass());
+			}else{
+				argumentTypes[i] = arguments[i].getClass();
+			}
 		}
 		Constructor constructor = myclass.getConstructor(argumentTypes);
 		return constructor.newInstance(arguments);

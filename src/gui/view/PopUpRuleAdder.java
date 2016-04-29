@@ -25,6 +25,7 @@ import authoringenvironment.view.KeyTriggerCreator;
 import authoringenvironment.view.LevelEditingEnvironment;
 import authoringenvironment.view.LoseGameActionCreator;
 import authoringenvironment.view.NextLevelActionCreator;
+import authoringenvironment.view.TabLevelRuleEditor;
 import authoringenvironment.view.TabRuleAdder;
 import authoringenvironment.view.TickTriggerCreator;
 import authoringenvironment.view.TriggerFactory;
@@ -48,7 +49,8 @@ public class PopUpRuleAdder extends PopUpParent {
 	private ResourceBundle myResources;
 	private static final String RESOURCE = "ruleAdder";
 	private static final String ADD_RULES = "Add New Rule";
-
+	private TabLevelRuleEditor myRuleEditor;
+	private static final String EDIT_RULES = "Remove Rules";
 
 	public PopUpRuleAdder(int popUpWidth, int popUpHeight, LevelEditingEnvironment environment) {
 		super(popUpWidth, popUpHeight);
@@ -59,8 +61,9 @@ public class PopUpRuleAdder extends PopUpParent {
 
 	private void init() {
 		myPane = new TabPane();
-		myRuleAdder = new TabRuleAdder(myResources, ADD_RULES, myLevelEditor);
-		myPane.getTabs().add(myRuleAdder.getTab());
+		myRuleEditor = new TabLevelRuleEditor(myResources, EDIT_RULES, myLevelEditor.getLevel());
+		myRuleAdder = new TabRuleAdder(myResources, ADD_RULES, myLevelEditor, myRuleEditor);
+		myPane.getTabs().addAll(myRuleAdder.getTab(), myRuleEditor.getTab());
 		getContainer().getChildren().add(myPane);
 		myPane.prefWidthProperty().bind(getContainer().widthProperty());
 		myPane.prefHeightProperty().bind(getContainer().heightProperty());
