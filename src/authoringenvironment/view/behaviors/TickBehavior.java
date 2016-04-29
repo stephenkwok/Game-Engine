@@ -30,4 +30,10 @@ public class TickBehavior extends DoubleBehavior {
 	public boolean isTrigger() {
 		return true;
 	}
+
+	@Override
+	public void updateValueBasedOnEditable() {
+		// TODO Auto-generated method stub
+		
+	}
 }

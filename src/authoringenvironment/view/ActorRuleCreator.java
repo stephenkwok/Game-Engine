@@ -130,10 +130,7 @@ public class ActorRuleCreator {
 	 * Actor, populates editing environment rules and fields based on the Actor
 	 */
 	public void updateActorRules() {
-		this.newlyReturned = true;
-		for(ActorRule toRemove: myActorRules) myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
-		myActorRules.clear();
-		ruleRow = RULE_ROW_START;
+		resetActorRules();
 		for (String triggerType : ((Actor) aEE.getEditable()).getRules().keySet()) {
 			ActorRule toAdd = new ActorRule(this);
 			toAdd.addBehavior(checkForKeyTrigger(triggerType));
@@ -149,6 +146,13 @@ public class ActorRuleCreator {
 			myActorRules.add(toAdd);
 			ruleRow++;
 		}
+	}
+	
+	private void resetActorRules(){
+		this.newlyReturned = true;
+		for(ActorRule toRemove: myActorRules) myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
+		myActorRules.clear();
+		ruleRow = RULE_ROW_START;
 	}
 
 	/**

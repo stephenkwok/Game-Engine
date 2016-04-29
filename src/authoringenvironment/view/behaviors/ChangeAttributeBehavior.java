@@ -14,11 +14,13 @@ public class ChangeAttributeBehavior extends DoubleBehavior {
 	private static final String CHANGE_HEALTH = "ChangeHealth";
 	private IAuthoringActor myActor;
 	private IAction myAction;
+	private AttributeType attributeType;
 
 	public ChangeAttributeBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
 			ResourceBundle myResources) {
 		super(myActorRule, behaviorType, myResources);
 		this.myActor = myActor;
+		this.attributeType = AttributeType.POINTS;
 	}
 
 	@Override
@@ -31,9 +33,8 @@ public class ChangeAttributeBehavior extends DoubleBehavior {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(myActor);
 		if (getBehaviorType().equals(CHANGE_HEALTH))
-			arguments.add(AttributeType.HEALTH);
-		else
-			arguments.add(AttributeType.POINTS);
+			attributeType = AttributeType.HEALTH;
+		arguments.add(attributeType);
 		arguments.add((int) getValue());
 		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
 		setTriggerOrAction();
@@ -42,5 +43,14 @@ public class ChangeAttributeBehavior extends DoubleBehavior {
 	@Override
 	public boolean isTrigger() {
 		return false;
+	}
+
+	@Override
+	public void updateValueBasedOnEditable() {
+		try{
+			setTextFieldValue(Integer.toString(getActorRule().getActor().getAttribute(attributeType).getMyValue()));
+		}catch(Exception e){
+			System.out.println("here");
+		}
 	}
 }

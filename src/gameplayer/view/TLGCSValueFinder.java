@@ -9,8 +9,8 @@ public class TLGCSValueFinder implements IValueFinder {
 	private Game data; //for other projects, your data will be a different class
 	
 	@Override
-	public Property find(String key) {
-		Property ret = null;
+	public Property<?> find(String key) {
+		Property<?> ret = null;
 		switch (key.toLowerCase()) {
 			case "points":
 				ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getProperty();
@@ -24,7 +24,7 @@ public class TLGCSValueFinder implements IValueFinder {
 			default:
 				break;
 		}
-		return ret == null ? new Property("Value Not Found", key) : ret;
+		return ret == null ? new Property<String>("Value Not Found", key) : ret;
 	}
 	
 	@Override

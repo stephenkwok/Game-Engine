@@ -33,8 +33,8 @@ public class KeyBehavior extends ComboBoxBehavior {
 	}
 
 	@Override
-	protected void updateValueBasedOnEditable() {
-		getComboBox().setValue(getValue());
+	public void updateValueBasedOnEditable() {
+//		getComboBox().setValue(getValue());
 	}
 
 	@Override
