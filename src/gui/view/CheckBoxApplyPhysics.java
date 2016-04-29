@@ -62,6 +62,7 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 				removeApplyPhysics((IAuthoringActor) aEE.getEditable());
 				System.out.println(((IAuthoringActor) aEE.getEditable()).getRules());
 			}
+			notifyObservers((IAuthoringActor) aEE.getEditable());
 		});
 	}
 	

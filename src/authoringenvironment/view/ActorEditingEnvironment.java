@@ -110,6 +110,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		actorFields.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		actorFields.setPrefHeight(FIELD_HEIGHT);
 		CheckBoxApplyPhysics checkPhysics = new CheckBoxApplyPhysics(APPLY_PHYSICS, APPLY_PHYSICS_WIDTH, this);
+		checkPhysics.addObserver(this);
 		vbox.getChildren().addAll(actorImageViewer.getPane(), checkPhysics.createNode(), actorFields, library.getPane());
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
 		myRoot.setLeft(vbox);
@@ -171,6 +172,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		toReturn.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		toReturn.setOnAction(event -> {
 			myActorRuleCreator.setRules();
+			myController.updateActors((Actor) myActor);
 		});
 		return toReturn;
 	}
