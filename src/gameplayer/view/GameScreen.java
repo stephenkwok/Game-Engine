@@ -114,7 +114,7 @@ public class GameScreen extends Observable implements IGameScreen {
 	public void handleScreenEvent(Event e) {
 		ITrigger trigger = null;
 		if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
-			trigger = handleClick(((MouseEvent) e).getSceneX(), ((MouseEvent) e).getSceneY());
+			trigger = handleClick(((MouseEvent) e).getSceneX() + myCamera.getTranslateX(), ((MouseEvent) e).getSceneY() + myCamera.getTranslateY());
 		} else if (e.getEventType() == KeyEvent.KEY_PRESSED) {
 			trigger = handleKeyPress(((KeyEvent) e).getCode());
 		}
