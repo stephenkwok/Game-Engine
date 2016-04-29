@@ -100,7 +100,7 @@ public class FlappyBird extends Application {
         player.addRule(new Rule(new BottomCollision(player, pipeBottom), new LoseGame(level1)));
         player.addRule(new Rule(new SideCollision(player,pipeBottom), new LoseGame(player)));
         player.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player)));
-        player.addRule(new Rule(new SideCollision(player, invisibleLine), new ChangeAttribute(player,AttributeType.POINTS,10)));
+        player.addRule(new Rule(new SideCollision(player, invisibleLine, true), new ChangeAttribute(player,AttributeType.POINTS,10)));
         player.addRule(new Rule(new BottomCollision(player, floor), new LoseGame(level1)));
         player.addRule(new Rule(new TickTrigger(5), new NextImage(player)));
 
