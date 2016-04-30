@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <initialGameFile>C:\Users\Stephen\workspace\voogasalad_LoopsGoatCheeseSalad\gamefiles\loaders\myTest</initialGameFile>
+  <initialGameFile>/Users/bobby_mac/Documents/workspace/voogasalad_LoopsGoatCheeseSalad/gamefiles/loaders/testmario</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -10,8 +10,8 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>106.0</x>
-          <y>97.0</y>
+          <x>0.0</x>
+          <y>0.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>
@@ -19,14 +19,16 @@
           <myID>1</myID>
           <myImageViewName>default_main_player.png</myImageViewName>
           <myHeading>0.0</myHeading>
-          <myImageViewSize>296.0</myImageViewSize>
+          <myImageViewSize>0.0</myImageViewSize>
           <myRuleManager>
             <myRules/>
           </myRuleManager>
           <myAttributeManager>
             <attributeMap/>
           </myAttributeManager>
-          <myStates/>
+          <myStates>
+            <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
+          </myStates>
           <mySprite>
             <myImages>
               <string>default_main_player.png</string>
@@ -38,9 +40,46 @@
             <nextXPos>0.0</nextXPos>
             <nextYVelo>0.0</nextYVelo>
             <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
           </myNextValues>
-          <isMainPlayer>false</isMainPlayer>
-          <isVisible>true</isVisible>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>12.0</x>
+          <y>160.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Floor Block</myName>
+          <myID>2</myID>
+          <myImageViewName>floor_block.jpg</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite>
+            <myImages>
+              <string>floor_block.jpg</string>
+            </myImages>
+            <spriteIndex>0</spriteIndex>
+          </mySprite>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
           <myRotate>0.0</myRotate>
           <myOpacity>1.0</myOpacity>
           <myScaleX>1.0</myScaleX>
@@ -59,6 +98,12 @@
       <myAttributeManager>
         <attributeMap/>
       </myAttributeManager>
+      <myMainCharacters>
+        <gameengine.model.Actor reference="../../myActors/gameengine.model.Actor"/>
+        <gameengine.model.Actor reference="../../myActors/gameengine.model.Actor"/>
+      </myMainCharacters>
+      <myBackgroundMusicName>Ink.mp3</myBackgroundMusicName>
+      <myGarbageCollectors/>
     </gameengine.controller.Level>
   </levels>
   <info>
@@ -67,9 +112,130 @@
     <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myHUDElementsToDisplay/>
-    <myFile>myTest</myFile>
+    <myFile>testmario</myFile>
     <isDestinationGame>true</isDestinationGame>
     <myActorMap>
+      <entry>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>0.0</x>
+          <y>0.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Floor Block</myName>
+          <myID>2</myID>
+          <myImageViewName>floor_block.jpg</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[2]/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <list>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[2]"/>
+        </list>
+      </entry>
+      <entry>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>0.0</x>
+          <y>0.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Main Player</myName>
+          <myID>1</myID>
+          <myImageViewName>default_main_player.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates>
+            <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
+          </myStates>
+          <mySprite reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <list>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor"/>
+        </list>
+      </entry>
+      <entry>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>0.0</x>
+          <y>0.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Vertical Invisible Line</myName>
+          <myID>4</myID>
+          <myImageViewName>vertical_invisible_line.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates>
+            <gameengine.model.ActorState>INVISIBLE</gameengine.model.ActorState>
+          </myStates>
+          <mySprite>
+            <myImages>
+              <string>vertical_invisible_line.png</string>
+            </myImages>
+            <spriteIndex>0</spriteIndex>
+          </mySprite>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <list/>
+      </entry>
       <entry>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -102,143 +268,14 @@
             <nextXPos>0.0</nextXPos>
             <nextYVelo>0.0</nextYVelo>
             <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
           </myNextValues>
-          <isMainPlayer>false</isMainPlayer>
-          <isVisible>true</isVisible>
           <myRotate>0.0</myRotate>
           <myOpacity>1.0</myOpacity>
           <myScaleX>1.0</myScaleX>
           <myScaleY>1.0</myScaleY>
         </gameengine.model.Actor>
         <list/>
-      </entry>
-      <entry>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs/>
-          <x>0.0</x>
-          <y>0.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myFriction>0.0</myFriction>
-          <myName>Floor Block</myName>
-          <myID>2</myID>
-          <myImageViewName>floor_block.jpg</myImageViewName>
-          <myHeading>0.0</myHeading>
-          <myImageViewSize>0.0</myImageViewSize>
-          <myRuleManager>
-            <myRules/>
-          </myRuleManager>
-          <myAttributeManager>
-            <attributeMap/>
-          </myAttributeManager>
-          <myStates/>
-          <mySprite>
-            <myImages>
-              <string>floor_block.jpg</string>
-            </myImages>
-            <spriteIndex>0</spriteIndex>
-          </mySprite>
-          <myNextValues>
-            <nextXVelo>0.0</nextXVelo>
-            <nextXPos>0.0</nextXPos>
-            <nextYVelo>0.0</nextYVelo>
-            <nextYPos>0.0</nextYPos>
-          </myNextValues>
-          <isMainPlayer>false</isMainPlayer>
-          <isVisible>true</isVisible>
-          <myRotate>0.0</myRotate>
-          <myOpacity>1.0</myOpacity>
-          <myScaleX>1.0</myScaleX>
-          <myScaleY>1.0</myScaleY>
-        </gameengine.model.Actor>
-        <list/>
-      </entry>
-      <entry>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs/>
-          <x>0.0</x>
-          <y>0.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myFriction>0.0</myFriction>
-          <myName>Vertical Invisible Line</myName>
-          <myID>4</myID>
-          <myImageViewName>vertical_invisible_line.png</myImageViewName>
-          <myHeading>0.0</myHeading>
-          <myImageViewSize>0.0</myImageViewSize>
-          <myRuleManager>
-            <myRules/>
-          </myRuleManager>
-          <myAttributeManager>
-            <attributeMap/>
-          </myAttributeManager>
-          <myStates/>
-          <mySprite>
-            <myImages>
-              <string>vertical_invisible_line.png</string>
-            </myImages>
-            <spriteIndex>0</spriteIndex>
-          </mySprite>
-          <myNextValues>
-            <nextXVelo>0.0</nextXVelo>
-            <nextXPos>0.0</nextXPos>
-            <nextYVelo>0.0</nextYVelo>
-            <nextYPos>0.0</nextYPos>
-          </myNextValues>
-          <isMainPlayer>false</isMainPlayer>
-          <isVisible>false</isVisible>
-          <myRotate>0.0</myRotate>
-          <myOpacity>1.0</myOpacity>
-          <myScaleX>1.0</myScaleX>
-          <myScaleY>1.0</myScaleY>
-        </gameengine.model.Actor>
-        <list/>
-      </entry>
-      <entry>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs/>
-          <x>0.0</x>
-          <y>0.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myFriction>0.0</myFriction>
-          <myName>Main Player</myName>
-          <myID>1</myID>
-          <myImageViewName>default_main_player.png</myImageViewName>
-          <myHeading>0.0</myHeading>
-          <myImageViewSize>296.0</myImageViewSize>
-          <myRuleManager>
-            <myRules/>
-          </myRuleManager>
-          <myAttributeManager>
-            <attributeMap/>
-          </myAttributeManager>
-          <myStates/>
-          <mySprite>
-            <myImages>
-              <string>default_main_player.png</string>
-            </myImages>
-            <spriteIndex>0</spriteIndex>
-          </mySprite>
-          <myNextValues>
-            <nextXVelo>0.0</nextXVelo>
-            <nextXPos>0.0</nextXPos>
-            <nextYVelo>0.0</nextYVelo>
-            <nextYPos>0.0</nextYPos>
-          </myNextValues>
-          <isMainPlayer>true</isMainPlayer>
-          <isVisible>true</isVisible>
-          <myRotate>0.0</myRotate>
-          <myOpacity>1.0</myOpacity>
-          <myScaleX>1.0</myScaleX>
-          <myScaleY>1.0</myScaleY>
-        </gameengine.model.Actor>
-        <list>
-          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor"/>
-        </list>
       </entry>
     </myActorMap>
   </info>
@@ -262,5 +299,21 @@
   </myCollisionDetector>
   <currentActors/>
   <deadActors/>
-  <count>1</count>
+  <levelTime>
+    <changed>false</changed>
+    <obs/>
+    <value class="int">1</value>
+    <bindings/>
+    <name>levelTime</name>
+  </levelTime>
+  <globalTime>
+    <changed>false</changed>
+    <obs/>
+    <value class="int">1</value>
+    <bindings/>
+    <name>globalTime</name>
+  </globalTime>
+  <sfxOff>false</sfxOff>
+  <musicOff>false</musicOff>
+  <actorsToAdd/>
 </gameengine.controller.Game>
