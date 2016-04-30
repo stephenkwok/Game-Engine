@@ -1,5 +1,6 @@
 package authoringenvironment.controller;
 
+
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 
 /**
  * Level editing environment
