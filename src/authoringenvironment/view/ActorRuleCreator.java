@@ -13,7 +13,6 @@ import gameengine.model.Rule;
 import gameengine.model.Actions.ApplyPhysics;
 import gameengine.model.Actions.ChangeAttribute;
 import gameengine.model.Triggers.TickTrigger;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -124,6 +123,7 @@ public class ActorRuleCreator {
 				String simpleName = rule.getMyAction().getClass().getSimpleName();
 				if (simpleName.equals(CHANGE_ATTRIBUTE)) {
 					String attributeType = ((ChangeAttribute) rule.getMyAction()).getMyAttributeType();
+					System.out.println("HERE: " + myActionResources.getString(attributeType));
 					toAdd.addBehavior(myActionResources.getString(attributeType), rule);
 				} else
 					toAdd.addBehavior(simpleName, rule); 
@@ -143,10 +143,9 @@ public class ActorRuleCreator {
 	
 	private void resetEnvironment(){
 		this.newlyReturned = true;
-		for(ActorRule toRemove: myActorRules) { 
-			removeActorRule(toRemove);
+		for(int i=0;i<myActorRules.size();i++){
+			removeActorRule(myActorRules.get(i));
 		}
-			//myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
 		myActorRules.clear();
 		ruleRow = RULE_ROW_START;
 	}

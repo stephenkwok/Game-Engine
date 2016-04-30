@@ -148,8 +148,10 @@ public class ActorRule {
 	public void addBehavior(String behaviorType, IRule rule) {
 		if (!(isTriggerType(behaviorType) && myTriggerNodes.getChildren().size() != 0)) {
 			IAuthoringBehavior element = actorRuleFactory.getAuthoringRule(behaviorType, rule);
+			System.out.println("ELEMENT: " + element);
 			authoringBehaviorMap.put(element, new ArrayList<>());
 			Node node = ((IGUIElement) element).createNode();
+			System.out.println("NODE: " + node);
 			element.updateValueBasedOnEditable();
 			setRemoveEvent(node, element);
 			if (isTriggerType(behaviorType)) {
@@ -245,10 +247,6 @@ public class ActorRule {
 			myActorRuleCreator.setNewlyReturned(false);
 			myActor.getRules().clear();
 		}
-		System.out.println("**TRIGGER**");
-		System.out.println(myTrigger);
-		System.out.println("***MYACTIONS***");
-		System.out.println(myActions.size());
 		if (myTrigger == null || myActions.size() == 0) {
 			showAlert(myActorRuleResources.getString("SomethingNotSet"), myActorRuleResources.getString("SetBoth"));
 		} else {
