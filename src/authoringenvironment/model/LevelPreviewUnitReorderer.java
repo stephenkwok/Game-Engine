@@ -23,30 +23,15 @@ public class LevelPreviewUnitReorderer {
 	private static final String ERROR_MESSAGE = "Invalid Input. Please try again";
 	private static final int MINIMUM_PLAY_POSITION = 1;
 	private static final int MINIMUM_LIST_INDEX = 0;
-	private List<PreviewUnitWithLevel> myLevelPreviewUnits;
-	private VBox myPreviewUnitsContainer;
-	private List<Level> myLevels;
-	private IEditingEnvironment myLevelEditor;
-	private List<PreviewUnitWithEditable> myPreviewUnits;
-	// private GUIMainScreen myMainScreen;
+	private final List<PreviewUnitWithLevel> myLevelPreviewUnits;
+	private final List<PreviewUnitWithEditable> myPreviewUnits;
+	private final List<Level> myLevels;
+	private final VBox myPreviewUnitsContainer;
+	private final IEditingEnvironment myLevelEditor;
+	private final ActorsAndLevelsDisplay myPreviewUnitsDisplay;
+	private final GameEditingEnvironment myGameEditor;
 	private List<Integer> playPositions;
 	private Set<Integer> uniquePlayPositions;
-	private ActorsAndLevelsDisplay myPreviewUnitsDisplay;
-	private GameEditingEnvironment myGameEditor;
-
-	// public LevelPreviewUnitReorderer(List<PreviewUnitWithLevel>
-	// levelPreviewUnits, VBox previewUnitsContainer,
-	// List<Level> levels, IEditingEnvironment levelEditor,
-	// List<PreviewUnitWithEditable> allPreviewUnits,
-	// GUIMainScreen mainScreen) {
-	// myLevelPreviewUnits = levelPreviewUnits;
-	// myPreviewUnitsContainer = previewUnitsContainer;
-	// myLevels = levels;
-	// myLevelEditor = levelEditor;
-	// myPreviewUnits = allPreviewUnits;
-	//// myMainScreen = mainScreen;
-	// initializeErrorChecking();
-	// }
 
 	public LevelPreviewUnitReorderer(List<Level> levels, IEditingEnvironment levelEditor,
 			ActorsAndLevelsDisplay display, GameEditingEnvironment gameEditor) {

@@ -20,7 +20,6 @@ import org.xml.sax.SAXException;
 
 import authoringenvironment.model.*;
 import authoringenvironment.model.PresetActorFactory;
-import authoringenvironment.view.GameAttributesDisplay;
 import authoringenvironment.view.PopUpAuthoringHelpPage;
 import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
@@ -61,8 +60,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private Map<IAuthoringActor, List<IAuthoringActor>> myActorMap;
 	private LevelEditingEnvironment levelEnvironment;
 	private ActorEditingEnvironment actorEnvironment;
-	private GameAttributesDisplay gameEnvironment;
-//	private GUIMainScreen mainScreen;
 	private ResourceBundle myResources;
 	private ResourceBundle myObservableResource;
 	private ResourceBundle myPresetActorsResource;
@@ -71,8 +68,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private Scene myScene;
 	private BorderPane myRoot;
 	private GUIFactory factory;
-	private Scene splashScene;
-	private PopUpAuthoringHelpPage helpPage;
+	private Scene splashScene; //REMOVE?
+	private PopUpAuthoringHelpPage helpPage; 
 	private ActorCopier myActorCopier;
 	private GameEditingEnvironment gameEditingEnvironment; 
 	private MainCharacterManager mainCharacterManager;
@@ -130,8 +127,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		AuthoringEnvironmentRestorer restorer = new AuthoringEnvironmentRestorer(myActorMap, myLevels);
 		restorer.restoreActorsAndLevels();
 		initializeGeneralComponents();
-//		myLevels.stream().forEach(level -> mainScreen.createLevelPreviewUnit(level, levelEnvironment));
-//		myActorMap.keySet().stream().forEach(actor -> mainScreen.createActorPreviewUnit(actor, actorEnvironment));
 		myLevels.stream().forEach(level -> gameEditingEnvironment.createLevelPreviewUnit(level, levelEnvironment));
 		myActorMap.keySet().stream().forEach(actor -> gameEditingEnvironment.createActorPreviewUnit(actor, actorEnvironment));
 	}
@@ -150,9 +145,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		this.myPresetActorsResource = ResourceBundle.getBundle(PRESET_ACTORS_RESOURCE);
 		factory = new GUIFactory(myResources);
 		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
-//		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
-//		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);
 		gameEditingEnvironment = new GameEditingEnvironment(this, getStage(), myLevels, gameInfo);
 		mainCharacterManager = new MainCharacterManager(myLevels);
 		setTopPane();
@@ -173,7 +166,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		PresetActorFactory presetActorFactory = new PresetActorFactory(myPresetActorsResource);
 		List<Actor> presetActors = presetActorFactory.getPresetActors();
 		presetActors.stream().forEach(actor -> myActorMap.put(actor, new ArrayList<>()));
-//		presetActors.stream().forEach(actor -> mainScreen.createActorPreviewUnit(actor, actorEnvironment));
 		presetActors.stream().forEach(actor -> gameEditingEnvironment.createActorPreviewUnit(actor, actorEnvironment));
 	}
 
@@ -264,8 +256,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * Switches screen to main screen
 	 */
 	public void goToMainScreen() {
-//		mainScreen.updatePreviewUnits();
-//		setCenterPane(mainScreen.getPane());
 		gameEditingEnvironment.updatePreviewUnits();
 		setCenterPane(gameEditingEnvironment.getPane());
 	}
@@ -344,8 +334,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		IAuthoringActor newActor = (IAuthoringActor) new Actor();
 		myActorMap.put(newActor, new ArrayList<>());
 		newActor.setID(myActorMap.size());
-//		myActorNames.add(newActor.getName());
-//		mainScreen.createActorPreviewUnit(newActor, actorEnvironment);
 		gameEditingEnvironment.createActorPreviewUnit(newActor, actorEnvironment);
 		goToEditingEnvironment(newActor, actorEnvironment);
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
