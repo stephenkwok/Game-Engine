@@ -25,7 +25,10 @@ public class TLGCSValueFinder implements IValueFinder {
 				case "health":
 					//ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.HEALTH).getProperty();
 					break;
-				case "time":
+				case "level time":
+					ret = data.getLevelTimeProperty();
+					break;
+				case "global time": case "time":
 					ret = data.getGlobalTimeProperty();
 					break;
 				default:
@@ -86,12 +89,6 @@ public class TLGCSValueFinder implements IValueFinder {
 		} else {
 			throw new IllegalArgumentException();
 		}
-	}
-
-	@Override
-	public void setController(HUDController controller) {
-		// TODO Auto-generated method stub
-		
 	}
 
 
