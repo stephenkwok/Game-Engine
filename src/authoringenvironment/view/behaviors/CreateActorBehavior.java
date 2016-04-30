@@ -133,7 +133,6 @@ public class CreateActorBehavior extends SelectActorBehavior {
 		arguments.add(getOtherActor());
 		addCoordinateArguments(arguments);
 		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
-		((CreateActor) myAction).printCoordinates();
 	}
 	
 	private void addCoordinateArguments(List<Object> arguments){
