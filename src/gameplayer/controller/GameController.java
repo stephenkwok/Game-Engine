@@ -100,6 +100,7 @@ public class GameController extends Observable implements Observer, IGameControl
 		// });
 		// a.put("Points", 0);
 		begin();
+		
 	}
 
 	/**
@@ -226,12 +227,10 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void restartGame() {
 		togglePause();
 		view.restartGame();
-		
 		ParserController parserController = new ParserController();
 		Game initialGame = parserController.loadforPlaying(new File(getGame().getInitialGameFile()));
 		setGame(initialGame);
 		initialize(0);
-		
 		Object[] args = {"setUpHUDScreen", null};
 		setChanged();
 		notifyObservers(Arrays.asList(args));

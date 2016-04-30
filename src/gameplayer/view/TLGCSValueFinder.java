@@ -92,4 +92,10 @@ public class TLGCSValueFinder implements IValueFinder {
 	}
 
 
+	public void setController(HUDController controller) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

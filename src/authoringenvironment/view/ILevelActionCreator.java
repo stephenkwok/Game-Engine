@@ -1,9 +1,9 @@
-package authoringenvironment.model;
+package authoringenvironment.view;
 
 import gameengine.model.IAction;
 import gameengine.model.Actions.Action;
 
-public interface IActionCreator {
+public interface ILevelActionCreator {
 
 	public Action createAction();
 	

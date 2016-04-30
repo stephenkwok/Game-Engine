@@ -1,20 +1,21 @@
-package authoringenvironment.model;
+package authoringenvironment.view;
 
 import gameengine.model.IAction;
 import gameengine.model.IGameElement;
 import gameengine.model.Actions.Action;
-import gameengine.model.Actions.WinGame;
+import gameengine.model.Actions.LoseGame;
 import javafx.scene.layout.VBox;
 
-public class WinGameActionCreator extends VBox implements IActionCreator {
+public class LoseGameActionCreator extends VBox implements ILevelActionCreator {
 	private IGameElement myElement;
 	
-	public WinGameActionCreator(IGameElement element) {
+	public LoseGameActionCreator(IGameElement element) {
 		myElement = element;
 	}
 	
 	@Override
 	public Action createAction() {
-		return new WinGame(myElement);
+		return new LoseGame(myElement);
 	}
+
 }

@@ -1,4 +1,4 @@
-package gui.view;
+package authoringenvironment.view;
 
 import java.util.ArrayList;
 import java.util.Arrays;

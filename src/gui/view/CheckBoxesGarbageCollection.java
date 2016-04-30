@@ -42,12 +42,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	private static final String BOTTOM = "Bottom";
 	private static final String COLLISION = "Collision";
 	private static final String IMAGE = "Image";
-	private static final String STRETCH_VERTICAL = "StretchVertical";
-	private static final String STRETCH_HORIZONTAL = "StretchHorizontal";
-	private static final String ADD_TO_IMAGE_DIMENSIONS = "AddToImageDimensions";
 	private static final String TRIGGER_DIRECTORY = "gameengine.model.Triggers.";
-	private static final String GAMESIDE = "gameside.png";
-	private static final String FLOOR = "floor.png";
 	private static final String X = "X";
 	private static final String Y = "Y";
 	private List<String> allSides;
@@ -111,64 +106,69 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	private void initAllSidesList() {
 		allSides = new ArrayList<>(Arrays.asList(LEFT, RIGHT, TOP, BOTTOM));
 	}
-
-	// if they add an already existing one --> Just update the actors
-	// if they add a new one --> update the actors
-	// if they remove one --> remove from level
+	
+	private IAuthoringActor getGarbageCollector(String side) {
+		if (garbageCollectors.containsKey(side)) {
+			return garbageCollectors.get(side);
+		} else {
+			return new Actor();
+		}
+	}
+	
 	public void updateGarbageCollectingActors(List<IPlayActor> actors) {
-		List<String> sides = getSides();
+		List<String> desiredSides = getSides();
 		for (int i = 0; i < allSides.size(); i++) {
-			IAuthoringActor garbageCollector;
-			if (garbageCollectors.containsKey(allSides.get(i))) {
-				garbageCollector = garbageCollectors.get(allSides.get(i));
-			} else {
-				garbageCollector = new Actor();
-			}
 			String sideToCheck = allSides.get(i);
-			if (sides.contains(sideToCheck)) {
-				garbageCollector.setImageView(new ImageView(new Image(myAttributesResources.getString(sides.get(i) + IMAGE))));
-				garbageCollector.setImageViewName(myAttributesResources.getString(sides.get(i) + IMAGE));
-				if (Arrays.asList(myAttributesResources.getString(STRETCH_VERTICAL).split(DELIMITER)).contains(sides.get(i))) {
-					//garbageCollector.getImageView().setPreserveRatio(false);
-					//garbageCollector.getImageView().setFitHeight((myLevel.getMyHeight()));
-					if (Arrays.asList(myAttributesResources.getString(ADD_TO_IMAGE_DIMENSIONS).split(DELIMITER)).contains(sides.get(i))) {
-						garbageCollector.setX(myLevel.getImageView().getFitWidth() + Double.parseDouble(myAttributesResources.getString(sides.get(i) + X)));
-					} else {
-						garbageCollector.setX(Double.parseDouble(myAttributesResources.getString(sides.get(i) + X)));
-					}
-					garbageCollector.setY(Double.parseDouble(myAttributesResources.getString(sides.get(i) + Y)));
-				} else {
-					//garbageCollector.setWidth(myLevel.getImageView().getFitWidth());
-					if (Arrays.asList(myAttributesResources.getString(ADD_TO_IMAGE_DIMENSIONS).split(DELIMITER)).contains(sides.get(i))) {
-						garbageCollector.setY(myLevel.getImageView().getFitHeight() + Double.parseDouble(myAttributesResources.getString(sides.get(i) + Y)));
-					} else {
-						garbageCollector.setY(Double.parseDouble(myAttributesResources.getString(sides.get(i) + Y)));
-					}
-					garbageCollector.setX(Double.parseDouble(myAttributesResources.getString(sides.get(i) + X)));
-				}
-
-				garbageCollector.getRules().clear();
-				for (int j = 0; j < actors.size(); j++) {
-					if (!garbageCollectors.keySet().contains(actors.get(j))) {
-						ITrigger trigger = createCollisionTrigger(sides.get(i), (Actor) garbageCollector, (Actor) actors.get(j)); // use reflection from properties file
-						garbageCollector.addRule(new Rule(trigger, new Destroy((Actor) actors.get(j))));
-					}
-				}
-				garbageCollectors.put(allSides.get(i), garbageCollector);
+			IAuthoringActor garbageCollector = getGarbageCollector(sideToCheck);
+			if (desiredSides.contains(sideToCheck)) {
+				updateGarbageCollector(garbageCollector, sideToCheck, actors);
+				garbageCollectors.put(sideToCheck, garbageCollector);
 				myLevel.addGarbageCollector((IPlayActor) garbageCollector);
 			} else {
-				if (myLevel.getActors().contains(garbageCollector)) {
-					myLevel.removeActor((Actor) garbageCollector);
-				}
+				removeGarbageCollector(garbageCollector);
 			}
 		}
-		System.out.println("Cur actors:");
-		
-		for (int k = 0; k < myLevel.getActors().size(); k++) {
-			System.out.println(myLevel.getActors().toString());
+	}
+	
+	private void updateGarbageCollector(IAuthoringActor garbageCollector, String sideToCheck, List<IPlayActor> actors) {
+		garbageCollector.setImageView(new ImageView(new Image(myAttributesResources.getString(sideToCheck + IMAGE))));
+		garbageCollector.setImageViewName(myAttributesResources.getString(sideToCheck + IMAGE));
+		positionGarbageCollector(garbageCollector, sideToCheck);
+		updateGarbageCollectorCollisions(garbageCollector, actors, sideToCheck);
+	}
+	
+	private void positionGarbageCollector(IAuthoringActor garbageCollector, String sideToCheck) {
+		if (sideToCheck.equals(LEFT)) {
+			garbageCollector.setX(Double.parseDouble(myAttributesResources.getString(sideToCheck + X)));
+			garbageCollector.setY(Double.parseDouble(myAttributesResources.getString(sideToCheck + Y)));
+		} else if (sideToCheck.equals(RIGHT)) {
+			garbageCollector.setX(myLevel.getImageView().getFitWidth() + Double.parseDouble(myAttributesResources.getString(sideToCheck + X)));
+			garbageCollector.setY(Double.parseDouble(myAttributesResources.getString(sideToCheck + Y)));
+		} else if (sideToCheck.equals(TOP)){
+			garbageCollector.setX(Double.parseDouble(myAttributesResources.getString(sideToCheck + X)));
+			garbageCollector.setY(Double.parseDouble(myAttributesResources.getString(sideToCheck + Y)));
+		}else {
+			garbageCollector.setX(Double.parseDouble(myAttributesResources.getString(sideToCheck + X)));
+			garbageCollector.setY(myLevel.getImageView().getFitHeight() + Double.parseDouble(myAttributesResources.getString(sideToCheck + Y)));
+		}
+	}
+	private void updateGarbageCollectorCollisions(IAuthoringActor garbageCollector, List<IPlayActor> actors, String sideToCheck) {
+		garbageCollector.getRules().clear();
+		for (int j = 0; j < actors.size(); j++) {
+			if (!garbageCollectors.keySet().contains(actors.get(j))) {
+				ITrigger trigger = createCollisionTrigger(sideToCheck, (Actor) garbageCollector, (Actor) actors.get(j)); // use reflection from properties file
+				garbageCollector.addRule(new Rule(trigger, new Destroy((Actor) actors.get(j))));
+			}
 		}
 	}
 
+	private void removeGarbageCollector(IAuthoringActor garbageCollector) {
+		if (myLevel.getActors().contains(garbageCollector)) {
+			myLevel.getGarbageCollectors().remove(garbageCollector);
+			myLevel.removeActor((Actor) garbageCollector);
+		}
+	}
+	
 	private ITrigger createCollisionTrigger(String side, Actor garbageCollector, Actor actor) {
 		Class<?> collision;
 		try {
