@@ -1,11 +1,13 @@
 package authoringenvironment.view.behaviors;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.ActorRule;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
+import gameengine.model.IAction;
 import gameengine.model.IRule;
 import gameengine.model.Actions.CreateActor;
 import gui.view.CheckBoxObject;
@@ -25,6 +27,13 @@ public class CreateActorBehavior extends SelectActorBehavior {
 	private boolean ySpecific;
 	private CheckBox xCheck;
 	private CheckBox yCheck;
+	private IAction myAction;
+	private TextField specificX;
+	private TextField specificY;
+	private TextField minX;
+	private TextField maxX;
+	private TextField minY;
+	private TextField maxY;
 
 	public CreateActorBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources,
 			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
@@ -77,17 +86,23 @@ public class CreateActorBehavior extends SelectActorBehavior {
 	}
 	
 	private void setCoordinateTypes(){
-		if(xSpecific){
+		if(xSpecific) {
 			this.xCoordinate = getSpecificCoordinate(myResources.getString("X"));
+			this.specificX = ((TextField) xCoordinate.getChildren().get(1));
 		}
 		else {
 			this.xCoordinate = getRangeCoordinate(myResources.getString("X"));
+			this.minX = ((TextField) xCoordinate.getChildren().get(1));
+			this.maxX = ((TextField) xCoordinate.getChildren().get(2));
 		}
 		if(ySpecific) {
 			this.yCoordinate = getSpecificCoordinate(myResources.getString("Y"));
+			this.specificY = ((TextField) yCoordinate.getChildren().get(1));
 		}
 		else {
 			this.yCoordinate = getRangeCoordinate(myResources.getString("Y"));
+			this.minY = ((TextField) yCoordinate.getChildren().get(1));
+			this.maxY = ((TextField) yCoordinate.getChildren().get(2));
 		}
 	}
 
@@ -113,14 +128,39 @@ public class CreateActorBehavior extends SelectActorBehavior {
 	
 	@Override
 	protected void createTriggerOrAction() {
-		// TODO Auto-generated method stub
-
+		List<Object> arguments = new ArrayList<>();
+		arguments.add(getMyActor());
+		arguments.add(getOtherActor());
+		addCoordinateArguments(arguments);
+		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
+		((CreateActor) myAction).printCoordinates();
+	}
+	
+	private void addCoordinateArguments(List<Object> arguments){
+		if(xSpecific && ySpecific){
+			arguments.add(Double.parseDouble(specificX.getText()));
+			arguments.add(Double.parseDouble(specificY.getText()));
+		}else if(!(xSpecific && ySpecific)){
+			if(xSpecific){
+				arguments.add(Double.parseDouble(specificX.getText()));
+				arguments.add(Double.parseDouble(specificX.getText()));
+			}else{
+				arguments.add(Double.parseDouble(minX.getText()));
+				arguments.add(Double.parseDouble(maxX.getText()));
+			}
+			if(ySpecific){
+				arguments.add(Double.parseDouble(specificY.getText()));
+				arguments.add(Double.parseDouble(specificY.getText()));
+			}else{
+				arguments.add(Double.parseDouble(minY.getText()));
+				arguments.add(Double.parseDouble(maxY.getText()));
+			}
+		}
 	}
 
 	@Override
 	public void setTriggerOrAction() {
-		// TODO Auto-generated method stub
-
+		setAction(this, myAction);
 	}
 
 	@Override
