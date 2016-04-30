@@ -85,26 +85,6 @@ public class TabRuleAdder extends TabParent implements Observer{
 		myActionContainer.getChildren().add(myActionComboBox.createNode());
 	}
 
-	private void displayTriggerParameters() {
-		myTriggerCreator = null;
-
-		switch (myTriggerName) {
-		case "Key":
-			myTriggerCreator = new KeyTriggerCreator(getResources(), myLevel);
-			break;
-		case "Tick":
-			myTriggerCreator = new TickTriggerCreator(getResources(), myLevel);
-			break;
-		case "Click":
-			myTriggerCreator = new ClickTriggerCreator(getResources(), myLevel);
-			break;
-		case "AttributeReached": 
-			myTriggerCreator = new AttributeTriggerAndActionCreator(getResources(), myLevel, myLevelEditor, "AttributeReachedLabelText");
-			break;
-		}
-		myTriggerContainer.getChildren().add(myTriggerCreator);
-	}
-
 	private void createAndAddRule() {
 		myTriggerContainer.getChildren().remove(myTriggerCreator);
 		myActionContainer.getChildren().remove(myActionCreator);
@@ -118,7 +98,7 @@ public class TabRuleAdder extends TabParent implements Observer{
 	public void update(Observable o, Object arg) {
 		if (Arrays.asList(getResources().getString(TRIGGERS).split(DELIMITER)).contains((String) arg)) {
 			myTriggerName = (String) arg;
-			displayTriggerParameters();
+			displayTriggerParameters(myTriggerName);
 		} else {
 			myActionName = (String) arg;
 			displayActionParameters(myActionName);
@@ -130,6 +110,45 @@ public class TabRuleAdder extends TabParent implements Observer{
 			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		return myContainer;
 	}
+	
+	private void displayTriggerParameters(String name) {
+		myTriggerCreator = null;
+		Class<?> creator;
+		try {
+			creator = Class.forName(getResources().getString(DIRECTORY) + getResources().getString(name + TRIGGER_CREATOR));
+			Constructor<?> constructor;
+			if (Arrays.asList(getResources().getString(ATTRIBUTE_BEHAVIORS).split(DELIMITER)).contains(name)) {
+				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class, IEditingEnvironment.class, String.class);
+				myTriggerCreator = (VBox) constructor.newInstance(getResources(), myLevel, myLevelEditor, name + LABEL_TEXT);
+			} else {
+				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class);
+				myTriggerCreator = (VBox) constructor.newInstance(getResources(), myLevel);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		myTriggerContainer.getChildren().add(myTriggerCreator);
+	}
+
 
 	private void displayActionParameters(String name) {
 		myActionCreator = null;
