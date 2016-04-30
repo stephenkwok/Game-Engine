@@ -38,7 +38,7 @@ public class TabLevelRuleEditor extends TabParent {
 	
 	private void init() {
 		myContainer = new VBox(PADDING);
-		myContainer.setAlignment(Pos.CENTER);
+		myContainer.setAlignment(Pos.TOP_CENTER);
 		myContainer.setPadding(new Insets(PADDING));
 		myRuleMap = new HashMap<>();
 		currentRules = new ArrayList<>();

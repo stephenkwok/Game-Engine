@@ -6,10 +6,8 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 import authoringenvironment.controller.LevelEditingEnvironment;
-import authoringenvironment.model.IActionCreator;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.model.ITriggerCreator;
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
@@ -25,7 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class AttributeTriggerAndActionCreator extends VBox implements ITriggerCreator, IActionCreator {
+public class AttributeTriggerAndActionCreator extends VBox implements ILevelTriggerCreator, ILevelActionCreator {
 	private static final String LEVEL = "Level";
 	private static final String HEALTH = "Health";
 	private static final String POINTS = "Points";

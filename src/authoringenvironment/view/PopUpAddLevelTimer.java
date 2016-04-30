@@ -7,7 +7,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-import authoringenvironment.model.IActionCreator;
 import gameengine.controller.Level;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
@@ -136,7 +135,7 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	
 	private void createAttributeReachedRule(int triggerValue) {
 		ITrigger trigger = new AttributeReached(myLevel, AttributeType.TIME, triggerValue);
-		Action action = ((IActionCreator) myActionCreator).createAction();
+		Action action = ((ILevelActionCreator) myActionCreator).createAction();
 		myLevel.addRule(new Rule(trigger, action));
 		this.closePopUp();
 	}

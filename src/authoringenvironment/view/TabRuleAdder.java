@@ -8,9 +8,7 @@ import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.LevelEditingEnvironment;
-import authoringenvironment.model.IActionCreator;
 import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.model.ITriggerCreator;
 import gameengine.controller.Level;
 import gameengine.model.IGameElement;
 import gameengine.model.Rule;
@@ -92,8 +90,8 @@ public class TabRuleAdder extends TabParent implements Observer{
 	private void createAndAddRule() {
 		myTriggerContainer.getChildren().remove(myTriggerCreator);
 		myActionContainer.getChildren().remove(myActionCreator);
-		ITrigger trigger = ((ITriggerCreator) myTriggerCreator).createTrigger();
-		Action action = ((IActionCreator) myActionCreator).createAction();
+		ITrigger trigger = ((ILevelTriggerCreator) myTriggerCreator).createTrigger();
+		Action action = ((ILevelActionCreator) myActionCreator).createAction();
 		myLevel.addRule(new Rule(trigger, action));
 		myRuleEditor.updateRules();
 	}
