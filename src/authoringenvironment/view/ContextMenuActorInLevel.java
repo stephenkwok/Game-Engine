@@ -15,9 +15,9 @@ public class ContextMenuActorInLevel extends ContextMenu {
 	private static final String EDIT_SIZE = "Edit actor size";
 	private static final String GROUP = "Group all actors of this type";
 	private ImageviewActorIcon curIcon;
-	private LevelPreview myLevelPreview;
+	private LevelPreviewEditing myLevelPreview;
 
-	public ContextMenuActorInLevel(LevelPreview levelPreview) {
+	public ContextMenuActorInLevel(LevelPreviewEditing levelPreview) {
 		myLevelPreview = levelPreview;
 		curIcon = null;
 		initMenuItems();
