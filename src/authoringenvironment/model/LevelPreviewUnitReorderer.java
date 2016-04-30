@@ -2,13 +2,13 @@ package authoringenvironment.model;
 
 import java.util.*;
 
+import authoringenvironment.view.PopUpParent;
+import authoringenvironment.view.PopUpSimpleErrorMessage;
 import authoringenvironment.controller.GameEditingEnvironment;
 import authoringenvironment.view.ActorsAndLevelsDisplay;
 import authoringenvironment.view.PreviewUnitWithEditable;
 import authoringenvironment.view.PreviewUnitWithLevel;
 import gameengine.controller.Level;
-import gui.view.PopUpParent;
-import gui.view.PopUpSimpleErrorMessage;
 import javafx.scene.layout.VBox;
 
 /**

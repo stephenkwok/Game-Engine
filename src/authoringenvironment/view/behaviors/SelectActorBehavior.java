@@ -96,10 +96,14 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	private void initButton(){
 		getButton().setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
 		setButtonAction(e -> {
-			this.otherActor = (IAuthoringActor) comboBox.getValue();
-			createTriggerOrAction();
-			setTriggerOrAction();
+			setValue();
 		});
+	}
+	
+	public void setValue(){
+		this.otherActor = (IAuthoringActor) comboBox.getValue();
+		createTriggerOrAction();
+		setTriggerOrAction();
 	}
 
 	/**

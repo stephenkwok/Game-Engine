@@ -9,8 +9,6 @@ import authoringenvironment.model.IAuthoringActor;
 import gui.view.ButtonFileChooserBackgroundImage;
 import gui.view.CheckBoxesGarbageCollection;
 import gui.view.IGUI;
-import gui.view.PopUpAddLevelTimer;
-import gui.view.PopUpRuleAdder;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
@@ -25,12 +23,18 @@ import javafx.stage.Stage;
 
 public class LevelInspector implements IGUI {
 	private static final String BUTTON_LABEL = "Choose a new background image";
-	private static final int BUTTON_HEIGHT = 30;
-	private static final int BUTTON_WIDTH = 300;
+	private static final int RULE_ADDER_HEIGHT = 300;
+	private static final int RULE_ADDER_WIDTH = 400;
+	private static final int TIMER_ADDER_HEIGHT = 300;
+	private static final int TIMER_ADDER_WIDTH = 300;
+	private static final int PADDING = 10;
 	private static final String LEVEL_OPTIONS_RESOURCE = "levelEditorOptions";
 	private static final String ACTORS = "Actors";
 	private static final String LEVEL_ATTRIBUTES = "Level Attributes";
 	private static final int SPACING = 5;
+	private static final String EDIT_RULES = "Edit level rules";
+	private static final String ADD_TIMER = "Add level timer";
+	private static final String PREVIEW = "Preview";
 	private Pane myPane;
 	private TabActors myActorsTab;
 	private TabFields myAttributesTab;
@@ -76,6 +80,7 @@ public class LevelInspector implements IGUI {
 		addTabToContainer(myAttributesTab, false);
 		myContainer.getChildren().add(buttonBox);
 		addTabToContainer(myActorsTab, true);
+		addPreviewButton();
 	}
 	
 	public CheckBoxesGarbageCollection getGarbageCollector() {
@@ -83,13 +88,22 @@ public class LevelInspector implements IGUI {
 	}
 	
 	private HBox addEditingButtons() {
-		Button addRuleButton = new Button("Edit level rules");
-		addRuleButton.setOnAction(e -> new PopUpRuleAdder(300,300, myLevelEditor));
-		Button addTimerButton = new Button("Add a level timer");
-		addTimerButton.setOnAction(e -> new PopUpAddLevelTimer(300,300, myLevelEditor.getLevel()));
-		HBox box = new HBox();
+		Button addRuleButton = new Button(EDIT_RULES);
+		addRuleButton.setOnAction(e -> new PopUpRuleAdder(RULE_ADDER_WIDTH, RULE_ADDER_HEIGHT, myLevelEditor));
+		Button addTimerButton = new Button(ADD_TIMER);
+		addTimerButton.setOnAction(e -> new PopUpAddLevelTimer(TIMER_ADDER_WIDTH, TIMER_ADDER_HEIGHT, myLevelEditor.getLevel()));
+		HBox box = new HBox(PADDING);
+		box.setAlignment(Pos.CENTER);
 		box.getChildren().addAll(addRuleButton, addTimerButton);
 		return box;
+	}
+	
+	private void addPreviewButton() {
+		Button myB = new Button(PREVIEW);
+		myB.setOnMouseClicked(e -> myLevelEditor.previewGame());
+		myB.setLayoutX(100);
+		myB.setLayoutY(300);
+		myContainer.getChildren().add(myB);
 	}
 
 	/**

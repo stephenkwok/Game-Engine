@@ -18,7 +18,13 @@ import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
-import authoringenvironment.model.*;
+import authoringenvironment.model.AuthoringEnvironmentRestorer;
+import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.model.PresetActorFactory;
+import authoringenvironment.view.PopUpAuthoringHelpPage;
+import authoringenvironment.model.ActorCopier;
 import authoringenvironment.view.GameAttributesDisplay;
 import authoringenvironment.controller.ActorEditingEnvironment;
 import authoringenvironment.controller.LevelEditingEnvironment;
@@ -32,7 +38,6 @@ import gameengine.model.IPlayActor;
 import gameplayer.controller.BranchScreenController;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
-import gui.view.PopUpAuthoringHelpPage;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
