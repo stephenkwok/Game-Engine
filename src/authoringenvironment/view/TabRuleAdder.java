@@ -18,6 +18,7 @@ import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.ITrigger;
 import gui.view.ComboBoxLevelTriggerAndAction;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -38,6 +39,8 @@ public class TabRuleAdder extends TabParent implements Observer{
 	private static final String DIRECTORY = "Directory";
 	private static final String ATTRIBUTE_BEHAVIORS = "AttributeBehaviors";
 	private static final Object CREATE_ACTOR = "CreateActor";
+	private static final String STANDARD_TRIGGER = "StandardTrigger";
+	private static final String STANDARD_ACTION = "StandardAction";
 
 	private VBox myTriggerContainer;
 	private ComboBoxLevelTriggerAndAction myTriggerComboBox;
@@ -54,8 +57,9 @@ public class TabRuleAdder extends TabParent implements Observer{
 
 	public TabRuleAdder(ResourceBundle myResources, String tabText, LevelEditingEnvironment environment, TabLevelRuleEditor ruleEditor) {
 		super(myResources, tabText);
-		myContainer = new VBox();
+		myContainer = new VBox(PADDING);
 		myContainer.setPadding(new Insets(PADDING));
+		myContainer.setAlignment(Pos.CENTER);
 		myLevel = environment.getLevel();
 		myLevelEditor = environment;
 		myButton = new Button(CREATE_RULE);
@@ -72,14 +76,14 @@ public class TabRuleAdder extends TabParent implements Observer{
 	} 
 
 	private void initTriggerContainer() {
-		myTriggerContainer = new VBox();
+		myTriggerContainer = new VBox(PADDING);
 		myTriggerComboBox = new ComboBoxLevelTriggerAndAction(getResources().getString(TRIGGERS + LABEL), getResources().getString(TRIGGERS + PROMPT), Arrays.asList(getResources().getString(TRIGGERS).split(DELIMITER)));
 		myTriggerComboBox.addObserver(this);
 		myTriggerContainer.getChildren().add(myTriggerComboBox.createNode());
 	}
 
 	private void initActionContainer() {
-		myActionContainer = new VBox();
+		myActionContainer = new VBox(PADDING);
 		myActionComboBox = new ComboBoxLevelTriggerAndAction(getResources().getString(ACTIONS + LABEL), getResources().getString(ACTIONS + PROMPT), Arrays.asList(getResources().getString(ACTIONS).split(DELIMITER)));
 		myActionComboBox.addObserver(this);
 		myActionContainer.getChildren().add(myActionComboBox.createNode());
@@ -112,59 +116,27 @@ public class TabRuleAdder extends TabParent implements Observer{
 	}
 	
 	private void displayTriggerParameters(String name) {
-		myTriggerCreator = null;
-		Class<?> creator;
-		try {
-			creator = Class.forName(getResources().getString(DIRECTORY) + getResources().getString(name + TRIGGER_CREATOR));
-			Constructor<?> constructor;
-			if (Arrays.asList(getResources().getString(ATTRIBUTE_BEHAVIORS).split(DELIMITER)).contains(name)) {
-				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class, IEditingEnvironment.class, String.class);
-				myTriggerCreator = (VBox) constructor.newInstance(getResources(), myLevel, myLevelEditor, name + LABEL_TEXT);
-			} else {
-				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class);
-				myTriggerCreator = (VBox) constructor.newInstance(getResources(), myLevel);
-			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		myTriggerCreator = displayParameters(name, name + TRIGGER_CREATOR);
 		myTriggerContainer.getChildren().add(myTriggerCreator);
 	}
-
-
-	private void displayActionParameters(String name) {
-		myActionCreator = null;
+	
+	private VBox displayParameters(String name, String className) {
 		Class<?> creator;
 		try {
-			creator = Class.forName(getResources().getString(DIRECTORY) + getResources().getString(name + ACTION_CREATOR));
+			creator = Class.forName(getResources().getString(DIRECTORY) + getResources().getString(className));
 			Constructor<?> constructor;
 			if (Arrays.asList(getResources().getString(ATTRIBUTE_BEHAVIORS).split(DELIMITER)).contains(name)) {
 				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class, IEditingEnvironment.class, String.class);
-				myActionCreator = (VBox) constructor.newInstance(getResources(), myLevel, myLevelEditor, name + LABEL_TEXT);
+				return (VBox) constructor.newInstance(getResources(), myLevel, myLevelEditor, name + LABEL_TEXT);
 			} else if (name.equals(CREATE_ACTOR)) {
 				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class, IEditingEnvironment.class);
-				myActionCreator = (VBox) constructor.newInstance(getResources(), myLevel, myLevelEditor);
-			} else {
+				return (VBox) constructor.newInstance(getResources(), myLevel, myLevelEditor);
+			} else if ((Arrays.asList(getResources().getString(STANDARD_TRIGGER).split(DELIMITER)).contains(name))) {
+				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class);
+				return (VBox) constructor.newInstance(getResources(), myLevel);
+			} else if ((Arrays.asList(getResources().getString(STANDARD_ACTION).split(DELIMITER)).contains(name))){
 				constructor = creator.getConstructor(IGameElement.class);
-				myActionCreator = (VBox) constructor.newInstance(myLevel);
+				return (VBox) constructor.newInstance(myLevel);
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -188,6 +160,11 @@ public class TabRuleAdder extends TabParent implements Observer{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	private void displayActionParameters(String name) {
+		myActionCreator = displayParameters(name, name + ACTION_CREATOR);
 		myActionContainer.getChildren().add(myActionCreator);
 	}
 

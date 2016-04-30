@@ -3,6 +3,7 @@ package authoringenvironment.view;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.LevelEditingEnvironment;
+import javafx.geometry.Pos;
 import javafx.scene.control.TabPane;
 
 /**

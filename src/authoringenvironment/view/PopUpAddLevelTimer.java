@@ -19,6 +19,8 @@ import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.TickTrigger;
 import gui.view.ComboBoxLevelTriggerAndAction;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -40,6 +42,8 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	private static final String DIRECTORY = "Directory";
 	private static final int ONE = 1;
 	private static final int TICKS_PER_SECOND = 50;
+	private static final String BACKGROUND_COLOR = "-fx-background-color: lightgray";
+	private static final int PADDING = 10;
 	private ResourceBundle myResources;
 	private TextField myInitialMinutes;
 	private TextField myInitialSeconds;
@@ -48,7 +52,6 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	private ComboBoxLevelTriggerAndAction myAction;
 	private VBox myActionCreator;
 	private Level myLevel;
-	private Button myButton;
 	
 	public PopUpAddLevelTimer(int popUpWidth, int popUpHeight, Level level) {
 		super(popUpWidth, popUpHeight);
@@ -58,9 +61,17 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	}
 	
 	private void init() {
+		formatContainer();
 		addInitialTimeBox();
 		addTriggerTimeBox();
 		addActionBox();
+	}
+	
+	private void formatContainer() {
+		getContainer().setAlignment(Pos.CENTER);
+		getContainer().setStyle(BACKGROUND_COLOR);
+		getContainer().setPadding(new Insets(PADDING));
+		getContainer().setSpacing(PADDING);
 	}
 	
 	private void addInitialTimeBox() {
@@ -76,14 +87,14 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	}
 	
 	private void addTimeBox(String labelKey, TextField minutesTextField, TextField secondsTextField) {
-		VBox container = new VBox();
+		VBox container = new VBox(PADDING);
 		Label label = new Label(myResources.getString(labelKey));
 		
-		HBox minutesContainer = new HBox();
+		HBox minutesContainer = new HBox(PADDING);
 		Label minutesLabel = new Label(MINUTES);
 		minutesContainer.getChildren().addAll(minutesLabel, minutesTextField);
 		
-		HBox secondsContainer = new HBox();
+		HBox secondsContainer = new HBox(PADDING);
 		Label secondsLabel = new Label(SECONDS);
 		secondsContainer.getChildren().addAll(secondsLabel, secondsTextField);
 		

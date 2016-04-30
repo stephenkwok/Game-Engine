@@ -37,7 +37,8 @@ import javafx.stage.Stage;
  */
 public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final String GUI_RESOURCE = "authoringGUI";
-	private static final String BACKGROUND_COLOR = "-fx-background-color: darkgray";
+	private static final String BACKGROUND_DARK_GRAY = "-fx-background-color: darkgray";
+	private static final String BACKGROUND_LIGHT_GRAY = "-fx-background-color: lightgray";
 	private static final double SUBSCENE_WIDTH = 1000;
 	private static final int DOUBLE_CLICK = 2;
 	private BorderPane myRoot;
@@ -76,7 +77,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 * well as the ability to drag actors between the left and center pane.
 	 */
 	private void initializeEnvironment() {
-		myRoot.setStyle(BACKGROUND_COLOR);
+		myRoot.setStyle(BACKGROUND_DARK_GRAY);
 		initializeCenter();
 		initializeLeftPane();
 		updateDrag();
@@ -91,6 +92,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
 		myRoot.setLeft(myLeftPane);
 		myLeftPane.setMaxWidth(myStage.getWidth() - SUBSCENE_WIDTH);
+		myLeftPane.setStyle(BACKGROUND_LIGHT_GRAY);
 		addChildrenToLeftPane();
 	}
 

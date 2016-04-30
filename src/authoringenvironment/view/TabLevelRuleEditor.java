@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 import gameengine.controller.Level;
 import gameengine.model.Rule;
 import gui.view.CheckBoxObject;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -18,6 +20,7 @@ import javafx.scene.layout.VBox;
 
 public class TabLevelRuleEditor extends TabParent {
 	private static final int CHECK_BOX_WIDTH = 250;
+	private static final int PADDING = 10;
 	private static final String DELETE = "Delete";
 	private Level myLevel;
 	private VBox myContainer;
@@ -34,11 +37,13 @@ public class TabLevelRuleEditor extends TabParent {
 	}
 	
 	private void init() {
-		myContainer = new VBox();
+		myContainer = new VBox(PADDING);
+		myContainer.setAlignment(Pos.CENTER);
+		myContainer.setPadding(new Insets(PADDING));
 		myRuleMap = new HashMap<>();
 		currentRules = new ArrayList<>();
 		newRules = new ArrayList<>();
-		myCheckBoxes = new VBox();
+		myCheckBoxes = new VBox(PADDING);
 		myDeleteButton = new Button(DELETE);
 		myDeleteButton.setOnAction(e -> deleteSelectedRules());
 		myContainer.getChildren().addAll(myCheckBoxes, myDeleteButton);
