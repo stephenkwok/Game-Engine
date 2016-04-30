@@ -4049,7 +4049,7 @@
     <bindings/>
     <name>globalTime</name>
   </globalTime>
-  <sfxOff>true</sfxOff>
-  <musicOff>true</musicOff>
+  <sfxOff>false</sfxOff>
+  <musicOff>false</musicOff>
   <actorsToAdd/>
 </gameengine.controller.Game>
