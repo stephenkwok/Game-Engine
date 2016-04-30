@@ -19,7 +19,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 
 public class TabLevelRuleEditor extends TabParent {
-	private static final int CHECK_BOX_WIDTH = 250;
+	private static final int CHECK_BOX_WIDTH = 450;
 	private static final int PADDING = 10;
 	private static final String DELETE = "Delete";
 	private Level myLevel;
