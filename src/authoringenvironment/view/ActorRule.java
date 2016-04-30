@@ -1,32 +1,15 @@
 package authoringenvironment.view;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-
+import java.util.*;
 import authoringenvironment.controller.Controller;
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IAuthoringBehavior;
-import gameengine.model.IAction;
-import gameengine.model.IRule;
-import gameengine.model.Rule;
+import authoringenvironment.model.*;
+import gameengine.model.*;
 import gameengine.model.Actions.Action;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import gameengine.model.Triggers.ITrigger;
 
@@ -250,20 +233,22 @@ public class ActorRule {
 		if(myTrigger==null){
 			for(IAuthoringBehavior authoringBehavior: authoringBehaviorMap.keySet()){
 				if(isITrigger(authoringBehavior)){
-					authoringBehavior.setValue();
 					addRuleFromBehavior(authoringBehavior);
-				} //add trigger first
+				} 
 			}
 		}
-		for (IAuthoringBehavior authoringBehavior : authoringBehaviorMap.keySet()) {
-			authoringBehavior.setValue();
-			addRuleFromBehavior(authoringBehavior);
-		}
-		myActorRuleCreator.applyPhysics();
+		try{
+			for (IAuthoringBehavior authoringBehavior : authoringBehaviorMap.keySet()) {
+				addRuleFromBehavior(authoringBehavior);
+			}
+		}catch(Exception e){
+			showAlert(myActorRuleResources.getString("SomethingNotSet"), myActorRuleResources.getString("SetBoth"));
+		}	
 		printAll("AFTER SETTING RULES");
 	}
-
+	
 	private void addRuleFromBehavior(IAuthoringBehavior authoringBehavior) {
+		authoringBehavior.setValue();
 		if (!isITrigger(authoringBehavior)) {
 			Action myAction = (Action) authoringBehaviorMap.get(authoringBehavior)
 					.get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex")));
