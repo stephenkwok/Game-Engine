@@ -1,4 +1,4 @@
-package authoringenvironment.model;
+package authoringenvironment.view;
 
 import java.util.ResourceBundle;
 
@@ -15,8 +15,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class TickTriggerCreator extends VBox implements ITriggerCreator {
+public class TickTriggerCreator extends VBox implements ILevelTriggerCreator {
 	private static final double SPACING = 20;
+	private static final String LABEL_TEXT = "TickLabelText";
 	private TextField myTickTextField;
 	private ResourceBundle myResources;
 	
@@ -28,7 +29,7 @@ public class TickTriggerCreator extends VBox implements ITriggerCreator {
 	
 	private void init() {
 		HBox container = new HBox();
-		Label label = new Label(myResources.getString("TickLabelText"));
+		Label label = new Label(myResources.getString(LABEL_TEXT));
 		myTickTextField = new TextField();
 		container.getChildren().addAll(label, myTickTextField);
 		this.getChildren().add(container);

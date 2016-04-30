@@ -1,25 +1,25 @@
-package gui.view;
+package authoringenvironment.view;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-import authoringenvironment.model.AttributeTriggerAndActionCreator;
-import authoringenvironment.model.CreateActorActionCreator;
-import authoringenvironment.model.IActionCreator;
-import authoringenvironment.model.LoseGameActionCreator;
-import authoringenvironment.model.NextLevelActionCreator;
-import authoringenvironment.model.WinGameActionCreator;
 import gameengine.controller.Level;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
+import gameengine.model.IGameElement;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Actions.ChangeAttribute;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.TickTrigger;
+import gui.view.ComboBoxLevelTriggerAndAction;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -38,7 +38,12 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	private static final String SECONDS = "Seconds:";
 	private static final String ACTION_PROMPT = "Select";
 	private static final String DELIMITER = ",";
+	private static final String DIRECTORY = "Directory";
 	private static final int ONE = 1;
+	private static final String EMPTY = "";
+	private static final int TICKS_PER_SECOND = 50;
+	private static final String BACKGROUND_COLOR = "-fx-background-color: lightgray";
+	private static final int PADDING = 10;
 	private ResourceBundle myResources;
 	private TextField myInitialMinutes;
 	private TextField myInitialSeconds;
@@ -47,7 +52,6 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	private ComboBoxLevelTriggerAndAction myAction;
 	private VBox myActionCreator;
 	private Level myLevel;
-	private Button myButton;
 	
 	public PopUpAddLevelTimer(int popUpWidth, int popUpHeight, Level level) {
 		super(popUpWidth, popUpHeight);
@@ -57,9 +61,17 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	}
 	
 	private void init() {
+		formatContainer();
 		addInitialTimeBox();
 		addTriggerTimeBox();
 		addActionBox();
+	}
+	
+	private void formatContainer() {
+		getContainer().setAlignment(Pos.CENTER);
+		getContainer().setStyle(BACKGROUND_COLOR);
+		getContainer().setPadding(new Insets(PADDING));
+		getContainer().setSpacing(PADDING);
 	}
 	
 	private void addInitialTimeBox() {
@@ -75,14 +87,14 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	}
 	
 	private void addTimeBox(String labelKey, TextField minutesTextField, TextField secondsTextField) {
-		VBox container = new VBox();
+		VBox container = new VBox(PADDING);
 		Label label = new Label(myResources.getString(labelKey));
 		
-		HBox minutesContainer = new HBox();
+		HBox minutesContainer = new HBox(PADDING);
 		Label minutesLabel = new Label(MINUTES);
 		minutesContainer.getChildren().addAll(minutesLabel, minutesTextField);
 		
-		HBox secondsContainer = new HBox();
+		HBox secondsContainer = new HBox(PADDING);
 		Label secondsLabel = new Label(SECONDS);
 		secondsContainer.getChildren().addAll(secondsLabel, secondsTextField);
 		
@@ -101,26 +113,19 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		displayActionParameters((String) arg);
 		createLevelTimer();
 	}
-
-	private void displayActionParameters(String name) {
-		myActionCreator = null;
-		switch (name) {
-		case "WinGame":
-			myActionCreator = new WinGameActionCreator(myLevel);
-			break;
-		case "LoseGame":
-			myActionCreator = new LoseGameActionCreator(myLevel);
-			break;
-		case "NextLevel":
-			myActionCreator = new NextLevelActionCreator(myLevel);
-			break;
-		}
-	}
 	
 	private int convertToTicks(TextField minutesBox, TextField secondsBox) {
-		Integer minutes = Integer.parseInt(minutesBox.getText());
-		Integer seconds = Integer.parseInt(secondsBox.getText());
+		Integer minutes = getValueFromTextField(minutesBox);
+		Integer seconds = getValueFromTextField(secondsBox);
 		return minutes * 60 + seconds;
+	}
+	
+	private int getValueFromTextField(TextField text) {
+		if (text.getText().equals(EMPTY)) {
+			return 0;
+		} else {
+			return Integer.parseInt(text.getText());
+		}
 	}
 	
 	private void initializeAttribute(int initialValue) {
@@ -130,7 +135,7 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	
 	private void createAttributeReachedRule(int triggerValue) {
 		ITrigger trigger = new AttributeReached(myLevel, AttributeType.TIME, triggerValue);
-		Action action = ((IActionCreator) myActionCreator).createAction();
+		Action action = ((ILevelActionCreator) myActionCreator).createAction();
 		myLevel.addRule(new Rule(trigger, action));
 		this.closePopUp();
 	}
@@ -152,9 +157,41 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	
 	private int determineChange(int initialValue, int triggerValue) {
 		if (initialValue > triggerValue) {
-			return -1;
+			return -TICKS_PER_SECOND;
 		} else {
-			return 1;
+			return TICKS_PER_SECOND;
 		}
 	}
+	
+	private void displayActionParameters(String name) {
+		myActionCreator = null;
+		Class<?> creator;
+		try {
+			creator = Class.forName(myResources.getString(DIRECTORY) + myResources.getString(name));
+			Constructor<?> constructor = creator.getConstructor(IGameElement.class);
+			myActionCreator = (VBox) constructor.newInstance(myLevel);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }

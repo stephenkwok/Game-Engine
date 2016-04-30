@@ -1,4 +1,4 @@
-package gui.view;
+package authoringenvironment.view;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,24 +27,18 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 	private static final String HEADER = "Header";
 	private static final String SUBTOPICS = "Subtopics";
 	private static final String TEXT = "Text";
-//	private static final String ACTOR_ENVIRONMENT_QUESTIONS_KEY = "ActorQuestions";
-//	private static final String LEVEL_ENVIRONMENT_QUESTIONS_KEY = "LevelQuestions";
 	private static final String WELCOME_MESSAGE = "Welcome to the Help Page";
 	private static final String BOLD_FONT = "-fx-font-weight: bold;";
 	private static final String DELIMITER = ",";
-//	private static final String ANSWER = "Answer";
 	private static final int POPUP_WIDTH = 800;
 	private static final int POPUP_HEIGHT = 800;
 	private static final double HEADER_FONT_SIZE = 30.0;
 	private static final double TOPIC_HEADER_FONT_SIZE = 20.0;
 	private static final double SUBTOPIC_HEADER_FONT_SIZE = 15.0;
 	private static final double SCROLLPANE_BAR_WIDTH = 30.0;
-	
 	private final ResourceBundle myResources;
 	private final ScrollPane myScrollPane;
 	private final VBox myContainer;
-//	private List<String> actorEnvironmentQuestions;
-//	private List<String> levelEnvironmentQuestions;
 	private List<String> topics;
 	private List<Label> labels;
 
@@ -63,7 +57,6 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 		myContainer.prefWidthProperty().bind(myScrollPane.widthProperty().subtract(SCROLLPANE_BAR_WIDTH));
 		myScrollPane.setContent(myContainer);
 		getContainer().getChildren().add(myScrollPane);
-//		bindChildrenWidthsToContainerWidth();
 	}
 	
 	/**
@@ -101,8 +94,7 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 		String topicHeaderText = myResources.getString(topic + HEADER);
 		Label topicHeader = createHeader(topicHeaderText, TOPIC_HEADER_FONT_SIZE);
 		topicContainer.getChildren().add(topicHeader);
-		labels.add(topicHeader);
-		
+		labels.add(topicHeader);		
 		List<String> subtopics = Arrays.asList(myResources.getString(topic + SUBTOPICS).split(DELIMITER));
 		for (String subtopic : subtopics) {
 			String subtopicHeader = myResources.getString(subtopic + HEADER);
@@ -111,10 +103,8 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 			Label subtopicTextLabel = new Label(subtopicText);
 			topicContainer.getChildren().addAll(subtopicHeaderLabel, subtopicTextLabel);
 			labels.addAll(Arrays.asList(subtopicHeaderLabel, subtopicTextLabel));
-		}
-		
-		return topicContainer;
-		
+		}	
+		return topicContainer;	
 	}
 	
 	/**
@@ -132,22 +122,6 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 	 */
 	private void setLabelsToWrapText() {
 		labels.forEach(label -> label.setWrapText(true));
-	}
-	
-	/**
-	 * Retrieves questions and answers from property file and displays them 
-	 * in the pop up
-	 * @param questionKey: the key to retrieve a question from the property file
-	 */
-	private void addQuestionAndAnswerToPage(String key) {
-		/*String question = myResources.getString(questionKey);
-		String answer = myResources.getString(questionKey + ANSWER);
-		Label questionLabel = new Label(question);
-		questionLabel.setStyle(BOLD_FONT);
-		Label answerLabel = new Label(answer);
-		getContainer().getChildren().addAll(questionLabel, answerLabel);*/
-		Label textLabel = new Label(myResources.getString(key));
-		getContainer().getChildren().add(textLabel);
 	}
 
 }

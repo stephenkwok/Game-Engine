@@ -130,4 +130,4 @@ src/authoringenvironment/model/ICreatedLevel.java
 src/usecases/LevelEditorMain.java
 
 # XML's
-*.xml
+

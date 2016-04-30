@@ -19,10 +19,8 @@ public class HorizontalBounceCollision extends ActorAction{
 
 	@Override
 	public void perform() {
-		//System.out.println(getMyActor().getVeloX());
 		getMyActor().getPhysicsEngine().elasticHorizontalCollision(getMyActor());
 		
-		//getMyActor().setHeading(Math.abs(getMyActor().getHeading()-180));
 	}
 
 }

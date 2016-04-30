@@ -1,7 +1,7 @@
-package authoringenvironment.model;
+package authoringenvironment.view;
 
 import gameengine.model.Triggers.ITrigger;
 
-public interface ITriggerCreator {
+public interface ILevelTriggerCreator {
 	public ITrigger createTrigger();
 }

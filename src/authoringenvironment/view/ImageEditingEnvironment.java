@@ -3,7 +3,6 @@ package authoringenvironment.view;
 import java.util.Observable;
 import java.util.Observer;
 
-import gui.view.PopUpParent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
