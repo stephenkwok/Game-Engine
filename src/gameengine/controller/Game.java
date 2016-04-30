@@ -448,7 +448,8 @@ public class Game extends Observable implements Observer, IGame {
 	}
 
 	public int getLevelTime() {
-		return levelTime.getValue();
+	//	return levelTime.getValue();
+		return 0;
 	}
 
 	public void setLevelTime(int step) {
@@ -456,7 +457,8 @@ public class Game extends Observable implements Observer, IGame {
 	}
 
 	public int getGlobalTime() {
-		return globalTime.getValue();
+	//	return globalTime.getValue();
+		return 0;
 	}
 
 	public void setGlobalTime(int time) {
