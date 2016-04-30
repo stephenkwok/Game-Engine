@@ -90,6 +90,7 @@ public class FlappyBird extends Application {
 
         Actor player = new Actor();
         player.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new MoveUp(player)));
+        player.addRule(new Rule(new KeyTrigger(KeyCode.C), new SoundAction(player, "shotgun.mp3")));
 //        player.isMainPlayer();
         player.setID(1);
         player.setImageViewName("flappybird1.png");
@@ -100,7 +101,7 @@ public class FlappyBird extends Application {
         player.addRule(new Rule(new BottomCollision(player, pipeBottom), new LoseGame(level1)));
         player.addRule(new Rule(new SideCollision(player,pipeBottom), new LoseGame(player)));
         player.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player)));
-        player.addRule(new Rule(new SideCollision(player, invisibleLine, true), new ChangeAttribute(player,AttributeType.POINTS,10)));
+        player.addRule(new Rule(new SideCollision(player, invisibleLine,true), new ChangeAttribute(player,AttributeType.POINTS,10)));
         player.addRule(new Rule(new BottomCollision(player, floor), new LoseGame(level1)));
         player.addRule(new Rule(new TickTrigger(5), new NextImage(player)));
 
@@ -114,6 +115,7 @@ public class FlappyBird extends Application {
         level1.addActor(player);
         level1.addActor(floor);
         level1.addActor(gameSide);
+        level1.setSoundtrack("Photograph.mp3");
 
         Group group = new Group();
         Scene scene = new Scene(group);

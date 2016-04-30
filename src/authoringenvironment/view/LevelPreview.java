@@ -8,6 +8,7 @@ import java.util.Observer;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import authoringenvironment.controller.LevelEditingEnvironment;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.ImageEditingEnvironmentWithActor;
 import gameengine.controller.Level;
@@ -180,8 +181,9 @@ public class LevelPreview implements IGUI, Observer {
 				if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 					if (mouseEvent.getClickCount() == 2) {
 						System.out.println("Double clicked");
-//						PopUpActorResize popUp = new PopUpActorResize(POP_UP_WIDTH, POP_UP_HEIGHT, icon.getRefActor(),
-//								myLevelEditingEnvironment.getController());
+						// make new IEE popup
+						// make new IEE
+						// attach IEE as observer to popup
 						ImageEditingEnvironmentWithActor iEE = new ImageEditingEnvironmentWithActor(icon.getRefActor());
 						iEE.addObserver(LevelPreview.this);
 					}
@@ -227,12 +229,6 @@ public class LevelPreview implements IGUI, Observer {
 	public void update(Observable arg0, Object arg1) {
 		myLevelEditingEnvironment.getController().updateRefActor((IAuthoringActor) arg1);
 		addLevelActorsToScene();
-	}
-	
-	
-	public void groupActors(ImageviewActorIcon icon) {
-		IAuthoringActor actor = icon.getRefActor(); 
-		myLevelEditingEnvironment.groupActors(actor);
 	}
 
 }

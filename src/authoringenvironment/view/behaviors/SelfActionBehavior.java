@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.ActorRule;
 import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.view.ActorRule;
 import gameengine.model.IAction;
 import gameengine.model.IGameElement;
 

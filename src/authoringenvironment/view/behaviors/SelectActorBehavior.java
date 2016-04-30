@@ -5,13 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.ActionFactory;
+import authoringenvironment.model.ActorRule;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IAuthoringBehavior;
 import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.view.ActionFactory;
-import authoringenvironment.view.ActorGroup;
-import authoringenvironment.view.ActorRule;
-import authoringenvironment.view.TriggerFactory;
+import authoringenvironment.model.TriggerFactory;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
 import gameengine.model.Triggers.ITrigger;

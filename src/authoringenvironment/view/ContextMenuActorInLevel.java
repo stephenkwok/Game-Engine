@@ -28,7 +28,6 @@ public class ContextMenuActorInLevel extends ContextMenu {
 		delete.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
 				if (curIcon != null) {
 					myLevelPreview.removeActorFromLevel(curIcon);
 				}
@@ -36,14 +35,7 @@ public class ContextMenuActorInLevel extends ContextMenu {
 
 		});
 		
-		MenuItem groupAll = new MenuItem(GROUP);
-		groupAll.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				myLevelPreview.groupActors(curIcon);
-			}
-		});
-		getItems().addAll(delete, groupAll);
+		getItems().addAll(delete);
 	}
 
 	public void setIcon(ImageviewActorIcon icon) {

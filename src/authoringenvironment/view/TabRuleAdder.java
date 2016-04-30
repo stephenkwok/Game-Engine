@@ -6,8 +6,16 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.LevelEditingEnvironment;
+import authoringenvironment.model.AttributeTriggerAndActionCreator;
+import authoringenvironment.model.CreateActorActionCreator;
 import authoringenvironment.model.IActionCreator;
 import authoringenvironment.model.ITriggerCreator;
+import authoringenvironment.model.KeyTriggerCreator;
+import authoringenvironment.model.LoseGameActionCreator;
+import authoringenvironment.model.NextLevelActionCreator;
+import authoringenvironment.model.TickTriggerCreator;
+import authoringenvironment.model.WinGameActionCreator;
 import gameengine.controller.Level;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;

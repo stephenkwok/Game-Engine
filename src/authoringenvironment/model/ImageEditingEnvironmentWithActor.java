@@ -4,6 +4,7 @@ import java.util.Observable;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import authoringenvironment.view.ImageEditingEnvironment;
 import javafx.scene.image.ImageView;
 
 /**
