@@ -10,12 +10,19 @@
     </properties>
 
     <dependencies>
-        <dependency>
-          <groupId>XStream</groupId>
-          <artifactId>XStream</artifactId>
-          <version>1.4.9</version>
-          <scope>system</scope>
-          <systemPath>${project.basedir}/lib/xstream-1.4.9.jar</systemPath>
+	 <dependency> 
+	    <groupId>XStream</groupId>
+            <artifactId>XStream</artifactId>
+            <version>1.4.9</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/xstream-1.4.9.jar</systemPath>
+    </dependency>
+	 <dependency> 
+	    <groupId>vooga.util</groupId>
+            <artifactId>vooga.util</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/voogautil.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.oracle</groupId>

@@ -13,7 +13,6 @@ import gameengine.model.Rule;
 import gameengine.model.Actions.ApplyPhysics;
 import gameengine.model.Actions.ChangeAttribute;
 import gameengine.model.Triggers.TickTrigger;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -34,6 +33,8 @@ public class ActorRuleCreator {
 	private static final int ZERO = 0;
 	private static final String POINTS = "POINTS";
 	private static final String HEALTH = "HEALTH";
+	private static final String POINTS_TRIGGER = "POINTS_TRIGGER";
+	private static final String HEALTH_TRIGGER = "HEALTH_TRIGGER";
 	private int ruleRow;
 	private GridPane myActorRuleCreatorPane;
 	private List<ActorRule> myActorRules;
@@ -143,7 +144,9 @@ public class ActorRuleCreator {
 	
 	private void resetEnvironment(){
 		this.newlyReturned = true;
-		for(ActorRule toRemove: myActorRules) myActorRuleCreatorPane.getChildren().remove(toRemove.getGridPane());
+		for(int i=0;i<myActorRules.size();i++){
+			removeActorRule(myActorRules.get(i));
+		}
 		myActorRules.clear();
 		ruleRow = RULE_ROW_START;
 	}
@@ -171,9 +174,9 @@ public class ActorRuleCreator {
 		if (Arrays.asList(myActionResources.getString("KeyInputs").split(" ")).contains(triggerType)) {
 			return KEY;
 		}else if(triggerType.contains(POINTS)){
-			return myActionResources.getString(POINTS);
+			return myActionResources.getString(POINTS_TRIGGER);
 		}else if(triggerType.contains(HEALTH)){
-			return myActionResources.getString(HEALTH);
+			return myActionResources.getString(HEALTH_TRIGGER);
 		}
 		return triggerType;
 	}

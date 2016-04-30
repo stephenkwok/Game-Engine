@@ -37,11 +37,15 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 		this.myActorRule = myActorRule;
 		this.myRule = myRule;
 		setButtonAction(event -> {
-			this.value = Double.parseDouble(getTextFieldInput());
-			createTriggerOrAction();
+			setValue();
 		});
 	}
-
+	@Override
+	public void setValue(){
+		this.value = Double.parseDouble(getTextFieldInput());
+		createTriggerOrAction();
+	}
+	
 	@Override
 	public abstract void updateValueBasedOnEditable();
 

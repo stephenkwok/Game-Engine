@@ -1,8 +1,17 @@
 package authoringenvironment.controller;
 
-import java.io.*;
-import java.lang.reflect.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -10,19 +19,25 @@ import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 
 import authoringenvironment.model.*;
+import authoringenvironment.model.PresetActorFactory;
 import authoringenvironment.view.GameAttributesDisplay;
-import gamedata.controller.*;
-import gameengine.controller.*;
-import gameengine.model.*;
+import authoringenvironment.view.PopUpAuthoringHelpPage;
+import gamedata.controller.ChooserType;
+import gamedata.controller.CreatorController;
+import gamedata.controller.FileChooserController;
+import gameengine.controller.Game;
+import gameengine.controller.GameInfo;
+import gameengine.controller.Level;
+import gameengine.model.Actor;
 import gameplayer.controller.BranchScreenController;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
-import gui.view.PopUpAuthoringHelpPage;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import voogasalad.util.hud.source.IAuthoringHUDController;
 import voogasalad.util.hud.source.PopupSelector;
 

@@ -1,34 +1,35 @@
 package authoringenvironment.controller;
 
-import java.io.*;
-import java.util.*;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.ResourceBundle;
+import java.util.Set;
 
-import org.xml.sax.SAXException;
-
-import authoringenvironment.model.*;
+import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.view.ImageviewActorIcon;
 import authoringenvironment.view.LevelInspector;
 import authoringenvironment.view.LevelPreview;
-import gamedata.controller.*;
-import gameengine.controller.*;
-import gameengine.model.*;
-import gameplayer.controller.*;
-import gameplayer.view.GameScreen;
+import authoringenvironment.view.LevelPreviewEditing;
+import gameengine.controller.Level;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.ParallelCamera;
-import javafx.scene.Scene;
-import javafx.scene.SubScene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.input.*;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.stage.*;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 
 /**
  * Level editing environment
@@ -38,8 +39,10 @@ import javafx.stage.*;
  */
 public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private static final String GUI_RESOURCE = "authoringGUI";
+	private static final String BACKGROUND_DARK_GRAY = "-fx-background-color: darkgray";
+	private static final String BACKGROUND_LIGHT_GRAY = "-fx-background-color: lightgray";
 	private static final double SUBSCENE_WIDTH = 1000;
-	private static final double SUBSCENE_HEIGHT = 575;
+	private static final int DOUBLE_CLICK = 2;
 	private BorderPane myRoot;
 	private LevelInspector myInspector;
 	private ResourceBundle myResources;
@@ -49,8 +52,8 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	private Pane myCenterPane;
 	private Stage myStage;
 	private Controller myController;
-	private LevelPreview myLevelPreview;
-	private File myPreviewFile;
+	private LevelPreviewEditing myLevelEditingPreview;
+	private LevelPreview myLevelPreviewer;
 
 	/**
 	 * Constructor for a level editing environment.
@@ -67,71 +70,8 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		myRoot = new BorderPane();
 		myStage = stage;
 		myController = controller;
+		myLevelPreviewer = new LevelPreview(myController);
 		initializeEnvironment();
-	}
-	
-	
-	private void previewGame(){
-		myPreviewFile = new File("preview.xml");
-		Game model;
-		GameController controller;
-		GameScreen view;
-        
-		Group group = new Group();
-        Scene scene = new Scene(group);
-
-        model = new Game(new GameInfo(), myController.getLevels());
-        //TODO this is duplicated from controller save game.... also no check for if actors is empty
-        for(Level level: model.getLevels()) {
-			for (IPlayActor actor: level.getActors()) {
-				if (actor.checkState(ActorState.MAIN)) {
-					level.getMainCharacters().add(actor);
-				}
-			}
-			if (level.getMainCharacters().size() == 0) {
-				level.getActors().get(0).addState(ActorState.MAIN);
-			}
-		}
-        
-        CreatorController creatorController = new CreatorController(model);
-        try {
-			creatorController.saveForPreviewing(myPreviewFile);
-		} catch (SAXException | IOException | TransformerException | ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        ParserController parserController = new ParserController();
-        model = parserController.loadforPlaying(myPreviewFile);
-        
-        ParallelCamera camera = new ParallelCamera();
-        view = new GameScreen(camera);
-
-        controller = new GameController(model, PlayType.PREVIEW);
-        controller.setGame(model);
-        controller.setGameView(view);
-
-        SubScene sub = view.getScene();
-        sub.fillProperty().set(Color.BLUE);
-        group.getChildren().add(sub);
-
-        Stage stage = new Stage();
-        stage.setWidth(800);
-        stage.setHeight(600);
-
-        sub.setCamera(camera);
-        stage.setScene(scene);
-        stage.show();
-        controller.initialize(0);
-        
-        //controller.getView().clearGame();
-        
-        myPreviewFile.delete();
-        
-        stage.setOnCloseRequest(e -> {
-        	controller.endGame(false);
-        });
-        
-        
 	}
 	
 	/**
@@ -139,7 +79,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 * well as the ability to drag actors between the left and center pane.
 	 */
 	private void initializeEnvironment() {
-		myRoot.setStyle("-fx-background-color: darkgray");
+		myRoot.setStyle(BACKGROUND_DARK_GRAY);
 		initializeCenter();
 		initializeLeftPane();
 		updateDrag();
@@ -154,17 +94,13 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		myLeftPane.prefHeightProperty().bind(myRoot.heightProperty());
 		myRoot.setLeft(myLeftPane);
 		myLeftPane.setMaxWidth(myStage.getWidth() - SUBSCENE_WIDTH);
+		myLeftPane.setStyle(BACKGROUND_LIGHT_GRAY);
 		addChildrenToLeftPane();
 	}
 
 	private void addChildrenToLeftPane() {
 		myInspector = new LevelInspector(myResources, availableActors.keySet(), this);
 		myLeftPane.getChildren().add(myInspector.getPane());
-		Button myB = new Button("Preview");
-		myB.setOnMouseClicked(e -> previewGame());
-		myB.setLayoutX(100);
-		myB.setLayoutY(300);
-		myLeftPane.getChildren().add(myB);
 		myInspector.getPane().prefHeightProperty().bind(myLeftPane.heightProperty());
 	}
 
@@ -173,25 +109,26 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 * updates to currently available actors.
 	 */
 	private void updateDrag() {
-		List<ImageviewActorIcon> icons = myInspector.getActorsTab().getIcons();
 		setCenterPaneDragOver();
 		setCenterPaneDragDropped();
-		for (int i = 0; i < icons.size(); i++) {
-			ImageviewActorIcon source = icons.get(i);
-			setDragDetected(source);
-			source.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent mouseEvent) {
-					if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-						if (mouseEvent.getClickCount() == 2) {
-							System.out.println("Double clicked");
-							myController.goToEditingEnvironment(source.getRefActor(),
-									myController.getActorEditingEnvironment());
-						}
+		for (ImageviewActorIcon icon: myInspector.getActorsTab().getIcons()) {
+			setDragDetected(icon);
+			setMouseClickBehavior(icon);	
+		}
+	}
+	
+	private void setMouseClickBehavior(ImageviewActorIcon icon) {
+		icon.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+					if (mouseEvent.getClickCount() == DOUBLE_CLICK) {
+						myController.goToEditingEnvironment(icon.getRefActor(),
+								myController.getActorEditingEnvironment());
 					}
 				}
-			});
-		}
+			}
+		});
 	}
 
 	/**
@@ -216,9 +153,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 * When dragged over the center pane, copy the gesture source.
 	 */
 	private void setCenterPaneDragOver() {
-		myLevelPreview.getLevelPane().setOnDragOver(new EventHandler<DragEvent>() {
+		myLevelEditingPreview.getLevelPane().setOnDragOver(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
-				if (event.getGestureSource() != myLevelPreview.getLevelPane() && event.getDragboard().hasString()) {
+				if (event.getGestureSource() != myLevelEditingPreview.getLevelPane() && event.getDragboard().hasString()) {
 					event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
 				}
 				event.consume();
@@ -232,28 +169,33 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 * drags.
 	 */
 	private void setCenterPaneDragDropped() {
-		myLevelPreview.getLevelPane().setOnDragDropped(new EventHandler<DragEvent>() {
+		myLevelEditingPreview.getLevelPane().setOnDragDropped(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
 				boolean success = false;
 				if (db.hasString()) {
 					ImageviewActorIcon icon = getIconById(Integer.parseInt(db.getString()));
-					List<IAuthoringActor> val = availableActors.get(icon.getRefActor());
 					IAuthoringActor actor = icon.getActor();
-					val.add(actor);
-					availableActors.put(icon.getRefActor(), val);
-					myLevel.addActor(actor);
-
-					myInspector.getGarbageCollector().updateGarbageCollectingActors(myLevel.getActors());
-					//myLevel.addActor(icon.getRefActor());
-					myLevelPreview.addActorToScene(actor);
-					//myLevelPreview.addActorToScene(icon.getRefActor());
+					updateAvailableActors(actor, icon.getRefActor());
+					addActorToLevel(actor);
 					success = true;
 				}
 				event.setDropCompleted(success);
 				event.consume();
 			}
 		});
+	}
+	
+	private void updateAvailableActors(IAuthoringActor actor, IAuthoringActor refActor) {
+		List<IAuthoringActor> val = availableActors.get(refActor);
+		val.add(actor);
+		availableActors.put(refActor, val);
+	}
+	
+	private void addActorToLevel(IAuthoringActor actor) {
+		myLevel.addActor(actor);
+		myInspector.getGarbageCollector().updateGarbageCollectingActors(myLevel.getActors());
+		myLevelEditingPreview.addActorToScene(actor);
 	}
 
 	/**
@@ -277,8 +219,8 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 * Initialize the center pane.
 	 */
 	private void initializeCenter() {
-		myLevelPreview = new LevelPreview(this);
-		myCenterPane = myLevelPreview.getPane();
+		myLevelEditingPreview = new LevelPreviewEditing(this);
+		myCenterPane = myLevelEditingPreview.getPane();
 		myRoot.setCenter(myCenterPane);
 	}
 
@@ -297,14 +239,14 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	@Override
 	public void setEditableElement(IEditableGameElement editable) {
 		myLevel = (Level) editable;
-		myLevelPreview.updateLevelPreview(myLevel);
+		myLevelEditingPreview.updateLevelPreview(myLevel);
 		myInspector.getGarbageCollector().setEditableElement(myLevel);
 		updateActorsList();
 		myInspector.getAttributesTab().updateEditable(myLevel);
 	}
 
 	public void changeBackgroundImage(Image image, File imageFile) {
-		myLevelPreview.changeBackgroundImage(image, imageFile);
+		myLevelEditingPreview.changeBackgroundImage(image, imageFile);
 	}
 
 	/**
@@ -331,10 +273,10 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (arg == null) {
-			myLevelPreview.resizeBackgroundBasedOnScrolling();
+			myLevelEditingPreview.resizeBackgroundBasedOnScrolling();
 		} else {
 			myController.updateRefActor((IAuthoringActor) arg);
-			myLevelPreview.addLevelActorsToScene();
+			myLevelEditingPreview.addLevelActorsToScene();
 		}
 	}
 
@@ -344,5 +286,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	
 	public Set<IAuthoringActor> getAvailableActors() {
 		return availableActors.keySet();
+	}
+	
+	public void previewGame() {
+		myLevelPreviewer.previewGame();
 	}
 }

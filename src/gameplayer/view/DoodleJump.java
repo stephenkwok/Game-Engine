@@ -15,6 +15,7 @@ import gameengine.model.Actions.ShiftScene;
 import gameengine.model.Rule;
 import gameengine.model.Triggers.*;
 import gameplayer.controller.GameController;
+import gameplayer.controller.PlayType;
 import gameplayer.view.GameScreen;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -73,7 +74,7 @@ public class DoodleJump extends Application {
         greenplatform.setImageViewName("green_platform.png");
         greenplatform.setID(2);
         
-        player.addRule(new Rule(new TopCollision(player,greenplatform),new GlideUp(player, greenplatform.getBounds().getHeight()*-.4)));
+        //player.addRule(new Rule(new TopCollision(player,greenplatform),new GlideUp(player, greenplatform.getBounds().getHeight()*-.4)));
         player.addRule(new Rule(new BottomCollision(player,greenplatform),new VerticalBounceCollision(player)));
         player.addRule(new Rule(new BottomCollision(player,greenplatform, true),new ShiftScene(level1,"Down",50.0)));
         player.addRule(new Rule(new BottomCollision(player,greenplatform, true),new CreateActor(player,greenplatform,200.0,700.0,0.0,0.0)));
@@ -111,7 +112,7 @@ public class DoodleJump extends Application {
         ParallelCamera camera = new ParallelCamera();
         GameScreen view = new GameScreen(camera);
 
-        GameController controller = new GameController(model);
+        GameController controller = new GameController(model, PlayType.PREVIEW);
         controller.setGame(model);
         controller.setGameView(view);
 
