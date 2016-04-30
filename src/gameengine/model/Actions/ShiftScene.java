@@ -1,6 +1,5 @@
 package gameengine.model.Actions;
 
-import java.util.Observable;
 
 import gameengine.controller.Level;
 

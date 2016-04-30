@@ -44,7 +44,6 @@ public class CheckBoxObject extends Observable implements IGUIElement, IEditingE
 	 */
 	@Override
 	public Node createNode() {
-		
 		return myCheckBox;
 	}
 

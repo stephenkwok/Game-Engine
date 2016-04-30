@@ -2,7 +2,6 @@ package authoringenvironment.view.behaviors;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.ActionFactory;
@@ -52,6 +51,7 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	private IAuthoringActor otherActor;
 	private IAuthoringActor myActor;
 	private IRule myRule;
+	private HBox hbox;
 
 	public SelectActorBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
 			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
@@ -65,13 +65,13 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 		this.myActorRule = myActorRule;
 		this.myActors = myActors;
 		this.myActor = myActor;
+		this.hbox = new HBox(HBOX_SPACING);
 	}
 
 	/**
 	 * Creates ComboBox Node.
 	 */
 	public Node createNode() {
-		HBox hbox = new HBox(HBOX_SPACING);
 		Label label = new Label(labelText);
 		label.setWrapText(true);
 		initComboBox();
@@ -210,5 +210,9 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	
 	protected ComboBox<IEditableGameElement> getComboBox(){
 		return this.comboBox;
+	}
+	
+	protected HBox getHBox(){
+		return this.hbox;
 	}
 }
