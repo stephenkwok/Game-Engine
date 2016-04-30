@@ -92,14 +92,6 @@ public class TLGCSValueFinder implements IValueFinder {
 	}
 
 
-	@Override
-	public Property<?> find(String key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
 	public void setController(HUDController controller) {
 		// TODO Auto-generated method stub
 		

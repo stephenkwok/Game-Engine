@@ -30,6 +30,11 @@ public class CreateActorActionCreator extends VBox implements ILevelActionCreato
 	private static final String FIXED = "Fixed spawn location";
 	private static final String DELIMITER = ",";
 	private static final String LEVEL = "Level";
+	private static final String LABEL_TEXT = "CreateActorLabelText";
+	private static final String INITIAL_POSITION = "Enter initial position of created actor";
+	private static final String CHOOSE = "Choose";
+	private static final String RANDOM_TEXT_FIELD = "RandomIntervalTextFields";
+	private static final String FIXED_TEXT_FIELD = "FixedTextFields";
 	private String randomOrFixed;
 	private IGameElement myElement;
 	private ResourceBundle myResources;
@@ -52,7 +57,7 @@ public class CreateActorActionCreator extends VBox implements ILevelActionCreato
 	}
 	
 	private void init() {
-		String[] labelText = myResources.getString("CreateActorLabelText").split(DELIMITER);
+		String[] labelText = myResources.getString(LABEL_TEXT).split(DELIMITER);
 		Label[] labels = new Label[labelText.length];
 		for (int i = 0; i < labelText.length; i++) {
 			labels[i] = new Label(labelText[i]);
@@ -67,7 +72,7 @@ public class CreateActorActionCreator extends VBox implements ILevelActionCreato
 		options.add(FIXED);
 		ObservableList<String> comboOptions = FXCollections.observableArrayList(options);
 		myRandomOrFixedComboBox = new ComboBox<>(comboOptions);
-		Button button = new Button("Choose");
+		Button button = new Button(CHOOSE);
 		button.setOnAction(e -> {
 			randomOrFixed = (String) myRandomOrFixedComboBox.getValue();
 			displayXYOptions();
@@ -77,7 +82,7 @@ public class CreateActorActionCreator extends VBox implements ILevelActionCreato
 	}
 	
 	private void displayXYOptions() {
-		this.getChildren().add(new Label("Enter initial position of created actor"));
+		this.getChildren().add(new Label(INITIAL_POSITION));
 		switch (randomOrFixed) {
 		case RANDOM:
 			makeRandomIntervalTextFields();
@@ -89,7 +94,7 @@ public class CreateActorActionCreator extends VBox implements ILevelActionCreato
 	}
 	
 	private void makeRandomIntervalTextFields() {
-		String[] labelText = myResources.getString("RandomIntervalTextFields").split(DELIMITER);
+		String[] labelText = myResources.getString(RANDOM_TEXT_FIELD).split(DELIMITER);
 		Label[] labels = new Label[labelText.length];
 		for (int i = 0; i < labelText.length; i++) {
 			labels[i] = new Label(labelText[i]);
@@ -113,7 +118,7 @@ public class CreateActorActionCreator extends VBox implements ILevelActionCreato
 	}
 	
 	private void makeFixedTextFields() {
-		String[] labelText = myResources.getString("FixedTextFields").split(DELIMITER);
+		String[] labelText = myResources.getString(FIXED_TEXT_FIELD).split(DELIMITER);
 		Label[] labels = new Label[labelText.length];
 		for (int i = 0; i < labelText.length; i++) {
 			labels[i] = new Label(labelText[i]);

@@ -37,7 +37,7 @@ public class TabRuleAdder extends TabParent implements Observer{
 	private static final String DIRECTORY = "Directory";
 	private static final String ATTRIBUTE_BEHAVIORS = "AttributeBehaviors";
 	private static final Object CREATE_ACTOR = "CreateActor";
-	private static final String STANDARD_TRIGGER = "StandardTrigger";
+	private static final String NEEDS_RESOURCE = "NeedsResource";
 	private static final String STANDARD_ACTION = "StandardAction";
 
 	private VBox myTriggerContainer;
@@ -135,7 +135,7 @@ public class TabRuleAdder extends TabParent implements Observer{
 			} else if (name.equals(CREATE_ACTOR)) {
 				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class, IEditingEnvironment.class);
 				return (VBox) constructor.newInstance(getResources(), myLevel, myLevelEditor);
-			} else if ((Arrays.asList(getResources().getString(STANDARD_TRIGGER).split(DELIMITER)).contains(name))) {
+			} else if ((Arrays.asList(getResources().getString(NEEDS_RESOURCE).split(DELIMITER)).contains(name))) {
 				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class);
 				return (VBox) constructor.newInstance(getResources(), myLevel);
 			} else if ((Arrays.asList(getResources().getString(STANDARD_ACTION).split(DELIMITER)).contains(name))){

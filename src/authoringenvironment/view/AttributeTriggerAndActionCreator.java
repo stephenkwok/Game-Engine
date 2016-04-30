@@ -28,6 +28,7 @@ public class AttributeTriggerAndActionCreator extends VBox implements ILevelTrig
 	private static final String HEALTH = "Health";
 	private static final String POINTS = "Points";
 	private static final String TIME = "Time";
+	private static final String DELIMITER = ",";
 	private ComboBox myElementComboBox;
 	private ComboBox myTypeComboBox;
 	private TextField myValue;
@@ -45,7 +46,7 @@ public class AttributeTriggerAndActionCreator extends VBox implements ILevelTrig
 	}
 
 	private void init(String labelKey) {
-		String[] labelText = myResources.getString(labelKey).split(",");
+		String[] labelText = myResources.getString(labelKey).split(DELIMITER);
 		Label[] labels = new Label[labelText.length];
 		for (int i = 0; i < labelText.length; i++) {
 			labels[i] = new Label(labelText[i]);
