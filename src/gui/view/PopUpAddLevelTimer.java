@@ -5,12 +5,12 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.AttributeTriggerAndActionCreator;
+import authoringenvironment.model.CreateActorActionCreator;
 import authoringenvironment.model.IActionCreator;
-import authoringenvironment.view.AttributeTriggerAndActionCreator;
-import authoringenvironment.view.CreateActorActionCreator;
-import authoringenvironment.view.LoseGameActionCreator;
-import authoringenvironment.view.NextLevelActionCreator;
-import authoringenvironment.view.WinGameActionCreator;
+import authoringenvironment.model.LoseGameActionCreator;
+import authoringenvironment.model.NextLevelActionCreator;
+import authoringenvironment.model.WinGameActionCreator;
 import gameengine.controller.Level;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.ActorRule;
 import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.view.ActorRule;
 import gameengine.model.*;
 import gameengine.model.Actions.ChangeAttribute;
 

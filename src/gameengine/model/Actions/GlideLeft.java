@@ -10,6 +10,9 @@ public class GlideLeft extends GlidingAction {
 
 	@Override
 	public void perform() {
+		getMyActor().setHeading(180);
+		getMyActor().setDirection();
+
     	getMyActor().getPhysicsEngine().glideLeft(getMyActor(),this.getGlideOffset());			
 
 	}

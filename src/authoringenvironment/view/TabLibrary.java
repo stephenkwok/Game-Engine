@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.ActorRule;
+import authoringenvironment.model.ActorRuleCreator;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
