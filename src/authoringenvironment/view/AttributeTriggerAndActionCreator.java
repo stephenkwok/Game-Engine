@@ -123,14 +123,12 @@ public class AttributeTriggerAndActionCreator extends VBox implements ITriggerCr
 	
 	@Override
 	public ITrigger createTrigger() {
-		AttributeType type = getAttributeType();
-		return new AttributeReached(getElementByName(), type, Integer.parseInt(myValue.getText()));
+		return new AttributeReached(getElementByName(), getAttributeType(), Integer.parseInt(myValue.getText()));
 	}
 
 	@Override
 	public Action createAction() {
-		AttributeType type = getAttributeType();
-		return new ChangeAttribute(getElementByName(), type, Integer.parseInt(myValue.getText()));
+		return new ChangeAttribute(getElementByName(), getAttributeType(), Integer.parseInt(myValue.getText()));
 	}
 
 }

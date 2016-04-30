@@ -120,6 +120,12 @@ public class TabRuleAdder extends TabParent implements Observer{
 		myTriggerContainer.getChildren().add(myTriggerCreator);
 	}
 	
+
+	private void displayActionParameters(String name) {
+		myActionCreator = displayParameters(name, name + ACTION_CREATOR);
+		myActionContainer.getChildren().add(myActionCreator);
+	}
+	
 	private VBox displayParameters(String name, String className) {
 		Class<?> creator;
 		try {
@@ -162,11 +168,5 @@ public class TabRuleAdder extends TabParent implements Observer{
 		}
 		return null;
 	}
-
-	private void displayActionParameters(String name) {
-		myActionCreator = displayParameters(name, name + ACTION_CREATOR);
-		myActionContainer.getChildren().add(myActionCreator);
-	}
-
 
 }
