@@ -70,5 +70,13 @@ public class Attribute extends Observable {
     public Property<Integer> getProperty() {
     	return myValue;
     }
+    
+    public Set<Integer> getTriggerValues(){
+    	return myTriggerValues;
+    }
+    
+    public void setTriggerValues(Set<Integer> triggers){
+    	myTriggerValues = triggers;
+    }
         
 }

@@ -38,10 +38,6 @@ public class AttributeReached extends ITrigger {
 		return myType;
 	}
 	
-	/*public IGameElement getMyTarget() {
-		return myTarget;
-	}*/
-	
 	public int getMyValue() {
 		return myTriggerValue;
 	}
