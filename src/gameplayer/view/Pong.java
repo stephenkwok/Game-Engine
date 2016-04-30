@@ -101,9 +101,9 @@ public class Pong extends Application {
         ball.setImageViewName("fireball.png");
         ball.setX(400);
         ball.setY(400);
-        ball.setHeading(170);
+        ball.setHeading(140);
         level1.addActor(ball);
-        ball.addRule(new Rule(new TickTrigger(), new GlideForward(ball, 2.0)));
+        ball.addRule(new Rule(new TickTrigger(), new GlideForward(ball, 5.0)));
         ball.addRule(new Rule(new SideCollision(ball, leftSide), new ReverseHeading(ball)));
         ball.addRule(new Rule(new SideCollision(ball, rightSide), new ReverseHeading(ball)));
         
