@@ -3,10 +3,11 @@ package authoringenvironment.view;
 import java.util.Observable;
 import java.util.Observer;
 
-import gui.view.PopUpParent;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
  * This class generates a Pop Up that allows the author to edit an ImageView's 
@@ -26,9 +27,11 @@ public abstract class ImageEditingEnvironment extends PopUpParent implements Obs
 	private final HBox myToolbarContainer;
 	private final ImageView myImageView;
 	private final ImageEditingToolbar myToolbar;
+	private final VBox myContainer;
 
 	public ImageEditingEnvironment(ImageView imageView) {
 		super(POPUP_WIDTH, POPUP_HEIGHT);
+		myContainer = new VBox();
 		myImageDisplay = new HBox();
 		myToolbarContainer = new HBox();
 		myImageView = imageView;
@@ -36,6 +39,7 @@ public abstract class ImageEditingEnvironment extends PopUpParent implements Obs
 		myToolbar.addObserver(this);
 		initializeImageDisplay();
 		initializeToolbarContainer();
+		addNodesToParentContainer();
 		bindChildrenWidthsToContainerWidth();
 	}
 
@@ -47,7 +51,7 @@ public abstract class ImageEditingEnvironment extends PopUpParent implements Obs
 		myImageDisplay.setAlignment(Pos.CENTER);
 		myImageDisplay.setStyle(BORDER_COLOR);
 		myImageDisplay.getChildren().add(myImageView);
-		getContainer().getChildren().add(myImageDisplay);
+		myContainer.getChildren().add(myImageDisplay);
 	}
 
 	/**
@@ -59,7 +63,15 @@ public abstract class ImageEditingEnvironment extends PopUpParent implements Obs
 		myToolbarContainer.setStyle(BORDER_COLOR);
 		myToolbar.getToolbar().prefWidthProperty().bind(myToolbarContainer.widthProperty());
 		myToolbarContainer.getChildren().add(myToolbar.getToolbar());
-		getContainer().getChildren().add(myToolbarContainer);
+		myContainer.getChildren().add(myToolbarContainer);
+	}
+	
+	/**
+	 * Adds this class' nodes to the parent container
+	 */
+	private void addNodesToParentContainer() {
+		myContainer.prefHeightProperty().bind(getContainer().heightProperty());
+		getContainer().getChildren().add(myContainer);
 	}
 
 	/**

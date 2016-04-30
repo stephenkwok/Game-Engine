@@ -117,6 +117,15 @@ public class CollisionDetection {
 
 	private void resolveCollision(IPlayActor a1, IPlayActor a2) {
 		String collisionType = getCollisionType(a1, a2);
+		if(!collisionType.equals(BottomCollision)){
+			resolutionReflection(a1,a2, collisionType);
+		}else if(a1.getVeloY()>=0){
+			resolutionReflection(a1,a2, collisionType);
+		}
+	}
+
+	
+	private void resolutionReflection(IPlayActor a1, IPlayActor a2, String collisionType){
 		try {
 			Class<?> className = Class.forName(TRIGGER_PREFIX + collisionType);
 			Constructor[] myConstructors = className.getConstructors();
@@ -126,7 +135,6 @@ public class CollisionDetection {
 			e.printStackTrace();
 		}
 	}
-
 	public PhysicsEngine getMyPhysicsEngine() {
 		return myPhysicsEngine;
 	}

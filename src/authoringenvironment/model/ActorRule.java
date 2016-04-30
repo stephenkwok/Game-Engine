@@ -15,16 +15,9 @@ import gameengine.model.Actions.Action;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import gameengine.model.Triggers.ITrigger;
 
@@ -146,8 +139,10 @@ public class ActorRule {
 	public void addBehavior(String behaviorType, IRule rule) {
 		if (!(isTriggerType(behaviorType) && myTriggerNodes.getChildren().size() != 0)) {
 			IAuthoringBehavior element = actorRuleFactory.getAuthoringRule(behaviorType, rule);
+			System.out.println("ELEMENT: " + element);
 			authoringBehaviorMap.put(element, new ArrayList<>());
 			Node node = ((IGUIElement) element).createNode();
+			System.out.println("NODE: " + node);
 			element.updateValueBasedOnEditable();
 			setRemoveEvent(node, element);
 			if (isTriggerType(behaviorType)) {
@@ -243,18 +238,25 @@ public class ActorRule {
 			myActorRuleCreator.setNewlyReturned(false);
 			myActor.getRules().clear();
 		}
-		if (myTrigger == null || myActions.size() == 0) {
-			showAlert(myActorRuleResources.getString("SomethingNotSet"), myActorRuleResources.getString("SetBoth"));
-		} else {
-			for (IAuthoringBehavior authoringBehavior : authoringBehaviorMap.keySet()) {
-				addRuleFromActionBehavior(authoringBehavior);
+		if(myTrigger==null){
+			for(IAuthoringBehavior authoringBehavior: authoringBehaviorMap.keySet()){
+				if(isITrigger(authoringBehavior)){
+					addRuleFromBehavior(authoringBehavior);
+				} 
 			}
 		}
-		myActorRuleCreator.applyPhysics();
+		try{
+			for (IAuthoringBehavior authoringBehavior : authoringBehaviorMap.keySet()) {
+				addRuleFromBehavior(authoringBehavior);
+			}
+		}catch(Exception e){
+			showAlert(myActorRuleResources.getString("SomethingNotSet"), myActorRuleResources.getString("SetBoth"));
+		}	
 		printAll("AFTER SETTING RULES");
 	}
-
-	private void addRuleFromActionBehavior(IAuthoringBehavior authoringBehavior) {
+	
+	private void addRuleFromBehavior(IAuthoringBehavior authoringBehavior) {
+		authoringBehavior.setValue();
 		if (!isITrigger(authoringBehavior)) {
 			Action myAction = (Action) authoringBehaviorMap.get(authoringBehavior)
 					.get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex")));
