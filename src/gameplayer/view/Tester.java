@@ -103,13 +103,13 @@ public class Tester extends Application {
         IPlayActor enemy2 = new Actor();
         ((IAuthoringActor)enemy2).setImageViewName("goomba.png");
         ((Actor) enemy2).setName("enemy2");
-        enemy2.setX(400);
+        enemy2.setX(450);
+        enemy2.setY(350);
         System.out.println(enemy2.getHeading());
         TickTrigger trigger = new TickTrigger();
         Action moveForward = new GlideForward((Actor)enemy2, 1.0);
         Rule movingForward = new Rule(trigger, moveForward);
         enemy2.addRule(movingForward);
-        
 
         SideCollision triggerenemy = new SideCollision((Actor)enemy2,(Actor)blocky);
         Action actionenemy2 = new ReverseHeading((Actor)enemy2);
