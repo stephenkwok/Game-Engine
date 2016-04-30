@@ -10,6 +10,8 @@ public class GlideDown extends GlidingAction {
 
 	@Override
 	public void perform() {
+			getMyActor().setHeading(270);
+			getMyActor().setDirection();
 		    getMyActor().getPhysicsEngine().glideDown(getMyActor(),this.getGlideOffset());					
 	}
 
