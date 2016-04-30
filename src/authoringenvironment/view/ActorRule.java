@@ -247,18 +247,23 @@ public class ActorRule {
 			myActorRuleCreator.setNewlyReturned(false);
 			myActor.getRules().clear();
 		}
-		if (myTrigger == null || myActions.size() == 0) {
-			showAlert(myActorRuleResources.getString("SomethingNotSet"), myActorRuleResources.getString("SetBoth"));
-		} else {
-			for (IAuthoringBehavior authoringBehavior : authoringBehaviorMap.keySet()) {
-				addRuleFromActionBehavior(authoringBehavior);
+		if(myTrigger==null){
+			for(IAuthoringBehavior authoringBehavior: authoringBehaviorMap.keySet()){
+				if(isITrigger(authoringBehavior)){
+					authoringBehavior.setValue();
+					addRuleFromBehavior(authoringBehavior);
+				} //add trigger first
 			}
+		}
+		for (IAuthoringBehavior authoringBehavior : authoringBehaviorMap.keySet()) {
+			authoringBehavior.setValue();
+			addRuleFromBehavior(authoringBehavior);
 		}
 		myActorRuleCreator.applyPhysics();
 		printAll("AFTER SETTING RULES");
 	}
 
-	private void addRuleFromActionBehavior(IAuthoringBehavior authoringBehavior) {
+	private void addRuleFromBehavior(IAuthoringBehavior authoringBehavior) {
 		if (!isITrigger(authoringBehavior)) {
 			Action myAction = (Action) authoringBehaviorMap.get(authoringBehavior)
 					.get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex")));

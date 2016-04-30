@@ -42,9 +42,13 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 	@Override
 	public void setButtonAction() {
 		getComboButton().setOnAction(event -> {
-			this.value = (String) getComboBox().getValue();
-			createTriggerOrAction();
+			setValue();
 		});
+	}
+	
+	public void setValue(){
+		this.value = (String) getComboBox().getValue();
+		createTriggerOrAction();
 	}
 
 	/**
