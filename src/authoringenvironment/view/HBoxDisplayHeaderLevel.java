@@ -33,7 +33,7 @@ public class HBoxDisplayHeaderLevel extends HBoxDisplayHeader {
 		myButtonImage.setFitHeight(BUTTON_IMAGE_HEIGHT);
 		myButtonImage.setPreserveRatio(true);
 		myReorderLevelsButton = new Button(BUTTON_TEXT, myButtonImage);
-		myReorderLevelsButton.setOnAction(e -> notifyObservers("reorderLevels"));
+		myReorderLevelsButton.setOnAction(e -> notifyObservers());
 		myReorderLevelsButton.prefHeightProperty().bind(getHBox().heightProperty().subtract(BUTTON_TOP_BOTTOM_PADDING));
 		getHBox().getChildren().add(myReorderLevelsButton);
 	}

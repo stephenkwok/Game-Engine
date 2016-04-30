@@ -9,7 +9,7 @@ import gameengine.model.Actor;
 import gameengine.model.ActorState;
 
 /**
- * This class creates a list of Actors with attributes pre-defined in a resource
+ * This class creates a list of Actors with attributes predefined in a resource
  * file
  * 
  * @author Stephen
@@ -162,28 +162,6 @@ public class PresetActorFactory {
 			SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Method methodToCall = actor.getClass().getDeclaredMethod(method, int.class);
 		methodToCall.invoke(actor, Integer.parseInt(parameter.trim()));
-	}
-
-	/**
-	 * Executes an Actor's method that takes in a boolean as a parameter
-	 * 
-	 * @param actor:
-	 *            the Actor on which a method to be created is invoked
-	 * @param method:
-	 *            the method to be invoked on an Actor
-	 * @param parameter:
-	 *            the argument to be passed into the method created (as String)
-	 * @throws NoSuchMethodException
-	 * @throws SecurityException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
-	@SuppressWarnings("unused")
-	private void executeBooleanMethod(Actor actor, String method, String parameter) throws NoSuchMethodException,
-			SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Method methodToCall = actor.getClass().getDeclaredMethod(method, boolean.class);
-		methodToCall.invoke(actor, Boolean.parseBoolean(parameter.trim()));
 	}
 
 	/**

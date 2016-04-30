@@ -12,11 +12,11 @@ import javafx.scene.layout.*;
 
 /**
  * 
- * This class creates a Label containing text (the name of an actor or level)
- * and an image (a picture of an actor or level). When clicked, the label sets
- * the screen to either the Level Editing Environment, if the Label's
+ * This class creates a preview unit containing text (the name of an actor or level)
+ * and an image (a picture of an actor or level). When clicked, the preview unit sets
+ * the screen to either the Level Editing Environment, if the preview unit's
  * IEditableGameElement is a Level, or the Actor Editing Environment, if the
- * Label's IEditableGameElement is an Actor
+ * preview unit's IEditableGameElement is an Actor
  * 
  * @author Stephen
  *
@@ -50,7 +50,7 @@ public class PreviewUnitWithEditable extends ObjectObservable implements IEditin
 	}
 
 	/**
-	 * Updates the Label's text and image to account for any changes in the
+	 * Updates the preview unit's text and image to account for any changes in the
 	 * Actor or Level's name and image
 	 */
 	public void update() {
