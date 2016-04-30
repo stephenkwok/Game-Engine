@@ -139,10 +139,8 @@ public class ActorRule {
 	public void addBehavior(String behaviorType, IRule rule) {
 		if (!(isTriggerType(behaviorType) && myTriggerNodes.getChildren().size() != 0)) {
 			IAuthoringBehavior element = actorRuleFactory.getAuthoringRule(behaviorType, rule);
-			System.out.println("ELEMENT: " + element);
 			authoringBehaviorMap.put(element, new ArrayList<>());
 			Node node = ((IGUIElement) element).createNode();
-			System.out.println("NODE: " + node);
 			element.updateValueBasedOnEditable();
 			setRemoveEvent(node, element);
 			if (isTriggerType(behaviorType)) {
@@ -152,7 +150,6 @@ public class ActorRule {
 			}
 			authoringBehaviorMap.get(element).add(Integer.parseInt(myActorRuleResources.getString("NodeIndex")), node);
 		}
-		printAll("AFTER ADDING BEHAVIOR");
 	}
 
 	/**
@@ -178,7 +175,6 @@ public class ActorRule {
 				authoringBehaviorMap.remove(toRemove);
 			}
 		}
-		printAll("AFTER REMOVING SOMETHING");
 	}
 
 	private void removeTrigger(IAuthoringBehavior toRemove) {
@@ -197,7 +193,6 @@ public class ActorRule {
 			}
 		}
 		myTrigger = null;
-		printAll("AFTER REMOVING TRIGGER");
 	}
 
 	private void removeAction(IAuthoringBehavior toRemove) {
@@ -207,7 +202,6 @@ public class ActorRule {
 				.get(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")));
 		removeIRuleFromActor(ruleToRemove);
 		authoringBehaviorMap.remove(toRemove);
-		printAll("AFTER REMOVING ACTION");
 	}
 
 	private void removeIRuleFromActor(IRule toRemove) {
@@ -252,7 +246,6 @@ public class ActorRule {
 		}catch(Exception e){
 			showAlert(myActorRuleResources.getString("SomethingNotSet"), myActorRuleResources.getString("SetBoth"));
 		}	
-		printAll("AFTER SETTING RULES");
 	}
 	
 	private void addRuleFromBehavior(IAuthoringBehavior authoringBehavior) {
