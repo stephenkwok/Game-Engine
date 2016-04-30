@@ -3485,8 +3485,8 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>400.0</x>
-          <y>0.0</y>
+          <x>450.0</x>
+          <y>350.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>

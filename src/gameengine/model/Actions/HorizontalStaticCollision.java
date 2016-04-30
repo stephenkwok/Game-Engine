@@ -19,6 +19,8 @@ public class HorizontalStaticCollision extends ActorAction{
 	@Override
 	public void perform() {
 		getMyActor().getPhysicsEngine().staticHorizontalCollision(getMyActor());
+		
+		
 	}
 
 }
