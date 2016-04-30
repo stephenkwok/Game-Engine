@@ -101,7 +101,7 @@ public class Pong extends Application {
         ball.setImageViewName("fireball.png");
         ball.setX(400);
         ball.setY(400);
-        ball.setHeading(150);
+        ball.setHeading(100);
         level1.addActor(ball);
         ball.addRule(new Rule(new TickTrigger(), new GlideForward(ball, 2.0)));
         ball.addRule(new Rule(new SideCollision(ball, leftSide), new ReverseHeading(ball)));
@@ -121,10 +121,17 @@ public class Pong extends Application {
         level1.addActor(topEdge);
         
         ball.addRule(new Rule(new TopCollision(ball, topEdge), new VerticalBounceCollision(ball)));
+        ball.addRule(new Rule(new TopCollision(ball, topEdge), new VerticalHeadingSwitch(ball)));        
         ball.addRule(new Rule(new BottomCollision(ball, bottomEdge), new VerticalBounceCollision(ball)));
+        ball.addRule(new Rule(new BottomCollision(ball, bottomEdge), new VerticalHeadingSwitch(ball)));
+
         
         ball.addRule(new Rule(new SideCollision(ball, player1), new HorizontalBounceCollision(ball)));
         ball.addRule(new Rule(new SideCollision(ball, player2), new HorizontalBounceCollision(ball)));
+        ball.addRule(new Rule(new SideCollision(ball, player1), new HorizontalHeadingSwitch(ball)));
+        ball.addRule(new Rule(new SideCollision(ball, player2), new HorizontalHeadingSwitch(ball)));
+
+
       
        
         Group group = new Group();
