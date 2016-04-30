@@ -102,37 +102,6 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		displayActionParameters((String) arg);
 		createLevelTimer();
 	}
-
-	private void displayActionParameters(String name) {
-		myActionCreator = null;
-		Class<?> creator;
-		try {
-			creator = Class.forName(myResources.getString(DIRECTORY) + myResources.getString(name));
-			Constructor<?> constructor = creator.getConstructor(IGameElement.class);
-			myActionCreator = (VBox) constructor.newInstance(myLevel);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	private int convertToTicks(TextField minutesBox, TextField secondsBox) {
 		Integer minutes = Integer.parseInt(minutesBox.getText());
@@ -174,4 +143,36 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 			return TICKS_PER_SECOND;
 		}
 	}
+	
+	private void displayActionParameters(String name) {
+		myActionCreator = null;
+		Class<?> creator;
+		try {
+			creator = Class.forName(myResources.getString(DIRECTORY) + myResources.getString(name));
+			Constructor<?> constructor = creator.getConstructor(IGameElement.class);
+			myActionCreator = (VBox) constructor.newInstance(myLevel);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }

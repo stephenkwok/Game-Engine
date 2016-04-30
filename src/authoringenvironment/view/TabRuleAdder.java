@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Observable;
@@ -8,8 +9,10 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.controller.LevelEditingEnvironment;
 import authoringenvironment.model.IActionCreator;
+import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.model.ITriggerCreator;
 import gameengine.controller.Level;
+import gameengine.model.IGameElement;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.ITrigger;
@@ -29,6 +32,12 @@ public class TabRuleAdder extends TabParent implements Observer{
 	private static final String PROMPT = "Prompt";
 	private static final String CREATE_RULE = "Create rule";
 	private static final int PADDING = 10;
+	private static final String TRIGGER_CREATOR = "TriggerCreator";
+	private static final String ACTION_CREATOR = "ActionCreator";
+	private static final String LABEL_TEXT = "LabelText";
+	private static final String DIRECTORY = "Directory";
+	private static final String ATTRIBUTE_BEHAVIORS = "AttributeBehaviors";
+	private static final Object CREATE_ACTOR = "CreateActor";
 
 	private VBox myTriggerContainer;
 	private ComboBoxLevelTriggerAndAction myTriggerComboBox;
@@ -42,7 +51,7 @@ public class TabRuleAdder extends TabParent implements Observer{
 	private Level myLevel;
 	private LevelEditingEnvironment myLevelEditor;
 	private TabLevelRuleEditor myRuleEditor;
-	
+
 	public TabRuleAdder(ResourceBundle myResources, String tabText, LevelEditingEnvironment environment, TabLevelRuleEditor ruleEditor) {
 		super(myResources, tabText);
 		myContainer = new VBox();
@@ -78,6 +87,7 @@ public class TabRuleAdder extends TabParent implements Observer{
 
 	private void displayTriggerParameters() {
 		myTriggerCreator = null;
+
 		switch (myTriggerName) {
 		case "Key":
 			myTriggerCreator = new KeyTriggerCreator(getResources(), myLevel);
@@ -95,28 +105,6 @@ public class TabRuleAdder extends TabParent implements Observer{
 		myTriggerContainer.getChildren().add(myTriggerCreator);
 	}
 
-	private void displayActionParameters() {
-		myActionCreator = null;
-		switch (myActionName) {
-		case "WinGame":
-			myActionCreator = new WinGameActionCreator(myLevel);
-			break;
-		case "LoseGame":
-			myActionCreator = new LoseGameActionCreator(myLevel);
-			break;
-		case "CreateActor":
-			myActionCreator = new CreateActorActionCreator(getResources(), myLevel, myLevelEditor);
-			break;
-		case "ChangeAttribute":
-			myActionCreator = new AttributeTriggerAndActionCreator(getResources(), myLevel, myLevelEditor, "ChangeAttributeLabelText");
-			break;
-		case "NextLevel":
-			myActionCreator = new NextLevelActionCreator(myLevel);
-			break;
-		}
-		myActionContainer.getChildren().add(myActionCreator);
-	}
-
 	private void createAndAddRule() {
 		myTriggerContainer.getChildren().remove(myTriggerCreator);
 		myActionContainer.getChildren().remove(myActionCreator);
@@ -125,7 +113,7 @@ public class TabRuleAdder extends TabParent implements Observer{
 		myLevel.addRule(new Rule(trigger, action));
 		myRuleEditor.updateRules();
 	}
-	
+
 	@Override
 	public void update(Observable o, Object arg) {
 		if (Arrays.asList(getResources().getString(TRIGGERS).split(DELIMITER)).contains((String) arg)) {
@@ -133,14 +121,56 @@ public class TabRuleAdder extends TabParent implements Observer{
 			displayTriggerParameters();
 		} else {
 			myActionName = (String) arg;
-			displayActionParameters();
+			displayActionParameters(myActionName);
 		}
 	}
-	
+
 	@Override
 	Node getContent()
 			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		return myContainer;
 	}
+
+	private void displayActionParameters(String name) {
+		myActionCreator = null;
+		Class<?> creator;
+		try {
+			creator = Class.forName(getResources().getString(DIRECTORY) + getResources().getString(name + ACTION_CREATOR));
+			Constructor<?> constructor;
+			if (Arrays.asList(getResources().getString(ATTRIBUTE_BEHAVIORS).split(DELIMITER)).contains(name)) {
+				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class, IEditingEnvironment.class, String.class);
+				myActionCreator = (VBox) constructor.newInstance(getResources(), myLevel, myLevelEditor, name + LABEL_TEXT);
+			} else if (name.equals(CREATE_ACTOR)) {
+				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class, IEditingEnvironment.class);
+				myActionCreator = (VBox) constructor.newInstance(getResources(), myLevel, myLevelEditor);
+			} else {
+				constructor = creator.getConstructor(IGameElement.class);
+				myActionCreator = (VBox) constructor.newInstance(myLevel);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		myActionContainer.getChildren().add(myActionCreator);
+	}
+
 
 }
