@@ -33,6 +33,8 @@ public class ActorRuleCreator {
 	private static final int ZERO = 0;
 	private static final String POINTS = "POINTS";
 	private static final String HEALTH = "HEALTH";
+	private static final String POINTS_TRIGGER = "POINTS_TRIGGER";
+	private static final String HEALTH_TRIGGER = "HEALTH_TRIGGER";
 	private int ruleRow;
 	private GridPane myActorRuleCreatorPane;
 	private List<ActorRule> myActorRules;
@@ -123,7 +125,6 @@ public class ActorRuleCreator {
 				String simpleName = rule.getMyAction().getClass().getSimpleName();
 				if (simpleName.equals(CHANGE_ATTRIBUTE)) {
 					String attributeType = ((ChangeAttribute) rule.getMyAction()).getMyAttributeType();
-					System.out.println("HERE: " + myActionResources.getString(attributeType));
 					toAdd.addBehavior(myActionResources.getString(attributeType), rule);
 				} else
 					toAdd.addBehavior(simpleName, rule); 
@@ -173,9 +174,9 @@ public class ActorRuleCreator {
 		if (Arrays.asList(myActionResources.getString("KeyInputs").split(" ")).contains(triggerType)) {
 			return KEY;
 		}else if(triggerType.contains(POINTS)){
-			return myActionResources.getString(POINTS);
+			return myActionResources.getString(POINTS_TRIGGER);
 		}else if(triggerType.contains(HEALTH)){
-			return myActionResources.getString(HEALTH);
+			return myActionResources.getString(HEALTH_TRIGGER);
 		}
 		return triggerType;
 	}
