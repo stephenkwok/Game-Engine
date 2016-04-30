@@ -2,7 +2,6 @@ package authoringenvironment.view;
 
 import java.util.Observable;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -19,7 +18,6 @@ import javafx.stage.Stage;
  */
 public abstract class PopUpParent extends Observable {
 
-	private static final double DEFAULT_CONTAINER_PADDING = 25.0;
 	private static final double DEFAULT_CONTAINER_SPACING = 10.0;
 	private VBox myContainer;
 	private int myWidth;
