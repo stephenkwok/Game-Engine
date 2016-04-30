@@ -1,7 +1,5 @@
 package gui.view;
 
-import java.util.Arrays;
-
 public class ButtonEdit extends ButtonParent{
 
 	public ButtonEdit(String buttonText, String imageName) {
