@@ -16,6 +16,7 @@ import gameengine.model.Triggers.SideCollision;
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.Triggers.TopCollision;
 import gameplayer.controller.GameController;
+import gameplayer.controller.PlayType;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.ParallelCamera;
@@ -410,7 +411,7 @@ public class Tester extends Application {
         ParallelCamera camera = new ParallelCamera();
         GameScreen view = new GameScreen(camera);
 
-        GameController controller = new GameController(model);
+        GameController controller = new GameController(model, PlayType.PREVIEW);
         controller.setGame(model);
         controller.setGameView(view);
 
