@@ -77,11 +77,11 @@ public class TabLevelRuleEditor extends TabParent {
 			if (((CheckBox) checkBox.createNode()).isSelected()) {
 				myLevel.removeRule(myRuleMap.get(checkBox));
 				toRemove.add(checkBox);
-				myCheckBoxes.getChildren().remove(checkBox);
 			}
 		}
 		for (int i = 0; i < toRemove.size(); i++) {
 			myRuleMap.remove(toRemove.get(i));
+			myCheckBoxes.getChildren().remove(toRemove.get(i));
 		}
 	}
 	

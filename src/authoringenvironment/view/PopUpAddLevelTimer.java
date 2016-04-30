@@ -41,6 +41,7 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	private static final String DELIMITER = ",";
 	private static final String DIRECTORY = "Directory";
 	private static final int ONE = 1;
+	private static final String EMPTY = "";
 	private static final int TICKS_PER_SECOND = 50;
 	private static final String BACKGROUND_COLOR = "-fx-background-color: lightgray";
 	private static final int PADDING = 10;
@@ -115,9 +116,17 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	}
 	
 	private int convertToTicks(TextField minutesBox, TextField secondsBox) {
-		Integer minutes = Integer.parseInt(minutesBox.getText());
-		Integer seconds = Integer.parseInt(secondsBox.getText());
+		Integer minutes = getValueFromTextField(minutesBox);
+		Integer seconds = getValueFromTextField(secondsBox);
 		return minutes * 60 + seconds;
+	}
+	
+	private int getValueFromTextField(TextField text) {
+		if (text.getText().equals(EMPTY)) {
+			return 0;
+		} else {
+			return Integer.parseInt(text.getText());
+		}
 	}
 	
 	private void initializeAttribute(int initialValue) {
