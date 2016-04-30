@@ -113,10 +113,8 @@ public class PhysicsEngine {
 	public void staticVerticalCollision(IPlayActor a1){
 //		a1.setY(a1.getY()-a1.getVeloY());
 //		a1.setVeloY(0);
-		if(a1.getVeloY()>=0){
-
 		setNextVals(a1,a1.getX(),a1.getY()-a1.getVeloY(),a1.getVeloX(), 0 );
-		}
+		
 	}
 
 	public void staticHorizontalCollision(IPlayActor a1) {
@@ -138,9 +136,8 @@ public class PhysicsEngine {
 	public void elasticVerticalCollision(IPlayActor a1) {
 //		a1.setY(a1.getY() - (a1.getVeloY() * bounce));
 //		a1.setVeloY(-horizontalForce * (a1.getVeloY() / Math.abs(a1.getVeloY())));
-		if(a1.getVeloY()>=0){
-			setNextVals(a1,a1.getX(),a1.getY() - (a1.getVeloY() * bounce),a1.getVeloX(), -horizontalForce * (a1.getVeloY() / Math.abs(a1.getVeloY())) );
-		}
+		setNextVals(a1,a1.getX(),a1.getY() - (a1.getVeloY() * bounce),a1.getVeloX(), -horizontalForce * (a1.getVeloY() / Math.abs(a1.getVeloY())) );
+		
 	}
 
 	public void setHorizontalForce(double horizontalForce) {
