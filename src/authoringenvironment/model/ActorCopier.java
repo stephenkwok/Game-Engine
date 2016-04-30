@@ -33,6 +33,7 @@ import javafx.scene.image.ImageView;
  */
 public class ActorCopier {
 	private static final String RESOURCE = "ruleCreator";
+	private static final String DELIMITER = ",";
 	private Actor myReferenceActor;
 	@XStreamOmitField
 	private ResourceBundle myResources;
@@ -128,7 +129,6 @@ public class ActorCopier {
 	}
 	
 	private ITrigger createTrigger(ITrigger trigger, Actor toUpdate) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		System.out.println("triggerkey " + trigger.getMyKey());
 		Object[] params = trigger.getParameters();
 		if(params[0].getClass().equals(Actor.class)&&((Actor)params[0]).getID()==toUpdate.getID()){
 			params[0] = toUpdate;
@@ -143,7 +143,7 @@ public class ActorCopier {
 	}
 
 	private boolean checkType(String name, String key) {
-		if (Arrays.asList(myResources.getString(key).split(",")).contains(name)) {
+		if (Arrays.asList(myResources.getString(key).split(DELIMITER)).contains(name)) {
 			return true;
 		}
 		return false;

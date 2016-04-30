@@ -80,8 +80,6 @@ public class LevelPreviewEditing implements IGUI, Observer {
 
 	private void initScrollPane() {
 		myScrollPane = new ScrollPane();
-		//myScrollPane.setMinViewportWidth(SUBSCENE_WIDTH);
-		//myScrollPane.setMinViewportHeight(SUBSCENE_HEIGHT);
 		myScrollPane.setPrefViewportWidth(SUBSCENE_WIDTH);
 		myScrollPane.setPrefViewportHeight(SUBSCENE_HEIGHT);
 		myScrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
@@ -122,8 +120,6 @@ public class LevelPreviewEditing implements IGUI, Observer {
 	}
 
 	public void resizeBackgroundBasedOnScrolling() {
-		// myLevelBackground.setImage(new
-		// Image(myLevel.getMyBackgroundImgName()));
 		if (myLevel.getMyScrollingDirection().equals(VERTICAL)) {
 			myLevelBackground.setFitWidth(SUBSCENE_WIDTH);
 			// need to get background and set size
@@ -171,7 +167,6 @@ public class LevelPreviewEditing implements IGUI, Observer {
 			public void handle(ContextMenuEvent t) {
 				contextMenu.setIcon(icon);
 				contextMenu.show(icon, t.getSceneX(), t.getScreenY());
-				System.out.println("pressed");
 			}
 		});
 
@@ -180,10 +175,6 @@ public class LevelPreviewEditing implements IGUI, Observer {
 			public void handle(MouseEvent mouseEvent) {
 				if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 					if (mouseEvent.getClickCount() == 2) {
-						System.out.println("Double clicked");
-						// make new IEE popup
-						// make new IEE
-						// attach IEE as observer to popup
 						ImageEditingEnvironmentWithActor iEE = new ImageEditingEnvironmentWithActor(icon.getRefActor());
 						iEE.addObserver(LevelPreviewEditing.this);
 					}
