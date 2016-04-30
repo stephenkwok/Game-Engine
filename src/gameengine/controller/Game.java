@@ -125,6 +125,7 @@ public class Game extends Observable implements Observer, IGame {
 
 	private void togglePause() {
 		animation.pause();
+		this.toggleSoundPause();
 	}
 
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
