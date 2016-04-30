@@ -22,7 +22,7 @@ public class HorizontalBounceCollision extends ActorAction{
 		//System.out.println(getMyActor().getVeloX());
 		getMyActor().getPhysicsEngine().elasticHorizontalCollision(getMyActor());
 		
-		getMyActor().setHeading(Math.abs(getMyActor().getHeading()-180));
+		//getMyActor().setHeading(Math.abs(getMyActor().getHeading()-180));
 	}
 
 }
