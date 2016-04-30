@@ -289,7 +289,6 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		return myPlayPosition;
 	}
 
-	// add play position to constructor later
 	public void setPlayPosition(int playPosition) {
 		myPlayPosition = playPosition;
 	}
@@ -335,6 +334,10 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		return null;
 	}
 
+	/**
+	 * 
+	 * @return: a List of the Level's main characters
+	 */
 	public List<IPlayActor> getMainCharacters() {
 		myMainCharacters.clear();
 		for (IPlayActor a : myActors) {
@@ -342,7 +345,6 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 				myMainCharacters.add(a);
 			}
 		}
-
 		return myMainCharacters;
 	}
 
