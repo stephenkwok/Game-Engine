@@ -36,12 +36,12 @@ public class TLGCSValueFinder implements IValueFinder {
 			throw new IllegalArgumentException();
 		}
 	}
-
-	@Override
-	public void setController(HUDController controller) {
-		// TODO Auto-generated method stub
-		
-	}
+//
+//	@Override
+//	public void setController(HUDController controller) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 
 }
