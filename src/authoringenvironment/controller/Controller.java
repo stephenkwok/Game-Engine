@@ -60,6 +60,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private PopUpAuthoringHelpPage helpPage;
 	private ActorCopier myActorCopier;
 	private GameEditingEnvironment gameEditingEnvironment; 
+	private MainCharacterManager mainCharacterManager;
 
 	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
 	IllegalArgumentException, InvocationTargetException {
@@ -138,6 +139,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
 //		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);
 		gameEditingEnvironment = new GameEditingEnvironment(this, getStage(), myLevels, gameInfo);
+		mainCharacterManager = new MainCharacterManager(myLevels);
 		setTopPane();
 		setCenterPane();
 	}
@@ -260,22 +262,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 *            file to write to.
 	 */
 	public void saveGame() {
-		// TODO implement incomplete game error checking
-		// need to filter out actors that are no longer main characters from main character list
-		
-		
-		
-		for(Level level: myLevels) {
-			for (IPlayActor actor: level.getActors()) {
-				if (actor.checkState(ActorState.MAIN)) {
-					level.getMainCharacters().add(actor);
-				}
-			}
-			if (level.getMainCharacters().size() == 0) {
-				// problem if no actors
-				level.getActors().get(0).addState(ActorState.MAIN);
-			}
-		}
+		mainCharacterManager.updateMainCharacterListsForEachLevel();
+		if (!mainCharacterManager.updateSuccessful()) return;
 		// need error checking
 		gameInfo.setMyImageName(myLevels.get(0).getMyBackgroundImgName());
 		List<IAuthoringActor> refActor = new ArrayList(myActorMap.keySet());
