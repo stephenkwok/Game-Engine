@@ -46,8 +46,8 @@ public class Game extends Observable implements Observer, IGame {
 	private List<IPlayActor> deadActors;
 	private Property<Integer> levelTime = new Property<>(1, "levelTime");
 	private Property<Integer> globalTime = new Property<>(1, "globalTime");
-    
-	@XStreamOmitField
+
+    @XStreamOmitField
     private SoundPlayer soundEngine;
     private boolean sfxOff = false;
     private boolean musicOff = false;
@@ -125,6 +125,7 @@ public class Game extends Observable implements Observer, IGame {
 
 	private void togglePause() {
 		animation.pause();
+		this.toggleSoundPause();
 	}
 
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
