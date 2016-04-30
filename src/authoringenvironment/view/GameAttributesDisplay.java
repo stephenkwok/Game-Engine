@@ -8,7 +8,6 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.Node;
-import javafx.stage.Stage;
 
 /**
  * This class enables the author to edit and set various attributes of the game

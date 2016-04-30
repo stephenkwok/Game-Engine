@@ -16,6 +16,7 @@ import gameengine.model.Triggers.SideCollision;
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.Triggers.TopCollision;
 import gameplayer.controller.GameController;
+import gameplayer.controller.PlayType;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.ParallelCamera;
@@ -103,13 +104,13 @@ public class Tester extends Application {
         IPlayActor enemy2 = new Actor();
         ((IAuthoringActor)enemy2).setImageViewName("goomba.png");
         ((Actor) enemy2).setName("enemy2");
-        enemy2.setX(400);
+        enemy2.setX(450);
+        enemy2.setY(350);
         System.out.println(enemy2.getHeading());
         TickTrigger trigger = new TickTrigger();
         Action moveForward = new GlideForward((Actor)enemy2, 1.0);
         Rule movingForward = new Rule(trigger, moveForward);
         enemy2.addRule(movingForward);
-        
 
         SideCollision triggerenemy = new SideCollision((Actor)enemy2,(Actor)blocky);
         Action actionenemy2 = new ReverseHeading((Actor)enemy2);
@@ -410,7 +411,7 @@ public class Tester extends Application {
         ParallelCamera camera = new ParallelCamera();
         GameScreen view = new GameScreen(camera);
 
-        GameController controller = new GameController(model);
+        GameController controller = new GameController(model, PlayType.PREVIEW);
         controller.setGame(model);
         controller.setGameView(view);
 

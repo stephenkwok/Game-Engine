@@ -19,20 +19,19 @@ import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 
 import authoringenvironment.model.*;
+import authoringenvironment.model.PresetActorFactory;
 import authoringenvironment.view.GameAttributesDisplay;
-import authoringenvironment.controller.ActorEditingEnvironment;
-import authoringenvironment.controller.LevelEditingEnvironment;
+import authoringenvironment.view.PopUpAuthoringHelpPage;
 import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
 import gamedata.controller.FileChooserController;
-import gameengine.controller.*;
+import gameengine.controller.Game;
+import gameengine.controller.GameInfo;
+import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gameengine.model.ActorState;
-import gameengine.model.IPlayActor;
 import gameplayer.controller.BranchScreenController;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
-import gui.view.PopUpAuthoringHelpPage;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
@@ -76,6 +75,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private PopUpAuthoringHelpPage helpPage;
 	private ActorCopier myActorCopier;
 	private GameEditingEnvironment gameEditingEnvironment; 
+	private MainCharacterManager mainCharacterManager;
 
 	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
 	IllegalArgumentException, InvocationTargetException {
@@ -154,6 +154,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
 //		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);
 		gameEditingEnvironment = new GameEditingEnvironment(this, getStage(), myLevels, gameInfo);
+		mainCharacterManager = new MainCharacterManager(myLevels);
 		setTopPane();
 		setCenterPane();
 	}
@@ -276,18 +277,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 *            file to write to.
 	 */
 	public void saveGame() {
-		// TODO implement incomplete game error checking
-		for(Level level: myLevels) {
-			for (IPlayActor actor: level.getActors()) {
-				if (actor.checkState(ActorState.MAIN)) {
-					level.getMainCharacters().add(actor);
-				}
-			}
-			if (level.getMainCharacters().size() == 0) {
-				// problem if no actors
-				level.getActors().get(0).addState(ActorState.MAIN);
-			}
-		}
+		mainCharacterManager.updateMainCharacterListsForEachLevel();
+		if (!mainCharacterManager.updateSuccessful()) return;
+		// need error checking
 		gameInfo.setMyImageName(myLevels.get(0).getMyBackgroundImgName());
 		List<IAuthoringActor> refActor = new ArrayList(myActorMap.keySet());
 		IAuthoringActor realRefActor = refActor.get(0);
