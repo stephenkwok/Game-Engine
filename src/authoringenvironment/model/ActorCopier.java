@@ -152,6 +152,7 @@ public class ActorCopier {
 	private void copyAttributes(IGameElement toUpdate, Map<AttributeType, Attribute> attributeMap) {
 		for (AttributeType type: attributeMap.keySet()) {
 			Attribute toCopy = new Attribute(type, attributeMap.get(type).getMyValue(), toUpdate);
+			toCopy.setTriggerValues(attributeMap.get(type).getTriggerValues());
 			toUpdate.addAttribute(toCopy);
 		}
 	}
