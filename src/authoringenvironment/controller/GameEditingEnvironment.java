@@ -1,183 +1,123 @@
 package authoringenvironment.controller;
 
-import java.util.*;
-import authoringenvironment.model.*;
-import authoringenvironment.view.LabelMainScreenWelcome;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.model.LevelPreviewUnitReorderer;
+import authoringenvironment.view.ActorsAndLevelsDisplay;
+import authoringenvironment.view.GameAttributesDisplay;
+import authoringenvironment.view.PreviewUnitWithEditable;
 import gameengine.controller.GameInfo;
-import gui.view.*;
-import javafx.geometry.Insets;
-import javafx.scene.layout.*;
-import javafx.scene.control.*;
-import javafx.scene.Node;
+import gameengine.controller.Level;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
- * This class enables the author to edit and set various attributes of the game
- * including the game's name, description, and preview image. It will be
- * displayed as the left pane of the Main Screen.
+ * 
+ * This class controls and manages the GUI elements that allow an author to edit a game
  * 
  * @author Stephen
  *
  */
 
-public class GameEditingEnvironment implements IEditingElement {
+public class GameEditingEnvironment implements Observer {
 
-	private static final String RESOURCE_BUNDLE_KEY = "mainScreenGUI";
-	private static final double DEFAULT_PADDING = 10;
-	private static final double CONTAINER_PREFERRED_WIDTH = 350.0;
-	private static final int TEXT_AREA_ROWS = 3;
-	private static final double TEXT_FIELD_WIDTH = 100.0;
-	private static final double TEXT_FIELD_CONTAINER_SPACING = 10.0;
-	private static final double SCROLLBAR_WIDTH = 30.0;
+	private final ActorsAndLevelsDisplay myActorsAndLevelsDisplay;
+	private final GameAttributesDisplay myGameAttributesDisplay;
+	private final BorderPane myBorderPane;
+	private final Controller myController;
+	private final List<Level> myLevels;
+	private final GameInfo myGameInfo;
 	private final Stage myStage;
-	private final ResourceBundle myResources;
-	private IEditableGameElement myGameInfo;
-	private HBox nameEditorContainer, gameTypeButtonContainer, previewImageContainer, welcomeMessage;
-	private VBox editingEnvironmentContainer, gameDescriptionEditor;
-	private ScrollPane myScrollPane;
 
-	public GameEditingEnvironment(GameInfo gameInfo, Stage stage) {
-		this.myGameInfo = gameInfo;
-		this.myStage = stage;
-		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
-		initializeEditingEnvironment();
+	public GameEditingEnvironment(Controller controller, Stage stage, List<Level> levels, GameInfo gameInfo) {
+		myController = controller;
+		myLevels = levels;
+		myStage = stage;
+		myGameInfo = gameInfo;
+		myBorderPane = new BorderPane();
+		myActorsAndLevelsDisplay = new ActorsAndLevelsDisplay(myBorderPane.widthProperty(),
+				myBorderPane.heightProperty());
+		myGameAttributesDisplay = new GameAttributesDisplay(myGameInfo);
+		initializeBorderPane();
+		initializeActorsAndLevelsDisplay();
 	}
 
 	/**
-	 * Initializes the Game Editing Environment
+	 * Initializes the BorderPane containing all GUI Elements in the Game Editing Environment
 	 */
-	private void initializeEditingEnvironment() {
-		initializeContainer();
-		initializeWelcomeMessage();
-		initializeGameNameEditor();
-		initializeGameDescriptionEditor();
-		initializeGameTypeButton();
-		initializePreviewImageDisplay();
-		initializeScrollPane();
-		initializeEditingEnvironmentContainer();
+	private void initializeBorderPane() {
+		myBorderPane.prefWidthProperty().bind(myStage.widthProperty());
+		myBorderPane.prefHeightProperty().bind(myStage.heightProperty());
+		myBorderPane.setCenter(myActorsAndLevelsDisplay.getPane());
+		myBorderPane.setLeft(myGameAttributesDisplay.getNode());
+	}
+
+	/**
+	 * Initializes the Pane displaying all created Actors and Levels
+	 */
+	private void initializeActorsAndLevelsDisplay() {
+		myActorsAndLevelsDisplay.addObserver(this);
+	}
+
+	/**
+	 * Reorders Level Labels so that Labels with Levels that appear earlier in
+	 * the game are displayed toward the top of the ScrollPane containing all
+	 * Level Labels
+	 */
+	private void reorderLevels() {
+		LevelPreviewUnitReorderer levelReorderer = new LevelPreviewUnitReorderer(myLevels,
+				myController.getLevelEditingEnvironment(), myActorsAndLevelsDisplay, this);
+		levelReorderer.reorderLevels();
 	}
 	
 	/**
-	 * Initializes the Game Editing Environment's parent container by adding all created
-	 * nodes to it and binding each child node's width to the parent container's width
+	 * Creates a preview unit displaying a created actor 
+	 * 
+	 * @param actor: actor to be displayed by the preview unit
+	 * @param actorEditor: editing environment used to edit the actor
 	 */
-	private void initializeEditingEnvironmentContainer() {
-		editingEnvironmentContainer.getChildren().addAll(welcomeMessage, nameEditorContainer, gameDescriptionEditor,
-				gameTypeButtonContainer, previewImageContainer);
-		editingEnvironmentContainer.getChildren().stream().forEach(node -> bindChildWidthToParentWidth(node));
+	public void createActorPreviewUnit(IEditableGameElement actor, IEditingEnvironment actorEditor) {
+		PreviewUnitWithEditable previewUnit = myActorsAndLevelsDisplay.createActorPreviewUnit(actor, actorEditor);
+		previewUnit.addObserver(myController);
 	}
 	
 	/**
-	 * Binds an HBox or VBox's width to the Game Editing Environment's parent container
-	 * @param child
-	 */
-	private void bindChildWidthToParentWidth(Node child) {
-		((Region) child).prefWidthProperty().bind(editingEnvironmentContainer.widthProperty());;
-	}
-
-	/**
-	 * Initialize the VBox containing all GUI elements in the Game Editing
-	 * Environment
+	 * Creates a preview unit displaying a created level
 	 * 
+	 * @param level: level to be displayed by the preview unit
+	 * @param levelEditor: editing environment used to edit the level
 	 */
-	private void initializeContainer() {
-		editingEnvironmentContainer = new VBox();
-		editingEnvironmentContainer.setPrefWidth(CONTAINER_PREFERRED_WIDTH);
-		editingEnvironmentContainer.setStyle(myResources.getString("defaultBorderColor"));
+	public void createLevelPreviewUnit(IEditableGameElement level, IEditingEnvironment levelEditor) {
+		PreviewUnitWithEditable previewUnit = myActorsAndLevelsDisplay.createLevelPreviewUnit(level, levelEditor);
+		previewUnit.addObserver(myController);
 	}
-
+	
 	/**
-	 * Initialize the Label displaying text welcoming the author to the Game
-	 * Authoring Environment
+	 * Updates all preview units to reflect changes in any Actors or Levels
 	 */
-	private void initializeWelcomeMessage() {
-		welcomeMessage = new HBox(new LabelMainScreenWelcome(myResources.getString("mainScreenWelcome")));
-	}
-
-	/**
-	 * Initialize the Game Name Editor, which includes a text field for the
-	 * author to enter a name for the game, and a button that, when clicked,
-	 * allows the author to save the text field input as the game's name
-	 */
-	private void initializeGameNameEditor() {
-		String mainPrompt = myResources.getString("gameName");
-		String textFieldPrompt = myResources.getString("enterGameName");
-		TextFieldWithButton nameEditor = new TextFieldGameNameEditor(mainPrompt, textFieldPrompt, TEXT_FIELD_WIDTH);
-		nameEditor.setEditableElement(myGameInfo);
-		nameEditorContainer = (HBox) nameEditor.createNode();
-		nameEditorContainer.setSpacing(TEXT_FIELD_CONTAINER_SPACING);
-		nameEditorContainer.setPadding(new Insets(DEFAULT_PADDING));
-	}
-
-	/**
-	 * Initializes the Game Description Editor, which includes a text area for
-	 * the author to enter a description for the game. The Game Description
-	 * Editor also contains a button that when clicked, sets the game's
-	 * description.
-	 */
-	private void initializeGameDescriptionEditor() {
-		String prompt = myResources.getString("promptForGameDescription");
-		String buttonText = myResources.getString("save");
-		TextAreaParent descriptionEditor = new TextAreaGameDescriptionEditor(prompt, buttonText, TEXT_AREA_ROWS);
-		descriptionEditor.setEditableElement(myGameInfo);
-		gameDescriptionEditor = (VBox) descriptionEditor.createNode();
-	}
-
-	private void initializeGameTypeButton() {
-		ButtonGameType buttonGameType = new ButtonGameType(getGameInfo());
-		Button button = (Button) buttonGameType.createNode();
-		gameTypeButtonContainer = new HBox(button);
-		button.prefWidthProperty().bind(gameTypeButtonContainer.widthProperty());
-		gameTypeButtonContainer.setPadding(new Insets(DEFAULT_PADDING));
-	}
-
-	/**
-	 * Initializes the GUI Elements displaying the game's current preview image
-	 */
-	private void initializePreviewImageDisplay() {
-		previewImageContainer = new HBox();
-		String gameImageName = ((GameInfo) myGameInfo).getMyImageName();
-		ButtonFileChooserGameImage buttonGameImage = new ButtonFileChooserGameImage(gameImageName, this, myStage);
-		Button button = (Button) buttonGameImage.createNode();
-		button.prefWidthProperty().bind(previewImageContainer.widthProperty());
-		previewImageContainer.getChildren().add(button);
-		previewImageContainer.setPadding(new Insets(DEFAULT_PADDING));
-	}
-
-	/**
-	 * Initializes the scroll pane that contains the Game Editing Environment's
-	 * GUI elements and allows for additional elements to be added should the
-	 * height of the combined elements exceed the height of the stage
-	 */
-	private void initializeScrollPane() {
-		myScrollPane = new ScrollPane();
-		myScrollPane.prefWidthProperty().bind(editingEnvironmentContainer.prefWidthProperty().add(SCROLLBAR_WIDTH));
-		myScrollPane.setContent(editingEnvironmentContainer);
-		myScrollPane.setPadding(new Insets(DEFAULT_PADDING));
+	public void updatePreviewUnits() {
+		myActorsAndLevelsDisplay.updatePreviewUnits();
 	}
 
 	/**
 	 * 
-	 * @return the Node containing all Nodes in the Game Editing Environment
+	 * @return the BorderPane containing all GUI elements in the Game Editing Environment
 	 */
-	public Node getNode() {
-		return myScrollPane;
+	public Pane getPane() {
+		return myBorderPane;
 	}
-
+	
 	/**
-	 * 
-	 * @return the Game Editing Environment's instance of GameInfo
-	 */
-	public GameInfo getGameInfo() {
-		return (GameInfo) myGameInfo;
-	}
-
-	/**
-	 * Sets the Game Editing Environment's editable to a new editable
+	 * Reorders the Game's Levels
 	 */
 	@Override
-	public void setEditableElement(IEditableGameElement element) {
-		myGameInfo = element;
+	public void update(Observable o, Object arg) {
+		 reorderLevels();
 	}
 
 }
