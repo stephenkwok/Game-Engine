@@ -105,13 +105,11 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 * updates to currently available actors.
 	 */
 	private void updateDrag() {
-		List<ImageviewActorIcon> icons = myInspector.getActorsTab().getIcons();
 		setCenterPaneDragOver();
 		setCenterPaneDragDropped();
-		for (int i = 0; i < icons.size(); i++) {
-			ImageviewActorIcon source = icons.get(i);
-			setDragDetected(source);
-			setMouseClickBehavior(source);	
+		for (ImageviewActorIcon icon: myInspector.getActorsTab().getIcons()) {
+			setDragDetected(icon);
+			setMouseClickBehavior(icon);	
 		}
 	}
 	
