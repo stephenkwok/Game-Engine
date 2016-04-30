@@ -25,6 +25,9 @@ public class GlideRight extends GlidingAction {
 	 */
 	@Override
 	public void perform() {
+		getMyActor().setHeading(0);
+		getMyActor().setDirection();
+
     	getMyActor().getPhysicsEngine().glideRight(getMyActor(),this.getGlideOffset());		
 
 	}

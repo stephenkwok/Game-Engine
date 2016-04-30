@@ -2,10 +2,10 @@ package authoringenvironment.view.behaviors;
 
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.ActionFactory;
+import authoringenvironment.model.ActorRule;
 import authoringenvironment.model.IAuthoringBehavior;
-import authoringenvironment.view.ActionFactory;
-import authoringenvironment.view.ActorRule;
-import authoringenvironment.view.TriggerFactory;
+import authoringenvironment.model.TriggerFactory;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
 import gameengine.model.Triggers.ITrigger;
@@ -37,11 +37,15 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 		this.myActorRule = myActorRule;
 		this.myRule = myRule;
 		setButtonAction(event -> {
-			this.value = Double.parseDouble(getTextFieldInput());
-			createTriggerOrAction();
+			setValue();
 		});
 	}
-
+	@Override
+	public void setValue(){
+		this.value = Double.parseDouble(getTextFieldInput());
+		createTriggerOrAction();
+	}
+	
 	@Override
 	public abstract void updateValueBasedOnEditable();
 

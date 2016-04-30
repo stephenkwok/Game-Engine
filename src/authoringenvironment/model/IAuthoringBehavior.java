@@ -9,5 +9,7 @@ public interface IAuthoringBehavior extends IGUIElement {
 	boolean isTrigger();
 	
 	void updateValueBasedOnEditable();
+	
+	void setValue();
 
 }

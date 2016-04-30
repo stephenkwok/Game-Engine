@@ -2,10 +2,10 @@ package authoringenvironment.view.behaviors;
 
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.ActionFactory;
+import authoringenvironment.model.ActorRule;
 import authoringenvironment.model.IAuthoringBehavior;
-import authoringenvironment.view.ActionFactory;
-import authoringenvironment.view.ActorRule;
-import authoringenvironment.view.TriggerFactory;
+import authoringenvironment.model.TriggerFactory;
 import gameengine.model.IAction;
 import gameengine.model.Triggers.ITrigger;
 import gui.view.IGUIElement;
@@ -27,9 +27,13 @@ public abstract class LabelBehavior implements IGUIElement, IAuthoringBehavior {
 
 	@Override
 	public Node createNode() {
+		setValue();
+		return new Label(behaviorType);
+	}
+	
+	public void setValue(){
 		createTriggerOrAction();
 		setTriggerOrAction();
-		return new Label(behaviorType);
 	}
 
 	/**

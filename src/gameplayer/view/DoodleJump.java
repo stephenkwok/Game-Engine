@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import authoringenvironment.view.ActorCopier;
+import authoringenvironment.model.ActorCopier;
 
 public class DoodleJump extends Application {
     /**
@@ -74,7 +74,7 @@ public class DoodleJump extends Application {
         greenplatform.setImageViewName("green_platform.png");
         greenplatform.setID(2);
         
-        player.addRule(new Rule(new TopCollision(player,greenplatform),new GlideUp(player, greenplatform.getBounds().getHeight()*-.4)));
+        //player.addRule(new Rule(new TopCollision(player,greenplatform),new GlideUp(player, greenplatform.getBounds().getHeight()*-.4)));
         player.addRule(new Rule(new BottomCollision(player,greenplatform),new VerticalBounceCollision(player)));
         player.addRule(new Rule(new BottomCollision(player,greenplatform, true),new ShiftScene(level1,"Down",50.0)));
         player.addRule(new Rule(new BottomCollision(player,greenplatform, true),new CreateActor(player,greenplatform,200.0,700.0,0.0,0.0)));

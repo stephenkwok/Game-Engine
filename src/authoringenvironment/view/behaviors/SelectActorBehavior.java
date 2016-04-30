@@ -5,13 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.ActionFactory;
+import authoringenvironment.model.ActorRule;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IAuthoringBehavior;
 import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.view.ActionFactory;
-import authoringenvironment.view.ActorGroup;
-import authoringenvironment.view.ActorRule;
-import authoringenvironment.view.TriggerFactory;
+import authoringenvironment.model.TriggerFactory;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
 import gameengine.model.Triggers.ITrigger;
@@ -39,7 +38,7 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	private static final String PROMPT = "Prompt";
 	private static final int COMBOBOX_WIDTH = 300;
 	private static final int HBOX_SPACING = 5;
-	private static final String GO = "Go";
+	private static final String GO = "a"; //bottom collision
 	private static final int BUTTON_SIZE = 40;
 	private String promptText;
 	private ObservableList<IEditableGameElement> options;
@@ -97,10 +96,14 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	private void initButton(){
 		getButton().setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
 		setButtonAction(e -> {
-			this.otherActor = (IAuthoringActor) comboBox.getValue();
-			createTriggerOrAction();
-			setTriggerOrAction();
+			setValue();
 		});
+	}
+	
+	public void setValue(){
+		this.otherActor = (IAuthoringActor) comboBox.getValue();
+		createTriggerOrAction();
+		setTriggerOrAction();
 	}
 
 	/**

@@ -2,7 +2,6 @@ package gameengine.model.Actions;
 
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
-import gameengine.model.IPlayActor;
 
 /**
  * @author blakekaplan

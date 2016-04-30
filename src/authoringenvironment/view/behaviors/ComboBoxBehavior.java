@@ -3,10 +3,10 @@ package authoringenvironment.view.behaviors;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.ActionFactory;
+import authoringenvironment.model.ActorRule;
 import authoringenvironment.model.IAuthoringBehavior;
-import authoringenvironment.view.ActionFactory;
-import authoringenvironment.view.ActorRule;
-import authoringenvironment.view.TriggerFactory;
+import authoringenvironment.model.TriggerFactory;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
 import gameengine.model.Triggers.ITrigger;
@@ -42,9 +42,13 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 	@Override
 	public void setButtonAction() {
 		getComboButton().setOnAction(event -> {
-			this.value = (String) getComboBox().getValue();
-			createTriggerOrAction();
+			setValue();
 		});
+	}
+	
+	public void setValue(){
+		this.value = (String) getComboBox().getValue();
+		createTriggerOrAction();
 	}
 
 	/**

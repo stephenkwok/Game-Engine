@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import authoringenvironment.model.IActionCreator;
+import authoringenvironment.controller.LevelEditingEnvironment;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.model.ITriggerCreator;
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
@@ -24,11 +23,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class AttributeTriggerAndActionCreator extends VBox implements ITriggerCreator, IActionCreator {
+public class AttributeTriggerAndActionCreator extends VBox implements ILevelTriggerCreator, ILevelActionCreator {
 	private static final String LEVEL = "Level";
 	private static final String HEALTH = "Health";
 	private static final String POINTS = "Points";
 	private static final String TIME = "Time";
+	private static final String DELIMITER = ",";
 	private ComboBox myElementComboBox;
 	private ComboBox myTypeComboBox;
 	private TextField myValue;
@@ -46,7 +46,7 @@ public class AttributeTriggerAndActionCreator extends VBox implements ITriggerCr
 	}
 
 	private void init(String labelKey) {
-		String[] labelText = myResources.getString(labelKey).split(",");
+		String[] labelText = myResources.getString(labelKey).split(DELIMITER);
 		Label[] labels = new Label[labelText.length];
 		for (int i = 0; i < labelText.length; i++) {
 			labels[i] = new Label(labelText[i]);
@@ -119,16 +119,15 @@ public class AttributeTriggerAndActionCreator extends VBox implements ITriggerCr
 		}
 		return type;
 	}
+	
 	@Override
 	public ITrigger createTrigger() {
-		AttributeType type = getAttributeType();
-		return new AttributeReached(getElementByName(), type, Integer.parseInt(myValue.getText()));
+		return new AttributeReached(getElementByName(), getAttributeType(), Integer.parseInt(myValue.getText()));
 	}
 
 	@Override
 	public Action createAction() {
-		AttributeType type = getAttributeType();
-		return new ChangeAttribute(getElementByName(), type, Integer.parseInt(myValue.getText()));
+		return new ChangeAttribute(getElementByName(), getAttributeType(), Integer.parseInt(myValue.getText()));
 	}
 
 }
