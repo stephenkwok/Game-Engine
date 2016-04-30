@@ -67,7 +67,7 @@ public interface IGame {
 	
 	public void toggleMusic();
 
-	public void setAllSound(boolean mute);
+	public void toggleSoundPause();
 
 	public void playSound(String key);
 

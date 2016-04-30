@@ -4035,8 +4035,20 @@
   </myCollisionDetector>
   <currentActors/>
   <deadActors/>
-  <levelTime>1</levelTime>
-  <globalTime>1</globalTime>
+  <levelTime>
+    <changed>false</changed>
+    <obs/>
+    <value class="int">1</value>
+    <bindings/>
+    <name>levelTime</name>
+  </levelTime>
+  <globalTime>
+    <changed>false</changed>
+    <obs/>
+    <value class="int">1</value>
+    <bindings/>
+    <name>globalTime</name>
+  </globalTime>
   <sfxOff>true</sfxOff>
   <musicOff>true</musicOff>
   <actorsToAdd/>
