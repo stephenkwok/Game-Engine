@@ -1,17 +1,8 @@
 package authoringenvironment.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.ResourceBundle;
+import java.io.*;
+import java.lang.reflect.*;
+import java.util.*;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -20,15 +11,9 @@ import org.xml.sax.SAXException;
 
 import authoringenvironment.model.*;
 import authoringenvironment.view.GameAttributesDisplay;
-import authoringenvironment.controller.ActorEditingEnvironment;
-import authoringenvironment.controller.LevelEditingEnvironment;
-import gamedata.controller.ChooserType;
-import gamedata.controller.CreatorController;
-import gamedata.controller.FileChooserController;
+import gamedata.controller.*;
 import gameengine.controller.*;
-import gameengine.model.Actor;
-import gameengine.model.ActorState;
-import gameengine.model.IPlayActor;
+import gameengine.model.*;
 import gameplayer.controller.BranchScreenController;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
@@ -37,8 +22,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import javafx.stage.*;
 import voogasalad.util.hud.source.IAuthoringHUDController;
 import voogasalad.util.hud.source.PopupSelector;
 
@@ -277,6 +261,10 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 */
 	public void saveGame() {
 		// TODO implement incomplete game error checking
+		// need to filter out actors that are no longer main characters from main character list
+		
+		
+		
 		for(Level level: myLevels) {
 			for (IPlayActor actor: level.getActors()) {
 				if (actor.checkState(ActorState.MAIN)) {
@@ -288,6 +276,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 				level.getActors().get(0).addState(ActorState.MAIN);
 			}
 		}
+		// need error checking
 		gameInfo.setMyImageName(myLevels.get(0).getMyBackgroundImgName());
 		List<IAuthoringActor> refActor = new ArrayList(myActorMap.keySet());
 		IAuthoringActor realRefActor = refActor.get(0);

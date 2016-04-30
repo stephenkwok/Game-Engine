@@ -1,36 +1,21 @@
 package authoringenvironment.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.model.*;
 import authoringenvironment.view.ImageviewActorIcon;
 import authoringenvironment.view.LevelInspector;
 import authoringenvironment.view.LevelPreview;
-import gamedata.controller.CreatorController;
-import gamedata.controller.ParserController;
-import gameengine.controller.Game;
-import gameengine.controller.GameInfo;
-import gameengine.controller.Level;
-import gameengine.model.ActorState;
-import gameengine.model.IPlayActor;
-import gameplayer.controller.GameController;
-import gameplayer.controller.PlayType;
+import gamedata.controller.*;
+import gameengine.controller.*;
+import gameengine.model.*;
+import gameplayer.controller.*;
 import gameplayer.view.GameScreen;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -39,18 +24,11 @@ import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import javafx.stage.*;
 
 /**
  * Level editing environment
