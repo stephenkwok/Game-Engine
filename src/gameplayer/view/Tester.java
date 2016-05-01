@@ -167,18 +167,18 @@ public class Tester extends Application {
         Action tick2 = new ApplyPhysics((Actor)actor2);
         Action tick3 = new ApplyPhysics((Actor)blocky);
         Action tick4 = new ApplyPhysics((Actor) actor4);
-        Action tick5 = new ApplyPhysics((Actor) enemy2);
+        //Action tick5 = new ApplyPhysics((Actor) enemy1);
         Rule rule7 = new Rule(tick,tick1);
         Rule rule8 = new Rule(tick,tick2);
         Rule blockrule = new Rule (tick, tick3);
         Rule ruleBlock = new Rule(tick, tick4);
-        Rule ruleEnemy = new Rule(tick, tick5);
+       // Rule ruleEnemy = new Rule(tick, tick5);
 
         actor1.addRule(rule7);
         actor2.addRule(rule8);
         blocky.addRule(blockrule);
         ((Actor) actor4).addRule(ruleBlock);
-        enemy2.addRule(ruleEnemy);
+        //enemy2.addRule(ruleEnemy);
 
         IPlayActor actor3 = new Actor();
         ((IAuthoringActor)actor3).setImageViewName("flagpole.png");

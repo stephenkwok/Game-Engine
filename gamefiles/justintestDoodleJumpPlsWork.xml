@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <initialGameFile>gamefiles/loaders/DoodleJump_loader.xml</initialGameFile>
+  <initialGameFile>gamefiles/loaders/justintestDoodleJumpPlsWork_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -123,7 +123,7 @@
                       <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.ShiftScene">
-                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myGameElement class="gameengine.controller.Level" reference="../../../../../../../../.."/>
                       <myShiftAmount>50.0</myShiftAmount>
                       <myDirection>Down</myDirection>
                     </myAction>
@@ -137,6 +137,8 @@
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.CreateActor">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myX>0.0</myX>
+                      <myY>0.0</myY>
                       <myActorToCopy reference="../../../gameengine.model.Rule/myTrigger/myCollisionActor"/>
                       <myMinX>200.0</myMinX>
                       <myMaxX>700.0</myMaxX>
@@ -190,7 +192,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>518.2174220908964</x>
+          <x>709.7690081226864</x>
           <y>40.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -235,7 +237,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>490.8263038907889</x>
+          <x>445.6864320826168</x>
           <y>80.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -280,7 +282,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>260.06526310938534</x>
+          <x>105.70197194840868</x>
           <y>120.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -325,7 +327,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>275.6837634140205</x>
+          <x>703.4711452336534</x>
           <y>160.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -370,7 +372,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>105.47743685253002</x>
+          <x>547.6949637626594</x>
           <y>200.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -415,7 +417,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>366.49791428538987</x>
+          <x>777.3201992378288</x>
           <y>240.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -460,7 +462,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>732.747781939922</x>
+          <x>288.9569348788494</x>
           <y>280.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -505,7 +507,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>269.91007846844866</x>
+          <x>338.9576650388283</x>
           <y>320.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -550,7 +552,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>773.6076752011808</x>
+          <x>709.8631031836861</x>
           <y>360.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -595,7 +597,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>309.42835986578024</x>
+          <x>621.380652191522</x>
           <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -640,7 +642,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>597.3075049111967</x>
+          <x>309.8127489498646</x>
           <y>440.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -685,7 +687,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>316.71897710695185</x>
+          <x>487.78179936892786</x>
           <y>480.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -730,7 +732,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>699.0464318379521</x>
+          <x>343.00810830587284</x>
           <y>520.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -796,7 +798,7 @@
     <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myHUDElementsToDisplay/>
-    <myFile>DoodleJump.xml</myFile>
+    <myFile>justintestDoodleJumpPlsWork.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
     <myHUDFileLocation>a.txt</myHUDFileLocation>
   </info>
