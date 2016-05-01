@@ -1,10 +1,7 @@
 package gameengine.model;
 
-import javafx.scene.image.ImageView;
-
-import java.util.Set;
-
 import gameengine.model.Triggers.ITrigger;
+import javafx.scene.image.ImageView;
 
 /**
  * This interface defines a limited subset of Actor functionality. We have

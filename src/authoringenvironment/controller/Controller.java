@@ -18,7 +18,12 @@ import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
-import authoringenvironment.model.*;
+import authoringenvironment.model.ActorCopier;
+import authoringenvironment.model.AuthoringEnvironmentRestorer;
+import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.model.MainCharacterManager;
 import authoringenvironment.model.PresetActorFactory;
 import authoringenvironment.view.PopUpAuthoringHelpPage;
 import gamedata.controller.ChooserType;
@@ -33,7 +38,12 @@ import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -81,8 +91,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		initNewGame();
 	}
 
-	// TODO Need a constructor that takes in a game passed by data and sets up
-	// Authoring Environment accordingly
 	public Controller(Game game, Stage myStage) {
 		super(myStage, EDITING_CONTROLLER_RESOURCE);
 		this.game = game;
@@ -127,8 +135,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		AuthoringEnvironmentRestorer restorer = new AuthoringEnvironmentRestorer(myActorMap, myLevels);
 		restorer.restoreActorsAndLevels();
 		initializeGeneralComponents();
-		myLevels.stream().forEach(level -> gameEditingEnvironment.createLevelPreviewUnit(level, levelEnvironment));
-		myActorMap.keySet().stream().forEach(actor -> gameEditingEnvironment.createActorPreviewUnit(actor, actorEnvironment));
+		myLevels.stream().forEach(level -> gameEditingEnvironment.createLevelPreviewUnit(level));
+		myActorMap.keySet().stream().forEach(actor -> gameEditingEnvironment.createActorPreviewUnit(actor));
 	}
 
 	/**
@@ -166,7 +174,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		PresetActorFactory presetActorFactory = new PresetActorFactory(myPresetActorsResource);
 		List<Actor> presetActors = presetActorFactory.getPresetActors();
 		presetActors.stream().forEach(actor -> myActorMap.put(actor, new ArrayList<>()));
-		presetActors.stream().forEach(actor -> gameEditingEnvironment.createActorPreviewUnit(actor, actorEnvironment));
+		presetActors.stream().forEach(actor -> gameEditingEnvironment.createActorPreviewUnit(actor));
 	}
 
 	/**
@@ -242,10 +250,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	/**
 	 * Switches screen to appropriate editing environment
 	 * 
-	 * @param editable
-	 *            - Level or Actor to edit
-	 * @param environment
-	 *            - Editing environment for editable
+	 * @param editable: Level or Actor to edit
+	 * @param environment: Editing environment for editable
 	 */
 	public void goToEditingEnvironment(IEditableGameElement editable, IEditingEnvironment environment) {
 		environment.setEditableElement(editable);
@@ -262,9 +268,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 
 	/**
 	 * Passes Actor and Level info to Game Data to be saved in XML file
-	 * 
-	 * @param file:
-	 *            file to write to.
 	 */
 	public void saveGame() {
 		mainCharacterManager.updateMainCharacterListsForEachLevel();
@@ -290,6 +293,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 
 	}
 
+	/**
+	 * Loads a previously saved game
+	 */
 	public void loadGame() {
 		FileChooserController fileChooserController = new FileChooserController(getStage(), ChooserType.EDIT);
 	}
@@ -303,6 +309,10 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		return myLevels;
 	}
 
+	/**
+	 * 
+	 * @return the Game's map of Actors
+	 */
 	public Map<IAuthoringActor, List<IAuthoringActor>> getActorMap() {
 		return myActorMap;
 	}
@@ -311,15 +321,12 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * For each level that is created, adds it to the running list in this
 	 * class.
 	 * 
-	 * @param newLevel
 	 */
 	public void addLevel() {
 		Level newLevel = new Level();
 		newLevel.setPlayPosition(myLevels.size());
 		myLevels.add(newLevel);
-//		myLevelNames.add(newLevel.getName());
-//		mainScreen.createLevelPreviewUnit(newLevel, levelEnvironment);
-		gameEditingEnvironment.createLevelPreviewUnit(newLevel, levelEnvironment);
+		gameEditingEnvironment.createLevelPreviewUnit(newLevel);
 		goToEditingEnvironment(newLevel, levelEnvironment);
 	}
 
@@ -334,7 +341,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		IAuthoringActor newActor = (IAuthoringActor) new Actor();
 		myActorMap.put(newActor, new ArrayList<>());
 		newActor.setID(myActorMap.size());
-		gameEditingEnvironment.createActorPreviewUnit(newActor, actorEnvironment);
+		gameEditingEnvironment.createActorPreviewUnit(newActor);
 		goToEditingEnvironment(newActor, actorEnvironment);
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
 	}
@@ -410,14 +417,25 @@ public class Controller extends BranchScreenController implements Observer, IAut
 			}
 		}
 	}
-
+	
+	/**
+	 * Sets Actor Environment's editable to actor passed in and switches
+	 * scene to Actor Environment
+	 * @param actor: actor to be edited
+	 */
 	@SuppressWarnings("unused")
-	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
-		@SuppressWarnings("unchecked")
-		List<Object> arguments = (List<Object>) notifyObserversArgument;
-		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
-		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
-		goToEditingEnvironment(editable, environment);
+	private void goToActorEditing(Object actor) {
+		goToEditingEnvironment((IEditableGameElement) actor, actorEnvironment);
+	}
+	
+	/**
+	 * Sets Level Environment's editable to level passed in and switches
+	 * scene to Level Environment
+	 * @param level: level to be edited
+	 */
+	@SuppressWarnings("unused")
+	private void goToLevelEditing(Object level) {
+		goToEditingEnvironment((IEditableGameElement) level, levelEnvironment);
 	}
 
 	/**

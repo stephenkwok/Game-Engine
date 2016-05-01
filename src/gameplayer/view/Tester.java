@@ -1,13 +1,39 @@
 package gameplayer.view;
 
-import gameengine.controller.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import authoringenvironment.model.IAuthoringActor;
+import gamedata.controller.CreatorController;
+import gameengine.controller.Game;
+import gameengine.controller.GameInfo;
+import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
+import gameengine.model.IPlayActor;
+import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
-import gameengine.model.Actions.*;
+import gameengine.model.Actions.Action;
+import gameengine.model.Actions.ApplyPhysics;
+import gameengine.model.Actions.ChangeAttribute;
+import gameengine.model.Actions.CreateActor;
+import gameengine.model.Actions.Destroy;
+import gameengine.model.Actions.GlideForward;
+import gameengine.model.Actions.HorizontalStaticCollision;
+import gameengine.model.Actions.MoveLeft;
+import gameengine.model.Actions.MoveRight;
+import gameengine.model.Actions.MoveUp;
+import gameengine.model.Actions.NextImage;
+import gameengine.model.Actions.NextLevel;
+import gameengine.model.Actions.ReverseHeading;
+import gameengine.model.Actions.Spawn;
+import gameengine.model.Actions.VerticalBounceCollision;
+import gameengine.model.Actions.VerticalStaticCollision;
+import gameengine.model.Actions.WinGame;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.ITrigger;
@@ -25,13 +51,6 @@ import javafx.scene.SubScene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.util.*;
-import gameengine.model.IPlayActor;
-import gameengine.model.PhysicsEngine;
-import authoringenvironment.model.IAuthoringActor;
-import gamedata.controller.CreatorController;
 
 public class Tester extends Application {
 

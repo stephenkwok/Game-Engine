@@ -1,6 +1,7 @@
 package gameengine.model;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AttributeManager {
 	private Map<AttributeType, Attribute> attributeMap = new HashMap<AttributeType, Attribute>();

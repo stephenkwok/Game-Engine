@@ -1,8 +1,6 @@
 package gameengine.model.Triggers;
 
 import gameengine.model.Actor;
-import gameengine.model.IActor;
-import gameengine.model.IPlayActor;
 
 public class TopCollision extends CollisionTrigger {
 
