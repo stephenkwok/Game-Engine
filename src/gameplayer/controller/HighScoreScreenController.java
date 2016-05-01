@@ -1,10 +1,7 @@
 package gameplayer.controller;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-import java.util.Map;
 import java.util.Observable;
-import java.util.ResourceBundle;
 
 import gamedata.controller.ChooserType;
 import gamedata.controller.FileChooserController;
@@ -13,13 +10,6 @@ import gameengine.controller.HighScoresKeeper;
 import gameengine.controller.IHighScoresKeeper;
 import gameplayer.view.HighScoreScreen;
 import gameplayer.view.IHighScoreScreen;
-import javafx.beans.InvalidationListener;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
-import javafx.collections.ObservableMap;
-import javafx.collections.MapChangeListener.Change;
 import javafx.stage.Stage;
 
 public class HighScoreScreenController extends BranchScreenController {

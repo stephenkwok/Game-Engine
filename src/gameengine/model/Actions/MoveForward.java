@@ -1,8 +1,6 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
-import gameengine.model.IGameElement;
-import gameengine.model.IPlayActor;
 
 /**
  * Moves Actor in the direction of its heading

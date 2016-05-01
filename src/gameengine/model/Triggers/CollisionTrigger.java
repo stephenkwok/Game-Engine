@@ -1,9 +1,9 @@
 package gameengine.model.Triggers;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import gameengine.model.Actor;
-import gameengine.model.IActor;
 import gameengine.model.IPlayActor;
 
 public abstract class CollisionTrigger extends ITrigger {

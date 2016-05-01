@@ -1,9 +1,15 @@
 package authoringenvironment.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import authoringenvironment.controller.GameEditingEnvironment;
-import authoringenvironment.view.*;
+import authoringenvironment.view.ActorsAndLevelsDisplay;
+import authoringenvironment.view.PreviewUnitWithEditable;
+import authoringenvironment.view.PreviewUnitWithLevel;
 import gameengine.controller.Level;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -23,37 +29,20 @@ public class LevelPreviewUnitReorderer {
 	private static final String ERROR_MESSAGE = "Invalid Input. Please try again";
 	private static final int MINIMUM_PLAY_POSITION = 1;
 	private static final int MINIMUM_LIST_INDEX = 0;
-	private List<PreviewUnitWithLevel> myLevelPreviewUnits;
-	private VBox myPreviewUnitsContainer;
-	private List<Level> myLevels;
-	private IEditingEnvironment myLevelEditor;
-	private List<PreviewUnitWithEditable> myPreviewUnits;
-	// private GUIMainScreen myMainScreen;
+	private final List<PreviewUnitWithLevel> myLevelPreviewUnits;
+	private final List<PreviewUnitWithEditable> myPreviewUnits;
+	private final List<Level> myLevels;
+	private final VBox myPreviewUnitsContainer;
+	private final ActorsAndLevelsDisplay myPreviewUnitsDisplay;
+	private final GameEditingEnvironment myGameEditor;
 	private List<Integer> playPositions;
 	private Set<Integer> uniquePlayPositions;
-	private ActorsAndLevelsDisplay myPreviewUnitsDisplay;
-	private GameEditingEnvironment myGameEditor;
 
-	// public LevelPreviewUnitReorderer(List<PreviewUnitWithLevel>
-	// levelPreviewUnits, VBox previewUnitsContainer,
-	// List<Level> levels, IEditingEnvironment levelEditor,
-	// List<PreviewUnitWithEditable> allPreviewUnits,
-	// GUIMainScreen mainScreen) {
-	// myLevelPreviewUnits = levelPreviewUnits;
-	// myPreviewUnitsContainer = previewUnitsContainer;
-	// myLevels = levels;
-	// myLevelEditor = levelEditor;
-	// myPreviewUnits = allPreviewUnits;
-	//// myMainScreen = mainScreen;
-	// initializeErrorChecking();
-	// }
-
-	public LevelPreviewUnitReorderer(List<Level> levels, IEditingEnvironment levelEditor,
-			ActorsAndLevelsDisplay display, GameEditingEnvironment gameEditor) {
+	public LevelPreviewUnitReorderer(List<Level> levels, ActorsAndLevelsDisplay display,
+			GameEditingEnvironment gameEditor) {
 		myLevelPreviewUnits = display.getLevelPreviewUnits();
 		myPreviewUnitsContainer = display.getLevelPreviewUnitsContainer();
 		myLevels = levels;
-		myLevelEditor = levelEditor;
 		myPreviewUnits = display.getPreviewUnits();
 		myPreviewUnitsDisplay = display;
 		myGameEditor = gameEditor;
@@ -83,7 +72,7 @@ public class LevelPreviewUnitReorderer {
 		myLevelPreviewUnits.clear();
 		myPreviewUnitsContainer.getChildren().clear();
 		Collections.sort(myLevels);
-		myLevels.stream().forEach(level -> myGameEditor.createLevelPreviewUnit(level, myLevelEditor));
+		myLevels.stream().forEach(level -> myGameEditor.createLevelPreviewUnit(level));
 		myPreviewUnits.stream().filter(unit -> myPreviewUnitsContainer.getChildren().contains(unit));
 		myPreviewUnitsDisplay.updatePreviewUnits();
 	}

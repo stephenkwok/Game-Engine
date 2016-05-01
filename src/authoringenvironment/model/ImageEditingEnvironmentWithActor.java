@@ -1,6 +1,7 @@
 package authoringenvironment.model;
 
 import java.util.Observable;
+
 import authoringenvironment.view.ImageEditingEnvironment;
 import javafx.scene.image.ImageView;
 

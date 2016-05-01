@@ -62,5 +62,6 @@ public class GUILibrary implements IGUI {
 		soundLib.updateDragEvents(myActorRuleCreator);
 		actionLib.updateDragEvents(myActorRuleCreator);
 		triggerLib.updateDragEvents(myActorRuleCreator);
+		System.out.println("UPDATED");
 	}
 }

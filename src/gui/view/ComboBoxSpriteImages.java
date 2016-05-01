@@ -1,11 +1,11 @@
 package gui.view;
 
+import authoringenvironment.controller.ActorEditingEnvironment;
+import authoringenvironment.model.IAuthoringActor;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import authoringenvironment.controller.ActorEditingEnvironment;
-import authoringenvironment.model.IAuthoringActor;
 
 public class ComboBoxSpriteImages extends ComboBoxActorImages {
 	private static final String ADD = "+";

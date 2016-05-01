@@ -1,6 +1,6 @@
 package gameengine.model.Triggers;
 
-import gameengine.model.*;
+import gameengine.model.IGameElement;
 
 /**
  * @author blakekaplan

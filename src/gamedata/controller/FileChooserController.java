@@ -1,9 +1,6 @@
 package gamedata.controller;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Observable;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
@@ -13,7 +10,6 @@ import gameplayer.controller.BaseScreenController;
 import gameplayer.controller.BranchScreenController;
 import gameplayer.controller.GameController;
 import gameplayer.controller.HighScoreScreenController;
-import gameplayer.controller.PlayType;
 import javafx.stage.Stage;
 
 public class FileChooserController extends BranchScreenController {

@@ -12,7 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import voogasalad.util.hud.source.*;
+import voogasalad.util.hud.source.AbstractHUDScreen;
 
 /**
  * This class provides for a private interface to create a base screen view that

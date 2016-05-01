@@ -1,8 +1,10 @@
 package gameengine.model;
 
-import gameengine.model.Triggers.AttributeReached;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Observable;
+import java.util.Set;
 
+import gameengine.model.Triggers.AttributeReached;
 import voogasalad.util.hud.source.Property;
 
 

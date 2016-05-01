@@ -12,8 +12,16 @@ import java.util.Observer;
 import java.util.Set;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import gameengine.model.Triggers.*;
-import gameengine.model.*;
+
+import gameengine.model.Actor;
+import gameengine.model.ActorState;
+import gameengine.model.AttributeType;
+import gameengine.model.CollisionDetection;
+import gameengine.model.IGameElement;
+import gameengine.model.IPlayActor;
+import gameengine.model.PhysicsEngine;
+import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.TickTrigger;
 import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -126,6 +134,7 @@ public class Game extends Observable implements Observer, IGame {
 	private void togglePause() {
 		animation.pause();
 		this.toggleSoundPause();
+		this.toggleMusic();
 	}
 
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {

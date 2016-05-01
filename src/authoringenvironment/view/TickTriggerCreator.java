@@ -4,14 +4,9 @@ import java.util.ResourceBundle;
 
 import gameengine.model.IGameElement;
 import gameengine.model.Triggers.ITrigger;
-import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.TickTrigger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 

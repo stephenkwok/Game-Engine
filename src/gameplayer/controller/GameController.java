@@ -1,10 +1,9 @@
 package gameplayer.controller;
 
-import java.util.List;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -21,9 +20,7 @@ import gameengine.model.IDisplayActor;
 import gameengine.model.IPlayActor;
 import gameplayer.view.GameScreen;
 import gameplayer.view.IGameScreen;
-import javafx.animation.Timeline;
 import javafx.scene.ParallelCamera;
-import voogasalad.util.hud.source.AbstractHUDScreen;
 
 /**
  * This class serves as the private interface that any game controller must
@@ -100,6 +97,7 @@ public class GameController extends Observable implements Observer, IGameControl
 		// });
 		// a.put("Points", 0);
 		begin();
+		
 	}
 
 	/**
@@ -226,12 +224,10 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void restartGame() {
 		togglePause();
 		view.restartGame();
-		
 		ParserController parserController = new ParserController();
 		Game initialGame = parserController.loadforPlaying(new File(getGame().getInitialGameFile()));
 		setGame(initialGame);
 		initialize(0);
-		
 		Object[] args = {"setUpHUDScreen", null};
 		setChanged();
 		notifyObservers(Arrays.asList(args));
