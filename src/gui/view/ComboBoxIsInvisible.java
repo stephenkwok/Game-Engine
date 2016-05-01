@@ -39,6 +39,7 @@ public class ComboBoxIsInvisible extends ComboBoxTextCell {
 			else {
 				((Actor) getEditableElement()).removeState(ActorState.INVISIBLE);
 			}
+			this.notifyObservers((IAuthoringActor) this.getEditableElement());
 		});
 	}
 

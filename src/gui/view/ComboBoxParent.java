@@ -152,4 +152,8 @@ public abstract class ComboBoxParent extends EditingElementParent {
 	protected ComboBox<String> getComboBox() {
 		return comboBox;
 	}
+	
+	protected void removeComboButton() {
+		hbox.getChildren().remove(comboButton);
+	}
 }

@@ -34,6 +34,7 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 		this.myResources = myResources;
 		this.myActorRule = myActorRule;
 		this.myRule = myRule;
+		removeComboButton();
 	}
 
 	/**
@@ -41,9 +42,9 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 	 */
 	@Override
 	public void setButtonAction() {
-		getComboButton().setOnAction(event -> {
-			setValue();
-		});
+	//	getComboButton().setOnAction(event -> {
+		//	setValue();
+	//	});
 	}
 	
 	public void setValue(){

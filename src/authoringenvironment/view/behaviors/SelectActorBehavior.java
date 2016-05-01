@@ -76,7 +76,8 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 		label.setWrapText(true);
 		initComboBox();
 		initButton();
-		hbox.getChildren().addAll(label, comboBox, getButton());
+		//hbox.getChildren().addAll(label, comboBox, getButton());
+		hbox.getChildren().addAll(label, comboBox);
 		hbox.setAlignment(Pos.CENTER_LEFT);
 		return hbox;
 	}
@@ -94,10 +95,10 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	}
 	
 	private void initButton(){
-		getButton().setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
+		/*getButton().setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
 		setButtonAction(e -> {
 			setValue();
-		});
+		});*/
 	}
 	
 	public void setValue(){
