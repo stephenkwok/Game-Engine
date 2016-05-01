@@ -20,6 +20,15 @@
       </tree-map>
     </entry>
     <entry>
+      <string>/Users/michaelfigueiras/Documents/workspace/voogasalad_LoopsGoatCheeseSalad/gamefiles/loaders/SSSSgame</string>
+      <tree-map>
+        <entry>
+          <string>michael</string>
+          <int>3</int>
+        </entry>
+      </tree-map>
+    </entry>
+    <entry>
       <string>gamefiles/loaders/FlappyBird_loader.xml</string>
       <tree-map>
         <entry>
