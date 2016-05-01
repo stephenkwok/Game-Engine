@@ -37,18 +37,17 @@ public class ShiftSceneBehavior extends ComboBoxBehavior {
 
 	@Override
 	protected void createTriggerOrAction() {
+		System.out.println("IAM HERE");
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(myActor);
 		arguments.add(getValue());
 		arguments.add(shiftAmount.getValue());
 		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
-		System.out.println("HERE: " + myAction);
 	}
 
 	@Override
 	public void setTriggerOrAction() {
 		setAction(this, myAction);
-
 	}
 
 	@Override
