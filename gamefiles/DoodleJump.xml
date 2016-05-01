@@ -123,11 +123,7 @@
                       <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.ShiftScene">
-<<<<<<< HEAD
-                      <myGameElement class="gameengine.controller.Level" reference="../../../../../../../../.."/>
-=======
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
->>>>>>> c18c1fcdf93f4d68dbb0866495e411ca97832572
                       <myShiftAmount>50.0</myShiftAmount>
                       <myDirection>Down</myDirection>
                     </myAction>

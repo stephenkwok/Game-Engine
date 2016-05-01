@@ -186,6 +186,9 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		toReturn.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		toReturn.setOnAction(event -> {
 			myActorRuleCreator.setRules();
+			if (checkPhysics.isSelected()) {
+				myActorRuleCreator.applyPhysics();
+			}
 			myController.updateActors((Actor) myActor);
 		});
 		return toReturn;
@@ -199,6 +202,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		myActor = (IAuthoringActor) editable;
 		myActorIV = new ImageviewActorIcon(myActor, ICON_WIDTH);
 		setLeftPane();
+		checkPhysics.setEditableElement(myActor);
 		myActorRuleCreator.updateActorRules();
 		library.updateDragEvents();
 	}

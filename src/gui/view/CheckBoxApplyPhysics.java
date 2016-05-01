@@ -1,5 +1,7 @@
 package gui.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -7,6 +9,8 @@ import authoringenvironment.controller.ActorEditingEnvironment;
 import authoringenvironment.model.*;
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
+import gameengine.model.Rule;
+import gameengine.model.Actions.ApplyPhysics;
 import javafx.geometry.*;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
@@ -24,6 +28,7 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 	private IEditableGameElement myEditableElement;
 	private ActorEditingEnvironment aEE;
 	private boolean isSelected;
+	private CheckBox checkbox;
 
 	/**
 	 * Constructs a CheckBoxObject to edit a given element.
@@ -42,7 +47,7 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 	 */
 	@Override
 	public Node createNode() {
-		CheckBox checkbox = new CheckBox(myPromptText);
+		checkbox = new CheckBox(myPromptText);
 		checkbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
 		checkbox.setPrefWidth(myWidth);
 		checkbox.setAlignment(Pos.CENTER_LEFT);
@@ -58,8 +63,7 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 			}else{
 				isSelected = false;
 			}
-			System.out.println("checked");
-			System.out.println(this.countObservers());
+			setChanged();
 			notifyObservers((IAuthoringActor) aEE.getEditable());
 		});
 	}
@@ -70,6 +74,18 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 	@Override
 	public void setEditableElement(IEditableGameElement element) {
 		myEditableElement = element;
+		Actor thisActor = (Actor) myEditableElement;
+		if (thisActor.getRules().containsKey("Tick")) {
+			List<Rule> tickRules = thisActor.getRules().get("Tick");
+			List<Class<?>> tickActionsClasses = new ArrayList<>();
+			tickRules.forEach(rule -> tickActionsClasses.add(rule.getMyAction().getClass()));
+			if (tickActionsClasses.contains(ApplyPhysics.class)) {
+				System.out.println("check true");
+				isSelected = true;
+				checkbox.setSelected(true);
+			}
+		}
+		
 	}
 
 	/**
