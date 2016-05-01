@@ -12,7 +12,6 @@ import gameengine.model.IRule;
 import gameengine.model.Actions.GlideTarget;
 import gameengine.model.Triggers.CollisionTrigger;
 import javafx.scene.Node;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
