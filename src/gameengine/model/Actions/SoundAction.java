@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import gameengine.model.Actor;
 import gameengine.model.IGameElement;
 
 public class SoundAction extends Action{

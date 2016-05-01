@@ -59,7 +59,6 @@ public class CollisionBehavior extends SelectActorBehavior {
 	public void updateValueBasedOnEditable() {
 		try{
 			getComboBox().setValue((IEditableGameElement) (((CollisionTrigger) getMyRule().getMyTrigger()).getMyCollisionActor()));
-			
 		}catch(Exception e){
 		}
 	}

@@ -1,6 +1,5 @@
 package authoringenvironment.view;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,7 +23,6 @@ import javafx.scene.media.AudioClip;
 public class TabLibrarySounds extends TabLibrary {
 	private static final String SOUND_IMAGE_NAME = "sound.png";
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
-	private static final String MUSIC = "Music";
 
 	public TabLibrarySounds(ResourceBundle myResources, String tabText, ActorRuleCreator myRuleMaker) {
 		super(myResources, tabText, myRuleMaker);

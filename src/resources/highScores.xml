@@ -3,6 +3,23 @@
   <obs/>
   <myScores>
     <entry>
+      <string>gamefiles/loaders/test2_loader.xml</string>
+      <tree-map>
+        <entry>
+          <string>Luigi</string>
+          <int>38</int>
+        </entry>
+        <entry>
+          <string>Maria</string>
+          <int>5</int>
+        </entry>
+        <entry>
+          <string>Mario</string>
+          <int>5</int>
+        </entry>
+      </tree-map>
+    </entry>
+    <entry>
       <string>gamefiles/loaders/FlappyBird_loader.xml</string>
       <tree-map>
         <entry>

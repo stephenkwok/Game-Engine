@@ -84,7 +84,7 @@ public class ActorCopier {
 		copyStates(toUpdate, toCopy);
 		toUpdate.setSprite(toCopy.getSprite());
 		copyRules(toUpdate, toCopy.getRules());
-		copyAttributes((IGameElement) toUpdate, toCopy.getAttributeMap());
+		copyAttributes(toUpdate, toCopy.getAttributeMap());
 	}
 
 	private void copyRules(Actor toUpdate, Map<String, List<Rule>> rulesToCopy) {
@@ -114,8 +114,8 @@ public class ActorCopier {
 		Class myclass = object.getClass();
 		Class[] argumentTypes = new Class[arguments.length];
 		for(int i=0; i<argumentTypes.length;i++){
-			if((myclass.getSuperclass() == ITrigger.class || myclass.getSuperclass() == Action.class) && arguments[i].getClass() == Actor.class){
-				argumentTypes[i] = IGameElement.class;
+			if((myclass.getSuperclass() == ITrigger.class || (myclass.getSuperclass() == Action.class && i==0)) && arguments[i].getClass() == Actor.class){
+				argumentTypes[i] = IGameElement.class;	
 			}else{
 				argumentTypes[i] = arguments[i].getClass();
 			}

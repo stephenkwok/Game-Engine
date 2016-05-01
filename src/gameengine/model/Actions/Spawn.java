@@ -20,7 +20,6 @@ public class Spawn extends ActorAction{
 		super(actor1);
 		mySpawnedActor  = (IPlayActor) spawnedActor;
 		spawnAngle = angle;
-
 	}
 
 	@Override
