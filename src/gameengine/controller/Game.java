@@ -35,8 +35,7 @@ import voogasalad.util.hud.source.Property;
  *
  */
 
-public class Game extends Observable implements Observer, IGame {
-
+public class Game extends Observable implements Observer, IGame, IPlayGame {
 	public static final int SIZE = 400;
 	public static final int FRAMES_PER_SECOND = 50;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
@@ -161,9 +160,14 @@ public class Game extends Observable implements Observer, IGame {
 	public void toggleUnPause() {
 		animation.play();
 	}
+	
+	private void initGameElement(IGameElement gameElement){
+		gameElement.setGame((IPlayGame)this);
+	}
 
 	private void initCurrentLevel() {
 		getCurrentLevel().addObserver(this);
+		initGameElement(getCurrentLevel());
 	}
 
 	/**
@@ -173,6 +177,7 @@ public class Game extends Observable implements Observer, IGame {
 		currentActors = getCurrentLevel().getActors();
 		for (IPlayActor actor : currentActors) {
 			((Observable) actor).addObserver(this);
+			initGameElement(actor);
 			actor.setPhysicsEngine(myPhysicsEngine);
 			actor.setVisibility();
 		}
