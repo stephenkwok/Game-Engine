@@ -45,8 +45,8 @@ public class Spawn extends ActorAction{
 		double startingYPos = getMyActor().getBounds().getMinY() + getMyActor().getBounds().getHeight()/2;
 		double y_Offset = Math.sin(Math.toRadians(spawnAngle));
 		double x_Offset = Math.cos(Math.toRadians(spawnAngle));		
-		clone.setX(startingXPos+(x_Offset*halfWidth));
-		clone.setY(startingYPos-(y_Offset*halfHeight));
+		clone.setX(startingXPos+(x_Offset*halfWidth)-(clone.getBounds().getWidth()/2));
+		clone.setY(startingYPos-(y_Offset*halfHeight)-(clone.getBounds().getHeight()/2));
 		clone.setHeading(spawnAngle);
 
 		getMyActor().changed();

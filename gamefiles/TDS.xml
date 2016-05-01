@@ -42,7 +42,7 @@
                         <myFriction>0.0</myFriction>
                         <myName>Default Name</myName>
                         <myID>4</myID>
-                        <myImageViewName>fireball.png</myImageViewName>
+                        <myImageViewName>goomba.png</myImageViewName>
                         <myHeading>0.0</myHeading>
                         <myImageViewSize>0.0</myImageViewSize>
                         <myRuleManager>
@@ -153,7 +153,7 @@
                         <myStates/>
                         <mySprite>
                           <myImages>
-                            <string>fireball.png</string>
+                            <string>goomba.png</string>
                           </myImages>
                           <spriteIndex>0</spriteIndex>
                         </mySprite>
@@ -169,7 +169,7 @@
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </mySpawnedActor>
-                      <spawnAngle>200.0</spawnAngle>
+                      <spawnAngle>45.0</spawnAngle>
                     </myAction>
                   </gameengine.model.Rule>
                 </list>

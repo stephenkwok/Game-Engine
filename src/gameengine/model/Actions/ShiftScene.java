@@ -11,6 +11,11 @@ public class ShiftScene extends Action {
 		myShiftAmount = shiftAmount;
 		myDirection = direction;
 	}
+	
+	@Override
+	public Object[] getParameters(){
+		return new Object[]{getGameElement(),myDirection,myShiftAmount};
+	}
 
 	@Override
 	public void perform() {
