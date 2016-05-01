@@ -28,7 +28,7 @@ public class HighScoresKeeper extends Observable implements IHighScoresKeeper {
 	public void addScore(String gameIdentifier, String player, int score) {
 		Map<String, Integer> gameScores;
 		if (getMyScores().keySet().contains(gameIdentifier)) {
-			gameScores = (TreeMap<String, Integer>) getMyScores().get(gameIdentifier);
+			gameScores = getMyScores().get(gameIdentifier);
 		} else {
 			gameScores = new TreeMap<>();
 		}

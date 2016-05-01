@@ -106,7 +106,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	 * Set Actor of actor editing environment to a default new Actor
 	 */
 	private void setDefaultActor() {
-		IAuthoringActor defaultActor = (IAuthoringActor) new Actor();
+		IAuthoringActor defaultActor = new Actor();
 		this.myActor = defaultActor;
 		this.myActorIV = new ImageviewActorIcon(defaultActor, ICON_WIDTH);
 	}

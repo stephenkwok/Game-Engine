@@ -84,7 +84,7 @@ public class ActorCopier {
 		copyStates(toUpdate, toCopy);
 		toUpdate.setSprite(toCopy.getSprite());
 		copyRules(toUpdate, toCopy.getRules());
-		copyAttributes((IGameElement) toUpdate, toCopy.getAttributeMap());
+		copyAttributes(toUpdate, toCopy.getAttributeMap());
 	}
 
 	private void copyRules(Actor toUpdate, Map<String, List<Rule>> rulesToCopy) {
