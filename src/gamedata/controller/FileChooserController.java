@@ -70,6 +70,7 @@ public class FileChooserController extends BranchScreenController {
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 				| SecurityException e) {
 			// TODO Auto-generated catch block
+			this.myScreen.showError(e.getMessage());
 			e.printStackTrace();
 		}
 	}

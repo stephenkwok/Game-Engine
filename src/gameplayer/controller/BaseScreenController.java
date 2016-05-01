@@ -78,8 +78,8 @@ public class BaseScreenController extends BranchScreenController {
 			setUpHUDScreen();
 			
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-			e.printStackTrace();
 			myScreen.showError(e.getMessage());
+			e.printStackTrace();
 		}
 		toggleUnPause();
 	}

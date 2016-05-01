@@ -79,8 +79,8 @@ public abstract class BranchScreenController implements Observer {
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 					| NoSuchMethodException | SecurityException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
 				this.myScreen.showError(e.getMessage());
+				e1.printStackTrace();
 			}
 		}
 	}

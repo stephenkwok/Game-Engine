@@ -186,7 +186,7 @@ public class GameController extends Observable implements Observer, IGameControl
 			}
 		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException
 				| InvocationTargetException | NoSuchMethodException e1) {
-			// TODO Auto-generated catch block
+			sendChange(e1.getMessage());
 			e1.printStackTrace();
 		}
 	}
@@ -240,6 +240,7 @@ public class GameController extends Observable implements Observer, IGameControl
 					view.changeCamera(model.getCurrentLevel().getMainCharacters().get(0).getX(), 0);
 				} catch (Exception e) {
 					model.stopGame();
+					sendChange(e.getMessage());
 					e.printStackTrace();
 				}
 			} else {
@@ -248,12 +249,20 @@ public class GameController extends Observable implements Observer, IGameControl
 		}
 	}
 	
-	public void leave() {
-		Object[] args = {"goToSplash", null};
+	public void sendChange(String message){
+//		System.out.println("**IDK WTF IS GOING ON**");
+//		System.out.println(message);
+		Object[] args = {message , null};
 		setChanged();
 		notifyObservers(Arrays.asList(args));
-		
 	}
+	
+//	public void leave() {
+//		Object[] args = {"goToSplash", null};
+//		setChanged();
+//		notifyObservers(Arrays.asList(args));
+//		
+//	}
 	
 	private void playSound(String key) {
 		model.playSound(key);

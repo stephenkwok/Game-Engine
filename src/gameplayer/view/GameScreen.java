@@ -201,9 +201,10 @@ public class GameScreen extends Observable implements IGameScreen {
 		endAlert.show();
 		endAlert.showingProperty().addListener((observable, oldValue, newValue) -> {
 			if (!newValue) {
-				Object[] args = {"leave", null};
+				//System.out.println("****SHIT ABOUT TO GO DOWN****");
+				Object[] args = {"sendChange", "goToSplash"};
 				if (endAlert.getResult() == ButtonType.YES) {
-					Object[] yesArgs = { "restartGame", null };
+					Object[] yesArgs = { "sendChange", "restartGame" };
 					args = yesArgs;
 				}
 				setChanged();
