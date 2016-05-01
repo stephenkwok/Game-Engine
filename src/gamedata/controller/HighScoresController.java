@@ -76,6 +76,7 @@ public class HighScoresController implements IHighScoresController {
 			completePlayers.add("");
 		}
 		HighScoresKeeper updatedKeeper = new HighScoresKeeper(getAllGameScores());
+		
 		for (int i=0; i<scores.size(); i++) {
 			updatedKeeper.addScore(myGameFile, completePlayers.get(i).trim(), scores.get(i));
 		}
