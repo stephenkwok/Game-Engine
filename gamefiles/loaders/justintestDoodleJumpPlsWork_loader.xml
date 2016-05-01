@@ -137,8 +137,6 @@
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.CreateActor">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myX>0.0</myX>
-                      <myY>0.0</myY>
                       <myActorToCopy reference="../../../gameengine.model.Rule/myTrigger/myCollisionActor"/>
                       <myMinX>200.0</myMinX>
                       <myMaxX>700.0</myMaxX>
@@ -192,7 +190,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>709.7690081226864</x>
+          <x>693.2627844825146</x>
           <y>40.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -237,7 +235,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>445.6864320826168</x>
+          <x>343.7141867167676</x>
           <y>80.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -282,7 +280,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>105.70197194840868</x>
+          <x>438.6925418645283</x>
           <y>120.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -327,7 +325,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>703.4711452336534</x>
+          <x>398.727446774431</x>
           <y>160.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -372,7 +370,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>547.6949637626594</x>
+          <x>580.4515177556834</x>
           <y>200.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -417,7 +415,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>777.3201992378288</x>
+          <x>296.65040765395133</x>
           <y>240.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -462,7 +460,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>288.9569348788494</x>
+          <x>418.9459673993917</x>
           <y>280.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -507,7 +505,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>338.9576650388283</x>
+          <x>764.4032156320077</x>
           <y>320.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -552,7 +550,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>709.8631031836861</x>
+          <x>604.0286411099244</x>
           <y>360.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -597,7 +595,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>621.380652191522</x>
+          <x>488.1961996899898</x>
           <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -642,7 +640,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>309.8127489498646</x>
+          <x>615.8096390239803</x>
           <y>440.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -687,7 +685,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>487.78179936892786</x>
+          <x>509.86418251810977</x>
           <y>480.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -732,7 +730,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>343.00810830587284</x>
+          <x>707.6847353784814</x>
           <y>520.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
