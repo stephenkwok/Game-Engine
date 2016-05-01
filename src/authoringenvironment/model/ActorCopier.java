@@ -2,25 +2,15 @@ package authoringenvironment.model;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-import gameengine.model.Actor;
-import gameengine.model.ActorState;
-import gameengine.model.Attribute;
-import gameengine.model.AttributeType;
-import gameengine.model.IGameElement;
-import gameengine.model.Rule;
+import authoringenvironment.view.AlertGenerator;
+import gameengine.model.*;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.ITrigger;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
 
 /**
  * Actor copying class
@@ -136,7 +126,8 @@ public class ActorCopier {
 						
 					} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 							| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-						e.printStackTrace();
+						AlertGenerator alert = new AlertGenerator();
+						alert.generateAlert(e.getClass().toString());
 					}
 			}
 		}

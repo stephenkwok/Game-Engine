@@ -1,32 +1,21 @@
 package authoringenvironment.view;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 import authoringenvironment.controller.LevelEditingEnvironment;
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.ImageEditingEnvironmentWithActor;
+import authoringenvironment.model.*;
 import gameengine.controller.Level;
-import gameengine.model.Actor;
-import gameengine.model.IPlayActor;
+import gameengine.model.*;
 import gui.view.IGUI;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.Pane;
+import javafx.scene.image.*;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
@@ -35,8 +24,6 @@ public class LevelPreviewEditing implements IGUI, Observer {
 	private static final String VERTICAL = "Vertically";
 	private static final double SUBSCENE_HEIGHT = 500; // 700 * 3/4
 	private static final double SUBSCENE_WIDTH = 1000;
-	private static final int POP_UP_WIDTH = 300;
-	private static final int POP_UP_HEIGHT = 100;
 	private Pane myLevelPane;
 	private StackPane myStackPane;
 	private ScrollPane myScrollPane;

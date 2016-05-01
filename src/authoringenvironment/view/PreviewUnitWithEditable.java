@@ -1,7 +1,6 @@
 package authoringenvironment.view;
 
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingElement;
+import authoringenvironment.model.*;
 import gui.view.ObjectObservable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -34,17 +33,13 @@ public class PreviewUnitWithEditable extends ObjectObservable implements IEditin
 		myEditable = editable;
 		myLabel = new Label();
 		myLabel.setPadding(new Insets(LABEL_PADDING));
-		myLabel.setOnMouseClicked(e -> setButtonAction());
+		myLabel.setOnMouseClicked(e -> notifyObservers(myEditable));
 		myLabel.wrapTextProperty().setValue(true);
 		myHBox = new HBox(myLabel);
 		myHBox.setAlignment(Pos.CENTER_LEFT);
 		myHBox.setSpacing(HBOX_SPACING);
 	}
-
-	private void setButtonAction() {
-		notifyObservers(myEditable);
-	}
-
+	
 	/**
 	 * Updates the preview unit's text and image to account for any changes in the
 	 * Actor or Level's name and image

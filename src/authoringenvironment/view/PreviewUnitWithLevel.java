@@ -3,7 +3,8 @@ package authoringenvironment.view;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.controller.Level;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 /**
  * This class creates a preview unit for a created level and allows the author

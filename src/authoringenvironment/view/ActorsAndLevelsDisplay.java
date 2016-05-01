@@ -1,16 +1,11 @@
 package authoringenvironment.view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 import authoringenvironment.model.IEditableGameElement;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 /**
  * 
