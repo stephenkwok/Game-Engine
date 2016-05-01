@@ -19,7 +19,6 @@ import gameengine.model.Actions.GlideUp;
 import gameengine.model.Actions.HorizontalBounceCollision;
 import gameengine.model.Actions.HorizontalHeadingSwitch;
 import gameengine.model.Actions.HorizontalStaticCollision;
-import gameengine.model.Actions.ReverseHeading;
 import gameengine.model.Actions.VerticalBounceCollision;
 import gameengine.model.Actions.VerticalHeadingSwitch;
 import gameengine.model.Triggers.BottomCollision;
@@ -112,8 +111,6 @@ public class Pong extends Application {
         ball.setHeading(140);
         level1.addActor(ball);
         ball.addRule(new Rule(new TickTrigger(), new GlideForward(ball, 6.0)));
-        ball.addRule(new Rule(new SideCollision(ball, leftSide), new ReverseHeading(ball)));
-        ball.addRule(new Rule(new SideCollision(ball, rightSide), new ReverseHeading(ball)));
         
         player2.addRule(new Rule(new TickTrigger(), new GlideTarget(player2, 15.0, ball)));
 
