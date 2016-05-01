@@ -10,6 +10,8 @@ import gameengine.model.IAction;
 import gameengine.model.IRule;
 import gameengine.model.Triggers.ITrigger;
 import gui.view.TextFieldWithButton;
+import javafx.scene.Node;
+import javafx.scene.layout.HBox;
 
 /**
  * GUI representation of behaviors that take in a single Double as a parameter
@@ -40,6 +42,15 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 			setValue();
 		});
 	}
+	
+	@Override
+	public Node createNode(){
+		HBox toReturn = (HBox) super.createNode();
+		int index = toReturn.getChildren().size();
+		toReturn.getChildren().remove(index-1);
+		return toReturn;
+	}
+	
 	@Override
 	public void setValue(){
 		this.value = Double.parseDouble(getTextFieldInput());

@@ -9,6 +9,8 @@ import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.IRule;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.TickTrigger;
+import javafx.scene.Node;
+import javafx.scene.layout.HBox;
 
 public class TickBehavior extends DoubleBehavior {
 	private ITrigger myTrigger;
@@ -17,7 +19,7 @@ public class TickBehavior extends DoubleBehavior {
 			ResourceBundle myResources) {
 		super(myRule, myActorRule, behaviorType, myResources);
 	}
-
+	
 	@Override
 	public void setTriggerOrAction() {
 		setTrigger(this, myTrigger);
