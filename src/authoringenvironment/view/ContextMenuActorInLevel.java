@@ -7,8 +7,6 @@ import javafx.scene.control.MenuItem;
 
 public class ContextMenuActorInLevel extends ContextMenu {
 	private static final String DELETE = "Remove actor";
-	private static final String EDIT_SIZE = "Edit actor size";
-	private static final String GROUP = "Group all actors of this type";
 	private ImageviewActorIcon curIcon;
 	private LevelPreviewEditing myLevelPreview;
 

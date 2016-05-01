@@ -4,7 +4,7 @@ import java.lang.reflect.*;
 import java.util.*;
 
 import authoringenvironment.model.*;
-import authoringenvironment.view.AlertEditable;
+import authoringenvironment.view.AlertGenerator;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
@@ -72,10 +72,8 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	/**
 	 * Initializes the VBox containing the HUD checkboxes.
 	 * 
-	 * @param key:
-	 *            key in resource file for the checkboxes to add.
-	 * @param vbox:
-	 *            vbox to add checkboxes into.
+	 * @param key: key in resource file for the checkboxes to add.
+	 * @param vbox: vbox to add checkboxes into.
 	 */
 	private void init() {
 		initAllSidesList();
@@ -180,7 +178,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 			return (ITrigger) constructor.newInstance(garbageCollector, actor);
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			AlertEditable alert = new AlertEditable();
+			AlertGenerator alert = new AlertGenerator();
 			alert.generateAlert(e.getClass().toString());
 		} 
 		return null;

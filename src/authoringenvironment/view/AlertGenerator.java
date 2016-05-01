@@ -9,9 +9,9 @@ import javafx.scene.control.Alert;
  *
  */
 
-public class AlertEditable extends Alert {
+public class AlertGenerator extends Alert {
 	
-	public AlertEditable() {
+	public AlertGenerator() {
 		super(AlertType.ERROR);
 	}
 	

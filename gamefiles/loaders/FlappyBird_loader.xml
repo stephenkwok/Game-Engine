@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <initialGameFile>gamefiles/loaders/FlappyBird_loader.xml</initialGameFile>
+  <initialGameFile>gamefiles\loaders\FlappyBird_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -415,7 +415,7 @@
                     <obs/>
                     <value class="int">15</value>
                     <bindings/>
-                    <name>Default NamePOINTS</name>
+                    <name>Default Name Points</name>
                   </myValue>
                   <myTriggerValues/>
                   <myType>POINTS</myType>
@@ -514,6 +514,7 @@
       <myMainCharacters/>
       <soundtrack>Photograph.mp3</soundtrack>
       <myGarbageCollectors/>
+      <toBeDeleted>false</toBeDeleted>
     </gameengine.controller.Level>
   </levels>
   <info>

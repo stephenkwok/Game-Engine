@@ -16,19 +16,17 @@ import gamedata.controller.*;
 import gameengine.controller.*;
 import gameengine.model.Actor;
 import gameplayer.controller.BranchScreenController;
-import gui.view.GUIFactory;
-import gui.view.IGUIElement;
+import gui.view.*;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import voogasalad.util.hud.source.IAuthoringHUDController;
-import voogasalad.util.hud.source.PopupSelector;
+import voogasalad.util.hud.source.*;
 
 /**
  * This class serves as the main controller for the authoring environment
@@ -63,7 +61,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private GameEditingEnvironment myGameEditingEnvironment;
 	private MainCharacterManager myMainCharacterManager;
 	private GamePreviewImageSetter myGamePreviewImageSetter;
-	private AlertEditable myAlertGenerator;
+	private AlertGenerator myAlertGenerator;
 
 	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException {
@@ -133,7 +131,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		this.myObservableResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
 		this.myPresetActorsResource = ResourceBundle.getBundle(PRESET_ACTORS_RESOURCE);
 		factory = new GUIFactory(myResources);
-		myAlertGenerator = new AlertEditable();
+		myAlertGenerator = new AlertGenerator();
 		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
 		myGameEditingEnvironment = new GameEditingEnvironment(this, getStage(), myLevels, gameInfo);
