@@ -68,10 +68,7 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 	 */
 	@Override
 	public void setEditableElement(IEditableGameElement element) {
-		myEditableElement = element;
-		if (aEE.shouldApplyPhysics()) {
-			myCheckBox.setSelected(true);
-		}
+		myEditableElement = element;		
 	}
 
 	/**
