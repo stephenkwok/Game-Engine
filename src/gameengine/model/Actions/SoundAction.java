@@ -30,6 +30,11 @@ public class SoundAction extends Action{
 		return new Object[]{getGameElement(), soundFile};
 	}
 
+	@Override
+	public Object[] getParameters(){
+    	return new Object[]{getGameElement(), soundFile};
+    }
+	
 	public String getSoundFile(){
 		return this.soundFile;
 	}
