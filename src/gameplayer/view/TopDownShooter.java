@@ -101,10 +101,12 @@ public class TopDownShooter extends Application {
         
         Actor bullet = new Actor();
         bullet.setID(4);
-        bullet.setImageViewName("fireball.png");
+        bullet.setImageViewName("blue_ball.png");
         bullet.addRule(new Rule(new TickTrigger(), new GlideUp(bullet, 2.5)));
+        
+        
+        player1.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new Spawn(player1,bullet, 90.0)));
 
-        player1.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new Spawn(player1,bullet, 45.0)));
         
         bullet.addRule(new Rule(new TopCollision(bullet,enemy), new Destroy(bullet)));
         enemy.addRule(new Rule(new BottomCollision(enemy,bullet), new Destroy(enemy)));
