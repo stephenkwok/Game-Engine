@@ -6,6 +6,8 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+import authoringenvironment.view.AlertGenerator;
+
 /**
  * Instantiates IGUIElements based on a ResourceBundle String key passed into
  * createNewGUIObject(String nodeTypeKey).
@@ -26,27 +28,24 @@ public class GUIFactory {
 	private static final String GUI_ELEMENT_TYPES = "GUIElementTypes";
 	private static final String DELIMITER = ",";
 	private ResourceBundle myResources;
+	private AlertGenerator myAlertGenerator;
 
 	/**
 	 * Constructs a GUIFactory with elements specified in a given
 	 * ResourceBundle.
 	 * 
-	 * @param myResources:
-	 *            ResourceBundle containing the elements to be made.
-	 * @param myController:
-	 *            environment's controller.
+	 * @param myResources: ResourceBundle containing the elements to be made
 	 */
 	public GUIFactory(ResourceBundle myResources) {
 		this.myResources = myResources;
+		this.myAlertGenerator = new AlertGenerator();
 	}
 
 	/**
 	 * Creates new IGUIElement based on nodeTypeKey passed in.
 	 * 
-	 * @param nodeTypeKey:
-	 *            Name of object you want to create.
-	 * @return IGUIElement: element corresponding to nodeTypeKey in
-	 *         ResourceBundle.
+	 * @param nodeTypeKey: Name of object you want to create.
+	 * @return IGUIElement: element corresponding to nodeTypeKey in ResourceBundle.
 	 */
 	public IGUIElement createNewGUIObject(String nodeTypeKey) {
 		String nodeType = myResources.getString(nodeTypeKey);
@@ -76,39 +75,25 @@ public class GUIFactory {
 	/**
 	 * Create the desired element.
 	 * 
-	 * @param elementType:
-	 *            ComboBox, TextFieldWithButton, Button, Menu, Pane, MenuBar, or
-	 *            CheckBoxObject.
-	 * @param nodeType:
-	 *            name of the elementType as specified in the properties file.
+	 * @param elementType: ComboBox, TextFieldWithButton, Button, Menu, Pane, MenuBar, or CheckBoxObject.
+	 * @param nodeType: name of the elementType as specified in the properties file.
 	 * @return IGUIElement for the desired element.
 	 */
 	private IGUIElement createElement(String elementType, String nodeType) {
 		String className = GUI + VIEW + myResources.getString(nodeType + CLASS);
-		
 		try {
 			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class);
 			if (elementType.equals("ComboBox")) {
 				try {
 					createComboBox(nodeType, className);
 				} catch (ClassNotFoundException | InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					myAlertGenerator.generateAlert(e.getClass().toString());
 				}
 			}
 			return (IGUIElement) createMethod.invoke(this, nodeType, className);
-		} catch (NoSuchMethodException | SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			myAlertGenerator.generateAlert(e.getClass().toString());
 		}
 		return null;
 	}
@@ -116,11 +101,8 @@ public class GUIFactory {
 	/**
 	 * Creates a ComboBox.
 	 * 
-	 * @param nodeType:
-	 *            nodeType corresponding to the nodeTypeKey originally
-	 *            specified.
-	 * @param className:
-	 *            specific subclass of ComboBoxParent.
+	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
+	 * @param className: specific subclass of ComboBoxParent.
 	 * @return IGUIElement for the ComboBox.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
@@ -143,11 +125,8 @@ public class GUIFactory {
 	/**
 	 * Creates a Button.
 	 * 
-	 * @param nodeType:
-	 *            nodeType corresponding to the nodeTypeKey originally
-	 *            specified.
-	 * @param className:
-	 *            specific subclass of ButtonParent.
+	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
+	 * @param className: specific subclass of ButtonParent.
 	 * @return IGUIElement for the Button.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
@@ -170,11 +149,8 @@ public class GUIFactory {
 	/**
 	 * Creates a Pane.
 	 * 
-	 * @param nodeType:
-	 *            nodeType corresponding to the nodeTypeKey originally
-	 *            specified.
-	 * @param className:
-	 *            specific subclass of PaneParent.
+	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
+	 * @param className: specific subclass of PaneParent.
 	 * @return IGUIElement for the Pane.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
@@ -195,11 +171,8 @@ public class GUIFactory {
 	/**
 	 * Creates a Menu.
 	 * 
-	 * @param nodeType:
-	 *            nodeType corresponding to the nodeTypeKey originally
-	 *            specified.
-	 * @param className:
-	 *            specific subclass of MenuParent.
+	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
+	 * @param className: specific subclass of MenuParent.
 	 * @return IGUIElement for the Menu.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
@@ -221,11 +194,8 @@ public class GUIFactory {
 	/**
 	 * Creates a MenuBar.
 	 * 
-	 * @param nodeType:
-	 *            nodeType corresponding to the nodeTypeKey originally
-	 *            specified.
-	 * @param className:
-	 *            specific subclass of MenuBarParent.
+	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
+	 * @param className: specific subclass of MenuBarParent.
 	 * @return IGUIElement for the MenuBar.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
@@ -246,11 +216,8 @@ public class GUIFactory {
 	/**
 	 * Creates a TextFieldWithButton.
 	 * 
-	 * @param nodeType:
-	 *            nodeType corresponding to the nodeTypeKey originally
-	 *            specified.
-	 * @param className:
-	 *            specific subclass of TextFieldWithButton.
+	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
+	 * @param className: specific subclass of TextFieldWithButton.
 	 * @return IGUIElement for the TextFieldWithButton.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
@@ -275,11 +242,8 @@ public class GUIFactory {
 	/**
 	 * Creates a CheckBoxObject.
 	 * 
-	 * @param nodeType:
-	 *            nodeType corresponding to the nodeTypeKey originally
-	 *            specified.
-	 * @param className:
-	 *            CheckBoxObject.
+	 * @param nodeType: nodeType corresponding to the nodeTypeKey originally specified.
+	 * @param className: CheckBoxObject.
 	 * @return IGUIElement for the CheckBoxObject.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException

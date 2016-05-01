@@ -1,20 +1,13 @@
 package authoringenvironment.view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
+import java.util.*;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.beans.value.*;
+import javafx.geometry.*;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 /**
  * 

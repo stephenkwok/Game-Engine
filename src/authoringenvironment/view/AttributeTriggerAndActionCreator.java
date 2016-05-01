@@ -1,13 +1,9 @@
 package authoringenvironment.view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 import authoringenvironment.controller.LevelEditingEnvironment;
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.model.*;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
 import gameengine.model.Actions.Action;
@@ -16,11 +12,8 @@ import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 
 public class AttributeTriggerAndActionCreator extends VBox implements ILevelTriggerCreator, ILevelActionCreator {
 	private static final String LEVEL = "Level";
