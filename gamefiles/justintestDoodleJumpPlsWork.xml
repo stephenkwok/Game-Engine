@@ -190,7 +190,11 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
+<<<<<<< HEAD
           <x>718.273234424641</x>
+=======
+          <x>774.0125137902147</x>
+>>>>>>> bc5f491f3bf1ace852a82bcd3aafb6c899ef6c72
           <y>40.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -235,7 +239,11 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
+<<<<<<< HEAD
           <x>273.82692581842537</x>
+=======
+          <x>374.1251754716565</x>
+>>>>>>> bc5f491f3bf1ace852a82bcd3aafb6c899ef6c72
           <y>80.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -280,7 +288,11 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
+<<<<<<< HEAD
           <x>741.9097955233514</x>
+=======
+          <x>224.67085296067435</x>
+>>>>>>> bc5f491f3bf1ace852a82bcd3aafb6c899ef6c72
           <y>120.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -325,7 +337,11 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
+<<<<<<< HEAD
           <x>431.65015769025524</x>
+=======
+          <x>385.0025798083919</x>
+>>>>>>> bc5f491f3bf1ace852a82bcd3aafb6c899ef6c72
           <y>160.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -370,7 +386,11 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
+<<<<<<< HEAD
           <x>246.90880409951455</x>
+=======
+          <x>424.18659571057447</x>
+>>>>>>> bc5f491f3bf1ace852a82bcd3aafb6c899ef6c72
           <y>200.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -415,7 +435,11 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
+<<<<<<< HEAD
           <x>649.6205980398101</x>
+=======
+          <x>780.7787539447571</x>
+>>>>>>> bc5f491f3bf1ace852a82bcd3aafb6c899ef6c72
           <y>240.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -460,7 +484,11 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
+<<<<<<< HEAD
           <x>587.82918880165</x>
+=======
+          <x>480.6479612018729</x>
+>>>>>>> bc5f491f3bf1ace852a82bcd3aafb6c899ef6c72
           <y>280.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -505,7 +533,11 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
+<<<<<<< HEAD
           <x>373.236553839476</x>
+=======
+          <x>423.14637085708796</x>
+>>>>>>> bc5f491f3bf1ace852a82bcd3aafb6c899ef6c72
           <y>320.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -550,7 +582,11 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
+<<<<<<< HEAD
           <x>696.0125287488119</x>
+=======
+          <x>511.4832837122002</x>
+>>>>>>> bc5f491f3bf1ace852a82bcd3aafb6c899ef6c72
           <y>360.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -595,7 +631,11 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
+<<<<<<< HEAD
           <x>796.5185409153763</x>
+=======
+          <x>116.25001248092862</x>
+>>>>>>> bc5f491f3bf1ace852a82bcd3aafb6c899ef6c72
           <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -640,7 +680,11 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
+<<<<<<< HEAD
           <x>716.1996213900286</x>
+=======
+          <x>674.1313183832092</x>
+>>>>>>> bc5f491f3bf1ace852a82bcd3aafb6c899ef6c72
           <y>440.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -685,7 +729,11 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
+<<<<<<< HEAD
           <x>169.65292412745487</x>
+=======
+          <x>559.1013549912075</x>
+>>>>>>> bc5f491f3bf1ace852a82bcd3aafb6c899ef6c72
           <y>480.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -730,7 +778,11 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
+<<<<<<< HEAD
           <x>740.464359411817</x>
+=======
+          <x>413.4672504247934</x>
+>>>>>>> bc5f491f3bf1ace852a82bcd3aafb6c899ef6c72
           <y>520.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
