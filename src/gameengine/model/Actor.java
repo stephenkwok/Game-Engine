@@ -270,29 +270,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	 */
 	@Override
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-
-		stringBuilder.append("Actor[ ");
-		stringBuilder.append("\nname: ");
-		stringBuilder.append(myName);
-		stringBuilder.append("\nmyImgName: ");
-		stringBuilder.append(myImageViewName);
-		stringBuilder.append("\nmyImg: ");
-		stringBuilder.append(myImageView);
-		stringBuilder.append("\nmyPosition: ");
-		stringBuilder.append("(");
-		stringBuilder.append(x);
-		stringBuilder.append(",");
-		stringBuilder.append(y);
-		stringBuilder.append(",");
-		stringBuilder.append(")");
-		stringBuilder.append("(");
-
-		stringBuilder.append("\nmyRules: ");
-		stringBuilder.append(getRules().toString());
-		stringBuilder.append(" ]");
-
-		return stringBuilder.toString();
+		return getName();
 	}
 
 	/**
