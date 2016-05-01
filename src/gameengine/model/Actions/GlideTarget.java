@@ -41,8 +41,8 @@ public class GlideTarget extends GlidingAction {
 	}
 	
 	public void calcHeading(Actor assignedActor, Actor target){
-		double verticalDiff   = assignedActor.getY()  - target.getY();
-		double horizontalDiff  = target.getX()  - assignedActor.getX();
+		double verticalDiff   = (assignedActor.getBounds().getHeight()/2 + assignedActor.getY()) - (target.getBounds().getHeight()/2 + target.getY());
+		double horizontalDiff  = (target.getBounds().getWidth()/2 + target.getX())  - ( assignedActor.getBounds().getWidth()/2 + assignedActor.getX());
 		double angle  = Math.toDegrees(Math.sin((verticalDiff/horizontalDiff)));
 		//double newX  = Math.toDegrees(Math.cos(Math.toRadians(verticalDiff/horizontalDiff)));
 
