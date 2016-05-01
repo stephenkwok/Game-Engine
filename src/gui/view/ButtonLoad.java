@@ -15,7 +15,7 @@ public class ButtonLoad extends ButtonParent {
 	@Override
 	protected void setButtonAction() {
 		getButton().setOnAction(event -> {
-			notifyObservers("ButtonLoad");
+			notifyObservers();
 		});
 	}
 
