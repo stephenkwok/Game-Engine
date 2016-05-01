@@ -187,7 +187,8 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 		refreshTriggerMap();
 		myCollisionDetector.detection(getCurrentActors());
 		signalTick();
-		updateCamera();
+		if(info.isDestinationGame())
+			updateCamera();
 		updateActors();
 		levelTime.setValue(levelTime.getValue() + 1);
 		globalTime.setValue(globalTime.getValue() + 1);
