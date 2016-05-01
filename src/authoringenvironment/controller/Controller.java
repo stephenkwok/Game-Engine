@@ -20,6 +20,7 @@ import org.xml.sax.SAXException;
 
 import authoringenvironment.model.ActorCopier;
 import authoringenvironment.model.AuthoringEnvironmentRestorer;
+import authoringenvironment.model.GamePreviewImageSetter;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
@@ -70,9 +71,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private Map<IAuthoringActor, List<IAuthoringActor>> myActorMap;
 	private LevelEditingEnvironment levelEnvironment;
 	private ActorEditingEnvironment actorEnvironment;
-	private ResourceBundle myResources;
-	private ResourceBundle myObservableResource;
-	private ResourceBundle myPresetActorsResource;
+	private ResourceBundle myResources, myObservableResource,  myPresetActorsResource;
 	private Game game;
 	private GameInfo gameInfo;
 	private Scene myScene;
@@ -83,6 +82,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private ActorCopier myActorCopier;
 	private GameEditingEnvironment gameEditingEnvironment;
 	private MainCharacterManager mainCharacterManager;
+	private GamePreviewImageSetter myGamePreviewImageSetter;
 
 	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException {
@@ -157,6 +157,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
 		gameEditingEnvironment = new GameEditingEnvironment(this, getStage(), myLevels, gameInfo);
 		mainCharacterManager = new MainCharacterManager(myLevels);
+		myGamePreviewImageSetter = new GamePreviewImageSetter(gameInfo, myLevels);
 		setTopPane();
 		setCenterPane();
 	}
@@ -274,10 +275,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 */
 	public void saveGame() {
 		mainCharacterManager.updateMainCharacterListsForEachLevel();
-		if (!mainCharacterManager.updateSuccessful())
-			return;
-		// need error checking
-		gameInfo.setMyImageName(myLevels.get(0).getMyBackgroundImgName());
+		if (!mainCharacterManager.updateSuccessful()) return;
+		myGamePreviewImageSetter.setGameImage();
+		if (!myGamePreviewImageSetter.gameImageSetSuccessful()) return;
 		List<IAuthoringActor> refActor = new ArrayList(myActorMap.keySet());
 		IAuthoringActor realRefActor = refActor.get(0);
 		FileChooser fileChooser = new FileChooser();
