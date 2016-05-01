@@ -3802,7 +3802,7 @@
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myHUDElementsToDisplay/>
     <myFile>test2.xml</myFile>
-    <isDestinationGame>true</isDestinationGame>
+    <isDestinationGame>false</isDestinationGame>
     <myHUDFileLocation>a.txt</myHUDFileLocation>
   </info>
   <myPhysicsEngine>
