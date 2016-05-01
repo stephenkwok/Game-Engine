@@ -4,26 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import authoringenvironment.model.ActionFactory;
-import authoringenvironment.model.ActorRule;
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IAuthoringBehavior;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.TriggerFactory;
-import gameengine.model.IAction;
-import gameengine.model.IRule;
+import authoringenvironment.model.*;
+import gameengine.model.*;
 import gameengine.model.Triggers.ITrigger;
 import gui.view.EditingElementParent;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.*;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
 
 /**
  * Abstract class to implement ComboBox<IAuthoringActor> or ComboBox<Level>.
@@ -37,8 +27,7 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	private static final String PROMPT = "Prompt";
 	private static final int COMBOBOX_WIDTH = 300;
 	private static final int HBOX_SPACING = 5;
-	private static final String GO = "a"; //bottom collision
-	private static final int BUTTON_SIZE = 40;
+	private static final String GO = "GO"; //bottom collision
 	private String promptText;
 	private ObservableList<IEditableGameElement> options;
 	private ComboBox<IEditableGameElement> comboBox;
@@ -75,8 +64,7 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 		Label label = new Label(labelText);
 		label.setWrapText(true);
 		initComboBox();
-		initButton();
-		hbox.getChildren().addAll(label, comboBox, getButton());
+		hbox.getChildren().addAll(label, comboBox);
 		hbox.setAlignment(Pos.CENTER_LEFT);
 		return hbox;
 	}
@@ -91,13 +79,6 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 		comboBox.setPromptText(promptText);
 		comboBox.setCellFactory(factory -> new MyCustomCell());
 		HBox.setHgrow(comboBox, Priority.ALWAYS);
-	}
-	
-	private void initButton(){
-		getButton().setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
-		setButtonAction(e -> {
-			setValue();
-		});
 	}
 	
 	public void setValue(){
