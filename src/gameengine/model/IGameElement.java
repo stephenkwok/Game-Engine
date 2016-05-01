@@ -3,8 +3,10 @@ package gameengine.model;
 import java.util.List;
 import java.util.Map;
 
+import gameengine.controller.IPlayGame;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
+import javafx.beans.Observable;
 import javafx.geometry.Bounds;
 
 public interface IGameElement {
@@ -23,4 +25,6 @@ public interface IGameElement {
     public Map<String, List<Rule>> getRules();
     public void changed();
     public Bounds getBounds();
+    public void setGame(IPlayGame game);
+    public IPlayGame getGame();
 }

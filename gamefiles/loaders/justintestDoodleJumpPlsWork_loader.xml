@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <initialGameFile>gamefiles/loaders/DoodleJump_loader.xml</initialGameFile>
+  <initialGameFile>gamefiles/loaders/justintestDoodleJumpPlsWork_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -123,11 +123,7 @@
                       <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.ShiftScene">
-<<<<<<< HEAD
-                      <myGameElement class="gameengine.controller.Level" reference="../../../../../../../../.."/>
-=======
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
->>>>>>> c18c1fcdf93f4d68dbb0866495e411ca97832572
                       <myShiftAmount>50.0</myShiftAmount>
                       <myDirection>Down</myDirection>
                     </myAction>
@@ -194,11 +190,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-<<<<<<< HEAD
-          <x>470.3789642264959</x>
-=======
-          <x>518.2174220908964</x>
->>>>>>> c18c1fcdf93f4d68dbb0866495e411ca97832572
+          <x>654.8846041483586</x>
           <y>40.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -243,11 +235,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-<<<<<<< HEAD
-          <x>128.95894192782873</x>
-=======
-          <x>490.8263038907889</x>
->>>>>>> c18c1fcdf93f4d68dbb0866495e411ca97832572
+          <x>131.33755010450966</x>
           <y>80.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -292,11 +280,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-<<<<<<< HEAD
-          <x>740.5864619460466</x>
-=======
-          <x>260.06526310938534</x>
->>>>>>> c18c1fcdf93f4d68dbb0866495e411ca97832572
+          <x>213.90992914388713</x>
           <y>120.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -341,11 +325,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-<<<<<<< HEAD
-          <x>197.57278036311428</x>
-=======
-          <x>275.6837634140205</x>
->>>>>>> c18c1fcdf93f4d68dbb0866495e411ca97832572
+          <x>667.3948882373841</x>
           <y>160.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -390,11 +370,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-<<<<<<< HEAD
-          <x>444.55279382775694</x>
-=======
-          <x>105.47743685253002</x>
->>>>>>> c18c1fcdf93f4d68dbb0866495e411ca97832572
+          <x>475.9440395204599</x>
           <y>200.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -439,11 +415,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-<<<<<<< HEAD
-          <x>182.8198640545017</x>
-=======
-          <x>366.49791428538987</x>
->>>>>>> c18c1fcdf93f4d68dbb0866495e411ca97832572
+          <x>391.40618169289144</x>
           <y>240.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -488,11 +460,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-<<<<<<< HEAD
-          <x>334.4386936473621</x>
-=======
-          <x>732.747781939922</x>
->>>>>>> c18c1fcdf93f4d68dbb0866495e411ca97832572
+          <x>313.18477025485026</x>
           <y>280.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -537,11 +505,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-<<<<<<< HEAD
-          <x>719.6306433424436</x>
-=======
-          <x>269.91007846844866</x>
->>>>>>> c18c1fcdf93f4d68dbb0866495e411ca97832572
+          <x>538.3520630829008</x>
           <y>320.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -586,11 +550,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-<<<<<<< HEAD
-          <x>347.93456302169636</x>
-=======
-          <x>773.6076752011808</x>
->>>>>>> c18c1fcdf93f4d68dbb0866495e411ca97832572
+          <x>404.705601250702</x>
           <y>360.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -635,11 +595,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-<<<<<<< HEAD
-          <x>742.9118521202352</x>
-=======
-          <x>309.42835986578024</x>
->>>>>>> c18c1fcdf93f4d68dbb0866495e411ca97832572
+          <x>548.5442205923953</x>
           <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -684,11 +640,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-<<<<<<< HEAD
-          <x>226.9990407201187</x>
-=======
-          <x>597.3075049111967</x>
->>>>>>> c18c1fcdf93f4d68dbb0866495e411ca97832572
+          <x>281.4181946478019</x>
           <y>440.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -733,11 +685,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-<<<<<<< HEAD
-          <x>500.3627732388714</x>
-=======
-          <x>316.71897710695185</x>
->>>>>>> c18c1fcdf93f4d68dbb0866495e411ca97832572
+          <x>319.31549367338175</x>
           <y>480.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -782,11 +730,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-<<<<<<< HEAD
-          <x>486.54518936687765</x>
-=======
-          <x>699.0464318379521</x>
->>>>>>> c18c1fcdf93f4d68dbb0866495e411ca97832572
+          <x>789.770256831181</x>
           <y>520.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -852,7 +796,7 @@
     <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myHUDElementsToDisplay/>
-    <myFile>DoodleJump.xml</myFile>
+    <myFile>justintestDoodleJumpPlsWork_loader.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
     <myHUDFileLocation>a.txt</myHUDFileLocation>
   </info>
