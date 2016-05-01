@@ -6,7 +6,6 @@ import java.util.Map;
 import gameengine.controller.IPlayGame;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
-import javafx.beans.Observable;
 import javafx.geometry.Bounds;
 
 public interface IGameElement {
