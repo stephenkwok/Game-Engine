@@ -95,6 +95,7 @@ public class ActorRuleCreator {
 		myActorRuleCreatorPane.add(newRule.getGridPane(), RULE_COL, ruleRow);
 		myActorRules.add(newRule);
 		ruleRow++;
+		
 	}
 
 	/**
