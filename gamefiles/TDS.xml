@@ -170,7 +170,7 @@
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </mySpawnedActor>
-                      <spawnAngle>90.0</spawnAngle>
+                      <spawnAngle>45.0</spawnAngle>
                     </myAction>
                   </gameengine.model.Rule>
                 </list>
@@ -350,6 +350,7 @@
       <myMainCharacters/>
       <soundtrack>Ink.mp3</soundtrack>
       <myGarbageCollectors/>
+      <toBeDeleted>false</toBeDeleted>
     </gameengine.controller.Level>
   </levels>
   <info>

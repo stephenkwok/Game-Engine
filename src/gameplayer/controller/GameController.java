@@ -198,26 +198,24 @@ public class GameController extends Observable implements Observer, IGameControl
 
 	@Override
 	public void toggleSound() {
-		System.out.println("toggle sound unimplemented");
+		getGame().toggleSound();
 	}
 	
 	@Override
 	public void toggleMusic() {
-		System.out.println("toggle music unimplemented");
+		getGame().toggleMusic();
 	}
 	
 	@Override
 	public void togglePause() {
 		model.stopGame();
 		view.togglePause();
-		getGame().toggleSoundPause();
 	}
 
 	@Override
 	public void toggleUnPause() {
 		model.toggleUnPause();
 		view.toggleUnPause();
-		getGame().toggleSoundPause();
 	}
 
 	@Override
