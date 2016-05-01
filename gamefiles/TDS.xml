@@ -169,6 +169,7 @@
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </mySpawnedActor>
+                      <spawnAngle>200.0</spawnAngle>
                     </myAction>
                   </gameengine.model.Rule>
                 </list>
