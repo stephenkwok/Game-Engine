@@ -161,7 +161,7 @@ public class ActorRule {
 		if (!(isTriggerType(behaviorType) && myTriggerNodes.getChildren().size() != 0)) {
 			IAuthoringBehavior element = actorRuleFactory.getAuthoringRule(behaviorType, rule);
 			authoringBehaviorMap.put(element, new ArrayList<>());
-			Node node = ((IGUIElement) element).createNode();
+			Node node = (element).createNode();
 			element.updateValueBasedOnEditable();
 			setRemoveEvent(node, element);
 			if (isTriggerType(behaviorType)) {
@@ -177,7 +177,7 @@ public class ActorRule {
 	public void addSound(String behaviorType, String soundName){
 		IAuthoringBehavior element = actorRuleFactory.getSoundRule(behaviorType, soundName);
 		authoringBehaviorMap.put(element, new ArrayList<>());
-		Node node = ((IGUIElement) element).createNode();
+		Node node = (element).createNode();
 		element.updateValueBasedOnEditable();
 		setRemoveEvent(node, element);
 		myActionNodes.getChildren().add(node);
@@ -265,6 +265,7 @@ public class ActorRule {
 		if (myActorRuleCreator.isNewlyReturned()) {
 			myActorRuleCreator.setNewlyReturned(false);
 			myActor.getRules().clear();
+			System.out.println("cleared");
 		}
 		if (myTrigger == null) {
 			for (IAuthoringBehavior authoringBehavior : authoringBehaviorMap.keySet()) {

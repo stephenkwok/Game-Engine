@@ -162,7 +162,7 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 	}
 	
 	private void initGameElement(IGameElement gameElement){
-		gameElement.setGame((IPlayGame)this);
+		gameElement.setGame(this);
 	}
 
 	private void initCurrentLevel() {
@@ -475,11 +475,11 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 	}
 
 	public void setGlobalTime(int time) {
-		this.globalTime.setValue(time);;
+		this.globalTime.setValue(time);
 	}
 
 	public void resetLevelTime() {
-		levelTime.setValue(1);;
+		levelTime.setValue(1);
 	}
 
 	public void toggleSound() {

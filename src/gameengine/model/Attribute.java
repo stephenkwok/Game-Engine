@@ -26,7 +26,7 @@ public class Attribute extends Observable {
 
     public Attribute(AttributeType type, int initialValue, IGameElement owner) {
         myType = type;
-        myValue = new Property<Integer>(initialValue,owner.getName()+type.toString());
+        myValue = new Property<Integer>(initialValue,owner.getName()+ " " + formatAttributeName(type.toString()));
         myTriggerValues = new HashSet<Integer>();
         myOwner = owner;
     }
@@ -79,6 +79,10 @@ public class Attribute extends Observable {
     
     public void setTriggerValues(Set<Integer> triggers){
     	myTriggerValues = triggers;
+    }
+    
+    private String formatAttributeName(String rawName) {
+    	return Character.toUpperCase(rawName.charAt(0)) + rawName.substring(1).toLowerCase();
     }
         
 }

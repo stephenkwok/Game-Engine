@@ -66,4 +66,8 @@ public abstract class CollisionTrigger extends ITrigger {
 		}
 		return false;
 	}
+	
+	public boolean equals(CollisionTrigger other){
+		return (myMainActor.getID() == other.getMyMainActor().getID() && myCollisionActor.getID() == other.getMyCollisionActor().getID());
+	}
 }

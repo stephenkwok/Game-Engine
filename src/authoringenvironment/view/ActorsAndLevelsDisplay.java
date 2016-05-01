@@ -6,7 +6,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingEnvironment;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
