@@ -140,6 +140,7 @@
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </mySpawnedActor>
+                      <spawnAngle>90.0</spawnAngle>
                     </myAction>
                   </gameengine.model.Rule>
                 </list>
@@ -2794,7 +2795,7 @@
                     <obs/>
                     <value class="int">0</value>
                     <bindings/>
-                    <name>Mario Points</name>
+                    <name>MarioPOINTS</name>
                   </myValue>
                   <myTriggerValues>
                     <int>5</int>
@@ -2904,7 +2905,7 @@
                     <obs/>
                     <value class="int">3</value>
                     <bindings/>
-                    <name>Luigi Points</name>
+                    <name>LuigiPOINTS</name>
                   </myValue>
                   <myTriggerValues/>
                   <myType>POINTS</myType>
