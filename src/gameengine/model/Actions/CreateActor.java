@@ -1,6 +1,7 @@
 package gameengine.model.Actions;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Observable;
 
 import authoringenvironment.model.ActorCopier;
@@ -71,5 +72,13 @@ public class CreateActor extends Action {
 	
 	public void printCoordinates(){
 		System.out.println(myX + " " + myY + " " + myMinX + " " + myMaxX + " " + myMinY + " " + myMaxY);
+	}
+	
+	public boolean isRandom(){
+		return isRandom;
+	}
+	
+	public List<Double> getCoordinates(){
+		return Arrays.asList(myX, myY, myMinX, myMaxX, myMinY, myMaxY);
 	}
 }

@@ -7,10 +7,8 @@ import java.util.Observer;
 import gui.view.IGUIElement;
 import gui.view.Screen;
 import javafx.geometry.Insets;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 /**
@@ -56,7 +54,10 @@ public class SplashScreen extends Screen implements Observer, ISplashScreen {
 		}
 		// TODO Magic constant
 		hbox.setLayoutY(getScene().getHeight() / 6);
-		hbox.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		BackgroundImage myBI= new BackgroundImage(new Image("hawaiianprint.jpg"),
+		        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+		          BackgroundSize.DEFAULT);
+		hbox.setBackground(new Background(myBI));		
 		addToScene(hbox);
 	}
 
