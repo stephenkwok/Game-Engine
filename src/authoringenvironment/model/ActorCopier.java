@@ -18,11 +18,7 @@ import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.AttributeReached;
-import gameengine.model.Triggers.CollisionTrigger;
 import gameengine.model.Triggers.ITrigger;
-import gameengine.model.Triggers.KeyTrigger;
-import gameengine.model.Triggers.TickTrigger;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

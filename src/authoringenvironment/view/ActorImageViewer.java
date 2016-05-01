@@ -2,11 +2,9 @@ package authoringenvironment.view;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 import authoringenvironment.controller.ActorEditingEnvironment;
 import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditingElement;
 import gui.view.ButtonFileChooserActorImage;
 import gui.view.ComboBoxActorImages;
 import gui.view.ComboBoxSpriteImages;

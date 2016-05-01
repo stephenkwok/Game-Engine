@@ -5,25 +5,21 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import com.sun.xml.internal.bind.v2.runtime.output.NamespaceContextImpl.Element;
-
 import authoringenvironment.controller.LevelEditingEnvironment;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditingEnvironment;
-import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gameengine.model.IAction;
 import gameengine.model.IGameElement;
 import gameengine.model.Actions.Action;
 import gameengine.model.Actions.CreateActor;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class CreateActorActionCreator extends VBox implements ILevelActionCreator {
 	private static final String RANDOM = "Randomly spawn within a range";

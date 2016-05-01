@@ -2,12 +2,11 @@ package gameplayer.view;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
-import java.util.TreeSet;
 
 import gameengine.controller.Game;
-import gameengine.model.AttributeType;
-import voogasalad.util.hud.source.*;
+import voogasalad.util.hud.source.HUDController;
+import voogasalad.util.hud.source.IValueFinder;
+import voogasalad.util.hud.source.Property;
 
 public class TLGCSValueFinder implements IValueFinder {
 	private Game data; //for other projects, your data will be a different class

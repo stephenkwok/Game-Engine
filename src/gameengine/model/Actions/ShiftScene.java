@@ -1,6 +1,5 @@
 package gameengine.model.Actions;
 
-
 import gameengine.controller.Level;
 
 public class ShiftScene extends LevelAction {

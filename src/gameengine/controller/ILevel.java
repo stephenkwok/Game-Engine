@@ -1,10 +1,10 @@
 package gameengine.controller;
 
+import java.util.List;
+
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.IPlayActor;
 import gameengine.model.Triggers.ITrigger;
-
-import java.util.List;
 
 /**
  * This interface describes the API for a Level object Levels will contain sets

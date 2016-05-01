@@ -6,7 +6,7 @@ import authoringenvironment.model.IEditingElement;
 import authoringenvironment.view.GameAttributesDisplay;
 import gameengine.controller.GameInfo;
 import javafx.scene.image.Image;
-import javafx.scene.image.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**

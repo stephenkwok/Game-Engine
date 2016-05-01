@@ -1,6 +1,5 @@
 package authoringenvironment.view;
 
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -18,8 +17,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 public class LevelInspector implements IGUI {
 	private static final String BUTTON_LABEL = "Choose a new background image";

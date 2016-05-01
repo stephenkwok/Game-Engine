@@ -1,8 +1,6 @@
 package gui.view;
 
-import javafx.scene.control.Alert;
 import java.io.File;
-import java.util.Arrays;
 
 
 public class ButtonPlay extends ButtonParent{
