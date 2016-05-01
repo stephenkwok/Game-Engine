@@ -24,8 +24,12 @@ public class ShiftSceneBehavior extends ComboBoxBehavior {
 	private ActionFactory actionFactory;
 	private ActorRule myActorRule;
 	private String behaviorType;
+	private List<IAuthoringActor> myActors;
+	private IAuthoringActor otherActor;
 	private IAuthoringActor myActor;
 	private IRule myRule;
+	private ResourceBundle myResources;
+	private HBox hbox;
 	private IAction myAction;
 	private OffsetBehavior shiftAmount;
 	
