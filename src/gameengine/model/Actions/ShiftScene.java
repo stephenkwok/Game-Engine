@@ -1,12 +1,13 @@
 package gameengine.model.Actions;
 
 import gameengine.controller.Level;
+import gameengine.model.IGameElement;
 
-public class ShiftScene extends LevelAction {
+public class ShiftScene extends Action {
 	private Double myShiftAmount;
 	private String myDirection;
 	
-	public ShiftScene(Level myElement, String direction, Double shiftAmount) {
+	public ShiftScene(IGameElement myElement, String direction, Double shiftAmount) {
 		super(myElement);
 		myShiftAmount = shiftAmount;
 		myDirection = direction;
@@ -14,7 +15,7 @@ public class ShiftScene extends LevelAction {
 
 	@Override
 	public void perform() {
-		getMyLevel().shiftScene(myDirection, myShiftAmount);
+		getGameElement().getGame().getCurrentLevel().shiftScene(myDirection, myShiftAmount);
 	}
 
 }

@@ -4,29 +4,38 @@ package gameplayer.view;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import authoringenvironment.model.ActorCopier;
 import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.ActorState;
-import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
 import gameengine.model.Actions.ApplyPhysics;
 import gameengine.model.Actions.CreateActor;
+import gameengine.model.Actions.Destroy;
+import gameengine.model.Actions.GlideDown;
+import gameengine.model.Actions.GlideForward;
+import gameengine.model.Actions.GlideTarget;
+import gameengine.model.Actions.GlideUp;
+import gameengine.model.Actions.HorizontalBounceCollision;
+import gameengine.model.Actions.HorizontalHeadingSwitch;
+import gameengine.model.Actions.HorizontalStaticCollision;
+import gameengine.model.Actions.LoseGame;
 import gameengine.model.Actions.MoveLeft;
 import gameengine.model.Actions.MoveRight;
-import gameengine.model.Actions.MoveUp;
-import gameengine.model.Actions.ShiftScene;
+import gameengine.model.Actions.ReverseHeading;
+import gameengine.model.Actions.Spawn;
 import gameengine.model.Actions.VerticalBounceCollision;
+import gameengine.model.Actions.VerticalHeadingSwitch;
+import gameengine.model.Actions.VerticalStaticCollision;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.KeyTrigger;
+import gameengine.model.Triggers.SideCollision;
 import gameengine.model.Triggers.TickTrigger;
+import gameengine.model.Triggers.TopCollision;
 import gameplayer.controller.GameController;
-import gameplayer.controller.PlayType;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.ParallelCamera;
@@ -36,7 +45,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class DoodleJump extends Application {
+public class TopDownShooter extends Application {
     /**
      * The main entry point for all JavaFX applications.
      * The start method is called after the init method has returned,
@@ -56,66 +65,70 @@ public class DoodleJump extends Application {
     public void start(Stage primaryStage) throws Exception {
         GameInfo info = new GameInfo();
         info.setMyCurrentLevelNum(0);
-        info.setName("Doodle Jump");
+        info.setName("TDS");
 
         List<Level> levels = new ArrayList<>();
 
         Level level1 = new Level();
         level1.setMyScrollingDirection("Vertically");
-        level1.setMyBackgroundImgName("doodle_background.png");
+        level1.setMyBackgroundImgName("space.png");
         levels.add(level1);
         
-        Actor player = new Actor();
-        player.addState(ActorState.MAIN);
-        player.setID(1);
-        player.setImageViewName("doodle_right.png");
-        player.addSpriteImage("doodle_left.png");
-        level1.addActor(player);
+        
+        Actor player1 = new Actor();
+        player1.addState(ActorState.MAIN);
+        player1.setID(1);
+        player1.setImageViewName("spaceship.png");
+        player1.setX(10);
+        level1.addActor(player1);
+        
+        player1.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player1)));
+        player1.addRule(new Rule(new KeyTrigger(KeyCode.RIGHT), new MoveRight(player1)));
+        player1.addRule(new Rule(new KeyTrigger(KeyCode.LEFT), new MoveLeft(player1)));
+
+        
+        Actor floor  = new Actor();
+        floor.setID(2);
+        floor.setImageViewName("orange.png");
+        floor.setY(500);
+        level1.addActor(floor);
+        
+        player1.addRule(new Rule(new BottomCollision(player1,floor), new VerticalStaticCollision(player1)));
+
+        Actor enemy = new Actor();
+        enemy.setID(3);
+        enemy.setImageViewName("goomba.png");
+        enemy.addRule(new Rule(new TickTrigger(), new GlideDown(enemy,1.00)));
+        
+        Actor bullet = new Actor();
+        bullet.setID(4);
+        bullet.setImageViewName("fireball.png");
+        bullet.addRule(new Rule(new TickTrigger(), new GlideUp(bullet, 2.5)));
+        
+        
+        player1.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new Spawn(player1,bullet)));
+        
+        bullet.addRule(new Rule(new TopCollision(bullet,enemy), new Destroy(bullet)));
+        enemy.addRule(new Rule(new BottomCollision(enemy,bullet), new Destroy(enemy)));
+        
+        floor.addRule(new Rule(new TopCollision(floor, enemy), new LoseGame(level1)));
+
+
+        
+        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, enemy, 0.0, 600.0, 0.0, 0.0)));
+
        
-       
-        Actor greenplatform = new Actor();
-        greenplatform.setImageViewName("green_platform.png");
-        greenplatform.setID(2);
-        
-
-        player.addRule(new Rule(new BottomCollision(player,greenplatform),new VerticalBounceCollision(player)));
-        player.addRule(new Rule(new BottomCollision(player,greenplatform, true),new ShiftScene(player,"Down",50.0)));
-        player.addRule(new Rule(new BottomCollision(player,greenplatform, true),new CreateActor(player,greenplatform,200.0,700.0,0.0,0.0)));
-        
-        ActorCopier copier = new ActorCopier(greenplatform);
-        
-        Random r = new Random();
-        for(int i=1; i<14; i++){
-            Actor greenplatform1 = copier.makeCopy();
-            greenplatform1.setPhysicsEngine(new PhysicsEngine());
-            greenplatform1.setX(100 + (700) * r.nextDouble());
-            greenplatform1.setY(i*40);
-
-            
-            level1.addActor(greenplatform1);
-            
-           
-            
-        }
-        
-        
-        player.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new MoveUp(player)));
-        player.addRule(new Rule(new KeyTrigger(KeyCode.RIGHT), new MoveRight(player)));
-        player.addRule(new Rule(new KeyTrigger(KeyCode.LEFT), new MoveLeft(player)));
-        player.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player)));
-        
-
         Group group = new Group();
         Scene scene = new Scene(group);
 
         Game model = new Game(info, levels);
         model.setHUDInfoFile("a.txt");
         CreatorController c = new CreatorController(model);
-        c.saveForEditing(new File("gamefiles/justintestDoodleJumpPlsWork.xml"));
+        c.saveForEditing(new File("gamefiles/TDS.xml"));
         ParallelCamera camera = new ParallelCamera();
         GameScreen view = new GameScreen(camera);
 
-        GameController controller = new GameController(model, PlayType.PREVIEW);
+        GameController controller = new GameController(model);
         controller.setGame(model);
         controller.setGameView(view);
 

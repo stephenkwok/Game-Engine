@@ -14,9 +14,11 @@ import gameengine.model.ActorState;
 import gameengine.model.Rule;
 import gameengine.model.Actions.GlideDown;
 import gameengine.model.Actions.GlideForward;
+import gameengine.model.Actions.GlideTarget;
 import gameengine.model.Actions.GlideUp;
 import gameengine.model.Actions.HorizontalBounceCollision;
 import gameengine.model.Actions.HorizontalHeadingSwitch;
+import gameengine.model.Actions.HorizontalStaticCollision;
 import gameengine.model.Actions.ReverseHeading;
 import gameengine.model.Actions.VerticalBounceCollision;
 import gameengine.model.Actions.VerticalHeadingSwitch;
@@ -72,8 +74,8 @@ public class Pong extends Application {
         player1.setX(10);
         level1.addActor(player1);
         
-        player1.addRule(new Rule(new KeyTrigger(KeyCode.RIGHT), new GlideDown(player1, 15.0)));
-        player1.addRule(new Rule(new KeyTrigger(KeyCode.LEFT), new GlideUp(player1, 15.0)));
+        player1.addRule(new Rule(new KeyTrigger(KeyCode.RIGHT), new GlideDown(player1, 25.0)));
+        player1.addRule(new Rule(new KeyTrigger(KeyCode.LEFT), new GlideUp(player1, 25.0)));
 
         
         Actor player2 = new Actor();
@@ -83,8 +85,11 @@ public class Pong extends Application {
         player2.setX(800-player2.getBounds().getWidth()-10);
         level1.addActor(player2);
         
-        player2.addRule(new Rule(new KeyTrigger(KeyCode.D), new GlideDown(player2, 15.0)));
-        player2.addRule(new Rule(new KeyTrigger(KeyCode.A), new GlideUp(player2, 15.0)));
+//        player2.addRule(new Rule(new KeyTrigger(KeyCode.D), new GlideDown(player2, 25.0)));
+//        player2.addRule(new Rule(new KeyTrigger(KeyCode.A), new GlideUp(player2, 25.0)));
+//        player2.addRule(new Rule(new KeyTrigger(KeyCode.LEFT), new GlideLeft(player2, 2.0)));
+        
+
        
         
         Actor leftSide = new Actor();
@@ -106,9 +111,21 @@ public class Pong extends Application {
         ball.setY(400);
         ball.setHeading(140);
         level1.addActor(ball);
-        ball.addRule(new Rule(new TickTrigger(), new GlideForward(ball, 5.0)));
+        ball.addRule(new Rule(new TickTrigger(), new GlideForward(ball, 6.0)));
         ball.addRule(new Rule(new SideCollision(ball, leftSide), new ReverseHeading(ball)));
         ball.addRule(new Rule(new SideCollision(ball, rightSide), new ReverseHeading(ball)));
+        
+        player2.addRule(new Rule(new TickTrigger(), new GlideTarget(player2, 15.0, ball)));
+
+        
+        Actor boundary = new Actor();
+        boundary.setID(8);
+        boundary.setImageViewName("gameside.png");
+        boundary.setX(600);
+        level1.addActor(boundary);
+        
+        player2.addRule(new Rule(new SideCollision(player2, boundary), new HorizontalStaticCollision(player2)));
+        
         
         
         Actor bottomEdge = new Actor();
@@ -134,8 +151,6 @@ public class Pong extends Application {
         ball.addRule(new Rule(new SideCollision(ball, player1), new HorizontalHeadingSwitch(ball)));
         ball.addRule(new Rule(new SideCollision(ball, player2), new HorizontalHeadingSwitch(ball)));
 
-
-      
        
         Group group = new Group();
         Scene scene = new Scene(group);
@@ -143,7 +158,7 @@ public class Pong extends Application {
         Game model = new Game(info, levels);
         model.setHUDInfoFile("a.txt");
         CreatorController c = new CreatorController(model);
-        c.saveForEditing(new File("gamefiles/DoodleJump.xml"));
+        c.saveForEditing(new File("gamefiles/Pong.xml"));
         ParallelCamera camera = new ParallelCamera();
         GameScreen view = new GameScreen(camera);
 
