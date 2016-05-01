@@ -35,7 +35,6 @@ public class XMLCreator {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		String xml = this.myXStream.toXML(object);
-		System.out.println(xml);
 		Document document = documentBuilder.parse(new InputSource(new StringReader(xml)));
 		convertDocumentToFile(document, file);
 	}

@@ -61,6 +61,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	private String soundtrack;
 	private String myBackgroundMusicName;
 	private List<IPlayActor> myGarbageCollectors;
+	private IPlayGame myGame;
 	
 	/**
 	 * Instantiates the triggerMap and Actor list
@@ -443,4 +444,14 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
     public List<IPlayActor> getGarbageCollectors() {
     	return myGarbageCollectors;
     }
+
+	@Override
+	public void setGame(IPlayGame game) {
+		myGame = game;
+	}
+	
+	@Override
+	public IPlayGame getGame(){
+		return myGame;
+	}
 }
