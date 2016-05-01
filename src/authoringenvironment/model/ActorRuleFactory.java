@@ -59,6 +59,17 @@ public class ActorRuleFactory {
 		}
 		return null;
 	}
+	
+	public IAuthoringBehavior getSoundRule(String behaviorType, String soundName){
+		try{
+			String className = PACKAGE + myResources.getString(behaviorType + CLASS);
+			Class<?> clazz = Class.forName(className);
+			Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, ResourceBundle.class, String.class, IAuthoringActor.class);
+			return (IAuthoringBehavior) constructor.newInstance(myActorRule, behaviorType, myResources,soundName, myActor);
+		}catch(Exception e){
+			return null;
+		}
+	}
 
 	/**
 	 * Return ComboBox IAuthoringRule type with parameter options for Collision

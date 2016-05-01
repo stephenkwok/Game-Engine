@@ -153,5 +153,13 @@ public class ActionFactory {
 		Constructor<?> constructor = clazz.getConstructor(Actor.class, Double.class, Actor.class);
 		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO), arguments.get(ONE), (Actor) arguments.get(TWO));
 	}
+	
+	private IAction createSoundBehavior(String actionType, String className)
+			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Class<?> clazz = Class.forName(className);
+		Constructor<?> constructor = clazz.getConstructor(Actor.class, String.class);
+		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO), arguments.get(ONE));
+	}
 
 }
