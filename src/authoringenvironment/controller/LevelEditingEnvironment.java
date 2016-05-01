@@ -98,6 +98,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		addChildrenToLeftPane();
 	}
 
+	/**
+	 * Add the LevelInspector to the left pane.
+	 */
 	private void addChildrenToLeftPane() {
 		myInspector = new LevelInspector(myResources, availableActors.keySet(), this);
 		myLeftPane.getChildren().add(myInspector.getPane());
@@ -117,6 +120,10 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		}
 	}
 	
+	/**
+	 * Sets the actor tab's icons to go to the actor editing environment on a double click.
+	 * @param icon: actor tab icon.
+	 */
 	private void setMouseClickBehavior(ImageviewActorIcon icon) {
 		icon.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -186,12 +193,21 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		});
 	}
 	
+	/**
+	 * Update the list of available actors.
+	 * @param actor: actor to add.
+	 * @param refActor: actor's reference actor.
+	 */
 	private void updateAvailableActors(IAuthoringActor actor, IAuthoringActor refActor) {
 		List<IAuthoringActor> val = availableActors.get(refActor);
 		val.add(actor);
 		availableActors.put(refActor, val);
 	}
 	
+	/**
+	 * Add an actor to the level; update garbage collecting behavior; add the actor preview to the scene.
+	 * @param actor: actor to add.
+	 */
 	private void addActorToLevel(IAuthoringActor actor) {
 		myLevel.addActor(actor);
 		myInspector.getGarbageCollector().updateGarbageCollectingActors(myLevel.getActors());
@@ -245,6 +261,11 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		myInspector.getAttributesTab().updateEditable(myLevel);
 	}
 
+	/**
+	 * Change the background image.
+	 * @param image: image to change background to.
+	 * @param imageFile: new background image filename.
+	 */
 	public void changeBackgroundImage(Image image, File imageFile) {
 		myLevelEditingPreview.changeBackgroundImage(image, imageFile);
 	}
@@ -261,15 +282,25 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		updateDrag();
 	}
 
+	/**
+	 * Gets the current level.
+	 * @return current level.
+	 */
 	public Level getLevel() {
 		return myLevel;
 	}
 
+	/**
+	 * Gets the stage.
+	 */
 	@Override
 	public Stage getStage() {
 		return myStage;
 	}
 
+	/**
+	 * Update background or level preview.
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		if (arg == null) {
@@ -280,14 +311,25 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		}
 	}
 
+	/**
+	 * Gets the controller.
+	 * @return current controller.
+	 */
 	public Controller getController() {
 		return myController;
 	}
 	
+	/**
+	 * Gets the available actors.
+	 * @return set of actors that have been made by user.
+	 */
 	public Set<IAuthoringActor> getAvailableActors() {
 		return availableActors.keySet();
 	}
 	
+	/**
+	 * Opens a preview of the game.
+	 */
 	public void previewGame() {
 		myLevelPreviewer.previewGame();
 	}

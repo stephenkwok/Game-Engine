@@ -16,9 +16,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.layout.HBox;
 
 public class CollisionBehavior extends SelectActorBehavior {
-	private int CHECK_WIDTH = 90;
+	private static final String APPLY_ONCE = "Only apply once";
+	private static final int CHECK_WIDTH = 200;
 	private ITrigger myTrigger;
 	private boolean oneTime;
+	private CheckBox myCheckBox;
 
 	public CollisionBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
 			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
@@ -33,11 +35,11 @@ public class CollisionBehavior extends SelectActorBehavior {
 	@Override
 	public Node createNode() {
 		HBox hbox = (HBox) super.createNode();
-		CheckBox checkBox = (CheckBox) new CheckBoxObject("Apply 1x",CHECK_WIDTH).createNode();
-		checkBox.setOnAction(e->{
-			oneTime = checkBox.isSelected();
+		myCheckBox = (CheckBox) new CheckBoxObject(APPLY_ONCE,CHECK_WIDTH).createNode();
+		myCheckBox.setOnAction(e->{
+			oneTime = myCheckBox.isSelected();
 		});
-		hbox.getChildren().add(2,checkBox);
+		hbox.getChildren().add(2,myCheckBox);
 		return hbox;
 	}
 
@@ -59,6 +61,7 @@ public class CollisionBehavior extends SelectActorBehavior {
 	public void updateValueBasedOnEditable() {
 		try{
 			getComboBox().setValue((IEditableGameElement) (((CollisionTrigger) getMyRule().getMyTrigger()).getMyCollisionActor()));
+			myCheckBox.setSelected(((CollisionTrigger) getMyRule().getMyTrigger()).isOneTime());
 		}catch(Exception e){
 		}
 	}

@@ -23,8 +23,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * 
- * @author amyzhao
+ * Actor copying class
+ * @author amyzhao, colette
  *
  */
 public class ActorCopier {
@@ -36,29 +36,52 @@ public class ActorCopier {
 	private ActionFactory myActionFactory;
 	private TriggerFactory myTriggerFactory;
 
+	/**
+	 * Creates an ActorCopier with no reference actor to copy yet.
+	 */
 	public ActorCopier() {
 		myReferenceActor = null;
 		init();
 	}
 
+	/**
+	 * Creates an ActorCopier with a reference actor to copy.
+	 * @param actor
+	 */
 	public ActorCopier(Actor actor) {
 		myReferenceActor = actor;
 		init();
 	}
 
+	/**
+	 * Initializes the ActorCopier.
+	 */
 	public void init() {
 		myResources = ResourceBundle.getBundle(RESOURCE);
 		myActionFactory = new ActionFactory();
 		myTriggerFactory = new TriggerFactory();
 	}
+	
+	/**
+	 * Sets the reference actor to copy.
+	 * @param newReference: reference actor to copy.
+	 */
 	public void setReferenceActor(Actor newReference) {
 		myReferenceActor = newReference;
 	}
 
+	/**
+	 * Gets the reference actor.
+	 * @return reference actor.
+	 */
 	public IAuthoringActor getReferenceActor() {
 		return myReferenceActor;
 	}
 
+	/**
+	 * Makes a copy if the reference actor has already been set.
+	 * @return copy of actor.
+	 */
 	public Actor makeCopy() {
 		Actor actor = new Actor();
 		if (myReferenceActor != null) {
@@ -69,7 +92,11 @@ public class ActorCopier {
 		}
 	}
 
-	// not sure how to make this nicer yet
+	/**
+	 * Copies the actor.
+	 * @param toUpdate: new actor.
+	 * @param toCopy: actor to copy.
+	 */
 	public void copyActor(Actor toUpdate, Actor toCopy) {
 		toUpdate.setName(toCopy.getName());
 		toUpdate.setFriction(toCopy.getFriction());
@@ -87,6 +114,11 @@ public class ActorCopier {
 		copyAttributes(toUpdate, toCopy.getAttributeMap());
 	}
 
+	/**
+	 * Copies the reference actor's rules.
+	 * @param toUpdate: actor to update.
+	 * @param rulesToCopy: rules from reference actor.
+	 */
 	private void copyRules(Actor toUpdate, Map<String, List<Rule>> rulesToCopy) {
 		toUpdate.getRules().clear();
 		for (String trigger : rulesToCopy.keySet()) {
@@ -110,6 +142,18 @@ public class ActorCopier {
 		}
 	}
 	
+	/**
+	 * Creates either a trigger or an action.
+	 * @param object: trigger or action to create.
+	 * @param arguments: arguments to add into the trigger or action.
+	 * @return trigger or action.
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private Object createObject(Object object, Object[] arguments) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		Class myclass = object.getClass();
 		Class[] argumentTypes = new Class[arguments.length];
@@ -124,6 +168,18 @@ public class ActorCopier {
 		return constructor.newInstance(arguments);
 	}
 	
+	/**
+	 * Create a copy of a trigger.
+	 * @param trigger: trigger to copy.
+	 * @param toUpdate: actor to update.
+	 * @return copy of trigger specific to the actor to update.
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private ITrigger createTrigger(ITrigger trigger, Actor toUpdate) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Object[] params = trigger.getParameters();
 		if(params[0].getClass().equals(Actor.class)&&((Actor)params[0]).getID()==toUpdate.getID()){
@@ -132,19 +188,30 @@ public class ActorCopier {
 		return (ITrigger) createObject(trigger,params);
 	}
 	
+	/**
+	 * Create a copy of action.
+	 * @param action: action to copy.
+	 * @param toUpdate: actor to update.
+	 * @return copy of action specific to the actor to update.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private Action createAction(Action action, Actor toUpdate) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Object[] params = action.getParameters();
 		params[0] = toUpdate;
 		return (Action) createObject(action,params);
 	}
 
-	private boolean checkType(String name, String key) {
-		if (Arrays.asList(myResources.getString(key).split(DELIMITER)).contains(name)) {
-			return true;
-		}
-		return false;
-	}
-
+	/**
+	 * Copies an actor's attributes.
+	 * @param toUpdate: actor to update.
+	 * @param attributeMap: attribute map to copy.
+	 */
 	private void copyAttributes(IGameElement toUpdate, Map<AttributeType, Attribute> attributeMap) {
 		for (AttributeType type: attributeMap.keySet()) {
 			Attribute toCopy = new Attribute(type, attributeMap.get(type).getMyValue(), toUpdate);
@@ -153,6 +220,11 @@ public class ActorCopier {
 		}
 	}
 	
+	/**
+	 * Copies an actor's states.
+	 * @param toUpdate: actor to update.
+	 * @param toCopy: actor to copy.
+	 */
 	private void copyStates(Actor toUpdate, Actor toCopy) {
 		Set<ActorState> updatedStates = new HashSet<ActorState>();
 		for (ActorState state: toCopy.getStates()) {
