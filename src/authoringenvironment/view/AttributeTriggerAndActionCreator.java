@@ -8,7 +8,6 @@ import java.util.Set;
 import authoringenvironment.controller.LevelEditingEnvironment;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditingEnvironment;
-import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
 import gameengine.model.Actions.Action;

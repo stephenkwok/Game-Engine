@@ -1,16 +1,31 @@
 package gameplayer.view;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
-import gameengine.model.Actions.*;
 import gameengine.model.Actor;
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.Rule;
-import gameengine.model.Triggers.*;
+import gameengine.model.Actions.ApplyPhysics;
+import gameengine.model.Actions.ChangeAttribute;
+import gameengine.model.Actions.CreateActor;
+import gameengine.model.Actions.Destroy;
+import gameengine.model.Actions.GlideLeft;
+import gameengine.model.Actions.LoseGame;
+import gameengine.model.Actions.MoveUp;
+import gameengine.model.Actions.NextImage;
+import gameengine.model.Actions.SoundAction;
+import gameengine.model.Triggers.BottomCollision;
+import gameengine.model.Triggers.KeyTrigger;
+import gameengine.model.Triggers.SideCollision;
+import gameengine.model.Triggers.TickTrigger;
 import gameplayer.controller.GameController;
 import gameplayer.controller.PlayType;
 import javafx.application.Application;
@@ -21,10 +36,6 @@ import javafx.scene.SubScene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author blakekaplan

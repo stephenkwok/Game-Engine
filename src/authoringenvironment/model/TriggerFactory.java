@@ -12,7 +12,6 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
-import gameengine.model.IPlayActor;
 import gameengine.model.Triggers.ITrigger;
 import javafx.scene.input.KeyCode;
 

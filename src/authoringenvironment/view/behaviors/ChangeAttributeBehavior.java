@@ -6,7 +6,9 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.ActorRule;
 import authoringenvironment.model.IAuthoringActor;
-import gameengine.model.*;
+import gameengine.model.AttributeType;
+import gameengine.model.IAction;
+import gameengine.model.IRule;
 import gameengine.model.Actions.ChangeAttribute;
 
 public class ChangeAttributeBehavior extends DoubleBehavior {

@@ -1,12 +1,6 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
-import gameengine.model.IGameElement;
-import gameengine.model.IPlayActor;
-import gameengine.model.PhysicsEngine;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * An example of an Action to move an Actor right by a given distance.

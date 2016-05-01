@@ -1,7 +1,11 @@
 package gameengine.controller;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import javafx.scene.image.ImageView;

@@ -1,10 +1,5 @@
 package authoringenvironment.view;
 
-import java.util.List;
-
-import authoringenvironment.model.IAuthoringActor;
-import gameengine.controller.Level;
-import gameengine.model.Actor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;

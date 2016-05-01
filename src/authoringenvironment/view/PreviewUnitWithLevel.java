@@ -1,11 +1,9 @@
 package authoringenvironment.view;
 
 import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingEnvironment;
 import gameengine.controller.Level;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
 
 /**
  * This class creates a preview unit for a created level and allows the author
@@ -21,8 +19,8 @@ public class PreviewUnitWithLevel extends PreviewUnitWithEditable {
 	private static final Double TEXT_FIELD_WIDTH = 125.0;
 	private final TextField myTextField;
 
-	public PreviewUnitWithLevel(IEditableGameElement editable, IEditingEnvironment environment) {
-		super(editable, environment);
+	public PreviewUnitWithLevel(IEditableGameElement editable) {
+		super(editable);
 		myTextField = new TextField();
 		myTextField.setPrefWidth(TEXT_FIELD_WIDTH);
 		myTextField.setPromptText(TEXT_FIELD_PROMPT_TEXT);

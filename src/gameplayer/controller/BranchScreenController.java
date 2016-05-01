@@ -1,11 +1,6 @@
 package gameplayer.controller;
 
-import gui.view.IScreen;
-import gui.view.Screen;
-
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -13,7 +8,7 @@ import java.util.ResourceBundle;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-import gameplayer.controller.SplashScreenController;
+import gui.view.IScreen;
 import javafx.stage.Stage;
 
 /**

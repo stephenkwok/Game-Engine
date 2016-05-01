@@ -1,9 +1,15 @@
 package authoringenvironment.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import authoringenvironment.controller.GameEditingEnvironment;
-import authoringenvironment.view.*;
+import authoringenvironment.view.ActorsAndLevelsDisplay;
+import authoringenvironment.view.PreviewUnitWithEditable;
+import authoringenvironment.view.PreviewUnitWithLevel;
 import gameengine.controller.Level;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -27,18 +33,16 @@ public class LevelPreviewUnitReorderer {
 	private final List<PreviewUnitWithEditable> myPreviewUnits;
 	private final List<Level> myLevels;
 	private final VBox myPreviewUnitsContainer;
-	private final IEditingEnvironment myLevelEditor;
 	private final ActorsAndLevelsDisplay myPreviewUnitsDisplay;
 	private final GameEditingEnvironment myGameEditor;
 	private List<Integer> playPositions;
 	private Set<Integer> uniquePlayPositions;
 
-	public LevelPreviewUnitReorderer(List<Level> levels, IEditingEnvironment levelEditor,
-			ActorsAndLevelsDisplay display, GameEditingEnvironment gameEditor) {
+	public LevelPreviewUnitReorderer(List<Level> levels, ActorsAndLevelsDisplay display,
+			GameEditingEnvironment gameEditor) {
 		myLevelPreviewUnits = display.getLevelPreviewUnits();
 		myPreviewUnitsContainer = display.getLevelPreviewUnitsContainer();
 		myLevels = levels;
-		myLevelEditor = levelEditor;
 		myPreviewUnits = display.getPreviewUnits();
 		myPreviewUnitsDisplay = display;
 		myGameEditor = gameEditor;
@@ -68,7 +72,7 @@ public class LevelPreviewUnitReorderer {
 		myLevelPreviewUnits.clear();
 		myPreviewUnitsContainer.getChildren().clear();
 		Collections.sort(myLevels);
-		myLevels.stream().forEach(level -> myGameEditor.createLevelPreviewUnit(level, myLevelEditor));
+		myLevels.stream().forEach(level -> myGameEditor.createLevelPreviewUnit(level));
 		myPreviewUnits.stream().filter(unit -> myPreviewUnitsContainer.getChildren().contains(unit));
 		myPreviewUnitsDisplay.updatePreviewUnits();
 	}
