@@ -26,5 +26,8 @@ public interface IEditingEnvironment extends IEditingElement, Observer {
 	 */
 	public Pane getPane();
 
+	/**
+	 * @return the Stage for the editing environment
+	 */
 	public Stage getStage();
 }
