@@ -48,7 +48,7 @@ public class TickTrigger extends ITrigger {
 		return false;
 	}
 	
-	public boolean equals(TickTrigger other){
-		return myInterval == other.getMyInterval();
+	public boolean equals(Object other){
+		return other.getClass().equals(this.getClass()) && myInterval == ((TickTrigger) other).getMyInterval();
 	}
 }

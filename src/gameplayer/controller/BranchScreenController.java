@@ -63,7 +63,7 @@ public abstract class BranchScreenController implements Observer {
 			else if (myResources.getString(methodName).equals("String")) {
 				Class[] parameterTypes = {String.class};
 				Object[] parameters = {(String) myList.get(1)};
-				invoke(methodName, parameterTypes, parameters);;
+				invoke(methodName, parameterTypes, parameters);
 			} 
 			else {
 				Class<?> myClass = Class.forName(myResources.getString(methodName));

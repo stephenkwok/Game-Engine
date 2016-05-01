@@ -10,7 +10,7 @@ import gameengine.model.IPlayActor;
 public abstract class ActorAction extends Action {
 
     public ActorAction(Actor assignedActor){
-        super((IGameElement)assignedActor);
+        super(assignedActor);
     }
 
     public IPlayActor getMyActor(){

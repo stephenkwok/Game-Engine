@@ -338,7 +338,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * 
 	 */
 	public void addActor() {
-		IAuthoringActor newActor = (IAuthoringActor) new Actor();
+		IAuthoringActor newActor = new Actor();
 		myActorMap.put(newActor, new ArrayList<>());
 		newActor.setID(myActorMap.size());
 		gameEditingEnvironment.createActorPreviewUnit(newActor);
@@ -349,7 +349,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	/**
 	 * Saves game and returns to splash screen of game player.
 	 */
-
 	public void goToSplash() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setContentText(FINISH_CONFIRMATION_TEXT);

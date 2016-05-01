@@ -9,7 +9,7 @@ import gameengine.model.IGameElement;
 public abstract class LevelAction extends Action {
 
     public LevelAction(Level assignedLevel){
-        super((IGameElement)assignedLevel);
+        super(assignedLevel);
     }
 
     public Level getMyLevel(){

@@ -76,7 +76,7 @@ public class GameAttributesDisplay implements IEditingElement {
 	 * @param child
 	 */
 	private void bindChildWidthToParentWidth(Node child) {
-		((Region) child).prefWidthProperty().bind(editingEnvironmentContainer.widthProperty());;
+		((Region) child).prefWidthProperty().bind(editingEnvironmentContainer.widthProperty());
 	}
 
 	/**
