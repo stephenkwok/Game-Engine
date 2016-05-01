@@ -89,24 +89,34 @@ public class PhysicsEngine {
 		moveForwardBack(a1, false);
 	}
 		
-	public void glideRight(IPlayActor a1, double offset){
+	public void glideLeftRight(IPlayActor a1, double offset, boolean right) {
+		offset *= (right ? 1 : -1);
 		a1.setX(applyForce(a1.getX(),offset));
 		a1.setVeloX(offset);
 	}
+	
+	
+	public void glideRight(IPlayActor a1, double offset){
+		glideLeftRight(a1, offset, true);
+	}
 	public void glideLeft(IPlayActor a1, double offset){
-		a1.setX(applyForce(a1.getX(),-offset));
-		a1.setVeloX(-offset);
+		glideLeftRight(a1, offset, false);
 
 	}
-	public void glideUp(IPlayActor a1, double offset){
+	
+	
+	public void glideUpDown(IPlayActor a1, double offset, boolean up) {
+		offset *= (up ? -1 : 1);
 		a1.setY(applyForce(a1.getY(),-offset));
 		a1.setVeloY(-offset);
-
 	}
+	
+	public void glideUp(IPlayActor a1, double offset){
+		glideUpDown(a1, offset, true);
+	}
+	
 	public void glideDown(IPlayActor a1, double offset){
-		a1.setY(applyForce(a1.getY(),offset));
-		a1.setVeloY(offset);
-
+		glideUpDown(a1, offset, false);
 	}
 	
 	public void glideForward(IPlayActor a1, double offset) {
