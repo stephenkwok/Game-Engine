@@ -32,6 +32,7 @@
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.Spawn">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <ZERO>0.0</ZERO>
                       <mySpawnedActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
@@ -42,7 +43,7 @@
                         <myFriction>0.0</myFriction>
                         <myName>Default Name</myName>
                         <myID>4</myID>
-                        <myImageViewName>fireball.png</myImageViewName>
+                        <myImageViewName>blue_ball.png</myImageViewName>
                         <myHeading>0.0</myHeading>
                         <myImageViewSize>0.0</myImageViewSize>
                         <myRuleManager>
@@ -153,7 +154,7 @@
                         <myStates/>
                         <mySprite>
                           <myImages>
-                            <string>fireball.png</string>
+                            <string>blue_ball.png</string>
                           </myImages>
                           <spriteIndex>0</spriteIndex>
                         </mySprite>

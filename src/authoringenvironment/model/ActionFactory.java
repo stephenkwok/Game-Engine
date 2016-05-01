@@ -128,8 +128,8 @@ public class ActionFactory {
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> clazz = Class.forName(className);
-		Constructor<?> constructor = clazz.getConstructor(Actor.class, Actor.class);
-		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO), (Actor) arguments.get(ONE));
+		Constructor<?> constructor = clazz.getConstructor(Actor.class, Actor.class, Double.class);
+		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO), (Actor) arguments.get(ONE), arguments.get(TWO));
 	}
 	
 	private IAction createCreateActorBehavior(String actionType, String className)

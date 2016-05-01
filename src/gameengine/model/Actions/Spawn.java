@@ -10,16 +10,23 @@ import gameengine.model.IPlayActor;
 
 
 public class Spawn extends ActorAction{
-
-	IPlayActor mySpawnedActor;
-	double spawnAngle ;
+	private Double ZERO = 0.0;
+	private IPlayActor mySpawnedActor;
+	private Double spawnAngle ;
 	
 
 	
-	public Spawn(Actor actor1, Actor spawnedActor, double angle) {
+	public Spawn(Actor actor1, Actor spawnedActor, Double angle) {
 		super(actor1);
 		mySpawnedActor  = (IPlayActor) spawnedActor;
 		spawnAngle = angle;
+	}
+	
+	public double getSpawnAngle(){
+		if(spawnAngle==null){
+			spawnAngle = ZERO;
+		}
+		return spawnAngle;
 	}
 
 	@Override
@@ -38,10 +45,6 @@ public class Spawn extends ActorAction{
 		double startingYPos = getMyActor().getBounds().getMinY() + getMyActor().getBounds().getHeight()/2;
 		double y_Offset = Math.sin(Math.toRadians(spawnAngle));
 		double x_Offset = Math.cos(Math.toRadians(spawnAngle));		
-		
-		System.out.println(x_Offset*(clone.getBounds().getWidth()/2 + halfWidth));
-//		clone.setX(startingXPos+( (x_Offset*(halfWidth-clone.getBounds().getWidth())) ));
-//		clone.setY(startingYPos-( (y_Offset*(halfHeight-clone.getBounds().getHeight()/2))));
 		
 		clone.setX(startingXPos - clone.getBounds().getWidth()/2 +(x_Offset*(clone.getBounds().getWidth()/2 + halfWidth)));
 		clone.setY(startingYPos - clone.getBounds().getHeight()/2 -(y_Offset*(clone.getBounds().getHeight()/2 + halfHeight)));
