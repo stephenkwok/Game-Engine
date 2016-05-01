@@ -12,7 +12,7 @@ public class ReverseHeading extends MovingAction {
 
 	@Override
 	public void perform() {
-		if (getMyActor().getHeading() == 0.0) {
+		if (Math.abs(getMyActor().getHeading()) == 0.0) {
 			getMyActor().setHeading(180.0);
 			getMyActor().setDirection();
 		} else { 
