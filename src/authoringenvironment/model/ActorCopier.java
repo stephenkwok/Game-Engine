@@ -114,8 +114,8 @@ public class ActorCopier {
 		Class myclass = object.getClass();
 		Class[] argumentTypes = new Class[arguments.length];
 		for(int i=0; i<argumentTypes.length;i++){
-			if((myclass.getSuperclass() == ITrigger.class || myclass.getSuperclass() == Action.class) && arguments[i].getClass() == Actor.class){
-				argumentTypes[i] = IGameElement.class;
+			if((myclass.getSuperclass() == ITrigger.class || (myclass.getSuperclass() == Action.class && i==0)) && arguments[i].getClass() == Actor.class){
+				argumentTypes[i] = IGameElement.class;	
 			}else{
 				argumentTypes[i] = arguments[i].getClass();
 			}
