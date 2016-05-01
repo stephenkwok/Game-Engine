@@ -24,5 +24,8 @@ public class SoundAction extends Action{
 		((Observable) getGameElement()).notifyObservers(send);
 	}
 
+	public String getSoundFile(){
+		return this.soundFile;
+	}
 
 }
