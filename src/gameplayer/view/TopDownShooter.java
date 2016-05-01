@@ -25,7 +25,6 @@ import gameengine.model.Actions.HorizontalStaticCollision;
 import gameengine.model.Actions.LoseGame;
 import gameengine.model.Actions.MoveLeft;
 import gameengine.model.Actions.MoveRight;
-import gameengine.model.Actions.ReverseHeading;
 import gameengine.model.Actions.Spawn;
 import gameengine.model.Actions.VerticalBounceCollision;
 import gameengine.model.Actions.VerticalHeadingSwitch;
@@ -124,7 +123,8 @@ public class TopDownShooter extends Application {
         Game model = new Game(info, levels);
         model.setHUDInfoFile("a.txt");
         CreatorController c = new CreatorController(model);
-        c.saveForEditing(new File("gamefiles/TDS.xml"));
+        c.saveForEditing(new File("gamefiles/TDS"
+        		+ ".xml"));
         ParallelCamera camera = new ParallelCamera();
         GameScreen view = new GameScreen(camera);
 
