@@ -105,7 +105,7 @@ public class TopDownShooter extends Application {
         bullet.addRule(new Rule(new TickTrigger(), new GlideUp(bullet, 2.5)));
         
         
-        player1.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new Spawn(player1,bullet, 90.0)));
+        player1.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new Spawn(player1,bullet)));
 
         
         bullet.addRule(new Rule(new TopCollision(bullet,enemy), new Destroy(bullet)));
