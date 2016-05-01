@@ -40,7 +40,6 @@ public class LevelPreview {
 		myPreviewFile = new File(PREVIEW_FILE);
 		Game model;
 		GameController controller;
-		GameScreen view;
 
 		Group group = new Group();
 		Scene scene = new Scene(group);
@@ -57,8 +56,6 @@ public class LevelPreview {
 		stage.setOnCloseRequest(e -> {
 			controller.endGame(false);
 		});
-
-
 	}
 
 	private void addLevelsAndActors(Game model) {

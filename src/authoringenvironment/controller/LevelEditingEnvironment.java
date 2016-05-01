@@ -17,6 +17,7 @@ import authoringenvironment.view.LevelInspector;
 import authoringenvironment.view.LevelPreview;
 import authoringenvironment.view.LevelPreviewEditing;
 import gameengine.controller.Level;
+import gameengine.model.Rule;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.ClipboardContent;
@@ -332,5 +333,9 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	 */
 	public void previewGame() {
 		myLevelPreviewer.previewGame();
+	}
+
+	public void addRuleToLevel(Rule rule) {
+		myLevel.addRule(new Rule(trigger, action));
 	}
 }
