@@ -29,7 +29,6 @@ import gameengine.model.Actions.MoveRight;
 import gameengine.model.Actions.MoveUp;
 import gameengine.model.Actions.NextImage;
 import gameengine.model.Actions.NextLevel;
-import gameengine.model.Actions.ReverseHeading;
 import gameengine.model.Actions.SoundAction;
 import gameengine.model.Actions.Spawn;
 import gameengine.model.Actions.VerticalBounceCollision;

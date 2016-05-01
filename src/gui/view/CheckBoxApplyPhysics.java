@@ -90,5 +90,8 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 		return this.isSelected;
 	}
 
+	public void updateSelection() {
+		
+	}
 
 }
