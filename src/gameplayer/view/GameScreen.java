@@ -37,7 +37,7 @@ import javafx.util.Callback;
  */
 
 public class GameScreen extends Observable implements IGameScreen {
-
+	private int BACKGROUND_OFFSET = 10;
 	private SubScene mySubscene;
 	private Group mySubgroup;
 	private Camera myCamera;
@@ -84,12 +84,14 @@ public class GameScreen extends Observable implements IGameScreen {
 
 	public void addBackground(Level level) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(level.getMyBackgroundImgName()));
-		this.myEndHorizontal = image.getWidth();
-		this.myEndVertical = image.getHeight();
+		
 		ImageView imageView = new ImageView(image);
 		imageView.setPreserveRatio(true); // amy added this to resize background to fit height
 		imageView.setFitHeight(level.getMyBackgroundHeight()); // amy also added this
+		this.myEndHorizontal = imageView.getBoundsInParent().getWidth();
+		this.myEndVertical = imageView.getBoundsInParent().getHeight();
 		level.setMyImageView(imageView);
+		
 		
 		ImageView imageView2 = new ImageView(image);
 		imageView2.setPreserveRatio(true); // amy also added
@@ -100,7 +102,7 @@ public class GameScreen extends Observable implements IGameScreen {
 			@Override
 			public void changed(ObservableValue o, Object oldVal, Object newVal) {
 				// TODO Watch that magic constant!
-				imageView2.setX((Double) newVal + imageView.getImage().getWidth() - 10);
+				imageView2.setX((Double) newVal + imageView.getImage().getWidth() - BACKGROUND_OFFSET);
 			}
 		});
 
@@ -161,13 +163,13 @@ public class GameScreen extends Observable implements IGameScreen {
 
 	@Override
 	public void disableMusic(boolean disable) {
-		// TODO Auto-generated method stub
+		// Depracated method: sound is handled through gameController now
 
 	}
 
 	@Override
 	public void disableSoundFX(boolean disable) {
-		// TODO Auto-generated method stub
+		// Depracated method: sound is handled through gameController now
 
 	}
 
@@ -185,7 +187,7 @@ public class GameScreen extends Observable implements IGameScreen {
 		alert.setOnCloseRequest( e -> {
 			if (alert.getResult() == ButtonType.YES) {
 				saveScorePrompt();
-			} 
+			}
 			else {
 				restartGamePrompt();
 			}

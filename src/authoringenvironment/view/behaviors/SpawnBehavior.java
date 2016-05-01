@@ -10,13 +10,29 @@ import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
 import gameengine.model.Actions.Spawn;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 
 public class SpawnBehavior extends SelectActorBehavior {
+	private String ANGLE_LABEL = "Spawn at degree: ";
 	private IAction myAction;
+	private TextField angleField;
+	
 	
 	public SpawnBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
 			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
 		super(myRule, myActorRule, behaviorType, myResources, myActor, myActors);
+	}
+	
+	@Override
+	public Node createNode(){
+		HBox hb = (HBox)super.createNode();
+		Label angleLabel = new Label(ANGLE_LABEL);
+		angleField = new TextField();
+		hb.getChildren().addAll(angleLabel,angleField);
+		return hb;
 	}
 
 	@Override
@@ -24,6 +40,7 @@ public class SpawnBehavior extends SelectActorBehavior {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(getMyActor());
 		arguments.add(getOtherActor());
+		arguments.add(Double.parseDouble(angleField.getText()));
 		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
 	}
 
@@ -41,6 +58,7 @@ public class SpawnBehavior extends SelectActorBehavior {
 	public void updateValueBasedOnEditable() {
 		try{
 			getComboBox().setValue((IEditableGameElement) (((Spawn) getMyRule().getMyAction()).getMySpawnedActor()));
+			angleField.setText(Double.toString((Double) ((Spawn)getMyRule().getMyAction()).getSpawnAngle()));
 		}catch(Exception e){
 		}
 	}

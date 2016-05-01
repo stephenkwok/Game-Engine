@@ -75,6 +75,7 @@
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.Spawn">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <ZERO>0.0</ZERO>
                       <mySpawnedActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
@@ -140,6 +141,7 @@
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </mySpawnedActor>
+                      <spawnAngle>0.0</spawnAngle>
                     </myAction>
                   </gameengine.model.Rule>
                 </list>
@@ -3681,6 +3683,7 @@
       <myMainCharacters/>
       <soundtrack>Jordan.mp3</soundtrack>
       <myGarbageCollectors/>
+      <toBeDeleted>false</toBeDeleted>
     </gameengine.controller.Level>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -3730,6 +3733,7 @@
       <myMainCharacters/>
       <soundtrack>Ink.mp3</soundtrack>
       <myGarbageCollectors/>
+      <toBeDeleted>false</toBeDeleted>
     </gameengine.controller.Level>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -3788,6 +3792,7 @@
       <myMainCharacters/>
       <soundtrack>Robot.mp3</soundtrack>
       <myGarbageCollectors/>
+      <toBeDeleted>false</toBeDeleted>
     </gameengine.controller.Level>
   </levels>
   <info>
