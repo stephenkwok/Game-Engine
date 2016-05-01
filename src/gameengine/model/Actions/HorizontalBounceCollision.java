@@ -1,8 +1,6 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
-import gameengine.model.IGameElement;
-import gameengine.model.IPlayActor;
 
 /**
  * This Action represents an elastic sideways collision between Actors
@@ -20,6 +18,7 @@ public class HorizontalBounceCollision extends ActorAction{
 	@Override
 	public void perform() {
 		getMyActor().getPhysicsEngine().elasticHorizontalCollision(getMyActor());
+		
 	}
 
 }

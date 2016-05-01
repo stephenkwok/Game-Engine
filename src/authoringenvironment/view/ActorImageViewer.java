@@ -2,10 +2,9 @@ package authoringenvironment.view;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
+import authoringenvironment.controller.ActorEditingEnvironment;
 import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditingElement;
 import gui.view.ButtonFileChooserActorImage;
 import gui.view.ComboBoxActorImages;
 import gui.view.ComboBoxSpriteImages;
@@ -29,6 +28,7 @@ public class ActorImageViewer implements IGUI {
 	private static final String AVAILABLE_ACTOR_IMAGES = "Available Images";
 	private static final String AVAILABLE_SPRITE_IMAGES = "Available Sprites";
 	private static final String IMAGE_RESOURCE = "images";
+	private static final double ACTOR_DISPLAY_FIT_SIZE = 80.0;
 	private static final double DEFAULT_HEIGHT = 20;
 	private static final int PADDING = 10;
 	private static final String BUTTON_LABEL = "Load Image...";
@@ -36,6 +36,7 @@ public class ActorImageViewer implements IGUI {
 	private StackPane myPane;
 	private ActorEditingEnvironment aEE;
 	private List<IGUIElement> elementList;
+	
 
 	/**
 	 * Module that contains actor image display and options for loading an image
@@ -64,7 +65,13 @@ public class ActorImageViewer implements IGUI {
 		ButtonFileChooserActorImage imageChooser = new ButtonFileChooserActorImage(BUTTON_LABEL, null, aEE,
 				aEE.getStage());
 		imageChooser.addObserver(aEE);
-		hbox.getChildren().addAll(myActorIV, imageChooser.createNode());
+
+		ImageView myActorIVCopy = new ImageView(myActorIV.getImage());
+		myActorIVCopy.setFitHeight(ACTOR_DISPLAY_FIT_SIZE);
+		myActorIVCopy.setFitWidth(ACTOR_DISPLAY_FIT_SIZE);
+		myActorIVCopy.setPreserveRatio(true);
+		hbox.getChildren().addAll(myActorIVCopy, imageChooser.createNode());
+
 		vbox.getChildren().addAll(hbox, getImagesComboBox(), getSpritesComboBox());
 		myPane.getChildren().add(vbox);
 		myPane.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));

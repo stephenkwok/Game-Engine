@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.HighScoresKeeper>
+  <changed>false</changed>
+  <obs/>
+  <myScores>
+    <entry>
+      <string>gamefiles/loaders/FlappyBird_loader.xml</string>
+      <tree-map>
+        <entry>
+          <string>b0$$</string>
+          <int>1895</int>
+        </entry>
+        <entry>
+          <string>michael figueiras</string>
+          <int>75</int>
+        </entry>
+        <entry>
+          <string>michaelf</string>
+          <int>205</int>
+        </entry>
+      </tree-map>
+    </entry>
+  </myScores>
+</gameengine.controller.HighScoresKeeper>

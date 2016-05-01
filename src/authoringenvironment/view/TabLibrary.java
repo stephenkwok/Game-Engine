@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.ActorRule;
+import authoringenvironment.model.ActorRuleCreator;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -172,7 +174,7 @@ abstract class TabLibrary extends TabParent {
 	 */
 	private void addNodeToTarget(Label toAdd, ActorRule myActorRule) {
 		if (matchesExtensions(toAdd.getText(), SOUND_FILE_EXTS))
-			myActorRuleCreator.addBehavior(myActorRule, toAdd.getText());
+			myActorRuleCreator.addSound(myActorRule, "SoundAction", toAdd.getText());
 		else
 			myActorRuleCreator.addBehavior(myActorRule, toAdd.getText());
 	}

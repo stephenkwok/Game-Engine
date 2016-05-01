@@ -1,8 +1,10 @@
 package gameengine.model;
 
-import gameengine.model.Triggers.AttributeReached;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Observable;
+import java.util.Set;
 
+import gameengine.model.Triggers.AttributeReached;
 import voogasalad.util.hud.source.Property;
 
 
@@ -67,9 +69,16 @@ public class Attribute extends Observable {
         return myType;
     }
     
-    
     public Property<Integer> getProperty() {
     	return myValue;
+    }
+    
+    public Set<Integer> getTriggerValues(){
+    	return myTriggerValues;
+    }
+    
+    public void setTriggerValues(Set<Integer> triggers){
+    	myTriggerValues = triggers;
     }
         
 }

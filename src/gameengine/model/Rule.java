@@ -1,6 +1,5 @@
 package gameengine.model;
 
-import gameengine.model.IRule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.ITrigger;
 
@@ -59,5 +58,11 @@ public class Rule implements IRule{
 	public String toString() {
 		return "Trigger: " + myTrigger.getClass().getSimpleName() + "\t causes \t Action:" + myAction.getClass().getSimpleName();
 		
+	}
+	
+
+	@Override
+	public boolean equals(Object other){
+		return ((Rule)other).getMyAction().equals(getMyAction()) && myTrigger.equals(((Rule)other).getMyTrigger());
 	}
 }

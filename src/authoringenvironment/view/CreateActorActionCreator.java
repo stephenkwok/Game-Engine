@@ -5,31 +5,32 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import com.sun.xml.internal.bind.v2.runtime.output.NamespaceContextImpl.Element;
-
-import authoringenvironment.model.IActionCreator;
+import authoringenvironment.controller.LevelEditingEnvironment;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditingEnvironment;
-import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gameengine.model.IAction;
 import gameengine.model.IGameElement;
 import gameengine.model.Actions.Action;
 import gameengine.model.Actions.CreateActor;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
-public class CreateActorActionCreator extends VBox implements IActionCreator {
+public class CreateActorActionCreator extends VBox implements ILevelActionCreator {
 	private static final String RANDOM = "Randomly spawn within a range";
 	private static final String FIXED = "Fixed spawn location";
 	private static final String DELIMITER = ",";
 	private static final String LEVEL = "Level";
+	private static final String LABEL_TEXT = "CreateActorLabelText";
+	private static final String INITIAL_POSITION = "Enter initial position of created actor";
+	private static final String CHOOSE = "Choose";
+	private static final String RANDOM_TEXT_FIELD = "RandomIntervalTextFields";
+	private static final String FIXED_TEXT_FIELD = "FixedTextFields";
 	private String randomOrFixed;
 	private IGameElement myElement;
 	private ResourceBundle myResources;
@@ -52,7 +53,7 @@ public class CreateActorActionCreator extends VBox implements IActionCreator {
 	}
 	
 	private void init() {
-		String[] labelText = myResources.getString("CreateActorLabelText").split(DELIMITER);
+		String[] labelText = myResources.getString(LABEL_TEXT).split(DELIMITER);
 		Label[] labels = new Label[labelText.length];
 		for (int i = 0; i < labelText.length; i++) {
 			labels[i] = new Label(labelText[i]);
@@ -67,7 +68,7 @@ public class CreateActorActionCreator extends VBox implements IActionCreator {
 		options.add(FIXED);
 		ObservableList<String> comboOptions = FXCollections.observableArrayList(options);
 		myRandomOrFixedComboBox = new ComboBox<>(comboOptions);
-		Button button = new Button("Choose");
+		Button button = new Button(CHOOSE);
 		button.setOnAction(e -> {
 			randomOrFixed = (String) myRandomOrFixedComboBox.getValue();
 			displayXYOptions();
@@ -77,7 +78,7 @@ public class CreateActorActionCreator extends VBox implements IActionCreator {
 	}
 	
 	private void displayXYOptions() {
-		this.getChildren().add(new Label("Enter initial position of created actor"));
+		this.getChildren().add(new Label(INITIAL_POSITION));
 		switch (randomOrFixed) {
 		case RANDOM:
 			makeRandomIntervalTextFields();
@@ -89,7 +90,7 @@ public class CreateActorActionCreator extends VBox implements IActionCreator {
 	}
 	
 	private void makeRandomIntervalTextFields() {
-		String[] labelText = myResources.getString("RandomIntervalTextFields").split(DELIMITER);
+		String[] labelText = myResources.getString(RANDOM_TEXT_FIELD).split(DELIMITER);
 		Label[] labels = new Label[labelText.length];
 		for (int i = 0; i < labelText.length; i++) {
 			labels[i] = new Label(labelText[i]);
@@ -113,7 +114,7 @@ public class CreateActorActionCreator extends VBox implements IActionCreator {
 	}
 	
 	private void makeFixedTextFields() {
-		String[] labelText = myResources.getString("FixedTextFields").split(DELIMITER);
+		String[] labelText = myResources.getString(FIXED_TEXT_FIELD).split(DELIMITER);
 		Label[] labels = new Label[labelText.length];
 		for (int i = 0; i < labelText.length; i++) {
 			labels[i] = new Label(labelText[i]);

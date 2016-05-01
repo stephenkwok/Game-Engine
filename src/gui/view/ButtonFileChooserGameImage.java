@@ -3,10 +3,10 @@ package gui.view;
 import java.io.File;
 
 import authoringenvironment.model.IEditingElement;
-import authoringenvironment.view.GameEditingEnvironment;
+import authoringenvironment.view.GameAttributesDisplay;
 import gameengine.controller.GameInfo;
 import javafx.scene.image.Image;
-import javafx.scene.image.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
@@ -38,7 +38,7 @@ public class ButtonFileChooserGameImage extends ButtonFileChooser {
 	 */
 	@Override
 	protected void updateImage(IEditingElement editor, Image image, File imageFile) {
-		GameInfo myGameInfo = ((GameEditingEnvironment) editor).getGameInfo();
+		GameInfo myGameInfo = ((GameAttributesDisplay) editor).getGameInfo();
 		String imageName = imageFile.getPath();
 		myGameInfo.setImageView(new ImageView(image));
 		myGameInfo.setMyImageName(imageName);

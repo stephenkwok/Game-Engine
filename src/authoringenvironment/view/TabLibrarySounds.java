@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import authoringenvironment.model.ActorRuleCreator;
 import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -78,7 +79,6 @@ public class TabLibrarySounds extends TabLibrary {
 		iv.setPreserveRatio(true);
 		Button button = new Button("", iv);
 		URL resource = getClass().getClassLoader().getResource(soundName);
-		System.out.println("" + resource == null + " " + soundName);
 		AudioClip sound = new AudioClip(resource.toString());
 		button.setOnAction(event -> {
 			if (sound.isPlaying()) {

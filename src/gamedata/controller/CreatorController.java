@@ -2,15 +2,14 @@ package gamedata.controller;
 
 import java.io.File;
 import java.io.IOException;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
 import gamedata.XMLCreator;
-import gameengine.controller.Game;
 import gameengine.controller.IGame;
-import gui.view.Screen;
 
 public class CreatorController implements ICreatorController {
 

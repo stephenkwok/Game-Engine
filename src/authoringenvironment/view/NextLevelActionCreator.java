@@ -1,12 +1,11 @@
 package authoringenvironment.view;
 
-import authoringenvironment.model.IActionCreator;
 import gameengine.model.IGameElement;
 import gameengine.model.Actions.Action;
 import gameengine.model.Actions.NextLevel;
 import javafx.scene.layout.VBox;
 
-public class NextLevelActionCreator extends VBox implements IActionCreator {
+public class NextLevelActionCreator extends VBox implements ILevelActionCreator {
 	private IGameElement myElement;
 	
 	public NextLevelActionCreator(IGameElement element) {

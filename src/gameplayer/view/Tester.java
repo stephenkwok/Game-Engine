@@ -1,13 +1,39 @@
 package gameplayer.view;
 
-import gameengine.controller.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import authoringenvironment.model.IAuthoringActor;
+import gamedata.controller.CreatorController;
+import gameengine.controller.Game;
+import gameengine.controller.GameInfo;
+import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
+import gameengine.model.IPlayActor;
+import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
-import gameengine.model.Actions.*;
+import gameengine.model.Actions.Action;
+import gameengine.model.Actions.ApplyPhysics;
+import gameengine.model.Actions.ChangeAttribute;
+import gameengine.model.Actions.CreateActor;
+import gameengine.model.Actions.Destroy;
+import gameengine.model.Actions.GlideForward;
+import gameengine.model.Actions.HorizontalStaticCollision;
+import gameengine.model.Actions.MoveLeft;
+import gameengine.model.Actions.MoveRight;
+import gameengine.model.Actions.MoveUp;
+import gameengine.model.Actions.NextImage;
+import gameengine.model.Actions.NextLevel;
+import gameengine.model.Actions.ReverseHeading;
+import gameengine.model.Actions.Spawn;
+import gameengine.model.Actions.VerticalBounceCollision;
+import gameengine.model.Actions.VerticalStaticCollision;
+import gameengine.model.Actions.WinGame;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.ITrigger;
@@ -16,6 +42,7 @@ import gameengine.model.Triggers.SideCollision;
 import gameengine.model.Triggers.TickTrigger;
 import gameengine.model.Triggers.TopCollision;
 import gameplayer.controller.GameController;
+import gameplayer.controller.PlayType;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.ParallelCamera;
@@ -24,13 +51,6 @@ import javafx.scene.SubScene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.util.*;
-import gameengine.model.IPlayActor;
-import gameengine.model.PhysicsEngine;
-import authoringenvironment.model.IAuthoringActor;
-import gamedata.controller.CreatorController;
 
 public class Tester extends Application {
 
@@ -103,13 +123,13 @@ public class Tester extends Application {
         IPlayActor enemy2 = new Actor();
         ((IAuthoringActor)enemy2).setImageViewName("goomba.png");
         ((Actor) enemy2).setName("enemy2");
-        enemy2.setX(400);
+        enemy2.setX(450);
+        enemy2.setY(350);
         System.out.println(enemy2.getHeading());
         TickTrigger trigger = new TickTrigger();
         Action moveForward = new GlideForward((Actor)enemy2, 1.0);
         Rule movingForward = new Rule(trigger, moveForward);
         enemy2.addRule(movingForward);
-        
 
         SideCollision triggerenemy = new SideCollision((Actor)enemy2,(Actor)blocky);
         Action actionenemy2 = new ReverseHeading((Actor)enemy2);
@@ -255,6 +275,11 @@ public class Tester extends Application {
         level1.addActor((IAuthoringActor)actor3);
         level1.addActor((IAuthoringActor) actor4);
         
+        Level level3 = new Level();
+        level3.setMyBackgroundImgName("vgnwpGb.png");
+        levels.add(level3);
+        level3.addActor(actor1);
+        
         
         Level level2 = new Level();
         level2.setMyBackgroundImgName("vgnwpGb.png");
@@ -267,11 +292,7 @@ public class Tester extends Application {
         level1.setSoundtrack("Jordan.mp3");
         level2.setSoundtrack("Robot.mp3");
 
-        Level level3 = new Level();
-        level3.setMyBackgroundImgName("vgnwpGb.png");
-        levels.add(level3);
-        level3.addActor(actor1);
-        
+
         int yposition = 200;
         int xposition = 150;
         for(int i=1; i<=7; i++){
@@ -409,7 +430,7 @@ public class Tester extends Application {
         ParallelCamera camera = new ParallelCamera();
         GameScreen view = new GameScreen(camera);
 
-        GameController controller = new GameController(model);
+        GameController controller = new GameController(model, PlayType.PREVIEW);
         controller.setGame(model);
         controller.setGameView(view);
 

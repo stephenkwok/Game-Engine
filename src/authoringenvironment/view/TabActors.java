@@ -2,7 +2,6 @@ package authoringenvironment.view;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -117,7 +116,6 @@ public class TabActors extends TabParent {
 	 *            updated list of actors.
 	 */
 	public void setAvailableActors(Set<IAuthoringActor> updatedActors) {
-//		actorIcons.clear();
 		updateActorList(updatedActors);
 		actorIcons = actorListToIconList(curActors);
 		addIconsToPane();

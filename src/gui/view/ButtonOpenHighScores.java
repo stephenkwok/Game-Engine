@@ -1,7 +1,5 @@
 package gui.view;
 
-import java.util.Arrays;
-
 public class ButtonOpenHighScores extends ButtonParent{
 
 	public ButtonOpenHighScores(String buttonText, String imageName) {

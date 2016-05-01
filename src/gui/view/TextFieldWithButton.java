@@ -16,7 +16,7 @@ import javafx.scene.layout.Priority;
 
 public abstract class TextFieldWithButton extends EditingElementParent {
 	private static final int PADDING = 10;
-	private static final String GO = "Go";
+	private static final String GO = "Go"; //attributes
 	private HBox myContainer;
 	private Label myTextFieldPrompt;
 	private TextField myTextField;

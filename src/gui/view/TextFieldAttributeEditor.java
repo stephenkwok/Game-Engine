@@ -4,9 +4,9 @@ import gameengine.model.Actor;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
-import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 
 public class TextFieldAttributeEditor extends TextFieldWithButton {
 	private static final double DEFAULT_HEALTH = 0;
@@ -26,8 +26,7 @@ public class TextFieldAttributeEditor extends TextFieldWithButton {
 	}
 	
 	private void determineAttributeType(String labelText){
-		if(labelText==HEALTH_LABEL) attributeType = AttributeType.HEALTH;
-		attributeType = AttributeType.POINTS;
+		attributeType = AttributeType.valueOf(labelText.toUpperCase());
 	}
 	
 	private void createRemoveButton(){

@@ -1,13 +1,11 @@
 package authoringenvironment.view;
 
-import authoringenvironment.model.IActionCreator;
-import gameengine.model.IAction;
 import gameengine.model.IGameElement;
 import gameengine.model.Actions.Action;
 import gameengine.model.Actions.WinGame;
 import javafx.scene.layout.VBox;
 
-public class WinGameActionCreator extends VBox implements IActionCreator {
+public class WinGameActionCreator extends VBox implements ILevelActionCreator {
 	private IGameElement myElement;
 	
 	public WinGameActionCreator(IGameElement element) {

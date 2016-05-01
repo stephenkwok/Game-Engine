@@ -1,5 +1,6 @@
 package authoringenvironment.view;
 
+import authoringenvironment.model.ActorCopier;
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.Actor;
 import javafx.scene.image.ImageView;
@@ -26,7 +27,11 @@ public class ImageviewActorIcon extends ImageView {
 		myActor = actor;
 		setImage(actor.getImageView().getImage());
 		this.setFitWidth(width);
+//		this.setFitHeight(100.0);
 		this.setPreserveRatio(true);
+//		System.out.println("Actor Name: " + actor.getName());
+//		System.out.println("Fit Width: " + getFitWidth());
+//		System.out.println("Fit Height: " + getFitHeight());
 		this.setRotate(actor.getRotate());
 		this.setOpacity(actor.getOpacity());
 		myID = actor.getID();

@@ -1,18 +1,14 @@
 package gameengine.controller;
 
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaPlayer.Status;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.util.Duration;
-import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 /**
  * Created by aamir on 4/24/2016.
@@ -60,14 +56,15 @@ public class SoundPlayer {
      * @param soundFileName
      */
     public void setSoundtrack(String soundFileName){
-        Media soundtrack = mediaMap.get(soundFileName);
+    	if (!isValid(soundFileName)) {
+    		return;
+    	}
         if (soundtrackPlayer != null) {
         	soundtrackPlayer.dispose();
         }
-        if (soundtrack == null) {
-        	return;
-        }
-        soundtrackPlayer = new MediaPlayer(soundtrack);
+
+        soundtrackPlayer = new MediaPlayer(mediaMap.get(soundFileName));
+
         soundtrackPlayer.setOnEndOfMedia(new Runnable() {
             public void run() {
                 soundtrackPlayer.seek(Duration.ZERO);
@@ -85,7 +82,8 @@ public class SoundPlayer {
 //        MediaPlayer curMediaPlayer = new MediaPlayer(sound);
 //        mediaPlayers.put(sound, curMediaPlayer);
 //        curMediaPlayer.play();
-    	if (mediaMap.get(soundFileName) == null) {
+
+    	if (!isValid(soundFileName)) {
     		return;
     	}
     	MediaPlayer mp = new MediaPlayer(mediaMap.get(soundFileName));
@@ -119,6 +117,10 @@ public class SoundPlayer {
      */
     public void soundtrackSetMute(boolean mute){
         soundtrackPlayer.setMute(mute);
+    }
+    
+    public boolean isValid(String key) {
+    	return key != null && mediaMap.get(key) != null;
     }
 
 }

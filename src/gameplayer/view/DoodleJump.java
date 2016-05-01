@@ -1,21 +1,32 @@
 package gameplayer.view;
 
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import authoringenvironment.model.ActorCopier;
 import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
-import gameengine.model.Actions.*;
 import gameengine.model.Actor;
 import gameengine.model.ActorState;
-import gameengine.model.Attribute;
-import gameengine.model.AttributeType;
 import gameengine.model.PhysicsEngine;
-import gameengine.model.Actions.ShiftScene;
 import gameengine.model.Rule;
-import gameengine.model.Triggers.*;
+import gameengine.model.Actions.ApplyPhysics;
+import gameengine.model.Actions.CreateActor;
+import gameengine.model.Actions.MoveLeft;
+import gameengine.model.Actions.MoveRight;
+import gameengine.model.Actions.MoveUp;
+import gameengine.model.Actions.ShiftScene;
+import gameengine.model.Actions.VerticalBounceCollision;
+import gameengine.model.Triggers.BottomCollision;
+import gameengine.model.Triggers.KeyTrigger;
+import gameengine.model.Triggers.TickTrigger;
 import gameplayer.controller.GameController;
-import gameplayer.view.GameScreen;
+import gameplayer.controller.PlayType;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.ParallelCamera;
@@ -24,13 +35,6 @@ import javafx.scene.SubScene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import authoringenvironment.view.ActorCopier;
 
 public class DoodleJump extends Application {
     /**
@@ -73,7 +77,7 @@ public class DoodleJump extends Application {
         greenplatform.setImageViewName("green_platform.png");
         greenplatform.setID(2);
         
-        
+
         player.addRule(new Rule(new BottomCollision(player,greenplatform),new VerticalBounceCollision(player)));
         player.addRule(new Rule(new BottomCollision(player,greenplatform, true),new ShiftScene(player,"Down",50.0)));
         player.addRule(new Rule(new BottomCollision(player,greenplatform, true),new CreateActor(player,greenplatform,200.0,700.0,0.0,0.0)));
@@ -111,7 +115,7 @@ public class DoodleJump extends Application {
         ParallelCamera camera = new ParallelCamera();
         GameScreen view = new GameScreen(camera);
 
-        GameController controller = new GameController(model);
+        GameController controller = new GameController(model, PlayType.PREVIEW);
         controller.setGame(model);
         controller.setGameView(view);
 
