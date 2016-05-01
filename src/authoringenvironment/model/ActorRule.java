@@ -13,7 +13,6 @@ import gameengine.model.IRule;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.ITrigger;
-import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -265,7 +264,6 @@ public class ActorRule {
 		if (myActorRuleCreator.isNewlyReturned()) {
 			myActorRuleCreator.setNewlyReturned(false);
 			myActor.getRules().clear();
-			System.out.println("cleared");
 		}
 		if (myTrigger == null) {
 			for (IAuthoringBehavior authoringBehavior : authoringBehaviorMap.keySet()) {

@@ -56,6 +56,10 @@ public abstract class CollisionTrigger extends ITrigger {
 	public void setMyCollisionActor(Actor myCollisionActor) {
 		this.myCollisionActor = myCollisionActor;
 	}
+	
+	public boolean isOneTime() {
+		return oneTime;
+	}
 
 	@Override
 	public boolean equals(Object o) {

@@ -349,7 +349,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	/**
 	 * Saves game and returns to splash screen of game player.
 	 */
-
 	public void goToSplash() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setContentText(FINISH_CONFIRMATION_TEXT);
