@@ -24,6 +24,11 @@ public class SoundAction extends Action{
 		send.add(soundFile);
 		((Observable) getGameElement()).notifyObservers(send);
 	}
+	
+	@Override
+	public Object[] getParameters() {
+		return new Object[]{getGameElement(), soundFile};
+	}
 
 	@Override
 	public Object[] getParameters(){

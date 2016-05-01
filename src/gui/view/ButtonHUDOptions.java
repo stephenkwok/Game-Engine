@@ -17,7 +17,7 @@ public class ButtonHUDOptions extends ButtonParent {
 	 */
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnAction(e -> notifyObservers("ButtonHUDOptions"));
+		getButton().setOnAction(e -> notifyObservers());
 	}
 	
 }
