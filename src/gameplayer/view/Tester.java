@@ -71,19 +71,26 @@ public class Tester extends Application {
 
         IAuthoringActor actor1 = new Actor();
         actor1.setImageViewName("runningmario1.png");
-        actor1.setName("A1");
+        actor1.setName("Mario");
         actor1.setID(1);
-        actor1.addRule(new Rule(new KeyTrigger(KeyCode.C), new SoundAction((Actor)actor1, "shotgun.mp3")));
+        
         actor1.addSpriteImage("runningmario2.png");
         actor1.addSpriteImage("runningmario3.png");
         
         IAuthoringActor actor12 = new Actor();
         actor12.setImageViewName("runningmario1.png");
-        actor12.setName("A1");
+        actor12.setName("Luigi");
         actor12.setID(4);
         actor12.addState(ActorState.MAIN);
-        actor12.addAttribute(new Attribute(AttributeType.POINTS, 0, (IPlayActor) actor12));
-
+        actor12.addAttribute(new Attribute(AttributeType.POINTS, 3, (IPlayActor) actor12));
+        
+        actor12.addRule(new Rule(new KeyTrigger(KeyCode.C), new SoundAction((Actor)actor12, "shotgun.mp3")));
+        actor12.addRule(new Rule(new KeyTrigger(KeyCode.D), new MoveRight((Actor)actor12)));
+        actor12.addRule(new Rule(new KeyTrigger(KeyCode.R), new ChangeAttribute((IPlayActor)actor12,AttributeType.POINTS,1)));
+        
+        
+        
+        
         actor1.addSpriteImage("runningmario2.png");
         actor1.addSpriteImage("runningmario3.png");
         

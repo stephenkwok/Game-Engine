@@ -1,30 +1,30 @@
 package gameplayer.view;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 
 import gameengine.controller.Game;
+import gameengine.model.Actor;
 import gameengine.model.AttributeType;
+import gameengine.model.IPlayActor;
 import voogasalad.util.hud.source.HUDController;
 import voogasalad.util.hud.source.IValueFinder;
 import voogasalad.util.hud.source.Property;
 
 public class TLGCSValueFinder implements IValueFinder {
-	private Game data; //for other projects, your data will be a different class
+	private Game data;
 	
 	@Override
 	public Collection<Property<?>> find(String key) {
-		Collection<Property<?>> properties = new HashSet<>();
+		Collection<Property<?>> properties = new ArrayList<>();
 		Property<?> ret = null;
+		boolean multiSuccess = false;
 		try {
-			
 			switch (key.toLowerCase()) {
-				case "points":
-					ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getProperty();
-					break;
-				case "health":
-					//ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.HEALTH).getProperty();
-					break;
 				case "level time":
 					ret = data.getLevelTimeProperty();
 					break;
@@ -32,7 +32,11 @@ public class TLGCSValueFinder implements IValueFinder {
 					ret = data.getGlobalTimeProperty();
 					break;
 				default:
-					properties.addAll(findMany(key));
+					Collection<Property<?>> multipleProperties = findMany(key);
+					if (multipleProperties.size() != 0) {
+						properties.addAll(multipleProperties);
+						multiSuccess = true;
+					}
 					break;
 			}
 		} catch (Exception e) {
@@ -40,40 +44,42 @@ public class TLGCSValueFinder implements IValueFinder {
 		}
 
 		if (ret != null) {
-			System.out.println(ret.hashCode() + " : " + ret.getFieldName());
 			properties.add(ret);
-		} else {
-			properties.add(new Property<String>("Vaule not found", key));
+		} else if (!multiSuccess){
+			properties.add(new Property<String>("Value not found", key));
 		}
 		
 		
+		
+		
+		
 		return properties;
-		//return ret == null ? new Property<String>("Value Not Found", key) : ret;
 	}
 	
 	
-	//will uncomment when stuff works
 	private Collection<Property<?>> findMany(String key) {
-		Collection<Property<?>> properties = new HashSet<>();
-		/*
-		for (Character c : data.getCurrentLevel().getMainCharacters()) {
+		List<Property<?>> properties = new ArrayList<>();
+		for (IPlayActor mainCharacter : data.getCurrentLevel().getMainCharacters()) {
 			Property<?> ret = null;
 			switch (key.toLowerCase()) {
 				case "points":
-					ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getProperty();
+					ret = mainCharacter.getAttribute(AttributeType.POINTS).getProperty();
 					break;
 				case "health":
-					ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.HEALTH).getProperty();
+					ret = mainCharacter.getAttribute(AttributeType.HEALTH).getProperty();
 					break;
 				default:
 					break;
 			}
-			if (ret != null) {
+			if (ret != null && !properties.contains(ret)) {
 				properties.add(ret);
 			}
 		}
-		*/
-		properties.add(new Property<String>("Value Not Found", key));
+		
+		Collections.sort(properties, (Property<?> a, Property<?> b) 
+									-> a.getFieldName().compareTo(b.getFieldName()));
+		
+		
 		return properties;
 	}
 	
@@ -91,11 +97,6 @@ public class TLGCSValueFinder implements IValueFinder {
 		}
 	}
 
-
-	public void setController(HUDController controller) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 }
