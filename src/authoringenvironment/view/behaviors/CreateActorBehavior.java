@@ -172,20 +172,20 @@ public class CreateActorBehavior extends SelectActorBehavior {
 		try{
 			CreateActor caAction = (CreateActor) getMyRule().getMyAction();
 			getComboBox().setValue((IEditableGameElement) caAction.getMyActorToCopy());
-//			List<Double> coordinates = caAction.getCoordinates();
-//			if(caAction.isRandom()){
-//				xSpecific = false;
-//				ySpecific = false;
-//				addCoordinates();
-//				minX.setText(""+coordinates.get(0));
-//				maxX.setText(""+coordinates.get(1));
-//				minY.setText(""+coordinates.get(2));
-//				maxY.setText(""+coordinates.get(3));
-//			}else{
-//				System.out.println("not random");
-//				minX.setText(""+coordinates.get(0));
-//				maxX.setText(""+coordinates.get(1));
-//			}
+			List<Double> coordinates = caAction.getCoordinates();
+			if(caAction.isRandom()){
+				xSpecific = false;
+				ySpecific = false;
+				addCoordinates();
+				minX.setText(""+coordinates.get(2));
+				maxX.setText(""+coordinates.get(3));
+				minY.setText(""+coordinates.get(4));
+				maxY.setText(""+coordinates.get(5));
+			}else{
+				System.out.println("not random");
+				minX.setText(""+coordinates.get(0));
+				maxX.setText(""+coordinates.get(1));
+			}
 		}catch(Exception e){
 		}
 	}
