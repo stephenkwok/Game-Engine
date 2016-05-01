@@ -190,7 +190,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>718.273234424641</x>
+          <x>786.9850508070828</x>
           <y>40.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -235,7 +235,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>273.82692581842537</x>
+          <x>346.0333495767685</x>
           <y>80.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -280,7 +280,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>741.9097955233514</x>
+          <x>412.0726462404028</x>
           <y>120.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -325,7 +325,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>431.65015769025524</x>
+          <x>113.15659732515985</x>
           <y>160.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -370,7 +370,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>246.90880409951455</x>
+          <x>322.75027832840976</x>
           <y>200.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -415,7 +415,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>649.6205980398101</x>
+          <x>506.8981775643218</x>
           <y>240.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -460,7 +460,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>587.82918880165</x>
+          <x>540.9556672148074</x>
           <y>280.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -505,7 +505,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>373.236553839476</x>
+          <x>585.3121919597011</x>
           <y>320.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -550,7 +550,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>696.0125287488119</x>
+          <x>274.82408863634873</x>
           <y>360.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -595,7 +595,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>796.5185409153763</x>
+          <x>674.0660936570273</x>
           <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -640,7 +640,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>716.1996213900286</x>
+          <x>727.7843083274664</x>
           <y>440.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -685,7 +685,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>169.65292412745487</x>
+          <x>323.0749542302367</x>
           <y>480.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -730,7 +730,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>740.464359411817</x>
+          <x>189.76665046127957</x>
           <y>520.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -779,6 +779,7 @@
       <myPlayPosition>0</myPlayPosition>
       <myScrollingDirection>Vertically</myScrollingDirection>
       <myBackgroundImgName>doodle_background.png</myBackgroundImgName>
+      <myBackgroundImgHeight>0.0</myBackgroundImgHeight>
       <myRuleManager>
         <myRules/>
       </myRuleManager>
