@@ -66,6 +66,12 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 		getContainer().setAlignment(Pos.TOP_LEFT);
 	}
 	
+	/**
+	 * Creates a header
+	 * @param headerText: the text for the header
+	 * @param fontSize: the font size for the header
+	 * @return: the header created
+	 */
 	private Label createHeader(String headerText, double fontSize) {
 		Label header = new Label(headerText);
 		header.setStyle(BOLD_FONT);
@@ -82,11 +88,6 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 		for (String topic : topics) {
 			myContainer.getChildren().add(createTopicContent(topic));
 		}
-		
-//		addQuestionAndAnswerToPage(elementName + TEXT);
-		/*actorEnvironmentQuestions = Arrays
-				.asList(myResources.getString(ACTOR_ENVIRONMENT_QUESTIONS_KEY).split(DELIMITER));
-		actorEnvironmentQuestions.stream().forEach(questionKey -> addQuestionAndAnswerToPage(questionKey));*/
 	}
 	
 	private VBox createTopicContent(String topic) {

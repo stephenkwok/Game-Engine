@@ -60,19 +60,23 @@ public class TLGCSValueFinder implements IValueFinder {
 	private Collection<Property<?>> findMany(String key) {
 		List<Property<?>> properties = new ArrayList<>();
 		for (IPlayActor mainCharacter : data.getCurrentLevel().getMainCharacters()) {
-			Property<?> ret = null;
-			switch (key.toLowerCase()) {
-				case "points":
-					ret = mainCharacter.getAttribute(AttributeType.POINTS).getProperty();
-					break;
-				case "health":
-					ret = mainCharacter.getAttribute(AttributeType.HEALTH).getProperty();
-					break;
-				default:
-					break;
-			}
-			if (ret != null && !properties.contains(ret)) {
-				properties.add(ret);
+			try {
+				Property<?> ret = null;
+				switch (key.toLowerCase()) {
+					case "points":
+						ret = mainCharacter.getAttribute(AttributeType.POINTS).getProperty();
+						break;
+					case "health":
+						ret = mainCharacter.getAttribute(AttributeType.HEALTH).getProperty();
+						break;
+					default:
+						break;
+				}
+				if (ret != null && !properties.contains(ret)) {
+					properties.add(ret);
+				}
+			} catch (Exception e) {
+				// don't worry about it
 			}
 		}
 		

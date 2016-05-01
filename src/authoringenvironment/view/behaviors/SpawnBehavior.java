@@ -16,8 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 public class SpawnBehavior extends SelectActorBehavior {
+	private String ANGLE_LABEL = "Spawn at degree: ";
 	private IAction myAction;
 	private TextField angleField;
+	
 	
 	public SpawnBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
 			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
@@ -27,7 +29,7 @@ public class SpawnBehavior extends SelectActorBehavior {
 	@Override
 	public Node createNode(){
 		HBox hb = (HBox)super.createNode();
-		Label angleLabel = new Label("Spawn at degree: ");
+		Label angleLabel = new Label(ANGLE_LABEL);
 		angleField = new TextField();
 		hb.getChildren().addAll(angleLabel,angleField);
 		return hb;
