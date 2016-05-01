@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -18,14 +19,7 @@ import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
-import authoringenvironment.model.ActorCopier;
-import authoringenvironment.model.AuthoringEnvironmentRestorer;
-import authoringenvironment.model.GamePreviewImageSetter;
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.model.MainCharacterManager;
-import authoringenvironment.model.PresetActorFactory;
+import authoringenvironment.model.*;
 import authoringenvironment.view.PopUpAuthoringHelpPage;
 import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
@@ -39,6 +33,9 @@ import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -67,11 +64,12 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private static final String EDITING_CONTROLLER_RESOURCE = "editingActions";
 	private static final String REQUIRES_ARG = "RequiresArg";
 	private static final String PRESET_ACTORS_RESOURCE = "presetActorsFactory";
+	private static final String FINISH_CONFIRMATION_TEXT = "Have you saved your game?";
 	private List<Level> myLevels;
 	private Map<IAuthoringActor, List<IAuthoringActor>> myActorMap;
 	private LevelEditingEnvironment levelEnvironment;
 	private ActorEditingEnvironment actorEnvironment;
-	private ResourceBundle myResources, myObservableResource,  myPresetActorsResource;
+	private ResourceBundle myResources, myObservableResource, myPresetActorsResource;
 	private Game game;
 	private GameInfo gameInfo;
 	private Scene myScene;
@@ -87,7 +85,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException {
 		super(myStage, EDITING_CONTROLLER_RESOURCE);
-		this.myObservableResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
 		initNewGame();
 	}
 
@@ -353,7 +350,10 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * Saves game and returns to splash screen of game player.
 	 */
 	public void goToSplash() {
-		super.goToSplash();
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setContentText(FINISH_CONFIRMATION_TEXT);
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) super.goToSplash();
 	}
 
 	/**

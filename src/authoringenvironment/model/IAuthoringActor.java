@@ -140,6 +140,10 @@ public interface IAuthoringActor extends IEditableGameElement {
 
 	double getSize();
 
+	/**
+	 * Sets the ID of the Actor
+	 * @param ID: the ID to be assigned to the Actor
+	 */
 	void setID(int ID);
 
 	void addAttribute(Attribute newAttribute);
@@ -153,22 +157,57 @@ public interface IAuthoringActor extends IEditableGameElement {
     public void setPhysicsEngine(PhysicsEngine myPhysicsEngine);
     //public void setRuleMap(Map<String, List<Rule>> updatedRules);
     
+    /**
+     * Sets the Actor's rotate property
+     * @param rotate: the value the Actor's rotate property is to be set to
+     */
     public void setRotate(double rotate);
     
+    /**
+     * 
+     * @return: the value of the Actor's rotate property
+     */
     public double getRotate();
     
+    /**
+     * Sets the Actor's opacity property
+     * @param opacity: the value the Actor's opacity property is to be set to
+     */
     public void setOpacity(double opacity);
     
+    /**
+     * 
+     * @return: the value of the Actor's opacity property
+     */
     public double getOpacity();
     
+    /**
+     * Sets the Actor's scaleX property
+     * @param scaleX: the value the Actor's scaleX property is to be set to
+     */
     public void setScaleX(double scaleX);
     
+    /**
+     * 
+     * @return: the value of the Actor's scaleX property
+     */
     public double getScaleX();
     
+    /**
+     * Sets the Actor's scaleY property
+     * @param scaleY: the value the Actor's scaleY property is to be set to
+     */
     public void setScaleY(double scaleY);
     
+    /**
+     * @return: the value of the Actor's scaleY property
+     */
     public double getScaleY();
     
+    /**
+     * Restores the Actor's ImageView according to its
+     * size, opacity, rotate, scaleX, and scaleY properties
+     */
     public void restoreImageView();
 
 	public Attribute getAttribute(AttributeType attributeType);

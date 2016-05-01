@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <initialGameFile>gamefiles/loaders/Pong_loader.xml</initialGameFile>
+  <initialGameFile>gamefiles/loaders/TDS_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -355,7 +355,7 @@
     <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myHUDElementsToDisplay/>
-    <myFile>Pong_loader.xml</myFile>
+    <myFile>TDS_loader.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
     <myHUDFileLocation>a.txt</myHUDFileLocation>
   </info>
