@@ -4,15 +4,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import authoringenvironment.controller.ActorEditingEnvironment;
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingElement;
-import gameengine.model.Actor;
-import gameengine.model.Rule;
-import gameengine.model.Actions.ApplyPhysics;
-import gameengine.model.Triggers.TickTrigger;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import authoringenvironment.model.*;
+import javafx.geometry.*;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 
@@ -24,7 +17,6 @@ import javafx.scene.control.CheckBox;
  */
 public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEditingElement {
 	private static final int PADDING = 10;
-	private static final String APPLY_PHYSICS = "ApplyPhysics";
 	private String myPromptText;
 	private int myWidth;
 	private IEditableGameElement myEditableElement;
@@ -61,33 +53,11 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 		checkbox.setOnAction(event -> {
 			if(checkbox.isSelected()){
 				isSelected = true;
-//				System.out.println(((IAuthoringActor) aEE.getEditable()).getRules());
 			}else{
 				isSelected = false;
-//				System.out.println(((IAuthoringActor) aEE.getEditable()).getRules());
 			}
 			notifyObservers((IAuthoringActor) aEE.getEditable());
 		});
-	}
-	
-	private void addApplyPhysics(IAuthoringActor myActor){
-		Rule toAdd = new Rule(new TickTrigger(), new ApplyPhysics((Actor) myActor));
-		myActor.addRule(toAdd);
-		aEE.setEditableElement(myActor);
-	}
-	
-	private void removeApplyPhysics(IAuthoringActor myActor){
-		TickTrigger tick = new TickTrigger();
-		myActor.getRules().remove(tick.getMyKey());
-//		Iterator<Rule> rulesIter = myActor.getRules().get(tick.getMyKey()).iterator();
-//		while (rulesIter.hasNext()){
-//			Rule myRule = rulesIter.next();
-//			if(myRule.getMyAction() instanceof ApplyPhysics){
-//				System.out.println(myRule);
-//				rulesIter.remove();
-//			}
-//		}
-		aEE.setEditableElement(myActor);
 	}
 	
 	/**
