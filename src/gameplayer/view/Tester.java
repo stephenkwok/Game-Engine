@@ -230,7 +230,7 @@ public class Tester extends Application {
         Action action4 = new MoveUp((Actor)actor1);
         Action action5 = new VerticalBounceCollision((Actor)actor1);
         Action action6 = new WinGame((Actor)actor1);
-        Action actionSpawn = new Spawn((Actor) actor1, (Actor) spawnedActor,0.0);
+        Action actionSpawn = new Spawn((Actor) actor1, (Actor) spawnedActor);
         Action actionNextLevel = new NextLevel((IPlayActor) actor1);
         
         Rule rule = new Rule(trigger1,action1);

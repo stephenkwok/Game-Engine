@@ -37,7 +37,7 @@ import javafx.util.Callback;
  */
 
 public class GameScreen extends Observable implements IGameScreen {
-
+	private int BACKGROUND_OFFSET = 10;
 	private SubScene mySubscene;
 	private Group mySubgroup;
 	private Camera myCamera;
@@ -88,11 +88,9 @@ public class GameScreen extends Observable implements IGameScreen {
 		ImageView imageView = new ImageView(image);
 		imageView.setPreserveRatio(true); // amy added this to resize background to fit height
 		imageView.setFitHeight(level.getMyBackgroundHeight()); // amy also added this
+		this.myEndHorizontal = imageView.getBoundsInParent().getWidth();
+		this.myEndVertical = imageView.getBoundsInParent().getHeight();
 		level.setMyImageView(imageView);
-		double ratio = image.getHeight()/imageView.getFitHeight();
-		double width = image.getWidth() / ratio;
-		this.myEndHorizontal = width;
-		this.myEndVertical = imageView.getFitHeight();
 		
 		
 		ImageView imageView2 = new ImageView(image);
@@ -104,7 +102,7 @@ public class GameScreen extends Observable implements IGameScreen {
 			@Override
 			public void changed(ObservableValue o, Object oldVal, Object newVal) {
 				// TODO Watch that magic constant!
-				imageView2.setX((Double) newVal + imageView.getImage().getWidth() - 10);
+				imageView2.setX((Double) newVal + imageView.getImage().getWidth() - BACKGROUND_OFFSET);
 			}
 		});
 
