@@ -17,7 +17,7 @@ public class ButtonFinish extends ButtonParent {
 	 */
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnAction(e -> notifyObservers("ButtonFinish"));
+		getButton().setOnAction(e -> notifyObservers());
 	}
 
 }

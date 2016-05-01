@@ -27,7 +27,7 @@ public class ButtonNewActor extends ButtonParent {
 	 */
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnAction(e -> notifyObservers("ButtonNewActor"));
+		getButton().setOnAction(e -> notifyObservers());
 	}
 
 }

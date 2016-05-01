@@ -16,7 +16,7 @@ public class ButtonHome extends ButtonParent {
 	 */
 	@Override
 	protected void setButtonAction() {
-		getButton().setOnAction(e -> notifyObservers("ButtonHome"));
+		getButton().setOnAction(e -> notifyObservers());
 	}
 
 }
