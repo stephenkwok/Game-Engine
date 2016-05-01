@@ -7,9 +7,14 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.ActorRule;
 import authoringenvironment.model.IAuthoringActor;
+
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.TriggerFactory;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 public class ShiftSceneBehavior extends ComboBoxBehavior {
