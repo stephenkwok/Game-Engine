@@ -338,7 +338,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * 
 	 */
 	public void addActor() {
-		IAuthoringActor newActor = (IAuthoringActor) new Actor();
+		IAuthoringActor newActor = new Actor();
 		myActorMap.put(newActor, new ArrayList<>());
 		newActor.setID(myActorMap.size());
 		gameEditingEnvironment.createActorPreviewUnit(newActor);
@@ -366,7 +366,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 			SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Method method = this.getClass().getDeclaredMethod(methodName, parameterTypes);
 		Object parameter = parameters[0] == null ? null : parameters[0];
-		System.out.println(method);
 		if (parameter == null) method.invoke(this, null);
 		else method.invoke(this, parameter);
 	}

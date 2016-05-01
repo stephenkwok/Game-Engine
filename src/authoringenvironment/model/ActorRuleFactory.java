@@ -129,18 +129,19 @@ public class ActorRuleFactory {
 	private IAuthoringBehavior createStandardBehavior(String behaviorType, String className, IRule rule)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Class<?> clazz = Class.forName(className);
 		try{
-			Class<?> clazz = Class.forName(className);
 			Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, ResourceBundle.class);
 			return (IAuthoringBehavior) constructor.newInstance(myActorRule, behaviorType, myResources);
-		}catch(Exception e){
-			Class<?> clazz = Class.forName(className);
-			Constructor<?> constructor = clazz.getConstructor(IRule.class, ActorRule.class, String.class, ResourceBundle.class);
-			return (IAuthoringBehavior) constructor.newInstance(rule, myActorRule, behaviorType, myResources);
+		}catch(Exception e1){
+			try{
+				Constructor<?> constructor = clazz.getConstructor(IRule.class, ActorRule.class, String.class, ResourceBundle.class);
+				return (IAuthoringBehavior) constructor.newInstance(rule, myActorRule, behaviorType, myResources);
+			}catch(Exception e2){
+				Constructor<?> constructor = clazz.getConstructor(IAuthoringActor.class, IRule.class, ActorRule.class, String.class, ResourceBundle.class);
+				return (IAuthoringBehavior) constructor.newInstance(myActor, rule, myActorRule, behaviorType, myResources);
+			}
 		}
 	}
 	
-//	private IAuthoringBehavior createSoundActionBehavior(){
-//		
-//	}
 }

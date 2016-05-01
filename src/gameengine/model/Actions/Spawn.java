@@ -15,7 +15,7 @@ public class Spawn extends ActorAction{
 	
 	public Spawn(Actor actor1, Actor spawnedActor) {
 		super(actor1);
-		mySpawnedActor  = (IPlayActor) spawnedActor;
+		mySpawnedActor  = spawnedActor;
 	}
 	
 	@Override

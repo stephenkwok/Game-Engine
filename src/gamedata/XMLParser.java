@@ -78,11 +78,7 @@ public class XMLParser {
 
 	private boolean empty(File file) {
 		String xml = convertFileToString(file);
-		if (xml.length() == 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return xml.length() == 0;
 	}
 
 }

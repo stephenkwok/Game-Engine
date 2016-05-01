@@ -23,6 +23,7 @@ import gameengine.model.Actions.ChangeAttribute;
 import gameengine.model.Actions.CreateActor;
 import gameengine.model.Actions.Destroy;
 import gameengine.model.Actions.GlideForward;
+import gameengine.model.Actions.HorizontalHeadingSwitch;
 import gameengine.model.Actions.HorizontalStaticCollision;
 import gameengine.model.Actions.MoveLeft;
 import gameengine.model.Actions.MoveRight;
@@ -68,27 +69,34 @@ public class Tester extends Application {
         info.setMyCurrentLevelNum(0);
         info.setName("Colette");
 
-        IAuthoringActor actor1 = (IAuthoringActor) new Actor();
+        IAuthoringActor actor1 = new Actor();
         actor1.setImageViewName("runningmario1.png");
-        actor1.setName("A1");
+        actor1.setName("Mario");
         actor1.setID(1);
-        actor1.addRule(new Rule(new KeyTrigger(KeyCode.C), new SoundAction((Actor)actor1, "shotgun.mp3")));
+        
         actor1.addSpriteImage("runningmario2.png");
         actor1.addSpriteImage("runningmario3.png");
         
-        IAuthoringActor actor12 = (IAuthoringActor) new Actor();
+        IAuthoringActor actor12 = new Actor();
         actor12.setImageViewName("runningmario1.png");
-        actor12.setName("A1");
+        actor12.setName("Luigi");
         actor12.setID(4);
         actor12.addState(ActorState.MAIN);
-        actor12.addAttribute(new Attribute(AttributeType.POINTS, 0, (IPlayActor) actor12));
-
+        actor12.addAttribute(new Attribute(AttributeType.POINTS, 3, (IPlayActor) actor12));
+        
+        actor12.addRule(new Rule(new KeyTrigger(KeyCode.C), new SoundAction((Actor)actor12, "shotgun.mp3")));
+        actor12.addRule(new Rule(new KeyTrigger(KeyCode.D), new MoveRight((Actor)actor12)));
+        actor12.addRule(new Rule(new KeyTrigger(KeyCode.R), new ChangeAttribute((IPlayActor)actor12,AttributeType.POINTS,1)));
+        
+        
+        
+        
         actor1.addSpriteImage("runningmario2.png");
         actor1.addSpriteImage("runningmario3.png");
         
         
 
-        IAuthoringActor actor2 = (IAuthoringActor) new Actor();
+        IAuthoringActor actor2 = new Actor();
         actor2.setImageViewName("block.png");
         actor2.setX(300);
         actor2.setY(300);
@@ -96,14 +104,14 @@ public class Tester extends Application {
         actor2.setID(2);
         
         
-        IAuthoringActor blocky = (IAuthoringActor) new Actor();
+        IAuthoringActor blocky = new Actor();
         blocky.setImageViewName("block.png");
         blocky.setX(650);
         blocky.setY(300);
         blocky.setName("blocky");
         blocky.setID(2);
         
-        IAuthoringActor spawnedActor = (IAuthoringActor) new Actor();
+        IAuthoringActor spawnedActor = new Actor();
         spawnedActor.setImageViewName("redball.png");
         spawnedActor.setName("bullet");
         spawnedActor.setID(90);
@@ -132,9 +140,9 @@ public class Tester extends Application {
         enemy2.addRule(movingForward);
 
         SideCollision triggerenemy = new SideCollision((Actor)enemy2,(Actor)blocky);
-        //Action actionenemy2 = new ReverseHeading((Actor)enemy2);
-       // Rule ruleenemy = new Rule(triggerenemy,actionenemy2);
-        //enemy2.addRule(ruleenemy);
+        Action actionenemy2 = new HorizontalHeadingSwitch((Actor)enemy2);
+        Rule ruleenemy = new Rule(triggerenemy,actionenemy2);
+        enemy2.addRule(ruleenemy);
 
         //moves it left
 //        Action actionCollide = new MoveLeft((Actor)enemy2);
@@ -312,7 +320,7 @@ public class Tester extends Application {
 
             actor1.addRule(brule);
             actor1.addRule(brule2);
-            level2.addActor((IAuthoringActor) block);
+            level2.addActor(block);
             yposition-=50;
         }
         
@@ -337,7 +345,7 @@ public class Tester extends Application {
             actor1.addRule(ruleNextLevel2);
             actor1.addRule(brule3);
             actor1.addRule(brule4);
-            level2.addActor((IAuthoringActor) block2);
+            level2.addActor(block2);
             yposition2-=50;
         }
         
@@ -370,7 +378,7 @@ public class Tester extends Application {
         /**
          * testing create actors
          */
-        IAuthoringActor a = (IAuthoringActor) new Actor();
+        IAuthoringActor a = new Actor();
         a.setID(10);
         a.setImageViewName("pipes.png");
         TickTrigger translatetick = new TickTrigger(45);
@@ -414,9 +422,9 @@ public class Tester extends Application {
             blocky.addRule(brule4);
             enemy2.addRule(brule5);
 
-            level1.addActor((IAuthoringActor)floor);
-            level2.addActor((IAuthoringActor) floor);
-            level3.addActor((IAuthoringActor)floor);
+            level1.addActor(floor);
+            level2.addActor(floor);
+            level3.addActor(floor);
         }
 
         Group group = new Group();
