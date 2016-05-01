@@ -39,67 +39,84 @@ public class PhysicsEngine {
 		}
 		a1.setY(bound(nextYPos));
 	}
-
-	public void moveRight(IPlayActor a1) {
-		nextXVelo = (applyForce(a1.getVeloX(), horizontalForce));
+	
+	private void moveLeftRight(IPlayActor a1, boolean right) {
+		double localHorizForce = horizontalForce * (right ? 1 : -1);
+		nextXVelo = (applyForce(a1.getVeloX(), localHorizForce));
 		a1.setVeloX(nextXVelo);
 		a1.setX((applyForce(a1.getX(), nextXVelo)));
+	}
+
+	public void moveRight(IPlayActor a1) {
+		moveLeftRight(a1, true);
 	}
 
 	public void moveLeft(IPlayActor a1) {
-		nextXVelo = applyForce(a1.getVeloX(), -horizontalForce);
-		a1.setVeloX(nextXVelo);
-		a1.setX(applyForce(a1.getX(), nextXVelo));
+		moveLeftRight(a1, false);
+	}
+	
+	private void moveUpDown(IPlayActor a1, boolean up) {
+		double localVerticalForce = verticalForce * (up ? 1 : -1);
+		nextYVelo = applyForce(a1.getVeloY(), localVerticalForce);
+		a1.setVeloY(nextYVelo);
+		a1.setY((applyForce(a1.getY(), nextYVelo)));
 	}
 
 	public void moveUp(IPlayActor a1) {
-		nextYVelo = applyForce(a1.getVeloY(), verticalForce);
-		a1.setVeloY(nextYVelo);
-		a1.setY((applyForce(a1.getY(), nextYVelo)));
+		moveUpDown(a1, true);
 	}
 
 	public void moveDown(IPlayActor a1) {
-		nextYVelo = applyForce(a1.getVeloY(), -verticalForce);
-		a1.setVeloY(nextYVelo);
-		a1.setY((applyForce(a1.getY(), nextYVelo)));
+		moveUpDown(a1, false);
 	}
-
-	public void moveForward(IPlayActor a1) {
-		nextXVelo = applyForce(a1.getVeloX(), horizontalForce * (Math.cos(Math.toRadians(a1.getHeading()))));
+	
+	public void moveForwardBack(IPlayActor a1, boolean forward) {
+		double localHorizForce = horizontalForce * (forward ? 1 : -1);
+		double localVerticalForce = verticalForce * (forward ? 1 : -1);
+		nextXVelo = applyForce(a1.getVeloX(), localHorizForce * (Math.cos(Math.toRadians(a1.getHeading()))));
 		a1.setVeloX(nextXVelo);
 		a1.setX((applyForce(a1.getX(), nextXVelo)));
-		nextYVelo = applyForce(a1.getVeloY(), verticalForce * (Math.sin(Math.toRadians(a1.getHeading()))));
+		nextYVelo = applyForce(a1.getVeloY(), localVerticalForce * (Math.sin(Math.toRadians(a1.getHeading()))));
 		a1.setVeloY(nextYVelo);
 		a1.setY((applyForce(a1.getY(), nextYVelo)) - gravity);
+	}
+	
+	public void moveForward(IPlayActor a1) {
+		moveForwardBack(a1, true);
 	}
 
 	public void moveBackward(IPlayActor a1) {
-		nextXVelo = applyForce(a1.getVeloX(), -horizontalForce * (Math.cos(Math.toRadians(a1.getHeading()))));
-		a1.setVeloX(nextXVelo);
-		a1.setX((applyForce(a1.getX(), nextXVelo)));
-		nextYVelo = applyForce(a1.getVeloY(), -verticalForce * (Math.sin(Math.toRadians(a1.getHeading()))));
-		a1.setVeloY(nextYVelo);
-		a1.setY((applyForce(a1.getY(), nextYVelo)) - gravity);
+		moveForwardBack(a1, false);
 	}
 		
-	public void glideRight(IPlayActor a1, double offset){
+	public void glideLeftRight(IPlayActor a1, double offset, boolean right) {
+		offset *= (right ? 1 : -1);
 		a1.setX(applyForce(a1.getX(),offset));
 		a1.setVeloX(offset);
 	}
+	
+	
+	public void glideRight(IPlayActor a1, double offset){
+		glideLeftRight(a1, offset, true);
+	}
 	public void glideLeft(IPlayActor a1, double offset){
-		a1.setX(applyForce(a1.getX(),-offset));
-		a1.setVeloX(-offset);
+		glideLeftRight(a1, offset, false);
 
 	}
-	public void glideUp(IPlayActor a1, double offset){
+	
+	
+	public void glideUpDown(IPlayActor a1, double offset, boolean up) {
+		offset *= (up ? -1 : 1);
 		a1.setY(applyForce(a1.getY(),-offset));
 		a1.setVeloY(-offset);
-
 	}
+	
+	public void glideUp(IPlayActor a1, double offset){
+		glideUpDown(a1, offset, true);
+	}
+	
 	public void glideDown(IPlayActor a1, double offset){
-		a1.setY(applyForce(a1.getY(),offset));
-		a1.setVeloY(offset);
-
+		glideUpDown(a1, offset, false);
 	}
 	
 	public void glideForward(IPlayActor a1, double offset) {
