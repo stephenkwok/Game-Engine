@@ -58,6 +58,8 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 			}else{
 				isSelected = false;
 			}
+			System.out.println("checked");
+			System.out.println(this.countObservers());
 			notifyObservers((IAuthoringActor) aEE.getEditable());
 		});
 	}
