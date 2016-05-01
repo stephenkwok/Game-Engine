@@ -161,13 +161,13 @@ public class GameScreen extends Observable implements IGameScreen {
 
 	@Override
 	public void disableMusic(boolean disable) {
-		// TODO Auto-generated method stub
+		// Depracated method: sound is handled through gameController now
 
 	}
 
 	@Override
 	public void disableSoundFX(boolean disable) {
-		// TODO Auto-generated method stub
+		// Depracated method: sound is handled through gameController now
 
 	}
 
@@ -185,7 +185,7 @@ public class GameScreen extends Observable implements IGameScreen {
 		alert.setOnCloseRequest( e -> {
 			if (alert.getResult() == ButtonType.YES) {
 				saveScorePrompt();
-			} 
+			}
 			else {
 				restartGamePrompt();
 			}

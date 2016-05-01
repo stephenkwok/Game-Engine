@@ -132,8 +132,7 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 
 	private void togglePause() {
 		animation.pause();
-		this.toggleSoundPause();
-		this.toggleMusic();
+		soundEngine.allSetMute(true);
 	}
 
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
@@ -159,6 +158,7 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 
 	public void toggleUnPause() {
 		animation.play();
+		toggleSoundPause();
 	}
 	
 	private void initGameElement(IGameElement gameElement){
@@ -504,7 +504,7 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 				soundEngine.allSoundsSetMute(sfxOff);
 			}
 		} catch (Exception e) {
-			// some parts of sound engine are not initialized yet
+			System.out.println("FAILED");
 		}
 	}
 
