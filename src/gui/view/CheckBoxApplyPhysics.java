@@ -5,6 +5,8 @@ import java.util.Observer;
 
 import authoringenvironment.controller.ActorEditingEnvironment;
 import authoringenvironment.model.*;
+import gameengine.model.Actor;
+import gameengine.model.IPlayActor;
 import javafx.geometry.*;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
@@ -85,5 +87,6 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 	public boolean isSelected(){
 		return this.isSelected;
 	}
+
 
 }
