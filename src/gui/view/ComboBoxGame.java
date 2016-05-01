@@ -10,7 +10,6 @@ import java.util.Map;
 import gamedata.controller.ParserController;
 import gameengine.controller.Game;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;

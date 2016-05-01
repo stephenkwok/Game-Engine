@@ -1,8 +1,8 @@
 package gameplayer.controller;
 
-import java.lang.reflect.InvocationTargetException;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -20,10 +20,9 @@ import gamedata.controller.FileChooserController;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.IBaseScreen;
 import gameplayer.view.TLGCSValueFinder;
-import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import voogasalad.util.hud.source.*;
+import voogasalad.util.hud.source.HUDController;
 
 public class BaseScreenController extends BranchScreenController {
 

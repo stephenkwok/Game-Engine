@@ -18,7 +18,8 @@ import javafx.stage.Stage;
 
 /**
  * 
- * This class controls and manages the GUI elements that allow an author to edit a game
+ * This class controls and manages the GUI elements that allow an author to edit
+ * a game
  * 
  * @author Stephen
  *
@@ -48,7 +49,8 @@ public class GameEditingEnvironment implements Observer {
 	}
 
 	/**
-	 * Initializes the BorderPane containing all GUI Elements in the Game Editing Environment
+	 * Initializes the BorderPane containing all GUI Elements in the Game
+	 * Editing Environment
 	 */
 	private void initializeBorderPane() {
 		myBorderPane.prefWidthProperty().bind(myStage.widthProperty());
@@ -70,33 +72,36 @@ public class GameEditingEnvironment implements Observer {
 	 * Level Labels
 	 */
 	private void reorderLevels() {
-		LevelPreviewUnitReorderer levelReorderer = new LevelPreviewUnitReorderer(myLevels,
-				myController.getLevelEditingEnvironment(), myActorsAndLevelsDisplay, this);
+		LevelPreviewUnitReorderer levelReorderer = new LevelPreviewUnitReorderer(myLevels, myActorsAndLevelsDisplay, this);
 		levelReorderer.reorderLevels();
 	}
-	
+
 	/**
-	 * Creates a preview unit displaying a created actor 
+	 * Creates a preview unit displaying a created actor
 	 * 
-	 * @param actor: actor to be displayed by the preview unit
-	 * @param actorEditor: editing environment used to edit the actor
+	 * @param actor:
+	 *            actor to be displayed by the preview unit
+	 * @param actorEditor:
+	 *            editing environment used to edit the actor
 	 */
-	public void createActorPreviewUnit(IEditableGameElement actor, IEditingEnvironment actorEditor) {
-		PreviewUnitWithEditable previewUnit = myActorsAndLevelsDisplay.createActorPreviewUnit(actor, actorEditor);
+	public void createActorPreviewUnit(IEditableGameElement actor) {
+		PreviewUnitWithEditable previewUnit = myActorsAndLevelsDisplay.createActorPreviewUnit(actor);
 		previewUnit.addObserver(myController);
 	}
-	
+
 	/**
 	 * Creates a preview unit displaying a created level
 	 * 
-	 * @param level: level to be displayed by the preview unit
-	 * @param levelEditor: editing environment used to edit the level
+	 * @param level:
+	 *            level to be displayed by the preview unit
+	 * @param levelEditor:
+	 *            editing environment used to edit the level
 	 */
-	public void createLevelPreviewUnit(IEditableGameElement level, IEditingEnvironment levelEditor) {
-		PreviewUnitWithEditable previewUnit = myActorsAndLevelsDisplay.createLevelPreviewUnit(level, levelEditor);
+	public void createLevelPreviewUnit(IEditableGameElement level) {
+		PreviewUnitWithEditable previewUnit = myActorsAndLevelsDisplay.createLevelPreviewUnit(level);
 		previewUnit.addObserver(myController);
 	}
-	
+
 	/**
 	 * Updates all preview units to reflect changes in any Actors or Levels
 	 */
@@ -106,18 +111,19 @@ public class GameEditingEnvironment implements Observer {
 
 	/**
 	 * 
-	 * @return the BorderPane containing all GUI elements in the Game Editing Environment
+	 * @return the BorderPane containing all GUI elements in the Game Editing
+	 *         Environment
 	 */
 	public Pane getPane() {
 		return myBorderPane;
 	}
-	
+
 	/**
 	 * Reorders the Game's Levels
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		 reorderLevels();
+		reorderLevels();
 	}
 
 }

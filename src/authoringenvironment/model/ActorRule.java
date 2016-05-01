@@ -12,14 +12,21 @@ import gameengine.model.IAction;
 import gameengine.model.IRule;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
+import gameengine.model.Triggers.ITrigger;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import gameengine.model.Triggers.ITrigger;
 
 /**
  * Rule container for an actor containing behavior, images, and/or sounds.

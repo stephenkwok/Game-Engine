@@ -1,8 +1,6 @@
 package gameengine.model.Actions;
 
 import gameengine.controller.Level;
-import gameengine.model.Actor;
-import gameengine.model.IPlayActor;
 import gameengine.model.IGameElement;
 
 /**

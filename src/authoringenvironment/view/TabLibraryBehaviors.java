@@ -3,11 +3,11 @@ package authoringenvironment.view;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.ActorRuleCreator;
+import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.TransferMode;
-import javafx.collections.FXCollections;
 
 /**
  * Tab contains ListView of behaviors and drag/drop behavior for behaviors.

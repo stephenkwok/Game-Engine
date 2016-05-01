@@ -3,6 +3,7 @@ package gameplayer.view;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
 import java.util.Observer;
+
 import gui.view.IGUIElement;
 import gui.view.Screen;
 import javafx.geometry.Insets;

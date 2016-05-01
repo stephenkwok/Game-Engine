@@ -1,12 +1,6 @@
 package gameengine.model.Actions;
 
 import gameengine.model.Actor;
-import gameengine.model.IGameElement;
-import gameengine.model.IPlayActor;
-import gameengine.model.PhysicsEngine;
-import gameengine.model.Actions.MovingAction;
-
-import java.util.List;
 
 /**
  * @author blakekaplan

@@ -1,13 +1,22 @@
 package authoringenvironment.view;
 
-import java.util.*;
-import authoringenvironment.model.*;
+import java.util.ResourceBundle;
+
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingElement;
 import gameengine.controller.GameInfo;
-import gui.view.*;
+import gui.view.ButtonGameType;
+import gui.view.TextAreaGameDescriptionEditor;
+import gui.view.TextAreaParent;
+import gui.view.TextFieldGameNameEditor;
+import gui.view.TextFieldWithButton;
 import javafx.geometry.Insets;
-import javafx.scene.layout.*;
-import javafx.scene.control.*;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 /**
  * This class enables the author to edit and set various attributes of the game

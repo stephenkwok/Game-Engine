@@ -2,13 +2,10 @@ package gameengine.model.Actions;
 
 import java.util.Arrays;
 import java.util.Observable;
-import java.util.Random;
 
 import authoringenvironment.model.ActorCopier;
-import gameengine.controller.IGame;
 import gameengine.model.Actor;
 import gameengine.model.IGameElement;
-import gameengine.model.IPlayActor;
 
 public class CreateActor extends Action {
 	Actor cloneActor;

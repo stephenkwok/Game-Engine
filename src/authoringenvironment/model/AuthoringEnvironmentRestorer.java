@@ -1,6 +1,8 @@
 package authoringenvironment.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import gameengine.controller.Level;
 import gameengine.model.Actor;

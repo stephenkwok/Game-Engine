@@ -1,20 +1,20 @@
 package gui.view;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import authoringenvironment.controller.ActorEditingEnvironment;
-import authoringenvironment.model.*;
-import authoringenvironment.view.*;
-import gameengine.model.*;
+import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingElement;
+import gameengine.model.Actor;
+import gameengine.model.Rule;
 import gameengine.model.Actions.ApplyPhysics;
 import gameengine.model.Triggers.TickTrigger;
-import javafx.geometry.*;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 
 /**
  * Checkbox object for ApplyPhysics option selection.

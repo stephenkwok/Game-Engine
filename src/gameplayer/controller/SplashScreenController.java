@@ -6,12 +6,12 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
+import authoringenvironment.controller.Controller;
 import gamedata.controller.ChooserType;
 import gamedata.controller.FileChooserController;
 import gameplayer.view.ISplashScreen;
 import gameplayer.view.SplashScreen;
 import javafx.stage.Stage;
-import authoringenvironment.controller.Controller;
 
 public class SplashScreenController implements Observer {
 
