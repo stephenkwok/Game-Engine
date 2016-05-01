@@ -20,8 +20,9 @@ import javafx.scene.control.Button;
 public abstract class EditingElementParent extends ObjectObservable implements IGUIElement, IEditingElement {	
 	private static final double BUTTON_WIDTH = 40.0;
 	private static final double BUTTON_HEIGHT = 15.0;
+	private final Button myButton;
 	private IEditableGameElement myEditableElement;
-	private Button myButton;
+	
 
 	public EditingElementParent(String buttonText) {
 		myButton = new Button(buttonText);

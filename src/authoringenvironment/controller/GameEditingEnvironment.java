@@ -5,7 +5,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.model.LevelPreviewUnitReorderer;
 import authoringenvironment.view.ActorsAndLevelsDisplay;
 import authoringenvironment.view.GameAttributesDisplay;
