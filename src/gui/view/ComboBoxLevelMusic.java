@@ -28,7 +28,7 @@ public class ComboBoxLevelMusic extends ComboBoxTextCell {
 	@Override
 	public void setButtonAction() {
 		getComboButton().setOnAction(event -> {
-			((Level) getEditableElement()).setMyBackgroundMusicName(getComboBox().getValue());
+			((Level) getEditableElement()).setSoundtrack(getComboBox().getValue());
 		});
 	}
 
@@ -39,7 +39,7 @@ public class ComboBoxLevelMusic extends ComboBoxTextCell {
 
 	@Override
 	protected void updateValueBasedOnEditable() {
-		getComboBox().setValue(((Level) getEditableElement()).getMyBackgroundMusicName());
+		getComboBox().setValue(((Level) getEditableElement()).getSoundtrack());
 	}
 
 }
