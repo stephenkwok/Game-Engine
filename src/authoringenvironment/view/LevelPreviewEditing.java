@@ -104,10 +104,10 @@ public class LevelPreviewEditing implements IGUI, Observer {
 	/**
 	 * Updates the preview to show the level's background.
 	 */
-	private void updateLevelBackground() {
+	private double updateLevelBackground() {
 		myLevelBackground = myLevel.getImageView();
-		resizeBackgroundBasedOnScrolling();
 		myStackPane.getChildren().addAll(myLevelBackground, myLevelPane);
+		return resizeBackgroundBasedOnScrolling();
 	}
 
 	public void changeBackgroundImage(Image image, File imageFile) {
@@ -117,7 +117,7 @@ public class LevelPreviewEditing implements IGUI, Observer {
 		updateLevelBackground();
 	}
 
-	public void resizeBackgroundBasedOnScrolling() {
+	public double resizeBackgroundBasedOnScrolling() {
 		if (myLevel.getMyScrollingDirection().equals(VERTICAL)) {
 			myLevelBackground.setFitWidth(SUBSCENE_WIDTH);
 			// need to get background and set size
@@ -126,6 +126,7 @@ public class LevelPreviewEditing implements IGUI, Observer {
 			// need to get background and set size
 		}
 		myLevelBackground.setPreserveRatio(true);
+		return myLevelBackground.getFitHeight();
 	}
 
 	/**

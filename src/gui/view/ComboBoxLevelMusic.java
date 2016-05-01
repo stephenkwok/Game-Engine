@@ -10,6 +10,7 @@ import gameengine.controller.Level;
 
 public class ComboBoxLevelMusic extends ComboBoxTextCell {
 	private static final String MUSIC_RESOURCE = "authoringmusic";
+	private static final String NONE = "NONE";
 	private List<String> musicNames;
 
 	public ComboBoxLevelMusic(ResourceBundle myResources, String promptText, String labelText) {
@@ -23,12 +24,13 @@ public class ComboBoxLevelMusic extends ComboBoxTextCell {
 		for (File musicFile : soundDir.listFiles()) {
 			musicNames.add(musicFile.getName());
 		}
+		musicNames.add(NONE);
 	}
 
 	@Override
 	public void setButtonAction() {
 		getComboButton().setOnAction(event -> {
-			((Level) getEditableElement()).setMyBackgroundMusicName(getComboBox().getValue());
+			((Level) getEditableElement()).setSoundtrack(getComboBox().getValue());
 		});
 	}
 
@@ -39,7 +41,7 @@ public class ComboBoxLevelMusic extends ComboBoxTextCell {
 
 	@Override
 	protected void updateValueBasedOnEditable() {
-		getComboBox().setValue(((Level) getEditableElement()).getMyBackgroundMusicName());
+		getComboBox().setValue(((Level) getEditableElement()).getSoundtrack());
 	}
 
 }

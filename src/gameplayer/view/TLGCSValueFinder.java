@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import gameengine.controller.Game;
+import gameengine.model.AttributeType;
 import voogasalad.util.hud.source.HUDController;
 import voogasalad.util.hud.source.IValueFinder;
 import voogasalad.util.hud.source.Property;
@@ -19,7 +20,7 @@ public class TLGCSValueFinder implements IValueFinder {
 			
 			switch (key.toLowerCase()) {
 				case "points":
-					//ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getProperty();
+					ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.POINTS).getProperty();
 					break;
 				case "health":
 					//ret = data.getCurrentLevel().getMainCharacter().getAttribute(AttributeType.HEALTH).getProperty();
