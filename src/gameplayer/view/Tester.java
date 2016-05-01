@@ -30,6 +30,7 @@ import gameengine.model.Actions.MoveUp;
 import gameengine.model.Actions.NextImage;
 import gameengine.model.Actions.NextLevel;
 import gameengine.model.Actions.ReverseHeading;
+import gameengine.model.Actions.SoundAction;
 import gameengine.model.Actions.Spawn;
 import gameengine.model.Actions.VerticalBounceCollision;
 import gameengine.model.Actions.VerticalStaticCollision;
@@ -72,7 +73,7 @@ public class Tester extends Application {
         actor1.setImageViewName("runningmario1.png");
         actor1.setName("A1");
         actor1.setID(1);
-
+        actor1.addRule(new Rule(new KeyTrigger(KeyCode.C), new SoundAction((Actor)actor1, "shotgun.mp3")));
         actor1.addSpriteImage("runningmario2.png");
         actor1.addSpriteImage("runningmario3.png");
         
