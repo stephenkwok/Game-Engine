@@ -37,7 +37,6 @@ public class TabLibrarySounds extends TabLibrary {
 	@Override
 	public void setContent() {
 		fillFileNames();
-		fillMusicNames(); // also add music files
 		setLabels(FXCollections.observableArrayList());
 		for (String soundName : getFileNames()) {
 			Label soundLabel = new Label(soundName, createPlaySoundButton(soundName));
@@ -47,16 +46,6 @@ public class TabLibrarySounds extends TabLibrary {
 			getLabels().add(soundLabel);
 		}
 		setListView(new ListView<>(getLabels()));
-	}
-
-	/**
-	 * Get sound files from resources
-	 */
-	private void fillMusicNames() {
-		File directory = new File(getResources().getString(MUSIC));
-		for (File file : directory.listFiles()) {
-			getFileNames().add(file.getName());
-		}
 	}
 
 	/**
