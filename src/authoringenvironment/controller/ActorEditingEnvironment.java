@@ -115,7 +115,6 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	 * Populate left section of the actor editing environment
 	 */
 	private void setLeftPane() {
-		System.out.println("SetLeftPane");
 		VBox vbox = new VBox();
 		library = new GUILibrary(myActorRuleCreator);
 		library.updateDragEvents();

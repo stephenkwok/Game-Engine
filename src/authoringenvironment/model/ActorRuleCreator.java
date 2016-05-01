@@ -12,6 +12,7 @@ import gameengine.model.IRule;
 import gameengine.model.Rule;
 import gameengine.model.Actions.ApplyPhysics;
 import gameengine.model.Actions.ChangeAttribute;
+import gameengine.model.Actions.SoundAction;
 import gameengine.model.Triggers.TickTrigger;
 import javafx.scene.layout.GridPane;
 
@@ -35,6 +36,7 @@ public class ActorRuleCreator {
 	private static final String HEALTH = "HEALTH";
 	private static final String POINTS_TRIGGER = "POINTS_TRIGGER";
 	private static final String HEALTH_TRIGGER = "HEALTH_TRIGGER";
+	private static final String SOUND_ACTION = "SoundAction";
 	private int ruleRow;
 	private GridPane myActorRuleCreatorPane;
 	private List<ActorRule> myActorRules;
@@ -79,6 +81,10 @@ public class ActorRuleCreator {
 	 */
 	public void addBehavior(ActorRule rule, String behavior) {
 		rule.addBehavior(behavior, null);
+	}
+	
+	public void addSound(ActorRule rule, String behavior, String soundName){
+		rule.addSound(behavior, soundName);
 	}
 	/**
 	 * Create new rule for Actor currently in the actor editing environment and
@@ -126,8 +132,8 @@ public class ActorRuleCreator {
 				if (simpleName.equals(CHANGE_ATTRIBUTE)) {
 					String attributeType = ((ChangeAttribute) rule.getMyAction()).getMyAttributeType();
 					toAdd.addBehavior(myActionResources.getString(attributeType), rule);
-				} else
-					toAdd.addBehavior(simpleName, rule); 
+				} else if (simpleName.equals(SOUND_ACTION)) toAdd.addSound(simpleName, ((SoundAction) rule.getMyAction()).getSoundFile());
+				else toAdd.addBehavior(simpleName, rule); 
 			}
 			myActorRuleCreatorPane.add(toAdd.getGridPane(), RULE_COL, ruleRow);
 			myActorRules.add(toAdd);

@@ -132,7 +132,7 @@ public class ActionFactory {
 		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO), (Actor) arguments.get(ONE));
 	}
 	
-	private IAction createSelectActorBehavior(String actionType, String className)
+	private IAction createCreateActorBehavior(String actionType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> clazz = Class.forName(className);
@@ -144,6 +144,22 @@ public class ActionFactory {
 			Constructor<?> constructor = clazz.getConstructor(IGameElement.class, Actor.class, Double.class, Double.class);
 			return (IAction) constructor.newInstance((IGameElement) arguments.get(ZERO), (Actor) arguments.get(ONE), arguments.get(TWO), arguments.get(THREE));
 		}
+	}
+	
+	private IAction createGlideTargetBehavior(String actionType, String className)
+			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Class<?> clazz = Class.forName(className);
+		Constructor<?> constructor = clazz.getConstructor(Actor.class, Double.class, Actor.class);
+		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO), arguments.get(ONE), (Actor) arguments.get(TWO));
+	}
+	
+	private IAction createSoundBehavior(String actionType, String className)
+			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Class<?> clazz = Class.forName(className);
+		Constructor<?> constructor = clazz.getConstructor(IGameElement.class, String.class);
+		return (IAction) constructor.newInstance((IGameElement) arguments.get(ZERO), arguments.get(ONE));
 	}
 
 }

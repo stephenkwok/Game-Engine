@@ -2,18 +2,15 @@ package authoringenvironment.view.behaviors;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.ActorRule;
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.IAction;
-import gameengine.model.IGameElement;
 
 public class SelfActionBehavior extends LabelBehavior {
 	private IAction myAction;
 	private IAuthoringActor myActor;
-	private IGameElement myfa;
 
 	public SelfActionBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
 			ResourceBundle myResources) {
@@ -27,15 +24,9 @@ public class SelfActionBehavior extends LabelBehavior {
 	}
 
 	@Override
-	public void addNodeObserver(Observer observer) {
-
-	}
-
-	@Override
 	protected void createTriggerOrAction() {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(myActor);
-		
 		myAction = getActionFactory().createNewAction(getBehaviorType(), arguments);
 	}
 
@@ -46,7 +37,6 @@ public class SelfActionBehavior extends LabelBehavior {
 
 	@Override
 	public void updateValueBasedOnEditable() {
-		// TODO Auto-generated method stub
 		
 	}
 
