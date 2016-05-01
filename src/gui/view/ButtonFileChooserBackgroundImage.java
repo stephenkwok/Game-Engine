@@ -21,6 +21,7 @@ public class ButtonFileChooserBackgroundImage extends ButtonFileChooser {
 	@Override
 	protected void updateImage(IEditingElement editor, Image image, File imageFile) {
 		((LevelEditingEnvironment) editor).changeBackgroundImage(image, imageFile);
+		notifyObservers();
 	}
 
 }

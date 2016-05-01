@@ -51,6 +51,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	private List<String> myHUDOptions;
 	private String myScrollingDirection;
 	private String myBackgroundImgName;
+	private double myBackgroundImgHeight;
 	@XStreamOmitField
 	private ImageView myBackground;
 	@XStreamOmitField
@@ -73,6 +74,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		myBackgroundImgName = DEFAULT_IMAGE_NAME;
 		soundtrack = DEFAULT_MUSIC;
 		setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myBackgroundImgName))));
+		myBackgroundImgHeight = myBackground.getFitHeight();
 		myScrollingDirection = DEFAULT_SCROLLING;
 		myName = DEFAULT_NAME;
 		myHeight = DEFAULT_HEIGHT;
@@ -166,6 +168,13 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		this.myBackgroundImgName = myBackgroundImgName;
 	}
 
+	public void setMyBackgroundHeight(double height) {
+		myBackgroundImgHeight = height;
+	}
+	
+	public double getMyBackgroundHeight() {
+		return myBackgroundImgHeight;
+	}
 	/**
 	 * Provides a string representation of the Level object
 	 *
