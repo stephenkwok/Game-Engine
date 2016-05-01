@@ -56,7 +56,7 @@ public class SpawnBehavior extends SelectActorBehavior {
 	public void updateValueBasedOnEditable() {
 		try{
 			getComboBox().setValue((IEditableGameElement) (((Spawn) getMyRule().getMyAction()).getMySpawnedActor()));
-			angleField.setText((String) ((Spawn)getMyRule().getMyAction()).getParameters()[2]);
+			angleField.setText(Double.toString((Double) ((Spawn)getMyRule().getMyAction()).getSpawnAngle()));
 		}catch(Exception e){
 		}
 	}
