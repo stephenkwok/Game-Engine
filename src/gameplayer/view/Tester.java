@@ -67,6 +67,7 @@ public class Tester extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         GameInfo info = new GameInfo();
+       // info.setIsDestinationGame(true);
         info.setMyCurrentLevelNum(0);
         info.setName("Colette");
 
