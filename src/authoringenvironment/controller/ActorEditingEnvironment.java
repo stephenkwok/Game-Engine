@@ -200,6 +200,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		myActorIV = new ImageviewActorIcon(myActor, ICON_WIDTH);
 		setLeftPane();
 		myActorRuleCreator.updateActorRules();
+		checkPhysics.setEditableElement(editable);
 		library.updateDragEvents();
 	}
 
@@ -236,8 +237,6 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		myController.updateActors((Actor) arg);
-		System.out.println("checkPHysics: ");
-		System.out.println(checkPhysics.isSelected());
 		if (checkPhysics.isSelected()) {
 			myActorRuleCreator.applyPhysics();
 		}

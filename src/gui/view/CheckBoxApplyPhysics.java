@@ -22,6 +22,7 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 	private IEditableGameElement myEditableElement;
 	private ActorEditingEnvironment aEE;
 	private boolean isSelected;
+	private CheckBox myCheckBox;
 
 	/**
 	 * Constructs a CheckBoxObject to edit a given element.
@@ -40,13 +41,13 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 	 */
 	@Override
 	public Node createNode() {
-		CheckBox checkbox = new CheckBox(myPromptText);
-		checkbox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
-		checkbox.setPrefWidth(myWidth);
-		checkbox.setAlignment(Pos.CENTER_LEFT);
-		checkbox.setId(myPromptText);
-		setEvent(checkbox);
-		return checkbox;
+		myCheckBox = new CheckBox(myPromptText);
+		myCheckBox.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
+		myCheckBox.setPrefWidth(myWidth);
+		myCheckBox.setAlignment(Pos.CENTER_LEFT);
+		myCheckBox.setId(myPromptText);
+		setEvent(myCheckBox);
+		return myCheckBox;
 	}
 	
 	private void setEvent(CheckBox checkbox){
@@ -68,6 +69,9 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 	@Override
 	public void setEditableElement(IEditableGameElement element) {
 		myEditableElement = element;
+		if (aEE.shouldApplyPhysics()) {
+			myCheckBox.setSelected(true);
+		}
 	}
 
 	/**
