@@ -190,7 +190,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>304.9442931693663</x>
+          <x>718.273234424641</x>
           <y>40.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -235,7 +235,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>240.14488407630114</x>
+          <x>273.82692581842537</x>
           <y>80.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -280,7 +280,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>210.4014106333895</x>
+          <x>741.9097955233514</x>
           <y>120.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -325,7 +325,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>124.3557003146411</x>
+          <x>431.65015769025524</x>
           <y>160.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -370,7 +370,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>522.4005540274798</x>
+          <x>246.90880409951455</x>
           <y>200.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -415,7 +415,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>661.2069597658029</x>
+          <x>649.6205980398101</x>
           <y>240.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -460,7 +460,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>321.6066727475649</x>
+          <x>587.82918880165</x>
           <y>280.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -505,7 +505,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>762.7769595767803</x>
+          <x>373.236553839476</x>
           <y>320.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -550,7 +550,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>273.6503365937093</x>
+          <x>696.0125287488119</x>
           <y>360.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -595,7 +595,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>143.56203899424045</x>
+          <x>796.5185409153763</x>
           <y>400.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -640,7 +640,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>469.6370986489408</x>
+          <x>716.1996213900286</x>
           <y>440.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -685,7 +685,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>162.8322686905325</x>
+          <x>169.65292412745487</x>
           <y>480.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -730,7 +730,7 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>265.9257706507932</x>
+          <x>740.464359411817</x>
           <y>520.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
@@ -786,7 +786,7 @@
         <attributeMap/>
       </myAttributeManager>
       <myMainCharacters/>
-      <myBackgroundMusicName>Ink.mp3</myBackgroundMusicName>
+      <soundtrack>Ink.mp3</soundtrack>
       <myGarbageCollectors/>
     </gameengine.controller.Level>
   </levels>
@@ -825,14 +825,14 @@
     <obs/>
     <value class="int">1</value>
     <bindings/>
-    <name>levelTime</name>
+    <name>Time This Level</name>
   </levelTime>
   <globalTime>
     <changed>false</changed>
     <obs/>
     <value class="int">1</value>
     <bindings/>
-    <name>globalTime</name>
+    <name>Global Time</name>
   </globalTime>
   <sfxOff>false</sfxOff>
   <musicOff>false</musicOff>
