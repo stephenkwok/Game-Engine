@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.ActorRule;
 import gameengine.model.IRule;
-import gameengine.model.Actions.ChangeAttribute;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.KeyTrigger;
 import javafx.scene.input.KeyCode;

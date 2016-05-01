@@ -6,10 +6,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Map;
 
 import authoringenvironment.controller.Controller;
-import authoringenvironment.view.behaviors.CollisionBehavior;
 import gameengine.model.IRule;
 
 /**

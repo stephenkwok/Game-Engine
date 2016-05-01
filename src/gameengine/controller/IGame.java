@@ -1,11 +1,10 @@
 package gameengine.controller;
 
+import java.util.List;
+
 import gameengine.model.Actor;
-import gameengine.model.IActor;
 import gameengine.model.IPlayActor;
 import gameengine.model.Triggers.ITrigger;
-
-import java.util.List;
 
 /**
  * This interface defines the API for the Game class. The Game will be the main

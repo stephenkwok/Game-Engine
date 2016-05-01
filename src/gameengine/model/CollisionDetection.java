@@ -2,7 +2,7 @@ package gameengine.model;
 
 import java.lang.reflect.Constructor;
 import java.util.List;
-import gameengine.model.Actor;
+
 import gameengine.model.Triggers.CollisionTrigger;
 import javafx.geometry.Point2D;
 

@@ -1,11 +1,17 @@
 package authoringenvironment.view;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-import authoringenvironment.model.*;
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingEnvironment;
 import javafx.beans.binding.DoubleExpression;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 /**
  * 
@@ -104,8 +110,8 @@ public class ActorsAndLevelsDisplay extends Observable implements Observer {
 	 * @param actorEditor: IEditingEnvironment in which Actor is to be edited
 	 * @return a PreviewUnitWithEditable associated with an Actor
 	 */
-	public PreviewUnitWithEditable createActorPreviewUnit(IEditableGameElement actor, IEditingEnvironment actorEditor) {
-		PreviewUnitWithEditable actorPreviewUnit = new PreviewUnitWithEditable(actor, actorEditor);
+	public PreviewUnitWithEditable createActorPreviewUnit(IEditableGameElement actor) {
+		PreviewUnitWithEditable actorPreviewUnit = new PreviewUnitWithEditable(actor);
 		initializePreviewUnit(actorPreviewUnit, myActorPreviewUnitsContainer);
 		return actorPreviewUnit;
 	}
@@ -117,8 +123,8 @@ public class ActorsAndLevelsDisplay extends Observable implements Observer {
 	 * @param levelEditor: IEditingEnvironment in which Level is to be edited
 	 * @return a preview unit associated with a Level
 	 */
-	public PreviewUnitWithEditable createLevelPreviewUnit(IEditableGameElement level, IEditingEnvironment levelEditor) {
-		PreviewUnitWithLevel levelPreviewUnit = new PreviewUnitWithLevel(level, levelEditor);
+	public PreviewUnitWithEditable createLevelPreviewUnit(IEditableGameElement level) {
+		PreviewUnitWithLevel levelPreviewUnit = new PreviewUnitWithLevel(level);
 		initializePreviewUnit(levelPreviewUnit, myLevelPreviewUnitsContainer);
 		myLevelPreviewUnits.add(levelPreviewUnit);
 		return levelPreviewUnit;

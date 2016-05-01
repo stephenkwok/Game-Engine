@@ -1,6 +1,5 @@
 package gameplayer.view;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,12 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.TreeMap;
 
-import gui.view.IGUIElement;
 import gui.view.Screen;
-import javafx.geometry.Orientation;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToolBar;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
