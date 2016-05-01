@@ -10,8 +10,8 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>209.0</x>
-          <y>218.0</y>
+          <x>235.0</x>
+          <y>147.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>
@@ -21,7 +21,23 @@
           <myHeading>0.0</myHeading>
           <myImageViewSize>0.0</myImageViewSize>
           <myRuleManager>
-            <myRules/>
+            <myRules>
+              <entry>
+                <string>Space</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
+                      <myKey>Space</myKey>
+                      <myKeyCode>SPACE</myKeyCode>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.SoundAction">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <soundFile>shotgun.mp3</soundFile>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+            </myRules>
           </myRuleManager>
           <myAttributeManager>
             <attributeMap/>
@@ -63,7 +79,7 @@
       <myMainCharacters>
         <gameengine.model.Actor reference="../../myActors/gameengine.model.Actor"/>
       </myMainCharacters>
-      <soundtrack>Robot.mp3</soundtrack>
+      <soundtrack>Jordan.mp3</soundtrack>
       <myGarbageCollectors/>
     </gameengine.controller.Level>
   </levels>
@@ -126,46 +142,6 @@
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>
-          <myName>Main Player</myName>
-          <myID>1</myID>
-          <myImageViewName>default_main_player.png</myImageViewName>
-          <myHeading>0.0</myHeading>
-          <myImageViewSize>0.0</myImageViewSize>
-          <myRuleManager>
-            <myRules/>
-          </myRuleManager>
-          <myAttributeManager>
-            <attributeMap/>
-          </myAttributeManager>
-          <myStates>
-            <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
-          </myStates>
-          <mySprite reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/mySprite"/>
-          <myNextValues>
-            <nextXVelo>0.0</nextXVelo>
-            <nextXPos>0.0</nextXPos>
-            <nextYVelo>0.0</nextYVelo>
-            <nextYPos>0.0</nextYPos>
-            <collision>false</collision>
-          </myNextValues>
-          <myRotate>0.0</myRotate>
-          <myOpacity>1.0</myOpacity>
-          <myScaleX>1.0</myScaleX>
-          <myScaleY>1.0</myScaleY>
-        </gameengine.model.Actor>
-        <list>
-          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor"/>
-        </list>
-      </entry>
-      <entry>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs/>
-          <x>0.0</x>
-          <y>0.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myFriction>0.0</myFriction>
           <myName>Vertical Invisible Line</myName>
           <myID>4</myID>
           <myImageViewName>vertical_invisible_line.png</myImageViewName>
@@ -199,6 +175,62 @@
           <myScaleY>1.0</myScaleY>
         </gameengine.model.Actor>
         <list/>
+      </entry>
+      <entry>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>0.0</x>
+          <y>0.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Main Player</myName>
+          <myID>1</myID>
+          <myImageViewName>default_main_player.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules>
+              <entry>
+                <string>Space</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
+                      <myKey>Space</myKey>
+                      <myKeyCode>SPACE</myKeyCode>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.SoundAction">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <soundFile>shotgun.mp3</soundFile>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+            </myRules>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates>
+            <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
+          </myStates>
+          <mySprite reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <list>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor"/>
+        </list>
       </entry>
       <entry>
         <gameengine.model.Actor>
@@ -268,14 +300,14 @@
     <obs/>
     <value class="int">1</value>
     <bindings/>
-    <name>levelTime</name>
+    <name>Time This Level</name>
   </levelTime>
   <globalTime>
     <changed>false</changed>
     <obs/>
     <value class="int">1</value>
     <bindings/>
-    <name>globalTime</name>
+    <name>Global Time</name>
   </globalTime>
   <sfxOff>false</sfxOff>
   <musicOff>false</musicOff>
