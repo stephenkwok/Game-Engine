@@ -95,6 +95,7 @@ public class ActorRuleCreator {
 		myActorRuleCreatorPane.add(newRule.getGridPane(), RULE_COL, ruleRow);
 		myActorRules.add(newRule);
 		ruleRow++;
+		
 	}
 
 	/**
@@ -141,7 +142,7 @@ public class ActorRuleCreator {
 		}
 	}
 	
-	protected void applyPhysics(){
+	public void applyPhysics(){
 		if(aEE.shouldApplyPhysics()){
 			Rule toAdd = new Rule(new TickTrigger(), new ApplyPhysics((Actor) aEE.getEditable()));
 			((IAuthoringActor) aEE.getEditable()).addRule(toAdd);

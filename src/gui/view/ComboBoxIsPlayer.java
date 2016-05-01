@@ -27,6 +27,7 @@ public class ComboBoxIsPlayer extends ComboBoxTextCell {
 			else {
 				((Actor) getEditableElement()).removeState(ActorState.MAIN);
 			}
+			notifyObservers((IAuthoringActor) this.getEditableElement());
 		});
 	}
 

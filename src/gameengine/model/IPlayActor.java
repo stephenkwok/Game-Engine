@@ -136,5 +136,8 @@ public interface IPlayActor extends IGameElement {
 	
 	public void setNextValues(NextValues myNextValues);
 	
+	/**
+	 * Sets the Actor's visibility
+	 */
 	public void setVisibility();
 }
