@@ -29,7 +29,7 @@ import gameengine.model.Actions.MoveRight;
 import gameengine.model.Actions.MoveUp;
 import gameengine.model.Actions.NextImage;
 import gameengine.model.Actions.NextLevel;
-import gameengine.model.Actions.ReverseHeading;
+//import gameengine.model.Actions.ReverseHeading;
 import gameengine.model.Actions.SoundAction;
 import gameengine.model.Actions.Spawn;
 import gameengine.model.Actions.VerticalBounceCollision;
@@ -133,9 +133,9 @@ public class Tester extends Application {
         enemy2.addRule(movingForward);
 
         SideCollision triggerenemy = new SideCollision((Actor)enemy2,(Actor)blocky);
-        Action actionenemy2 = new ReverseHeading((Actor)enemy2);
-        Rule ruleenemy = new Rule(triggerenemy,actionenemy2);
-        enemy2.addRule(ruleenemy);
+//        Action actionenemy2 = new ReverseHeading((Actor)enemy2);
+//        Rule ruleenemy = new Rule(triggerenemy,actionenemy2);
+//        enemy2.addRule(ruleenemy);
 
         //moves it left
 //        Action actionCollide = new MoveLeft((Actor)enemy2);

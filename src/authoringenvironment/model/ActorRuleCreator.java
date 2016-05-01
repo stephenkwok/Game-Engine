@@ -150,17 +150,12 @@ public class ActorRuleCreator {
 	}
 	
 	private void resetEnvironment(){
-		System.out.println("BEFORE RESET: " + myActorRules);
-		this.newlyReturned = true;
-		for(int i=0;i<myActorRules.size();i++){
-			removeActorRule(myActorRules.get(i));
-		}
-		myActorRules.clear();
-		ruleRow = RULE_ROW_START;
-		System.out.println("AFTER RESET: " + myActorRules);
-		System.out.println(myActorRuleCreatorPane.getChildren().size());
-	}
-
+        this.newlyReturned = true;
+        myActorRuleCreatorPane.getChildren().clear();
+        myActorRules.clear();
+        ruleRow = RULE_ROW_START;
+    }
+	
 	/**
 	 * Get the current IAuthoringActor
 	 * 

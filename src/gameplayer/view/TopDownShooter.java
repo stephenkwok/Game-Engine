@@ -12,6 +12,9 @@ import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.ActorState;
 import gameengine.model.Rule;
+import gameengine.model.Actions.ApplyPhysics;
+import gameengine.model.Actions.CreateActor;
+import gameengine.model.Actions.Destroy;
 import gameengine.model.Actions.GlideDown;
 import gameengine.model.Actions.GlideForward;
 import gameengine.model.Actions.GlideTarget;
@@ -19,8 +22,13 @@ import gameengine.model.Actions.GlideUp;
 import gameengine.model.Actions.HorizontalBounceCollision;
 import gameengine.model.Actions.HorizontalHeadingSwitch;
 import gameengine.model.Actions.HorizontalStaticCollision;
+import gameengine.model.Actions.LoseGame;
+import gameengine.model.Actions.MoveLeft;
+import gameengine.model.Actions.MoveRight;
+import gameengine.model.Actions.Spawn;
 import gameengine.model.Actions.VerticalBounceCollision;
 import gameengine.model.Actions.VerticalHeadingSwitch;
+import gameengine.model.Actions.VerticalStaticCollision;
 import gameengine.model.Triggers.BottomCollision;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.SideCollision;
@@ -36,7 +44,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class Pong extends Application {
+public class TopDownShooter extends Application {
     /**
      * The main entry point for all JavaFX applications.
      * The start method is called after the init method has returned,
@@ -56,97 +64,57 @@ public class Pong extends Application {
     public void start(Stage primaryStage) throws Exception {
         GameInfo info = new GameInfo();
         info.setMyCurrentLevelNum(0);
-        info.setName("Pong");
+        info.setName("TDS");
 
         List<Level> levels = new ArrayList<>();
 
         Level level1 = new Level();
-        level1.setMyScrollingDirection("Horizontally");
-        level1.setMyBackgroundImgName("doodle_background.png");
+        level1.setMyScrollingDirection("Vertically");
+        level1.setMyBackgroundImgName("space.png");
         levels.add(level1);
         
         
         Actor player1 = new Actor();
         player1.addState(ActorState.MAIN);
         player1.setID(1);
-        player1.setImageViewName("block.png");
+        player1.setImageViewName("spaceship.png");
         player1.setX(10);
         level1.addActor(player1);
         
-        player1.addRule(new Rule(new KeyTrigger(KeyCode.RIGHT), new GlideDown(player1, 25.0)));
-        player1.addRule(new Rule(new KeyTrigger(KeyCode.LEFT), new GlideUp(player1, 25.0)));
+        player1.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player1)));
+        player1.addRule(new Rule(new KeyTrigger(KeyCode.RIGHT), new MoveRight(player1)));
+        player1.addRule(new Rule(new KeyTrigger(KeyCode.LEFT), new MoveLeft(player1)));
 
         
-        Actor player2 = new Actor();
-        player2.addState(ActorState.MAIN);
-        player2.setID(2);
-        player2.setImageViewName("block.png");
-        player2.setX(800-player2.getBounds().getWidth()-10);
-        level1.addActor(player2);
+        Actor floor  = new Actor();
+        floor.setID(2);
+        floor.setImageViewName("orange.png");
+        floor.setY(500);
+        level1.addActor(floor);
         
-//        player2.addRule(new Rule(new KeyTrigger(KeyCode.D), new GlideDown(player2, 25.0)));
-//        player2.addRule(new Rule(new KeyTrigger(KeyCode.A), new GlideUp(player2, 25.0)));
-//        player2.addRule(new Rule(new KeyTrigger(KeyCode.LEFT), new GlideLeft(player2, 2.0)));
-        
+        player1.addRule(new Rule(new BottomCollision(player1,floor), new VerticalStaticCollision(player1)));
 
-       
+        Actor enemy = new Actor();
+        enemy.setID(3);
+        enemy.setImageViewName("goomba.png");
+        enemy.addRule(new Rule(new TickTrigger(), new GlideDown(enemy,1.00)));
         
-        Actor leftSide = new Actor();
-        leftSide.setID(3);
-        leftSide.setImageViewName("gameside.png");
-        leftSide.setX(0);
-        level1.addActor(leftSide);
+        Actor bullet = new Actor();
+        bullet.setID(4);
+        bullet.setImageViewName("fireball.png");
+        bullet.addRule(new Rule(new TickTrigger(), new GlideUp(bullet, 2.5)));
         
-        Actor rightSide = new Actor();
-        rightSide.setID(4);
-        rightSide.setImageViewName("gameside.png");
-        rightSide.setX(800);
-        level1.addActor(rightSide);
         
-        Actor ball  = new Actor();
-        ball.setID(5);
-        ball.setImageViewName("fireball.png");
-        ball.setX(400);
-        ball.setY(400);
-        ball.setHeading(140);
-        level1.addActor(ball);
-        ball.addRule(new Rule(new TickTrigger(), new GlideForward(ball, 6.0)));
+        player1.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new Spawn(player1,bullet)));
         
-        player2.addRule(new Rule(new TickTrigger(), new GlideTarget(player2, 15.0, ball)));
+        bullet.addRule(new Rule(new TopCollision(bullet,enemy), new Destroy(bullet)));
+        enemy.addRule(new Rule(new BottomCollision(enemy,bullet), new Destroy(enemy)));
+        
+        floor.addRule(new Rule(new TopCollision(floor, enemy), new LoseGame(level1)));
+
 
         
-        Actor boundary = new Actor();
-        boundary.setID(8);
-        boundary.setImageViewName("gameside.png");
-        boundary.setX(600);
-        level1.addActor(boundary);
-        
-        player2.addRule(new Rule(new SideCollision(player2, boundary), new HorizontalStaticCollision(player2)));
-        
-        
-        
-        Actor bottomEdge = new Actor();
-        bottomEdge.setID(6);
-        bottomEdge.setImageViewName("rect.png");
-        bottomEdge.setY(500);
-        level1.addActor(bottomEdge);
-        
-        Actor topEdge = new Actor();
-        topEdge.setID(7);
-        topEdge.setImageViewName("rect.png");
-        topEdge.setY(0-topEdge.getBounds().getHeight());
-        level1.addActor(topEdge);
-        
-        ball.addRule(new Rule(new TopCollision(ball, topEdge), new VerticalBounceCollision(ball)));
-        ball.addRule(new Rule(new TopCollision(ball, topEdge), new VerticalHeadingSwitch(ball)));        
-        ball.addRule(new Rule(new BottomCollision(ball, bottomEdge), new VerticalBounceCollision(ball)));
-        ball.addRule(new Rule(new BottomCollision(ball, bottomEdge), new VerticalHeadingSwitch(ball)));
-
-        
-        ball.addRule(new Rule(new SideCollision(ball, player1), new HorizontalBounceCollision(ball)));
-        ball.addRule(new Rule(new SideCollision(ball, player2), new HorizontalBounceCollision(ball)));
-        ball.addRule(new Rule(new SideCollision(ball, player1), new HorizontalHeadingSwitch(ball)));
-        ball.addRule(new Rule(new SideCollision(ball, player2), new HorizontalHeadingSwitch(ball)));
+        level1.addRule(new Rule(new TickTrigger(75), new CreateActor(level1, enemy, 0.0, 600.0, 0.0, 0.0)));
 
        
         Group group = new Group();
@@ -155,7 +123,8 @@ public class Pong extends Application {
         Game model = new Game(info, levels);
         model.setHUDInfoFile("a.txt");
         CreatorController c = new CreatorController(model);
-        c.saveForEditing(new File("gamefiles/Pong.xml"));
+        c.saveForEditing(new File("gamefiles/TDS"
+        		+ ".xml"));
         ParallelCamera camera = new ParallelCamera();
         GameScreen view = new GameScreen(camera);
 
