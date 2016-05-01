@@ -12,6 +12,7 @@ import javafx.util.Duration;
 
 /**
  * Created by aamir on 4/24/2016.
+ * Edited by Bobby on 4/29/2016.
  */
 public class SoundPlayer {
 	
@@ -20,7 +21,7 @@ public class SoundPlayer {
     private List<MediaPlayer> mediaPlayers;
 
     /**
-     * Creates the stage to be used and a sound file location (in src/soundfiles)
+     * Initializes the mediaMap and mediaPlayers list
      */
     public SoundPlayer(){
         mediaMap = new HashMap<>();
@@ -29,7 +30,7 @@ public class SoundPlayer {
 
 
     /**
-     * Loads multiple sound files from a given directory with sound files
+     * Loads multiple sound files from a given directory
      * @param folder
      */
     public void loadMultipleSoundFilesFromDir(File folder){
@@ -42,8 +43,8 @@ public class SoundPlayer {
 
     /**
      * Loads a sound file from the given file, and puts it into our Media
-     * @param key
-     * @param mediaFile
+     * @param key which is your future file name
+     * @param mediaFile which is the file to be loaded
      */
 
     public void loadSingleSoundFileFromFile(String key, File mediaFile){
@@ -52,13 +53,15 @@ public class SoundPlayer {
     }
 
     /**
-     * Plays a soundtrack given the sound file name
+     * Plays a soundtrack given the sound file name from the mediaMap
      * @param soundFileName
      */
     public void setSoundtrack(String soundFileName){
+    	
     	if (!isValid(soundFileName)) {
     		return;
     	}
+    	
         if (soundtrackPlayer != null) {
         	soundtrackPlayer.dispose();
         }
@@ -74,15 +77,11 @@ public class SoundPlayer {
     }
 
     /**
-     * Plays a sound given a sound file name. This is different than a soundtrack in that it doesn't repeat
+     * Plays a sound given a sound file name.
      * @param soundFileName
      */
     public void playSound(String soundFileName){
-//        Media sound = mediaMap.get(soundFileName);
-//        MediaPlayer curMediaPlayer = new MediaPlayer(sound);
-//        mediaPlayers.put(sound, curMediaPlayer);
-//        curMediaPlayer.play();
-
+    	
     	if (!isValid(soundFileName)) {
     		return;
     	}
@@ -93,7 +92,7 @@ public class SoundPlayer {
 
 
     /**
-     * Sets all sounds, including the soundtrack, as muted or unmuted, depending on the given boolean
+     * Mutes or unmutes all sound effects and soundtrack.
      * @param mute -> true = mute, false = unmute
      */
     public void allSetMute(boolean mute){
@@ -102,7 +101,7 @@ public class SoundPlayer {
     }
 
     /**
-     * Sets all sounds, minus the soundtrack, as muted or unmnuted, depending on the given boolean
+     * Mutes or undmutes all sound effects
      * @param mute -> true = mute, false = unmute
      */
     public void allSoundsSetMute(boolean mute){
@@ -112,12 +111,20 @@ public class SoundPlayer {
     }
 
     /**
-     * Sets the soundtrack as muted or unmuted, depending on the given boolean
+     * Mutes or unmutes the soundtrack
      * @param mute -> true = mute, false = unmute
      */
     public void soundtrackSetMute(boolean mute){
         soundtrackPlayer.setMute(mute);
     }
+    
+    /**
+     * Tests whether the given string will throw a null pointer exception
+     * when used as a key in the mediaMap to create a new mediaPlayer
+     * @param key -> string to be tested
+     * @return whether the key can be used to create a valid mediaPlayer
+     */
+    
     
     public boolean isValid(String key) {
     	return key != null && mediaMap.get(key) != null;

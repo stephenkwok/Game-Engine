@@ -236,6 +236,12 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		myController.updateActors((Actor) arg);
+		System.out.println("checkPHysics: ");
+		System.out.println(checkPhysics.isSelected());
+		if (checkPhysics.isSelected()) {
+			myActorRuleCreator.applyPhysics();
+		}
+		//myActorRuleCreator.applyPhysics();
 	}
 	
 	public boolean shouldApplyPhysics(){

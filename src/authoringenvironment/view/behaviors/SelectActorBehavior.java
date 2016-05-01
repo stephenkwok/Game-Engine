@@ -64,6 +64,8 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 		Label label = new Label(labelText);
 		label.setWrapText(true);
 		initComboBox();
+		initButton();
+		//hbox.getChildren().addAll(label, comboBox, getButton());
 		hbox.getChildren().addAll(label, comboBox);
 		hbox.setAlignment(Pos.CENTER_LEFT);
 		return hbox;
@@ -79,6 +81,13 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 		comboBox.setPromptText(promptText);
 		comboBox.setCellFactory(factory -> new MyCustomCell());
 		HBox.setHgrow(comboBox, Priority.ALWAYS);
+	}
+	
+	private void initButton(){
+		/*getButton().setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
+		setButtonAction(e -> {
+			setValue();
+		});*/
 	}
 	
 	public void setValue(){

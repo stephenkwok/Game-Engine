@@ -71,6 +71,7 @@ public class LevelInspector implements IGUI {
 		myAttributesTab.setObserver(myLevelEditor);
 		HBox buttonBox = addEditingButtons();
 		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(BUTTON_LABEL, null, myLevelEditor, myLevelEditor.getStage());
+		button.addObserver(myLevelEditor);
 		myAttributesTab.addElement(button);
 		myGarbageCollector = new CheckBoxesGarbageCollection();
 		myAttributesTab.addElement(myGarbageCollector);
