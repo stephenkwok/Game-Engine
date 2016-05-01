@@ -526,15 +526,4 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 		return this.levelTime;
 	}
 
-
-	
-	//
-	// private void garbageCollect() {
-	// if (globalTime % 50 == 0) {
-	// soundEngine.garbageCollect();
-	// System.runFinalization();
-	// System.gc();
-	// }
-	// }
-
 }
