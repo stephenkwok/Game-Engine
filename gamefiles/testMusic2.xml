@@ -10,8 +10,8 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>235.0</x>
-          <y>147.0</y>
+          <x>248.0</x>
+          <y>198.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>
@@ -23,12 +23,26 @@
           <myRuleManager>
             <myRules>
               <entry>
-                <string>Space</string>
+                <string>A</string>
                 <list>
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.KeyTrigger">
-                      <myKey>Space</myKey>
-                      <myKeyCode>SPACE</myKeyCode>
+                      <myKey>A</myKey>
+                      <myKeyCode>A</myKeyCode>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.SoundAction">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <soundFile>strongpunch.mp3</soundFile>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+              <entry>
+                <string>Click</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.ClickTrigger">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.SoundAction">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -79,7 +93,7 @@
       <myMainCharacters>
         <gameengine.model.Actor reference="../../myActors/gameengine.model.Actor"/>
       </myMainCharacters>
-      <soundtrack>Jordan.mp3</soundtrack>
+      <soundtrack>Ink.mp3</soundtrack>
       <myGarbageCollectors/>
     </gameengine.controller.Level>
   </levels>
@@ -101,9 +115,79 @@
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>
-          <myName>Floor Block</myName>
-          <myID>2</myID>
-          <myImageViewName>floor_block.jpg</myImageViewName>
+          <myName>Main Player</myName>
+          <myID>1</myID>
+          <myImageViewName>default_main_player.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules>
+              <entry>
+                <string>A</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
+                      <myKey>A</myKey>
+                      <myKeyCode>A</myKeyCode>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.SoundAction">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <soundFile>strongpunch.mp3</soundFile>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+              <entry>
+                <string>Click</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.ClickTrigger">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.SoundAction">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <soundFile>shotgun.mp3</soundFile>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+            </myRules>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates>
+            <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
+          </myStates>
+          <mySprite reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <list>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor"/>
+        </list>
+      </entry>
+      <entry>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>0.0</x>
+          <y>0.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Solid Floor</myName>
+          <myID>3</myID>
+          <myImageViewName>solid_floor.png</myImageViewName>
           <myHeading>0.0</myHeading>
           <myImageViewSize>0.0</myImageViewSize>
           <myRuleManager>
@@ -115,7 +199,7 @@
           <myStates/>
           <mySprite>
             <myImages>
-              <string>floor_block.jpg</string>
+              <string>solid_floor.png</string>
             </myImages>
             <spriteIndex>0</spriteIndex>
           </mySprite>
@@ -185,65 +269,9 @@
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>
-          <myName>Main Player</myName>
-          <myID>1</myID>
-          <myImageViewName>default_main_player.png</myImageViewName>
-          <myHeading>0.0</myHeading>
-          <myImageViewSize>0.0</myImageViewSize>
-          <myRuleManager>
-            <myRules>
-              <entry>
-                <string>Space</string>
-                <list>
-                  <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
-                      <myKey>Space</myKey>
-                      <myKeyCode>SPACE</myKeyCode>
-                    </myTrigger>
-                    <myAction class="gameengine.model.Actions.SoundAction">
-                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <soundFile>shotgun.mp3</soundFile>
-                    </myAction>
-                  </gameengine.model.Rule>
-                </list>
-              </entry>
-            </myRules>
-          </myRuleManager>
-          <myAttributeManager>
-            <attributeMap/>
-          </myAttributeManager>
-          <myStates>
-            <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
-          </myStates>
-          <mySprite reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/mySprite"/>
-          <myNextValues>
-            <nextXVelo>0.0</nextXVelo>
-            <nextXPos>0.0</nextXPos>
-            <nextYVelo>0.0</nextYVelo>
-            <nextYPos>0.0</nextYPos>
-            <collision>false</collision>
-          </myNextValues>
-          <myRotate>0.0</myRotate>
-          <myOpacity>1.0</myOpacity>
-          <myScaleX>1.0</myScaleX>
-          <myScaleY>1.0</myScaleY>
-        </gameengine.model.Actor>
-        <list>
-          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor"/>
-        </list>
-      </entry>
-      <entry>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs/>
-          <x>0.0</x>
-          <y>0.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myFriction>0.0</myFriction>
-          <myName>Solid Floor</myName>
-          <myID>3</myID>
-          <myImageViewName>solid_floor.png</myImageViewName>
+          <myName>Floor Block</myName>
+          <myID>2</myID>
+          <myImageViewName>floor_block.jpg</myImageViewName>
           <myHeading>0.0</myHeading>
           <myImageViewSize>0.0</myImageViewSize>
           <myRuleManager>
@@ -255,7 +283,7 @@
           <myStates/>
           <mySprite>
             <myImages>
-              <string>solid_floor.png</string>
+              <string>floor_block.jpg</string>
             </myImages>
             <spriteIndex>0</spriteIndex>
           </mySprite>
