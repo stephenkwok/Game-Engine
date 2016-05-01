@@ -12,6 +12,8 @@ import gameengine.model.IRule;
 import gameengine.model.Triggers.ITrigger;
 import gui.view.ComboBoxTextCell;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 
 /**
@@ -20,6 +22,8 @@ import javafx.scene.layout.HBox;
 public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuthoringBehavior {
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
+	private static final String HEADER = "Failed to set rules.";
+	private static final String CONTENT = "Please select a value for each field.";
 	private String value;
 	private String behaviorType;
 	private TriggerFactory triggerFactory;
@@ -54,7 +58,15 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 	
 	public void setValue(){
 		this.value = getComboBox().getValue();
+		if(value == null) showAlert(HEADER,CONTENT);
 		createTriggerOrAction();
+	}
+	
+	private void showAlert(String alertHeader, String alertContent) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setHeaderText(alertHeader);
+		alert.setContentText(alertContent);
+		alert.showAndWait();
 	}
 
 	/**

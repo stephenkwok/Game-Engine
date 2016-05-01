@@ -10,17 +10,28 @@ import gameengine.model.IPlayActor;
 
 
 public class Spawn extends ActorAction{
-
-	IPlayActor mySpawnedActor;
+	private Double ZERO = 0.0;
+	private IPlayActor mySpawnedActor;
+	private Double spawnAngle ;
 	
-	public Spawn(Actor actor1, Actor spawnedActor) {
+
+	
+	public Spawn(Actor actor1, Actor spawnedActor, Double angle) {
 		super(actor1);
-		mySpawnedActor  = spawnedActor;
+		mySpawnedActor  = (IPlayActor) spawnedActor;
+		spawnAngle = angle;
 	}
 	
+	public double getSpawnAngle(){
+		if(spawnAngle==null){
+			spawnAngle = ZERO;
+		}
+		return spawnAngle;
+	}
+
 	@Override
 	public Object[] getParameters(){
-		return new Object[]{getMyActor(),mySpawnedActor};
+		return new Object[]{getMyActor(),mySpawnedActor, spawnAngle};
 	}
 	
 	public void perform() {
@@ -28,19 +39,19 @@ public class Spawn extends ActorAction{
 		ActorCopier myActorCopier = new ActorCopier((Actor)mySpawnedActor);
 		Actor clone = myActorCopier.makeCopy();
 		clone.setHeading(getMyActor().getHeading());
+		double halfWidth = getMyActor().getBounds().getWidth()/2;
+		double halfHeight = getMyActor().getBounds().getHeight()/2;
+		double startingXPos = getMyActor().getBounds().getMinX() + getMyActor().getBounds().getWidth()/2;
+		double startingYPos = getMyActor().getBounds().getMinY() + getMyActor().getBounds().getHeight()/2;
+		double y_Offset = Math.sin(Math.toRadians(spawnAngle));
+		double x_Offset = Math.cos(Math.toRadians(spawnAngle));		
 		
-		System.out.println(clone.getHeading());
+		clone.setX(startingXPos - clone.getBounds().getWidth()/2 +(x_Offset*(clone.getBounds().getWidth()/2 + halfWidth)));
+		clone.setY(startingYPos - clone.getBounds().getHeight()/2 -(y_Offset*(clone.getBounds().getHeight()/2 + halfHeight)));
+
 		
-		if(clone.getHeading() == 0){
-			clone.setX(getMyActor().getBounds().getMaxX());
-			clone.setY(getMyActor().getBounds().getMinY() + getMyActor().getBounds().getHeight()/2 - clone.getBounds().getHeight()/2);
-		}else if(clone.getHeading() == 180){
-			clone.setX(getMyActor().getBounds().getMinX()-clone.getBounds().getWidth());
-			clone.setY(getMyActor().getBounds().getMinY() + getMyActor().getBounds().getHeight()/2 - clone.getBounds().getHeight()/2);
-		}else{
-			clone.setX(getMyActor().getBounds().getMinX() +getMyActor().getBounds().getWidth()/2 - clone.getBounds().getWidth()/2);
-			clone.setY(getMyActor().getY()-clone.getBounds().getHeight());
-		}
+		clone.setHeading(spawnAngle);
+
 		getMyActor().changed();
 		List<Object> myList = new ArrayList<>();
 		myList.add("addActor");
