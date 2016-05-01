@@ -125,15 +125,12 @@ public class ActorRuleCreator {
 	public void updateActorRules() {
 		resetEnvironment();
 		for (String triggerType : ((IAuthoringActor) aEE.getEditable()).getRules().keySet()) {
-			//for (IRule rule : ((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType)) {
 			for (int i = 0; i < ((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType).size(); i++) {
 				
 				IRule rule = ((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType).get(i);
 				ActorRule toAdd = new ActorRule(this);
 				toAdd.addBehavior(checkForKeyOrAttributeTrigger(triggerType), 
 						rule);
-				//toAdd.addBehavior(checkForKeyOrAttributeTrigger(triggerType), 
-						//((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType).get(ZERO));
 				String simpleName = rule.getMyAction().getClass().getSimpleName();
 				if (simpleName.equals(CHANGE_ATTRIBUTE)) {
 					String attributeType = ((ChangeAttribute) rule.getMyAction()).getMyAttributeType();
@@ -144,8 +141,6 @@ public class ActorRuleCreator {
 				myActorRules.add(toAdd);
 				ruleRow++;
 			}
-			//}
-			
 		}
 	}
 	
