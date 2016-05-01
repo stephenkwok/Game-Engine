@@ -25,10 +25,6 @@ public class SelfTriggerBehavior extends LabelBehavior {
 	}
 
 	@Override
-	public void addNodeObserver(Observer observer) {
-	}
-
-	@Override
 	protected void createTriggerOrAction() {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(myActor);

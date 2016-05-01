@@ -117,6 +117,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	private void setLeftPane() {
 		VBox vbox = new VBox();
 		library = new GUILibrary(myActorRuleCreator);
+		library.updateDragEvents();
 		actorImageViewer = new ActorImageViewer(this, myActorIV);
 		TabPane actorFields = new TabPane();
 		actorFields.getTabs().addAll(actorCharacteristics(), actorAttributes());

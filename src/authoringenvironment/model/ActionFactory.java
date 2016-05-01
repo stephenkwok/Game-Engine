@@ -24,6 +24,9 @@ public class ActionFactory {
 	private static final int ZERO = 0;
 	private static final int ONE = 1;
 	private static final int TWO = 2;
+	private static final int THREE = 3;
+	private static final int FOUR = 4;
+	private static final int FIVE = 5;
 	private static final String ACTION_RESOURCE = "actionfactory";
 	private static final String DELIMITER = ",";
 	private static final String ACTION_TYPES = "ActionTypes";
@@ -127,6 +130,36 @@ public class ActionFactory {
 		Class<?> clazz = Class.forName(className);
 		Constructor<?> constructor = clazz.getConstructor(Actor.class, Actor.class);
 		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO), (Actor) arguments.get(ONE));
+	}
+	
+	private IAction createCreateActorBehavior(String actionType, String className)
+			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Class<?> clazz = Class.forName(className);
+		try{
+			Constructor<?> constructor = clazz.getConstructor(IGameElement.class, Actor.class, Double.class, Double.class, Double.class, Double.class);
+			return (IAction) constructor.newInstance((IGameElement) arguments.get(ZERO), (Actor) arguments.get(ONE), arguments.get(TWO), arguments.get(THREE), arguments.get(FOUR), arguments.get(FIVE));
+		}catch(Exception e){
+			System.out.println("single");
+			Constructor<?> constructor = clazz.getConstructor(IGameElement.class, Actor.class, Double.class, Double.class);
+			return (IAction) constructor.newInstance((IGameElement) arguments.get(ZERO), (Actor) arguments.get(ONE), arguments.get(TWO), arguments.get(THREE));
+		}
+	}
+	
+	private IAction createGlideTargetBehavior(String actionType, String className)
+			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Class<?> clazz = Class.forName(className);
+		Constructor<?> constructor = clazz.getConstructor(Actor.class, Double.class, Actor.class);
+		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO), arguments.get(ONE), (Actor) arguments.get(TWO));
+	}
+	
+	private IAction createSoundBehavior(String actionType, String className)
+			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Class<?> clazz = Class.forName(className);
+		Constructor<?> constructor = clazz.getConstructor(Actor.class, String.class);
+		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO), arguments.get(ONE));
 	}
 
 }
