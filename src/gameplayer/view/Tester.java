@@ -69,7 +69,7 @@ public class Tester extends Application {
         info.setMyCurrentLevelNum(0);
         info.setName("Colette");
 
-        IAuthoringActor actor1 = (IAuthoringActor) new Actor();
+        IAuthoringActor actor1 = new Actor();
         actor1.setImageViewName("runningmario1.png");
         actor1.setName("A1");
         actor1.setID(1);
@@ -77,7 +77,7 @@ public class Tester extends Application {
         actor1.addSpriteImage("runningmario2.png");
         actor1.addSpriteImage("runningmario3.png");
         
-        IAuthoringActor actor12 = (IAuthoringActor) new Actor();
+        IAuthoringActor actor12 = new Actor();
         actor12.setImageViewName("runningmario1.png");
         actor12.setName("A1");
         actor12.setID(4);
@@ -89,7 +89,7 @@ public class Tester extends Application {
         
         
 
-        IAuthoringActor actor2 = (IAuthoringActor) new Actor();
+        IAuthoringActor actor2 = new Actor();
         actor2.setImageViewName("block.png");
         actor2.setX(300);
         actor2.setY(300);
@@ -97,14 +97,14 @@ public class Tester extends Application {
         actor2.setID(2);
         
         
-        IAuthoringActor blocky = (IAuthoringActor) new Actor();
+        IAuthoringActor blocky = new Actor();
         blocky.setImageViewName("block.png");
         blocky.setX(650);
         blocky.setY(300);
         blocky.setName("blocky");
         blocky.setID(2);
         
-        IAuthoringActor spawnedActor = (IAuthoringActor) new Actor();
+        IAuthoringActor spawnedActor = new Actor();
         spawnedActor.setImageViewName("redball.png");
         spawnedActor.setName("bullet");
         spawnedActor.setID(90);
@@ -313,7 +313,7 @@ public class Tester extends Application {
 
             actor1.addRule(brule);
             actor1.addRule(brule2);
-            level2.addActor((IAuthoringActor) block);
+            level2.addActor(block);
             yposition-=50;
         }
         
@@ -338,7 +338,7 @@ public class Tester extends Application {
             actor1.addRule(ruleNextLevel2);
             actor1.addRule(brule3);
             actor1.addRule(brule4);
-            level2.addActor((IAuthoringActor) block2);
+            level2.addActor(block2);
             yposition2-=50;
         }
         
@@ -371,7 +371,7 @@ public class Tester extends Application {
         /**
          * testing create actors
          */
-        IAuthoringActor a = (IAuthoringActor) new Actor();
+        IAuthoringActor a = new Actor();
         a.setID(10);
         a.setImageViewName("pipes.png");
         TickTrigger translatetick = new TickTrigger(45);
@@ -415,9 +415,9 @@ public class Tester extends Application {
             blocky.addRule(brule4);
             enemy2.addRule(brule5);
 
-            level1.addActor((IAuthoringActor)floor);
-            level2.addActor((IAuthoringActor) floor);
-            level3.addActor((IAuthoringActor)floor);
+            level1.addActor(floor);
+            level2.addActor(floor);
+            level3.addActor(floor);
         }
 
         Group group = new Group();

@@ -47,7 +47,7 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 	}
 	
 	public void setValue(){
-		this.value = (String) getComboBox().getValue();
+		this.value = getComboBox().getValue();
 		createTriggerOrAction();
 	}
 

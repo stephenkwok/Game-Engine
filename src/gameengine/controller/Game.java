@@ -162,7 +162,7 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 	}
 	
 	private void initGameElement(IGameElement gameElement){
-		gameElement.setGame((IPlayGame)this);
+		gameElement.setGame(this);
 	}
 
 	private void initCurrentLevel() {

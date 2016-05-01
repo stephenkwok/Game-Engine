@@ -341,7 +341,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * 
 	 */
 	public void addActor() {
-		IAuthoringActor newActor = (IAuthoringActor) new Actor();
+		IAuthoringActor newActor = new Actor();
 		myActorMap.put(newActor, new ArrayList<>());
 		newActor.setID(myActorMap.size());
 		gameEditingEnvironment.createActorPreviewUnit(newActor);
