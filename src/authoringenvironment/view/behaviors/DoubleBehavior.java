@@ -11,6 +11,8 @@ import gameengine.model.IRule;
 import gameengine.model.Triggers.ITrigger;
 import gui.view.TextFieldWithButton;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 
 /**
@@ -23,6 +25,8 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	private static final String LABEL = "Label";
 	private static final String PROMPT = "Prompt";
 	private static final String WIDTH = "Width";
+	private static final String HEADER = "Failed to set rules.";
+	private static final String CONTENT = "Please enter a value for each field.";
 	private Double value;
 	private TriggerFactory triggerFactory;
 	private ActionFactory actionFactory;
@@ -53,8 +57,19 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	
 	@Override
 	public void setValue(){
-		this.value = Double.parseDouble(getTextFieldInput());
-		createTriggerOrAction();
+		try{
+			this.value = Double.parseDouble(getTextFieldInput());
+			createTriggerOrAction();
+		}catch(Exception e){
+			showAlert(HEADER,CONTENT);
+		}
+	}
+	
+	private void showAlert(String alertHeader, String alertContent) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setHeaderText(alertHeader);
+		alert.setContentText(alertContent);
+		alert.showAndWait();
 	}
 	
 	@Override
