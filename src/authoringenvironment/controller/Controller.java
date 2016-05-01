@@ -2,39 +2,18 @@ package authoringenvironment.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.lang.reflect.*;
+import java.util.*;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
-import authoringenvironment.model.ActorCopier;
-import authoringenvironment.model.AuthoringEnvironmentRestorer;
-import authoringenvironment.model.GamePreviewImageSetter;
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.model.MainCharacterManager;
-import authoringenvironment.model.PresetActorFactory;
-import authoringenvironment.view.AlertEditable;
-import authoringenvironment.view.PopUpAuthoringHelpPage;
-import gamedata.controller.ChooserType;
-import gamedata.controller.CreatorController;
-import gamedata.controller.FileChooserController;
-import gameengine.controller.Game;
-import gameengine.controller.GameInfo;
-import gameengine.controller.Level;
+import authoringenvironment.model.*;
+import authoringenvironment.view.*;
+import gamedata.controller.*;
+import gameengine.controller.*;
 import gameengine.model.Actor;
 import gameplayer.controller.BranchScreenController;
 import gui.view.GUIFactory;
@@ -44,12 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -349,7 +323,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * 
 	 */
 	public void addActor() {
-		IAuthoringActor newActor = (IAuthoringActor) new Actor();
+		IAuthoringActor newActor = new Actor();
 		myActorMap.put(newActor, new ArrayList<>());
 		newActor.setID(myActorMap.size());
 		myGameEditingEnvironment.createActorPreviewUnit(newActor);
@@ -360,7 +334,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	/**
 	 * Saves game and returns to splash screen of game player.
 	 */
-
 	public void goToSplash() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setContentText(FINISH_CONFIRMATION_TEXT);
@@ -378,10 +351,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 			SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Method method = this.getClass().getDeclaredMethod(methodName, parameterTypes);
 		Object parameter = parameters[0] == null ? null : parameters[0];
-		if (parameter == null)
-			method.invoke(this, null);
-		else
-			method.invoke(this, parameter);
+		if (parameter == null) method.invoke(this, null);
+		else method.invoke(this, parameter);
 	}
 
 	/**
@@ -410,14 +381,23 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	/**
 	 * Generates pop up allowing user to input HUD Options
 	 */
+	@SuppressWarnings("unused")
 	private void displayHUDOptions() {
 		PopupSelector selector = new PopupSelector(this);
 	}
 
+	/**
+	 * Displays the Help Page
+	 */
+	@SuppressWarnings("unused")
 	private void displayHelp(Object arg) {
 		helpPage = new PopUpAuthoringHelpPage((String) arg);
 	}
 
+	/**
+	 * Copies properties from a reference actor to all of its copies
+	 * @param actor: reference actor from which all copies should set their properties
+	 */
 	public void updateActors(Actor actor) {
 		myActorCopier.setReferenceActor(actor);
 		List<IAuthoringActor> listToUpdate = myActorMap.get(actor);
@@ -427,6 +407,11 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		}
 	}
 
+	/**
+	 * Updates a reference actor according to changes in one of its copies
+	 * @param actor: a copy of the reference actor whose properties the reference actor
+	 * should take on
+	 */
 	public void updateRefActor(IAuthoringActor actor) {
 		for (IAuthoringActor refActor : myActorMap.keySet()) {
 			if (myActorMap.get(refActor).contains(actor)) {

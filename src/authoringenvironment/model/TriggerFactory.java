@@ -110,8 +110,8 @@ public class TriggerFactory {
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> collisionClass = Class.forName(className);
-		Constructor<?> constructor = collisionClass.getConstructor(Actor.class, Actor.class);
-		return (ITrigger) constructor.newInstance((Actor) arguments.get(ZERO), (Actor) arguments.get(ONE));
+		Constructor<?> constructor = collisionClass.getConstructor(Actor.class, Actor.class, Boolean.class);
+		return (ITrigger) constructor.newInstance((Actor) arguments.get(ZERO), (Actor) arguments.get(ONE), (Boolean) arguments.get(TWO));
 	}
 
 	private ITrigger createKeyTrigger(String behaviorType, String className)

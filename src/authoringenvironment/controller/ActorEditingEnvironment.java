@@ -71,7 +71,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 
 	private Stage myStage;
 	private Controller myController;
-	
+
 	private CheckBoxApplyPhysics checkPhysics;
 
 	public ActorEditingEnvironment(ResourceBundle myResources, Stage stage, Controller myController) {
@@ -106,7 +106,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	 * Set Actor of actor editing environment to a default new Actor
 	 */
 	private void setDefaultActor() {
-		IAuthoringActor defaultActor = (IAuthoringActor) new Actor();
+		IAuthoringActor defaultActor = new Actor();
 		this.myActor = defaultActor;
 		this.myActorIV = new ImageviewActorIcon(defaultActor, ICON_WIDTH);
 	}
@@ -125,19 +125,20 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		actorFields.setPrefHeight(FIELD_HEIGHT);
 		checkPhysics = new CheckBoxApplyPhysics(APPLY_PHYSICS, APPLY_PHYSICS_WIDTH, this);
 		checkPhysics.addObserver(this);
-		vbox.getChildren().addAll(actorImageViewer.getPane(), checkPhysics.createNode(), actorFields, library.getPane());
+		vbox.getChildren().addAll(actorImageViewer.getPane(), checkPhysics.createNode(), actorFields,
+				library.getPane());
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
 		myRoot.setLeft(vbox);
 	}
-	
-	private Tab actorCharacteristics(){
+
+	private Tab actorCharacteristics() {
 		characteristics = new TabFields(myResources, ACTOR_CHARACTERISTICS, ACTOR_CHARACTERISTICS_RESOURCE, myActor);
 		characteristics.setObserver(this);
 		characteristics.updateEditable(myActor);
 		return characteristics.getTab();
 	}
-	
-	private Tab actorAttributes(){
+
+	private Tab actorAttributes() {
 		attributes = new TabFields(myResources, ACTOR_ATTRIBUTES, ACTOR_ATTRIBUTES_RESOURCE, myActor);
 		attributes.setObserver(this);
 		attributes.updateEditable(myActor);
@@ -200,6 +201,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		myActorIV = new ImageviewActorIcon(myActor, ICON_WIDTH);
 		setLeftPane();
 		myActorRuleCreator.updateActorRules();
+		checkPhysics.setEditableElement(editable);
 		library.updateDragEvents();
 	}
 
@@ -236,18 +238,12 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		myController.updateActors((Actor) arg);
-		System.out.println("checkPHysics: ");
-		System.out.println(checkPhysics.isSelected());
-		if (checkPhysics.isSelected()) {
-			myActorRuleCreator.applyPhysics();
-		}
-		//myActorRuleCreator.applyPhysics();
 	}
-	
-	public boolean shouldApplyPhysics(){
-		if(myActor.getRules().get(TICK_KEY)!=null){
-			for(IRule rule: myActor.getRules().get(TICK_KEY)){
-				if(rule.getMyAction().getClass().getSimpleName().equals(APPLY_PHYSICS)){
+
+	public boolean shouldApplyPhysics() {
+		if (myActor.getRules().get(TICK_KEY) != null) {
+			for (IRule rule : myActor.getRules().get(TICK_KEY)) {
+				if (rule.getMyAction().getClass().getSimpleName().equals(APPLY_PHYSICS)) {
 					return false;
 				}
 			}

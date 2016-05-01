@@ -125,20 +125,22 @@ public class ActorRuleCreator {
 	public void updateActorRules() {
 		resetEnvironment();
 		for (String triggerType : ((IAuthoringActor) aEE.getEditable()).getRules().keySet()) {
-			ActorRule toAdd = new ActorRule(this);
-			toAdd.addBehavior(checkForKeyOrAttributeTrigger(triggerType), 
-					((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType).get(ZERO));
-			for (IRule rule : ((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType)) {
+			for (int i = 0; i < ((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType).size(); i++) {
+				
+				IRule rule = ((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType).get(i);
+				ActorRule toAdd = new ActorRule(this);
+				toAdd.addBehavior(checkForKeyOrAttributeTrigger(triggerType), 
+						rule);
 				String simpleName = rule.getMyAction().getClass().getSimpleName();
 				if (simpleName.equals(CHANGE_ATTRIBUTE)) {
 					String attributeType = ((ChangeAttribute) rule.getMyAction()).getMyAttributeType();
 					toAdd.addBehavior(myActionResources.getString(attributeType), rule);
 				} else if (simpleName.equals(SOUND_ACTION)) toAdd.addSound(simpleName, ((SoundAction) rule.getMyAction()).getSoundFile());
-				else toAdd.addBehavior(simpleName, rule); 
+				else toAdd.addBehavior(simpleName, rule);
+				myActorRuleCreatorPane.add(toAdd.getGridPane(), RULE_COL, ruleRow);
+				myActorRules.add(toAdd);
+				ruleRow++;
 			}
-			myActorRuleCreatorPane.add(toAdd.getGridPane(), RULE_COL, ruleRow);
-			myActorRules.add(toAdd);
-			ruleRow++;
 		}
 	}
 	

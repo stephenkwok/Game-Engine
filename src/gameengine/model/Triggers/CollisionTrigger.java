@@ -56,6 +56,10 @@ public abstract class CollisionTrigger extends ITrigger {
 	public void setMyCollisionActor(Actor myCollisionActor) {
 		this.myCollisionActor = myCollisionActor;
 	}
+	
+	public boolean isOneTime() {
+		return oneTime;
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -65,5 +69,9 @@ public abstract class CollisionTrigger extends ITrigger {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean equals(CollisionTrigger other){
+		return (myMainActor.getID() == other.getMyMainActor().getID() && myCollisionActor.getID() == other.getMyCollisionActor().getID());
 	}
 }

@@ -13,7 +13,6 @@ import gameengine.model.IRule;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Triggers.ITrigger;
-import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -161,7 +160,7 @@ public class ActorRule {
 		if (!(isTriggerType(behaviorType) && myTriggerNodes.getChildren().size() != 0)) {
 			IAuthoringBehavior element = actorRuleFactory.getAuthoringRule(behaviorType, rule);
 			authoringBehaviorMap.put(element, new ArrayList<>());
-			Node node = ((IGUIElement) element).createNode();
+			Node node = (element).createNode();
 			element.updateValueBasedOnEditable();
 			setRemoveEvent(node, element);
 			if (isTriggerType(behaviorType)) {
@@ -177,7 +176,7 @@ public class ActorRule {
 	public void addSound(String behaviorType, String soundName){
 		IAuthoringBehavior element = actorRuleFactory.getSoundRule(behaviorType, soundName);
 		authoringBehaviorMap.put(element, new ArrayList<>());
-		Node node = ((IGUIElement) element).createNode();
+		Node node = (element).createNode();
 		element.updateValueBasedOnEditable();
 		setRemoveEvent(node, element);
 		myActionNodes.getChildren().add(node);

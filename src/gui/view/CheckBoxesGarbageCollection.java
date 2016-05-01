@@ -1,19 +1,10 @@
 package gui.view;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.ResourceBundle;
+import java.lang.reflect.*;
+import java.util.*;
 
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingElement;
+import authoringenvironment.model.*;
+import authoringenvironment.view.AlertEditable;
 import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
@@ -22,13 +13,9 @@ import gameengine.model.Actions.Destroy;
 import gameengine.model.Triggers.ITrigger;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.layout.*;
 
 /**
  * Checkboxes for all HUD options.
@@ -116,7 +103,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	private void initAllSidesList() {
 		allSides = new ArrayList<>(Arrays.asList(LEFT, RIGHT, TOP, BOTTOM));
 	}
-	
+
 	private IAuthoringActor getGarbageCollector(String side) {
 		if (garbageCollectors.containsKey(side)) {
 			return garbageCollectors.get(side);
@@ -124,7 +111,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 			return new Actor();
 		}
 	}
-	
+
 	public void updateGarbageCollectingActors(List<IPlayActor> actors) {
 		List<String> desiredSides = getSides();
 		for (int i = 0; i < allSides.size(); i++) {
@@ -139,34 +126,39 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 			}
 		}
 	}
-	
+
 	private void updateGarbageCollector(IAuthoringActor garbageCollector, String sideToCheck, List<IPlayActor> actors) {
 		garbageCollector.setImageView(new ImageView(new Image(myAttributesResources.getString(sideToCheck + IMAGE))));
 		garbageCollector.setImageViewName(myAttributesResources.getString(sideToCheck + IMAGE));
 		positionGarbageCollector(garbageCollector, sideToCheck);
 		updateGarbageCollectorCollisions(garbageCollector, actors, sideToCheck);
 	}
-	
+
 	private void positionGarbageCollector(IAuthoringActor garbageCollector, String sideToCheck) {
 		if (sideToCheck.equals(LEFT)) {
 			garbageCollector.setX(Double.parseDouble(myAttributesResources.getString(sideToCheck + X)));
 			garbageCollector.setY(Double.parseDouble(myAttributesResources.getString(sideToCheck + Y)));
 		} else if (sideToCheck.equals(RIGHT)) {
-			garbageCollector.setX(myLevel.getImageView().getFitWidth() + Double.parseDouble(myAttributesResources.getString(sideToCheck + X)));
+			garbageCollector.setX(myLevel.getImageView().getFitWidth()
+					+ Double.parseDouble(myAttributesResources.getString(sideToCheck + X)));
 			garbageCollector.setY(Double.parseDouble(myAttributesResources.getString(sideToCheck + Y)));
-		} else if (sideToCheck.equals(TOP)){
+		} else if (sideToCheck.equals(TOP)) {
 			garbageCollector.setX(Double.parseDouble(myAttributesResources.getString(sideToCheck + X)));
 			garbageCollector.setY(Double.parseDouble(myAttributesResources.getString(sideToCheck + Y)));
-		}else {
+		} else {
 			garbageCollector.setX(Double.parseDouble(myAttributesResources.getString(sideToCheck + X)));
-			garbageCollector.setY(myLevel.getImageView().getFitHeight() + Double.parseDouble(myAttributesResources.getString(sideToCheck + Y)));
+			garbageCollector.setY(myLevel.getImageView().getFitHeight()
+					+ Double.parseDouble(myAttributesResources.getString(sideToCheck + Y)));
 		}
 	}
-	private void updateGarbageCollectorCollisions(IAuthoringActor garbageCollector, List<IPlayActor> actors, String sideToCheck) {
+
+	private void updateGarbageCollectorCollisions(IAuthoringActor garbageCollector, List<IPlayActor> actors,
+			String sideToCheck) {
 		garbageCollector.getRules().clear();
 		for (int j = 0; j < actors.size(); j++) {
 			if (!garbageCollectors.keySet().contains(actors.get(j))) {
-				ITrigger trigger = createCollisionTrigger(sideToCheck, (Actor) garbageCollector, (Actor) actors.get(j)); // use reflection from properties file
+				ITrigger trigger = createCollisionTrigger(sideToCheck, (Actor) garbageCollector, (Actor) actors.get(j)); 
+				// use reflection from properties file
 				garbageCollector.addRule(new Rule(trigger, new Destroy((Actor) actors.get(j))));
 			}
 		}
@@ -178,7 +170,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 			myLevel.removeActor((Actor) garbageCollector);
 		}
 	}
-	
+
 	private ITrigger createCollisionTrigger(String side, Actor garbageCollector, Actor actor) {
 		Class<?> collision;
 		try {
@@ -186,38 +178,19 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 			collision = Class.forName(TRIGGER_DIRECTORY + name);
 			Constructor<?> constructor = collision.getConstructor(Actor.class, Actor.class);
 			return (ITrigger) constructor.newInstance(garbageCollector, actor);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			AlertEditable alert = new AlertEditable();
+			alert.generateAlert(e.getClass().toString());
+		} 
 		return null;
 	}
 
 	/**
 	 * Add checkbox elements to the vbox.
 	 * 
-	 * @param key:
-	 *            key in resource file for elements to add.
-	 * @param vbox:
-	 *            container to add checkboxes to.
+	 * @param key: key in resource file for elements to add.
+	 * @param vbox: container to add checkboxes to.
 	 * @return list of elements added.
 	 */
 	private List<Node> addElements(String key, VBox vbox) {
@@ -236,8 +209,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	 */
 	public List<String> getSides() {
 		List<String> sides = new ArrayList<String>();
-		mySides.stream().filter(checkbox -> checkbox.isSelected())
-		.forEach(checkbox -> sides.add(checkbox.getId()));
+		mySides.stream().filter(checkbox -> checkbox.isSelected()).forEach(checkbox -> sides.add(checkbox.getId()));
 		return sides;
 	}
 
