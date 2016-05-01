@@ -87,13 +87,13 @@ public class GameScreen extends Observable implements IGameScreen {
 		this.myEndHorizontal = image.getWidth();
 		this.myEndVertical = image.getHeight();
 		ImageView imageView = new ImageView(image);
-		imageView.setPreserveRatio(true);
-		imageView.setFitHeight(level.getMyBackgroundHeight());
+		imageView.setPreserveRatio(true); // amy added this to resize background to fit height
+		imageView.setFitHeight(level.getMyBackgroundHeight()); // amy also added this
 		level.setMyImageView(imageView);
 		
 		ImageView imageView2 = new ImageView(image);
-		imageView2.setPreserveRatio(true);
-		imageView2.setFitHeight(level.getMyBackgroundHeight());
+		imageView2.setPreserveRatio(true); // amy also added
+		imageView2.setFitHeight(level.getMyBackgroundHeight()); //amy also added SORRY IF THIS RUINS THINGS - CAN BE TAKEN OUT
 		imageView2.setX(imageView.getImage().getWidth());
 
 		level.getMyBackgroundX().addListener(new ChangeListener() {
