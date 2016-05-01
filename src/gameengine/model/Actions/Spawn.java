@@ -79,6 +79,7 @@ import gameengine.model.IPlayActor;
 
 public class Spawn extends ActorAction{
 
+
 	IPlayActor mySpawnedActor;
 	
 	public Spawn(Actor actor1, Actor spawnedActor) {
