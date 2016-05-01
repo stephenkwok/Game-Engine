@@ -12,11 +12,11 @@ import gameengine.model.IPlayActor;
 public class Spawn extends ActorAction{
 
 	IPlayActor mySpawnedActor;
-	double spawnAngle ;
+	Double spawnAngle ;
 	
 
 	
-	public Spawn(Actor actor1, Actor spawnedActor, double angle) {
+	public Spawn(Actor actor1, Actor spawnedActor, Double angle) {
 		super(actor1);
 		mySpawnedActor  = (IPlayActor) spawnedActor;
 		spawnAngle = angle;
