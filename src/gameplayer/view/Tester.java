@@ -319,7 +319,7 @@ public class Tester extends Application {
         
         int yposition2 = 100;
         int xposition2 = 600;
-        for(int j=1; j<=5; j++){
+        for(int j=1; j<=1; j++){
             Actor block2 = new Actor();
             block2.setName("salad");
             block2.setID(102);
