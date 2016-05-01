@@ -23,13 +23,14 @@ import gameengine.model.Actions.ChangeAttribute;
 import gameengine.model.Actions.CreateActor;
 import gameengine.model.Actions.Destroy;
 import gameengine.model.Actions.GlideForward;
+import gameengine.model.Actions.HorizontalHeadingSwitch;
 import gameengine.model.Actions.HorizontalStaticCollision;
 import gameengine.model.Actions.MoveLeft;
 import gameengine.model.Actions.MoveRight;
 import gameengine.model.Actions.MoveUp;
 import gameengine.model.Actions.NextImage;
 import gameengine.model.Actions.NextLevel;
-import gameengine.model.Actions.ReverseHeading;
+//import gameengine.model.Actions.ReverseHeading;
 import gameengine.model.Actions.SoundAction;
 import gameengine.model.Actions.Spawn;
 import gameengine.model.Actions.VerticalBounceCollision;
@@ -140,7 +141,7 @@ public class Tester extends Application {
         enemy2.addRule(movingForward);
 
         SideCollision triggerenemy = new SideCollision((Actor)enemy2,(Actor)blocky);
-        Action actionenemy2 = new ReverseHeading((Actor)enemy2);
+        Action actionenemy2 = new HorizontalHeadingSwitch((Actor)enemy2);
         Rule ruleenemy = new Rule(triggerenemy,actionenemy2);
         enemy2.addRule(ruleenemy);
 
@@ -326,7 +327,7 @@ public class Tester extends Application {
         
         int yposition2 = 100;
         int xposition2 = 600;
-        for(int j=1; j<=5; j++){
+        for(int j=1; j<=1; j++){
             Actor block2 = new Actor();
             block2.setName("salad");
             block2.setID(102);

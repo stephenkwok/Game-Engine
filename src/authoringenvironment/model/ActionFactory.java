@@ -140,7 +140,6 @@ public class ActionFactory {
 			Constructor<?> constructor = clazz.getConstructor(IGameElement.class, Actor.class, Double.class, Double.class, Double.class, Double.class);
 			return (IAction) constructor.newInstance((IGameElement) arguments.get(ZERO), (Actor) arguments.get(ONE), arguments.get(TWO), arguments.get(THREE), arguments.get(FOUR), arguments.get(FIVE));
 		}catch(Exception e){
-			System.out.println("single");
 			Constructor<?> constructor = clazz.getConstructor(IGameElement.class, Actor.class, Double.class, Double.class);
 			return (IAction) constructor.newInstance((IGameElement) arguments.get(ZERO), (Actor) arguments.get(ONE), arguments.get(TWO), arguments.get(THREE));
 		}
@@ -160,6 +159,15 @@ public class ActionFactory {
 		Class<?> clazz = Class.forName(className);
 		Constructor<?> constructor = clazz.getConstructor(IGameElement.class, String.class);
 		return (IAction) constructor.newInstance((IGameElement) arguments.get(ZERO), arguments.get(ONE));
+	}
+	
+	private IAction createShiftSceneBehavior(String actionType, String className)
+			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Class<?> clazz = Class.forName(className);
+		Constructor<?> constructor = clazz.getConstructor(IGameElement.class, String.class, Double.class);
+		return (IAction) constructor.newInstance((IGameElement) arguments.get(ZERO), arguments.get(ONE), arguments.get(TWO));
+		
 	}
 
 }

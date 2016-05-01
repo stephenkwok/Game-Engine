@@ -1,6 +1,5 @@
 package authoringenvironment.view;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,7 +23,6 @@ import javafx.scene.media.AudioClip;
 public class TabLibrarySounds extends TabLibrary {
 	private static final String SOUND_IMAGE_NAME = "sound.png";
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
-	private static final String MUSIC = "Music";
 
 	public TabLibrarySounds(ResourceBundle myResources, String tabText, ActorRuleCreator myRuleMaker) {
 		super(myResources, tabText, myRuleMaker);
@@ -37,7 +35,6 @@ public class TabLibrarySounds extends TabLibrary {
 	@Override
 	public void setContent() {
 		fillFileNames();
-		fillMusicNames(); // also add music files
 		setLabels(FXCollections.observableArrayList());
 		for (String soundName : getFileNames()) {
 			Label soundLabel = new Label(soundName, createPlaySoundButton(soundName));
@@ -47,16 +44,6 @@ public class TabLibrarySounds extends TabLibrary {
 			getLabels().add(soundLabel);
 		}
 		setListView(new ListView<>(getLabels()));
-	}
-
-	/**
-	 * Get sound files from resources
-	 */
-	private void fillMusicNames() {
-		File directory = new File(getResources().getString(MUSIC));
-		for (File file : directory.listFiles()) {
-			getFileNames().add(file.getName());
-		}
 	}
 
 	/**

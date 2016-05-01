@@ -11,6 +11,8 @@ import gameengine.model.IAction;
 import gameengine.model.IRule;
 import gameengine.model.Triggers.ITrigger;
 import gui.view.ComboBoxTextCell;
+import javafx.scene.Node;
+import javafx.scene.layout.HBox;
 
 /**
  * @author AnnieTang
@@ -35,15 +37,19 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 		this.myActorRule = myActorRule;
 		this.myRule = myRule;
 	}
+	@Override
+	public Node createNode(){
+		HBox toReturn = (HBox) super.createNode();
+		int index = toReturn.getChildren().size();
+		toReturn.getChildren().remove(index-1);
+		return toReturn;
+	}
 
 	/**
 	 * On click, set general field to ComboBox content
 	 */
 	@Override
 	public void setButtonAction() {
-		getComboButton().setOnAction(event -> {
-			setValue();
-		});
 	}
 	
 	public void setValue(){

@@ -456,6 +456,7 @@
       <myPlayPosition>0</myPlayPosition>
       <myScrollingDirection>Horizontally</myScrollingDirection>
       <myBackgroundImgName>flappybackground.png</myBackgroundImgName>
+      <myBackgroundImgHeight>0.0</myBackgroundImgHeight>
       <myRuleManager>
         <myRules>
           <entry>
@@ -512,7 +513,6 @@
       </myAttributeManager>
       <myMainCharacters/>
       <soundtrack>Photograph.mp3</soundtrack>
-      <myBackgroundMusicName>Ink.mp3</myBackgroundMusicName>
       <myGarbageCollectors/>
     </gameengine.controller.Level>
   </levels>
@@ -551,14 +551,14 @@
     <obs/>
     <value class="int">1</value>
     <bindings/>
-    <name>levelTime</name>
+    <name>Time This Level</name>
   </levelTime>
   <globalTime>
     <changed>false</changed>
     <obs/>
     <value class="int">1</value>
     <bindings/>
-    <name>globalTime</name>
+    <name>Global Time</name>
   </globalTime>
   <sfxOff>false</sfxOff>
   <musicOff>false</musicOff>

@@ -95,6 +95,7 @@ public class ActorRuleCreator {
 		myActorRuleCreatorPane.add(newRule.getGridPane(), RULE_COL, ruleRow);
 		myActorRules.add(newRule);
 		ruleRow++;
+		
 	}
 
 	/**
@@ -124,24 +125,31 @@ public class ActorRuleCreator {
 	public void updateActorRules() {
 		resetEnvironment();
 		for (String triggerType : ((IAuthoringActor) aEE.getEditable()).getRules().keySet()) {
-			ActorRule toAdd = new ActorRule(this);
-			toAdd.addBehavior(checkForKeyOrAttributeTrigger(triggerType), 
-					((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType).get(ZERO));
-			for (IRule rule : ((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType)) {
+			//for (IRule rule : ((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType)) {
+			for (int i = 0; i < ((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType).size(); i++) {
+				
+				IRule rule = ((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType).get(i);
+				ActorRule toAdd = new ActorRule(this);
+				toAdd.addBehavior(checkForKeyOrAttributeTrigger(triggerType), 
+						rule);
+				//toAdd.addBehavior(checkForKeyOrAttributeTrigger(triggerType), 
+						//((IAuthoringActor) aEE.getEditable()).getRules().get(triggerType).get(ZERO));
 				String simpleName = rule.getMyAction().getClass().getSimpleName();
 				if (simpleName.equals(CHANGE_ATTRIBUTE)) {
 					String attributeType = ((ChangeAttribute) rule.getMyAction()).getMyAttributeType();
 					toAdd.addBehavior(myActionResources.getString(attributeType), rule);
 				} else if (simpleName.equals(SOUND_ACTION)) toAdd.addSound(simpleName, ((SoundAction) rule.getMyAction()).getSoundFile());
-				else toAdd.addBehavior(simpleName, rule); 
+				else toAdd.addBehavior(simpleName, rule);
+				myActorRuleCreatorPane.add(toAdd.getGridPane(), RULE_COL, ruleRow);
+				myActorRules.add(toAdd);
+				ruleRow++;
 			}
-			myActorRuleCreatorPane.add(toAdd.getGridPane(), RULE_COL, ruleRow);
-			myActorRules.add(toAdd);
-			ruleRow++;
+			//}
+			
 		}
 	}
 	
-	protected void applyPhysics(){
+	public void applyPhysics(){
 		if(aEE.shouldApplyPhysics()){
 			Rule toAdd = new Rule(new TickTrigger(), new ApplyPhysics((Actor) aEE.getEditable()));
 			((IAuthoringActor) aEE.getEditable()).addRule(toAdd);
@@ -149,14 +157,12 @@ public class ActorRuleCreator {
 	}
 	
 	private void resetEnvironment(){
-		this.newlyReturned = true;
-		for(int i=0;i<myActorRules.size();i++){
-			removeActorRule(myActorRules.get(i));
-		}
-		myActorRules.clear();
-		ruleRow = RULE_ROW_START;
-	}
-
+        this.newlyReturned = true;
+        myActorRuleCreatorPane.getChildren().clear();
+        myActorRules.clear();
+        ruleRow = RULE_ROW_START;
+    }
+	
 	/**
 	 * Get the current IAuthoringActor
 	 * 

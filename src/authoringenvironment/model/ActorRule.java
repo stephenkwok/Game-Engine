@@ -265,6 +265,7 @@ public class ActorRule {
 		if (myActorRuleCreator.isNewlyReturned()) {
 			myActorRuleCreator.setNewlyReturned(false);
 			myActor.getRules().clear();
+			System.out.println("cleared");
 		}
 		if (myTrigger == null) {
 			for (IAuthoringBehavior authoringBehavior : authoringBehaviorMap.keySet()) {
