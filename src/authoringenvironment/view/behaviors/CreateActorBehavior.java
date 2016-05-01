@@ -44,8 +44,8 @@ public class CreateActorBehavior extends SelectActorBehavior {
 	
 	private void initializeEnvironment(){
 		this.myResources = ResourceBundle.getBundle(CREATE_ACTOR_BUNDLE);
-		this.xSpecific = true;
-		this.ySpecific = true;
+		this.xSpecific = false;
+		this.ySpecific = false;
 		coordinateOptions = new VBox(Double.parseDouble(myResources.getString("Padding")));
 		getHBox().getChildren().add(coordinateOptions);
 		xCheck = getCoordinateCheckBox();
@@ -69,18 +69,18 @@ public class CreateActorBehavior extends SelectActorBehavior {
 	
 	private void updateYCoordinate(CheckBox checkBox){
 		if(checkBox.isSelected()){
-			this.ySpecific = false;
-		}else{
 			this.ySpecific = true;
+		}else{
+			this.ySpecific = false;
 		}
 		addCoordinates();
 	}
 	
 	private void updateXCoordinate(CheckBox checkBox){
 		if(checkBox.isSelected()){
-			this.xSpecific = false;
-		}else{
 			this.xSpecific = true;
+		}else{
+			this.xSpecific = false;
 		}
 		addCoordinates();
 	}
@@ -139,7 +139,7 @@ public class CreateActorBehavior extends SelectActorBehavior {
 		if(xSpecific && ySpecific){
 			arguments.add(Double.parseDouble(specificX.getText()));
 			arguments.add(Double.parseDouble(specificY.getText()));
-		}else if(!(xSpecific && ySpecific)){
+		}else {
 			if(xSpecific){
 				arguments.add(Double.parseDouble(specificX.getText()));
 				arguments.add(Double.parseDouble(specificX.getText()));
@@ -172,20 +172,20 @@ public class CreateActorBehavior extends SelectActorBehavior {
 		try{
 			CreateActor caAction = (CreateActor) getMyRule().getMyAction();
 			getComboBox().setValue((IEditableGameElement) caAction.getMyActorToCopy());
-//			List<Double> coordinates = caAction.getCoordinates();
-//			if(caAction.isRandom()){
-//				xSpecific = false;
-//				ySpecific = false;
-//				addCoordinates();
-//				minX.setText(""+coordinates.get(0));
-//				maxX.setText(""+coordinates.get(1));
-//				minY.setText(""+coordinates.get(2));
-//				maxY.setText(""+coordinates.get(3));
-//			}else{
-//				System.out.println("not random");
-//				minX.setText(""+coordinates.get(0));
-//				maxX.setText(""+coordinates.get(1));
-//			}
+			List<Double> coordinates = caAction.getCoordinates();
+			if(caAction.isRandom()){
+				xSpecific = false;
+				ySpecific = false;
+				addCoordinates();
+				minX.setText(""+coordinates.get(2));
+				maxX.setText(""+coordinates.get(3));
+				minY.setText(""+coordinates.get(4));
+				maxY.setText(""+coordinates.get(5));
+			}else{
+				System.out.println("not random");
+				minX.setText(""+coordinates.get(0));
+				maxX.setText(""+coordinates.get(1));
+			}
 		}catch(Exception e){
 		}
 	}
