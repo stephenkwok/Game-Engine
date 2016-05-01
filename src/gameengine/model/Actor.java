@@ -11,6 +11,7 @@ import java.util.Set;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import authoringenvironment.model.IAuthoringActor;
+import gameengine.controller.IPlayGame;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
 import javafx.geometry.Bounds;
@@ -52,6 +53,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
     private double myOpacity;
     private double myScaleX;
     private double myScaleY;
+    private IPlayGame myGame;
 
     /**
      * Converts a list of Rules to a map of trigger to list of Actions
@@ -624,6 +626,16 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	 */
 	public void setStates(Set<ActorState> states) {
 		myStates = states;
+	}
+
+	@Override
+	public void setGame(IPlayGame game) {
+		myGame = game;
+	}
+
+	@Override
+	public IPlayGame getGame() {
+		return myGame;
 	}
 	
 }
