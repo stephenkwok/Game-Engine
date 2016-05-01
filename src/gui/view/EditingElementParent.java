@@ -1,8 +1,11 @@
 package gui.view;
 
 import java.util.Observer;
-import authoringenvironment.model.*;
-import javafx.event.*;
+
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingElement;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
 /**

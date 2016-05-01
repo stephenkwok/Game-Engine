@@ -1,21 +1,31 @@
 package gameplayer.view;
 
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import gamedata.controller.CreatorController;
 import gameengine.controller.Game;
 import gameengine.controller.GameInfo;
 import gameengine.controller.Level;
-import gameengine.model.Actions.*;
 import gameengine.model.Actor;
 import gameengine.model.ActorState;
-import gameengine.model.Attribute;
-import gameengine.model.AttributeType;
-import gameengine.model.PhysicsEngine;
-import gameengine.model.Actions.ShiftScene;
 import gameengine.model.Rule;
-import gameengine.model.Triggers.*;
+import gameengine.model.Actions.GlideDown;
+import gameengine.model.Actions.GlideForward;
+import gameengine.model.Actions.GlideUp;
+import gameengine.model.Actions.HorizontalBounceCollision;
+import gameengine.model.Actions.HorizontalHeadingSwitch;
+import gameengine.model.Actions.ReverseHeading;
+import gameengine.model.Actions.VerticalBounceCollision;
+import gameengine.model.Actions.VerticalHeadingSwitch;
+import gameengine.model.Triggers.BottomCollision;
+import gameengine.model.Triggers.KeyTrigger;
+import gameengine.model.Triggers.SideCollision;
+import gameengine.model.Triggers.TickTrigger;
+import gameengine.model.Triggers.TopCollision;
 import gameplayer.controller.GameController;
-import gameplayer.view.GameScreen;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.ParallelCamera;
@@ -24,13 +34,6 @@ import javafx.scene.SubScene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import authoringenvironment.model.ActorCopier;
 
 public class Pong extends Application {
     /**

@@ -1,5 +1,6 @@
 package authoringenvironment.view.behaviors;
 
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.ActionFactory;
@@ -69,5 +70,9 @@ public abstract class LabelBehavior implements IGUIElement, IAuthoringBehavior {
 
 	public void setAction(IAuthoringBehavior key, IAction value) {
 		myActorRule.setAction(key, value);
+	}
+	
+	@Override
+	public void addNodeObserver(Observer observer) {
 	}
 }

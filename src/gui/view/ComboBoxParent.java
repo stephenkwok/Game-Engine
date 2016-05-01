@@ -1,6 +1,7 @@
 package gui.view;
 
 import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -22,7 +23,7 @@ public abstract class ComboBoxParent extends EditingElementParent {
 	private static final int COMBOBOX_WIDTH = 150;
 	private static final int VISIBLE_ROW_COUNT = 5;
 	private static final int HBOX_SPACING = 5;
-	private static final String GO = "b"; //key
+	private static final String GO = "Go"; //key
 	private static final int BUTTON_HEIGHT = 30;
 	private static final int BUTTON_WIDTH = 40;
 	private String promptText;

@@ -1,20 +1,36 @@
 package authoringenvironment.controller;
 
-import java.util.*;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.ResourceBundle;
 
-import authoringenvironment.model.*;
+import authoringenvironment.model.ActorRuleCreator;
+import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.IEditableGameElement;
+import authoringenvironment.model.IEditingEnvironment;
 import authoringenvironment.view.ActorImageViewer;
 import authoringenvironment.view.GUILibrary;
 import authoringenvironment.view.ImageviewActorIcon;
 import authoringenvironment.view.TabFields;
 import gameengine.model.Actor;
 import gameengine.model.IRule;
-import javafx.geometry.*;
 import gui.view.CheckBoxApplyPhysics;
-import javafx.scene.control.*;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -101,6 +117,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	private void setLeftPane() {
 		VBox vbox = new VBox();
 		library = new GUILibrary(myActorRuleCreator);
+		library.updateDragEvents();
 		actorImageViewer = new ActorImageViewer(this, myActorIV);
 		TabPane actorFields = new TabPane();
 		actorFields.getTabs().addAll(actorCharacteristics(), actorAttributes());

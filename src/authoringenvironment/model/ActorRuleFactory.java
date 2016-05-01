@@ -6,10 +6,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Map;
 
 import authoringenvironment.controller.Controller;
-import authoringenvironment.view.behaviors.CollisionBehavior;
 import gameengine.model.IRule;
 
 /**
@@ -60,6 +58,17 @@ public class ActorRuleFactory {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public IAuthoringBehavior getSoundRule(String behaviorType, String soundName){
+		try{
+			String className = PACKAGE + myResources.getString(behaviorType + CLASS);
+			Class<?> clazz = Class.forName(className);
+			Constructor<?> constructor = clazz.getConstructor(ActorRule.class, String.class, ResourceBundle.class, String.class, IAuthoringActor.class);
+			return (IAuthoringBehavior) constructor.newInstance(myActorRule, behaviorType, myResources,soundName, myActor);
+		}catch(Exception e){
+			return null;
+		}
 	}
 
 	/**

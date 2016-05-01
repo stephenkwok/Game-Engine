@@ -3,14 +3,9 @@ package gui.view;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import authoringenvironment.controller.ActorEditingEnvironment;
-import authoringenvironment.model.IAuthoringActor;
-import gameengine.controller.Level;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import java.util.ResourceBundle;
+
+import gameengine.controller.Level;
 
 
 public class ComboBoxLevelMusic extends ComboBoxTextCell {
@@ -34,7 +29,6 @@ public class ComboBoxLevelMusic extends ComboBoxTextCell {
 	public void setButtonAction() {
 		getComboButton().setOnAction(event -> {
 			((Level) getEditableElement()).setMyBackgroundMusicName(getComboBox().getValue());
-			System.out.println(((Level) getEditableElement()).getMyBackgroundMusicName());
 		});
 	}
 

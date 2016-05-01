@@ -18,29 +18,32 @@ import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
+import authoringenvironment.model.ActorCopier;
 import authoringenvironment.model.AuthoringEnvironmentRestorer;
 import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import authoringenvironment.model.IEditingEnvironment;
+import authoringenvironment.model.MainCharacterManager;
 import authoringenvironment.model.PresetActorFactory;
 import authoringenvironment.view.PopUpAuthoringHelpPage;
-import authoringenvironment.model.ActorCopier;
-import authoringenvironment.view.GameAttributesDisplay;
-import authoringenvironment.controller.ActorEditingEnvironment;
-import authoringenvironment.controller.LevelEditingEnvironment;
 import gamedata.controller.ChooserType;
 import gamedata.controller.CreatorController;
 import gamedata.controller.FileChooserController;
-import gameengine.controller.*;
+import gameengine.controller.Game;
+import gameengine.controller.GameInfo;
+import gameengine.controller.Level;
 import gameengine.model.Actor;
-import gameengine.model.ActorState;
-import gameengine.model.IPlayActor;
 import gameplayer.controller.BranchScreenController;
 import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -67,8 +70,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private Map<IAuthoringActor, List<IAuthoringActor>> myActorMap;
 	private LevelEditingEnvironment levelEnvironment;
 	private ActorEditingEnvironment actorEnvironment;
-	private GameAttributesDisplay gameEnvironment;
-//	private GUIMainScreen mainScreen;
 	private ResourceBundle myResources;
 	private ResourceBundle myObservableResource;
 	private ResourceBundle myPresetActorsResource;
@@ -77,20 +78,19 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	private Scene myScene;
 	private BorderPane myRoot;
 	private GUIFactory factory;
-	private Scene splashScene;
+	@SuppressWarnings("unused")
 	private PopUpAuthoringHelpPage helpPage;
 	private ActorCopier myActorCopier;
-	private GameEditingEnvironment gameEditingEnvironment; 
+	private GameEditingEnvironment gameEditingEnvironment;
+	private MainCharacterManager mainCharacterManager;
 
 	public Controller(Stage myStage) throws NoSuchMethodException, SecurityException, IllegalAccessException,
-	IllegalArgumentException, InvocationTargetException {
+			IllegalArgumentException, InvocationTargetException {
 		super(myStage, EDITING_CONTROLLER_RESOURCE);
 		this.myObservableResource = ResourceBundle.getBundle(EDITING_CONTROLLER_RESOURCE);
 		initNewGame();
 	}
 
-	// TODO Need a constructor that takes in a game passed by data and sets up
-	// Authoring Environment accordingly
 	public Controller(Game game, Stage myStage) {
 		super(myStage, EDITING_CONTROLLER_RESOURCE);
 		this.game = game;
@@ -116,9 +116,10 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		initializePresetActors();
 		addDefaultLevel();
 	}
-	
+
 	/**
-	 * Adds a default level to the Game and directs the author to the Main Screen
+	 * Adds a default level to the Game and directs the author to the Main
+	 * Screen
 	 */
 	private void addDefaultLevel() {
 		addLevel();
@@ -135,10 +136,8 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		AuthoringEnvironmentRestorer restorer = new AuthoringEnvironmentRestorer(myActorMap, myLevels);
 		restorer.restoreActorsAndLevels();
 		initializeGeneralComponents();
-//		myLevels.stream().forEach(level -> mainScreen.createLevelPreviewUnit(level, levelEnvironment));
-//		myActorMap.keySet().stream().forEach(actor -> mainScreen.createActorPreviewUnit(actor, actorEnvironment));
-		myLevels.stream().forEach(level -> gameEditingEnvironment.createLevelPreviewUnit(level, levelEnvironment));
-		myActorMap.keySet().stream().forEach(actor -> gameEditingEnvironment.createActorPreviewUnit(actor, actorEnvironment));
+		myLevels.stream().forEach(level -> gameEditingEnvironment.createLevelPreviewUnit(level));
+		myActorMap.keySet().stream().forEach(actor -> gameEditingEnvironment.createActorPreviewUnit(actor));
 	}
 
 	/**
@@ -155,10 +154,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		this.myPresetActorsResource = ResourceBundle.getBundle(PRESET_ACTORS_RESOURCE);
 		factory = new GUIFactory(myResources);
 		levelEnvironment = new LevelEditingEnvironment(myActorMap, getStage(), this);
-//		gameEnvironment = new GameEditingEnvironment(gameInfo, getStage());
 		actorEnvironment = new ActorEditingEnvironment(myResources, getStage(), this);
-//		mainScreen = new GUIMainScreen(gameEnvironment, this, getStage(), myLevels, levelEnvironment);
 		gameEditingEnvironment = new GameEditingEnvironment(this, getStage(), myLevels, gameInfo);
+		mainCharacterManager = new MainCharacterManager(myLevels);
 		setTopPane();
 		setCenterPane();
 	}
@@ -177,8 +175,7 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		PresetActorFactory presetActorFactory = new PresetActorFactory(myPresetActorsResource);
 		List<Actor> presetActors = presetActorFactory.getPresetActors();
 		presetActors.stream().forEach(actor -> myActorMap.put(actor, new ArrayList<>()));
-//		presetActors.stream().forEach(actor -> mainScreen.createActorPreviewUnit(actor, actorEnvironment));
-		presetActors.stream().forEach(actor -> gameEditingEnvironment.createActorPreviewUnit(actor, actorEnvironment));
+		presetActors.stream().forEach(actor -> gameEditingEnvironment.createActorPreviewUnit(actor));
 	}
 
 	/**
@@ -254,10 +251,10 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	/**
 	 * Switches screen to appropriate editing environment
 	 * 
-	 * @param editable
-	 *            - Level or Actor to edit
-	 * @param environment
-	 *            - Editing environment for editable
+	 * @param editable:
+	 *            Level or Actor to edit
+	 * @param environment:
+	 *            Editing environment for editable
 	 */
 	public void goToEditingEnvironment(IEditableGameElement editable, IEditingEnvironment environment) {
 		environment.setEditableElement(editable);
@@ -268,31 +265,18 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * Switches screen to main screen
 	 */
 	public void goToMainScreen() {
-//		mainScreen.updatePreviewUnits();
-//		setCenterPane(mainScreen.getPane());
 		gameEditingEnvironment.updatePreviewUnits();
 		setCenterPane(gameEditingEnvironment.getPane());
 	}
 
 	/**
 	 * Passes Actor and Level info to Game Data to be saved in XML file
-	 * 
-	 * @param file:
-	 *            file to write to.
 	 */
 	public void saveGame() {
-		// TODO implement incomplete game error checking
-		for(Level level: myLevels) {
-			for (IPlayActor actor: level.getActors()) {
-				if (actor.checkState(ActorState.MAIN)) {
-					level.getMainCharacters().add(actor);
-				}
-			}
-			if (level.getMainCharacters().size() == 0) {
-				// problem if no actors
-				level.getActors().get(0).addState(ActorState.MAIN);
-			}
-		}
+		mainCharacterManager.updateMainCharacterListsForEachLevel();
+		if (!mainCharacterManager.updateSuccessful())
+			return;
+		// need error checking
 		gameInfo.setMyImageName(myLevels.get(0).getMyBackgroundImgName());
 		List<IAuthoringActor> refActor = new ArrayList(myActorMap.keySet());
 		IAuthoringActor realRefActor = refActor.get(0);
@@ -305,14 +289,16 @@ public class Controller extends BranchScreenController implements Observer, IAut
 			try {
 				controller.saveForEditing(file);
 			} catch (SAXException | IOException | TransformerException | ParserConfigurationException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-				
+
 			}
 		}
 
 	}
 
+	/**
+	 * Loads a previously saved game
+	 */
 	public void loadGame() {
 		FileChooserController fileChooserController = new FileChooserController(getStage(), ChooserType.EDIT);
 	}
@@ -326,6 +312,10 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		return myLevels;
 	}
 
+	/**
+	 * 
+	 * @return the Game's map of Actors
+	 */
 	public Map<IAuthoringActor, List<IAuthoringActor>> getActorMap() {
 		return myActorMap;
 	}
@@ -334,78 +324,87 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 * For each level that is created, adds it to the running list in this
 	 * class.
 	 * 
-	 * @param newLevel
 	 */
 	public void addLevel() {
 		Level newLevel = new Level();
 		newLevel.setPlayPosition(myLevels.size());
 		myLevels.add(newLevel);
-//		myLevelNames.add(newLevel.getName());
-//		mainScreen.createLevelPreviewUnit(newLevel, levelEnvironment);
-		gameEditingEnvironment.createLevelPreviewUnit(newLevel, levelEnvironment);
+		gameEditingEnvironment.createLevelPreviewUnit(newLevel);
 		goToEditingEnvironment(newLevel, levelEnvironment);
 	}
 
 	/**
-	 * Creates a new Actor and places it in the map
-	 * of all created actors, sets the Actor's ID, creates a preview unit
-	 * for that Actor on the Main Screen, and redirects the author to
-	 * the Actor Editing Environment to edit that Actor
+	 * Creates a new Actor and places it in the map of all created actors, sets
+	 * the Actor's ID, creates a preview unit for that Actor on the Main Screen,
+	 * and redirects the author to the Actor Editing Environment to edit that
+	 * Actor
 	 * 
 	 */
 	public void addActor() {
 		IAuthoringActor newActor = (IAuthoringActor) new Actor();
 		myActorMap.put(newActor, new ArrayList<>());
 		newActor.setID(myActorMap.size());
-//		myActorNames.add(newActor.getName());
-//		mainScreen.createActorPreviewUnit(newActor, actorEnvironment);
-		gameEditingEnvironment.createActorPreviewUnit(newActor, actorEnvironment);
+		gameEditingEnvironment.createActorPreviewUnit(newActor);
 		goToEditingEnvironment(newActor, actorEnvironment);
 		actorEnvironment.setActorImage(newActor.getImageView(), newActor.getImageViewName());
-	}
-
-	public void useGame() {
-		// TODO Auto-generated method stub
-
 	}
 
 	/**
 	 * Saves game and returns to splash screen of game player.
 	 */
-	
-	  public void goToSplash() {
-		  super.goToSplash();
-	  }
-	 
 
-	public void switchGame() {
-		// TODO Auto-generated method stub
+	public void goToSplash() {
+		super.goToSplash();
 	}
 
+	/**
+	 * Creates method to be called and invokes it
+	 */
+	@SuppressWarnings("rawtypes")
+	@Override
+	public void invoke(String methodName, Class[] parameterTypes, Object[] parameters) throws NoSuchMethodException,
+			SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Method method = this.getClass().getDeclaredMethod(methodName, parameterTypes);
+		Object parameter = parameters[0] == null ? null : parameters[0];
+		if (parameter == null) method.invoke(this, null);
+		else method.invoke(this, parameter);
+	}
+	
+	/**
+	 * Calls a method within the Controller depending on the Observable's class
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		String className = o.getClass().getSimpleName();
-		Method method;
+		String method = myObservableResource.getString(className);
+		Object[] parameters = new Object[] { arg };
+		@SuppressWarnings("rawtypes")
+		Class[] parameterTypes;
+		if (Arrays.asList(myObservableResource.getString(REQUIRES_ARG).split(DELIMITER)).contains(className)) {
+			parameterTypes = new Class[] { Object.class };
+		} else {
+			parameterTypes = new Class[] {};
+		}
 		try {
-			if (Arrays.asList(myObservableResource.getString(REQUIRES_ARG).split(DELIMITER)).contains(className)) {
-				method = this.getClass().getDeclaredMethod(myObservableResource.getString(className), Object.class);
-				method.invoke(this, arg);
-			} else {
-				Class noparams[] = {};
-				method = this.getClass().getDeclaredMethod(myObservableResource.getString(className), noparams);
-				method.invoke(this, null);
-			}
-		} catch (NoSuchMethodException | SecurityException e) {
+			invoke(method, parameterTypes, parameters);
+		}
+		catch (NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
-		} catch (IllegalAccessException e) {
+		}
+		catch (IllegalAccessException e) {
 			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
+		}
+		catch (IllegalArgumentException e) {
 			e.printStackTrace();
-		} catch (InvocationTargetException e) {
+		}
+		catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Generates pop up allowing user to input HUD Options
+	 */
 	private void displayHUDOptions() {
 		PopupSelector selector = new PopupSelector(this);
 	}
@@ -436,13 +435,28 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		}
 	}
 
+	/**
+	 * Sets Actor Environment's editable to actor passed in and switches scene
+	 * to Actor Environment
+	 * 
+	 * @param actor:
+	 *            actor to be edited
+	 */
 	@SuppressWarnings("unused")
-	private void handleObservableGoToEditingEnvironmentCall(Object notifyObserversArgument) {
-		@SuppressWarnings("unchecked")
-		List<Object> arguments = (List<Object>) notifyObserversArgument;
-		IEditableGameElement editable = (IEditableGameElement) arguments.get(0);
-		IEditingEnvironment environment = (IEditingEnvironment) arguments.get(1);
-		goToEditingEnvironment(editable, environment);
+	private void goToActorEditing(Object actor) {
+		goToEditingEnvironment((IEditableGameElement) actor, actorEnvironment);
+	}
+
+	/**
+	 * Sets Level Environment's editable to level passed in and switches scene
+	 * to Level Environment
+	 * 
+	 * @param level:
+	 *            level to be edited
+	 */
+	@SuppressWarnings("unused")
+	private void goToLevelEditing(Object level) {
+		goToEditingEnvironment((IEditableGameElement) level, levelEnvironment);
 	}
 
 	/**
@@ -461,6 +475,9 @@ public class Controller extends BranchScreenController implements Observer, IAut
 		return levelEnvironment;
 	}
 
+	/**
+	 * Sets the Game's HUD Info File
+	 */
 	@Override
 	public void setHUDInfoFile(String location) {
 		game.setHUDInfoFile(location);
@@ -471,12 +488,6 @@ public class Controller extends BranchScreenController implements Observer, IAut
 	 */
 	public Game getGame() {
 		return game;
-	}
-
-	@Override
-	public void invoke(String method, Class[] parameterTypes, Object[] parameters) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

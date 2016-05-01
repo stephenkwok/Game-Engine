@@ -2,7 +2,6 @@ package gameengine.model.Actions;
 
 import gameengine.model.Actor;
 import gameengine.model.ActorState;
-import gameengine.model.IGameElement;
 
 /**
  * An example of an Action to glide an Actor right by a given distance (no

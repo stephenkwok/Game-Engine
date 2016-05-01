@@ -1,6 +1,16 @@
 package gameengine.controller;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.Actor;
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;
@@ -18,13 +28,6 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
-
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
-import authoringenvironment.model.IEditableGameElement;
 
 /**
  * A Level is essentially a package of Actor objects. It is able to relay a
@@ -289,7 +292,6 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		return myPlayPosition;
 	}
 
-	// add play position to constructor later
 	public void setPlayPosition(int playPosition) {
 		myPlayPosition = playPosition;
 	}
@@ -335,13 +337,17 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		return null;
 	}
 
+	/**
+	 * 
+	 * @return: a List of the Level's main characters
+	 */
 	public List<IPlayActor> getMainCharacters() {
+		myMainCharacters.clear();
 		for (IPlayActor a : myActors) {
 			if (a.checkState(ActorState.MAIN) && !myMainCharacters.contains(a)) {
 				myMainCharacters.add(a);
 			}
 		}
-
 		return myMainCharacters;
 	}
 

@@ -3,6 +3,7 @@ package gamedata;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -34,6 +35,7 @@ public class XMLCreator {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		String xml = this.myXStream.toXML(object);
+		System.out.println(xml);
 		Document document = documentBuilder.parse(new InputSource(new StringReader(xml)));
 		convertDocumentToFile(document, file);
 	}

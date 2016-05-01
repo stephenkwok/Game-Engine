@@ -1,14 +1,18 @@
 package authoringenvironment.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import authoringenvironment.view.PopUpParent;
-import authoringenvironment.view.PopUpSimpleErrorMessage;
 import authoringenvironment.controller.GameEditingEnvironment;
 import authoringenvironment.view.ActorsAndLevelsDisplay;
 import authoringenvironment.view.PreviewUnitWithEditable;
 import authoringenvironment.view.PreviewUnitWithLevel;
 import gameengine.controller.Level;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 
 /**
@@ -22,40 +26,23 @@ import javafx.scene.layout.VBox;
 
 public class LevelPreviewUnitReorderer {
 
-	private static final String POPUP_ERROR_MESSAGE = "Invalid Input. Please try again";
-	private static final String POPUP_BUTTON_TEXT = "Close Window";
-	private static final int POPUP_WIDTH = 250;
-	private static final int POPUP_HEIGHT = 100;
-	private static final int MINIMUM_PLAY_POSITION = 0;
+	private static final String ERROR_MESSAGE = "Invalid Input. Please try again";
+	private static final int MINIMUM_PLAY_POSITION = 1;
 	private static final int MINIMUM_LIST_INDEX = 0;
-	private List<PreviewUnitWithLevel> myLevelPreviewUnits;
-	private VBox myPreviewUnitsContainer;
-	private List<Level> myLevels;
-	private IEditingEnvironment myLevelEditor;
-	private List<PreviewUnitWithEditable> myPreviewUnits;
-//	private GUIMainScreen myMainScreen;
+	private final List<PreviewUnitWithLevel> myLevelPreviewUnits;
+	private final List<PreviewUnitWithEditable> myPreviewUnits;
+	private final List<Level> myLevels;
+	private final VBox myPreviewUnitsContainer;
+	private final ActorsAndLevelsDisplay myPreviewUnitsDisplay;
+	private final GameEditingEnvironment myGameEditor;
 	private List<Integer> playPositions;
 	private Set<Integer> uniquePlayPositions;
-	private ActorsAndLevelsDisplay myPreviewUnitsDisplay;
-	private GameEditingEnvironment myGameEditor;
 
-//	public LevelPreviewUnitReorderer(List<PreviewUnitWithLevel> levelPreviewUnits, VBox previewUnitsContainer,
-//			List<Level> levels, IEditingEnvironment levelEditor, List<PreviewUnitWithEditable> allPreviewUnits,
-//			GUIMainScreen mainScreen) {
-//		myLevelPreviewUnits = levelPreviewUnits;
-//		myPreviewUnitsContainer = previewUnitsContainer;
-//		myLevels = levels;
-//		myLevelEditor = levelEditor;
-//		myPreviewUnits = allPreviewUnits;
-////		myMainScreen = mainScreen;
-//		initializeErrorChecking();
-//	}
-	
-	public LevelPreviewUnitReorderer(List<Level> levels, IEditingEnvironment levelEditor, ActorsAndLevelsDisplay display, GameEditingEnvironment gameEditor) {
+	public LevelPreviewUnitReorderer(List<Level> levels, ActorsAndLevelsDisplay display,
+			GameEditingEnvironment gameEditor) {
 		myLevelPreviewUnits = display.getLevelPreviewUnits();
 		myPreviewUnitsContainer = display.getLevelPreviewUnitsContainer();
 		myLevels = levels;
-		myLevelEditor = levelEditor;
 		myPreviewUnits = display.getPreviewUnits();
 		myPreviewUnitsDisplay = display;
 		myGameEditor = gameEditor;
@@ -79,23 +66,24 @@ public class LevelPreviewUnitReorderer {
 	 * the container
 	 */
 	public void reorderLevels() {
-		if (!validDataEntered()) notifyAuthorOfError();
+		if (!validDataEntered())
+			notifyAuthorOfError();
 		myLevelPreviewUnits.stream().forEach(unit -> unit.updateLevelPlayPosition());
 		myLevelPreviewUnits.clear();
 		myPreviewUnitsContainer.getChildren().clear();
 		Collections.sort(myLevels);
-		myLevels.stream().forEach(level -> myGameEditor.createLevelPreviewUnit(level, myLevelEditor));
+		myLevels.stream().forEach(level -> myGameEditor.createLevelPreviewUnit(level));
 		myPreviewUnits.stream().filter(unit -> myPreviewUnitsContainer.getChildren().contains(unit));
 		myPreviewUnitsDisplay.updatePreviewUnits();
 	}
-	
+
 	/**
 	 * Notifies the author that invalid input was entered
 	 */
 	private void notifyAuthorOfError() {
-		@SuppressWarnings("unused")
-		PopUpParent errorNotification = new PopUpSimpleErrorMessage(POPUP_WIDTH, POPUP_HEIGHT, POPUP_BUTTON_TEXT,
-				POPUP_ERROR_MESSAGE);
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setContentText(ERROR_MESSAGE);
+		alert.show();
 	}
 
 	/**
@@ -104,7 +92,7 @@ public class LevelPreviewUnitReorderer {
 	 * @return true if user input is valid; false otherwise
 	 */
 	private boolean validDataEntered() {
-		return atLeastOneLevelCreated() && lowestPlayPositionEqualsZero() && highestPlayPositionEqualsMaxPlayPosition()
+		return atLeastOneLevelCreated() && lowestPlayPositionEqualsOne() && highestPlayPositionEqualsMaxPlayPosition()
 				&& noDuplicatePositionsEntered();
 	}
 
@@ -123,7 +111,7 @@ public class LevelPreviewUnitReorderer {
 	 * 
 	 * @return true if lowest play position equals 1; false otherwise
 	 */
-	private boolean lowestPlayPositionEqualsZero() {
+	private boolean lowestPlayPositionEqualsOne() {
 		return playPositions.get(MINIMUM_LIST_INDEX) == MINIMUM_PLAY_POSITION;
 	}
 
@@ -135,7 +123,7 @@ public class LevelPreviewUnitReorderer {
 	 *         levels created; false otherwise
 	 */
 	private boolean highestPlayPositionEqualsMaxPlayPosition() {
-		int highestPossiblePlayPosition = playPositions.size() - 1;
+		int highestPossiblePlayPosition = playPositions.size();
 		int indexOfHighestEnteredPlayPosition = playPositions.size() - 1;
 		return playPositions.get(indexOfHighestEnteredPlayPosition) == highestPossiblePlayPosition;
 	}
