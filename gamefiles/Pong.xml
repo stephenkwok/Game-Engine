@@ -513,6 +513,7 @@
       <myMainCharacters/>
       <soundtrack>Ink.mp3</soundtrack>
       <myGarbageCollectors/>
+      <toBeDeleted>false</toBeDeleted>
     </gameengine.controller.Level>
   </levels>
   <info>
