@@ -21,6 +21,7 @@ public class CollisionBehavior extends SelectActorBehavior {
 	private ITrigger myTrigger;
 	private CheckBox myCheckBox;
 
+
 	public CollisionBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
 			IAuthoringActor myActor, List<IAuthoringActor> myActors) {
 		super(myRule, myActorRule, behaviorType, myResources, myActor, myActors);
