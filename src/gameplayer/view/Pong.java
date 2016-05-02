@@ -62,15 +62,16 @@ public class Pong extends Application {
 
         Level level1 = new Level();
         level1.setMyScrollingDirection("Horizontally");
-        level1.setMyBackgroundImgName("doodle_background.png");
+        level1.setMyBackgroundImgName("blackscreen.png");
         levels.add(level1);
         
         
         Actor player1 = new Actor();
         player1.addState(ActorState.MAIN);
         player1.setID(1);
-        player1.setImageViewName("block.png");
+        player1.setImageViewName("whiterectangle.png");
         player1.setX(10);
+        player1.setY(100);
         level1.addActor(player1);
         
         player1.addRule(new Rule(new KeyTrigger(KeyCode.RIGHT), new GlideDown(player1, 25.0)));
@@ -80,7 +81,7 @@ public class Pong extends Application {
         Actor player2 = new Actor();
         player2.addState(ActorState.MAIN);
         player2.setID(2);
-        player2.setImageViewName("block.png");
+        player2.setImageViewName("whiterectangle.png");
         player2.setX(800-player2.getBounds().getWidth()-10);
         level1.addActor(player2);
         
@@ -105,7 +106,7 @@ public class Pong extends Application {
         
         Actor ball  = new Actor();
         ball.setID(5);
-        ball.setImageViewName("fireball.png");
+        ball.setImageViewName("whitecircle.png");
         ball.setX(400);
         ball.setY(400);
         ball.setHeading(140);
@@ -115,10 +116,11 @@ public class Pong extends Application {
         player2.addRule(new Rule(new TickTrigger(), new GlideTarget(player2, 15.0, ball)));
 
         
+        
         Actor boundary = new Actor();
         boundary.setID(8);
         boundary.setImageViewName("gameside.png");
-        boundary.setX(600);
+        boundary.setX(700);
         level1.addActor(boundary);
         
         player2.addRule(new Rule(new SideCollision(player2, boundary), new HorizontalStaticCollision(player2)));
@@ -141,6 +143,11 @@ public class Pong extends Application {
         ball.addRule(new Rule(new TopCollision(ball, topEdge), new VerticalHeadingSwitch(ball)));        
         ball.addRule(new Rule(new BottomCollision(ball, bottomEdge), new VerticalBounceCollision(ball)));
         ball.addRule(new Rule(new BottomCollision(ball, bottomEdge), new VerticalHeadingSwitch(ball)));
+        
+        ball.addRule(new Rule(new TopCollision(ball, player1), new VerticalHeadingSwitch(ball))); 
+        ball.addRule(new Rule(new TopCollision(ball, player2), new VerticalHeadingSwitch(ball)));        
+        ball.addRule(new Rule(new BottomCollision(ball, player1), new VerticalHeadingSwitch(ball))); 
+        ball.addRule(new Rule(new BottomCollision(ball, player2), new VerticalHeadingSwitch(ball)));
 
         
         ball.addRule(new Rule(new SideCollision(ball, player1), new HorizontalBounceCollision(ball)));

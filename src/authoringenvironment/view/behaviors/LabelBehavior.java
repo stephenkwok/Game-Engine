@@ -52,22 +52,44 @@ public abstract class LabelBehavior implements IGUIElement, IAuthoringBehavior {
 	 */
 	public abstract boolean isTrigger();
 
+	/**
+	 * Gets the behavior type.
+	 * @return: behavior type.
+	 */
 	protected String getBehaviorType() {
 		return this.behaviorType;
 	}
 
+	/**
+	 * Gets the trigger factory.
+	 * @return trigger factory.
+	 */
 	protected TriggerFactory getTriggerFactory() {
 		return this.triggerFactory;
 	}
 
+	/**
+	 * Gets the action factory.
+	 * @return action factory.
+	 */
 	protected ActionFactory getActionFactory() {
 		return this.actionFactory;
 	}
 
+	/**
+	 * Sets the trigger.
+	 * @param key: behavior key.
+	 * @param value: trigger.
+	 */
 	public void setTrigger(IAuthoringBehavior key, ITrigger value) {
 		myActorRule.setTrigger(key, value);
 	}
 
+	/**
+	 * Sets the action.
+	 * @param key: action key.
+	 * @param value: action.
+	 */
 	public void setAction(IAuthoringBehavior key, IAction value) {
 		myActorRule.setAction(key, value);
 	}

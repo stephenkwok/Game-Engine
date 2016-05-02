@@ -69,18 +69,39 @@ public class Attribute extends Observable {
         return myType;
     }
     
+    /**
+     * Provides the Actor's Property
+     * 
+     * @return	The Actor's Property
+     */
     public Property<Integer> getProperty() {
     	return myValue;
     }
     
+    /**
+     * Provides the Atrribute's Trigger values
+     * 
+     * @return	The Attribute's Trigger values
+     */
     public Set<Integer> getTriggerValues(){
     	return myTriggerValues;
     }
     
+    /**
+     * Sets the Attribute's Trigger values
+     * 
+     * @param triggers	The desired Attribute Trigger values
+     */
     public void setTriggerValues(Set<Integer> triggers){
     	myTriggerValues = triggers;
     }
     
+    /**
+     * Provides a string representation of the Attribute
+     * 
+     * @param rawName	The Attribute's raw name
+     * @return	A string representation of the Attribute
+     */
     private String formatAttributeName(String rawName) {
     	return Character.toUpperCase(rawName.charAt(0)) + rawName.substring(1).toLowerCase();
     }

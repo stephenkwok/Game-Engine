@@ -2,6 +2,10 @@ package gameengine.model.Actions;
 
 import gameengine.model.Actor;
 
+/**
+ * Glides the actor downwards by a given offset.
+ * @author justinbergkamp
+ */
 public class GlideDown extends GlidingAction {
 
 	public GlideDown(Actor assignedActor, Double offset) {

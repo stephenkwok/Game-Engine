@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import authoringenvironment.view.AlertGenerator;
 import gameengine.model.IRule;
 
 /**
  * Factory to create visual representations of triggers and actions that go into
  * an ActorRule object
- * 
  * @author AnnieTang
  *
  */
@@ -26,6 +26,7 @@ public class ActorRuleFactory {
 	private static final String ELEMENT = "Element";
 	private Controller myController;
 	private ActorRule myActorRule;
+	private final AlertGenerator myAlertGenerator;
 
 	public ActorRuleFactory(ResourceBundle myLibraryResources, IAuthoringActor myActor, Controller myController,
 			ActorRule myActorRule) {
@@ -33,14 +34,11 @@ public class ActorRuleFactory {
 		this.myActor = myActor;
 		this.myController = myController;
 		this.myActorRule = myActorRule;
+		this.myAlertGenerator = new AlertGenerator();
 	}
 
 	/**
-	 * Return Node type with parameter options for given behavior type
-	 * 
-	 * @param behaviorType
-	 * @param value
-	 * @return
+	 * Return IAuthoringBehavior with parameter options for given behavior type
 	 */
 	public IAuthoringBehavior getAuthoringRule(String behaviorType, IRule rule) {
 		String className = PACKAGE + myResources.getString(behaviorType + CLASS);
@@ -48,18 +46,14 @@ public class ActorRuleFactory {
 		try {
 			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class, IRule.class);
 			return (IAuthoringBehavior) createMethod.invoke(this, behaviorType, className, rule);
-		} catch (NoSuchMethodException | SecurityException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			myAlertGenerator.generateAlert(e.getClass().toString());
+		} 
 		return null;
 	}
-	
+	/**
+	 * Return IAuthoringBehavior that is a SoundAction for given soundName
+	 */
 	public IAuthoringBehavior getSoundRule(String behaviorType, String soundName){
 		try{
 			String className = PACKAGE + myResources.getString(behaviorType + CLASS);
@@ -72,12 +66,11 @@ public class ActorRuleFactory {
 	}
 
 	/**
-	 * Return ComboBox IAuthoringRule type with parameter options for Collision
-	 * behavior type
-	 * 
-	 * @param behaviorType
-	 * @param className
-	 * @return
+	 * Creates a select actor behavior.
+	 * @param behaviorType: behavior type.
+	 * @param className: name of bheavior's class.
+	 * @param rule: rule to add it to.
+	 * @return behavior.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
 	 * @throws SecurityException
@@ -98,11 +91,11 @@ public class ActorRuleFactory {
 	}
 
 	/**
-	 * Return Label IAuthoringRule type with parameter options for behavior type
-	 * 
-	 * @param behaviorType
-	 * @param className
-	 * @return
+	 * Creates a standard actor behavior.
+	 * @param behaviorType: behavior type.
+	 * @param className: name of bheavior's class.
+	 * @param rule: rule to add it to.
+	 * @return behavior.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
 	 * @throws SecurityException
@@ -126,6 +119,20 @@ public class ActorRuleFactory {
 		}
 	}
 
+	/**
+	 * Creates a standard behavior.
+	 * @param behaviorType: behavior type.
+	 * @param className: name of bheavior's class.
+	 * @param rule: rule to add it to.
+	 * @return behavior.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAuthoringBehavior createStandardBehavior(String behaviorType, String className, IRule rule)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {

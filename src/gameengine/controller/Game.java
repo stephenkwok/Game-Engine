@@ -510,7 +510,6 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 				soundEngine.allSoundsSetMute(sfxOff);
 			}
 		} catch (Exception e) {
-			System.out.println("FAILED");
 		}
 	}
 
