@@ -336,6 +336,6 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 	}
 
 	public void addRuleToLevel(Rule rule) {
-		myLevel.addRule(new Rule(trigger, action));
+		myLevel.addRule(rule);
 	}
 }
