@@ -133,7 +133,6 @@ public class Tester extends Application {
         ((Actor) enemy2).setName("enemy2");
         enemy2.setX(450);
         enemy2.setY(350);
-        System.out.println(enemy2.getHeading());
         TickTrigger trigger = new TickTrigger();
         Action moveForward = new GlideForward((Actor)enemy2, 1.0);
         Rule movingForward = new Rule(trigger, moveForward);
