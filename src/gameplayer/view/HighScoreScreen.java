@@ -18,7 +18,7 @@ import javafx.scene.text.Text;
  * This class displays the high score player data on a BorderPane and includes a
  * ToolBar for necessary screen functionality
  * 
- * @author michaelfigueiras
+ * @author cmt57
  *
  */
 public class HighScoreScreen extends Screen implements Observer, IHighScoreScreen {

@@ -28,26 +28,9 @@ import javafx.stage.Stage;
 
 
 public class LevelPreview {
+	private static final String PREVIEW_FILE = "preview.xml";
 	private File myPreviewFile;
 	private Controller myController;
-<<<<<<< HEAD
-	
-	public LevelPreview(Controller controller) {
-		myController = controller;
-	}
-	public void previewGame(){
-		myPreviewFile = new File("preview.xml");
-		Game model;
-		GameController controller;
-		GameScreen view;
-        
-		Group group = new Group();
-        Scene scene = new Scene(group);
-
-        model = new Game(new GameInfo(), myController.getLevels());
-        //TODO this is duplicated from controller save game.... also no check for if actors is empty
-        for(Level level: model.getLevels()) {
-=======
 	private GameScreen myView;
 	private Game myModel;
 	private GameController myGameController;
@@ -59,6 +42,10 @@ public class LevelPreview {
 	private SubScene mySubScene;
 	private Stage myStage;
 
+	/**
+	 * Constructor for a LevelPreview
+	 * @param controller: authoring environment controller.
+	 */
 	public LevelPreview(Controller controller) {
 		myController = controller;
 		myPreviewFile = new File(PREVIEW_FILE);
@@ -67,6 +54,9 @@ public class LevelPreview {
 		myModel = new Game(new GameInfo(), myController.getLevels());
 	}
 
+	/**
+	 * Open a new stage to preview a game.
+	 */
 	public void previewGame(){
 		addLevelsAndActors();   
 		saveCurrentGame();
@@ -81,15 +71,11 @@ public class LevelPreview {
 		});
 	}
 
-	private void initGame() {
-		myGameController = new GameController(myModel, PlayType.PREVIEW);
-		myGameController.setGame(myModel);
-		myGameController.setGameView(myView);
-	}
-
+	/**
+	 * Add levels and actors from the current game to be playable.
+	 */
 	private void addLevelsAndActors() {
 		for(Level level: myModel.getLevels()) {
->>>>>>> a073355c41e95c2785e8021a9dfe261031755d2c
 			for (IPlayActor actor: level.getActors()) {
 				if (actor.checkState(ActorState.MAIN)) {
 					level.getMainCharacters().add(actor);
@@ -99,70 +85,52 @@ public class LevelPreview {
 				level.getActors().get(0).addState(ActorState.MAIN);
 			}
 		}
-<<<<<<< HEAD
-        
-        CreatorController creatorController = new CreatorController(model);
-        try {
-			creatorController.saveForPreviewing(myPreviewFile);
-=======
 	}
+	
 
+	/**
+	 * Save the current game to a preview.xml file
+	 */
 	private void saveCurrentGame() {
 		myCreatorController = new CreatorController(myModel);
 
 		try {
 			myCreatorController.saveForPreviewing(myPreviewFile);
->>>>>>> a073355c41e95c2785e8021a9dfe261031755d2c
 		} catch (SAXException | IOException | TransformerException | ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
-        ParserController parserController = new ParserController();
-        model = parserController.loadforPlaying(myPreviewFile);
-        
-        ParallelCamera camera = new ParallelCamera();
-        view = new GameScreen(camera);
-
-        controller = new GameController(model, PlayType.PREVIEW);
-        controller.setGame(model);
-        controller.setGameView(view);
-
-        SubScene sub = view.getScene();
-        sub.fillProperty().set(Color.BLUE);
-        group.getChildren().add(sub);
-
-        Stage stage = new Stage();
-        stage.setWidth(800);
-        stage.setHeight(600);
-
-        sub.setCamera(camera);
-        stage.setScene(scene);
-        stage.show();
-        controller.initialize(0);
-        
-        //controller.getView().clearGame();
-        
-        myPreviewFile.delete();
-        
-        stage.setOnCloseRequest(e -> {
-        	controller.endGame(false);
-        });
-        
-        
-=======
 	}
-
+       
+		
+	/**
+	 * Load the previewed game so as not to override the one the user is currently making in the authoring environment.
+	 */
 	private void loadForPlaying() {
 		myParserController = new ParserController();
 		myModel = myParserController.loadforPlaying(myPreviewFile);
 	}
 
+	/**
+	 * Initialize the game camera.
+	 */
 	private void initCamera() {
 		myCamera = new ParallelCamera();
 		myView = new GameScreen(myCamera);
 	}
-
+	
+	/**
+	 * Initialize the game controller.
+	 */
+	private void initGame() {
+		myGameController = new GameController(myModel, PlayType.PREVIEW);
+		myGameController.setGame(myModel);
+		myGameController.setGameView(myView);
+	}
+	
+	/**
+	 * Initialize the stage and scene.
+	 */
 	private void initGameView() {
 		mySubScene = myView.getScene();
 		mySubScene.fillProperty().set(Color.BLUE);
@@ -175,6 +143,5 @@ public class LevelPreview {
 		mySubScene.setCamera(myCamera);
 		myStage.setScene(myScene);
 		myStage.show();
->>>>>>> a073355c41e95c2785e8021a9dfe261031755d2c
 	}
 }
