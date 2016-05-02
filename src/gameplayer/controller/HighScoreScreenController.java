@@ -18,6 +18,12 @@ import gameplayer.view.HighScoreScreen;
 import gameplayer.view.IHighScoreScreen;
 import javafx.stage.Stage;
 
+/**
+ * This controller simply handles displaying the scores and user input like clearing or adding new entries. It also collaborates
+ * with game data to work in conjunction with parsers and xstream to handles these changes. 
+ * @author cmt57
+ *
+ */
 public class HighScoreScreenController extends BranchScreenController {
 
 	private static final String SCORE_CONTROLLER_RESOURCE = "scoresActions";
@@ -38,6 +44,9 @@ public class HighScoreScreenController extends BranchScreenController {
 		changeScreen(myScreen);
 	}
 
+	/**
+	 * Calls the necessary methods to organize the front end scene
+	 */
 	private void setUpScreen() {
 		this.myScreen = new HighScoreScreen();
 		this.myScreen.displayScores(myGameName, myDataController.getGameHighScores());
@@ -45,14 +54,23 @@ public class HighScoreScreenController extends BranchScreenController {
 		setMyScreen(this.myScreen);
 	}
 
+	/**
+	 * Ensures that the front end representation of the current scores matches the back end information
+	 */
 	private void updateScores() {
 		myScreen.displayScores(myGameName, myScores.getGameScores(myGameName));
 	}
 
+	/**
+	 * Returns to an intermediary controller which allows the user to choose a new game for a specific purpose
+	 */
 	private void switchGame() {
 		FileChooserController fileChooserController = new FileChooserController(getStage(), ChooserType.SCORES);
 	}
 
+	/**
+	 * Updates the model representation of a game's scores to reflect a purge in recorded information
+	 */
 	private void clearScores() {
 		myScores.clearGameScores(myDataController.getGameFile());
 		try {

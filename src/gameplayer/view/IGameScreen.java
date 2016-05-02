@@ -55,20 +55,46 @@ public interface IGameScreen {
 	 */
 	public void disableSoundFX(boolean disable);
 
+	/**
+	 * Removes an actor from the game's scene's root
+	 * @param IDisplayActor
+	 */
 	public void removeActor(IDisplayActor a);
 
+	/**
+	 * Repositions the camera and clears the screen of game nodes
+	 */
 	public void clearGame();
 
+	/**
+	 * Assigns the game's background image and relevant details to the saved properites taken from the game's xml file
+	 * @param Level
+	 */
 	public void addBackground(Level current);
 
+	/**
+	 * Stops the game
+	 */
 	public void togglePause();
 
+	/**
+	 * Continues the game
+	 */
 	public void toggleUnPause();
 
+	/**
+	 * Clears current game to allow for a new game to be started
+	 */
 	public void restartGame();
 
+	/**
+	 * Returns the SubScene
+	 */
 	public Node getScene();
 
+	/**
+	 * Handles whether the user won or lost the game and alerts the user of this change
+	 */
 	public void terminateGame(boolean win);
 
 
