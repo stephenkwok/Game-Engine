@@ -21,7 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class CreateActorActionCreator extends VBox implements ILevelActionCreator {
+public class VBoxCreateActorActionCreator extends VBox implements ILevelActionCreator {
 	private static final String RANDOM = "Randomly spawn within a range";
 	private static final String FIXED = "Fixed spawn location";
 	private static final String DELIMITER = ",";
@@ -45,7 +45,7 @@ public class CreateActorActionCreator extends VBox implements ILevelActionCreato
 	private TextField myX;
 	private TextField myY;
 	
-	public CreateActorActionCreator(ResourceBundle resource, IGameElement element, IEditingEnvironment environment) {
+	public VBoxCreateActorActionCreator(ResourceBundle resource, IGameElement element, IEditingEnvironment environment) {
 		myElement = element;
 		myEditingEnvironment = environment;
 		myResources = resource;
@@ -69,6 +69,7 @@ public class CreateActorActionCreator extends VBox implements ILevelActionCreato
 		ObservableList<String> comboOptions = FXCollections.observableArrayList(options);
 		myRandomOrFixedComboBox = new ComboBox<>(comboOptions);
 		Button button = new Button(CHOOSE);
+		button.setPrefWidth(100);
 		button.setOnAction(e -> {
 			randomOrFixed = (String) myRandomOrFixedComboBox.getValue();
 			displayXYOptions();

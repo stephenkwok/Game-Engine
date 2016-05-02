@@ -518,13 +518,13 @@
   </levels>
   <info>
     <myName>Pong</myName>
-    <myImageName>default_game.jpg</myImageName>
-    <myDescription>This is a scrolling game.</myDescription>
+    <myImageName>Pong.jpg</myImageName>
+    <myDescription>This is a multiplayer game that demonstrates AI capability.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myHUDElementsToDisplay/>
     <myFile>Pong.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
-    <myHUDFileLocation>a.txt</myHUDFileLocation>
+    <myHUDFileLocation>pong.txt</myHUDFileLocation>
   </info>
   <myPhysicsEngine>
     <nextXVelo>0.0</nextXVelo>

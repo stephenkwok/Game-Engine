@@ -21,7 +21,7 @@ import javafx.scene.layout.VBox;
 public class LevelInspector implements IGUI {
 	private static final String BUTTON_LABEL = "Choose a new background image";
 	private static final int RULE_ADDER_HEIGHT = 300;
-	private static final int RULE_ADDER_WIDTH = 400;
+	private static final int RULE_ADDER_WIDTH = 450;
 	private static final int TIMER_ADDER_HEIGHT = 300;
 	private static final int TIMER_ADDER_WIDTH = 300;
 	private static final int PADDING = 10;

@@ -826,9 +826,9 @@
     </gameengine.controller.Level>
   </levels>
   <info>
-    <myName>My Game</myName>
+    <myName>Doodle Jump</myName>
     <myImageName>doodle_background.png</myImageName>
-    <myDescription>This is a scrolling game.</myDescription>
+    <myDescription>This is an infinite, vertical scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myHUDElementsToDisplay/>
     <myFile>DoodleJumpGAE.xml</myFile>

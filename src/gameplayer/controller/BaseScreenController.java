@@ -90,6 +90,7 @@ public class BaseScreenController extends BranchScreenController {
 	}
 
 	private void chooseGame() {
+		togglePause();
 		FileChooserController fileChooserController = new FileChooserController(getStage(), ChooserType.PLAY);
 	}
 

@@ -3027,12 +3027,12 @@
     </gameengine.controller.Level>
   </levels>
   <info>
-    <myName>Puzzle</myName>
+    <myName>My Game</myName>
     <myImageName>maze_background.png</myImageName>
-    <myDescription>This is a multiplayer game where the goal is to get to the flag.</myDescription>
+    <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myHUDElementsToDisplay/>
-    <myFile>mazeGAE.xml</myFile>
+    <myFile>mazeGAE_loader.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
     <myActorMap>
       <entry>

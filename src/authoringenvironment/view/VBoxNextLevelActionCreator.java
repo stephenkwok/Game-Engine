@@ -5,10 +5,10 @@ import gameengine.model.Actions.Action;
 import gameengine.model.Actions.NextLevel;
 import javafx.scene.layout.VBox;
 
-public class NextLevelActionCreator extends VBox implements ILevelActionCreator {
+public class VBoxNextLevelActionCreator extends VBox implements ILevelActionCreator {
 	private IGameElement myElement;
 	
-	public NextLevelActionCreator(IGameElement element) {
+	public VBoxNextLevelActionCreator(IGameElement element) {
 		myElement = element;
 	}
 	
