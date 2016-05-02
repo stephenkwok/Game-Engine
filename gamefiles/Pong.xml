@@ -568,7 +568,7 @@
     <myHUDElementsToDisplay/>
     <myFile>Pong.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
-    <myHUDFileLocation>a.txt</myHUDFileLocation>
+    <myHUDFileLocation>pong.txt</myHUDFileLocation>
   </info>
   <myPhysicsEngine>
     <nextXVelo>0.0</nextXVelo>
