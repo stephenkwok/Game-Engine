@@ -18,6 +18,10 @@ public class ImageEditingEnvironmentWithActor extends ImageEditingEnvironment{
 	private final IAuthoringActor myActor;
 	private final ImageView myImageView;
 	
+	/**
+	 * Creates an Image Editing Environment that also edits an Actor
+	 * @param actor: the Actor to be edited
+	 */
 	public ImageEditingEnvironmentWithActor(IAuthoringActor actor) {
 		super(actor.getImageView());
 		myActor = actor;
