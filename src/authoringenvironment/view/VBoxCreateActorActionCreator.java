@@ -69,6 +69,7 @@ public class VBoxCreateActorActionCreator extends VBox implements ILevelActionCr
 		ObservableList<String> comboOptions = FXCollections.observableArrayList(options);
 		myRandomOrFixedComboBox = new ComboBox<>(comboOptions);
 		Button button = new Button(CHOOSE);
+		button.setPrefWidth(100);
 		button.setOnAction(e -> {
 			randomOrFixed = (String) myRandomOrFixedComboBox.getValue();
 			displayXYOptions();
