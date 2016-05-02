@@ -110,6 +110,7 @@ public class BaseScreenController extends BranchScreenController {
 	 * Switches scenes to allow the user the opportunity to choose a new game
 	 */
 	private void chooseGame() {
+		togglePause();
 		FileChooserController fileChooserController = new FileChooserController(getStage(), ChooserType.PLAY);
 	}
 

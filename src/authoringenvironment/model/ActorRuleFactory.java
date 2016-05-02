@@ -13,7 +13,6 @@ import gameengine.model.IRule;
 /**
  * Factory to create visual representations of triggers and actions that go into
  * an ActorRule object
- * 
  * @author AnnieTang
  *
  */
@@ -36,11 +35,7 @@ public class ActorRuleFactory {
 	}
 
 	/**
-	 * Return Node type with parameter options for given behavior type
-	 * 
-	 * @param behaviorType
-	 * @param value
-	 * @return
+	 * Return IAuthoringBehavior with parameter options for given behavior type
 	 */
 	public IAuthoringBehavior getAuthoringRule(String behaviorType, IRule rule) {
 		String className = PACKAGE + myResources.getString(behaviorType + CLASS);
@@ -59,7 +54,9 @@ public class ActorRuleFactory {
 		}
 		return null;
 	}
-	
+	/**
+	 * Return IAuthoringBehavior that is a SoundAction for given soundName
+	 */
 	public IAuthoringBehavior getSoundRule(String behaviorType, String soundName){
 		try{
 			String className = PACKAGE + myResources.getString(behaviorType + CLASS);
@@ -71,21 +68,6 @@ public class ActorRuleFactory {
 		}
 	}
 
-	/**
-	 * Return ComboBox IAuthoringRule type with parameter options for Collision
-	 * behavior type
-	 * 
-	 * @param behaviorType
-	 * @param className
-	 * @return
-	 * @throws ClassNotFoundException
-	 * @throws NoSuchMethodException
-	 * @throws SecurityException
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
 	private IAuthoringBehavior createSelectActorBehavior(String behaviorType, String className, IRule rule)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -97,20 +79,6 @@ public class ActorRuleFactory {
 					myActors);
 	}
 
-	/**
-	 * Return Label IAuthoringRule type with parameter options for behavior type
-	 * 
-	 * @param behaviorType
-	 * @param className
-	 * @return
-	 * @throws ClassNotFoundException
-	 * @throws NoSuchMethodException
-	 * @throws SecurityException
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
 	private IAuthoringBehavior createStandardActorBehavior(String behaviorType, String className, IRule rule)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {

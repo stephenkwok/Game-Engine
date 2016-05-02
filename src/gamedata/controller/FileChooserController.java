@@ -41,7 +41,7 @@ public class FileChooserController extends BranchScreenController {
 	}
 
 	private void goScores(Game game) {
-		HighScoresController controller = new HighScoresController(game.getInitialGameFile(), myScreen);
+		HighScoresController controller = new HighScoresController(game.getInfo().getMyFile(), myScreen);
 		HighScoreScreenController highScoreScreenController = new HighScoreScreenController(getStage(), controller);
 	}
 

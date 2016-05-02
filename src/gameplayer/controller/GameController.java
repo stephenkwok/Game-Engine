@@ -1,12 +1,18 @@
 package gameplayer.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -134,8 +140,9 @@ public class GameController extends Observable implements Observer, IGameControl
 	 * Instantiates a high score controller to save the user's name and score in the proper xml file
 	 * @param name
 	 */
-	private void saveGameScore(String name) {
-		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
+
+	private void saveGameScore(String name) throws SAXException, IOException, TransformerException, ParserConfigurationException {
+		HighScoresController c = new HighScoresController(this.getGame().getInfo().getMyFile());
 		c.saveHighScore(getGame().getScores(), Arrays.asList(name.split(",")));
 	}
 

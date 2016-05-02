@@ -15,7 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-public class AttributeTriggerAndActionCreator extends VBox implements ILevelTriggerCreator, ILevelActionCreator {
+public class VBoxAttributeTriggerAndActionCreator extends VBox implements ILevelTriggerCreator, ILevelActionCreator {
 	private static final String LEVEL = "Level";
 	private static final String HEALTH = "Health";
 	private static final String POINTS = "Points";
@@ -30,7 +30,7 @@ public class AttributeTriggerAndActionCreator extends VBox implements ILevelTrig
 	private Set<IAuthoringActor> myActors;
 	
 	
-	public AttributeTriggerAndActionCreator(ResourceBundle resources, IGameElement element, IEditingEnvironment editor, String labelKey) {
+	public VBoxAttributeTriggerAndActionCreator(ResourceBundle resources, IGameElement element, IEditingEnvironment editor, String labelKey) {
 		myElement = element;
 		myResources = resources;
 		myEditingEnvironment = editor;

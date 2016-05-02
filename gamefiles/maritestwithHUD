@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <initialGameFile>/Users/bobby_mac/Documents/workspace/voogasalad_LoopsGoatCheeseSalad/gamefiles/loaders/testMusic2_loader.xml</initialGameFile>
+  <initialGameFile>/Users/Carine/OneDrive/CS308_Workspace/voogasalad_LoopsGoatCheeseSalad/gamefiles/loaders/maritestwithHUD</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <changed>false</changed>
@@ -10,8 +10,8 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>0.0</x>
-          <y>0.0</y>
+          <x>251.0</x>
+          <y>273.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>
@@ -23,16 +23,16 @@
           <myRuleManager>
             <myRules>
               <entry>
-                <string>Space</string>
+                <string>Click</string>
                 <list>
                   <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
-                      <myKey>Space</myKey>
-                      <myKeyCode>SPACE</myKeyCode>
-                    </myTrigger>
-                    <myAction class="gameengine.model.Actions.SoundAction">
+                    <myTrigger class="gameengine.model.Triggers.ClickTrigger">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <soundFile>shotgun.mp3</soundFile>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.ChangeAttribute">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myType>POINTS</myType>
+                      <myChange>2</myChange>
                     </myAction>
                   </gameengine.model.Rule>
                 </list>
@@ -40,7 +40,27 @@
             </myRules>
           </myRuleManager>
           <myAttributeManager>
-            <attributeMap/>
+            <attributeMap>
+              <entry>
+                <gameengine.model.AttributeType>POINTS</gameengine.model.AttributeType>
+                <gameengine.model.Attribute>
+                  <changed>false</changed>
+                  <obs/>
+                  <myValue>
+                    <changed>false</changed>
+                    <obs/>
+                    <value class="int">0</value>
+                    <bindings/>
+                    <name>Main PlayerPOINTS</name>
+                  </myValue>
+                  <myTriggerValues>
+                    <int>4</int>
+                  </myTriggerValues>
+                  <myType>POINTS</myType>
+                  <myOwner class="gameengine.model.Actor" reference="../../../../.."/>
+                </gameengine.model.Attribute>
+              </entry>
+            </attributeMap>
           </myAttributeManager>
           <myStates>
             <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
@@ -70,6 +90,7 @@
       <myPlayPosition>0</myPlayPosition>
       <myScrollingDirection>Horizontally</myScrollingDirection>
       <myBackgroundImgName>default_landscape.png</myBackgroundImgName>
+      <myBackgroundImgHeight>0.0</myBackgroundImgHeight>
       <myRuleManager>
         <myRules/>
       </myRuleManager>
@@ -79,7 +100,7 @@
       <myMainCharacters>
         <gameengine.model.Actor reference="../../myActors/gameengine.model.Actor"/>
       </myMainCharacters>
-      <soundtrack>Photograph.mp3</soundtrack>
+      <soundtrack>Ink.mp3</soundtrack>
       <myGarbageCollectors/>
     </gameengine.controller.Level>
   </levels>
@@ -89,7 +110,7 @@
     <myDescription>This is a scrolling game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myHUDElementsToDisplay/>
-    <myFile>testMusic2.xml</myFile>
+    <myFile>maritestwithHUD</myFile>
     <isDestinationGame>true</isDestinationGame>
     <myActorMap>
       <entry>
@@ -109,16 +130,73 @@
           <myRuleManager>
             <myRules>
               <entry>
-                <string>Space</string>
+                <string>Click</string>
                 <list>
                   <gameengine.model.Rule>
-                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
-                      <myKey>Space</myKey>
-                      <myKeyCode>SPACE</myKeyCode>
-                    </myTrigger>
-                    <myAction class="gameengine.model.Actions.SoundAction">
+                    <myTrigger class="gameengine.model.Triggers.ClickTrigger">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <soundFile>shotgun.mp3</soundFile>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.ChangeAttribute">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myType>POINTS</myType>
+                      <myChange>2</myChange>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+              <entry>
+                <string>Main PlayerPOINTS4</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.AttributeReached">
+                      <myTarget class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myKey>Main PlayerPOINTS4</myKey>
+                      <myType>POINTS</myType>
+                      <myTriggerValue>4</myTriggerValue>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.CreateActor">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myX>100.0</myX>
+                      <myY>100.0</myY>
+                      <myActorToCopy>
+                        <changed>false</changed>
+                        <obs/>
+                        <x>0.0</x>
+                        <y>0.0</y>
+                        <veloX>0.0</veloX>
+                        <veloY>0.0</veloY>
+                        <myFriction>0.0</myFriction>
+                        <myName>Floor Block</myName>
+                        <myID>2</myID>
+                        <myImageViewName>floor_block.jpg</myImageViewName>
+                        <myHeading>0.0</myHeading>
+                        <myImageViewSize>0.0</myImageViewSize>
+                        <myRuleManager>
+                          <myRules/>
+                        </myRuleManager>
+                        <myAttributeManager>
+                          <attributeMap/>
+                        </myAttributeManager>
+                        <myStates/>
+                        <mySprite>
+                          <myImages>
+                            <string>floor_block.jpg</string>
+                          </myImages>
+                          <spriteIndex>0</spriteIndex>
+                        </mySprite>
+                        <myNextValues>
+                          <nextXVelo>0.0</nextXVelo>
+                          <nextXPos>0.0</nextXPos>
+                          <nextYVelo>0.0</nextYVelo>
+                          <nextYPos>0.0</nextYPos>
+                          <collision>false</collision>
+                        </myNextValues>
+                        <myRotate>0.0</myRotate>
+                        <myOpacity>1.0</myOpacity>
+                        <myScaleX>1.0</myScaleX>
+                        <myScaleY>1.0</myScaleY>
+                      </myActorToCopy>
+                      <isRandom>false</isRandom>
                     </myAction>
                   </gameengine.model.Rule>
                 </list>
@@ -126,7 +204,25 @@
             </myRules>
           </myRuleManager>
           <myAttributeManager>
-            <attributeMap/>
+            <attributeMap>
+              <entry>
+                <gameengine.model.AttributeType>POINTS</gameengine.model.AttributeType>
+                <gameengine.model.Attribute>
+                  <changed>false</changed>
+                  <obs/>
+                  <myValue>
+                    <changed>false</changed>
+                    <obs/>
+                    <value class="int">0</value>
+                    <bindings/>
+                    <name>Main PlayerPOINTS</name>
+                  </myValue>
+                  <myTriggerValues reference="../../../../../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor/myAttributeManager/attributeMap/entry/gameengine.model.Attribute/myTriggerValues"/>
+                  <myType>POINTS</myType>
+                  <myOwner class="gameengine.model.Actor" reference="../../../../.."/>
+                </gameengine.model.Attribute>
+              </entry>
+            </attributeMap>
           </myAttributeManager>
           <myStates>
             <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
@@ -149,6 +245,10 @@
         </list>
       </entry>
       <entry>
+        <gameengine.model.Actor reference="../../entry/gameengine.model.Actor/myRuleManager/myRules/entry[2]/list/gameengine.model.Rule/myAction/myActorToCopy"/>
+        <list/>
+      </entry>
+      <entry>
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
@@ -157,9 +257,9 @@
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>
-          <myName>Floor Block</myName>
-          <myID>2</myID>
-          <myImageViewName>floor_block.jpg</myImageViewName>
+          <myName>Vertical Invisible Line</myName>
+          <myID>4</myID>
+          <myImageViewName>vertical_invisible_line.png</myImageViewName>
           <myHeading>0.0</myHeading>
           <myImageViewSize>0.0</myImageViewSize>
           <myRuleManager>
@@ -168,10 +268,12 @@
           <myAttributeManager>
             <attributeMap/>
           </myAttributeManager>
-          <myStates/>
+          <myStates>
+            <gameengine.model.ActorState>INVISIBLE</gameengine.model.ActorState>
+          </myStates>
           <mySprite>
             <myImages>
-              <string>floor_block.jpg</string>
+              <string>vertical_invisible_line.png</string>
             </myImages>
             <spriteIndex>0</spriteIndex>
           </mySprite>
@@ -230,50 +332,8 @@
         </gameengine.model.Actor>
         <list/>
       </entry>
-      <entry>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs/>
-          <x>0.0</x>
-          <y>0.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myFriction>0.0</myFriction>
-          <myName>Vertical Invisible Line</myName>
-          <myID>4</myID>
-          <myImageViewName>vertical_invisible_line.png</myImageViewName>
-          <myHeading>0.0</myHeading>
-          <myImageViewSize>0.0</myImageViewSize>
-          <myRuleManager>
-            <myRules/>
-          </myRuleManager>
-          <myAttributeManager>
-            <attributeMap/>
-          </myAttributeManager>
-          <myStates>
-            <gameengine.model.ActorState>INVISIBLE</gameengine.model.ActorState>
-          </myStates>
-          <mySprite>
-            <myImages>
-              <string>vertical_invisible_line.png</string>
-            </myImages>
-            <spriteIndex>0</spriteIndex>
-          </mySprite>
-          <myNextValues>
-            <nextXVelo>0.0</nextXVelo>
-            <nextXPos>0.0</nextXPos>
-            <nextYVelo>0.0</nextYVelo>
-            <nextYPos>0.0</nextYPos>
-            <collision>false</collision>
-          </myNextValues>
-          <myRotate>0.0</myRotate>
-          <myOpacity>1.0</myOpacity>
-          <myScaleX>1.0</myScaleX>
-          <myScaleY>1.0</myScaleY>
-        </gameengine.model.Actor>
-        <list/>
-      </entry>
     </myActorMap>
+    <myHUDFileLocation>gamefiles/mariohud</myHUDFileLocation>
   </info>
   <myPhysicsEngine>
     <nextXVelo>0.0</nextXVelo>

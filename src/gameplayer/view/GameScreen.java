@@ -88,7 +88,6 @@ public class GameScreen extends Observable implements IGameScreen {
 	
 	public void addBackground(Level level) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(level.getMyBackgroundImgName()));
-		
 		ImageView imageView = new ImageView(image);
 		imageView.setPreserveRatio(true); // amy added this to resize background to fit height
 		imageView.setFitHeight(level.getMyBackgroundHeight()); // amy also added this
@@ -181,10 +180,10 @@ public class GameScreen extends Observable implements IGameScreen {
 	public void changeCamera(double x, double y) {
 		if (x < myEndHorizontal - getScene().getWidth() && x > 0) {
 			myCamera.setTranslateX(x);
-		}
+		} 
 		if (y > 0 && y < myEndVertical - getScene().getHeight()) {
 			myCamera.setTranslateY(y);
-		}
+		} 
 	}
 
 	/**

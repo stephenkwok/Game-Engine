@@ -70,24 +70,18 @@ public class HighScoresController implements IHighScoresController {
 	 * Clears the high scores of a specific game in the xml file
 	 */
 	@Override
-	public void clearHighScores() {
+	public void clearHighScores() throws SAXException, IOException, TransformerException, ParserConfigurationException {
 		HighScoresKeeper newKeeper = new HighScoresKeeper(getAllGameScores());
 		newKeeper.clearGameScores(myGameFile);
-		//HighScoresCreator scoresCreator = new HighScoresCreator();
 		XMLCreator scoresCreator = new XMLCreator();
-		try {
-			scoresCreator.save(newKeeper, myFile);
-		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		scoresCreator.save(newKeeper, myFile);
 	}
 
 	/**
 	 * Saves a new high score to the master entity of all game scores
 	 */
 	@Override
-	public void saveHighScore(List<Integer> scores, List<String> players) {
+	public void saveHighScore(List<Integer> scores, List<String> players) throws SAXException, IOException, TransformerException, ParserConfigurationException {
 		ArrayList<String> completePlayers = new ArrayList<>();
 		players.forEach(player -> completePlayers.add(player));
 		while (completePlayers.size() < scores.size()) {
@@ -99,12 +93,7 @@ public class HighScoresController implements IHighScoresController {
 			updatedKeeper.addScore(myGameFile, completePlayers.get(i).trim(), scores.get(i));
 		}
 		XMLCreator scoresCreator = new XMLCreator();
-		try {
-			scoresCreator.save(updatedKeeper, myFile);
-		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		scoresCreator.save(updatedKeeper, myFile);
 	}
 
 	public String getGameFile() {
