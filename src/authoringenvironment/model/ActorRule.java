@@ -298,7 +298,7 @@ public class ActorRule {
 				authoringBehaviorMap.get(authoringBehavior).add(newRule);
 			}
 		}
-		myActorRuleCreator.applyPhysics();
+		//myActorRuleCreator.applyPhysics();
 	}
 
 	private boolean actionNotYetAdded(Map<String, List<Rule>> ruleMap, IAction value) {

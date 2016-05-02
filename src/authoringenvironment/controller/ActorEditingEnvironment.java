@@ -238,8 +238,11 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		myController.updateActors((Actor) arg);
+		if (shouldApplyPhysics()) {
+			myActorRuleCreator.applyPhysics();
+		}
 	}
-
+	
 	public boolean shouldApplyPhysics() {
 		if (myActor.getRules().get(TICK_KEY) != null) {
 			for (IRule rule : myActor.getRules().get(TICK_KEY)) {
