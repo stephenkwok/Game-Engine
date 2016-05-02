@@ -9,6 +9,11 @@ import authoringenvironment.model.IEditableGameElement;
  */
 public class CheckBoxOneTime extends CheckBoxObject {
 
+	/**
+	 * Constructor for CheckBoxOneTime.
+	 * @param promptText: initial prompt text.
+	 * @param width
+	 */
 	public CheckBoxOneTime(String promptText, int width) {
 		super(promptText, width);
 	}

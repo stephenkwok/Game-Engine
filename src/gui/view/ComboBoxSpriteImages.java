@@ -39,6 +39,9 @@ public class ComboBoxSpriteImages extends ComboBoxActorImages {
 		});
 	}
 	
+	/**
+	 * Sets the click behavior so they're deleted when clicked.
+	 */
 	private void setClickToDelete(){
 		for(Node child: sprites.getChildren()){
 			child.setOnMouseClicked(event -> {
