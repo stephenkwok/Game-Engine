@@ -27,6 +27,10 @@ public class MainCharacterManager {
 	private final List<Level> myLevels;
 	private boolean updateSuccessful;
 
+	/**
+	 * Creates a Main Character Manager that sets the main characters for each level
+	 * @param levels: the list of levels for the game
+	 */
 	public MainCharacterManager(List<Level> levels) {
 		myLevels = levels;
 		updateSuccessful = false;
