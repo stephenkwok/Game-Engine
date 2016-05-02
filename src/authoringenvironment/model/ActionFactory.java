@@ -71,7 +71,7 @@ public class ActionFactory {
 	}
 
 	/**
-	 * Create the desired element.
+	 * Create the desired element based on actionType and behaviorType.
 	 * 
 	 * @return IGUIElement for the desired element.
 	 */

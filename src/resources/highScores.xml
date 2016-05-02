@@ -3,6 +3,19 @@
   <obs/>
   <myScores>
     <entry>
+      <string>FlappyWithGunSound.xml</string>
+      <tree-map>
+        <entry>
+          <string>Agatha</string>
+          <int>20</int>
+        </entry>
+        <entry>
+          <string>Amy</string>
+          <int>50</int>
+        </entry>
+      </tree-map>
+    </entry>
+    <entry>
       <string>gamefiles/loaders/test2_loader.xml</string>
       <tree-map>
         <entry>
@@ -20,6 +33,10 @@
       </tree-map>
     </entry>
     <entry>
+      <string>/Users/blakekaplan/Documents/308 Workspace/voogasalad_LoopsGoatCheeseSalad/gamefiles/loaders/FlappyWithGunSound_loader.xml</string>
+      <tree-map/>
+    </entry>
+    <entry>
       <string>gamefiles/loaders/FlappyBird_loader.xml</string>
       <tree-map>
         <entry>
@@ -33,6 +50,19 @@
         <entry>
           <string>michaelf</string>
           <int>205</int>
+        </entry>
+      </tree-map>
+    </entry>
+    <entry>
+      <string>/Users/blakekaplan/Documents/308 Workspace/voogasalad_LoopsGoatCheeseSalad/gamefiles/loaders/FlappyWithSound_loader.xml</string>
+      <tree-map>
+        <entry>
+          <string>Blake</string>
+          <int>150</int>
+        </entry>
+        <entry>
+          <string>Flappy</string>
+          <int>10</int>
         </entry>
       </tree-map>
     </entry>
