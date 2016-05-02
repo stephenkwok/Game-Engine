@@ -38,22 +38,44 @@ public abstract class BranchScreenController implements Observer {
 		SplashScreenController splashScreenController = new SplashScreenController(myStage);
 	}
 
+	/**
+	 * Changes the scene of the stage
+	 * @param newScreen
+	 */
 	protected void changeScreen(IScreen newScreen) {
 		this.myStage.setScene(newScreen.getScene());
 	}
 
+	/**
+	 * 
+	 * @return the stage
+	 */
 	protected Stage getStage() {
 		return this.myStage;
 	}
 	
+	/**
+	 * Sets the current screen
+	 * @param screen
+	 */
 	protected void setMyScreen(IScreen screen) {
 		this.myScreen = screen;
 	}
 	
+	/**
+	 * Used in classes that extend this controller, this method uses reflection to invoke controller-specific methods
+	 * @param method
+	 * @param parameterTypes
+	 * @param parameters
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 */
 	public abstract void invoke(String method, Class[] parameterTypes, Object[] parameters) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException;
 	
 	public void update(Observable o, Object arg) {
-		
 		List<Object> myList = (List<Object>) arg;
 		String methodName = (String) myList.get(0);
 		try {

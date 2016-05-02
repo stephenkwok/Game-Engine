@@ -86,16 +86,6 @@ public class GameController extends Observable implements Observer, IGameControl
 	 */
 	public void initialize(int level) {
 		model.setCurrentLevel(level);
-		// ObservableMap<String, Object> a = FXCollections.observableHashMap();
-		// a.addListener(new MapChangeListener<String, Object>() {
-		// @Override
-		// public void onChanged(Change<? extends String, ? extends Object>
-		// change) {
-		// if(change!=null && hud != null)
-		// hud.handleChange(change);
-		// }
-		// });
-		// a.put("Points", 0);
 		begin();
 		
 	}
@@ -125,27 +115,36 @@ public class GameController extends Observable implements Observer, IGameControl
 		}
 	}
 	
+	/*
+	 * Notifies the game controller to initiate the win game protocol
+	 */
 	public void winGame() {
 		endGame(true);
 	}
 	
+	/**
+	 * Notifies the game controller to initiate the lose game protocol
+	 */
 	public void loseGame() {
 		endGame(false);
 	}
 	
-
+	
+	/**
+	 * Instantiates a high score controller to save the user's name and score in the proper xml file
+	 * @param name
+	 */
 	private void saveGameScore(String name) {
 		HighScoresController c = new HighScoresController(this.getGame().getInitialGameFile());
-		System.out.println(this.getGame().getInitialGameFile());
 		c.saveHighScore(getGame().getScores(), Arrays.asList(name.split(",")));
-		System.out.println("umm");
 	}
 
-	
+	/**
+	 * Makes changes in front end and back end of the game to reflect a change to the next level
+	 */
 	public void nextLevel() {
 		if (model.nextLevel()) {
 			view.clearGame();
-			model.nextLevel();
 			model.resetLevelTime();
 			begin();
 		}
@@ -154,15 +153,24 @@ public class GameController extends Observable implements Observer, IGameControl
 		}
 	}
 
+	/**
+	 * Returns the GameScreen
+	 */
 	@Override
 	public IGameScreen getView() {
 		return view;
 	}
 
+	/**
+	 * Returns the Game
+	 */
 	public IGame getGame() {
 		return model;
 	}
 
+	/**
+	 * Purges the game screen of dead actor displays
+	 */
 	private void updateActors() {
 		for (IPlayActor a : model.getDeadActors()) {
 			view.removeActor((IDisplayActor) a);
@@ -193,6 +201,10 @@ public class GameController extends Observable implements Observer, IGameControl
 		}
 	}
 
+	/**
+	 * Adds a new actor to the game and game screen
+	 * @param a
+	 */
 	public void addActor(Actor a) {
 		model.addActor(a);
 		view.addActor(a);
@@ -220,6 +232,10 @@ public class GameController extends Observable implements Observer, IGameControl
 		view.toggleUnPause();
 	}
 
+	/**
+	 * Stops the current game, clears it from the game screen, and then reinitializes the controller with a fresh game
+	 * instantiated from the xml file
+	 */
 	@Override
 	public void restartGame() {
 		togglePause();
@@ -233,6 +249,9 @@ public class GameController extends Observable implements Observer, IGameControl
 		notifyObservers(Arrays.asList(args));
 	}
 
+	/**
+	 * Repositions the camera depending on the main character's status
+	 */
 	public void updateCamera() {
 		if (model.getCurrentLevel().getMainCharacter() != null) {
 			if (model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))) {
@@ -248,6 +267,9 @@ public class GameController extends Observable implements Observer, IGameControl
 		}
 	}
 	
+	/**
+	 * Notifies the base screen to change screens on the stage
+	 */
 	public void leave() {
 		Object[] args = {"goToSplash", null};
 		setChanged();
@@ -255,6 +277,10 @@ public class GameController extends Observable implements Observer, IGameControl
 		
 	}
 	
+	/**
+	 * Controls the status of the sound in the game 
+	 * @param key
+	 */
 	private void playSound(String key) {
 		model.playSound(key);
 	}
