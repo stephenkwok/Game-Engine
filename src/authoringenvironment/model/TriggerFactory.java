@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import authoringenvironment.view.AlertGenerator;
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
@@ -36,9 +37,11 @@ public class TriggerFactory {
 	@XStreamOmitField
 	private ResourceBundle myResources;
 	private List<Object> arguments;
+	private final AlertGenerator myAlertGenerator;
 
 	public TriggerFactory() {
 		this.myResources = ResourceBundle.getBundle(TRIGGER_RESOURCE);
+		this.myAlertGenerator = new AlertGenerator();
 	}
 
 	/**
@@ -78,15 +81,9 @@ public class TriggerFactory {
 		try {
 			Method createMethod = this.getClass().getDeclaredMethod(CREATE + triggerType, String.class, String.class);
 			return (ITrigger) createMethod.invoke(this, behaviorType, className);
-		} catch (NoSuchMethodException | SecurityException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			myAlertGenerator.generateAlert(e.getClass().toString());
+		} 
 		return null;
 	}
 

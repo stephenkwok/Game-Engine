@@ -50,58 +50,61 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	private ComboBoxLevelTriggerAndAction myAction;
 	private VBox myActionCreator;
 	private Level myLevel;
-	
+	private AlertGenerator myAlertGenerator;
+
 	public PopUpAddLevelTimer(int popUpWidth, int popUpHeight, Level level) {
 		super(popUpWidth, popUpHeight);
 		myResources = ResourceBundle.getBundle(RESOURCES);
 		myLevel = level;
+		this.myAlertGenerator = new AlertGenerator();
 		init();
 	}
-	
+
 	private void init() {
 		formatContainer();
 		addInitialTimeBox();
 		addTriggerTimeBox();
 		addActionBox();
 	}
-	
+
 	private void formatContainer() {
 		getContainer().setAlignment(Pos.CENTER);
 		getContainer().setStyle(BACKGROUND_COLOR);
 		getContainer().setPadding(new Insets(PADDING));
 		getContainer().setSpacing(PADDING);
 	}
-	
+
 	private void addInitialTimeBox() {
 		myInitialMinutes = new TextField();
 		myInitialSeconds = new TextField();
 		addTimeBox(INITIAL + PROMPT, myInitialMinutes, myInitialSeconds);
 	}
-	
+
 	private void addTriggerTimeBox() {
 		myTriggerMinutes = new TextField();
 		myTriggerSeconds = new TextField();
 		addTimeBox(TRIGGER + PROMPT, myTriggerMinutes, myTriggerSeconds);
 	}
-	
+
 	private void addTimeBox(String labelKey, TextField minutesTextField, TextField secondsTextField) {
 		VBox container = new VBox(PADDING);
 		Label label = new Label(myResources.getString(labelKey));
-		
+
 		HBox minutesContainer = new HBox(PADDING);
 		Label minutesLabel = new Label(MINUTES);
 		minutesContainer.getChildren().addAll(minutesLabel, minutesTextField);
-		
+
 		HBox secondsContainer = new HBox(PADDING);
 		Label secondsLabel = new Label(SECONDS);
 		secondsContainer.getChildren().addAll(secondsLabel, secondsTextField);
-		
+
 		container.getChildren().addAll(label, minutesContainer, secondsContainer);
 		getContainer().getChildren().add(container);
 	}
-	
+
 	private void addActionBox() {
-		myAction = new ComboBoxLevelTriggerAndAction(myResources.getString(ACTION + PROMPT), ACTION_PROMPT, Arrays.asList(myResources.getString(ACTION + OPTIONS).split(DELIMITER)));
+		myAction = new ComboBoxLevelTriggerAndAction(myResources.getString(ACTION + PROMPT), ACTION_PROMPT,
+				Arrays.asList(myResources.getString(ACTION + OPTIONS).split(DELIMITER)));
 		myAction.addObserver(this);
 		getContainer().getChildren().add(myAction.createNode());
 	}
@@ -111,13 +114,13 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		displayActionParameters((String) arg);
 		createLevelTimer();
 	}
-	
+
 	private int convertToTicks(TextField minutesBox, TextField secondsBox) {
 		Integer minutes = getValueFromTextField(minutesBox);
 		Integer seconds = getValueFromTextField(secondsBox);
 		return minutes * 60 + seconds;
 	}
-	
+
 	private int getValueFromTextField(TextField text) {
 		if (text.getText().equals(EMPTY)) {
 			return 0;
@@ -125,26 +128,26 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 			return Integer.parseInt(text.getText());
 		}
 	}
-	
+
 	private void initializeAttribute(int initialValue) {
 		Attribute attribute = new Attribute(AttributeType.TIME, initialValue, myLevel);
 		myLevel.addAttribute(attribute);
 	}
-	
+
 	private void createAttributeReachedRule(int triggerValue) {
 		ITrigger trigger = new AttributeReached(myLevel, AttributeType.TIME, triggerValue);
 		Action action = ((ILevelActionCreator) myActionCreator).createAction();
 		myLevel.addRule(new Rule(trigger, action));
 		this.closePopUp();
 	}
-	
+
 	private void createChangeAttributeRule(int initialValue, int triggerValue) {
 		int change = determineChange(initialValue, triggerValue);
 		ITrigger trigger = new TickTrigger(ONE);
 		Action action = new ChangeAttribute(myLevel, AttributeType.TIME, change);
 		myLevel.addRule(new Rule(trigger, action));
 	}
-	
+
 	private void createLevelTimer() {
 		int initialTicks = convertToTicks(myInitialMinutes, myInitialSeconds);
 		int triggerTicks = convertToTicks(myTriggerMinutes, myTriggerSeconds);
@@ -152,7 +155,7 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		createAttributeReachedRule(triggerTicks);
 		createChangeAttributeRule(initialTicks, triggerTicks);
 	}
-	
+
 	private int determineChange(int initialValue, int triggerValue) {
 		if (initialValue > triggerValue) {
 			return -TICKS_PER_SECOND;
@@ -160,7 +163,7 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 			return TICKS_PER_SECOND;
 		}
 	}
-	
+
 	private void displayActionParameters(String name) {
 		myActionCreator = null;
 		Class<?> creator;
@@ -168,28 +171,10 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 			creator = Class.forName(myResources.getString(DIRECTORY) + myResources.getString(name));
 			Constructor<?> constructor = creator.getConstructor(IGameElement.class);
 			myActionCreator = (VBox) constructor.newInstance(myLevel);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			myAlertGenerator.generateAlert(e.getClass().toString());
+		} 
 	}
-	
+
 }
