@@ -44,6 +44,10 @@ public class ImageEditingToolbar extends Observable {
 	private Slider myOpacitySlider, mySizeSlider, myRotateSlider;
 	private Button myFlipHorizontalButton, myFlipVerticalButton, myFinishButton;
 
+	/**
+	 * Creates the toolbar for the ImageEditingEnvironment
+	 * @param imageView: the ImageView to be edited by the ImageEditingEnvironment
+	 */
 	public ImageEditingToolbar(ImageView imageView) {
 		myImageView = imageView;
 		mySliders = new ArrayList<>();

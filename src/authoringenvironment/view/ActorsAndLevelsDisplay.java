@@ -28,6 +28,11 @@ public class ActorsAndLevelsDisplay extends Observable implements Observer {
 	private List<PreviewUnitWithEditable> myPreviewUnits;
 	private List<PreviewUnitWithLevel> myLevelPreviewUnits;
 
+	/**
+	 * Creates the GUI element displaying created actors and levels
+	 * @param width: the width of the display
+	 * @param height: the height of the display
+	 */
 	public ActorsAndLevelsDisplay(DoubleExpression width, DoubleExpression height) {
 		myWidth = width;
 		myHeight = height;

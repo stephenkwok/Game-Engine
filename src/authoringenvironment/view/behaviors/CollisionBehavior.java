@@ -19,7 +19,6 @@ public class CollisionBehavior extends SelectActorBehavior {
 	private static final String APPLY_ONCE = "Only apply once";
 	private static final int CHECK_WIDTH = 200;
 	private ITrigger myTrigger;
-	private boolean oneTime;
 	private CheckBox myCheckBox;
 
 	public CollisionBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 
@@ -36,11 +35,6 @@ public class CollisionBehavior extends SelectActorBehavior {
 	public Node createNode() {
 		HBox hbox = (HBox) super.createNode();
 		myCheckBox = (CheckBox) new CheckBoxObject(APPLY_ONCE,CHECK_WIDTH).createNode();
-//		oneTime = ((CollisionTrigger)getMyRule().getMyTrigger()).isOneTime();
-
-		myCheckBox.setOnAction(e->{
-			oneTime = myCheckBox.isSelected();
-		});
 		hbox.getChildren().add(2,myCheckBox);
 		return hbox;
 	}

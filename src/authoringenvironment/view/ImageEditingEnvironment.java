@@ -28,6 +28,11 @@ public abstract class ImageEditingEnvironment extends PopUpParent implements Obs
 	private final ImageEditingToolbar myToolbar;
 	private final VBox myContainer;
 
+	/**
+	 * Creates a pop up that allows the author to easily edit an Image View's 
+	 * size, rotation, scaleX, scaleY, and opacity
+	 * @param imageView: the ImageView to edit
+	 */
 	public ImageEditingEnvironment(ImageView imageView) {
 		super(POPUP_WIDTH, POPUP_HEIGHT);
 		myContainer = new VBox();
