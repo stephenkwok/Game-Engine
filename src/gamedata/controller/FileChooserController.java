@@ -69,8 +69,7 @@ public class FileChooserController extends BranchScreenController {
 			myScreen.getClass().getDeclaredMethod("alert", parameterTypes).invoke(myScreen, parameters);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 				| SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.myScreen.showError(e.getMessage());
 		}
 	}
 	
