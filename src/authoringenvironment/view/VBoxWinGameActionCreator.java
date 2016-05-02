@@ -5,10 +5,10 @@ import gameengine.model.Actions.Action;
 import gameengine.model.Actions.WinGame;
 import javafx.scene.layout.VBox;
 
-public class WinGameActionCreator extends VBox implements ILevelActionCreator {
+public class VBoxWinGameActionCreator extends VBox implements ILevelActionCreator {
 	private IGameElement myElement;
 	
-	public WinGameActionCreator(IGameElement element) {
+	public VBoxWinGameActionCreator(IGameElement element) {
 		myElement = element;
 	}
 	

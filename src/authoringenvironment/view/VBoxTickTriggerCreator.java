@@ -10,13 +10,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class TickTriggerCreator extends VBox implements ILevelTriggerCreator {
+public class VBoxTickTriggerCreator extends VBox implements ILevelTriggerCreator {
 	private static final double SPACING = 20;
 	private static final String LABEL_TEXT = "TickLabelText";
 	private TextField myTickTextField;
 	private ResourceBundle myResources;
 	
-	public TickTriggerCreator(ResourceBundle resources, IGameElement element) {
+	public VBoxTickTriggerCreator(ResourceBundle resources, IGameElement element) {
 		myResources = resources;
 		this.setSpacing(SPACING);
 		init();

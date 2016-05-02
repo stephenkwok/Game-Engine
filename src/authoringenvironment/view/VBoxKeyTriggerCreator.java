@@ -13,7 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class KeyTriggerCreator extends VBox implements ILevelTriggerCreator {
+public class VBoxKeyTriggerCreator extends VBox implements ILevelTriggerCreator {
 	private static final String KEY_INPUT = "KeyInputs";
 	private static final String LABEL_TEXT = "KeyLabelText";
 	private static final String DELIMITER = " ";
@@ -22,7 +22,7 @@ public class KeyTriggerCreator extends VBox implements ILevelTriggerCreator {
 	private ObservableList<String> myOptions;
 	private ResourceBundle myResources;
 	
-	public KeyTriggerCreator(ResourceBundle resources, IGameElement element) {
+	public VBoxKeyTriggerCreator(ResourceBundle resources, IGameElement element) {
 		myResources = resources;
 		this.setSpacing(SPACING);
 		init();
