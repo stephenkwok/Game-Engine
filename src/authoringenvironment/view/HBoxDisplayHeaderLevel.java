@@ -20,6 +20,10 @@ public class HBoxDisplayHeaderLevel extends HBoxDisplayHeader {
 	private static final double BUTTON_TOP_BOTTOM_PADDING = 30.0;
 	private Button myReorderLevelsButton;
 
+	/**
+	 * Creates a header for the GUI element displaying created levels
+	 * @param bindWidth: the width the header's width should be bound to
+	 */
 	public HBoxDisplayHeaderLevel(DoubleExpression bindWidth) {
 		super(LABEL_TEXT, bindWidth);
 		initializeReorderLevelsButton();

@@ -38,6 +38,12 @@ public class LevelPreviewUnitReorderer {
 	private List<Integer> playPositions;
 	private Set<Integer> uniquePlayPositions;
 
+	/**
+	 * Creates a reorderer that reorders the levels in the game and displays these changes
+	 * @param levels: the list of levels
+	 * @param display: the GUI element displaying the levels
+	 * @param gameEditor: the Game Editing Environment
+	 */
 	public LevelPreviewUnitReorderer(List<Level> levels, ActorsAndLevelsDisplay display,
 			GameEditingEnvironment gameEditor) {
 		myLevelPreviewUnits = display.getLevelPreviewUnits();
