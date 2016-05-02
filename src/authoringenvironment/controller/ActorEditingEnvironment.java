@@ -200,6 +200,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		myActor = (IAuthoringActor) editable;
 		myActorIV = new ImageviewActorIcon(myActor, ICON_WIDTH);
 		setLeftPane();
+		checkPhysics.setEditableElement(myActor);
 		myActorRuleCreator.updateActorRules();
 		checkPhysics.setEditableElement(editable);
 		library.updateDragEvents();
