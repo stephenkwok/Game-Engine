@@ -54,25 +54,25 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 	private Property<Integer> levelTime = new Property<>(1, "Time This Level");
 	private Property<Integer> globalTime = new Property<>(1, "Global Time");
 
-    @XStreamOmitField
-    private SoundPlayer soundEngine;
-    private boolean sfxOff = false;
-    private boolean musicOff = false;
+	@XStreamOmitField
+	private SoundPlayer soundEngine;
+	private boolean sfxOff = false;
+	private boolean musicOff = false;
 	private List<IPlayActor> actorsToAdd;
 
-    
-    public Game(String initialGameFile, 
-    		List<Level> levels, 
-    		GameInfo info, 
-    		PhysicsEngine myPhysicsEngine,
-    		CollisionDetection myCollisionDetector, 
-    		Map<String, Set<IGameElement>> activeTriggers,
-    		Timeline animation, 
-    		List<IPlayActor> currentActors, 
-    		List<IPlayActor> deadActors,
-    		int levelTime, int globalTime) {
-    	this(initialGameFile, info, levels);
-    	currentActors = new ArrayList<IPlayActor>();
+
+	public Game(String initialGameFile, 
+			List<Level> levels, 
+			GameInfo info, 
+			PhysicsEngine myPhysicsEngine,
+			CollisionDetection myCollisionDetector, 
+			Map<String, Set<IGameElement>> activeTriggers,
+			Timeline animation, 
+			List<IPlayActor> currentActors, 
+			List<IPlayActor> deadActors,
+			int levelTime, int globalTime) {
+		this(initialGameFile, info, levels);
+		currentActors = new ArrayList<IPlayActor>();
 		deadActors = new ArrayList<IPlayActor>();
 		actorsToAdd = new ArrayList<IPlayActor>();
 		myPhysicsEngine = new PhysicsEngine();
@@ -106,7 +106,7 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
 		initTimeline();
-		// initSoundEngine();
+		initSoundEngine();
 	}
 
 	/**
@@ -132,7 +132,9 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 
 	private void togglePause() {
 		animation.pause();
-		soundEngine.allSetMute(true);
+		if (soundEngine != null) {
+			soundEngine.allSetMute(true);
+		}
 	}
 
 	public Game(GameInfo gameInfo, List<Level> gameLevels) {
@@ -160,7 +162,7 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 		animation.play();
 		toggleSoundPause();
 	}
-	
+
 	private void initGameElement(IGameElement gameElement){
 		gameElement.setGame(this);
 	}
@@ -438,7 +440,10 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 	public List<Integer> getScores() {
 		List<Integer> scores = new ArrayList<>();
 		for (IPlayActor actor: getCurrentLevel().getMainCharacters()) {
-			scores.add(actor.getAttribute(AttributeType.POINTS).getMyValue());
+			try {
+				scores.add(actor.getAttribute(AttributeType.POINTS).getMyValue());
+			} catch (Exception e) {
+			}
 		}
 		return scores;
 	}
@@ -518,11 +523,11 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 	public boolean isPaused() {
 		return animation.getStatus() == Status.PAUSED;
 	}
-	
+
 	public Property<Integer> getGlobalTimeProperty() {
 		return globalTime;
 	}
-	
+
 	public Property<Integer> getLevelTimeProperty() {
 		return this.levelTime;
 	}
