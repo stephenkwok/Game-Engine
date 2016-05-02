@@ -562,8 +562,8 @@
   </levels>
   <info>
     <myName>Pong</myName>
-    <myImageName>default_game.jpg</myImageName>
-    <myDescription>This is a scrolling game.</myDescription>
+    <myImageName>Pong.jpg</myImageName>
+    <myDescription>This is a multiplayer game demonstrating AI.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myHUDElementsToDisplay/>
     <myFile>Pong.xml</myFile>

@@ -526,8 +526,8 @@
   </levels>
   <info>
     <myName>TDS</myName>
-    <myImageName>default_game.jpg</myImageName>
-    <myDescription>This is a scrolling game.</myDescription>
+    <myImageName>space.png</myImageName>
+    <myDescription>This is a top-down shooter game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myHUDElementsToDisplay/>
     <myFile>TDS.xml</myFile>
