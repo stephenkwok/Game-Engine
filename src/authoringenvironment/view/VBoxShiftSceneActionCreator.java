@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class ShiftSceneActionCreator extends VBox implements ILevelActionCreator {
+public class VBoxShiftSceneActionCreator extends VBox implements ILevelActionCreator {
 	private static final String LABEL_TEXT = "ShiftSceneLabelText";
 	private static final String DELIMITER = ",";
 	private static final String DIRECTION = "ShiftSceneDirections";
@@ -25,7 +25,7 @@ public class ShiftSceneActionCreator extends VBox implements ILevelActionCreator
 	private ComboBox myDirectionComboBox;
 	private ObservableList<String> directionOptions;
 	
-	public ShiftSceneActionCreator(ResourceBundle resources, IGameElement level) {
+	public VBoxShiftSceneActionCreator(ResourceBundle resources, IGameElement level) {
 		myElement = level;
 		myResources = resources;
 		init();

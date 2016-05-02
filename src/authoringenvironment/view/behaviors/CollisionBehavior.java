@@ -50,7 +50,7 @@ public class CollisionBehavior extends SelectActorBehavior {
 		List<Object> arguments = new ArrayList<>();
 		arguments.add(getMyActor());
 		arguments.add(getOtherActor());
-		arguments.add(oneTime);
+		arguments.add(myCheckBox.isSelected());
 		myTrigger = getTriggerFactory().createNewTrigger(getBehaviorType(), arguments);
 	}
 
