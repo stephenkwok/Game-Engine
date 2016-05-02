@@ -31,7 +31,6 @@ public class ActorRuleCreator {
 	private static final int HGAP = 10;
 	private static final double CONTAINERS_PERCENT_WIDTH = 0.75;
 	private static final Object CHANGE_ATTRIBUTE = "ChangeAttribute";
-	private static final int ZERO = 0;
 	private static final String POINTS = "POINTS";
 	private static final String HEALTH = "HEALTH";
 	private static final String POINTS_TRIGGER = "POINTS_TRIGGER";
@@ -82,7 +81,12 @@ public class ActorRuleCreator {
 	public void addBehavior(ActorRule rule, String behavior) {
 		rule.addBehavior(behavior, null);
 	}
-	
+	/**
+	 * Add given sound to given ActorRule 
+	 * @param rule
+	 * @param behavior
+	 * @param soundName
+	 */
 	public void addSound(ActorRule rule, String behavior, String soundName){
 		rule.addSound(behavior, soundName);
 	}
@@ -144,14 +148,21 @@ public class ActorRuleCreator {
 		}
 	}
 	
+	/**
+	 * Adds ApplyPhysics action to the current Actor
+	 */
 	public void applyPhysics(){
 		if(aEE.shouldApplyPhysics()){
 			Rule toAdd = new Rule(new TickTrigger(), new ApplyPhysics((Actor) aEE.getEditable()));
 			System.out.println("adding");
 			((IAuthoringActor) aEE.getEditable()).addRule(toAdd);
+			System.out.println(((IAuthoringActor) aEE.getEditable()).getRules());
 		}
 	}
 	
+	/**
+	 * Clear environment so it can be reset for the new Actor that it is editing 
+	 */
 	private void resetEnvironment(){
         this.newlyReturned = true;
         myActorRuleCreatorPane.getChildren().clear();
@@ -167,17 +178,26 @@ public class ActorRuleCreator {
 	public IAuthoringActor getActor() {
 		return (IAuthoringActor) aEE.getEditable();
 	}
-
+	/**
+	 * Returns Controller
+	 * @return
+	 */
 	public Controller getController() {
 		return aEE.getController();
 	}
-
+	/**
+	 * Sets Rules for the current Actor 
+	 */
 	public void setRules() {
 		for (ActorRule actorRule : myActorRules) {
 			actorRule.setRules();
 		}
 	}
-
+	/**
+	 * If triggerType is a Key or Attribute Trigger, returns correct triggerType key 
+	 * @param triggerType
+	 * @return
+	 */
 	private String checkForKeyOrAttributeTrigger(String triggerType) {
 		if (Arrays.asList(myActionResources.getString("KeyInputs").split(" ")).contains(triggerType)) {
 			return KEY;
@@ -188,11 +208,17 @@ public class ActorRuleCreator {
 		}
 		return triggerType;
 	}
-
+	/**
+	 * Returns if the Actor Editing Environment has just been returned to 
+	 * @return
+	 */
 	public boolean isNewlyReturned() {
 		return this.newlyReturned;
 	}
-
+	/**
+	 * Sets if Actor Editing Environment has just been returned to based on given boolean
+	 * @param bool
+	 */
 	public void setNewlyReturned(boolean bool) {
 		this.newlyReturned = bool;
 	}
