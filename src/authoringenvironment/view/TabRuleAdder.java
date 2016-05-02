@@ -92,7 +92,7 @@ public class TabRuleAdder extends TabParent implements Observer{
 		ITrigger trigger = ((ILevelTriggerCreator) myTriggerCreator).createTrigger();
 		Action action = ((ILevelActionCreator) myActionCreator).createAction();
 		Rule rule = new Rule(trigger, action);
-		myLevelEditor.addRuleToLevel(rule));
+		myLevelEditor.addRuleToLevel(rule);
 		myRuleEditor.updateRules();
 	}
 
