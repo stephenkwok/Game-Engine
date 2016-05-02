@@ -242,6 +242,7 @@ public class ActorRule {
 	 */
 	public void setRules() {
 		if (myActorRuleCreator.isNewlyReturned()) {
+			System.out.println("here");
 			myActorRuleCreator.setNewlyReturned(false);
 			myActor.getRules().clear();
 		}
