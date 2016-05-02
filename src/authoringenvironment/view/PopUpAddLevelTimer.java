@@ -51,6 +51,12 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	private VBox myActionCreator;
 	private Level myLevel;
 	
+	/**
+	 * Constructor for a PopUpAddLevelTimer
+	 * @param popUpWidth: width of popup.
+	 * @param popUpHeight: height of popup.
+	 * @param level: level to add timers to.
+	 */
 	public PopUpAddLevelTimer(int popUpWidth, int popUpHeight, Level level) {
 		super(popUpWidth, popUpHeight);
 		myResources = ResourceBundle.getBundle(RESOURCES);
@@ -58,6 +64,9 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		init();
 	}
 	
+	/**
+	 * Initialize pop up.
+	 */
 	private void init() {
 		formatContainer();
 		addInitialTimeBox();
@@ -65,6 +74,9 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		addActionBox();
 	}
 	
+	/**
+	 * Format the pop up container.
+	 */
 	private void formatContainer() {
 		getContainer().setAlignment(Pos.CENTER);
 		getContainer().setStyle(BACKGROUND_COLOR);
@@ -72,18 +84,30 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		getContainer().setSpacing(PADDING);
 	}
 	
+	/**
+	 * Add textfields for initial time.
+	 */
 	private void addInitialTimeBox() {
 		myInitialMinutes = new TextField();
 		myInitialSeconds = new TextField();
 		addTimeBox(INITIAL + PROMPT, myInitialMinutes, myInitialSeconds);
 	}
 	
+	/**
+	 * Add textfields for trigger time.
+	 */
 	private void addTriggerTimeBox() {
 		myTriggerMinutes = new TextField();
 		myTriggerSeconds = new TextField();
 		addTimeBox(TRIGGER + PROMPT, myTriggerMinutes, myTriggerSeconds);
 	}
 	
+	/**
+	 * Add vbox for time textfields.
+	 * @param labelKey: key for label.
+	 * @param minutesTextField: textfield for minutes.
+	 * @param secondsTextField: textfield for seconds.
+	 */
 	private void addTimeBox(String labelKey, TextField minutesTextField, TextField secondsTextField) {
 		VBox container = new VBox(PADDING);
 		Label label = new Label(myResources.getString(labelKey));
@@ -100,22 +124,34 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		getContainer().getChildren().add(container);
 	}
 	
+	/**
+	 * Add a combobox to select action.
+	 */
 	private void addActionBox() {
 		myAction = new ComboBoxLevelTriggerAndAction(myResources.getString(ACTION + PROMPT), ACTION_PROMPT, Arrays.asList(myResources.getString(ACTION + OPTIONS).split(DELIMITER)));
 		myAction.addObserver(this);
 		getContainer().getChildren().add(myAction.createNode());
 	}
 
+	/**
+	 * Update to display parameter options and create the level timer.
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		displayActionParameters((String) arg);
 		createLevelTimer();
 	}
 	
+	/**
+	 * 
+	 * @param minutesBox
+	 * @param secondsBox
+	 * @return
+	 */
 	private int convertToTicks(TextField minutesBox, TextField secondsBox) {
 		Integer minutes = getValueFromTextField(minutesBox);
 		Integer seconds = getValueFromTextField(secondsBox);
-		return minutes * 60 + seconds;
+		return (minutes * 60 + seconds) * TICKS_PER_SECOND;
 	}
 	
 	private int getValueFromTextField(TextField text) {
@@ -155,9 +191,9 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	
 	private int determineChange(int initialValue, int triggerValue) {
 		if (initialValue > triggerValue) {
-			return -TICKS_PER_SECOND;
+			return -1;
 		} else {
-			return TICKS_PER_SECOND;
+			return 1;
 		}
 	}
 	
