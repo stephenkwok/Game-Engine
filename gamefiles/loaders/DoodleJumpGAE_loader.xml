@@ -10,8 +10,8 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>601.0</x>
-          <y>352.0</y>
+          <x>598.0</x>
+          <y>381.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>
@@ -48,8 +48,8 @@
         <gameengine.model.Actor>
           <changed>false</changed>
           <obs/>
-          <x>473.0</x>
-          <y>406.0</y>
+          <x>477.0</x>
+          <y>421.0</y>
           <veloX>0.0</veloX>
           <veloY>0.0</veloY>
           <myFriction>0.0</myFriction>
@@ -94,6 +94,21 @@
           <myRuleManager>
             <myRules>
               <entry>
+                <string>Left</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
+                      <myKey>Left</myKey>
+                      <myKeyCode>LEFT</myKeyCode>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.GlideLeft">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <glideOffset>5.0</glideOffset>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+              <entry>
                 <string>Right</string>
                 <list>
                   <gameengine.model.Rule>
@@ -101,8 +116,9 @@
                       <myKey>Right</myKey>
                       <myKeyCode>RIGHT</myKeyCode>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.MoveRight">
+                    <myAction class="gameengine.model.Actions.GlideRight">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <glideOffset>5.0</glideOffset>
                     </myAction>
                   </gameengine.model.Rule>
                 </list>
@@ -176,8 +192,25 @@
                     <myAction class="gameengine.model.Actions.CreateActor">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                       <myActorToCopy reference="../../../gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <myMinX>-100.0</myMinX>
+                      <myMaxX>600.0</myMaxX>
+                      <myMinY>-100.0</myMinY>
+                      <myMaxY>-100.0</myMaxY>
+                      <isRandom>true</isRandom>
+                    </myAction>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <oneTime>true</oneTime>
+                      <resolvedCollisions/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.CreateActor">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myActorToCopy reference="../../../gameengine.model.Rule/myTrigger/myCollisionActor"/>
                       <myMinX>-20.0</myMinX>
-                      <myMaxX>740.0</myMaxX>
+                      <myMaxX>640.0</myMaxX>
                       <myMinY>-20.0</myMinY>
                       <myMaxY>-20.0</myMaxY>
                       <isRandom>true</isRandom>
@@ -190,9 +223,26 @@
                       <oneTime>true</oneTime>
                       <resolvedCollisions/>
                     </myTrigger>
+                    <myAction class="gameengine.model.Actions.CreateActor">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myActorToCopy reference="../../../gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <myMinX>-60.0</myMinX>
+                      <myMaxX>740.0</myMaxX>
+                      <myMinY>-60.0</myMinY>
+                      <myMaxY>-60.0</myMaxY>
+                      <isRandom>true</isRandom>
+                    </myAction>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <oneTime>true</oneTime>
+                      <resolvedCollisions/>
+                    </myTrigger>
                     <myAction class="gameengine.model.Actions.ShiftScene">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myShiftAmount>40.0</myShiftAmount>
+                      <myShiftAmount>120.0</myShiftAmount>
                       <myDirection>Down</myDirection>
                     </myAction>
                   </gameengine.model.Rule>
@@ -213,6 +263,534 @@
             </myImages>
             <spriteIndex>0</spriteIndex>
           </mySprite>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>657.0</x>
+          <y>341.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>388.0</x>
+          <y>327.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>312.0</x>
+          <y>286.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>531.0</x>
+          <y>256.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>367.0</x>
+          <y>456.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>285.0</x>
+          <y>232.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>658.0</x>
+          <y>215.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>258.0</x>
+          <y>162.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>559.0</x>
+          <y>182.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>165.0</x>
+          <y>204.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>502.0</x>
+          <y>139.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>690.0</x>
+          <y>87.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>439.0</x>
+          <y>70.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>756.0</x>
+          <y>27.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>298.0</x>
+          <y>44.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>578.0</x>
+          <y>-1.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Green Platform</myName>
+          <myID>6</myID>
+          <myImageViewName>green_platform.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite reference="../../gameengine.model.Actor/mySprite"/>
           <myNextValues>
             <nextXVelo>0.0</nextXVelo>
             <nextXPos>0.0</nextXPos>
@@ -256,47 +834,6 @@
     <myFile>DoodleJumpGAE_loader.xml</myFile>
     <isDestinationGame>true</isDestinationGame>
     <myActorMap>
-      <entry>
-        <gameengine.model.Actor>
-          <changed>false</changed>
-          <obs/>
-          <x>0.0</x>
-          <y>0.0</y>
-          <veloX>0.0</veloX>
-          <veloY>0.0</veloY>
-          <myFriction>0.0</myFriction>
-          <myName>Solid Floor</myName>
-          <myID>3</myID>
-          <myImageViewName>solid_floor.png</myImageViewName>
-          <myHeading>0.0</myHeading>
-          <myImageViewSize>0.0</myImageViewSize>
-          <myRuleManager>
-            <myRules/>
-          </myRuleManager>
-          <myAttributeManager>
-            <attributeMap/>
-          </myAttributeManager>
-          <myStates/>
-          <mySprite>
-            <myImages>
-              <string>solid_floor.png</string>
-            </myImages>
-            <spriteIndex>0</spriteIndex>
-          </mySprite>
-          <myNextValues>
-            <nextXVelo>0.0</nextXVelo>
-            <nextXPos>0.0</nextXPos>
-            <nextYVelo>0.0</nextYVelo>
-            <nextYPos>0.0</nextYPos>
-            <collision>false</collision>
-          </myNextValues>
-          <myRotate>0.0</myRotate>
-          <myOpacity>1.0</myOpacity>
-          <myScaleX>1.0</myScaleX>
-          <myScaleY>1.0</myScaleY>
-        </gameengine.model.Actor>
-        <list/>
-      </entry>
       <entry>
         <gameengine.model.Actor>
           <changed>false</changed>
@@ -355,6 +892,21 @@
           <myRuleManager>
             <myRules>
               <entry>
+                <string>Left</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
+                      <myKey>Left</myKey>
+                      <myKeyCode>LEFT</myKeyCode>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.GlideLeft">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <glideOffset>5.0</glideOffset>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+              <entry>
                 <string>Right</string>
                 <list>
                   <gameengine.model.Rule>
@@ -362,8 +914,9 @@
                       <myKey>Right</myKey>
                       <myKeyCode>RIGHT</myKeyCode>
                     </myTrigger>
-                    <myAction class="gameengine.model.Actions.MoveRight">
+                    <myAction class="gameengine.model.Actions.GlideRight">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <glideOffset>5.0</glideOffset>
                     </myAction>
                   </gameengine.model.Rule>
                 </list>
@@ -387,7 +940,7 @@
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]/myRuleManager/myRules/entry[3]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]/myRuleManager/myRules/entry[4]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
                       <oneTime>false</oneTime>
                       <resolvedCollisions/>
                     </myTrigger>
@@ -398,15 +951,32 @@
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]/myRuleManager/myRules/entry[3]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]/myRuleManager/myRules/entry[4]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
                       <oneTime>true</oneTime>
                       <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.CreateActor">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myActorToCopy reference="../../../../../../../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]/myRuleManager/myRules/entry[3]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
-                      <myMinX>200.0</myMinX>
-                      <myMaxX>740.0</myMaxX>
+                      <myActorToCopy reference="../../../../../../../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]/myRuleManager/myRules/entry[4]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <myMinX>300.0</myMinX>
+                      <myMaxX>600.0</myMaxX>
+                      <myMinY>-100.0</myMinY>
+                      <myMaxY>-100.0</myMaxY>
+                      <isRandom>true</isRandom>
+                    </myAction>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]/myRuleManager/myRules/entry[4]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <oneTime>true</oneTime>
+                      <resolvedCollisions/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.CreateActor">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myActorToCopy reference="../../../../../../../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]/myRuleManager/myRules/entry[4]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <myMinX>300.0</myMinX>
+                      <myMaxX>640.0</myMaxX>
                       <myMinY>-20.0</myMinY>
                       <myMaxY>-20.0</myMaxY>
                       <isRandom>true</isRandom>
@@ -415,13 +985,30 @@
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.BottomCollision">
                       <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]/myRuleManager/myRules/entry[3]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]/myRuleManager/myRules/entry[4]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <oneTime>true</oneTime>
+                      <resolvedCollisions/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.CreateActor">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myActorToCopy reference="../../../../../../../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]/myRuleManager/myRules/entry[4]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <myMinX>200.0</myMinX>
+                      <myMaxX>740.0</myMaxX>
+                      <myMinY>-60.0</myMinY>
+                      <myMaxY>-60.0</myMaxY>
+                      <isRandom>true</isRandom>
+                    </myAction>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]/myRuleManager/myRules/entry[4]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
                       <oneTime>true</oneTime>
                       <resolvedCollisions/>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.ShiftScene">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
-                      <myShiftAmount>40.0</myShiftAmount>
+                      <myShiftAmount>120.0</myShiftAmount>
                       <myDirection>Down</myDirection>
                     </myAction>
                   </gameengine.model.Rule>
@@ -450,13 +1037,6 @@
         </gameengine.model.Actor>
         <list>
           <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]"/>
-        </list>
-      </entry>
-      <entry>
-        <gameengine.model.Actor reference="../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]/myRuleManager/myRules/entry[3]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
-        <list>
-          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor"/>
-          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[2]"/>
         </list>
       </entry>
       <entry>
@@ -526,6 +1106,111 @@
           <mySprite>
             <myImages>
               <string>default_main_player.png</string>
+            </myImages>
+            <spriteIndex>0</spriteIndex>
+          </mySprite>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <list/>
+      </entry>
+      <entry>
+        <gameengine.model.Actor reference="../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[3]/myRuleManager/myRules/entry[4]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+        <list>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[2]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[4]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[5]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[6]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[7]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[8]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[9]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[10]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[11]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[12]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[13]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[14]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[15]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[16]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[17]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[18]"/>
+          <gameengine.model.Actor reference="../../../../../levels/gameengine.controller.Level/myActors/gameengine.model.Actor[19]"/>
+        </list>
+      </entry>
+      <entry>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>0.0</x>
+          <y>0.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Solid Floor</myName>
+          <myID>3</myID>
+          <myImageViewName>solid_floor.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite>
+            <myImages>
+              <string>solid_floor.png</string>
+            </myImages>
+            <spriteIndex>0</spriteIndex>
+          </mySprite>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <list/>
+      </entry>
+      <entry>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>0.0</x>
+          <y>0.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Default Name</myName>
+          <myID>7</myID>
+          <myImageViewName>hellokitty.gif</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules/>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates/>
+          <mySprite>
+            <myImages>
+              <string>hellokitty.gif</string>
             </myImages>
             <spriteIndex>0</spriteIndex>
           </mySprite>
