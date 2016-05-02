@@ -22,6 +22,11 @@ public class GamePreviewImageSetter {
 	private final List<Level> myLevels;
 	private boolean gameImageSetSuccessful;
 
+	/**
+	 * Creates an image setter that sets the Game's preview image
+	 * @param info: the GameInfo object being edited
+	 * @param levels: the Game's list of levels
+	 */
 	public GamePreviewImageSetter(GameInfo info, List<Level> levels) {
 		myGameInfo = info;
 		myLevels = levels;

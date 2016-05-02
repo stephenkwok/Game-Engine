@@ -35,6 +35,15 @@ public class PresetActorFactory {
 	private Map<String, List<String>> myMethodsMap;
 	private List<String> actorNames;
 
+	/**
+	 * Creates a factory that generates preset actors
+	 * @param resources: the ResourceBundle defining the preset actors
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	public PresetActorFactory(ResourceBundle resources) throws NoSuchMethodException, SecurityException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException {
 		myResources = resources;

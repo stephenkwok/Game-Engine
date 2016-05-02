@@ -42,6 +42,10 @@ public class PopUpAuthoringHelpPage extends PopUpParent {
 	private List<String> topics;
 	private List<Label> labels;
 
+	/**
+	 * Creates a help page for the authoring environment displayed as a pop up
+	 * @param elementName: name of the GUI element
+	 */
 	public PopUpAuthoringHelpPage(String elementName) {
 		super(POPUP_WIDTH, POPUP_HEIGHT);
 		myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
