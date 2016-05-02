@@ -90,7 +90,7 @@ public class TriggerFactory {
 	/**
 	 * Creates a Collision Trigger.
 	 * 
-	 * @param nodeType:
+	 * @param behaviorType:
 	 *            Type corresponding to the nodeTypeKey originally specified.
 	 * @param className:
 	 *            specific subclass of CollisionTrigger.
@@ -111,6 +111,22 @@ public class TriggerFactory {
 		return (ITrigger) constructor.newInstance((Actor) arguments.get(ZERO), (Actor) arguments.get(ONE), (Boolean) arguments.get(TWO));
 	}
 
+	/**
+	 * Creates a Key Trigger.
+	 * 
+	 * @param behaviorType:
+	 *            Type corresponding to the nodeTypeKey originally specified.
+	 * @param className:
+	 *            specific subclass of CollisionTrigger.
+	 * @return ITrigger.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private ITrigger createKeyTrigger(String behaviorType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -119,6 +135,22 @@ public class TriggerFactory {
 		return (ITrigger) constructor.newInstance(arguments.get(ZERO));
 	}
 
+	/**
+	 * Creates a Tick Trigger.
+	 * 
+	 * @param behaviorType:
+	 *            Type corresponding to the nodeTypeKey originally specified.
+	 * @param className:
+	 *            specific subclass of CollisionTrigger.
+	 * @return ITrigger.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private ITrigger createTickTrigger(String behaviorType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -128,6 +160,22 @@ public class TriggerFactory {
 
 	}
 
+	/**
+	 * Creates a Click Trigger.
+	 * 
+	 * @param behaviorType:
+	 *            Type corresponding to the nodeTypeKey originally specified.
+	 * @param className:
+	 *            specific subclass of CollisionTrigger.
+	 * @return ITrigger.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private ITrigger createClickTrigger(String behaviorType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -136,6 +184,22 @@ public class TriggerFactory {
 		return (ITrigger) constructor.newInstance((IGameElement) arguments.get(ZERO));
 	}
 
+	/**
+	 * Creates an Attribute Reached behavior.
+	 * 
+	 * @param behaviorType:
+	 *            Type corresponding to the nodeTypeKey originally specified.
+	 * @param className:
+	 *            specific subclass of CollisionTrigger.
+	 * @return ITrigger.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private ITrigger createAttributeReached(String behaviorType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
