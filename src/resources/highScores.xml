@@ -3,6 +3,19 @@
   <obs/>
   <myScores>
     <entry>
+      <string>mario14.xml</string>
+      <tree-map>
+        <entry>
+          <string>carine</string>
+          <int>4</int>
+        </entry>
+        <entry>
+          <string>colette</string>
+          <int>15</int>
+        </entry>
+      </tree-map>
+    </entry>
+    <entry>
       <string>michaelMario</string>
       <tree-map>
         <entry>
