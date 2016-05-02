@@ -128,7 +128,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void winGame() {
 		endGame(true);
 	}
-	
+
 	public void loseGame() {
 		endGame(false);
 	}
