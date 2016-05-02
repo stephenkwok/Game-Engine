@@ -91,6 +91,11 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 		setTriggerOrAction();
 	}
 	
+	/**
+	 * Shows an alert.
+	 * @param alertHeader: alert title.
+	 * @param alertContent: text in alert.
+	 */
 	private void showAlert(String alertHeader, String alertContent) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setHeaderText(alertHeader);
@@ -156,6 +161,9 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	 */
 	public abstract boolean isTrigger();
 
+	/**
+	 * Update the value based on the editable's rules.
+	 */
 	public abstract void updateValueBasedOnEditable();
 
 	/**
@@ -176,34 +184,68 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 		return this.actionFactory;
 	}
 
+	/**
+	 * Set a trigger.
+	 * @param key: key for trigger.
+	 * @param value: value for trigger.
+	 */
 	public void setTrigger(IAuthoringBehavior key, ITrigger value) {
 		myActorRule.setTrigger(key, value);
 	}
 
+	/**
+	 * Set an action.
+	 * @param key: key for action.
+	 * @param value: value for action.
+	 */
 	public void setAction(IAuthoringBehavior key, IAction value) {
 		myActorRule.setAction(key, value);
 	}
 
+	/**
+	 * Gets the behavior type.
+	 * @return behavior type.
+	 */
 	protected String getBehaviorType() {
 		return this.behaviorType;
 	}
 	
+	/**
+	 * Gets the actor.
+	 * @return actor.
+	 */
 	protected IAuthoringActor getMyActor(){
 		return this.myActor;
 	}
 	
+	/**
+	 * Gets the other actor to act on.
+	 * @return other actor to act on.
+	 */
 	protected IAuthoringActor getOtherActor(){
 		return this.otherActor;
 	}
 	
+	/**
+	 * Gets the rule.
+	 * @return rule.
+	 */
 	protected IRule getMyRule(){
 		return this.myRule;
 	}
 	
+	/**
+	 * Combobox showing actors.
+	 * @return combobox showing actors.
+	 */
 	protected ComboBox<IEditableGameElement> getComboBox(){
 		return this.comboBox;
 	}
 	
+	/**
+	 * Gets the hbox container.
+	 * @return container.
+	 */
 	protected HBox getHBox(){
 		return this.hbox;
 	}
