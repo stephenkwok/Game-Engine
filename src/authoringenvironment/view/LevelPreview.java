@@ -42,6 +42,10 @@ public class LevelPreview {
 	private SubScene mySubScene;
 	private Stage myStage;
 
+	/**
+	 * Constructor for a LevelPreview
+	 * @param controller: authoring environment controller.
+	 */
 	public LevelPreview(Controller controller) {
 		myController = controller;
 		myPreviewFile = new File(PREVIEW_FILE);
@@ -50,6 +54,9 @@ public class LevelPreview {
 		myModel = new Game(new GameInfo(), myController.getLevels());
 	}
 
+	/**
+	 * Open a new stage to preview a game.
+	 */
 	public void previewGame(){
 		addLevelsAndActors();   
 		saveCurrentGame();
@@ -64,12 +71,9 @@ public class LevelPreview {
 		});
 	}
 
-	private void initGame() {
-		myGameController = new GameController(myModel, PlayType.PREVIEW);
-		myGameController.setGame(myModel);
-		myGameController.setGameView(myView);
-	}
-
+	/**
+	 * Add levels and actors from the current game to be playable.
+	 */
 	private void addLevelsAndActors() {
 		for(Level level: myModel.getLevels()) {
 			for (IPlayActor actor: level.getActors()) {
@@ -82,7 +86,11 @@ public class LevelPreview {
 			}
 		}
 	}
+	
 
+	/**
+	 * Save the current game to a preview.xml file
+	 */
 	private void saveCurrentGame() {
 		myCreatorController = new CreatorController(myModel);
 
@@ -94,16 +102,34 @@ public class LevelPreview {
 		}
 	}
 
+	/**
+	 * Load the previewed game so as not to override the one the user is currently making in the authoring environment.
+	 */
 	private void loadForPlaying() {
 		myParserController = new ParserController();
 		myModel = myParserController.loadforPlaying(myPreviewFile);
 	}
 
+	/**
+	 * Initialize the game camera.
+	 */
 	private void initCamera() {
 		myCamera = new ParallelCamera();
 		myView = new GameScreen(myCamera);
 	}
-
+	
+	/**
+	 * Initialize the game controller.
+	 */
+	private void initGame() {
+		myGameController = new GameController(myModel, PlayType.PREVIEW);
+		myGameController.setGame(myModel);
+		myGameController.setGameView(myView);
+	}
+	
+	/**
+	 * Initialize the stage and scene.
+	 */
 	private void initGameView() {
 		mySubScene = myView.getScene();
 		mySubScene.fillProperty().set(Color.BLUE);
