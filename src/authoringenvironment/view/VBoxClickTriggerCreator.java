@@ -7,10 +7,10 @@ import gameengine.model.Triggers.ClickTrigger;
 import gameengine.model.Triggers.ITrigger;
 import javafx.scene.layout.VBox;
 
-public class ClickTriggerCreator extends VBox implements ILevelTriggerCreator{
+public class VBoxClickTriggerCreator extends VBox implements ILevelTriggerCreator{
 	private IGameElement myElement;
 	
-	public ClickTriggerCreator(ResourceBundle resources, IGameElement element) {
+	public VBoxClickTriggerCreator(ResourceBundle resources, IGameElement element) {
 		myElement = element;
 	}
 	
