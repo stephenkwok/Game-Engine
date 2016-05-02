@@ -21,6 +21,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
+/**
+ * Tab to add rules to a level.
+ * @author amyzhao
+ *
+ */
 public class TabRuleAdder extends TabParent implements Observer {
 	private VBox myContainer;
 	private static final String TRIGGERS = "Triggers";
@@ -53,6 +58,13 @@ public class TabRuleAdder extends TabParent implements Observer {
 	private TabLevelRuleEditor myRuleEditor;
 	private AlertGenerator myAlertGenerator;
 
+	/**
+	 * Constructor for TabRuleAdder.
+	 * @param myResources: resource bundle to use.
+	 * @param tabText: title of tab.
+	 * @param environment: level editing environment.
+	 * @param ruleEditor: rule editor that allows for deletion.
+	 */
 	public TabRuleAdder(ResourceBundle myResources, String tabText, LevelEditingEnvironment environment,
 			TabLevelRuleEditor ruleEditor) {
 		super(myResources, tabText);
@@ -69,12 +81,18 @@ public class TabRuleAdder extends TabParent implements Observer {
 		myAlertGenerator = new AlertGenerator();
 	}
 
+	/**
+	 * Initialize containers.
+	 */
 	private void init() {
 		initTriggerContainer();
 		initActionContainer();
 		myContainer.getChildren().addAll(myTriggerContainer, myActionContainer);
 	}
 
+	/**
+	 * Initialize trigger containers.
+	 */
 	private void initTriggerContainer() {
 		myTriggerContainer = new VBox(PADDING);
 		myTriggerComboBox = new ComboBoxLevelTriggerAndAction(getResources().getString(TRIGGERS + LABEL),
@@ -84,6 +102,9 @@ public class TabRuleAdder extends TabParent implements Observer {
 		myTriggerContainer.getChildren().add(myTriggerComboBox.createNode());
 	}
 
+	/**
+	 * Initialize action containers.
+	 */
 	private void initActionContainer() {
 		myActionContainer = new VBox(PADDING);
 		myActionComboBox = new ComboBoxLevelTriggerAndAction(getResources().getString(ACTIONS + LABEL),
@@ -93,6 +114,9 @@ public class TabRuleAdder extends TabParent implements Observer {
 		myActionContainer.getChildren().add(myActionComboBox.createNode());
 	}
 
+	/**
+	 * Create and add rules that the user's selected.
+	 */
 	private void createAndAddRule() {
 		myTriggerContainer.getChildren().remove(myTriggerCreator);
 		myActionContainer.getChildren().remove(myActionCreator);
@@ -103,6 +127,9 @@ public class TabRuleAdder extends TabParent implements Observer {
 		myRuleEditor.updateRules();
 	}
 
+	/**
+	 * Update parameter options based on selected trigger or action.
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		if (Arrays.asList(getResources().getString(TRIGGERS).split(DELIMITER)).contains((String) arg)) {
@@ -114,22 +141,39 @@ public class TabRuleAdder extends TabParent implements Observer {
 		}
 	}
 
+	/**
+	 * Returns the container.
+	 */
 	@Override
 	Node getContent()
 			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		return myContainer;
 	}
 
+	/**
+	 * Display parameters based on trigger.
+	 * @param name: trigger name.
+	 */
 	private void displayTriggerParameters(String name) {
 		myTriggerCreator = displayParameters(name, name + TRIGGER_CREATOR);
 		myTriggerContainer.getChildren().add(myTriggerCreator);
 	}
 
+	/**
+	 * Display parameters based on action.
+	 * @param name: action name.
+	 */
 	private void displayActionParameters(String name) {
 		myActionCreator = displayParameters(name, name + ACTION_CREATOR);
 		myActionContainer.getChildren().add(myActionCreator);
 	}
-
+	
+	/**
+	 * Display parameters for action or trigger.
+	 * @param name: trigger or action name.
+	 * @param className: class that corresponds to its creator.
+	 * @return vbox displaying parameters.
+	 */
 	private VBox displayParameters(String name, String className) {
 		Class<?> creator;
 		try {
