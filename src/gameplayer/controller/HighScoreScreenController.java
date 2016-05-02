@@ -1,7 +1,13 @@
 package gameplayer.controller;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
 
 import gamedata.controller.ChooserType;
 import gamedata.controller.FileChooserController;
@@ -49,7 +55,11 @@ public class HighScoreScreenController extends BranchScreenController {
 
 	private void clearScores() {
 		myScores.clearGameScores(myDataController.getGameFile());
-		myDataController.clearHighScores();
+		try {
+			myDataController.clearHighScores();
+		} catch (SAXException | IOException | TransformerException | ParserConfigurationException e) {
+			this.myScreen.showError(e.getMessage());
+		}
 	}
 	
 	@Override

@@ -11,6 +11,8 @@ import gamedata.controller.ParserController;
 import gameengine.controller.Game;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -19,6 +21,8 @@ public class ComboBoxGame extends ComboBoxImageCell {
 
 	private static final int STANDARD_IMAGE_HEIGHT = 50;
 	private Map<String, Game> myGames;
+	private static final int DEFAULT_HEIGHT = 60;
+	private static final int DEFAULT_WIDTH = 80;
 	
 	public ComboBoxGame(String promptText, String imageResource) {
 		super(promptText, imageResource, STANDARD_IMAGE_HEIGHT);
@@ -59,7 +63,7 @@ public class ComboBoxGame extends ComboBoxImageCell {
 		//TODO implement error checking
 		File gameFileDir = new File(selectionResource);
 		for(File gameFile: gameFileDir.listFiles()) {
-			if(!gameFile.isDirectory()) {
+			if(!gameFile.isDirectory()  && gameFile.getName().contains(".xml")) {
 				ParserController parserController = new ParserController();
 				Game game = parserController.loadforPlaying(gameFile);
 				if (game != null)
@@ -81,8 +85,11 @@ public class ComboBoxGame extends ComboBoxImageCell {
 		HBox hbox = new HBox();
 		VBox vbox = new VBox();
 		Game game = myGames.get(item);
-		vbox.getChildren().addAll(new Label(item), new Text("\n" + game.getInfo().getMyDescription()));
-		hbox.getChildren().addAll(imageMap.get(game.getInfo().getMyImageName()), vbox);
+		vbox.getChildren().addAll(new Label(game.getInfo().getName() + "\n" + item), new Text(game.getInfo().getMyDescription()));
+		ImageView newIV = new ImageView(new Image(game.getInfo().getMyImageName()));
+		newIV.setFitWidth(DEFAULT_WIDTH);
+		newIV.setFitHeight(DEFAULT_HEIGHT);
+		hbox.getChildren().addAll(newIV, vbox);
 		return hbox;
 	}
 	
