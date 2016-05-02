@@ -32,10 +32,12 @@ public class GlideTarget extends GlidingAction {
 	 */
 	@Override
 	public void perform() {
-		if(!targetActor.checkState(ActorState.DEAD)){
-			calcHeading((Actor)getMyActor(),targetActor);
+		calcHeading((Actor)getMyActor(),targetActor);
+		if(targetActor.checkState(ActorState.DEAD)){
+			getMyActor().getPhysicsEngine().glideForward(getMyActor(),0);	
+		}else{
+			getMyActor().getPhysicsEngine().glideForward(getMyActor(),this.getGlideOffset());
 		}
-    	getMyActor().getPhysicsEngine().glideForward(getMyActor(),this.getGlideOffset());		
 
 	}
 	

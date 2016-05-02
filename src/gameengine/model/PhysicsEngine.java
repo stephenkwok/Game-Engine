@@ -26,6 +26,14 @@ public class PhysicsEngine {
 		return (vector + force);
 	}
 
+	
+	/**
+	 * This is the 'apply physics' method
+	 * Updates an actors velocity and position with gravity and friction
+	 * Also bounds the X/Y positions so actor cannot exit screen to the 
+	 * top or to the left. 
+	 * @param a1
+	 */
 	public void tick(IPlayActor a1) {
 		nextXVelo = applyForce(a1.getVeloX(), friction * a1.getVeloX());
 		nextXPos = applyForce(a1.getX(), nextXVelo);
@@ -40,6 +48,12 @@ public class PhysicsEngine {
 		a1.setY(bound(nextYPos));
 	}
 	
+	
+	/**
+	 * This method alters X position and Velocity according to a force
+	 * @param a1
+	 * @param right
+	 */
 	private void moveLeftRight(IPlayActor a1, boolean right) {
 		double localHorizForce = horizontalForce * (right ? 1 : -1);
 		nextXVelo = (applyForce(a1.getVeloX(), localHorizForce));
@@ -144,10 +158,7 @@ public class PhysicsEngine {
 	}
 
 	public void staticHorizontalCollision(IPlayActor a1) {
-
 		setNextVals(a1, a1.getX()-(a1.getVeloX()) , a1.getY(), 0 , a1.getVeloY());
-
-		//setNextVals(a1, a1.getX()-(a1.getVeloX() * bounce) , a1.getY() , 0 , a1.getVeloY()-gravity );
 	}
 
 	public void elasticHorizontalCollision(IPlayActor a1) {

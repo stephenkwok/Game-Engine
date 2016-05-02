@@ -82,9 +82,27 @@ public class TopDownShooter extends Application {
         level1.addActor(player1);
         
         player1.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player1)));
-        player1.addRule(new Rule(new KeyTrigger(KeyCode.RIGHT), new MoveRight(player1)));
-        player1.addRule(new Rule(new KeyTrigger(KeyCode.LEFT), new MoveLeft(player1)));
+        player1.addRule(new Rule(new KeyTrigger(KeyCode.D), new MoveRight(player1)));
+        player1.addRule(new Rule(new KeyTrigger(KeyCode.A), new MoveLeft(player1)));
 
+
+        
+        
+        
+        Actor player2 = new Actor();
+        player2.addState(ActorState.MAIN);
+        player2.setID(100);
+        player2.setImageViewName("spaceship2.png");
+        player2.setX(700);
+        level1.addActor(player2);
+        
+        player2.addRule(new Rule(new TickTrigger(), new ApplyPhysics(player2)));
+        player2.addRule(new Rule(new KeyTrigger(KeyCode.RIGHT), new MoveRight(player2)));
+        player2.addRule(new Rule(new KeyTrigger(KeyCode.LEFT), new MoveLeft(player2)));
+
+        
+        
+        
         
         Actor floor  = new Actor();
         floor.setID(2);
@@ -93,19 +111,26 @@ public class TopDownShooter extends Application {
         level1.addActor(floor);
         
         player1.addRule(new Rule(new BottomCollision(player1,floor), new VerticalStaticCollision(player1)));
+        player2.addRule(new Rule(new BottomCollision(player2,floor), new VerticalStaticCollision(player2)));
+
 
         Actor enemy = new Actor();
         enemy.setID(3);
-        enemy.setImageViewName("goomba.png");
+        enemy.setImageViewName("alien1.png");
         enemy.addRule(new Rule(new TickTrigger(), new GlideDown(enemy,1.00)));
         
         Actor bullet = new Actor();
         bullet.setID(4);
-        bullet.setImageViewName("blue_ball.png");
+        bullet.setImageViewName("fireball.png");
         bullet.addRule(new Rule(new TickTrigger(), new GlideUp(bullet, 2.5)));
         
         
-        player1.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new Spawn(player1,bullet,45.0)));
+        player2.addRule(new Rule(new KeyTrigger(KeyCode.SHIFT), new Spawn(player2,bullet,70.0)));
+        player2.addRule(new Rule(new KeyTrigger(KeyCode.SHIFT), new Spawn(player2,bullet,110.0)));
+        
+        player1.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new Spawn(player1,bullet,70.0)));
+        player1.addRule(new Rule(new KeyTrigger(KeyCode.SPACE), new Spawn(player1,bullet,110.0)));
+
 
         
         bullet.addRule(new Rule(new TopCollision(bullet,enemy), new Destroy(bullet)));
