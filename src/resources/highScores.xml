@@ -3,6 +3,24 @@
   <obs/>
   <myScores>
     <entry>
+      <string>FlappyWithGunSound.xml</string>
+      <tree-map>
+        <entry>
+          <string>Mateo</string>
+          <int>30</int>
+        </entry>
+      </tree-map>
+    </entry>
+    <entry>
+      <string>newFlappy.xml</string>
+      <tree-map>
+        <entry>
+          <string>Blythe</string>
+          <int>20</int>
+        </entry>
+      </tree-map>
+    </entry>
+    <entry>
       <string>michaelMario</string>
       <tree-map>
         <entry>

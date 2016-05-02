@@ -203,9 +203,10 @@ public class GameController extends Observable implements Observer, IGameControl
 			}
 		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException
 				| InvocationTargetException | NoSuchMethodException e1) {
-			Object[] args = {"showGameError", e1};
-			setChanged();
-			notifyObservers(Arrays.asList(args));
+			e1.printStackTrace();
+//			Object[] args = {"showGameError", e1};
+//			setChanged();
+//			notifyObservers(Arrays.asList(args));
 		}
 	}
 
