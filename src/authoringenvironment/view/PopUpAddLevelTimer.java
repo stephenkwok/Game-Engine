@@ -143,10 +143,10 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	}
 	
 	/**
-	 * 
-	 * @param minutesBox
-	 * @param secondsBox
-	 * @return
+	 * Convert textfield entered minutes and seconds to ticks.
+	 * @param minutesBox: textfield to enter minutes into.
+	 * @param secondsBox: textfield to enter seconds into.
+	 * @return # of ticks.
 	 */
 	private int convertToTicks(TextField minutesBox, TextField secondsBox) {
 		Integer minutes = getValueFromTextField(minutesBox);
@@ -154,6 +154,11 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		return (minutes * 60 + seconds) * TICKS_PER_SECOND;
 	}
 	
+	/**
+	 * Get a value from a textfield.
+	 * @param text: text to interpret.
+	 * @return value or 0 if empty.
+	 */
 	private int getValueFromTextField(TextField text) {
 		if (text.getText().equals(EMPTY)) {
 			return 0;
@@ -162,11 +167,19 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		}
 	}
 	
+	/**
+	 * Initialize the time attribute for the level.
+	 * @param initialValue: initial time value.
+	 */
 	private void initializeAttribute(int initialValue) {
 		Attribute attribute = new Attribute(AttributeType.TIME, initialValue, myLevel);
 		myLevel.addAttribute(attribute);
 	}
 	
+	/**
+	 * Create the attribute reached rule for the level.
+	 * @param triggerValue: time at which to trigger the rule.
+	 */
 	private void createAttributeReachedRule(int triggerValue) {
 		ITrigger trigger = new AttributeReached(myLevel, AttributeType.TIME, triggerValue);
 		Action action = ((ILevelActionCreator) myActionCreator).createAction();
@@ -174,6 +187,11 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		this.closePopUp();
 	}
 	
+	/**
+	 * Create change attribute rule for the level's time attribute.
+	 * @param initialValue: initial time value.
+	 * @param triggerValue: time at which to trigger rule.
+	 */
 	private void createChangeAttributeRule(int initialValue, int triggerValue) {
 		int change = determineChange(initialValue, triggerValue);
 		ITrigger trigger = new TickTrigger(ONE);
@@ -181,6 +199,9 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		myLevel.addRule(new Rule(trigger, action));
 	}
 	
+	/**
+	 * Create the level timer.
+	 */
 	private void createLevelTimer() {
 		int initialTicks = convertToTicks(myInitialMinutes, myInitialSeconds);
 		int triggerTicks = convertToTicks(myTriggerMinutes, myTriggerSeconds);
@@ -189,6 +210,12 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		createChangeAttributeRule(initialTicks, triggerTicks);
 	}
 	
+	/**
+	 * Determine whether to increase or decrease time.
+	 * @param initialValue: starting time.
+	 * @param triggerValue: trigger time.
+	 * @return -1 if initial value is less than trigger; +1 if initial value is more than trigger.
+	 */
 	private int determineChange(int initialValue, int triggerValue) {
 		if (initialValue > triggerValue) {
 			return -1;
@@ -197,6 +224,10 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		}
 	}
 	
+	/**
+	 * Display the action parameters.
+	 * @param name: name of action.
+	 */
 	private void displayActionParameters(String name) {
 		myActionCreator = null;
 		Class<?> creator;
