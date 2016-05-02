@@ -17,6 +17,10 @@ public class LabelMainScreenWelcome extends Label {
 
 	private static final double LABEL_PADDING = 10.0;
 
+	/**
+	 * Creates a Label displaying a message welcoming the author to the Authoring Environment
+	 * @param welcomeMessage: the message to be displayed
+	 */
 	public LabelMainScreenWelcome(String welcomeMessage) {
 		this.setText(welcomeMessage);
 		this.setWrapText(true);

@@ -42,6 +42,10 @@ public class GameAttributesDisplay implements IEditingElement {
 	private VBox editingEnvironmentContainer, gameDescriptionEditor;
 	private ScrollPane myScrollPane;
 
+	/**
+	 * Creates the GUI element allowing the author to change various attributes of the Game
+	 * @param gameInfo: the GameInfo object edited by the GameAttributesDisplay
+	 */
 	public GameAttributesDisplay(GameInfo gameInfo) {
 		this.myGameInfo = gameInfo;
 		this.myResources = ResourceBundle.getBundle(RESOURCE_BUNDLE_KEY);
