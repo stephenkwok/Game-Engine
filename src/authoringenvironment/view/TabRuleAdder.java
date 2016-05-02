@@ -21,7 +21,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-public class TabRuleAdder extends TabParent implements Observer{
+public class TabRuleAdder extends TabParent implements Observer {
 	private VBox myContainer;
 	private static final String TRIGGERS = "Triggers";
 	private static final String ACTIONS = "Actions";
@@ -51,8 +51,10 @@ public class TabRuleAdder extends TabParent implements Observer{
 	private Level myLevel;
 	private LevelEditingEnvironment myLevelEditor;
 	private TabLevelRuleEditor myRuleEditor;
+	private AlertGenerator myAlertGenerator;
 
-	public TabRuleAdder(ResourceBundle myResources, String tabText, LevelEditingEnvironment environment, TabLevelRuleEditor ruleEditor) {
+	public TabRuleAdder(ResourceBundle myResources, String tabText, LevelEditingEnvironment environment,
+			TabLevelRuleEditor ruleEditor) {
 		super(myResources, tabText);
 		myContainer = new VBox(PADDING);
 		myContainer.setPadding(new Insets(PADDING));
@@ -62,26 +64,31 @@ public class TabRuleAdder extends TabParent implements Observer{
 		myButton = new Button(CREATE_RULE);
 		myButton.setOnAction(e -> createAndAddRule());
 		init();
-		myContainer.getChildren().add(myButton);	
+		myContainer.getChildren().add(myButton);
 		myRuleEditor = ruleEditor;
+		myAlertGenerator = new AlertGenerator();
 	}
 
 	private void init() {
 		initTriggerContainer();
 		initActionContainer();
 		myContainer.getChildren().addAll(myTriggerContainer, myActionContainer);
-	} 
+	}
 
 	private void initTriggerContainer() {
 		myTriggerContainer = new VBox(PADDING);
-		myTriggerComboBox = new ComboBoxLevelTriggerAndAction(getResources().getString(TRIGGERS + LABEL), getResources().getString(TRIGGERS + PROMPT), Arrays.asList(getResources().getString(TRIGGERS).split(DELIMITER)));
+		myTriggerComboBox = new ComboBoxLevelTriggerAndAction(getResources().getString(TRIGGERS + LABEL),
+				getResources().getString(TRIGGERS + PROMPT),
+				Arrays.asList(getResources().getString(TRIGGERS).split(DELIMITER)));
 		myTriggerComboBox.addObserver(this);
 		myTriggerContainer.getChildren().add(myTriggerComboBox.createNode());
 	}
 
 	private void initActionContainer() {
 		myActionContainer = new VBox(PADDING);
-		myActionComboBox = new ComboBoxLevelTriggerAndAction(getResources().getString(ACTIONS + LABEL), getResources().getString(ACTIONS + PROMPT), Arrays.asList(getResources().getString(ACTIONS).split(DELIMITER)));
+		myActionComboBox = new ComboBoxLevelTriggerAndAction(getResources().getString(ACTIONS + LABEL),
+				getResources().getString(ACTIONS + PROMPT),
+				Arrays.asList(getResources().getString(ACTIONS).split(DELIMITER)));
 		myActionComboBox.addObserver(this);
 		myActionContainer.getChildren().add(myActionComboBox.createNode());
 	}
@@ -112,58 +119,41 @@ public class TabRuleAdder extends TabParent implements Observer{
 			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		return myContainer;
 	}
-	
+
 	private void displayTriggerParameters(String name) {
 		myTriggerCreator = displayParameters(name, name + TRIGGER_CREATOR);
 		myTriggerContainer.getChildren().add(myTriggerCreator);
 	}
-	
 
 	private void displayActionParameters(String name) {
 		myActionCreator = displayParameters(name, name + ACTION_CREATOR);
 		myActionContainer.getChildren().add(myActionCreator);
 	}
-	
+
 	private VBox displayParameters(String name, String className) {
 		Class<?> creator;
 		try {
 			creator = Class.forName(getResources().getString(DIRECTORY) + getResources().getString(className));
 			Constructor<?> constructor;
 			if (Arrays.asList(getResources().getString(ATTRIBUTE_BEHAVIORS).split(DELIMITER)).contains(name)) {
-				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class, IEditingEnvironment.class, String.class);
+				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class,
+						IEditingEnvironment.class, String.class);
 				return (VBox) constructor.newInstance(getResources(), myLevel, myLevelEditor, name + LABEL_TEXT);
 			} else if (name.equals(CREATE_ACTOR)) {
-				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class, IEditingEnvironment.class);
+				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class,
+						IEditingEnvironment.class);
 				return (VBox) constructor.newInstance(getResources(), myLevel, myLevelEditor);
 			} else if ((Arrays.asList(getResources().getString(NEEDS_RESOURCE).split(DELIMITER)).contains(name))) {
 				constructor = creator.getConstructor(ResourceBundle.class, IGameElement.class);
 				return (VBox) constructor.newInstance(getResources(), myLevel);
-			} else if ((Arrays.asList(getResources().getString(STANDARD_ACTION).split(DELIMITER)).contains(name))){
+			} else if ((Arrays.asList(getResources().getString(STANDARD_ACTION).split(DELIMITER)).contains(name))) {
 				constructor = creator.getConstructor(IGameElement.class);
 				return (VBox) constructor.newInstance(myLevel);
 			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			myAlertGenerator.generateAlert(e.getClass().toString());
+		} 
 		return null;
 	}
 

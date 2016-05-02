@@ -50,6 +50,7 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	private ComboBoxLevelTriggerAndAction myAction;
 	private VBox myActionCreator;
 	private Level myLevel;
+	private AlertGenerator myAlertGenerator;
 	
 	/**
 	 * Constructor for a PopUpAddLevelTimer
@@ -61,9 +62,10 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 		super(popUpWidth, popUpHeight);
 		myResources = ResourceBundle.getBundle(RESOURCES);
 		myLevel = level;
+		this.myAlertGenerator = new AlertGenerator();
 		init();
 	}
-	
+
 	/**
 	 * Initialize pop up.
 	 */
@@ -111,15 +113,15 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	private void addTimeBox(String labelKey, TextField minutesTextField, TextField secondsTextField) {
 		VBox container = new VBox(PADDING);
 		Label label = new Label(myResources.getString(labelKey));
-		
+
 		HBox minutesContainer = new HBox(PADDING);
 		Label minutesLabel = new Label(MINUTES);
 		minutesContainer.getChildren().addAll(minutesLabel, minutesTextField);
-		
+
 		HBox secondsContainer = new HBox(PADDING);
 		Label secondsLabel = new Label(SECONDS);
 		secondsContainer.getChildren().addAll(secondsLabel, secondsTextField);
-		
+
 		container.getChildren().addAll(label, minutesContainer, secondsContainer);
 		getContainer().getChildren().add(container);
 	}
@@ -128,7 +130,8 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	 * Add a combobox to select action.
 	 */
 	private void addActionBox() {
-		myAction = new ComboBoxLevelTriggerAndAction(myResources.getString(ACTION + PROMPT), ACTION_PROMPT, Arrays.asList(myResources.getString(ACTION + OPTIONS).split(DELIMITER)));
+		myAction = new ComboBoxLevelTriggerAndAction(myResources.getString(ACTION + PROMPT), ACTION_PROMPT,
+				Arrays.asList(myResources.getString(ACTION + OPTIONS).split(DELIMITER)));
 		myAction.addObserver(this);
 		getContainer().getChildren().add(myAction.createNode());
 	}
@@ -235,28 +238,10 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 			creator = Class.forName(myResources.getString(DIRECTORY) + myResources.getString(name));
 			Constructor<?> constructor = creator.getConstructor(IGameElement.class);
 			myActionCreator = (VBox) constructor.newInstance(myLevel);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			myAlertGenerator.generateAlert(e.getClass().toString());
+		} 
 	}
-	
+
 }

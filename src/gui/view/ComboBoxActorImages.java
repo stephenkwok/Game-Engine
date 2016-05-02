@@ -4,6 +4,7 @@ import java.io.File;
 
 import authoringenvironment.controller.ActorEditingEnvironment;
 import authoringenvironment.model.IAuthoringActor;
+import authoringenvironment.view.AlertGenerator;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -13,10 +14,12 @@ import javafx.scene.layout.HBox;
 public class ComboBoxActorImages extends ComboBoxImageCell {
 	ActorEditingEnvironment aEE;
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
+	private AlertGenerator myAlertGenerator;
 
 	public ComboBoxActorImages(String promptText, String imageResource, ActorEditingEnvironment aEE) {
 		super(promptText, imageResource, STANDARD_IMAGE_HEIGHT);
 		this.aEE = aEE;
+		this.myAlertGenerator = new AlertGenerator();
 		fillImageNames();
 		fillImageMap();
 	}
@@ -29,7 +32,7 @@ public class ComboBoxActorImages extends ComboBoxImageCell {
 				aEE.setActorImage(new ImageView(image), getComboBox().getValue());
 				notifyObservers((IAuthoringActor) aEE.getEditable());
 			} catch (Exception e) {
-				e.printStackTrace();
+				myAlertGenerator.generateAlert(e.getClass().toString());
 			}
 		});
 	}
@@ -54,6 +57,14 @@ public class ComboBoxActorImages extends ComboBoxImageCell {
 
 	@Override
 	protected void updateValueBasedOnEditable() {
+	}
+	
+	/**
+	 * 
+	 * @return the Actor Editing Enviroment
+	 */
+	public ActorEditingEnvironment getActorEditingEnvironment() {
+		return aEE;
 	}
 
 }

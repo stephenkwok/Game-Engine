@@ -21,10 +21,12 @@ abstract class TabParent {
 	private ResourceBundle myResources;
 	private List<String> fileNames;
 	private ScrollPane sp;
+	private AlertGenerator myAlertGenerator;
 
 	public TabParent(ResourceBundle myResources, String tabText) {
 		this.tabText = tabText;
 		this.myResources = myResources;
+		this.myAlertGenerator = new AlertGenerator();
 	}
 
 	/**
@@ -54,8 +56,7 @@ abstract class TabParent {
 			tab.setContent(sp);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			myAlertGenerator.generateAlert(e.getClass().toString());
 		}
 		return tab;
 	}
@@ -69,8 +70,7 @@ abstract class TabParent {
 			tab.setContent(sp);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			myAlertGenerator.generateAlert(e.getClass().toString());
 		}
 	}
 
