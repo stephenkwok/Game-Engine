@@ -3,20 +3,15 @@
   <obs/>
   <myScores>
     <entry>
-      <string>FlappyWithGunSound.xml</string>
+      <string>mario14.xml</string>
       <tree-map>
         <entry>
-          <string>Mateo</string>
-          <int>30</int>
+          <string>carine</string>
+          <int>4</int>
         </entry>
-      </tree-map>
-    </entry>
-    <entry>
-      <string>newFlappy.xml</string>
-      <tree-map>
         <entry>
-          <string>Blythe</string>
-          <int>20</int>
+          <string>colette</string>
+          <int>15</int>
         </entry>
       </tree-map>
     </entry>
