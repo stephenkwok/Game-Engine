@@ -92,7 +92,6 @@ public class BaseScreenController extends BranchScreenController {
 			setUpHUDScreen();
 			
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-			e.printStackTrace();
 			myScreen.showError(e.getMessage());
 		}
 		toggleUnPause();
@@ -161,6 +160,9 @@ public class BaseScreenController extends BranchScreenController {
 		this.getClass().getDeclaredMethod(method, parameterTypes).invoke(this, parameters);
 	}
 	
+	public void showGameError(Exception e) {
+		this.myScreen.showError(e.getMessage());
+	}
 	
 	
 	

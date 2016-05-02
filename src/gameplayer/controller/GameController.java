@@ -203,8 +203,9 @@ public class GameController extends Observable implements Observer, IGameControl
 			}
 		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException
 				| InvocationTargetException | NoSuchMethodException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			Object[] args = {"showGameError", e1};
+			setChanged();
+			notifyObservers(Arrays.asList(args));
 		}
 	}
 
@@ -262,12 +263,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void updateCamera() {
 		if (model.getCurrentLevel().getMainCharacter() != null) {
 			if (model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))) {
-				try {
-					view.changeCamera(model.getCurrentLevel().getMainCharacters().get(0).getX(), 0);
-				} catch (Exception e) {
-					model.stopGame();
-					e.printStackTrace();
-				}
+				view.changeCamera(model.getCurrentLevel().getMainCharacters().get(0).getX(), 0);
 			} else {
 				view.changeCamera(0, model.getCurrentLevel().getMainCharacters().get(0).getY());
 			}
