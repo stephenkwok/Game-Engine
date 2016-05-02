@@ -36,11 +36,8 @@ public class CollisionBehavior extends SelectActorBehavior {
 	public Node createNode() {
 		HBox hbox = (HBox) super.createNode();
 		myCheckBox = (CheckBox) new CheckBoxObject(APPLY_ONCE,CHECK_WIDTH).createNode();
-<<<<<<< HEAD
 //		oneTime = ((CollisionTrigger)getMyRule().getMyTrigger()).isOneTime();
-=======
-		//oneTime = ((CollisionTrigger)getMyRule().getMyTrigger()).isOneTime();
->>>>>>> 471aee855786c2276656d4a0a9e6d7a6ab06c3fe
+
 		myCheckBox.setOnAction(e->{
 			oneTime = myCheckBox.isSelected();
 		});

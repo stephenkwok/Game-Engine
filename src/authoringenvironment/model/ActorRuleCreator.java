@@ -148,6 +148,7 @@ public class ActorRuleCreator {
 		if(aEE.shouldApplyPhysics()){
 			Rule toAdd = new Rule(new TickTrigger(), new ApplyPhysics((Actor) aEE.getEditable()));
 			((IAuthoringActor) aEE.getEditable()).addRule(toAdd);
+			System.out.println(((IAuthoringActor) aEE.getEditable()).getRules());
 		}
 	}
 	
