@@ -106,7 +106,7 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 		myPhysicsEngine = new PhysicsEngine();
 		myCollisionDetector = new CollisionDetection(myPhysicsEngine);
 		initTimeline();
-		// initSoundEngine();
+		initSoundEngine();
 	}
 
 	/**
@@ -440,7 +440,10 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 	public List<Integer> getScores() {
 		List<Integer> scores = new ArrayList<>();
 		for (IPlayActor actor: getCurrentLevel().getMainCharacters()) {
-			scores.add(actor.getAttribute(AttributeType.POINTS).getMyValue());
+			try {
+				scores.add(actor.getAttribute(AttributeType.POINTS).getMyValue());
+			} catch (Exception e) {
+			}
 		}
 		return scores;
 	}
