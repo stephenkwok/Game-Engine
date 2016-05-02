@@ -18,7 +18,7 @@ import voogasalad.util.hud.source.AbstractHUDScreen;
  * This class provides for a private interface to create a base screen view that
  * will hold the other view components of the gaming program.
  * 
- * @author Carine, Michael
+ * @author cmt57, mdf15
  *
  */
 public class BaseScreen extends Screen implements Observer, IBaseScreen {
@@ -50,11 +50,14 @@ public class BaseScreen extends Screen implements Observer, IBaseScreen {
 		initialize();
 	}
 
+	
 	public void setGameScreen(IGameScreen iGameScreen) {
 		this.myGameScreen = iGameScreen;
 		this.myPane.setCenter(myGameScreen.getScene());
 	}
 
+	
+	
 	public void setHUDScreen(AbstractHUDScreen screen) {
 		this.hud = screen;
 		IGUIElement hudPane = getFactory().createNewGUIObject("hudPane");
@@ -69,9 +72,7 @@ public class BaseScreen extends Screen implements Observer, IBaseScreen {
 		notifyObservers(arg);
 	}
 
-	/**
-	 * Displays the proper alert sequences for ending and saving games
-	 */
+	
 	public void switchAlert() {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, getResources().getString("SwitchConfirmation"),
 				ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);

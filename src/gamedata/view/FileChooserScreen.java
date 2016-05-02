@@ -11,10 +11,20 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.HBox;
 
+/**
+ * This screen acts as an intermediary between program functions that equips the user with the opportunity to choose a new
+ * game for different purposes. It is comprised of a simpel toolbar with a returnToSplash button and a combo box that displays
+ * existing games available in the directory
+ * @author cmt57, mdf15
+ *
+ */
 public class FileChooserScreen extends Screen implements Observer {
 
 	private static final String CHOOSER_RESOURCE = "fcGUI";
 	private static final String FC_BUTTONS = "FCButtons";
+	private static final int X_OFFSET = 100;
+	private static final int BOX_X = SCREEN_WIDTH/2;
+	private static final int BOX_Y = SCREEN_HEIGHT/2;
 
 	public FileChooserScreen() {
 		super();
@@ -28,12 +38,15 @@ public class FileChooserScreen extends Screen implements Observer {
 		getRoot().getChildren().add(addToolbar(FC_BUTTONS));
 	}
 
+	/**
+	 * Instantiates and adds the combo box to the screen
+	 */
 	private void addButton() {
 		ComboBoxGame fileSelector = new ComboBoxGame(getResources().getString("Prompt"), getResources().getString("Directory"));
 		fileSelector.addNodeObserver(this);
 		HBox myBox = (HBox) fileSelector.createNode();
-		myBox.setLayoutX(SCREEN_WIDTH/2 - 100);
-		myBox.setLayoutY(SCREEN_HEIGHT/2);
+		myBox.setLayoutX(BOX_X - X_OFFSET);
+		myBox.setLayoutY(BOX_Y);
 		getRoot().getChildren().add(myBox);
 		//TODO fix magic strings and constants!
 	}
@@ -46,7 +59,10 @@ public class FileChooserScreen extends Screen implements Observer {
 		notifyObservers(arg);
 	}
 
-	//TODO should this alert happen here?? -michael wondering things
+	/**
+	 * Displays an alert to the user if an error occurs which prevents the user's function from happening. 
+	 * @param type
+	 */
 	public void alert(String type) {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
 		alert.setContentText(getResources().getString(type));
