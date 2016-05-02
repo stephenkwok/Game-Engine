@@ -22,10 +22,24 @@ public class PhysicsEngine {
 	private double maxVelo = 7;
 	private double bounce = 2.5; // purely aesthetic
 
+	/**
+	 * Basic method for the physics engine
+	 * Applies a force to a vector
+	 * 
+	 * @param vector
+	 * @param force
+	 * @return
+	 */
 	public double applyForce(double vector, double force) {
 		return (vector + force);
 	}
 
+	/**
+	 * This is the method called by ApplyPhysics
+	 * Applies gravity and friction.
+	 * Also bounds the Actor's x/y positions
+	 * @param a1
+	 */
 	public void tick(IPlayActor a1) {
 		nextXVelo = applyForce(a1.getVeloX(), friction * a1.getVeloX());
 		nextXPos = applyForce(a1.getX(), nextXVelo);
@@ -40,6 +54,11 @@ public class PhysicsEngine {
 		a1.setY(bound(nextYPos));
 	}
 	
+	/**
+	 * This action applies a negative or positive horizontal force on an actor's velocity
+	 * @param a1
+	 * @param right
+	 */
 	private void moveLeftRight(IPlayActor a1, boolean right) {
 		double localHorizForce = horizontalForce * (right ? 1 : -1);
 		nextXVelo = (applyForce(a1.getVeloX(), localHorizForce));
@@ -55,6 +74,12 @@ public class PhysicsEngine {
 		moveLeftRight(a1, false);
 	}
 	
+	/**
+	 * This action applies a negative or positive vertical force on an actor's velocity. 
+	 * 
+	 * @param a1
+	 * @param up
+	 */
 	private void moveUpDown(IPlayActor a1, boolean up) {
 		double localVerticalForce = verticalForce * (up ? 1 : -1);
 		nextYVelo = applyForce(a1.getVeloY(), localVerticalForce);
@@ -70,6 +95,11 @@ public class PhysicsEngine {
 		moveUpDown(a1, false);
 	}
 	
+	/**
+	 * Determines new x and y velocity and positions based on the actor's heading. 
+	 * @param a1
+	 * @param forward
+	 */
 	public void moveForwardBack(IPlayActor a1, boolean forward) {
 		double localHorizForce = horizontalForce * (forward ? 1 : -1);
 		double localVerticalForce = verticalForce * (forward ? 1 : -1);
@@ -119,6 +149,12 @@ public class PhysicsEngine {
 		glideUpDown(a1, offset, false);
 	}
 	
+	/**
+	 * Moves actor in direction of its heading by an offset. 
+	 * 
+	 * @param a1
+	 * @param offset
+	 */
 	public void glideForward(IPlayActor a1, double offset) {
 		a1.setX(applyForce(a1.getX(),offset*(Math.cos(Math.toRadians(a1.getHeading())))));
 		a1.setVeloX(offset*(Math.cos(Math.toRadians(a1.getHeading()))));
@@ -138,16 +174,11 @@ public class PhysicsEngine {
 		if(Math.abs(velo)>maxVelo){return maxVelo;} return velo;}
 	
 	public void staticVerticalCollision(IPlayActor a1){
-
 		setNextVals(a1,a1.getX(),a1.getY()-a1.getVeloY(),a1.getVeloX(), 0 );
-		
 	}
 
 	public void staticHorizontalCollision(IPlayActor a1) {
-
 		setNextVals(a1, a1.getX()-(a1.getVeloX()) , a1.getY(), 0 , a1.getVeloY());
-
-		//setNextVals(a1, a1.getX()-(a1.getVeloX() * bounce) , a1.getY() , 0 , a1.getVeloY()-gravity );
 	}
 
 	public void elasticHorizontalCollision(IPlayActor a1) {
@@ -158,6 +189,7 @@ public class PhysicsEngine {
 
 		}
 	}
+
 
 	public void elasticVerticalCollision(IPlayActor a1) {
 		if(a1.getVeloY()!=0){
@@ -192,6 +224,15 @@ public class PhysicsEngine {
 		this.bounce = bounce;
 	}
 	
+	/**
+	 * Sets new NextVals
+	 * 
+	 * @param a1
+	 * @param x
+	 * @param y
+	 * @param xVelo
+	 * @param yVelo
+	 */
 	public void setNextVals(IPlayActor a1, double x, double y, double xVelo, double yVelo){
 		if(!a1.getNextValues().hadCollision()){
 			a1.getNextValues().setNextXPos(x);

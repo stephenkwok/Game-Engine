@@ -2,6 +2,10 @@ package gameengine.model.Actions;
 
 import gameengine.model.Actor;
 
+/**
+ * This action glides the actor to the left by a given offset.
+ * @author justinbergkamp
+ */
 public class GlideLeft extends GlidingAction {
 
 	public GlideLeft(Actor assignedActor, Double offset) {
