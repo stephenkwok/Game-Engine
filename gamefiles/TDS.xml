@@ -32,6 +32,7 @@
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.Spawn">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <ZERO>0.0</ZERO>
                       <mySpawnedActor class="gameengine.model.Actor">
                         <changed>false</changed>
                         <obs/>
@@ -169,6 +170,7 @@
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </mySpawnedActor>
+                      <spawnAngle>45.0</spawnAngle>
                     </myAction>
                   </gameengine.model.Rule>
                 </list>
@@ -348,6 +350,7 @@
       <myMainCharacters/>
       <soundtrack>Ink.mp3</soundtrack>
       <myGarbageCollectors/>
+      <toBeDeleted>false</toBeDeleted>
     </gameengine.controller.Level>
   </levels>
   <info>
