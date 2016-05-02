@@ -19,6 +19,11 @@ import javafx.scene.layout.*;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
+/**
+ * Level Preview for Editing
+ * @author amyzhao
+ *
+ */
 public class LevelPreviewEditing implements IGUI, Observer {
 	private static final Color DEFAULT_COLOR = Color.CORNFLOWERBLUE;
 	private static final String VERTICAL = "Vertically";

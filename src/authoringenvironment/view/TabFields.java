@@ -56,6 +56,10 @@ public class TabFields extends TabParent {
 		addElements();
 	}
 
+	/**
+	 * Sets the editing environment that's observing this tab.
+	 * @param observer: editing environment.
+	 */
 	public void setObserver(IEditingEnvironment observer) {
 		for (int i = 0; i < myEditingElements.size(); i++) {
 			((EditingElementParent) myEditingElements.get(i)).addObserver(observer);
@@ -107,7 +111,10 @@ public class TabFields extends TabParent {
 		}
 	}
 
-	
+	/**
+	 * Add element to the container.
+	 * @param element: element to add.
+	 */
 	public void addElement(IGUIElement element) {
 		myContent.getChildren().add(element.createNode());
 	}

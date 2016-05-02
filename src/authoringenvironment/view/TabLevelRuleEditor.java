@@ -17,6 +17,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Tab to remove level rules.
+ * @author amyzhao
+ *
+ */
 public class TabLevelRuleEditor extends TabParent {
 	private static final int CHECK_BOX_WIDTH = 450;
 	private static final int PADDING = 10;
@@ -29,12 +34,21 @@ public class TabLevelRuleEditor extends TabParent {
 	private Map<CheckBoxObject, Rule> myRuleMap;
 	private Button myDeleteButton;
 	
+	/**
+	 * Constructor for TabLevelRuleEditor
+	 * @param myResources: resource bundle to use.
+	 * @param tabText: title of tab.
+	 * @param level: level to edit.
+	 */
 	public TabLevelRuleEditor(ResourceBundle myResources, String tabText, Level level) {
 		super(myResources, tabText);
 		myLevel = level;
 		init();
 	}
 	
+	/**
+	 * Initialize the containers.
+	 */
 	private void init() {
 		myContainer = new VBox(PADDING);
 		myContainer.setAlignment(Pos.TOP_CENTER);
@@ -49,6 +63,9 @@ public class TabLevelRuleEditor extends TabParent {
 		updateRules();
 	}
 	
+	/**
+	 * Update the rules shown in the vbox via checkboxes.
+	 */
 	public void updateRules() {
 		newRules.clear();
 		for (String key: myLevel.getRules().keySet()) {
@@ -62,6 +79,9 @@ public class TabLevelRuleEditor extends TabParent {
 		updateCheckBoxes();
 	}
 	
+	/**
+	 * Update the checkboxes shown in the vbox.
+	 */
 	public void updateCheckBoxes() {
 		for (int i = 0; i < newRules.size(); i++) {
 			CheckBoxObject checkBox = new CheckBoxObject(newRules.get(i).toString(), CHECK_BOX_WIDTH);
@@ -70,6 +90,9 @@ public class TabLevelRuleEditor extends TabParent {
 		}
 	}
 	
+	/**
+	 * Delete the checked off rules.
+	 */
 	private void deleteSelectedRules() {
 		List<CheckBoxObject> toRemove = new ArrayList<>();
 		for (CheckBoxObject checkBox: myRuleMap.keySet()) {
@@ -88,6 +111,9 @@ public class TabLevelRuleEditor extends TabParent {
 		updateCheckBoxes();
 	}
 	
+	/**
+	 * Returns container.
+	 */
 	@Override
 	Node getContent()
 			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
