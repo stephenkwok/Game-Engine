@@ -1,11 +1,15 @@
 package gui.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import authoringenvironment.controller.ActorEditingEnvironment;
 import authoringenvironment.model.*;
-import gameengine.model.IRule;
+import gameengine.model.Actor;
+import gameengine.model.Rule;
+import gameengine.model.Actions.ApplyPhysics;
 import javafx.geometry.*;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
@@ -68,7 +72,16 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 	 */
 	@Override
 	public void setEditableElement(IEditableGameElement element) {
-		myEditableElement = element;		
+		myEditableElement = element;
+		Actor thisActor = (Actor) myEditableElement;
+		if (thisActor.getRules().containsKey("Tick")) {
+			List<Rule> tickRules = thisActor.getRules().get("Tick");
+			List<Class<?>> tickActionsClasses = new ArrayList<>();
+			tickRules.forEach(rule -> tickActionsClasses.add(rule.getMyAction().getClass()));
+			if (tickActionsClasses.contains(ApplyPhysics.class)) {
+				myCheckBox.setSelected(true);
+			}
+		}
 	}
 
 	/**
@@ -86,7 +99,11 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 	}
 	
 	public boolean isSelected(){
-		return this.isSelected;
+		return myCheckBox.isSelected();
+	}
+
+	public void updateSelection() {
+		
 	}
 
 }
