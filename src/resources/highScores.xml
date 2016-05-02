@@ -3,80 +3,11 @@
   <obs/>
   <myScores>
     <entry>
-      <string>FlappyWithGunSound.xml</string>
-      <tree-map>
-        <entry>
-          <string>Agatha</string>
-          <int>20</int>
-        </entry>
-        <entry>
-          <string>Amy</string>
-          <int>50</int>
-        </entry>
-      </tree-map>
-    </entry>
-    <entry>
-      <string>gamefiles/loaders/test2_loader.xml</string>
-      <tree-map>
-        <entry>
-          <string>Luigi</string>
-          <int>38</int>
-        </entry>
-        <entry>
-          <string>Maria</string>
-          <int>5</int>
-        </entry>
-        <entry>
-          <string>Mario</string>
-          <int>5</int>
-        </entry>
-      </tree-map>
-    </entry>
-    <entry>
-<<<<<<< HEAD
-      <string>/Users/michaelfigueiras/Documents/workspace/voogasalad_LoopsGoatCheeseSalad/gamefiles/loaders/SSSSgame</string>
+      <string>michaelMario</string>
       <tree-map>
         <entry>
           <string>michael</string>
-          <int>3</int>
-        </entry>
-      </tree-map>
-=======
-      <string>/Users/blakekaplan/Documents/308 Workspace/voogasalad_LoopsGoatCheeseSalad/gamefiles/loaders/FlappyWithGunSound_loader.xml</string>
-      <tree-map/>
->>>>>>> a62fd5a9a08a41f00bd3f3b81f7078937bd896e5
-    </entry>
-    <entry>
-      <string>gamefiles/loaders/FlappyBird_loader.xml</string>
-      <tree-map>
-        <entry>
-          <string>b0$$</string>
-          <int>1895</int>
-        </entry>
-        <entry>
-          <string>michael</string>
-          <int>55</int>
-        </entry>
-        <entry>
-          <string>michael figueiras</string>
-          <int>75</int>
-        </entry>
-        <entry>
-          <string>michaelf</string>
-          <int>205</int>
-        </entry>
-      </tree-map>
-    </entry>
-    <entry>
-      <string>/Users/blakekaplan/Documents/308 Workspace/voogasalad_LoopsGoatCheeseSalad/gamefiles/loaders/FlappyWithSound_loader.xml</string>
-      <tree-map>
-        <entry>
-          <string>Blake</string>
-          <int>150</int>
-        </entry>
-        <entry>
-          <string>Flappy</string>
-          <int>10</int>
+          <int>193</int>
         </entry>
       </tree-map>
     </entry>

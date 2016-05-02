@@ -116,7 +116,7 @@ public class FileChooserController extends BranchScreenController {
 	}
 	
 	/**
-	 * Determines the current function of the controller, in other words, what the user intends to do with this game
+	 * Determines the current function of the controller, in other words, what the user intends to do with this gameg
 	 * @return
 	 */
 	private String getType() {
