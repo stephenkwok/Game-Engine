@@ -2,6 +2,18 @@ package gameengine.model.Actions;
 
 import gameengine.model.Actor;
 
+
+
+
+/**
+ * This action is an abstract class that contains logic and a uniform 
+ * constructor for all gliding type actions. This action takes in a offset
+ * value, which represents the number of pixels that the actor glides each
+ * time the action is called. 
+ * 
+ * @author justinbergkamp
+ *
+ */
 public abstract class GlidingAction extends ActorAction {
 
 	Double glideOffset;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><gameengine.controller.Game>
   <changed>false</changed>
   <obs/>
-  <initialGameFile>/Users/yitaek/Desktop/Amy/CS308/Workspace/voogasalad_LoopsGoatCheeseSalad/gamefiles/loaders/mazeGAE_loader.xml</initialGameFile>
+  <initialGameFile>gamefiles/loaders/mazeGAE_loader.xml</initialGameFile>
   <levels>
     <gameengine.controller.Level>
       <changed>false</changed>

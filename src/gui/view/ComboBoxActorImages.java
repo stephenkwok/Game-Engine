@@ -37,6 +37,9 @@ public class ComboBoxActorImages extends ComboBoxImageCell {
 		});
 	}
 
+	/**
+	 * Fill the options with image file names.
+	 */
 	public void fillImageNames() {
 		File imageDir = new File(selectionResource);
 		for (File imageFile : imageDir.listFiles()) {

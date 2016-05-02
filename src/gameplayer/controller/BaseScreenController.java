@@ -161,6 +161,7 @@ public class BaseScreenController extends BranchScreenController {
 	}
 	
 	public void showGameError(Exception e) {
+		e.printStackTrace();
 		this.myScreen.showError(e.getMessage());
 	}
 	
