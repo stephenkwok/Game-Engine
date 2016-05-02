@@ -4,33 +4,15 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-import authoringenvironment.model.ActorRuleCreator;
-import authoringenvironment.model.IAuthoringActor;
-import authoringenvironment.model.IEditableGameElement;
-import authoringenvironment.model.IEditingEnvironment;
-import authoringenvironment.view.ActorImageViewer;
-import authoringenvironment.view.GUILibrary;
-import authoringenvironment.view.ImageviewActorIcon;
-import authoringenvironment.view.TabFields;
-import gameengine.model.Actor;
-import gameengine.model.IRule;
+import authoringenvironment.model.*;
+import authoringenvironment.view.*;
+import gameengine.model.*;
 import gui.view.CheckBoxApplyPhysics;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.geometry.*;
+import javafx.scene.control.*;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -130,7 +112,11 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		vbox.setPrefWidth(LEFT_PANE_WIDTH);
 		myRoot.setLeft(vbox);
 	}
-
+	
+	/**
+	 * Sets up actor inspector with fields that the user can edit to modify Actor characteristics
+	 * @return
+	 */
 	private Tab actorCharacteristics() {
 		characteristics = new TabFields(myResources, ACTOR_CHARACTERISTICS, ACTOR_CHARACTERISTICS_RESOURCE, myActor);
 		characteristics.setObserver(this);
@@ -138,6 +124,10 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		return characteristics.getTab();
 	}
 
+	/**
+	 * Sets up actor inspector with fields that the user can edit to modify Actor attributes
+	 * @return
+	 */
 	private Tab actorAttributes() {
 		attributes = new TabFields(myResources, ACTOR_ATTRIBUTES, ACTOR_ATTRIBUTES_RESOURCE, myActor);
 		attributes.setObserver(this);
@@ -181,7 +171,11 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		});
 		return toReturn;
 	}
-
+	
+	/**
+	 * Returns button to allow users to set rules in Actor Editing Environment 
+	 * @return
+	 */
 	private Button setRuleButton() {
 		Button toReturn = new Button(SET_RULE_LABEL);
 		toReturn.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -225,16 +219,26 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		myActorIV = new ImageviewActorIcon(myActor, ICON_WIDTH);
 		setLeftPane();
 	}
-
+	
+	/**
+	 * Return Stage
+	 */
 	@Override
 	public Stage getStage() {
 		return myStage;
 	}
-
+	
+	/**
+	 * Return Controller
+	 * @return
+	 */
 	public Controller getController() {
 		return this.myController;
 	}
-
+	
+	/**
+	 * Updates all instances of the Actor currently in the environment 
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		myController.updateActors((Actor) arg);
@@ -243,6 +247,10 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 		}
 	}
 	
+	/**
+	 * Returns whether or not the Actor requires the ApplyPhyiscs action 
+	 * @return
+	 */
 	public boolean shouldApplyPhysics() {
 		if (myActor.getRules().get(TICK_KEY) != null) {
 			for (IRule rule : myActor.getRules().get(TICK_KEY)) {
