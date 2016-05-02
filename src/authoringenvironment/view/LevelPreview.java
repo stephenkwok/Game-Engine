@@ -101,7 +101,8 @@ public class LevelPreview {
 			e.printStackTrace();
 		}
 	}
-
+       
+		
 	/**
 	 * Load the previewed game so as not to override the one the user is currently making in the authoring environment.
 	 */

@@ -26,6 +26,11 @@ public abstract class PopUpParent extends Observable {
 	private Group myRoot;
 	private Scene myScene;
 
+	/**
+	 * Creates a pop up with a given width and height
+	 * @param popUpWidth: the width of the pop up
+	 * @param popUpHeight: the height of the pop up
+	 */
 	public PopUpParent(int popUpWidth, int popUpHeight) {
 		myWidth = popUpWidth;
 		myHeight = popUpHeight;

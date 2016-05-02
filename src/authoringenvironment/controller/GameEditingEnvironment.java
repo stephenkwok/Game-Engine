@@ -34,6 +34,13 @@ public class GameEditingEnvironment implements Observer {
 	private final GameInfo myGameInfo;
 	private final Stage myStage;
 
+	/**
+	 * Creates the Game Editing Enviroment of the Authoring Environment
+	 * @param controller: the Authoring Environment's contrller
+	 * @param stage: the stage for all GUI elements
+	 * @param levels: the list of levels for the Game
+	 * @param gameInfo: the class holding the Game's information
+	 */
 	public GameEditingEnvironment(Controller controller, Stage stage, List<Level> levels, GameInfo gameInfo) {
 		myController = controller;
 		myLevels = levels;

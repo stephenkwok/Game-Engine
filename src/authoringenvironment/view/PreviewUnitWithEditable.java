@@ -29,6 +29,10 @@ public class PreviewUnitWithEditable extends ObjectObservable implements IEditin
 	private final Label myLabel;
 	private IEditableGameElement myEditable;
 
+	/**
+	 * Creates a preview unit for an IEditableGameElement
+	 * @param editable: the IEditableGameElement the preview unit will be displaying
+	 */
 	public PreviewUnitWithEditable(IEditableGameElement editable) {
 		myEditable = editable;
 		myLabel = new Label();

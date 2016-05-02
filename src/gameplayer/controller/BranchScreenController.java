@@ -70,7 +70,7 @@ public abstract class BranchScreenController implements Observer {
 				Object arg2 = myClass.cast(myList.get(1));
 				Class[] parameterTypes = { myClass };
 				Object[] parameters = { arg2 };
-				try {invoke(methodName, parameterTypes, parameters);} catch (Exception e) {e.printStackTrace();}
+				invoke(methodName, parameterTypes, parameters);
 			
 			}
 		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
@@ -78,8 +78,6 @@ public abstract class BranchScreenController implements Observer {
 				this.getClass().getSuperclass().getDeclaredMethod(methodName).invoke(this);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 					| NoSuchMethodException | SecurityException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 				this.myScreen.showError(e.getMessage());
 			}
 		}

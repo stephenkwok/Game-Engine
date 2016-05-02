@@ -20,6 +20,10 @@ public class PreviewUnitWithLevel extends PreviewUnitWithEditable {
 	private static final Double TEXT_FIELD_WIDTH = 125.0;
 	private final TextField myTextField;
 
+	/**
+	 * Creates a preview unit for a Level
+	 * @param editable: the IEditableGameElement the preview unit will be displaying
+	 */
 	public PreviewUnitWithLevel(IEditableGameElement editable) {
 		super(editable);
 		myTextField = new TextField();

@@ -92,16 +92,6 @@ public class GameController extends Observable implements Observer, IGameControl
 	 */
 	public void initialize(int level) {
 		model.setCurrentLevel(level);
-		// ObservableMap<String, Object> a = FXCollections.observableHashMap();
-		// a.addListener(new MapChangeListener<String, Object>() {
-		// @Override
-		// public void onChanged(Change<? extends String, ? extends Object>
-		// change) {
-		// if(change!=null && hud != null)
-		// hud.handleChange(change);
-		// }
-		// });
-		// a.put("Points", 0);
 		begin();
 		
 	}
@@ -149,7 +139,6 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void nextLevel() {
 		if (model.nextLevel()) {
 			view.clearGame();
-			model.nextLevel();
 			model.resetLevelTime();
 			begin();
 		}
@@ -192,8 +181,9 @@ public class GameController extends Observable implements Observer, IGameControl
 			}
 		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException
 				| InvocationTargetException | NoSuchMethodException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			Object[] args = {"showGameError", e1};
+			setChanged();
+			notifyObservers(Arrays.asList(args));
 		}
 	}
 
@@ -240,12 +230,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	public void updateCamera() {
 		if (model.getCurrentLevel().getMainCharacter() != null) {
 			if (model.getCurrentLevel().getMyScrollingDirection().equals(myResources.getString("DirectionH"))) {
-				try {
-					view.changeCamera(model.getCurrentLevel().getMainCharacters().get(0).getX(), 0);
-				} catch (Exception e) {
-					model.stopGame();
-					e.printStackTrace();
-				}
+				view.changeCamera(model.getCurrentLevel().getMainCharacters().get(0).getX(), 0);
 			} else {
 				view.changeCamera(0, model.getCurrentLevel().getMainCharacters().get(0).getY());
 			}
