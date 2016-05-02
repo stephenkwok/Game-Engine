@@ -107,8 +107,8 @@ public class PhysicsEngine {
 	
 	public void glideUpDown(IPlayActor a1, double offset, boolean up) {
 		offset *= (up ? -1 : 1);
-		a1.setY(applyForce(a1.getY(),-offset));
-		a1.setVeloY(-offset);
+		a1.setY(applyForce(a1.getY(),offset));
+		a1.setVeloY(offset);
 	}
 	
 	public void glideUp(IPlayActor a1, double offset){
