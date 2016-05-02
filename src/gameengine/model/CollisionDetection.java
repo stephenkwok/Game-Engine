@@ -8,7 +8,7 @@ import javafx.geometry.Point2D;
 
 /**
  * Collision Detection class handles checking for collisions among a list of
- * Actors It also handles resolving said collision should one be found
+ * Actors It also handles resolving said collision should one be found. 
  * 
  * @author justinbergkamp
  *
@@ -50,6 +50,11 @@ public class CollisionDetection {
 		return list;
 	}
 
+	/**
+	 * Sets new positions and velocities from the actor's nextValues
+	 * 
+	 * @param a1
+	 */
 	private void changeValues(IPlayActor a1){
 		    a1.setX(a1.getNextValues().getNextXPos());
 		    a1.setY(a1.getNextValues().getNextYPos());
@@ -70,6 +75,11 @@ public class CollisionDetection {
 		return a1.getBounds().intersects(a2.getBounds());
 	}
 
+	/**
+	 * Finds the ordered pair that represents the center of an object. 
+	 * @param a1
+	 * @return
+	 */
 	private Point2D findCenter(IPlayActor a1) {
 		double centerX = (a1.getBounds().getWidth()) * .5 + a1.getBounds().getMinX();
 		double centerY = (a1.getBounds().getHeight()) * .5 + a1.getBounds().getMinY();
@@ -115,6 +125,12 @@ public class CollisionDetection {
 		}
 	}
 
+	/**
+	 * Doesn't register BottomCollisions if the actor's y velocity is positive
+	 * 
+	 * @param a1
+	 * @param a2
+	 */
 	private void resolveCollision(IPlayActor a1, IPlayActor a2) {
 		String collisionType = getCollisionType(a1, a2);
 		if(!collisionType.equals(BottomCollision)){
@@ -125,6 +141,13 @@ public class CollisionDetection {
 	}
 
 	
+	/**
+	 * Performs reflection on the collisionType
+	 * 
+	 * @param a1
+	 * @param a2
+	 * @param collisionType
+	 */
 	private void resolutionReflection(IPlayActor a1, IPlayActor a2, String collisionType){
 		try {
 			Class<?> className = Class.forName(TRIGGER_PREFIX + collisionType);

@@ -1,5 +1,12 @@
 package gameengine.model;
 
+/**
+ * This class is an info class for the actor. 
+ * These next values are set during collision resolution.
+ * It makes it so collisions are not skipped over by actors moving during the collision detection process.
+ * 
+ * @author justinbergkamp
+ */
 public class NextValues {
 	
 	double nextXVelo;

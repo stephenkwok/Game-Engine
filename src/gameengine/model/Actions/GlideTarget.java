@@ -4,8 +4,8 @@ import gameengine.model.Actor;
 import gameengine.model.ActorState;
 
 /**
- * An example of an Action to glide an Actor right by a given distance (no
- * gravity, no friction).
+ * This action glides the given assignedActor towards the given target actor at a given offset. 
+ * Used for our basic AI. 
  *
  * @author michelle
  */
@@ -28,7 +28,7 @@ public class GlideTarget extends GlidingAction {
 	}
 
 	/**
-	 * Moves the Actor to the right through gliding
+	 * Moves the Actor towards the target actor 
 	 */
 	@Override
 	public void perform() {
@@ -39,11 +39,17 @@ public class GlideTarget extends GlidingAction {
 
 	}
 	
+	/**
+	 * This action calculates a new heading for the assignedActor
+	 * This new heading points from the center of the assignedActor to the center of the target actor. 
+	 * 
+	 * @param assignedActor
+	 * @param target
+	 */
 	public void calcHeading(Actor assignedActor, Actor target){
 		double verticalDiff   = (assignedActor.getBounds().getHeight()/2 + assignedActor.getY()) - (target.getBounds().getHeight()/2 + target.getY());
 		double horizontalDiff  = (target.getBounds().getWidth()/2 + target.getX())  - ( assignedActor.getBounds().getWidth()/2 + assignedActor.getX());
 		double angle  = Math.toDegrees(Math.sin((verticalDiff/horizontalDiff)));
-		//double newX  = Math.toDegrees(Math.cos(Math.toRadians(verticalDiff/horizontalDiff)));
 
 		if(Math.abs(horizontalDiff) < 10){
 			if(verticalDiff > 0){
