@@ -21,6 +21,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * VBoxCreateActorActionCreator
+ * @author amyzhao
+ *
+ */
 public class VBoxCreateActorActionCreator extends VBox implements ILevelActionCreator {
 	private static final String RANDOM = "Randomly spawn within a range";
 	private static final String FIXED = "Fixed spawn location";
@@ -45,6 +50,12 @@ public class VBoxCreateActorActionCreator extends VBox implements ILevelActionCr
 	private TextField myX;
 	private TextField myY;
 	
+	/**
+	 * Constructor for VBoxCreateActorActionCreator
+	 * @param resource: resource bundle to use.
+	 * @param element: game element to add action to.
+	 * @param environment: editing environment.
+	 */
 	public VBoxCreateActorActionCreator(ResourceBundle resource, IGameElement element, IEditingEnvironment environment) {
 		myElement = element;
 		myEditingEnvironment = environment;
@@ -52,6 +63,9 @@ public class VBoxCreateActorActionCreator extends VBox implements ILevelActionCr
 		init();
 	}
 	
+	/**
+	 * Initialize the vbox.
+	 */
 	private void init() {
 		String[] labelText = myResources.getString(LABEL_TEXT).split(DELIMITER);
 		Label[] labels = new Label[labelText.length];
@@ -61,6 +75,11 @@ public class VBoxCreateActorActionCreator extends VBox implements ILevelActionCr
 		this.getChildren().addAll(makeActorComboBox(labels[0]), makeRandomOrFixedComboBox(labels[1]));
 	}
 	
+	/**
+	 * Make combobox based on selection of random or fixed.
+	 * @param label: label for combobox.
+	 * @return combobox.
+	 */
 	private HBox makeRandomOrFixedComboBox(Label label) {
 		HBox comboContainer = new HBox();
 		List<String> options = new ArrayList<>();
@@ -78,6 +97,9 @@ public class VBoxCreateActorActionCreator extends VBox implements ILevelActionCr
 		return comboContainer;		
 	}
 	
+	/**
+	 * Display options for xy positions.
+	 */
 	private void displayXYOptions() {
 		this.getChildren().add(new Label(INITIAL_POSITION));
 		switch (randomOrFixed) {
@@ -90,6 +112,9 @@ public class VBoxCreateActorActionCreator extends VBox implements ILevelActionCr
 		}
 	}
 	
+	/**
+	 * Make textfields for a random interval.
+	 */
 	private void makeRandomIntervalTextFields() {
 		String[] labelText = myResources.getString(RANDOM_TEXT_FIELD).split(DELIMITER);
 		Label[] labels = new Label[labelText.length];
@@ -114,6 +139,9 @@ public class VBoxCreateActorActionCreator extends VBox implements ILevelActionCr
 		this.getChildren().addAll(minXContainer, minYContainer, maxXContainer, maxYContainer);
 	}
 	
+	/**
+	 * Make textfields for fixed position.
+	 */
 	private void makeFixedTextFields() {
 		String[] labelText = myResources.getString(FIXED_TEXT_FIELD).split(DELIMITER);
 		Label[] labels = new Label[labelText.length];
@@ -130,6 +158,11 @@ public class VBoxCreateActorActionCreator extends VBox implements ILevelActionCr
 		this.getChildren().addAll(myXContainer, myYContainer);
 	}
 	
+	/**
+	 * Make actor selecting combobox.
+	 * @param label
+	 * @return
+	 */
 	private HBox makeActorComboBox(Label label) {
 		if (myElement.getClass().getSimpleName().equals(LEVEL)) {
 			myActors = ((LevelEditingEnvironment) myEditingEnvironment).getAvailableActors();
@@ -141,6 +174,10 @@ public class VBoxCreateActorActionCreator extends VBox implements ILevelActionCr
 		return comboContainer;
 	}
 	
+	/**
+	 * Get actor by name.
+	 * @return actor.
+	 */
 	private Actor getActorByName() {
 		for (IAuthoringActor actor: myActors) {
 			if (actor.getName().equals(myActorComboBox.getValue())) {
@@ -150,6 +187,10 @@ public class VBoxCreateActorActionCreator extends VBox implements ILevelActionCr
 		return null;
 	}
 	
+	/**
+	 * Get available actors names.
+	 * @return list of available actors' names.
+	 */
 	private ObservableList<String> getActorNames() {
 		List<String> names = new ArrayList<>();
 		for (IAuthoringActor actor: myActors) {
@@ -157,6 +198,7 @@ public class VBoxCreateActorActionCreator extends VBox implements ILevelActionCr
 		}
 		return FXCollections.observableArrayList(names);
 	}
+	
 	@Override
 	public Action createAction() {
 		switch (randomOrFixed) {

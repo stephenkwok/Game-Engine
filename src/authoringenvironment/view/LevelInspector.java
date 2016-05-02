@@ -18,6 +18,11 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Level Inspector to view and edit level attributes
+ * @author amyzhao
+ *
+ */
 public class LevelInspector implements IGUI {
 	private static final String BUTTON_LABEL = "Choose a new background image";
 	private static final int RULE_ADDER_HEIGHT = 300;
@@ -57,6 +62,11 @@ public class LevelInspector implements IGUI {
 		init(myResources, availActors);
 	}
 
+	/**
+	 * Initialize the level inspector.
+	 * @param myResources: resource bundle.
+	 * @param availActors: currently available actors.
+	 */
 	private void init(ResourceBundle myResources, Set<IAuthoringActor> availActors) {
 		myPane = new StackPane();
 		myContainer = new VBox(SPACING);
@@ -65,26 +75,42 @@ public class LevelInspector implements IGUI {
 		myPane.getChildren().addAll(myContainer);
 	}
 
+	/**
+	 * Add children to the level inspector.
+	 * @param myResources: resource bundle to use.
+	 * @param availActors: list of available actors.
+	 */
 	private void addChildrenToLevelInspector(ResourceBundle myResources, Set<IAuthoringActor> availActors) {
 		myActorsTab = new TabActors(myResources, ACTORS, availActors);
 		myAttributesTab = new TabFields(myResources, LEVEL_ATTRIBUTES,LEVEL_OPTIONS_RESOURCE, myLevelEditor.getLevel());
 		myAttributesTab.setObserver(myLevelEditor);
+		
 		HBox buttonBox = addEditingButtons();
 		ButtonFileChooserBackgroundImage button = new ButtonFileChooserBackgroundImage(BUTTON_LABEL, null, myLevelEditor, myLevelEditor.getStage());
 		button.addObserver(myLevelEditor);
+		
 		myAttributesTab.addElement(button);
 		myGarbageCollector = new CheckBoxesGarbageCollection();
 		myAttributesTab.addElement(myGarbageCollector);
+		
 		addTabToContainer(myAttributesTab, false);
 		myContainer.getChildren().add(buttonBox);
 		addTabToContainer(myActorsTab, true);
 		addPreviewButton();
 	}
 	
+	/**
+	 * Gets the checkboxes for choosing garbage collectors.
+	 * @return garbage collecting checkboxes.
+	 */
 	public CheckBoxesGarbageCollection getGarbageCollector() {
 		return myGarbageCollector;
 	}
 	
+	/**
+	 * Add the buttons for editing rules and timer.
+	 * @return hbox with buttons for editing rules and timer.
+	 */
 	private HBox addEditingButtons() {
 		Button addRuleButton = new Button(EDIT_RULES);
 		addRuleButton.setOnAction(e -> new PopUpRuleAdder(RULE_ADDER_WIDTH, RULE_ADDER_HEIGHT, myLevelEditor));
@@ -96,6 +122,9 @@ public class LevelInspector implements IGUI {
 		return box;
 	}
 	
+	/**
+	 * Add button to preview game.
+	 */
 	private void addPreviewButton() {
 		Button myB = new Button(PREVIEW);
 		myB.setOnMouseClicked(e -> myLevelEditor.previewGame());
