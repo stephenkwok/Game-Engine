@@ -32,35 +32,46 @@ public class LevelPreview {
 	private File myPreviewFile;
 	private Controller myController;
 	private GameScreen myView;
+	private Game myModel;
+	private GameController myGameController;
+	private Group myGroup;
+	private Scene myScene;
+	private CreatorController myCreatorController;
+	private ParallelCamera myCamera; 
+	private ParserController myParserController;
+	private SubScene mySubScene;
+	private Stage myStage;
 
 	public LevelPreview(Controller controller) {
 		myController = controller;
-	}
-	public void previewGame(){
 		myPreviewFile = new File(PREVIEW_FILE);
-		Game model;
-		GameController controller;
+		myGroup = new Group();
+		myScene = new Scene(myGroup);
+		myModel = new Game(new GameInfo(), myController.getLevels());
+	}
 
-		Group group = new Group();
-		Scene scene = new Scene(group);
-		model = new Game(new GameInfo(), myController.getLevels());
-
-		addLevelsAndActors(model);
-		saveCurrentGame(model);
-		loadToPlay(model);
-		Stage stage = initCamera(scene, group);
-		controller = initController(model, myView, stage);
-
+	public void previewGame(){
+		addLevelsAndActors();   
+		saveCurrentGame();
+		loadForPlaying();
+		initCamera();
+		initGame();
+		initGameView();
+		myGameController.initialize(0);
 		myPreviewFile.delete();
-
-		stage.setOnCloseRequest(e -> {
-			controller.endGame(false);
+		myStage.setOnCloseRequest(e -> {
+			myGameController.endGame(false);
 		});
 	}
 
-	private void addLevelsAndActors(Game model) {
-		//TODO this is duplicated from controller save game.... also no check for if actors is empty
-		for(Level level: model.getLevels()) {
+	private void initGame() {
+		myGameController = new GameController(myModel, PlayType.PREVIEW);
+		myGameController.setGame(myModel);
+		myGameController.setGameView(myView);
+	}
+
+	private void addLevelsAndActors() {
+		for(Level level: myModel.getLevels()) {
 			for (IPlayActor actor: level.getActors()) {
 				if (actor.checkState(ActorState.MAIN)) {
 					level.getMainCharacters().add(actor);
@@ -71,46 +82,39 @@ public class LevelPreview {
 			}
 		}
 	}
-	
-	private void saveCurrentGame(Game model) {
-		CreatorController creatorController = new CreatorController(model);
+
+	private void saveCurrentGame() {
+		myCreatorController = new CreatorController(myModel);
+
 		try {
-			creatorController.saveForPreviewing(myPreviewFile);
+			myCreatorController.saveForPreviewing(myPreviewFile);
 		} catch (SAXException | IOException | TransformerException | ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	private void loadToPlay(Game model) {
-		ParserController parserController = new ParserController();
-		model = parserController.loadforPlaying(myPreviewFile);
+
+	private void loadForPlaying() {
+		myParserController = new ParserController();
+		myModel = myParserController.loadforPlaying(myPreviewFile);
 	}
-	
-	private Stage initCamera(Scene scene, Group group) {
-		ParallelCamera camera = new ParallelCamera();
-		myView = new GameScreen(camera);
 
-		SubScene sub = myView.getScene();
-		sub.fillProperty().set(Color.BLUE);
-		group.getChildren().add(sub);
-
-		Stage stage = new Stage();
-		stage.setWidth(800);
-		stage.setHeight(600);
-
-		sub.setCamera(camera);
-		stage.setScene(scene);
-		stage.show();
-		
-		return stage;
+	private void initCamera() {
+		myCamera = new ParallelCamera();
+		myView = new GameScreen(myCamera);
 	}
-	
-	private GameController initController(Game model, GameScreen view, Stage stage) {
-		GameController controller = new GameController(model, PlayType.PREVIEW);
-		controller.setGame(model);
-		controller.setGameView(view);
-		controller.initialize(0);
-		return controller;
+
+	private void initGameView() {
+		mySubScene = myView.getScene();
+		mySubScene.fillProperty().set(Color.BLUE);
+		myGroup.getChildren().add(mySubScene);
+
+		myStage = new Stage();
+		myStage.setWidth(800);
+		myStage.setHeight(600);
+
+		mySubScene.setCamera(myCamera);
+		myStage.setScene(myScene);
+		myStage.show();
 	}
 }
