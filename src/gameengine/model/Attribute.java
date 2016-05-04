@@ -9,6 +9,7 @@ import voogasalad.util.hud.source.Property;
 
 
 /**
+ * 
  * This class is purposed to store properties belonging to an actor that are
  * updated throughout the game that may signal some action to be performed once
  * they meet a specified criteria
