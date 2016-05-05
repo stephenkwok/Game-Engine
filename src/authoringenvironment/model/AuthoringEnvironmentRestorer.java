@@ -21,6 +21,11 @@ public class AuthoringEnvironmentRestorer {
 	private final Map<IAuthoringActor, List<IAuthoringActor>> myActorMap;
 	private final List<Level> myLevels;
 
+	/**
+	 * Creates a restorer that restores the Actors and Levels of a Game when a saved game is loaded back in
+	 * @param actorMap: the map of created actors
+	 * @param levels: the list of created levels
+	 */
 	public AuthoringEnvironmentRestorer(Map<IAuthoringActor, List<IAuthoringActor>> actorMap, List<Level> levels) {
 		myActorMap = actorMap;
 		myLevels = levels;

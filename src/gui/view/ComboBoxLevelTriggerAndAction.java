@@ -2,9 +2,20 @@ package gui.view;
 
 import java.util.List;
 
+/**
+ * ComboBoxLevelTriggerOrAction
+ * @author amyzhao
+ *
+ */
 public class ComboBoxLevelTriggerAndAction extends ComboBoxTextCell {
 	private List<String> myOptions;
 	
+	/**
+	 * Constructor for ComboBoxLevelTriggerAndAction.
+	 * @param promptText: initial prompt shown in combobox.
+	 * @param labelText: label next to combobox.
+	 * @param options: options to display in combobox.
+	 */
 	public ComboBoxLevelTriggerAndAction(String promptText, String labelText, List<String> options) {
 		super(promptText, labelText);
 		myOptions = options;
@@ -22,8 +33,7 @@ public class ComboBoxLevelTriggerAndAction extends ComboBoxTextCell {
 
 	@Override
 	protected void updateValueBasedOnEditable() {
-		// TODO Auto-generated method stub
-		
+		// do nothing
 	}
 
 }

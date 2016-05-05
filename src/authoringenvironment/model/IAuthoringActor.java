@@ -125,6 +125,10 @@ public interface IAuthoringActor extends IEditableGameElement {
 	 */
 	void setSize(double size);
 
+	/**
+	 * Sets the friction value.
+	 * @param parseDouble: friction value.
+	 */
 	void setFriction(double parseDouble);
 
 	/**
@@ -132,12 +136,29 @@ public interface IAuthoringActor extends IEditableGameElement {
 	 */
 	double getFriction();
 
+	/**
+	 * Get the actor's ID.
+	 * @return ID.
+	 */
 	int getID();
 
+	/**
+	 * Add a state to an actor.
+	 * @param state: state to add.
+	 */
 	void addState(ActorState state);
 
+	/**
+	 * Check state of actor.
+	 * @param main: main state.
+	 * @return true if main actor; false o.w.
+	 */
 	boolean checkState(ActorState main);
 
+	/**
+	 * Get actor's size.
+	 * @return actor's size.
+	 */
 	double getSize();
 
 	/**
@@ -146,16 +167,23 @@ public interface IAuthoringActor extends IEditableGameElement {
 	 */
 	void setID(int ID);
 
+	/**
+	 * Add an attribute to an actor.
+	 * @param newAttribute: attribute to add.
+	 */
 	void addAttribute(Attribute newAttribute);
 
+	/**
+	 * Add a sprite image.
+	 * @param newImage: attribute to add.
+	 */
     void addSpriteImage(String newImage);
     
+    /**
+     * Get the sprite.
+     * @return: sprite.
+     */
     public Sprite getSprite();
-    
-    public PhysicsEngine getPhysicsEngine();
-    
-    public void setPhysicsEngine(PhysicsEngine myPhysicsEngine);
-    //public void setRuleMap(Map<String, List<Rule>> updatedRules);
     
     /**
      * Sets the Actor's rotate property
@@ -210,5 +238,10 @@ public interface IAuthoringActor extends IEditableGameElement {
      */
     public void restoreImageView();
 
+    /**
+     * Get an actor's attribute.
+     * @param attributeType: attribute type.
+     * @return attribute.
+     */
 	public Attribute getAttribute(AttributeType attributeType);
 }

@@ -37,19 +37,20 @@ import javafx.util.Callback;
  */
 
 public class GameScreen extends Observable implements IGameScreen {
+	
 	private int BACKGROUND_OFFSET = 10;
 	private SubScene mySubscene;
 	private Group mySubgroup;
 	private Camera myCamera;
 	private double myEndHorizontal;
 	private double myEndVertical;
-
 	private ResourceBundle myResources;
 	private static final String GAME_RESOURCE = "gameGUI";
+	private static final int SUB_HEIGHT = 500;
 
 	public GameScreen(Camera camera) {
 		setMySubgroup(new Group());
-		mySubscene = new SubScene(getMySubgroup(), Screen.SCREEN_WIDTH, 500);
+		mySubscene = new SubScene(getMySubgroup(), Screen.SCREEN_WIDTH, SUB_HEIGHT);
 		mySubscene.setFill(Color.ALICEBLUE);
 		mySubscene.setFocusTraversable(true);
 		mySubscene.setOnKeyPressed(e -> handleScreenEvent(e));
@@ -62,6 +63,7 @@ public class GameScreen extends Observable implements IGameScreen {
 		this.myResources = ResourceBundle.getBundle(GAME_RESOURCE);
 	}
 
+	
 	public SubScene getScene() {
 		return mySubscene;
 	}
@@ -78,13 +80,14 @@ public class GameScreen extends Observable implements IGameScreen {
 		getMySubgroup().getChildren().add(actor.getImageView());
 	}
 
+	
 	public void removeActor(IDisplayActor a) {
 		mySubgroup.getChildren().remove(a.getImageView());
 	}
 
+	
 	public void addBackground(Level level) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(level.getMyBackgroundImgName()));
-		
 		ImageView imageView = new ImageView(image);
 		imageView.setPreserveRatio(true); // amy added this to resize background to fit height
 		imageView.setFitHeight(level.getMyBackgroundHeight()); // amy also added this
@@ -101,7 +104,6 @@ public class GameScreen extends Observable implements IGameScreen {
 		level.getMyBackgroundX().addListener(new ChangeListener() {
 			@Override
 			public void changed(ObservableValue o, Object oldVal, Object newVal) {
-				// TODO Watch that magic constant!
 				imageView2.setX((Double) newVal + imageView.getImage().getWidth() - BACKGROUND_OFFSET);
 			}
 		});
@@ -129,50 +131,79 @@ public class GameScreen extends Observable implements IGameScreen {
 		notifyObservers(Arrays.asList(methodArg));
 	}
 
+	/**
+	 * Accounts for user's click input on environment
+	 * @param x
+	 * @param y
+	 * @return clickTrigger
+	 */
 	private ClickTrigger handleClick(double x, double y) {
 		ClickTrigger clickTrigger = new ClickTrigger(x, y);
 		return clickTrigger;
 	}
 
+	/**
+	 * Makes a user input's key into a KeyTrigger
+	 * @param key
+	 * @return KeyTrigger
+	 */
 	private KeyTrigger handleKeyPress(KeyCode key) {
 		return new KeyTrigger(key);
 	}
 
+	
 	public void clearGame() {
 		myCamera.setTranslateX(0.0);
 		getMySubgroup().getChildren().clear();
 	}
 
+	/**
+	 * 
+	 * @return the game scene's group
+	 */
 	public Group getMySubgroup() {
 		return mySubgroup;
 	}
 
+	/**
+	 * Sets the scene's root 
+	 * @param mySubgroup
+	 */
 	public void setMySubgroup(Group mySubgroup) {
 		this.mySubgroup = mySubgroup;
 	}
 
+	/**
+	 * Repositions the camera's position
+	 */
 	@Override
 	public void changeCamera(double x, double y) {
 		if (x < myEndHorizontal - getScene().getWidth() && x > 0) {
 			myCamera.setTranslateX(x);
-		}
+		} 
 		if (y > 0 && y < myEndVertical - getScene().getHeight()) {
 			myCamera.setTranslateY(y);
-		}
+		} 
 	}
 
+	/**
+	 * Intended to stop music
+	 */
 	@Override
 	public void disableMusic(boolean disable) {
 		// Depracated method: sound is handled through gameController now
 
 	}
-
+	/**
+	 * Intended to stop sound effects
+	 */
 	@Override
 	public void disableSoundFX(boolean disable) {
 		// Depracated method: sound is handled through gameController now
 
 	}
 
+	
 	public void terminateGame(boolean win) {
 		String gameStatus = "";
 		if (win) {
@@ -197,6 +228,9 @@ public class GameScreen extends Observable implements IGameScreen {
 	}
 	
 
+	/**
+	 * Prompts the user to decide whether to replay or not and then notifies the game controller of this decision
+	 */
 	private void restartGamePrompt() {
 		Alert endAlert = new Alert(Alert.AlertType.CONFIRMATION, myResources.getString("RestartMessage"), ButtonType.YES,
 				ButtonType.NO);
@@ -215,6 +249,9 @@ public class GameScreen extends Observable implements IGameScreen {
 		
 	}
 
+	/**
+	 * Prompts the user to decide whether to save the game or not and then notifies the game controller of this decision
+	 */
 	public void saveScorePrompt() {
 		TextInputDialog dialog = new TextInputDialog(myResources.getString("Name"));
 		dialog.setContentText(myResources.getString("SaveMessage"));
@@ -237,16 +274,21 @@ public class GameScreen extends Observable implements IGameScreen {
 		
 	}
 
+	/**
+	 * Clears current game to allow for a new game to be started
+	 */
 	public void restartGame() {
 		clearGame();	
 	}
 
+	
 	@Override
 	public void togglePause() {
 		getScene().setDisable(true);
 		
 	}
 
+	
 	@Override
 	public void toggleUnPause() {
 		getScene().setDisable(false);

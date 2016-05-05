@@ -9,6 +9,14 @@ import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
 
 
+/**
+ * This action creates a new instance of the actor passed in as spawnedActor. 
+ * It then adds this actor at an angle relative to the primary actor.
+ * This angle is passed in as a parameter. 
+ * This action is primarily used for shooting projectiles. 
+ * 
+ * @author justinbergkamp
+ */
 public class Spawn extends ActorAction{
 	private Double ZERO = 0.0;
 	private IPlayActor mySpawnedActor;
@@ -35,7 +43,9 @@ public class Spawn extends ActorAction{
 	}
 	
 	public void perform() {
-		
+
+		//The math in this method is used to calculate the centers of the primary actor and the spawned actor, to give a value 
+		//position relative to the primary actor
 		ActorCopier myActorCopier = new ActorCopier((Actor)mySpawnedActor);
 		Actor clone = myActorCopier.makeCopy();
 		clone.setHeading(getMyActor().getHeading());
@@ -45,18 +55,13 @@ public class Spawn extends ActorAction{
 		double startingYPos = getMyActor().getBounds().getMinY() + getMyActor().getBounds().getHeight()/2;
 		double y_Offset = Math.sin(Math.toRadians(spawnAngle));
 		double x_Offset = Math.cos(Math.toRadians(spawnAngle));		
-		
 		clone.setX(startingXPos - clone.getBounds().getWidth()/2 +(x_Offset*(clone.getBounds().getWidth()/2 + halfWidth)));
 		clone.setY(startingYPos - clone.getBounds().getHeight()/2 -(y_Offset*(clone.getBounds().getHeight()/2 + halfHeight)));
-
-		
 		clone.setHeading(spawnAngle);
-
 		getMyActor().changed();
 		List<Object> myList = new ArrayList<>();
 		myList.add("addActor");
 		myList.add(clone);
-
 		((Observable) getMyActor()).notifyObservers(myList);
 	}
 
