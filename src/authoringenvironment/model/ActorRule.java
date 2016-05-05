@@ -120,7 +120,7 @@ public class ActorRule {
 			}
 			if (authoringBehaviorMap.size() != 0)
 				remove(new ArrayList<IAuthoringBehavior>(authoringBehaviorMap.keySet()).get(FIRST_INDEX));
-			myActorRuleCreator.removeActorRule(this);
+			myActorRuleCreator.removeActorRule(this);			
 		});
 		myRule.add(close, Integer.parseInt(myActorRuleResources.getString("CloseCol")),
 				Integer.parseInt(myActorRuleResources.getString("CloseRow")));
