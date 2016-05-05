@@ -34,6 +34,9 @@ public abstract class ButtonParent extends ObjectObservable implements IGUIEleme
 		myResources =  ResourceBundle.getBundle("buttonInfo");
 	}
 
+	/**
+	 * Initialize the button.
+	 */
 	private void initializeButton() {
 		button = new Button(buttonText);
 		button.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));

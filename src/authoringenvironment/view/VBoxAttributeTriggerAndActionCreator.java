@@ -15,6 +15,11 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
+/**
+ * VBox for displaying Attribute Triggers and Actions 
+ * @author amyzhao
+ *
+ */
 public class VBoxAttributeTriggerAndActionCreator extends VBox implements ILevelTriggerCreator, ILevelActionCreator {
 	private static final String LEVEL = "Level";
 	private static final String HEALTH = "Health";
@@ -29,7 +34,13 @@ public class VBoxAttributeTriggerAndActionCreator extends VBox implements ILevel
 	private IEditingEnvironment myEditingEnvironment;
 	private Set<IAuthoringActor> myActors;
 	
-	
+	/**
+	 * Constructor for VBoxAttributeTriggerAndActionCreator
+	 * @param resources: resource bundle to use.
+	 * @param element: element to add trigger or action to.
+	 * @param editor: editing environment currently in use.
+	 * @param labelKey: key for label in resource bundle.
+	 */
 	public VBoxAttributeTriggerAndActionCreator(ResourceBundle resources, IGameElement element, IEditingEnvironment editor, String labelKey) {
 		myElement = element;
 		myResources = resources;
@@ -37,6 +48,10 @@ public class VBoxAttributeTriggerAndActionCreator extends VBox implements ILevel
 		init(labelKey);
 	}
 
+	/**
+	 * Initialize vbox with label.
+	 * @param labelKey: key for label in resourcebundle.
+	 */
 	private void init(String labelKey) {
 		String[] labelText = myResources.getString(labelKey).split(DELIMITER);
 		Label[] labels = new Label[labelText.length];
@@ -51,6 +66,10 @@ public class VBoxAttributeTriggerAndActionCreator extends VBox implements ILevel
 		makeValueTextField(labels[2]);
 	}
 	
+	/**
+	 * Make the combobox for selecting the actor or level.
+	 * @param label: label to add to combo box.
+	 */
 	private void makeElementComboBox(Label label) {
 		HBox container = new HBox();
 		myElementComboBox = new ComboBox<>(getElementNames());
@@ -58,6 +77,10 @@ public class VBoxAttributeTriggerAndActionCreator extends VBox implements ILevel
 		this.getChildren().add(container);
 	}
 	
+	/**
+	 * Make the combobox for selecting an attribute type.
+	 * @param label: label to add to combo box.
+	 */
 	private void makeTypeComboBox(Label label) {
 		HBox container = new HBox();
 		List<String> options = new ArrayList<>();
@@ -69,6 +92,10 @@ public class VBoxAttributeTriggerAndActionCreator extends VBox implements ILevel
 		this.getChildren().add(container);
 	}
 	
+	/**
+	 * Get the game element to add the action or trigger to.
+	 * @return: game element to use.
+	 */
 	private IGameElement getElementByName() {
 		if (myElement.getName().equals(myElementComboBox.getValue())) {
 			return myElement;
@@ -80,6 +107,11 @@ public class VBoxAttributeTriggerAndActionCreator extends VBox implements ILevel
 		}
 		return null;
 	}
+	
+	/**
+	 * Make a textfield for a user to enter a trigger value into.
+	 * @param label: label for text field.
+	 */
 	private void makeValueTextField(Label label) {
 		HBox container = new HBox();
 		myValue = new TextField();
@@ -87,6 +119,10 @@ public class VBoxAttributeTriggerAndActionCreator extends VBox implements ILevel
 		this.getChildren().add(container);
 	}
 	
+	/**
+	 * Get the list of available game elements.
+	 * @return: list of available game element names.
+	 */
 	private ObservableList<String> getElementNames() {
 		List<String> names = new ArrayList<>();
 		for (IAuthoringActor actor: myActors) {
@@ -96,6 +132,10 @@ public class VBoxAttributeTriggerAndActionCreator extends VBox implements ILevel
 		return FXCollections.observableArrayList(names);
 	}
 	
+	/**
+	 * Gets the attribute type to use.
+	 * @return attribute type.
+	 */
 	private AttributeType getAttributeType() {
 		AttributeType type = null;
 		switch ((String) myTypeComboBox.getValue()) {
@@ -112,11 +152,17 @@ public class VBoxAttributeTriggerAndActionCreator extends VBox implements ILevel
 		return type;
 	}
 	
+	/**
+	 * Creates the trigger.
+	 */
 	@Override
 	public ITrigger createTrigger() {
 		return new AttributeReached(getElementByName(), getAttributeType(), Integer.parseInt(myValue.getText()));
 	}
 
+	/**
+	 * Creates the action.
+	 */
 	@Override
 	public Action createAction() {
 		return new ChangeAttribute(getElementByName(), getAttributeType(), Integer.parseInt(myValue.getText()));

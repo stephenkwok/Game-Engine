@@ -25,6 +25,11 @@ public abstract class HBoxDisplayHeader extends ObjectObservable {
 	private final HBox myHBox;
 	private final Label myLabel;
 
+	/**
+	 * Creates the header for the GUI element displaying created Actors or Levels
+	 * @param labelText: the text to be displayed in the header
+	 * @param bindWidth: the width the header's width should be bound to
+	 */
 	public HBoxDisplayHeader(String labelText, DoubleExpression bindWidth) {
 		myHBox = new HBox(HBOX_SPACING);
 		myHBox.setMinHeight(HBOX_HEIGHT);

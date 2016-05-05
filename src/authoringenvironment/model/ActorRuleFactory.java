@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoringenvironment.controller.Controller;
+import authoringenvironment.view.AlertGenerator;
 import gameengine.model.IRule;
 
 /**
@@ -25,6 +26,7 @@ public class ActorRuleFactory {
 	private static final String ELEMENT = "Element";
 	private Controller myController;
 	private ActorRule myActorRule;
+	private final AlertGenerator myAlertGenerator;
 
 	public ActorRuleFactory(ResourceBundle myLibraryResources, IAuthoringActor myActor, Controller myController,
 			ActorRule myActorRule) {
@@ -32,6 +34,7 @@ public class ActorRuleFactory {
 		this.myActor = myActor;
 		this.myController = myController;
 		this.myActorRule = myActorRule;
+		this.myAlertGenerator = new AlertGenerator();
 	}
 
 	/**
@@ -43,15 +46,9 @@ public class ActorRuleFactory {
 		try {
 			Method createMethod = this.getClass().getDeclaredMethod(CREATE + elementType, String.class, String.class, IRule.class);
 			return (IAuthoringBehavior) createMethod.invoke(this, behaviorType, className, rule);
-		} catch (NoSuchMethodException | SecurityException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			myAlertGenerator.generateAlert(e.getClass().toString());
+		} 
 		return null;
 	}
 	/**
@@ -68,6 +65,20 @@ public class ActorRuleFactory {
 		}
 	}
 
+	/**
+	 * Creates a select actor behavior.
+	 * @param behaviorType: behavior type.
+	 * @param className: name of bheavior's class.
+	 * @param rule: rule to add it to.
+	 * @return behavior.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAuthoringBehavior createSelectActorBehavior(String behaviorType, String className, IRule rule)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -79,6 +90,20 @@ public class ActorRuleFactory {
 					myActors);
 	}
 
+	/**
+	 * Creates a standard actor behavior.
+	 * @param behaviorType: behavior type.
+	 * @param className: name of bheavior's class.
+	 * @param rule: rule to add it to.
+	 * @return behavior.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAuthoringBehavior createStandardActorBehavior(String behaviorType, String className, IRule rule)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -94,6 +119,20 @@ public class ActorRuleFactory {
 		}
 	}
 
+	/**
+	 * Creates a standard behavior.
+	 * @param behaviorType: behavior type.
+	 * @param className: name of bheavior's class.
+	 * @param rule: rule to add it to.
+	 * @return behavior.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAuthoringBehavior createStandardBehavior(String behaviorType, String className, IRule rule)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {

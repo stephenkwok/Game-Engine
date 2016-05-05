@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import authoringenvironment.view.AlertGenerator;
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import gameengine.model.IAction;
@@ -38,9 +39,11 @@ public class ActionFactory {
 	@XStreamOmitField
 	private ResourceBundle myResources;
 	private List<Object> arguments;
+	private AlertGenerator myAlertGenerator;
 
 	public ActionFactory() {
 		this.myResources = ResourceBundle.getBundle(ACTION_RESOURCE);
+		this.myAlertGenerator = new AlertGenerator();
 	}
 
 	/**
@@ -80,18 +83,25 @@ public class ActionFactory {
 		try {
 			Method createMethod = this.getClass().getDeclaredMethod(CREATE + actionType, String.class, String.class);
 			return (IAction) createMethod.invoke(this, behaviorType, className);
-		} catch (NoSuchMethodException | SecurityException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			myAlertGenerator.generateAlert(e.getClass().toString());
+		} 
 		return null;
 	}
 
+	/**
+	 * Creates a self-action action
+	 * @param actionType: name of action.
+	 * @param className: action's class name.
+	 * @return action.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAction createSelfActionActionIGameElement(String actionType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -100,6 +110,19 @@ public class ActionFactory {
 		return (IAction) constructor.newInstance((IGameElement) arguments.get(ZERO));
 	}
 	
+	/**
+	 * Creates a self-action action that takes an actor.
+	 * @param actionType: name of action.
+	 * @param className: action's class name.
+	 * @return action.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAction createSelfActionActionActor(String actionType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -108,6 +131,19 @@ public class ActionFactory {
 		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO));
 	}
 
+	/**
+	 * Creates a change attribute behavior.
+	 * @param actionType: name of behavior.
+	 * @param className: behavior's class name.
+	 * @return behavior.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAction createChangeAttributeBehavior(String actionType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -116,6 +152,19 @@ public class ActionFactory {
 		return (IAction) constructor.newInstance((IGameElement) arguments.get(ZERO), arguments.get(ONE), arguments.get(TWO));
 	}
 	
+	/**
+	 * Creates an offset behavior.
+	 * @param actionType: name of behavior.
+	 * @param className: behavior's class name.
+	 * @return behavior.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAction createOffsetBehavior(String actionType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -124,6 +173,19 @@ public class ActionFactory {
 		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO), arguments.get(ONE));
 	}
 	
+	/**
+	 * Creates a spawn behavior.
+	 * @param actionType: name of behavior.
+	 * @param className: behavior's class name.
+	 * @return behavior.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAction createSpawnBehavior(String actionName, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -132,6 +194,19 @@ public class ActionFactory {
 		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO), (Actor) arguments.get(ONE), arguments.get(TWO));
 	}
 	
+	/**
+	 * Creates a spawn behavior.
+	 * @param actionType: name of behavior.
+	 * @param className: behavior's class name.
+	 * @return behavior.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAction createCreateActorBehavior(String actionType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -145,6 +220,19 @@ public class ActionFactory {
 		}
 	}
 	
+	/**
+	 * Creates glide target behavior.
+	 * @param actionType: name of behavior.
+	 * @param className: behavior's class name.
+	 * @return behavior.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAction createGlideTargetBehavior(String actionType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -153,6 +241,19 @@ public class ActionFactory {
 		return (IAction) constructor.newInstance((Actor) arguments.get(ZERO), arguments.get(ONE), (Actor) arguments.get(TWO));
 	}
 	
+	/**
+	 * Creates a sound behavior.
+	 * @param actionType: name of behavior.
+	 * @param className: behavior's class name.
+	 * @return behavior.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAction createSoundBehavior(String actionType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -161,6 +262,19 @@ public class ActionFactory {
 		return (IAction) constructor.newInstance((IGameElement) arguments.get(ZERO), arguments.get(ONE));
 	}
 	
+	/**
+	 * Creates a shift scene behavior.
+	 * @param actionType: name of behavior.
+	 * @param className: behavior's class name.
+	 * @return behavior.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAction createShiftSceneBehavior(String actionType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {

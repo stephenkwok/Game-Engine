@@ -49,7 +49,6 @@ public class SplashScreen extends Screen implements Observer, ISplashScreen {
 			setButtonsUp(hbox);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
-			e.printStackTrace();
 			showError(e.getMessage());
 		}
 		// TODO Magic constant

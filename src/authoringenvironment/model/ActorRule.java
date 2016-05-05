@@ -183,9 +183,8 @@ public class ActorRule {
 	 * Removes rule's trigger value 
 	 */
 	private void removeTrigger(IAuthoringBehavior toRemove) {
-		authoringBehaviorMap.remove(toRemove); // remove trigger from authoring behavior
-		myActor.getRules().remove(myTrigger.getMyKey()); // remove rules corresponding to this trigger key from actor
-		// remove rules from authoring behaviors in actorRuleMap that have the current trigger as their trigger
+		authoringBehaviorMap.remove(toRemove);
+		myActor.getRules().remove(myTrigger.getMyKey());
 		for (IAuthoringBehavior authoringBehavior : authoringBehaviorMap.keySet()) {
 			String otherTriggerKey = ((Rule) authoringBehaviorMap.get(authoringBehavior)
 					.get(Integer.parseInt(myActorRuleResources.getString("IRuleIndex")))).getMyTrigger().getMyKey();
@@ -242,7 +241,6 @@ public class ActorRule {
 	 */
 	public void setRules() {
 		if (myActorRuleCreator.isNewlyReturned()) {
-			System.out.println("here");
 			myActorRuleCreator.setNewlyReturned(false);
 			myActor.getRules().clear();
 		}

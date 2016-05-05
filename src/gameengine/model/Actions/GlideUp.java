@@ -2,6 +2,10 @@ package gameengine.model.Actions;
 
 import gameengine.model.Actor;
 
+/**
+ * This action glides the actor up by a given offset. 
+ * @author justinbergkamp
+ */
 public class GlideUp extends GlidingAction {
 
 	public GlideUp(Actor assignedActor, Double offset) {

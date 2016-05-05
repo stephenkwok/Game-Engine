@@ -45,7 +45,7 @@ public class CreatorController implements ICreatorController {
 
 	private File createLoaderFileFromFile(File f) {
 		String loaderFileName = f.getName().replace(".xml", "_loader.xml");
-		File loaderFile = new File(f.getParent() + "/loaders/" + loaderFileName);
+		File loaderFile = new File(f.getParentFile() + "/loaders/" + loaderFileName);
 		return loaderFile;
 	}
 
