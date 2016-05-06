@@ -18,7 +18,7 @@ import javafx.scene.image.*;
 import javafx.scene.layout.*;
 
 /**
- * Checkboxes for all HUD options.
+ * Checkboxes for adding garbage collectors.
  * 
  * @author amyzhao, stephen
  *
@@ -70,7 +70,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	}
 
 	/**
-	 * Initializes the VBox containing the HUD checkboxes.
+	 * Initializes the VBox containing the garbage collecting checkboxes.
 	 * 
 	 * @param key: key in resource file for the checkboxes to add.
 	 * @param vbox: vbox to add checkboxes into.
@@ -98,10 +98,18 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 		myContainer.getChildren().add(checkGarbageCollectorsButton);
 	}
 
+	/**
+	 * init options for left, right, top, and bottom.
+	 */
 	private void initAllSidesList() {
 		allSides = new ArrayList<>(Arrays.asList(LEFT, RIGHT, TOP, BOTTOM));
 	}
 
+	/**
+	 * Get a garbage collector for a given side.
+	 * @param side: left, right, top, or bottom.
+	 * @return garbage collecting actor.
+	 */
 	private IAuthoringActor getGarbageCollector(String side) {
 		if (garbageCollectors.containsKey(side)) {
 			return garbageCollectors.get(side);
@@ -110,6 +118,10 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 		}
 	}
 
+	/**
+	 * Update the collision behavior for the garbage collectors based on new list of actors.
+	 * @param actors: actors to garbage collect on collision.
+	 */
 	public void updateGarbageCollectingActors(List<IPlayActor> actors) {
 		List<String> desiredSides = getSides();
 		for (int i = 0; i < allSides.size(); i++) {
@@ -125,6 +137,12 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 		}
 	}
 
+	/**
+	 * update garbage collector for updated actors.
+	 * @param garbageCollector: garbage collecting actor to update.
+	 * @param sideToCheck: side that garbage collector's on.
+	 * @param actors: list of actors to garbage collect on collision.
+	 */
 	private void updateGarbageCollector(IAuthoringActor garbageCollector, String sideToCheck, List<IPlayActor> actors) {
 		garbageCollector.setImageView(new ImageView(new Image(myAttributesResources.getString(sideToCheck + IMAGE))));
 		garbageCollector.setImageViewName(myAttributesResources.getString(sideToCheck + IMAGE));
@@ -132,6 +150,11 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 		updateGarbageCollectorCollisions(garbageCollector, actors, sideToCheck);
 	}
 
+	/**
+	 * Position the garbage collector based on which side it should be on.
+	 * @param garbageCollector: garbage collecting actor to position.
+	 * @param sideToCheck: side it should be on.
+	 */
 	private void positionGarbageCollector(IAuthoringActor garbageCollector, String sideToCheck) {
 		if (sideToCheck.equals(LEFT)) {
 			garbageCollector.setX(Double.parseDouble(myAttributesResources.getString(sideToCheck + X)));
@@ -150,18 +173,27 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 		}
 	}
 
+	/**
+	 * Update garbage collector collisions for new actors.
+	 * @param garbageCollector: garbage collecting actor.
+	 * @param actors: actors to garbage collect on collision.
+	 * @param sideToCheck: side for garbage collecting actor.
+	 */
 	private void updateGarbageCollectorCollisions(IAuthoringActor garbageCollector, List<IPlayActor> actors,
 			String sideToCheck) {
 		garbageCollector.getRules().clear();
 		for (int j = 0; j < actors.size(); j++) {
 			if (!garbageCollectors.keySet().contains(actors.get(j))) {
 				ITrigger trigger = createCollisionTrigger(sideToCheck, (Actor) garbageCollector, (Actor) actors.get(j)); 
-				// use reflection from properties file
 				garbageCollector.addRule(new Rule(trigger, new Destroy((Actor) actors.get(j))));
 			}
 		}
 	}
 
+	/**
+	 * Remove a garbage collector from the level.
+	 * @param garbageCollector: garbage collector to remove.
+	 */
 	private void removeGarbageCollector(IAuthoringActor garbageCollector) {
 		if (myLevel.getActors().contains(garbageCollector)) {
 			myLevel.getGarbageCollectors().remove(garbageCollector);
@@ -169,6 +201,13 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 		}
 	}
 
+	/**
+	 * Create the collision trigger.
+	 * @param side: side to collide on.
+	 * @param garbageCollector: garbage collecting actor.
+	 * @param actor: actor to collide with.
+	 * @return collision trigger.
+	 */
 	private ITrigger createCollisionTrigger(String side, Actor garbageCollector, Actor actor) {
 		Class<?> collision;
 		try {

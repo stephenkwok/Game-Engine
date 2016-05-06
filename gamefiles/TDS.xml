@@ -43,7 +43,7 @@
                         <myFriction>0.0</myFriction>
                         <myName>Default Name</myName>
                         <myID>4</myID>
-                        <myImageViewName>blue_ball.png</myImageViewName>
+                        <myImageViewName>fireball.png</myImageViewName>
                         <myHeading>0.0</myHeading>
                         <myImageViewSize>0.0</myImageViewSize>
                         <myRuleManager>
@@ -64,7 +64,7 @@
                                       <myFriction>0.0</myFriction>
                                       <myName>Default Name</myName>
                                       <myID>3</myID>
-                                      <myImageViewName>goomba.png</myImageViewName>
+                                      <myImageViewName>alien1.png</myImageViewName>
                                       <myHeading>0.0</myHeading>
                                       <myImageViewSize>0.0</myImageViewSize>
                                       <myRuleManager>
@@ -107,7 +107,7 @@
                                       <myStates/>
                                       <mySprite>
                                         <myImages>
-                                          <string>goomba.png</string>
+                                          <string>alien1.png</string>
                                         </myImages>
                                         <spriteIndex>0</spriteIndex>
                                       </mySprite>
@@ -154,7 +154,7 @@
                         <myStates/>
                         <mySprite>
                           <myImages>
-                            <string>blue_ball.png</string>
+                            <string>fireball.png</string>
                           </myImages>
                           <spriteIndex>0</spriteIndex>
                         </mySprite>
@@ -170,18 +170,30 @@
                         <myScaleX>1.0</myScaleX>
                         <myScaleY>1.0</myScaleY>
                       </mySpawnedActor>
-                      <spawnAngle>45.0</spawnAngle>
+                      <spawnAngle>70.0</spawnAngle>
+                    </myAction>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
+                      <myKey>Space</myKey>
+                      <myKeyCode>SPACE</myKeyCode>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.Spawn">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <ZERO>0.0</ZERO>
+                      <mySpawnedActor class="gameengine.model.Actor" reference="../../../gameengine.model.Rule/myAction/mySpawnedActor"/>
+                      <spawnAngle>110.0</spawnAngle>
                     </myAction>
                   </gameengine.model.Rule>
                 </list>
               </entry>
               <entry>
-                <string>Left</string>
+                <string>A</string>
                 <list>
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.KeyTrigger">
-                      <myKey>Left</myKey>
-                      <myKeyCode>LEFT</myKeyCode>
+                      <myKey>A</myKey>
+                      <myKeyCode>A</myKeyCode>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.MoveLeft">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
@@ -190,14 +202,30 @@
                 </list>
               </entry>
               <entry>
-                <string>Right</string>
+                <string>D</string>
                 <list>
                   <gameengine.model.Rule>
                     <myTrigger class="gameengine.model.Triggers.KeyTrigger">
-                      <myKey>Right</myKey>
-                      <myKeyCode>RIGHT</myKeyCode>
+                      <myKey>D</myKey>
+                      <myKeyCode>D</myKeyCode>
                     </myTrigger>
                     <myAction class="gameengine.model.Actions.MoveRight">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+              <entry>
+                <string>TopCollision</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.TopCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../entry/list/gameengine.model.Rule/myAction/mySpawnedActor/myRuleManager/myRules/entry/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.Destroy">
                       <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
                     </myAction>
                   </gameengine.model.Rule>
@@ -312,7 +340,150 @@
           <myScaleX>1.0</myScaleX>
           <myScaleY>1.0</myScaleY>
         </gameengine.model.Actor>
-        <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[5]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+        <gameengine.model.Actor>
+          <changed>false</changed>
+          <obs/>
+          <x>700.0</x>
+          <y>0.0</y>
+          <veloX>0.0</veloX>
+          <veloY>0.0</veloY>
+          <myFriction>0.0</myFriction>
+          <myName>Default Name</myName>
+          <myID>100</myID>
+          <myImageViewName>spaceship2.png</myImageViewName>
+          <myHeading>0.0</myHeading>
+          <myImageViewSize>0.0</myImageViewSize>
+          <myRuleManager>
+            <myRules>
+              <entry>
+                <string>Left</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
+                      <myKey>Left</myKey>
+                      <myKeyCode>LEFT</myKeyCode>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.MoveLeft">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+              <entry>
+                <string>Command</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
+                      <myKey>Command</myKey>
+                      <myKeyCode>COMMAND</myKeyCode>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.Spawn">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <ZERO>0.0</ZERO>
+                      <mySpawnedActor class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor/myRuleManager/myRules/entry/list/gameengine.model.Rule/myAction/mySpawnedActor"/>
+                      <spawnAngle>70.0</spawnAngle>
+                    </myAction>
+                  </gameengine.model.Rule>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
+                      <myKey>Command</myKey>
+                      <myKeyCode>COMMAND</myKeyCode>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.Spawn">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <ZERO>0.0</ZERO>
+                      <mySpawnedActor class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor/myRuleManager/myRules/entry/list/gameengine.model.Rule/myAction/mySpawnedActor"/>
+                      <spawnAngle>110.0</spawnAngle>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+              <entry>
+                <string>TopCollision</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.TopCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor/myRuleManager/myRules/entry/list/gameengine.model.Rule/myAction/mySpawnedActor/myRuleManager/myRules/entry/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.Destroy">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+              <entry>
+                <string>Right</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.KeyTrigger">
+                      <myKey>Right</myKey>
+                      <myKeyCode>RIGHT</myKeyCode>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.MoveRight">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+              <entry>
+                <string>Tick</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.TickTrigger">
+                      <myInterval>1</myInterval>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.ApplyPhysics">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+              <entry>
+                <string>BottomCollision</string>
+                <list>
+                  <gameengine.model.Rule>
+                    <myTrigger class="gameengine.model.Triggers.BottomCollision">
+                      <myMainActor class="gameengine.model.Actor" reference="../../../../../../.."/>
+                      <myCollisionActor class="gameengine.model.Actor" reference="../../../../../../../../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
+                      <oneTime>false</oneTime>
+                      <resolvedCollisions/>
+                    </myTrigger>
+                    <myAction class="gameengine.model.Actions.VerticalStaticCollision">
+                      <myGameElement class="gameengine.model.Actor" reference="../../../../../../.."/>
+                    </myAction>
+                  </gameengine.model.Rule>
+                </list>
+              </entry>
+            </myRules>
+          </myRuleManager>
+          <myAttributeManager>
+            <attributeMap/>
+          </myAttributeManager>
+          <myStates>
+            <gameengine.model.ActorState>MAIN</gameengine.model.ActorState>
+          </myStates>
+          <mySprite>
+            <myImages>
+              <string>spaceship2.png</string>
+            </myImages>
+            <spriteIndex>0</spriteIndex>
+          </mySprite>
+          <myNextValues>
+            <nextXVelo>0.0</nextXVelo>
+            <nextXPos>0.0</nextXPos>
+            <nextYVelo>0.0</nextYVelo>
+            <nextYPos>0.0</nextYPos>
+            <collision>false</collision>
+          </myNextValues>
+          <myRotate>0.0</myRotate>
+          <myOpacity>1.0</myOpacity>
+          <myScaleX>1.0</myScaleX>
+          <myScaleY>1.0</myScaleY>
+        </gameengine.model.Actor>
+        <gameengine.model.Actor reference="../gameengine.model.Actor/myRuleManager/myRules/entry[6]/list/gameengine.model.Rule/myTrigger/myCollisionActor"/>
       </myActors>
       <myName>Default</myName>
       <myHeight>800.0</myHeight>
@@ -355,8 +526,8 @@
   </levels>
   <info>
     <myName>TDS</myName>
-    <myImageName>default_game.jpg</myImageName>
-    <myDescription>This is a scrolling game.</myDescription>
+    <myImageName>space.png</myImageName>
+    <myDescription>This is a top-down shooter game.</myDescription>
     <myCurrentLevelNum>0</myCurrentLevelNum>
     <myHUDElementsToDisplay/>
     <myFile>TDS.xml</myFile>

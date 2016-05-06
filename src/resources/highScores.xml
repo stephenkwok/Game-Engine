@@ -3,36 +3,32 @@
   <obs/>
   <myScores>
     <entry>
-      <string>gamefiles/loaders/test2_loader.xml</string>
+      <string>mario14.xml</string>
       <tree-map>
         <entry>
-          <string>Luigi</string>
-          <int>38</int>
+          <string>carine</string>
+          <int>4</int>
         </entry>
         <entry>
-          <string>Maria</string>
-          <int>5</int>
+          <string>colette</string>
+          <int>15</int>
         </entry>
         <entry>
-          <string>Mario</string>
-          <int>5</int>
+          <string>duvall</string>
+          <int>77</int>
+        </entry>
+        <entry>
+          <string>michelle</string>
+          <int>91</int>
         </entry>
       </tree-map>
     </entry>
     <entry>
-      <string>gamefiles/loaders/FlappyBird_loader.xml</string>
+      <string>michaelMario</string>
       <tree-map>
         <entry>
-          <string>b0$$</string>
-          <int>1895</int>
-        </entry>
-        <entry>
-          <string>michael figueiras</string>
-          <int>75</int>
-        </entry>
-        <entry>
-          <string>michaelf</string>
-          <int>205</int>
+          <string>michael</string>
+          <int>193</int>
         </entry>
       </tree-map>
     </entry>

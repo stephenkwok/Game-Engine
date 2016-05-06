@@ -90,34 +90,68 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	 */
 	public abstract boolean isTrigger();
 
+	/**
+	 * Return value.
+	 * @return value.
+	 */
 	public double getValue() {
 		return value;
 	}
 
+	/**
+	 * Return behavior type.
+	 * @return behavior type.
+	 */
 	protected String getBehaviorType() {
 		return this.behaviorType;
 	}
 
+	/**
+	 * Return trigger factory.
+	 * @return trigger factory.
+	 */
 	protected TriggerFactory getTriggerFactory() {
 		return this.triggerFactory;
 	}
 
+	/**
+	 * Return action factory.
+	 * @return action factory.
+	 */
 	protected ActionFactory getActionFactory() {
 		return this.actionFactory;
 	}
 
+	/**
+	 * Sets the trigger.
+	 * @param key: key for trigger class.
+	 * @param value: trigger to return.
+	 */
 	public void setTrigger(IAuthoringBehavior key, ITrigger value) {
 		myActorRule.setTrigger(key, value);
 	}
 
+	/**
+	 * Sets the action.
+	 * @param key: key for action class.
+	 * @param value: action to return.
+	 */
 	public void setAction(IAuthoringBehavior key, IAction value) {
 		myActorRule.setAction(key, value);
 	}
 	
+	/**
+	 * Gets the actor rule.
+	 * @return: actor rule.
+	 */
 	protected ActorRule getActorRule(){
 		return this.myActorRule;
 	}
 	
+	/**
+	 * Gets the rule.
+	 * @return: rule.
+	 */
 	protected IRule getMyRule(){
 		return this.myRule;
 	}

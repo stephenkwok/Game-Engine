@@ -70,10 +70,6 @@ public class CreateActor extends Action {
 		return myActorToCopy;
 	}
 	
-	public void printCoordinates(){
-		System.out.println(myX + " " + myY + " " + myMinX + " " + myMaxX + " " + myMinY + " " + myMaxY);
-	}
-	
 	public boolean isRandom(){
 		return isRandom;
 	}

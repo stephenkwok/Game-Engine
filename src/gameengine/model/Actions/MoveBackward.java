@@ -3,7 +3,7 @@ package gameengine.model.Actions;
 import gameengine.model.Actor;
 
 /**
- * Moves Actor in the direction of its heading
+ * Moves Actor against the direction of its heading
  *
  * @author justinbergkamp
  */

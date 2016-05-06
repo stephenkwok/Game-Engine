@@ -13,6 +13,10 @@ import javafx.scene.layout.Pane;
  */
 public interface IGUI {
 
+	/**
+	 * Returns the content.
+	 * @return pane with content.
+	 */
 	Pane getPane();
 
 }

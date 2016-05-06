@@ -23,7 +23,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-
+/**
+ * Returns top left corner of the Actor Editing Environment where the user can see the Actor image and set this image.
+ * @author AnnieTang
+ *
+ */
 public class ActorImageViewer implements IGUI {
 	private static final String AVAILABLE_ACTOR_IMAGES = "Available Images";
 	private static final String AVAILABLE_SPRITE_IMAGES = "Available Sprites";
@@ -90,6 +94,10 @@ public class ActorImageViewer implements IGUI {
 		return (HBox) availableImages.createNode();
 	}
 	
+	/**
+	 * Return ComboBox that allows user to select Sprite images
+	 * @return
+	 */
 	private VBox getSpritesComboBox(){
 		HBox sprites = new HBox(PADDING);
 		populateSprites(sprites);
@@ -102,12 +110,19 @@ public class ActorImageViewer implements IGUI {
 		return toReturn;
 	}
 	
+	/**
+	 * Adds elements to be observed by the Actor Editing Environment
+	 */
 	private void addObserversToElements() {
 		for (int i = 0; i < elementList.size(); i++) {
 			((ObjectObservable) elementList.get(i)).addObserver(aEE);
 		}
 	}
-
+	
+	/**
+	 * Fills ComboBox of Sprite images
+	 * @param sprites
+	 */
 	private void populateSprites(HBox sprites){
 		List<String> spriteNames = ((IAuthoringActor) aEE.getEditable()).getSprite().getMyImages();
 		for(String imageName: spriteNames){

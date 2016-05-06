@@ -182,7 +182,6 @@ public class CreateActorBehavior extends SelectActorBehavior {
 				minY.setText(""+coordinates.get(4));
 				maxY.setText(""+coordinates.get(5));
 			}else{
-				System.out.println("not random");
 				minX.setText(""+coordinates.get(0));
 				maxX.setText(""+coordinates.get(1));
 			}

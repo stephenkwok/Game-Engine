@@ -37,8 +37,7 @@ public class SelfTriggerBehavior extends LabelBehavior {
 
 	@Override
 	public void updateValueBasedOnEditable() {
-		// TODO Auto-generated method stub
-		
+		// do nothing
 	}
 
 }

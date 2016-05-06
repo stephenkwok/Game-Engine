@@ -3,7 +3,7 @@ package gameengine.model.Actions;
 import gameengine.model.Actor;
 
 /**
- * An example of an Action to move an Actor right by a given distance.
+ * An example of an Action to move an Actor right by a force.
  *
  * @author blakekaplan
  */

@@ -11,6 +11,9 @@ import javafx.scene.control.Alert;
 
 public class AlertGenerator extends Alert {
 	
+	/**
+	 * Generates an Alert of the type ERROR
+	 */
 	public AlertGenerator() {
 		super(AlertType.ERROR);
 	}
