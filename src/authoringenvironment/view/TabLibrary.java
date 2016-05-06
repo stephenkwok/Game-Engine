@@ -1,31 +1,31 @@
+/**
+ * This entire file is part of my masterpiece.
+ * Annie Tang
+ * 
+ *   The purpose of this code is to allow the user to create tabs with draggable content that they can
+ *   place in authoring environment's library, or elsewhere. It contains all the logic for setting drag events.
+ *   The things that are abstracted are what the content of each tab is. 
+ *   
+ *   This is good code because it does not have any code smells (see GUILibrary no code smells). It also utilizes
+ *   lambda expressions, which is something we learned in class this semester. This class also sets up a hierarchy 
+ *   for library tabs that is easily extensible (see TabLibraryBehaviors, TabLibrarySounds). Also, instead of using 
+ *   protected variables, I have getters and setters for the variables that will be needed by subclasses.  
+ */
 package authoringenvironment.view;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import authoringenvironment.model.ActorRule;
-import authoringenvironment.model.ActorRuleCreator;
+import java.util.*;
+import authoringenvironment.model.*;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.*;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 /**
  * Abstract class for library tabs, so each Node in the tabs are draggable.
- * 
+ * Drag/Drop event handling code mostly acquired from Oracle.
  * @author AnnieTang
  *
  */
@@ -62,12 +62,15 @@ abstract class TabLibrary extends TabParent {
 	 * @param transferMode
 	 */
 	protected void setDragEvent(Label source, TransferMode transferMode) {
+		/*refactored this for masterpiece, realized I did not need all three arguments (source, transferMode, 
+		 * rule.getGridPane()) for all drag methods.
+		 */
 		for (ActorRule rule : myActorRules) {
-			setDragDetected(source, rule.getGridPane(), transferMode);
-			setDragOver(source, rule.getGridPane(), transferMode);
-			setDragEntered(source, rule.getGridPane());
-			setDragExited(source, rule.getGridPane());
-			setDragDropped(source, rule.getGridPane(), rule);
+			setDragDetected(source, transferMode);
+			setDragOver(rule.getGridPane(), transferMode);
+			setDragEntered(rule.getGridPane());
+			setDragExited(rule.getGridPane());
+			setDragDropped(rule.getGridPane(), rule);
 		}
 	}
 
@@ -78,15 +81,16 @@ abstract class TabLibrary extends TabParent {
 	 * @param myTarget
 	 * @param transferMode
 	 */
-	private void setDragDetected(Label mySource, GridPane myTarget, TransferMode transferMode) {
-		mySource.setOnDragDetected(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-				Dragboard db = mySource.startDragAndDrop(transferMode);
-				ClipboardContent content = new ClipboardContent();
-				content.putString(mySource.getText());
-				db.setContent(content);
-				event.consume();
-			}
+	private void setDragDetected(Label mySource, TransferMode transferMode) {
+		/*
+		 * Refactored to use lambda expressions
+		 */
+		mySource.setOnDragDetected(event -> {
+			Dragboard db = mySource.startDragAndDrop(transferMode);
+			ClipboardContent content = new ClipboardContent();
+			content.putString(mySource.getText());
+			db.setContent(content);
+			event.consume();
 		});
 
 	}
@@ -98,14 +102,15 @@ abstract class TabLibrary extends TabParent {
 	 * @param myTarget
 	 * @param transferMode
 	 */
-	private void setDragOver(Label mySource, GridPane myTarget, TransferMode transferMode) {
-		myTarget.setOnDragOver(new EventHandler<DragEvent>() {
-			public void handle(DragEvent event) {
-				if (event.getGestureSource() != myTarget && event.getDragboard().hasString()) {
-					event.acceptTransferModes(transferMode);
-				}
-				event.consume();
+	private void setDragOver(GridPane myTarget, TransferMode transferMode) {
+		/*
+		 * Refactored to use lambda expressions
+		 */
+		myTarget.setOnDragOver(event -> {
+			if (event.getGestureSource() != myTarget && event.getDragboard().hasString()) {
+				event.acceptTransferModes(transferMode);
 			}
+			event.consume();
 		});
 	}
 
@@ -115,15 +120,16 @@ abstract class TabLibrary extends TabParent {
 	 * @param mySource
 	 * @param myTarget
 	 */
-	private void setDragEntered(Label mySource, GridPane myTarget) {
-		myTarget.setOnDragEntered(new EventHandler<DragEvent>() {
-			public void handle(DragEvent event) {
-				if (event.getGestureSource() != myTarget && event.getDragboard().hasString()) {
-					myTarget.setBackground(new Background(
-							new BackgroundFill(Color.PALEGREEN, new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
-				}
-				event.consume();
+	private void setDragEntered(GridPane myTarget) {
+		/*
+		 * Refactored to use lambda expressions
+		 */
+		myTarget.setOnDragEntered(event -> {
+			if (event.getGestureSource() != myTarget && event.getDragboard().hasString()) {
+				myTarget.setBackground(new Background(
+						new BackgroundFill(Color.PALEGREEN, new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
 			}
+			event.consume();
 		});
 	}
 
@@ -133,13 +139,14 @@ abstract class TabLibrary extends TabParent {
 	 * @param mySource
 	 * @param myTarget
 	 */
-	private void setDragExited(Label mySource, GridPane myTarget) {
-		myTarget.setOnDragExited(new EventHandler<DragEvent>() {
-			public void handle(DragEvent event) {
-				myTarget.setBackground(new Background(
-						new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
-				event.consume();
-			}
+	private void setDragExited(GridPane myTarget) {
+		/*
+		 * Refactored to use lambda expressions
+		 */
+		myTarget.setOnDragExited(event -> {
+			myTarget.setBackground(new Background(
+					new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(CORNER_RADIUS), Insets.EMPTY)));
+			event.consume();
 		});
 	}
 
@@ -150,18 +157,19 @@ abstract class TabLibrary extends TabParent {
 	 * @param myTarget
 	 * @param myActorRule
 	 */
-	private void setDragDropped(Label mySource, GridPane myTarget, ActorRule myActorRule) {
-		myTarget.setOnDragDropped(new EventHandler<DragEvent>() {
-			public void handle(DragEvent event) {
-				Dragboard db = event.getDragboard();
-				boolean success = false;
-				if (db.hasString()) {
-					addNodeToTarget(new Label(event.getDragboard().getString()), myActorRule);
-					success = true;
-				}
-				event.setDropCompleted(success);
-				event.consume();
+	private void setDragDropped(GridPane myTarget, ActorRule myActorRule) {
+		/*
+		 * Refactored to use lambda expressions
+		 */
+		myTarget.setOnDragDropped(event -> {
+			Dragboard db = event.getDragboard();
+			boolean success = false;
+			if (db.hasString()) {
+				addNodeToTarget(new Label(event.getDragboard().getString()), myActorRule);
+				success = true;
 			}
+			event.setDropCompleted(success);
+			event.consume();
 		});
 	}
 

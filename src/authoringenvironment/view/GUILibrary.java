@@ -1,3 +1,18 @@
+/**
+ * This entire file is part of my masterpiece.
+ * Annie Tang  
+ * 
+ * The purpose of this code is to provide the user with a library of actions, triggers, and sounds that the
+ * user can click and drag into the Actor Rule Creator to create ActorRules and implement game engine
+ * Rules (Trigger -> Action) in the authoring environment. 
+ * 
+ * This code is well designed not necessarily because it implements a specific design pattern (most of the design patterns
+ * we learned about are also not naturally implemented by front-end code) but because it doesn't have any code smells- 
+ * no long methods, not a large class, no duplicated code, no magic numbers/Strings, no public variables. 
+ * It also demonstrates an appropriate use of a properties file and the TabParent class hierarchy that I created 
+ * (expanded upon more in those classes). 
+ * 
+ */
 package authoringenvironment.view;
 
 import java.util.ResourceBundle;
@@ -10,7 +25,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 /**
- * Returns library of available game behaviors, images, and sounds
+ * Returns library of available game behaviors (actions and triggers) and sounds
  * 
  * @author AnnieTang
  *

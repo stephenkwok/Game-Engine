@@ -1,3 +1,13 @@
+/**
+ * This entire file is part of my masterpiece.
+ * Annie Tang
+ * 
+ *   The purpose of this class is to allow users to easily create scrollable JavaFX Tabs. 
+ *   
+ *   This class is good code because it shows a good use of an inheritance hierarchy. It also does not have any code 
+ *   smells (see GUILibrary no code smells explanation SORRY I KEEP SAYING THAT!), and uses private variables with
+ *   getters instead of protected or public variables. It also is a good use of a properties file. 
+ */
 package authoringenvironment.view;
 
 import java.io.File;
