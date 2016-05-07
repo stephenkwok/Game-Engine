@@ -6,8 +6,8 @@
 // same view elements to edit different levels or different actors. Our ActorEditingEnvironment, LevelEditingEnvironment, and GameEditingEnvironments are 
 // designed such that when their setEditableElement() method is called, it updates the editable element for all of the IEditingElements contained within it,
 // and those do the same for any of their child IEditingElements. This cascade allows for a particular actor or level's attributes (e.g. name, size, image) 
-// to be reflected in the view elements of the editing environment so that the user can easily see the attributes they've already chosen. This interface is 
-// simple and clearly demonstrates a unique purpose of all elements that implement this interface, and also enhances user friendliness.
+// to be reflected in the view elements of the editing environment so that the user can easily see the attributes they've already chosen. This interface 
+// is good code because it is simple and clearly demonstrates a unique functionality of all elements that implement this interface, while also enhancing user friendliness 
 
 package authoringenvironment.model;
 
