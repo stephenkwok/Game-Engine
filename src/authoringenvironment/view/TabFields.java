@@ -50,6 +50,7 @@ public class TabFields extends TabParent {
 	private static final String EDITOR_ELEMENTS = "EditorElements";
 	private static final String DELIMITER = ",";
 	private static final String ERROR_MESSAGE = "ErrorMessage";
+	private static final String SPACE = " ";
 	private ResourceBundle myAttributesResources;
 	private GUIFactory myFactory;
 	private VBox myContent;
@@ -124,7 +125,8 @@ public class TabFields extends TabParent {
 			myEditingElements.add((IEditingElement) elementToCreate);
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setContentText(elementToCreate.getClass().getSimpleName() + myAttributesResources.getString(ERROR_MESSAGE));
+			alert.setContentText(elementToCreate.getClass().getSimpleName() +
+					SPACE + myAttributesResources.getString(ERROR_MESSAGE));
 			Optional<ButtonType> result = alert.showAndWait();
 		}
 	}
