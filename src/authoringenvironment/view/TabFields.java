@@ -37,7 +37,7 @@ public class TabFields extends TabParent {
 	 * @param controller:
 	 *            controller for this authoring environment.
 	 * @param myResources:
-	 *            resource bundle for the authoring environment.
+	 *            resource bundle for the authoring environment (used by super class).
 	 * @param tabText:
 	 *            name of this tab.
 	 * @param optionsResource:
@@ -54,14 +54,6 @@ public class TabFields extends TabParent {
 		myEditableElement = element;
 		myEditingElements = new ArrayList<>();
 		addElements();
-	}
-
-	/**
-	 * Sets the editing environment that's observing this tab.
-	 * @param observer: editing environment.
-	 */
-	public void setObserver(IEditingEnvironment observer) {
-		myEditingElements.stream().forEach(element -> ((EditingElementParent) element).addObserver(observer));
 	}
 
 	/**
@@ -103,7 +95,15 @@ public class TabFields extends TabParent {
 		}
 		return createdElements;
 	}
-
+	
+	/**
+	 * Add element to the container.
+	 * @param element: element to add.
+	 */
+	public void addElement(IGUIElement element) {
+		myContent.getChildren().add(element.createNode());
+	}
+	
 	/**
 	 * Updates the editable element that each attribute tab element is
 	 * modifying.
@@ -117,11 +117,11 @@ public class TabFields extends TabParent {
 	}
 
 	/**
-	 * Add element to the container.
-	 * @param element: element to add.
+	 * Sets the editing environment that's observing this tab.
+	 * @param observer: editing environment.
 	 */
-	public void addElement(IGUIElement element) {
-		myContent.getChildren().add(element.createNode());
+	public void setObserver(IEditingEnvironment observer) {
+		myEditingElements.stream().forEach(element -> ((EditingElementParent) element).addObserver(observer));
 	}
 	
 	/**
