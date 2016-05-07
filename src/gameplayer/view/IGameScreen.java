@@ -42,20 +42,6 @@ public interface IGameScreen {
 	public void changeCamera(double x, double y);
 
 	/**
-	 * Turns background music on the scene on or off.
-	 * 
-	 * @param disable
-	 */
-	public void disableMusic(boolean disable);
-
-	/**
-	 * Turns all scene's actors' sound effects on or off.
-	 * 
-	 * @param disable
-	 */
-	public void disableSoundFX(boolean disable);
-
-	/**
 	 * Removes an actor from the game's scene's root
 	 * @param IDisplayActor
 	 */
@@ -75,17 +61,7 @@ public interface IGameScreen {
 	/**
 	 * Stops the game
 	 */
-	public void togglePause();
-
-	/**
-	 * Continues the game
-	 */
-	public void toggleUnPause();
-
-	/**
-	 * Clears current game to allow for a new game to be started
-	 */
-	public void restartGame();
+	public void togglePause(boolean pause);
 
 	/**
 	 * Returns the SubScene
@@ -97,5 +73,6 @@ public interface IGameScreen {
 	 */
 	public void terminateGame(boolean win);
 
+	public void showError(String message);
 
 }

@@ -110,7 +110,7 @@ public abstract class Screen extends Observable implements IScreen {
 		  Alert alert = new Alert(Alert.AlertType.ERROR);
 		  if(message == null) message = NULL_ERROR;
 	      alert.setContentText(message);
-	      alert.showAndWait();
+	      alert.show();
 	}
 
 	/**

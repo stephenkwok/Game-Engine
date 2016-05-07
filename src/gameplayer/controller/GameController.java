@@ -115,7 +115,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	 */
 	public void endGame(boolean win) {
 		model.stopGame();
-		view.togglePause();
+		view.togglePause(true);
 		if (myMode == PlayType.PLAY) {
 			view.terminateGame(win);
 		}
@@ -203,9 +203,8 @@ public class GameController extends Observable implements Observer, IGameControl
 			}
 		} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | IllegalAccessException
 				| InvocationTargetException | NoSuchMethodException e1) {
-			Object[] args = {"showGameError", e1};
-			setChanged();
-			notifyObservers(Arrays.asList(args));
+			e1.printStackTrace();
+			view.showError(e1.getMessage());
 		}
 	}
 
@@ -231,13 +230,13 @@ public class GameController extends Observable implements Observer, IGameControl
 	@Override
 	public void togglePause() {
 		model.stopGame();
-		view.togglePause();
+		view.togglePause(true);
 	}
 
 	@Override
 	public void toggleUnPause() {
 		model.toggleUnPause();
-		view.toggleUnPause();
+		view.togglePause(false);
 	}
 
 	/**
@@ -247,7 +246,7 @@ public class GameController extends Observable implements Observer, IGameControl
 	@Override
 	public void restartGame() {
 		togglePause();
-		view.restartGame();
+		view.clearGame();
 		ParserController parserController = new ParserController();
 		Game initialGame = parserController.loadforPlaying(new File(getGame().getInitialGameFile()));
 		setGame(initialGame);
