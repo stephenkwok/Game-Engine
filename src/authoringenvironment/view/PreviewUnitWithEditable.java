@@ -37,7 +37,7 @@ public class PreviewUnitWithEditable extends ObjectObservable implements IEditin
 		myEditable = editable;
 		myLabel = new Label();
 		myLabel.setPadding(new Insets(LABEL_PADDING));
-		myLabel.setOnMouseClicked(e -> notifyObservers(myEditable));
+		myLabel.setOnMouseClicked(e -> notifyObservers(editable));
 		myLabel.wrapTextProperty().setValue(true);
 		myHBox = new HBox(myLabel);
 		myHBox.setAlignment(Pos.CENTER_LEFT);

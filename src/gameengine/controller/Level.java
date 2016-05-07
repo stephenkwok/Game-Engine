@@ -62,7 +62,6 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	private String soundtrack;
 	private List<IPlayActor> myGarbageCollectors;
 	private IPlayGame myGame;
-	private boolean toBeDeleted;
 	
 	/**
 	 * Instantiates the triggerMap and Actor list
@@ -80,7 +79,6 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		myName = DEFAULT_NAME;
 		myHeight = DEFAULT_HEIGHT;
 		myWidth = DEFAULT_WIDTH;
-		toBeDeleted = false;
 		myRuleManager = new RuleManager();
 		myMainCharacters = new ArrayList<>();
 		myGarbageCollectors = new ArrayList<>();
