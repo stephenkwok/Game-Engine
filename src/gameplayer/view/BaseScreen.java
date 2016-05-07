@@ -1,7 +1,21 @@
+//This entire file is part of my masterpiece.
+// Michael Figueiras, The Loops Goat Cheese Salad
+/*
+ * This class is intended to display the main screen of our program, where games are played (and subsequent HUD data visually updated)
+ * and high level program operations (like switching the game or exiting to the splash screen) take place. It serves as an example
+ * implementation of the superclass Screen in the gui.view package. 
+ * 
+ * Good design principles are evident here in the reuse of parent methods like notifying controllers of user input changes and also
+ * in modeling the "is-a" relationship (i.e. BaseScreen, as well as all other screens, is-a Screen) between implementation and inheritance. In terms of code change ripple effects, the consequences 
+ * of edits to the superclass are minimized since the relationship between these two classes will always exist in an inheritance fashion,
+ * meaning that changes to one will always need to take effect in the other (in other words, a BaseScreen will always need to
+ * do the work of a Screen). This reinforces open-closed extension capabilities while maintaining the flexibility 
+ * of this class to employ its superclass's methods.
+ * 
+ * See Screen in the gui.view package to see how this is an extension of the superclass.
+ */
 package gameplayer.view;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Optional;
@@ -10,7 +24,6 @@ import gui.view.IGUIElement;
 import gui.view.Screen;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import voogasalad.util.hud.source.AbstractHUDScreen;
 
@@ -25,81 +38,57 @@ public class BaseScreen extends Screen implements Observer, IBaseScreen {
 
 	private static final String BASE_RESOURCE = "gameGUI";
 	private static final String SIDE_BUTTONS = "SideButtons";
-
-	private BorderPane myPane;
 	private IGameScreen myGameScreen;
 	private AbstractHUDScreen hud;
 
 	/**
 	 * Adds the auxiliary views, like the HUD display, ToolBar, and GameScreen,
 	 * to the BaseScreen
-	 * 
-	 * @param stage
-	 *            to change the scene
-	 * @param game
-	 *            to initialize the gamescreen with
-	 * @throws InvocationTargetException
-	 * @throws IllegalArgumentException
-	 * @throws IllegalAccessException
-	 * @throws InstantiationException
 	 */
 	public BaseScreen() {
 		super();
-		this.myPane = new BorderPane();
 		setUpResourceBundle(BASE_RESOURCE);
-		initialize();
+		initialize(SIDE_BUTTONS);
 	}
 
-	
 	public void setGameScreen(IGameScreen iGameScreen) {
 		this.myGameScreen = iGameScreen;
-		this.myPane.setCenter(myGameScreen.getScene());
+		super.getPane().setCenter(myGameScreen.getScene());
 	}
 
-	
-	
 	public void setHUDScreen(AbstractHUDScreen screen) {
 		this.hud = screen;
-		IGUIElement hudPane = getFactory().createNewGUIObject("hudPane");
+		IGUIElement hudPane = super.getFactory().createNewGUIObject("hudPane");
 		Pane myP = (Pane) hudPane.createNode();
 		myP.getChildren().add(hud.getScene());
-		this.myPane.setBottom(myP);
+		super.getPane().setBottom(myP);
 	}
 
+	/**
+	 * JavaFX Observer method
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		setChanged();
 		notifyObservers(arg);
 	}
 
-	
+	/**
+	 * Prompts the user for the appropriate controller decisions, like whether
+	 * to return to splash or restart, based on how the game ended
+	 */
 	public void switchAlert() {
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, getResources().getString("SwitchConfirmation"),
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, super.getResources().getString("SwitchConfirmation"),
 				ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.YES) {
-			setChanged();
-			Object[] methodArg = { "saveGame", null };
-			notifyObservers(Arrays.asList(methodArg));
-			setChanged();
-			Object[] methodArg2 = { "chooseGame", null };
-			notifyObservers(Arrays.asList(methodArg2));
+			sendChange("saveGame", null);
+			sendChange("chooseGame", null);
 		} else if (result.get() == ButtonType.NO) {
-			setChanged();
-			Object[] methodArg = { "chooseGame", null };
-			notifyObservers(Arrays.asList(methodArg));
+			sendChange("chooseGame", null);
 		} else {
-			setChanged();
-			Object[] methodArg = { "toggleUnPause", null };
-			notifyObservers(Arrays.asList(methodArg));
+			sendChange("toggleUnPause", null);
 		}
-
-	}
-
-	@Override
-	protected void initialize() {
-		myPane.setTop(addToolbar(SIDE_BUTTONS));
-		getRoot().getChildren().add(myPane);
 
 	}
 }
