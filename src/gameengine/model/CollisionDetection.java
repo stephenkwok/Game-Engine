@@ -1,10 +1,27 @@
+// This entire file is part of my masterpiece.
+// JUSTIN BERGKAMP
+
+/**
+ * This class utilizes a variety of tactics and techniques that we've learned throughout the course. 
+ * One is error handling, which in this case also uses lambda expression
+ * The major code technique used in this class is reflection. After the type of collision is determined by the 
+ * Minkowski Sum, the class uses reflection to create a trigger, which the actor then acts upon. 
+ * The reflection also utilizes a property file rather than in if statement chain. 
+ * More generally, the biggest idea I took from this course is the importance of singularity of purpose
+ * Each class, and each method should have a single responsibility. 
+ * This is certainly true in this case: the class takes in a list of actors, and resolves collisions
+ * I appreciated this modularity. 
+ */
+
 package gameengine.model;
 
 import java.lang.reflect.Constructor;
 import java.util.List;
-
 import gameengine.model.Triggers.CollisionTrigger;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 
 /**
  * Collision Detection class handles checking for collisions among a list of
@@ -155,7 +172,9 @@ public class CollisionDetection {
 			CollisionTrigger myTrigger = (CollisionTrigger) myConstructors[0].newInstance(a1, a2,false);
 			a1.handleTrigger(myTrigger);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.showAndWait()
+		      .filter(response -> response == ButtonType.OK);
 		}
 	}
 	public PhysicsEngine getMyPhysicsEngine() {
