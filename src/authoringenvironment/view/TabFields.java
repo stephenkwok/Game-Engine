@@ -1,12 +1,28 @@
 // This entire file is part of my masterpiece.
 // Amy Zhao
 
-//
+// The purpose of this class within the context of our VOOGASalad project is to create the tab in both the
+// Actor Editing Environment and the Level Editing Environment that contains all of the view elements (e.g.
+// ComboBoxes, TextFields, etc.) that edit the actor or level's name, size, and other fields. It creates these
+// elements, controls the updating of their values to reflect the current level or actor being updated, and also
+// allows for an Editing Environment to attach itself as an observer that is notified whenever a field of an
+// actor or level is updated.
+
+// This class is well-designed because none of the elements it creates are hard-coded. All of the elements for the
+// actor editing environment's TabField tab and all of the elements for the level editing environment's TabField tab
+// are specified in properties files (myAttributesResources)--the only requirement being that all of the elements 
+// implement both IGUIElement and IEditingElement so that. This allows for all of the elements to be created easily 
+// using the GUIFactory using reflection, and for all of the elements' setEditable() methods to be called easily in
+// this class's own setEditable() method using a stream. Admittedly, casting is required to convert from the IGUIElement
+// that is created by the GUIFactory to an IEditingElement that can be added into the myEditingElements list, but this
+// is done through the addToEditingElementsList() method which will check that the element can be safely cast to an
+// IEditingElement and display an error alert if not.
 
 package authoringenvironment.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import authoringenvironment.model.IEditableGameElement;
@@ -17,11 +33,14 @@ import gui.view.GUIFactory;
 import gui.view.IGUIElement;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 
 /**
- * Tab for setting attributes to go in the Inspector Pane in either the Level or
- * Actor Editing Environment GUI.
+ * Tab for setting attributes to be displayed in the Inspector Pane in both the Level and
+ * Actor Editing Environments.
  * 
  * @author amyzhao
  *
@@ -30,6 +49,7 @@ public class TabFields extends TabParent {
 	private static final int PADDING = 10;
 	private static final String EDITOR_ELEMENTS = "EditorElements";
 	private static final String DELIMITER = ",";
+	private static final String ERROR_MESSAGE = "ErrorMessage";
 	private ResourceBundle myAttributesResources;
 	private GUIFactory myFactory;
 	private VBox myContent;
@@ -70,7 +90,7 @@ public class TabFields extends TabParent {
 		updateCurrentEditable(myEditableElement);
 		myContent = editingElementContainer;
 	}
-	
+
 	/**
 	 * Creates and formats a VBox to hold all of the IEditingElements in this tab.
 	 * @return VBox containing all of the desired IEditingElements.
@@ -94,11 +114,21 @@ public class TabFields extends TabParent {
 		for (int i = 0; i < elements.length; i++) {
 			IGUIElement elementToCreate = myFactory.createNewGUIObject(elements[i]);
 			createdElements.add(elementToCreate.createNode());
-			myEditingElements.add((IEditingElement) elementToCreate);
+			addToEditingElementsList(elementToCreate);
 		}
 		return createdElements;
 	}
-	
+
+	private void addToEditingElementsList(IGUIElement elementToCreate) {
+		if (IEditingElement.class.isAssignableFrom(elementToCreate.getClass())) {
+			myEditingElements.add((IEditingElement) elementToCreate);
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText(elementToCreate.getClass().getSimpleName() + myAttributesResources.getString(ERROR_MESSAGE));
+			Optional<ButtonType> result = alert.showAndWait();
+		}
+	}
+
 	/**
 	 * Add element to the container.
 	 * @param element: element to add.
@@ -106,7 +136,7 @@ public class TabFields extends TabParent {
 	public void addElement(IGUIElement element) {
 		myContent.getChildren().add(element.createNode());
 	}
-	
+
 	/**
 	 * Updates the editable element that each attribute tab element is
 	 * modifying.
