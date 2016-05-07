@@ -1,3 +1,8 @@
+// This entire file is part of my masterpiece.
+// Amy Zhao
+
+//
+
 package authoringenvironment.view;
 
 import java.util.ArrayList;
