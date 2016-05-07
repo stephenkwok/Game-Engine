@@ -10,13 +10,19 @@
 
 // This class is well-designed because none of the elements it creates are hard-coded. All of the elements for the
 // actor editing environment's TabField tab and all of the elements for the level editing environment's TabField tab
-// are specified in properties files (myAttributesResources)--the only requirement being that all of the elements 
-// implement both IGUIElement and IEditingElement so that. This allows for all of the elements to be created easily 
-// using the GUIFactory using reflection, and for all of the elements' setEditable() methods to be called easily in
-// this class's own setEditable() method using a stream. Admittedly, casting is required to convert from the IGUIElement
+// are specified in properties files (myAttributesResources)--in theory, it is flexible enough that it could be used to construct any sort of
+// attribute inspector for any game element. The only requirement being that all of the elements implement both 
+// IGUIElement and IEditingElement so that, which allows for all of the elements to be created easily using the 
+// GUIFactory using reflection, and for all of the elements' setEditable() methods to be called easily in this 
+// class's own setEditable() method using a stream. Admittedly, casting is required to convert from the IGUIElement
 // that is created by the GUIFactory to an IEditingElement that can be added into the myEditingElements list, but this
 // is done through the addToEditingElementsList() method which will check that the element can be safely cast to an
 // IEditingElement and display an error alert if not.
+
+// Overall, this class demonstrates clean, concise code that takes advantage of interfaces (IEditingElement and IGUIElement),
+// properties files, lambdas, and streams to provide improved readability, functionality, and flexibility to the programmer.
+
+// TODO: add more about readings and stuff
 
 package authoringenvironment.view;
 
