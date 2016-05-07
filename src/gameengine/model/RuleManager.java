@@ -22,8 +22,10 @@
  * for different game elements to handle rules in their own particular manner if need be.
  * 
  * Lastly, I think this class shows good design for very basic design traits, such as being a very concise class with short 
- * methods, no duplicate code, etc.  It has also been refactored to ensure it makes use of interfaces as opposed to concrete
- * classes such that  
+ * methods, no duplicate code, and no public variables.  It has also been refactored to ensure it makes use of interfaces as opposed to concrete
+ * classes such that it adheres to the Dependency Inversion Principle that class method signatures use interfaces, allowing
+ * the RuleManager class to only have access to the exposed parts of other classes, such that encapsulation is maintained and
+ * rules, triggers, and actions can be referenced polymorphically to reduce dependencies. 
  */
 package gameengine.model;
 
