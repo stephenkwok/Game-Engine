@@ -259,7 +259,7 @@ public class LevelEditingEnvironment implements IEditingEnvironment, Observer {
 		myLevelEditingPreview.updateLevelPreview(myLevel);
 		myInspector.getGarbageCollector().setEditableElement(myLevel);
 		updateActorsList();
-		myInspector.getAttributesTab().updateEditable(myLevel);
+		myInspector.getAttributesTab().updateCurrentEditable(myLevel);
 	}
 
 	/**

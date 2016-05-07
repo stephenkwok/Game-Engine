@@ -34,18 +34,11 @@ public class TabFields extends TabParent {
 	/**
 	 * Constructor for an attributes tab.
 	 * 
-	 * @param controller:
-	 *            controller for this authoring environment.
-	 * @param myResources:
-	 *            resource bundle for the authoring environment.
-	 * @param tabText:
-	 *            name of this tab.
-	 * @param optionsResource:
-	 *            resource bundle containing info about the GUI elements for
-	 *            this attributes tab.
-	 * @param element:
-	 *            element that is being edited by this attributes tab (i.e. a
-	 *            level or an actor).
+	 * @param controller: controller for this authoring environment.
+	 * @param myResources: resource bundle for the authoring environment (required by super class TabParent).
+	 * @param tabText: name of this tab.
+	 * @param optionsResource: resource bundle containing info about the GUI elements for this attributes tab.
+	 * @param element: element that is being edited by this attributes tab (i.e. a level or an actor).
 	 */
 	public TabFields(ResourceBundle myResources, String tabText, String optionsResource, IEditableGameElement element) {
 		super(myResources, tabText);
@@ -57,13 +50,11 @@ public class TabFields extends TabParent {
 	}
 
 	/**
-	 * Sets the editing environment that's observing this tab.
+	 * Sets the editing environment that's observing this tab as an observer for each editing element.
 	 * @param observer: editing environment.
 	 */
 	public void setObserver(IEditingEnvironment observer) {
-		for (int i = 0; i < myEditingElements.size(); i++) {
-			((EditingElementParent) myEditingElements.get(i)).addObserver(observer);
-		}
+		myEditingElements.stream().forEach(element -> ((EditingElementParent) element).addObserver(observer));
 	}
 
 	/**
@@ -71,28 +62,34 @@ public class TabFields extends TabParent {
 	 * tab.
 	 */
 	private void addElements() {
-		VBox vbox = new VBox(PADDING);
-		vbox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
-		vbox.getChildren().addAll(createElements(EDITOR_ELEMENTS));
-		updateEditable(myEditableElement);
-		myContent = vbox;
+		VBox editingElementsContainer = initElementsContainer();
+		updateCurrentEditable(myEditableElement);
+		myContent = editingElementsContainer;
+	}
+
+	private VBox initElementsContainer() {
+		VBox container = new VBox(PADDING);
+		container.setPadding(new Insets(PADDING));
+		container.getChildren().addAll(createElements(EDITOR_ELEMENTS));
+		return container;
 	}
 
 	/**
-	 * Creates the elements to be added to this tab.
+	 * Creates the editing elements to be added to this tab.
 	 * 
-	 * @param key:
-	 *            key in resource file for the value that lists all the elements
-	 *            to create
+	 * @param key: key in resource file for the value that lists all the elements to create
 	 * @return list of IGUIElements to be added to the tab.
 	 */
 	private List<Node> createElements(String key) {
 		String[] elements = myAttributesResources.getString(key).split(DELIMITER);
 		List<Node> createdElements = new ArrayList<>();
 		for (int i = 0; i < elements.length; i++) {
-			IEditingElement elementToCreate = (IEditingElement) myFactory.createNewGUIObject(elements[i]);
-			myEditingElements.add(elementToCreate);
-			createdElements.add(((IGUIElement) elementToCreate).createNode());
+			IGUIElement elementToCreate = myFactory.createNewGUIObject(elements[i]);
+			createdElements.add(elementToCreate.createNode());
+			myEditingElements.add((IEditingElement) elementToCreate);
+//			IEditingElement elementToCreate = (IEditingElement) myFactory.createNewGUIObject(elements[i]);
+//			myEditingElements.add(elementToCreate);
+//			createdElements.add(((IGUIElement) elementToCreate).createNode());
 		}
 		return createdElements;
 	}
@@ -101,14 +98,11 @@ public class TabFields extends TabParent {
 	 * Updates the editable element that each attribute tab element is
 	 * modifying.
 	 * 
-	 * @param element:
-	 *            the level or actor that you now want to modify.
+	 * @param element: the level or actor that you now want to modify.
 	 */
-	public void updateEditable(IEditableGameElement element) {
-		myEditableElement = element;
-		for (int i = 0; i < myEditingElements.size(); i++) {
-			myEditingElements.get(i).setEditableElement(element);
-		}
+	public void updateCurrentEditable(IEditableGameElement gameElement) {
+		myEditableElement = gameElement;
+		myEditingElements.stream().forEach(editingElement -> editingElement.setEditableElement(gameElement));
 	}
 
 	/**
@@ -118,9 +112,9 @@ public class TabFields extends TabParent {
 	public void addElement(IGUIElement element) {
 		myContent.getChildren().add(element.createNode());
 	}
-	
+
 	/**
-	 * Returns the content of this attributes tab.
+	 * Returns the contents of this attributes tab to be added into panes.
 	 */
 	@Override
 	Node getContent() {
