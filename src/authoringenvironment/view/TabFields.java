@@ -61,9 +61,7 @@ public class TabFields extends TabParent {
 	 * @param observer: editing environment.
 	 */
 	public void setObserver(IEditingEnvironment observer) {
-		for (int i = 0; i < myEditingElements.size(); i++) {
-			((EditingElementParent) myEditingElements.get(i)).addObserver(observer);
-		}
+		myEditingElements.stream().forEach(element -> ((EditingElementParent) element).addObserver(observer));
 	}
 
 	/**
@@ -71,11 +69,20 @@ public class TabFields extends TabParent {
 	 * tab.
 	 */
 	private void addElements() {
-		VBox vbox = new VBox(PADDING);
-		vbox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
-		vbox.getChildren().addAll(createElements(EDITOR_ELEMENTS));
+		VBox editingElementContainer = createEditingElementContainer();
 		updateEditable(myEditableElement);
-		myContent = vbox;
+		myContent = editingElementContainer;
+	}
+	
+	/**
+	 * Creates and formats a VBox to hold all of the IEditingElements in this tab.
+	 * @return VBox containing all of the desired IEditingElements.
+	 */
+	private VBox createEditingElementContainer() {
+		VBox container = new VBox(PADDING);
+		container.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
+		container.getChildren().addAll(createElements(EDITOR_ELEMENTS));
+		return container;
 	}
 
 	/**
@@ -90,9 +97,9 @@ public class TabFields extends TabParent {
 		String[] elements = myAttributesResources.getString(key).split(DELIMITER);
 		List<Node> createdElements = new ArrayList<>();
 		for (int i = 0; i < elements.length; i++) {
-			IEditingElement elementToCreate = (IEditingElement) myFactory.createNewGUIObject(elements[i]);
-			myEditingElements.add(elementToCreate);
-			createdElements.add(((IGUIElement) elementToCreate).createNode());
+			IGUIElement elementToCreate = myFactory.createNewGUIObject(elements[i]);
+			createdElements.add(elementToCreate.createNode());
+			myEditingElements.add((IEditingElement) elementToCreate);
 		}
 		return createdElements;
 	}
@@ -104,11 +111,9 @@ public class TabFields extends TabParent {
 	 * @param element:
 	 *            the level or actor that you now want to modify.
 	 */
-	public void updateEditable(IEditableGameElement element) {
-		myEditableElement = element;
-		for (int i = 0; i < myEditingElements.size(); i++) {
-			myEditingElements.get(i).setEditableElement(element);
-		}
+	public void updateEditable(IEditableGameElement gameElement) {
+		myEditableElement = gameElement;
+		myEditingElements.stream().forEach(editingElement -> editingElement.setEditableElement(gameElement));
 	}
 
 	/**
