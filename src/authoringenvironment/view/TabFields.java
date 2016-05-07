@@ -67,7 +67,7 @@ public class TabFields extends TabParent {
 	 */
 	private void addElements() {
 		VBox editingElementContainer = createEditingElementContainer();
-		updateEditable(myEditableElement);
+		updateCurrentEditable(myEditableElement);
 		myContent = editingElementContainer;
 	}
 	
@@ -83,11 +83,9 @@ public class TabFields extends TabParent {
 	}
 
 	/**
-	 * Creates the elements to be added to this tab.
+	 * Creates the editing elements to be added to this tab.
 	 * 
-	 * @param key:
-	 *            key in resource file for the value that lists all the elements
-	 *            to create
+	 * @param key: key in resource file for the value that lists all the elements to create
 	 * @return list of IGUIElements to be added to the tab.
 	 */
 	private List<Node> createElements(String key) {
@@ -113,10 +111,9 @@ public class TabFields extends TabParent {
 	 * Updates the editable element that each attribute tab element is
 	 * modifying.
 	 * 
-	 * @param element:
-	 *            the level or actor that you now want to modify.
+	 * @param element: the level or actor that you now want to modify.
 	 */
-	public void updateEditable(IEditableGameElement gameElement) {
+	public void updateCurrentEditable(IEditableGameElement gameElement) {
 		myEditableElement = gameElement;
 		myEditingElements.stream().forEach(editingElement -> editingElement.setEditableElement(gameElement));
 	}
@@ -128,9 +125,9 @@ public class TabFields extends TabParent {
 	public void setObserver(IEditingEnvironment observer) {
 		myEditingElements.stream().forEach(element -> ((EditingElementParent) element).addObserver(observer));
 	}
-	
+
 	/**
-	 * Returns the content of this attributes tab.
+	 * Returns the contents of this attributes tab to be added into panes.
 	 */
 	@Override
 	Node getContent() {

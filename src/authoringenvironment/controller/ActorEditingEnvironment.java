@@ -120,7 +120,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	private Tab actorCharacteristics() {
 		characteristics = new TabFields(myResources, ACTOR_CHARACTERISTICS, ACTOR_CHARACTERISTICS_RESOURCE, myActor);
 		characteristics.setObserver(this);
-		characteristics.updateEditable(myActor);
+		characteristics.updateCurrentEditable(myActor);
 		return characteristics.getTab();
 	}
 
@@ -131,7 +131,7 @@ public class ActorEditingEnvironment implements IEditingEnvironment, Observer {
 	private Tab actorAttributes() {
 		attributes = new TabFields(myResources, ACTOR_ATTRIBUTES, ACTOR_ATTRIBUTES_RESOURCE, myActor);
 		attributes.setObserver(this);
-		attributes.updateEditable(myActor);
+		attributes.updateCurrentEditable(myActor);
 		return attributes.getTab();
 	}
 
