@@ -1,3 +1,13 @@
+// This entire file is part of my masterpiece
+// Stephen Kwok
+
+// This class is included in my masterpiece to showcase the extensibility of my PreviewUnitWithEditable
+// class. I wanted to add functionality to the preview unit to allow users to input a "level number"
+// for each level displayed, which would determine when in the game that level would be played. To do so,
+// I simply create the additional nodes needed to support this feature, then add that node to the 
+// hbox contained in the parent class. This demonstrates the extensibility of my code since you can
+// see how we can continue adding as many features as we wanted to the preview unit.
+
 package authoringenvironment.view;
 
 import authoringenvironment.model.IEditableGameElement;
@@ -55,7 +65,7 @@ public class PreviewUnitWithLevel extends PreviewUnitWithEditable {
 	 * @param input: the text the author entered into the preview unit's text field
 	 * @return true if the author entered valid input; false otherwise
 	 */
-	public boolean inputIsValid(String input) {
+	private boolean inputIsValid(String input) {
 		for (Character character : input.toCharArray()) {
 			if (!Character.isDigit(character))
 				return false;

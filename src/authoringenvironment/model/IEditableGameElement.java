@@ -1,3 +1,13 @@
+// This entire file is part of my masterpiece
+// Stephen Kwok
+
+// This class is included in my masterpiece to demonstrate how I am able to keep the PreviewUnitWithEditable
+// class as reusable as possible. By simply having all classes to be preview implement this interface,
+// I can ensure that the PreviewUnitWithEditable class can support the previewing of any class it wants,
+// even those written by other members of my team or even by other programmers working on other projects.
+// To prove the utility of this class, I had the Turtle class in my slogo project implement this class
+// in order to dispaly Turtle images for the front-end extension.
+
 package authoringenvironment.model;
 
 import javafx.scene.image.ImageView;
