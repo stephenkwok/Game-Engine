@@ -160,7 +160,7 @@ public class Pong extends Application {
         Scene scene = new Scene(group);
 
         Game model = new Game(info, levels);
-        model.setHUDInfoFile("a.txt");
+        model.setHUDInfoFile("pong.txt");
         CreatorController c = new CreatorController(model);
         c.saveForEditing(new File("gamefiles/Pong.xml"));
         ParallelCamera camera = new ParallelCamera();
