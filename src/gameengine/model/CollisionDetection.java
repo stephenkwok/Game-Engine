@@ -11,6 +11,8 @@
  * Each class, and each method should have a single responsibility. 
  * This is certainly true in this case: the class takes in a list of actors, and resolves collisions
  * I appreciated this modularity. 
+ * This code also utilizes interfaces to limit access to information about actors to the specifics of what we need in the 
+ * back-end. This is seen in the IPlayActor casting of Actor
  */
 
 package gameengine.model;
