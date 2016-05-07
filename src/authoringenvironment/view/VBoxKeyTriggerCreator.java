@@ -3,7 +3,7 @@ package authoringenvironment.view;
 import java.util.ResourceBundle;
 
 import gameengine.model.IGameElement;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import gameengine.model.Triggers.KeyTrigger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -52,7 +52,7 @@ public class VBoxKeyTriggerCreator extends VBox implements ILevelTriggerCreator 
 	}
 	
 	@Override
-	public ITrigger createTrigger() {
+	public Trigger createTrigger() {
 		if (myKeyCodeComboBox.getValue() != null) {
 			return new KeyTrigger(KeyCode.getKeyCode((String) myKeyCodeComboBox.getValue()));
 		} else {

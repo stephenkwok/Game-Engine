@@ -1,7 +1,7 @@
 package gameengine.model;
 
 import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 
 /**
  * This interface defines the public methods for Rule objects. For our purposes,
@@ -17,7 +17,7 @@ public interface IRule {
 	 *
 	 * @return The specific Trigger from the Rule
 	 */
-	public ITrigger getMyTrigger();
+	public Trigger getMyTrigger();
 
 	/**
 	 * Gets the Action from the Rule

@@ -6,7 +6,7 @@ import java.util.List;
 import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
 
-public abstract class CollisionTrigger extends ITrigger {
+public abstract class CollisionTrigger extends Trigger {
 
 	private IPlayActor myMainActor;
 	private IPlayActor myCollisionActor;

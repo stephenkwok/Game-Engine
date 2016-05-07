@@ -16,13 +16,16 @@ import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeManager;
 import gameengine.model.AttributeType;
+import gameengine.model.IAttribute;
 import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
+import gameengine.model.IRule;
 import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
 import gameengine.model.RuleManager;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Bounds;
@@ -368,7 +371,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	 * @param attribute The Attribute to be added
 	 */
 	@Override
-	public void addAttribute(Attribute attribute) {
+	public void addAttribute(IAttribute attribute) {
 		myAttributeManager.addAttribute(attribute);
 
 	}
@@ -379,7 +382,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	 * @param attribute The Attribute to be removed
 	 */
 	@Override
-	public void removeAttribute(Attribute attribute) {
+	public void removeAttribute(IAttribute attribute) {
 		myAttributeManager.removeAttribute(attribute);
 
 	}
@@ -401,7 +404,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	 * @param type The AttributeType to get the Attribute for
 	 */
 	@Override
-	public Attribute getAttribute(AttributeType type) {
+	public IAttribute getAttribute(AttributeType type) {
 		return myAttributeManager.getAttribute(type);
 	}
 
@@ -423,7 +426,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	 * @param rule The Rule to add to the Level
 	 */
 	@Override
-	public void addRule(Rule rule) {
+	public void addRule(IRule rule) {
 		myRuleManager.addRule(rule);
 
 	}
@@ -434,7 +437,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	 * @param rule The Rule to be removed
 	 */
 	@Override
-	public void removeRule(Rule rule) {
+	public void removeRule(IRule rule) {
 		myRuleManager.removeRule(rule);
 
 	}
@@ -445,7 +448,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	 * @return The Level's Rules
 	 */
 	@Override
-	public Map<String, List<Rule>> getRules() {
+	public Map<String, List<IRule>> getRules() {
 		return myRuleManager.getRules();
 	}
 

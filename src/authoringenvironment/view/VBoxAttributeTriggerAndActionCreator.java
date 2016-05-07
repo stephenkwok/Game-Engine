@@ -9,7 +9,7 @@ import gameengine.model.IGameElement;
 import gameengine.model.Actions.Action;
 import gameengine.model.Actions.ChangeAttribute;
 import gameengine.model.Triggers.AttributeReached;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -156,7 +156,7 @@ public class VBoxAttributeTriggerAndActionCreator extends VBox implements ILevel
 	 * Creates the trigger.
 	 */
 	@Override
-	public ITrigger createTrigger() {
+	public Trigger createTrigger() {
 		return new AttributeReached(getElementByName(), getAttributeType(), Integer.parseInt(myValue.getText()));
 	}
 

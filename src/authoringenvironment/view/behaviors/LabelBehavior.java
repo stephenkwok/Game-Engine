@@ -8,7 +8,7 @@ import authoringenvironment.model.ActorRule;
 import authoringenvironment.model.IAuthoringBehavior;
 import authoringenvironment.model.TriggerFactory;
 import gameengine.model.IAction;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import gui.view.IGUIElement;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -81,7 +81,7 @@ public abstract class LabelBehavior implements IGUIElement, IAuthoringBehavior {
 	 * @param key: behavior key.
 	 * @param value: trigger.
 	 */
-	public void setTrigger(IAuthoringBehavior key, ITrigger value) {
+	public void setTrigger(IAuthoringBehavior key, Trigger value) {
 		myActorRule.setTrigger(key, value);
 	}
 

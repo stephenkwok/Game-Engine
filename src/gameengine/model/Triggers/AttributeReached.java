@@ -3,7 +3,7 @@ package gameengine.model.Triggers;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
 
-public class AttributeReached extends ITrigger {
+public class AttributeReached extends Trigger {
 	private IGameElement myTarget;
 	private String myKey;
 	private AttributeType myType;

@@ -4,7 +4,7 @@ import java.util.ResourceBundle;
 
 import gameengine.model.IGameElement;
 import gameengine.model.Triggers.ClickTrigger;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import javafx.scene.layout.VBox;
 
 /**
@@ -25,7 +25,7 @@ public class VBoxClickTriggerCreator extends VBox implements ILevelTriggerCreato
 	}
 	
 	@Override
-	public ITrigger createTrigger() {
+	public Trigger createTrigger() {
 		return new ClickTrigger(myElement);
 	}
 }

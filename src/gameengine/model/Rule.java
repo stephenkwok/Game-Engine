@@ -1,7 +1,7 @@
 package gameengine.model;
 
 import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 
 /**
  * Contains a trigger and linked action to be performed when the trigger is
@@ -13,10 +13,10 @@ import gameengine.model.Triggers.ITrigger;
 
 public class Rule implements IRule{
 
-    private ITrigger myTrigger;
+    private Trigger myTrigger;
     private Action myAction;
     
-    public Rule(ITrigger trigger, Action action){
+    public Rule(Trigger trigger, Action action){
         setMyTrigger(trigger);
         setMyAction(action);
     }
@@ -25,7 +25,7 @@ public class Rule implements IRule{
      * Returns the trigger of the rule 
      */
     @Override
-    public ITrigger getMyTrigger() {
+    public Trigger getMyTrigger() {
         return myTrigger;
     }
     
@@ -41,7 +41,7 @@ public class Rule implements IRule{
      * Sets the trigger for the rule 
      * @param myTrigger
      */
-	public void setMyTrigger(ITrigger myTrigger) {
+	public void setMyTrigger(Trigger myTrigger) {
 		this.myTrigger = myTrigger;
 	}
 

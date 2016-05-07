@@ -15,7 +15,7 @@ import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
 import gameengine.model.Actions.ChangeAttribute;
 import gameengine.model.Triggers.AttributeReached;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import gameengine.model.Triggers.TickTrigger;
 import gui.view.ComboBoxLevelTriggerAndAction;
 import javafx.geometry.Insets;
@@ -184,7 +184,7 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	 * @param triggerValue: time at which to trigger the rule.
 	 */
 	private void createAttributeReachedRule(int triggerValue) {
-		ITrigger trigger = new AttributeReached(myLevel, AttributeType.TIME, triggerValue);
+		Trigger trigger = new AttributeReached(myLevel, AttributeType.TIME, triggerValue);
 		Action action = ((ILevelActionCreator) myActionCreator).createAction();
 		myLevel.addRule(new Rule(trigger, action));
 		this.closePopUp();
@@ -197,7 +197,7 @@ public class PopUpAddLevelTimer extends PopUpParent implements Observer {
 	 */
 	private void createChangeAttributeRule(int initialValue, int triggerValue) {
 		int change = determineChange(initialValue, triggerValue);
-		ITrigger trigger = new TickTrigger(ONE);
+		Trigger trigger = new TickTrigger(ONE);
 		Action action = new ChangeAttribute(myLevel, AttributeType.TIME, change);
 		myLevel.addRule(new Rule(trigger, action));
 	}

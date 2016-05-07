@@ -9,7 +9,7 @@ import authoringenvironment.model.IAuthoringActor;
 import authoringenvironment.model.IEditableGameElement;
 import gameengine.model.IRule;
 import gameengine.model.Triggers.CollisionTrigger;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import gui.view.CheckBoxObject;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
@@ -18,7 +18,7 @@ import javafx.scene.layout.HBox;
 public class CollisionBehavior extends SelectActorBehavior {
 	private static final String APPLY_ONCE = "Only apply once";
 	private static final int CHECK_WIDTH = 200;
-	private ITrigger myTrigger;
+	private Trigger myTrigger;
 	private CheckBox myCheckBox;
 
 	public CollisionBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources, 

@@ -9,14 +9,14 @@ import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.AttributeType;
 import gameengine.model.IRule;
 import gameengine.model.Triggers.AttributeReached;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 
 public class AttributeReachedBehavior extends DoubleBehavior {
 
 	private static final String ATTRIBUTE_RESOURCES = "attributeResources";
 	private static final String CHANGE_HEALTH = "ChangeHealth";
 	private IAuthoringActor myActor;
-	private ITrigger myTrigger;
+	private Trigger myTrigger;
 	private ResourceBundle myBundle;
 
 	public AttributeReachedBehavior(IRule myRule, ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,

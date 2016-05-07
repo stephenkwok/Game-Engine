@@ -5,7 +5,7 @@ import gameengine.model.IGameElement;
 /**
  * @author blakekaplan
  */
-public class ClickTrigger extends ITrigger {
+public class ClickTrigger extends Trigger {
 
     private Double myX;
     private Double myY;

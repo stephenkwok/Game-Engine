@@ -13,7 +13,7 @@ import gameengine.controller.Level;
 import gameengine.model.IGameElement;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import gui.view.ComboBoxLevelTriggerAndAction;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -120,7 +120,7 @@ public class TabRuleAdder extends TabParent implements Observer {
 	private void createAndAddRule() {
 		myTriggerContainer.getChildren().remove(myTriggerCreator);
 		myActionContainer.getChildren().remove(myActionCreator);
-		ITrigger trigger = ((ILevelTriggerCreator) myTriggerCreator).createTrigger();
+		Trigger trigger = ((ILevelTriggerCreator) myTriggerCreator).createTrigger();
 		Action action = ((ILevelActionCreator) myActionCreator).createAction();
 		Rule rule = new Rule(trigger, action);
 		myLevelEditor.addRuleToLevel(rule);

@@ -20,6 +20,7 @@ import gameengine.model.CollisionDetection;
 import gameengine.model.IGameElement;
 import gameengine.model.IPlayActor;
 import gameengine.model.PhysicsEngine;
+import gameengine.model.Triggers.Trigger;
 import gameengine.model.Triggers.ITrigger;
 import gameengine.model.Triggers.TickTrigger;
 import javafx.animation.Animation.Status;
@@ -203,7 +204,7 @@ public class Game extends Observable implements Observer, IGame, IPlayGame {
 	}
 
 	private void signalTick() {
-		handleTrigger(new TickTrigger(levelTime.getValue()));
+		handleTrigger((ITrigger)new TickTrigger(levelTime.getValue()));
 	}
 
 	private void updateBackground() {

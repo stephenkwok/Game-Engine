@@ -7,13 +7,13 @@ import java.util.ResourceBundle;
 import authoringenvironment.model.ActorRule;
 import authoringenvironment.model.IAuthoringActor;
 import gameengine.model.IRule;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import gameengine.model.Triggers.TickTrigger;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 
 public class TickBehavior extends DoubleBehavior {
-	private ITrigger myTrigger;
+	private Trigger myTrigger;
 
 	public TickBehavior(IRule myRule, ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,
 			ResourceBundle myResources) {

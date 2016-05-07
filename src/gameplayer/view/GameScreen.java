@@ -8,7 +8,7 @@ import gameengine.controller.Level;
 import gameengine.model.Actor;
 import gameengine.model.IDisplayActor;
 import gameengine.model.Triggers.ClickTrigger;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import gameengine.model.Triggers.KeyTrigger;
 import gui.view.Screen;
 import javafx.beans.value.ChangeListener;
@@ -120,7 +120,7 @@ public class GameScreen extends Observable implements IGameScreen {
 	 *            event
 	 */
 	public void handleScreenEvent(Event e) {
-		ITrigger trigger = null;
+		Trigger trigger = null;
 		if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
 			trigger = handleClick(((MouseEvent) e).getSceneX() + myCamera.getTranslateX(), ((MouseEvent) e).getSceneY() + myCamera.getTranslateY());
 		} else if (e.getEventType() == KeyEvent.KEY_PRESSED) {

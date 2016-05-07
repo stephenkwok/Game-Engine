@@ -6,6 +6,8 @@ import java.util.Map;
 import gameengine.model.ActorState;
 import gameengine.model.Attribute;
 import gameengine.model.AttributeType;
+import gameengine.model.IAttribute;
+import gameengine.model.IRule;
 import gameengine.model.PhysicsEngine;
 import gameengine.model.Rule;
 import gameengine.model.Sprite;
@@ -26,21 +28,21 @@ public interface IAuthoringActor extends IEditableGameElement {
 	 * @param newRule
 	 *            The Rule to be added to the Actor
 	 */
-	void addRule(Rule newRule);
+	void addRule(IRule newRule);
 
 	/**
 	 * Gets Map<String, List<Rule>>
 	 * 
 	 * @return
 	 */
-	public Map<String, List<Rule>> getRules();
+	public Map<String, List<IRule>> getRules();
 
 	/**
 	 * Removes given Rule from Actor
 	 * 
 	 * @return
 	 */
-	public void removeRule(Rule rule);
+	public void removeRule(IRule rule);
 
 	/**
 	 * Sets the Actor's X coordinate
@@ -171,7 +173,7 @@ public interface IAuthoringActor extends IEditableGameElement {
 	 * Add an attribute to an actor.
 	 * @param newAttribute: attribute to add.
 	 */
-	void addAttribute(Attribute newAttribute);
+	void addAttribute(IAttribute newAttribute);
 
 	/**
 	 * Add a sprite image.
@@ -243,5 +245,5 @@ public interface IAuthoringActor extends IEditableGameElement {
      * @param attributeType: attribute type.
      * @return attribute.
      */
-	public Attribute getAttribute(AttributeType attributeType);
+	public IAttribute getAttribute(AttributeType attributeType);
 }

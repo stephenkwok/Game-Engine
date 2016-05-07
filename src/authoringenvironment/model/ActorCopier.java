@@ -9,7 +9,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import authoringenvironment.view.AlertGenerator;
 import gameengine.model.*;
 import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import javafx.scene.image.*;
 
 /**
@@ -109,19 +109,19 @@ public class ActorCopier {
 	 * @param toUpdate: actor to update.
 	 * @param rulesToCopy: rules from reference actor.
 	 */
-	private void copyRules(Actor toUpdate, Map<String, List<Rule>> rulesToCopy) {
+	private void copyRules(Actor toUpdate, Map<String, List<IRule>> rulesToCopy) {
 		toUpdate.getRules().clear();
 		for (String trigger : rulesToCopy.keySet()) {
-			List<Rule> toAdd = rulesToCopy.get(trigger);
+			List<IRule> toAdd = rulesToCopy.get(trigger);
 			for (int i = 0; i < toAdd.size(); i++) {
 					try {
-						Rule oldRule = toAdd.get(i);
-						ITrigger oldTrigger = oldRule.getMyTrigger();
+						IRule oldRule = toAdd.get(i);
+						Trigger oldTrigger = oldRule.getMyTrigger();
 						Action oldAction = oldRule.getMyAction();
 						
-						ITrigger triggerToAdd = createTrigger(oldTrigger, toUpdate);
+						Trigger triggerToAdd = createTrigger(oldTrigger, toUpdate);
 						Action actionToAdd = createAction(oldAction,toUpdate);
-						Rule rule = new Rule(triggerToAdd, actionToAdd);
+						IRule rule = new Rule(triggerToAdd, actionToAdd);
 						toUpdate.addRule(rule);
 						
 					} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
@@ -149,7 +149,7 @@ public class ActorCopier {
 		Class myclass = object.getClass();
 		Class[] argumentTypes = new Class[arguments.length];
 		for(int i=0; i<argumentTypes.length;i++){
-			if((myclass.getSuperclass() == ITrigger.class || (myclass.getSuperclass() == Action.class && i==0)) && arguments[i].getClass() == Actor.class){
+			if((myclass.getSuperclass() == Trigger.class || (myclass.getSuperclass() == Action.class && i==0)) && arguments[i].getClass() == Actor.class){
 				argumentTypes[i] = IGameElement.class;	
 			}else{
 				argumentTypes[i] = arguments[i].getClass();
@@ -171,12 +171,12 @@ public class ActorCopier {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private ITrigger createTrigger(ITrigger trigger, Actor toUpdate) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private Trigger createTrigger(Trigger trigger, Actor toUpdate) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Object[] params = trigger.getParameters();
 		if(params[0].getClass().equals(Actor.class)&&((Actor)params[0]).getID()==toUpdate.getID()){
 			params[0] = toUpdate;
 		}
-		return (ITrigger) createObject(trigger,params);
+		return (Trigger) createObject(trigger,params);
 	}
 	
 	/**
@@ -203,7 +203,7 @@ public class ActorCopier {
 	 * @param toUpdate: actor to update.
 	 * @param attributeMap: attribute map to copy.
 	 */
-	private void copyAttributes(IGameElement toUpdate, Map<AttributeType, Attribute> attributeMap) {
+	private void copyAttributes(IGameElement toUpdate, Map<AttributeType, IAttribute> attributeMap) {
 		for (AttributeType type: attributeMap.keySet()) {
 			Attribute toCopy = new Attribute(type, attributeMap.get(type).getMyValue(), toUpdate);
 			toCopy.setTriggerValues(attributeMap.get(type).getTriggerValues());

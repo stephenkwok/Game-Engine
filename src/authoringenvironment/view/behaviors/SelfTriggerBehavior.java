@@ -6,10 +6,10 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.ActorRule;
 import authoringenvironment.model.IAuthoringActor;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 
 public class SelfTriggerBehavior extends LabelBehavior {
-	private ITrigger myTrigger;
+	private Trigger myTrigger;
 	private IAuthoringActor myActor;
 
 	public SelfTriggerBehavior(ActorRule myActorRule, IAuthoringActor myActor, String behaviorType,

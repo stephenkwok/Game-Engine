@@ -3,7 +3,7 @@ package authoringenvironment.view;
 import java.util.ResourceBundle;
 
 import gameengine.model.IGameElement;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import gameengine.model.Triggers.TickTrigger;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -45,7 +45,7 @@ public class VBoxTickTriggerCreator extends VBox implements ILevelTriggerCreator
 	}
 	
 	@Override
-	public ITrigger createTrigger() {
+	public Trigger createTrigger() {
 		if (myTickTextField.getText() != null) {
 			return new TickTrigger(Integer.parseInt(myTickTextField.getText()));
 		} else {

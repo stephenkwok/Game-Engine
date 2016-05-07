@@ -17,7 +17,7 @@ import voogasalad.util.hud.source.Property;
  * @author colettetorres
  *
  */
-public class Attribute extends Observable {
+public class Attribute extends Observable implements IAttribute {
 
 
     private Property<Integer> myValue;

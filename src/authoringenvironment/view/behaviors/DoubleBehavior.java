@@ -8,7 +8,7 @@ import authoringenvironment.model.IAuthoringBehavior;
 import authoringenvironment.model.TriggerFactory;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import gui.view.TextFieldWithButton;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -127,7 +127,7 @@ public abstract class DoubleBehavior extends TextFieldWithButton implements IAut
 	 * @param key: key for trigger class.
 	 * @param value: trigger to return.
 	 */
-	public void setTrigger(IAuthoringBehavior key, ITrigger value) {
+	public void setTrigger(IAuthoringBehavior key, Trigger value) {
 		myActorRule.setTrigger(key, value);
 	}
 

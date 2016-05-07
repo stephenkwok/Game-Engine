@@ -2,7 +2,7 @@ package gameengine.model.Triggers;
 
 import javafx.scene.input.KeyCode;
 
-public class KeyTrigger extends ITrigger {
+public class KeyTrigger extends Trigger {
 
     private String myKey;
     private KeyCode myKeyCode;

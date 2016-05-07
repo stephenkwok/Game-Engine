@@ -8,6 +8,7 @@ import java.util.Observer;
 import authoringenvironment.controller.ActorEditingEnvironment;
 import authoringenvironment.model.*;
 import gameengine.model.Actor;
+import gameengine.model.IRule;
 import gameengine.model.Rule;
 import gameengine.model.Actions.ApplyPhysics;
 import javafx.geometry.*;
@@ -75,7 +76,7 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 		myEditableElement = element;
 		Actor thisActor = (Actor) myEditableElement;
 		if (thisActor.getRules().containsKey("Tick")) {
-			List<Rule> tickRules = thisActor.getRules().get("Tick");
+			List<IRule> tickRules = thisActor.getRules().get("Tick");
 			List<Class<?>> tickActionsClasses = new ArrayList<>();
 			tickRules.forEach(rule -> tickActionsClasses.add(rule.getMyAction().getClass()));
 			if (tickActionsClasses.contains(ApplyPhysics.class)) {

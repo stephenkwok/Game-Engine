@@ -13,7 +13,7 @@ import authoringenvironment.view.AlertGenerator;
 import gameengine.model.Actor;
 import gameengine.model.AttributeType;
 import gameengine.model.IGameElement;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import javafx.scene.input.KeyCode;
 
 /**
@@ -49,7 +49,7 @@ public class TriggerFactory {
 	 * 
 	 * @return ITrigger: element corresponding to nodeTypeKey in ResourceBundle.
 	 */
-	public ITrigger createNewTrigger(String behaviorType, List<Object> arguments) {
+	public Trigger createNewTrigger(String behaviorType, List<Object> arguments) {
 		this.arguments = arguments;
 		String triggerType = determineTriggerType(behaviorType);
 		return createTrigger(triggerType, behaviorType);
@@ -76,11 +76,11 @@ public class TriggerFactory {
 	 * 
 	 * @return IGUIElement for the desired element.
 	 */
-	private ITrigger createTrigger(String triggerType, String behaviorType) {
+	private Trigger createTrigger(String triggerType, String behaviorType) {
 		String className = GAME_ENGINE + MODEL + TRIGGERS + myResources.getString(behaviorType + CLASS);
 		try {
 			Method createMethod = this.getClass().getDeclaredMethod(CREATE + triggerType, String.class, String.class);
-			return (ITrigger) createMethod.invoke(this, behaviorType, className);
+			return (Trigger) createMethod.invoke(this, behaviorType, className);
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			myAlertGenerator.generateAlert(e.getClass().toString());
 		} 
@@ -103,12 +103,12 @@ public class TriggerFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private ITrigger createCollisionTrigger(String behaviorType, String className)
+	private Trigger createCollisionTrigger(String behaviorType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> collisionClass = Class.forName(className);
 		Constructor<?> constructor = collisionClass.getConstructor(Actor.class, Actor.class, Boolean.class);
-		return (ITrigger) constructor.newInstance((Actor) arguments.get(ZERO), (Actor) arguments.get(ONE), (Boolean) arguments.get(TWO));
+		return (Trigger) constructor.newInstance((Actor) arguments.get(ZERO), (Actor) arguments.get(ONE), (Boolean) arguments.get(TWO));
 	}
 
 	/**
@@ -127,12 +127,12 @@ public class TriggerFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private ITrigger createKeyTrigger(String behaviorType, String className)
+	private Trigger createKeyTrigger(String behaviorType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> keyClass = Class.forName(className);
 		Constructor<?> constructor = keyClass.getConstructor(KeyCode.class);
-		return (ITrigger) constructor.newInstance(arguments.get(ZERO));
+		return (Trigger) constructor.newInstance(arguments.get(ZERO));
 	}
 
 	/**
@@ -151,12 +151,12 @@ public class TriggerFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private ITrigger createTickTrigger(String behaviorType, String className)
+	private Trigger createTickTrigger(String behaviorType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> collisionClass = Class.forName(className);
 		Constructor<?> constructor = collisionClass.getConstructor(Integer.class);
-		return (ITrigger) constructor.newInstance(((Double) arguments.get(ZERO)).intValue());
+		return (Trigger) constructor.newInstance(((Double) arguments.get(ZERO)).intValue());
 
 	}
 
@@ -176,12 +176,12 @@ public class TriggerFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private ITrigger createClickTrigger(String behaviorType, String className)
+	private Trigger createClickTrigger(String behaviorType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> collisionClass = Class.forName(className);
 		Constructor<?> constructor = collisionClass.getConstructor(IGameElement.class);
-		return (ITrigger) constructor.newInstance((IGameElement) arguments.get(ZERO));
+		return (Trigger) constructor.newInstance((IGameElement) arguments.get(ZERO));
 	}
 
 	/**
@@ -200,11 +200,11 @@ public class TriggerFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	private ITrigger createAttributeReached(String behaviorType, String className)
+	private Trigger createAttributeReached(String behaviorType, String className)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> collisionClass = Class.forName(className);
 		Constructor<?> constructor = collisionClass.getConstructor(IGameElement.class,AttributeType.class,Integer.class);
-		return (ITrigger) constructor.newInstance((IGameElement) arguments.get(ZERO), arguments.get(ONE), (int) arguments.get(TWO));
+		return (Trigger) constructor.newInstance((IGameElement) arguments.get(ZERO), arguments.get(ONE), (int) arguments.get(TWO));
 	}
 }

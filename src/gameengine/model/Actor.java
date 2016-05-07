@@ -14,6 +14,7 @@ import authoringenvironment.model.IAuthoringActor;
 import gameengine.controller.IPlayGame;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -92,7 +93,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	 *            The new Actor Attribute
 	 */
 	@Override
-	public void addAttribute(Attribute attribute) {
+	public void addAttribute(IAttribute attribute) {
 		myAttributeManager.addAttribute(attribute);
 	}
 
@@ -103,11 +104,11 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	 *            The new Actor Attribute Type
 	 */
 	@Override
-	public Attribute getAttribute(AttributeType type) {
+	public IAttribute getAttribute(AttributeType type) {
 		return myAttributeManager.getAttribute(type);
 	}
 
-	public Map<AttributeType, Attribute> getAttributeMap() {
+	public Map<AttributeType, IAttribute> getAttributeMap() {
 		return myAttributeManager.getAttributeMap();
 	}
 
@@ -126,12 +127,12 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	/**
 	 * Adds a new Rule to the Actor
 	 *
-	 * @param newRule
+	 * @param rule
 	 *            The Rule to be added to the Actor
 	 */
 	@Override
-	public void addRule(Rule newRule) {
-		myRuleManager.addRule(newRule);
+	public void addRule(IRule rule) {
+		myRuleManager.addRule(rule);
 	}
 
 	/**
@@ -336,7 +337,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	 * 
 	 * @return The Actor's Rules
 	 */
-	public Map<String, List<Rule>> getRules() {
+	public Map<String, List<IRule>> getRules() {
 		return myRuleManager.getRules();
 	}
 
@@ -450,7 +451,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	 * Removes an Attribute from an Actor
 	 */
 	@Override
-	public void removeAttribute(Attribute attribute) {
+	public void removeAttribute(IAttribute attribute) {
 		myAttributeManager.removeAttribute(attribute);
 
 	}
@@ -459,7 +460,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	 * Removes a Rule from an Actor
 	 */
 	@Override
-	public void removeRule(Rule rule) {
+	public void removeRule(IRule rule) {
 		myRuleManager.removeRule(rule);
 
 	}

@@ -3,7 +3,7 @@ package gameengine.model.Triggers;
 /**
  * @author blakekaplan
  */
-public class TickTrigger extends ITrigger {
+public class TickTrigger extends Trigger {
 
 	private static final String TICK = "Tick";
 	private Integer myInterval;

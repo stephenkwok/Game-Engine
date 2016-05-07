@@ -10,7 +10,7 @@ import gameengine.model.Actor;
 import gameengine.model.IPlayActor;
 import gameengine.model.Rule;
 import gameengine.model.Actions.Destroy;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -184,7 +184,7 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 		garbageCollector.getRules().clear();
 		for (int j = 0; j < actors.size(); j++) {
 			if (!garbageCollectors.keySet().contains(actors.get(j))) {
-				ITrigger trigger = createCollisionTrigger(sideToCheck, (Actor) garbageCollector, (Actor) actors.get(j)); 
+				Trigger trigger = createCollisionTrigger(sideToCheck, (Actor) garbageCollector, (Actor) actors.get(j)); 
 				garbageCollector.addRule(new Rule(trigger, new Destroy((Actor) actors.get(j))));
 			}
 		}
@@ -208,13 +208,13 @@ public class CheckBoxesGarbageCollection extends Observable implements IGUIEleme
 	 * @param actor: actor to collide with.
 	 * @return collision trigger.
 	 */
-	private ITrigger createCollisionTrigger(String side, Actor garbageCollector, Actor actor) {
+	private Trigger createCollisionTrigger(String side, Actor garbageCollector, Actor actor) {
 		Class<?> collision;
 		try {
 			String name = myAttributesResources.getString(side + COLLISION);
 			collision = Class.forName(TRIGGER_DIRECTORY + name);
 			Constructor<?> constructor = collision.getConstructor(Actor.class, Actor.class);
-			return (ITrigger) constructor.newInstance(garbageCollector, actor);
+			return (Trigger) constructor.newInstance(garbageCollector, actor);
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			AlertGenerator alert = new AlertGenerator();

@@ -108,7 +108,7 @@ public interface IPlayActor extends IGameElement {
 
 	public String getName();
 
-	public Attribute getAttribute(AttributeType health);
+	public IAttribute getAttribute(AttributeType health);
 
 	public double getFriction();
 
@@ -120,7 +120,7 @@ public interface IPlayActor extends IGameElement {
 
 	public void addState(ActorState state);
 
-	public Map<String, List<Rule>> getRules();
+	public Map<String, List<IRule>> getRules();
 
 	public void setHeading(double h);
 

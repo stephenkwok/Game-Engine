@@ -1,6 +1,7 @@
 package gameengine.model;
 
 import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import javafx.scene.image.ImageView;
 
 /**
@@ -46,7 +47,7 @@ public interface IActor {
 	 * @param newRule
 	 *            The Rule to be added to the Actor
 	 */
-	public void addRule(Rule newRule);
+	public void addRule(IRule newRule);
 
 	/**
 	 * Perform's the Actor's actions for a particular trigger

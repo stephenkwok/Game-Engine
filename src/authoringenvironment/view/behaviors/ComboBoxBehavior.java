@@ -9,7 +9,7 @@ import authoringenvironment.model.IAuthoringBehavior;
 import authoringenvironment.model.TriggerFactory;
 import gameengine.model.IAction;
 import gameengine.model.IRule;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import gui.view.ComboBoxTextCell;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -138,7 +138,7 @@ public abstract class ComboBoxBehavior extends ComboBoxTextCell implements IAuth
 	@Override
 	public abstract void updateValueBasedOnEditable();
 
-	protected void setTrigger(IAuthoringBehavior key, ITrigger value) {
+	protected void setTrigger(IAuthoringBehavior key, Trigger value) {
 		myActorRule.setTrigger(key, value);
 	}
 

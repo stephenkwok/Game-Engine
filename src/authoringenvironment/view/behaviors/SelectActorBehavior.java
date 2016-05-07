@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.*;
 import gameengine.model.*;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import gui.view.EditingElementParent;
 import javafx.collections.*;
 import javafx.geometry.Pos;
@@ -189,7 +189,7 @@ public abstract class SelectActorBehavior extends EditingElementParent implement
 	 * @param key: key for trigger.
 	 * @param value: value for trigger.
 	 */
-	public void setTrigger(IAuthoringBehavior key, ITrigger value) {
+	public void setTrigger(IAuthoringBehavior key, Trigger value) {
 		myActorRule.setTrigger(key, value);
 	}
 

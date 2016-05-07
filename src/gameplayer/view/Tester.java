@@ -37,7 +37,7 @@ import gameengine.model.Actions.VerticalStaticCollision;
 import gameengine.model.Actions.WinGame;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.BottomCollision;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import gameengine.model.Triggers.KeyTrigger;
 import gameengine.model.Triggers.SideCollision;
 import gameengine.model.Triggers.TickTrigger;
@@ -257,7 +257,7 @@ public class Tester extends Application {
         actor1.addState(ActorState.MAIN);
         actor1.addAttribute(new Attribute(AttributeType.POINTS, 0, (IPlayActor) actor1));
         
-		ITrigger attreached = new AttributeReached((IGameElement)actor1, AttributeType.POINTS,5);
+		Trigger attreached = new AttributeReached((IGameElement)actor1, AttributeType.POINTS,5);
 		Action wingame = new WinGame((IPlayActor) actor1);
 		
 		actor1.addRule(new Rule(attreached,wingame));

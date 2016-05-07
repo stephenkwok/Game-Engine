@@ -6,6 +6,7 @@ import java.util.Map;
 import gameengine.controller.IPlayGame;
 import gameengine.model.Triggers.AttributeReached;
 import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import javafx.geometry.Bounds;
 
 public interface IGameElement {
@@ -15,14 +16,14 @@ public interface IGameElement {
 	 * 
 	 * @param attribuet	The Attribute to be added
 	 */
-	public void addAttribute(Attribute attribuet);
+	public void addAttribute(IAttribute attribuet);
 
 	/**
 	 * Removes an Attribute from the IGameElement
 	 * 
 	 * @param attribute	The Attribute to be removed
 	 */
-	public void removeAttribute(Attribute attribute);
+	public void removeAttribute(IAttribute attribute);
 
 	/**
 	 * Executes the appropriate Actions when an Attribute reaches its Trigger value
@@ -37,7 +38,7 @@ public interface IGameElement {
 	 * @param type	The desired AttributeType
 	 * @return	The Attribute for the particular AttributeType
 	 */
-    public Attribute getAttribute(AttributeType type);
+    public IAttribute getAttribute(AttributeType type);
     
     /**
      * Gets the name for the IGameElement
@@ -58,10 +59,10 @@ public interface IGameElement {
      * 
      * @param rule
      */
-    public void addRule(Rule rule);
-    public void removeRule(Rule rule);
+    public void addRule(IRule rule);
+    public void removeRule(IRule rule);
     public void handleTrigger(ITrigger trigger);
-    public Map<String, List<Rule>> getRules();
+    public Map<String, List<IRule>> getRules();
     public void changed();
     public Bounds getBounds();
     public void setGame(IPlayGame game);

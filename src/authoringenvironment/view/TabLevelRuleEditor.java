@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import gameengine.controller.Level;
+import gameengine.model.IRule;
 import gameengine.model.Rule;
 import gui.view.CheckBoxObject;
 import javafx.geometry.Insets;
@@ -28,10 +29,10 @@ public class TabLevelRuleEditor extends TabParent {
 	private static final String DELETE = "Delete";
 	private Level myLevel;
 	private VBox myContainer;
-	private List<Rule> currentRules;
+	private List<IRule> currentRules;
 	private VBox myCheckBoxes;
-	private List<Rule> newRules;
-	private Map<CheckBoxObject, Rule> myRuleMap;
+	private List<IRule> newRules;
+	private Map<CheckBoxObject, IRule> myRuleMap;
 	private Button myDeleteButton;
 	
 	/**

@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 
 import authoringenvironment.model.ActorRule;
 import gameengine.model.IRule;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import gameengine.model.Triggers.KeyTrigger;
 import javafx.scene.input.KeyCode;
 
@@ -18,7 +18,7 @@ import javafx.scene.input.KeyCode;
  * @author AnnieTang
  */
 public class KeyBehavior extends ComboBoxBehavior {
-	private ITrigger myTrigger;
+	private Trigger myTrigger;
 
 	public KeyBehavior(IRule myRule, ActorRule myActorRule, String behaviorType, ResourceBundle myResources) {
 		super(myRule, myActorRule, behaviorType, myResources);

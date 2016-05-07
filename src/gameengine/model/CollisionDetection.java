@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.util.List;
 
 import gameengine.model.Triggers.CollisionTrigger;
+import gameengine.model.Triggers.ITrigger;
 import javafx.geometry.Point2D;
 
 /**
@@ -153,7 +154,7 @@ public class CollisionDetection {
 			Class<?> className = Class.forName(TRIGGER_PREFIX + collisionType);
 			Constructor[] myConstructors = className.getConstructors();
 			CollisionTrigger myTrigger = (CollisionTrigger) myConstructors[0].newInstance(a1, a2,false);
-			a1.handleTrigger(myTrigger);
+			a1.handleTrigger((ITrigger)myTrigger);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

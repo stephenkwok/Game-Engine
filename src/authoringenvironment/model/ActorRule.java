@@ -5,7 +5,7 @@ import java.util.*;
 import authoringenvironment.controller.Controller;
 import gameengine.model.*;
 import gameengine.model.Actions.Action;
-import gameengine.model.Triggers.ITrigger;
+import gameengine.model.Triggers.Trigger;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -30,7 +30,7 @@ public class ActorRule {
 	private ActorRuleFactory actorRuleFactory;
 	private Controller myController;
 	private Map<IAuthoringBehavior, List<Object>> authoringBehaviorMap;
-	private ITrigger myTrigger;
+	private Trigger myTrigger;
 	private List<IAction> myActions;
 	private IAuthoringActor myActor;
 
@@ -210,13 +210,13 @@ public class ActorRule {
 	 * Remove given IRule from the Actor currently being edited
 	 */
 	private void removeIRuleFromActor(IRule toRemove) {
-		List<Rule> rulesForCurrentTrigger = myActor.getRules().get(myTrigger.getMyKey());
+		List<IRule> rulesForCurrentTrigger = myActor.getRules().get(myTrigger.getMyKey());
 		rulesForCurrentTrigger.remove(toRemove);
 	}
 	/**
 	 * Set Trigger value
 	 */
-	public void setTrigger(IAuthoringBehavior key, ITrigger value) {
+	public void setTrigger(IAuthoringBehavior key, Trigger value) {
 		myTrigger = value;
 		authoringBehaviorMap.get(key).add(value);
 	}
@@ -266,7 +266,7 @@ public class ActorRule {
 			Action myAction = (Action) authoringBehaviorMap.get(authoringBehavior)
 					.get(Integer.parseInt(myActorRuleResources.getString("TriggerActionIndex")));
 			Rule newRule = new Rule(myTrigger, myAction);
-			Map<String, List<Rule>> ruleMap = myActor.getRules();
+			Map<String, List<IRule>> ruleMap = myActor.getRules();
 			if (!(ruleMap.containsKey(myTrigger.getMyKey()))) {
 				myActor.addRule(newRule);
 				authoringBehaviorMap.get(authoringBehavior).add(newRule);
@@ -279,8 +279,8 @@ public class ActorRule {
 	/**
 	 * Checks if given Action has been added to the Actor for this Trigger yet
 	 */
-	private boolean actionNotYetAdded(Map<String, List<Rule>> ruleMap, IAction value) {
-		for (Rule rule : ruleMap.get(myTrigger.getMyKey())) {
+	private boolean actionNotYetAdded(Map<String, List<IRule>> ruleMap, IAction value) {
+		for (IRule rule : ruleMap.get(myTrigger.getMyKey())) {
 			if (rule.getMyAction() == value)
 				return false;
 		}
