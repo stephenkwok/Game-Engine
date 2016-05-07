@@ -98,12 +98,12 @@ public class CheckBoxApplyPhysics extends Observable implements IGUIElement, IEd
 		this.addObserver(observer);
 	}
 	
+	/**
+	 * Checks if the checkbox has been checked.
+	 * @return true if checkbox checked; false o.w.
+	 */
 	public boolean isSelected(){
 		return myCheckBox.isSelected();
-	}
-
-	public void updateSelection() {
-		
 	}
 
 }

@@ -6,7 +6,7 @@ import authoringenvironment.controller.LevelEditingEnvironment;
 import javafx.scene.control.TabPane;
 
 /**
- * 
+ * Pop up to add rules to a level.
  * @author amyzhao
  *
  */
@@ -20,6 +20,12 @@ public class PopUpRuleAdder extends PopUpParent {
 	private TabLevelRuleEditor myRuleEditor;
 	private static final String EDIT_RULES = "Remove Rules";
 
+	/**
+	 * Constructs a PopUpRuleAdder.
+	 * @param popUpWidth: width of pop up.
+	 * @param popUpHeight: height of pop up.
+	 * @param environment: current level editing environment.
+	 */
 	public PopUpRuleAdder(int popUpWidth, int popUpHeight, LevelEditingEnvironment environment) {
 		super(popUpWidth, popUpHeight);
 		myLevelEditor = environment;
@@ -27,6 +33,9 @@ public class PopUpRuleAdder extends PopUpParent {
 		init();
 	}
 
+	/**
+	 * Initialize the tab pane.
+	 */
 	private void init() {
 		myPane = new TabPane();
 		myRuleEditor = new TabLevelRuleEditor(myResources, EDIT_RULES, myLevelEditor.getLevel());

@@ -116,13 +116,16 @@ public class FileChooserController extends BranchScreenController {
 	}
 	
 	/**
-	 * Determines the current function of the controller, in other words, what the user intends to do with this game
+	 * Determines the current function of the controller, in other words, what the user intends to do with this gameg
 	 * @return
 	 */
 	private String getType() {
 		return myType.toString();
 	}
 
+	/**
+	 * A method that executes a method of choice via reflection based on the provided arguments
+	 */
 	@Override
 	public void invoke(String method, Class[] parameterTypes, Object[] parameters) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		this.getClass().getDeclaredMethod(method, parameterTypes).invoke(this, parameters);	

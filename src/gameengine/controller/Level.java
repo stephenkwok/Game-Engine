@@ -198,18 +198,17 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		return stringBuilder.toString();
 	}
 
-//	public Map<String, List<IPlayActor>> getMyTriggerMap() {
-//		return myTriggerMap;
-//	}
-//
-//	public void setMyTriggerMap(Map<String, List<IPlayActor>> myTriggerMap) {
-//		this.myTriggerMap = myTriggerMap;
-//	}
-
+	/**
+	 * Provides the Actors in a particular Level
+	 */
 	public List<IPlayActor> getActors() {
 		return myActors;
 	}
 
+	/**
+	 * Sets the Actors for a particular Level
+	 * @param myActors	The desired Level Actors
+	 */
 	public void setMyActors(List<IPlayActor> myActors) {
 		this.myActors = myActors;
 	}
@@ -347,6 +346,7 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 	}
 
 	/**
+	 * Gets the main Actors for a particular Level
 	 * 
 	 * @return: a List of the Level's main characters
 	 */
@@ -360,70 +360,134 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
 		return myMainCharacters;
 	}
 
+	/**
+	 * Adds an attribute to a Level
+	 * 
+	 * @param attribute The Attribute to be added
+	 */
 	@Override
 	public void addAttribute(Attribute attribute) {
 		myAttributeManager.addAttribute(attribute);
 
 	}
 
+	/**
+	 * Removes an attribute from a Level
+	 * 
+	 * @param attribute The Attribute to be removed
+	 */
 	@Override
 	public void removeAttribute(Attribute attribute) {
 		myAttributeManager.removeAttribute(attribute);
 
 	}
 
+	/**
+	 * Executes the appropriate action when an Attribute reaches its target value
+	 * 
+	 * @param trigger The Attribute that reaches its target value
+	 */
 	@Override
 	public void handleReachedAttribute(AttributeReached trigger) {
 		setChanged();
 		notifyObservers(Arrays.asList(new Object[] { "handleTrigger", trigger }));
 	}
 
+	/**
+	 * Provides a particular Attribute from the Level
+	 * 
+	 * @param type The AttributeType to get the Attribute for
+	 */
 	@Override
 	public Attribute getAttribute(AttributeType type) {
 		return myAttributeManager.getAttribute(type);
 	}
 
+	/**
+	 * Changes the value of an Attribute
+	 * 
+	 * @param type The AttributeType being referenced
+	 * @param change The amount to change the Attribute by
+	 */
 	@Override
 	public void changeAttribute(AttributeType type, int change) {
 		myAttributeManager.changeAttribute(type, change);
 
 	}
 
+	/**
+	 * Adds a Rule to the Level
+	 * 
+	 * @param rule The Rule to add to the Level
+	 */
 	@Override
 	public void addRule(Rule rule) {
 		myRuleManager.addRule(rule);
 
 	}
 
+	/**
+	 * Removes a Rule from a Level
+	 * 
+	 * @param rule The Rule to be removed
+	 */
 	@Override
 	public void removeRule(Rule rule) {
 		myRuleManager.removeRule(rule);
 
 	}
 
+	/**
+	 * Provides the Level's Rules
+	 * 
+	 * @return The Level's Rules
+	 */
 	@Override
 	public Map<String, List<Rule>> getRules() {
 		return myRuleManager.getRules();
 	}
 
 
+	/**
+	 * Sets the Level as changed
+	 */
     public void changed(){
         setChanged();
     }
 
+    /**
+     * Provides the Level's Bounds
+     * 
+     * @return The Level's Bounds
+     */
     public Bounds getBounds(){
         return myBackground.getBoundsInLocal();
     }
 	
+    /**
+     * Sets the Level's Soundtrack
+     * 
+     * @param soundtrack	The desired Level Soundtrack
+     */
     public void setSoundtrack(String soundtrack) {
     	this.soundtrack = soundtrack;
     }
     
+    /**
+     * Provides the Level's Soundtrack
+     * 
+     * @return	The Level's Soundtrack
+     */
     public String getSoundtrack() {
     	return soundtrack;
     }
     
-    
+    /**
+     * Shifts the Actors in a particular Level
+     * 
+     * @param direction	The direction to shift the Actors in
+     * @param amount	The amount to shift the Actors by
+     */
     public void shiftScene(String direction, double amount){
     	for(IPlayActor a: myActors){
     		try {
@@ -437,20 +501,40 @@ public class Level extends Observable implements ILevel, IEditableGameElement, C
     	}
     } 
     
+    /**
+     * Adds a garbage collector Actor to a Level
+     * 
+     * @param actor	The garbage collector Actor
+     */
     public void addGarbageCollector(IPlayActor actor) {
     	myActors.add(actor);
     	myGarbageCollectors.add(actor);
     }
     
+    /**
+     * Provides the Level's garbage collecting Actors
+     * 
+     * @return	The Level's garbage collecting Actors
+     */
     public List<IPlayActor> getGarbageCollectors() {
     	return myGarbageCollectors;
     }
 
+    /**
+     * Sets the Game that the Level is associated with
+     * 
+     * @param game The Game that the Level is associated with
+     */
 	@Override
 	public void setGame(IPlayGame game) {
 		myGame = game;
 	}
 	
+	/**
+	 * Provides the Game that the Level is associated with
+	 * 
+	 * @return The Game that the Level is associated with
+	 */
 	@Override
 	public IPlayGame getGame(){
 		return myGame;

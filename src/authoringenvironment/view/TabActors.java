@@ -54,6 +54,9 @@ public class TabActors extends TabParent {
 		setAvailableActors(availActors);
 	}
 
+	/**
+	 * Format the tab.
+	 */
 	private void formatTab() {
 		myPane.setPrefTileHeight(TILE_HEIGHT);
 		myPane.setPrefTileWidth(TILE_WIDTH);
@@ -79,6 +82,10 @@ public class TabActors extends TabParent {
 		return iconList;
 	}
 	
+	/**
+	 * Update the list of actors to reflect updated list.
+	 * @param actors: updated list of actors.
+	 */
 	private void updateActorList(Set<IAuthoringActor> actors) {
 		for (IAuthoringActor actor : actors) {
 			if (!curActors.contains(actor)) {
@@ -122,6 +129,9 @@ public class TabActors extends TabParent {
 		
 	}
 
+	/**
+	 * Add the icons to the pane.
+	 */
 	private void addIconsToPane() {
 		myPane.getChildren().removeAll(icons);
 		icons.clear();

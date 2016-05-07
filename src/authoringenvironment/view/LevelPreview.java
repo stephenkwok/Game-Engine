@@ -97,8 +97,8 @@ public class LevelPreview {
 		try {
 			myCreatorController.saveForPreviewing(myPreviewFile);
 		} catch (SAXException | IOException | TransformerException | ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			AlertGenerator alert = new AlertGenerator();
+			alert.generateAlert(e.getClass().toString());
 		}
 	}
        

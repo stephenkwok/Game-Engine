@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class ComboBoxActorImages extends ComboBoxImageCell {
-	ActorEditingEnvironment aEE;
+	private ActorEditingEnvironment aEE;
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
 	private AlertGenerator myAlertGenerator;
 
@@ -37,6 +37,9 @@ public class ComboBoxActorImages extends ComboBoxImageCell {
 		});
 	}
 
+	/**
+	 * Fill the options with image file names.
+	 */
 	public void fillImageNames() {
 		File imageDir = new File(selectionResource);
 		for (File imageFile : imageDir.listFiles()) {

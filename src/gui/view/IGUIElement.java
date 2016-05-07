@@ -24,5 +24,9 @@ public interface IGUIElement {
 	 */
 	public Node createNode();
 
+	/**
+	 * Add observer to the node.
+	 * @param observer: observer to add.
+	 */
 	public void addNodeObserver(Observer observer);
 }
