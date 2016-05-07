@@ -65,6 +65,20 @@ public class ActorRuleFactory {
 		}
 	}
 
+	/**
+	 * Creates a select actor behavior.
+	 * @param behaviorType: behavior type.
+	 * @param className: name of bheavior's class.
+	 * @param rule: rule to add it to.
+	 * @return behavior.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAuthoringBehavior createSelectActorBehavior(String behaviorType, String className, IRule rule)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -76,6 +90,20 @@ public class ActorRuleFactory {
 					myActors);
 	}
 
+	/**
+	 * Creates a standard actor behavior.
+	 * @param behaviorType: behavior type.
+	 * @param className: name of bheavior's class.
+	 * @param rule: rule to add it to.
+	 * @return behavior.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAuthoringBehavior createStandardActorBehavior(String behaviorType, String className, IRule rule)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -91,6 +119,20 @@ public class ActorRuleFactory {
 		}
 	}
 
+	/**
+	 * Creates a standard behavior.
+	 * @param behaviorType: behavior type.
+	 * @param className: name of bheavior's class.
+	 * @param rule: rule to add it to.
+	 * @return behavior.
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	private IAuthoringBehavior createStandardBehavior(String behaviorType, String className, IRule rule)
 			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {

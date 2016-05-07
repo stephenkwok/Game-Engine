@@ -44,8 +44,6 @@ public class ImageviewActorIcon extends ImageView {
 		return myActor;
 	}
 
-	// if you have this already on the board, then it should reference the
-	// already new actor not the original actor the icon was made from
 	/**
 	 * Gets the actor associated with this icon.
 	 * 

@@ -25,10 +25,17 @@ public class TextFieldAttributeEditor extends TextFieldWithButton {
 		createRemoveButton();
 	}
 	
+	/**
+	 * Determines the attribute type.
+	 * @param labelText: name of attribute.
+	 */
 	private void determineAttributeType(String labelText){
 		attributeType = AttributeType.valueOf(labelText.toUpperCase());
 	}
 	
+	/**
+	 * Creates a button to remove the attribute.
+	 */
 	private void createRemoveButton(){
 		Button removeAttributeButton = new Button(REMOVE);
 		removeAttributeButton.setOnAction(event->{
