@@ -1,3 +1,21 @@
+// This entire file is part of my masterpiece.
+// Blake Kaplan
+
+/*
+ * This class is responsible for the animation functionality in an Actor.
+ * At a foundational level, an animation is just a series of images changing at high speeds.
+ * I tried to mirror that functionality with this Sprite class. This class holds a list of
+ * image names through which the Sprite rotates. The sprite index is determined based on the
+ * previous sprite index and the current number of Sprite images.
+ * 
+ * I think that this class is well designed because it provides functionality
+ * to the Actor via composition. At any given moment, the Actor only knows which image it currently
+ * needs to display. That image is determined by the Sprite and passed on to the Actor.
+ * The logic for selecting the image is entirely encapsulated within the Actor's Sprite object.
+ * Whenever it wants to switch images, it just tells the Sprite to move to the next one and
+ * the Sprite handles all additional logic.
+ */
+
 package gameengine.model;
 
 import java.util.ArrayList;
@@ -16,15 +34,6 @@ public class Sprite {
 		myImages = new ArrayList<>();
 		myImages.add(DEFAULT_IMAGE_NAME);
 		spriteIndex = 0;
-	}
-
-	public Sprite(String singleImage) {
-		myImages = new ArrayList<>();
-		myImages.add(singleImage);
-	}
-
-	public Sprite(List<String> images) {
-		myImages = images;
 	}
 
 	/**
@@ -85,8 +94,9 @@ public class Sprite {
 	}
 
 	/**
-	 * Gets the Sprite images
-	 * @return
+	 * Provides the Sprite's images
+	 * 
+	 * @return The Sprite's images
 	 */
 	public List<String> getMyImages() {
 		return this.myImages;
