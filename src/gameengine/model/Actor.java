@@ -1,3 +1,26 @@
+//Lines 81-139 of this file are part of my masterpiece.
+//Michelle Chen
+
+/**
+ * Rules are triggered within the Actor, which contains a map with triggers to actions. When provided with a Trigger object, all actions associated with 
+ * a particular trigger are executed.
+ * 
+ * Seeing as the actor acts as the fundamental building block to our program, it only makes sense that the actor plays a big role in the implementation
+ * of rules. But because the other components of the masterpiece contain deeper explanations of the actual implementation of this project component,
+ * I will not duplicate that explanation here. Instead, I want to speak more to the overall changes both this class and the overall component
+ * underwent. I recognize here that it is natural for APIs to change over time, but think it is worth mentioning that our team had many design
+ * conversations centering around this component and while the final product may not show it, our previous design went through many changes to come out
+ * with what I ultimately believe to be better, stronger, much cleaner and more flexible design.
+ *  
+ * I believe the reason our game engine is so flexible and we can support so many different genres and types of games is because of our implementation 
+ * of this single actor class with a common implementation of rules. The reason actors can take on whatever role and carry out whatever actions the user
+ * defines is because of the design of rules that integrates with the actor class. Of course, this was not necessarily our original plan--Justin and I 
+ * thought a lot about  creating actor subclasses and hardcoding in rules for actor subtype interaction to a) shorten the actor class and b) make our lives 
+ * easier in the context of organization. This of course proved to be a bad idea not only in the context of extensibility, but also general implementation.
+ * Rules are now modular and the actor is defined solely within the context of its set behaviors (through rules) meaning we don't need to hardcode in several classes 
+ * that represent possible actor types the user may want to utilize, and within each actor hardcode in rules which would severely limit flexibility and consistency. 
+ */
+
 package gameengine.model;
 
 import java.util.Arrays;
@@ -24,7 +47,7 @@ import javafx.scene.image.ImageView;
  * Trigger are executed. The Actor also extends the ImageView class so they will
  * also be visual elements.
  *
- * @author blakekaplan
+ * @author blakekaplan, colettetorres, michellechen, justinbergkamp
  */
 
 public class Actor extends Observable implements Observer, IPlayActor, IDisplayActor, IAuthoringActor {
@@ -55,6 +78,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	private double myScaleY;
 	private IPlayGame myGame;
 
+	///////MASTERPIECE///////
 	/**
 	 * Converts a list of Rules to a map of trigger to list of Actions
 	 */
@@ -66,8 +90,7 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 		myImageViewName = DEFAULT_IMAGE_NAME;
 		mySprite = new Sprite();
 		myNextValues = new NextValues();
-		setImageView(
-				new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
+		setImageView(new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(mySprite.getCurrentImage()))));
 		myRotate = myImageView.getRotate();
 		myOpacity = myImageView.getOpacity();
 		myScaleX = myImageView.getScaleX();
@@ -84,6 +107,36 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	public void handleTrigger(ITrigger myTrigger) {
 		myRuleManager.handleTrigger(myTrigger);
 	}
+	
+	/**
+	 * Adds a new Rule to the Actor
+	 *
+	 * @param newRule
+	 *            The Rule to be added to the Actor
+	 */
+	@Override
+	public void addRule(Rule newRule) {
+		myRuleManager.addRule(newRule);
+	}
+	
+	/**
+	 * Provides the Actor's Rules
+	 * 
+	 * @return The Actor's Rules
+	 */
+	public Map<String, List<Rule>> getRules() {
+		return myRuleManager.getRules();
+	}
+	
+	/**
+	 * Removes a Rule from an Actor
+	 */
+	@Override
+	public void removeRule(Rule rule) {
+		myRuleManager.removeRule(rule);
+
+	}
+	///////MASTERPIECE///////
 
 	/**
 	 * Adds a new Attribute to an Actors
@@ -121,17 +174,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	 */
 	public void changeAttribute(AttributeType type, int change) {
 		myAttributeManager.changeAttribute(type, change);
-	}
-
-	/**
-	 * Adds a new Rule to the Actor
-	 *
-	 * @param newRule
-	 *            The Rule to be added to the Actor
-	 */
-	@Override
-	public void addRule(Rule newRule) {
-		myRuleManager.addRule(newRule);
 	}
 
 	/**
@@ -332,15 +374,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	}
 
 	/**
-	 * Provides the Actor's Rules
-	 * 
-	 * @return The Actor's Rules
-	 */
-	public Map<String, List<Rule>> getRules() {
-		return myRuleManager.getRules();
-	}
-
-	/**
 	 * Sets a new physics engine
 	 * 
 	 * @param myPhysicsEngine
@@ -452,15 +485,6 @@ public class Actor extends Observable implements Observer, IPlayActor, IDisplayA
 	@Override
 	public void removeAttribute(Attribute attribute) {
 		myAttributeManager.removeAttribute(attribute);
-
-	}
-
-	/**
-	 * Removes a Rule from an Actor
-	 */
-	@Override
-	public void removeRule(Rule rule) {
-		myRuleManager.removeRule(rule);
 
 	}
 

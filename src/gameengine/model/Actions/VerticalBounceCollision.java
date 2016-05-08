@@ -18,7 +18,7 @@ public class VerticalBounceCollision extends ActorAction{
 
 	@Override
 	public void perform() {
-		getMyActor().getPhysicsEngine().elasticVerticalCollision(getMyActor());
+		getMyActor().getPhysicsEngine().verticalBounceCollision(getMyActor());
 	}
 
 }

@@ -125,7 +125,6 @@ public class PhysicsEngine {
 		a1.setVeloX(offset);
 	}
 	
-	
 	public void glideRight(IPlayActor a1, double offset){
 		glideLeftRight(a1, offset, true);
 	}
@@ -133,7 +132,6 @@ public class PhysicsEngine {
 		glideLeftRight(a1, offset, false);
 
 	}
-	
 	
 	public void glideUpDown(IPlayActor a1, double offset, boolean up) {
 		offset *= (up ? -1 : 1);
@@ -173,30 +171,27 @@ public class PhysicsEngine {
 	private double limitVelo(double velo){
 		if(Math.abs(velo)>maxVelo){return maxVelo;} return velo;}
 	
-	public void staticVerticalCollision(IPlayActor a1){
+	public void verticalStaticCollision(IPlayActor a1){
 		setNextVals(a1,a1.getX(),a1.getY()-a1.getVeloY(),a1.getVeloX(), 0 );
 	}
 
-	public void staticHorizontalCollision(IPlayActor a1) {
+	public void horizontalStaticCollision(IPlayActor a1) {
 		setNextVals(a1, a1.getX()-(a1.getVeloX()) , a1.getY(), 0 , a1.getVeloY());
 	}
 
-	public void elasticHorizontalCollision(IPlayActor a1) {
+	public void horizontalBounceCollision(IPlayActor a1) {
 		if(a1.getVeloX()!=0){
 			setNextVals(a1, a1.getX()-(a1.getVeloX() * bounce) , a1.getY() , -horizontalForce * (a1.getVeloX() / Math.abs(a1.getVeloX())) , a1.getVeloY() );
 		}else{
 			setNextVals(a1, a1.getX()-(a1.getVeloX() * bounce) , a1.getY() , 0 , a1.getVeloY() );
-
 		}
 	}
 
-
-	public void elasticVerticalCollision(IPlayActor a1) {
+	public void verticalBounceCollision(IPlayActor a1) {
 		if(a1.getVeloY()!=0){
 			setNextVals(a1,a1.getX(),a1.getY() - (a1.getVeloY() * bounce),a1.getVeloX(), -horizontalForce * (a1.getVeloY() / Math.abs(a1.getVeloY())) );
 		}else{
 			setNextVals(a1 , a1.getX(), a1.getY() - (a1.getVeloY() * bounce), a1.getVeloX() , 0 );
-
 		}
 	}
 
