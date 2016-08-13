@@ -16,8 +16,8 @@ import javafx.scene.layout.Priority;
  */
 public class PreviewUnitWithLevel extends PreviewUnitWithEditable {
 
-	private static final String TEXT_FIELD_PROMPT_TEXT = "Enter Level Number";
-	private static final Double TEXT_FIELD_WIDTH = 125.0;
+	private static final String TEXT_FIELD_PROMPT_TEXT = "Level #";
+	private static final Double TEXT_FIELD_WIDTH = 65.0;
 	private final TextField myTextField;
 
 	/**
@@ -29,7 +29,9 @@ public class PreviewUnitWithLevel extends PreviewUnitWithEditable {
 		myTextField = new TextField();
 		myTextField.setPrefWidth(TEXT_FIELD_WIDTH);
 		myTextField.setPromptText(TEXT_FIELD_PROMPT_TEXT);
-		HBox.setHgrow(myTextField, Priority.ALWAYS);
+		HBox spacing = new HBox();
+		HBox.setHgrow(spacing, Priority.ALWAYS);
+		getHBox().getChildren().add(spacing);
 		getHBox().getChildren().add(myTextField);
 	}
 

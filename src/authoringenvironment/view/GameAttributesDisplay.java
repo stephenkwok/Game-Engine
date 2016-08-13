@@ -8,7 +8,7 @@ import gameengine.controller.GameInfo;
 import gui.view.ButtonGameType;
 import gui.view.TextAreaGameDescriptionEditor;
 import gui.view.TextAreaParent;
-import gui.view.TextFieldGameNameEditor;
+import gui.view.TextFieldNameEditor;
 import gui.view.TextFieldWithButton;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -110,8 +110,9 @@ public class GameAttributesDisplay implements IEditingElement {
 	private void initializeGameNameEditor() {
 		String mainPrompt = myResources.getString("gameName");
 		String textFieldPrompt = myResources.getString("enterGameName");
-		TextFieldWithButton nameEditor = new TextFieldGameNameEditor(mainPrompt, textFieldPrompt, TEXT_FIELD_WIDTH);
+		TextFieldWithButton nameEditor = new TextFieldNameEditor(mainPrompt, textFieldPrompt, TEXT_FIELD_WIDTH);
 		nameEditor.setEditableElement(myGameInfo);
+		nameEditor.setTextFieldHGrow();
 		nameEditorContainer = (HBox) nameEditor.createNode();
 		nameEditorContainer.setSpacing(TEXT_FIELD_CONTAINER_SPACING);
 		nameEditorContainer.setPadding(new Insets(DEFAULT_PADDING));

@@ -74,7 +74,7 @@ public abstract class TextFieldWithButton extends EditingElementParent {
 	/**
 	 * Enables the TextField to expand to fill the width of the HBox container
 	 */
-	protected void setTextFieldHGrow() {
+	public void setTextFieldHGrow() {
 		HBox.setHgrow(myTextField, Priority.ALWAYS);
 	}
 	

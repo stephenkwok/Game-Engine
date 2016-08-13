@@ -1,18 +1,6 @@
 package gui.view;
 
-import gameengine.controller.Level;
-
-/**
- * 
- * This class extends the TextFieldWithButton class and enables the author to
- * set the name of a given level by entering the name in a text field and
- * clicking a button
- * 
- * @author Stephen
- *
- */
-
-public class TextFieldLevelNameEditor extends TextFieldWithButton {
+public class TextFieldNameEditor extends TextFieldWithButton {
 
 	/**
 	 * Constructs a TextField to edit a level's name with a given prompt and
@@ -25,9 +13,9 @@ public class TextFieldLevelNameEditor extends TextFieldWithButton {
 	 * @param textFieldWidth:
 	 *            width of the textfield.
 	 */
-	public TextFieldLevelNameEditor(String labelText, String promptText, Double textFieldWidth) {
+	public TextFieldNameEditor(String labelText, String promptText, Double textFieldWidth) {
 		super(labelText, promptText, textFieldWidth);
-		setButtonAction(e -> ((Level) getEditableElement()).setName(getTextFieldInput()));
+		setButtonAction(e -> (getEditableElement()).setName(getTextFieldInput()));
 	}
 
 	/**
@@ -35,7 +23,7 @@ public class TextFieldLevelNameEditor extends TextFieldWithButton {
 	 */
 	@Override
 	protected void updateValueBasedOnEditable() {
-		setTextFieldValue(((Level) getEditableElement()).getName());
+		setTextFieldValue((getEditableElement()).getName());
 	}
-
+	
 }

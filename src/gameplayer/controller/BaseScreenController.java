@@ -20,7 +20,6 @@ import gamedata.controller.CreatorController;
 import gamedata.controller.FileChooserController;
 import gameplayer.view.BaseScreen;
 import gameplayer.view.IBaseScreen;
-import gameplayer.view.TLGCSValueFinder;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import voogasalad.util.hud.source.HUDController;
@@ -59,7 +58,6 @@ public class BaseScreenController extends BranchScreenController {
 		this.myScreen = new BaseScreen();
 		((Observable) this.myScreen).addObserver(this);
 		setUpGameScreen();
-		setUpHUDScreen();
 		setMyScreen(this.myScreen);
 	}
 
@@ -89,7 +87,6 @@ public class BaseScreenController extends BranchScreenController {
 				c.saveForPlaying(file);
 			}
 			((Observable) myGameController.getGame()).addObserver((Observer) myGameController);
-			setUpHUDScreen();
 			
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
 			myScreen.showError(e.getMessage());
@@ -132,7 +129,6 @@ public class BaseScreenController extends BranchScreenController {
 	 */
 	private void restartGame() {
 		myGameController.restartGame();
-		setUpHUDScreen();
 	}
 
 	/**
@@ -142,15 +138,6 @@ public class BaseScreenController extends BranchScreenController {
 		this.myScreen.setGameScreen(this.myGameController.getView());
 	}
 
-	/**
-	 * Uses the HUD controller to set the front end view of the HUD screen component
-	 */
-	private void setUpHUDScreen() {
-		myHUDController = new HUDController();
-		myHUDController.init(myGameController.getGame().getHUDInfoFile(), myGameController.getGame(), new TLGCSValueFinder());
-		myScreen.setHUDScreen(myHUDController.getView());
-		
-	}
 	
 	/**
 	 * Uses reflection to invoke specific base screen controller-methods in this class

@@ -30,7 +30,7 @@ public class ComboBoxSpriteImages extends ComboBoxActorImages {
 				ImageView imageView = new ImageView(image);
 				imageView.setFitHeight(DEFAULT_HEIGHT);
 				imageView.setPreserveRatio(true);
-				((IAuthoringActor) aEE.getEditable()).addSpriteImage(getComboBox().getValue());
+				((IAuthoringActor) getActorEditingEnvironment().getEditable()).addSpriteImage(getComboBox().getValue());
 				sprites.getChildren().add(imageView);
 				setClickToDelete();
 			} catch (Exception e) {
